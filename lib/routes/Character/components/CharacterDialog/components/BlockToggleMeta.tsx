@@ -1,7 +1,7 @@
 import { css } from "@emotion/css";
 import Checkbox from "@material-ui/core/Checkbox";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
+import CircleIcon from "@material-ui/icons/Circle";
+import CircleOutlinedIcon from "@material-ui/icons/CircleOutlined";
 import React from "react";
 import {
   IBlock,
@@ -21,13 +21,14 @@ export function BlockToggleMeta<
   return (
     <Checkbox
       data-cy={`${props.dataCy}.toggle`}
-      color="primary"
       size="small"
-      icon={<RadioButtonUncheckedIcon />}
-      checkedIcon={<CheckCircleIcon />}
+      icon={<CircleOutlinedIcon htmlColor="currentColor" />}
+      checkedIcon={<CircleIcon htmlColor="currentColor" />}
       checked={props.block.meta.checked}
+      color="default"
       disabled={props.readonly}
       className={css({
+        color: "inherit",
         padding: "0",
       })}
       onChange={() => {

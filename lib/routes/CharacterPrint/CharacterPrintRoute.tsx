@@ -34,7 +34,7 @@ export const CharacterPrintRoute: React.FC<{
   const devMode = query.get("dev") === "true";
 
   useEffect(() => {
-    logger.info("Route:CharacterPrint");
+    logger.track("character.print");
     if (!devMode) {
       window.print();
     }
@@ -82,7 +82,7 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
   return (
     <>
       <Box mb="1rem">
-        <Grid container justify="center">
+        <Grid container justifyContent="center">
           <Grid item>
             <FateLabel uppercase={false} variant="h4">
               {props.character?.name}
@@ -133,27 +133,27 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
                 </Box>
               </Box>
               {/* <Box
+              className={css({
+                columns: "2",
+                columnGap: "1rem",
+                // breakInside: "avoid",
+              })}
+            >
+              <Box
                 className={css({
-                  columns: "2",
-                  columnGap: "1rem",
-                  // breakInside: "avoid",
+                  pageBreakInside: "avoid",
                 })}
               >
-                <Box
-                  className={css({
-                    pageBreakInside: "avoid",
-                  })}
-                >
-                  <PrintSections sections={leftSections} />
-                </Box>
-                <Box
-                  className={css({
-                    pageBreakInside: "avoid",
-                  })}
-                >
-                  <PrintSections sections={rightSections} />
-                </Box>
-              </Box> */}
+                <PrintSections sections={leftSections} />
+              </Box>
+              <Box
+                className={css({
+                  pageBreakInside: "avoid",
+                })}
+              >
+                <PrintSections sections={rightSections} />
+              </Box>
+            </Box> */}
               <Grid container spacing={1}>
                 <Grid item xs={6}>
                   <PrintSections sections={leftSections} />

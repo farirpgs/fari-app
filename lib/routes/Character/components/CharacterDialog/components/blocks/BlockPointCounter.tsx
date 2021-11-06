@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { default as React } from "react";
 import {
@@ -10,6 +10,7 @@ import {
   previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
+import { Delays } from "../../../../../../constants/Delays";
 import { IPointCounterBlock } from "../../../../../../domains/character/types";
 import { Font } from "../../../../../../domains/font/Font";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
@@ -29,12 +30,12 @@ export function usePointCounter(props: {
   const [internalPoints, setInternalPoints] = useLazyState({
     value: props.points,
     onChange: props.onPointsChange,
-    delay: 750,
+    delay: Delays.field,
   });
   const [internalMaxPoints, setInternalMaxPoints] = useLazyState({
     value: props.maxPoints,
     onChange: props.onMaxPointsChange,
-    delay: 750,
+    delay: Delays.field,
   });
 
   function increment() {
@@ -120,7 +121,12 @@ export function BlockPointCounter(
       <Box>
         {isLabelVisible && (
           <Box>
-            <Grid container justify={"space-between"} wrap="nowrap" spacing={1}>
+            <Grid
+              container
+              justifyContent={"space-between"}
+              wrap="nowrap"
+              spacing={1}
+            >
               <Grid item className={css({ flex: "1 1 auto" })}>
                 <FateLabel
                   display="inline"
@@ -147,7 +153,7 @@ export function BlockPointCounter(
 
         <Grid
           container
-          justify="center"
+          justifyContent="center"
           wrap="nowrap"
           alignItems="center"
           spacing={1}
@@ -201,7 +207,7 @@ export function BlockPointCounter(
           )}
         </Grid>
         {canRefresh && (
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid item>
               <Link
                 component="button"
@@ -212,6 +218,7 @@ export function BlockPointCounter(
                 onClick={() => {
                   pointsManager.actions.refresh();
                 }}
+                underline="hover"
               >
                 {t("character-dialog.control.refresh")}
               </Link>
@@ -244,6 +251,7 @@ export function BlockPointCounterActions(
             onClick={() => {
               props.onMainPointCounterChange?.();
             }}
+            underline="hover"
           >
             {props.block.meta.isMainPointCounter
               ? t("character-dialog.control.unset-main-counter")
@@ -264,6 +272,7 @@ export function BlockPointCounterActions(
               max: props.block.meta.max === undefined ? "1" : undefined,
             });
           }}
+          underline="hover"
         >
           {props.block.meta.max === undefined
             ? t("character-dialog.control.add-max")

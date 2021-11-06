@@ -28,7 +28,7 @@ export const PlayOfflineRoute: React.FC<{
   const logger = useLogger();
 
   useEffect(() => {
-    logger.info("Route:PlayOffline");
+    logger.track("play_offline_game");
   }, []);
 
   const { t } = useTranslate();

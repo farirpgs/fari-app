@@ -15,11 +15,22 @@ describe("/scenes", () => {
       Fari.get("scene.name").type("Ba Sing Se");
       Fari.get("scene.group").type("Avatar");
 
-      Fari.get("scene.add-aspect").click();
-      Fari.get("scene.add-boost").click();
-      Fari.get("scene.add-npc").click();
-      Fari.get("scene.add-bad-guy").click();
-      Fari.get("scene.add-index-card").click();
+      Fari.get("scene.card-collections").select("Fate");
+
+      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select.ASPECT").click({ force: true });
+
+      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select.BOOST").click({ force: true });
+
+      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select.NPC").click({ force: true });
+
+      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select.BAD GUY").click({ force: true });
+
+      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select.CARD").click({ force: true });
 
       // aspect
       Fari.get("scene.aspect.0.title").type("Something weird is going on");
@@ -47,7 +58,6 @@ describe("/scenes", () => {
       Fari.get("my-binder.folders.scenes").click();
       Fari.get("my-binder.element.Ba Sing Se.delete").first().click();
 
-      cy.contains("Avatar").should("not.exist");
       cy.contains("Ba Sing Se").should("not.exist");
 
       // should be back to home page
@@ -55,7 +65,6 @@ describe("/scenes", () => {
 
       // undo
       cy.contains("Undo").click();
-      cy.contains("Avatar");
       cy.contains("Ba Sing Se").click();
 
       // new scene
@@ -64,7 +73,10 @@ describe("/scenes", () => {
       Fari.get("my-binder.folders.scenes.new").click();
 
       // add badguy and pin it
-      Fari.get("scene.add-bad-guy").click();
+
+      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select.BAD GUY").click({ force: true });
+
       Fari.get("scene.aspect.0.title").type("Dai Li");
       Fari.get("scene.aspect.0.pin").click({ force: true });
 
@@ -81,7 +93,6 @@ describe("/scenes", () => {
       Fari.get("page.menu.my-binder").click();
       Fari.get("my-binder.folders.scenes").click();
 
-      cy.contains("Avatar");
       cy.contains("Ba Sing Se");
       cy.contains("Lower Ring");
 

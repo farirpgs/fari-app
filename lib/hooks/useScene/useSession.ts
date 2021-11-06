@@ -28,11 +28,13 @@ export function useSession(props: IProps) {
         playedDuringTurn: false,
         points: "3",
         isGM: true,
+        private: false,
         npcs: [],
       },
       players: [],
       goodConfetti: 0,
       badConfetti: 0,
+      paused: false,
       drawAreaObjects: [],
     })
   );
@@ -158,6 +160,26 @@ export function useSession(props: IProps) {
       })
     );
   }
+  function pause() {
+    setSession(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+        draft.paused = true;
+      })
+    );
+  }
+  function unpause() {
+    setSession(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+        draft.paused = false;
+      })
+    );
+  }
 
   function updateDrawAreaObjects(objects: IDrawAreaObjects) {
     setSession(
@@ -198,6 +220,7 @@ export function useSession(props: IProps) {
             rolls: rolls,
             isGM: false,
             points: points,
+            private: false,
             playedDuringTurn: playedDuringTurn,
             offline: false,
           };
@@ -226,6 +249,7 @@ export function useSession(props: IProps) {
           rolls: [],
           playedDuringTurn: false,
           isGM: false,
+          private: false,
           points: "3",
         });
       })
@@ -249,6 +273,22 @@ export function useSession(props: IProps) {
         });
         draft.players = draft.players.filter((p) => {
           return p.id !== id;
+        });
+      })
+    );
+  }
+
+  function togglePlayerVisibility(id: string) {
+    setSession(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+        const everyone = getEveryone(draft);
+        everyone.forEach((p) => {
+          if (p.id === id) {
+            p.private = !p.private;
+          }
         });
       })
     );
@@ -389,11 +429,12 @@ export function useSession(props: IProps) {
     actions: {
       overrideSession,
       resetInitiative,
-      addOfflinePlayer,
+      addNpc: addOfflinePlayer,
       fireBadConfetti,
       fireGoodConfetti,
       loadPlayerCharacter: loadPlayerCharacter,
       removePlayer,
+      togglePlayerVisibility,
       reset,
       updateDrawAreaObjects,
       updateGmRoll,
@@ -402,6 +443,8 @@ export function useSession(props: IProps) {
       updatePlayerRoll,
       updatePlayerCharacterMainPointCounter,
       updatePlayersWithConnections,
+      pause,
+      unpause,
     },
     _: {
       removedPlayers,

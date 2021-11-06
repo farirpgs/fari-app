@@ -1,49 +1,56 @@
 import { css } from "@emotion/css";
+import Alert from "@material-ui/core/Alert";
+import Autocomplete from "@material-ui/core/Autocomplete";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Collapse from "@material-ui/core/Collapse";
-import Container from "@material-ui/core/Container";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import Fade from "@material-ui/core/Fade";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import ImageList from "@material-ui/core/ImageList";
+import ImageListItem from "@material-ui/core/ImageListItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import Select from "@material-ui/core/Select";
 import Snackbar from "@material-ui/core/Snackbar";
-import { darken } from "@material-ui/core/styles";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { darken, useTheme } from "@material-ui/core/styles";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import TextField from "@material-ui/core/TextField";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
+import ErrorIcon from "@material-ui/icons/Error";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import FilterHdrIcon from "@material-ui/icons/FilterHdr";
 import MovieIcon from "@material-ui/icons/Movie";
+import PanToolIcon from "@material-ui/icons/PanTool";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import SaveIcon from "@material-ui/icons/Save";
-import Alert from "@material-ui/lab/Alert";
-import Autocomplete from "@material-ui/lab/Autocomplete";
 import TabContext from "@material-ui/lab/TabContext";
 import TabPanel from "@material-ui/lab/TabPanel";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
+import { IndexCardCollectionsContext } from "../../contexts/IndexCardCollectionsContext/IndexCardCollectionsContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { arraySort, IArraySortGetter } from "../../domains/array/arraySort";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
-import { BlockType, ICharacter } from "../../domains/character/types";
+import { ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
 import { Font } from "../../domains/font/Font";
@@ -56,7 +63,7 @@ import {
   IIndexCard,
   IIndexCardType,
   IPlayer,
-  IScene,
+  IScene
 } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useSession } from "../../hooks/useScene/useSession";
@@ -65,11 +72,13 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
-import { ContentEditable } from "../ContentEditable/ContentEditable";
+import {
+  ContentEditable,
+  previewContentEditable
+} from "../ContentEditable/ContentEditable";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
-import { IndexCardColor } from "../IndexCard/IndexCardColor";
 import { LiveMode, Page } from "../Page/Page";
 import { SplitButton } from "../SplitButton/SplitButton";
 import { Toolbox } from "../Toolbox/Toolbox";
@@ -155,8 +164,9 @@ export const Session: React.FC<IProps> = (props) => {
 
   const [streamerModalOpen, setStreamerModalOpen] = useState(false);
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
-  const [characterDialogPlayerId, setCharacterDialogPlayerId] =
-    useState<string | undefined>(undefined);
+  const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
+    string | undefined
+  >(undefined);
 
   const [tab, setTab] = useState<"characters" | "scene" | "draw">("scene");
 
@@ -212,8 +222,8 @@ export const Session: React.FC<IProps> = (props) => {
 
   const liveMode = getLiveMode();
 
-  const handleGMAddOfflinePlayer = () => {
-    sessionManager.actions.addOfflinePlayer();
+  const handleGMAddNpc = () => {
+    sessionManager.actions.addNpc();
   };
 
   const handleAssignOriginalCharacterSheet = (
@@ -295,6 +305,7 @@ export const Session: React.FC<IProps> = (props) => {
           when={isGMHostingOnlineOrOfflineGame}
           message={t("play-route.host-leaving-warning")}
         />
+        {renderPauseDialog()}
         {streamerModalOpen && (
           <WindowPortal
             onClose={() => {
@@ -319,41 +330,70 @@ export const Session: React.FC<IProps> = (props) => {
           }}
           centerActions={
             <>
-              {isGM && (
-                <>
-                  {props.mode !== SceneMode.Manage && (
-                    <Grid item>
-                      <IconButton
-                        onClick={() => {
-                          sessionManager.actions.fireGoodConfetti();
-                          logger.info("Scene:onFireGoodConfetti");
-                        }}
-                        color="primary"
-                      >
-                        <Icons.PartyPopper
-                          className={css({ width: "2rem", height: "2rem" })}
-                          htmlColor={darken(theme.palette.success.main, 0.2)}
-                        />
-                      </IconButton>
-                    </Grid>
-                  )}
-                  {props.mode !== SceneMode.Manage && (
-                    <Grid item>
-                      <IconButton
-                        onClick={() => {
-                          sessionManager.actions.fireBadConfetti();
-                          logger.info("Scene:onFireBadConfetti");
-                        }}
-                        color="primary"
-                      >
-                        <Icons.PartyPopper
-                          className={css({ width: "2rem", height: "2rem" })}
-                          htmlColor={darken(theme.palette.error.main, 0.2)}
-                        />
-                      </IconButton>
-                    </Grid>
-                  )}
-                </>
+              {isGM && props.mode !== SceneMode.Manage && (
+                <Grid item>
+                  <Tooltip title={t("play-route.fire-rainbow-confetti")}>
+                    <IconButton
+                      onClick={() => {
+                        sessionManager.actions.fireGoodConfetti();
+                        logger.track("session.fire_good_confetti");
+                      }}
+                      color="primary"
+                      size="large"
+                    >
+                      <Icons.PartyPopper
+                        className={css({ width: "2rem", height: "2rem" })}
+                        htmlColor={darken(theme.palette.success.main, 0.2)}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
+              {props.mode !== SceneMode.Manage && (
+                <Grid item>
+                  <Tooltip title={t("play-route.pause-session")}>
+                    <IconButton
+                      onClick={() => {
+                        if (isGM) {
+                          sessionManager.actions.pause();
+                        } else {
+                          connectionsManager?.actions.sendToHost<IPeerActions>({
+                            action: "pause",
+                            payload: undefined,
+                          });
+                        }
+                      }}
+                      color="primary"
+                      size="large"
+                    >
+                      <PanToolIcon
+                        className={css({ width: "1.8rem", height: "1.8rem" })}
+                        htmlColor={theme.palette.text.primary}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
+
+              {isGM && props.mode !== SceneMode.Manage && (
+                <Grid item>
+                  <Tooltip title={t("play-route.fire-red-confetti")}>
+                    <IconButton
+                      onClick={() => {
+                        sessionManager.actions.fireBadConfetti();
+
+                        logger.track("session.fire_fire_confetti");
+                      }}
+                      color="primary"
+                      size="large"
+                    >
+                      <Icons.PartyPopper
+                        className={css({ width: "2rem", height: "2rem" })}
+                        htmlColor={darken(theme.palette.error.main, 0.2)}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
               )}
             </>
           }
@@ -400,6 +440,55 @@ export const Session: React.FC<IProps> = (props) => {
           )}
         </Box>
       </Fade>
+    );
+  }
+
+  function renderPauseDialog() {
+    return (
+      <Dialog
+        fullWidth
+        maxWidth="sm"
+        open={sessionManager.state.session.paused}
+        keepMounted={false}
+        onClose={() => {
+          if (isGM) {
+            sessionManager.actions.unpause();
+          }
+        }}
+      >
+        <DialogTitle>
+          <Grid container justifyContent="center">
+            <Grid item>{t("play-route.paused-dialog.title")}</Grid>
+          </Grid>
+        </DialogTitle>
+        <DialogContent>
+          <Grid container justifyContent="center">
+            <Grid item>
+              <ErrorIcon
+                className={css({
+                  width: "3rem",
+                  height: "3rem",
+                })}
+              />
+            </Grid>
+          </Grid>
+
+          <DialogContentText textAlign="center">
+            {t("play-route.paused-dialog.content")}
+          </DialogContentText>
+        </DialogContent>
+        {isGM && (
+          <DialogActions>
+            <Button
+              onClick={() => {
+                sessionManager.actions.unpause();
+              }}
+            >
+              {t("play-route.paused-dialog.continue")}
+            </Button>
+          </DialogActions>
+        )}
+      </Dialog>
     );
   }
 
@@ -476,7 +565,7 @@ export const Session: React.FC<IProps> = (props) => {
                           onClick={() => {
                             sessionManager.actions.resetInitiative();
                             sceneManager.actions.resetInitiative();
-                            logger.info("Scene:onResetInitiative");
+                            logger.track("session.reset_initiative");
                           }}
                           variant="contained"
                           color="secondary"
@@ -491,8 +580,9 @@ export const Session: React.FC<IProps> = (props) => {
                             <Button
                               data-cy="scene.add-player"
                               onClick={() => {
-                                handleGMAddOfflinePlayer();
-                                logger.info("Scene:addPlayer");
+                                handleGMAddNpc();
+
+                                logger.track("session.add_npc");
                               }}
                               variant="contained"
                               color="secondary"
@@ -515,9 +605,13 @@ export const Session: React.FC<IProps> = (props) => {
               canControl: me?.id === gm.id,
               isMe: me?.id === gm.id,
               index: "gm",
+              isChild: false,
               children: (
                 <>
                   {gm.npcs.map((npc, npcIndex) => {
+                    if (npc.private && !isGM) {
+                      return null;
+                    }
                     return (
                       <React.Fragment key={npc.id}>
                         <Box>
@@ -530,6 +624,7 @@ export const Session: React.FC<IProps> = (props) => {
                               player: npc,
                               canControl: me?.id === gm.id,
                               isMe: me?.id === gm.id,
+                              isChild: true,
                               index: `gm-npc-${npcIndex}`,
                             })}
                           </Box>
@@ -551,6 +646,7 @@ export const Session: React.FC<IProps> = (props) => {
                     player,
                     canControl,
                     isMe,
+                    isChild: false,
                     index: playerRowIndex,
                   })}
                 </React.Fragment>
@@ -613,12 +709,14 @@ export const Session: React.FC<IProps> = (props) => {
     canControl: boolean;
     isMe: boolean;
     index: number | string;
+    isChild: boolean;
     children?: JSX.Element;
   }) {
     const {
       player,
       canControl,
       isMe,
+      isChild,
       index: playerRowIndex,
       children: playerRowChildren,
     } = options;
@@ -633,12 +731,16 @@ export const Session: React.FC<IProps> = (props) => {
           canLoadDuplicateCharacterSheet: isGM,
           canLoadCharacterSheet: canControl && !player.isGM,
           canRemove: isGM && !player.isGM,
+          canMarkPrivate: isGM && isChild,
         }}
         key={player.id}
         isMe={isMe}
         player={player}
         onPlayerRemove={() => {
           sessionManager.actions.removePlayer(player.id);
+        }}
+        onTogglePrivate={() => {
+          sessionManager.actions.togglePlayerVisibility(player.id);
         }}
         onCharacterSheetOpen={() => {
           if (player.character) {
@@ -700,7 +802,7 @@ export const Session: React.FC<IProps> = (props) => {
     );
   }
 
-  function renderPlayersCharacterCards() {
+  function renderCharacterCards() {
     const { playersWithCharacterSheets } = sessionManager.computed;
 
     return (
@@ -742,33 +844,35 @@ export const Session: React.FC<IProps> = (props) => {
                 </Box>
               );
             })}
-            {props.mode === SceneMode.PlayOffline &&
-              sessionManager.state.session.gm.npcs.map((npc, index) => {
-                const canControl = isGM;
-                return (
-                  <Box
+            {sessionManager.state.session.gm.npcs.map((npc, index) => {
+              const canControl = isGM;
+              if (npc.private) {
+                return null;
+              }
+              return (
+                <Box
+                  key={npc?.id || index}
+                  className={css({
+                    width: characterCardWidth,
+                    display: "inline-block",
+                    marginBottom: "1rem",
+                  })}
+                >
+                  <CharacterCard
                     key={npc?.id || index}
-                    className={css({
-                      width: characterCardWidth,
-                      display: "inline-block",
-                      marginBottom: "1rem",
-                    })}
-                  >
-                    <CharacterCard
-                      key={npc?.id || index}
-                      readonly={!canControl}
-                      playerName={npc.playerName}
-                      characterSheet={npc.character}
-                      onCharacterDialogOpen={() => {
-                        setCharacterDialogPlayerId(npc.id);
-                      }}
-                      onRoll={(newDiceRollResult) => {
-                        handleSetPlayerRoll(npc.id, newDiceRollResult);
-                      }}
-                    />
-                  </Box>
-                );
-              })}
+                    readonly={!canControl}
+                    playerName={npc.playerName}
+                    characterSheet={npc.character}
+                    onCharacterDialogOpen={() => {
+                      setCharacterDialogPlayerId(npc.id);
+                    }}
+                    onRoll={(newDiceRollResult) => {
+                      handleSetPlayerRoll(npc.id, newDiceRollResult);
+                    }}
+                  />
+                </Box>
+              );
+            })}
           </Box>
         </Box>
       </>
@@ -828,7 +932,7 @@ export const Session: React.FC<IProps> = (props) => {
             <Box>
               <Box py="2rem" position="relative" minHeight="20rem">
                 <TabPanel value={"characters"} className={tabPanelStyle}>
-                  {renderPlayersCharacterCards()}
+                  {renderCharacterCards()}
                 </TabPanel>
                 <TabPanel value={"npcs"} className={tabPanelStyle}>
                   {renderNpcsCharacterCards()}
@@ -836,12 +940,22 @@ export const Session: React.FC<IProps> = (props) => {
                 <TabPanel value={"scene"} className={tabPanelStyle}>
                   <Scene
                     sceneManager={sceneManager}
-                    readonly={!isGM}
+                    isGM={isGM}
                     canLoad={props.mode !== SceneMode.Manage && isGM}
                     onRoll={handleSetMyRoll}
                     onPoolClick={(element) => {
                       diceManager.actions.addOrRemovePoolElement(element);
                       diceManager.actions.setPlayerId(gm.id);
+                    }}
+                    onIndexCardUpdate={(indexCard, type) => {
+                      if (isGM) {
+                        sceneManager.actions.updateIndexCard(indexCard, type);
+                      } else {
+                        connectionsManager?.actions.sendToHost<IPeerActions>({
+                          action: "update-index-card",
+                          payload: { indexCard: indexCard },
+                        });
+                      }
                     }}
                   />
                 </TabPanel>
@@ -882,7 +996,8 @@ export const Session: React.FC<IProps> = (props) => {
   function renderSessionTabs() {
     const tabClass = css({
       background: headerBackgroundColor,
-      color: headerColor,
+      color: `${headerColor} !important`,
+      padding: "0 1.5rem",
       marginRight: ".5rem",
       // Pentagone
       // https://bennettfeely.com/clippy/
@@ -902,6 +1017,10 @@ export const Session: React.FC<IProps> = (props) => {
           classes={{
             flexContainer: css({
               borderBottom: `3px solid ${headerBackgroundColor}`,
+            }),
+            indicator: css({
+              height: ".4rem",
+              backgroundColor: theme.palette.secondary.main,
             }),
           }}
           onChange={(e, newValue) => {
@@ -982,11 +1101,11 @@ export const Session: React.FC<IProps> = (props) => {
                     window.open(link, "_blank");
                   }
 
-                  logger.info("Scene:onCopyGameLink");
+                  logger.track("session.copy_session_link");
                 }
               }}
               variant="outlined"
-              color={shareLinkToolTip.open ? "primary" : "default"}
+              color={shareLinkToolTip.open ? "primary" : "inherit"}
               endIcon={<FileCopyIcon />}
             >
               {t("play-route.copy-game-link")}
@@ -1004,7 +1123,12 @@ export const Session: React.FC<IProps> = (props) => {
 
     return (
       <Box pb="1rem">
-        <Grid container spacing={1} justify="space-evenly" alignItems="center">
+        <Grid
+          container
+          spacing={1}
+          justifyContent="space-evenly"
+          alignItems="center"
+        >
           {props.mode === SceneMode.PlayOnline && props.shareLink && (
             <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
           )}
@@ -1050,17 +1174,24 @@ Session.displayName = "Session";
 
 export function Scene(props: {
   sceneManager: ReturnType<typeof useScene>;
-  readonly: boolean;
+  isGM: boolean;
   canLoad: boolean;
   onRoll(diceRollResult: IDiceRollResult): void;
   onPoolClick(element: IDicePoolElement): void;
+  onIndexCardUpdate(indexCard: IIndexCard, type: IIndexCardType): void;
 }) {
   const { sceneManager } = props;
+  const settingsManager = useContext(SettingsContext);
+  const indexCardCollectionsManager = useContext(IndexCardCollectionsContext);
+  const selectedIndexCardCollection =
+    indexCardCollectionsManager.state.sceneIndexCardCollections.find(
+      (i) => i.id === settingsManager.state.gameTemplate
+    );
 
   const theme = useTheme();
   const logger = useLogger();
   const { t } = useTranslate();
-  const isSMAndDown = useMediaQuery(theme.breakpoints.down("sm"));
+
   const scenesManager = useContext(ScenesContext);
   const myBinderManager = useContext(MyBinderContext);
 
@@ -1068,7 +1199,7 @@ export function Scene(props: {
     theme.palette.background.paper
   ).primary;
   const numberOfColumnsForCards = useResponsiveValue({
-    xl: 4,
+    xl: 3,
     lg: 3,
     md: 2,
     sm: 1,
@@ -1080,14 +1211,15 @@ export function Scene(props: {
 
   const [sort, setSort] = useState<SortMode>(SortMode.None);
   const [savedSnack, setSavedSnack] = useState(false);
-  const [sceneTab, setSceneTab] =
-    useState<"public" | "private" | "notes">("public");
+  const [sceneTab, setSceneTab] = useState<"public" | "private" | "notes">(
+    "public"
+  );
 
   const headerColor = theme.palette.background.paper;
   const hasScene = !!sceneManager.state.scene;
 
   const handleLoadScene = (newScene: IScene) => {
-    sceneManager.actions.loadScene(newScene, true);
+    sceneManager.actions.loadScene(newScene);
   };
 
   const handleCloneAndLoadScene = (newScene: IScene) => {
@@ -1129,7 +1261,7 @@ export function Scene(props: {
     return (
       <Box>
         <Box mb="1rem">
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid item>
               <Typography variant="h6" color="textSecondary">
                 {"No Scene Currently in Play"}
@@ -1138,12 +1270,12 @@ export function Scene(props: {
           </Grid>
         </Box>
         <Box mb="4rem">
-          <Grid container justify="center" spacing={2}>
+          <Grid container justifyContent="center" spacing={1}>
             {renderSceneActionGridItems()}
           </Grid>
         </Box>
         <Box>
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid item>
               <img
                 src="https://img.icons8.com/plasticine/100/000000/alps.png"
@@ -1161,6 +1293,51 @@ export function Scene(props: {
   function renderSceneActionGridItems() {
     return (
       <>
+        {props.canLoad && (
+          <Grid item>
+            <ButtonGroup
+              color="primary"
+              aria-label="outlined primary button group"
+            >
+              <Button
+                data-cy="scene.new-scene"
+                onClick={() => {
+                  const confirmed = sceneManager.state.scene
+                    ? confirm(t("play-route.reset-scene-confirmation"))
+                    : true;
+                  if (confirmed) {
+                    sceneManager.actions.addAndSetNewScene();
+
+                    logger.track("session.new_scene");
+                  }
+                }}
+              >
+                {t("play-route.new-scene")}
+              </Button>
+              <Button
+                onClick={() => {
+                  myBinderManager.actions.open({
+                    folder: "scenes",
+                    callback: handleLoadScene,
+                  });
+                }}
+              >
+                {t("play-route.load-scene")}
+              </Button>
+              <Button
+                onClick={() => {
+                  myBinderManager.actions.open({
+                    folder: "scenes",
+                    callback: handleCloneAndLoadScene,
+                  });
+                }}
+              >
+                {t("play-route.clone-and-load-scene")}
+              </Button>
+            </ButtonGroup>
+          </Grid>
+        )}
+
         {sceneManager.state.scene && (
           <Grid item>
             <Button
@@ -1172,64 +1349,15 @@ export function Scene(props: {
                 scenesManager.actions.upsert(sceneManager.state.scene);
                 sceneManager.actions.loadScene(
                   sceneManager.state.scene as IScene,
-                  false
+                  
                 );
                 setSavedSnack(true);
-                logger.info("Scene:onSave");
+                logger.track("scene.save");
               }}
             >
               {t("play-route.save-scene")}
             </Button>
           </Grid>
-        )}
-        {props.canLoad && (
-          <>
-            <Grid item>
-              <Button
-                variant="outlined"
-                color="primary"
-                data-cy="scene.new-scene"
-                endIcon={<MovieIcon />}
-                onClick={() => {
-                  const confirmed = sceneManager.state.scene
-                    ? confirm(t("play-route.reset-scene-confirmation"))
-                    : true;
-                  if (confirmed) {
-                    sceneManager.actions.addAndSetNewScene();
-                    logger.info("Scene:onReset");
-                  }
-                }}
-              >
-                {t("play-route.new-scene")}
-              </Button>
-            </Grid>
-            <Grid item>
-              <SplitButton
-                color="primary"
-                variant="outlined"
-                options={[
-                  {
-                    label: t("play-route.load-scene"),
-                    onClick: () => {
-                      myBinderManager.actions.open({
-                        folder: "scenes",
-                        callback: handleLoadScene,
-                      });
-                    },
-                  },
-                  {
-                    label: t("play-route.clone-and-load-scene"),
-                    onClick: () => {
-                      myBinderManager.actions.open({
-                        folder: "scenes",
-                        callback: handleCloneAndLoadScene,
-                      });
-                    },
-                  },
-                ]}
-              />
-            </Grid>
-          </>
         )}
       </>
     );
@@ -1241,17 +1369,33 @@ export function Scene(props: {
     return (
       <Box>
         <Box>
-          <Box mb="1rem">
+          {/* <Box mb="1rem">
             <Grid
               container
-              justify={props.canLoad ? "flex-start" : "center"}
+              justifyContent={props.canLoad ? "flex-start" : "center"}
               spacing={2}
             >
-              {renderSceneActionGridItems()}
+              
             </Grid>
-          </Box>
-          <Box>
-            <Container maxWidth="sm">{renderSceneNameAndGroup()}</Container>
+          </Box> */}
+          <Box mb="1rem">
+            <Grid container justifyContent="space-between" spacing={2}>
+              <Grid item xs={12} md={12} lg={8}>
+                <Grid container spacing={2} alignItems="flex-end">
+                  <Grid item xs={8}>
+                    {renderSceneName()}
+                  </Grid>
+                  <Grid item xs={4}>
+                    {renderSceneGroup()}
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={12} md={12} lg={4}>
+                <Grid container spacing={2} justifyContent="flex-end">
+                  {renderSceneActionGridItems()}
+                </Grid>
+              </Grid>
+            </Grid>
           </Box>
 
           <TabContext value={sceneTab}>
@@ -1281,97 +1425,87 @@ export function Scene(props: {
     );
   }
 
-  function renderSceneNameAndGroup() {
+  function renderSceneName() {
     return (
       <>
-        <Box mb=".5rem">
-          <FateLabel
-            variant="h4"
-            uppercase={false}
-            className={css({
-              borderBottom: `1px solid ${theme.palette.divider}`,
-              textAlign: "center",
-            })}
-          >
-            <ContentEditable
-              autoFocus
-              data-cy="scene.name"
-              value={sceneManager.state.scene?.name ?? ""}
-              readonly={props.readonly}
-              onChange={(value) => {
-                sceneManager.actions.updateName(value);
-              }}
-            />
-          </FateLabel>
-          <FormHelperText className={css({ textAlign: "right" })}>
-            {t("play-route.scene-name")}
-          </FormHelperText>
-        </Box>
-        <Collapse in={!!(sceneManager.state.scene?.name ?? "")}>
-          <Box mb="1rem">
-            <Grid
-              container
-              spacing={2}
-              wrap="nowrap"
-              justify="center"
-              alignItems="flex-end"
-            >
-              <Grid item>
-                <FateLabel>{t("play-route.group")}</FateLabel>
-              </Grid>
-              <Grid item xs={8} sm={4}>
-                <LazyState
-                  value={sceneManager.state.scene?.group}
-                  delay={750}
-                  onChange={(newGroup) => {
-                    sceneManager.actions.setGroup(newGroup);
-                  }}
-                  render={([lazyGroup, setLazyGroup]) => {
-                    return (
-                      <Autocomplete
-                        freeSolo
-                        options={scenesManager.state.groups.filter((g) => {
-                          const currentGroup = lazyGroup ?? "";
-                          return g.toLowerCase().includes(currentGroup);
-                        })}
-                        value={lazyGroup ?? ""}
-                        onChange={(event, newValue) => {
-                          setLazyGroup(newValue || undefined);
-                        }}
-                        inputValue={lazyGroup ?? ""}
-                        onInputChange={(event, newInputValue) => {
-                          setLazyGroup(newInputValue);
-                        }}
-                        disabled={props.readonly}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            variant="standard"
-                            InputProps={{
-                              ...params.InputProps,
-                              disableUnderline: true,
-                            }}
-                            data-cy="scene.group"
-                            inputProps={{
-                              ...params.inputProps,
-                              className: css({ padding: "2px" }),
-                            }}
-                            className={css({
-                              borderBottom: `1px solid ${theme.palette.divider}`,
-                            })}
-                          />
-                        )}
-                      />
-                    );
-                  }}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-        </Collapse>
+        <FateLabel
+          variant="h4"
+          uppercase={false}
+          className={css({
+            borderBottom: `1px solid ${theme.palette.divider}`,
+          })}
+        >
+          <ContentEditable
+            autoFocus
+            data-cy="scene.name"
+            value={sceneManager.state.scene?.name ?? ""}
+            readonly={!props.isGM}
+            onChange={(value) => {
+              sceneManager.actions.updateName(value);
+            }}
+          />
+        </FateLabel>
+        <FormHelperText>{t("play-route.scene-name")}</FormHelperText>
       </>
     );
   }
+
+  function renderSceneGroup() {
+    return (
+      <>
+        <Box>
+          <LazyState
+            value={sceneManager.state.scene?.group}
+            delay={750}
+            onChange={(newGroup) => {
+              sceneManager.actions.setGroup(newGroup);
+            }}
+            render={([lazyGroup, setLazyGroup]) => {
+              return (
+                <Autocomplete
+                  freeSolo
+                  // multiple
+                  options={scenesManager.state.groups.filter((g) => {
+                    const currentGroup = lazyGroup ?? "";
+                    return g.toLowerCase().includes(currentGroup);
+                  })}
+                  value={lazyGroup ?? ""}
+                  onChange={(event, newValue) => {
+                    setLazyGroup(newValue || undefined);
+                  }}
+                  inputValue={lazyGroup ?? ""}
+                  onInputChange={(event, newInputValue) => {
+                    setLazyGroup(newInputValue);
+                  }}
+                  disabled={!props.isGM}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="standard"
+                      InputProps={{
+                        ...params.InputProps,
+                        disableUnderline: true,
+                      }}
+                      data-cy="scene.group"
+                      inputProps={{
+                        ...params.inputProps,
+                        className: css({ padding: "2px" }),
+                      }}
+                      className={css({
+                        borderBottom: `1px solid ${theme.palette.divider}`,
+                      })}
+                    />
+                  )}
+                />
+              );
+            }}
+          />
+          <FormHelperText>{t("play-route.group")}</FormHelperText>
+        </Box>
+      </>
+    );
+  }
+
   function renderSceneNotes() {
     return (
       <Grid container>
@@ -1404,45 +1538,7 @@ export function Scene(props: {
 
     return (
       <Box>
-        <Box>{renderGMIndexCardActions(type)}</Box>
-        <Box mb="2rem">
-          <Grid container spacing={1} justify="center" alignItems="flex-end">
-            <Grid item>
-              <FormControl>
-                <InputLabel>{t("play-route.sort")}</InputLabel>
-
-                <Select
-                  native
-                  value={sort}
-                  onChange={(e) => {
-                    setSort(e.target.value as SortMode);
-                  }}
-                >
-                  <option value={SortMode.None}>
-                    {t("play-route.sort-options.none")}
-                  </option>
-                  <option value={SortMode.GroupFirst}>
-                    {t("play-route.sort-options.groups-first")}
-                  </option>
-                  <option value={SortMode.PinnedFirst}>
-                    {t("play-route.sort-options.pinned-first")}
-                  </option>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item>
-              <Button
-                onClick={() => {
-                  hiddenIndexCardRecord.actions.toggleAll();
-                }}
-              >
-                {hiddenIndexCardRecord.state.areAllCardsVisible
-                  ? t("play-route.collapse-all")
-                  : t("play-route.expand-all")}
-              </Button>
-            </Grid>
-          </Grid>
-        </Box>
+        <Box>{renderIndexCardActions(type)}</Box>
 
         {renderIndexCards(indexCardsFromTab, type)}
 
@@ -1481,86 +1577,93 @@ export function Scene(props: {
     const sortedCards = arraySort(indexCardsFromTab, sorters);
 
     return (
-      <Box
-        className={css({
-          label: "Scene-aspect-masonry-content",
-          columnCount: numberOfColumnsForCards,
-          columnWidth: "auto",
-          columnGap: "1rem",
-        })}
-      >
-        {sortedCards.map((indexCard, index) => {
-          const hasChildren = indexCard.subCards.length > 0;
-          return (
-            <Box
-              key={`${indexCard.id}.${type}`}
-              className={css({
-                label: "Scene-aspect-masonry-card",
-                paddingBottom: "1rem",
-                width: "100%",
-                columnSpan: hasChildren ? "all" : "initial",
-                /**
-                 * Disables bottom being cut-off in Chrome
-                 */
-                breakInside: "avoid",
-                /**
-                 * Disables bottom being cut-off in Firefox
-                 */
-                display: hasChildren ? "block" : "inline-block",
-              })}
-            >
-              <IndexCard
-                type={type}
-                reactDndIndex={index}
-                allCards={sortedCards}
-                canMove={sort === SortMode.None && !props.readonly}
-                key={indexCard.id}
-                reactDndType={DragAndDropTypes.SceneIndexCards}
-                data-cy={`scene.aspect.${index}`}
-                id={`index-card-${indexCard.id}`}
-                indexCardHiddenRecord={
-                  hiddenIndexCardRecord.state.indexCardHiddenRecord
-                }
-                onToggleVisibility={(indexCard) => {
-                  hiddenIndexCardRecord.actions.toggle(indexCard);
-                }}
-                onTogglePrivate={() => {
-                  sceneManager.actions.toggleIndexCardSection(indexCard, type);
-                }}
-                onMoveTo={(
-                  idOfIndexCardToMove: string,
-                  idOfIndexCardToMoveTo: string
-                ) => {
-                  sceneManager.actions.moveIndexCardTo(
-                    idOfIndexCardToMove,
-                    idOfIndexCardToMoveTo,
-                    type
-                  );
-                }}
-                readonly={props.readonly}
-                indexCard={indexCard}
-                onRoll={props.onRoll}
-                onPoolClick={props.onPoolClick}
-                onMove={(dragIndex, hoverIndex) => {
-                  sceneManager.actions.moveIndexCard(
-                    dragIndex,
-                    hoverIndex,
-                    type
-                  );
-                }}
-                onChange={(newIndexCard) => {
-                  sceneManager.actions.updateIndexCard(newIndexCard, type);
-                }}
-                onDuplicate={() => {
-                  sceneManager.actions.duplicateIndexCard(indexCard, type);
-                }}
-                onRemove={() => {
-                  sceneManager.actions.removeIndexCard(indexCard.id, type);
-                }}
-              />
-            </Box>
-          );
-        })}
+      <Box>
+        <ImageList
+          variant={sortedCards.length >= 10 ? "masonry" : "standard"}
+          cols={numberOfColumnsForCards}
+          gap={16}
+          className={css({
+            overflow: "initial",
+          })}
+        >
+          {sortedCards.map((indexCard, index) => {
+            const hasChildren = indexCard.subCards.length > 0;
+            return (
+              <ImageListItem
+                key={`${indexCard.id}.${type}`}
+                cols={hasChildren ? numberOfColumnsForCards : 1}
+                className={css({
+                  width: "100%",
+                  paddingTop: ".25rem",
+                  paddingBottom: ".25rem",
+                  // Cards with children take 100% of the available space
+                  columnSpan: hasChildren ? "all" : "initial",
+                  /**
+                   * Disables bottom being cut-off in Chrome
+                   */
+                  // breakInside: "avoid",
+                  /**
+                   * Disables bottom being cut-off in Firefox
+                   */
+                  display: hasChildren ? "block" : "inline-block",
+                })}
+              >
+                <IndexCard
+                  type={type}
+                  reactDndIndex={index}
+                  allCards={sortedCards}
+                  canMove={sort === SortMode.None && props.isGM}
+                  key={indexCard.id}
+                  reactDndType={DragAndDropTypes.SceneIndexCards}
+                  data-cy={`scene.aspect.${index}`}
+                  id={`index-card-${indexCard.id}`}
+                  indexCardHiddenRecord={
+                    hiddenIndexCardRecord.state.indexCardHiddenRecord
+                  }
+                  onToggleVisibility={(indexCard) => {
+                    hiddenIndexCardRecord.actions.toggle(indexCard);
+                  }}
+                  onTogglePrivate={() => {
+                    sceneManager.actions.toggleIndexCardSection(
+                      indexCard,
+                      type
+                    );
+                  }}
+                  onMoveTo={(
+                    idOfIndexCardToMove: string,
+                    idOfIndexCardToMoveTo: string
+                  ) => {
+                    sceneManager.actions.moveIndexCardTo(
+                      idOfIndexCardToMove,
+                      idOfIndexCardToMoveTo,
+                      type
+                    );
+                  }}
+                  isGM={props.isGM}
+                  indexCard={indexCard}
+                  onRoll={props.onRoll}
+                  onPoolClick={props.onPoolClick}
+                  onMove={(dragIndex, hoverIndex) => {
+                    sceneManager.actions.moveIndexCard(
+                      dragIndex,
+                      hoverIndex,
+                      type
+                    );
+                  }}
+                  onChange={(newIndexCard) => {
+                    props.onIndexCardUpdate(newIndexCard, type);
+                  }}
+                  onDuplicate={() => {
+                    sceneManager.actions.duplicateIndexCard(indexCard, type);
+                  }}
+                  onRemove={() => {
+                    sceneManager.actions.removeIndexCard(indexCard.id, type);
+                  }}
+                />
+              </ImageListItem>
+            );
+          })}
+        </ImageList>
       </Box>
     );
   }
@@ -1568,8 +1671,8 @@ export function Scene(props: {
   function renderSceneTabs() {
     const tabClass = css({
       background: headerBackgroundColor,
-      color: headerColor,
       marginRight: ".5rem",
+      color: `${headerColor} !important`,
       // Pentagone
       // https://bennettfeely.com/clippy/
       // clipPath: "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
@@ -1589,6 +1692,10 @@ export function Scene(props: {
             flexContainer: css({
               borderBottom: `1px solid ${headerBackgroundColor}`,
             }),
+            indicator: css({
+              height: ".4rem",
+              backgroundColor: theme.palette.secondary.main,
+            }),
           }}
           onChange={(e, newValue) => {
             setSceneTab(newValue);
@@ -1606,7 +1713,7 @@ export function Scene(props: {
             }
             className={tabClass}
           />
-          {!props.readonly && (
+          {props.isGM && (
             <Tab
               value="private"
               data-cy="scene.tabs.private"
@@ -1620,7 +1727,7 @@ export function Scene(props: {
               className={tabClass}
             />
           )}
-          {!props.readonly && (
+          {props.isGM && (
             <Tab
               value="notes"
               data-cy="scene.tabs.gm-notes"
@@ -1639,116 +1746,120 @@ export function Scene(props: {
     );
   }
 
-  function renderGMIndexCardActions(type: IIndexCardType) {
-    if (props.readonly) {
-      return null;
-    }
+  function renderIndexCardActions(type: IIndexCardType) {
     return (
       <Box mb="1rem">
-        <Grid container spacing={1} justify="center">
+        <Grid
+          container
+          spacing={2}
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          {props.isGM && (
+            <Grid item>
+              <Grid container spacing={1} alignItems="center">
+                <Grid item>
+                  <FormControl variant="standard">
+                    <Select
+                      native
+                      inputProps={{
+                        "data-cy": "scene.card-collections",
+                      }}
+                      value={settingsManager.state.gameTemplate}
+                      onChange={(e) => {
+                        settingsManager.actions.setGameTemplate(e.target.value);
+                      }}
+                      variant="standard"
+                    >
+                      <option value={""}>- Collections -</option>
+                      {indexCardCollectionsManager.state.sceneIndexCardCollections.map(
+                        (indexCardCollection) => (
+                          <option
+                            key={indexCardCollection.id}
+                            value={indexCardCollection.id}
+                          >
+                            {previewContentEditable({
+                              value: indexCardCollection.name,
+                            })}
+                          </option>
+                        )
+                      )}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item>
+                  <SplitButton
+                    data-cy="scene.add-card"
+                    instant
+                    options={[
+                      {
+                        label: t("play-route.add-index-card").toUpperCase(),
+                        endIcon: <AddCircleOutlineIcon />,
+                        onClick: () => {
+                          sceneManager.actions.addIndexCard(type);
+                          logger.track("scene.add_index_card");
+                        },
+                      },
+                      ...(selectedIndexCardCollection?.indexCards ?? []).map(
+                        (card) => {
+                          return {
+                            label: previewContentEditable({
+                              value: card.titleLabel.toUpperCase(),
+                            }),
+                            endIcon: <AddCircleOutlineIcon />,
+                            onClick: () => {
+                              return sceneManager.actions.duplicateIndexCard(
+                                card,
+                                type
+                              );
+                            },
+                          };
+                        }
+                      ),
+                    ]}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+          )}
           <Grid item>
-            <ButtonGroup
-              color="default"
-              variant="outlined"
-              orientation={isSMAndDown ? "vertical" : "horizontal"}
-            >
-              <Button
-                data-cy="scene.add-index-card"
-                onClick={() => {
-                  sceneManager.actions.addIndexCard(type);
-                  logger.info("Scene:onAddCard:IndexCard");
-                }}
-                endIcon={<AddCircleOutlineIcon />}
-              >
-                {t("play-route.add-index-card")}
-              </Button>
-              <Button
-                data-cy="scene.add-aspect"
-                onClick={() => {
-                  sceneManager.actions.addIndexCard(type, (card) => {
-                    card.titleLabel = "Aspect";
-                    card.contentLabel = "Notes";
-                    const freeInvokes = CharacterFactory.makeBlock(
-                      BlockType.SlotTracker
-                    );
-                    freeInvokes.label = "Free Invokes";
-                    freeInvokes.value = [];
-                    card.blocks.push(freeInvokes);
-                  });
-                  logger.info("Scene:onAddCard:Aspect");
-                }}
-                endIcon={<AddCircleOutlineIcon />}
-              >
-                {t("play-route.add-aspect")}
-              </Button>
-              <Button
-                data-cy="scene.add-boost"
-                onClick={() => {
-                  sceneManager.actions.addIndexCard(type, (card) => {
-                    card.titleLabel = "Boost";
-                    card.contentLabel = "Notes";
-                    const freeInvokes = CharacterFactory.makeBlock(
-                      BlockType.SlotTracker
-                    );
-                    freeInvokes.label = "Free Invokes";
-                    card.blocks.push(freeInvokes);
-                    card.color = IndexCardColor.blue;
-                  });
-                  logger.info("Scene:onAddCard:Boost");
-                }}
-                endIcon={<AddCircleOutlineIcon />}
-              >
-                {t("play-route.add-boost")}
-              </Button>
-              <Button
-                data-cy="scene.add-npc"
-                onClick={() => {
-                  sceneManager.actions.addIndexCard(type, (card) => {
-                    card.titleLabel = "NPC";
-                    card.contentLabel = "Aspects";
-                    const stress = CharacterFactory.makeBlock(
-                      BlockType.SlotTracker
-                    );
-                    stress.label = "Stress";
-                    const consequences = CharacterFactory.makeBlock(
-                      BlockType.Text
-                    );
-                    consequences.label = "Consequences";
-                    card.blocks.push(stress);
-                    card.blocks.push(consequences);
-                    card.color = IndexCardColor.green;
-                  });
-                  logger.info("Scene:onAddCard:NPC");
-                }}
-                endIcon={<AddCircleOutlineIcon />}
-              >
-                {t("play-route.add-npc")}
-              </Button>
-              <Button
-                data-cy="scene.add-bad-guy"
-                onClick={() => {
-                  sceneManager.actions.addIndexCard(type, (card) => {
-                    card.titleLabel = "Bad Guy";
-                    card.contentLabel = "Aspects";
-                    const stress = CharacterFactory.makeBlock(
-                      BlockType.SlotTracker
-                    );
-                    stress.label = "Stress";
-                    const consequences = CharacterFactory.makeBlock(
-                      BlockType.Text
-                    );
-                    consequences.label = "Consequences";
-                    card.blocks.push(stress);
-                    card.blocks.push(consequences);
-                    card.color = IndexCardColor.red;
-                  });
-                  logger.info("Scene:onAddCard:BadGuy");
-                }}
-                endIcon={<AddCircleOutlineIcon />}
-              >
-                {t("play-route.add-bad-guy")}
-              </Button>
-            </ButtonGroup>
+            <Grid container spacing={1} alignItems="center">
+              <Grid item>
+                <FormControl variant="standard">
+                  <InputLabel>{t("play-route.sort")}</InputLabel>
+
+                  <Select
+                    native
+                    value={sort}
+                    onChange={(e) => {
+                      setSort(e.target.value as SortMode);
+                    }}
+                    variant="standard"
+                  >
+                    <option value={SortMode.None}>
+                      {t("play-route.sort-options.none")}
+                    </option>
+                    <option value={SortMode.GroupFirst}>
+                      {t("play-route.sort-options.groups-first")}
+                    </option>
+                    <option value={SortMode.PinnedFirst}>
+                      {t("play-route.sort-options.pinned-first")}
+                    </option>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item>
+                <Button
+                  onClick={() => {
+                    hiddenIndexCardRecord.actions.toggleAll();
+                  }}
+                >
+                  {hiddenIndexCardRecord.state.areAllCardsVisible
+                    ? t("play-route.collapse-all")
+                    : t("play-route.expand-all")}
+                </Button>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       </Box>

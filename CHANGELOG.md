@@ -2,6 +2,25 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
+# v5.2
+
+- feat: new "Pause Button" safety tool when playing online games. Anyone can click on it, but only the GM can resume the game.
+- feat: NPCs now show up in the scene's characters tab
+- feat: GMs can now hide NPCs from players
+- fix: When there is less than 10 index cards in a scene, they will flow from left to right. More than 10 index cards will trigger the masonry (pinterest) style layout
+- feat: New "Card Collections" beta feature that lets you create your own "add index cards" buttons!
+- feat: Adding a new Skill/Pool block uses the latest used dice commands as its default.
+- feat: Players can update index cards.
+- feat: can middle-click or command click to open binder items in new tab
+- fix: analytics tracking using GA
+- fix: duplicated binder latest items
+- fix: stop duplicating pinned icons
+- fix: make app faster with shorter useLazy delays
+- feat: new scene UI
+- tech: new Migrator utility class
+- tech: Material-UI was updated from v4 to v5
+- tech: Performance issue when using multiple tabs
+
 # v5.1
 
 - feat: A new binder view has replaced the previous scenes and characters drawer to offer new search and filtering features on Fari's data;

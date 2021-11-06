@@ -1,6 +1,11 @@
-const fariTypes = ["scene", "character", "full"] as const;
+const fariTypes = [
+  "scene",
+  "character",
+  "index-card-template",
+  "full",
+] as const;
 
-type IFariType = typeof fariTypes[number];
+export type IFariType = typeof fariTypes[number];
 
 type IFariEntity = {
   fariType: IFariType;

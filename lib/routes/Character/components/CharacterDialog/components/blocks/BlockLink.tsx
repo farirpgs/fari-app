@@ -2,10 +2,11 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import React from "react";
 import { AppLink } from "../../../../../../components/AppLink/AppLink";
+import { Delays } from "../../../../../../constants/Delays";
 import { ILinkBlock } from "../../../../../../domains/character/types";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
@@ -24,13 +25,13 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
   const [linkState, setLinkState] = useLazyState({
     value: props.block.value,
     onChange: props.onValueChange,
-    delay: 750,
+    delay: Delays.field,
   });
 
   const [linkLabel, setLinkLabel] = useLazyState({
     value: props.block.label,
     onChange: props.onLabelChange,
-    delay: 750,
+    delay: Delays.field,
   });
 
   const linkText =
@@ -42,7 +43,7 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
 
   return (
     <Box>
-      <Grid container spacing={1} justify="space-between" wrap="nowrap">
+      <Grid container spacing={1} justifyContent="space-between" wrap="nowrap">
         <Grid item xs>
           {advanced ? (
             <Box>
@@ -72,6 +73,7 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
                       ? undefined
                       : t("character-dialog.helper-text.invalid-link")
                   }
+                  variant="standard"
                 />
               </Box>
               <Box>
@@ -93,6 +95,7 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
                       }
                       setLinkLabel(label);
                     }}
+                    variant="standard"
                   />
                 )}
               </Box>
@@ -137,6 +140,7 @@ export function BlockLinkActions(
               hasDisplayName: !props.block.meta?.hasDisplayName,
             });
           }}
+          underline="hover"
         >
           {props.block.meta.hasDisplayName
             ? t("character-dialog.control.hide-display-name")

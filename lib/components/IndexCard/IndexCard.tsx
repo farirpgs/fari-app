@@ -5,18 +5,17 @@ import Fade from "@material-ui/core/Fade";
 import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
+import ImageList from "@material-ui/core/ImageList";
+import ImageListItem from "@material-ui/core/ImageListItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Popover from "@material-ui/core/Popover";
 import Select from "@material-ui/core/Select";
-import { darken, lighten } from "@material-ui/core/styles";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { darken, lighten, useTheme } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import BookmarkIcon from "@material-ui/icons/Bookmark";
-import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import ControlCameraIcon from "@material-ui/icons/ControlCamera";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
@@ -28,6 +27,8 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 import PaletteIcon from "@material-ui/icons/Palette";
 import PaletteOutlinedIcon from "@material-ui/icons/PaletteOutlined";
 import PostAddIcon from "@material-ui/icons/PostAdd";
+import PushPinIcon from "@material-ui/icons/PushPin";
+import PushPinOutlinedIcon from "@material-ui/icons/PushPinOutlined";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { ThemeProvider } from "@material-ui/styles";
@@ -117,7 +118,7 @@ function FariPopper(props: {
 
 export const IndexCard: React.FC<
   {
-    readonly: boolean;
+    // readonly?: boolean;
     className?: string;
     id: string;
     type?: IIndexCardType;
@@ -127,16 +128,17 @@ export const IndexCard: React.FC<
     reactDndIndex: number;
     reactDndType: string;
     canMove: boolean;
-    indexCardHiddenRecord: Record<string, boolean>;
+    isGM: boolean;
+    indexCardHiddenRecord?: Record<string, boolean>;
     onPoolClick(element: IDicePoolElement): void;
     onChange(newIndexCard: IIndexCard): void;
-    onMoveTo(idOfIndexCardToMove: string, idOfIndexCardToMoveTo: string): void;
+    onMoveTo?(idOfIndexCardToMove: string, idOfIndexCardToMoveTo: string): void;
     onRoll(diceRollResult: IDiceRollResult): void;
     onMove(dragIndex: number, hoverIndex: number): void;
     onRemove(): void;
     onDuplicate(): void;
     onTogglePrivate?(): void;
-    onToggleVisibility(indexCard: IIndexCard): void;
+    onToggleVisibility?(indexCard: IIndexCard): void;
   } & IDataCyProps
 > = (props) => {
   const theme = useTheme();
@@ -157,7 +159,7 @@ export const IndexCard: React.FC<
   );
   const diceManager = useContext(DiceContext);
   const [advanced, setAdvanced] = useState(false);
-  const open = !props.indexCardHiddenRecord[props.indexCard.id];
+  const open = !props.indexCardHiddenRecord?.[props.indexCard.id];
   const numberOfColumnsForSubCards = useResponsiveValue({
     xl: 3,
     lg: 2,
@@ -167,7 +169,7 @@ export const IndexCard: React.FC<
   });
 
   const paper = useTextColors(
-    theme.palette.type === "light"
+    theme.palette.mode === "light"
       ? indexCardManager.state.indexCard.color
       : darken(indexCardManager.state.indexCard.color, 0.5)
   );
@@ -176,11 +178,11 @@ export const IndexCard: React.FC<
 
   return (
     <Paper
-      elevation={indexCardManager.state.indexCard.pinned ? 8 : 2}
+      elevation={indexCardManager.state.indexCard.pinned ? 4 : 2}
       className={props.className}
     >
       <Box
-        pb={props.readonly ? "1rem" : "0"}
+        pb={!props.isGM ? "1rem" : "0"}
         bgcolor={paper.bgColor}
         color={paper.primary}
         onClick={() => {
@@ -215,11 +217,11 @@ export const IndexCard: React.FC<
                             size="small"
                             className={css({
                               position: "absolute",
-                              marginTop: "1rem",
-                              marginLeft: ".5rem",
+                              marginTop: ".5rem",
+                              marginLeft: ".25rem",
                               cursor: "drag",
                               display:
-                                props.readonly || !props.canMove
+                                !props.canMove || !props.isGM
                                   ? "none"
                                   : "block",
                             })}
@@ -247,7 +249,7 @@ export const IndexCard: React.FC<
         >
           <Box>
             <Grid container>
-              <Grid item xs={12} md={hasSubCards ? 3 : 12}>
+              <Grid item xs={12} lg={hasSubCards ? 3 : 12}>
                 <Box display="flex" height="100%" flexDirection="column">
                   <ThemeProvider theme={defaultButtonTheme}>
                     <Box
@@ -282,7 +284,7 @@ export const IndexCard: React.FC<
                 <Grid
                   item
                   xs={12}
-                  md={9}
+                  lg={9}
                   className={css({
                     background:
                       paper.type === "light"
@@ -301,9 +303,6 @@ export const IndexCard: React.FC<
   );
 
   function renderGMActions() {
-    if (props.readonly) {
-      return null;
-    }
     return (
       <Fade in={hover}>
         <Box
@@ -313,8 +312,13 @@ export const IndexCard: React.FC<
           alignItems="flex-end"
           flex="1 0 auto"
         >
-          <Grid container wrap="nowrap" justify="space-between" spacing={1}>
-            <Grid item container justify="flex-start" spacing={1}>
+          <Grid
+            container
+            wrap="nowrap"
+            justifyContent="space-between"
+            spacing={1}
+          >
+            <Grid item container justifyContent="flex-start" spacing={1}>
               <Grid item>
                 <IconButton
                   size="small"
@@ -386,7 +390,7 @@ export const IndexCard: React.FC<
                 </Tooltip>
               </Grid>
             </Grid>
-            <Grid item container justify="center" spacing={1}>
+            <Grid item container justifyContent="center" spacing={1}>
               <Grid item>
                 <Tooltip title={t("index-card.add-block")}>
                   <span>
@@ -394,6 +398,13 @@ export const IndexCard: React.FC<
                       variant="icon"
                       onAddBlock={(blockType) => {
                         indexCardManager.actions.addBlock(blockType);
+
+                        if (!open) {
+                          props.onToggleVisibility?.(
+                            indexCardManager.state.indexCard
+                          );
+                        }
+
                         setAdvanced(true);
                       }}
                     />
@@ -401,109 +412,116 @@ export const IndexCard: React.FC<
                 </Tooltip>
               </Grid>
             </Grid>
-            <Grid item container justify="flex-end" spacing={1}>
-              <Grid item>
-                <Tooltip title={t("index-card.duplicate")}>
-                  <IconButton
-                    size="small"
-                    data-cy={`${props["data-cy"]}.duplicate`}
-                    onClick={() => {
-                      props.onDuplicate();
-                    }}
-                  >
-                    <FileCopyIcon htmlColor={paper.primary} />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
-              <Grid item>
-                <FariPopper
-                  renderPopper={(renderProps) => {
-                    const cardsForSelect = props.allCards.filter((c) => {
-                      const isCurrent =
-                        c.id !== indexCardManager.state.indexCard.id;
-                      const isParent = c.id !== props.parentIndexCard?.id;
-                      return isCurrent && isParent;
-                    });
-                    return (
-                      <Box p="1rem" minWidth="200px">
-                        <FormControl fullWidth>
-                          <InputLabel>{t("index-card.move-to")}</InputLabel>
+            <Grid item container justifyContent="flex-end" spacing={1}>
+              {props.isGM && (
+                <Grid item>
+                  <Tooltip title={t("index-card.duplicate")}>
+                    <IconButton
+                      size="small"
+                      data-cy={`${props["data-cy"]}.duplicate`}
+                      onClick={() => {
+                        props.onDuplicate();
+                      }}
+                    >
+                      <FileCopyIcon htmlColor={paper.primary} />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
+              {props.isGM && props.onMoveTo && (
+                <Grid item>
+                  <FariPopper
+                    renderPopper={(renderProps) => {
+                      const cardsForSelect = props.allCards.filter((c) => {
+                        const isCurrent =
+                          c.id !== indexCardManager.state.indexCard.id;
+                        const isParent = c.id !== props.parentIndexCard?.id;
+                        return isCurrent && isParent;
+                      });
+                      return (
+                        <Box p="1rem" minWidth="200px">
+                          <FormControl fullWidth variant="standard">
+                            <InputLabel>{t("index-card.move-to")}</InputLabel>
 
-                          <Select
-                            fullWidth
-                            native
-                            inputProps={{
-                              ["data-cy"]: "app.languages",
-                            }}
-                            onChange={(e) => {
-                              renderProps.handleOnClose();
-                              if (e.target.value) {
-                                props.onMoveTo(
-                                  indexCardManager.state.indexCard.id,
-                                  e.target.value as string
+                            <Select
+                              fullWidth
+                              native
+                              inputProps={{
+                                ["data-cy"]: "app.languages",
+                              }}
+                              onChange={(e) => {
+                                renderProps.handleOnClose();
+                                if (e.target.value) {
+                                  props.onMoveTo?.(
+                                    indexCardManager.state.indexCard.id,
+                                    e.target.value as string
+                                  );
+                                }
+                              }}
+                              variant="standard"
+                            >
+                              <option value="" />
+                              {cardsForSelect.map((card) => {
+                                const value = previewContentEditable({
+                                  value: card.title,
+                                });
+                                return (
+                                  <option key={card.id} value={card.id}>
+                                    {value}
+                                  </option>
                                 );
-                              }
-                            }}
-                          >
-                            <option value="" />
-                            {cardsForSelect.map((card) => {
-                              const value = previewContentEditable({
-                                value: card.title,
-                              });
-                              return (
-                                <option key={card.id} value={card.id}>
-                                  {value}
-                                </option>
-                              );
-                            })}
-                          </Select>
-                        </FormControl>
-                      </Box>
-                    );
-                  }}
-                  renderAnchor={(renderProps) => {
-                    return (
-                      <Tooltip title={t("index-card.move-to")}>
-                        <span>
-                          <IconButton
-                            disabled={hasSubCards}
-                            size="small"
-                            data-cy={`${props["data-cy"]}.move`}
-                            onClick={(event) => {
-                              renderProps.handleOnOpen(event);
-                            }}
-                          >
-                            <ControlCameraIcon
-                              htmlColor={
-                                hasSubCards ? paper.disabled : paper.primary
-                              }
-                            />
-                          </IconButton>
-                        </span>
-                      </Tooltip>
-                    );
-                  }}
-                />
-              </Grid>
-
-              <Grid item>
-                <Tooltip title={t("index-card.remove")}>
-                  <IconButton
-                    size="small"
-                    data-cy={`${props["data-cy"]}.remove`}
-                    onClick={() => {
-                      const confirmed = confirm(
-                        t("index-card.remove-confirmation")
+                              })}
+                            </Select>
+                          </FormControl>
+                        </Box>
                       );
-                      if (confirmed) {
-                        props.onRemove();
-                      }
                     }}
-                  >
-                    <DeleteIcon htmlColor={paper.primary} />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
+                    renderAnchor={(renderProps) => {
+                      return (
+                        <Tooltip title={t("index-card.move-to")}>
+                          <span>
+                            <IconButton
+                              disabled={hasSubCards}
+                              size="small"
+                              data-cy={`${props["data-cy"]}.move`}
+                              onClick={(event) => {
+                                renderProps.handleOnOpen(event);
+                              }}
+                            >
+                              <ControlCameraIcon
+                                htmlColor={
+                                  hasSubCards ? paper.disabled : paper.primary
+                                }
+                              />
+                            </IconButton>
+                          </span>
+                        </Tooltip>
+                      );
+                    }}
+                  />
+                </Grid>
+              )}
+
+              {props.isGM && (
+                <Grid item>
+                  <Tooltip title={t("index-card.remove")}>
+                    <IconButton
+                      size="small"
+                      data-cy={`${props["data-cy"]}.remove`}
+                      onClick={() => {
+                        const confirmed = confirm(
+                          t("index-card.remove-confirmation")
+                        );
+                        if (confirmed) {
+                          props.onRemove();
+                        }
+                      }}
+                    >
+                      <DeleteIcon htmlColor={paper.primary} />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </Box>
@@ -513,50 +531,43 @@ export const IndexCard: React.FC<
 
   function renderSubCards() {
     return (
-      <>
-        <Box
-          py="1rem"
-          px="1rem"
-          // mb="1rem"
+      <Box px="1rem" py="1rem">
+        <ImageList
+          variant={"standard"}
+          cols={numberOfColumnsForSubCards}
+          gap={16}
           className={css({
-            label: "IndexCard-masonry-content",
-            columnCount: numberOfColumnsForSubCards,
-            columnWidth: "auto",
-            columnGap: "1rem",
+            // padding: "1rem 1rem", // for boxShadow padding
+            // margin: "-1rem -1rem", // for boxShadow padding
           })}
         >
           {indexCardManager.state.indexCard.subCards?.map(
             (subCard, subCardIndex) => {
               return (
-                <Box
+                <ImageListItem
                   key={subCard.id}
+                  cols={1}
                   className={css({
-                    label: "IndexCard-masonry-card",
                     width: "100%",
-                    display: "inline-block",
-
-                    marginBottom: "1rem",
-                    /**
-                     * Disables bottom being cut-off
-                     */
-                    breakInside: "avoid",
+                    paddingTop: ".25rem",
+                    paddingBottom: ".25rem",
                   })}
                 >
                   <IndexCard
                     indexCard={subCard}
+                    isGM={props.isGM}
                     parentIndexCard={indexCardManager.state.indexCard}
                     allCards={props.allCards}
                     id={`index-card-${subCard.id}`}
                     reactDndType={`${DragAndDropTypes.SceneIndexCardsSubCards}.${indexCardManager.state.indexCard.id}`}
                     canMove={true}
                     reactDndIndex={subCardIndex}
-                    readonly={props.readonly}
                     onPoolClick={props.onPoolClick}
                     onRoll={props.onRoll}
                     indexCardHiddenRecord={props.indexCardHiddenRecord}
                     onToggleVisibility={props.onToggleVisibility}
                     onMoveTo={(idOfIndexCardToMove, idOfIndexCardToMoveTo) => {
-                      props.onMoveTo(
+                      props.onMoveTo?.(
                         idOfIndexCardToMove,
                         idOfIndexCardToMoveTo
                       );
@@ -577,12 +588,12 @@ export const IndexCard: React.FC<
                       indexCardManager.actions.removeIndexCard(subCard.id);
                     }}
                   />
-                </Box>
+                </ImageListItem>
               );
             }
           )}
-        </Box>
-      </>
+        </ImageList>
+      </Box>
     );
   }
 
@@ -643,7 +654,7 @@ export const IndexCard: React.FC<
                           <BlockByType
                             advanced={advanced}
                             hideHelp
-                            readonly={props.readonly}
+                            readonly={false}
                             dataCy={`index-card.${block.label}`}
                             block={block}
                             onChange={(newBlock) => {
@@ -658,6 +669,7 @@ export const IndexCard: React.FC<
                                   <Link
                                     component="button"
                                     variant="caption"
+                                    color="inherit"
                                     data-cy={`index-card.${block.label}.duplicate`}
                                     className={css({
                                       label: "CharacterDialog-duplicate",
@@ -667,6 +679,7 @@ export const IndexCard: React.FC<
                                         block
                                       );
                                     }}
+                                    underline="hover"
                                   >
                                     {t("character-dialog.control.duplicate")}
                                   </Link>
@@ -675,6 +688,7 @@ export const IndexCard: React.FC<
                                   <Link
                                     component="button"
                                     variant="caption"
+                                    color="inherit"
                                     data-cy={`index-card.${block.label}.remove`}
                                     className={css({
                                       label: "CharacterDialog-remove",
@@ -684,6 +698,7 @@ export const IndexCard: React.FC<
                                         block
                                       );
                                     }}
+                                    underline="hover"
                                   >
                                     {t("character-dialog.control.remove-block")}
                                   </Link>
@@ -708,7 +723,7 @@ export const IndexCard: React.FC<
     const hasSkills = indexCardSkills.length > 0;
 
     return (
-      <Collapse in={hasSkills && !props.readonly}>
+      <Collapse in={hasSkills && props.isGM}>
         <Box px="1rem" py=".5rem">
           <Grid container spacing={1} alignItems="center">
             {indexCardSkills.map((skill, skillIndex) => {
@@ -717,9 +732,9 @@ export const IndexCard: React.FC<
                   <Link
                     className={css([
                       {
-                        cursor: props.readonly ? "inherit" : "pointer",
+                        cursor: !props.isGM ? "inherit" : "pointer",
                       },
-                      props.readonly && {
+                      !props.isGM && {
                         "color": theme.palette.text.primary,
                         "&:hover": {
                           textDecoration: "none",
@@ -728,7 +743,7 @@ export const IndexCard: React.FC<
                     ])}
                     data-cy={`index-card.skill.${skill.label}`}
                     onClick={() => {
-                      if (props.readonly) {
+                      if (!props.isGM) {
                         return;
                       }
                       const modifier = parseInt(skill.modifier) || 0;
@@ -744,6 +759,7 @@ export const IndexCard: React.FC<
                         diceManager.actions.roll(commandOptionList);
                       props.onRoll(result);
                     }}
+                    underline="hover"
                   >
                     {skill.label} ({skill.modifier})
                   </Link>
@@ -759,12 +775,15 @@ export const IndexCard: React.FC<
   function renderHeader() {
     const dragIconMargin = "1.5rem";
     return (
-      <Box ml={props.readonly ? "0" : dragIconMargin}>
-        <Grid container alignItems="center" spacing={1} wrap="nowrap">
-          <Grid item className={css({ flex: "1 0 auto" })}>
+      <Box ml={!props.isGM ? "0" : dragIconMargin}>
+        <Grid container alignItems="flex-start" spacing={1} wrap="nowrap">
+          <Grid item xs>
             <Typography
+              noWrap
               variant="overline"
               className={css({
+                display: "flex",
+                width: "100%",
                 fontWeight: indexCardManager.state.indexCard.pinned
                   ? "bold"
                   : "inherit",
@@ -774,7 +793,6 @@ export const IndexCard: React.FC<
               <ContentEditable
                 data-cy={`${props["data-cy"]}.title-label`}
                 value={indexCardManager.state.indexCard.titleLabel}
-                readonly={props.readonly}
                 onChange={(newLabel) => {
                   indexCardManager.actions.setTitleLabel(newLabel);
                 }}
@@ -783,110 +801,116 @@ export const IndexCard: React.FC<
           </Grid>
 
           <Fade in={hover}>
-            <Grid item container justify="flex-end">
-              {!isSubCard && !props.readonly && (
+            <Grid item>
+              <Grid container spacing={1} justifyContent="flex-end">
+                {!isSubCard && props.isGM && props.onTogglePrivate && (
+                  <Grid item>
+                    <Tooltip
+                      title={
+                        props.type === "public"
+                          ? t("index-card.mark-private")
+                          : t("index-card.mark-public")
+                      }
+                    >
+                      <IconButton
+                        size="small"
+                        data-cy={`${props["data-cy"]}.menu.visibility`}
+                        onClick={() => {
+                          props.onTogglePrivate?.();
+                        }}
+                      >
+                        {props.type === "public" ? (
+                          <VisibilityOffIcon htmlColor={paper.primary} />
+                        ) : (
+                          <VisibilityIcon htmlColor={paper.primary} />
+                        )}
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                )}
+                {props.isGM && (
+                  <Grid item>
+                    <Tooltip
+                      title={
+                        indexCardManager.state.indexCard.pinned
+                          ? t("index-card.unpin")
+                          : t("index-card.pin")
+                      }
+                    >
+                      <IconButton
+                        ref={$menu}
+                        size="small"
+                        data-cy={`${props["data-cy"]}.pin`}
+                        onClick={() => {
+                          indexCardManager.actions.togglePinned();
+                        }}
+                      >
+                        {indexCardManager.state.indexCard.pinned ? (
+                          <PushPinIcon htmlColor={paper.primary} />
+                        ) : (
+                          <PushPinOutlinedIcon htmlColor={paper.primary} />
+                        )}
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                )}
                 <Grid item>
                   <Tooltip
                     title={
-                      props.type === "public"
-                        ? t("index-card.mark-private")
-                        : t("index-card.mark-public")
+                      indexCardManager.state.indexCard.playedDuringTurn
+                        ? t("player-row.played")
+                        : t("player-row.not-played")
                     }
                   >
-                    <IconButton
-                      size="small"
-                      data-cy={`${props["data-cy"]}.menu.visibility`}
-                      onClick={() => {
-                        props.onTogglePrivate?.();
-                      }}
-                    >
-                      {props.type === "public" ? (
-                        <VisibilityOffIcon htmlColor={paper.primary} />
-                      ) : (
-                        <VisibilityIcon htmlColor={paper.primary} />
-                      )}
-                    </IconButton>
+                    <span>
+                      <IconButton
+                        data-cy={`${props["data-cy"]}.initiative`}
+                        onClick={() => {
+                          indexCardManager.actions.toggleInitiative();
+                        }}
+                        size="small"
+                      >
+                        {indexCardManager.state.indexCard.playedDuringTurn ? (
+                          <DirectionsRunIcon htmlColor={paper.primary} />
+                        ) : (
+                          <EmojiPeopleIcon htmlColor={paper.primary} />
+                        )}
+                      </IconButton>
+                    </span>
                   </Tooltip>
                 </Grid>
-              )}
-              {!props.readonly && (
-                <Grid item>
-                  <Tooltip
-                    title={
-                      indexCardManager.state.indexCard.pinned
-                        ? t("index-card.unpin")
-                        : t("index-card.pin")
-                    }
-                  >
-                    <IconButton
-                      ref={$menu}
-                      size="small"
-                      data-cy={`${props["data-cy"]}.pin`}
-                      onClick={() => {
-                        indexCardManager.actions.togglePinned();
-                      }}
-                    >
-                      {indexCardManager.state.indexCard.pinned ? (
-                        <BookmarkIcon htmlColor={paper.primary} />
-                      ) : (
-                        <BookmarkBorderIcon htmlColor={paper.primary} />
-                      )}
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-              )}
-              <Grid item>
-                <Tooltip
-                  title={
-                    indexCardManager.state.indexCard.playedDuringTurn
-                      ? t("player-row.played")
-                      : t("player-row.not-played")
-                  }
-                >
-                  <span>
-                    <IconButton
-                      data-cy={`${props["data-cy"]}.initiative`}
-                      onClick={() => {
-                        indexCardManager.actions.toggleInitiative();
-                      }}
-                      disabled={props.readonly}
-                      size="small"
-                    >
-                      {indexCardManager.state.indexCard.playedDuringTurn ? (
-                        <DirectionsRunIcon htmlColor={paper.primary} />
-                      ) : (
-                        <EmojiPeopleIcon htmlColor={paper.primary} />
-                      )}
-                    </IconButton>
-                  </span>
-                </Tooltip>
-              </Grid>
 
-              <Grid item>
-                <Tooltip
-                  title={
-                    open ? t("index-card.collapse") : t("index-card.expand")
-                  }
-                >
-                  <span>
-                    <IconButton
-                      size="small"
-                      data-cy={`${props["data-cy"]}.collapse`}
-                      onClick={() => {
-                        props.onToggleVisibility(
-                          indexCardManager.state.indexCard
-                        );
-                      }}
+                {props.onToggleVisibility && (
+                  <Grid item>
+                    <Tooltip
+                      title={
+                        open ? t("index-card.collapse") : t("index-card.expand")
+                      }
                     >
-                      <ArrowForwardIosIcon
-                        className={css({
-                          transform: open ? "rotate(270deg)" : "rotate(90deg)",
-                          transition: theme.transitions.create("transform"),
-                        })}
-                      />
-                    </IconButton>
-                  </span>
-                </Tooltip>
+                      <span>
+                        <IconButton
+                          size="small"
+                          data-cy={`${props["data-cy"]}.collapse`}
+                          onClick={() => {
+                            props.onToggleVisibility?.(
+                              indexCardManager.state.indexCard
+                            );
+                          }}
+                        >
+                          <ArrowForwardIosIcon
+                            htmlColor={paper.primary}
+                            className={css({
+                              transform: open
+                                ? "rotate(270deg)"
+                                : "rotate(90deg)",
+                              transition: theme.transitions.create("transform"),
+                            })}
+                          />
+                        </IconButton>
+                      </span>
+                    </Tooltip>
+                  </Grid>
+                )}
               </Grid>
             </Grid>
           </Fade>
@@ -897,7 +921,12 @@ export const IndexCard: React.FC<
 
   function renderTitle() {
     return (
-      <Grid container justify="space-between" alignItems="center" spacing={2}>
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={2}
+      >
         <Grid item xs>
           <ContentEditable
             id={props.id}
@@ -906,9 +935,9 @@ export const IndexCard: React.FC<
             className={css({
               fontSize: "1.8rem",
               fontFamily: FontFamily.HandWriting,
+              lineHeight: "normal",
               // letterSpacing: "-.5px",
             })}
-            readonly={props.readonly}
             onChange={(newTitle) => {
               indexCardManager.actions.setTitle(newTitle);
             }}
@@ -933,7 +962,6 @@ export const IndexCard: React.FC<
             <ContentEditable
               data-cy={`${props["data-cy"]}.content-label`}
               value={indexCardManager.state.indexCard.contentLabel}
-              readonly={props.readonly}
               onChange={(newLabel) => {
                 indexCardManager.actions.setContentLabel(newLabel);
               }}
@@ -944,7 +972,6 @@ export const IndexCard: React.FC<
         <Box p="0 1rem">
           <ContentEditable
             data-cy={`${props["data-cy"]}.content`}
-            readonly={props.readonly}
             border
             placeholder="..."
             value={indexCardManager.state.indexCard.content}
@@ -985,7 +1012,7 @@ function IndexCardColorPicker(props: {
         }}
       />
       <Box pb=".5rem" bgcolor="white" width="225px">
-        <Grid container justify="center" spacing={1}>
+        <Grid container justifyContent="center" spacing={1}>
           {Object.keys(IndexCardColor).map((colorName) => {
             const color = IndexCardColor[colorName as IndexCardColorTypes];
             return (

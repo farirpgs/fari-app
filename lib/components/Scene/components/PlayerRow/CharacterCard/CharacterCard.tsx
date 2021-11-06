@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import InputLabel from "@material-ui/core/InputLabel";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import FaceIcon from "@material-ui/icons/Face";
 import React, { useContext } from "react";
@@ -79,6 +79,8 @@ export const CharacterCard: React.FC<{
   if (!props.characterSheet) {
     return null;
   }
+  const numberOfSections = visibleSections?.length ?? 0;
+  const hasSections = numberOfSections > 0;
 
   const renderBlockByBlockType: Record<
     keyof typeof BlockType,
@@ -113,7 +115,7 @@ export const CharacterCard: React.FC<{
             className={css({
               fontSize: "1.5rem",
               width: "100%",
-              borderBottom: "1px solid #f0a4a4",
+              borderBottom: hasSections ? "1px solid #f0a4a4" : undefined,
             })}
           >
             <Box>
@@ -130,7 +132,9 @@ export const CharacterCard: React.FC<{
                           data-cy="character-card.open-character-sheet"
                           onClick={() => {
                             props.onCharacterDialogOpen?.();
-                            logger.info("CharacterCard:onCharacterDialogOpen");
+                            logger.track(
+                              "session.open_character_sheet_from_card"
+                            );
                           }}
                         >
                           <FaceIcon
@@ -150,30 +154,35 @@ export const CharacterCard: React.FC<{
               )}
             </Box>
           </Box>
-          <Box px="1rem" pb="1rem">
-            {visibleSections?.map((section) => {
-              return (
-                <Box key={section.id} className={css({ clear: "both" })}>
-                  <Box className={sheetHeaderClassName}>
-                    <FateLabel noWrap>
-                      {previewContentEditable({ value: section.label })}
-                    </FateLabel>
+          {hasSections && (
+            <Box px="1rem" pb="1rem">
+              {visibleSections?.map((section) => {
+                return (
+                  <Box key={section.id} className={css({ clear: "both" })}>
+                    <Box className={sheetHeaderClassName}>
+                      <FateLabel noWrap>
+                        {previewContentEditable({ value: section.label })}
+                      </FateLabel>
+                    </Box>
+                    <Box px=".2rem">
+                      <Grid container>
+                        {section.blocks.map((block) => {
+                          return (
+                            <React.Fragment key={block.id}>
+                              {renderBlockByBlockType[block.type](
+                                section,
+                                block
+                              )}
+                            </React.Fragment>
+                          );
+                        })}
+                      </Grid>
+                    </Box>
                   </Box>
-                  <Box px=".2rem">
-                    <Grid container>
-                      {section.blocks.map((block) => {
-                        return (
-                          <React.Fragment key={block.id}>
-                            {renderBlockByBlockType[block.type](section, block)}
-                          </React.Fragment>
-                        );
-                      })}
-                    </Grid>
-                  </Box>
-                </Box>
-              );
-            })}
-          </Box>
+                );
+              })}
+            </Box>
+          )}
         </Box>
       </Paper>
     </Box>
@@ -298,6 +307,7 @@ export const CharacterCard: React.FC<{
             });
             props.onRoll(diceRollResult);
           }}
+          underline="hover"
         >
           {previewContentEditable({ value: block.label })} ({blockValue})
         </Link>

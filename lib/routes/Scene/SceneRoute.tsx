@@ -31,7 +31,7 @@ export const SceneRoute: React.FC<{
   const myBinderManager = useContext(MyBinderContext);
 
   useEffect(() => {
-    logger.info("Route:Scene");
+    logger.track("view_scene");
   }, []);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export const SceneRoute: React.FC<{
     );
 
     if (sceneToLoad) {
-      sceneManager.actions.loadScene(sceneToLoad, false);
+      sceneManager.actions.loadScene(sceneToLoad);
     } else {
       history.replace("/");
       myBinderManager.actions.open({ folder: "scenes" });

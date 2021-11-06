@@ -1,4 +1,7 @@
 import { css } from "@emotion/css";
+import Autocomplete, {
+  createFilterOptions,
+} from "@material-ui/core/Autocomplete";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
@@ -14,7 +17,7 @@ import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -22,15 +25,11 @@ import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import EditIcon from "@material-ui/icons/Edit";
 import MenuIcon from "@material-ui/icons/Menu";
-import Autocomplete, {
-  createFilterOptions,
-} from "@material-ui/lab/Autocomplete";
 import truncate from "lodash/truncate";
 import uniq from "lodash/uniq";
 import React, { useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import { Link as RouterLink } from "react-router-dom";
-import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { AppLink } from "../AppLink/AppLink";
 import { FateLabel } from "../FateLabel/FateLabel";
@@ -122,9 +121,8 @@ export type IDocProps = IProps;
 export const Doc: React.FC<IProps> = (props) => {
   const lightBackground = useLightBackground();
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const history = useHistory();
-  const logger = useLogger();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const section = params.get("goTo");
@@ -172,22 +170,6 @@ export const Doc: React.FC<IProps> = (props) => {
       window.scrollTo(0, 0);
     };
   }, []);
-
-  useEffect(
-    function sendLog() {
-      const dynamicLogMessage = `Route:Document:${location.pathname}`;
-
-      logger.info(dynamicLogMessage);
-      logger.info("Route:Document", {
-        tags: {
-          pathname: location.pathname,
-          page: pageId,
-          section: section,
-        },
-      });
-    },
-    [location.pathname]
-  );
 
   useEffect(
     function transformHashToGoodUrl() {
@@ -306,7 +288,7 @@ export const Doc: React.FC<IProps> = (props) => {
                       </div>
                     </Box>
                   </Grid>
-                  <Hidden mdDown>
+                  <Hidden lgDown>
                     <Grid item lg={3}>
                       <Box
                         pl={2}
@@ -372,10 +354,9 @@ export const Doc: React.FC<IProps> = (props) => {
     const githubHash = pageId ? `#${pageId}` : "";
     return (
       <Box my=".5rem" pb="2rem">
-        <Grid container justify="flex-start">
+        <Grid container justifyContent="flex-start">
           <Grid item>
             <Button
-              color="default"
               component="a"
               startIcon={<EditIcon />}
               target="_blank"
@@ -396,7 +377,7 @@ export const Doc: React.FC<IProps> = (props) => {
     }
     return (
       <Box>
-        <Grid container spacing={1} justify="space-between">
+        <Grid container spacing={1} justifyContent="space-between">
           <Grid container item sm={12} md spacing={1} alignItems="center">
             <Grid item className={css({ display: "flex" })}>
               {props.author.avatarUrl ? (
@@ -417,7 +398,7 @@ export const Doc: React.FC<IProps> = (props) => {
             sm={12}
             md
             spacing={1}
-            justify={isSmall ? "flex-start" : "flex-end"}
+            justifyContent={isSmall ? "flex-start" : "flex-end"}
             alignItems="center"
           >
             {props.author.items.map((item, index) => {
@@ -482,6 +463,7 @@ export const Doc: React.FC<IProps> = (props) => {
                 onClick={() => {
                   setMobileMenuOpen(true);
                 }}
+                size="large"
               >
                 <MenuIcon color="inherit" />
               </IconButton>
@@ -499,7 +481,12 @@ export const Doc: React.FC<IProps> = (props) => {
 
   function renderHeader() {
     return (
-      <Grid container justify="space-between" alignItems="flex-end" spacing={2}>
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="flex-end"
+        spacing={2}
+      >
         <Grid item md={7} xs={12} zeroMinWidth>
           {renderTitle()}
         </Grid>
@@ -523,7 +510,7 @@ export const Doc: React.FC<IProps> = (props) => {
         <Grid
           container
           spacing={2}
-          justify={
+          justifyContent={
             previousIndex && !nextIndex
               ? "flex-start"
               : !previousIndex && nextIndex
@@ -532,7 +519,7 @@ export const Doc: React.FC<IProps> = (props) => {
           }
         >
           {previousIndex && (
-            <Grid container item xs={12} sm={6} justify="flex-start">
+            <Grid container item xs={12} sm={6} justifyContent="flex-start">
               <Button
                 fullWidth={isSmall}
                 className={css({
@@ -570,7 +557,7 @@ export const Doc: React.FC<IProps> = (props) => {
             </Grid>
           )}
           {nextIndex && (
-            <Grid container item xs={12} sm={6} justify="flex-end">
+            <Grid container item xs={12} sm={6} justifyContent="flex-end">
               <Button
                 fullWidth={isSmall}
                 className={css({
@@ -643,15 +630,15 @@ export const Doc: React.FC<IProps> = (props) => {
               }
             }
           }}
-          renderOption={(header) => (
+          renderOption={(props, options) => (
             <React.Fragment>
               <Box width="100%">
                 <Grid container alignItems="center">
-                  <Grid item>{header.label}</Grid>
+                  <Grid item>{options.label}</Grid>
                 </Grid>
                 <Box>
                   <Typography variant="body2" noWrap color="textSecondary">
-                    {header.preview}
+                    {options.preview}
                   </Typography>
                 </Box>
               </Box>
@@ -664,6 +651,7 @@ export const Doc: React.FC<IProps> = (props) => {
               className={css({ width: "100%", margin: "0" })}
               label="Search"
               margin="normal"
+              variant="standard"
             />
           )}
         />
@@ -695,7 +683,7 @@ export const Doc: React.FC<IProps> = (props) => {
             <Box p="2rem">{sideBar}</Box>
           </Drawer>
         </Hidden>
-        <Hidden smDown>
+        <Hidden mdDown>
           <Drawer
             variant="permanent"
             anchor="left"
@@ -821,7 +809,7 @@ export const DocSideBar: React.FC<{
                 </Box>
 
                 <ArrowForwardIosIcon
-                  htmlColor={theme.palette.text.hint}
+                  htmlColor={theme.palette.text.secondary}
                   className={css({
                     width: "1rem",
                     height: "1rem",

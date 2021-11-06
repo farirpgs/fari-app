@@ -61,6 +61,15 @@ export const PlayRoute: React.FC<{
       if (peerAction.action === "load-character") {
         sessionManager.actions.loadPlayerCharacter(id, peerAction.payload);
       }
+      if (peerAction.action === "pause") {
+        sessionManager.actions.pause();
+      }
+      if (peerAction.action === "update-index-card") {
+        sceneManager.actions.updateIndexCard(
+          peerAction.payload.indexCard,
+          "public"
+        );
+      }
     },
     debug: debug,
   });
@@ -94,11 +103,13 @@ export const PlayRoute: React.FC<{
 
   useEffect(() => {
     if (isGM) {
-      logger.info("Route:Play");
-      logger.info("Route:Play:GM");
+      logger.track("play_online_game", {
+        as: "gm",
+      });
     } else {
-      logger.info("Route:Play");
-      logger.info("Route:Play:Player");
+      logger.track("play_online_game", {
+        as: "player",
+      });
     }
   }, []);
 

@@ -9,6 +9,7 @@ export const PossibleLanguages = [
   "es",
   "eo",
   "pt-BR",
+  "zh_CN",
   "fr",
   "gl",
   "ru",
@@ -25,6 +26,7 @@ export const PossibleLanguagesNames: Record<IPossibleLanguages, string> = {
   "es": "Español",
   "eo": "Esperanto",
   "pt-BR": "Português Brasileiro",
+  "zh_CN": "简体中文",
   "fr": "Français",
   "gl": "Galego",
   "ru": "Русский",
@@ -51,7 +53,7 @@ export async function InternationalizationService(logger: ILogger) {
       },
     });
   logger.setTag("language", i18n.language);
-  logger.info(`I18n:onDetect:${i18n.language}`, {
-    // tags: { language: i18n.language, languages: i18n.languages },
+  logger.track(`detect_language`, {
+    language: i18n.language,
   });
 }

@@ -4,8 +4,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import { darken, lighten } from "@material-ui/core/styles/colorManipulator";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { darken, lighten, useTheme } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import { default as React, useContext } from "react";
 import {
@@ -57,8 +56,13 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
     <>
       <Box>
         {isLabelVisible && (
-          <Box>
-            <Grid container spacing={1} justify="space-between" wrap="nowrap">
+          <Box pb=".5rem">
+            <Grid
+              container
+              spacing={1}
+              justifyContent="space-between"
+              wrap="nowrap"
+            >
               <Grid item xs>
                 <FateLabel display="inline" align="center">
                   <ContentEditable
@@ -78,7 +82,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
         <Grid
           container
           spacing={1}
-          justify="center"
+          justifyContent="center"
           alignItems="center"
           wrap="nowrap"
         >
@@ -123,7 +127,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
                       container
                       spacing={1}
                       alignItems="center"
-                      justify="center"
+                      justifyContent="center"
                     >
                       {!hasCommands && (
                         <Grid item>
@@ -197,6 +201,7 @@ export function BlockDicePoolActions(
                     diceMenuProps.closeMenu();
                   }
                 }}
+                underline="hover"
               >
                 {t("character-dialog.control.set-dice")}
               </Link>
@@ -230,11 +235,11 @@ export const Pool: React.FC<
   } = props;
   const theme = useTheme();
   const hoverBackground =
-    theme.palette.type === "light" ? "#e4e4e4" : "#6b6b6b";
+    theme.palette.mode === "light" ? "#e4e4e4" : "#6b6b6b";
   const hoverColor = theme.palette.getContrastText(hoverBackground);
 
   const hoverBackgroundColor =
-    theme.palette.type === "light"
+    theme.palette.mode === "light"
       ? lighten(theme.palette.primary.main, 0.9)
       : darken(theme.palette.primary.main, 0.7);
 

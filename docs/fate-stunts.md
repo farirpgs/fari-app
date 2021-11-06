@@ -897,6 +897,7 @@ Multitasking behind the wheel is second nature to you. +2 to overcome with Drive
 <p class="with-anchor"> Pedal to the Metal </p>
 
 You can coax more speed out of your vehicle than seems possible. Whenever you’re engaged in any contest where speed is the primary factor (such as a chase or race of some kind) and you tie with your Drive roll, it’s considered a success. (Fate Core, p.107)
+
 <p class="with-anchor">Ramming Speed!</p>
 
 When ramming another vehicle, you ignore two shifts of damage. So if you ram and hit for four shifts, you only take two yourself. (Fate Core, p.107)
@@ -1088,6 +1089,7 @@ You can invoke _Dwarven Shield-Maiden_ when a nearby ally suffers an attack. Whe
 <p class="with-anchor"> Defend the Weak </p>
 
 When someone is attacked physically while within your zone, you can spend a fate point to redirect that attack to yourself. You may defend against that attack at +1. (Fate System Toolkit, p.41)
+
 <p class="with-anchor"> Leave My Friends Alone!</p>
 
 +2 to attack with Fight when your opponent’s most recent action was to attack one of your allies. (Peter Blake)
@@ -1649,6 +1651,7 @@ While others are content to read the journals, you have the training and drive t
 <p class="with-anchor"> The Eye Sees All Paths </p>
 
 You may not know everything, but you always know how to find out. When looking for a fairly specific piece of information, you may give the GM a fate point to be told the closest place you can go to find out, no matter how obscure or lost the information is. In short, you can never hit a wall when trying to find something out. There are no guarantees of how easy it will be to get the knowledge, but that’s what adventure is for. (Fate System Toolkit, p.93)
+
 <p class="with-anchor"> I’ve Read about That!</p>
 
 You’ve read hundreds—if not thousands—of books on a wide variety of topics. You can spend a fate point to use Lore in place of any other skill for one roll or exchange, provided you can justify having read about the action you’re attempting. (Fate Core, p.115)
@@ -1734,6 +1737,7 @@ You can use Notice instead of Shoot to make quick, reactive shots that don’t i
 <p class="with-anchor"> The Advantage of Familiarity </p>
 
 There are benefits to knowing a place really well. Pick a location or a small neighbourhood. +2 to Notice while you are in that area.
+
 <p class="with-anchor"> Attention!</p>
 
 You have been trained to follow orders instantly in combat. When determining turn order for a physical conflict, you may use an ally's Notice skill instead of your own.

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 
 type IManagerCallback = (entity: any) => void | undefined;
-export type IFolders = "characters" | "scenes";
+export type IFolders = "characters" | "scenes" | "index-card-collections";
 
 export function useMyBinder() {
   const managerCallback = useRef<IManagerCallback | undefined>(undefined);

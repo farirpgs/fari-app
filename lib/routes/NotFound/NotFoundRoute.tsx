@@ -11,7 +11,7 @@ export const NotFoundRoute: React.FC<{}> = () => {
   const logger = useLogger();
 
   useEffect(() => {
-    logger.info("Route:NotFound");
+    logger.track("page_not_found");
   }, []);
 
   return (

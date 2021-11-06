@@ -1,5 +1,5 @@
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { StylesProvider, ThemeProvider } from "@material-ui/core/styles";
+import { StyledEngineProvider, ThemeProvider } from "@material-ui/core/styles";
 import React, { useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -37,6 +37,9 @@ export function StoryProvider(props: {
   const scenesManager = useScenes();
   const diceManager = useDice({
     defaultCommands: settingsManager.state.diceCommandIds,
+    defaultOptions: {
+      listResults: false,
+    },
     onCommandSetsChange(commandSetOptions) {
       const commandSetIds = commandSetOptions.map((l) => l.id);
       settingsManager.actions.setDiceCommandsIds(commandSetIds);
@@ -55,20 +58,20 @@ export function StoryProvider(props: {
             <CharactersContext.Provider value={charactersManager}>
               <ScenesContext.Provider value={scenesManager}>
                 <DiceContext.Provider value={diceManager}>
-                  <ThemeProvider
-                    theme={
-                      settingsManager.state.themeMode === "dark"
-                        ? AppDarkTheme
-                        : AppLightTheme
-                    }
-                  >
-                    <StylesProvider injectFirst>
+                  <StyledEngineProvider injectFirst>
+                    <ThemeProvider
+                      theme={
+                        settingsManager.state.themeMode === "dark"
+                          ? AppDarkTheme
+                          : AppLightTheme
+                      }
+                    >
+                      <CssBaseline />
                       <BrowserRouter>
-                        <CssBaseline />
                         <HelmetProvider>{props.children}</HelmetProvider>
                       </BrowserRouter>
-                    </StylesProvider>
-                  </ThemeProvider>
+                    </ThemeProvider>
+                  </StyledEngineProvider>
                 </DiceContext.Provider>
               </ScenesContext.Provider>
             </CharactersContext.Provider>

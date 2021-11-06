@@ -20,7 +20,7 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export function DiceRoute(props: { pool: boolean }) {
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const [, ...archivedRolls] = rolls;
   const fiveLatestRolls = archivedRolls.slice(0, 5);
@@ -31,12 +31,12 @@ export function DiceRoute(props: { pool: boolean }) {
   useEffect(
     function onLoad() {
       if (!props.pool) {
-        logger.info("Route:Dice");
+        logger.track("view_dice_page");
         setRollResult(
           diceManager.actions.rollCommandGroups({ listResults: props.pool })
         );
       } else {
-        logger.info("Route:DicePool");
+        logger.track("view_dice_pool_page");
       }
       diceManager.actions.setOptions({ listResults: props.pool });
     },
@@ -45,7 +45,6 @@ export function DiceRoute(props: { pool: boolean }) {
 
   const setRollResult = (result: IDiceRollResult) => {
     setRolls((draft) => {
-      logger.info("DiceRoute:onDiceRoll", { extra: { roll: result } });
       return [result, ...draft];
     });
   };

@@ -1,5 +1,4 @@
-import { responsiveFontSizes } from "@material-ui/core/styles";
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import { createTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import produce from "immer";
 import { useMemo } from "react";
 import { defaultThemeConfiguration } from "../../theme";
@@ -13,9 +12,9 @@ export function useThemeFromColor(color: string, type?: PaletteType) {
       draft.palette = { primary: { main: color } };
       const defaultType = whiteVariants.includes(color) ? "dark" : "light";
       const typeToUse = type ?? defaultType;
-      draft.palette.type = typeToUse;
+      draft.palette.mode = typeToUse;
     });
-    return responsiveFontSizes(createMuiTheme(options));
+    return responsiveFontSizes(createTheme(options));
   }, [color]);
 
   return buttonTheme;

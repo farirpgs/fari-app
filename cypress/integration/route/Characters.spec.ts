@@ -62,10 +62,7 @@ describe("/characters", () => {
 
       // save
 
-      cy.title().should(
-        "eq",
-        "Fari | Play Table-Top RPGs Online Without the Headache"
-      );
+      cy.title().should("contain", "Fari | ");
       Fari.waitContentEditable();
       Fari.get("character-dialog.save").click();
       cy.title().should("eq", "Luke Skywalker | Fari");
@@ -78,7 +75,6 @@ describe("/characters", () => {
       Fari.get("page.menu.my-binder").click();
       Fari.get("my-binder.folders.characters").click();
 
-      cy.contains("Star Wars");
       cy.contains("Luke Skywalker").click();
       cy.title().should("eq", "Luke Skywalker | Fari");
 
@@ -112,7 +108,6 @@ describe("/characters", () => {
 
       // undo
       cy.contains("Undo").click();
-      cy.contains("Star Wars");
       cy.contains("Luke Skywalker").click();
 
       // character card
@@ -255,12 +250,20 @@ describe("/characters", () => {
       Fari.get("character-dialog.Stress.#Physical.remove").click();
 
       // slot tracker
-      Fari.get("character-dialog.Stress.Mental.add-box").click();
-      Fari.get("character-dialog.Stress.Mental.remove-box").click();
-      Fari.get("character-dialog.Stress.Mental.remove-box").click();
-      Fari.get("character-dialog.Stress.Mental.remove-box").click();
-      Fari.get("character-dialog.Stress.Mental.remove-box").click();
-      Fari.get("character-dialog.Stress.Mental.add-box").click();
+      Fari.get("character-dialog.Stress.Mental.add-box").click({ force: true });
+      Fari.get("character-dialog.Stress.Mental.remove-box").click({
+        force: true,
+      });
+      Fari.get("character-dialog.Stress.Mental.remove-box").click({
+        force: true,
+      });
+      Fari.get("character-dialog.Stress.Mental.remove-box").click({
+        force: true,
+      });
+      Fari.get("character-dialog.Stress.Mental.remove-box").click({
+        force: true,
+      });
+      Fari.get("character-dialog.Stress.Mental.add-box").click({ force: true });
 
       // section labels
       Fari.get("character-dialog.Aspects.label").clear().type("#Aspects");

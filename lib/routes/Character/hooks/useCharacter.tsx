@@ -1,7 +1,8 @@
 import produce from "immer";
 import isEqual from "lodash/isEqual";
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { previewContentEditable } from "../../../components/ContentEditable/ContentEditable";
+import { SettingsContext } from "../../../contexts/SettingsContext/SettingsContext";
 import { CharacterFactory } from "../../../domains/character/CharacterFactory";
 import { CharacterTemplates } from "../../../domains/character/CharacterType";
 import {
@@ -15,6 +16,8 @@ import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/Id/Id";
 
 export function useCharacter(characterFromProps?: ICharacter | undefined) {
+  const settingsManager = useContext(SettingsContext);
+
   const [character, setCharacter] = useState<ICharacter | undefined>(
     characterFromProps
   );
@@ -161,9 +164,8 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.pages[pageIndex].sections[sectionLocation][
-          sectionIndex
-        ].label = label;
+        draft.pages[pageIndex].sections[sectionLocation][sectionIndex].label =
+          label;
       })
     );
   }
@@ -296,7 +298,11 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
         draft.pages[pageIndex].sections[sectionLocation][
           sectionIndex
-        ].blocks.push(CharacterFactory.makeBlock(type));
+        ].blocks.push(
+          CharacterFactory.makeBlock(type, {
+            defaultCommands: settingsManager.state.diceCommandIds,
+          })
+        );
       })
     );
   }
@@ -481,8 +487,8 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
 
               if (block.type === BlockType.PointCounter) {
                 if (match) {
-                  block.meta.isMainPointCounter = !block.meta
-                    .isMainPointCounter;
+                  block.meta.isMainPointCounter =
+                    !block.meta.isMainPointCounter;
                 } else {
                   block.meta.isMainPointCounter = false;
                 }
@@ -505,13 +511,12 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.pages[pageIndex].sections[sectionLocation][
-          sectionIndex
-        ].blocks = draft.pages[pageIndex].sections[sectionLocation][
-          sectionIndex
-        ].blocks.filter((field, index) => {
-          return index !== blockIndex;
-        });
+        draft.pages[pageIndex].sections[sectionLocation][sectionIndex].blocks =
+          draft.pages[pageIndex].sections[sectionLocation][
+            sectionIndex
+          ].blocks.filter((field, index) => {
+            return index !== blockIndex;
+          });
       })
     );
   }

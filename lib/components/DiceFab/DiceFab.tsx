@@ -180,7 +180,7 @@ export function DiceFabButton(props: {
           })}
         >
           <Fab
-            variant="round"
+            variant="circular"
             color={props.showCloseButton ? "secondary" : "primary"}
             onClick={props.onFabClick}
             onContextMenu={(e) => {

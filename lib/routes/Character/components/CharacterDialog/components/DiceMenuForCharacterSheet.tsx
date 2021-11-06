@@ -1,12 +1,15 @@
 import Box from "@material-ui/core/Box";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import React, { useEffect, useState } from "react";
+import { ThemeProvider } from "@material-ui/core/styles";
+import React, { useContext, useEffect, useState } from "react";
 import { DiceMenu } from "../../../../../components/DiceFab/DiceMenu";
+import { SettingsContext } from "../../../../../contexts/SettingsContext/SettingsContext";
 import {
   CommmandSetOptions,
   IDiceCommandSetId,
   IDiceCommandSetOption,
 } from "../../../../../domains/dice/Dice";
+import { AppDarkTheme, AppLightTheme } from "../../../../../theme";
 
 type RenderProps = {
   open: boolean;
@@ -57,6 +60,8 @@ export function DiceMenuForCharacterSheet(props: {
     [props.commandSetIds]
   );
 
+  const settingsManager = useContext(SettingsContext);
+
   return (
     <>
       <Box>
@@ -67,18 +72,25 @@ export function DiceMenuForCharacterSheet(props: {
               openMenu: handleOnMenuOpen,
               closeMenu: handleOnMenuClose,
             })}
-
-            <DiceMenu
-              open={open}
-              anchorEl={anchorEl}
-              commands={commandSetIds}
-              showPoolToggle={false}
-              onDiceCommandChange={setCommandSetIds}
-              ctaLabel="Select"
-              onClear={handleOnClear}
-              onClose={handleOnMenuClose}
-              onCtaClick={handleOnNewCommandSelect}
-            />
+            <ThemeProvider
+              theme={
+                settingsManager.state.themeMode === "dark"
+                  ? AppDarkTheme
+                  : AppLightTheme
+              }
+            >
+              <DiceMenu
+                open={open}
+                anchorEl={anchorEl}
+                commands={commandSetIds}
+                showPoolToggle={false}
+                onDiceCommandChange={setCommandSetIds}
+                ctaLabel="Select"
+                onClear={handleOnClear}
+                onClose={handleOnMenuClose}
+                onCtaClick={handleOnNewCommandSelect}
+              />
+            </ThemeProvider>
           </Box>
         </ClickAwayListener>
       </Box>

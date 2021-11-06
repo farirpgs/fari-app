@@ -12,6 +12,7 @@ export interface IPlayer {
   playedDuringTurn: boolean;
   isGM: boolean;
   points: string;
+  private: boolean;
 }
 
 /**
@@ -94,4 +95,5 @@ export interface ISession {
   goodConfetti: number;
   badConfetti: number;
   drawAreaObjects: IDrawAreaObjects;
+  paused: boolean;
 }

@@ -25,8 +25,9 @@ export const CharacterRoute: React.FC<{
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const diceManager = useContext(DiceContext);
   const myBinderManager = useContext(MyBinderContext);
-  const [selectedCharacter, setSelectedCharacter] =
-    useState<ICharacter | undefined>(undefined);
+  const [selectedCharacter, setSelectedCharacter] = useState<
+    ICharacter | undefined
+  >(undefined);
   const logger = useLogger();
 
   function handleSetRollResult(result: IDiceRollResult) {
@@ -36,7 +37,7 @@ export const CharacterRoute: React.FC<{
   }
 
   useEffect(() => {
-    logger.info("Route:Character");
+    logger.track("character.view");
   }, []);
 
   useEffect(() => {

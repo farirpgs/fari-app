@@ -14,7 +14,7 @@ import { IDicePoolElement } from "../lib/routes/Character/components/CharacterDi
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookIndexCard(props: {
-  readonly: boolean;
+  isGM: boolean;
   indexCard: IIndexCard;
   pinned: boolean;
   playedDuringTurn: boolean;
@@ -66,7 +66,7 @@ function StorybookIndexCard(props: {
           indexCardHiddenRecord={{
             "123": collapse ? true : false,
           }}
-          readonly={props.readonly}
+          isGM={props.isGM}
           onRoll={(diceRollResult) => {
             handleOnNewRoll(diceRollResult);
           }}
@@ -94,7 +94,7 @@ export default {
   component: StorybookIndexCard,
   args: {
     indexCard: anIndexCard(),
-    readonly: false,
+    isGM: true,
     pinned: false,
     playedDuringTurn: false,
     width: "350px",
@@ -107,7 +107,7 @@ const Template: Story<IProps> = (args, context) => (
     <Box width="100%">
       <StorybookIndexCard
         indexCard={args.indexCard}
-        readonly={args.readonly}
+        isGM={args.isGM}
         pinned={args.pinned}
         width={args.width}
         playedDuringTurn={args.playedDuringTurn}

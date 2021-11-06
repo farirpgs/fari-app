@@ -37,14 +37,10 @@ export function useScene() {
       const newScene = scenesManager.actions.upsert(sceneToInsert);
       setSceneToLoad(newScene);
     } else {
-      const pinnedIndexCards = getPinnedIndexCards(scene);
       const sceneToInsert = SceneFactory.make();
       sceneToInsert.name = "";
       sceneToInsert.group = scene.group;
-      sceneToInsert.indexCards = {
-        public: pinnedIndexCards.publicIndexCards,
-        private: pinnedIndexCards.privateIndexCards,
-      };
+
       const newScene = scenesManager.actions.upsert(sceneToInsert);
       setSceneToLoad(newScene);
     }
@@ -56,27 +52,13 @@ export function useScene() {
     }
   }
 
-  function loadScene(newScene: IScene, keepPinned: boolean) {
+  function loadScene(newScene: IScene) {
     if (newScene) {
-      const pinnedIndexCards = getPinnedIndexCards(scene);
-      const publicIndexCards = keepPinned
-        ? [...pinnedIndexCards.publicIndexCards, ...newScene.indexCards.public]
-        : newScene.indexCards.public;
-      const privateIndexCards = keepPinned
-        ? [
-            ...pinnedIndexCards.privateIndexCards,
-            ...newScene.indexCards.private,
-          ]
-        : newScene.indexCards.private;
-
       setSceneToLoad({
         id: newScene.id,
         name: newScene.name,
         group: newScene.group,
-        indexCards: {
-          public: publicIndexCards,
-          private: privateIndexCards,
-        },
+        indexCards: newScene.indexCards,
         notes: newScene.notes,
         lastUpdated: newScene.lastUpdated,
         version: newScene.version,
@@ -87,7 +69,7 @@ export function useScene() {
   function cloneAndLoadNewScene(sceneToClone: IScene) {
     if (sceneToClone) {
       const clonedNewScene = scenesManager.actions.duplicate(sceneToClone.id);
-      loadScene(clonedNewScene as IScene, true);
+      loadScene(clonedNewScene as IScene);
     }
   }
 
@@ -164,9 +146,13 @@ export function useScene() {
           return;
         }
         const cards = draft.indexCards[type];
-        const index = cards.findIndex((c) => c.id === indexCard.id);
         const copy = SceneFactory.duplicateIndexCard(indexCard);
-        cards.splice(index, 0, copy);
+        const index = cards.findIndex((c) => c.id === indexCard.id);
+        if (index !== -1) {
+          cards.splice(index, 0, copy);
+        } else {
+          cards.unshift(copy);
+        }
       })
     );
   }
@@ -215,10 +201,10 @@ export function useScene() {
         }
 
         const indexCards = draft.indexCards[type];
-        const indexCardToMove = spliceIndexCard();
-        addIndexCard(indexCardToMove);
+        const indexCardToMove = removeIndexCardFromCurrentPosition();
+        addIndexCardToNewPosition(indexCardToMove);
 
-        function spliceIndexCard() {
+        function removeIndexCardFromCurrentPosition() {
           for (const [index, card] of indexCards.entries()) {
             if (card.id === idOfIndexCardToMove) {
               return indexCards.splice(index, 1)[0];
@@ -231,7 +217,7 @@ export function useScene() {
           }
         }
 
-        function addIndexCard(cardToAdd: IIndexCard | undefined) {
+        function addIndexCardToNewPosition(cardToAdd: IIndexCard | undefined) {
           if (!cardToAdd) {
             return;
           }
@@ -331,16 +317,6 @@ export function useScene() {
       updateName,
     },
   };
-}
-
-function getPinnedIndexCards(scene: IScene | undefined) {
-  if (!scene) {
-    return { publicIndexCards: [], privateIndexCards: [] };
-  }
-  const publicIndexCards = scene.indexCards.public.filter((i) => i.pinned);
-  const privateIndexCards = scene.indexCards.private.filter((i) => i.pinned);
-
-  return { publicIndexCards, privateIndexCards };
 }
 
 export interface IPeerMeta {

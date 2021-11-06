@@ -13,8 +13,7 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Popover from "@material-ui/core/Popover";
 import Select from "@material-ui/core/Select";
-import { ThemeProvider } from "@material-ui/core/styles";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { ThemeProvider, useTheme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
@@ -23,7 +22,7 @@ import BookIcon from "@material-ui/icons/Book";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import BugReportIcon from "@material-ui/icons/BugReport";
-import CasinoIcon from '@material-ui/icons/Casino';
+import CasinoIcon from "@material-ui/icons/Casino";
 import ChatIcon from "@material-ui/icons/Chat";
 import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
 import EmojiObjectsIcon from "@material-ui/icons/EmojiObjects";
@@ -55,7 +54,7 @@ import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import {
   IPossibleLanguages,
-  PossibleLanguagesNames
+  PossibleLanguagesNames,
 } from "../../services/internationalization/InternationalizationService";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { CannyChangelog } from "../CannyChangelog/CannyChangelog";
@@ -89,7 +88,7 @@ export const Page: React.FC<{
 }> = (props) => {
   const history = useHistory();
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
@@ -192,7 +191,7 @@ export const Page: React.FC<{
           <Box py="1rem">
             <Grid
               container
-              justify="space-between"
+              justifyContent="space-between"
               alignItems="center"
               spacing={4}
             >
@@ -211,7 +210,7 @@ export const Page: React.FC<{
           <Box py="1rem">
             <Grid
               container
-              justify="space-between"
+              justifyContent="space-between"
               spacing={4}
               alignItems="center"
             >
@@ -221,6 +220,7 @@ export const Page: React.FC<{
                     href="https://www.netlify.com"
                     target="_blank"
                     rel="noreferrer"
+                    underline="hover"
                   >
                     This site is powered by Netlify
                   </Link>
@@ -240,7 +240,7 @@ export const Page: React.FC<{
           <Box py="1rem">
             <Grid
               container
-              justify="space-between"
+              justifyContent="space-between"
               spacing={4}
               alignItems="center"
             >
@@ -254,7 +254,7 @@ export const Page: React.FC<{
             </Grid>
           </Box>
 
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid item xs>
               <Box mb=".5rem">
                 <Typography variant="caption" align="justify">
@@ -298,6 +298,7 @@ export const Page: React.FC<{
                     href="http://game-icons.net"
                     target="_blank"
                     rel="noreferrer"
+                    underline="hover"
                   >
                     http://game-icons.net
                   </Link>{" "}
@@ -306,6 +307,7 @@ export const Page: React.FC<{
                     href="https://icons8.com/icon/569/dice"
                     target="_blank"
                     rel="noreferrer"
+                    underline="hover"
                   >
                     Icons8
                   </Link>
@@ -321,6 +323,7 @@ export const Page: React.FC<{
                   target="_blank"
                   rel="noreferrer"
                   data-cy="page.privacy-policy"
+                  underline="hover"
                 >
                   {t("page.privacy-policy")}
                 </Link>
@@ -404,7 +407,7 @@ export const Page: React.FC<{
                   </Grid>
                 </Box>
               )}
-              <Hidden smDown>{renderMenu(false)}</Hidden>
+              <Hidden mdDown>{renderMenu(false)}</Hidden>
               <Hidden mdUp>
                 {!isLive && (
                   <IconButton
@@ -413,6 +416,7 @@ export const Page: React.FC<{
                     onClick={() => {
                       setMenuOpen(true);
                     }}
+                    size="large"
                   >
                     <MenuIcon color="inherit" />
                   </IconButton>
@@ -443,7 +447,7 @@ export const Page: React.FC<{
                   flex: "1 1 auto",
                 })}
               />
-              <Hidden smDown>
+              <Hidden mdDown>
                 {!shouldDisplayRejoinButton && (
                   <Box width="250px">
                     <Patreon />
@@ -487,7 +491,7 @@ export const Page: React.FC<{
       <Grid
         container
         spacing={3}
-        justify={mobile ? "center" : undefined}
+        justifyContent={mobile ? "center" : undefined}
         alignItems="center"
       >
         {!isLive && (
@@ -654,6 +658,7 @@ export const Page: React.FC<{
                   i18n.changeLanguage(newLanguage);
                   logger.setTag("language", newLanguage);
                 }}
+                variant="standard"
               >
                 {Object.keys(PossibleLanguagesNames).map((languageKey) => {
                   const shouldRenderDev = languageKey === "dev" && env.isDev;
@@ -729,7 +734,7 @@ function PageNavLink(
   }
 ) {
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const highlight = useHighlight();
   const subNav = props.subNav ?? [];
   const hasSubNav = subNav.length > 0;
@@ -782,7 +787,7 @@ function PageNavLink(
         </div>
       </Tooltip>
 
-      <Hidden smDown>
+      <Hidden mdDown>
         <Popover
           open={open}
           onClose={handleCloseSubNav}

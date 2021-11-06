@@ -2,11 +2,12 @@ import { css } from "@emotion/css";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import React, { useContext } from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
+import { Delays } from "../../../../../../constants/Delays";
 import { DiceContext } from "../../../../../../contexts/DiceContext/DiceContext";
 import { ISkillBlock } from "../../../../../../domains/character/types";
 import { CommmandSetOptions } from "../../../../../../domains/dice/Dice";
@@ -25,11 +26,13 @@ import { Pool } from "./BlockDicePool";
 
 export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
   const { t } = useTranslate();
+  const theme = useTheme();
+
   const diceManager = useContext(DiceContext);
   const [state, setState] = useLazyState({
     value: props.block.value,
     onChange: props.onValueChange,
-    delay: 750,
+    delay: Delays.field,
   });
 
   const isSlotTrackerVisible =
@@ -38,12 +41,14 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
   const isSelected = diceManager.state.pool.some(
     (p) => p.blockId === props.block.id
   );
+  const numberOfCommands = props.block.meta?.commands?.length ?? 0;
+  const hasCommands = numberOfCommands > 0;
   const [firstCommandSet] =
     props.block.meta?.commands?.map((commandId) => {
       return CommmandSetOptions[commandId];
     }) ?? [];
   const rollGroup = BlockSelectors.getRollGroupFromBlock(props.block);
-
+  const shouldDisplayNoCommandsWarning = hasCommands || !props.advanced;
   const RollIcon = firstCommandSet?.icon ?? Icons.ThrowDice;
 
   return (
@@ -55,12 +60,21 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
               <RollIcon className={css({ fontSize: "2rem" })} />
             ) : (
               <Pool
-                tooltipTitle={t("character-dialog.skill-block.roll")}
+                tooltipTitle={
+                  shouldDisplayNoCommandsWarning
+                    ? t("character-dialog.skill-block.roll")
+                    : t("character-dialog.skill-block.missing-dice-commands")
+                }
                 fontSize="1.2rem"
                 borderRadius="8px"
                 selected={isSelected}
                 clickable={!props.readonly}
                 borderStyle={"solid"}
+                className={css({
+                  borderColor: shouldDisplayNoCommandsWarning
+                    ? "inherit"
+                    : theme.palette.warning.light,
+                })}
                 onContextMenu={(event) => {
                   event.preventDefault();
 
@@ -73,13 +87,20 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
                   });
                 }}
                 onClick={() => {
+                  if (!hasCommands) {
+                    return;
+                  }
                   const diceRollResult = diceManager.actions.roll([rollGroup], {
                     listResults: false,
                   });
                   props.onRoll(diceRollResult);
                 }}
               >
-                <RollIcon className={css({ fontSize: "2.3rem" })} />
+                <RollIcon
+                  className={css({
+                    fontSize: "2.3rem",
+                  })}
+                />
               </Pool>
             )}
           </Grid>
@@ -151,6 +172,7 @@ export function BlockSkillActions(
               hideModifier: !props.block.meta.hideModifier,
             });
           }}
+          underline="hover"
         >
           {!props.block.meta.hideModifier
             ? t("character-dialog.control.hide-modifer")
@@ -181,6 +203,7 @@ export function BlockSkillActions(
                     diceMenuProps.closeMenu();
                   }
                 }}
+                underline="hover"
               >
                 {t("character-dialog.control.set-dice")}
               </Link>
@@ -202,6 +225,7 @@ export function BlockSkillActions(
                 props.block.meta.checked === undefined ? false : undefined,
             });
           }}
+          underline="hover"
         >
           {props.block.meta.checked === undefined
             ? t("character-dialog.control.add-toggle")

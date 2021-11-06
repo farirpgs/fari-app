@@ -1,10 +1,12 @@
 import produce from "immer";
 import { getUnix } from "../dayjs/getDayJS";
+import { IDiceCommandSetId } from "../dice/Dice";
 import { Id } from "../Id/Id";
 import { CharacterTemplates } from "./CharacterType";
 import {
   BlockType,
   IBlock,
+  IBlockTypes,
   ICharacter,
   IDicePoolBlock,
   IImageBlock,
@@ -336,7 +338,12 @@ export const CharacterFactory = {
       name: `${c?.name} Template`,
     };
   },
-  makeBlock(type: BlockType) {
+  makeBlock<TType extends IBlockTypes>(
+    type: BlockType,
+    options: {
+      defaultCommands?: Array<IDiceCommandSetId> | null;
+    } = {}
+  ) {
     const blockDefault: Record<BlockType, IBlock> = {
       [BlockType.Text]: {
         id: Id.generate(),
@@ -363,6 +370,7 @@ export const CharacterFactory = {
         value: "0",
         meta: {
           checked: undefined,
+          commands: options.defaultCommands,
         },
       } as IBlock & ISkillBlock,
       [BlockType.DicePool]: {
@@ -371,7 +379,7 @@ export const CharacterFactory = {
         type: type,
         value: "",
         meta: {
-          commands: undefined,
+          commands: options.defaultCommands,
         },
       } as IBlock & IDicePoolBlock,
       [BlockType.PointCounter]: {
@@ -414,7 +422,7 @@ export const CharacterFactory = {
       } as IBlock & ISeparatorBlock,
     };
 
-    return blockDefault[type];
+    return blockDefault[type] as IBlock & TType;
   },
   duplicateBlock(block: IBlock): IBlock {
     return produce(block, (draft) => {

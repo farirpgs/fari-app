@@ -318,6 +318,7 @@ describe("useMarkdownPage", () => {
         () => view.result.current.pageDom?.innerHTML
       );
       expect(fakeLogger.error).toHaveBeenCalledWith(
+        "useMarkdownPage:error",
         'DocumentProcessor: no "h1" in the document'
       );
       expect(view.result.current.title).toEqual("Error");
