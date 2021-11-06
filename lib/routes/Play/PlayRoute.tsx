@@ -3,7 +3,7 @@ import {
   useBroadcastEvent,
   useEventListener,
   useObject,
-  useStorage,
+  useStorage
 } from "@liveblocks/react";
 import React, { useContext, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
@@ -18,7 +18,7 @@ import { useSession } from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import {
   IPlayerInteraction,
-  PlayerInteractionFactory,
+  PlayerInteractionFactory
 } from "./types/IPlayerInteraction";
 
 export function useLiveObject<T>(props: {

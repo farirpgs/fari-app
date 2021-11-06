@@ -9,7 +9,7 @@ import {
   BlockType,
   IBlock,
   ICharacter,
-  IPage,
+  IPage
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/Id/Id";

@@ -22,7 +22,7 @@ import { isWebRTCSupported } from "../../hooks/usePeerJS/isWebRTCSupported";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import {
   IPlayerInteraction,
-  PlayerInteractionFactory,
+  PlayerInteractionFactory
 } from "./types/IPlayerInteraction";
 
 export const JoinAGameRoute: React.FC<{

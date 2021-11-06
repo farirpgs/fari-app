@@ -1,3 +1,4 @@
+
 import CssBaseline from "@mui/material/CssBaseline";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
 import React, { useEffect } from "react";
@@ -7,17 +8,17 @@ import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
 import {
   CharactersContext,
-  useCharacters,
+  useCharacters
 } from "../lib/contexts/CharactersContext/CharactersContext";
 import { DiceContext, useDice } from "../lib/contexts/DiceContext/DiceContext";
 import { InjectionsContext } from "../lib/contexts/InjectionsContext/InjectionsContext";
 import {
   ScenesContext,
-  useScenes,
+  useScenes
 } from "../lib/contexts/SceneContext/ScenesContext";
 import {
   SettingsContext,
-  useSettings,
+  useSettings
 } from "../lib/contexts/SettingsContext/SettingsContext";
 import { getDefaultInjections } from "../lib/services/injections";
 import { AppDarkTheme, AppLightTheme } from "../lib/theme";

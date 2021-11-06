@@ -1,7 +1,7 @@
 import {
   createTheme,
   responsiveFontSizes,
-  ThemeOptions,
+  ThemeOptions
 } from "@mui/material/styles";
 import { FontFamily } from "./constants/FontFamily";
 

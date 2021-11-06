@@ -75,7 +75,6 @@ describe("/characters", () => {
       Fari.get("page.menu.my-binder").click();
       Fari.get("my-binder.folders.characters").click();
 
-      cy.contains("Star Wars");
       cy.contains("Luke Skywalker").click();
       cy.title().should("eq", "Luke Skywalker | Fari");
 
@@ -109,7 +108,6 @@ describe("/characters", () => {
 
       // undo
       cy.contains("Undo").click();
-      cy.contains("Star Wars");
       cy.contains("Luke Skywalker").click();
 
       // character card

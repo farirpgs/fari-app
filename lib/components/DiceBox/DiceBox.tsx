@@ -15,7 +15,7 @@ import {
   CommmandSetOptions,
   Dice,
   DiceCommandOptions,
-  IDiceRollResult,
+  IDiceRollResult
 } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useLatestDiceRoll } from "../../hooks/useLatestDiceRoll/useLatestDiceRoll";

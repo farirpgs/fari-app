@@ -8,7 +8,7 @@ import { Images } from "../../constants/Images";
 import { creatures } from "./domains/creatures";
 import {
   ICreature,
-  ISeelieSquireCharacter as ICreatureCharacter,
+  ISeelieSquireCharacter as ICreatureCharacter
 } from "./domains/ICreature";
 
 export const SeelieSquireRoute: React.FC<{
