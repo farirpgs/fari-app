@@ -1,6 +1,6 @@
+import { TLDrawDocument } from "@tldraw/tldraw";
 import produce from "immer";
 import { useEffect, useState } from "react";
-import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { Delays } from "../../constants/Delays";
 import { arraySort } from "../../domains/array/arraySort";
 import {
@@ -13,6 +13,7 @@ import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
+import { BlankTLDrawDocument } from "../../routes/Draw/TLDraw";
 import { IPlayer, ISession } from "./IScene";
 import { IProps } from "./useScene";
 
@@ -35,7 +36,7 @@ export function useSession(props: IProps) {
       goodConfetti: 0,
       badConfetti: 0,
       paused: false,
-      drawAreaObjects: [],
+      tlDrawDoc: BlankTLDrawDocument,
     })
   );
 
@@ -204,15 +205,13 @@ export function useSession(props: IProps) {
     );
   }
 
-  function updateDrawAreaObjects(objects: IDrawAreaObjects) {
-    setSession(
-      produce((draft) => {
-        if (!draft) {
-          return;
-        }
-        draft.drawAreaObjects = objects;
-      })
-    );
+  function updateDrawAreaObjects(doc: TLDrawDocument) {
+    setSession((prev) => {
+      return {
+        ...prev,
+        tlDrawDoc: doc,
+      };
+    });
   }
 
   // function updatePlayersWithConnections(
@@ -380,7 +379,7 @@ export function useSession(props: IProps) {
           return;
         }
         const everyone = getEveryone(draft);
-        draft.drawAreaObjects = [];
+        draft.tlDrawDoc = BlankTLDrawDocument;
         everyone.forEach((p) => {
           p.playedDuringTurn = false;
         });

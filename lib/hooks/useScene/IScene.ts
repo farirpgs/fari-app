@@ -1,3 +1,4 @@
+import { TLDrawDocument } from "@tldraw/tldraw";
 import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { IBlock, ICharacter } from "../../domains/character/types";
@@ -98,6 +99,6 @@ export interface ISession {
   players: Record<string, IPlayer>;
   goodConfetti: number;
   badConfetti: number;
-  drawAreaObjects: IDrawAreaObjects;
+  tlDrawDoc: TLDrawDocument;
   paused: boolean;
 }

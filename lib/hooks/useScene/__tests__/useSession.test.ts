@@ -1,9 +1,6 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import {
-  ILineObject,
-  ObjectType,
-} from "../../../components/DrawArea/hooks/useDrawing";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
+import { BlankTLDrawDocument } from "../../../routes/Draw/TLDraw";
 import { ISession } from "../IScene";
 import { useSession } from "../useSession";
 
@@ -28,7 +25,7 @@ describe("useSession", () => {
       goodConfetti: 0,
       badConfetti: 0,
       paused: false,
-      drawAreaObjects: [],
+      tlDrawDoc: BlankTLDrawDocument,
     };
     // WHEN
     const { result } = renderHook(() => {
@@ -210,32 +207,6 @@ describe("useSession", () => {
     });
   });
 
-  describe("draw area", () => {
-    // GIVEN
-    const userId = "111";
-    const useCharactersMock = mockUseCharacters();
-
-    // WHEN initial render
-    const { result } = renderHook(() => {
-      const charactersManager = useCharactersMock();
-      return useSession({
-        userId,
-
-        charactersManager,
-      });
-    });
-    expect(result.current.state.session.drawAreaObjects).toEqual([]);
-    // WHEN drawing
-    act(() => {
-      result.current.actions.updateDrawAreaObjects([
-        { color: "", points: [], type: ObjectType.Line } as ILineObject,
-      ]);
-    });
-    // THEN
-    expect(result.current.state.session.drawAreaObjects).toEqual([
-      { color: "", points: [], type: ObjectType.Line },
-    ]);
-  });
   describe("confetti", () => {
     // GIVEN
     const userId = "111";

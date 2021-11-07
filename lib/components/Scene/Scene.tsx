@@ -70,6 +70,7 @@ import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+import { TLDrawReader, TLDrawWriter } from "../../routes/Draw/TLDraw";
 import {
   IPlayerInteraction,
   PlayerInteractionFactory,
@@ -78,7 +79,6 @@ import {
   ContentEditable,
   previewContentEditable,
 } from "../ContentEditable/ContentEditable";
-import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
 import { LiveMode, Page } from "../Page/Page";
@@ -856,20 +856,22 @@ export const Session: React.FC<IProps> = (props) => {
     const tokenTitles = Object.values(sessionManager.state.session.players).map(
       (p) => (p.character?.name ?? p.playerName) as string
     );
+
     return (
       <Box
         border={`1px solid ${theme.palette.divider}`}
-        maxWidth="600px"
+        // maxWidth="800px"
         margin="0 auto"
       >
-        <DrawArea
-          objects={sessionManager.state.session.drawAreaObjects}
-          readonly={!isGM}
-          tokenTitles={tokenTitles}
-          onChange={(lines) => {
-            sessionManager.actions.updateDrawAreaObjects(lines);
-          }}
-        />
+        {isGM ? (
+          <TLDrawWriter
+            onChange={(state) => {
+              sessionManager.actions.updateDrawAreaObjects(state);
+            }}
+          />
+        ) : (
+          <TLDrawReader doc={sessionManager.state.session.tlDrawDoc} />
+        )}
       </Box>
     );
   }
