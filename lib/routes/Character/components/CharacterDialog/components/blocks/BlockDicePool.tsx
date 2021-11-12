@@ -29,6 +29,7 @@ import {
   IBlockActionComponentProps,
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
+import { BlockToggleMeta } from "../BlockToggleMeta";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
 
 export type IDicePoolElement = {
@@ -52,6 +53,9 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
   const [hover, setHover] = useState(false);
   const isLabelVisible =
     !!previewContentEditable({ value: props.block.label }) || props.advanced;
+
+  const isToggleVisible =
+    props.block.meta?.checked === true || props.block.meta?.checked === false;
 
   const commands = props.block.meta.commands || [];
   const blockCommandSetOptions = DiceCommandGroup.getCommandSetOptionsFromBlock(
@@ -120,7 +124,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
           {!props.readonly && isAllTheSameCommand && (
             <Fade in={hover}>
               <Grid item>
-                <Tooltip title={"..."}>
+                <Tooltip title={t("character-dialog.control.remove-one")}>
                   <IconButton
                     size="small"
                     color="inherit"
@@ -198,52 +202,12 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
                   })}
                 </Grid>
               </Pool>
-              {!props.readonly && (
-                <Grid container justifyContent="center" spacing={1}>
-                  <Grid item>
-                    <DiceMenuForCharacterSheet
-                      commandSetIds={commands}
-                      onChange={(newCommandIds) => {
-                        props.onMetaChange({
-                          ...props.block.meta,
-                          commands: newCommandIds,
-                        });
-                      }}
-                      render={(diceMenuProps) => (
-                        <Tooltip title={commands.join(" + ")}>
-                          <Link
-                            component="button"
-                            variant="caption"
-                            className={css({
-                              color: theme.palette.primary.main,
-                            })}
-                            onClick={(e: any) => {
-                              if (!props.readonly) {
-                                diceMenuProps.openMenu(e);
-                              }
-
-                              if (!diceMenuProps.open) {
-                                diceMenuProps.openMenu(e);
-                              } else {
-                                diceMenuProps.closeMenu();
-                              }
-                            }}
-                            underline="hover"
-                          >
-                            {t("character-dialog.control.set-dice")}
-                          </Link>
-                        </Tooltip>
-                      )}
-                    />
-                  </Grid>
-                </Grid>
-              )}
             </Box>
           </Grid>
           {!props.readonly && isAllTheSameCommand && (
             <Fade in={hover}>
               <Grid item>
-                <Tooltip title={"..."}>
+                <Tooltip title={t("character-dialog.control.add-one")}>
                   <IconButton
                     color="inherit"
                     data-cy={`${props.dataCy}.add-box`}
@@ -259,6 +223,60 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
             </Fade>
           )}
         </Grid>
+        {isToggleVisible && (
+          <Box pt=".5rem">
+            <Grid container justifyContent="center">
+              <Grid item spacing={1}>
+                <BlockToggleMeta
+                  readonly={props.readonly}
+                  dataCy={props.dataCy}
+                  block={props.block}
+                  onMetaChange={props.onMetaChange}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+        )}
+        {!props.readonly && (
+          <Fade in={hover}>
+            <Grid container justifyContent="center" spacing={1}>
+              <Grid item>
+                <DiceMenuForCharacterSheet
+                  commandSetIds={commands}
+                  onChange={(newCommandIds) => {
+                    props.onMetaChange({
+                      ...props.block.meta,
+                      commands: newCommandIds,
+                    });
+                  }}
+                  render={(diceMenuProps) => (
+                    <Link
+                      component="button"
+                      variant="caption"
+                      className={css({
+                        color: theme.palette.primary.main,
+                      })}
+                      onClick={(e: any) => {
+                        if (!props.readonly) {
+                          diceMenuProps.openMenu(e);
+                        }
+
+                        if (!diceMenuProps.open) {
+                          diceMenuProps.openMenu(e);
+                        } else {
+                          diceMenuProps.closeMenu();
+                        }
+                      }}
+                      underline="hover"
+                    >
+                      {t("character-dialog.control.set-dice")}
+                    </Link>
+                  )}
+                />
+              </Grid>
+            </Grid>
+          </Fade>
+        )}
       </Box>
     </>
   );
@@ -268,7 +286,33 @@ BlockDicePool.displayName = "BlockDicePool";
 export function BlockDicePoolActions(
   props: IBlockActionComponentProps<IDicePoolBlock>
 ) {
-  return <></>;
+  const { t } = useTranslate();
+  const theme = useTheme();
+  return (
+    <>
+      <Grid item>
+        <Link
+          component="button"
+          variant="caption"
+          className={css({
+            color: theme.palette.primary.main,
+          })}
+          onClick={() => {
+            props.onMetaChange({
+              ...props.block.meta,
+              checked:
+                props.block.meta.checked === undefined ? false : undefined,
+            });
+          }}
+          underline="hover"
+        >
+          {props.block.meta.checked === undefined
+            ? t("character-dialog.control.add-toggle")
+            : t("character-dialog.control.remove-toggle")}
+        </Link>
+      </Grid>
+    </>
+  );
 }
 
 BlockDicePoolActions.displayName = "BlockDicePoolActions";
@@ -337,7 +381,7 @@ export const Pool: React.FC<
           className
         )}
       >
-        <ButtonBase>
+        <ButtonBase disabled={!props.clickable}>
           <Box
             p=".3rem"
             minWidth="50%"

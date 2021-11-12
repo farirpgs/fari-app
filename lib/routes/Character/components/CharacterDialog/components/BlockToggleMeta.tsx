@@ -5,13 +5,15 @@ import Checkbox from "@mui/material/Checkbox";
 import React from "react";
 import {
   IBlock,
+  IDicePoolBlock,
   INumericBlock,
   ISkillBlock,
   ITextBlock,
 } from "../../../../../domains/character/types";
 
 export function BlockToggleMeta<
-  TBlock extends IBlock & (ITextBlock | INumericBlock | ISkillBlock)
+  TBlock extends IBlock &
+    (ITextBlock | INumericBlock | ISkillBlock | IDicePoolBlock)
 >(props: {
   readonly: boolean | undefined;
   dataCy: string;
