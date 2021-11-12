@@ -137,125 +137,107 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
           )}
           <Grid item>
             <Box>
-              <DiceMenuForCharacterSheet
-                commandSetIds={commands}
-                onChange={(newCommandIds) => {
-                  props.onMetaChange({
-                    ...props.block.meta,
-                    commands: newCommandIds,
+              <Pool
+                fontSize="1.2rem"
+                borderRadius="8px"
+                selected={isSelected}
+                clickable={canRoll}
+                borderStyle={hasCommands ? "solid" : "dashed"}
+                onContextMenu={(e) => {
+                  e.preventDefault();
+                  diceManager.actions.setOptions({ listResults: true });
+                  diceManager.actions.addOrRemovePoolElement({
+                    blockId: props.block.id,
+                    blockType: props.block.type,
+                    label: props.block.label,
+                    rollGroup: rollGroup,
                   });
                 }}
-                render={(diceMenuProps) => (
-                  <>
-                    <Pool
-                      fontSize="1.2rem"
-                      borderRadius="8px"
-                      selected={isSelected}
-                      clickable={canRoll}
-                      borderStyle={hasCommands ? "solid" : "dashed"}
-                      onContextMenu={(e) => {
-                        e.preventDefault();
-                        diceManager.actions.setOptions({ listResults: true });
-                        diceManager.actions.addOrRemovePoolElement({
-                          blockId: props.block.id,
-                          blockType: props.block.type,
-                          label: props.block.label,
-                          rollGroup: rollGroup,
+                onClick={() => {
+                  if (!canRoll) {
+                    return;
+                  }
+
+                  const diceRollResult = diceManager.actions.roll([rollGroup], {
+                    listResults: true,
+                  });
+                  props.onRoll(diceRollResult);
+                }}
+              >
+                <Grid
+                  container
+                  spacing={1}
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  {!hasCommands && (
+                    <Grid item>
+                      <FormHelperText
+                        className={css({
+                          margin: "0",
+                          padding: ".5rem",
+                        })}
+                      >
+                        {t("character-dialog.helper-text.empty-dice-pool")}
+                      </FormHelperText>
+                    </Grid>
+                  )}
+                  {blockCommandSetOptions.map((commandSet, index) => {
+                    return (
+                      <Grid item key={index}>
+                        <Tooltip title={commandSet.label}>
+                          <commandSet.icon
+                            className={css({
+                              display: "flex",
+                              fontSize: "2.3rem",
+                            })}
+                          />
+                        </Tooltip>
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+              </Pool>
+              {!props.readonly && (
+                <Grid container justifyContent="center" spacing={1}>
+                  <Grid item>
+                    <DiceMenuForCharacterSheet
+                      commandSetIds={commands}
+                      onChange={(newCommandIds) => {
+                        props.onMetaChange({
+                          ...props.block.meta,
+                          commands: newCommandIds,
                         });
                       }}
-                      onClick={() => {
-                        if (!canRoll) {
-                          return;
-                        }
+                      render={(diceMenuProps) => (
+                        <Tooltip title={commands.join(" + ")}>
+                          <Link
+                            component="button"
+                            variant="caption"
+                            className={css({
+                              color: theme.palette.primary.main,
+                            })}
+                            onClick={(e: any) => {
+                              if (!props.readonly) {
+                                diceMenuProps.openMenu(e);
+                              }
 
-                        const diceRollResult = diceManager.actions.roll(
-                          [rollGroup],
-                          {
-                            listResults: true,
-                          }
-                        );
-                        props.onRoll(diceRollResult);
-                      }}
-                    >
-                      <Grid
-                        container
-                        spacing={1}
-                        alignItems="center"
-                        justifyContent="center"
-                      >
-                        {!hasCommands && (
-                          <Grid item>
-                            <FormHelperText
-                              className={css({
-                                margin: "0",
-                                padding: ".5rem",
-                              })}
-                            >
-                              {t(
-                                "character-dialog.helper-text.empty-dice-pool"
-                              )}
-                            </FormHelperText>
-                          </Grid>
-                        )}
-                        {blockCommandSetOptions.map((commandSet, index) => {
-                          return (
-                            <Grid item key={index}>
-                              <Tooltip title={commandSet.label}>
-                                <commandSet.icon
-                                  className={css({
-                                    display: "flex",
-                                    fontSize: "2.3rem",
-                                  })}
-                                />
-                              </Tooltip>
-                            </Grid>
-                          );
-                        })}
-                      </Grid>
-                    </Pool>
-                    {!props.readonly && (
-                      <Grid container justifyContent="center" spacing={1}>
-                        <Grid item>
-                          <DiceMenuForCharacterSheet
-                            commandSetIds={commands}
-                            onChange={(newCommandIds) => {
-                              props.onMetaChange({
-                                ...props.block.meta,
-                                commands: newCommandIds,
-                              });
+                              if (!diceMenuProps.open) {
+                                diceMenuProps.openMenu(e);
+                              } else {
+                                diceMenuProps.closeMenu();
+                              }
                             }}
-                            render={(diceMenuProps) => (
-                              <Tooltip title={commands.join(" + ")}>
-                                <Link
-                                  component="button"
-                                  variant="caption"
-                                  className={css({
-                                    color: theme.palette.primary.main,
-                                  })}
-                                  onClick={(e: any) => {
-                                    if (!props.readonly) {
-                                      diceMenuProps.openMenu(e);
-                                    }
-
-                                    if (!diceMenuProps.open) {
-                                      diceMenuProps.openMenu(e);
-                                    } else {
-                                      diceMenuProps.closeMenu();
-                                    }
-                                  }}
-                                  underline="hover"
-                                >
-                                  {t("character-dialog.control.set-dice")}
-                                </Link>
-                              </Tooltip>
-                            )}
-                          />
-                        </Grid>
-                      </Grid>
-                    )}
-                  </>
-                )}
-              />
+                            underline="hover"
+                          >
+                            {t("character-dialog.control.set-dice")}
+                          </Link>
+                        </Tooltip>
+                      )}
+                    />
+                  </Grid>
+                </Grid>
+              )}
             </Box>
           </Grid>
           {!props.readonly && isAllTheSameCommand && (
