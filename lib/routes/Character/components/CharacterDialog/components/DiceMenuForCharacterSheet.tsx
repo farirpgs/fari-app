@@ -1,6 +1,6 @@
-import Box from "@material-ui/core/Box";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import { ThemeProvider } from "@material-ui/core/styles";
+import Box from "@mui/material/Box";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import { ThemeProvider } from "@mui/material/styles";
 import React, { useContext, useEffect, useState } from "react";
 import { DiceMenu } from "../../../../../components/DiceFab/DiceMenu";
 import { SettingsContext } from "../../../../../contexts/SettingsContext/SettingsContext";

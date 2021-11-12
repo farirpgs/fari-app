@@ -1,4 +1,4 @@
-import { alpha, useTheme } from '@material-ui/core/styles';
+import { alpha, useTheme } from "@mui/material/styles";
 import { useMemo } from "react";
 
 export const whiteVariants = ["#fff", "#ffffff", "#FFF", "#FFFFFF", "white"];

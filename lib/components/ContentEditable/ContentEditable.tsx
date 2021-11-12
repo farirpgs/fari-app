@@ -1,5 +1,5 @@
 import { css, cx } from "@emotion/css";
-import { useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@mui/material/styles";
 import DOMPurify, { Config } from "dompurify";
 import lowerCase from "lodash/lowerCase";
 import startCase from "lodash/startCase";

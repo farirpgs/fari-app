@@ -1,8 +1,8 @@
 import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
-import Grid, { GridSize } from "@material-ui/core/Grid";
-import { useTheme } from "@material-ui/core/styles";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Grid, { GridSize } from "@mui/material/Grid";
+import { useTheme } from "@mui/material/styles";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";

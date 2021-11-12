@@ -1,7 +1,7 @@
-import Box from "@material-ui/core/Box";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Container from "@material-ui/core/Container";
-import Fade from "@material-ui/core/Fade";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import Container from "@mui/material/Container";
+import Fade from "@mui/material/Fade";
 import React, { useEffect, useRef, useState } from "react";
 import { Page } from "../Page/Page";
 

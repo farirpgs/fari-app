@@ -1,5 +1,5 @@
-import Box from "@material-ui/core/Box";
-import Divider from "@material-ui/core/Divider";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
 import React from "react";
 import { env } from "../../constants/env";
 

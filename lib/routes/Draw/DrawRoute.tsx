@@ -1,7 +1,7 @@
 import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
-import { useTheme } from "@material-ui/core/styles";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import { useTheme } from "@mui/material/styles";
 import React from "react";
 import { DrawObjects } from "../../components/DrawArea/DrawObjects";
 import { useDrawing } from "../../components/DrawArea/hooks/useDrawing";

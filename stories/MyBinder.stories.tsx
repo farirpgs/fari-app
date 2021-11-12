@@ -1,5 +1,5 @@
-import Box from "@material-ui/core/Box";
-import Paper from "@material-ui/core/Paper";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React, { useState } from "react";

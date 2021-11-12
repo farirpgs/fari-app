@@ -1,44 +1,44 @@
 import { css } from "@emotion/css";
-import Alert from "@material-ui/core/Alert";
-import Autocomplete from "@material-ui/core/Autocomplete";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Fade from "@material-ui/core/Fade";
-import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import ImageList from "@material-ui/core/ImageList";
-import ImageListItem from "@material-ui/core/ImageListItem";
-import InputLabel from "@material-ui/core/InputLabel";
-import Paper from "@material-ui/core/Paper";
-import Select from "@material-ui/core/Select";
-import Snackbar from "@material-ui/core/Snackbar";
-import { darken, useTheme } from "@material-ui/core/styles";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import TextField from "@material-ui/core/TextField";
-import Tooltip from "@material-ui/core/Tooltip";
-import Typography from "@material-ui/core/Typography";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
-import ErrorIcon from "@material-ui/icons/Error";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
-import FilterHdrIcon from "@material-ui/icons/FilterHdr";
-import MovieIcon from "@material-ui/icons/Movie";
-import PanToolIcon from "@material-ui/icons/PanTool";
-import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import SaveIcon from "@material-ui/icons/Save";
-import TabContext from "@material-ui/lab/TabContext";
-import TabPanel from "@material-ui/lab/TabPanel";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
+import ErrorIcon from "@mui/icons-material/Error";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+import FilterHdrIcon from "@mui/icons-material/FilterHdr";
+import MovieIcon from "@mui/icons-material/Movie";
+import PanToolIcon from "@mui/icons-material/PanTool";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import SaveIcon from "@mui/icons-material/Save";
+import TabContext from "@mui/lab/TabContext";
+import TabPanel from "@mui/lab/TabPanel";
+import Alert from "@mui/material/Alert";
+import Autocomplete from "@mui/material/Autocomplete";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import CircularProgress from "@mui/material/CircularProgress";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Fade from "@mui/material/Fade";
+import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import InputLabel from "@mui/material/InputLabel";
+import Paper from "@mui/material/Paper";
+import Select from "@mui/material/Select";
+import Snackbar from "@mui/material/Snackbar";
+import { darken, useTheme } from "@mui/material/styles";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import TextField from "@mui/material/TextField";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
@@ -63,7 +63,7 @@ import {
   IIndexCard,
   IIndexCardType,
   IPlayer,
-  IScene
+  IScene,
 } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useSession } from "../../hooks/useScene/useSession";
@@ -74,7 +74,7 @@ import { IDicePoolElement } from "../../routes/Character/components/CharacterDia
 import { IPeerActions } from "../../routes/Play/types/IPeerActions";
 import {
   ContentEditable,
-  previewContentEditable
+  previewContentEditable,
 } from "../ContentEditable/ContentEditable";
 import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
@@ -1348,8 +1348,7 @@ export function Scene(props: {
               onClick={() => {
                 scenesManager.actions.upsert(sceneManager.state.scene);
                 sceneManager.actions.loadScene(
-                  sceneManager.state.scene as IScene,
-                  
+                  sceneManager.state.scene as IScene
                 );
                 setSavedSnack(true);
                 logger.track("scene.save");

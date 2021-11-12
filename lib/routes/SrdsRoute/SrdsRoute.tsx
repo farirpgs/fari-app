@@ -1,16 +1,16 @@
 import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import { useTheme } from '@material-ui/core/styles';
-import Typography from "@material-ui/core/Typography";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import HelpIcon from "@material-ui/icons/Help";
-import MenuBookIcon from "@material-ui/icons/MenuBook";
+import HelpIcon from "@mui/icons-material/Help";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import Box from "@mui/material/Box";
+import ButtonBase from "@mui/material/ButtonBase";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import React from "react";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
@@ -204,7 +204,7 @@ export const DocCard: React.FC<{
   const theme = useTheme();
   const backgroundColor = props.bgColor ?? theme.palette.background.paper;
   const color = theme.palette.getContrastText(backgroundColor);
-  const isSmall = useMediaQuery(theme.breakpoints.down('md'));
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <ButtonBase
