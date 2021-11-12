@@ -31,13 +31,9 @@ export const CharacterPrintRoute: React.FC<{
   const logger = useLogger();
 
   const query = useQuery<"dev">();
-  const devMode = query.get("dev") === "true";
 
   useEffect(() => {
     logger.track("character.print");
-    if (!devMode) {
-      window.print();
-    }
 
     settingsManager.actions.setThemeModeTemporarily("light");
   }, []);
