@@ -122,7 +122,7 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
             >
               <ContentEditable
                 data-cy={`${props.dataCy}.label`}
-                readonly={props.readonly}
+                readonly={props.readonly || !props.advanced}
                 border={props.advanced}
                 value={props.block.label}
                 onChange={(value) => {

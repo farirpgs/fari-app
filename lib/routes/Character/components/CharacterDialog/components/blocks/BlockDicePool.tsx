@@ -101,7 +101,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
               <Grid item xs>
                 <FateLabel display="inline" align="center">
                   <ContentEditable
-                    readonly={props.readonly}
+                    readonly={props.readonly || !props.advanced}
                     border={props.advanced}
                     data-cy={`${props.dataCy}.label`}
                     value={props.block.label}
