@@ -1,6 +1,6 @@
 {
   "id": "59c260ce-6a4b-4019-89c3-321b12149655",
-  "version": 3,
+  "version": 5,
   "name": "",
   "template": "Blank",
   "lastUpdated": 1619722775,
@@ -8,7 +8,7 @@
     {
       "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
       "label": "Character",
-      "sections": []
+      "rows": [{ "columns": [] }]
     }
   ],
   "fariType": "character"

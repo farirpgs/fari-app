@@ -9,7 +9,7 @@ import {
   BlockType,
   IBlock,
   ICharacter,
-  IPage
+  IPage,
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/Id/Id";
@@ -95,7 +95,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
         const newPage: IPage = {
           id: Id.generate(),
-          sections: [],
+          rows: [],
           label: "Page",
         };
         draft.pages.push(newPage);
@@ -125,14 +125,76 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function addSection(pageIndex: number, sectionIndex: number) {
+  function addRow(indexes: { pageIndex: number }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows.push({
+          columns: [{ sections: [] }],
+        });
+      })
+    );
+  }
+
+  function deleteRow(indexes: { pageIndex: number; rowIndex: number }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows.splice(indexes.rowIndex, 1);
+      })
+    );
+  }
+
+  function addColumn(indexes: { pageIndex: number; rowIndex: number }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns.push({
+          sections: [],
+        });
+      })
+    );
+  }
+
+  function deleteColumn(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns.splice(
+          indexes.columnIndex,
+          1
+        );
+      })
+    );
+  }
+
+  function addSection(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+  }) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
 
-        draft.pages[pageIndex].sections.splice(sectionIndex + 1, 0, {
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+          indexes.columnIndex
+        ].sections.splice(indexes.sectionIndex + 1, 0, {
           id: Id.generate(),
           label: "Section",
           blocks: [],
@@ -142,9 +204,12 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
   }
 
   function renameSection(
-    pageIndex: number,
-
-    sectionIndex: number,
+    indexes: {
+      pageIndex: number;
+      rowIndex: number;
+      columnIndex: number;
+      sectionIndex: number;
+    },
     label: string
   ) {
     setCharacter(
@@ -152,24 +217,33 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.pages[pageIndex].sections[sectionIndex].label = label;
+        const sections =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections;
+        sections[indexes.sectionIndex].label = label;
       })
     );
   }
 
-  function toggleSectionVisibleOnCard(
-    pageIndex: number,
-
-    sectionIndex: number
-  ) {
+  function toggleSectionVisibleOnCard(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+  }) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        const oldValue =
-          draft.pages[pageIndex].sections[sectionIndex].visibleOnCard;
-        draft.pages[pageIndex].sections[sectionIndex].visibleOnCard = !oldValue;
+
+        const sections =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections;
+        const oldValue = sections[indexes.sectionIndex].visibleOnCard;
+        sections[indexes.sectionIndex].visibleOnCard = !oldValue;
       })
     );
   }
@@ -185,91 +259,37 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function repositionSection(pageIndex: number, sectionIndex: number) {
+  function removeSection(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+  }) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        // if (sectionLocation === "left") {
-        //   const [sectionToMove] = draft.pages[pageIndex].sections.left.splice(
-        //     sectionIndex,
-        //     1
-        //   );
-        //   draft.pages[pageIndex].sections.right.push(sectionToMove);
-        // } else {
-        //   const [sectionToMove] = draft.pages[pageIndex].sections.right.splice(
-        //     sectionIndex,
-        //     1
-        //   );
-        //   draft.pages[pageIndex].sections.left.push(sectionToMove);
-        // }
-      })
-    );
-  }
-  function moveSectionInPage(
-    pageIndex: number,
 
-    sectionIndex: number,
-    newPageIndex: number
-  ) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        const [section] = draft.pages[pageIndex].sections.splice(
-          sectionIndex,
-          1
-        );
-        draft.pages[newPageIndex].sections.push(section);
-      })
-    );
-  }
+        const column =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ];
 
-  function moveSection(
-    pageIndex: number,
-
-    sectionIndex: number,
-    direction: "up" | "down"
-  ) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.pages[pageIndex].sections = moveValueInList(
-          draft.pages[pageIndex].sections,
-          sectionIndex,
-          direction
-        );
-      })
-    );
-  }
-
-  function removeSection(
-    pageIndex: number,
-
-    sectionIndex: number
-  ) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.pages[pageIndex].sections = draft.pages[
-          pageIndex
-        ].sections.filter((a, index) => {
-          return index !== sectionIndex;
+        column.sections = column.sections.filter((a, index) => {
+          return index !== indexes.sectionIndex;
         });
       })
     );
   }
 
   function addBlock(
-    pageIndex: number,
-
-    sectionIndex: number,
+    indexes: {
+      pageIndex: number;
+      rowIndex: number;
+      columnIndex: number;
+      sectionIndex: number;
+    },
     type: BlockType
   ) {
     setCharacter(
@@ -277,7 +297,12 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.pages[pageIndex].sections[sectionIndex].blocks.push(
+
+        const section =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex];
+        section.blocks.push(
           CharacterFactory.makeBlock(type, {
             defaultCommands: settingsManager.state.diceCommandIds,
           })
@@ -302,79 +327,36 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function duplicateSection(
-    pageIndex: number,
+  // function moveDnDSection(
+  //   pageIndex: number,
+  //   dragIndex: number,
+  //   hoverIndex: number
+  // ) {
+  //   setCharacter(
+  //     produce((draft: ICharacter | undefined) => {
+  //       if (!draft) {
+  //         return;
+  //       }
 
-    sectionIndex: number
-  ) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        const sectionToDuplicate =
-          draft.pages[pageIndex].sections[sectionIndex];
+  //       if (dragIndex === undefined || hoverIndex === undefined) {
+  //         return;
+  //       }
 
-        draft.pages[pageIndex].sections.splice(
-          sectionIndex + 1,
-          0,
-          CharacterFactory.duplicateSection(sectionToDuplicate)
-        );
-      })
-    );
-  }
+  //       const dragItem = draft.pages[pageIndex].sections[dragIndex];
 
-  function duplicateBlock(
-    pageIndex: number,
-
-    sectionIndex: number,
-    blockIndex: number
-  ) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        const blockToDuplicate =
-          draft.pages[pageIndex].sections[sectionIndex].blocks[blockIndex];
-
-        draft.pages[pageIndex].sections[sectionIndex].blocks.splice(
-          blockIndex + 1,
-          0,
-          CharacterFactory.duplicateBlock(blockToDuplicate)
-        );
-      })
-    );
-  }
-
-  function moveDnDSection(
-    pageIndex: number,
-
-    dragIndex: number,
-    hoverIndex: number
-  ) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-
-        if (dragIndex === undefined || hoverIndex === undefined) {
-          return;
-        }
-
-        const dragItem = draft.pages[pageIndex].sections[dragIndex];
-
-        draft.pages[pageIndex].sections.splice(dragIndex, 1);
-        draft.pages[pageIndex].sections.splice(hoverIndex, 0, dragItem);
-      })
-    );
-  }
+  //       draft.pages[pageIndex].sections.splice(dragIndex, 1);
+  //       draft.pages[pageIndex].sections.splice(hoverIndex, 0, dragItem);
+  //     })
+  //   );
+  // }
 
   function moveDnDBlock(
-    pageIndex: number,
-
-    sectionIndex: number,
+    indexes: {
+      pageIndex: number;
+      rowIndex: number;
+      columnIndex: number;
+      sectionIndex: number;
+    },
     dragIndex: number,
     hoverIndex: number
   ) {
@@ -388,26 +370,26 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           return;
         }
 
-        const dragItem =
-          draft.pages[pageIndex].sections[sectionIndex].blocks[dragIndex];
+        const section =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex];
 
-        draft.pages[pageIndex].sections[sectionIndex].blocks.splice(
-          dragIndex,
-          1
-        );
-        draft.pages[pageIndex].sections[sectionIndex].blocks.splice(
-          hoverIndex,
-          0,
-          dragItem
-        );
+        const dragItem = section.blocks[dragIndex];
+
+        section.blocks.splice(dragIndex, 1);
+        section.blocks.splice(hoverIndex, 0, dragItem);
       })
     );
   }
 
   function setBlock(
-    pageIndex: number,
-
-    sectionIndex: number,
+    indexes: {
+      pageIndex: number;
+      rowIndex: number;
+      columnIndex: number;
+      sectionIndex: number;
+    },
     blockIndex: number,
     block: IBlock
   ) {
@@ -416,16 +398,22 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.pages[pageIndex].sections[sectionIndex].blocks[blockIndex] =
-          block;
+        const section =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex];
+        section.blocks[blockIndex] = block;
       })
     );
   }
 
   function setBlockMeta(
-    pageIndex: number,
-
-    sectionIndex: number,
+    indexes: {
+      pageIndex: number;
+      rowIndex: number;
+      columnIndex: number;
+      sectionIndex: number;
+    },
     blockIndex: number,
     meta: any
   ) {
@@ -434,9 +422,11 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-
-        draft.pages[pageIndex].sections[sectionIndex].blocks[blockIndex].meta =
-          meta;
+        const section =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex];
+        section.blocks[blockIndex].meta = meta;
       })
     );
   }
@@ -449,16 +439,20 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
 
         for (const page of draft.pages) {
-          for (const section of page.sections) {
-            for (const block of section.blocks) {
-              const match = block.id === blockId;
+          for (const row of page.rows) {
+            for (const column of row.columns) {
+              for (const section of column.sections) {
+                for (const block of section.blocks) {
+                  const match = block.id === blockId;
 
-              if (block.type === BlockType.PointCounter) {
-                if (match) {
-                  block.meta.isMainPointCounter =
-                    !block.meta.isMainPointCounter;
-                } else {
-                  block.meta.isMainPointCounter = false;
+                  if (block.type === BlockType.PointCounter) {
+                    if (match) {
+                      block.meta.isMainPointCounter =
+                        !block.meta.isMainPointCounter;
+                    } else {
+                      block.meta.isMainPointCounter = false;
+                    }
+                  }
                 }
               }
             }
@@ -468,25 +462,13 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function toggleSectionWidth(pageIndex: number, sectionIndex: number) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        const section = draft.pages[pageIndex].sections[sectionIndex];
-        const shouldUseHalfWidth = section.width == null || section.width === 1;
-        const newWidth = shouldUseHalfWidth ? 0.5 : 1;
-
-        section.width = newWidth;
-      })
-    );
-  }
-
   function removeBlock(
-    pageIndex: number,
-
-    sectionIndex: number,
+    index: {
+      pageIndex: number;
+      rowIndex: number;
+      columnIndex: number;
+      sectionIndex: number;
+    },
     blockIndex: number
   ) {
     setCharacter(
@@ -494,9 +476,11 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         if (!draft) {
           return;
         }
-        draft.pages[pageIndex].sections[sectionIndex].blocks = draft.pages[
-          pageIndex
-        ].sections[sectionIndex].blocks.filter((field, index) => {
+        const section =
+          draft.pages[index.pageIndex].rows[index.rowIndex].columns[
+            index.columnIndex
+          ].sections[index.sectionIndex];
+        section.blocks = section.blocks.filter((field, index) => {
           return index !== blockIndex;
         });
       })
@@ -545,21 +529,19 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       setName,
       setGroup,
       addPage,
+      addRow,
+      deleteRow,
+      addColumn,
+      deleteColumn,
       renamePage,
       removePage,
       addSection,
       renameSection,
       toggleSectionVisibleOnCard,
-      moveSection,
-      repositionSection,
       movePage,
-      moveSectionInPage,
       removeSection,
       addBlock,
-      duplicateBlock,
       duplicatePage,
-      duplicateSection,
-      moveDnDSection,
       moveDnDBlock,
       setBlock,
       setBlockMeta,
@@ -568,7 +550,6 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       getCharacterWithNewTimestamp,
       toggleWideMode,
       setZoom,
-      toggleSectionWidth,
     },
   };
 }

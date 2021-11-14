@@ -1,32 +1,17 @@
 import { css } from "@emotion/css";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ControlCameraIcon from "@mui/icons-material/ControlCamera";
 import DeleteIcon from "@mui/icons-material/Delete";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
-import FlipToBackIcon from "@mui/icons-material/FlipToBack";
-import HeightIcon from "@mui/icons-material/Height";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import { useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import React from "react";
-import {
-  ContentEditable,
-  previewContentEditable,
-} from "../../../../../components/ContentEditable/ContentEditable";
+import { ContentEditable } from "../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../components/FateLabel/FateLabel";
-import {
-  IPage,
-  ISection,
-  V3Position,
-} from "../../../../../domains/character/types";
+import { IPage, ISection } from "../../../../../domains/character/types";
 import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { smallIconButtonStyle } from "../CharacterV3Dialog";
@@ -41,12 +26,7 @@ export const SheetHeader: React.FC<{
   canMoveDown: boolean;
   onLabelChange?: (newLabel: string) => void;
   onRemove(): void;
-  onMoveUp(): void;
-  onMoveDown(): void;
-  onReposition(position: V3Position): void;
-  onDuplicateSection(): void;
-  onToggleSectionWidth(): void;
-  onMoveToPage: (pageIndex: number) => void;
+
   visibleOnCard?: boolean;
   onToggleVisibleOnCard?: () => void;
 }> = (props) => {
@@ -60,7 +40,7 @@ export const SheetHeader: React.FC<{
     label: "SheetHeader-box",
     // Hexagone
     // https://bennettfeely.com/clippy/
-    clipPath: "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
+    // clipPath: "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
     background: headerBackgroundColors.primary,
     color: headerColor,
     width: "100%",
@@ -139,39 +119,7 @@ export const SheetHeader: React.FC<{
             </Tooltip>
           </Grid>
         )}
-        {props.advanced && (
-          <Grid item>
-            <Tooltip title={`Width: ${(props.section.width || 1) * 100} %`}>
-              <IconButton
-                data-cy={`character-dialog.${props.label}.toggle-width`}
-                size="small"
-                className={smallIconButtonStyle}
-                onClick={props.onToggleSectionWidth}
-              >
-                <HeightIcon
-                  htmlColor={headerColor}
-                  className={css({
-                    transform: "rotate(90deg)",
-                  })}
-                />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-        )}
-        {props.advanced && (
-          <Grid item>
-            <Tooltip title={t("character-dialog.control.duplicate")}>
-              <IconButton
-                data-cy={`character-dialog.${props.label}.duplicate`}
-                size="small"
-                className={smallIconButtonStyle}
-                onClick={props.onDuplicateSection}
-              >
-                <FileCopyIcon htmlColor={headerColor} />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-        )}
+
         {props.advanced && (
           <Grid item>
             <Tooltip title={t("character-dialog.control.remove-section")}>
@@ -189,83 +137,6 @@ export const SheetHeader: React.FC<{
           </Grid>
         )}
       </Grid>
-      <Menu
-        keepMounted
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <MenuItem
-          disabled={!props.canMoveUp}
-          data-cy={`character-dialog.${props.label}.move-up`}
-          onClick={() => {
-            handleClose();
-            props.onMoveUp();
-          }}
-        >
-          <ListItemIcon>
-            <ArrowUpwardIcon />
-          </ListItemIcon>
-          {t("character-dialog.control.move-up")}
-        </MenuItem>
-        <MenuItem
-          disabled={!props.canMoveDown}
-          data-cy={`character-dialog.${props.label}.move-down`}
-          onClick={() => {
-            handleClose();
-            props.onMoveDown();
-          }}
-        >
-          <ListItemIcon>
-            <ArrowDownwardIcon />
-          </ListItemIcon>
-          {t("character-dialog.control.move-down")}
-        </MenuItem>
-        {/* <MenuItem
-          data-cy={`character-dialog.${props.label}.switch-side`}
-          onClick={() => {
-            handleClose();
-            const newPosition =
-              props.sectionIndex === "left"
-                ? V3Position.Right
-                : V3Position.Left;
-            props.onReposition(newPosition);
-          }}
-        >
-          <ListItemIcon>
-            <ArrowForwardIcon
-              className={css({
-                transform:
-                  props.sectionIndex === "left"
-                    ? undefined
-                    : "rotate(180deg)",
-              })}
-            />
-          </ListItemIcon>
-          {props.sectionIndex === "left"
-            ? t("character-dialog.control.move-right")
-            : t("character-dialog.control.move-left")}
-        </MenuItem> */}
-        {props.pages?.map((page, pageIndex) => {
-          if (pageIndex === props.pageIndex) {
-            return null;
-          }
-          return (
-            <MenuItem
-              key={page.id}
-              onClick={() => {
-                handleClose();
-                props.onMoveToPage(pageIndex);
-              }}
-            >
-              <ListItemIcon>
-                <FlipToBackIcon />
-              </ListItemIcon>
-              {`Move To Page: ${previewContentEditable({ value: page.label })}`}
-            </MenuItem>
-          );
-        })}
-      </Menu>
     </Box>
   );
 };

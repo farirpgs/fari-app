@@ -256,16 +256,19 @@ export type ISection = {
   label: string;
   blocks: Array<IBlock>;
   visibleOnCard?: boolean;
-  /**
-   * Column width from 0 to 1
-   */
-  width?: number;
+};
+
+export type IPageColumn = {
+  sections: Array<ISection>;
+};
+export type IPageRow = {
+  columns: Array<IPageColumn>;
 };
 
 export interface IPage {
   id: string;
   label: string;
-  sections: Array<ISection>;
+  rows: Array<IPageRow>;
 }
 
 export interface ICharacter {

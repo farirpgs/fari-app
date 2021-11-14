@@ -461,10 +461,14 @@ export const CharacterFactory = {
       draft.id = Id.generate();
       draft.label += " Copy";
 
-      draft.sections.forEach((s) => {
-        s.id = Id.generate();
-        s.blocks.forEach((b) => {
-          b.id = Id.generate();
+      draft.rows.forEach((r) => {
+        r.columns.forEach((c) => {
+          c.sections.forEach((s) => {
+            s.id = Id.generate();
+            s.blocks.forEach((b) => {
+              b.id = Id.generate();
+            });
+          });
         });
       });
     });
@@ -689,9 +693,13 @@ function migrateV4CharacterToV5(v4: IV4Character): ICharacter {
       return {
         id: page.id,
         label: page.label,
-        sections: [
-          ...page.sections.left.map(migrateSection),
-          ...page.sections.right.map(migrateSection),
+        rows: [
+          {
+            columns: [
+              { sections: page.sections.left },
+              { sections: page.sections.right },
+            ],
+          },
         ],
       };
     }),
@@ -705,7 +713,6 @@ function migrateV4CharacterToV5(v4: IV4Character): ICharacter {
       label: section.label,
       blocks: section.blocks,
       visibleOnCard: section.visibleOnCard,
-      width: 0.5,
     };
   }
 
