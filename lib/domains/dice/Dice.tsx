@@ -1,6 +1,15 @@
+import { css, cx } from "@emotion/css";
 import isEqual from "lodash/isEqual";
-import startCase from "lodash/startCase";
+import React from "react";
 import { Icons } from "../Icons/Icons";
+import {
+  black_die,
+  blue_die,
+  green_die,
+  purple_die,
+  red_die,
+  yellow_die,
+} from "./narrative-dice-system/narrativeDice";
 
 export type IDiceCommandSetOption = {
   id: IDiceCommandSetId;
@@ -22,6 +31,12 @@ export type IDiceCommandNames =
   | "1d12"
   | "1d20"
   | "1d100"
+  | "narrativeDiceBlue"
+  | "narrativeDiceGreen"
+  | "narrativeDiceYellow"
+  | "narrativeDiceBlack"
+  | "narrativeDicePurple"
+  | "narrativeDiceRed"
   | "coin"
   | "card";
 
@@ -99,6 +114,96 @@ export const CommmandSetOptions: Record<
     icon: Icons.Coin,
     value: ["coin"],
   },
+  "narrativeDiceBlue": {
+    id: "narrativeDiceBlue",
+    label: "1dBoost",
+    icon: (props) => (
+      <Icons.Dice6
+        className={cx(
+          props.className,
+          css({
+            // borderBottom: "4px solid blue",
+          })
+        )}
+      />
+    ),
+    value: ["narrativeDiceBlue"],
+  },
+  "narrativeDiceGreen": {
+    id: "narrativeDiceGreen",
+    label: "1dAbility",
+    icon: (props) => (
+      <Icons.Dice8
+        className={cx(
+          props.className,
+          css({
+            // borderBottom: "4px solid green",
+          })
+        )}
+      />
+    ),
+    value: ["narrativeDiceGreen"],
+  },
+  "narrativeDiceYellow": {
+    id: "narrativeDiceYellow",
+    label: "1dProficiency",
+    icon: (props) => (
+      <Icons.Dice12
+        className={cx(
+          props.className,
+          css({
+            // borderBottom: "4px solid yellow",
+          })
+        )}
+      />
+    ),
+    value: ["narrativeDiceYellow"],
+  },
+  "narrativeDiceBlack": {
+    id: "narrativeDiceBlack",
+    label: "1dSetback",
+    icon: (props) => (
+      <Icons.Dice6
+        className={cx(
+          props.className,
+          css({
+            // borderBottom: "4px solid black",
+          })
+        )}
+      />
+    ),
+    value: ["narrativeDiceBlack"],
+  },
+  "narrativeDicePurple": {
+    id: "narrativeDicePurple",
+    label: "1dDifficulty",
+    icon: (props) => (
+      <Icons.Dice8
+        className={cx(
+          props.className,
+          css({
+            // borderBottom: "4px solid purple",
+          })
+        )}
+      />
+    ),
+    value: ["narrativeDicePurple"],
+  },
+  "narrativeDiceRed": {
+    id: "narrativeDiceRed",
+    label: "1dChallenge",
+    icon: (props) => (
+      <Icons.Dice12
+        className={cx(
+          props.className,
+          css({
+            // borderBottom: "4px solid red",
+          })
+        )}
+      />
+    ),
+    value: ["narrativeDiceRed"],
+  },
   "card": {
     id: "card",
     label: "Card",
@@ -129,7 +234,7 @@ const HundredSidedDie = makeNormalDie(100);
 const DeckOfCards = makeCards();
 
 type IDiceCommandOptions = {
-  sides: Array<number | string>;
+  sides: Array<number | string | any>;
   formatDetailedResult: (value: number | string) => string;
 };
 
@@ -177,7 +282,43 @@ export const DiceCommandOptions: Record<
     sides: CoinToss,
     formatDetailedResult: formatNormalDie,
   },
+  "narrativeDiceBlue": {
+    sides: blue_die.faces,
+    formatDetailedResult: formatEdgeDie,
+  },
+  "narrativeDiceGreen": {
+    sides: green_die.faces,
+    formatDetailedResult: formatEdgeDie,
+  },
+  "narrativeDiceYellow": {
+    sides: yellow_die.faces,
+    formatDetailedResult: formatEdgeDie,
+  },
+  "narrativeDiceBlack": {
+    sides: black_die.faces,
+    formatDetailedResult: formatEdgeDie,
+  },
+  "narrativeDicePurple": {
+    sides: purple_die.faces,
+    formatDetailedResult: formatEdgeDie,
+  },
+  "narrativeDiceRed": {
+    sides: red_die.faces,
+    formatDetailedResult: formatEdgeDie,
+  },
 };
+
+function formatEdgeDie(die: any): string {
+  let label = "";
+  Object.keys(die).forEach((key) => {
+    const count = die[key];
+    const firstLetter = key.charAt(0).toUpperCase();
+    if (count > true) {
+      label += `${firstLetter} (${count})`;
+    }
+  });
+  return label || "";
+}
 
 export type IRollDiceOptions = {
   listResults: boolean;
@@ -328,7 +469,8 @@ export const Dice = {
             const typeLabel = `${count}d${dice}`;
             return typeLabel;
           }
-          return startCase(command);
+          const label = CommmandSetOptions[command].label;
+          return label;
         }
       );
 

@@ -107,6 +107,15 @@ export function DiceMenu(props: {
                       CommmandSetOptions["card"],
                       CommmandSetOptions["2d6"],
                     ])}
+                    {renderCommandSetHeader("Narrative Dice")}
+                    {renderOptions([
+                      CommmandSetOptions["narrativeDiceBlue"],
+                      CommmandSetOptions["narrativeDiceGreen"],
+                      CommmandSetOptions["narrativeDiceYellow"],
+                      CommmandSetOptions["narrativeDiceBlack"],
+                      CommmandSetOptions["narrativeDicePurple"],
+                      CommmandSetOptions["narrativeDiceRed"],
+                    ])}
 
                     {(props.onClear || props.onCtaClick) && (
                       <Box mt="1.5rem">

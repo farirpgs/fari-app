@@ -310,7 +310,7 @@ export function DiceBoxResult(props: {
   });
   const shouldListResult =
     diceRollsManager.state.finalResult?.options.listResults ?? false;
-  const separator = shouldListResult ? "~" : "+";
+  const separator = shouldListResult ? "•" : "+";
 
   const items = diceRollsManager.state.finalResultRolls.flatMap(
     (rollGroup, i) => {
@@ -327,6 +327,7 @@ export function DiceBoxResult(props: {
           };
         });
       });
+
       return shouldListResult
         ? arraySort(commandSets, [
             (c) => ({
@@ -346,7 +347,7 @@ export function DiceBoxResult(props: {
           const isFate = item.name === "1dF";
           const options = CommmandSetOptions[item.commandSetId];
           const diceCommandOptions = DiceCommandOptions[item.name!];
-
+          const content = diceCommandOptions.formatDetailedResult(item.value);
           const IconForPool = options.icon;
 
           return (
@@ -368,8 +369,8 @@ export function DiceBoxResult(props: {
                 <Tooltip
                   title={
                     item.label
-                      ? `${item.commandSetId} (${item.label})`
-                      : item.commandSetId
+                      ? `${options.label} (${item.label})`
+                      : options.label
                   }
                 >
                   <Box
@@ -381,24 +382,26 @@ export function DiceBoxResult(props: {
                     })}
                   >
                     <Grid container alignItems="center">
-                      <Grid item>
-                        <Box
-                          className={css({
-                            label: "DiceBoxResult-rollType-DiceCommand-value",
-                            fontFamily: isFate ? FontFamily.Fate : "inherit",
-                            marginLeft: isFate ? ".2rem" : undefined,
-                            verticalAlign: "middle",
-                          })}
-                        >
-                          {diceCommandOptions.formatDetailedResult(item.value)}
-                        </Box>
-                      </Grid>
+                      {content && (
+                        <Grid item>
+                          <Box
+                            className={css({
+                              label: "DiceBoxResult-rollType-DiceCommand-value",
+                              fontFamily: isFate ? FontFamily.Fate : "inherit",
+                              marginLeft: isFate ? ".2rem" : undefined,
+                              verticalAlign: "middle",
+                            })}
+                          >
+                            {content}
+                          </Box>
+                        </Grid>
+                      )}
                       {!isFate && (
                         <Grid item>
                           <IconForPool
                             className={css({
                               display: "flex",
-                              marginLeft: "4px",
+                              marginLeft: content ? "4px" : undefined,
                             })}
                           />
                         </Grid>
