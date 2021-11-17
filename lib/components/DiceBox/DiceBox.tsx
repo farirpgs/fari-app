@@ -91,9 +91,8 @@ export const DiceBox: React.FC<IProps> = (props) => {
     animationTimingFunction: "linear",
   });
   const shouldListResult =
-    diceRollsManager.state.finalResult?.options.listResults;
+    diceRollsManager.state.finalResult?.options.listResults ?? false;
   const separator = shouldListResult ? " • " : " + ";
-  const isPool = shouldListResult ?? false;
   const tooltipContent = !diceRollsManager.state.finalResultHidden && (
     <Box
       className={css({
@@ -280,7 +279,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
           >
             {diceRollsManager.state.finalResultHidden
               ? ""
-              : isPool
+              : shouldListResult
               ? "~"
               : diceRollsManager.state.finalResultTotal}
           </Typography>
@@ -394,7 +393,7 @@ export function DiceBoxResult(props: {
                           {diceCommandOptions.formatDetailedResult(item.value)}
                         </Box>
                       </Grid>
-                      {!isFate && shouldListResult && (
+                      {!isFate && (
                         <Grid item>
                           <IconForPool
                             className={css({
