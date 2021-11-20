@@ -402,20 +402,21 @@ export function useSession(props: IProps) {
           if (p.id === id) {
             p.points = points;
             if (p.character) {
-              for (const page of p.character.pages) {
-                for (const section of page.sections) {
-                  for (const block of section.blocks) {
-                    const shouldUpdateBlock =
-                      block.type === BlockType.PointCounter &&
-                      block.meta.isMainPointCounter;
-                    if (shouldUpdateBlock) {
-                      const typedBlock = block as IPointCounterBlock & IBlock;
+              const blocks = p.character.pages
+                .flatMap((p) => p.rows)
+                .flatMap((r) => r.columns)
+                .flatMap((c) => c.sections)
+                .flatMap((s) => s.blocks);
+              for (const block of blocks) {
+                const shouldUpdateBlock =
+                  block.type === BlockType.PointCounter &&
+                  block.meta.isMainPointCounter;
+                if (shouldUpdateBlock) {
+                  const typedBlock = block as IPointCounterBlock & IBlock;
 
-                      typedBlock.value = points;
-                      typedBlock.meta.max = maxPoints;
-                      p.character.lastUpdated = getUnix();
-                    }
-                  }
+                  typedBlock.value = points;
+                  typedBlock.meta.max = maxPoints;
+                  p.character.lastUpdated = getUnix();
                 }
               }
             }

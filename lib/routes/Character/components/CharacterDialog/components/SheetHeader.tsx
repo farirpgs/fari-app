@@ -96,9 +96,19 @@ export const SheetHeader: React.FC<{
                 }}
               >
                 {props.visibleOnCard ? (
-                  <VisibilityIcon htmlColor={headerColor} />
+                  <VisibilityIcon
+                    htmlColor={headerColor}
+                    className={css({
+                      fontSize: "1rem",
+                    })}
+                  />
                 ) : (
-                  <VisibilityOffIcon htmlColor={headerColor} />
+                  <VisibilityOffIcon
+                    htmlColor={headerColor}
+                    className={css({
+                      fontSize: "1rem",
+                    })}
+                  />
                 )}
               </IconButton>
             </Tooltip>
@@ -114,7 +124,12 @@ export const SheetHeader: React.FC<{
                 className={smallIconButtonStyle}
                 onClick={handleOpenMoveMenu}
               >
-                <ControlCameraIcon htmlColor={headerColor} />
+                <ControlCameraIcon
+                  htmlColor={headerColor}
+                  className={css({
+                    fontSize: "1rem",
+                  })}
+                />
               </IconButton>
             </Tooltip>
           </Grid>
@@ -131,7 +146,12 @@ export const SheetHeader: React.FC<{
                   props.onRemove?.();
                 }}
               >
-                <DeleteIcon htmlColor={headerColor} />
+                <DeleteIcon
+                  htmlColor={headerColor}
+                  className={css({
+                    fontSize: "1rem",
+                  })}
+                />
               </IconButton>
             </Tooltip>
           </Grid>

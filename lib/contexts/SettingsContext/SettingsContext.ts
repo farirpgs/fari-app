@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { IBlock, ISection } from "../../domains/character/types";
 import { IDiceCommandSetId, IRollDiceOptions } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
 import { useStorageEntity } from "../../hooks/useStorageEntities/useStorageEntity";
@@ -45,6 +46,8 @@ export function useSettings() {
     key: "fari-dice-command-options",
     localStorage: window.localStorage,
   });
+  const [blockInClipboard, setBlockInClipboard] = useState<IBlock>();
+  const [sectionInClipboard, setSectionInClipboard] = useState<ISection>();
 
   function toggleThemeMode() {
     setThemeMode(() => {
@@ -61,6 +64,8 @@ export function useSettings() {
       diceCommandIds: diceCommandIds,
       diceOptions,
       gameTemplate,
+      blockInClipboard,
+      sectionInClipboard,
     },
     actions: {
       setThemeMode,
@@ -70,6 +75,8 @@ export function useSettings() {
       setDiceCommandsIds: setDiceCommandsIds,
       setGameTemplate,
       setDiceOptions,
+      setBlockInClipboard,
+      setSectionInClipboard,
     },
   };
 }

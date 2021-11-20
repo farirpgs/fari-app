@@ -1,11 +1,17 @@
 import { css, cx } from "@emotion/css";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import DoNotDisturbIcon from "@mui/icons-material/DoNotDisturb";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import Badge from "@mui/material/Badge";
 import Box, { BoxProps } from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
+import Fade from "@mui/material/Fade";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import { darken, lighten, useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
-import { default as React, useContext } from "react";
+import { default as React, useContext, useState } from "react";
 import {
   ContentEditable,
   previewContentEditable,
@@ -301,7 +307,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
         position="relative"
         clickable={canRoll}
         tooltipTitle={
-          canRoll
+          hasCommands
             ? undefined
             : t("character-dialog.helper-text.empty-dice-pool")
         }

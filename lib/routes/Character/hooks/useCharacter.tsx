@@ -125,6 +125,76 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
+  function moveRowUp(indexes: { pageIndex: number; rowIndex: number }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows = moveValueInList(
+          draft.pages[indexes.pageIndex].rows,
+          indexes.rowIndex,
+          "up"
+        );
+      })
+    );
+  }
+
+  function moveRowDown(indexes: { pageIndex: number; rowIndex: number }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows = moveValueInList(
+          draft.pages[indexes.pageIndex].rows,
+          indexes.rowIndex,
+          "down"
+        );
+      })
+    );
+  }
+
+  function moveColumnUp(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns =
+          moveValueInList(
+            draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns,
+            indexes.columnIndex,
+            "up"
+          );
+      })
+    );
+  }
+
+  function moveColumnDown(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns =
+          moveValueInList(
+            draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns,
+            indexes.columnIndex,
+            "down"
+          );
+      })
+    );
+  }
+
   function addRow(indexes: { pageIndex: number }) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -530,8 +600,12 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       setGroup,
       addPage,
       addRow,
+      moveRowUp,
+      moveRowDown,
       deleteRow,
       addColumn,
+      moveColumnUp,
+      moveColumnDown,
       deleteColumn,
       renamePage,
       removePage,

@@ -445,19 +445,27 @@ function aCharacter(name: string): ICharacter {
       {
         id: "1",
         label: "Page",
-        sections: [
+        rows: [
           {
-            id: "1",
-            label: "Section",
-            blocks: [
+            columns: [
               {
-                ...CharacterFactory.makeBlock(BlockType.PointCounter),
-                value: "1",
-                label: "Fate Points",
-                meta: {
-                  max: "3",
-                  isMainPointCounter: true,
-                },
+                sections: [
+                  {
+                    id: "1",
+                    label: "Section",
+                    blocks: [
+                      {
+                        ...CharacterFactory.makeBlock(BlockType.PointCounter),
+                        value: "1",
+                        label: "Fate Points",
+                        meta: {
+                          max: "3",
+                          isMainPointCounter: true,
+                        },
+                      },
+                    ],
+                  },
+                ],
               },
             ],
           },

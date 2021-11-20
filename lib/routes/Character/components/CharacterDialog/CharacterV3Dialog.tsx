@@ -1,6 +1,11 @@
-import { css, cx } from "@emotion/css";
+import { css } from "@emotion/css";
 import AddIcon from "@mui/icons-material/Add";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import CloseIcon from "@mui/icons-material/Close";
+import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
@@ -29,6 +34,8 @@ import IconButton from "@mui/material/IconButton";
 import InputLabel from "@mui/material/InputLabel";
 import NativeSelect from "@mui/material/NativeSelect";
 import Snackbar from "@mui/material/Snackbar";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
+import Switch from "@mui/material/Switch";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import TextField from "@mui/material/TextField";
@@ -42,6 +49,7 @@ import { FateLabel } from "../../../../components/FateLabel/FateLabel";
 import { CharacterCard } from "../../../../components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
 import { CharactersContext } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
+import { SettingsContext } from "../../../../contexts/SettingsContext/SettingsContext";
 import {
   CharacterTemplates,
   CharacterTemplatesWithGroups,
@@ -115,6 +123,7 @@ export const CharacterV3Dialog: React.FC<{
   const defaultAdvanced = query.get("advanced") === "true";
   const logger = useLogger();
   const characterManager = useCharacter(props.character);
+  const settingsManager = useContext(SettingsContext);
   const [advanced, setAdvanced] = useState(defaultAdvanced);
   const [savedSnack, setSavedSnack] = useState(false);
   const charactersManager = useContext(CharactersContext);
@@ -373,9 +382,10 @@ export const CharacterV3Dialog: React.FC<{
     if (!pages) {
       return null;
     }
-    const numberOfSections = pages.flatMap((p) => {
-      return p.sections;
-    }).length;
+    const numberOfSections = pages
+      .flatMap((p) => p.rows)
+      .flatMap((r) => r.columns)
+      .flatMap((c) => c.sections).length;
     const doesntHaveSections = numberOfSections === 0;
     const shouldRenderLoadTemplate = doesntHaveSections || advanced;
     const zoom = characterManager.state.character?.zoom ?? 1;
@@ -573,6 +583,40 @@ export const CharacterV3Dialog: React.FC<{
                             <Grid container justifyContent="flex-end">
                               <Grid item>
                                 <IconButton
+                                  disabled={rowIndex === 0}
+                                  onClick={() => {
+                                    characterManager.actions.moveRowUp({
+                                      pageIndex,
+                                      rowIndex,
+                                    });
+                                  }}
+                                >
+                                  <ArrowUpwardIcon
+                                    className={css({
+                                      fontSize: "1rem",
+                                    })}
+                                  />
+                                </IconButton>
+                              </Grid>
+                              <Grid item>
+                                <IconButton
+                                  disabled={rowIndex === page.rows.length - 1}
+                                  onClick={() => {
+                                    characterManager.actions.moveRowDown({
+                                      pageIndex,
+                                      rowIndex,
+                                    });
+                                  }}
+                                >
+                                  <ArrowDownwardIcon
+                                    className={css({
+                                      fontSize: "1rem",
+                                    })}
+                                  />
+                                </IconButton>
+                              </Grid>
+                              <Grid item>
+                                <IconButton
                                   onClick={() => {
                                     characterManager.actions.deleteRow({
                                       pageIndex: pageIndex,
@@ -580,11 +624,16 @@ export const CharacterV3Dialog: React.FC<{
                                     });
                                   }}
                                 >
-                                  <DeleteIcon />
+                                  <DeleteIcon
+                                    className={css({
+                                      fontSize: "1rem",
+                                    })}
+                                  />
                                 </IconButton>
                               </Grid>
                               <Grid item>
                                 <IconButton
+                                  disabled={row.columns.length === 4}
                                   onClick={() => {
                                     characterManager.actions.addColumn({
                                       pageIndex: pageIndex,
@@ -592,7 +641,11 @@ export const CharacterV3Dialog: React.FC<{
                                     });
                                   }}
                                 >
-                                  <AddIcon />
+                                  <AddIcon
+                                    className={css({
+                                      fontSize: "1rem",
+                                    })}
+                                  />
                                 </IconButton>
                               </Grid>
                             </Grid>
@@ -631,6 +684,49 @@ export const CharacterV3Dialog: React.FC<{
                                         >
                                           <Grid item>
                                             <IconButton
+                                              disabled={columnIndex === 0}
+                                              onClick={() => {
+                                                characterManager.actions.moveColumnUp(
+                                                  {
+                                                    pageIndex,
+                                                    rowIndex,
+                                                    columnIndex,
+                                                  }
+                                                );
+                                              }}
+                                            >
+                                              <ArrowBackIcon
+                                                className={css({
+                                                  fontSize: "1rem",
+                                                })}
+                                              />
+                                            </IconButton>
+                                          </Grid>
+                                          <Grid item>
+                                            <IconButton
+                                              disabled={
+                                                columnIndex ===
+                                                row.columns.length - 1
+                                              }
+                                              onClick={() => {
+                                                characterManager.actions.moveColumnDown(
+                                                  {
+                                                    pageIndex,
+                                                    rowIndex,
+                                                    columnIndex,
+                                                  }
+                                                );
+                                              }}
+                                            >
+                                              <ArrowForwardIcon
+                                                className={css({
+                                                  fontSize: "1rem",
+                                                })}
+                                              />
+                                            </IconButton>
+                                          </Grid>
+                                          <Grid item>
+                                            <IconButton
                                               onClick={() => {
                                                 characterManager.actions.deleteColumn(
                                                   {
@@ -641,7 +737,11 @@ export const CharacterV3Dialog: React.FC<{
                                                 );
                                               }}
                                             >
-                                              <DeleteIcon />
+                                              <DeleteIcon
+                                                className={css({
+                                                  fontSize: "1rem",
+                                                })}
+                                              />
                                             </IconButton>
                                           </Grid>
                                         </Grid>
@@ -849,6 +949,13 @@ export const CharacterV3Dialog: React.FC<{
                             }}
                           />
                         </Grid>
+                        {settingsManager.state.blockInClipboard && (
+                          <Grid item>
+                            <IconButton>
+                              <ContentPasteIcon />
+                            </IconButton>
+                          </Grid>
+                        )}
                         <Grid item>
                           <AddSection
                             onAddSection={() => {
@@ -998,22 +1105,6 @@ export const CharacterV3Dialog: React.FC<{
             </Grid>
             {!props.dialog && (
               <>
-                <Grid item>
-                  <Tooltip title={t("character-dialog.export-as-template")}>
-                    <IconButton
-                      color="default"
-                      data-cy="character-dialog.print"
-                      size="small"
-                      onClick={() => {
-                        charactersManager.actions.exportEntityAsTemplate(
-                          characterManager.state.character as ICharacter
-                        );
-                      }}
-                    >
-                      <ShareIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
                 <Grid item>
                   <Tooltip title={t("character-dialog.export-as-template")}>
                     <IconButton
@@ -1188,7 +1279,8 @@ export const CharacterV3Dialog: React.FC<{
       sectionIndex: number;
     }
   ) {
-    const dragAndDropKey = `${page.label}.${indexes.pageIndex}.${section.label}.${indexes.sectionIndex}`;
+    const dragAndDropKey = `${indexes.pageIndex}-${indexes.sectionIndex}-${indexes.rowIndex}-${indexes.columnIndex}`;
+
     return (
       <>
         <Box
@@ -1228,7 +1320,144 @@ export const CharacterV3Dialog: React.FC<{
                     render={(dndRenderProps) => {
                       return (
                         <Box>
-                          <Grid container wrap="nowrap">
+                          <ManagerBox
+                            label={<>Bloc #{blockIndex + 1}</>}
+                            readonly={!advanced}
+                            backgroundColor={theme.palette.background.paper}
+                            actions={
+                              <>
+                                <Grid container justifyContent="flex-end">
+                                  <Grid item>
+                                    <div ref={dndRenderProps.drag}>
+                                      <Tooltip
+                                        title={t(
+                                          "character-dialog.control.move"
+                                        )}
+                                      >
+                                        <IconButton size="small">
+                                          <DragIndicatorIcon
+                                            className={css({
+                                              fontSize: "1rem",
+                                              cursor: "move",
+                                            })}
+                                          />
+                                        </IconButton>
+                                      </Tooltip>
+                                    </div>
+                                  </Grid>
+
+                                  <Grid item>
+                                    <Tooltip
+                                      title={t(
+                                        "character-dialog.control.duplicate"
+                                      )}
+                                    >
+                                      <IconButton
+                                        size="small"
+                                        onClick={() => {
+                                          settingsManager.actions.setBlockInClipboard(
+                                            block
+                                          );
+                                        }}
+                                      >
+                                        <FileCopyIcon
+                                          className={css({
+                                            fontSize: "1rem",
+                                          })}
+                                        />
+                                      </IconButton>
+                                    </Tooltip>
+                                  </Grid>
+
+                                  <Grid item>
+                                    <Tooltip
+                                      title={t(
+                                        "character-dialog.control.remove-block"
+                                      )}
+                                    >
+                                      <IconButton
+                                        size="small"
+                                        data-cy={`character-dialog.${section.label}.${block.label}.remove`}
+                                        onClick={() => {
+                                          characterManager.actions.removeBlock(
+                                            {
+                                              pageIndex: indexes.pageIndex,
+                                              sectionIndex:
+                                                indexes.sectionIndex,
+                                              rowIndex: indexes.rowIndex,
+                                              columnIndex: indexes.columnIndex,
+                                            },
+
+                                            blockIndex
+                                          );
+                                        }}
+                                      >
+                                        <DeleteIcon
+                                          className={css({
+                                            fontSize: "1rem",
+                                          })}
+                                        />
+                                      </IconButton>
+                                    </Tooltip>
+                                  </Grid>
+                                </Grid>
+                              </>
+                            }
+                          >
+                            <BlockByType
+                              advanced={advanced}
+                              readonly={props.readonly}
+                              dataCy={`character-dialog.${section.label}.${block.label}`}
+                              block={block}
+                              onChange={(newBlock) => {
+                                characterManager.actions.setBlock(
+                                  {
+                                    pageIndex: indexes.pageIndex,
+                                    rowIndex: indexes.rowIndex,
+                                    columnIndex: indexes.columnIndex,
+                                    sectionIndex: indexes.sectionIndex,
+                                  },
+                                  blockIndex,
+                                  newBlock
+                                );
+                              }}
+                              onToggleSplit={() => {
+                                const shouldUseHalfWidth =
+                                  block.meta.width == null ||
+                                  block.meta.width === 1;
+                                const shouldUseThirdWidth =
+                                  block.meta.width === 0.5;
+                                const newWidth = shouldUseHalfWidth
+                                  ? 0.5
+                                  : shouldUseThirdWidth
+                                  ? 0.33
+                                  : 1;
+
+                                characterManager.actions.setBlockMeta(
+                                  {
+                                    pageIndex: indexes.pageIndex,
+                                    rowIndex: indexes.rowIndex,
+                                    columnIndex: indexes.columnIndex,
+                                    sectionIndex: indexes.sectionIndex,
+                                  },
+                                  blockIndex,
+                                  {
+                                    ...block.meta,
+                                    width: newWidth,
+                                  }
+                                );
+                              }}
+                              onMainPointCounterChange={() => {
+                                characterManager.actions.toggleBlockMainPointCounter(
+                                  block.id
+                                );
+                              }}
+                              onRoll={(diceRollResult) => {
+                                props.onRoll(diceRollResult);
+                              }}
+                            />
+                          </ManagerBox>
+                          {/* <Grid container wrap="nowrap">
                             {advanced && (
                               <Grid item>
                                 <div ref={dndRenderProps.drag}>
@@ -1264,10 +1493,9 @@ export const CharacterV3Dialog: React.FC<{
                                     <IconButton
                                       size="small"
                                       onClick={() => {
-                                        // characterManager.actions.duplicateBlock(
-                                        //   {}
-                                        //   blockIndex
-                                        // );
+                                        settingsManager.actions.setBlockInClipboard(
+                                          block
+                                        );
                                       }}
                                     >
                                       <FileCopyIcon
@@ -1408,7 +1636,7 @@ export const CharacterV3Dialog: React.FC<{
                                 />
                               </Box>
                             </Grid>
-                          </Grid>
+                          </Grid> */}
                         </Box>
                       );
                     }}
@@ -1424,7 +1652,7 @@ export const CharacterV3Dialog: React.FC<{
 };
 CharacterV3Dialog.displayName = "CharacterV3Dialog";
 
-function ManagerBox(props: {
+export function ManagerBox(props: {
   label: string | React.ReactNode;
   actions?: React.ReactNode;
   children: React.ReactNode;
@@ -1437,7 +1665,7 @@ function ManagerBox(props: {
     return <>{props.children}</>;
   }
   return (
-    <Box p="1rem" mb="1rem" height="100%" bgcolor={props.backgroundColor}>
+    <Box p=".5rem" mb=".5rem" height="100%" bgcolor={props.backgroundColor}>
       <Box mb=".5rem">
         <Grid container spacing={1} alignContent="center">
           <Grid
@@ -1450,7 +1678,8 @@ function ManagerBox(props: {
           >
             <Typography
               className={css({
-                fontSize: "1rem",
+                fontSize: ".7rem",
+                color: theme.palette.text.secondary,
                 fontWeight: theme.typography.fontWeightBold,
               })}
             >

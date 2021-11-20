@@ -40,11 +40,11 @@ describe("CharacterFactory.migrate", () => {
         const result = CharacterFactory.migrate(v1Char);
 
         // THEN
-        expect(
-          result.pages
-            .flatMap((p) => p.sections)
-            .find((s) => s.label === "Stress")?.blocks
-        ).toEqual([
+        const sections = result.pages
+          .flatMap((p) => p.rows)
+          .flatMap((r) => r.columns)
+          .flatMap((c) => c.sections);
+        expect(sections.find((s) => s.label === "Stress")?.blocks).toEqual([
           {
             id: expect.anything(),
             label: "Physical",

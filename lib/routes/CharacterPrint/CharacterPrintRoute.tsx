@@ -14,6 +14,7 @@ import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext"
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { ICharacter, ISection } from "../../domains/character/types";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import { ManagerBox } from "../Character/components/CharacterDialog/CharacterV3Dialog";
 import { BlockByType } from "../Character/components/CharacterDialog/components/BlockByType";
 
 export const CharacterPrintRoute: React.FC<{
@@ -90,12 +91,12 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
               key={pageIndex}
               className={css({
                 pageBreakAfter: "always",
+                marginBottom: "1rem",
               })}
             >
               <Box
                 className={css({
                   borderBottom: `3px solid ${headerBackgroundColor}`,
-                  marginBottom: "1rem",
                   width: "100%",
                   display: "flex",
                 })}
@@ -123,40 +124,59 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
                   </FateLabel>
                 </Box>
               </Box>
-              {/* <Box
-              className={css({
-                columns: "2",
-                columnGap: "1rem",
-                // breakInside: "avoid",
-              })}
-            >
-              <Box
-                className={css({
-                  pageBreakInside: "avoid",
-                })}
-              >
-                <PrintSections sections={leftSections} />
-              </Box>
-              <Box
-                className={css({
-                  pageBreakInside: "avoid",
-                })}
-              >
-                <PrintSections sections={rightSections} />
-              </Box>
-            </Box> */}
-              <Grid container spacing={1}>
-                {page.sections.map((section, sectionIndex) => {
-                  const width: GridSize = !!section.width
-                    ? (Math.round(section.width * 12) as GridSize)
-                    : 12;
+              <Box>
+                {page.rows.map((row, rowIndex) => {
+                  const columnSize = Math.floor(12 / row.columns.length);
                   return (
-                    <Grid item xs={width} key={section.id}>
-                      <PrintSections section={section} />
-                    </Grid>
+                    <ManagerBox
+                      key={rowIndex}
+                      readonly={true}
+                      backgroundColor={theme.palette.action.hover}
+                      label={<>Row #{rowIndex + 1}</>}
+                    >
+                      {row.columns.length > 0 && (
+                        <Grid container>
+                          {row.columns.map((column, columnIndex) => {
+                            return (
+                              <Grid
+                                item
+                                key={columnIndex}
+                                xs={12}
+                                md={columnSize as GridSize}
+                                className={css({
+                                  borderLeft:
+                                    columnIndex === 0
+                                      ? `2px solid ${headerBackgroundColor}`
+                                      : "none",
+                                  borderBottom: `2px solid ${headerBackgroundColor}`,
+                                  borderRight: `2px solid ${headerBackgroundColor}`,
+                                })}
+                              >
+                                <ManagerBox
+                                  readonly={true}
+                                  label={<>Column #{columnIndex + 1}</>}
+                                  backgroundColor={
+                                    theme.palette.action.selected
+                                  }
+                                >
+                                  {column.sections.map((section) => {
+                                    return (
+                                      <PrintSections
+                                        key={section.id}
+                                        section={section}
+                                      />
+                                    );
+                                  })}
+                                </ManagerBox>
+                              </Grid>
+                            );
+                          })}
+                        </Grid>
+                      )}
+                    </ManagerBox>
                   );
                 })}
-              </Grid>
+              </Box>
             </Box>
           );
         })}
@@ -185,8 +205,8 @@ function PrintSections(props: { section: ISection }) {
               className={css({
                 // Hexagone
                 // https://bennettfeely.com/clippy/
-                clipPath:
-                  "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
+                // clipPath:
+                //   "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
                 background: headerBackgroundColor,
                 color: headerColor,
                 width: "100%",

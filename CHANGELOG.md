@@ -2,6 +2,12 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
+# v6.0.0
+
+- feat: cloud infra for real time features
+- feat: new drawing area
+- feat: character sheet rows and columns
+
 # v5.3
 
 - feat: Dice Pool block enhancements
