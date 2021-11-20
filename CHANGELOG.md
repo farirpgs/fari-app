@@ -2,31 +2,18 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
-# In Progress
+# v5.3
 
-## LiveBlocks
+- feat: Dice Pool block enhancements
+  - feat: better UX for to align with skill block
+  - feat: can add "Toggle" to block
+  - feat: can quickly add or remove dice if all the dice commands are the same
+- feat: Charge RPG character sheet
+- feat: New scene image on home page
+- tech: update Vite
+- tech: update to MUI 5
+- fix: typo in Fate spanish sheets
 
-- [ ] Player Interactions
-- [ ] Clear scene on load (missing API)
-
-## Character Sheet
-
-- [ ] List Block
-- [ ] Wide Character Sheet
-
-## Misc
-
-- [ ] Tooltip for clone and load button
-- [ ] space in name of collection
-
-# v5.2
-
-- feat: new "Pause Button" safety tool when playing online games. Anyone can click on it, but only the GM can resume the game.
-- feat: NPCs now how up in the scene's characters tab
-- feat: GMs can now hide NPCs from players
-- fix: when there is less than 10 index cards in a scene, they will flow from left to right. More than 10 index cards will trigger the masonry (pinterest) style layout
-- feat: new "Card Collections" beta feature that lets you create your own "add index cards" buttons!
-- feat: adding a new Skill/Pool block uses the currently selected dice commands as its default
 # v5.2
 
 - feat: new "Pause Button" safety tool when playing online games. Anyone can click on it, but only the GM can resume the game.

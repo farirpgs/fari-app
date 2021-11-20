@@ -138,7 +138,7 @@ export const HomeRoute: React.FC<{}> = () => {
                 py="2rem"
                 mb={sectionsSeparator}
                 imageSrcs={[
-                  "https://gyazo.com/8bfd3d59844728d5ee749ffe48196f23.png",
+                  "https://gyazo.com/697a63e5e97d9384310d87e7c0b462e1.png",
                   "https://gyazo.com/cc7519a58190e6d12504f9d06908d518.png",
                 ]}
               >

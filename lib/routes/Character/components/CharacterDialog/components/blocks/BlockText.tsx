@@ -38,7 +38,7 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
               <Box>
                 <FateLabel display="inline">
                   <ContentEditable
-                    readonly={props.readonly}
+                    readonly={props.readonly || !props.advanced}
                     border={props.advanced}
                     data-cy={`${props.dataCy}.label`}
                     value={props.block.label}

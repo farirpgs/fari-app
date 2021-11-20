@@ -35,7 +35,7 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
     delay: Delays.field,
   });
 
-  const isSlotTrackerVisible =
+  const isToggleVisible =
     props.block.meta?.checked === true || props.block.meta?.checked === false;
 
   const isSelected = diceManager.state.pool.some(
@@ -122,7 +122,7 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
             >
               <ContentEditable
                 data-cy={`${props.dataCy}.label`}
-                readonly={props.readonly}
+                readonly={props.readonly || !props.advanced}
                 border={props.advanced}
                 value={props.block.label}
                 onChange={(value) => {
@@ -132,7 +132,7 @@ export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
             </FateLabel>
           </Grid>
 
-          {isSlotTrackerVisible && (
+          {isToggleVisible && (
             <Grid item>
               <BlockToggleMeta
                 readonly={props.readonly}

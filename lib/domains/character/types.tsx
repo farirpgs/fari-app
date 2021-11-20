@@ -161,6 +161,7 @@ export type ISkillBlock = {
 export type IDicePoolBlock = {
   type: BlockType.DicePool;
   meta: IDefaultBlockMeta & {
+    checked?: boolean;
     commands?: Array<IDiceCommandSetId>;
   };
   value: string;

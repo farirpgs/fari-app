@@ -30,7 +30,7 @@ import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/Id/Id";
 import {
   IIndexCardCollection,
-  IndexCardCollectionFactory,
+  IndexCardCollectionFactory
 } from "../../domains/index-card-collection/IndexCardCollectionFactory";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
