@@ -13,7 +13,6 @@
     "start": "vite --open",
     "start:all": "concurrently npm:start:all:*",
     "start:all:vite": "vite --open",
-    "start:all:functions": "netlify functions:serve",
     "start:all:eleventy": "npm run eleventy -- --watch",
     "postinstall": "npm run eleventy",
     "build": "vite build",
@@ -76,7 +75,7 @@
     "react-i18next": "^11.9.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "roughjs": "^4.4.1",    
+    "roughjs": "^4.4.1",
     "@tldraw/core": "^0.0.91",
     "@tldraw/tldraw": "^0.0.91",
     "uuid": "^8.3.2"
