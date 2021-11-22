@@ -19,7 +19,7 @@ Playing your favorite TTRPG with Fari isn't more complicated than that, though t
 To start a new game session, Fari offers you the following two options:
 
 - Playing Online
-- Player Offline
+- Playing Offline
 
 ### Online
 
@@ -29,7 +29,7 @@ When a session is started, Fari gives you access to a `Session Link` that you ca
 
 ![Copying a Game Link](https://gyazo.com/d00cf8bf9b69416ccc5e29c5539ce719.png)
 
-After you sent your players the session link, they can enter their name and joined a game, every modification that you do the Session, Scene or Character will be synced with all the players.
+After you sent your players the session link, they can enter their name and join the game, and every modification that you do to the Session, Scene, or Character will be synced with all the players.
 
 ![Joining a Game](https://gyazo.com/c3c4a71bfc268c8739a016a07756f122.png)
 
@@ -39,11 +39,11 @@ After you sent your players the session link, they can enter their name and join
 
 ### Offline
 
-The Offline mode is useful if everyone are physically in the same room but the GM still wants to use Fari to manage their Scenes.
+The Offline mode is useful if everyone is physically in the same room but the GM still wants to use Fari to manage their Scenes.
 
 When playing in Offline mode, Fari won't connect to its server and won't generate the session link cited above.
 
-This mode is also useful if for some reasons, some of your players can't connect to your Online game session and you want to share your screen with them. See more about connection issues below.
+This mode is also useful if for some reason, some of your players can't connect to your Online game session and you want to share your screen with them. See more about connection issues below.
 
 > #### Issues When Joining a Game
 >
@@ -95,13 +95,13 @@ If so, you can create a `New Empty Scene` again by pressing the `New Scene` butt
 
 ### Saving
 
-During a game session, there a very high probably that have to cancel the session early, but you probably don't want to loose your current scene and all the index cards you've added so far.
+During a game session, there is a very high probably that you will have to cancel the session early, but you probably don't want to lose your current scene and all the index cards you've added so far.
 
 No worries, simply click the `Save Scene` button and Fari will save your scene so that you can load it in another game session.
 
 ### Loading Scenes
 
-Wether you had to leave your last game session early or you've prepared scenes in advance for tonights game, Fari lets you load scenes on the fly during your session so that you are always on top of your game.
+Whether you had to leave your last game session early or you've prepared scenes in advance for tonight's game, Fari lets you load scenes on the fly during your session so that you are always on top of your game.
 
 Use the `...` menu on the right and either click `Load Scene` or `Clone And Load Scene`
 
@@ -129,7 +129,7 @@ When opening a character sheet inside an online game and clicking on the `Stored
 
 > #### Load VS Clone and Load
 >
-> Everytime you create something in Fari, Fari creates a unique identifier and attach it to what you created.
+> Everytime you create something in Fari, Fari creates a unique identifier and attaches it to what you created.
 >
 > When you `Load a Scene`, you are truly loading _this_ scene. Which means that if you click `Save` during your game session, you will modify the scene you loaded.
 >
