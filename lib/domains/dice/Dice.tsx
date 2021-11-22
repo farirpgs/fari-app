@@ -2,6 +2,7 @@ import { css, cx } from "@emotion/css";
 import isEqual from "lodash/isEqual";
 import React from "react";
 import { Icons } from "../Icons/Icons";
+import { NarrativeDiceSystemIcons } from "../Icons/NarrativeDiceSystemIcons/NarrativeDiceSystemIcons";
 import {
   black_die,
   blue_die,
@@ -116,7 +117,7 @@ export const CommmandSetOptions: Record<
   },
   "narrativeDiceBlue": {
     id: "narrativeDiceBlue",
-    label: "1dBoost",
+    label: "Boost",
     icon: (props) => (
       <Icons.Dice6
         className={cx(
@@ -131,7 +132,7 @@ export const CommmandSetOptions: Record<
   },
   "narrativeDiceGreen": {
     id: "narrativeDiceGreen",
-    label: "1dAbility",
+    label: "Ability",
     icon: (props) => (
       <Icons.Dice8
         className={cx(
@@ -146,7 +147,7 @@ export const CommmandSetOptions: Record<
   },
   "narrativeDiceYellow": {
     id: "narrativeDiceYellow",
-    label: "1dProficiency",
+    label: "Proficiency",
     icon: (props) => (
       <Icons.Dice12
         className={cx(
@@ -161,7 +162,7 @@ export const CommmandSetOptions: Record<
   },
   "narrativeDiceBlack": {
     id: "narrativeDiceBlack",
-    label: "1dSetback",
+    label: "Setback",
     icon: (props) => (
       <Icons.Dice6
         className={cx(
@@ -176,7 +177,7 @@ export const CommmandSetOptions: Record<
   },
   "narrativeDicePurple": {
     id: "narrativeDicePurple",
-    label: "1dDifficulty",
+    label: "Difficulty",
     icon: (props) => (
       <Icons.Dice8
         className={cx(
@@ -191,7 +192,7 @@ export const CommmandSetOptions: Record<
   },
   "narrativeDiceRed": {
     id: "narrativeDiceRed",
-    label: "1dChallenge",
+    label: "Challenge",
     icon: (props) => (
       <Icons.Dice12
         className={cx(
@@ -284,40 +285,32 @@ export const DiceCommandOptions: Record<
   },
   "narrativeDiceBlue": {
     sides: blue_die.faces,
-    formatDetailedResult: formatEdgeDie,
+    formatDetailedResult: formatNarrativeDiceSystemDie,
   },
   "narrativeDiceGreen": {
     sides: green_die.faces,
-    formatDetailedResult: formatEdgeDie,
+    formatDetailedResult: formatNarrativeDiceSystemDie,
   },
   "narrativeDiceYellow": {
     sides: yellow_die.faces,
-    formatDetailedResult: formatEdgeDie,
+    formatDetailedResult: formatNarrativeDiceSystemDie,
   },
   "narrativeDiceBlack": {
     sides: black_die.faces,
-    formatDetailedResult: formatEdgeDie,
+    formatDetailedResult: formatNarrativeDiceSystemDie,
   },
   "narrativeDicePurple": {
     sides: purple_die.faces,
-    formatDetailedResult: formatEdgeDie,
+    formatDetailedResult: formatNarrativeDiceSystemDie,
   },
   "narrativeDiceRed": {
     sides: red_die.faces,
-    formatDetailedResult: formatEdgeDie,
+    formatDetailedResult: formatNarrativeDiceSystemDie,
   },
 };
 
-function formatEdgeDie(die: any): string {
-  let label = "";
-  Object.keys(die).forEach((key) => {
-    const count = die[key];
-    const firstLetter = key.charAt(0).toUpperCase();
-    if (count > true) {
-      label += `${firstLetter} (${count})`;
-    }
-  });
-  return label || "";
+function formatNarrativeDiceSystemDie(die: any): string {
+  return "";
 }
 
 export type IRollDiceOptions = {
@@ -457,22 +450,63 @@ export const Dice = {
         });
       });
 
-      const simplifiedRolls: Array<string> = Object.keys(commandIdAndCount).map(
-        (key) => {
-          const command = key as IDiceCommandNames;
-          const count = commandIdAndCount[command];
+      const simplifiedRolls: Array<string | React.ReactNode> = Object.keys(
+        commandIdAndCount
+      ).map((key) => {
+        const command = key as IDiceCommandNames;
+        const count = commandIdAndCount[command];
 
-          const isCountableDiceCommand =
-            command.startsWith("1d") || command.startsWith("4d");
-          if (isCountableDiceCommand) {
-            const [, /* 1d */ dice] = command.split("d");
-            const typeLabel = `${count}d${dice}`;
-            return typeLabel;
-          }
-          const label = CommmandSetOptions[command].label;
-          return label;
+        const isCountableDiceCommand =
+          command.startsWith("1d") || command.startsWith("4d");
+        if (isCountableDiceCommand) {
+          const [, /* 1d */ dice] = command.split("d");
+          const typeLabel = `${count}d${dice}`;
+          return typeLabel;
         }
-      );
+
+        const label =
+          (
+            <>
+              <NarrativeDiceSystemIcons.Despair
+                className={css({
+                  width: "6rem",
+                  height: "6rem",
+                })}
+              />
+              <NarrativeDiceSystemIcons.Advantage
+                className={css({
+                  width: "6rem",
+                  height: "6rem",
+                })}
+              />
+              <NarrativeDiceSystemIcons.Failure
+                className={css({
+                  width: "6rem",
+                  height: "6rem",
+                })}
+              />
+              <NarrativeDiceSystemIcons.Success
+                className={css({
+                  width: "6rem",
+                  height: "6rem",
+                })}
+              />
+              <NarrativeDiceSystemIcons.Threat
+                className={css({
+                  width: "6rem",
+                  height: "6rem",
+                })}
+              />
+              <NarrativeDiceSystemIcons.Triumph
+                className={css({
+                  width: "6rem",
+                  height: "6rem",
+                })}
+              />
+            </>
+          ) || CommmandSetOptions[command].label;
+        return label;
+      });
 
       return {
         label: rollGroup.label,

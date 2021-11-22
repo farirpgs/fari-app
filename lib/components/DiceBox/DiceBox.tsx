@@ -360,12 +360,18 @@ export function DiceBoxResult(props: {
                     display: "flex",
                     margin: "0 4px",
                     fontSize: ".8rem",
+                    height: "100%",
                   })}
                 >
                   {separator}
                 </Grid>
               )}
-              <Grid item>
+              <Grid
+                item
+                className={css({
+                  height: "100%",
+                })}
+              >
                 <Tooltip
                   title={
                     item.label
@@ -376,20 +382,33 @@ export function DiceBoxResult(props: {
                   <Box
                     className={css({
                       color: item.color ? item.color : undefined,
+                      height: "100%",
                       borderBottom: item.color
                         ? `3px solid ${item.color}`
                         : undefined,
                     })}
                   >
-                    <Grid container alignItems="center">
+                    <Grid
+                      container
+                      alignItems="center"
+                      className={css({
+                        height: "100%",
+                      })}
+                    >
                       {content && (
-                        <Grid item>
+                        <Grid
+                          item
+                          className={css({
+                            height: "100%",
+                          })}
+                        >
                           <Box
                             className={css({
                               label: "DiceBoxResult-rollType-DiceCommand-value",
                               fontFamily: isFate ? FontFamily.Fate : "inherit",
                               marginLeft: isFate ? ".2rem" : undefined,
                               verticalAlign: "middle",
+                              height: "100%",
                             })}
                           >
                             {content}
@@ -397,9 +416,16 @@ export function DiceBoxResult(props: {
                         </Grid>
                       )}
                       {!isFate && (
-                        <Grid item>
+                        <Grid
+                          item
+                          className={css({
+                            height: "100%",
+                          })}
+                        >
                           <IconForPool
                             className={css({
+                              width: "2rem",
+                              height: "2rem",
                               display: "flex",
                               marginLeft: content ? "4px" : undefined,
                             })}

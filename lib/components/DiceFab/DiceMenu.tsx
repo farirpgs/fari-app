@@ -198,13 +198,13 @@ export function DiceMenu(props: {
           <Grid container spacing={1} justifyContent="center">
             {options.map((o) => {
               const badgeContent = props.commands.reduce((acc, curr) => {
-                if (o.label === curr.label) {
+                if (o.id === curr.id) {
                   return acc + 1;
                 }
                 return acc;
               }, 0);
               return (
-                <Grid item key={o.label}>
+                <Grid item key={o.id}>
                   <Grid container justifyContent="center" direction="column">
                     <Grid container item justifyContent="center">
                       <IconButton
@@ -217,8 +217,7 @@ export function DiceMenu(props: {
                           e.preventDefault();
                           props.onDiceCommandChange((draft) => {
                             const indexToRemove = draft.findIndex(
-                              (selectedOption) =>
-                                selectedOption.label === o.label
+                              (selectedOption) => selectedOption.id === o.id
                             );
                             if (indexToRemove !== -1) {
                               draft.splice(indexToRemove, 1);
