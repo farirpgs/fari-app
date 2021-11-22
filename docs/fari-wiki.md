@@ -27,7 +27,7 @@ When you click on the `Play Online` button on the home page, Fari will create a 
 
 When a session is started, Fari gives you access to a `Session Link` that you can send to your friends so that they can join your `Session`.
 
-![Copying a Game Link](https://gyazo.com/d00cf8bf9b69416ccc5e29c5539ce719.png)
+![Copying a Game Link](https://gyazo.com/9e8faf0a0e3a1c25e5119bc1034f186d.png)
 
 After you sent your players the session link, they can enter their name and join the game, and every modification that you do to the Session, Scene, or Character will be synced with all the players.
 
@@ -61,7 +61,7 @@ Kind of like in real life, the player needs to pull their character sheet out of
 
 To do that, a player simply has to click on the `Assign Character Sheet` button beside the player's name on the left of the screen.
 
-![Assign A Character Sheet](https://gyazo.com/b749b79a1748e2f21526fac87784359c.gif)
+![Assign A Character Sheet](https://gyazo.com/e3c035bb1997f71dc35bae11d0792363.gif)
 
 You then have the ability to do three things:
 
@@ -149,7 +149,7 @@ Those cards will probably be of different colors, have text, numbers and checkbo
 
 Fari Scenes are organized exactly like that. Each scene is a board which you can use to add index cards on!
 
-![Scene Example](https://gyazo.com/ff7a89a873c9e020497c9804fa4ec515.png)
+![Scene Example](https://gyazo.com/fa2315a4dcbb0dd7bafdcf8bbb50b0af.png)
 
 > ### What kind of content can I add on index cards ?
 >
@@ -179,28 +179,16 @@ If you want to do this, simply click on the `Mark Public/Private` button at the 
 
 Each scene has also a basic note field that you can use if you want to save some information like scene recap or things like that.
 
-![Scene Notes](https://gyazo.com/11335b29d602c811917ff5572e0d815a.png)
+![Scene Notes](https://gyazo.com/8578285231381b2f70750ba4c85cff0f.png)
 
 ## Index Cards Quick Templates
 
 Like said previously, Index Cards are built using the character sheet building blocks.
 
-To help you quickly add index cards during play, Fari as 5 quick templates buttons to add:
+To help you quickly add index cards during play, Fari as multiple pre mades templates for Fate, Blades in the Dark. You can also use the `Card Collection` feature to make your own templates to pull in during a gane.
 
-- An Index Card
-- An Aspect
-- A Boost
-- An NPC
-- A Bad Guy
-
-![Quick Templates Buttons](https://gyazo.com/37a2fbe4267992b6830595a3e72b1872.png)
-![Quick Templates](https://gyazo.com/7b3ddf3e7b6542c941135ddf9b06f965.png)
-
-> ### Wait a minute, aren't most of those pretty Fate Specific ?
->
-> Yes they are. Fari was initially create as a Fate RPG online companion.
->
-> For now it is not possible for GMs to create custom quick index cards templates, but rest assure that it is something that we are probably going to add in the future :)
+![Quick Templates Buttons](https://gyazo.com/fa537106c33dd715830bb325c28a3eea.png)
+![Quick Templates](https://gyazo.com/e03c3b97e16b425c2c5ea26cdcacd452.png)
 
 ## Sorting Index Cards
 
@@ -210,7 +198,7 @@ Scenes can become pretty messy over time. That why Fari offers 3 index card sort
 - `Group First`: Index Cards can contain sub cards, this sorting function will keep those group cards at the top, followed by cards without sub cards
 - `Pinned First`: Cards can also be `Pinned`. Using this sort function will keep the pinned cards first followed by unpinned cards.
 
-![Sorting Index Cards](https://gyazo.com/726fa5f333fd9320dfce6d504ff8db8a.png)
+![Sorting Index Cards](https://gyazo.com/d05d64413bba2dcc4c787998351366c8.png)
 
 ## Collapsing or Expanding Index Cards
 
@@ -218,7 +206,7 @@ Since scenes can become quite big and cluttered as you play, another useful feat
 
 Using either the top level `Collapse All / Expand All` button or by clicking on the `Collapse/Expand` arrow on an index card, you can minimize the space index cards take by hiding all the content of the card except for the title.
 
-![Collapse All / Expand All](https://gyazo.com/2c2db9625571fde31afc1ff269d38cec.png)
+![Collapse All / Expand All](https://gyazo.com/262f04773e08db223b9caa863a8fa177.png)
 ![Collapse / Expand Arrow](https://gyazo.com/a81824f73a959da4c72008de7cc64d0b.png)
 
 ## Index Card Content
@@ -262,11 +250,7 @@ Fari also offers you the ability to pin index cards.
 
 When an index card is pinned, it will elevate itself a bit from the board as to stand out from the rest of the cards.
 
-Pinned cards are useful since they have some mechanical benefits when used during play.
-
-First off, if you reset a scene or load a new scene, all pinned cards will be copied over from your previous scene to the new one.
-
-The other benefit is that it is possible to sort index cards by showing pinned cards first. This is convenient if you want to always display a couple of cards before the rest.
+You can also sort all the cards so that pinned cards show up first.
 
 ### Adding Sub Cards
 
@@ -459,7 +443,7 @@ When the pool is complete, the player simply needs to click on the `Roll Pool` f
 
 - `Set Dice`: Clicking on this control will display the dice menu so that you can select the set of dice that the pool should contain
 
-![Dice Pool Block](https://gyazo.com/9d6ccb333b78e5b7b5ea724ccfe42943.png)
+![Dice Pool Block](https://gyazo.com/48b3744e6a3011076ba308cf51b35b68.png)
 
 #### Point Counter Block
 
@@ -571,6 +555,8 @@ This is a nice way to learn how people _actually_ use Fari!
 
 - In Spanish
   - [El Rastro de Cthulhu - Stele Sophie](https://www.youtube.com/watch?v=wSNv2X06_lA)
+- Shout outs
+  - [Savage Interludes](https://savageinterludes.com/episode-103-keepin-it-real)
 
 ## Interview
 
@@ -585,7 +571,7 @@ Looking for a template but it's not available ?
 Are you interested in contributing to Fari ? Here is what you can do
 
 1. [Create a template](https://fari.app/fari-wiki/managing-characters)
-2. Export it from the `Characters` menu
+2. Export it from the `Characters` menu using the Share button
 3. Send it to `RPDeshaies#4116` [on Discord](https://discord.com/invite/vMAJFjUraA)
 
 And that's about it!
