@@ -314,7 +314,11 @@ export const CharacterFactory = {
     };
   },
   makeFromJson(jsonData: any): ICharacter {
-    const newSheet = { ...jsonData };
+    const newSheet = {
+      ...jsonData,
+      // to clear ViteJS default value from json import
+      default: undefined,
+    };
     const migratedSheet = this.migrate(newSheet);
     return migratedSheet;
   },
