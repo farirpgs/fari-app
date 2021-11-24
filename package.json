@@ -57,7 +57,7 @@
     "i18next": "^20.3.0",
     "i18next-browser-languagedetector": "^6.1.1",
     "i18next-http-backend": "^1.2.6",
-    "immer": "^9.0.2",
+    "immer": "^9.0.6",
     "jest-junit": "^12.1.0",
     "lodash": "^4.17.21",
     "marked": "^2.0.5",
