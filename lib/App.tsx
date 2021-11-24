@@ -1,5 +1,5 @@
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { StyledEngineProvider, ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
 import * as Sentry from "@sentry/react";
 import React, { ReactNode, useContext } from "react";
 import { DndProvider } from "react-dnd";
@@ -387,7 +387,11 @@ function AppProviders(props: { children: ReactNode }) {
 
   return (
     <ThemeProvider
-      theme={settingsManager.state.themeMode === "dark" ? AppDarkTheme : AppLightTheme}
+      theme={
+        settingsManager.state.themeMode === "dark"
+          ? AppDarkTheme
+          : AppLightTheme
+      }
     >
       <StyledEngineProvider injectFirst>
         <CssBaseline />

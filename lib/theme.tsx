@@ -2,7 +2,7 @@ import {
   createTheme,
   responsiveFontSizes,
   ThemeOptions,
-} from "@material-ui/core/styles";
+} from "@mui/material/styles";
 import { FontFamily } from "./constants/FontFamily";
 
 export const defaultThemeConfiguration: ThemeOptions = {

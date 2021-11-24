@@ -1,48 +1,45 @@
 import { css, cx } from "@emotion/css";
-import Alert from "@material-ui/core/Alert";
-import Autocomplete, {
-  createFilterOptions,
-} from "@material-ui/core/Autocomplete";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Collapse from "@material-ui/core/Collapse";
-import Container from "@material-ui/core/Container";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Grid, { GridSize } from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import InputLabel from "@material-ui/core/InputLabel";
-import Snackbar from "@material-ui/core/Snackbar";
-import { ThemeProvider, useTheme } from "@material-ui/core/styles";
-import Switch from "@material-ui/core/Switch";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import TextField from "@material-ui/core/TextField";
-import Tooltip from "@material-ui/core/Tooltip";
-import Typography from "@material-ui/core/Typography";
-import AddIcon from "@material-ui/icons/Add";
-import CloseIcon from "@material-ui/icons/Close";
-import DeleteIcon from "@material-ui/icons/Delete";
-import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
-import ExportIcon from "@material-ui/icons/GetApp";
-import PrintIcon from "@material-ui/icons/Print";
-import RedoIcon from "@material-ui/icons/Redo";
-import SaveIcon from "@material-ui/icons/Save";
-import ShareIcon from "@material-ui/icons/Share";
-import UndoIcon from "@material-ui/icons/Undo";
-import TabContext from "@material-ui/lab/TabContext";
-import TabPanel from "@material-ui/lab/TabPanel";
+import AddIcon from "@mui/icons-material/Add";
+import CloseIcon from "@mui/icons-material/Close";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+import ExportIcon from "@mui/icons-material/GetApp";
+import PrintIcon from "@mui/icons-material/Print";
+import RedoIcon from "@mui/icons-material/Redo";
+import SaveIcon from "@mui/icons-material/Save";
+import ShareIcon from "@mui/icons-material/Share";
+import UndoIcon from "@mui/icons-material/Undo";
+import TabContext from "@mui/lab/TabContext";
+import TabPanel from "@mui/lab/TabPanel";
+import Alert from "@mui/material/Alert";
+import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Collapse from "@mui/material/Collapse";
+import Container from "@mui/material/Container";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid, { GridSize } from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
+import Snackbar from "@mui/material/Snackbar";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
+import Switch from "@mui/material/Switch";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import TextField from "@mui/material/TextField";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 import startCase from "lodash/startCase";
 import React, { useContext, useEffect, useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../components/FateLabel/FateLabel";
 import { CharacterCard } from "../../../../components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
-import { SlideUpTransition } from "../../../../components/SlideUpTransition/SlideUpTransition";
 import { CharactersContext } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import {
@@ -237,7 +234,6 @@ export const CharacterV3Dialog: React.FC<{
           classes={{
             paper: css({ height: "100%" }),
           }}
-          TransitionComponent={SlideUpTransition}
         >
           <DialogTitle
             className={css({

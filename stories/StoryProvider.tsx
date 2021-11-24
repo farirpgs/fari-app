@@ -1,5 +1,5 @@
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { StyledEngineProvider, ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
 import React, { useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";

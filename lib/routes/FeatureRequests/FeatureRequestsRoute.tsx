@@ -1,7 +1,7 @@
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
-import { useTheme } from "@material-ui/core/styles";
-import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import { useTheme } from "@mui/material/styles";
 import React from "react";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";

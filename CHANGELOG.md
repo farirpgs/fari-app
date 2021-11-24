@@ -2,6 +2,18 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
+# v5.3
+
+- feat: Dice Pool block enhancements
+  - feat: better UX for to align with skill block
+  - feat: can add "Toggle" to block
+  - feat: can quickly add or remove dice if all the dice commands are the same
+- feat: Charge RPG character sheet
+- feat: New scene image on home page
+- tech: update Vite
+- tech: update to MUI 5
+- fix: typo in Fate spanish sheets
+
 # v5.2
 
 - feat: new "Pause Button" safety tool when playing online games. Anyone can click on it, but only the GM can resume the game.

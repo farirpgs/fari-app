@@ -1,5 +1,5 @@
-import { useTheme, Theme } from "@material-ui/core/styles";
-import SvgIcon, { SvgIconProps } from "@material-ui/core/SvgIcon";
+import { Theme, useTheme } from "@mui/material/styles";
+import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon";
 import React from "react";
 
 export function makeIcon(options: {

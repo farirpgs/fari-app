@@ -1,9 +1,7 @@
 import { css, cx } from "@emotion/css";
-import Button, { ButtonProps } from "@material-ui/core/Button";
-import MaterialUILink, {
-  LinkProps as MUILinkProps,
-} from "@material-ui/core/Link";
-import { useTheme } from "@material-ui/core/styles";
+import Button, { ButtonProps } from "@mui/material/Button";
+import MaterialUILink, { LinkProps as MUILinkProps } from "@mui/material/Link";
+import { useTheme } from "@mui/material/styles";
 import React from "react";
 import {
   Link as ReactRouterLink,
@@ -50,7 +48,8 @@ export const AppLink: React.FC<
         className={className}
         rel={props.target === "_blank" ? "noreferrer" : undefined}
         {...rest}
-        underline="hover">
+        underline="hover"
+      >
         {props.children}
       </MaterialUILink>
     );
@@ -69,7 +68,8 @@ export const AppLink: React.FC<
         }
       }}
       {...rest}
-      underline="hover">
+      underline="hover"
+    >
       {props.children}
     </MaterialUILink>
   );

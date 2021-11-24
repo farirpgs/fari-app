@@ -1,16 +1,16 @@
 import { css, cx } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import Checkbox from "@material-ui/core/Checkbox";
-import Fade from "@material-ui/core/Fade";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import Link from "@material-ui/core/Link";
-import { useTheme } from "@material-ui/core/styles";
-import Tooltip from "@material-ui/core/Tooltip";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import CircleIcon from "@material-ui/icons/Circle";
-import CircleOutlinedIcon from "@material-ui/icons/CircleOutlined";
-import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import CircleIcon from "@mui/icons-material/Circle";
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import Box from "@mui/material/Box";
+import Checkbox from "@mui/material/Checkbox";
+import Fade from "@mui/material/Fade";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Link from "@mui/material/Link";
+import { useTheme } from "@mui/material/styles";
+import Tooltip from "@mui/material/Tooltip";
 import React, { useState } from "react";
 import {
   ContentEditable,
@@ -149,7 +149,7 @@ export function BlockSlotTracker(
                   >
                     <ContentEditable
                       data-cy={`${props.dataCy}.label`}
-                      readonly={props.readonly}
+                      readonly={props.readonly || !props.advanced}
                       border={props.advanced}
                       value={props.block.label}
                       onChange={(value) => {

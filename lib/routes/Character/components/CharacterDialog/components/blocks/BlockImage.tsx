@@ -1,15 +1,15 @@
 import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Grid from "@material-ui/core/Grid";
-import { useTheme } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Grid from "@mui/material/Grid";
+import { useTheme } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import {
   ContentEditable,
@@ -63,92 +63,100 @@ export function BlockImage(props: IBlockComponentProps<IImageBlock> & {}) {
   //   }
   // }
 
-  return <>
-    {isLabelVisible && (
-      <Box>
-        <Grid container spacing={1} justifyContent="space-between" wrap="nowrap">
-          <Grid item xs>
-            <FateLabel display="inline">
-              <ContentEditable
-                readonly={props.readonly}
-                border={props.advanced}
-                data-cy={`${props.dataCy}.label`}
-                value={props.block.label}
-                onChange={(value) => {
-                  props.onLabelChange(value);
-                }}
-              />
-            </FateLabel>
-          </Grid>
-        </Grid>
-      </Box>
-    )}
-    <Dialog open={open} onClose={handleOnClose}>
-      <DialogTitle>
-        {t("character-dialog.image-block.dialog.title")}
-      </DialogTitle>
-      <DialogContent>
-        {!props.readonly && (
-          <>
-            <DialogContentText>
-              {t("character-dialog.image-block.dialog.description")}
-            </DialogContentText>
-            <Grid
-              container
-              wrap="nowrap"
-              justifyContent="space-around"
-              spacing={2}
-              alignItems="center"
-            >
-              <Grid item xs>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  value={props.block.value}
-                  onChange={(event) => {
-                    setError(false);
-                    props.onValueChange(event.target.value);
+  return (
+    <>
+      {isLabelVisible && (
+        <Box>
+          <Grid
+            container
+            spacing={1}
+            justifyContent="space-between"
+            wrap="nowrap"
+          >
+            <Grid item xs>
+              <FateLabel display="inline">
+                <ContentEditable
+                  readonly={props.readonly}
+                  border={props.advanced}
+                  data-cy={`${props.dataCy}.label`}
+                  value={props.block.label}
+                  onChange={(value) => {
+                    props.onLabelChange(value);
                   }}
-                  label={t(
-                    "character-dialog.image-block.dialog.image-url-label"
-                  )}
-                  fullWidth
-                  variant="standard" />
-              </Grid>
-              {false && (
-                <Grid item>
-                  <Button
-                    color="primary"
-                    variant="outlined"
-                    component="a"
-                    href="https://imgur.com/upload"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {t("character-dialog.image-block.dialog.upload")}
-                  </Button>
-                  {/* <Button color="primary" variant="outlined" component="label">
+                />
+              </FateLabel>
+            </Grid>
+          </Grid>
+        </Box>
+      )}
+      <Dialog open={open} onClose={handleOnClose}>
+        <DialogTitle>
+          {t("character-dialog.image-block.dialog.title")}
+        </DialogTitle>
+        <DialogContent>
+          {!props.readonly && (
+            <>
+              <DialogContentText>
+                {t("character-dialog.image-block.dialog.description")}
+              </DialogContentText>
+              <Grid
+                container
+                wrap="nowrap"
+                justifyContent="space-around"
+                spacing={2}
+                alignItems="center"
+              >
+                <Grid item xs>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    value={props.block.value}
+                    onChange={(event) => {
+                      setError(false);
+                      props.onValueChange(event.target.value);
+                    }}
+                    label={t(
+                      "character-dialog.image-block.dialog.image-url-label"
+                    )}
+                    fullWidth
+                    variant="standard"
+                  />
+                </Grid>
+                {false && (
+                  <Grid item>
+                    <Button
+                      color="primary"
+                      variant="outlined"
+                      component="a"
+                      href="https://imgur.com/upload"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {t("character-dialog.image-block.dialog.upload")}
+                    </Button>
+                    {/* <Button color="primary" variant="outlined" component="label">
                 {t("character-dialog.image-block.dialog.upload")}
                 {renderHiddenUploadInput()}
               </Button> */}
-                </Grid>
-              )}
-            </Grid>
-          </>
-        )}
+                  </Grid>
+                )}
+              </Grid>
+            </>
+          )}
 
-        {renderImage(false)}
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleOnClose} color="primary">
-          {t("character-dialog.image-block.dialog.close")}
-        </Button>
-      </DialogActions>
-    </Dialog>
+          {renderImage(false)}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleOnClose} color="primary">
+            {t("character-dialog.image-block.dialog.close")}
+          </Button>
+        </DialogActions>
+      </Dialog>
 
-    {renderImage(true)}
-    {renderNoImageOrError()}
-  </>;
+      {renderImage(true)}
+      {renderNoImageOrError()}
+    </>
+  );
 
   // function renderHiddenUploadInput() {
   //   return (

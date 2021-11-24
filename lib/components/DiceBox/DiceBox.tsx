@@ -1,12 +1,12 @@
 import { css, cx } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import Grid from "@material-ui/core/Grid";
-import Grow from "@material-ui/core/Grow";
-import Popper from "@material-ui/core/Popper";
-import { useTheme } from "@material-ui/core/styles";
-import Tooltip, { TooltipProps } from "@material-ui/core/Tooltip";
-import Typography from "@material-ui/core/Typography";
+import Box from "@mui/material/Box";
+import ButtonBase from "@mui/material/ButtonBase";
+import Grid from "@mui/material/Grid";
+import Grow from "@mui/material/Grow";
+import Popper from "@mui/material/Popper";
+import { useTheme } from "@mui/material/styles";
+import Tooltip, { TooltipProps } from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import { FontFamily } from "../../constants/FontFamily";
 import { useZIndex } from "../../constants/zIndex";
@@ -91,9 +91,8 @@ export const DiceBox: React.FC<IProps> = (props) => {
     animationTimingFunction: "linear",
   });
   const shouldListResult =
-    diceRollsManager.state.finalResult?.options.listResults;
+    diceRollsManager.state.finalResult?.options.listResults ?? false;
   const separator = shouldListResult ? " • " : " + ";
-  const isPool = shouldListResult ?? false;
   const tooltipContent = !diceRollsManager.state.finalResultHidden && (
     <Box
       className={css({
@@ -280,7 +279,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
           >
             {diceRollsManager.state.finalResultHidden
               ? ""
-              : isPool
+              : shouldListResult
               ? "~"
               : diceRollsManager.state.finalResultTotal}
           </Typography>
@@ -394,7 +393,7 @@ export function DiceBoxResult(props: {
                           {diceCommandOptions.formatDetailedResult(item.value)}
                         </Box>
                       </Grid>
-                      {!isFate && shouldListResult && (
+                      {!isFate && (
                         <Grid item>
                           <IconForPool
                             className={css({

@@ -1,17 +1,19 @@
 import { css } from "@emotion/css";
-import Checkbox from "@material-ui/core/Checkbox";
-import CircleIcon from "@material-ui/icons/Circle";
-import CircleOutlinedIcon from "@material-ui/icons/CircleOutlined";
+import CircleIcon from "@mui/icons-material/Circle";
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
+import Checkbox from "@mui/material/Checkbox";
 import React from "react";
 import {
   IBlock,
+  IDicePoolBlock,
   INumericBlock,
   ISkillBlock,
   ITextBlock,
 } from "../../../../../domains/character/types";
 
 export function BlockToggleMeta<
-  TBlock extends IBlock & (ITextBlock | INumericBlock | ISkillBlock)
+  TBlock extends IBlock &
+    (ITextBlock | INumericBlock | ISkillBlock | IDicePoolBlock)
 >(props: {
   readonly: boolean | undefined;
   dataCy: string;

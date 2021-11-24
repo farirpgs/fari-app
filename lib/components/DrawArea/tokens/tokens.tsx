@@ -3,7 +3,7 @@
  * Converted tokens using: https://react-svgr.com/playground/
  */
 
-import { Theme } from "@material-ui/core/styles";
+import { Theme } from "@mui/material/styles";
 import React from "react";
 import { makeIcon } from "../../../domains/Icons/makeIcon";
 
