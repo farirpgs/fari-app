@@ -2,8 +2,8 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="53.163456mm"
-   height="60.083782mm"
+   width="92mm"
+   height="92mm"
    viewBox="0 0 53.163456 60.083782"
    version="1.1"
    id="svg2298"
@@ -40,10 +40,10 @@
      id="layer1"
      transform="translate(-81.758353,-145.36068)">
     <ellipse
-       style="fill:#ffffff;stroke:#000000;stroke-width:1.07076"
+       style="fill:none;stroke:#000000;stroke-width:1.07076"
        id="path2381"
-       cx="106.68655"
-       cy="177.9043"
+       cx="106.87268"
+       cy="176.96867"
        rx="24.211206"
        ry="23.495443"
        transform="matrix(0.99999956,9.367545e-4,-0.00102054,0.99999948,0,0)" />
