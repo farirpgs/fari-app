@@ -25,6 +25,7 @@
 - feat: binder analytics
 - fix: character card dice pool roll + margins
 - feat: Life Beyond Exo Station character template
+- fix: storybook
 
 # v5.2
 
