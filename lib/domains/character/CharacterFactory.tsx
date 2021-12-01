@@ -43,6 +43,15 @@ export const CharacterFactory = {
       /**
        * @author @RPDeshaies
        */
+      [CharacterTemplates.LifeBeyondExoStation]: async () => {
+        const jsonData = await import(
+          "./character-templates/LifeBeyondExoStation.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      /**
+       * @author @RPDeshaies
+       */
       [CharacterTemplates.FateCondensed]: async () => {
         const jsonData = await import(
           "./character-templates/FateCondensed.json"

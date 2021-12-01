@@ -87,7 +87,7 @@ export function MyBinder<TFolders extends string>(props: {
   const logger = useLogger();
   const theme = useTheme();
   const history = useHistory();
-
+  const searchInputRef = React.useRef<HTMLInputElement>(null);
   const [search, setSearch] = useState(props.search);
   const [folder, setFolder] = useLazyState({
     value: props.folder,
@@ -113,6 +113,11 @@ export function MyBinder<TFolders extends string>(props: {
   const latestElements = currentFolderElementsSorted.slice(0, 5);
 
   const where = getWhere();
+
+  useEffect(() => {
+    searchInputRef.current?.focus();
+    debugger;
+  }, [currentFolder]);
 
   useEffect(
     function clearFolderOnClose() {
@@ -326,7 +331,9 @@ export function MyBinder<TFolders extends string>(props: {
                 <Grid item>
                   <Box mr=".5rem" width="30px">
                     {where === Where.Folders || !props.canGoBack ? (
-                      <MenuBookIcon color="primary" />
+                      <IconButton size="small" disabled>
+                        <MenuBookIcon color="primary" />
+                      </IconButton>
                     ) : (
                       <IconButton size="small" onClick={handleOnGoBack}>
                         <ArrowBackIcon />
@@ -351,7 +358,7 @@ export function MyBinder<TFolders extends string>(props: {
                                 )} "${currentFolderLabel}"...`
                               : t("my-binder.search")
                           }
-                          autoFocus
+                          inputRef={searchInputRef}
                           value={lazySearch}
                           fullWidth
                           onChange={(e) => {

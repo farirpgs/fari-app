@@ -14,11 +14,17 @@
 - tech: update to MUI 5
 - fix: typo in Fate spanish sheets
 
+**v5.3.1**
+
+- fix: remove default property from character sheet template
+- feat: Charge character template
+
 **v5.3.2**
 
 - fix: dice fab tooltip placement
 - feat: binder analytics
 - fix: character card dice pool roll + margins
+- feat: Life Beyond Exo Station character template
 
 # v5.2
 
