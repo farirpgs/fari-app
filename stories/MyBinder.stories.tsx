@@ -128,7 +128,7 @@ function StorybookMyBinder(props: {
         folders={props.folders}
         onSelect={action("onSelect")}
         onSelectOnNewTab={action("onSelectOnNewTab")}
-        onAdd={action("onAdd")}
+        onNew={action("onAdd")}
         onDelete={action("onDelete")}
         onDuplicate={action("onDuplicate")}
         onUndo={action("onUndo")}

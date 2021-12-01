@@ -351,7 +351,7 @@ function MyBinderManager() {
       onSelectOnNewTab={(folder, element) => {
         handler[folder].onSelectOnNewTab(element);
       }}
-      onAdd={(folder) => {
+      onNew={(folder) => {
         handler[folder].onAdd();
       }}
       onDelete={(folder, element) => {

@@ -34,6 +34,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { arraySort } from "../../domains/array/arraySort";
 import { LazyState, useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -69,7 +70,7 @@ export function MyBinder<TFolders extends string>(props: {
   folder: string | undefined;
   onSelect(folder: TFolders, element: IManagerViewModel): void;
   onSelectOnNewTab(folder: TFolders, element: IManagerViewModel): void;
-  onAdd(folder: TFolders): void;
+  onNew(folder: TFolders): void;
   onDelete(folder: TFolders, element: IManagerViewModel): void;
   onDuplicate(folder: TFolders, element: IManagerViewModel): void;
   onUndo(folder: TFolders, element: IManagerViewModel): void;
@@ -77,16 +78,16 @@ export function MyBinder<TFolders extends string>(props: {
     folder: TFolders,
     importPaths: FileList | null
   ): Promise<{ entity: any | undefined }>;
-
   onImportAddAsNew(folder: TFolders, entity: any): void;
   onImportUpdateExisting(folder: TFolders, entity: any): void;
   onExport(folder: TFolders, element: IManagerViewModel): void;
   onExportAsTemplate(folder: TFolders, element: IManagerViewModel): void;
 }) {
   const { t } = useTranslate();
+  const logger = useLogger();
   const theme = useTheme();
   const history = useHistory();
-
+  const searchInputRef = React.useRef<HTMLInputElement>(null);
   const [search, setSearch] = useState(props.search);
   const [folder, setFolder] = useLazyState({
     value: props.folder,
@@ -113,6 +114,11 @@ export function MyBinder<TFolders extends string>(props: {
 
   const where = getWhere();
 
+  useEffect(() => {
+    searchInputRef.current?.focus();
+    debugger;
+  }, [currentFolder]);
+
   useEffect(
     function clearFolderOnClose() {
       if (props.open === false) {
@@ -123,6 +129,38 @@ export function MyBinder<TFolders extends string>(props: {
     [props.open]
   );
 
+  function handleOnSelect(currentFolder: TFolders, element: IManagerViewModel) {
+    props.onSelect(currentFolder, element);
+    logger.track("binder.select", {
+      folder: currentFolder,
+      name: element.name,
+      group: element.group,
+    });
+  }
+
+  function handleOnSelectOnNewTab(
+    currentFolder: TFolders,
+    element: IManagerViewModel
+  ) {
+    props.onSelectOnNewTab(currentFolder, element);
+    logger.track("binder.select-on-new-tab", {
+      folder: currentFolder,
+      name: element.name,
+      group: element.group,
+    });
+  }
+
+  function handleOnDelete(currentFolder: TFolders, element: IManagerViewModel) {
+    setDeletedObject({ folder: currentFolder, element: element });
+    setDeletedSnack(true);
+    props.onDelete(currentFolder, element);
+    logger.track("binder.delete", {
+      folder: currentFolder,
+      name: element.name,
+      group: element.group,
+    });
+  }
+
   function handleOnUndo() {
     if (deletedObject) {
       props.onUndo(deletedObject.folder, deletedObject.element);
@@ -131,15 +169,69 @@ export function MyBinder<TFolders extends string>(props: {
     }
   }
 
-  function handleOnDelete(currentFolder: TFolders, element: IManagerViewModel) {
-    setDeletedObject({ folder: currentFolder, element: element });
-    setDeletedSnack(true);
-    props.onDelete(currentFolder, element);
+  function handleOnDuplicate(
+    currentFolder: TFolders,
+    element: IManagerViewModel
+  ) {
+    props.onDuplicate(currentFolder, element);
+    logger.track("binder.duplicate", {
+      folder: currentFolder,
+      name: element.name,
+      group: element.group,
+    });
   }
 
-  function handleGoBack() {
+  function handleOnExport(currentFolder: TFolders, element: IManagerViewModel) {
+    props.onExport(currentFolder, element);
+    logger.track("binder.export", {
+      folder: currentFolder,
+      name: element.name,
+      group: element.group,
+    });
+  }
+
+  function handleOnExportAsTemplate(
+    currentFolder: TFolders,
+    element: IManagerViewModel
+  ) {
+    props.onExportAsTemplate(currentFolder, element);
+    logger.track("binder.export-as-template", {
+      folder: currentFolder,
+      name: element.name,
+      group: element.group,
+    });
+  }
+
+  function handleOnGoBack() {
     setFolder(undefined);
     setSearch("");
+  }
+
+  async function handleOnImport(event: React.ChangeEvent<HTMLInputElement>) {
+    const { entity } = await props.onImport(currentFolder, event.target.files);
+    if (entity) {
+      setImportDialogModalEntity(entity);
+    }
+    event.target.value = "";
+    logger.track("binder.import", {
+      folder: currentFolder,
+    });
+  }
+
+  function handleOnImportAsNew() {
+    props.onImportAddAsNew(currentFolder, importDialogModalEntity);
+    setImportDialogModalEntity(undefined);
+    logger.track("binder.import-as-new", {
+      folder: currentFolder,
+    });
+  }
+
+  function handleOnImportUpdateExisting() {
+    props.onImportUpdateExisting(currentFolder, importDialogModalEntity);
+    setImportDialogModalEntity(undefined);
+    logger.track("binder.import-update-existing", {
+      folder: currentFolder,
+    });
   }
 
   return (
@@ -171,11 +263,7 @@ export function MyBinder<TFolders extends string>(props: {
                   data-cy={`my-binder.folders.${currentFolder}.import`}
                   size="small"
                   onClick={() => {
-                    props.onImportUpdateExisting(
-                      currentFolder,
-                      importDialogModalEntity
-                    );
-                    setImportDialogModalEntity(undefined);
+                    handleOnImportUpdateExisting();
                   }}
                 >
                   {t("my-binder.import-dialog.update-existing")}
@@ -188,11 +276,7 @@ export function MyBinder<TFolders extends string>(props: {
                   data-cy={`my-binder.folders.${currentFolder}.import`}
                   size="small"
                   onClick={() => {
-                    props.onImportAddAsNew(
-                      currentFolder,
-                      importDialogModalEntity
-                    );
-                    setImportDialogModalEntity(undefined);
+                    handleOnImportAsNew();
                   }}
                 >
                   {t("my-binder.import-dialog.add-as-new")}
@@ -247,9 +331,11 @@ export function MyBinder<TFolders extends string>(props: {
                 <Grid item>
                   <Box mr=".5rem" width="30px">
                     {where === Where.Folders || !props.canGoBack ? (
-                      <MenuBookIcon color="primary" />
+                      <IconButton size="small" disabled>
+                        <MenuBookIcon color="primary" />
+                      </IconButton>
                     ) : (
-                      <IconButton size="small" onClick={handleGoBack}>
+                      <IconButton size="small" onClick={handleOnGoBack}>
                         <ArrowBackIcon />
                       </IconButton>
                     )}
@@ -272,7 +358,7 @@ export function MyBinder<TFolders extends string>(props: {
                                 )} "${currentFolderLabel}"...`
                               : t("my-binder.search")
                           }
-                          autoFocus
+                          inputRef={searchInputRef}
                           value={lazySearch}
                           fullWidth
                           onChange={(e) => {
@@ -376,7 +462,10 @@ export function MyBinder<TFolders extends string>(props: {
                   size="small"
                   data-cy={`my-binder.folders.${currentFolder}.new`}
                   onClick={() => {
-                    props.onAdd(currentFolder);
+                    props.onNew(currentFolder);
+                    logger.track("binder.new", {
+                      folder: currentFolder,
+                    });
                   }}
                 >
                   {t("my-binder.elements.new")}
@@ -397,15 +486,8 @@ export function MyBinder<TFolders extends string>(props: {
                     className={css({
                       display: "none",
                     })}
-                    onChange={async (event) => {
-                      const { entity } = await props.onImport(
-                        currentFolder,
-                        event.target.files
-                      );
-                      if (entity) {
-                        setImportDialogModalEntity(entity);
-                      }
-                      event.target.value = "";
+                    onChange={(event) => {
+                      handleOnImport(event);
                     }}
                   />
                 </Button>
@@ -456,22 +538,22 @@ export function MyBinder<TFolders extends string>(props: {
                   element={element}
                   displayType={false}
                   onSelect={() => {
-                    props.onSelect(type, element);
+                    handleOnSelect(type, element);
                   }}
                   onSelectOnNewTab={() => {
-                    props.onSelectOnNewTab(type, element);
+                    handleOnSelectOnNewTab(type, element);
                   }}
                   onDelete={() => {
                     handleOnDelete(type, element);
                   }}
                   onDuplicate={() => {
-                    props.onDuplicate(type, element);
+                    handleOnDuplicate(type, element);
                   }}
                   onExport={() => {
-                    props.onExport(type, element);
+                    handleOnExport(type, element);
                   }}
                   onExportAsTemplate={() => {
-                    props.onExportAsTemplate(type, element);
+                    handleOnExportAsTemplate(type, element);
                   }}
                 />
               </React.Fragment>
@@ -548,22 +630,22 @@ export function MyBinder<TFolders extends string>(props: {
                         element={element}
                         displayType={displayType}
                         onSelect={() => {
-                          props.onSelect(type, element);
+                          handleOnSelect(type, element);
                         }}
                         onSelectOnNewTab={() => {
-                          props.onSelectOnNewTab(type, element);
+                          handleOnSelectOnNewTab(type, element);
                         }}
                         onDelete={() => {
-                          props.onDelete(type, element);
+                          handleOnDelete(type, element);
                         }}
                         onDuplicate={() => {
-                          props.onDuplicate(type, element);
+                          handleOnDuplicate(type, element);
                         }}
                         onExport={() => {
-                          props.onExport(type, element);
+                          handleOnExport(type, element);
                         }}
                         onExportAsTemplate={() => {
-                          props.onExportAsTemplate(type, element);
+                          handleOnExportAsTemplate(type, element);
                         }}
                       />
                     </React.Fragment>

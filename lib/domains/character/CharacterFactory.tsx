@@ -46,6 +46,15 @@ export const CharacterFactory = {
       /**
        * @author @RPDeshaies
        */
+      [CharacterTemplates.LifeBeyondExoStation]: async () => {
+        const jsonData = await import(
+          "./character-templates/LifeBeyondExoStation.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      /**
+       * @author @RPDeshaies
+       */
       [CharacterTemplates.FateCondensed]: async () => {
         const jsonData = await import(
           "./character-templates/FateCondensed.json"
@@ -317,7 +326,12 @@ export const CharacterFactory = {
     };
   },
   makeFromJson(jsonData: any): ICharacter {
-    const migratedSheet = this.migrate(jsonData);
+    const newSheet = {
+      ...jsonData,
+      // to clear ViteJS default value from json import
+      default: undefined,
+    };
+    const migratedSheet = this.migrate(newSheet);
     return migratedSheet;
   },
   migrate(character: any): ICharacter {

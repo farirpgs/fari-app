@@ -307,7 +307,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
         position="relative"
         clickable={canRoll}
         tooltipTitle={
-          hasCommands
+          canRoll
             ? undefined
             : t("character-dialog.helper-text.empty-dice-pool")
         }

@@ -1,13 +1,11 @@
 # Changelog
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
-
 # v6.0.0
 
 - feat: cloud infra for real time features
 - feat: new drawing area
 - feat: character sheet rows and columns
-
 # v5.3
 
 - feat: Dice Pool block enhancements
@@ -19,6 +17,19 @@
 - tech: update Vite
 - tech: update to MUI 5
 - fix: typo in Fate spanish sheets
+
+**v5.3.1**
+
+- fix: remove default property from character sheet template
+- feat: Charge character template
+
+**v5.3.2**
+
+- fix: dice fab tooltip placement
+- feat: binder analytics
+- fix: character card dice pool roll + margins
+- feat: Life Beyond Exo Station character template
+- fix: storybook
 
 # v5.2
 
@@ -436,7 +447,3 @@ https://www.reddit.com/r/FATErpg/comments/gg00pr/announcing_fari_20_the_best_fat
 - feat: initial proof of concept
 
 https://www.reddit.com/r/FATErpg/comments/eb4xpk/fari_the_roleplaying_fate_game_companion/
-
-```
-
-```
