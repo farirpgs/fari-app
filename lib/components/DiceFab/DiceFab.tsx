@@ -126,7 +126,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
           zIndex: zIndex.diceFabDie,
         })}
         rolls={props.rollsForDiceBox ?? []}
-        tooltipPlacement="right-start"
+        tooltipPlacement="top"
         size="3.5rem"
         fontSize="2rem"
         borderSize=".2rem"
