@@ -14,6 +14,11 @@
 - tech: update to MUI 5
 - fix: typo in Fate spanish sheets
 
+**v5.3.2**
+
+- fix: dice fab tooltip placement
+- feat: binder analytics
+
 # v5.2
 
 - feat: new "Pause Button" safety tool when playing online games. Anyone can click on it, but only the GM can resume the game.
@@ -430,7 +435,3 @@ https://www.reddit.com/r/FATErpg/comments/gg00pr/announcing_fari_20_the_best_fat
 - feat: initial proof of concept
 
 https://www.reddit.com/r/FATErpg/comments/eb4xpk/fari_the_roleplaying_fate_game_companion/
-
-```
-
-```
