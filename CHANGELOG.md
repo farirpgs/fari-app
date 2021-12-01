@@ -18,6 +18,7 @@
 
 - fix: dice fab tooltip placement
 - feat: binder analytics
+- fix: character card dice pool roll + margins
 
 # v5.2
 
