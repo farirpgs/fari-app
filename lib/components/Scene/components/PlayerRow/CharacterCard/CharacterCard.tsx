@@ -253,7 +253,6 @@ export const CharacterCard: React.FC<{
         className={css({
           flex: "0 1 auto",
           marginTop: ".5rem",
-
           whiteSpace: "nowrap",
           overflow: "hidden",
           textOverflow: "ellipsis",
@@ -317,7 +316,7 @@ export const CharacterCard: React.FC<{
 
   function renderDicePool(section: ISection, block: IBlock & IDicePoolBlock) {
     return (
-      <Grid item xs={12}>
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <BlockDicePool
           advanced={false}
           readonly={props.readonly}
@@ -326,7 +325,7 @@ export const CharacterCard: React.FC<{
           onLabelChange={() => {}}
           onValueChange={() => {}}
           onMetaChange={() => {}}
-          onRoll={() => {}}
+          onRoll={props.onRoll}
         />
       </Grid>
     );

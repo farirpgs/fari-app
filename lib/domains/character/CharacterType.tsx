@@ -34,6 +34,7 @@ export enum CharacterTemplates {
   Maze = "Maze",
   Dnd5e = "Dnd5e",
   ChargeRPG = "ChargeRPG",
+  LifeBeyondExoStation = "LifeBeyondExoStation",
   TheWitchIsDead = "TheWitchIsDead",
   EdgeOfTheEmpire = "EdgeOfTheEmpire",
   EdgeOfTheEmpire_FR = "EdgeOfTheEmpire_FR",
@@ -47,7 +48,8 @@ export type ICharacterTemplateWithGroup = {
 
 export const CharacterTemplatesWithGroups: Array<ICharacterTemplateWithGroup> =
   [
-    { group: "Charge RPG", template: CharacterTemplates.ChargeRPG },
+    { group: "Fari Games", template: CharacterTemplates.ChargeRPG },
+    { group: "Fari Games", template: CharacterTemplates.LifeBeyondExoStation },
     { group: "Fate", template: CharacterTemplates.FateCondensed },
     { group: "Fate", template: CharacterTemplates.FateCore },
     { group: "Fate", template: CharacterTemplates.FateAccelerated },
