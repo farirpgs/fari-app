@@ -15,6 +15,8 @@ import RedoIcon from "@mui/icons-material/Redo";
 import SaveIcon from "@mui/icons-material/Save";
 import ShareIcon from "@mui/icons-material/Share";
 import UndoIcon from "@mui/icons-material/Undo";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
 import Alert from "@mui/material/Alert";
@@ -129,10 +131,8 @@ export const CharacterV3Dialog: React.FC<{
   const charactersManager = useContext(CharactersContext);
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
 
-  const headerColor = theme.palette.background.paper;
-  const headerBackgroundColor = useTextColors(
-    theme.palette.background.paper
-  ).primary;
+  const headerBackgroundColors = useTextColors(theme.palette.background.paper);
+  const headerTextColors = useTextColors(headerBackgroundColors.primary);
 
   const [tab, setTab] = useState<string>("0");
   const currentPageIndex = parseInt(tab);
@@ -419,7 +419,7 @@ export const CharacterV3Dialog: React.FC<{
                 scrollButtons="auto"
                 classes={{
                   flexContainer: css({
-                    borderBottom: `4px solid ${headerBackgroundColor}`,
+                    borderBottom: `4px solid ${headerBackgroundColors.primary}`,
                   }),
                   indicator: css({
                     display: "none",
@@ -436,8 +436,8 @@ export const CharacterV3Dialog: React.FC<{
                       disableRipple
                       key={page.id}
                       className={css({
-                        background: headerBackgroundColor,
-                        color: `${headerColor} !important`,
+                        background: headerBackgroundColors.primary,
+                        color: `${headerTextColors.primary} !important`,
                         marginRight: ".5rem",
                         // Pentagone
                         // https://bennettfeely.com/clippy/
@@ -465,7 +465,7 @@ export const CharacterV3Dialog: React.FC<{
                             value={page.label}
                             readonly={!advanced}
                             border={advanced}
-                            borderColor={headerColor}
+                            borderColor={headerTextColors.primary}
                             onChange={(newValue) => {
                               characterManager.actions.renamePage(
                                 pageIndex,
@@ -533,7 +533,7 @@ export const CharacterV3Dialog: React.FC<{
                       t("character-dialog.remove-page-confirmation")
                     );
                     if (confirmed) {
-                      characterManager.actions.removePage(currentPageIndex);
+                      characterManager.actions.deletePage(currentPageIndex);
                     }
                     setTab("0");
                   }}
@@ -582,203 +582,283 @@ export const CharacterV3Dialog: React.FC<{
                           <>
                             <Grid container justifyContent="flex-end">
                               <Grid item>
-                                <IconButton
-                                  disabled={rowIndex === 0}
-                                  onClick={() => {
-                                    characterManager.actions.moveRowUp({
-                                      pageIndex,
-                                      rowIndex,
-                                    });
-                                  }}
+                                <Tooltip
+                                  title={t(
+                                    "character-dialog.control.move-row-up"
+                                  )}
                                 >
-                                  <ArrowUpwardIcon
-                                    className={css({
-                                      fontSize: "1rem",
-                                    })}
-                                  />
-                                </IconButton>
+                                  <span>
+                                    <IconButton
+                                      disabled={rowIndex === 0}
+                                      onClick={() => {
+                                        characterManager.actions.moveRowUp({
+                                          pageIndex,
+                                          rowIndex,
+                                        });
+                                      }}
+                                    >
+                                      <ArrowUpwardIcon
+                                        className={css({
+                                          fontSize: "1rem",
+                                        })}
+                                      />
+                                    </IconButton>
+                                  </span>
+                                </Tooltip>
                               </Grid>
                               <Grid item>
-                                <IconButton
-                                  disabled={rowIndex === page.rows.length - 1}
-                                  onClick={() => {
-                                    characterManager.actions.moveRowDown({
-                                      pageIndex,
-                                      rowIndex,
-                                    });
-                                  }}
+                                <Tooltip
+                                  title={t(
+                                    "character-dialog.control.move-row-down"
+                                  )}
                                 >
-                                  <ArrowDownwardIcon
-                                    className={css({
-                                      fontSize: "1rem",
-                                    })}
-                                  />
-                                </IconButton>
+                                  <span>
+                                    <IconButton
+                                      disabled={
+                                        rowIndex === page.rows.length - 1
+                                      }
+                                      onClick={() => {
+                                        characterManager.actions.moveRowDown({
+                                          pageIndex,
+                                          rowIndex,
+                                        });
+                                      }}
+                                    >
+                                      <ArrowDownwardIcon
+                                        className={css({
+                                          fontSize: "1rem",
+                                        })}
+                                      />
+                                    </IconButton>
+                                  </span>
+                                </Tooltip>
                               </Grid>
                               <Grid item>
-                                <IconButton
-                                  onClick={() => {
-                                    characterManager.actions.deleteRow({
-                                      pageIndex: pageIndex,
-                                      rowIndex: rowIndex,
-                                    });
-                                  }}
+                                <Tooltip
+                                  title={t(
+                                    "character-dialog.control.delete-row"
+                                  )}
                                 >
-                                  <DeleteIcon
-                                    className={css({
-                                      fontSize: "1rem",
-                                    })}
-                                  />
-                                </IconButton>
+                                  <span>
+                                    <IconButton
+                                      onClick={() => {
+                                        characterManager.actions.deleteRow({
+                                          pageIndex: pageIndex,
+                                          rowIndex: rowIndex,
+                                        });
+                                      }}
+                                    >
+                                      <DeleteIcon
+                                        className={css({
+                                          fontSize: "1rem",
+                                        })}
+                                      />
+                                    </IconButton>
+                                  </span>
+                                </Tooltip>
                               </Grid>
                               <Grid item>
-                                <IconButton
-                                  disabled={row.columns.length === 4}
-                                  onClick={() => {
-                                    characterManager.actions.addColumn({
-                                      pageIndex: pageIndex,
-                                      rowIndex: rowIndex,
-                                    });
-                                  }}
+                                <Tooltip
+                                  title={t(
+                                    "character-dialog.control.add-column"
+                                  )}
                                 >
-                                  <AddIcon
-                                    className={css({
-                                      fontSize: "1rem",
-                                    })}
-                                  />
-                                </IconButton>
+                                  <span>
+                                    <IconButton
+                                      disabled={row.columns.length === 4}
+                                      onClick={() => {
+                                        characterManager.actions.addColumn({
+                                          pageIndex: pageIndex,
+                                          rowIndex: rowIndex,
+                                        });
+                                      }}
+                                    >
+                                      <AddIcon
+                                        className={css({
+                                          fontSize: "1rem",
+                                        })}
+                                      />
+                                    </IconButton>
+                                  </span>
+                                </Tooltip>
                               </Grid>
                             </Grid>
                           </>
                         }
                       >
-                        {row.columns.length > 0 && (
-                          <Grid container>
-                            {row.columns.map((column, columnIndex) => {
-                              return (
-                                <Grid
-                                  item
-                                  key={columnIndex}
-                                  xs={12}
-                                  md={columnSize as GridSize}
-                                  className={css({
-                                    borderLeft:
-                                      columnIndex === 0
-                                        ? `2px solid ${headerBackgroundColor}`
-                                        : "none",
-                                    borderBottom: `2px solid ${headerBackgroundColor}`,
-                                    borderRight: `2px solid ${headerBackgroundColor}`,
-                                  })}
-                                >
-                                  <ManagerBox
-                                    readonly={!advanced}
-                                    label={<>Column #{columnIndex + 1}</>}
-                                    backgroundColor={
-                                      theme.palette.action.selected
-                                    }
-                                    actions={
-                                      <>
-                                        <Grid
-                                          container
-                                          justifyContent="flex-end"
-                                        >
-                                          <Grid item>
-                                            <IconButton
-                                              disabled={columnIndex === 0}
-                                              onClick={() => {
-                                                characterManager.actions.moveColumnUp(
-                                                  {
-                                                    pageIndex,
-                                                    rowIndex,
-                                                    columnIndex,
-                                                  }
-                                                );
-                                              }}
-                                            >
-                                              <ArrowBackIcon
-                                                className={css({
-                                                  fontSize: "1rem",
-                                                })}
-                                              />
-                                            </IconButton>
-                                          </Grid>
-                                          <Grid item>
-                                            <IconButton
-                                              disabled={
-                                                columnIndex ===
-                                                row.columns.length - 1
-                                              }
-                                              onClick={() => {
-                                                characterManager.actions.moveColumnDown(
-                                                  {
-                                                    pageIndex,
-                                                    rowIndex,
-                                                    columnIndex,
-                                                  }
-                                                );
-                                              }}
-                                            >
-                                              <ArrowForwardIcon
-                                                className={css({
-                                                  fontSize: "1rem",
-                                                })}
-                                              />
-                                            </IconButton>
-                                          </Grid>
-                                          <Grid item>
-                                            <IconButton
-                                              onClick={() => {
-                                                characterManager.actions.deleteColumn(
-                                                  {
-                                                    pageIndex: pageIndex,
-                                                    rowIndex: rowIndex,
-                                                    columnIndex: columnIndex,
-                                                  }
-                                                );
-                                              }}
-                                            >
-                                              <DeleteIcon
-                                                className={css({
-                                                  fontSize: "1rem",
-                                                })}
-                                              />
-                                            </IconButton>
-                                          </Grid>
-                                        </Grid>
-                                      </>
-                                    }
+                        <Box
+                          className={css({
+                            borderTop: `2px solid ${headerBackgroundColors.primary}`,
+                            borderBottom: `2px solid ${headerBackgroundColors.primary}`,
+                          })}
+                        >
+                          {row.columns.length > 0 && (
+                            <Grid container>
+                              {row.columns.map((column, columnIndex) => {
+                                return (
+                                  <Grid
+                                    item
+                                    key={columnIndex}
+                                    xs={12}
+                                    md={columnSize as GridSize}
+                                    className={css({
+                                      borderLeft:
+                                        columnIndex === 0
+                                          ? `2px solid ${headerBackgroundColors.primary}`
+                                          : "none",
+                                      borderRight: `2px solid ${headerBackgroundColors.primary}`,
+                                    })}
                                   >
-                                    {renderSections(
-                                      {
-                                        pageIndex,
-                                        rowIndex,
-                                        columnIndex,
-                                      },
-                                      page,
-                                      column.sections
-                                    )}
-                                  </ManagerBox>
-                                </Grid>
-                              );
-                            })}
-                            {/* <IconButton
-                            size="large"
-                            className={css({
-                              position: "absolute",
-                              top: "0",
-                              right: "0",
-                            })}
-                            onClick={() => {
-                              characterManager.actions.addColumn({
-                                pageIndex: pageIndex,
-                                rowIndex: rowIndex,
-                              });
-                            }}
-                          >
-                            <AddBoxIcon />
-                          </IconButton> */}
-                          </Grid>
-                        )}
+                                    <ManagerBox
+                                      readonly={!advanced}
+                                      label={<>Column #{columnIndex + 1}</>}
+                                      backgroundColor={
+                                        theme.palette.action.selected
+                                      }
+                                      actions={
+                                        <>
+                                          <Grid
+                                            container
+                                            justifyContent="flex-end"
+                                          >
+                                            <Grid item>
+                                              <Tooltip
+                                                title={t(
+                                                  "character-dialog.control.move-column-left"
+                                                )}
+                                              >
+                                                <span>
+                                                  <IconButton
+                                                    disabled={columnIndex === 0}
+                                                    onClick={() => {
+                                                      characterManager.actions.moveColumnLeft(
+                                                        {
+                                                          pageIndex,
+                                                          rowIndex,
+                                                          columnIndex,
+                                                        }
+                                                      );
+                                                    }}
+                                                  >
+                                                    <ArrowBackIcon
+                                                      className={css({
+                                                        fontSize: "1rem",
+                                                      })}
+                                                    />
+                                                  </IconButton>
+                                                </span>
+                                              </Tooltip>
+                                            </Grid>
+                                            <Grid item>
+                                              <Tooltip
+                                                title={t(
+                                                  "character-dialog.control.move-column-right"
+                                                )}
+                                              >
+                                                <span>
+                                                  <IconButton
+                                                    disabled={
+                                                      columnIndex ===
+                                                      row.columns.length - 1
+                                                    }
+                                                    onClick={() => {
+                                                      characterManager.actions.moveColumnRight(
+                                                        {
+                                                          pageIndex,
+                                                          rowIndex,
+                                                          columnIndex,
+                                                        }
+                                                      );
+                                                    }}
+                                                  >
+                                                    <ArrowForwardIcon
+                                                      className={css({
+                                                        fontSize: "1rem",
+                                                      })}
+                                                    />
+                                                  </IconButton>
+                                                </span>
+                                              </Tooltip>
+                                            </Grid>
+
+                                            <Grid item>
+                                              <Tooltip
+                                                title={t(
+                                                  "character-dialog.control.delete-column"
+                                                )}
+                                              >
+                                                <span>
+                                                  <IconButton
+                                                    onClick={() => {
+                                                      characterManager.actions.deleteColumn(
+                                                        {
+                                                          pageIndex: pageIndex,
+                                                          rowIndex: rowIndex,
+                                                          columnIndex:
+                                                            columnIndex,
+                                                        }
+                                                      );
+                                                    }}
+                                                  >
+                                                    <DeleteIcon
+                                                      className={css({
+                                                        fontSize: "1rem",
+                                                      })}
+                                                    />
+                                                  </IconButton>
+                                                </span>
+                                              </Tooltip>
+                                            </Grid>
+
+                                            {/* <Grid item>
+                                              <Tooltip
+                                                title={t(
+                                                  "character-dialog.control.add-section"
+                                                )}
+                                              >
+                                                <span>
+                                                  <IconButton
+                                                    onClick={() => {
+                                                      characterManager.actions.addSection(
+                                                        {
+                                                          pageIndex: pageIndex,
+                                                          rowIndex: rowIndex,
+                                                          columnIndex:
+                                                            columnIndex,
+                                                          sectionIndex: 0,
+                                                        }
+                                                      );
+                                                    }}
+                                                  >
+                                                    <AddIcon
+                                                      className={css({
+                                                        fontSize: "1rem",
+                                                      })}
+                                                    />
+                                                  </IconButton>
+                                                </span>
+                                              </Tooltip>
+                                            </Grid> */}
+                                          </Grid>
+                                        </>
+                                      }
+                                    >
+                                      {renderSections(
+                                        {
+                                          pageIndex,
+                                          rowIndex,
+                                          columnIndex,
+                                        },
+                                        page,
+                                        column.sections
+                                      )}
+                                    </ManagerBox>
+                                  </Grid>
+                                );
+                              })}
+                            </Grid>
+                          )}
+                        </Box>
                       </ManagerBox>
                     );
                   })}
@@ -787,6 +867,7 @@ export const CharacterV3Dialog: React.FC<{
                       <Grid>
                         <Button
                           variant="outlined"
+                          size="small"
                           color="inherit"
                           onClick={() => {
                             characterManager.actions.addRow({
@@ -794,7 +875,7 @@ export const CharacterV3Dialog: React.FC<{
                             });
                           }}
                         >
-                          Add Row
+                          {t("character-dialog.control.add-row")}
                         </Button>
                       </Grid>
                     </Grid>
@@ -874,104 +955,264 @@ export const CharacterV3Dialog: React.FC<{
       <>
         <Box py={numberOfSections === 0 ? "1rem" : undefined}>
           {sections?.map((section, sectionIndex) => {
+            const canMoveUp = !(sectionIndex === 0);
+            const canMoveDown = !(sectionIndex === numberOfSections - 1);
             return (
               <Box key={section.id}>
-                <SheetHeader
-                  label={section.label}
-                  pageIndex={indexes.pageIndex}
-                  pages={characterManager.state.character?.pages}
-                  section={section}
-                  advanced={advanced}
-                  visibleOnCard={section.visibleOnCard}
-                  canMoveUp={sectionIndex !== 0}
-                  canMoveDown={sectionIndex !== sections.length - 1}
-                  onToggleVisibleOnCard={() => {
-                    characterManager.actions.toggleSectionVisibleOnCard({
-                      pageIndex: indexes.pageIndex,
-                      rowIndex: indexes.rowIndex,
-                      columnIndex: indexes.columnIndex,
-                      sectionIndex: sectionIndex,
-                    });
-                  }}
-                  onLabelChange={(newLabel) => {
-                    characterManager.actions.renameSection(
-                      {
-                        pageIndex: indexes.pageIndex,
-                        rowIndex: indexes.rowIndex,
-                        columnIndex: indexes.columnIndex,
-                        sectionIndex: sectionIndex,
-                      },
-                      newLabel
-                    );
-                  }}
-                  onRemove={() => {
-                    const confirmed = confirm(
-                      t("character-dialog.remove-section-confirmation")
-                    );
-                    if (confirmed) {
-                      characterManager.actions.removeSection({
-                        pageIndex: indexes.pageIndex,
-                        rowIndex: indexes.rowIndex,
-                        columnIndex: indexes.columnIndex,
-                        sectionIndex: sectionIndex,
-                      });
-                    }
-                  }}
-                />
-                {renderSectionBlocks(page, section, {
-                  pageIndex: indexes.pageIndex,
-                  rowIndex: indexes.rowIndex,
-                  columnIndex: indexes.columnIndex,
-                  sectionIndex: sectionIndex,
-                })}
-
-                {advanced && (
-                  <Box p=".5rem" mb=".5rem">
-                    <ThemeProvider theme={blackButtonTheme}>
-                      <Grid
-                        container
-                        justifyContent="center"
-                        alignItems="center"
-                      >
+                <>
+                  <SheetHeader
+                    label={section.label}
+                    advanced={advanced}
+                    onLabelChange={(newLabel) => {
+                      characterManager.actions.renameSection(
+                        {
+                          pageIndex: indexes.pageIndex,
+                          rowIndex: indexes.rowIndex,
+                          columnIndex: indexes.columnIndex,
+                          sectionIndex: sectionIndex,
+                        },
+                        newLabel
+                      );
+                    }}
+                    actions={
+                      <>
                         <Grid item>
-                          <AddBlock
-                            variant="button"
-                            onAddBlock={(blockType) => {
-                              characterManager.actions.addBlock(
-                                {
+                          <Tooltip
+                            title={t(
+                              "character-dialog.control.visible-on-card"
+                            )}
+                          >
+                            <IconButton
+                              data-cy={`character-dialog.${section.label}.visible-on-card`}
+                              size="small"
+                              onClick={() => {
+                                characterManager.actions.toggleSectionVisibleOnCard(
+                                  {
+                                    pageIndex: indexes.pageIndex,
+                                    rowIndex: indexes.rowIndex,
+                                    columnIndex: indexes.columnIndex,
+                                    sectionIndex: sectionIndex,
+                                  }
+                                );
+                              }}
+                            >
+                              {section.visibleOnCard ? (
+                                <VisibilityIcon
+                                  htmlColor={headerTextColors.primary}
+                                  className={css({
+                                    fontSize: "1rem",
+                                  })}
+                                />
+                              ) : (
+                                <VisibilityOffIcon
+                                  htmlColor={headerTextColors.primary}
+                                  className={css({
+                                    fontSize: "1rem",
+                                  })}
+                                />
+                              )}
+                            </IconButton>
+                          </Tooltip>
+                        </Grid>
+                        <Grid item>
+                          <Tooltip
+                            title={t(
+                              "character-dialog.control.move-section-up"
+                            )}
+                          >
+                            <span>
+                              <IconButton
+                                disabled={!canMoveUp}
+                                size="small"
+                                onClick={() => {
+                                  characterManager.actions.moveSectionUp({
+                                    pageIndex: indexes.pageIndex,
+                                    rowIndex: indexes.rowIndex,
+                                    columnIndex: indexes.columnIndex,
+                                    sectionIndex: sectionIndex,
+                                  });
+                                }}
+                              >
+                                <ArrowUpwardIcon
+                                  htmlColor={
+                                    !canMoveUp
+                                      ? headerTextColors.disabled
+                                      : headerTextColors.primary
+                                  }
+                                  className={css({
+                                    fontSize: "1rem",
+                                  })}
+                                />
+                              </IconButton>
+                            </span>
+                          </Tooltip>
+                        </Grid>
+                        <Grid item>
+                          <Tooltip
+                            title={t(
+                              "character-dialog.control.move-section-down"
+                            )}
+                          >
+                            <span>
+                              <IconButton
+                                disabled={!canMoveDown}
+                                size="small"
+                                onClick={() => {
+                                  characterManager.actions.moveSectionDown({
+                                    pageIndex: indexes.pageIndex,
+                                    rowIndex: indexes.rowIndex,
+                                    columnIndex: indexes.columnIndex,
+                                    sectionIndex: sectionIndex,
+                                  });
+                                }}
+                              >
+                                <ArrowDownwardIcon
+                                  htmlColor={
+                                    !canMoveDown
+                                      ? headerTextColors.disabled
+                                      : headerTextColors.primary
+                                  }
+                                  className={css({
+                                    fontSize: "1rem",
+                                  })}
+                                />
+                              </IconButton>
+                            </span>
+                          </Tooltip>
+                        </Grid>
+                        <Grid item>
+                          <Tooltip
+                            title={t(
+                              "character-dialog.control.copy-section-blocks"
+                            )}
+                          >
+                            <IconButton
+                              size="small"
+                              onClick={() => {
+                                settingsManager.actions.setBlocksInClipboard(
+                                  section.blocks
+                                );
+                              }}
+                            >
+                              <FileCopyIcon
+                                htmlColor={headerTextColors.primary}
+                                className={css({
+                                  fontSize: "1rem",
+                                })}
+                              />
+                            </IconButton>
+                          </Tooltip>
+                        </Grid>
+                        <Grid item>
+                          <Tooltip
+                            title={t("character-dialog.control.delete-section")}
+                          >
+                            <IconButton
+                              data-cy={`character-dialog.${section.label}.delete`}
+                              size="small"
+                              onClick={() => {
+                                const confirmed = confirm(
+                                  t(
+                                    "character-dialog.delete-section-confirmation"
+                                  )
+                                );
+                                if (confirmed) {
+                                  characterManager.actions.deleteSection({
+                                    pageIndex: indexes.pageIndex,
+                                    rowIndex: indexes.rowIndex,
+                                    columnIndex: indexes.columnIndex,
+                                    sectionIndex: sectionIndex,
+                                  });
+                                }
+                              }}
+                            >
+                              <DeleteIcon
+                                htmlColor={headerTextColors.primary}
+                                className={css({
+                                  fontSize: "1rem",
+                                })}
+                              />
+                            </IconButton>
+                          </Tooltip>
+                        </Grid>
+                      </>
+                    }
+                  />
+                  {renderSectionBlocks(page, section, {
+                    pageIndex: indexes.pageIndex,
+                    rowIndex: indexes.rowIndex,
+                    columnIndex: indexes.columnIndex,
+                    sectionIndex: sectionIndex,
+                  })}
+
+                  {advanced && (
+                    <Box p=".5rem" mb=".5rem">
+                      <ThemeProvider theme={blackButtonTheme}>
+                        <Grid
+                          container
+                          justifyContent="center"
+                          alignItems="center"
+                        >
+                          <Grid item>
+                            <AddBlock
+                              variant="button"
+                              onAddBlock={(blockType) => {
+                                characterManager.actions.addBlock(
+                                  {
+                                    pageIndex: indexes.pageIndex,
+                                    rowIndex: indexes.rowIndex,
+                                    columnIndex: indexes.columnIndex,
+                                    sectionIndex: sectionIndex,
+                                  },
+                                  blockType
+                                );
+                              }}
+                            />
+                          </Grid>
+                          {settingsManager.computed.hasBlocksInClipboard && (
+                            <Grid item>
+                              <Tooltip
+                                title={t(
+                                  "character-dialog.control.paste-blocks"
+                                )}
+                              >
+                                <span>
+                                  <IconButton
+                                    onClick={() => {
+                                      characterManager.actions.pasteBlocks(
+                                        {
+                                          pageIndex: indexes.pageIndex,
+                                          rowIndex: indexes.rowIndex,
+                                          columnIndex: indexes.columnIndex,
+                                          sectionIndex: sectionIndex,
+                                        },
+                                        settingsManager.state.blocksInClipboard
+                                      );
+                                    }}
+                                  >
+                                    <ContentPasteIcon />
+                                  </IconButton>
+                                </span>
+                              </Tooltip>
+                            </Grid>
+                          )}
+                          <Grid item>
+                            <AddSection
+                              onAddSection={() => {
+                                characterManager.actions.addSection({
                                   pageIndex: indexes.pageIndex,
                                   rowIndex: indexes.rowIndex,
                                   columnIndex: indexes.columnIndex,
                                   sectionIndex: sectionIndex,
-                                },
-                                blockType
-                              );
-                            }}
-                          />
-                        </Grid>
-                        {settingsManager.state.blockInClipboard && (
-                          <Grid item>
-                            <IconButton>
-                              <ContentPasteIcon />
-                            </IconButton>
+                                });
+                              }}
+                            />
                           </Grid>
-                        )}
-                        <Grid item>
-                          <AddSection
-                            onAddSection={() => {
-                              characterManager.actions.addSection({
-                                pageIndex: indexes.pageIndex,
-                                rowIndex: indexes.rowIndex,
-                                columnIndex: indexes.columnIndex,
-                                sectionIndex: sectionIndex,
-                              });
-                            }}
-                          />
                         </Grid>
-                      </Grid>
-                    </ThemeProvider>
-                  </Box>
-                )}
+                      </ThemeProvider>
+                    </Box>
+                  )}
+                </>
               </Box>
             );
           })}
@@ -1279,14 +1520,12 @@ export const CharacterV3Dialog: React.FC<{
       sectionIndex: number;
     }
   ) {
-    const dragAndDropKey = `${indexes.pageIndex}-${indexes.sectionIndex}-${indexes.rowIndex}-${indexes.columnIndex}`;
-
     return (
       <>
         <Box
           className={css({
-            marginTop: section.blocks.length === 0 ? "2rem" : ".5rem",
-            marginBottom: section.blocks.length === 0 ? "2rem" : ".5rem",
+            marginTop: section.blocks.length === 0 ? ".5rem" : ".5rem",
+            marginBottom: section.blocks.length === 0 ? ".5rem" : ".5rem",
           })}
         >
           <Grid container>
@@ -1299,9 +1538,8 @@ export const CharacterV3Dialog: React.FC<{
                   <BetterDnd
                     direction="vertical"
                     index={blockIndex}
-                    type={dragAndDropKey}
+                    type={`drag-character-sheet-block.${indexes.pageIndex}-${indexes.rowIndex}-${indexes.columnIndex}-${indexes.sectionIndex}`}
                     className={css({
-                      label: "CharacterDialog-block-dnd",
                       marginLeft: ".5rem",
                       marginRight: ".5rem",
                     })}
@@ -1349,14 +1587,14 @@ export const CharacterV3Dialog: React.FC<{
                                   <Grid item>
                                     <Tooltip
                                       title={t(
-                                        "character-dialog.control.duplicate"
+                                        "character-dialog.control.copy-block"
                                       )}
                                     >
                                       <IconButton
                                         size="small"
                                         onClick={() => {
-                                          settingsManager.actions.setBlockInClipboard(
-                                            block
+                                          settingsManager.actions.setBlocksInClipboard(
+                                            [block]
                                           );
                                         }}
                                       >
@@ -1372,14 +1610,14 @@ export const CharacterV3Dialog: React.FC<{
                                   <Grid item>
                                     <Tooltip
                                       title={t(
-                                        "character-dialog.control.remove-block"
+                                        "character-dialog.control.delete-block"
                                       )}
                                     >
                                       <IconButton
                                         size="small"
-                                        data-cy={`character-dialog.${section.label}.${block.label}.remove`}
+                                        data-cy={`character-dialog.${section.label}.${block.label}.delete`}
                                         onClick={() => {
-                                          characterManager.actions.removeBlock(
+                                          characterManager.actions.deleteBlock(
                                             {
                                               pageIndex: indexes.pageIndex,
                                               sectionIndex:

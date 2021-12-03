@@ -21,6 +21,7 @@ import { DiceContext } from "../../../../../../contexts/DiceContext/DiceContext"
 import {
   BlockType,
   IDicePoolBlock,
+  ISkillBlock,
 } from "../../../../../../domains/character/types";
 import {
   IDiceCommandSetId,
@@ -45,7 +46,13 @@ export type IDicePoolElement = {
 
 export type IDicePool = Array<IDicePoolElement>;
 
-export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
+export function BlockDicePool(
+  props: IBlockComponentProps<IDicePoolBlock | ISkillBlock> & {
+    listResults?: boolean;
+    mid?: React.ReactNode;
+  }
+) {
+  const listResults = props.listResults ?? true;
   const { t } = useTranslate();
   const theme = useTheme();
   const diceManager = useContext(DiceContext);
@@ -96,30 +103,6 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
           setHover(false);
         }}
       >
-        {/* {isLabelVisible && (
-          <Box pb=".5rem">
-            <Grid
-              container
-              spacing={1}
-              justifyContent="space-between"
-              wrap="nowrap"
-            >
-              <Grid item xs>
-                <FateLabel display="inline" align="center">
-                  <ContentEditable
-                    readonly={props.readonly || !props.advanced}
-                    border={props.advanced}
-                    data-cy={`${props.dataCy}.label`}
-                    value={props.block.label}
-                    onChange={(value) => {
-                      props.onLabelChange(value);
-                    }}
-                  />
-                </FateLabel>
-              </Grid>
-            </Grid>
-          </Box>
-        )} */}
         <Grid
           container
           spacing={1}
@@ -127,9 +110,6 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
           alignItems="center"
           wrap="nowrap"
         >
-          {/* {!props.readonly && isAllTheSameCommand && (
-            <Grid item>{renderDiceIncrementDecrementActions()}</Grid>
-          )} */}
           <Grid
             item
             className={css({
@@ -138,6 +118,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
           >
             {renderPool()}
           </Grid>
+          {props.mid && <Grid item>{props.mid}</Grid>}
 
           <Grid item xs>
             {renderLabel()}
@@ -243,44 +224,6 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
       />
     );
   }
-  function renderDiceIncrementDecrementActions() {
-    return (
-      <Box>
-        <Box>
-          <Tooltip title={t("character-dialog.control.add-one")}>
-            <IconButton
-              color="inherit"
-              data-cy={`${props.dataCy}.add-box`}
-              size="small"
-              onClick={() => {
-                handleOnAddDiceFrom();
-              }}
-            >
-              <AddCircleOutlineIcon
-                className={css({ width: "1.1rem", height: "1.1rem" })}
-              />
-            </IconButton>
-          </Tooltip>
-        </Box>
-        <Box>
-          <Tooltip title={t("character-dialog.control.remove-one")}>
-            <IconButton
-              size="small"
-              color="inherit"
-              data-cy={`${props.dataCy}.remove-box`}
-              onClick={() => {
-                handleOnRemoveDiceFrom();
-              }}
-            >
-              <RemoveCircleOutlineIcon
-                className={css({ width: "1.1rem", height: "1.1rem" })}
-              />
-            </IconButton>
-          </Tooltip>
-        </Box>
-      </Box>
-    );
-  }
 
   function renderLabel() {
     return (
@@ -316,7 +259,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
           e.preventDefault();
           const rollGroup = BlockSelectors.getRollGroupFromBlock(props.block);
 
-          diceManager.actions.setOptions({ listResults: true });
+          diceManager.actions.setOptions({ listResults: listResults });
           diceManager.actions.addOrRemovePoolElement({
             blockId: props.block.id,
             blockType: props.block.type,
@@ -331,7 +274,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
 
           const rollGroup = BlockSelectors.getRollGroupFromBlock(props.block);
           const diceRollResult = diceManager.actions.roll([rollGroup], {
-            listResults: true,
+            listResults: listResults,
           });
           props.onRoll(diceRollResult);
         }}

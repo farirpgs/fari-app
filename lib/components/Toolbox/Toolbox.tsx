@@ -168,7 +168,7 @@ export function Toolbox(props: {
                   </Grid>
                 </Grid>
               </Grid>
-            )}{" "}
+            )}
           </Grid>
         </Box>
       </Box>

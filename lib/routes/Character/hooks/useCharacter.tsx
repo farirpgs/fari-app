@@ -103,7 +103,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function removePage(pageIndex: number) {
+  function deletePage(pageIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
@@ -155,7 +155,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function moveColumnUp(indexes: {
+  function moveColumnLeft(indexes: {
     pageIndex: number;
     rowIndex: number;
     columnIndex: number;
@@ -175,7 +175,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function moveColumnDown(indexes: {
+  function moveColumnRight(indexes: {
     pageIndex: number;
     rowIndex: number;
     columnIndex: number;
@@ -191,6 +191,54 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
             indexes.columnIndex,
             "down"
           );
+      })
+    );
+  }
+
+  function moveSectionUp(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+          indexes.columnIndex
+        ].sections = moveValueInList(
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections,
+          indexes.sectionIndex,
+          "up"
+        );
+      })
+    );
+  }
+
+  function moveSectionDown(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+          indexes.columnIndex
+        ].sections = moveValueInList(
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections,
+          indexes.sectionIndex,
+          "down"
+        );
       })
     );
   }
@@ -329,7 +377,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function removeSection(indexes: {
+  function deleteSection(indexes: {
     pageIndex: number;
     rowIndex: number;
     columnIndex: number;
@@ -380,6 +428,31 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       })
     );
   }
+  function pasteBlocks(
+    indexes: {
+      pageIndex: number;
+      rowIndex: number;
+      columnIndex: number;
+      sectionIndex: number;
+    },
+    blocks: Array<IBlock>
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+
+        const section =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex];
+        for (const block of blocks) {
+          section.blocks.push(CharacterFactory.duplicateBlock(block));
+        }
+      })
+    );
+  }
 
   function duplicatePage(pageIndex: number) {
     setCharacter(
@@ -397,28 +470,37 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  // function moveDnDSection(
-  //   pageIndex: number,
-  //   dragIndex: number,
-  //   hoverIndex: number
-  // ) {
-  //   setCharacter(
-  //     produce((draft: ICharacter | undefined) => {
-  //       if (!draft) {
-  //         return;
-  //       }
+  function moveDnDSection(
+    indexes: {
+      pageIndex: number;
+      rowIndex: number;
+      columnIndex: number;
+    },
+    dragIndex: number,
+    hoverIndex: number
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
 
-  //       if (dragIndex === undefined || hoverIndex === undefined) {
-  //         return;
-  //       }
+        if (dragIndex === undefined || hoverIndex === undefined) {
+          return;
+        }
 
-  //       const dragItem = draft.pages[pageIndex].sections[dragIndex];
+        const column =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ];
 
-  //       draft.pages[pageIndex].sections.splice(dragIndex, 1);
-  //       draft.pages[pageIndex].sections.splice(hoverIndex, 0, dragItem);
-  //     })
-  //   );
-  // }
+        const dragItem = column.sections[dragIndex];
+
+        column.sections.splice(dragIndex, 1);
+        column.sections.splice(hoverIndex, 0, dragItem);
+      })
+    );
+  }
 
   function moveDnDBlock(
     indexes: {
@@ -532,7 +614,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function removeBlock(
+  function deleteBlock(
     index: {
       pageIndex: number;
       rowIndex: number;
@@ -604,23 +686,26 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       moveRowDown,
       deleteRow,
       addColumn,
-      moveColumnUp,
-      moveColumnDown,
+      moveColumnLeft,
+      moveColumnRight,
       deleteColumn,
       renamePage,
-      removePage,
+      deletePage,
       addSection,
+      moveSectionUp,
+      moveSectionDown,
+      pasteBlocks,
       renameSection,
       toggleSectionVisibleOnCard,
       movePage,
-      removeSection,
+      deleteSection,
       addBlock,
       duplicatePage,
       moveDnDBlock,
       setBlock,
       setBlockMeta,
       toggleBlockMainPointCounter,
-      removeBlock,
+      deleteBlock,
       getCharacterWithNewTimestamp,
       toggleWideMode,
       setZoom,

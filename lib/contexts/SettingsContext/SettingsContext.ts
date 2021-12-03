@@ -46,7 +46,7 @@ export function useSettings() {
     key: "fari-dice-command-options",
     localStorage: window.localStorage,
   });
-  const [blockInClipboard, setBlockInClipboard] = useState<IBlock>();
+  const [blocksInClipboard, setBlocksInClipboard] = useState<Array<IBlock>>([]);
   const [sectionInClipboard, setSectionInClipboard] = useState<ISection>();
 
   function toggleThemeMode() {
@@ -57,6 +57,9 @@ export function useSettings() {
 
   const appThemeMode = temporaryThemeMode ?? themeMode;
   return {
+    computed: {
+      hasBlocksInClipboard: blocksInClipboard?.length > 0,
+    },
     state: {
       themeMode: appThemeMode,
       userId,
@@ -64,7 +67,7 @@ export function useSettings() {
       diceCommandIds: diceCommandIds,
       diceOptions,
       gameTemplate,
-      blockInClipboard,
+      blocksInClipboard,
       sectionInClipboard,
     },
     actions: {
@@ -75,7 +78,7 @@ export function useSettings() {
       setDiceCommandsIds: setDiceCommandsIds,
       setGameTemplate,
       setDiceOptions,
-      setBlockInClipboard,
+      setBlocksInClipboard,
       setSectionInClipboard,
     },
   };

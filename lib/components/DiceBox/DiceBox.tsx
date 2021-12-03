@@ -15,7 +15,7 @@ import {
   CommmandSetOptions,
   Dice,
   DiceCommandOptions,
-  IDiceRollResult
+  IDiceRollResult,
 } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { useLatestDiceRoll } from "../../hooks/useLatestDiceRoll/useLatestDiceRoll";
@@ -321,6 +321,7 @@ export function DiceBoxResult(props: {
           return {
             name: command.name,
             value: command.value,
+            modifier: rollGroup.modifier,
             commandSetId: commandSet.id,
             label: rollGroup.label,
             color: color,
@@ -401,6 +402,22 @@ export function DiceBoxResult(props: {
                               marginLeft: "4px",
                             })}
                           />
+                        </Grid>
+                      )}
+                      {item.modifier != null && (
+                        <Grid item>
+                          <Box
+                            className={css({
+                              label:
+                                "DiceBoxResult-rollType-DiceCommand-modifier",
+                              fontFamily: isFate ? FontFamily.Fate : "inherit",
+                              marginLeft: isFate ? ".2rem" : undefined,
+                              verticalAlign: "middle",
+                            })}
+                          >
+                            &nbsp;{"+"}&nbsp;
+                            {item.modifier}
+                          </Box>
                         </Grid>
                       )}
                     </Grid>

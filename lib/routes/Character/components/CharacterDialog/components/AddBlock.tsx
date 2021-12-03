@@ -37,6 +37,7 @@ export const AddBlock: React.FC<
     >
       {variant === "button" ? (
         <Button
+          size="small"
           color="inherit"
           variant="outlined"
           onClick={(e) => {
