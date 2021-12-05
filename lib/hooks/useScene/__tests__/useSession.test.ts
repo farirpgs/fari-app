@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
 import { BlankTLDrawDocument } from "../../../routes/Draw/TLDraw";
@@ -60,13 +64,12 @@ describe("useSession", () => {
       // THEN
       expect(result.current.state.session.gm.npcs[0]).toEqual({
         character: undefined,
-        id: "1",
+        id: expect.anything(),
         isGM: false,
         private: false,
         points: "3",
         playedDuringTurn: false,
-        offline: false,
-        playerName: "RP",
+        playerName: "Character #1",
         rolls: [],
       });
       // WHEN player plays (fp, rolls, initiative)
@@ -229,15 +232,15 @@ describe("useSession", () => {
       result.current.actions.fireGoodConfetti();
     });
     // THEN
-    expect(result.current.state.session.goodConfetti).toEqual(0);
+    expect(result.current.state.session.goodConfetti).toEqual(1);
     expect(result.current.state.session.badConfetti).toEqual(0);
     // WHEN bad confetti
     act(() => {
       result.current.actions.fireBadConfetti();
     });
     // THEN
-    expect(result.current.state.session.goodConfetti).toEqual(0);
-    expect(result.current.state.session.badConfetti).toEqual(0);
+    expect(result.current.state.session.goodConfetti).toEqual(1);
+    expect(result.current.state.session.badConfetti).toEqual(1);
   });
 
   describe("overrideSession", () => {
