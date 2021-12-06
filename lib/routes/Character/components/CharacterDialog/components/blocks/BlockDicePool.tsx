@@ -5,18 +5,16 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import Badge from "@mui/material/Badge";
 import Box, { BoxProps } from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
-import Fade from "@mui/material/Fade";
+import Collapse from "@mui/material/Collapse";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import { darken, lighten, useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
-import { default as React, useContext, useState } from "react";
-import {
-  ContentEditable,
-  previewContentEditable,
-} from "../../../../../../components/ContentEditable/ContentEditable";
+import { default as React, useContext, useEffect, useState } from "react";
+import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
+import { Delays } from "../../../../../../constants/Delays";
 import { DiceContext } from "../../../../../../contexts/DiceContext/DiceContext";
 import {
   BlockType,
@@ -50,13 +48,12 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
   const theme = useTheme();
   const diceManager = useContext(DiceContext);
   const [hover, setHover] = useState(false);
+  const [hoverControlsVisible, setHoverControlsVisible] = useState(false);
   const hasCommands = !!props.block.meta.commands?.length;
   const canRoll = !props.readonly && hasCommands;
   const isSelected = diceManager.state.pool.some(
     (p) => p.blockId === props.block.id
   );
-  const isLabelVisible =
-    !!previewContentEditable({ value: props.block.label }) || props.advanced;
   const isToggleVisible =
     props.block.meta?.checked === true || props.block.meta?.checked === false;
 
@@ -71,6 +68,18 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
   const firstCommand = commands[0];
   const isAllTheSameCommand =
     !!firstCommand && commands.every((c) => c === firstCommand);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (hover) {
+      timeout = setTimeout(() => {
+        setHoverControlsVisible(true);
+      }, Delays.blockHoverControls);
+    } else {
+      setHoverControlsVisible(false);
+    }
+    return () => clearTimeout(timeout);
+  }, [hover]);
 
   function handleOnAddDiceFrom() {
     props.onMetaChange({
@@ -150,47 +159,49 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
         </Grid>
 
         {!props.readonly && (
-          <Fade in={hover}>
-            <Grid container alignItems="center">
-              {isAllTheSameCommand && (
-                <Grid item>
-                  <Tooltip title={t("character-dialog.control.remove-one")}>
-                    <IconButton
-                      size="small"
-                      color="inherit"
-                      data-cy={`${props.dataCy}.remove-box`}
-                      onClick={() => {
-                        handleOnRemoveDiceFrom();
-                      }}
-                    >
-                      <RemoveCircleOutlineIcon
-                        className={css({ width: "1.1rem", height: "1.1rem" })}
-                      />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-              )}
-              <Grid item>{renderSetDice()}</Grid>
-              {isAllTheSameCommand && (
-                <Grid item>
-                  <Tooltip title={t("character-dialog.control.add-one")}>
-                    <IconButton
-                      color="inherit"
-                      data-cy={`${props.dataCy}.add-box`}
-                      size="small"
-                      onClick={() => {
-                        handleOnAddDiceFrom();
-                      }}
-                    >
-                      <AddCircleOutlineIcon
-                        className={css({ width: "1.1rem", height: "1.1rem" })}
-                      />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-              )}
-            </Grid>
-          </Fade>
+          <Collapse in={hoverControlsVisible}>
+            <Box>
+              <Grid container alignItems="center">
+                {isAllTheSameCommand && (
+                  <Grid item>
+                    <Tooltip title={t("character-dialog.control.remove-one")}>
+                      <IconButton
+                        size="small"
+                        color="inherit"
+                        data-cy={`${props.dataCy}.remove-box`}
+                        onClick={() => {
+                          handleOnRemoveDiceFrom();
+                        }}
+                      >
+                        <RemoveCircleOutlineIcon
+                          className={css({ width: "1.1rem", height: "1.1rem" })}
+                        />
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                )}
+                <Grid item>{renderSetDice()}</Grid>
+                {isAllTheSameCommand && (
+                  <Grid item>
+                    <Tooltip title={t("character-dialog.control.add-one")}>
+                      <IconButton
+                        color="inherit"
+                        data-cy={`${props.dataCy}.add-box`}
+                        size="small"
+                        onClick={() => {
+                          handleOnAddDiceFrom();
+                        }}
+                      >
+                        <AddCircleOutlineIcon
+                          className={css({ width: "1.1rem", height: "1.1rem" })}
+                        />
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                )}
+              </Grid>
+            </Box>
+          </Collapse>
         )}
       </Box>
     </>
@@ -241,44 +252,6 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
         block={props.block}
         onMetaChange={props.onMetaChange}
       />
-    );
-  }
-  function renderDiceIncrementDecrementActions() {
-    return (
-      <Box>
-        <Box>
-          <Tooltip title={t("character-dialog.control.add-one")}>
-            <IconButton
-              color="inherit"
-              data-cy={`${props.dataCy}.add-box`}
-              size="small"
-              onClick={() => {
-                handleOnAddDiceFrom();
-              }}
-            >
-              <AddCircleOutlineIcon
-                className={css({ width: "1.1rem", height: "1.1rem" })}
-              />
-            </IconButton>
-          </Tooltip>
-        </Box>
-        <Box>
-          <Tooltip title={t("character-dialog.control.remove-one")}>
-            <IconButton
-              size="small"
-              color="inherit"
-              data-cy={`${props.dataCy}.remove-box`}
-              onClick={() => {
-                handleOnRemoveDiceFrom();
-              }}
-            >
-              <RemoveCircleOutlineIcon
-                className={css({ width: "1.1rem", height: "1.1rem" })}
-              />
-            </IconButton>
-          </Tooltip>
-        </Box>
-      </Box>
     );
   }
 
@@ -348,7 +321,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
             const count = commandsCount[id];
             return (
               <Grid item key={index}>
-                <Tooltip title={commandSet.label} placement="top">
+                <Tooltip title={commandSet.label} placement="left">
                   <Badge
                     badgeContent={count}
                     color="default"

@@ -13,7 +13,6 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { ICharacter, ISection } from "../../domains/character/types";
-import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { BlockByType } from "../Character/components/CharacterDialog/components/BlockByType";
 
@@ -29,8 +28,6 @@ export const CharacterPrintRoute: React.FC<{
   const [character, setCharacter] = useState<ICharacter | undefined>(undefined);
   const myBinderManager = useContext(MyBinderContext);
   const logger = useLogger();
-
-  const query = useQuery<"dev">();
 
   useEffect(() => {
     logger.track("character.print");
