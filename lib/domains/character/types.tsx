@@ -206,6 +206,7 @@ export type ISeparatorBlock = {
   value: unknown;
   meta: IDefaultBlockMeta & {
     hasLabel: boolean;
+    hideDivider?: boolean;
   };
 };
 

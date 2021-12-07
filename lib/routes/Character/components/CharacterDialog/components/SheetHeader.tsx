@@ -54,7 +54,7 @@ export const SheetHeader: React.FC<{
             />
           </FateLabel>
         </Grid>
-        {props.advanced && <>{props.actions}</>}
+        {props.advanced && <Grid item>{props.actions}</Grid>}
       </Grid>
     </Box>
   );

@@ -470,38 +470,6 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function moveDnDSection(
-    indexes: {
-      pageIndex: number;
-      rowIndex: number;
-      columnIndex: number;
-    },
-    dragIndex: number,
-    hoverIndex: number
-  ) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-
-        if (dragIndex === undefined || hoverIndex === undefined) {
-          return;
-        }
-
-        const column =
-          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
-            indexes.columnIndex
-          ];
-
-        const dragItem = column.sections[dragIndex];
-
-        column.sections.splice(dragIndex, 1);
-        column.sections.splice(hoverIndex, 0, dragItem);
-      })
-    );
-  }
-
   function moveDnDBlock(
     indexes: {
       pageIndex: number;
@@ -535,14 +503,64 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
+  function moveBlockUp(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+    blockIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+          indexes.columnIndex
+        ].sections[indexes.sectionIndex].blocks = moveValueInList(
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex].blocks,
+          indexes.blockIndex,
+          "up"
+        );
+      })
+    );
+  }
+
+  function moveBlockDown(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+    blockIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+          indexes.columnIndex
+        ].sections[indexes.sectionIndex].blocks = moveValueInList(
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex].blocks,
+          indexes.blockIndex,
+          "down"
+        );
+      })
+    );
+  }
+
   function setBlock(
     indexes: {
       pageIndex: number;
       rowIndex: number;
       columnIndex: number;
       sectionIndex: number;
+      blockIndex: number;
     },
-    blockIndex: number,
     block: IBlock
   ) {
     setCharacter(
@@ -554,7 +572,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
             indexes.columnIndex
           ].sections[indexes.sectionIndex];
-        section.blocks[blockIndex] = block;
+        section.blocks[indexes.blockIndex] = block;
       })
     );
   }
@@ -565,8 +583,8 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       rowIndex: number;
       columnIndex: number;
       sectionIndex: number;
+      blockIndex: number;
     },
-    blockIndex: number,
     meta: any
   ) {
     setCharacter(
@@ -578,7 +596,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
             indexes.columnIndex
           ].sections[indexes.sectionIndex];
-        section.blocks[blockIndex].meta = meta;
+        section.blocks[indexes.blockIndex].meta = meta;
       })
     );
   }
@@ -614,26 +632,24 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function deleteBlock(
-    index: {
-      pageIndex: number;
-      rowIndex: number;
-      columnIndex: number;
-      sectionIndex: number;
-    },
-    blockIndex: number
-  ) {
+  function deleteBlock(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+    blockIndex: number;
+  }) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
         const section =
-          draft.pages[index.pageIndex].rows[index.rowIndex].columns[
-            index.columnIndex
-          ].sections[index.sectionIndex];
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex];
         section.blocks = section.blocks.filter((field, index) => {
-          return index !== blockIndex;
+          return index !== indexes.blockIndex;
         });
       })
     );
@@ -702,6 +718,8 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       addBlock,
       duplicatePage,
       moveDnDBlock,
+      moveBlockUp,
+      moveBlockDown,
       setBlock,
       setBlockMeta,
       toggleBlockMainPointCounter,
