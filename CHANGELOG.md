@@ -1,11 +1,14 @@
 # Changelog
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
+
 # v6.0.0
 
-- feat: cloud infra for real time features
+- feat: new cloud infra for real time features
 - feat: new drawing area
-- feat: character sheet rows and columns
+- feat: character sheet now support rows and columns
+- feat: copy/paste blocks from character sheets
+
 # v5.3
 
 - feat: Dice Pool block enhancements
