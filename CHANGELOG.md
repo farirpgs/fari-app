@@ -18,6 +18,10 @@
 - tech: update to MUI 5
 - fix: typo in Fate spanish sheets
 
+**v5.3.3**
+
+- feat: collapsible dice pool controls
+
 **v5.3.1**
 
 - fix: remove default property from character sheet template
