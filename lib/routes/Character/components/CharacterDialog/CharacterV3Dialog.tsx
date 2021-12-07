@@ -1551,7 +1551,7 @@ export const CharacterV3Dialog: React.FC<{
                     }}
                     render={(dndRenderProps) => {
                       return (
-                        <Box>
+                        <Box mb=".5rem">
                           <ManagerBox
                             label={<>Bloc #{blockIndex + 1}</>}
                             readonly={!advanced}
