@@ -282,11 +282,11 @@ export function BlockDicePool(
           if (!canRoll) {
             return;
           }
-
           const rollGroup = BlockSelectors.getRollGroupFromBlock(props.block);
           const diceRollResult = diceManager.actions.roll([rollGroup], {
             listResults: listResults,
           });
+
           props.onRoll(diceRollResult);
         }}
       >

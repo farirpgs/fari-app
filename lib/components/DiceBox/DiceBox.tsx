@@ -312,121 +312,141 @@ export function DiceBoxResult(props: {
     diceRollsManager.state.finalResult?.options.listResults ?? false;
   const separator = shouldListResult ? "~" : "+";
 
-  const items = diceRollsManager.state.finalResultRolls.flatMap(
-    (rollGroup, i) => {
-      const color = !props.noColor ? DiceLabelsColors[i] : undefined;
-
-      const commandSets = rollGroup.commandSets.flatMap((commandSet) => {
-        return commandSet.commands.flatMap((command) => {
-          return {
-            name: command.name,
-            value: command.value,
-            modifier: rollGroup.modifier,
-            commandSetId: commandSet.id,
-            label: rollGroup.label,
-            color: color,
-          };
-        });
-      });
-      return shouldListResult
-        ? arraySort(commandSets, [
-            (c) => ({
-              value: c.value.toString(),
-              direction: "desc",
-            }),
-          ])
-        : commandSets;
-    }
-  );
-
   return (
     <>
       <Grid container justifyContent="flex-start" alignItems="center">
-        {items.map((item, itemIndex) => {
-          const isFirst = itemIndex === 0;
-          const isFate = item.name === "1dF";
-          const options = CommmandSetOptions[item.commandSetId];
-          const diceCommandOptions = DiceCommandOptions[item.name!];
+        {diceRollsManager.state.finalResultRolls.map(
+          (rollGroup, rollGroupIndex) => {
+            const rollGroupTextColor = !props.noColor
+              ? DiceLabelsColors[rollGroupIndex]
+              : undefined;
 
-          const IconForPool = options.icon;
+            return (
+              <React.Fragment key={rollGroupIndex}>
+                {rollGroup.commandSets.map((commandSet, commandSetIndex) => {
+                  const commandSetOptions = CommmandSetOptions[commandSet.id];
 
-          return (
-            <React.Fragment key={itemIndex}>
-              {!isFirst && (
-                <Grid
-                  item
-                  className={css({
-                    label: "DiceBoxResult-rollType-DiceCommand-separator",
-                    display: "flex",
-                    margin: "0 4px",
-                    fontSize: ".8rem",
-                  })}
-                >
-                  {separator}
-                </Grid>
-              )}
-              <Grid item>
-                <Tooltip
-                  title={
-                    item.label
-                      ? `${item.commandSetId} (${item.label})`
-                      : item.commandSetId
-                  }
-                >
-                  <Box
-                    className={css({
-                      color: item.color ? item.color : undefined,
-                      borderBottom: item.color
-                        ? `3px solid ${item.color}`
-                        : undefined,
-                    })}
-                  >
-                    <Grid container alignItems="center">
-                      <Grid item>
-                        <Box
+                  const sortedCommands = shouldListResult
+                    ? arraySort(commandSet.commands, [
+                        (c) => ({
+                          value: c.value.toString(),
+                          direction: "desc",
+                        }),
+                      ])
+                    : commandSet.commands;
+                  return (
+                    <React.Fragment key={commandSetIndex}>
+                      {commandSetIndex !== 0 && (
+                        <Grid
+                          item
                           className={css({
-                            label: "DiceBoxResult-rollType-DiceCommand-value",
-                            fontFamily: isFate ? FontFamily.Fate : "inherit",
-                            marginLeft: isFate ? ".2rem" : undefined,
-                            verticalAlign: "middle",
+                            label:
+                              "DiceBoxResult-rollType-DiceCommand-separator",
+                            display: "flex",
+                            margin: "0 4px",
                           })}
                         >
-                          {diceCommandOptions.formatDetailedResult(item.value)}
-                        </Box>
-                      </Grid>
-                      {!isFate && (
-                        <Grid item>
-                          <IconForPool
-                            className={css({
-                              display: "flex",
-                              marginLeft: "4px",
-                            })}
-                          />
+                          {separator}
                         </Grid>
                       )}
-                      {item.modifier != null && (
-                        <Grid item>
-                          <Box
-                            className={css({
-                              label:
-                                "DiceBoxResult-rollType-DiceCommand-modifier",
-                              fontFamily: isFate ? FontFamily.Fate : "inherit",
-                              marginLeft: isFate ? ".2rem" : undefined,
-                              verticalAlign: "middle",
-                            })}
-                          >
-                            &nbsp;{"+"}&nbsp;
-                            {item.modifier}
-                          </Box>
-                        </Grid>
-                      )}
-                    </Grid>
-                  </Box>
-                </Tooltip>
-              </Grid>
-            </React.Fragment>
-          );
-        })}
+                      {sortedCommands.map((command, commandIndex) => {
+                        const isFate = command.name === "1dF";
+                        const diceCommandOptions =
+                          DiceCommandOptions[command.name!];
+
+                        const IconForPool = commandSetOptions.icon;
+                        return (
+                          <React.Fragment key={commandIndex}>
+                            {commandIndex !== 0 && (
+                              <Grid
+                                item
+                                className={css({
+                                  label:
+                                    "DiceBoxResult-rollType-DiceCommand-separator",
+                                  display: "flex",
+                                  margin: "0 4px",
+                                })}
+                              >
+                                {separator}
+                              </Grid>
+                            )}
+                            <Grid item>
+                              <Tooltip
+                                title={
+                                  rollGroup.label
+                                    ? `${commandSet.id} (${rollGroup.label})`
+                                    : commandSet.id
+                                }
+                              >
+                                <Box
+                                  className={css({
+                                    color: rollGroupTextColor
+                                      ? rollGroupTextColor
+                                      : undefined,
+                                    borderBottom: rollGroupTextColor
+                                      ? `3px solid ${rollGroupTextColor}`
+                                      : undefined,
+                                  })}
+                                >
+                                  <Grid container alignItems="center">
+                                    <Grid item>
+                                      <Box
+                                        className={css({
+                                          label:
+                                            "DiceBoxResult-rollType-DiceCommand-value",
+                                          fontFamily: isFate
+                                            ? FontFamily.Fate
+                                            : "inherit",
+                                          marginLeft: isFate
+                                            ? ".2rem"
+                                            : ".2rem",
+                                          verticalAlign: "middle",
+                                        })}
+                                      >
+                                        {diceCommandOptions.formatDetailedResult(
+                                          command.value
+                                        )}
+                                      </Box>
+                                    </Grid>
+                                    {!isFate && (
+                                      <Grid item>
+                                        <IconForPool
+                                          className={css({
+                                            display: "flex",
+                                            marginLeft: "4px",
+                                          })}
+                                        />
+                                      </Grid>
+                                    )}
+                                  </Grid>
+                                </Box>
+                              </Tooltip>
+                            </Grid>
+                          </React.Fragment>
+                        );
+                      })}
+                    </React.Fragment>
+                  );
+                })}
+                {rollGroup.modifier != null && (
+                  <Grid item>
+                    <Box
+                      className={css({
+                        label: "DiceBoxResult-rollType-DiceCommand-modifier",
+                        // fontFamily: isFate ? FontFamily.Fate : "inherit",
+                        // marginLeft: isFate ? ".2rem" : undefined,
+                        verticalAlign: "middle",
+                      })}
+                    >
+                      &nbsp;{"+"}&nbsp;
+                      {rollGroup.modifier}
+                    </Box>
+                  </Grid>
+                )}
+              </React.Fragment>
+            );
+          }
+        )}
       </Grid>
     </>
   );
