@@ -228,6 +228,12 @@ export const CharacterFactory = {
         );
         return this.makeFromJson(jsonData);
       },
+      [CharacterTemplates.FateCoreGerman]: async () => {
+        const jsonData = await import(
+          "./character-templates/FateCoreGerman.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
       [CharacterTemplates.FateCondensedTurkish]: async () => {
         const jsonData = await import(
           "./character-templates/FateCondensedTurkish.json"

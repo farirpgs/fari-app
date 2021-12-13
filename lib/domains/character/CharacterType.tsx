@@ -14,6 +14,7 @@ export enum CharacterTemplates {
   EvolutionPulse_Obscura = "EvolutionPulse_Obscura",
   EvolutionPulse_Proxy = "EvolutionPulse_Proxy",
   FateCoreSpanish = "FateCoreSpanish",
+  FateCoreGerman = "FateCoreGerman",
   FateCondensedSpanish = "FateCondensedSpanish",
   FateCondensedBrazilianPortuguese = "FateCondensedBrazilianPortuguese",
   FateAcceleratedBrazilianPortuguese = "FateAcceleratedBrazilianPortuguese",
