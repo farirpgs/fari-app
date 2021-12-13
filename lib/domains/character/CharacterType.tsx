@@ -67,6 +67,10 @@ export const CharacterTemplatesWithGroups: Array<ICharacterTemplateWithGroup> =
     },
     { group: "Fate (Spanish)", template: CharacterTemplates.FateCoreSpanish },
     {
+      group: "Fate (German)",
+      template: CharacterTemplates.FateCoreGerman,
+    },
+    {
       group: "Fate (Turkish)",
       template: CharacterTemplates.FateCondensedTurkish,
     },
