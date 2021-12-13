@@ -105,7 +105,7 @@ export const HomeRoute: React.FC<{}> = () => {
                   color="primary"
                   uppercase={false}
                 >
-                  {"Fari"}
+                  {"Fari App"}
                 </FateLabel>
               </Grid>
             </Grid>
