@@ -14,7 +14,7 @@ export const PageMeta: React.FC<{
 
   const title = propsTitle
     ? `${propsTitle} | Fari `
-    : `Fari | ${t("home-route.meta.title")}`;
+    : `Fari App| ${t("home-route.meta.title")}`;
   const meta = [];
 
   meta.push({
