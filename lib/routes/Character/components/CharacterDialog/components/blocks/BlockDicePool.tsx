@@ -105,30 +105,6 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
           setHover(false);
         }}
       >
-        {/* {isLabelVisible && (
-          <Box pb=".5rem">
-            <Grid
-              container
-              spacing={1}
-              justifyContent="space-between"
-              wrap="nowrap"
-            >
-              <Grid item xs>
-                <FateLabel display="inline" align="center">
-                  <ContentEditable
-                    readonly={props.readonly || !props.advanced}
-                    border={props.advanced}
-                    data-cy={`${props.dataCy}.label`}
-                    value={props.block.label}
-                    onChange={(value) => {
-                      props.onLabelChange(value);
-                    }}
-                  />
-                </FateLabel>
-              </Grid>
-            </Grid>
-          </Box>
-        )} */}
         <Grid
           container
           spacing={1}
@@ -136,9 +112,6 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
           alignItems="center"
           wrap="nowrap"
         >
-          {/* {!props.readonly && isAllTheSameCommand && (
-            <Grid item>{renderDiceIncrementDecrementActions()}</Grid>
-          )} */}
           <Grid
             item
             className={css({
