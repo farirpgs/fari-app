@@ -48,13 +48,13 @@ export function useLatestDiceRoll(
       } else if (
         commandGroup?.goodRoll &&
         latestPlayerRoll?.totalWithoutModifiers >= commandGroup?.goodRoll &&
-        !latestPlayerRoll.options.listResults
+        latestPlayerRoll.options.listResults !== true
       ) {
         setColor(darken(theme.palette.success.main, 0.2));
       } else if (
         commandGroup?.badRoll &&
         latestPlayerRoll?.totalWithoutModifiers <= commandGroup?.badRoll &&
-        !latestPlayerRoll.options.listResults
+        latestPlayerRoll.options.listResults !== true
       ) {
         setColor(darken(theme.palette.error.main, 0.2));
       } else {
@@ -101,7 +101,7 @@ export function useLatestDiceRoll(
     setRolling(false);
     setFinalResult(latestPlayerRoll);
     options?.onFinalResult?.(latestPlayerRoll);
-    const isPool = latestPlayerRoll?.options?.listResults;
+    const isPool = latestPlayerRoll?.options?.listResults === true;
 
     if (options?.disableConfettis || isPool) {
       return;

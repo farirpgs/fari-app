@@ -23,7 +23,8 @@ export type IDiceCommandNames =
   | "1d20"
   | "1d100"
   | "coin"
-  | "card";
+  | "card"
+  | "1dC";
 
 export type IDiceCommandSetId = IDiceCommandNames | "4dF" | "2d6";
 
@@ -31,6 +32,15 @@ export const CommmandSetOptions: Record<
   IDiceCommandSetId,
   IDiceCommandSetOption
 > = {
+  "1dC": {
+    id: "1dC",
+    label: "1dC",
+    icon: Icons.Dice6,
+    value: ["1dC"],
+    goodRoll: 6,
+    badRoll: 3,
+    criticalSuccess: 66,
+  },
   "4dF": {
     id: "4dF",
     label: "4dF",
@@ -177,10 +187,14 @@ export const DiceCommandOptions: Record<
     sides: CoinToss,
     formatDetailedResult: formatNormalDie,
   },
+  "1dC": {
+    sides: SixSidedDie,
+    formatDetailedResult: formatNormalDie,
+  },
 };
 
 export type IRollDiceOptions = {
-  listResults: boolean;
+  listResults: boolean | string;
 };
 
 export type IRollGroup = {
@@ -230,6 +244,7 @@ export const Dice = {
     let total = 0;
     let totalWithoutModifiers = 0;
     let containsSomethingElseThanNumberValues = false;
+    let specialListResults = "";
     const rollGroupsWithResult: Array<IRollGroupResult> =
       rollGroups.map<IRollGroupResult>((rollGroup) => {
         if (rollGroup.modifier) {
@@ -250,8 +265,10 @@ export const Dice = {
                   const sides = diceOption.sides;
                   const side = getRandomDiceSide(sides.length);
                   const result = sides[side];
-
-                  if (typeof result === "number") {
+                  if (commandName === "1dC" && typeof result === "number") {
+                    total = totalWithoutModifiers = rollCharge(result, total);
+                    specialListResults = "charge";
+                  } else if (typeof result === "number") {
                     total += result;
                     totalWithoutModifiers += result;
                   } else {
@@ -275,7 +292,9 @@ export const Dice = {
       rollGroups: rollGroupsWithResult,
       options: {
         listResults: containsSomethingElseThanNumberValues
-          ? true
+          ? containsSomethingElseThanNumberValues
+          : specialListResults
+          ? specialListResults
           : options.listResults,
       },
     };
@@ -284,7 +303,7 @@ export const Dice = {
   findCommandGroupOptionsMatchForResult(result: IDiceRollResult | undefined) {
     const flatCommandNames = result?.rollGroups
       .flatMap((rollGroup) => rollGroup)
-      .flatMap((rollGroup) => rollGroup.commandSets)
+      .flatMap((rollGroup) => rollGroup.commandSets[0])
       .flatMap((commandSet) => commandSet.commands)
       .flatMap((command) => command.name)
       .filter((c) => !!c) as Array<IDiceCommandNames>;
@@ -385,4 +404,14 @@ function formatFateDie(value: number | string) {
 
 function formatNormalDie(value: number | string) {
   return value.toString();
+}
+
+function rollCharge(result: number, total: number) {
+  if (total === 6 && result === 6) {
+    return 66;
+  } else if (result > total) {
+    return result;
+  } else {
+    return total;
+  }
 }

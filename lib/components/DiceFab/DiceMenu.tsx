@@ -106,6 +106,7 @@ export function DiceMenu(props: {
                       CommmandSetOptions["coin"],
                       CommmandSetOptions["card"],
                       CommmandSetOptions["2d6"],
+                      CommmandSetOptions["1dC"],
                     ])}
 
                     {(props.onClear || props.onCtaClick) && (
@@ -118,6 +119,8 @@ export function DiceMenu(props: {
                                   <Switch
                                     checked={
                                       diceManager.state.options.listResults
+                                        ? true
+                                        : false
                                     }
                                     onChange={() => {
                                       diceManager.actions.setOptions({

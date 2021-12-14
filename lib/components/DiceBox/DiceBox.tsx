@@ -279,7 +279,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
           >
             {diceRollsManager.state.finalResultHidden
               ? ""
-              : shouldListResult
+              : shouldListResult === true
               ? "~"
               : diceRollsManager.state.finalResultTotal}
           </Typography>
