@@ -116,7 +116,6 @@ export function MyBinder<TFolders extends string>(props: {
 
   useEffect(() => {
     searchInputRef.current?.focus();
-    debugger;
   }, [currentFolder]);
 
   useEffect(
