@@ -299,10 +299,6 @@ export function BlockByType(
       return null;
     }
 
-    // const isCenter =
-    //   props.block.type === BlockType.DicePool ||
-    //   props.block.type === BlockType.PointCounter;
-
     return (
       <Box>
         <Grid container alignItems="flex-start" wrap="nowrap">
