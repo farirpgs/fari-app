@@ -23,6 +23,7 @@ import {
 } from "../../../../../../domains/character/types";
 import {
   IDiceCommandSetId,
+  IRollDiceOptions,
   IRollGroup,
 } from "../../../../../../domains/dice/Dice";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
@@ -192,10 +193,12 @@ export function BlockDicePool(
     return (
       <DiceMenuForCharacterSheet
         commandSetIds={commands}
-        onChange={(newCommandIds) => {
+        options={props.block.meta.options}
+        onChange={(newCommandIds, options: IRollDiceOptions) => {
           props.onMetaChange({
             ...props.block.meta,
             commands: newCommandIds,
+            options: options,
           });
         }}
         render={(diceMenuProps) => (

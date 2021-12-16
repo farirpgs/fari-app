@@ -181,6 +181,11 @@ export const DiceCommandOptions: Record<
 
 export type IRollDiceOptions = {
   listResults: boolean;
+  highlight?: IRollDiceOptionsHighlight;
+};
+export type IRollDiceOptionsHighlight = {
+  value: number;
+  using: "highest" | "lowest";
 };
 
 export type IRollGroup = {
@@ -274,6 +279,7 @@ export const Dice = {
       totalWithoutModifiers,
       rollGroups: rollGroupsWithResult,
       options: {
+        ...options,
         listResults: containsSomethingElseThanNumberValues
           ? true
           : options.listResults,

@@ -65,7 +65,10 @@ function AppContexts(props: { children: ReactNode }) {
   const diceManager = useDice({
     defaultCommands: settingsManager.state.diceCommandIds,
     defaultOptions: settingsManager.state.diceOptions,
-    onCommandSetsChange(commandSetOptions) {
+    onOptionsChange: (options) => {
+      settingsManager.actions.setDiceOptions(options);
+    },
+    onCommandSetsChange: (commandSetOptions) => {
       const commandSetIds = commandSetOptions.map((l) => l.id);
       settingsManager.actions.setDiceCommandsIds(commandSetIds);
     },

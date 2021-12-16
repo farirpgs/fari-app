@@ -1,4 +1,4 @@
-import { IDiceCommandSetId } from "../dice/Dice";
+import { IDiceCommandSetId, IRollDiceOptions } from "../dice/Dice";
 import { CharacterTemplates } from "./CharacterType";
 
 export enum BlockType {
@@ -163,6 +163,7 @@ export type IDicePoolBlock = {
   meta: IDefaultBlockMeta & {
     checked?: boolean;
     commands?: Array<IDiceCommandSetId>;
+    options?: IRollDiceOptions;
   };
   value: string;
 };

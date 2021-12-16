@@ -1,4 +1,6 @@
 import { css } from "@emotion/css";
+import TabContext from "@mui/lab/TabContext";
+import TabPanel from "@mui/lab/TabPanel";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -6,10 +8,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import Grow from "@mui/material/Grow";
 import IconButton from "@mui/material/IconButton";
+import NativeSelect from "@mui/material/NativeSelect";
 import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import { useTheme } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 import React, { useContext } from "react";
 import { useZIndex } from "../../constants/zIndex";
@@ -17,26 +22,62 @@ import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import {
   CommmandSetOptions,
   IDiceCommandSetOption,
+  IRollDiceOptions,
+  IRollDiceOptionsHighlight,
 } from "../../domains/dice/Dice";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { CircleTextField } from "../../routes/Character/components/CharacterDialog/components/CircleTextField";
 
 export function DiceMenu(props: {
   anchorEl: any;
   open: boolean;
   ctaLabel?: string;
   commands: Array<IDiceCommandSetOption>;
+  options: IRollDiceOptions | undefined;
   showPoolToggle: boolean;
   onCtaClick?(): void;
   onClose?(): void;
   onClear?(): void;
-  onDiceCommandChange: React.Dispatch<
+  onDispatchDiceCommandChange: React.Dispatch<
     React.SetStateAction<IDiceCommandSetOption[]>
+  >;
+  onDispatchOptionsChange: React.Dispatch<
+    React.SetStateAction<IRollDiceOptions | undefined>
   >;
 }) {
   const theme = useTheme();
   const zIndex = useZIndex();
   const { t } = useTranslate();
   const diceManager = useContext(DiceContext);
+  const [tab, setTab] = React.useState<"dice" | "options">("dice");
+  const highlightOptions: IRollDiceOptionsHighlight = {
+    value: props.options.highlight?.value ?? 0,
+    using: props.options.highlight?.using ?? "highest",
+  };
+
+  function handleOnHighlightOptionsValueChange(value: number) {
+    props.onDispatchOptionsChange((prev) => {
+      return {
+        ...prev,
+        highlight: {
+          ...highlightOptions,
+          value: value,
+        },
+      };
+    });
+  }
+
+  function handleOnHighlightOptionsUsingChange(value: string) {
+    props.onDispatchOptionsChange((prev) => {
+      return {
+        ...prev,
+        highlight: {
+          ...highlightOptions,
+          using: value as IRollDiceOptionsHighlight["using"],
+        },
+      };
+    });
+  }
 
   return <>{renderPopper()}</>;
 
@@ -85,83 +126,155 @@ export function DiceMenu(props: {
             >
               <Paper elevation={6}>
                 <Box maxHeight="70vh" overflow="auto">
-                  <Box p="1rem">
-                    {renderCommandSetHeader("Fate")}
-                    {renderOptions([
-                      CommmandSetOptions["4dF"],
-                      CommmandSetOptions["1dF"],
-                    ])}
-                    {renderCommandSetHeader("D20s")}
-                    {renderOptions([
-                      CommmandSetOptions["1d4"],
-                      CommmandSetOptions["1d6"],
-                      CommmandSetOptions["1d8"],
-                      CommmandSetOptions["1d10"],
-                      CommmandSetOptions["1d12"],
-                      CommmandSetOptions["1d20"],
-                      CommmandSetOptions["1d100"],
-                    ])}
-                    {renderCommandSetHeader("Misc")}
-                    {renderOptions([
-                      CommmandSetOptions["coin"],
-                      CommmandSetOptions["card"],
-                      CommmandSetOptions["2d6"],
-                    ])}
-
-                    {(props.onClear || props.onCtaClick) && (
-                      <Box mt="1.5rem">
-                        <Grid container justifyContent="center" spacing={2}>
-                          {props.showPoolToggle && (
-                            <Grid item>
-                              <FormControlLabel
-                                control={
-                                  <Switch
-                                    checked={
-                                      diceManager.state.options.listResults
-                                    }
-                                    onChange={() => {
-                                      diceManager.actions.setOptions({
-                                        listResults:
-                                          !diceManager.state.options
-                                            .listResults,
-                                      });
-                                    }}
-                                    color="primary"
-                                  />
-                                }
-                                label={t("dice-fab.pool")}
-                              />
-                            </Grid>
-                          )}
-                          {props.onClear && (
-                            <Grid item>
-                              <Button variant="text" onClick={props.onClear}>
-                                {"Reset"}
-                              </Button>
-                            </Grid>
-                          )}
-
-                          {props.onCtaClick && (
-                            <Grid item>
-                              <Button
-                                color="primary"
-                                variant="contained"
-                                onClick={props.onCtaClick}
-                              >
-                                {props.ctaLabel}
-                              </Button>
-                            </Grid>
-                          )}
-                        </Grid>
-                      </Box>
-                    )}
-                  </Box>
+                  {renderMenu()}
                 </Box>
               </Paper>
             </Box>
           </Grow>
         )}
       </Popper>
+    );
+  }
+
+  function renderMenu() {
+    return (
+      <Box p="1rem">
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <TabContext value={tab}>
+            <Tabs
+              value={tab}
+              onChange={(event, newTab) => {
+                setTab(newTab);
+              }}
+            >
+              <Tab label="Dice" value={"dice"} />
+              <Tab label="Options" value={"options"} />
+            </Tabs>
+            <TabPanel value={"dice"}>
+              {renderCommandSetHeader("Standard Dice")}
+              {renderOptions([
+                CommmandSetOptions["1d4"],
+                CommmandSetOptions["1d6"],
+                CommmandSetOptions["1d8"],
+                CommmandSetOptions["1d10"],
+                CommmandSetOptions["1d12"],
+                CommmandSetOptions["1d20"],
+                CommmandSetOptions["1d100"],
+              ])}
+              {renderCommandSetHeader("Misc")}
+              {renderOptions([
+                CommmandSetOptions["4dF"],
+                CommmandSetOptions["1dF"],
+                CommmandSetOptions["coin"],
+                CommmandSetOptions["card"],
+                CommmandSetOptions["2d6"],
+              ])}
+
+              {renderActions()}
+            </TabPanel>
+            <TabPanel value={"options"}>
+              <Box minHeight={"15rem"}>
+                <Grid container alignItems="center" spacing={1}>
+                  <Grid item>
+                    <Typography sx={{ fontSize: "1.2rem" }}>
+                      Highlight
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <CircleTextField
+                      value={highlightOptions.value.toString()}
+                      onIncrement={() => {
+                        handleOnHighlightOptionsValueChange(
+                          highlightOptions.value + 1
+                        );
+                      }}
+                      onDecrement={() => {
+                        handleOnHighlightOptionsValueChange(
+                          highlightOptions.value - 1
+                        );
+                      }}
+                      onChange={(newValue) => {
+                        handleOnHighlightOptionsValueChange(parseInt(newValue));
+                      }}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <NativeSelect
+                      value={highlightOptions.using}
+                      onChange={(event) => {
+                        handleOnHighlightOptionsUsingChange(event.target.value);
+                      }}
+                      inputProps={{
+                        sx: {
+                          paddingTop: "0",
+                          // paddingBottom: "0",
+                          fontSize: "1.2rem",
+                        },
+                      }}
+                    >
+                      <option value={"highest"}>highest</option>
+                      <option value={"lowest"}>lowest</option>
+                    </NativeSelect>
+                  </Grid>
+                  <Grid>
+                    <Typography sx={{ fontSize: "1.2rem" }}>values.</Typography>
+                  </Grid>
+                </Grid>
+              </Box>
+            </TabPanel>
+          </TabContext>
+        </Box>
+      </Box>
+    );
+  }
+
+  function renderActions() {
+    return (
+      <>
+        {(props.onClear || props.onCtaClick) && (
+          <Box mt="1.5rem">
+            <Grid container justifyContent="center" spacing={2}>
+              {props.showPoolToggle && (
+                <Grid item>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={diceManager.state.options.listResults}
+                        onChange={() => {
+                          diceManager.actions.setOptions({
+                            listResults: !diceManager.state.options.listResults,
+                          });
+                        }}
+                        color="primary"
+                      />
+                    }
+                    label={t("dice-fab.pool")}
+                  />
+                </Grid>
+              )}
+              {props.onClear && (
+                <Grid item>
+                  <Button variant="text" onClick={props.onClear}>
+                    {"Reset"}
+                  </Button>
+                </Grid>
+              )}
+
+              {props.onCtaClick && (
+                <Grid item>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={props.onCtaClick}
+                  >
+                    {props.ctaLabel}
+                  </Button>
+                </Grid>
+              )}
+            </Grid>
+          </Box>
+        )}
+      </>
     );
   }
 
@@ -200,13 +313,13 @@ export function DiceMenu(props: {
                     <Grid container item justifyContent="center">
                       <IconButton
                         onClick={() => {
-                          props.onDiceCommandChange((t) => {
+                          props.onDispatchDiceCommandChange((t) => {
                             return [...t, o];
                           });
                         }}
                         onContextMenu={(e) => {
                           e.preventDefault();
-                          props.onDiceCommandChange((draft) => {
+                          props.onDispatchDiceCommandChange((draft) => {
                             const indexToRemove = draft.findIndex(
                               (selectedOption) =>
                                 selectedOption.label === o.label

@@ -19,10 +19,12 @@ export function useDice(props: {
   defaultCommands: Array<IDiceCommandSetId> | null;
   defaultOptions: IRollDiceOptions;
   onCommandSetsChange(commandSets: Array<IDiceCommandSetOption>): void;
+  onOptionsChange(options: IRollDiceOptions): void;
 }) {
   const [options, setOptions] = useState<IRollDiceOptions>(
     props.defaultOptions
   );
+  console.debug("useDice", options);
 
   const [pool, setPool] = useState<IDicePool>([]);
   const [playerId, setPlayerId] = useState<string>();
@@ -42,6 +44,10 @@ export function useDice(props: {
   useEffect(() => {
     props.onCommandSetsChange(commandSets);
   }, [commandSets]);
+
+  useEffect(() => {
+    props.onOptionsChange(options);
+  }, [options]);
 
   const poolCommandSets = useMemo(() => {
     const poolRollGroups = pool.flatMap((dicePoolElement) => {

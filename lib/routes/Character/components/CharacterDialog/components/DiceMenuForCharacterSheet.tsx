@@ -8,6 +8,7 @@ import {
   CommmandSetOptions,
   IDiceCommandSetId,
   IDiceCommandSetOption,
+  IRollDiceOptions,
 } from "../../../../../domains/dice/Dice";
 import { AppDarkTheme, AppLightTheme } from "../../../../../theme";
 
@@ -19,7 +20,11 @@ type RenderProps = {
 
 export function DiceMenuForCharacterSheet(props: {
   commandSetIds: Array<IDiceCommandSetId>;
-  onChange(newCommandIds: Array<IDiceCommandSetId>): void;
+  options: IRollDiceOptions;
+  onChange(
+    newCommandIds: Array<IDiceCommandSetId>,
+    options: IRollDiceOptions | undefined
+  ): void;
   render(renderProps: RenderProps): JSX.Element;
 }) {
   const [anchorEl, setAnchorEl] = useState<any>(null);
@@ -27,6 +32,7 @@ export function DiceMenuForCharacterSheet(props: {
   const [commandSetIds, setCommandSetIds] = useState<
     Array<IDiceCommandSetOption>
   >([]);
+  const [options, setOptions] = useState<IRollDiceOptions>();
 
   function handleOnMenuOpen(event: React.MouseEvent<any, MouseEvent>) {
     setAnchorEl(event.currentTarget);
@@ -34,7 +40,10 @@ export function DiceMenuForCharacterSheet(props: {
 
   function handleOnNewCommandSelect() {
     setAnchorEl(null);
-    props.onChange(commandSetIds.map((c) => c.id));
+    props.onChange(
+      commandSetIds.map((c) => c.id),
+      options
+    );
   }
 
   function handleOnClear() {
@@ -53,12 +62,12 @@ export function DiceMenuForCharacterSheet(props: {
     setCommandSetIds(newCommands);
   }
 
-  useEffect(
-    function syncPropsWithState() {
-      setCommandsGroupsFromIds(props.commandSetIds);
-    },
-    [props.commandSetIds]
-  );
+  useEffect(() => {
+    setCommandsGroupsFromIds(props.commandSetIds);
+  }, [props.commandSetIds]);
+  useEffect(() => {
+    setOptions(props.options);
+  }, [props.options]);
 
   const settingsManager = useContext(SettingsContext);
 
@@ -84,7 +93,9 @@ export function DiceMenuForCharacterSheet(props: {
                 anchorEl={anchorEl}
                 commands={commandSetIds}
                 showPoolToggle={false}
-                onDiceCommandChange={setCommandSetIds}
+                onDispatchDiceCommandChange={setCommandSetIds}
+                onDispatchOptionsChange={setOptions}
+                options={options}
                 ctaLabel="Select"
                 onClear={handleOnClear}
                 onClose={handleOnMenuClose}

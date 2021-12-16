@@ -92,6 +92,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
   });
   const shouldListResult =
     diceRollsManager.state.finalResult?.options.listResults ?? false;
+
   const separator = shouldListResult ? " • " : " + ";
   const tooltipContent = !diceRollsManager.state.finalResultHidden && (
     <Box
@@ -312,6 +313,21 @@ export function DiceBoxResult(props: {
     diceRollsManager.state.finalResult?.options.listResults ?? false;
   const separator = shouldListResult ? "~" : "+";
 
+  const highlightOptions =
+    diceRollsManager.state.finalResult?.options.highlight;
+  const numberOfValuesToHighlight = highlightOptions?.value ?? 0;
+  const allValues = diceRollsManager.state.finalResultRolls
+    .flatMap((rollGroup) => rollGroup.commandSets)
+    .flatMap((commandSet) => commandSet.commands)
+    .flatMap((command) => command.value);
+  const valuesSortedFromHighestToLowest = allValues.sort((a, b) => b - a);
+  const valuesSortedFromLowestToHighest = allValues.sort((a, b) => a - b);
+  const valuesToHighlight =
+    highlightOptions?.using === "highest"
+      ? valuesSortedFromHighestToLowest.slice(0, numberOfValuesToHighlight)
+      : valuesSortedFromLowestToHighest.slice(0, highlightOptions?.value);
+  let highlightCount = 0;
+
   return (
     <>
       <Grid container justifyContent="flex-start" alignItems="center">
@@ -353,7 +369,12 @@ export function DiceBoxResult(props: {
                         const isFate = command.name === "1dF";
                         const diceCommandOptions =
                           DiceCommandOptions[command.name!];
-
+                        const shouldHighlight =
+                          valuesToHighlight.includes(command.value) &&
+                          highlightCount < numberOfValuesToHighlight;
+                        if (shouldHighlight) {
+                          highlightCount++;
+                        }
                         const IconForPool = commandSetOptions.icon;
                         return (
                           <React.Fragment key={commandIndex}>
@@ -384,6 +405,9 @@ export function DiceBoxResult(props: {
                                       ? rollGroupTextColor
                                       : undefined,
                                     borderBottom: rollGroupTextColor
+                                      ? `3px solid ${rollGroupTextColor}`
+                                      : undefined,
+                                    border: shouldHighlight
                                       ? `3px solid ${rollGroupTextColor}`
                                       : undefined,
                                   })}
