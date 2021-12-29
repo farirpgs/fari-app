@@ -13,7 +13,7 @@ import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
-import { BlankTLDrawDocument } from "../../routes/Draw/TLDraw";
+import { BlankTDDocument } from "../../routes/Draw/TLDraw";
 import { IPlayer, ISession } from "./IScene";
 import { IProps } from "./useScene";
 
@@ -36,7 +36,7 @@ export function useSession(props: IProps) {
       goodConfetti: 0,
       badConfetti: 0,
       paused: false,
-      tlDrawDoc: BlankTLDrawDocument,
+      tlDrawDoc: BlankTDDocument,
     })
   );
 
@@ -379,7 +379,7 @@ export function useSession(props: IProps) {
           return;
         }
         const everyone = getEveryone(draft);
-        draft.tlDrawDoc = BlankTLDrawDocument;
+        draft.tlDrawDoc = BlankTDDocument;
         everyone.forEach((p) => {
           p.playedDuringTurn = false;
         });

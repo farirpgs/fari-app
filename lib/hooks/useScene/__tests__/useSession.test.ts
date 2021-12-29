@@ -4,7 +4,7 @@
 
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
-import { BlankTLDrawDocument } from "../../../routes/Draw/TLDraw";
+import { BlankTDDocument } from "../../../routes/Draw/TLDraw";
 import { ISession } from "../IScene";
 import { useSession } from "../useSession";
 
@@ -29,7 +29,7 @@ describe("useSession", () => {
       goodConfetti: 0,
       badConfetti: 0,
       paused: false,
-      tlDrawDoc: BlankTLDrawDocument,
+      tlDrawDoc: BlankTDDocument,
     };
     // WHEN
     const { result } = renderHook(() => {

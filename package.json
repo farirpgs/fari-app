@@ -76,8 +76,8 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "roughjs": "^4.4.1",
-    "@tldraw/core": "^0.0.91",
-    "@tldraw/tldraw": "^0.0.91",
+    "@tldraw/core": "^1.4.1",
+    "@tldraw/tldraw": "^1.4.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

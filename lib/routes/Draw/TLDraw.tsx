@@ -1,33 +1,14 @@
 import Box from "@mui/material/Box";
-import { TLDraw, TLDrawDocument, TLDrawProps } from "@tldraw/tldraw";
+import { TDDocument, Tldraw, TldrawApp, TldrawProps } from "@tldraw/tldraw";
 import React from "react";
 
-export function TLDrawWriter(props: {
-  onChange?: (doc: TLDrawDocument) => void;
-  tldrawProps?: TLDrawProps;
+export function TldrawWriter(props: {
+  onChange?: (doc: TDDocument) => void;
+  tldrawProps?: TldrawProps;
 }) {
   const timeout = React.useRef<any>(false);
 
-  const rDocument = React.useRef<TLDrawDocument>({
-    id: "doc1",
-    pages: {
-      page1: {
-        id: "page1",
-        shapes: {},
-        bindings: {},
-      },
-    },
-    pageStates: {
-      page1: {
-        id: "page1",
-        camera: {
-          point: [0, 0],
-          zoom: 1,
-        },
-        selectedIds: [],
-      },
-    },
-  });
+  const rDocument = React.useRef<TDDocument>(BlankTDDocument);
 
   const handleChange = React.useCallback((tlstate) => {
     rDocument.current = tlstate.document;
@@ -39,7 +20,8 @@ export function TLDrawWriter(props: {
 
   return (
     <Box position="relative" width="100%" height="600px">
-      <TLDraw
+      <Tldraw
+        showPages={false}
         document={rDocument.current}
         onChange={handleChange}
         {...(props.tldrawProps ?? {})}
@@ -48,20 +30,23 @@ export function TLDrawWriter(props: {
   );
 }
 
-export function TLDrawReader(props: { doc: TLDrawDocument }) {
+export function TldrawReader(props: { doc: TDDocument }) {
   if (!props.doc) {
     return null;
   }
 
   return (
     <Box position="relative" width="100%" height="600px">
-      <TLDraw document={props.doc} />
+      <Tldraw showPages={false} document={props.doc} readOnly />
     </Box>
   );
 }
 
-export const BlankTLDrawDocument: TLDrawDocument = {
-  id: "doc1",
+export const BlankTDDocument: TDDocument = {
+  id: "doc",
+  name: "New Document",
+  version: TldrawApp.version,
+  assets: {},
   pages: {
     page1: {
       id: "page1",

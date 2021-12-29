@@ -70,7 +70,7 @@ import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
-import { TLDrawReader, TLDrawWriter } from "../../routes/Draw/TLDraw";
+import { TldrawReader, TldrawWriter } from "../../routes/Draw/TlDraw";
 import {
   IPlayerInteraction,
   PlayerInteractionFactory,
@@ -864,13 +864,13 @@ export const Session: React.FC<IProps> = (props) => {
         margin="0 auto"
       >
         {isGM ? (
-          <TLDrawWriter
+          <TldrawWriter
             onChange={(state) => {
               sessionManager.actions.updateDrawAreaObjects(state);
             }}
           />
         ) : (
-          <TLDrawReader doc={sessionManager.state.session.tlDrawDoc} />
+          <TldrawReader doc={sessionManager.state.session.tlDrawDoc} />
         )}
       </Box>
     );

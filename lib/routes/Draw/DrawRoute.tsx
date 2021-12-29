@@ -8,7 +8,7 @@ import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { TLDrawWriter } from "./TLDraw";
+import { TldrawWriter } from "./TLDraw";
 
 export const DrawRoute: React.FC = () => {
   const { t } = useTranslate();
@@ -43,7 +43,7 @@ export const DrawRoute: React.FC = () => {
           height="600px"
           margin="0 auto"
         >
-          <TLDrawWriter />
+          <TldrawWriter />
         </Box>
       </Container>
     </Page>
