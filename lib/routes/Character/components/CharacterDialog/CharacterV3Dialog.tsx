@@ -488,17 +488,21 @@ export const CharacterV3Dialog: React.FC<{
             </Grid>
             {advanced && (
               <Grid item>
-                <IconButton
-                  onClick={() => {
-                    characterManager.actions.addPage();
-                    const newTab =
-                      characterManager.state.character?.pages.length ?? 0;
-                    setTab(newTab.toString());
-                  }}
-                  size="large"
-                >
-                  <AddIcon />
-                </IconButton>
+                <Tooltip title={t("character-dialog.control.add-page")}>
+                  <span>
+                    <IconButton
+                      onClick={() => {
+                        characterManager.actions.addPage();
+                        const newTab =
+                          characterManager.state.character?.pages.length ?? 0;
+                        setTab(newTab.toString());
+                      }}
+                      size="large"
+                    >
+                      <AddIcon />
+                    </IconButton>
+                  </span>
+                </Tooltip>
               </Grid>
             )}
           </Grid>
@@ -507,58 +511,100 @@ export const CharacterV3Dialog: React.FC<{
           <Box mb=".5rem">
             <Grid container justifyContent="space-around" alignItems="center">
               <Grid item>
-                <IconButton
-                  disabled={currentPageIndex === 0}
-                  onClick={() => {
-                    characterManager.actions.movePage(currentPageIndex, "up");
-                    setTab((currentPageIndex - 1).toString());
-                  }}
-                  size="large"
-                >
-                  <UndoIcon />
-                </IconButton>
+                <Tooltip title={t("character-dialog.control.move-page-left")}>
+                  <span>
+                    <IconButton
+                      disabled={currentPageIndex === 0}
+                      onClick={() => {
+                        characterManager.actions.movePage(
+                          currentPageIndex,
+                          "up"
+                        );
+                        setTab((currentPageIndex - 1).toString());
+                      }}
+                      size="large"
+                    >
+                      <UndoIcon />
+                    </IconButton>
+                  </span>
+                </Tooltip>
               </Grid>
               <Grid item>
-                <IconButton
-                  onClick={() => {
-                    characterManager.actions.duplicatePage(currentPageIndex);
-                    setTab((currentPageIndex + 1).toString());
-                  }}
-                  size="large"
-                >
-                  <FileCopyIcon />
-                </IconButton>
+                <Tooltip title={t("character-dialog.control.duplicate-page")}>
+                  <span>
+                    <IconButton
+                      onClick={() => {
+                        characterManager.actions.duplicatePage(
+                          currentPageIndex
+                        );
+                        setTab((currentPageIndex + 1).toString());
+                      }}
+                      size="large"
+                    >
+                      <FileCopyIcon />
+                    </IconButton>
+                  </span>
+                </Tooltip>
               </Grid>
               <Grid item>
-                <IconButton
-                  disabled={
-                    characterManager.state.character?.pages.length === 1
-                  }
-                  onClick={() => {
-                    const confirmed = confirm(
-                      t("character-dialog.remove-page-confirmation")
-                    );
-                    if (confirmed) {
-                      characterManager.actions.deletePage(currentPageIndex);
-                    }
-                    setTab("0");
-                  }}
-                  size="large"
-                >
-                  <DeleteIcon />
-                </IconButton>
+                <Tooltip title={t("character-dialog.control.delete-page")}>
+                  <span>
+                    <IconButton
+                      disabled={
+                        characterManager.state.character?.pages.length === 1
+                      }
+                      onClick={() => {
+                        const confirmed = confirm(
+                          t("character-dialog.remove-page-confirmation")
+                        );
+                        if (confirmed) {
+                          characterManager.actions.deletePage(currentPageIndex);
+                        }
+                        setTab("0");
+                      }}
+                      size="large"
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </span>
+                </Tooltip>
               </Grid>
               <Grid item>
-                <IconButton
-                  disabled={currentPageIndex === pages?.length - 1}
-                  onClick={() => {
-                    characterManager.actions.movePage(currentPageIndex, "down");
-                    setTab((currentPageIndex + 1).toString());
-                  }}
-                  size="large"
-                >
-                  <RedoIcon />
-                </IconButton>
+                <Tooltip title={t("character-dialog.control.move-page-right")}>
+                  <span>
+                    <IconButton
+                      disabled={currentPageIndex === pages?.length - 1}
+                      onClick={() => {
+                        characterManager.actions.movePage(
+                          currentPageIndex,
+                          "down"
+                        );
+                        setTab((currentPageIndex + 1).toString());
+                      }}
+                      size="large"
+                    >
+                      <RedoIcon />
+                    </IconButton>
+                  </span>
+                </Tooltip>
+              </Grid>
+
+              <Grid item>
+                <Tooltip title={t("character-dialog.control.add-row")}>
+                  <span>
+                    <IconButton
+                      disabled={currentPageIndex === pages?.length - 1}
+                      onClick={() => {
+                        characterManager.actions.addRow({
+                          pageIndex: currentPageIndex,
+                        });
+                      }}
+                      size="large"
+                    >
+                      <AddIcon />
+                    </IconButton>
+                  </span>
+                </Tooltip>
               </Grid>
             </Grid>
           </Box>
@@ -841,27 +887,6 @@ export const CharacterV3Dialog: React.FC<{
                       </ManagerBox>
                     );
                   })}
-                  {advanced ||
-                    (doesntHaveSections && (
-                      <Box my=".5rem">
-                        <Grid container justifyContent="center">
-                          <Grid>
-                            <Button
-                              variant="outlined"
-                              size="small"
-                              color="inherit"
-                              onClick={() => {
-                                characterManager.actions.addRow({
-                                  pageIndex: pageIndex,
-                                });
-                              }}
-                            >
-                              {t("character-dialog.control.add-row")}
-                            </Button>
-                          </Grid>
-                        </Grid>
-                      </Box>
-                    ))}
                 </Box>
               </TabPanel>
             );
