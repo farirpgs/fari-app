@@ -1,4 +1,4 @@
-import { TLDrawDocument } from "@tldraw/tldraw";
+import { TDDocument } from "@tldraw/tldraw";
 import produce from "immer";
 import { useEffect, useState } from "react";
 import { Delays } from "../../constants/Delays";
@@ -205,7 +205,7 @@ export function useSession(props: IProps) {
     );
   }
 
-  function updateDrawAreaObjects(doc: TLDrawDocument) {
+  function updateDrawAreaObjects(doc: TDDocument) {
     setSession((prev) => {
       return {
         ...prev,
