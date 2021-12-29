@@ -227,6 +227,7 @@ export type ITranslationKeys =
   | "my-binder.element.duplicate"
   | "my-binder.element.export"
   | "my-binder.element.export-as-template"
+  | "my-binder.element.untitled"
   | "my-binder.elements.new"
   | "my-binder.folder.characters"
   | "my-binder.folder.empty"

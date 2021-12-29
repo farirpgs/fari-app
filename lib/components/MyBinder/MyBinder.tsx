@@ -24,7 +24,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import Paper from "@mui/material/Paper";
@@ -734,6 +733,96 @@ function Element(props: {
     ? t(`my-binder.folder.${props.element.type}` as ITranslationKeys)
     : undefined;
 
+  const secondaryActions = (
+    <>
+      <Grid container spacing={1} alignItems="center">
+        <Grid item>
+          <Tooltip title={t("my-binder.element.export")}>
+            <IconButton
+              size="small"
+              data-cy={`my-binder.element.${props.element.name}.export`}
+              className={iconButtonClassName}
+              onPointerEnter={() => {
+                setHover(true);
+              }}
+              onPointerLeave={() => {
+                setHover(false);
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                props.onExport();
+              }}
+            >
+              <ExportIcon />
+            </IconButton>
+          </Tooltip>
+        </Grid>
+        <Grid item>
+          <Tooltip title={t("my-binder.element.export-as-template")}>
+            <IconButton
+              size="small"
+              data-cy={`my-binder.element.${props.element.name}.export-as-template`}
+              className={iconButtonClassName}
+              onPointerEnter={() => {
+                setHover(true);
+              }}
+              onPointerLeave={() => {
+                setHover(false);
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                props.onExportAsTemplate();
+              }}
+            >
+              <ShareIcon />
+            </IconButton>
+          </Tooltip>
+        </Grid>
+        <Grid item>
+          <Tooltip title={t("my-binder.element.duplicate")}>
+            <IconButton
+              size="small"
+              data-cy={`my-binder.element.${props.element.name}.duplicate`}
+              className={iconButtonClassName}
+              onPointerEnter={() => {
+                setHover(true);
+              }}
+              onPointerLeave={() => {
+                setHover(false);
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                props.onDuplicate();
+              }}
+            >
+              <FileCopyIcon />
+            </IconButton>
+          </Tooltip>
+        </Grid>
+        <Grid item>
+          <Tooltip title={t("my-binder.element.delete")}>
+            <IconButton
+              size="small"
+              data-cy={`my-binder.element.${props.element.name}.delete`}
+              className={iconButtonClassName}
+              onPointerEnter={() => {
+                setHover(true);
+              }}
+              onPointerLeave={() => {
+                setHover(false);
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                props.onDelete();
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </Grid>
+      </Grid>
+    </>
+  );
   return (
     <ListItem
       button
@@ -755,8 +844,15 @@ function Element(props: {
           props.onSelectOnNewTab();
         }
       }}
+      secondaryAction={
+        <>
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
+            {secondaryActions}
+          </Box>
+        </>
+      }
     >
-      <ListItemAvatar>
+      <ListItemAvatar sx={{ display: { xs: "none", md: "block" } }}>
         <Avatar
           className={css({
             color: color,
@@ -766,101 +862,28 @@ function Element(props: {
           {abrev}
         </Avatar>
       </ListItemAvatar>
-      <ListItemText primary={props.element.name} secondary={translatedType} />
-
-      <ListItemSecondaryAction>
-        <Grid container spacing={1} alignItems="center">
-          <Grid item>
-            <span className={css({ color: theme.palette.text.secondary })}>
-              ({listItem.formatDate(props.element.lastUpdated)})
-            </span>
-          </Grid>
-          <Grid item>
-            <Tooltip title={t("my-binder.element.export")}>
-              <IconButton
-                size="small"
-                data-cy={`my-binder.element.${props.element.name}.export`}
-                className={iconButtonClassName}
-                onPointerEnter={() => {
-                  setHover(true);
-                }}
-                onPointerLeave={() => {
-                  setHover(false);
-                }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  props.onExport();
-                }}
-              >
-                <ExportIcon />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-          <Grid item>
-            <Tooltip title={t("my-binder.element.export-as-template")}>
-              <IconButton
-                size="small"
-                data-cy={`my-binder.element.${props.element.name}.export-as-template`}
-                className={iconButtonClassName}
-                onPointerEnter={() => {
-                  setHover(true);
-                }}
-                onPointerLeave={() => {
-                  setHover(false);
-                }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  props.onExportAsTemplate();
-                }}
-              >
-                <ShareIcon />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-          <Grid item>
-            <Tooltip title={t("my-binder.element.duplicate")}>
-              <IconButton
-                size="small"
-                data-cy={`my-binder.element.${props.element.name}.duplicate`}
-                className={iconButtonClassName}
-                onPointerEnter={() => {
-                  setHover(true);
-                }}
-                onPointerLeave={() => {
-                  setHover(false);
-                }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  props.onDuplicate();
-                }}
-              >
-                <FileCopyIcon />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-          <Grid item>
-            <Tooltip title={t("my-binder.element.delete")}>
-              <IconButton
-                size="small"
-                data-cy={`my-binder.element.${props.element.name}.delete`}
-                className={iconButtonClassName}
-                onPointerEnter={() => {
-                  setHover(true);
-                }}
-                onPointerLeave={() => {
-                  setHover(false);
-                }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  props.onDelete();
-                }}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-        </Grid>
-      </ListItemSecondaryAction>
+      <ListItemText
+        primary={
+          <>
+            {props.element.name
+              ? props.element.name
+              : t("my-binder.element.untitled")}
+          </>
+        }
+        secondary={
+          <>
+            <Box>
+              {translatedType && <>{translatedType} - </>}
+              <span className={css({ color: theme.palette.text.secondary })}>
+                {listItem.formatDate(props.element.lastUpdated)}
+              </span>
+            </Box>
+            <Box sx={{ mt: ".5rem", display: { xs: "block", md: "none" } }}>
+              {secondaryActions}
+            </Box>
+          </>
+        }
+      />
     </ListItem>
   );
 }
