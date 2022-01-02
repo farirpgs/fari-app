@@ -319,7 +319,7 @@ export const CharacterCard: React.FC<{
       <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
         <BlockDicePool
           advanced={false}
-          readonly={props.readonly}
+          readonly={false}
           dataCy={`character-card.${section.label}.${block.label}`}
           block={block}
           onLabelChange={() => {}}
