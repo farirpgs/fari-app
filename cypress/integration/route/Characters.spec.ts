@@ -99,7 +99,9 @@ describe("/characters", () => {
       Fari.get("page.menu.my-binder").click();
       Fari.get("my-binder.folders.characters").click();
 
-      Fari.get("my-binder.element.Luke Skywalker.delete").first().click();
+      Fari.get("my-binder.element.Luke Skywalker.delete")
+        .first()
+        .click({ force: true });
       cy.contains("Star Wars").should("not.exist");
       cy.contains("Luke Skywalker").should("not.exist");
 

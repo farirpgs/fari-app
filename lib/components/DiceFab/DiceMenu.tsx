@@ -50,20 +50,9 @@ export function DiceMenu(props: {
         style={{ zIndex: zIndex.diceFab }}
         modifiers={[
           {
-            name: "flip",
-            enabled: false,
-          },
-          {
             name: "offset",
             options: {
               offset: [0, 16],
-            },
-          },
-          {
-            name: "preventOverflow",
-            enabled: true,
-            options: {
-              boundariesElement: "viewport",
             },
           },
         ]}
