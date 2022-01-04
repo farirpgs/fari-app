@@ -243,6 +243,7 @@
   "my-binder.element.duplicate": "Duplicate",
   "my-binder.element.export": "Export",
   "my-binder.element.export-as-template": "Export as Template",
+  "my-binder.element.untitled": "Untitled",
   "my-binder.elements.new": "New",
   "my-binder.folder.characters": "Characters",
   "my-binder.folder.empty": "Nothing here",

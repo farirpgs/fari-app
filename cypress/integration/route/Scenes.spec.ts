@@ -56,7 +56,9 @@ describe("/scenes", () => {
       // delete
       Fari.get("page.menu.my-binder").click();
       Fari.get("my-binder.folders.scenes").click();
-      Fari.get("my-binder.element.Ba Sing Se.delete").first().click();
+      Fari.get("my-binder.element.Ba Sing Se.delete")
+        .first()
+        .click({ force: true });
 
       cy.contains("Ba Sing Se").should("not.exist");
 

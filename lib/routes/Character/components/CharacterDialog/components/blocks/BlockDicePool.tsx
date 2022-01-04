@@ -140,7 +140,7 @@ export function BlockDicePool(
         </Grid>
 
         {!props.readonly && (
-          <Collapse in={hoverControlsVisible}>
+          <Collapse in={hoverControlsVisible || props.advanced}>
             <Box>
               <Grid container alignItems="center">
                 {isAllTheSameCommand && (

@@ -46,6 +46,13 @@
 - feat: Life Beyond Exo Station character template
 - fix: storybook
 
+**v5.3.5**
+
+- fix: binder overlapping info mobile
+- fix: dice menu popper position in character sheet going out of bound
+- feat: always show dice menu options in advanced mode
+- fix: block write view of dice pool blocks on character cards
+
 # v5.2
 
 - feat: new "Pause Button" safety tool when playing online games. Anyone can click on it, but only the GM can resume the game.
