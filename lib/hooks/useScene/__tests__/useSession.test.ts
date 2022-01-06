@@ -4,7 +4,7 @@
 
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
-import { BlankTDDocument } from "../../../routes/Draw/TLDraw";
+import { BlankTDDocument } from "../../../routes/Draw/TldrawWriterAndReader";
 import { ISession } from "../IScene";
 import { useSession } from "../useSession";
 

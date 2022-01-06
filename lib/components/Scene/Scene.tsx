@@ -70,7 +70,10 @@ import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
-import { TldrawReader, TldrawWriter } from "../../routes/Draw/TlDraw";
+import {
+  TldrawReader,
+  TldrawWriter,
+} from "../../routes/Draw/TldrawWriterAndReader";
 import {
   IPlayerInteraction,
   PlayerInteractionFactory,

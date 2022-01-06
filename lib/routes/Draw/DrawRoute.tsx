@@ -8,7 +8,7 @@ import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { TldrawWriter } from "./TLDraw";
+import { TldrawWriter } from "./TldrawWriterAndReader";
 
 export const DrawRoute: React.FC = () => {
   const { t } = useTranslate();
