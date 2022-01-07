@@ -14,6 +14,7 @@ export enum CharacterTemplates {
   EvolutionPulse_Obscura = "EvolutionPulse_Obscura",
   EvolutionPulse_Proxy = "EvolutionPulse_Proxy",
   FateCoreSpanish = "FateCoreSpanish",
+  FateCoreGerman = "FateCoreGerman",
   FateCondensedSpanish = "FateCondensedSpanish",
   FateCondensedBrazilianPortuguese = "FateCondensedBrazilianPortuguese",
   FateAcceleratedBrazilianPortuguese = "FateAcceleratedBrazilianPortuguese",
@@ -67,6 +68,10 @@ export const CharacterTemplatesWithGroups: Array<ICharacterTemplateWithGroup> =
       template: CharacterTemplates.FateCondensedSpanish,
     },
     { group: "Fate (Spanish)", template: CharacterTemplates.FateCoreSpanish },
+    {
+      group: "Fate (German)",
+      template: CharacterTemplates.FateCoreGerman,
+    },
     {
       group: "Fate (Turkish)",
       template: CharacterTemplates.FateCondensedTurkish,
