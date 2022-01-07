@@ -137,6 +137,12 @@ export const CharacterFactory = {
         );
         return this.makeFromJson(jsonData);
       },
+      [CharacterTemplates.TheWitchIsDead_FR]: async () => {
+        const jsonData = await import(
+          "./character-templates/TheWitchIsDead_FR.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
       /**
        * @author @Gpoitras
        */
@@ -228,6 +234,12 @@ export const CharacterFactory = {
         );
         return this.makeFromJson(jsonData);
       },
+      [CharacterTemplates.FateCoreGerman]: async () => {
+        const jsonData = await import(
+          "./character-templates/FateCoreGerman.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
       [CharacterTemplates.FateCondensedTurkish]: async () => {
         const jsonData = await import(
           "./character-templates/FateCondensedTurkish.json"
@@ -303,6 +315,12 @@ export const CharacterFactory = {
       [CharacterTemplates.TroikaNuminousEdition]: async () => {
         const jsonData = await import(
           "./character-templates/TroikaNuminousEdition.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.CortexKitchenSink]: async () => {
+        const jsonData = await import(
+          "./character-templates/CortexKitchenSink.json"
         );
         return this.makeFromJson(jsonData);
       },
