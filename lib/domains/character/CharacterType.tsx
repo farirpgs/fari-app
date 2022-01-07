@@ -34,8 +34,10 @@ export enum CharacterTemplates {
   Maze = "Maze",
   Dnd5e = "Dnd5e",
   ChargeRPG = "ChargeRPG",
+  CortexKitchenSink = "CortexKitchenSink",
   LifeBeyondExoStation = "LifeBeyondExoStation",
   TheWitchIsDead = "TheWitchIsDead",
+  TheWitchIsDead_FR = "TheWitchIsDead_FR",
   EdgeOfTheEmpire = "EdgeOfTheEmpire",
   EdgeOfTheEmpire_FR = "EdgeOfTheEmpire_FR",
   Blank = "Blank",
@@ -133,6 +135,10 @@ export const CharacterTemplatesWithGroups: Array<ICharacterTemplateWithGroup> =
       group: "Dresden Files RPG",
       template: CharacterTemplates.DresdenFilesRPGVampire,
     },
+    {
+      group: "Cortex Prime",
+      template: CharacterTemplates.CortexKitchenSink,
+    },
     { group: "Maze", template: CharacterTemplates.Maze },
     {
       group: "Tunnels & Trolls",
@@ -141,6 +147,7 @@ export const CharacterTemplatesWithGroups: Array<ICharacterTemplateWithGroup> =
     { group: "The Pool", template: CharacterTemplates.ThePool },
     { group: "Dungeons & Dragons", template: CharacterTemplates.Dnd5e },
     { group: "Grant Howitt", template: CharacterTemplates.TheWitchIsDead },
+    { group: "Grant Howitt", template: CharacterTemplates.TheWitchIsDead_FR },
     { group: "Star Wars", template: CharacterTemplates.EdgeOfTheEmpire },
     { group: "Star Wars", template: CharacterTemplates.EdgeOfTheEmpire_FR },
     {
