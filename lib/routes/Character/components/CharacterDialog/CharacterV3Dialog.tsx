@@ -593,7 +593,6 @@ export const CharacterV3Dialog: React.FC<{
                 <Tooltip title={t("character-dialog.control.add-row")}>
                   <span>
                     <IconButton
-                      disabled={currentPageIndex === pages?.length - 1}
                       onClick={() => {
                         characterManager.actions.addRow({
                           pageIndex: currentPageIndex,
@@ -612,6 +611,10 @@ export const CharacterV3Dialog: React.FC<{
 
         <TabContext value={tab}>
           {pages?.map((page, pageIndex) => {
+            const numberOfBlocks = page.rows
+              .flatMap((row) => row.columns)
+              .flatMap((column) => column.sections)
+              .flatMap((section) => section.blocks).length;
             return (
               <TabPanel
                 key={page.id}
@@ -624,15 +627,17 @@ export const CharacterV3Dialog: React.FC<{
                 <Box
                   position="relative"
                   className={css({
-                    border: advanced
-                      ? "none"
-                      : `${borderSize}px solid ${headerBackgroundColors.primary}`,
+                    border:
+                      advanced || numberOfBlocks === 0
+                        ? "none"
+                        : `${borderSize}px solid ${headerBackgroundColors.primary}`,
                   })}
                 >
                   {page.rows.map((row, rowIndex) => {
                     const columnSize = Math.floor(12 / row.columns.length);
                     const canMoveRowUp = rowIndex === 0;
                     const canMoveRowDown = rowIndex === page.rows.length - 1;
+
                     return (
                       <ManagerBox
                         key={rowIndex}
@@ -746,143 +751,148 @@ export const CharacterV3Dialog: React.FC<{
                         }
                       >
                         <Box>
-                          {row.columns.length > 0 && (
-                            <Grid container>
-                              {row.columns.map((column, columnIndex) => {
-                                const canMoveColumnLeft = columnIndex === 0;
-                                const canMoveColumnRight =
-                                  columnIndex === row.columns.length - 1;
-                                return (
-                                  <Grid
-                                    item
-                                    key={columnIndex}
-                                    xs={12}
-                                    md={columnSize as GridSize}
-                                    className={css({
-                                      borderLeft:
-                                        canMoveColumnLeft || advanced || isSmall
+                          {numberOfBlocks > 0 ||
+                            (advanced && (
+                              <Grid container>
+                                {row.columns.map((column, columnIndex) => {
+                                  const canMoveColumnLeft = columnIndex === 0;
+                                  const canMoveColumnRight =
+                                    columnIndex === row.columns.length - 1;
+                                  const hideColumnBorders =
+                                    canMoveColumnLeft || advanced || isSmall;
+                                  return (
+                                    <Grid
+                                      item
+                                      key={columnIndex}
+                                      xs={12}
+                                      md={columnSize as GridSize}
+                                      className={css({
+                                        borderLeft: hideColumnBorders
                                           ? "none"
                                           : `${borderSize}px solid ${headerBackgroundColors.primary}`,
-                                    })}
-                                  >
-                                    <ManagerBox
-                                      readonly={!advanced}
-                                      label={<>Column #{columnIndex + 1}</>}
-                                      backgroundColor={
-                                        theme.palette.action.selected
-                                      }
-                                      actions={
-                                        <>
-                                          <Grid
-                                            container
-                                            justifyContent="flex-end"
-                                          >
-                                            <Grid item>
-                                              <Tooltip
-                                                title={t(
-                                                  "character-dialog.control.move-column-left"
-                                                )}
-                                              >
-                                                <span>
-                                                  <IconButton
-                                                    disabled={canMoveColumnLeft}
-                                                    onClick={() => {
-                                                      characterManager.actions.moveColumnLeft(
-                                                        {
-                                                          pageIndex,
-                                                          rowIndex,
-                                                          columnIndex,
-                                                        }
-                                                      );
-                                                    }}
-                                                  >
-                                                    <ArrowBackIcon
-                                                      className={css({
-                                                        fontSize: "1rem",
-                                                      })}
-                                                    />
-                                                  </IconButton>
-                                                </span>
-                                              </Tooltip>
-                                            </Grid>
-                                            <Grid item>
-                                              <Tooltip
-                                                title={t(
-                                                  "character-dialog.control.move-column-right"
-                                                )}
-                                              >
-                                                <span>
-                                                  <IconButton
-                                                    disabled={
-                                                      canMoveColumnRight
-                                                    }
-                                                    onClick={() => {
-                                                      characterManager.actions.moveColumnRight(
-                                                        {
-                                                          pageIndex,
-                                                          rowIndex,
-                                                          columnIndex,
-                                                        }
-                                                      );
-                                                    }}
-                                                  >
-                                                    <ArrowForwardIcon
-                                                      className={css({
-                                                        fontSize: "1rem",
-                                                      })}
-                                                    />
-                                                  </IconButton>
-                                                </span>
-                                              </Tooltip>
-                                            </Grid>
-
-                                            <Grid item>
-                                              <Tooltip
-                                                title={t(
-                                                  "character-dialog.control.delete-column"
-                                                )}
-                                              >
-                                                <span>
-                                                  <IconButton
-                                                    onClick={() => {
-                                                      characterManager.actions.deleteColumn(
-                                                        {
-                                                          pageIndex: pageIndex,
-                                                          rowIndex: rowIndex,
-                                                          columnIndex:
-                                                            columnIndex,
-                                                        }
-                                                      );
-                                                    }}
-                                                  >
-                                                    <DeleteIcon
-                                                      className={css({
-                                                        fontSize: "1rem",
-                                                      })}
-                                                    />
-                                                  </IconButton>
-                                                </span>
-                                              </Tooltip>
-                                            </Grid>
-                                          </Grid>
-                                        </>
-                                      }
+                                      })}
                                     >
-                                      {renderSections(
-                                        {
-                                          pageIndex,
-                                          rowIndex,
-                                          columnIndex,
-                                        },
-                                        page,
-                                        column.sections
-                                      )}
-                                    </ManagerBox>
-                                  </Grid>
-                                );
-                              })}
-                            </Grid>
-                          )}
+                                      <ManagerBox
+                                        readonly={!advanced}
+                                        label={<>Column #{columnIndex + 1}</>}
+                                        backgroundColor={
+                                          theme.palette.action.selected
+                                        }
+                                        actions={
+                                          <>
+                                            <Grid
+                                              container
+                                              justifyContent="flex-end"
+                                            >
+                                              <Grid item>
+                                                <Tooltip
+                                                  title={t(
+                                                    "character-dialog.control.move-column-left"
+                                                  )}
+                                                >
+                                                  <span>
+                                                    <IconButton
+                                                      disabled={
+                                                        canMoveColumnLeft
+                                                      }
+                                                      onClick={() => {
+                                                        characterManager.actions.moveColumnLeft(
+                                                          {
+                                                            pageIndex,
+                                                            rowIndex,
+                                                            columnIndex,
+                                                          }
+                                                        );
+                                                      }}
+                                                    >
+                                                      <ArrowBackIcon
+                                                        className={css({
+                                                          fontSize: "1rem",
+                                                        })}
+                                                      />
+                                                    </IconButton>
+                                                  </span>
+                                                </Tooltip>
+                                              </Grid>
+                                              <Grid item>
+                                                <Tooltip
+                                                  title={t(
+                                                    "character-dialog.control.move-column-right"
+                                                  )}
+                                                >
+                                                  <span>
+                                                    <IconButton
+                                                      disabled={
+                                                        canMoveColumnRight
+                                                      }
+                                                      onClick={() => {
+                                                        characterManager.actions.moveColumnRight(
+                                                          {
+                                                            pageIndex,
+                                                            rowIndex,
+                                                            columnIndex,
+                                                          }
+                                                        );
+                                                      }}
+                                                    >
+                                                      <ArrowForwardIcon
+                                                        className={css({
+                                                          fontSize: "1rem",
+                                                        })}
+                                                      />
+                                                    </IconButton>
+                                                  </span>
+                                                </Tooltip>
+                                              </Grid>
+
+                                              <Grid item>
+                                                <Tooltip
+                                                  title={t(
+                                                    "character-dialog.control.delete-column"
+                                                  )}
+                                                >
+                                                  <span>
+                                                    <IconButton
+                                                      onClick={() => {
+                                                        characterManager.actions.deleteColumn(
+                                                          {
+                                                            pageIndex:
+                                                              pageIndex,
+                                                            rowIndex: rowIndex,
+                                                            columnIndex:
+                                                              columnIndex,
+                                                          }
+                                                        );
+                                                      }}
+                                                    >
+                                                      <DeleteIcon
+                                                        className={css({
+                                                          fontSize: "1rem",
+                                                        })}
+                                                      />
+                                                    </IconButton>
+                                                  </span>
+                                                </Tooltip>
+                                              </Grid>
+                                            </Grid>
+                                          </>
+                                        }
+                                      >
+                                        {renderSections(
+                                          {
+                                            pageIndex,
+                                            rowIndex,
+                                            columnIndex,
+                                          },
+                                          page,
+                                          column.sections
+                                        )}
+                                      </ManagerBox>
+                                    </Grid>
+                                  );
+                                })}
+                              </Grid>
+                            ))}
                         </Box>
                       </ManagerBox>
                     );
