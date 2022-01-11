@@ -615,7 +615,7 @@ export const CharacterV3Dialog: React.FC<{
               .flatMap((row) => row.columns)
               .flatMap((column) => column.sections)
               .flatMap((section) => section.blocks).length;
-            console.log("numberOfBlocks", numberOfBlocks);
+
             return (
               <TabPanel
                 key={page.id}
