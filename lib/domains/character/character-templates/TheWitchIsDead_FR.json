@@ -1,11 +1,11 @@
 {
+  "fariType": "character",
+  "lastUpdated": 1641843592,
   "name": " Template",
-  "lastUpdated": 1641475987,
-  "wide": true,
   "pages": [
     {
       "id": "8dbaf099-213a-47a4-a60f-158b6f585d39",
-      "label": "FEUILLE DE PERSONNAGE",
+      "label": "PERSONNAGE",
       "sections": {
         "left": [
           {
@@ -57,8 +57,18 @@
                 "id": "0673fc61-7045-4ced-86e7-5fc0c622a770",
                 "label": "Grant Howitt",
                 "type": "Link",
-                "meta": { "hasDisplayName": true },
+                "meta": { "hasDisplayName": true, "helperText": "Author" },
                 "value": "https://rowanrookanddecard.com/"
+              },
+              {
+                "id": "8746b22e-9430-4788-8f34-02d0218ca0e6",
+                "label": "Mori Dragon",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": true,
+                  "helperText": "Template Creator"
+                },
+                "value": "https://twitter.com/mori_drak"
               }
             ],
             "label": "CrÉdits"
@@ -123,7 +133,7 @@
       }
     }
   ],
-  "template": "TheWitchIsDead",
+  "template": "TheWitchIsDead_FR",
   "version": 4,
-  "fariType": "character"
+  "wide": false
 }
