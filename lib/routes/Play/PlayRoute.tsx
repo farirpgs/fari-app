@@ -3,7 +3,7 @@ import {
   useBroadcastEvent,
   useEventListener,
   useObject,
-  useStorage
+  useStorage,
 } from "@liveblocks/react";
 import React, { useContext, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
@@ -18,7 +18,7 @@ import { useSession } from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import {
   IPlayerInteraction,
-  PlayerInteractionFactory
+  PlayerInteractionFactory,
 } from "./types/IPlayerInteraction";
 
 export function useLiveObject<T>(props: {
@@ -154,9 +154,12 @@ export const PlayRoute: React.FC<{
 
   useEffect(() => {
     if (playerName) {
-      handlePlayerInteraction(
-        PlayerInteractionFactory.addPlayer(userId, playerName)
-      );
+      // until the liveblocks team fixes the bug
+      setTimeout(() => {
+        handlePlayerInteraction(
+          PlayerInteractionFactory.addPlayer(userId, playerName)
+        );
+      }, 2000);
     }
   }, [playerName]);
 
