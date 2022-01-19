@@ -143,7 +143,7 @@ This guide will cover how you can create and organize your Scenes inside Fari.
 
 ## What are Scenes used for ?
 
-When you play table-top RPGs in real life, each scene will probably consists of a bunch of index cards laid out all over a table.
+When you play tabletop RPGs in real life, each scene will probably consists of a bunch of index cards laid out all over a table.
 
 Those cards will probably be of different colors, have text, numbers and checkboxes doodled all over them.
 

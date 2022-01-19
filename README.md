@@ -12,7 +12,7 @@
 ![Continous Integration](https://github.com/fariapp/fari/workflows/CI/badge.svg)
 ![Integration Tests](https://github.com/fariapp/fari/workflows/Integration%20Tests/badge.svg)
 
-This repo contains the source code that powers Fari, the open source virtual table-top platform.
+This repo contains the source code that powers Fari, the open source virtual tabletop platform.
 
 ## Feature Requests
 
