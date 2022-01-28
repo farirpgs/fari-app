@@ -105,15 +105,15 @@ export const IronEddaAccelerated = makeCharacterSheetStory(CharacterTemplates.Ir
 // prettier-ignore
 export const StrandsOfFate = makeCharacterSheetStory(CharacterTemplates.StrandsOfFate)
 // prettier-ignore
-export const EvolutionPulse_Hydrah = makeCharacterSheetStory(CharacterTemplates.EvolutionPulse_Hydrah)
+export const EvolutionPulse_Hydrah = makeCharacterSheetStory(CharacterTemplates.EvolutionPulseHydrah)
 // prettier-ignore
-export const EvolutionPulse_Hyonos = makeCharacterSheetStory(CharacterTemplates.EvolutionPulse_Hyonos)
+export const EvolutionPulse_Hyonos = makeCharacterSheetStory(CharacterTemplates.EvolutionPulseHyonos)
 // prettier-ignore
-export const EvolutionPulse_LostH = makeCharacterSheetStory(CharacterTemplates.EvolutionPulse_LostH)
+export const EvolutionPulse_LostH = makeCharacterSheetStory(CharacterTemplates.EvolutionPulseLostH)
 // prettier-ignore
-export const EvolutionPulse_Obscura = makeCharacterSheetStory(CharacterTemplates.EvolutionPulse_Obscura)
+export const EvolutionPulse_Obscura = makeCharacterSheetStory(CharacterTemplates.EvolutionPulseObscura)
 // prettier-ignore
-export const EvolutionPulse_Proxy = makeCharacterSheetStory(CharacterTemplates.EvolutionPulse_Proxy)
+export const EvolutionPulse_Proxy = makeCharacterSheetStory(CharacterTemplates.EvolutionPulseProxy)
 // prettier-ignore
 export const FateCoreSpanish = makeCharacterSheetStory(CharacterTemplates.FateCoreSpanish)
 // prettier-ignore
@@ -151,7 +151,7 @@ export const TheWitchIsDead = makeCharacterSheetStory(CharacterTemplates.TheWitc
 // prettier-ignore
 export const EdgeOfTheEmpire = makeCharacterSheetStory(CharacterTemplates.EdgeOfTheEmpire)
 // prettier-ignore
-export const EdgeOfTheEmpire_FR = makeCharacterSheetStory(CharacterTemplates.EdgeOfTheEmpire_FR)
+export const EdgeOfTheEmpire_Français = makeCharacterSheetStory(CharacterTemplates.EdgeOfTheEmpireFrench)
 // prettier-ignore
 export const Blank = makeCharacterSheetStory(CharacterTemplates.Blank)
 

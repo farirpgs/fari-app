@@ -200,11 +200,11 @@ export const EdgeOfTheEmpire = Template.bind({});
   },
 ];
 
-export const EdgeOfTheEmpire_FR = Template.bind({});
-(EdgeOfTheEmpire_FR as any).loaders = [
+export const EdgeOfTheEmpire_Français = Template.bind({});
+(EdgeOfTheEmpire_Français as any).loaders = [
   async () => {
     const character = await CharacterFactory.make(
-      CharacterTemplates.EdgeOfTheEmpire_FR
+      CharacterTemplates.EdgeOfTheEmpireFrench
     );
     return { character };
   },

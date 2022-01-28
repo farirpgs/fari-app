@@ -152,9 +152,9 @@ export const CharacterFactory = {
       /**
        * @author @Gpoitras
        */
-      [CharacterTemplates.EdgeOfTheEmpire_FR]: async () => {
+      [CharacterTemplates.EdgeOfTheEmpireFrench]: async () => {
         const jsonData = await import(
-          "./character-templates/EdgeOfTheEmpire_FR.json"
+          "./character-templates/EdgeOfTheEmpireFrench.json"
         );
         return this.makeFromJson(jsonData);
       },
@@ -183,31 +183,31 @@ export const CharacterFactory = {
         );
         return this.makeFromJson(jsonData);
       },
-      [CharacterTemplates.EvolutionPulse_Hydrah]: async () => {
+      [CharacterTemplates.EvolutionPulseHydrah]: async () => {
         const jsonData = await import(
           "./character-templates/EvolutionPulse/Hydrah.json"
         );
         return this.makeFromJson(jsonData);
       },
-      [CharacterTemplates.EvolutionPulse_Hyonos]: async () => {
+      [CharacterTemplates.EvolutionPulseHyonos]: async () => {
         const jsonData = await import(
           "./character-templates/EvolutionPulse/Hyonos.json"
         );
         return this.makeFromJson(jsonData);
       },
-      [CharacterTemplates.EvolutionPulse_LostH]: async () => {
+      [CharacterTemplates.EvolutionPulseLostH]: async () => {
         const jsonData = await import(
           "./character-templates/EvolutionPulse/LostH.json"
         );
         return this.makeFromJson(jsonData);
       },
-      [CharacterTemplates.EvolutionPulse_Obscura]: async () => {
+      [CharacterTemplates.EvolutionPulseObscura]: async () => {
         const jsonData = await import(
           "./character-templates/EvolutionPulse/Obscura.json"
         );
         return this.makeFromJson(jsonData);
       },
-      [CharacterTemplates.EvolutionPulse_Proxy]: async () => {
+      [CharacterTemplates.EvolutionPulseProxy]: async () => {
         const jsonData = await import(
           "./character-templates/EvolutionPulse/Proxy.json"
         );
@@ -225,9 +225,27 @@ export const CharacterFactory = {
         );
         return this.makeFromJson(jsonData);
       },
+      [CharacterTemplates.FateCondensedGerman]: async () => {
+        const jsonData = await import(
+          "./character-templates/FateCondensedGerman.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
       [CharacterTemplates.FateCoreSpanish]: async () => {
         const jsonData = await import(
           "./character-templates/FateCoreSpanish.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.FateCoreFrench]: async () => {
+        const jsonData = await import(
+          "./character-templates/FateCoreFrench.json"
+        );
+        return this.makeFromJson(jsonData);
+      },
+      [CharacterTemplates.FateAcceleratedFrench]: async () => {
+        const jsonData = await import(
+          "./character-templates/FateAcceleratedFrench.json"
         );
         return this.makeFromJson(jsonData);
       },
@@ -315,7 +333,9 @@ export const CharacterFactory = {
       },
     };
 
-    const newCharacter = await templateFunctions[type]();
+    const template =
+      CharacterTemplates[type as keyof typeof CharacterTemplates];
+    const newCharacter = await templateFunctions[template]();
     return {
       ...newCharacter,
       id: Id.generate(),

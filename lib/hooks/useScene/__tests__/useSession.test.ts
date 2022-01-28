@@ -4,7 +4,6 @@
 
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
-import { BlankTDDocument } from "../../../routes/Draw/TldrawWriterAndReader";
 import { ISession } from "../IScene";
 import { useSession } from "../useSession";
 
@@ -29,7 +28,7 @@ describe("useSession", () => {
       goodConfetti: 0,
       badConfetti: 0,
       paused: false,
-      tlDrawDoc: BlankTDDocument,
+      tlDrawDoc: undefined,
     };
     // WHEN
     const { result } = renderHook(() => {

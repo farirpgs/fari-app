@@ -43,7 +43,6 @@ import TextField from "@mui/material/TextField";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import startCase from "lodash/startCase";
 import React, { useContext, useEffect, useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
@@ -68,7 +67,6 @@ import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useThemeFromColor } from "../../../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
-import { ITranslationKeys } from "../../../../locale";
 import { useCharacter } from "../../hooks/useCharacter";
 import { BetterDnd } from "../BetterDnD/BetterDnd";
 import { AddBlock } from "./components/AddBlock";
@@ -138,23 +136,6 @@ export const CharacterV3Dialog: React.FC<{
 
   const [tab, setTab] = useState<string>("0");
   const currentPageIndex = parseInt(tab);
-
-  function getTemplateName(template: string | undefined = "") {
-    const label = t(
-      `character-dialog.template.${template}` as ITranslationKeys,
-      {},
-      true
-    );
-
-    if (!!label) {
-      return label;
-    }
-    const formatted = template
-      .split("_")
-      .map((word) => startCase(word))
-      .join(" - ");
-    return formatted;
-  }
 
   function onSave() {
     const updatedCharacter =
@@ -353,7 +334,7 @@ export const CharacterV3Dialog: React.FC<{
               filterOptions={createFilterOptions({
                 limit: 100,
                 stringify: (option) => {
-                  const templateName = getTemplateName(option.template);
+                  const templateName = option.label;
                   const groupName = option.group;
                   return `${templateName} ${groupName}`;
                 },
@@ -361,12 +342,21 @@ export const CharacterV3Dialog: React.FC<{
               options={CharacterTemplatesWithGroups}
               className={css({ width: "300px" })}
               getOptionLabel={(option) => {
-                return getTemplateName(option.template);
+                return option.label;
               }}
               groupBy={(option) => option.group}
               onChange={(event, newValue) => {
-                if (newValue?.template) {
-                  onLoadTemplate(newValue?.template);
+                if (newValue?.label) {
+                  const templateKey = Object.keys(CharacterTemplates).find(
+                    (key) => {
+                      return (
+                        CharacterTemplates[
+                          key as keyof typeof CharacterTemplates
+                        ] === newValue.label
+                      );
+                    }
+                  ) as CharacterTemplates;
+                  onLoadTemplate(templateKey);
                 }
               }}
               renderInput={(params) => (
