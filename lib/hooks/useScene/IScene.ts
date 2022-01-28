@@ -99,6 +99,6 @@ export interface ISession {
   players: Record<string, IPlayer>;
   goodConfetti: number;
   badConfetti: number;
-  tlDrawDoc: TDDocument;
+  tlDrawDoc: TDDocument | undefined;
   paused: boolean;
 }
