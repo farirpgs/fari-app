@@ -52,7 +52,7 @@ import { CharactersContext } from "../../../../contexts/CharactersContext/Charac
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../../../contexts/SettingsContext/SettingsContext";
 import {
-  CharacterTemplatesDerp,
+  CharacterTemplates,
   ICharacterTemplate,
 } from "../../../../domains/character/CharacterType";
 import {
@@ -338,7 +338,7 @@ export const CharacterV3Dialog: React.FC<{
                   return `${templateName} ${groupName}`;
                 },
               })}
-              options={CharacterTemplatesDerp}
+              options={CharacterTemplates}
               className={css({ width: "300px" })}
               getOptionLabel={(option) => {
                 return option.fileName;
