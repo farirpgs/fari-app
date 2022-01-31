@@ -3,7 +3,7 @@
  */
 import { act, renderHook } from "@testing-library/react-hooks";
 import { CharacterFactory } from "../../../../domains/character/CharacterFactory";
-import { CharacterTemplates } from "../../../../domains/character/CharacterType";
+import { DefaultTemplates } from "../../../../domains/character/DefaultTemplates";
 import { ICharacter } from "../../../../domains/character/types";
 import { useCharacter } from "../useCharacter";
 
@@ -11,7 +11,7 @@ describe("useCharacter", () => {
   describe("sanitizeCharacter", () => {
     it("should sanitize the character", async () => {
       const defaultCahracter = await CharacterFactory.make(
-        CharacterTemplates.FateCondensed
+        DefaultTemplates.FateCondensed
       );
       // GIVEN
       const character = {
@@ -182,7 +182,7 @@ describe("useCharacter", () => {
   describe("load template", () => {
     it("should load the new template but keep the id and the name as is", async () => {
       const defaultCharacter = await CharacterFactory.make(
-        CharacterTemplates.FateCondensed
+        DefaultTemplates.FateCondensed
       );
       // GIVEN
       const character = {
@@ -205,7 +205,7 @@ describe("useCharacter", () => {
 
       // WHEN a template is loading
       act(() => {
-        result.current.actions.loadTemplate(CharacterTemplates.FateAccelerated);
+        result.current.actions.loadTemplate(DefaultTemplates.FateAccelerated);
       });
 
       // Wait for JSON download

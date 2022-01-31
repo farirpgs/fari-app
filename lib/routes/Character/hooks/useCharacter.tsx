@@ -4,12 +4,12 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { previewContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { SettingsContext } from "../../../contexts/SettingsContext/SettingsContext";
 import { CharacterFactory } from "../../../domains/character/CharacterFactory";
-import { CharacterTemplates } from "../../../domains/character/CharacterType";
+import { ICharacterTemplate } from "../../../domains/character/CharacterType";
 import {
   BlockType,
   IBlock,
   ICharacter,
-  IPage,
+  IPage
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/Id/Id";
@@ -42,8 +42,8 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     }
   }, [characterFromProps]);
 
-  async function loadTemplate(type: CharacterTemplates) {
-    const defaultCharacter = await CharacterFactory.make(type);
+  async function loadTemplate(template: ICharacterTemplate) {
+    const defaultCharacter = await CharacterFactory.make(template);
 
     setCharacter(
       produce((draft: ICharacter | undefined) => {

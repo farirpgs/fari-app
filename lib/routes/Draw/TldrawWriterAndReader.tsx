@@ -37,7 +37,7 @@ export function TldrawWriter(props: {
   );
 }
 
-export function TldrawReader(props: { doc: TDDocument }) {
+export function TldrawReader(props: { doc: TDDocument | undefined }) {
   if (!props.doc) {
     return null;
   }

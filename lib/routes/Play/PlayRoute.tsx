@@ -108,7 +108,7 @@ export const PlayRoute: React.FC<{
 
   const broadcast = useBroadcastEvent();
 
-  useEventListener<IPlayerInteraction>(({ connectionId, event }) => {
+  useEventListener<IPlayerInteraction>(({ event }) => {
     if (event.type === "pause") {
       sessionManager.actions.pause();
     }

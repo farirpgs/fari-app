@@ -1,5 +1,4 @@
 import { IDiceCommandSetId } from "../dice/Dice";
-import { CharacterTemplates } from "./CharacterType";
 
 export enum BlockType {
   Text = "Text",
@@ -110,7 +109,6 @@ export interface IV3Character {
   // hidden
   version: number;
   lastUpdated: number;
-  template?: CharacterTemplates;
   playedDuringTurn?: boolean;
 }
 
@@ -249,7 +247,6 @@ export interface IV4Character {
   // hidden
   version: number;
   lastUpdated: number;
-  template?: CharacterTemplates;
   playedDuringTurn?: boolean;
 }
 
@@ -284,6 +281,5 @@ export interface ICharacter {
   // hidden
   version: number;
   lastUpdated: number;
-  template?: CharacterTemplates;
   playedDuringTurn?: boolean;
 }

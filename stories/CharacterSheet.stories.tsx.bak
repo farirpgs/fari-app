@@ -1,0 +1,179 @@
+import Box from "@mui/material/Box";
+import { action } from "@storybook/addon-actions";
+import { Meta, Story } from "@storybook/react";
+import React, { useContext, useState } from "react";
+import { Toolbox } from "../lib/components/Toolbox/Toolbox";
+import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
+import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
+import { IDiceRollResult } from "../lib/domains/dice/Dice";
+import { CharacterV3Dialog } from "../lib/routes/Character/components/CharacterDialog/CharacterV3Dialog";
+import { StoryProvider } from "./StoryProvider";
+
+function StorybookCharacterSheet(
+  props: Pick<
+    Parameters<typeof CharacterV3Dialog>["0"],
+    "character" | "dialog" | "readonly"
+  >
+) {
+  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
+  const diceManager = useContext(DiceContext);
+
+  function handleOnNewRoll(result: IDiceRollResult) {
+    setRolls((draft) => {
+      return [result, ...draft];
+    });
+  }
+
+  function handleOnRollPool() {
+    const { result } = diceManager.actions.getPoolResult();
+    handleOnNewRoll(result);
+  }
+
+  return (
+    <>
+      <Toolbox
+        dice={{
+          rollsForDiceBox: rolls,
+          onRoll: handleOnNewRoll,
+          onRollPool: handleOnRollPool,
+        }}
+        hideDefaultRightActions={true}
+      />
+      <CharacterV3Dialog
+        dialog={props.dialog}
+        open={true}
+        character={props.character}
+        readonly={props.readonly}
+        synced={false}
+        onRoll={handleOnNewRoll}
+        onClose={action("onClose")}
+        onSave={action("onSave")}
+        onToggleSync={action("onToggleSync")}
+      />
+      <Box mt="6rem" />
+    </>
+  );
+}
+
+type IProps = Parameters<typeof StorybookCharacterSheet>["0"];
+
+export default {
+  title: "Main/Character",
+  component: StorybookCharacterSheet,
+  args: {
+    dialog: false,
+    readonly: false,
+    character: undefined,
+  },
+} as Meta<IProps>;
+
+const Template: Story<IProps> = (args, context) => {
+  const character = args.character ?? (context as any).loaded.character;
+  return (
+    <StoryProvider theme={context.globals.theme}>
+      <Box>
+        <StorybookCharacterSheet
+          character={character}
+          readonly={args.readonly}
+          dialog={args.dialog}
+        />
+      </Box>
+    </StoryProvider>
+  );
+};
+
+export const 
+// // prettier-ignore
+// export const FateCondensed = makeCharacterSheetStory(CharacterTemplatesDerp.FateCondensed)
+// // prettier-ignore
+// export const FateCore = makeCharacterSheetStory(CharacterTemplatesDerp.FateCore)
+// // prettier-ignore
+// export const FateAccelerated = makeCharacterSheetStory(CharacterTemplatesDerp.FateAccelerated)
+// // prettier-ignore
+// export const FateOfCthulhu = makeCharacterSheetStory(CharacterTemplatesDerp.FateOfCthulhu)
+// // prettier-ignore
+// export const DresdenFilesAccelerated = makeCharacterSheetStory(CharacterTemplatesDerp.DresdenFilesAccelerated)
+// // prettier-ignore
+// export const VentureCity = makeCharacterSheetStory(CharacterTemplatesDerp.VentureCity)
+// // prettier-ignore
+// export const Heartbreaker = makeCharacterSheetStory(CharacterTemplatesDerp.Heartbreaker)
+// // prettier-ignore
+// export const IronEddaAccelerated = makeCharacterSheetStory(CharacterTemplatesDerp.IronEddaAccelerated)
+// // prettier-ignore
+// export const StrandsOfFate = makeCharacterSheetStory(CharacterTemplatesDerp.StrandsOfFate)
+// // prettier-ignore
+// export const EvolutionPulse_Hydrah = makeCharacterSheetStory(CharacterTemplatesDerp.EvolutionPulseHydrah)
+// // prettier-ignore
+// export const EvolutionPulse_Hyonos = makeCharacterSheetStory(CharacterTemplatesDerp.EvolutionPulseHyonos)
+// // prettier-ignore
+// export const EvolutionPulse_LostH = makeCharacterSheetStory(CharacterTemplatesDerp.EvolutionPulseLostH)
+// // prettier-ignore
+// export const EvolutionPulse_Obscura = makeCharacterSheetStory(CharacterTemplatesDerp.EvolutionPulseObscura)
+// // prettier-ignore
+// export const EvolutionPulse_Proxy = makeCharacterSheetStory(CharacterTemplatesDerp.EvolutionPulseProxy)
+// // prettier-ignore
+// export const FateCoreSpanish = makeCharacterSheetStory(CharacterTemplatesDerp.FateCoreSpanish)
+// // prettier-ignore
+// export const FateCondensedSpanish = makeCharacterSheetStory(CharacterTemplatesDerp.FateCondensedSpanish)
+// // prettier-ignore
+// export const FateCondensedTurkish = makeCharacterSheetStory(CharacterTemplatesDerp.FateCondensedTurkish)
+// // prettier-ignore
+// export const FateCondensedBrazilianPortuguese = makeCharacterSheetStory(CharacterTemplatesDerp.FateCondensedBrazilianPortuguese)
+// // prettier-ignore
+// export const FateAcceleratedBrazilianPortuguese = makeCharacterSheetStory(CharacterTemplatesDerp.FateAcceleratedBrazilianPortuguese)
+// // prettier-ignore
+// export const MärchenkriegerLOS = makeCharacterSheetStory(CharacterTemplatesDerp.MärchenkriegerLOS)
+// // prettier-ignore
+// export const TachyonSquadronCharacter = makeCharacterSheetStory(CharacterTemplatesDerp.TachyonSquadronCharacter)
+// // prettier-ignore
+// export const TachyonSquadronShip = makeCharacterSheetStory(CharacterTemplatesDerp.TachyonSquadronShip)
+// // prettier-ignore
+// export const TachyonSquadronCharacterAndShip = makeCharacterSheetStory(CharacterTemplatesDerp.TachyonSquadronCharacterAndShip)
+// // prettier-ignore
+// export const DresdenFilesRPGCharacter = makeCharacterSheetStory(CharacterTemplatesDerp.DresdenFilesRPGCharacter)
+// // prettier-ignore
+// export const DresdenFilesRPGSpellCaster = makeCharacterSheetStory(CharacterTemplatesDerp.DresdenFilesRPGSpellCaster)
+// // prettier-ignore
+// export const DresdenFilesRPGVampire = makeCharacterSheetStory(CharacterTemplatesDerp.DresdenFilesRPGVampire)
+// // prettier-ignore
+// export const ThePool = makeCharacterSheetStory(CharacterTemplatesDerp.ThePool)
+// // prettier-ignore
+// export const TunnelsAndTrolls = makeCharacterSheetStory(CharacterTemplatesDerp.TunnelsAndTrolls)
+// // prettier-ignore
+// export const Maze = makeCharacterSheetStory(CharacterTemplatesDerp.Maze)
+// // prettier-ignore
+// export const Dnd5e = makeCharacterSheetStory(CharacterTemplatesDerp.Dnd5e)
+// // prettier-ignore
+// export const TheWitchIsDead = makeCharacterSheetStory(CharacterTemplatesDerp.TheWitchIsDead)
+// // prettier-ignore
+// export const EdgeOfTheEmpire = makeCharacterSheetStory(CharacterTemplatesDerp.EdgeOfTheEmpire)
+// // prettier-ignore
+// export const EdgeOfTheEmpire_Français = makeCharacterSheetStory(CharacterTemplatesDerp.EdgeOfTheEmpireFrench)
+// // prettier-ignore
+// export const Blank = makeCharacterSheetStory(CharacterTemplatesDerp.Blank)
+
+export const LoremIpsum = Template.bind({});
+LoremIpsum.args = {
+  character: CharacterFactory.migrate(LoremIpsumTemplate as any),
+};
+
+// function makeCharacterSheetStory(template: CharacterTemplatesDerp) {
+//   const story = Template.bind({});
+//   (story as any).loaders = [
+//     async () => {
+//       const character = await CharacterFactory.make(template);
+//       return { character: overrideCharacterDateForStorybook(character) };
+//     },
+//   ];
+//   return story;
+
+//   function overrideCharacterDateForStorybook(
+//     character: ICharacter
+//   ): ICharacter {
+//     return {
+//       ...character,
+//       id: "50fa2",
+//       lastUpdated: dayJS("2021-01-01").unix(),
+//     };
+//   }
+// }

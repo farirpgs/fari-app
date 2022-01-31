@@ -856,9 +856,9 @@ export const Session: React.FC<IProps> = (props) => {
   }
 
   function renderZones() {
-    const tokenTitles = Object.values(sessionManager.state.session.players).map(
-      (p) => (p.character?.name ?? p.playerName) as string
-    );
+    // const tokenTitles = Object.values(sessionManager.state.session.players).map(
+    //   (p) => (p.character?.name ?? p.playerName) as string
+    // );
 
     return (
       <Box

@@ -52,8 +52,8 @@ import { CharactersContext } from "../../../../contexts/CharactersContext/Charac
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../../../contexts/SettingsContext/SettingsContext";
 import {
-  CharacterTemplates,
-  CharacterTemplatesWithGroups,
+  CharacterTemplatesDerp,
+  ICharacterTemplate,
 } from "../../../../domains/character/CharacterType";
 import {
   ICharacter,
@@ -68,7 +68,6 @@ import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useThemeFromColor } from "../../../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { useCharacter } from "../../hooks/useCharacter";
-import { BetterDnd } from "../BetterDnD/BetterDnd";
 import { AddBlock } from "./components/AddBlock";
 import { AddSection } from "./components/AddSection";
 import { BlockByType } from "./components/BlockByType";
@@ -150,7 +149,7 @@ export const CharacterV3Dialog: React.FC<{
     logger.track("character.toggle_advanced_mode");
   }
 
-  function onLoadTemplate(newTemplate: CharacterTemplates) {
+  function onLoadTemplate(newTemplate: ICharacterTemplate) {
     const confirmKey = t("character-dialog.load-template-confirmation");
     const confirmed = confirm(confirmKey);
 
@@ -334,29 +333,20 @@ export const CharacterV3Dialog: React.FC<{
               filterOptions={createFilterOptions({
                 limit: 100,
                 stringify: (option) => {
-                  const templateName = option.label;
-                  const groupName = option.group;
+                  const templateName = option.fileName;
+                  const groupName = option.category;
                   return `${templateName} ${groupName}`;
                 },
               })}
-              options={CharacterTemplatesWithGroups}
+              options={CharacterTemplatesDerp}
               className={css({ width: "300px" })}
               getOptionLabel={(option) => {
-                return option.label;
+                return option.fileName;
               }}
-              groupBy={(option) => option.group}
-              onChange={(event, newValue) => {
-                if (newValue?.label) {
-                  const templateKey = Object.keys(CharacterTemplates).find(
-                    (key) => {
-                      return (
-                        CharacterTemplates[
-                          key as keyof typeof CharacterTemplates
-                        ] === newValue.label
-                      );
-                    }
-                  ) as CharacterTemplates;
-                  onLoadTemplate(templateKey);
+              groupBy={(option) => option.category}
+              onChange={(event, template) => {
+                if (template?.importFunction) {
+                  onLoadTemplate(template);
                 }
               }}
               renderInput={(params) => (
@@ -1551,232 +1541,177 @@ export const CharacterV3Dialog: React.FC<{
                 : 12;
               return (
                 <Grid key={block.id} item xs={width}>
-                  <BetterDnd
-                    direction="vertical"
-                    index={blockIndex}
-                    type={`drag-character-sheet-block.${indexes.pageIndex}-${indexes.rowIndex}-${indexes.columnIndex}-${indexes.sectionIndex}`}
-                    className={css({
-                      marginLeft: ".5rem",
-                      marginRight: ".5rem",
-                    })}
-                    onMove={(dragIndex, hoverIndex) => {
-                      characterManager.actions.moveDnDBlock(
-                        {
-                          pageIndex: indexes.pageIndex,
-                          sectionIndex: indexes.sectionIndex,
-                          rowIndex: indexes.rowIndex,
-                          columnIndex: indexes.columnIndex,
-                        },
-                        dragIndex,
-                        hoverIndex
-                      );
-                    }}
-                    render={(dndRenderProps) => {
-                      return (
-                        <Box mb=".5rem">
-                          <ManagerBox
-                            label={<>Bloc #{blockIndex + 1}</>}
-                            readonly={!advanced}
-                            backgroundColor={theme.palette.background.paper}
-                            actions={
-                              <>
-                                <Grid container justifyContent="flex-end">
-                                  {/* <Grid item>
-                                    <div ref={dndRenderProps.drag}>
-                                      <Tooltip
-                                        title={t(
-                                          "character-dialog.control.move"
-                                        )}
-                                      >
-                                        <IconButton size="small">
-                                          <DragIndicatorIcon
-                                            className={css({
-                                              fontSize: "1rem",
-                                              cursor: "move",
-                                            })}
-                                          />
-                                        </IconButton>
-                                      </Tooltip>
-                                    </div>
-                                  </Grid> */}
-                                  <Grid item>
-                                    <Tooltip
-                                      title={t(
-                                        "character-dialog.control.move-section-up"
-                                      )}
-                                    >
-                                      <span>
-                                        <IconButton
-                                          disabled={!canMoveBlockUp}
-                                          size="small"
-                                          onClick={() => {
-                                            characterManager.actions.moveBlockUp(
-                                              {
-                                                pageIndex: indexes.pageIndex,
-                                                rowIndex: indexes.rowIndex,
-                                                columnIndex:
-                                                  indexes.columnIndex,
-                                                sectionIndex:
-                                                  indexes.sectionIndex,
-                                                blockIndex: blockIndex,
-                                              }
-                                            );
-                                          }}
-                                        >
-                                          <ArrowUpwardIcon
-                                            className={css({
-                                              fontSize: "1rem",
-                                            })}
-                                          />
-                                        </IconButton>
-                                      </span>
-                                    </Tooltip>
-                                  </Grid>
-                                  <Grid item>
-                                    <Tooltip
-                                      title={t(
-                                        "character-dialog.control.move-section-down"
-                                      )}
-                                    >
-                                      <span>
-                                        <IconButton
-                                          disabled={!canMoveBlockDown}
-                                          size="small"
-                                          onClick={() => {
-                                            characterManager.actions.moveBlockDown(
-                                              {
-                                                pageIndex: indexes.pageIndex,
-                                                rowIndex: indexes.rowIndex,
-                                                columnIndex:
-                                                  indexes.columnIndex,
-                                                sectionIndex:
-                                                  indexes.sectionIndex,
-                                                blockIndex: blockIndex,
-                                              }
-                                            );
-                                          }}
-                                        >
-                                          <ArrowDownwardIcon
-                                            className={css({
-                                              fontSize: "1rem",
-                                            })}
-                                          />
-                                        </IconButton>
-                                      </span>
-                                    </Tooltip>
-                                  </Grid>
+                  <Box mb=".5rem">
+                    <ManagerBox
+                      label={<>Bloc #{blockIndex + 1}</>}
+                      readonly={!advanced}
+                      backgroundColor={theme.palette.background.paper}
+                      actions={
+                        <>
+                          <Grid container justifyContent="flex-end">
+                            <Grid item>
+                              <Tooltip
+                                title={t(
+                                  "character-dialog.control.move-section-up"
+                                )}
+                              >
+                                <span>
+                                  <IconButton
+                                    disabled={!canMoveBlockUp}
+                                    size="small"
+                                    onClick={() => {
+                                      characterManager.actions.moveBlockUp({
+                                        pageIndex: indexes.pageIndex,
+                                        rowIndex: indexes.rowIndex,
+                                        columnIndex: indexes.columnIndex,
+                                        sectionIndex: indexes.sectionIndex,
+                                        blockIndex: blockIndex,
+                                      });
+                                    }}
+                                  >
+                                    <ArrowUpwardIcon
+                                      className={css({
+                                        fontSize: "1rem",
+                                      })}
+                                    />
+                                  </IconButton>
+                                </span>
+                              </Tooltip>
+                            </Grid>
+                            <Grid item>
+                              <Tooltip
+                                title={t(
+                                  "character-dialog.control.move-section-down"
+                                )}
+                              >
+                                <span>
+                                  <IconButton
+                                    disabled={!canMoveBlockDown}
+                                    size="small"
+                                    onClick={() => {
+                                      characterManager.actions.moveBlockDown({
+                                        pageIndex: indexes.pageIndex,
+                                        rowIndex: indexes.rowIndex,
+                                        columnIndex: indexes.columnIndex,
+                                        sectionIndex: indexes.sectionIndex,
+                                        blockIndex: blockIndex,
+                                      });
+                                    }}
+                                  >
+                                    <ArrowDownwardIcon
+                                      className={css({
+                                        fontSize: "1rem",
+                                      })}
+                                    />
+                                  </IconButton>
+                                </span>
+                              </Tooltip>
+                            </Grid>
 
-                                  <Grid item>
-                                    <Tooltip
-                                      title={t(
-                                        "character-dialog.control.copy-block"
-                                      )}
-                                    >
-                                      <IconButton
-                                        size="small"
-                                        onClick={() => {
-                                          settingsManager.actions.setBlocksInClipboard(
-                                            [block]
-                                          );
-                                        }}
-                                      >
-                                        <FileCopyIcon
-                                          className={css({
-                                            fontSize: "1rem",
-                                          })}
-                                        />
-                                      </IconButton>
-                                    </Tooltip>
-                                  </Grid>
+                            <Grid item>
+                              <Tooltip
+                                title={t("character-dialog.control.copy-block")}
+                              >
+                                <IconButton
+                                  size="small"
+                                  onClick={() => {
+                                    settingsManager.actions.setBlocksInClipboard(
+                                      [block]
+                                    );
+                                  }}
+                                >
+                                  <FileCopyIcon
+                                    className={css({
+                                      fontSize: "1rem",
+                                    })}
+                                  />
+                                </IconButton>
+                              </Tooltip>
+                            </Grid>
 
-                                  <Grid item>
-                                    <Tooltip
-                                      title={t(
-                                        "character-dialog.control.delete-block"
-                                      )}
-                                    >
-                                      <IconButton
-                                        size="small"
-                                        data-cy={`character-dialog.${section.label}.${block.label}.delete`}
-                                        onClick={() => {
-                                          characterManager.actions.deleteBlock({
-                                            pageIndex: indexes.pageIndex,
-                                            sectionIndex: indexes.sectionIndex,
-                                            rowIndex: indexes.rowIndex,
-                                            columnIndex: indexes.columnIndex,
-                                            blockIndex,
-                                          });
-                                        }}
-                                      >
-                                        <DeleteIcon
-                                          className={css({
-                                            fontSize: "1rem",
-                                          })}
-                                        />
-                                      </IconButton>
-                                    </Tooltip>
-                                  </Grid>
-                                </Grid>
-                              </>
+                            <Grid item>
+                              <Tooltip
+                                title={t(
+                                  "character-dialog.control.delete-block"
+                                )}
+                              >
+                                <IconButton
+                                  size="small"
+                                  data-cy={`character-dialog.${section.label}.${block.label}.delete`}
+                                  onClick={() => {
+                                    characterManager.actions.deleteBlock({
+                                      pageIndex: indexes.pageIndex,
+                                      sectionIndex: indexes.sectionIndex,
+                                      rowIndex: indexes.rowIndex,
+                                      columnIndex: indexes.columnIndex,
+                                      blockIndex,
+                                    });
+                                  }}
+                                >
+                                  <DeleteIcon
+                                    className={css({
+                                      fontSize: "1rem",
+                                    })}
+                                  />
+                                </IconButton>
+                              </Tooltip>
+                            </Grid>
+                          </Grid>
+                        </>
+                      }
+                    >
+                      <BlockByType
+                        advanced={advanced}
+                        readonly={props.readonly}
+                        dataCy={`character-dialog.${section.label}.${block.label}`}
+                        block={block}
+                        onChange={(newBlock) => {
+                          characterManager.actions.setBlock(
+                            {
+                              pageIndex: indexes.pageIndex,
+                              rowIndex: indexes.rowIndex,
+                              columnIndex: indexes.columnIndex,
+                              sectionIndex: indexes.sectionIndex,
+                              blockIndex,
+                            },
+                            newBlock
+                          );
+                        }}
+                        onToggleSplit={() => {
+                          const shouldUseHalfWidth =
+                            block.meta.width == null || block.meta.width === 1;
+                          const shouldUseThirdWidth = block.meta.width === 0.5;
+                          const newWidth = shouldUseHalfWidth
+                            ? 0.5
+                            : shouldUseThirdWidth
+                            ? 0.33
+                            : 1;
+
+                          characterManager.actions.setBlockMeta(
+                            {
+                              pageIndex: indexes.pageIndex,
+                              rowIndex: indexes.rowIndex,
+                              columnIndex: indexes.columnIndex,
+                              sectionIndex: indexes.sectionIndex,
+                              blockIndex,
+                            },
+                            {
+                              ...block.meta,
+                              width: newWidth,
                             }
-                          >
-                            <BlockByType
-                              advanced={advanced}
-                              readonly={props.readonly}
-                              dataCy={`character-dialog.${section.label}.${block.label}`}
-                              block={block}
-                              onChange={(newBlock) => {
-                                characterManager.actions.setBlock(
-                                  {
-                                    pageIndex: indexes.pageIndex,
-                                    rowIndex: indexes.rowIndex,
-                                    columnIndex: indexes.columnIndex,
-                                    sectionIndex: indexes.sectionIndex,
-                                    blockIndex,
-                                  },
-                                  newBlock
-                                );
-                              }}
-                              onToggleSplit={() => {
-                                const shouldUseHalfWidth =
-                                  block.meta.width == null ||
-                                  block.meta.width === 1;
-                                const shouldUseThirdWidth =
-                                  block.meta.width === 0.5;
-                                const newWidth = shouldUseHalfWidth
-                                  ? 0.5
-                                  : shouldUseThirdWidth
-                                  ? 0.33
-                                  : 1;
-
-                                characterManager.actions.setBlockMeta(
-                                  {
-                                    pageIndex: indexes.pageIndex,
-                                    rowIndex: indexes.rowIndex,
-                                    columnIndex: indexes.columnIndex,
-                                    sectionIndex: indexes.sectionIndex,
-                                    blockIndex,
-                                  },
-                                  {
-                                    ...block.meta,
-                                    width: newWidth,
-                                  }
-                                );
-                              }}
-                              onMainPointCounterChange={() => {
-                                characterManager.actions.toggleBlockMainPointCounter(
-                                  block.id
-                                );
-                              }}
-                              onRoll={(diceRollResult) => {
-                                props.onRoll(diceRollResult);
-                              }}
-                            />
-                          </ManagerBox>
-                        </Box>
-                      );
-                    }}
-                  />
+                          );
+                        }}
+                        onMainPointCounterChange={() => {
+                          characterManager.actions.toggleBlockMainPointCounter(
+                            block.id
+                          );
+                        }}
+                        onRoll={(diceRollResult) => {
+                          props.onRoll(diceRollResult);
+                        }}
+                      />
+                    </ManagerBox>
+                  </Box>
                 </Grid>
               );
             })}

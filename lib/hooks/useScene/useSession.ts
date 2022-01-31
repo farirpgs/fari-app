@@ -17,6 +17,8 @@ import { makeNewBlankDocument } from "../../routes/Draw/TldrawWriterAndReader";
 import { IPlayer, ISession } from "./IScene";
 import { IProps } from "./useScene";
 
+(window as any).HTMLCanvasElement.prototype.getContext = () => {};
+
 export function useSession(props: IProps) {
   const { userId, charactersManager } = props;
 

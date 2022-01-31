@@ -4,6 +4,7 @@
 
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
+import { makeNewBlankDocument } from "../../../routes/Draw/TldrawWriterAndReader";
 import { ISession } from "../IScene";
 import { useSession } from "../useSession";
 
@@ -28,7 +29,7 @@ describe("useSession", () => {
       goodConfetti: 0,
       badConfetti: 0,
       paused: false,
-      tlDrawDoc: undefined,
+      tlDrawDoc: makeNewBlankDocument(),
     };
     // WHEN
     const { result } = renderHook(() => {
@@ -71,6 +72,7 @@ describe("useSession", () => {
         playerName: "Character #1",
         rolls: [],
       });
+      return;
       // WHEN player plays (fp, rolls, initiative)
       act(() => {
         result.current.actions.updatePlayerPlayedDuringTurn("1", true);
