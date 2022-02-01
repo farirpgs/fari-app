@@ -107,10 +107,6 @@ export function BlockImage(props: IBlockComponentProps<IImageBlock> & {}) {
                     >
                       {t("character-dialog.image-block.dialog.upload")}
                     </Button>
-                    {/* <Button color="primary" variant="outlined" component="label">
-                {t("character-dialog.image-block.dialog.upload")}
-                {renderHiddenUploadInput()}
-              </Button> */}
                   </Grid>
                 )}
               </Grid>
@@ -130,19 +126,6 @@ export function BlockImage(props: IBlockComponentProps<IImageBlock> & {}) {
       {renderNoImageOrError()}
     </>
   );
-
-  // function renderHiddenUploadInput() {
-  //   return (
-  //     <input
-  //       type="file"
-  //       hidden
-  //       onChange={(event) => {
-  //         handleOnImport(event.target.files);
-  //         event.target.value = "";
-  //       }}
-  //     />
-  //   );
-  // }
 
   function renderNoImageOrError() {
     if (props.block.value && !error) {
@@ -198,6 +181,7 @@ export function BlockImage(props: IBlockComponentProps<IImageBlock> & {}) {
         <img
           className={css({
             maxWidth: "100%",
+            maxHeight: open ? undefined : "250px",
             margin: "0 auto",
             height: "auto",
             display: "flex",
