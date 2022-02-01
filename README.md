@@ -28,7 +28,7 @@ If you want to make a contribution to Fari, you will need to fork / clone this r
 
 ### Prerequisites
 
-1. Install Node `^16.2.0` (to match engine property in `package.json`)
+1. Install Node `^16.2.0` (to match engine property in `package.json`) or use the [devcontainer](https://microsoft.github.io/code-with-engineering-playbook/developer-experience/devcontainers/) provided using [VS Code](https://code.visualstudio.com/).
 
 ### Installation
 
