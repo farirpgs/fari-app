@@ -163,7 +163,7 @@ function MyBinderManager() {
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(newCharacter);
         } else {
-          history.push(`/characters/${newCharacter.id}`);
+          history.push(`/characters/${newCharacter.id}?advanced=true`);
         }
         myBinderManager.actions.close();
       },

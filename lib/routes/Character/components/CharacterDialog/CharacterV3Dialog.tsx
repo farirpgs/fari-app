@@ -48,6 +48,7 @@ import { Prompt } from "react-router";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../components/FateLabel/FateLabel";
 import { CharacterCard } from "../../../../components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
+import { env } from "../../../../constants/env";
 import { CharactersContext } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../../../contexts/SettingsContext/SettingsContext";
@@ -881,7 +882,7 @@ export const CharacterV3Dialog: React.FC<{
         </TabContext>
 
         <Grid container justifyContent="space-between" alignItems="center">
-          {advanced && (
+          {advanced && env.isDev && (
             <Grid item>
               <Box pt=".5rem">
                 <FormControl fullWidth>
@@ -1332,6 +1333,28 @@ export const CharacterV3Dialog: React.FC<{
               </Grid>
             )}
             <Grid item>
+              <Tooltip title={t("character-dialog.delete")}>
+                <IconButton
+                  color="default"
+                  data-cy="character-dialog.delete"
+                  size="small"
+                  onClick={() => {
+                    const confirm = window.confirm(
+                      t("character-dialog.delete-confirmation")
+                    );
+
+                    if (confirm) {
+                      charactersManager.actions.remove(
+                        characterManager.state?.character?.id
+                      );
+                    }
+                  }}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+            <Grid item>
               <Tooltip title={t("character-dialog.export")}>
                 <IconButton
                   color="default"
@@ -1347,6 +1370,7 @@ export const CharacterV3Dialog: React.FC<{
                 </IconButton>
               </Tooltip>
             </Grid>
+
             {!props.dialog && (
               <>
                 <Grid item>

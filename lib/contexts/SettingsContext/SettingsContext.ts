@@ -1,16 +1,20 @@
+import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useEffect, useState } from "react";
 import { IBlock } from "../../domains/character/types";
 import { IDiceCommandSetId, IRollDiceOptions } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
 import { useStorageEntity } from "../../hooks/useStorageEntities/useStorageEntity";
 
-type IThemeMode = "dark" | "light";
+type IThemeMode = "dark" | "light" | undefined;
 
 const oldDarkThemeLocalStorageKey = "prefers-dark-mode";
 const oldDarkThemeLocalStorageValue =
   localStorage?.getItem(oldDarkThemeLocalStorageKey) === "true";
 
 export function useSettings() {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const systemMode = prefersDarkMode ? "dark" : "light";
+
   const [temporaryThemeMode, setThemeModeTemporarily] = useState<IThemeMode>();
 
   const [themeMode, setThemeMode] = useStorageEntity<IThemeMode>({
@@ -58,13 +62,8 @@ export function useSettings() {
     setBlocksInClipboard([]);
   }, []);
 
-  function toggleThemeMode() {
-    setThemeMode(() => {
-      return themeMode === "light" ? "dark" : "light";
-    });
-  }
+  const appThemeMode = temporaryThemeMode ?? themeMode ?? systemMode;
 
-  const appThemeMode = temporaryThemeMode ?? themeMode;
   return {
     computed: {
       hasBlocksInClipboard: blocksInClipboard?.length > 0,
@@ -80,7 +79,6 @@ export function useSettings() {
     },
     actions: {
       setThemeMode,
-      toggleThemeMode,
       setThemeModeTemporarily,
       setUserName,
       setDiceCommandsIds: setDiceCommandsIds,
