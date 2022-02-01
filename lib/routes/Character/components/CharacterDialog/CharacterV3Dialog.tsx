@@ -1025,6 +1025,7 @@ export const CharacterV3Dialog: React.FC<{
                               <IconButton
                                 disabled={!canMoveSectionUp}
                                 size="small"
+                                data-cy={`character-dialog.${section.label}.move-section-up`}
                                 onClick={() => {
                                   characterManager.actions.moveSectionUp({
                                     pageIndex: indexes.pageIndex,
@@ -1058,6 +1059,7 @@ export const CharacterV3Dialog: React.FC<{
                               <IconButton
                                 disabled={!canMoveSectionDown}
                                 size="small"
+                                data-cy={`character-dialog.${section.label}.move-section-down`}
                                 onClick={() => {
                                   characterManager.actions.moveSectionDown({
                                     pageIndex: indexes.pageIndex,
@@ -1541,7 +1543,7 @@ export const CharacterV3Dialog: React.FC<{
                 : 12;
               return (
                 <Grid key={block.id} item xs={width}>
-                  <Box mb=".5rem">
+                  <Box mb=".5rem" px=".5rem">
                     <ManagerBox
                       label={<>Bloc #{blockIndex + 1}</>}
                       readonly={!advanced}

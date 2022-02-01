@@ -245,11 +245,11 @@ describe("/characters", () => {
         .type("#Fate Points");
 
       // remove
-      Fari.get("character-dialog.Aspects.#High Concept.remove").click();
-      Fari.get("character-dialog.Stunts & Extras.#Stunt #1.remove").click();
-      Fari.get("character-dialog.Consequences.#Mild.remove").click();
-      Fari.get("character-dialog.Skills.#Academics.remove").click();
-      Fari.get("character-dialog.Stress.#Physical.remove").click();
+      Fari.get("character-dialog.Aspects.#High Concept.delete").click();
+      Fari.get("character-dialog.Stunts & Extras.#Stunt #1.delete").click();
+      Fari.get("character-dialog.Consequences.#Mild.delete").click();
+      Fari.get("character-dialog.Skills.#Academics.delete").click();
+      Fari.get("character-dialog.Stress.#Physical.delete").click();
 
       // slot tracker
       Fari.get("character-dialog.Stress.Mental.add-box").click({ force: true });
@@ -280,63 +280,61 @@ describe("/characters", () => {
       Fari.get("character-dialog.Skills.label").clear().type("#Skills");
 
       // move and remove new sections
-      Fari.get("character-dialog.#Aspects.move").click({ force: true });
-      Fari.get("character-dialog.#Aspects.move-up").click({ force: true });
-      Fari.get("character-dialog.#Aspects.move").click({ force: true });
-      Fari.get("character-dialog.#Aspects.move-down").click({ force: true });
-      Fari.get("character-dialog.#Aspects.move").click({ force: true });
-      Fari.get("character-dialog.#Aspects.switch-side").click({ force: true });
-      Fari.get("character-dialog.#Aspects.remove").click({ force: true });
-      Fari.get("character-dialog.#Stunts.move").click({ force: true });
-      Fari.get("character-dialog.#Stunts.move-up").click({ force: true });
-      Fari.get("character-dialog.#Stunts.move").click({ force: true });
-      Fari.get("character-dialog.#Stunts.move-down").click({ force: true });
-      Fari.get("character-dialog.#Stunts.move").click({ force: true });
-      Fari.get("character-dialog.#Stunts.switch-side").click({ force: true });
-      Fari.get("character-dialog.#Stunts.remove").click({ force: true });
-      Fari.get("character-dialog.#Other.move").click({ force: true });
-      Fari.get("character-dialog.#Other.move-up").click({ force: true });
-      Fari.get("character-dialog.#Other.move").click({ force: true });
-      Fari.get("character-dialog.#Other.move-down").click({ force: true });
-      Fari.get("character-dialog.#Other.move").click({ force: true });
-      Fari.get("character-dialog.#Other.switch-side").click({ force: true });
-      Fari.get("character-dialog.#Other.remove").click({ force: true });
-      Fari.get("character-dialog.#Stress.move").click({ force: true });
-      Fari.get("character-dialog.#Stress.move-up").click({ force: true });
-      Fari.get("character-dialog.#Stress.move").click({ force: true });
-      Fari.get("character-dialog.#Stress.move-down").click({ force: true });
-      Fari.get("character-dialog.#Stress.move").click({ force: true });
-      Fari.get("character-dialog.#Stress.switch-side").click({ force: true });
-      Fari.get("character-dialog.#Stress.remove").click({ force: true });
-      Fari.get("character-dialog.#Consequences.move").click({ force: true });
-      Fari.get("character-dialog.#Consequences.move-up").click({ force: true });
-      Fari.get("character-dialog.#Consequences.move").click({ force: true });
-      Fari.get("character-dialog.#Consequences.move-down").click({
+      Fari.get("character-dialog.#Aspects.move-section-up").click({
         force: true,
       });
-      Fari.get("character-dialog.#Consequences.move").click({ force: true });
-      Fari.get("character-dialog.#Consequences.switch-side").click({
+      Fari.get("character-dialog.#Aspects.move-section-down").click({
         force: true,
       });
-      Fari.get("character-dialog.#Consequences.remove").click({ force: true });
-      Fari.get("character-dialog.#Skills.move").click({ force: true });
-      Fari.get("character-dialog.#Skills.move-up").click({ force: true });
-      Fari.get("character-dialog.#Skills.move").click({ force: true });
-      Fari.get("character-dialog.#Skills.move-down").click({ force: true });
-      Fari.get("character-dialog.#Skills.move").click({ force: true });
-      Fari.get("character-dialog.#Skills.switch-side").click({ force: true });
-      Fari.get("character-dialog.#Skills.remove").click({ force: true });
-      Fari.get("character-dialog.#Fate Points.move").click({ force: true });
-      Fari.get("character-dialog.#Fate Points.move-up").click({ force: true });
-      Fari.get("character-dialog.#Fate Points.move").click({ force: true });
-      Fari.get("character-dialog.#Fate Points.move-down").click({
+
+      Fari.get("character-dialog.#Aspects.delete").click({ force: true });
+      Fari.get("character-dialog.#Stunts.move-section-up").click({
         force: true,
       });
-      Fari.get("character-dialog.#Fate Points.move").click({ force: true });
-      Fari.get("character-dialog.#Fate Points.switch-side").click({
+      Fari.get("character-dialog.#Stunts.move-section-down").click({
         force: true,
       });
-      Fari.get("character-dialog.#Fate Points.remove").click({ force: true });
+
+      Fari.get("character-dialog.#Stunts.delete").click({ force: true });
+      Fari.get("character-dialog.#Other.move-section-up").click({
+        force: true,
+      });
+      Fari.get("character-dialog.#Other.move-section-down").click({
+        force: true,
+      });
+
+      Fari.get("character-dialog.#Other.delete").click({ force: true });
+      Fari.get("character-dialog.#Stress.move-section-up").click({
+        force: true,
+      });
+      Fari.get("character-dialog.#Stress.move-section-down").click({
+        force: true,
+      });
+
+      Fari.get("character-dialog.#Stress.delete").click({ force: true });
+      Fari.get("character-dialog.#Consequences.move-section-up").click({
+        force: true,
+      });
+      Fari.get("character-dialog.#Consequences.move-section-down").click({
+        force: true,
+      });
+
+      Fari.get("character-dialog.#Consequences.delete").click({ force: true });
+      Fari.get("character-dialog.#Skills.move-section-up").click({
+        force: true,
+      });
+      Fari.get("character-dialog.#Skills.move-section-down").click({
+        force: true,
+      });
+      Fari.get("character-dialog.#Skills.delete").click({ force: true });
+      Fari.get("character-dialog.#Fate Points.move-section-up").click({
+        force: true,
+      });
+      Fari.get("character-dialog.#Fate Points.move-section-down").click({
+        force: true,
+      });
+
+      Fari.get("character-dialog.#Fate Points.delete").click({ force: true });
 
       // save
       Fari.waitContentEditable();
