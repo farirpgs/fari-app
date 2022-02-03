@@ -1,0 +1,284 @@
+{
+  "name": "Ryuutama GM Sheet Template",
+  "group": "Ryuutama",
+  "lastUpdated": 1643854634,
+  "wide": false,
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "1",
+      "sections": {
+        "left": [
+          {
+            "id": "a4139967-fc52-4349-bd40-177439b7f8bd",
+            "label": "Details",
+            "blocks": [
+              {
+                "id": "45d1e2b1-5be5-4cf1-9d7b-a1c2681277cd",
+                "label": "",
+                "type": "Image",
+                "meta": {},
+                "value": ""
+              },
+              {
+                "id": "edc7999e-7b11-4171-94b2-37cb92d6ef61",
+                "label": "GM Name",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "38fe2fdf-26d4-4637-aa96-2c4ef578f04d",
+                "label": "Date",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "3d91e547-74e8-4e79-97e6-6689c1f09e66",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "bb0635fe-dd3c-468d-abf5-65d48b5e965f",
+                "label": "Character Name",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "61e14b05-6bc4-412a-a170-cf962ef570d2",
+                "label": "Race",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "55077e7b-f62a-4e37-b4d0-15f5c8683857",
+                "label": "Level",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "9e34f46d-6fdd-4ea2-bcb1-8c392f461452",
+                "label": "Alt Shape",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "39b89418-853b-4cc4-8273-21c1fdadd746",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "814a9d6c-2f02-40f6-a17a-99a692d161e2",
+                "label": "Artifact",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "c86435fc-bf65-49f6-8f79-3c9e6fcfeb5c",
+                "label": "Inscription",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              }
+            ]
+          },
+          {
+            "id": "91e1e33c-9c13-4de8-bfb7-ee67ae6be320",
+            "label": "About This SHeet",
+            "blocks": [
+              {
+                "id": "8f0de605-98bb-4dad-9dd5-661b06a49784",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "Copyright © 2015 KOTODAMA HEAVY INDUSTRIES<br><br>*This Fari character sheet was independently designed by Discord user PistolPants#8314 and is not affiliated with the original game designers and publishers."
+                },
+                "value": "http://kotohi.com/ryuutama/"
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "f91ec79f-69b7-4eba-b9e5-a45b3aa4522b",
+            "label": "Lifepoints",
+            "blocks": [
+              {
+                "id": "654d274e-e3c7-4bde-8c94-d06e310727db",
+                "label": "LP (Current / Max)",
+                "type": "PointCounter",
+                "meta": { "max": "1", "isMainPointCounter": false },
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "id": "8545e060-ec14-4742-b9a0-8119ff07b365",
+            "label": "Bénédiction",
+            "blocks": [
+              {
+                "id": "0f4f7783-182e-4045-997e-55c05dc63dff",
+                "label": "# of Slots",
+                "type": "Numeric",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "1226be39-561f-4968-b7ce-e463c441d0f1",
+                "label": "",
+                "type": "Text",
+                "value": "1)\n2)\n3)\n4)<br>",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "d31027de-b169-4f58-9a6b-84893a1cb36e",
+            "label": "Réveil",
+            "blocks": [
+              {
+                "id": "f0e219eb-184a-4064-b4b0-67e2745519c0",
+                "label": "",
+                "type": "Text",
+                "value": "1)\n2)\n3)\n4)<br>",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "98c08ad2-1279-4116-8857-b6fc94a2bf7c",
+            "label": "Appearance, Personality",
+            "blocks": [
+              {
+                "id": "a547e0ed-d3f1-417d-b4a2-387b5d26b23b",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "2d23cb4a-ac64-4c2e-beac-826527b445d1",
+      "sections": {
+        "left": [
+          {
+            "id": "077fe59d-99df-47d1-aa6c-b5d1024aac4f",
+            "label": "Goal",
+            "blocks": [
+              {
+                "id": "95d402e8-ea6f-4dd3-a542-46887031f6f4",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "b91f4751-cf93-4c8f-a620-ecffca2e032b",
+            "label": "Living Quarters",
+            "blocks": [
+              {
+                "id": "fdf2905d-f3ca-4682-aa40-540c0a7eda82",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "619c3c5c-6329-40ad-8285-ebe2452e078c",
+            "label": "Protected Travelers",
+            "blocks": [
+              {
+                "id": "e0e92eab-ab11-49e4-96e8-fdc4dd2fdfc0",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "2205b847-1d58-4895-9fbb-74c805f7aba5",
+            "label": "Protected Worlds",
+            "blocks": [
+              {
+                "id": "adc7283e-78fd-46da-a0c1-5b2fbc72ab64",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "197eb780-6292-4872-8577-e5c2f0035e4f",
+            "label": "About \"History of Tales\"",
+            "blocks": [
+              {
+                "id": "fe3c44cc-6f43-46d1-b1c5-261b80f30323",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "» Duplicate as many \"History of Tales\" as necessary in Advanced Mode."
+                },
+                "value": ""
+              }
+            ]
+          },
+          {
+            "id": "c9b07336-8605-431e-8a92-f3ad947d3b8a",
+            "label": "History of Tales",
+            "blocks": [
+              {
+                "id": "e23f1cd6-6f6d-49e3-8cad-3af8a98938b9",
+                "label": "Scenario Name",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "470f9ff4-10c0-4fd9-b8d8-98fc43418cf5",
+                "label": "Scenario Date",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "7c3731fc-1e12-4b48-a156-81c5e97c3b99",
+                "label": "Traveler names",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              }
+            ]
+          }
+        ]
+      },
+      "label": "2"
+    }
+  ],
+  "template": "Blank",
+  "version": 4,
+  "fariType": "character"
+}
