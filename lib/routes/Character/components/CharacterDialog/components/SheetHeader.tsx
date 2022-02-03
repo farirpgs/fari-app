@@ -2,10 +2,10 @@ import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { useTheme } from "@mui/material/styles";
-import React from "react";
+import Typography from "@mui/material/Typography";
+import React, { useContext } from "react";
 import { ContentEditable } from "../../../../../components/ContentEditable/ContentEditable";
-import { FateLabel } from "../../../../../components/FateLabel/FateLabel";
-import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors";
+import { CharacterSheetThemeContext } from "../CharacterSheetThemeContext";
 
 export const SheetHeader: React.FC<{
   label: string;
@@ -14,21 +14,21 @@ export const SheetHeader: React.FC<{
   advanced: boolean;
 }> = (props) => {
   const theme = useTheme();
-  const headerBackgroundColors = useTextColors(theme.palette.background.paper);
-  const headerTextColors = useTextColors(headerBackgroundColors.primary);
-  const sheetHeaderClassName = css({
-    label: "SheetHeader-box",
-    // Hexagone
-    // https://bennettfeely.com/clippy/
-    // clipPath: "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
-    background: headerBackgroundColors.primary,
-    color: headerTextColors.primary,
-    width: "100%",
-    padding: ".5rem",
-  });
+  const characterSheetTheme = useContext(CharacterSheetThemeContext);
 
   return (
-    <Box className={sheetHeaderClassName}>
+    <Box
+      className={css({
+        label: "SheetHeader-box",
+        // Hexagone
+        // https://bennettfeely.com/clippy/
+        clipPath: "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
+        background: characterSheetTheme.textPrimary,
+        color: characterSheetTheme.textPrimaryInverted,
+        width: "100%",
+        padding: ".5rem",
+      })}
+    >
       <Grid
         container
         justifyContent="space-between"
@@ -37,22 +37,24 @@ export const SheetHeader: React.FC<{
         alignItems="center"
       >
         <Grid item xs>
-          <FateLabel
+          <Typography
             className={css({
-              fontSize: "1rem",
+              fontFamily: characterSheetTheme.sectionHeadingFontFamily,
+              fontSize: `${characterSheetTheme.sectionHeadingFontSize}rem`,
+              fontWeight: theme.typography.fontWeightBold,
             })}
           >
             <ContentEditable
               data-cy={`character-dialog.${props.label}.label`}
               readonly={!props.advanced || !props.onLabelChange}
               border={props.advanced && !!props.onLabelChange}
-              borderColor={headerTextColors.primary}
+              borderColor={characterSheetTheme.textPrimaryInverted}
               value={props.label}
               onChange={(newLabel) => {
                 props.onLabelChange?.(newLabel);
               }}
             />
-          </FateLabel>
+          </Typography>
         </Grid>
         {props.advanced && <Grid item>{props.actions}</Grid>}
       </Grid>

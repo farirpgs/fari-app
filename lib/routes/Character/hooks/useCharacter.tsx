@@ -9,7 +9,8 @@ import {
   BlockType,
   IBlock,
   ICharacter,
-  IPage
+  ICharacterTheme,
+  IPage,
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/Id/Id";
@@ -136,6 +137,28 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           indexes.rowIndex,
           "up"
         );
+      })
+    );
+  }
+
+  function setTheme(setter?: (theme: ICharacterTheme) => void) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.theme = draft.theme ?? {};
+        setter?.(draft.theme);
+      })
+    );
+  }
+  function removeTheme() {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.theme = undefined;
       })
     );
   }
@@ -699,6 +722,8 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       addPage,
       addRow,
       moveRowUp,
+      removeTheme,
+      setTheme,
       moveRowDown,
       deleteRow,
       addColumn,

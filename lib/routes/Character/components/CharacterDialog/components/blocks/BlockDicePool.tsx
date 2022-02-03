@@ -13,7 +13,6 @@ import { darken, lighten, useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import { default as React, useContext, useEffect, useState } from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
-import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { Delays } from "../../../../../../constants/Delays";
 import { DiceContext } from "../../../../../../contexts/DiceContext/DiceContext";
 import {
@@ -34,6 +33,7 @@ import {
 } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
+import { ThemedLabel } from "../ThemedLabel";
 
 export type IDicePoolElement = {
   blockId: string;
@@ -238,7 +238,7 @@ export function BlockDicePool(
 
   function renderLabel() {
     return (
-      <FateLabel display="inline">
+      <ThemedLabel>
         <ContentEditable
           readonly={props.readonly || !props.advanced}
           border={props.advanced}
@@ -248,7 +248,7 @@ export function BlockDicePool(
             props.onLabelChange(value);
           }}
         />
-      </FateLabel>
+      </ThemedLabel>
     );
   }
 

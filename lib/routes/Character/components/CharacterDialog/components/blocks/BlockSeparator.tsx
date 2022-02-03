@@ -4,20 +4,22 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import { useTheme } from "@mui/material/styles";
-import React from "react";
+import React, { useContext } from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
-import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { ISeparatorBlock } from "../../../../../../domains/character/types";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
+import { CharacterSheetThemeContext } from "../../CharacterSheetThemeContext";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
+import { ThemedLabel } from "../ThemedLabel";
 
 export function BlockSeparator(props: IBlockComponentProps<ISeparatorBlock>) {
   const theme = useTheme();
   const dividerHeight = "3px";
   const dividerMargin = ".5rem 0";
+  const characterSheetTheme = useContext(CharacterSheetThemeContext);
 
   if (props.block.meta.hideDivider) {
     return null;
@@ -39,7 +41,7 @@ export function BlockSeparator(props: IBlockComponentProps<ISeparatorBlock>) {
                     className={css({
                       height: dividerHeight,
                       margin: dividerMargin,
-                      backgroundColor: theme.palette.text.secondary,
+                      backgroundColor: characterSheetTheme.borderColor,
                     })}
                   />
                 </Grid>
@@ -47,9 +49,9 @@ export function BlockSeparator(props: IBlockComponentProps<ISeparatorBlock>) {
                   <>
                     <Grid item>{"//"}</Grid>
                     <Grid item>
-                      <FateLabel
-                        align="center"
+                      <ThemedLabel
                         className={css({
+                          textAlign: "center",
                           minWidth: "3rem",
                           fontSize: "1.1rem",
                           display: "flex",
@@ -64,7 +66,7 @@ export function BlockSeparator(props: IBlockComponentProps<ISeparatorBlock>) {
                             props.onLabelChange(value);
                           }}
                         />
-                      </FateLabel>
+                      </ThemedLabel>
                     </Grid>
                     <Grid item>{"//"}</Grid>
                   </>
@@ -75,7 +77,7 @@ export function BlockSeparator(props: IBlockComponentProps<ISeparatorBlock>) {
                       className={css({
                         height: dividerHeight,
                         margin: dividerMargin,
-                        backgroundColor: theme.palette.text.secondary,
+                        backgroundColor: characterSheetTheme.borderColor,
                       })}
                     />
                   </Grid>

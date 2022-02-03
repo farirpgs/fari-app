@@ -4,11 +4,13 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import CircleIcon from "@mui/icons-material/Circle";
 import CloseIcon from "@mui/icons-material/Close";
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import ExportIcon from "@mui/icons-material/GetApp";
+import PaletteIcon from "@mui/icons-material/Palette";
 import PrintIcon from "@mui/icons-material/Print";
 import RedoIcon from "@mui/icons-material/Redo";
 import SaveIcon from "@mui/icons-material/Save";
@@ -28,12 +30,14 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import Drawer from "@mui/material/Drawer";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid, { GridSize } from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import InputLabel from "@mui/material/InputLabel";
 import NativeSelect from "@mui/material/NativeSelect";
+import Slider from "@mui/material/Slider";
 import Snackbar from "@mui/material/Snackbar";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
@@ -46,9 +50,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useContext, useEffect, useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
-import { FateLabel } from "../../../../components/FateLabel/FateLabel";
 import { CharacterCard } from "../../../../components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
+import { Delays } from "../../../../constants/Delays";
 import { env } from "../../../../constants/env";
+import { FontFamily } from "../../../../constants/FontFamily";
 import { CharactersContext } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../../../contexts/SettingsContext/SettingsContext";
@@ -66,13 +71,17 @@ import { IDiceRollResult } from "../../../../domains/dice/Dice";
 import { LazyState } from "../../../../hooks/useLazyState/useLazyState";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
-import { useThemeFromColor } from "../../../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { useCharacter } from "../../hooks/useCharacter";
+import {
+  CharacterSheetThemeContext,
+  useCharacterSheetTheme,
+} from "./CharacterSheetThemeContext";
 import { AddBlock } from "./components/AddBlock";
 import { AddSection } from "./components/AddSection";
 import { BlockByType } from "./components/BlockByType";
 import { SheetHeader } from "./components/SheetHeader";
+import { ThemedLabel } from "./components/ThemedLabel";
 
 export const smallIconButtonStyle = css({
   label: "CharacterDialog-small-icon-button",
@@ -102,7 +111,8 @@ const ZoomOptions = [
   },
 ];
 
-const borderSize = 2;
+const borderSize = 4;
+
 export const CharacterV3Dialog: React.FC<{
   open: boolean;
   character: ICharacter | undefined;
@@ -118,7 +128,6 @@ export const CharacterV3Dialog: React.FC<{
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
-  const blackButtonTheme = useThemeFromColor(theme.palette.text.primary);
   const query = useQuery<"card" | "advanced">();
   const showCharacterCard = query.get("card") === "true";
   const defaultAdvanced = query.get("advanced") === "true";
@@ -127,9 +136,14 @@ export const CharacterV3Dialog: React.FC<{
   const characterManager = useCharacter(props.character);
   const settingsManager = useContext(SettingsContext);
   const [advanced, setAdvanced] = useState(defaultAdvanced);
+  const [themeEditorVisible, setThemeEditorVisible] = useState(false);
   const [savedSnack, setSavedSnack] = useState(false);
   const charactersManager = useContext(CharactersContext);
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
+  const characterSheetTheme = useCharacterSheetTheme({
+    character: characterManager.state.character,
+  });
+  const hasCharacterSheetTheme = !!characterManager.state.character?.theme;
 
   const headerBackgroundColors = useTextColors(theme.palette.background.paper);
   const headerTextColors = useTextColors(headerBackgroundColors.primary);
@@ -206,6 +220,7 @@ export const CharacterV3Dialog: React.FC<{
 
   return (
     <>
+      <style>{characterSheetTheme.fontImport}</style>
       <Prompt
         when={characterManager.state.dirty}
         message={t("manager.leave-without-saving")}
@@ -229,88 +244,120 @@ export const CharacterV3Dialog: React.FC<{
           {t("character-dialog.saved")}
         </Alert>
       </Snackbar>
-      {renderDialog()}
+      <CharacterSheetThemeContext.Provider value={characterSheetTheme}>
+        {renderSheet()}
+        <Drawer
+          anchor={"left"}
+          classes={{
+            paper: css({
+              marginTop: "5.5rem",
+              height: "calc(100vh - 5.5rem)",
+            }),
+          }}
+          BackdropProps={{
+            className: css({
+              background: "rgba(0, 0, 0, 0.4)",
+            }),
+          }}
+          open={themeEditorVisible}
+          onClose={() => {
+            setThemeEditorVisible(false);
+          }}
+        >
+          {renderThemeEditor()}
+        </Drawer>
+      </CharacterSheetThemeContext.Provider>
     </>
   );
 
-  function renderDialog() {
+  function renderSheet() {
     const shouldUseWideMode = characterManager.state.character?.wide;
     const maxWidth = shouldUseWideMode ? "lg" : "md";
 
     if (props.dialog && characterManager.state.character) {
       return (
-        <Dialog
-          open={props.open}
-          fullWidth
-          keepMounted={false}
-          maxWidth={maxWidth}
-          scroll="paper"
-          onClose={onClose}
-          classes={{
-            paper: css({ height: "100%" }),
-          }}
-        >
-          <DialogTitle
-            className={css({
-              label: "CharacterDialog-dialog-wrapper",
-              padding: "0",
-            })}
+        <ThemeProvider theme={characterSheetTheme.muiTheme}>
+          <Dialog
+            open={props.open}
+            fullWidth
+            keepMounted={false}
+            maxWidth={maxWidth}
+            scroll="paper"
+            onClose={onClose}
+            classes={{
+              paper: css({
+                height: "100%",
+                background: characterSheetTheme.backgroundColor,
+              }),
+            }}
           >
-            <Container maxWidth={maxWidth}>
-              <Box className={dialogSheetContentStyle}>
-                {renderNameAndGroup()}
-              </Box>
-            </Container>
-          </DialogTitle>
-          <DialogContent
-            className={css({
-              label: "CharacterDialog-dialog-wrapper",
-              padding: "0",
-            })}
-            dividers
-          >
-            <Container maxWidth={maxWidth}>
-              <Box className={dialogSheetContentStyle}>
-                {renderPages(characterManager.state.character.pages)}
-              </Box>
-            </Container>
-          </DialogContent>
-          <DialogActions
-            className={css({
-              label: "CharacterDialog-dialog-wrapper",
-              padding: "0",
-            })}
-          >
-            <Container
-              maxWidth={maxWidth}
-              className={css({ padding: ".5rem" })}
+            <DialogTitle
+              className={css({
+                label: "CharacterDialog-dialog-wrapper",
+                padding: "0",
+              })}
             >
-              <Box className={dialogSheetContentStyle}>
-                {renderSheetActions()}
-              </Box>
-            </Container>
-          </DialogActions>
-        </Dialog>
+              <Container maxWidth={maxWidth}>
+                <Box className={dialogSheetContentStyle}>
+                  {renderNameAndGroup()}
+                </Box>
+              </Container>
+            </DialogTitle>
+            <DialogContent
+              className={css({
+                label: "CharacterDialog-dialog-wrapper",
+                padding: "0",
+              })}
+              dividers
+            >
+              <Container maxWidth={maxWidth}>
+                <Box className={dialogSheetContentStyle}>
+                  {renderPages(characterManager.state.character.pages)}
+                </Box>
+              </Container>
+            </DialogContent>
+            <DialogActions
+              className={css({
+                label: "CharacterDialog-dialog-wrapper",
+                padding: "0",
+              })}
+            >
+              <Container
+                maxWidth={maxWidth}
+                className={css({ padding: ".5rem" })}
+              >
+                <Box className={dialogSheetContentStyle}>
+                  {renderSheetActions()}
+                </Box>
+              </Container>
+            </DialogActions>
+          </Dialog>
+        </ThemeProvider>
       );
     }
 
     return (
-      <Container maxWidth={maxWidth}>
-        <Box className={fullScreenSheetContentStyle}>
-          {renderSheetActions()}
-        </Box>
+      <ThemeProvider theme={characterSheetTheme.muiTheme}>
+        <Box
+          className={css({
+            color: characterSheetTheme.textPrimary,
+            backgroundColor: characterSheetTheme.backgroundColor,
+          })}
+        >
+          <Container maxWidth={maxWidth}>
+            <Box className={fullScreenSheetContentStyle}>
+              {renderSheetActions()}
+            </Box>
 
-        <Box className={fullScreenSheetContentStyle}>
-          {renderNameAndGroup()}
+            <Box className={fullScreenSheetContentStyle}>
+              {renderNameAndGroup()}
+            </Box>
+            <Box className={fullScreenSheetContentStyle}>
+              {renderPages(characterManager.state.character?.pages)}
+            </Box>
+          </Container>
         </Box>
-        <Box className={fullScreenSheetContentStyle}>
-          {renderPages(characterManager.state.character?.pages)}
-        </Box>
-
-        {/* <Box className={fullScreenSheetContentStyle}>
-          {renderSheetActions()}
-        </Box> */}
-      </Container>
+      </ThemeProvider>
     );
   }
 
@@ -340,7 +387,10 @@ export const CharacterV3Dialog: React.FC<{
                 },
               })}
               options={CharacterTemplates}
-              className={css({ width: "300px" })}
+              className={css({
+                width: "300px",
+                color: "red !important",
+              })}
               getOptionLabel={(option) => {
                 return option.fileName;
               }}
@@ -392,7 +442,11 @@ export const CharacterV3Dialog: React.FC<{
             </Grid>
           </Box>
         </Collapse>
-        <Box mb="1rem">
+        <Box
+          className={css({
+            padding: ".5rem",
+          })}
+        >
           <Grid
             container
             alignItems="center"
@@ -406,7 +460,7 @@ export const CharacterV3Dialog: React.FC<{
                 scrollButtons="auto"
                 classes={{
                   flexContainer: css({
-                    borderBottom: `4px solid ${headerBackgroundColors.primary}`,
+                    borderBottom: `4px solid ${characterSheetTheme.borderColor}`,
                   }),
                   indicator: css({
                     display: "none",
@@ -423,26 +477,32 @@ export const CharacterV3Dialog: React.FC<{
                       disableRipple
                       key={page.id}
                       className={css({
-                        background: headerBackgroundColors.primary,
-                        color: `${headerTextColors.primary} !important`,
+                        // color: `${characterSheetTheme.textPrimary} !important`,
+                        // marginRight: ".5rem",
+                        // // Pentagone
+                        // // https://bennettfeely.com/clippy/
+                        background: characterSheetTheme.textPrimary,
                         marginRight: ".5rem",
-                        // Pentagone
-                        // https://bennettfeely.com/clippy/
-                        clipPath:
-                          "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
-                        borderBottom: `4px solid ${
+                        // clipPath:
+                        //   "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
+                        color: `${characterSheetTheme.textPrimaryInverted} !important`,
+                        borderBottom: `${borderSize}px solid ${
                           isCurrentTab
-                            ? theme.palette.secondary.main
-                            : theme.palette.text.primary
+                            ? characterSheetTheme.primaryColor
+                            : characterSheetTheme.borderColor
                         }`,
                         transition: "border linear 200ms",
-                        marginBottom: "-4px",
+                        marginBottom: `-${borderSize}px`,
                       })}
                       value={pageIndex.toString()}
                       label={
-                        <FateLabel
+                        <Typography
                           className={css({
-                            fontSize: "1.2rem",
+                            fontFamily:
+                              characterSheetTheme.pageHeadingFontFamily,
+                            fontSize: `${characterSheetTheme.pageHeadingFontSize}rem`,
+                            fontWeight: theme.typography.fontWeightBold,
+                            textTransform: "none",
                             width: "100%",
                           })}
                         >
@@ -452,7 +512,9 @@ export const CharacterV3Dialog: React.FC<{
                             value={page.label}
                             readonly={!advanced}
                             border={advanced}
-                            borderColor={headerTextColors.primary}
+                            borderColor={
+                              characterSheetTheme.textPrimaryInverted
+                            }
                             onChange={(newValue) => {
                               characterManager.actions.renamePage(
                                 pageIndex,
@@ -460,7 +522,7 @@ export const CharacterV3Dialog: React.FC<{
                               );
                             }}
                           />
-                        </FateLabel>
+                        </Typography>
                       }
                     />
                   );
@@ -489,7 +551,7 @@ export const CharacterV3Dialog: React.FC<{
           </Grid>
         </Box>
         <Collapse in={advanced}>
-          <Box mb=".5rem">
+          <Box>
             <Grid container justifyContent="space-around" alignItems="center">
               <Grid item>
                 <Tooltip title={t("character-dialog.control.move-page-left")}>
@@ -596,7 +658,10 @@ export const CharacterV3Dialog: React.FC<{
               .flatMap((row) => row.columns)
               .flatMap((column) => column.sections)
               .flatMap((section) => section.blocks).length;
-
+            const borderStyle =
+              advanced || numberOfBlocks === 0
+                ? "none"
+                : `${borderSize}px solid ${characterSheetTheme.borderColor}`;
             return (
               <TabPanel
                 key={page.id}
@@ -604,15 +669,15 @@ export const CharacterV3Dialog: React.FC<{
                 className={css({
                   label: "CharacterDialog-tab-panel",
                   padding: "0",
+                  background: characterSheetTheme.backgroundColor,
                 })}
               >
                 <Box
                   position="relative"
                   className={css({
-                    border:
-                      advanced || numberOfBlocks === 0
-                        ? "none"
-                        : `${borderSize}px solid ${headerBackgroundColors.primary}`,
+                    background: characterSheetTheme.backgroundColor,
+                    color: characterSheetTheme.textPrimary,
+                    paddingTop: ".5rem",
                   })}
                 >
                   {page.rows.map((row, rowIndex) => {
@@ -624,7 +689,7 @@ export const CharacterV3Dialog: React.FC<{
                       <ManagerBox
                         key={rowIndex}
                         readonly={!advanced}
-                        backgroundColor={theme.palette.action.hover}
+                        backgroundColor={characterSheetTheme.boxBackgroundColor}
                         label={<>Row #{rowIndex + 1}</>}
                         actions={
                           <>
@@ -646,6 +711,9 @@ export const CharacterV3Dialog: React.FC<{
                                       }}
                                     >
                                       <ArrowUpwardIcon
+                                        htmlColor={
+                                          characterSheetTheme.textSecondary
+                                        }
                                         className={css({
                                           fontSize: "1rem",
                                         })}
@@ -748,16 +816,17 @@ export const CharacterV3Dialog: React.FC<{
                                     xs={12}
                                     md={columnSize as GridSize}
                                     className={css({
-                                      borderLeft: hideColumnBorders
-                                        ? "none"
-                                        : `${borderSize}px solid ${headerBackgroundColors.primary}`,
+                                      // padding: ".5rem 0",
+                                      // borderLeft: hideColumnBorders
+                                      //   ? "none"
+                                      //   : `${borderSize}px solid ${characterSheetTheme.borderColor}`,
                                     })}
                                   >
                                     <ManagerBox
                                       readonly={!advanced}
                                       label={<>Column #{columnIndex + 1}</>}
                                       backgroundColor={
-                                        theme.palette.action.selected
+                                        characterSheetTheme.box2BackgroundColor
                                       }
                                       actions={
                                         <>
@@ -911,8 +980,7 @@ export const CharacterV3Dialog: React.FC<{
           <Grid item>
             <Box pt=".5rem">
               <Typography>
-                {date.format("lll")} / {"v"}
-                {characterManager.state.character?.version} /{" "}
+                {date.format("lll")} / {"v"}{" "}
                 {characterManager.state.character?.id.slice(0, 5)}
               </Typography>
             </Box>
@@ -951,9 +1019,9 @@ export const CharacterV3Dialog: React.FC<{
         <Box
           py={numberOfSections === 0 ? "1rem" : undefined}
           className={css({
-            border: advanced
-              ? `${borderSize}px solid ${headerBackgroundColors.primary}`
-              : "none",
+            // border: advanced
+            //   ? `${borderSize}px solid ${characterSheetTheme.borderColor}`
+            //   : "none",
           })}
         >
           {sections?.map((section, sectionIndex) => {
@@ -962,186 +1030,190 @@ export const CharacterV3Dialog: React.FC<{
             return (
               <Box key={section.id}>
                 <>
-                  <SheetHeader
-                    label={section.label}
-                    advanced={advanced}
-                    onLabelChange={(newLabel) => {
-                      characterManager.actions.renameSection(
-                        {
-                          pageIndex: indexes.pageIndex,
-                          rowIndex: indexes.rowIndex,
-                          columnIndex: indexes.columnIndex,
-                          sectionIndex: sectionIndex,
-                        },
-                        newLabel
-                      );
-                    }}
-                    actions={
-                      <Grid container justifyContent="flex-end">
-                        <Grid item>
-                          <Tooltip
-                            title={t(
-                              "character-dialog.control.visible-on-card"
-                            )}
-                          >
-                            <IconButton
-                              data-cy={`character-dialog.${section.label}.visible-on-card`}
-                              size="small"
-                              onClick={() => {
-                                characterManager.actions.toggleSectionVisibleOnCard(
-                                  {
-                                    pageIndex: indexes.pageIndex,
-                                    rowIndex: indexes.rowIndex,
-                                    columnIndex: indexes.columnIndex,
-                                    sectionIndex: sectionIndex,
-                                  }
-                                );
-                              }}
-                            >
-                              {section.visibleOnCard ? (
-                                <VisibilityIcon
-                                  htmlColor={headerTextColors.primary}
-                                  className={css({
-                                    fontSize: "1rem",
-                                  })}
-                                />
-                              ) : (
-                                <VisibilityOffIcon
-                                  htmlColor={headerTextColors.primary}
-                                  className={css({
-                                    fontSize: "1rem",
-                                  })}
-                                />
+                  <Box px=".5rem">
+                    <SheetHeader
+                      label={section.label}
+                      advanced={advanced}
+                      onLabelChange={(newLabel) => {
+                        characterManager.actions.renameSection(
+                          {
+                            pageIndex: indexes.pageIndex,
+                            rowIndex: indexes.rowIndex,
+                            columnIndex: indexes.columnIndex,
+                            sectionIndex: sectionIndex,
+                          },
+                          newLabel
+                        );
+                      }}
+                      actions={
+                        <Grid container justifyContent="flex-end">
+                          <Grid item>
+                            <Tooltip
+                              title={t(
+                                "character-dialog.control.visible-on-card"
                               )}
-                            </IconButton>
-                          </Tooltip>
-                        </Grid>
-                        <Grid item>
-                          <Tooltip
-                            title={t(
-                              "character-dialog.control.move-section-up"
-                            )}
-                          >
-                            <span>
+                            >
                               <IconButton
-                                disabled={!canMoveSectionUp}
+                                data-cy={`character-dialog.${section.label}.visible-on-card`}
                                 size="small"
-                                data-cy={`character-dialog.${section.label}.move-section-up`}
                                 onClick={() => {
-                                  characterManager.actions.moveSectionUp({
-                                    pageIndex: indexes.pageIndex,
-                                    rowIndex: indexes.rowIndex,
-                                    columnIndex: indexes.columnIndex,
-                                    sectionIndex: sectionIndex,
-                                  });
+                                  characterManager.actions.toggleSectionVisibleOnCard(
+                                    {
+                                      pageIndex: indexes.pageIndex,
+                                      rowIndex: indexes.rowIndex,
+                                      columnIndex: indexes.columnIndex,
+                                      sectionIndex: sectionIndex,
+                                    }
+                                  );
                                 }}
                               >
-                                <ArrowUpwardIcon
-                                  htmlColor={
-                                    !canMoveSectionUp
-                                      ? headerTextColors.disabled
-                                      : headerTextColors.primary
-                                  }
+                                {section.visibleOnCard ? (
+                                  <VisibilityIcon
+                                    htmlColor={headerTextColors.primary}
+                                    className={css({
+                                      fontSize: "1rem",
+                                    })}
+                                  />
+                                ) : (
+                                  <VisibilityOffIcon
+                                    htmlColor={headerTextColors.primary}
+                                    className={css({
+                                      fontSize: "1rem",
+                                    })}
+                                  />
+                                )}
+                              </IconButton>
+                            </Tooltip>
+                          </Grid>
+                          <Grid item>
+                            <Tooltip
+                              title={t(
+                                "character-dialog.control.move-section-up"
+                              )}
+                            >
+                              <span>
+                                <IconButton
+                                  disabled={!canMoveSectionUp}
+                                  size="small"
+                                  data-cy={`character-dialog.${section.label}.move-section-up`}
+                                  onClick={() => {
+                                    characterManager.actions.moveSectionUp({
+                                      pageIndex: indexes.pageIndex,
+                                      rowIndex: indexes.rowIndex,
+                                      columnIndex: indexes.columnIndex,
+                                      sectionIndex: sectionIndex,
+                                    });
+                                  }}
+                                >
+                                  <ArrowUpwardIcon
+                                    htmlColor={
+                                      !canMoveSectionUp
+                                        ? headerTextColors.disabled
+                                        : headerTextColors.primary
+                                    }
+                                    className={css({
+                                      fontSize: "1rem",
+                                    })}
+                                  />
+                                </IconButton>
+                              </span>
+                            </Tooltip>
+                          </Grid>
+                          <Grid item>
+                            <Tooltip
+                              title={t(
+                                "character-dialog.control.move-section-down"
+                              )}
+                            >
+                              <span>
+                                <IconButton
+                                  disabled={!canMoveSectionDown}
+                                  size="small"
+                                  data-cy={`character-dialog.${section.label}.move-section-down`}
+                                  onClick={() => {
+                                    characterManager.actions.moveSectionDown({
+                                      pageIndex: indexes.pageIndex,
+                                      rowIndex: indexes.rowIndex,
+                                      columnIndex: indexes.columnIndex,
+                                      sectionIndex: sectionIndex,
+                                    });
+                                  }}
+                                >
+                                  <ArrowDownwardIcon
+                                    htmlColor={
+                                      !canMoveSectionDown
+                                        ? headerTextColors.disabled
+                                        : headerTextColors.primary
+                                    }
+                                    className={css({
+                                      fontSize: "1rem",
+                                    })}
+                                  />
+                                </IconButton>
+                              </span>
+                            </Tooltip>
+                          </Grid>
+                          <Grid item>
+                            <Tooltip
+                              title={t(
+                                "character-dialog.control.copy-section-blocks"
+                              )}
+                            >
+                              <IconButton
+                                size="small"
+                                onClick={() => {
+                                  settingsManager.actions.setBlocksInClipboard(
+                                    section.blocks
+                                  );
+                                }}
+                              >
+                                <FileCopyIcon
+                                  htmlColor={headerTextColors.primary}
                                   className={css({
                                     fontSize: "1rem",
                                   })}
                                 />
                               </IconButton>
-                            </span>
-                          </Tooltip>
-                        </Grid>
-                        <Grid item>
-                          <Tooltip
-                            title={t(
-                              "character-dialog.control.move-section-down"
-                            )}
-                          >
-                            <span>
+                            </Tooltip>
+                          </Grid>
+                          <Grid item>
+                            <Tooltip
+                              title={t(
+                                "character-dialog.control.delete-section"
+                              )}
+                            >
                               <IconButton
-                                disabled={!canMoveSectionDown}
+                                data-cy={`character-dialog.${section.label}.delete`}
                                 size="small"
-                                data-cy={`character-dialog.${section.label}.move-section-down`}
                                 onClick={() => {
-                                  characterManager.actions.moveSectionDown({
-                                    pageIndex: indexes.pageIndex,
-                                    rowIndex: indexes.rowIndex,
-                                    columnIndex: indexes.columnIndex,
-                                    sectionIndex: sectionIndex,
-                                  });
+                                  const confirmed = confirm(
+                                    t(
+                                      "character-dialog.delete-section-confirmation"
+                                    )
+                                  );
+                                  if (confirmed) {
+                                    characterManager.actions.deleteSection({
+                                      pageIndex: indexes.pageIndex,
+                                      rowIndex: indexes.rowIndex,
+                                      columnIndex: indexes.columnIndex,
+                                      sectionIndex: sectionIndex,
+                                    });
+                                  }
                                 }}
                               >
-                                <ArrowDownwardIcon
-                                  htmlColor={
-                                    !canMoveSectionDown
-                                      ? headerTextColors.disabled
-                                      : headerTextColors.primary
-                                  }
+                                <DeleteIcon
+                                  htmlColor={headerTextColors.primary}
                                   className={css({
                                     fontSize: "1rem",
                                   })}
                                 />
                               </IconButton>
-                            </span>
-                          </Tooltip>
+                            </Tooltip>
+                          </Grid>
                         </Grid>
-                        <Grid item>
-                          <Tooltip
-                            title={t(
-                              "character-dialog.control.copy-section-blocks"
-                            )}
-                          >
-                            <IconButton
-                              size="small"
-                              onClick={() => {
-                                settingsManager.actions.setBlocksInClipboard(
-                                  section.blocks
-                                );
-                              }}
-                            >
-                              <FileCopyIcon
-                                htmlColor={headerTextColors.primary}
-                                className={css({
-                                  fontSize: "1rem",
-                                })}
-                              />
-                            </IconButton>
-                          </Tooltip>
-                        </Grid>
-                        <Grid item>
-                          <Tooltip
-                            title={t("character-dialog.control.delete-section")}
-                          >
-                            <IconButton
-                              data-cy={`character-dialog.${section.label}.delete`}
-                              size="small"
-                              onClick={() => {
-                                const confirmed = confirm(
-                                  t(
-                                    "character-dialog.delete-section-confirmation"
-                                  )
-                                );
-                                if (confirmed) {
-                                  characterManager.actions.deleteSection({
-                                    pageIndex: indexes.pageIndex,
-                                    rowIndex: indexes.rowIndex,
-                                    columnIndex: indexes.columnIndex,
-                                    sectionIndex: sectionIndex,
-                                  });
-                                }
-                              }}
-                            >
-                              <DeleteIcon
-                                htmlColor={headerTextColors.primary}
-                                className={css({
-                                  fontSize: "1rem",
-                                })}
-                              />
-                            </IconButton>
-                          </Tooltip>
-                        </Grid>
-                      </Grid>
-                    }
-                  />
+                      }
+                    />
+                  </Box>
                   {renderSectionBlocks(page, section, {
                     pageIndex: indexes.pageIndex,
                     rowIndex: indexes.rowIndex,
@@ -1151,69 +1223,65 @@ export const CharacterV3Dialog: React.FC<{
 
                   {advanced && (
                     <Box p=".5rem" mb=".5rem">
-                      <ThemeProvider theme={blackButtonTheme}>
-                        <Grid
-                          container
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <Grid item>
-                            <AddBlock
-                              variant="button"
-                              onAddBlock={(blockType) => {
-                                characterManager.actions.addBlock(
-                                  {
-                                    pageIndex: indexes.pageIndex,
-                                    rowIndex: indexes.rowIndex,
-                                    columnIndex: indexes.columnIndex,
-                                    sectionIndex: sectionIndex,
-                                  },
-                                  blockType
-                                );
-                              }}
-                            />
-                          </Grid>
-                          {settingsManager.computed.hasBlocksInClipboard && (
-                            <Grid item>
-                              <Tooltip
-                                title={t(
-                                  "character-dialog.control.paste-blocks"
-                                )}
-                              >
-                                <span>
-                                  <IconButton
-                                    onClick={() => {
-                                      characterManager.actions.pasteBlocks(
-                                        {
-                                          pageIndex: indexes.pageIndex,
-                                          rowIndex: indexes.rowIndex,
-                                          columnIndex: indexes.columnIndex,
-                                          sectionIndex: sectionIndex,
-                                        },
-                                        settingsManager.state.blocksInClipboard
-                                      );
-                                    }}
-                                  >
-                                    <ContentPasteIcon />
-                                  </IconButton>
-                                </span>
-                              </Tooltip>
-                            </Grid>
-                          )}
-                          <Grid item>
-                            <AddSection
-                              onAddSection={() => {
-                                characterManager.actions.addSection({
+                      <Grid
+                        container
+                        justifyContent="center"
+                        alignItems="center"
+                      >
+                        <Grid item>
+                          <AddBlock
+                            variant="button"
+                            onAddBlock={(blockType) => {
+                              characterManager.actions.addBlock(
+                                {
                                   pageIndex: indexes.pageIndex,
                                   rowIndex: indexes.rowIndex,
                                   columnIndex: indexes.columnIndex,
                                   sectionIndex: sectionIndex,
-                                });
-                              }}
-                            />
-                          </Grid>
+                                },
+                                blockType
+                              );
+                            }}
+                          />
                         </Grid>
-                      </ThemeProvider>
+                        {settingsManager.computed.hasBlocksInClipboard && (
+                          <Grid item>
+                            <Tooltip
+                              title={t("character-dialog.control.paste-blocks")}
+                            >
+                              <span>
+                                <IconButton
+                                  onClick={() => {
+                                    characterManager.actions.pasteBlocks(
+                                      {
+                                        pageIndex: indexes.pageIndex,
+                                        rowIndex: indexes.rowIndex,
+                                        columnIndex: indexes.columnIndex,
+                                        sectionIndex: sectionIndex,
+                                      },
+                                      settingsManager.state.blocksInClipboard
+                                    );
+                                  }}
+                                >
+                                  <ContentPasteIcon />
+                                </IconButton>
+                              </span>
+                            </Tooltip>
+                          </Grid>
+                        )}
+                        <Grid item>
+                          <AddSection
+                            onAddSection={() => {
+                              characterManager.actions.addSection({
+                                pageIndex: indexes.pageIndex,
+                                rowIndex: indexes.rowIndex,
+                                columnIndex: indexes.columnIndex,
+                                sectionIndex: sectionIndex,
+                              });
+                            }}
+                          />
+                        </Grid>
+                      </Grid>
                     </Box>
                   )}
                 </>
@@ -1223,18 +1291,16 @@ export const CharacterV3Dialog: React.FC<{
 
           {shouldRenderAddSectionButton && (
             <Box>
-              <ThemeProvider theme={blackButtonTheme}>
-                <AddSection
-                  onAddSection={() => {
-                    characterManager.actions.addSection({
-                      pageIndex: indexes.pageIndex,
-                      rowIndex: indexes.rowIndex,
-                      columnIndex: indexes.columnIndex,
-                      sectionIndex: numberOfSections,
-                    });
-                  }}
-                />
-              </ThemeProvider>
+              <AddSection
+                onAddSection={() => {
+                  characterManager.actions.addSection({
+                    pageIndex: indexes.pageIndex,
+                    rowIndex: indexes.rowIndex,
+                    columnIndex: indexes.columnIndex,
+                    sectionIndex: numberOfSections,
+                  });
+                }}
+              />
             </Box>
           )}
         </Box>
@@ -1327,7 +1393,7 @@ export const CharacterV3Dialog: React.FC<{
                       window.open(`/characters/${props.character?.id}/print`);
                     }}
                   >
-                    <PrintIcon />
+                    <PrintIcon htmlColor={characterSheetTheme.textPrimary} />
                   </IconButton>
                 </Tooltip>
               </Grid>
@@ -1350,7 +1416,7 @@ export const CharacterV3Dialog: React.FC<{
                     }
                   }}
                 >
-                  <DeleteIcon />
+                  <DeleteIcon htmlColor={characterSheetTheme.textPrimary} />
                 </IconButton>
               </Tooltip>
             </Grid>
@@ -1366,7 +1432,7 @@ export const CharacterV3Dialog: React.FC<{
                     );
                   }}
                 >
-                  <ExportIcon />
+                  <ExportIcon htmlColor={characterSheetTheme.textPrimary} />
                 </IconButton>
               </Tooltip>
             </Grid>
@@ -1385,12 +1451,27 @@ export const CharacterV3Dialog: React.FC<{
                         );
                       }}
                     >
-                      <ShareIcon />
+                      <ShareIcon htmlColor={characterSheetTheme.textPrimary} />
                     </IconButton>
                   </Tooltip>
                 </Grid>
               </>
             )}
+
+            <Grid item>
+              <Tooltip title={t("character-dialog.open-theme-editor")}>
+                <IconButton
+                  color="default"
+                  data-cy="character-dialog.open-theme-editor"
+                  size="small"
+                  onClick={() => {
+                    setThemeEditorVisible(true);
+                  }}
+                >
+                  <PaletteIcon htmlColor={characterSheetTheme.textPrimary} />
+                </IconButton>
+              </Tooltip>
+            </Grid>
 
             <Grid item>
               <Button
@@ -1413,10 +1494,299 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
-  function renderNameAndGroup() {
+  function renderThemeEditor() {
+    return (
+      <>
+        <Box p="2rem" width="30vw">
+          <Grid container wrap="nowrap" justifyContent={"space-between"}>
+            <Grid item>
+              <Typography variant="h5">Theme settings</Typography>
+            </Grid>
+            <Grid item>
+              <Switch
+                color="primary"
+                data-cy="character-dialog.toggle-advanced"
+                checked={hasCharacterSheetTheme}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (hasCharacterSheetTheme) {
+                    characterManager.actions.removeTheme();
+                  } else {
+                    characterManager.actions.setTheme();
+                  }
+                }}
+              />
+            </Grid>
+          </Grid>
+
+          <Typography gutterBottom variant="h6">
+            Basics
+          </Typography>
+
+          {renderBasicThemeEditorControls()}
+
+          {renderFontThemeEditorControls({
+            label: "Pages",
+            initialFontSize: 1.25,
+            fontFamily:
+              characterManager.state.character?.theme?.pageHeadingFontFamily,
+            fontSize:
+              characterManager.state.character?.theme?.pageHeadingFontSize,
+            onFontFamilyChange: (fontFamily) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.pageHeadingFontFamily = fontFamily;
+              });
+            },
+            onFontSizeChange: (fontSize) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.pageHeadingFontSize = fontSize;
+              });
+            },
+          })}
+          {renderFontThemeEditorControls({
+            label: "Sections",
+            initialFontSize: 1,
+            fontFamily:
+              characterManager.state.character?.theme?.sectionHeadingFontFamily,
+            fontSize:
+              characterManager.state.character?.theme?.sectionHeadingFontSize,
+            onFontFamilyChange: (fontFamily) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.sectionHeadingFontFamily = fontFamily;
+              });
+            },
+            onFontSizeChange: (fontSize) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.sectionHeadingFontSize = fontSize;
+              });
+            },
+          })}
+          {renderFontThemeEditorControls({
+            label: "Labels",
+            initialFontSize: 1,
+            fontFamily:
+              characterManager.state.character?.theme?.labelFontFamily,
+            fontSize: characterManager.state.character?.theme?.labelFontSize,
+            onFontFamilyChange: (fontFamily) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.labelFontFamily = fontFamily;
+              });
+            },
+            onFontSizeChange: (fontSize) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.labelFontSize = fontSize;
+              });
+            },
+          })}
+          {renderFontThemeEditorControls({
+            label: "Text",
+            initialFontSize: 1,
+            fontFamily: characterManager.state.character?.theme?.textFontFamily,
+            fontSize: characterManager.state.character?.theme?.textFontSize,
+            onFontFamilyChange: (fontFamily) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.textFontFamily = fontFamily;
+              });
+            },
+            onFontSizeChange: (fontSize) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.textFontSize = fontSize;
+              });
+            },
+          })}
+        </Box>
+      </>
+    );
+  }
+
+  function renderBasicThemeEditorControls() {
     return (
       <>
         <Box mb="1rem">
+          <Grid container spacing={2} wrap="nowrap">
+            <Grid item xs>
+              <LazyState
+                delay={Delays.field}
+                value={characterManager.state.character?.theme?.backgroundColor}
+                onChange={(value) => {
+                  characterManager.actions.setTheme((theme) => {
+                    theme.backgroundColor = value;
+                  });
+                }}
+                render={([value, setValue]) => {
+                  return (
+                    <TextField
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      disabled={!hasCharacterSheetTheme}
+                      label="Background color"
+                      placeholder="#ffffff"
+                      InputProps={{
+                        startAdornment: <CircleIcon htmlColor={value} />,
+                      }}
+                      fullWidth
+                      value={value}
+                      onChange={(e) => {
+                        setValue(e.target.value);
+                      }}
+                      variant="standard"
+                    />
+                  );
+                }}
+              />
+            </Grid>
+            <Grid item xs>
+              <LazyState
+                delay={Delays.field}
+                value={characterManager.state.character?.theme?.primaryColor}
+                onChange={(value) => {
+                  characterManager.actions.setTheme((theme) => {
+                    theme.primaryColor = value;
+                  });
+                }}
+                render={([value, setValue]) => {
+                  return (
+                    <TextField
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      disabled={!hasCharacterSheetTheme}
+                      label="Primary Color"
+                      placeholder="#84addb"
+                      InputProps={{
+                        startAdornment: <CircleIcon htmlColor={value} />,
+                      }}
+                      fullWidth
+                      multiline
+                      variant="standard"
+                      value={value}
+                      onChange={(e) => {
+                        setValue(e.target.value);
+                      }}
+                    />
+                  );
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+
+        <Box mb="1rem">
+          <LazyState
+            delay={Delays.field}
+            value={characterManager.state.character?.theme?.fontImport}
+            onChange={(value) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.fontImport = value;
+              });
+            }}
+            render={([value, setValue]) => {
+              return (
+                <TextField
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  disabled={!hasCharacterSheetTheme}
+                  label="Font @import"
+                  placeholder="@import url('https://fonts.googleapis.com/css2?family="
+                  fullWidth
+                  multiline
+                  variant="standard"
+                  value={value}
+                  onChange={(e) => {
+                    setValue(e.target.value);
+                  }}
+                />
+              );
+            }}
+          />
+        </Box>
+      </>
+    );
+  }
+
+  function renderFontThemeEditorControls(renderProps: {
+    label: string;
+    initialFontSize: number;
+    fontFamily: string | undefined;
+    fontSize: number | undefined;
+    onFontFamilyChange: (value: string | undefined) => void;
+    onFontSizeChange: (value: number | undefined) => void;
+  }) {
+    return (
+      <>
+        <Typography gutterBottom variant="h6">
+          {renderProps.label}
+        </Typography>
+
+        <Box mb="1rem">
+          <Grid container spacing={2} wrap="nowrap">
+            <Grid item xs>
+              <LazyState
+                delay={Delays.field}
+                value={renderProps.fontFamily}
+                onChange={(value) => {
+                  renderProps.onFontFamilyChange(value);
+                }}
+                render={([value, setValue]) => {
+                  return (
+                    <TextField
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      disabled={!hasCharacterSheetTheme}
+                      label={`Font Family`}
+                      placeholder={FontFamily.Default.split(",").join(", ")}
+                      fullWidth
+                      multiline
+                      variant="standard"
+                      value={value}
+                      onChange={(e) => {
+                        setValue(e.target.value);
+                      }}
+                    />
+                  );
+                }}
+              />
+            </Grid>
+            <Grid item xs>
+              <LazyState
+                delay={Delays.field}
+                value={renderProps.fontSize}
+                onChange={(value) => {
+                  renderProps.onFontSizeChange(value);
+                }}
+                render={([value, setValue]) => {
+                  return (
+                    <>
+                      <InputLabel shrink>{`Font Size`}</InputLabel>
+                      <Slider
+                        defaultValue={renderProps.initialFontSize}
+                        step={0.125}
+                        min={1}
+                        max={2}
+                        valueLabelDisplay="auto"
+                        value={value}
+                        onChange={(e, value) => {
+                          setValue(value as number);
+                        }}
+                      />
+                    </>
+                  );
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+      </>
+    );
+  }
+
+  function renderNameAndGroup() {
+    return (
+      <>
+        <Box mb="1rem" px=".5rem">
           <Grid container>
             <Grid
               item
@@ -1433,7 +1803,7 @@ export const CharacterV3Dialog: React.FC<{
                   flex: "0 0 auto",
                 })}
               >
-                <FateLabel>{t("character-dialog.name")}</FateLabel>
+                <ThemedLabel>{t("character-dialog.name")}</ThemedLabel>
               </Grid>
               <Grid item xs>
                 <Box fontSize="1rem">
@@ -1465,7 +1835,7 @@ export const CharacterV3Dialog: React.FC<{
                   flex: "0 0 auto",
                 })}
               >
-                <FateLabel>{t("character-dialog.group")}</FateLabel>
+                <ThemedLabel>{t("character-dialog.group")}</ThemedLabel>
               </Grid>
               <Grid item xs>
                 <LazyState
@@ -1569,9 +1939,9 @@ export const CharacterV3Dialog: React.FC<{
                 <Grid key={block.id} item xs={width}>
                   <Box mb=".5rem" px=".5rem">
                     <ManagerBox
-                      label={<>Bloc #{blockIndex + 1}</>}
+                      label={<>Block #{blockIndex + 1}</>}
+                      backgroundColor={characterSheetTheme.backgroundColor}
                       readonly={!advanced}
-                      backgroundColor={theme.palette.background.paper}
                       actions={
                         <>
                           <Grid container justifyContent="flex-end">
@@ -1758,6 +2128,7 @@ export function ManagerBox(props: {
   readonly?: boolean;
 }) {
   const theme = useTheme();
+  const characterSheetTheme = useContext(CharacterSheetThemeContext);
   if (props.readonly) {
     return <>{props.children}</>;
   }

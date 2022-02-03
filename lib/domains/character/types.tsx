@@ -270,6 +270,20 @@ export interface IPage {
   rows: Array<IPageRow>;
 }
 
+export type ICharacterTheme = {
+  backgroundColor?: string;
+  fontImport?: string;
+  primaryColor?: string;
+  pageHeadingFontFamily?: string;
+  pageHeadingFontSize?: number;
+  sectionHeadingFontFamily?: string;
+  sectionHeadingFontSize?: number;
+  labelFontFamily?: string;
+  labelFontSize?: number;
+  textFontFamily?: string;
+  textFontSize?: number;
+};
+
 export interface ICharacter {
   id: string;
   name: string;
@@ -277,7 +291,7 @@ export interface ICharacter {
   wide: boolean;
   zoom?: number;
   pages: Array<IPage>;
-
+  theme?: ICharacterTheme;
   // hidden
   version: number;
   lastUpdated: number;

@@ -985,9 +985,10 @@ export const IndexCard: React.FC<
   }
 };
 
-function IndexCardColorPicker(props: {
+export function IndexCardColorPicker(props: {
   color: string;
   onChange(newColor: string): void;
+  hidePastils?: boolean;
 }) {
   const [color, setColor] = useLazyState({
     value: props.color,
@@ -999,46 +1000,47 @@ function IndexCardColorPicker(props: {
     <>
       <ChromePicker
         color={color}
-        disableAlpha
         onChange={(color) => {
           return setColor(color.hex);
         }}
-        styles={{
-          default: {
-            picker: {
-              boxShadow: "none",
-            },
-          },
-        }}
+        // styles={{
+        //   default: {
+        //     picker: {
+        //       boxShadow: "none",
+        //     },
+        //   },
+        // }}
       />
-      <Box pb=".5rem" bgcolor="white" width="225px">
-        <Grid container justifyContent="center" spacing={1}>
-          {Object.keys(IndexCardColor).map((colorName) => {
-            const color = IndexCardColor[colorName as IndexCardColorTypes];
-            return (
-              <Grid item key={color}>
-                <IconButton
-                  size="small"
-                  onClick={() => {
-                    setColor(color);
-                    props.onChange(color);
-                  }}
-                >
-                  <Box
-                    className={css({
-                      width: "1.5rem",
-                      height: "1.5rem",
-                      background: color,
-                      borderRadius: "50%",
-                      border: "1px solid #e0e0e0",
-                    })}
-                  />
-                </IconButton>
-              </Grid>
-            );
-          })}
-        </Grid>
-      </Box>
+      {!props.hidePastils && (
+        <Box pb=".5rem" bgcolor="white" width="225px">
+          <Grid container justifyContent="center" spacing={1}>
+            {Object.keys(IndexCardColor).map((colorName) => {
+              const color = IndexCardColor[colorName as IndexCardColorTypes];
+              return (
+                <Grid item key={color}>
+                  <IconButton
+                    size="small"
+                    onClick={() => {
+                      setColor(color);
+                      props.onChange(color);
+                    }}
+                  >
+                    <Box
+                      className={css({
+                        width: "1.5rem",
+                        height: "1.5rem",
+                        background: color,
+                        borderRadius: "50%",
+                        border: "1px solid #e0e0e0",
+                      })}
+                    />
+                  </IconButton>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Box>
+      )}
     </>
   );
 }

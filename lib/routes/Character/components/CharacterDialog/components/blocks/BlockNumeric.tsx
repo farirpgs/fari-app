@@ -5,7 +5,6 @@ import Link from "@mui/material/Link";
 import { useTheme } from "@mui/material/styles";
 import React from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
-import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { INumericBlock } from "../../../../../../domains/character/types";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import {
@@ -14,6 +13,7 @@ import {
 } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { CircleTextField } from "../CircleTextField";
+import { ThemedLabel } from "../ThemedLabel";
 
 export function BlockNumeric(props: IBlockComponentProps<INumericBlock> & {}) {
   const isSlotTrackerVisible =
@@ -40,7 +40,7 @@ export function BlockNumeric(props: IBlockComponentProps<INumericBlock> & {}) {
             />
           </Grid>
           <Grid item xs>
-            <FateLabel display="inline">
+            <ThemedLabel>
               <ContentEditable
                 readonly={props.readonly}
                 border={props.advanced}
@@ -50,7 +50,7 @@ export function BlockNumeric(props: IBlockComponentProps<INumericBlock> & {}) {
                   props.onLabelChange(value);
                 }}
               />
-            </FateLabel>
+            </ThemedLabel>
           </Grid>
           {isSlotTrackerVisible && (
             <Grid item>

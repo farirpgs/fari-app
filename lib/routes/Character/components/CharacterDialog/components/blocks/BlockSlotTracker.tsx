@@ -11,21 +11,22 @@ import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import { useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   ContentEditable,
   previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
-import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { Delays } from "../../../../../../constants/Delays";
 import { ISlotTrackerBlock } from "../../../../../../domains/character/types";
 import { Id } from "../../../../../../domains/Id/Id";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
+import { CharacterSheetThemeContext } from "../../CharacterSheetThemeContext";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
+import { ThemedLabel } from "../ThemedLabel";
 
 export function BlockSlotTracker(
   props: IBlockComponentProps<ISlotTrackerBlock>
@@ -143,9 +144,10 @@ export function BlockSlotTracker(
               )}
               {isLabelVisible && (
                 <Grid item className={css({ minWidth: "4rem" })}>
-                  <FateLabel
-                    display="inline"
-                    align={props.readonly ? "inherit" : "center"}
+                  <ThemedLabel
+                    className={css({
+                      textAlign: props.readonly ? "inherit" : "center",
+                    })}
                   >
                     <ContentEditable
                       data-cy={`${props.dataCy}.label`}
@@ -156,7 +158,7 @@ export function BlockSlotTracker(
                         props.onLabelChange(value);
                       }}
                     />
-                  </FateLabel>
+                  </ThemedLabel>
                 </Grid>
               )}
               {!props.readonly && (
@@ -248,7 +250,7 @@ export function BlockSlotTracker(
               </Box>
               {isBoxLabelVisible && (
                 <Box>
-                  <FateLabel className={css({ textAlign: "center" })}>
+                  <ThemedLabel className={css({ textAlign: "center" })}>
                     <ContentEditable
                       data-cy={`${props.dataCy}.box.${boxIndex}.label`}
                       readonly={props.readonly}
@@ -260,7 +262,7 @@ export function BlockSlotTracker(
                         handleSetBoxLabel(boxIndex, value);
                       }}
                     />
-                  </FateLabel>
+                  </ThemedLabel>
                 </Box>
               )}
             </Grid>
@@ -310,13 +312,14 @@ function Clock(props: {
   onClick: (sliceIndex: number) => void;
 }) {
   const theme = useTheme();
+  const characterSheetTheme = useContext(CharacterSheetThemeContext);
   const uuid = useState(() => Id.generate())[0];
   const circleCx = 55;
   const circleCy = 55;
   const circleR = 50;
   const filledColor = true
     ? `url(#fari-slot-tracker-clock-pattern-${uuid})`
-    : "theme.palette.text.primary";
+    : characterSheetTheme.textPrimary;
   const checkedSliceStyle = css({
     fill: filledColor,
     cursor: props.disabled ? "inherit" : "pointer",
@@ -357,7 +360,7 @@ function Clock(props: {
             y1="0"
             x2="5"
             y2="5"
-            stroke={theme.palette.text.primary}
+            stroke={characterSheetTheme.textPrimary}
             strokeWidth="1"
           />
         </pattern>
@@ -369,7 +372,7 @@ function Clock(props: {
           cy={circleCy}
           r={circleR}
           fill={props.slices[0] ? filledColor : "transparent"}
-          stroke={theme.palette.text.primary}
+          stroke={characterSheetTheme.textPrimary}
           strokeWidth="4px"
           className={sliceStyle}
           onClick={() => {
@@ -411,7 +414,7 @@ function Clock(props: {
               d={d}
               key={i}
               className={checked ? checkedSliceStyle : sliceStyle}
-              stroke={theme.palette.text.primary}
+              stroke={characterSheetTheme.textPrimary}
               strokeWidth="4px"
               onClick={() => {
                 if (props.disabled) {

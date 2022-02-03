@@ -4,25 +4,28 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import React from "react";
+import React, { useContext } from "react";
 import {
   ContentEditable,
   previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
-import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { ITextBlock } from "../../../../../../domains/character/types";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
+import { CharacterSheetThemeContext } from "../../CharacterSheetThemeContext";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
+import { ThemedLabel } from "../ThemedLabel";
 
 export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
   const isLabelVisible =
     !!previewContentEditable({ value: props.block.label }) || props.advanced;
   const isSlotTrackerVisible =
     props.block.meta?.checked === true || props.block.meta?.checked === false;
+  const theme = useTheme();
+  const characterSheetTheme = useContext(CharacterSheetThemeContext);
 
   return (
     <>
@@ -36,23 +39,30 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
           <Grid item xs>
             {isLabelVisible && (
               <Box>
-                <FateLabel display="inline">
+                <ThemedLabel>
                   <ContentEditable
                     readonly={props.readonly || !props.advanced}
                     border={props.advanced}
+                    borderColor={characterSheetTheme.borderColor}
                     data-cy={`${props.dataCy}.label`}
                     value={props.block.label}
                     onChange={(value) => {
                       props.onLabelChange(value);
                     }}
                   />
-                </FateLabel>
+                </ThemedLabel>
               </Box>
             )}
             <Box>
-              <Typography>
+              <Typography
+                className={css({
+                  fontFamily: characterSheetTheme.textFontFamily,
+                  fontSize: `${characterSheetTheme.textFontSize}rem`,
+                })}
+              >
                 <ContentEditable
                   border
+                  borderColor={characterSheetTheme.borderColor}
                   data-cy={`${props.dataCy}.value`}
                   readonly={props.readonly}
                   value={props.block.value}

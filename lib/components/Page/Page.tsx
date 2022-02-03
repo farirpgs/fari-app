@@ -82,6 +82,7 @@ export const Page: React.FC<{
   liveLabel?: string;
   drawerWidth?: string;
   maxWidth?: string;
+  marginTop?: string;
   pb?: string;
   debug?: Record<string, string>;
   hideHeaderLogo?: boolean;
@@ -143,7 +144,7 @@ export const Page: React.FC<{
                     : props.maxWidth ?? FariMaxWidth,
                   marginLeft: "auto",
                   marginRight: "auto",
-                  marginTop: "2rem",
+                  marginTop: props.marginTop || "2rem",
                   width: "100%",
                   flex: "1 0 auto",
                 })}

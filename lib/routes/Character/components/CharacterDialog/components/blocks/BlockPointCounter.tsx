@@ -9,7 +9,6 @@ import {
   ContentEditable,
   previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
-import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { Delays } from "../../../../../../constants/Delays";
 import { IPointCounterBlock } from "../../../../../../domains/character/types";
 import { Font } from "../../../../../../domains/font/Font";
@@ -20,6 +19,7 @@ import {
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
 import { CircleTextField } from "../CircleTextField";
+import { ThemedLabel } from "../ThemedLabel";
 
 export function usePointCounter(props: {
   points: string;
@@ -128,14 +128,7 @@ export function BlockPointCounter(
               spacing={1}
             >
               <Grid item className={css({ flex: "1 1 auto" })}>
-                <FateLabel
-                  display="inline"
-                  align="center"
-                  className={css({
-                    width: "100%",
-                    display: "inline-block",
-                  })}
-                >
+                <ThemedLabel className={css({ textAlign: "center" })}>
                   <ContentEditable
                     data-cy={`${props.dataCy}.label`}
                     readonly={props.readonly || !props.advanced}
@@ -145,7 +138,7 @@ export function BlockPointCounter(
                       props.onLabelChange(value);
                     }}
                   />
-                </FateLabel>
+                </ThemedLabel>
               </Grid>
             </Grid>
           </Box>
