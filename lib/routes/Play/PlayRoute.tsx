@@ -1,9 +1,8 @@
-import { LiveObject } from "@liveblocks/client";
 import {
   useBroadcastEvent,
   useEventListener,
   useObject,
-  useStorage,
+  useRoom,
 } from "@liveblocks/react";
 import React, { useContext, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
@@ -28,13 +27,7 @@ export function useLiveObject<T>(props: {
   onChange(newValue: T): void;
 }) {
   const liveObject = useObject<T>(props.key);
-  const [root] = useStorage();
-
-  useEffect(() => {
-    if (props.isOwner) {
-      root?.set(props.key, new LiveObject({}));
-    }
-  }, [root]);
+  const room = useRoom();
 
   useEffect(() => {
     if (props.isOwner) {
@@ -43,13 +36,6 @@ export function useLiveObject<T>(props: {
   }, [props.value]);
 
   useEffect(() => {
-    onLiveObjectChange();
-
-    liveObject?.subscribe(onLiveObjectChange);
-    return () => {
-      liveObject?.unsubscribe(onLiveObjectChange);
-    };
-
     function onLiveObjectChange() {
       const isSubscriber = !props.isOwner;
       const object = liveObject?.toObject();
@@ -58,6 +44,14 @@ export function useLiveObject<T>(props: {
         props.onChange(object as T);
       }
     }
+
+    onLiveObjectChange();
+
+    if (liveObject == null) {
+      return;
+    }
+
+    return room.subscribe(liveObject, onLiveObjectChange);
   }, [liveObject]);
 
   return liveObject;
@@ -141,25 +135,29 @@ export const PlayRoute: React.FC<{
       );
     }
     if (event.type === "ping") {
-      broadcast(PlayerInteractionFactory.pong());
+      broadcast(PlayerInteractionFactory.pong(), {
+        shouldQueueEventIfNotReady: true,
+      });
     }
   });
 
   function handlePlayerInteraction(interaction: IPlayerInteraction) {
-    broadcast({
-      type: interaction.type,
-      payload: interaction.payload,
-    });
+    broadcast(
+      {
+        type: interaction.type,
+        payload: interaction.payload,
+      },
+      {
+        shouldQueueEventIfNotReady: true,
+      }
+    );
   }
 
   useEffect(() => {
     if (playerName) {
-      // until the liveblocks team fixes the bug
-      setTimeout(() => {
-        handlePlayerInteraction(
-          PlayerInteractionFactory.addPlayer(userId, playerName)
-        );
-      }, 2000);
+      handlePlayerInteraction(
+        PlayerInteractionFactory.addPlayer(userId, playerName)
+      );
     }
   }, [playerName]);
 

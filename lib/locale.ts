@@ -239,7 +239,7 @@ export type ITranslationKeys =
   | "menu.success-with-style-blog"
   | "menu.toggle-theme"
   | "menu.tools"
-  | "menu.use-theme-from-preferences"
+  | "menu.use-theme-from-system-preferences"
   | "menu.whats-new"
   | "my-binder.all-my-data"
   | "my-binder.element.delete"
