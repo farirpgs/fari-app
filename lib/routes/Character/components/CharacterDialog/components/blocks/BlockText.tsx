@@ -21,7 +21,8 @@ import { ThemedLabel } from "../ThemedLabel";
 
 export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
   const isLabelVisible =
-    !!previewContentEditable({ value: props.block.label }) || props.advanced;
+    props.block.label !== undefined &&
+    (!!previewContentEditable({ value: props.block.label }) || props.advanced);
   const isSlotTrackerVisible =
     props.block.meta?.checked === true || props.block.meta?.checked === false;
   const theme = useTheme();
@@ -45,7 +46,7 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
                     border={props.advanced}
                     borderColor={characterSheetTheme.borderColor}
                     data-cy={`${props.dataCy}.label`}
-                    value={props.block.label}
+                    value={props.block.label || ""}
                     onChange={(value) => {
                       props.onLabelChange(value);
                     }}
@@ -116,6 +117,28 @@ export function BlockTextActions(
           {props.block.meta.checked === undefined
             ? t("character-dialog.control.add-toggle")
             : t("character-dialog.control.remove-toggle")}
+        </Link>
+      </Grid>
+      <Grid item>
+        <Link
+          component="button"
+          variant="caption"
+          className={css({
+            color: theme.palette.primary.main,
+          })}
+          onClick={() => {
+            const label = props.block.label;
+            if (label === undefined) {
+              props.onLabelChange("Label");
+            } else {
+              props.onLabelChange(undefined);
+            }
+          }}
+          underline="hover"
+        >
+          {props.block.label === undefined
+            ? t("character-dialog.control.add-label")
+            : t("character-dialog.control.remove-label")}
         </Link>
       </Grid>
     </>

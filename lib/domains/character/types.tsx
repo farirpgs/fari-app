@@ -2,6 +2,7 @@ import { IDiceCommandSetId } from "../dice/Dice";
 
 export enum BlockType {
   Text = "Text",
+  InfoText = "InfoText",
   Numeric = "Numeric",
   Skill = "Skill",
   DicePool = "DicePool",
@@ -138,6 +139,12 @@ export type ITextBlock = {
   value: string;
 };
 
+export type IInfoTextBlock = {
+  type: BlockType.InfoText;
+  meta: IDefaultBlockMeta & {};
+  value: string;
+};
+
 export type INumericBlock = {
   type: BlockType.Numeric;
   meta: IDefaultBlockMeta & {
@@ -210,6 +217,7 @@ export type ISeparatorBlock = {
 
 export type IBlockTypes =
   | ITextBlock
+  | IInfoTextBlock
   | INumericBlock
   | ISkillBlock
   | IDicePoolBlock
@@ -222,7 +230,7 @@ export type IBlockTypes =
 export type IBlock = {
   type: BlockType;
   id: string;
-  label: string;
+  label: string | undefined;
   value: unknown;
 } & IBlockTypes;
 

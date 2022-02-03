@@ -133,7 +133,7 @@ export function BlockPointCounter(
                     data-cy={`${props.dataCy}.label`}
                     readonly={props.readonly || !props.advanced}
                     border={props.advanced}
-                    value={props.block.label}
+                    value={props.block.label || ""}
                     onChange={(value) => {
                       props.onLabelChange(value);
                     }}

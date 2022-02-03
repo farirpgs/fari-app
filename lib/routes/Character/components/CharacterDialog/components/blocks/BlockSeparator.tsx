@@ -61,7 +61,7 @@ export function BlockSeparator(props: IBlockComponentProps<ISeparatorBlock>) {
                           readonly={!props.advanced}
                           border={props.advanced}
                           data-cy={`${props.dataCy}.label`}
-                          value={props.block.label}
+                          value={props.block.label || ""}
                           onChange={(value) => {
                             props.onLabelChange(value);
                           }}

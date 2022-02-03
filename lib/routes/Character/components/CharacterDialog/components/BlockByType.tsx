@@ -17,6 +17,7 @@ import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { IBlockComponentProps } from "../types/IBlockComponentProps";
 import { BlockDicePool, BlockDicePoolActions } from "./blocks/BlockDicePool";
 import { BlockImage } from "./blocks/BlockImage";
+import { BlockInfoText } from "./blocks/BlockInfoText";
 import { BlockLink, BlockLinkActions } from "./blocks/BlockLink";
 import { BlockNumeric, BlockNumericActions } from "./blocks/BlockNumeric";
 import {
@@ -104,6 +105,18 @@ export function BlockByType(
     <Box my={isSeparatorBlock ? ".5rem" : "0"}>
       {props.block.type === BlockType.Text && (
         <BlockText
+          advanced={props.advanced}
+          dataCy={props.dataCy}
+          readonly={props.readonly}
+          block={block}
+          onLabelChange={handleOnLabelChange}
+          onValueChange={handleOnValueChange}
+          onMetaChange={handleOnMetaChange}
+          onRoll={props.onRoll}
+        />
+      )}
+      {props.block.type === BlockType.InfoText && (
+        <BlockInfoText
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
@@ -214,7 +227,7 @@ export function BlockByType(
         />
       )}
 
-      {renderBlockHelpText()}
+      {props.block.type !== BlockType.InfoText && renderBlockHelpText()}
       {props.advanced && renderBlockAdvancedOptions()}
     </Box>
   );
@@ -225,41 +238,66 @@ export function BlockByType(
         {block.type === BlockType.PointCounter && (
           <BlockPointCounterActions
             block={block}
+            onLabelChange={handleOnLabelChange}
+            onValueChange={handleOnValueChange}
             onMetaChange={handleOnMetaChange}
             onMainPointCounterChange={props.onMainPointCounterChange}
           />
         )}
         {block.type === BlockType.Text && (
-          <BlockTextActions block={block} onMetaChange={handleOnMetaChange} />
+          <BlockTextActions
+            block={block}
+            onLabelChange={handleOnLabelChange}
+            onValueChange={handleOnValueChange}
+            onMetaChange={handleOnMetaChange}
+          />
         )}
         {block.type === BlockType.Numeric && (
           <BlockNumericActions
             block={block}
+            onLabelChange={handleOnLabelChange}
+            onValueChange={handleOnValueChange}
             onMetaChange={handleOnMetaChange}
           />
         )}
         {block.type === BlockType.SlotTracker && (
           <BlockSlotTrackerActions
             block={block}
+            onLabelChange={handleOnLabelChange}
+            onValueChange={handleOnValueChange}
             onMetaChange={handleOnMetaChange}
           />
         )}
 
         {block.type === BlockType.Skill && (
-          <BlockSkillActions block={block} onMetaChange={handleOnMetaChange} />
+          <BlockSkillActions
+            block={block}
+            onLabelChange={handleOnLabelChange}
+            onValueChange={handleOnValueChange}
+            onMetaChange={handleOnMetaChange}
+          />
         )}
         {block.type === BlockType.DicePool && (
           <BlockDicePoolActions
             block={block}
+            onLabelChange={handleOnLabelChange}
+            onValueChange={handleOnValueChange}
             onMetaChange={handleOnMetaChange}
           />
         )}
         {block.type === BlockType.Link && (
-          <BlockLinkActions block={block} onMetaChange={handleOnMetaChange} />
+          <BlockLinkActions
+            block={block}
+            onLabelChange={handleOnLabelChange}
+            onValueChange={handleOnValueChange}
+            onMetaChange={handleOnMetaChange}
+          />
         )}
         {block.type === BlockType.Separator && (
           <BlockSeparatorActions
             block={block}
+            onLabelChange={handleOnLabelChange}
+            onValueChange={handleOnValueChange}
             onMetaChange={handleOnMetaChange}
           />
         )}
