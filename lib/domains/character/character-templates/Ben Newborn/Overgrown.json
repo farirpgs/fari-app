@@ -1,0 +1,223 @@
+{
+  "name": "Overgrown Character Sheet Template",
+  "lastUpdated": 1643981979,
+  "wide": true,
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "Character",
+      "sections": {
+        "left": [
+          {
+            "id": "4998b838-623d-44d0-99d0-3ac2f5a18bd1",
+            "label": "Character",
+            "blocks": [
+              {
+                "id": "9619cdfe-f375-4bac-8249-271578e3ebcc",
+                "label": "NAME / CHARACTER NAME / PRONOUNS",
+                "type": "Text",
+                "value": "\n\n\n",
+                "meta": {
+                  "helperText": "Fill whichever identity info you want here"
+                }
+              },
+              {
+                "id": "16431af2-4478-4472-a854-0c1e14e30965",
+                "label": "health",
+                "type": "PointCounter",
+                "meta": { "max": "30", "isMainPointCounter": false },
+                "value": "30"
+              },
+              {
+                "id": "a43d59c3-b9a3-4f6d-a634-2963d60d84cf",
+                "label": "Action Roll",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d20"],
+                  "hideModifier": true,
+                  "helperText": "Tap here to perform an action - right click on the relevant modifiers below to have them included in the roll"
+                }
+              }
+            ]
+          },
+          {
+            "id": "bdbf50c5-f4a2-4946-a0d7-db3150cf7ca1",
+            "label": "Base animal",
+            "blocks": [
+              {
+                "id": "541945e8-3f00-4598-a439-14f89904984f",
+                "label": "Creature",
+                "type": "Skill",
+                "value": "3",
+                "meta": {
+                  "commands": [],
+                  "helperText": "The animal that forms the core of your character"
+                }
+              }
+            ]
+          },
+          {
+            "id": "2294e319-ca47-4165-bc31-355994a5f96c",
+            "label": "traumas",
+            "blocks": [
+              {
+                "id": "e45e47b3-1f9a-4852-9647-b792a4580e20",
+                "label": "permanent condition",
+                "type": "Skill",
+                "value": "-1",
+                "meta": {
+                  "checked": false,
+                  "commands": [],
+                  "helperText": "Penalty suffered to relevant rolls upon rolling 1 on the dice"
+                }
+              },
+              {
+                "id": "6f085782-64b8-4b82-a391-992967659518",
+                "label": "Trauma successes",
+                "type": "SlotTracker",
+                "meta": {
+                  "asClock": false,
+                  "helperText": "Roll 3 successes or a 20 on the dice when incurring trauma effect to recover"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "1a91684a-36dd-4799-abe7-adfc0fe9889b",
+            "label": "hybrid Look",
+            "blocks": [
+              {
+                "id": "7ad1e5e6-4987-4ad2-be24-e6b281c8251b",
+                "label": "",
+                "type": "Image",
+                "meta": {
+                  "helperText": "Optionally add some art of your hybrid animal<br>Contact @bennewbon on twitter to get one made!<br>"
+                },
+                "value": ""
+              }
+            ]
+          },
+          {
+            "id": "946f3285-ccf0-4f52-a81a-a1d3ba9cecc0",
+            "label": "animal features",
+            "blocks": [
+              {
+                "id": "762121e0-b512-4c83-98e7-ecf645bc781b",
+                "label": "creature feature",
+                "type": "Skill",
+                "value": "1",
+                "meta": {
+                  "commands": [],
+                  "helperText": "A specific animal feature that adds a +1 modifier to relevant dice rolls"
+                }
+              },
+              {
+                "id": "dd639e87-8388-4793-9618-aa662a82fb7a",
+                "label": "creature feature",
+                "type": "Skill",
+                "value": "2",
+                "meta": {
+                  "commands": [],
+                  "helperText": "A specific animal feature that adds a +2 modifier to relevant dice rolls"
+                }
+              }
+            ]
+          },
+          {
+            "id": "8e115da2-c29c-434c-a209-3b474860e4f6",
+            "label": "temporary status effects",
+            "blocks": [
+              {
+                "id": "3ebdedeb-f30f-4413-93b3-efd2ba67e942",
+                "label": "temporary bonus",
+                "type": "Skill",
+                "value": "1",
+                "meta": {
+                  "checked": false,
+                  "commands": [],
+                  "helperText": "Bonus added to relevant roll(s) from assist/preparation/buff"
+                }
+              },
+              {
+                "id": "adf47ecb-9345-4459-93ab-e0e0356fb32a",
+                "label": "temporary harmful condition",
+                "type": "Skill",
+                "value": "-1",
+                "meta": {
+                  "checked": false,
+                  "commands": [],
+                  "helperText": "Penalty suffered to relevant rolls or damage over time"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "290f2a23-393a-4fcb-8e94-b229a742dd01",
+      "sections": {
+        "left": [
+          {
+            "id": "3a95be19-b769-413a-8dd5-992628738486",
+            "label": "Rules reference",
+            "blocks": [
+              {
+                "id": "4b562424-7d92-4c32-8e86-f951f007d26a",
+                "label": "What can you do?",
+                "type": "Text",
+                "value": "Action rolls:\n\tRoll d20 +modifiers from base animal and/or any relevant \tanimal features (can stack)\n\nCrits:\n \t   1 on the dice = -1 to relevant trauma\n\t20 on the dice = +1 to relevant feature\n\nAction roll targets:\n\t  5\teasy\n\t10\tmed\n\t15\thard\n\t18\tvery hard\n\t20\textra hard\n",
+                "meta": {}
+              },
+              {
+                "id": "99ca9b9c-74e7-418b-8f0c-ef2e0ecde00d",
+                "label": "Combat, contests &amp; Damage",
+                "type": "Text",
+                "value": "Combat order: roll d20 +relevant modifiers\nDanger moves: roll d20, \n\t  &gt;10\t: achieve something ridiculous \n\t&lt;=10\t: something disastrous happens\n\nContested rolls\n\tEach rolls d20, highest wins\n\tif atk &gt; def, damage = atk - def\n\tif atk &gt;= def, no damage\n\tif 20 on dice, add status effect\n\nEnvironmental damage\n\tMissed action rolls may incur damage = target - roll\n\nHarmful status effects\n\troll d20 each turn\n\tif &gt;10, no damage &amp; recover\n\tif &lt;= 10, suffer effects;\n\tdamage = 10 + status effect modifier - roll\n",
+                "meta": { "helperText": "Damage is only applied when relevant" }
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "90bc13a7-aaa3-4caa-917a-235b5e4c93cf",
+            "label": "Additional rules",
+            "blocks": [
+              {
+                "id": "77dbde30-fa57-4341-b2ec-45a4c78916bf",
+                "label": "temporary modifiers",
+                "type": "Text",
+                "value": "Assist or preparation: (only lasts whilst relevant)\n\t1\t\t-1 to assist &amp; PC suffers trauma\n\t2-9\t\t0, no effect\n\t10-15\t+1 to assist\n\t16-19\t+2 to assist\n\t20+\t\t+3 to assist\n\nHealing or buff: (buffs expire upon rolling &lt;10 on the dice)\n\t1\t\tPC suffers related trauma\n\t2-9\t\t0, no effect\n\t10-15\t-1 to heal/buff\n\t16-19\t-2 to heal/buff\n\t20+\t\t-3 to heal/buff\n\nApply harmful status effect: (expires upon target rolling &gt;10)\n\t1\t\tPC suffers effect as trauma\n\t2-9\t\t0, no effect\n\t10-15\t-1 to target\n\t16-19\t-2 to target\n\t20+\t\t-3 to target\n",
+                "meta": {
+                  "helperText": "Always add relevant animal modifiers to rolls applying temporary effects"
+                }
+              },
+              {
+                "id": "26576995-24e3-489d-869a-57e86c9a5f63",
+                "label": "Brute force",
+                "type": "Text",
+                "value": "A hard (15) obstacle may be passed by 2x (10)\nA very hard (18) obstacle may be passed by 2x (15) or 3x (10)\n",
+                "meta": {
+                  "helperText": "Some obstacles may be overcome by continual rolling but narratively time must pass between actions"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "label": "Rules Reference"
+    }
+  ],
+  "template": "Blank",
+  "version": 4,
+  "fariType": "character"
+}
