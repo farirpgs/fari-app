@@ -1,8 +1,10 @@
+import { LiveObject } from "@liveblocks/client";
 import {
   useBroadcastEvent,
   useEventListener,
   useObject,
   useRoom,
+  useStorage,
 } from "@liveblocks/react";
 import React, { useContext, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
@@ -27,7 +29,15 @@ export function useLiveObject<T>(props: {
   onChange(newValue: T): void;
 }) {
   const liveObject = useObject<T>(props.key);
+  const [root] = useStorage();
+
   const room = useRoom();
+
+  useEffect(() => {
+    if (props.isOwner) {
+      root?.set(props.key, new LiveObject({}));
+    }
+  }, [root]);
 
   useEffect(() => {
     if (props.isOwner) {
