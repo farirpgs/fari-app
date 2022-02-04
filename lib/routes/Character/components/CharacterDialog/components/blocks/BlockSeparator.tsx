@@ -19,6 +19,9 @@ export function BlockSeparator(props: IBlockComponentProps<ISeparatorBlock>) {
   const dividerHeight = "3px";
   const dividerMargin = ".5rem 0";
 
+  if (props.block.meta.hideDivider) {
+    return null;
+  }
   return (
     <>
       <Box>
@@ -105,16 +108,38 @@ export function BlockSeparatorActions(
           onClick={() => {
             props.onMetaChange({
               ...props.block.meta,
-              hasLabel: !props.block.meta.hasLabel,
+              hideDivider: !props.block.meta.hideDivider,
             });
           }}
           underline="hover"
         >
-          {props.block.meta.hasLabel
-            ? t("character-dialog.control.remove-label")
-            : t("character-dialog.control.add-label")}
+          {props.block.meta.hideDivider
+            ? t("character-dialog.control.show-divider")
+            : t("character-dialog.control.hide-divider")}
         </Link>
       </Grid>
+      {!props.block.meta.hideDivider && (
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={() => {
+              props.onMetaChange({
+                ...props.block.meta,
+                hasLabel: !props.block.meta.hasLabel,
+              });
+            }}
+            underline="hover"
+          >
+            {props.block.meta.hasLabel
+              ? t("character-dialog.control.remove-label")
+              : t("character-dialog.control.add-label")}
+          </Link>
+        </Grid>
+      )}
     </>
   );
 }

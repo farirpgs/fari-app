@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { SceneMode, Session } from "../../components/Scene/Scene";
+import { Session } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
@@ -40,7 +40,7 @@ export const PlayOfflineRoute: React.FC<{
         description={t("home-route.play-offline.description")}
       />
       <Session
-        mode={SceneMode.PlayOffline}
+        userId={settingsManager.state.userId}
         sessionManager={sessionManager}
         sceneManager={sceneManager}
       />

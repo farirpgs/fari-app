@@ -5,7 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import React from "react";
 import {
   Link as ReactRouterLink,
-  LinkProps as ReactRouterLinkProps,
+  LinkProps as ReactRouterLinkProps
 } from "react-router-dom";
 
 type IProps = {

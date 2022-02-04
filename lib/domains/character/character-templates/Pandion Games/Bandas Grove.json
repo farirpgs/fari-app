@@ -1,0 +1,599 @@
+{
+  "id": "96e2fb69-ef27-40c4-b3ca-fc8f0ab2d8dd",
+  "name": "Banda's Grove Character Sheet",
+  "lastUpdated": 1643924759,
+  "wide": false,
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "Character",
+      "sections": {
+        "left": [
+          {
+            "id": "01e5544c-0fea-4337-8606-62e03432f79d",
+            "label": "Name &amp; Position",
+            "blocks": [
+              {
+                "id": "e49dc412-9685-47a7-a5dc-c958e085e754",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Say it out loud. How does it feel? Does it fit? It’s okay to choose another if it doesn’t."
+                }
+              }
+            ]
+          },
+          {
+            "id": "c65849c6-c86f-4ec0-ba72-a89ddb2fae27",
+            "label": "Strengths",
+            "blocks": [
+              {
+                "id": "9b6234fe-e1b7-4fba-9b83-89072a7fef7f",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "You're proud of what you can do." }
+              }
+            ]
+          },
+          {
+            "id": "6e23b91b-b9b7-444b-8596-a27de5f7d2aa",
+            "label": "Quirk",
+            "blocks": [
+              {
+                "id": "9117e4f7-b885-4917-a56a-441ee4eeb3b5",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "We’re all different, and that should be embraced and celebrated!"
+                }
+              }
+            ]
+          },
+          {
+            "id": "52cce00d-e063-4ea7-9f4a-af0c709916a6",
+            "label": "Hobby",
+            "blocks": [
+              {
+                "id": "1f07fa0c-97f1-4301-baf3-cf54c3c01595",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Whenever someone talks to you about or participates in your Hobby, THEY gain a Pebble."
+                }
+              }
+            ]
+          },
+          {
+            "id": "9d38fced-f3c4-4eac-8e58-0378298454d2",
+            "label": "Secret",
+            "blocks": [
+              {
+                "id": "e054510d-40cf-4b83-afe6-5df7a6d7832a",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Whenever YOU talk about your secret with someone, YOU gain a Pebble."
+                }
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "75d8991e-457f-4bd2-a52e-f380f187a2a9",
+            "label": "Pronouns",
+            "blocks": [
+              {
+                "id": "3fb87023-03e8-4d9f-bc5e-6738b2132488",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Do you have or use pronouns? If so, which ones? If you find they don’t fit, try another!"
+                }
+              }
+            ]
+          },
+          {
+            "id": "b7b209aa-49c9-4050-95be-7c3acb4b29c1",
+            "label": "Weaknesses",
+            "blocks": [
+              {
+                "id": "8d0f471d-d57b-4db8-aacb-af045fbce78f",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "We cannot be good at everything, nor should we try!"
+                }
+              }
+            ]
+          },
+          {
+            "id": "0dcdba89-7412-4bb0-b335-a3ca10b0e942",
+            "label": "Plane",
+            "blocks": [
+              {
+                "id": "651320d2-0b3b-4ee0-9b2e-c9eba292e211",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Which Plane do you belong to? <br>Ágil, Alohi, Pese Malosi, or Cluthar?&nbsp;"
+                }
+              }
+            ]
+          },
+          {
+            "id": "b62ba691-7a89-4a03-92c9-257eabd0f948",
+            "label": "Favorite Tool",
+            "blocks": [
+              {
+                "id": "69f9574c-326d-4b17-83f2-63ba38d65ac0",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Like an extension of ourselves, we grow bonds with things that help us succeed."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "01c784a4-cc6c-45f9-aa6e-4c571d3a2ef0",
+      "sections": {
+        "left": [
+          {
+            "id": "eb6a56d2-51fc-4163-acce-e6ebf3c302f4",
+            "label": "Downtime Action count",
+            "blocks": [
+              {
+                "id": "249944cf-726f-4be1-9bc5-86646a2c3644",
+                "label": "actions taken",
+                "type": "SlotTracker",
+                "meta": {},
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "7c303f2a-ff35-4c7a-b81e-6c4a568c9640",
+            "label": "Playbook actions",
+            "blocks": [
+              {
+                "id": "eee9f0b7-e2e3-4f11-af84-58f171800545",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "67b0e92d-c818-45b1-93d4-2b9fe8c053e0",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "82117aae-2193-4960-9802-21f3d7091581",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "0f09109a-549b-4a86-8cb0-15a9b8316985",
+            "label": "badges",
+            "blocks": [
+              {
+                "id": "39cdc447-36be-4ba4-9064-71de817a1678",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "3fc97c7b-6306-4a5a-bd6b-e2c53dc3def7",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "2c378944-a37c-4091-9644-bac7dfcb3ea5",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "85b03410-0b72-4c07-9556-0ec52a9b891d",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "e5fd5a39-3763-4917-93b9-e44f0583612f",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "d2a45874-6d50-41f9-9e39-81930bc4efa8",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "c95a8135-c326-4e21-af7f-ed687005b52b",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "fe67cf18-6660-495e-b427-7d557cfe0a03",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "c2ac4b87-3cf6-47cb-8c0a-02692056b002",
+            "label": "grove actions (up to 2 per downtime)",
+            "blocks": [
+              {
+                "id": "17c5aaf8-c002-4203-8211-06212aa58e2d",
+                "label": "Start a Grove Project",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Plan an Event, Convergence Event, Build a Facility",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "66bd40e4-1137-49d4-9f89-e9e2bcc4de20",
+                "label": "Swift Work ",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "2 Pebbles | Decrease Project Time by 1",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "9037b034-f0cd-4213-8ac4-79de69ddc560",
+                "label": "Define new spirit",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "2 Pebbles" }
+              },
+              {
+                "id": "5c82ed50-9f7a-4a45-9fc7-b7904b83c212",
+                "label": "Define new npc\n",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "1 Pebble" }
+              },
+              {
+                "id": "c4ed1adc-942e-4fb9-8672-92c935c12801",
+                "label": "add a detail\n",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "1 Pebble" }
+              },
+              {
+                "id": "97c37ce9-3ea7-4ee4-978f-e54d23bab484",
+                "label": "Quantum Fluctuations ",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "4 Pebbles", "width": 0.5 }
+              },
+              {
+                "id": "74ee8b1c-3955-4955-9b4b-47393f30846b",
+                "label": "Have a cozy Scene",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "0 Pebbles" }
+              },
+              {
+                "id": "9ebf2c1a-79f1-435e-93cf-c8dfbcc665f6",
+                "label": "gather ingredients",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "width": 0.5,
+                  "helperText": "2 ingredients per pebble"
+                }
+              },
+              {
+                "id": "ca37eb4d-2985-475a-855d-b818494d3633",
+                "label": "Earn a badge",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "2 Pebbles" }
+              },
+              {
+                "id": "a166d26c-13c7-4e13-a7e4-19cb08495d6c",
+                "label": "craft an item",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "1 Pebble" }
+              },
+              {
+                "id": "9cf0482f-e6e1-45bb-9b11-81109c00e71e",
+                "label": "go nature watching",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "2 Pebbles" }
+              },
+              {
+                "id": "7b10fbf6-a682-4265-b42d-9f62b0fcec75",
+                "label": "calm a spirit\n",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "1-10 Pebbles" }
+              }
+            ]
+          },
+          {
+            "id": "6896c177-8169-456d-974c-0b01f9add865",
+            "label": "Facility actions",
+            "blocks": [
+              {
+                "id": "eeacbe13-8baa-4d9b-bd02-3a9008237249",
+                "label": "community campfire",
+                "type": "Text",
+                "value": "Light the Flame | 1 Pebble<br>You’re the first one at the campfire tonight, and you put in the<br>unseen effort to light the fire and cozy up the space. When having any scene at the campfire during this Downtime Phase, you gain 2 additional Pebbles.",
+                "meta": {}
+              },
+              {
+                "id": "bf414146-47b5-4763-a21d-cc8c01328a37",
+                "label": "Diner",
+                "type": "Text",
+                "value": "A Full Breakfast | 2 Pebbles<br>A staple hangout spot, especially in the early mornings when a full breakfast can be had. After, you’re ready to take on the day! - take an additional 2 Actions this Downtime Phase.",
+                "meta": {}
+              },
+              {
+                "id": "6f40332f-22e4-4acf-9f1f-b4d31b60c484",
+                "label": "docks",
+                "type": "Text",
+                "value": "Fishing | 1 Pebble<br>Spend the day fishing with a friend or resident. Describe a water creature from one of the Planar Fragments that border the lake and name it. Add it to any empty Spot List slot you have - it counts towards the number of creatures you have seen. If you go fishing with another player, they gain a Pebble.",
+                "meta": {}
+              }
+            ]
+          }
+        ]
+      },
+      "label": "actions"
+    },
+    {
+      "id": "a377c119-e180-4e8f-8613-176d75555e92",
+      "sections": {
+        "left": [
+          {
+            "id": "4f29f7ba-41e7-4e1c-b58c-c941f8538aa1",
+            "label": "Items and inventory",
+            "blocks": [
+              {
+                "id": "e3d44d4e-6d18-4e91-a95d-46249b2c8dde",
+                "label": "pebbles",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false, "width": 0.5 },
+                "value": "0"
+              },
+              {
+                "id": "5b01183e-9a5e-4e90-8d72-ccbf598fcad2",
+                "label": "quantum shards",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false, "width": 0.5 },
+                "value": "0"
+              },
+              {
+                "id": "f0e9bb3a-9747-4ae6-bc74-42bc505b65d0",
+                "label": "Backpack",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "a2b0c30d-c5de-4c9c-a82e-a37d229aed1e",
+            "label": "ingredients &amp; Crafting",
+            "blocks": [
+              {
+                "id": "6abeb380-d60d-4306-8907-2480ddf11e28",
+                "label": "flora",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false, "width": 0.5 },
+                "value": "0"
+              },
+              {
+                "id": "fa02656a-1768-49b0-837a-23af4d40e380",
+                "label": "flora",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false, "width": 0.5 },
+                "value": "0"
+              },
+              {
+                "id": "82628360-f54e-472a-9628-cbf9a5db5518",
+                "label": "planar",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false, "width": 0.5 },
+                "value": "0"
+              },
+              {
+                "id": "0f9c2c4b-023a-449b-bf7d-44641d5554df",
+                "label": "quantum",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false, "width": 0.5 },
+                "value": "0"
+              },
+              {
+                "id": "6511feb7-7f52-4f3f-8e97-90f924fd6c53",
+                "label": "Crafting Recipes",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ]
+      },
+      "label": "inventory"
+    },
+    {
+      "id": "0fe1b7fc-771c-4b26-9549-1499e33f42cf",
+      "sections": {
+        "left": [
+          {
+            "id": "0ca50d25-f946-4a55-9942-20f8823748b6",
+            "label": "known npcs",
+            "blocks": [
+              {
+                "id": "8e35b709-993f-4eda-ac7d-c1da6500e1e4",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "3b90011d-132f-4786-87ae-c255942f939e",
+            "label": "grove details",
+            "blocks": [
+              {
+                "id": "c4c0fded-464e-485b-8696-199adb9cf6a1",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "ed3ce824-942d-4df7-8d6b-0620279a9577",
+            "label": "crafting recipes",
+            "blocks": [
+              {
+                "id": "c0620f78-0064-4896-bc9f-d7a131da3bea",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "7bc7ac69-04fa-4461-964f-c695420bd4a9",
+            "label": "blips and their source",
+            "blocks": [
+              {
+                "id": "af1b61c9-9694-45f4-8feb-16055008413f",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "6c0d05ed-4986-4ebd-9f18-9779070209b5",
+            "label": "known spirits",
+            "blocks": [
+              {
+                "id": "b2a5918c-e2ad-4e22-b265-cd74b5474088",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "c4c01a91-83aa-4695-a322-d925158ca24f",
+            "label": "backstory",
+            "blocks": [
+              {
+                "id": "2a8d6cac-da4c-441c-9b5b-bdd1bf150e98",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "f4e60f7c-108b-414a-a75d-bd6bfb0df533",
+            "label": "residence details",
+            "blocks": [
+              {
+                "id": "e7f160da-542c-4ff2-98fa-fd3acb95b015",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ]
+      },
+      "label": "notes"
+    },
+    {
+      "id": "7e75000f-8d6b-4be6-8b77-5634e7b5831f",
+      "sections": {
+        "left": [
+          {
+            "id": "25755ef6-5d01-4a05-ba03-fbbc66db478a",
+            "label": "Spotted creatures",
+            "blocks": [
+              {
+                "id": "1f653b3d-83b0-4fb5-b99a-dfac79614916",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ],
+        "right": []
+      },
+      "label": "Spot List"
+    }
+  ],
+  "template": "Blank",
+  "version": 4,
+  "fariType": "character"
+}

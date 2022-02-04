@@ -57,7 +57,6 @@ import { Font } from "../../domains/font/Font";
 import { Icons } from "../../domains/Icons/Icons";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { LazyState } from "../../hooks/useLazyState/useLazyState";
-import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
 import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
 import {
   IIndexCard,
@@ -71,12 +70,18 @@ import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
-import { IPeerActions } from "../../routes/Play/types/IPeerActions";
+import {
+  TldrawReader,
+  TldrawWriter,
+} from "../../routes/Draw/TldrawWriterAndReader";
+import {
+  IPlayerInteraction,
+  PlayerInteractionFactory,
+} from "../../routes/Play/types/IPlayerInteraction";
 import {
   ContentEditable,
   previewContentEditable,
 } from "../ContentEditable/ContentEditable";
-import { DrawArea } from "../DrawArea/DrawArea";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
 import { LiveMode, Page } from "../Page/Page";
@@ -86,6 +91,7 @@ import { WindowPortal } from "../WindowPortal/WindowPortal";
 import { CharacterCard } from "./components/PlayerRow/CharacterCard/CharacterCard";
 import { PlayerRow } from "./components/PlayerRow/PlayerRow";
 import { useHiddenIndexCardRecord } from "./hooks/useHiddenIndexCardRecord";
+import { TabbedScreen } from "./TabbedScreen";
 
 export enum SceneMode {
   PlayOnline,
@@ -101,51 +107,26 @@ enum SortMode {
 
 export const paperStyle = css({ borderRadius: "0px", flex: "1 0 auto" });
 
-type IProps =
-  | {
-      mode: SceneMode.Manage;
-      sessionManager: ReturnType<typeof useSession>;
-      sceneManager: ReturnType<typeof useScene>;
-      connectionsManager?: undefined;
-      idFromParams?: undefined;
-      isLoading?: undefined;
-      error?: undefined;
-    }
-  | {
-      mode: SceneMode.PlayOnline;
-      sessionManager: ReturnType<typeof useSession>;
-      sceneManager: ReturnType<typeof useScene>;
-      connectionsManager: ReturnType<typeof usePeerConnections>;
-      userId: string;
-      isLoading: boolean;
-      error: any;
-      shareLink: string;
-      idFromParams?: string;
-    }
-  | {
-      mode: SceneMode.PlayOffline;
-      sessionManager: ReturnType<typeof useSession>;
-      sceneManager: ReturnType<typeof useScene>;
-      connectionsManager?: undefined;
-      idFromParams?: undefined;
-      isLoading?: undefined;
-      error?: undefined;
-    };
+type IProps = {
+  sessionManager: ReturnType<typeof useSession>;
+  sceneManager: ReturnType<typeof useScene>;
+  userId: string;
+  isLoading?: boolean;
+  error?: any;
+  shareLink?: string;
+  idFromParams?: string;
+  onPlayerInteraction?(interaction: IPlayerInteraction): void;
+};
 
 export const Session: React.FC<IProps> = (props) => {
-  const { sessionManager, sceneManager, connectionsManager } = props;
+  const { sessionManager, sceneManager } = props;
 
   const charactersManager = useContext(CharactersContext);
   const myBinderManager = useContext(MyBinderContext);
 
   const isGM = !props.idFromParams;
 
-  const isGMHostingOnlineOrOfflineGame =
-    props.mode !== SceneMode.Manage && isGM;
-  const isGMEditingDirtyScene =
-    props.mode === SceneMode.Manage && sceneManager.state.dirty;
-
-  useBlockReload(isGMHostingOnlineOrOfflineGame || isGMEditingDirtyScene);
+  useBlockReload(sceneManager.state.dirty);
 
   const theme = useTheme();
   const { t } = useTranslate();
@@ -168,14 +149,7 @@ export const Session: React.FC<IProps> = (props) => {
     string | undefined
   >(undefined);
 
-  const [tab, setTab] = useState<"characters" | "scene" | "draw">("scene");
-
   const $shareLinkInputRef = useRef<HTMLInputElement | null>(null);
-
-  const headerColor = theme.palette.background.paper;
-  const headerBackgroundColor = useTextColors(
-    theme.palette.background.paper
-  ).primary;
 
   useEffect(() => {
     if (shareLinkToolTip.open) {
@@ -189,9 +163,9 @@ export const Session: React.FC<IProps> = (props) => {
   }, [shareLinkToolTip]);
 
   //#region TODO: refac into another function
-  const userId = props.mode === SceneMode.PlayOnline ? props.userId : undefined;
+  const userId = props.userId;
   const gm = sessionManager.state.session.gm;
-  const players = sessionManager.state.session.players ?? [];
+  const players = Object.values(sessionManager.state.session.players) ?? [];
 
   const sortedPlayers = arraySort(players, [
     (p) => {
@@ -220,8 +194,6 @@ export const Session: React.FC<IProps> = (props) => {
   });
   //#endregion
 
-  const liveMode = getLiveMode();
-
   const handleGMAddNpc = () => {
     sessionManager.actions.addNpc();
   };
@@ -233,10 +205,14 @@ export const Session: React.FC<IProps> = (props) => {
     if (isGM) {
       sessionManager.actions.loadPlayerCharacter(playerId, character);
     } else {
-      connectionsManager?.actions.sendToHost<IPeerActions>({
-        action: "load-character",
-        payload: character,
-      });
+      // TODO
+      // connectionsManager?.actions.sendToHost<IPeerActions>({
+      //   action: "load-character",
+      //   payload: character,
+      // });
+      props.onPlayerInteraction?.(
+        PlayerInteractionFactory.updatePlayerCharacter(playerId, character)
+      );
     }
   };
 
@@ -250,10 +226,11 @@ export const Session: React.FC<IProps> = (props) => {
     if (isGM) {
       sessionManager.actions.loadPlayerCharacter(playerId, copy);
     } else {
-      connectionsManager?.actions.sendToHost<IPeerActions>({
-        action: "load-character",
-        payload: copy,
-      });
+      // TODO
+      // connectionsManager?.actions.sendToHost<IPeerActions>({
+      //   action: "load-character",
+      //   payload: copy,
+      // });
     }
   };
 
@@ -265,10 +242,10 @@ export const Session: React.FC<IProps> = (props) => {
     if (isGM) {
       sessionManager.actions.updateGmRoll(result);
     } else {
-      connectionsManager?.actions.sendToHost<IPeerActions>({
-        action: "roll",
-        payload: result,
-      });
+      // TODO
+      props.onPlayerInteraction?.(
+        PlayerInteractionFactory.updatePlayerRolls(me!.id, result)
+      );
     }
   };
 
@@ -283,28 +260,27 @@ export const Session: React.FC<IProps> = (props) => {
         sessionManager.actions.updateGmRoll(result);
       }
     } else {
-      connectionsManager?.actions.sendToHost<IPeerActions>({
-        action: "roll",
-        payload: result,
-      });
+      // TODO
+
+      props.onPlayerInteraction?.(
+        PlayerInteractionFactory.updatePlayerRolls(me!.id, result)
+      );
     }
   };
   return (
     <Page
       pb="6rem"
       gameId={props.idFromParams}
-      live={liveMode}
+      live={LiveMode.Live}
       liveLabel={sceneManager.state.scene?.name ?? ""}
     >
       <Box px="1rem">
-        <Prompt
-          when={isGMEditingDirtyScene}
-          message={t("manager.leave-without-saving")}
-        />
-        <Prompt
+        <Prompt when={true} message={t("manager.leave-without-saving")} />
+        {/* TODO */}
+        {/* <Prompt
           when={isGMHostingOnlineOrOfflineGame}
           message={t("play-route.host-leaving-warning")}
-        />
+        /> */}
         {renderPauseDialog()}
         {streamerModalOpen && (
           <WindowPortal
@@ -330,7 +306,7 @@ export const Session: React.FC<IProps> = (props) => {
           }}
           centerActions={
             <>
-              {isGM && props.mode !== SceneMode.Manage && (
+              {isGM && (
                 <Grid item>
                   <Tooltip title={t("play-route.fire-rainbow-confetti")}>
                     <IconButton
@@ -349,33 +325,33 @@ export const Session: React.FC<IProps> = (props) => {
                   </Tooltip>
                 </Grid>
               )}
-              {props.mode !== SceneMode.Manage && (
-                <Grid item>
-                  <Tooltip title={t("play-route.pause-session")}>
-                    <IconButton
-                      onClick={() => {
-                        if (isGM) {
-                          sessionManager.actions.pause();
-                        } else {
-                          connectionsManager?.actions.sendToHost<IPeerActions>({
-                            action: "pause",
-                            payload: undefined,
-                          });
-                        }
-                      }}
-                      color="primary"
-                      size="large"
-                    >
-                      <PanToolIcon
-                        className={css({ width: "1.8rem", height: "1.8rem" })}
-                        htmlColor={theme.palette.text.primary}
-                      />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-              )}
 
-              {isGM && props.mode !== SceneMode.Manage && (
+              <Grid item>
+                <Tooltip title={t("play-route.pause-session")}>
+                  <IconButton
+                    onClick={() => {
+                      if (isGM) {
+                        sessionManager.actions.pause();
+                      } else {
+                        // TODO
+
+                        props.onPlayerInteraction?.(
+                          PlayerInteractionFactory.pause()
+                        );
+                      }
+                    }}
+                    color="primary"
+                    size="large"
+                  >
+                    <PanToolIcon
+                      className={css({ width: "1.8rem", height: "1.8rem" })}
+                      htmlColor={theme.palette.text.primary}
+                    />
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+
+              {isGM && (
                 <Grid item>
                   <Tooltip title={t("play-route.fire-red-confetti")}>
                     <IconButton
@@ -422,22 +398,14 @@ export const Session: React.FC<IProps> = (props) => {
     return (
       <Fade in>
         <Box>
-          {props.mode === SceneMode.Manage ? (
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                {renderSessionTabsAndContent()}
-              </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={5} lg={3}>
+              {renderSidePanel()}
             </Grid>
-          ) : (
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={5} lg={3}>
-                {renderSidePanel()}
-              </Grid>
-              <Grid item xs={12} md={7} lg={9}>
-                {renderSessionTabsAndContent()}
-              </Grid>
+            <Grid item xs={12} md={7} lg={9}>
+              {renderSession()}
             </Grid>
-          )}
+          </Grid>
         </Box>
       </Fade>
     );
@@ -533,7 +501,8 @@ export const Session: React.FC<IProps> = (props) => {
                       lineHeight: Font.lineHeight(1.2),
                     })}
                   >
-                    {sessionManager.state.session.players.length + 1}
+                    {Object.keys(sessionManager.state.session.players).length +
+                      1}
                   </Typography>
                   <Typography
                     variant="caption"
@@ -604,7 +573,7 @@ export const Session: React.FC<IProps> = (props) => {
               player: gm,
               canControl: me?.id === gm.id,
               isMe: me?.id === gm.id,
-              index: "gm",
+              dataCyIndex: "gm",
               isChild: false,
               children: (
                 <>
@@ -625,7 +594,7 @@ export const Session: React.FC<IProps> = (props) => {
                               canControl: me?.id === gm.id,
                               isMe: me?.id === gm.id,
                               isChild: true,
-                              index: `gm-npc-${npcIndex}`,
+                              dataCyIndex: `gm-npc-${npcIndex}`,
                             })}
                           </Box>
                         </Box>
@@ -647,7 +616,7 @@ export const Session: React.FC<IProps> = (props) => {
                     canControl,
                     isMe,
                     isChild: false,
-                    index: playerRowIndex,
+                    dataCyIndex: playerRowIndex,
                   })}
                 </React.Fragment>
               );
@@ -684,10 +653,13 @@ export const Session: React.FC<IProps> = (props) => {
               updatedCharacter
             );
           } else {
-            connectionsManager?.actions.sendToHost<IPeerActions>({
-              action: "update-character",
-              payload: updatedCharacter,
-            });
+            // TODO
+            props.onPlayerInteraction?.(
+              PlayerInteractionFactory.updatePlayerCharacter(
+                player.id,
+                updatedCharacter
+              )
+            );
           }
         }}
         onClose={() => {
@@ -708,7 +680,7 @@ export const Session: React.FC<IProps> = (props) => {
     player: IPlayer;
     canControl: boolean;
     isMe: boolean;
-    index: number | string;
+    dataCyIndex: number | string;
     isChild: boolean;
     children?: JSX.Element;
   }) {
@@ -717,13 +689,13 @@ export const Session: React.FC<IProps> = (props) => {
       canControl,
       isMe,
       isChild,
-      index: playerRowIndex,
+      dataCyIndex: playerRowDataCyIndex,
       children: playerRowChildren,
     } = options;
 
     return (
       <PlayerRow
-        data-cy={`scene.player-row.${playerRowIndex}`}
+        data-cy={`scene.player-row.${playerRowDataCyIndex}`}
         permissions={{
           canRoll: canControl,
           canUpdatePoints: canControl,
@@ -776,10 +748,13 @@ export const Session: React.FC<IProps> = (props) => {
               playedInTurnOrder
             );
           } else {
-            connectionsManager?.actions.sendToHost<IPeerActions>({
-              action: "played-in-turn-order",
-              payload: playedInTurnOrder,
-            });
+            // TODO
+            props.onPlayerInteraction?.(
+              PlayerInteractionFactory.updatePlayerPlayedDuringTurn(
+                player.id,
+                playedInTurnOrder
+              )
+            );
           }
         }}
         onPointsChange={(points, maxPoints) => {
@@ -790,10 +765,13 @@ export const Session: React.FC<IProps> = (props) => {
               maxPoints
             );
           } else {
-            connectionsManager?.actions.sendToHost<IPeerActions>({
-              action: "update-main-point-counter",
-              payload: { points, maxPoints },
-            });
+            props.onPlayerInteraction?.(
+              PlayerInteractionFactory.updatePlayerPoints(
+                player.id,
+                points,
+                maxPoints
+              )
+            );
           }
         }}
       >
@@ -816,9 +794,7 @@ export const Session: React.FC<IProps> = (props) => {
             })}
           >
             {playersWithCharacterSheets.map((player, index) => {
-              const isMe =
-                props.mode === SceneMode.PlayOnline &&
-                props.userId === player.id;
+              const isMe = props.userId === player.id;
               const canControl = isGM || isMe;
               return (
                 <Box
@@ -878,201 +854,85 @@ export const Session: React.FC<IProps> = (props) => {
       </>
     );
   }
-  function renderNpcsCharacterCards() {
-    return (
-      <>
-        <Box>
-          <Box
-            className={css({
-              display: "flex",
-              flexFlow: "row",
-              flexWrap: "wrap",
-            })}
-          >
-            {sessionManager.computed.npcsWithCharacterSheets.map(
-              (npc, index) => {
-                return (
-                  <Box
-                    key={npc?.id || index}
-                    className={css({
-                      width: characterCardWidth,
-                      display: "inline-block",
-                      marginBottom: "1rem",
-                    })}
-                  >
-                    <CharacterCard
-                      key={npc?.id || index}
-                      readonly={!isGM}
-                      playerName={npc.playerName}
-                      characterSheet={npc.character}
-                      onCharacterDialogOpen={() => {
-                        setCharacterDialogPlayerId(npc.id);
-                      }}
-                      onRoll={(newDiceRollResult) => {
-                        handleSetPlayerRoll(npc.id, newDiceRollResult);
-                      }}
-                    />
-                  </Box>
-                );
-              }
-            )}
-          </Box>
-        </Box>
-      </>
-    );
-  }
-
-  function renderSessionTabsAndContent() {
-    const tabPanelStyle = css({ padding: "0" });
-    return (
-      <Box mx=".5rem">
-        <Box>
-          <TabContext value={tab}>
-            {props.mode !== SceneMode.Manage && renderSessionTabs()}
-            <Box>
-              <Box py="2rem" position="relative" minHeight="20rem">
-                <TabPanel value={"characters"} className={tabPanelStyle}>
-                  {renderCharacterCards()}
-                </TabPanel>
-                <TabPanel value={"npcs"} className={tabPanelStyle}>
-                  {renderNpcsCharacterCards()}
-                </TabPanel>
-                <TabPanel value={"scene"} className={tabPanelStyle}>
-                  <Scene
-                    sceneManager={sceneManager}
-                    isGM={isGM}
-                    canLoad={props.mode !== SceneMode.Manage && isGM}
-                    onRoll={handleSetMyRoll}
-                    onPoolClick={(element) => {
-                      diceManager.actions.addOrRemovePoolElement(element);
-                      diceManager.actions.setPlayerId(gm.id);
-                    }}
-                    onIndexCardUpdate={(indexCard, type) => {
-                      if (isGM) {
-                        sceneManager.actions.updateIndexCard(indexCard, type);
-                      } else {
-                        connectionsManager?.actions.sendToHost<IPeerActions>({
-                          action: "update-index-card",
-                          payload: { indexCard: indexCard },
-                        });
-                      }
-                    }}
-                  />
-                </TabPanel>
-
-                <TabPanel value={"draw"} className={tabPanelStyle}>
-                  {renderZones()}
-                </TabPanel>
-              </Box>
-            </Box>
-          </TabContext>
-        </Box>
-      </Box>
-    );
-  }
 
   function renderZones() {
-    const tokenTitles = sessionManager.state.session.players.map(
-      (p) => (p.character?.name ?? p.playerName) as string
-    );
+    // const tokenTitles = Object.values(sessionManager.state.session.players).map(
+    //   (p) => (p.character?.name ?? p.playerName) as string
+    // );
+
     return (
       <Box
         border={`1px solid ${theme.palette.divider}`}
-        maxWidth="600px"
+        // maxWidth="800px"
         margin="0 auto"
       >
-        <DrawArea
-          objects={sessionManager.state.session.drawAreaObjects}
-          readonly={!isGM}
-          tokenTitles={tokenTitles}
-          onChange={(lines) => {
-            sessionManager.actions.updateDrawAreaObjects(lines);
-          }}
-        />
+        {isGM ? (
+          <TldrawWriter
+            onChange={(state) => {
+              sessionManager.actions.updateDrawAreaObjects(state);
+            }}
+          />
+        ) : (
+          <TldrawReader doc={sessionManager.state.session.tlDrawDoc} />
+        )}
       </Box>
     );
   }
 
-  function renderSessionTabs() {
-    const tabClass = css({
-      background: headerBackgroundColor,
-      color: `${headerColor} !important`,
-      padding: "0 1.5rem",
-      marginRight: ".5rem",
-      // Pentagone
-      // https://bennettfeely.com/clippy/
-      clipPath: "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
-    });
-    const tabLabelClass = css({
-      fontSize: "1rem",
-      width: "100%",
-    });
-
+  function renderSession() {
     return (
       <Box>
-        <Tabs
-          variant="scrollable"
-          scrollButtons="auto"
-          value={tab}
-          classes={{
-            flexContainer: css({
-              borderBottom: `3px solid ${headerBackgroundColor}`,
-            }),
-            indicator: css({
-              height: ".4rem",
-              backgroundColor: theme.palette.secondary.main,
-            }),
-          }}
-          onChange={(e, newValue) => {
-            setTab(newValue);
-          }}
-        >
-          {props.mode !== SceneMode.Manage && (
-            <Tab
-              value="characters"
-              data-cy="session.tabs.characters"
-              label={
-                <>
-                  <FateLabel className={tabLabelClass}>
-                    {t("menu.characters")}
-                  </FateLabel>
-                </>
-              }
-              className={tabClass}
-              icon={<PeopleAltIcon />}
-            />
-          )}
-
-          <Tab
-            value="scene"
-            data-cy="session.tabs.scene"
-            label={
-              <>
-                <FateLabel className={tabLabelClass}>
-                  {t("menu.scenes")}
-                </FateLabel>
-              </>
-            }
-            className={tabClass}
-            icon={<MovieIcon />}
-          />
-
-          {props.mode !== SceneMode.Manage && (
-            <Tab
-              value="draw"
-              data-cy="session.tabs.draw"
-              label={
-                <>
-                  <FateLabel className={tabLabelClass}>
-                    {t("draw-route.meta.title")}
-                  </FateLabel>
-                </>
-              }
-              className={tabClass}
-              icon={<FilterHdrIcon />}
-            />
-          )}
-        </Tabs>
+        <TabbedScreen
+          tabs={[
+            {
+              value: "scene",
+              dataCy: "session.tabs.characters",
+              label: t("menu.scenes"),
+              icon: <MovieIcon />,
+              render: () => (
+                <Scene
+                  sceneManager={sceneManager}
+                  isGM={isGM}
+                  canLoad={isGM}
+                  onRoll={handleSetMyRoll}
+                  onPoolClick={(element) => {
+                    diceManager.actions.addOrRemovePoolElement(element);
+                    diceManager.actions.setPlayerId(gm.id);
+                  }}
+                  onIndexCardUpdate={(indexCard, type) => {
+                    if (isGM) {
+                      sceneManager.actions.updateIndexCard(indexCard, type);
+                    } else {
+                      // TODO
+                      // props.onPlayerInteraction?.(
+                      //   `/scene/indexCards/${type}/0`,
+                      //   indexCard
+                      // );
+                      // connectionsManager?.actions.sendToHost<IPeerActions>({
+                      //   action: "update-index-card",
+                      //   payload: { indexCard: indexCard },
+                      // });
+                    }
+                  }}
+                />
+              ),
+            },
+            {
+              value: "characters",
+              dataCy: "session.tabs.scene",
+              label: t("menu.characters"),
+              icon: <PeopleAltIcon />,
+              render: renderCharacterCards,
+            },
+            {
+              value: "draw",
+              dataCy: "session.tabs.draw",
+              label: t("draw-route.meta.title"),
+              icon: <FilterHdrIcon />,
+              render: renderZones,
+            },
+          ]}
+        />
       </Box>
     );
   }
@@ -1129,7 +989,7 @@ export const Session: React.FC<IProps> = (props) => {
           justifyContent="space-evenly"
           alignItems="center"
         >
-          {props.mode === SceneMode.PlayOnline && props.shareLink && (
+          {props.shareLink && (
             <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
           )}
         </Grid>
@@ -1155,19 +1015,6 @@ export const Session: React.FC<IProps> = (props) => {
         </Box>
       </Box>
     );
-  }
-
-  function getLiveMode() {
-    if (props.mode === SceneMode.PlayOffline) {
-      return LiveMode.Live;
-    }
-    if (props.mode === SceneMode.Manage) {
-      return undefined;
-    }
-    if (props.isLoading) {
-      return LiveMode.Connecting;
-    }
-    return LiveMode.Live;
   }
 };
 Session.displayName = "Session";
@@ -1338,7 +1185,7 @@ export function Scene(props: {
           </Grid>
         )}
 
-        {sceneManager.state.scene && (
+        {sceneManager.state.scene && props.isGM && (
           <Grid item>
             <Button
               color="primary"

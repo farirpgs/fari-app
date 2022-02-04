@@ -1,10 +1,10 @@
 import { css } from "@emotion/css";
 import BookIcon from "@mui/icons-material/Book";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import CasinoIcon from "@mui/icons-material/Casino";
 import ChatIcon from "@mui/icons-material/Chat";
+import ComputerIcon from "@mui/icons-material/Computer";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -13,6 +13,7 @@ import ForumIcon from "@mui/icons-material/Forum";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InfoIcon from "@mui/icons-material/Info";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import LightModeIcon from "@mui/icons-material/LightMode";
 import LocalCafeIcon from "@mui/icons-material/LocalCafe";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -681,17 +682,35 @@ export const Page: React.FC<{
 
         <Grid item xs={xsSize} sm={smSize} className={itemClass}>
           <PageNavLink
+            data-cy="page.use-theme-from-system-preferences"
+            tooltip={t("menu.use-theme-from-system-preferences")}
+            onClick={() => {
+              settingsManager.actions.setThemeMode(undefined);
+            }}
+            label={
+              <>
+                <ComputerIcon />
+              </>
+            }
+          />
+        </Grid>
+        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+          <PageNavLink
             data-cy="page.toggle-dark-mode"
             tooltip={t("menu.toggle-theme")}
             onClick={() => {
-              settingsManager.actions.toggleThemeMode();
+              if (settingsManager.state.themeMode === "dark") {
+                settingsManager.actions.setThemeMode("light");
+              } else {
+                settingsManager.actions.setThemeMode("dark");
+              }
             }}
             label={
               <>
                 {settingsManager.state.themeMode === "dark" ? (
-                  <Brightness7Icon />
+                  <LightModeIcon />
                 ) : (
-                  <Brightness4Icon />
+                  <DarkModeIcon />
                 )}
               </>
             }

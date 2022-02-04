@@ -1,5 +1,8 @@
-import React from "react";
+import { LiveblocksProvider, RoomProvider } from "@liveblocks/react";
+import React, { useContext } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
+import { InjectionsContext } from "../../contexts/InjectionsContext/InjectionsContext";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { DocRoutes } from "../../domains/documents/DocRoutes";
 import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { StoryBuilderRoute } from "../../routes/StoryBuilder/StoryBuilderRoute";
@@ -29,6 +32,9 @@ const PlayOfflineRoute = React.lazy(
   () => import("../../routes/Play/PlayOfflineRoute")
 );
 const PlayRoute = React.lazy(() => import("../../routes/Play/PlayRoute"));
+const JoinAGameRoute = React.lazy(
+  () => import("../../routes/Play/JoinAGameRoute")
+);
 const SceneRoute = React.lazy(() => import("../../routes/Scene/SceneRoute"));
 const CardCollection = React.lazy(
   () => import("../../routes/CardCollection/CardCollectionRoute")
@@ -40,6 +46,10 @@ const SeelieSquireRoute = React.lazy(
 
 export const AppRouter = () => {
   const location = useLocation();
+  const settingsManager = useContext(SettingsContext);
+  const injections = useContext(InjectionsContext);
+  const userId = settingsManager.state.userId;
+
   return (
     <React.Suspense fallback={<LoadingRoute pathname={location.pathname} />}>
       <Switch>
@@ -101,16 +111,31 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/play"}
+          path={["/play", "/play/:id"]}
           render={(props) => {
-            return <PlayRoute {...props} />;
+            const sessionId = (props.match.params as any).id || userId;
+
+            return (
+              <LiveblocksProvider client={injections.liveBlocksClient}>
+                <RoomProvider id={sessionId}>
+                  <PlayRoute {...props} />;
+                </RoomProvider>
+              </LiveblocksProvider>
+            );
           }}
         />
         <Route
           exact
-          path={"/play/:id"}
+          path={"/play/join/:id"}
           render={(props) => {
-            return <PlayRoute {...props} />;
+            const sessionId = (props.match.params as any).id;
+            return (
+              <LiveblocksProvider client={injections.liveBlocksClient}>
+                <RoomProvider id={sessionId}>
+                  <JoinAGameRoute {...props} />;
+                </RoomProvider>
+              </LiveblocksProvider>
+            );
           }}
         />
         <Route

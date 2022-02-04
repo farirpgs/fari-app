@@ -1,0 +1,149 @@
+{
+  "name": "Draculola Kid Monster Sheet Template",
+  "lastUpdated": 1643732673,
+  "wide": true,
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "KId MOnster",
+      "sections": {
+        "left": [
+          {
+            "id": "b7ec8d20-109e-49a0-9a0b-0bf20e89eb41",
+            "label": "Name",
+            "blocks": [
+              {
+                "id": "2d8106f8-ca7b-48e2-ab56-edb2fb7772fe",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "db4542d0-5928-4e7d-bb85-26b37f3e71b9",
+            "label": "Traits",
+            "blocks": [
+              {
+                "id": "e02c01b2-38d0-4e98-82db-1222129b0b05",
+                "label": "Kid",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["2d6"],
+                  "hideModifier": false,
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "06d36f27-4587-423f-9bd2-72fef20dab29",
+                "label": "MOnster",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["2d6"], "width": 0.5 }
+              }
+            ]
+          },
+          {
+            "id": "25c1a7fa-c0dd-4cfd-a294-38125fca9a43",
+            "label": "Difficulty",
+            "blocks": [
+              {
+                "id": "e484efff-a611-4b07-9d3d-c0b248e78b82",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "c51d8a62-1de4-430a-b183-8f71235ad0f6",
+            "label": "Powers",
+            "blocks": [
+              {
+                "id": "c6341a95-419e-4280-8c4b-f2a6b7877647",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "414070ad-cb1a-47b4-9452-302a7c529964",
+            "label": "Qualities",
+            "blocks": [
+              {
+                "id": "61e04ce8-351d-45ae-991e-f2f5aa1d8985",
+                "label": "Origin / Style/ Skill",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "3a159e4c-7776-440e-8448-045713adeb67",
+                "label": "Description",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "3f3de9c4-56a6-485b-9d04-d2c226008d1e",
+            "label": "Resources",
+            "blocks": [
+              {
+                "id": "9438cef9-282c-41d3-955f-1dc6de268fa6",
+                "label": "Heart",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false, "width": 0.5 },
+                "value": "0"
+              },
+              {
+                "id": "822e6ef6-854f-4b77-a7a3-da0a4438cd41",
+                "label": "Hope",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false, "width": 0.5 },
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "id": "a057f5cc-ea12-41b7-981f-4c1956deeb31",
+            "label": "Three Things",
+            "blocks": [
+              {
+                "id": "75d8bda5-30ac-4f36-90ea-594d716aed3c",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "7b050898-9c84-4f8a-ab28-d553e6570df1",
+            "label": "Story",
+            "blocks": [
+              {
+                "id": "0fcb667c-6398-40f2-96fa-ce18341c8e0a",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "template": "Blank",
+  "version": 4,
+  "fariType": "character"
+}

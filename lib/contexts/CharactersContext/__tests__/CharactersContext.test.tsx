@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { CharacterTemplates } from "../../../domains/character/CharacterType";
+import { DefaultTemplates } from "../../../domains/character/DefaultTemplates";
 import { ICharacter } from "../../../domains/character/types";
 import { useCharacters } from "../CharactersContext";
 
@@ -55,7 +55,7 @@ describe("useCharacters", () => {
       let newCharacter: ICharacter | undefined = undefined;
       await act(async () => {
         newCharacter = await result.current.actions.add(
-          CharacterTemplates.FateCondensed
+          DefaultTemplates.FateCondensed
         );
       });
       // THEN the character is added

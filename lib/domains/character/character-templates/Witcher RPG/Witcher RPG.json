@@ -1,0 +1,2795 @@
+{
+  "id": "bfe9cc9f-d3bb-4db6-a8a9-c769cbe9d937",
+  "name": "Witcher TRPG",
+  "group": "Witcher",
+  "lastUpdated": 1643468728,
+  "wide": true,
+  "pages": [
+    {
+      "id": "6620102b-b61f-444d-aed9-b99bad50829a",
+      "sections": {
+        "left": [
+          {
+            "id": "50302473-c034-45db-8955-509715b0c82e",
+            "label": "Character info",
+            "blocks": [
+              {
+                "id": "90944706-7f14-44b1-9457-740d1f2601bc",
+                "label": "name",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "3d69d713-098f-4ffc-875f-c3989b721183",
+                "label": "race",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "2aa76607-5f11-405d-beb5-2eeb33112b5e",
+                "label": "gender",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "3f36d9c9-c8a6-4b8b-8b1a-53ff14a88ee2",
+                "label": "age",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              }
+            ]
+          },
+          {
+            "id": "f031b6e9-b669-4cf4-818e-aa5fc18393f9",
+            "label": "CHARACTERISTICS",
+            "blocks": [
+              {
+                "id": "b90de8b9-0c23-4efa-a35b-57ac0034318b",
+                "label": "CLOTHING",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "9b9dd9ea-055c-4753-a555-c3503ff726ca",
+                "label": "PERSONALITY",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "aa1948dd-09c8-410e-8415-08092b56d1a4",
+                "label": "HAIRSTYLE",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "2dfa457c-ff64-4d64-9581-d96cf9c3801e",
+                "label": "AFFECTATIONS",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "84476183-58ef-4145-b3b8-a0ff02d7acd5",
+                "label": "VALUED PERSON",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "861b1c7a-233c-4044-acf1-5c2af283c77c",
+                "label": "VALUE",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "3c03f343-49c8-4849-a313-71024d3aa8b0",
+                "label": "FEELINGS ON PEOPLE ",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              }
+            ]
+          },
+          {
+            "id": "0f3cd833-ef08-440a-9804-3ee3770c33b0",
+            "label": "Lifepath (normal and witcher)",
+            "blocks": [
+              {
+                "id": "20b11828-dafa-47a5-8250-a8c90a487274",
+                "label": "Homeland / WHEN DID YOU BECOME A WITCHER?",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "2106bb53-05b3-43fd-984f-bb9b00a6e35c",
+                "label": "family or parental fate / WHAT SCHOOL DID YOU TRAIN IN?",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "82947263-f5be-4055-97e7-419269c0aabd",
+                "label": "Family Status / HOW DID EARLY TRAINING GO?\n",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "61b4da28-e082-4b90-a3a7-f9c63a3ff56f",
+                "label": "Most Influential Friend / HOW DID YOUR TRIALS GO?\n",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "f3dc583e-a357-44c0-b584-c19732c2720e",
+                "label": "Siblings / WHAT WAS YOUR MOST IMPORTANT EVENT",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "1d4be58f-f4f8-4cab-b1c3-fbd0727fe4bf",
+                "label": "WHERE ARE YOU NOW? (witcher only)",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 1 }
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "da656e47-26e5-4569-ba60-81a8a9b328d9",
+            "label": "portait ",
+            "blocks": [
+              {
+                "id": "33bc38d4-6bb3-4c5a-b5a5-e421a82c6da3",
+                "label": "",
+                "type": "Image",
+                "meta": {},
+                "value": ""
+              }
+            ]
+          },
+          {
+            "id": "094de4b7-c8ee-49ad-8ffb-651eeabdbffb",
+            "label": "character biography ",
+            "blocks": [
+              {
+                "id": "a474702a-e546-4368-b577-3941f270f8ee",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "8a60f2d2-ca59-4303-a4e4-8357baa53d37",
+            "label": "LIFE EVENTS (decades)",
+            "blocks": [
+              {
+                "id": "7a3e1f53-32b6-4c4a-a295-44f78f2aa4c3",
+                "label": "10",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "1ca62705-2a37-404b-94a7-03dac22c141c",
+                "label": "110",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "f1070a7f-759a-471b-9405-9b15b198fdf9",
+                "label": "20",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "67d0dce8-8e70-4879-a31d-2022ff26c97f",
+                "label": "120",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "fb7a60c8-28d7-4709-a7c4-a2731ae69e1b",
+                "label": "30",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "bbfd0181-da6b-48fc-8044-f57095fb62e8",
+                "label": "130",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "ef05dd48-ecb7-43f2-a0cb-5bbdf58b6d85",
+                "label": "40",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "3c8b6b26-52b4-4780-83b3-3c83b773dd00",
+                "label": "140",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "0fcd141f-356b-4304-b949-cdb50541fc30",
+                "label": "50",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "e3531c21-6729-47fb-9fea-aac38e6fd985",
+                "label": "150",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "4c778d02-afb2-4963-a985-39d4cb635dd2",
+                "label": "60",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "d043f66e-4114-40de-b723-2f82a62cfdf8",
+                "label": "160",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "bf279fc8-98f6-467a-9953-aef2c8f1c0e8",
+                "label": "70",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "1e0aada4-a83f-42e8-95ee-ef665be09685",
+                "label": "170",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "5d1d5ca0-8b09-4da9-8183-cd1988e151ba",
+                "label": "80",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "ad5d9e7b-c486-474d-b0a4-61f34709daad",
+                "label": "180",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "32e014e7-a354-4043-a16c-54b89b6be7ea",
+                "label": "90",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "dcdd0549-fb7c-4c42-9851-8277a2a24163",
+                "label": "190",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "a1de8373-7dc3-4b8b-ac71-240429a2b583",
+                "label": "100",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "e6091073-3569-4848-9b8a-57167a691212",
+                "label": "200",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              }
+            ]
+          }
+        ]
+      },
+      "label": "Bio"
+    },
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "quick sheet",
+      "sections": {
+        "left": [
+          {
+            "id": "b1911280-b46a-48de-8105-472e55b07a90",
+            "label": "Perks (racial) ",
+            "blocks": [
+              {
+                "id": "f716da80-972f-4e77-b973-dcc82ceae64c",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "220050e8-4d60-44fd-a743-b066fed707bf",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "a703f12b-7ce8-4154-9857-c8d9f63f56f3",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "50fe3cf1-b63c-4e57-8908-e0229d186cea",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "f9b209ec-6bab-453b-bbee-314dfb9ce8f3",
+            "label": "Profession",
+            "blocks": [
+              {
+                "id": "3289bdc8-01ae-4d6d-8dfa-08c8cdbb7737",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "71f48381-62fc-4837-97d6-5f49b728e976",
+                "label": "DEFiNING SKILL",
+                "type": "Separator",
+                "meta": {
+                  "hasLabel": true,
+                  "helperText": "Each profession has a defining skill. This one skill separates this profession from all of the others-an ability that only a person with years of training in that field can acquire. The defining skill is counted in the profession skill package when buying skills.<br>"
+                },
+                "value": ""
+              },
+              {
+                "id": "b685b083-5424-448e-8670-ceef95fce951",
+                "label": "\n",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "<br>" }
+              },
+              {
+                "id": "ebbc2af1-5bb9-4c44-9cba-45e820a2b134",
+                "label": "SKILL PACKAGE/PROFFESSION ABILIETIES ",
+                "type": "Separator",
+                "meta": {
+                  "hasLabel": true,
+                  "helperText": "Each profession has a skill package which represents general learning over the course of an apprenticeship.&nbsp;<br>"
+                },
+                "value": ""
+              },
+              {
+                "id": "41362465-1126-4901-bdbf-13166a3284c2",
+                "label": "Skill",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              },
+              {
+                "id": "c4b3f329-b4ab-427f-8491-49fc2ca14a86",
+                "label": "Skill",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              },
+              {
+                "id": "227fcd8c-6da1-4b26-b48d-1eed52bbb881",
+                "label": "Skill",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              },
+              {
+                "id": "d3ae680f-d3df-450b-8e06-cada89161ad7",
+                "label": "Skill",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              },
+              {
+                "id": "40396d4b-0887-480f-90f3-825265d73609",
+                "label": "Skill",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              },
+              {
+                "id": "ee1d643a-81a9-490e-86fd-3b02d1be02d3",
+                "label": "Skill",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              },
+              {
+                "id": "45f6bc56-2da5-4aac-80fb-26b980760028",
+                "label": "Skill",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              },
+              {
+                "id": "a24aba91-cd0b-4813-b1c7-357378f1739c",
+                "label": "Skill",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              },
+              {
+                "id": "612c260f-8ff0-4deb-b579-d19b5abc8904",
+                "label": "Skill",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              },
+              {
+                "id": "a447f654-da2c-4ec4-ae83-c55858b173a9",
+                "label": "Skill",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              }
+            ]
+          },
+          {
+            "id": "2077a296-6ca1-47fb-9be9-6209223bfca1",
+            "label": "armor",
+            "blocks": [
+              {
+                "id": "b20b70e5-e156-4837-9616-243dac4e0034",
+                "label": "HEAD ARMOR",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "55c3cdc2-aab1-4a00-8b30-b804e3889d77",
+                "label": "Stopping Power (SP)\r",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false, "width": 0.5 },
+                "value": "0"
+              },
+              {
+                "id": "2c47371d-0433-480d-afc8-7f5394639c77",
+                "label": "Damge (Dmg)\n",
+                "type": "PointCounter",
+                "meta": {
+                  "isMainPointCounter": false,
+                  "width": 0.5,
+                  "max": "0"
+                },
+                "value": "0"
+              },
+              {
+                "id": "15768473-914b-4faf-b009-b2aa850e964a",
+                "label": "TORSO ARMOR",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "10eac37c-72c8-4093-bdf1-7843145754a0",
+                "label": "STOPPING POWER (SP)\r",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false, "width": 0.5 },
+                "value": "0"
+              },
+              {
+                "id": "5b423d7d-5438-4abf-9e5c-4e7ec21197f2",
+                "label": "DAMGE (DMG)",
+                "type": "PointCounter",
+                "meta": {
+                  "isMainPointCounter": false,
+                  "width": 0.5,
+                  "max": "0"
+                },
+                "value": "0"
+              },
+              {
+                "id": "e8e95a32-186b-49d7-874c-9932a36ba6b4",
+                "label": "LEG ARMOR",
+                "type": "Separator",
+                "meta": { "hasLabel": true, "helperText": "" },
+                "value": ""
+              },
+              {
+                "id": "8d5f622a-b223-4235-8718-e8410d9ec35c",
+                "label": "STOPPING POWER (SP)\r",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false, "width": 0.5 },
+                "value": "0"
+              },
+              {
+                "id": "cfde4faf-402f-4551-b4c3-8a86e5d18939",
+                "label": "DAMGE (DMG)",
+                "type": "PointCounter",
+                "meta": {
+                  "isMainPointCounter": false,
+                  "width": 0.5,
+                  "max": "0"
+                },
+                "value": "0"
+              },
+              {
+                "id": "3b682fe2-3033-46c2-9306-736e4a47f4e4",
+                "label": "SHIELD",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "665d8134-1449-4b11-a378-101ed9d24a1a",
+                "label": "STOPPING POWER (SP)",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false, "width": 0.5 },
+                "value": "0"
+              },
+              {
+                "id": "43f39dfa-3d05-4e54-8fe6-274e17ea2ec7",
+                "label": "DAMGE (DMG)",
+                "type": "PointCounter",
+                "meta": {
+                  "max": "0",
+                  "isMainPointCounter": false,
+                  "width": 0.5
+                },
+                "value": "0"
+              },
+              {
+                "id": "ed2de3e8-99b5-4cf8-b92f-333e35e84d58",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "1812bee9-59ad-4962-a393-2b1e1cbc5cf8",
+                "label": "armor notes",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "728df0c1-be04-4aca-ae2f-0de183563543",
+            "label": "Health, stammina, RESOLVE and wounds ",
+            "blocks": [
+              {
+                "id": "bf31b5e6-d0d5-4eaa-be66-04db3955dad5",
+                "label": "Health Points (HP)",
+                "type": "PointCounter",
+                "meta": {
+                  "isMainPointCounter": false,
+                  "helperText": "The number of points of damage you can take before you go into Death State and start bleeding out.&nbsp;<br>",
+                  "max": "0"
+                },
+                "value": "0"
+              },
+              {
+                "id": "b98f05af-1e0a-44f9-8ce8-8cc38206725d",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "552eaad4-cdd3-4239-93dd-dba71a2a7718",
+                "label": "Stamina (STA)",
+                "type": "PointCounter",
+                "meta": {
+                  "isMainPointCounter": false,
+                  "helperText": "Stamina represents how much energy you can expend before you become exhausted (whether it is physical effort or the use of magic) and how hard it is to knock you out. When it runs out, you are stunned and cannot do anything but recover. Nonlethal damage, casting spells, using certain abilities, and taking extra actions all lower your Stamina. Stamina returns whenever you take a Recover action, which restores as much Stamina as your REC.\n<br>",
+                  "max": "0"
+                },
+                "value": "0"
+              },
+              {
+                "id": "9529c615-11b8-4932-94f1-21ef21c14d06",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "819cc6d1-3c68-4c29-b348-52f8e3138e91",
+                "label": "WOUND  THRESHOLD",
+                "type": "PointCounter",
+                "meta": {
+                  "isMainPointCounter": false,
+                  "helperText": "Enough lethal damage will begin to hamper your actions. This is called your wound threshold, and it varies based on your maximum Health Points. When your current HP goes below your wound threshold, you halve your REF, DEX, INT, and WILL."
+                },
+                "value": "0"
+              },
+              {
+                "id": "2a53b3d6-1330-406a-abb3-379ee45746c4",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "e1938d42-3f68-4c15-9c2b-53dba3255fad",
+                "label": "CRITICAL WOUNDS",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Write down any critical wounds you've suffered and the effect it has here.&nbsp;<br>"
+                }
+              }
+            ]
+          },
+          {
+            "id": "0f7f72e7-6fdc-4aba-a799-ef26db03c126",
+            "label": "primary weapon ",
+            "blocks": [
+              {
+                "id": "54bed1d0-2818-481d-a73f-f4c0d28daaba",
+                "label": "WEAPON ACCURACY (WA) ",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              },
+              {
+                "id": "a2de23f4-397e-41a7-aa29-44198db79bc1",
+                "label": "DAMAGE &amp; TYPE (DMG)",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              },
+              {
+                "id": "26980022-87a1-416c-b6c1-067ac4376c7a",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "70112fae-4d9d-4f23-8ef1-f9626367330e",
+                "label": "Hands\n",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "d2158aa4-a6ae-4fd5-9a92-892deb3f2045",
+                "label": "range (RNG)\n",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "969778d6-218f-4165-b46d-619556f03e28",
+                "label": "Effect\n",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "aef3714c-9c3f-45d9-b2a6-0e0ff94052ea",
+                "label": "Concealment (CONC.)\n",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "b5e5017c-fe4a-4f41-aad4-9a4ec63cf073",
+                "label": "Enhancements (EN) \r\n",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "39a25865-f617-47bb-8376-46258c242758",
+                "label": "Weight (Wt)\n",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "f012276e-f2ff-4258-a2a5-391b1482235b",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "e6513fb6-4e58-42a0-bff5-a87f2d79e0cb",
+                "label": "REALIABILTY (REL.)",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false, "max": "0", "width": 1 },
+                "value": "0"
+              },
+              {
+                "id": "dc32b183-0c37-4a3c-99fa-7255c94512f2",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "629c5f92-852d-4403-b554-5ec890b8c3d7",
+                "label": "weapon notes ",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 1 }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "4c1e1e41-ee60-4393-bf10-be7d9c13c011",
+      "sections": {
+        "left": [
+          {
+            "id": "8fdc0355-1690-4dba-916d-84ebb83a9bf0",
+            "label": "STATISTICS",
+            "blocks": [
+              {
+                "id": "8ce1ac17-ec14-4e75-8bc0-0ee9ca3f0011",
+                "label": "INTELLIGENCE (INT)",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "For solving puzzles, performing science, deduction, and the like.",
+                  "width": 1,
+                  "hideModifier": false
+                }
+              },
+              {
+                "id": "647b5a1f-7001-4f71-93ae-87c8c7ea9787",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "7863d904-61db-4538-84af-0daabee64dee",
+                "label": "REFLEXES (REF)",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "For fighting, dodging and tasks that require fast reactions and accurate movements."
+                }
+              },
+              {
+                "id": "7741dad5-198f-4296-8212-ab85a3817687",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "77a7f757-e416-45b4-aedd-7a6fe6119c95",
+                "label": "DEXTERITY (DEX)",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "For ranged attacks and anything that requires hand-eye coordination or balance."
+                }
+              },
+              {
+                "id": "20119322-f7ae-4370-ad39-7c39d8cd12be",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "19a5d97e-967b-4bb6-a78b-9200b9ea384e",
+                "label": "BODY (BODY)",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "For things that require great strength, like wrestling and strength feats, or physical endurance, such as resisting disease or fatigue.<br>"
+                }
+              },
+              {
+                "id": "4cf0d865-9e5c-4efa-8f8a-d5e809677807",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "24093fb3-ffab-4e5d-9b8d-2540bf48c52c",
+                "label": "SPEED (SPD)",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "This is represents how fast your character moves. You can use this Stat when trying to outrun other people or determining how far you can move in a given time."
+                }
+              },
+              {
+                "id": "f90eb4cf-addf-4945-9076-5b0535de4494",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "e90b7f0c-7f88-4eff-ab0a-56980e9b8349",
+                "label": "EMPATHY (EMP)",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "For affairs of the heart and emotions. Seducing and persuading come under this category."
+                }
+              },
+              {
+                "id": "54076851-7e20-4a6d-93a6-dee35c9a9547",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "d9322382-c6fb-4b35-a519-0e32321ecc5c",
+                "label": "CRAFT (CRA)",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "For using machinery and creating things with precision. Also for using artillery and setting traps."
+                }
+              },
+              {
+                "id": "73e0d982-9829-4541-aeab-9229dc2523dd",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "3adf7790-f58b-4c1e-be05-8debb5c2834a",
+                "label": "WILL (WILL)",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "For intimidation, magical checks, and mental endurance checks. Shows your sheer power to keep moving forward and your ability to control magic."
+                }
+              },
+              {
+                "id": "c593ca5c-53a0-49f7-a101-7129ac90eb58",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "bf59a4ba-911e-4b89-8d6f-f7e72faa3d01",
+                "label": "LUCK (LUCK)",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Luck is a pool of points used to change things in your favor. Before\n<br>you make any skill roll (on your turn or in defense against someone else) or a Death save you can add Luck. For every point you use you gain +1, but you must choose how many points you use before you roll. Your Luck pool refills at the begining of each session.<br>"
+                }
+              },
+              {
+                "id": "a5cf5b49-2801-46ee-8cba-f9d42f7553ff",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "762d2f1f-9249-40aa-8fd2-09dfedbf30bb",
+            "label": "DERIVED STATISTICS\n",
+            "blocks": [
+              {
+                "id": "46570176-4c5c-47c2-81f5-ca74126ccad3",
+                "label": "vigor",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Your Vigor score is how many points of Chaos you can channel at one time without damaging yourself. If the total Stamina cost of all the spells you\n<br>cast in one round is greater than this value you take damage<br>"
+                }
+              },
+              {
+                "id": "7c0d541d-b1db-4792-8709-3f495b270e58",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "fefacdee-5fdc-4929-b60b-3dc0720a81f3",
+                "label": "Stun (STUN):",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Your Stun score represents how hard it is to stun you. When forced to\n<br>make a Stun save, you roll under this number or be stunned.<br>"
+                }
+              },
+              {
+                "id": "b6a6b2e0-5342-44ea-b7e2-a7bdbf0608f0",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "6841ba05-8e2a-42eb-9bf3-c6239307baa7",
+                "label": "Run (SPDx3):",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "This is how fast you are when moving at a comfortable run. In one\n<br>turn you can move a number of meters equal to your Run.<br>"
+                }
+              },
+              {
+                "id": "28a573bb-528b-4fcd-99bd-18cbe44c0901",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "5bf8b8b9-b988-4a64-8e48-b8ee7860edd7",
+                "label": "Leap (Run/5): ",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Your Leap score is how many meters you can jump from a running\n<br>start. Leap also establishes how far you can move when climbing.<br>"
+                }
+              },
+              {
+                "id": "394ca55d-ccc5-41b9-9a67-80d6fd288af0",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "c4b6df85-37cd-43d5-8983-49dab83791c1",
+                "label": "Health Points (HP):",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Your health is the number of points of damage you can take before you go into Death State and start bleeding out.<br>"
+                }
+              },
+              {
+                "id": "c1251ebb-9555-46b7-9e72-aad61a281b56",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "f62a796a-111e-4832-a1cf-3e54ea10e958",
+                "label": "Stamina (STA):",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Your Stamina represents how much energy you can expend before you\n<br>become exhausted (whether it is physical effort or the use of magic) and how hard it is to knock you out. When it runs out, you are stunned and cannot do anything but recover. Nonlethal damage, casting spells, using certain abilities, and taking extra actions all lower your Stamina. Stamina returns whenever you take a Recover action, which restores as much Stamina as your REC.<br>"
+                }
+              },
+              {
+                "id": "5fc6895e-5a0a-4f46-bd0a-2b69c7c39567",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "ff2d3832-792d-4c2c-9e6d-936a640a1f7d",
+                "label": "Encumbrance (ENC)(Body x10):",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "This is how much weight you can carry without being slowed down. When you are encumbered, subtract 1 from your REF, DEX, and SPD for every 5 points you exceed your encumbrance, minimum 1. You can dead-lift 50 times your Body in Kilograms.<br>"
+                }
+              },
+              {
+                "id": "edc48912-2f3a-4bb8-98ae-ab2292a7c15d",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "8e10f56e-8f1f-4898-9265-dd69c0ddfcf8",
+                "label": "Recovery (REC):",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Your Recovery indicates how much Health you get back with each day\n<br>of bed rest. To get these points back, someone must perform a First Aid check or a Healing Hands check on you.&nbsp;<br>"
+                }
+              },
+              {
+                "id": "e0288e9e-cbd8-422b-80ac-7bcb285503b6",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "6885be9d-6b6f-4bab-b0a9-c243e17d95f7",
+                "label": "Punch:\n",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Your Punch represent how much damage you are able to do with a punch. These strikes do non-lethal damage.<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "89909bac-38af-49a7-849a-ef141632b018",
+                "label": "Kick:\n",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Your Kick represent how much damage you are able to do with a kick. These strikes do non-lethal damage.<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "860656d5-29b6-4b19-8532-241299c11646",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              }
+            ]
+          }
+        ]
+      },
+      "label": "STATISTICS"
+    },
+    {
+      "id": "4dd480fa-9309-4742-b357-bafd3f39240d",
+      "sections": {
+        "left": [
+          {
+            "id": "31c86bfd-0168-4d4a-9da1-14aa19baec4c",
+            "label": "IMPROVEMENT POINTS",
+            "blocks": [
+              {
+                "id": "2f3e7fcb-6598-484d-8a54-252fe3da5564",
+                "label": "I.P. COUNTER",
+                "type": "PointCounter",
+                "meta": {
+                  "isMainPointCounter": false,
+                  "helperText": "To level up a skill, you allot Improvement Points (I.P.) to it. For most skills you must spend an amount of I.P. equal to the current level of the skill to raise its value by 1.",
+                  "width": 1
+                },
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "id": "14f91b29-44f6-435b-9f14-eac13fd4665c",
+            "label": "INTELLIGENCE skills ",
+            "blocks": [
+              {
+                "id": "bb1eb202-5b45-4a94-95ca-945ff15080ae",
+                "label": "Awareness",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Noticing things or spotting abnormalities in your environment.&nbsp;",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "4d066dbe-86a7-4c75-b55c-2f52b3163bb7",
+                "label": "Business",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "&nbsp;Starting and operating a business.",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "6a44f577-5e33-46cf-9815-e61825bf4aa3",
+                "label": "Deduction",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "The skill of deducing a conclusion from clues given to you.",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "83651a72-fba7-4443-a473-409da1dd367f",
+                "label": "Education",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "The level of formal education you have received.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "35a605c8-4cb6-441c-95e6-f1578ae85350",
+                "label": "Language (2)",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Skill in speaking a specific language<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "3445185c-3aa6-4778-8a2d-8673c92e4f0c",
+                "label": "Language (2)",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Skill in speaking a specific language.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "0b8c8c4e-8eac-475d-899f-f184cdde0921",
+                "label": "Monster Lore (2)\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Skill in discerning information about monsters.",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "2ecb5c28-9198-4b1d-be32-e09462aeb5e4",
+                "label": "Social Etiquette\r\n",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Blending in at social functions and not making a fool of yourself in\n<br>polite company.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "270420ef-8646-48b2-8fa7-a5ac79dd56e7",
+                "label": "Streetwise\n",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Knowing the streets. This skill is less about knowing a geography and more\n<br>about knowing how certain areas operate.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "702f5044-1138-4eb4-9444-1423986215bc",
+                "label": "Tactics (2)\r\n",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Anticipating enemy movements and planning accordingly.<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "ba0127db-e8e3-4381-86e7-8347fcc196f3",
+                "label": "Teaching\n",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "The skill of explaining skills to others. This skill is not required to teach\n<br>other skills, but it makes it a lot easier.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "ac600ca4-5363-40a6-80f6-5da12aa3d3a1",
+                "label": "Wilderness Survival\r\n",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Surviving outdoors and tracking prey.<br>",
+                  "width": 0.5
+                }
+              }
+            ]
+          },
+          {
+            "id": "db148114-48c8-4a41-aba6-d51cfa8cd2ca",
+            "label": "CRAFT skills",
+            "blocks": [
+              {
+                "id": "b383c1e3-4bb8-4f94-a85c-5b81070b72a2",
+                "label": "Alchemy (2)\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "The skill of creating potions, oils, decoctions, and more.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "ffb01e16-3a24-40d7-94d3-b9491a9f6997",
+                "label": "Crafting (2)\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Making and fixing weapons and armor.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "5cecf81b-43a9-4b77-a9dc-c450edda2517",
+                "label": "Disguise",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Disguising yourself or another as someone else.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "594eb0fc-e3b2-4414-82e1-7a2c44147654",
+                "label": "First Aid\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Stopping bleeding, setting broken bones, and tending to poison.",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "f42dfc76-c2d6-49d9-953f-6017c259aac0",
+                "label": "Forgery",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Falsifying documents and official papers. Forgery also applies to counterfeiting coins.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "c9398007-c362-4cf0-a6ac-dd4280b9b6a7",
+                "label": "Pick Lock",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Opening locks without a key.<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "c6700900-f557-41e0-a04a-03e0e9882a3e",
+                "label": "Trap Crafting (2)",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Creating makeshift traps and disabling traps.&nbsp;<br>",
+                  "width": 0.5
+                }
+              }
+            ]
+          },
+          {
+            "id": "dafb43a4-8e9c-4e35-abf6-87d5c5085a8d",
+            "label": "WILL",
+            "blocks": [
+              {
+                "id": "33fd1302-7afb-4b5e-96bb-32d800bf847f",
+                "label": "Courage",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "The skill of resisting fear.&nbsp;",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "9612f049-16ad-4b2a-aacc-fef3df39a321",
+                "label": "Hex Weaving (2)\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Hexing people or places.&nbsp;",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "88717458-c004-4a9e-8a6a-f86f528185a7",
+                "label": "Intimidation",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Scaring people, either to run them off or make them do something for you.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "3ed038eb-03c0-4d0a-8425-645fd1fff49e",
+                "label": "Spell Casting (2)\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Utilizing magic in the form of spells and their simpler cousins, signs.<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "36a92bd2-76d1-4183-8c5a-0dae767968d2",
+                "label": "Resist Magic (2)\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Resisting magical influence.",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "d7888f40-5318-4e70-bd36-a6210d3a1ad0",
+                "label": "Resist Coercion\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Resisting persuasion, seduction, and the like.&nbsp;",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "e336b701-f7eb-49c2-b8c6-a162e2b91c47",
+                "label": "Ritual Crafting (2)\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Ritualistic magic",
+                  "width": 0.5
+                }
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "495affb0-8ea5-46a9-9bd0-40eb7fb63d78",
+            "label": "REFLEX SKILLS ",
+            "blocks": [
+              {
+                "id": "d3588629-f6b4-4038-9f80-cbe196f514b9",
+                "label": "Brawling",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "The skill of fighting hand to hand with fists, feet, and the like.<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "de11a5b9-8aee-40ad-b6e9-eb5734c1a566",
+                "label": "Dodge/Escape\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Dodging attacks and missiles and escaping from holds and grapples.&nbsp;",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "864acd5e-5805-495a-ba40-9f2bd63f7a2d",
+                "label": "Melee",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Using weapons such as whips, bludgeons, and axes.",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "00210110-a132-4543-ba51-d1f730b5c0a2",
+                "label": "Riding",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Riding horses, and in some cases riding other animals or even monsters.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "7ac106b5-51a0-4572-95a2-d1d6bfacaa4b",
+                "label": "Sailing",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Sailing ships and controlling maritime vessels.&nbsp;",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "0eaa4b48-3ebd-4356-b7c1-0184b2fca01e",
+                "label": "Small Blades\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Using light weapons such as daggers and cleavers.<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "a222113b-6e72-42b1-9cf1-d70280c1e88d",
+                "label": "Staff/Spear\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Using long weapons such as staves, pole axes, and spears.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "de31e0aa-9c8a-4803-9a3a-02d43efcd60f",
+                "label": "Swordsmanship",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Using swords.&nbsp;",
+                  "width": 0.5
+                }
+              }
+            ]
+          },
+          {
+            "id": "cf7f7a53-b0dc-41c3-9d90-a4dd78062ea6",
+            "label": "DEXTERITY skill",
+            "blocks": [
+              {
+                "id": "a4f51b3b-8a10-465e-b1b4-56266ecffa04",
+                "label": "Archery",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Firing a bow and arrow.",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "5872ded6-420f-46bd-ab1a-9c2342cb61a0",
+                "label": "Athletics",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "The skill required for climbing, balancing, thrown weapons, and such.<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "a546dbf9-97c9-47b8-8795-e4f5f7275831",
+                "label": "Crossbow",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Firing a crossbow.&nbsp;",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "a494dda7-b167-4d83-aae0-b0c89de3a49c",
+                "label": "Sleight of Hand\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Performing stage magic tricks, making small things disappear or\n<br>appear, pickpocketing and slipping things into people’s pockets.<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "01f1cf39-9c1b-40c0-807f-10d45a4d4281",
+                "label": "Stealth",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Moving silently through your surroundings and acting without being perceived.",
+                  "width": 0.5
+                }
+              }
+            ]
+          },
+          {
+            "id": "9608524c-5262-42da-bd8b-031cc7e907fd",
+            "label": "EMPATHY skills",
+            "blocks": [
+              {
+                "id": "1fdc9788-c3f1-430f-af31-9a46c1e5dfe1",
+                "label": "Charisma",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Getting along with people.&nbsp;",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "092b3a82-a02e-4a9a-be98-6fddd8266129",
+                "label": "Deceit",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Lying and conniving.&nbsp;",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "f7e2d323-d310-43b1-867b-02ec070147be",
+                "label": "Fine Arts\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Creating works of art, from painting to song writing to glass-working.\n<br>Each time you take this skill you must specify what fine art you are training in.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "d36d2386-2731-4b15-be1f-0ad5b43107ef",
+                "label": "Gambling",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Counting odds, calculating risks, and earning money by gambling.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "f888a58c-7d58-48cd-b4ae-e2d0518a43dc",
+                "label": "Grooming and Style\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Grooming yourself and arranging your outfits to make an impression.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "98502b61-ef8b-457a-ba7e-5fd9f2772f5e",
+                "label": "Human Perception\r",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Reading people’s emotions.&nbsp;",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "80fd9da7-5668-40ee-abed-24f29803a720",
+                "label": "Leadership",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "The skill of rallying people under your banner, or just taking control of a\n<br>situation and getting people to do your bidding.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "e6e25c01-b552-47c6-b8c1-b7c8f68dcb4e",
+                "label": "Persuasion",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Convincing people to agree with you or do something you want them to do.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "1301933d-1498-4028-a456-7df48babd1ee",
+                "label": "Performance",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Playing instruments, singing, and acting. Each time you take this skill you must specify a form of performance.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "f999581e-3042-495b-bb99-b69ec6d636fe",
+                "label": "Seduction",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Seducing people and performing in bed.&nbsp;",
+                  "width": 0.5
+                }
+              }
+            ]
+          },
+          {
+            "id": "83c8a6bd-efcf-40d2-a785-0a58a99d1d82",
+            "label": "BODY skills",
+            "blocks": [
+              {
+                "id": "87e38fe6-a503-4d0e-b4bf-f91ba6ac206c",
+                "label": "Physique",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Lifting, tearing, and bending heavy and tough objects.&nbsp;<br>",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "8d076c72-0d07-4004-9077-0907654773b2",
+                "label": "Endurance",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Enduring fatigue, or the pain of torture and drugs.&nbsp;<br>",
+                  "width": 0.5
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "label": "Skills"
+    },
+    {
+      "id": "deae2aac-df6f-4bb5-a074-3748b341a29f",
+      "sections": {
+        "left": [
+          {
+            "id": "d7355c04-5865-4222-9c3d-c204b5952b5b",
+            "label": "SPELLS,  Invocations &amp; Signs\n",
+            "blocks": [
+              {
+                "id": "881b87c1-b396-452b-809c-a5f0980a9476",
+                "label": "SPELLS / INVOCATIONS / SIGNS 1\n",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "54481f51-883e-4e10-bb4c-7e2ab1b82bab",
+                "label": "spell name ",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "c108bae6-b294-4a31-99c0-86e05c9fbfd4",
+                "label": "Cost",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "a60c0810-b140-41f8-bd7c-af7373e0c63a",
+                "label": "Effect",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "8c5cf679-1437-41ba-ac6b-d287cc6049ff",
+                "label": "range",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "49418df8-3b28-42a7-afa9-62e2657a40db",
+                "label": "Duration",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "492244cb-7e0e-4a0c-925d-838fb31574f4",
+                "label": "Defense",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "9242dcf9-e537-4cdb-bcd0-1ad505839768",
+                "label": "SPELLS / INVOCATIONS / SIGNS 2\n",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "2893eabd-5a92-4c86-8440-f036ee3df6a6",
+                "label": "SPELL NAME ",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "be701956-aa30-4fc1-ac0a-67183055776d",
+                "label": "COST",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "8b5eafe5-b848-4f33-97ab-7b7e966c79d4",
+                "label": "EFFECT",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "31e66a8d-9fad-47e9-a106-4355140aff55",
+                "label": "RANGE",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "73ae3301-7364-4bb2-b648-d726f79acf18",
+                "label": "DURATION",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "7dd93667-57f1-4e1b-a62d-cb0d4103de75",
+                "label": "Defense",
+                "type": "Text",
+                "value": "\n",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "102804af-95c3-4c87-bf1f-0fcc9048d4ea",
+                "label": "SPELLS / INVOCATIONS / SIGNS 3\n",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "1b58991a-96e6-43d3-996e-e780d8c25ac2",
+                "label": "SPELL NAME ",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "c9f393e0-83e6-4e24-b477-af10b79b6d66",
+                "label": "COST",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "3ee32246-a8f6-4f28-8994-a21b212d4a66",
+                "label": "EFFECT",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "79d85634-f09c-4a01-9c59-e942095a2a26",
+                "label": "RANGE",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "2163568f-c04c-4cd2-ace5-186c61b9d3d2",
+                "label": "DURATION",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "e2a89f6d-0c8f-4e97-8f56-bfc77ba73736",
+                "label": "DEFENSE",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "84863825-5187-4557-b178-f811c8cc3a10",
+                "label": "SPELLS / INVOCATIONS / SIGNS 4\n",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "29f85f38-56c0-41b9-95cf-d74ef6de8969",
+                "label": "SPELL NAME ",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "59a3a7e3-b404-41af-948d-4cd2b5d57241",
+                "label": "COST",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "a8390392-2396-4605-910d-7b0c281dd0ba",
+                "label": "EFFECT",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "003307b9-c6e4-4ae8-81ad-c276160a9579",
+                "label": "RANGE",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "581ecd17-6a2b-40f3-b4c7-4ee0f19d554b",
+                "label": "DURATION",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "d7012b7d-bf0e-421f-a570-689946ed8a9e",
+                "label": "DEFENSE",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "88eb3c95-e1e4-4279-9cc8-59d7c5820f35",
+                "label": "SPELLS / INVOCATIONS / SIGNS 5\n",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "70c333ce-8312-4a2a-a7af-62df749657fc",
+                "label": "SPELL NAME ",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "2ee07252-9130-4c7b-8fa0-349d956acade",
+                "label": "cost",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "a298d78d-bccc-492b-9f20-0d4b31278e6f",
+                "label": "EFFECT",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "8efe95fc-3e55-47c0-b745-86088ed51470",
+                "label": "RANGE",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "97c138c2-aae7-453e-adac-8dd8a42d96c2",
+                "label": "DURATION",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "e41c2d57-ff03-4b84-80aa-cf7fe75c4aaa",
+                "label": "DEFENSE",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "957fafa0-748a-4e1a-b6cb-794bb4d8de82",
+            "label": "Vigor, focus &amp; stamina ",
+            "blocks": [
+              {
+                "id": "64c3aed4-a937-483f-a139-c6ad3fcf9896",
+                "label": "VIGOR",
+                "type": "PointCounter",
+                "meta": {
+                  "isMainPointCounter": false,
+                  "helperText": "Your Vigor score is how many points of Chaos you can channel at one time without damaging yourself. If the total Stamina cost of all the spells you\n<br>cast in one round is greater than this value you take damage&nbsp;<br>",
+                  "width": 1,
+                  "max": "0"
+                },
+                "value": "0"
+              },
+              {
+                "id": "d097cf6c-e5e6-493e-b7e7-014a29c83de0",
+                "label": "FOCUS (VIGOR MODDIFER)",
+                "type": "Separator",
+                "meta": { "hasLabel": false, "helperText": "" },
+                "value": ""
+              },
+              {
+                "id": "f373dbb6-a14f-4bee-ab90-14139fc6620b",
+                "label": "FOCUS (VIGOR MODDIFER)",
+                "type": "PointCounter",
+                "meta": {
+                  "isMainPointCounter": false,
+                  "width": 1,
+                  "helperText": "Mages and Priests can use magical staves and amulets to lower the STA Cost of a spell by a specific amount based on the focus. Magical focuses can never bring a STA Cost below 1 point and must be in the mage’s hand to work. A mage or preist can only utilize one focus at a time, even when carrying several. Weaving magic through focuses takes a great deal of attention and control"
+                },
+                "value": "0"
+              },
+              {
+                "id": "65778015-45eb-4f3a-9dfd-0ac02f5d2c8f",
+                "label": "STAMINA (STA):",
+                "type": "Separator",
+                "meta": { "hasLabel": false, "helperText": "" },
+                "value": ""
+              },
+              {
+                "id": "d84cc914-98e2-476d-bf38-689819c730e2",
+                "label": "STAMINA (STA):",
+                "type": "PointCounter",
+                "meta": {
+                  "isMainPointCounter": false,
+                  "width": 1,
+                  "max": "0",
+                  "helperText": "Refer to quick info for a detailed explanation of STA."
+                },
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "id": "ee980e73-5585-4cff-b2b2-2efd1a71163d",
+            "label": "Rituals",
+            "blocks": [
+              {
+                "id": "de293063-119c-4cb4-8503-f43382ac8468",
+                "label": "ritual 1",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "5cde5406-b1d4-4d27-acc2-ee9b60b0d1d3",
+                "label": "Cost",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "5c043eaa-92c5-472e-9bc4-ba37fe795a22",
+                "label": "Effect",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "8a0d570c-fd1e-4017-93d8-981e82178bb8",
+                "label": "Time",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "1f64d1cd-3916-4284-aa8c-8849d694271b",
+                "label": "Diffculty Check",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "66988be3-acd9-4352-9507-a5e204387999",
+                "label": "Duration",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "49d3afb5-f8a6-4c82-b448-1ec2dc526f82",
+                "label": "Components",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "d22b2850-ea77-41df-8089-a86fdde0f64d",
+                "label": "RITUAL 2",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "368cc338-99d0-4df4-ab6d-c545e475bceb",
+                "label": "cost",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "98b9f542-4ba7-40b8-8e61-42274d14d319",
+                "label": "Effect",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "b4aa4ef3-c00b-43fe-8321-511e911d71bf",
+                "label": "Time",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "fa1614f9-cc4e-441e-ac16-fcfa84285f37",
+                "label": "DIFFCULTY CHECK",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "b743ac5f-a22a-4625-89c5-da6c8671d835",
+                "label": "Duration",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "3060109c-456f-4ebb-8eb0-fd1930502763",
+                "label": "Components",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              }
+            ]
+          },
+          {
+            "id": "928eb1a1-e778-4e1d-8e96-2444e41efbb9",
+            "label": "hexes",
+            "blocks": [
+              {
+                "id": "1934cd7d-ffcc-4daa-9c9e-998780d3d9b4",
+                "label": "hex 1",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "6d92dfc3-5aca-4cab-832a-64a1f9da0946",
+                "label": "cost",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "fd93513f-58b0-404e-8d01-0bdca9043bf5",
+                "label": "effect",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "85abbc6a-0472-4680-b07b-b43450a9fd3c",
+                "label": "hex 2",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "60c7de98-e6c0-49f1-8cbf-ed47e8da652e",
+                "label": "COST",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "b7fb2f0d-8447-4578-a33f-a958e2dd2c9c",
+                "label": "EFFECT",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              }
+            ]
+          }
+        ]
+      },
+      "label": "magic"
+    },
+    {
+      "id": "004683f6-14da-4952-919b-a20f84f5de11",
+      "sections": {
+        "left": [
+          {
+            "id": "ee9d54cd-30f5-4e46-a486-8c4ca23d372e",
+            "label": "Backpack/Inventory\r",
+            "blocks": [
+              {
+                "id": "9a00f5b0-1dbb-4085-9229-50c7be19b7dc",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "f845f9af-9e10-4533-b506-6659809d0fbb",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "69ffa89e-cdd5-4c32-b23e-34428672cdd4",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "65aa4f84-95e1-4ad9-890a-5d0bc0cce481",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Write down any items your character is carrying. Make sure to write down the Weight of the item as well as any special properties."
+                }
+              }
+            ]
+          },
+          {
+            "id": "dd852d80-b444-4ac2-921d-6cbe8335ed6a",
+            "label": "Components (crafting)",
+            "blocks": [
+              {
+                "id": "f7312b8e-b87a-4daa-9b0f-1d5a7b8a33bb",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "27f3bc48-a248-4c3a-88fa-2ec9df3c0435",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "6b8c643e-fefa-4c06-8e61-5013f2ebe5b4",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "680248db-f6fc-4a0b-9a12-0915894a1d39",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Write down any crafting related items your character is carrying. Make sure to write down the Weight of the item as well as any special properties."
+                }
+              }
+            ]
+          },
+          {
+            "id": "73a33f13-1382-4d1a-93a8-ffca6f597545",
+            "label": "Encumbrance Penalties",
+            "blocks": [
+              {
+                "id": "9b95f847-3201-4ab3-a2e1-74bda7a0ae01",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "cc725709-30c7-4e14-94fb-7ab5829e6d4f",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "1395702e-2be9-4889-abdb-0a7b744448ca",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "1afe0ba7-ca69-41b4-91e1-135e5210d9ab",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "(Body x10): This is how much weight you can carry without being slowed down. When you are encumbered, subtract 1 from your REF, DEX, and SPD for every 5 points you exceed your encumbrance, minimum 1. You can dead-lift 50 times your Body in Kilograms.<br>"
+                }
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "692c6d2d-defc-4688-b16a-f2225223caee",
+            "label": "Wealth/currencies ",
+            "blocks": [
+              {
+                "id": "c2ba3d43-0b17-44cd-806c-c69e0092851f",
+                "label": "REDANIAN CROWN",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Currency used in the Kingdom of Redanian.&nbsp;",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "935a5ec6-e636-4c2b-b333-5396f6890a8d",
+                "label": "TEMERIAN OREN",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Currency used in the Kingdom of Temeria. 1 oren is equal to Redanian 1 Crown.",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "670b8677-c435-4a86-88fe-e227118d48c1",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "d897916a-62f5-4702-b3a1-a94b05889acb",
+                "label": "KAEDWENI DUCAT",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "width": 0.5,
+                  "helperText": "Currency used in the Kingdom of Kaedwen. 3 Ducats is equal to 1 Redanian Crown."
+                }
+              },
+              {
+                "id": "b0793b10-a1a3-4630-a887-bca03536eef6",
+                "label": "NILFGAARDIAN FLOREN",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "width": 0.5,
+                  "helperText": "Currency used in the Nilfgaardian empire. 1/3 is equal to 1 Redanian Crown."
+                }
+              },
+              {
+                "id": "24167111-fe25-4ace-aaf5-7c336316d0c8",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "608db34b-b598-43b5-b589-2b897fe3050d",
+                "label": "KOVIR &amp; POVISS BIZANT",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "width": 0.5,
+                  "helperText": "Currency used in the Kingdom of Kovir and Poviss. 1/4 Bizant is equal to 1 Redanian Crown."
+                }
+              },
+              {
+                "id": "b94f068e-db90-4ea7-b6fe-c5ff42dd9fbb",
+                "label": "HENGFORS LEAGUE  LINTAR",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "width": 0.5,
+                  "helperText": "Currency used in Used in \u0017 the Hengfors League . 1/2 Bizant is equal to 1 Redanian Crown."
+                }
+              }
+            ]
+          },
+          {
+            "id": "2c31a0d6-18fc-482f-9acb-413c70a811ac",
+            "label": "Journal/notes",
+            "blocks": [
+              {
+                "id": "6ca752b8-d34b-448a-8264-6bcdb646b464",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "6d8ebc03-7240-4a5d-a962-4653bf158019",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "67e2f169-97b3-45da-8bd3-52cf137740d3",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "d94441ef-af2c-4aca-aaab-fff7df880dd8",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "5172bb0e-6d6b-4b78-a2f0-ec59c9e50e20",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "ee096ae3-b805-4d98-aafe-62bb1252f6b4",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ]
+      },
+      "label": "Inventory\n"
+    },
+    {
+      "id": "bb274396-3064-4da4-8ba3-4760ab69bd7b",
+      "sections": {
+        "left": [
+          {
+            "id": "21ae9077-1a56-493a-a345-62cffc9fa065",
+            "label": "verbal combat ",
+            "blocks": [
+              {
+                "id": "a609b3a5-9b24-4532-808d-75d947ec0618",
+                "label": "RESOLVE ",
+                "type": "PointCounter",
+                "meta": {
+                  "max": "0",
+                  "isMainPointCounter": false,
+                  "helperText": "Resolve acts as Health Points for Verbal Combat. Resolve = ((WILL + INT)/2)x5"
+                },
+                "value": "0"
+              },
+              {
+                "id": "b6729f54-35a7-41c0-8766-532bbd2d837d",
+                "label": "EMPATHETIC ATTACKS",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "d0d1623c-112e-48eb-b897-c05317eabd01",
+                "label": "Seduce",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d6"],
+                  "width": 0.5,
+                  "helperText": "Skill: Seduction. <br>DMG: 1d6+EMP"
+                }
+              },
+              {
+                "id": "3bc33452-7314-41e1-9a65-eec82a46672c",
+                "label": "Persuade",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d6"],
+                  "width": 0.5,
+                  "helperText": "Skill: Persuasion. <br>DMG: 1d6/2+EMP."
+                }
+              },
+              {
+                "id": "3cf54908-71dc-4848-aee2-acd48e276163",
+                "label": "Appeal",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d6"],
+                  "width": 0.5,
+                  "helperText": "Skill: Leadership.<br>DMG: 1d10+EMP."
+                }
+              },
+              {
+                "id": "0784b5fd-4b07-48c5-8c31-04bef185d241",
+                "label": "Befriend",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d6"],
+                  "width": 0.5,
+                  "helperText": "Skill: Charisma.&nbsp;<br>DMG: 1d10+EMP."
+                }
+              },
+              {
+                "id": "ff56287a-9874-438c-a1b3-54012832b853",
+                "label": "ANTAGONISTIC ATTACKS",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "df25cc12-da9b-4819-ba57-7736b269e014",
+                "label": "Deceive",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d6"],
+                  "width": 0.5,
+                  "helperText": "Skill: Deceit.<br>DMG: 1d6+INT.<br>"
+                }
+              },
+              {
+                "id": "1f3bf6f0-023b-4801-8379-2a6b9910eee1",
+                "label": "Ridicule",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d6"],
+                  "width": 0.5,
+                  "helperText": "Skill: Social Etiquette.<br>DMG: 1d6+WILL.<br>"
+                }
+              },
+              {
+                "id": "4c2f38c2-e2fd-4fda-8023-c4683aaf2263",
+                "label": "Intimidate",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d10"],
+                  "width": 0.5,
+                  "helperText": "Skill: Intimidation. <br>DMG: 1d10+WILL."
+                }
+              },
+              {
+                "id": "40f1d145-d3b3-4079-80bd-0f95e27ca2d5",
+                "label": "DEFENSES",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "0689e7c1-e886-417e-a152-b13ccbd93901",
+                "label": "Ignore",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d10"],
+                  "width": 0.5,
+                  "helperText": "Skill: Resist Coercion.\n<br>DMG: 1d10+EMP.<br>"
+                }
+              },
+              {
+                "id": "49687c14-1ee3-4f0b-a31e-d031f25128bf",
+                "label": "Counterargue\r",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d6"],
+                  "width": 0.5,
+                  "helperText": "Skill: Resist Coercion.\n<br>DMG: NONE, see effect.<br>"
+                }
+              },
+              {
+                "id": "5419e17f-702c-4554-89d1-cfcc846b6202",
+                "label": "Change Subject\n",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d6"],
+                  "width": 0.5,
+                  "helperText": "Skill: Persuasion.\n<br>DMG: 1d6+INT.<br>"
+                }
+              },
+              {
+                "id": "42ab336f-7c94-45ab-8da7-2e3a7397c7a3",
+                "label": "Disengage",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d10"],
+                  "width": 0.5,
+                  "helperText": "Skill: Resist Coercion.\n<br>DMG: NONE, see effect.<br>"
+                }
+              },
+              {
+                "id": "2e6dcb93-baee-4da9-893b-d781986a861a",
+                "label": "EMPATHETIC TOOLS",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "929ece81-9bab-47fd-acff-eed0b5f4b22f",
+                "label": "ROMANCE",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d10"],
+                  "width": 0.5,
+                  "helperText": "Skill: Charisma.\n<br>DMG: NONE, see effect.<br>"
+                }
+              },
+              {
+                "id": "177cde08-e2d6-47aa-bcd7-791456187895",
+                "label": "STUDY",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d10"],
+                  "width": 0.5,
+                  "helperText": "Skill: Human Perception.\n<br>DMG: NONE, see effect.<br>"
+                }
+              },
+              {
+                "id": "57a9f413-f6ae-4b89-8109-c8510348caa7",
+                "label": "Antagonistic Tools\r",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "5b085225-e500-4fbe-a200-19f438ef67bf",
+                "label": "IMPLY",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d10"],
+                  "width": 0.5,
+                  "helperText": "Skill: Charisma.\n<br>DMG: NONE, see effect.<br>"
+                }
+              },
+              {
+                "id": "71d3975b-f27c-4cb4-a35a-8711ba2e03b1",
+                "label": "BRIBE",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d10"],
+                  "width": 0.5,
+                  "helperText": "Skill: Charisma.\n<br>DMG: NONE, see effect.<br>"
+                }
+              }
+            ]
+          },
+          {
+            "id": "51c02d12-756c-4302-9ae3-829d8113b996",
+            "label": "REPUTATION ",
+            "blocks": [
+              {
+                "id": "504cdb7a-0dcc-4555-8dfe-16c7d81199f0",
+                "label": "\"AREA\"",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "c1fc4bd5-17b5-4e19-9c50-515e25f45105",
+                "label": "\"AREA\"",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "4ebb5682-2e52-4ffe-aa77-7b606e06faef",
+                "label": "\"AREA\"",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "9c931c44-ec98-4a38-8da0-93f1a71ef1f8",
+                "label": "\"AREA\"",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "082e06b1-cebb-4eb7-a531-a15e1fe645a1",
+                "label": "\"AREA\"",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "8641549b-f9a8-40ed-9703-a7c8c9541e40",
+                "label": "\"AREA\"",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "3da28145-17a3-4fbc-bea4-f988b443e989",
+                "label": "Dice Pool",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Reputation is a measure of how well you are known for your actions, both famous and infamous. Your reputation differs from area to area. Roll 1d10+Will+Reputation Level."
+                }
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "7d42dd16-822f-4d99-9dac-79cd2e7f4600",
+            "label": "Social Standing in Human relams ",
+            "blocks": [
+              {
+                "id": "cd808dae-9fe3-4d32-a33c-f145400f47b0",
+                "label": "tHE NORTH",
+                "type": "Text",
+                "value": "Humans = Equal: No penalties to social interactions but gain no bonuses either.\n\nElves = Hated: -2 to Seduction, Charisma, Persuasion, and Leadership with people.\n \nDwarves = Tolerated: -1 to Seduction, Charisma, Persuasion, and Leadership with people. \n\nWitchers = Hated &amp; Feared: -2 to Seduction, Charisma, Persuasion, and Leadership with people but +1 to Intimidation. \n \nMages = Hated &amp; Feared: -2 to Seduction, Charisma, Persuasion, and Leadership with people but +1 to Intimidation. \n",
+                "meta": { "helperText": "", "width": 0.5 }
+              },
+              {
+                "id": "51139865-ae0d-4eec-8293-6a863999ffce",
+                "label": "Nilfgaard",
+                "type": "Text",
+                "value": "Humans = Equal: No penalties to social interactions but gain no bonuses either.\n\nElves = Equal: No penalties to social interactions but gain no bonuses either. \n \nDwarves = Equal: No penalties to social interactions but gain no bonuses either.\n \n \nWitchers = Hated &amp; Feared: -2 to Seduction, Charisma, Persuasion, and Leadership with people but +1 to Intimidation. \n\nMages = Hated &amp; Feared: -2 to Seduction, Charisma, Persuasion, and Leadership with people but +1 to Intimidation. \n",
+                "meta": { "helperText": "", "width": 0.5 }
+              },
+              {
+                "id": "77c0650b-3955-4a70-a02c-d5ce4800c8a9",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "1c9887d7-7af2-4c7c-9a4e-6d7d2416b8a0",
+                "label": "Skellige",
+                "type": "Text",
+                "value": "Humans = Equal: No penalties to social interactions but gain no bonuses either.\n\nElves =  Equal: No penalties to social interactions but gain no bonuses either. \n\nDwarves = Equal: No penalties to social interactions but gain no bonuses either.\n \nWitchers = Tolerated: -1 to Seduction, Charisma, Persuasion, and Leadership with people.\n \nMages = Tolerated: -1 to Seduction, Charisma, Persuasion, and Leadership with people.\n",
+                "meta": { "helperText": "" }
+              }
+            ]
+          },
+          {
+            "id": "b43685b5-5062-414c-819c-8deab378700d",
+            "label": "SOCIAL STANDING in Elder Race RELAMS ",
+            "blocks": [
+              {
+                "id": "62d73ff2-e663-4609-acfb-3c0896ef201c",
+                "label": "DOL BLATHANNA",
+                "type": "Text",
+                "value": "Humans = Hated: -2 to Seduction, Charisma, Persuasion, and Leadership with people.\n\nElves = Equal: No penalties to social interactions but gain no bonuses either.\n\nDwarves = Equal: No penalties to social interactions but gain no bonuses either.\n \nWitchers = Tolerated: -1 to Seduction, Charisma, Persuasion, and Leadership with people.\n \n \nMages = Equal: No penalties to social interactions but gain no bonuses either.\n",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "a6e76e4b-9ed4-4700-8f68-c1e0eb7b3c6a",
+                "label": "Mahakam",
+                "type": "Text",
+                "value": "Humans = Tolerated: -1 to Seduction, Charisma, Persuasion, and Leadership with people.\n\nElves = Equal: No penalties to social interactions but gain no bonuses either.\n\nDwarves = Equal: No penalties to social interactions but gain no bonuses either.\n\nWitchers = Tolerated: -1 to Seduction, Charisma, Persuasion, and Leadership with people.\n\nMages = Tolerated: -1 to Seduction, Charisma, Persuasion, and Leadership with people.\n",
+                "meta": { "width": 0.5 }
+              }
+            ]
+          }
+        ]
+      },
+      "label": "Social \n"
+    }
+  ],
+  "template": "Blank",
+  "version": 4,
+  "fariType": "character"
+}

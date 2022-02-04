@@ -1,5 +1,4 @@
 import { IDiceCommandSetId } from "../dice/Dice";
-import { CharacterTemplates } from "./CharacterType";
 
 export enum BlockType {
   Text = "Text",
@@ -110,13 +109,18 @@ export interface IV3Character {
   // hidden
   version: number;
   lastUpdated: number;
-  template?: CharacterTemplates;
   playedDuringTurn?: boolean;
 }
 
 /**
  * V4
  */
+
+export interface IV4Page {
+  id: string;
+  label: string;
+  sections: { left: Array<ISection>; right: Array<ISection> };
+}
 
 export type IDefaultBlockMeta = {
   helperText?: string;
@@ -200,6 +204,7 @@ export type ISeparatorBlock = {
   value: unknown;
   meta: IDefaultBlockMeta & {
     hasLabel: boolean;
+    hideDivider?: boolean;
   };
 };
 
@@ -221,6 +226,30 @@ export type IBlock = {
   value: unknown;
 } & IBlockTypes;
 
+export interface IV4Page {
+  id: string;
+  label: string;
+  sections: { left: Array<ISection>; right: Array<ISection> };
+}
+
+export type IPageSectionPosition = keyof IV4Page["sections"];
+
+/**
+ * @deprecated
+ */
+export interface IV4Character {
+  id: string;
+  name: string;
+  group: string | undefined;
+  wide: boolean;
+  pages: Array<IV4Page>;
+
+  // hidden
+  version: number;
+  lastUpdated: number;
+  playedDuringTurn?: boolean;
+}
+
 export type ISection = {
   id: string;
   label: string;
@@ -228,24 +257,29 @@ export type ISection = {
   visibleOnCard?: boolean;
 };
 
+export type IPageColumn = {
+  sections: Array<ISection>;
+};
+export type IPageRow = {
+  columns: Array<IPageColumn>;
+};
+
 export interface IPage {
   id: string;
   label: string;
-  sections: { left: Array<ISection>; right: Array<ISection> };
+  rows: Array<IPageRow>;
 }
-
-export type IPageSectionPosition = keyof IPage["sections"];
 
 export interface ICharacter {
   id: string;
   name: string;
   group: string | undefined;
   wide: boolean;
+  zoom?: number;
   pages: Array<IPage>;
 
   // hidden
   version: number;
   lastUpdated: number;
-  template?: CharacterTemplates;
   playedDuringTurn?: boolean;
 }

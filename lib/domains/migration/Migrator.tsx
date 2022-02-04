@@ -4,15 +4,15 @@ type IMigratableEntity = {
 export const Migrator = {
   makeMigrationFunction<T extends IMigratableEntity>(
     migrationFunctions: Array<{
-      version: number;
-      migrate: (entity: IMigratableEntity) => IMigratableEntity;
+      from: number;
+      migrate: (entity: any) => any;
     }>
   ) {
     return (entity: IMigratableEntity): T => {
       let migratedEntity = { ...entity };
       for (const migrationFunction of migrationFunctions) {
-        if (entity.version === migrationFunction.version) {
-          migratedEntity = migrationFunction.migrate(entity);
+        if (migratedEntity.version === migrationFunction.from) {
+          migratedEntity = migrationFunction.migrate(migratedEntity);
         }
       }
 

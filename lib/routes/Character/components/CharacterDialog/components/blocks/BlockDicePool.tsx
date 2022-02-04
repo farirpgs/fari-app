@@ -19,6 +19,7 @@ import { DiceContext } from "../../../../../../contexts/DiceContext/DiceContext"
 import {
   BlockType,
   IDicePoolBlock,
+  ISkillBlock,
 } from "../../../../../../domains/character/types";
 import {
   IDiceCommandSetId,
@@ -43,7 +44,13 @@ export type IDicePoolElement = {
 
 export type IDicePool = Array<IDicePoolElement>;
 
-export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
+export function BlockDicePool(
+  props: IBlockComponentProps<IDicePoolBlock | ISkillBlock> & {
+    listResults?: boolean;
+    mid?: React.ReactNode;
+  }
+) {
+  const listResults = props.listResults ?? true;
   const { t } = useTranslate();
   const theme = useTheme();
   const diceManager = useContext(DiceContext);
@@ -120,6 +127,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
           >
             {renderPool()}
           </Grid>
+          {props.mid && <Grid item>{props.mid}</Grid>}
 
           <Grid item xs>
             {renderLabel()}
@@ -262,7 +270,7 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
           e.preventDefault();
           const rollGroup = BlockSelectors.getRollGroupFromBlock(props.block);
 
-          diceManager.actions.setOptions({ listResults: true });
+          diceManager.actions.setOptions({ listResults: listResults });
           diceManager.actions.addOrRemovePoolElement({
             blockId: props.block.id,
             blockType: props.block.type,
@@ -274,11 +282,11 @@ export function BlockDicePool(props: IBlockComponentProps<IDicePoolBlock>) {
           if (!canRoll) {
             return;
           }
-
           const rollGroup = BlockSelectors.getRollGroupFromBlock(props.block);
           const diceRollResult = diceManager.actions.roll([rollGroup], {
-            listResults: true,
+            listResults: listResults,
           });
+
           props.onRoll(diceRollResult);
         }}
       >

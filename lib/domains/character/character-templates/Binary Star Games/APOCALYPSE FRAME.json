@@ -1,0 +1,527 @@
+{
+  "id": "9d55f4fd-a97b-4206-a717-6a9d44c072af",
+  "name": "APOCALYPSE FRAME",
+  "lastUpdated": 1643745247,
+  "wide": false,
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "Frame Information",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "755fc93f-e3e0-446c-98a2-1adc63d26481",
+                  "label": "Frame",
+                  "blocks": [
+                    {
+                      "id": "3a48a621-7a33-432a-83c3-156f7dfad26d",
+                      "label": "Frame Name",
+                      "type": "Text",
+                      "value": "Frame description goes here!",
+                      "meta": {
+                        "helperText": "Use Advanced Mode to edit the name."
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "fb15f44b-2d02-49f5-911a-f4bcb051c0d8",
+                  "label": "Attributes",
+                  "blocks": [
+                    {
+                      "id": "53507c59-171b-41e9-8afc-ed5833df5fee",
+                      "label": "Drive",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "b69558cb-18d1-403a-b080-2c2c49363ca3",
+                      "label": "Speed",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "63014e84-78ec-456d-b9ec-693ad91d9e6d",
+                      "label": "Control",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "216647dd-83e0-4448-86e7-733cb067a050",
+                  "label": "Traits",
+                  "blocks": [
+                    {
+                      "id": "2431d7b2-6130-4f2f-8ca0-4bfcb3025dd4",
+                      "label": "Build Trait",
+                      "type": "Text",
+                      "value": "Put your build trait here!",
+                      "meta": {
+                        "helperText": "Use Advanced Mode to edit the name."
+                      }
+                    },
+                    {
+                      "id": "d212af14-8e6b-4411-9344-eac60ab5654e",
+                      "label": "Integral Trait",
+                      "type": "Text",
+                      "value": "Put your integral trait here!",
+                      "meta": {
+                        "helperText": "Use Advanced Mode to edit the name."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "f2c50897-c311-4afc-9771-0fda84f6eb18",
+                  "label": "Resources",
+                  "blocks": [
+                    {
+                      "id": "6af94b21-db9d-4aea-b674-18e6690b6457",
+                      "label": "Vigor",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "asClock": false,
+                        "width": 1,
+                        "helperText": "Frame Base + Drive. <br><br>Start every combat at max Vigor."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "3ba7904f-1571-4c75-b30f-4e5df1d074de",
+                      "label": "Tension",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "asClock": false,
+                        "width": 1,
+                        "helperText": "Frame Base + Speed. <br><br>Start every combat at max - 3 Tension."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "c9d32b7f-41cc-4367-a7bd-7557e6088f38",
+                      "label": "Ammo",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "asClock": false,
+                        "width": 1,
+                        "helperText": "Frame Base + Control. <br><br>Start every mission at max Ammo."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "9458b313-32eb-455a-a22b-fcface814d4e",
+                  "label": "Frame Damage",
+                  "blocks": [
+                    {
+                      "id": "668f5991-3f4a-4bdf-9e6a-cb7222ffb212",
+                      "label": "Superstructure",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "-2 Max Vigor. Drive rolls have -1 die."
+                      }
+                    },
+                    {
+                      "id": "3ae6cc00-3941-4e76-9ddb-89531ec7c9bd",
+                      "label": "Leg",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Move/Sprint require a Speed roll. Other Speed rolls have -1 die."
+                      }
+                    },
+                    {
+                      "id": "7101939c-9d7f-4db6-be49-68533f8cb18a",
+                      "label": "Sensor",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Attack and Control rolls have -1 die."
+                      }
+                    },
+                    {
+                      "id": "0160ac29-d8a7-4a7e-92b8-93e85a8ca3f6",
+                      "label": "Arm",
+                      "type": "Numeric",
+                      "value": "4",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Replace an Armament with its Backup."
+                      }
+                    },
+                    {
+                      "id": "9763b70e-368a-4287-9d0a-c05739ebbb1f",
+                      "label": "Shoulder",
+                      "type": "Numeric",
+                      "value": "5",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "One Modular System now requires a Control roll to use.<br>"
+                      }
+                    },
+                    {
+                      "id": "f1eb1772-3c22-4a26-ac6e-ba3fa154ca88",
+                      "label": "Core",
+                      "type": "Numeric",
+                      "value": "6",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Integral System now requires a Drive roll to use."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a7dce3a7-25aa-447d-8733-e29606adffab",
+                  "label": "Armaments<br>",
+                  "blocks": [
+                    {
+                      "id": "cefb3e14-7e5d-449a-8134-b9bafe5081ab",
+                      "label": "Armament #1",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "helperText": "Replace 0 above with Harm and increase/decrease the number of dice.<br><br>Tags go here (turn on Advanced Mode to edit)<br><br>Untoggle if damaged, discarded, or stowed.<br>",
+                        "hideModifier": false,
+                        "checked": true
+                      }
+                    },
+                    {
+                      "id": "f1c324b3-f497-405d-9d0f-4c39564c2cfb",
+                      "label": "Backup #1 \n(Armament #1 backup)",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "helperText": "Replace 0 above with Harm and increase/decrease the number of dice.<br><br>Tags go here (turn on Advanced Mode to edit)<br><br>Toggle if backup is being used instead.<br>",
+                        "hideModifier": false,
+                        "checked": false
+                      }
+                    },
+                    {
+                      "id": "9cf0a929-aff4-4a86-974c-c83cc76667b4",
+                      "label": "Armament #2",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "helperText": "Replace 0 above with Harm and increase/decrease the number of dice.<br><br>Tags go here (turn on Advanced Mode to edit)<br><br>Untoggle if damaged, discarded, or stowed.<br>",
+                        "hideModifier": false,
+                        "checked": true
+                      }
+                    },
+                    {
+                      "id": "1aeb955a-2c9c-447c-bb66-b13ae05347f9",
+                      "label": "Backup #2<br>(Armament #2 backup)",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "helperText": "Replace 0 above with Harm and increase/decrease the number of dice.<br><br>Tags go here (turn on Advanced Mode to edit)<br><br>Toggle if backup is being used instead.<br>",
+                        "hideModifier": false,
+                        "checked": false
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "12d4088d-8fd6-4c1c-aa27-45230cb2cf1d",
+                  "label": "Integral System",
+                  "blocks": [
+                    {
+                      "id": "9443edb3-1f14-4ae6-9e38-33d5e893ae45",
+                      "label": "Integral System",
+                      "type": "Text",
+                      "value": "Integral System Description",
+                      "meta": {
+                        "helperText": "Tags go here (turn on Advanced Mode to edit)<br><br>If toggled, requires a Drive roll to use.<br>",
+                        "checked": false
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "6d5d26ea-e36a-4783-b952-2213b464de8b",
+                  "label": "Modular Systems",
+                  "blocks": [
+                    {
+                      "id": "46354ac1-5213-40b8-bbe2-5b1a4c3e1103",
+                      "label": "Modular System #1",
+                      "type": "Text",
+                      "value": "Modular System #1 Description",
+                      "meta": {
+                        "helperText": "Tags go here (turn on Advanced Mode to edit)<br><br>If toggled, requires a Control roll to use.",
+                        "checked": false
+                      }
+                    },
+                    {
+                      "id": "a9c7cc80-3c0b-4864-a833-df6ede09b66e",
+                      "label": "Modular System #2",
+                      "type": "Text",
+                      "value": "Modular System #2 Description",
+                      "meta": {
+                        "helperText": "Tags go here (turn on Advanced Mode to edit)<br><br>If toggled, requires a Control roll to use.",
+                        "checked": false
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c7242513-51da-48f3-a7dd-83f0aeec1c1d",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a3fd5558-22c4-4203-b685-ed2050052fcb",
+                  "label": "Ace Information",
+                  "blocks": [
+                    {
+                      "id": "abc78656-ba04-4be2-a6d6-1823f8501a1b",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "Put your Ace's name here!",
+                      "meta": { "helperText": "" }
+                    },
+                    {
+                      "id": "2a9cb1ff-7a01-43cf-a7de-7ad961cbbeee",
+                      "label": "Callsign",
+                      "type": "Text",
+                      "value": "Put your Ace's callsign here!",
+                      "meta": {}
+                    },
+                    {
+                      "id": "0779c120-50c0-44d9-a8ec-75762573964f",
+                      "label": "Frame",
+                      "type": "Text",
+                      "value": "Put your Frame's name here!",
+                      "meta": { "helperText": "" }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "9adad734-605b-4536-9ea4-51dfe40494d7",
+                  "label": "Other Information",
+                  "blocks": [
+                    {
+                      "id": "0a0b042d-e231-4811-b560-85ef753c1bae",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "Put anything else about your Ace/Frame here!",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Ace Information"
+    },
+    {
+      "id": "303a0444-69d8-470c-b6c2-94cef702c1eb",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2dccccea-04e7-492c-b78c-02610a1ebce1",
+                  "label": "Reference",
+                  "blocks": [
+                    {
+                      "id": "bf53522a-c927-4bf4-9e06-b90b454d3ec9",
+                      "label": "Rolling",
+                      "type": "Text",
+                      "value": "Roll the appropriate number of d6's and take the highest. (If you would roll 0 or less, roll two and take the lowest.)\n\n• 1-2: Failure with a consequence (No, and...)\n<br>• 3-4: Success with a consequence (Yes, but...)\n<br>• 5-6: Success with no consequences (Yes)<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "58b43485-7998-4f3f-9a3a-6bf02349e266",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "80af3504-d27c-48a8-9aee-c14a1cd16f7d",
+                      "label": "Attributes",
+                      "type": "Text",
+                      "value": "Roll your Attributes to determine your approach to a task.\n<br>Roll Drive for direct or forceful action.\n<br>Roll Speed for reflexive or hasty action.\n<br>Roll Control for thoughtful and skillful action.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "57d7c80d-fe37-412c-9cbf-5a8e2c6faae5",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "5cf4887b-4697-4267-8e4f-dc92e09d7c23",
+                      "label": "Actions",
+                      "type": "Text",
+                      "value": "You get two actions per turn before spending Tension. You can spend those Actions to do the following:\n<br>• Move to a Near location (no roll required)\n<br>• Sprint to a Far location if there are no enemies in Close, Near, or Far range (no roll required).\n<br>• Attack using an Armament (requires making a roll with the number of dice listed on the Armament). You may also drop your Armament in favor of a Backup Armament before or after attacking.\n<br>• Interact in a significant way with something in the environment (requires an Attribute roll if necessary depending on the interaction).",
+                      "meta": {}
+                    },
+                    {
+                      "id": "537e3605-6f70-4e3b-b15d-62f8b80e057a",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "193b8fd9-e749-4e7d-a2cd-6abbac55757c",
+                      "label": "Resources",
+                      "type": "Text",
+                      "value": "You may spend 1 Tension on your turn to reroll an Attack or gain another Action. Tension can be restored at the end of the GM Turn.\n<br>You may spend 1 Ammo on your turn to use an Integral or Modular System. Ammo is mostly restored at the end of a mission.",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "62a02f36-0b7a-4278-b379-10119c34cfe6",
+                  "label": "Terms/Tags",
+                  "blocks": [
+                    {
+                      "id": "2d42c9a8-2b3b-4b77-b444-164b4ea48517",
+                      "label": "Close",
+                      "type": "Text",
+                      "value": "A few steps away at most. In the same hex.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "be2ca340-bfb8-4e5e-9482-865b0886c81b",
+                      "label": "Near",
+                      "type": "Text",
+                      "value": "A short distance away. One hex away.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "315875ca-9070-4713-a3c0-2f3cf2742b54",
+                      "label": "Far",
+                      "type": "Text",
+                      "value": "Beyond Near but within range. Two hexes away.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "90fa5ffc-9ebd-46f5-b285-be877ce1bd1e",
+                      "label": "TAgs",
+                      "type": "Text",
+                      "value": "Put the other tags for your various Armaments/Systems here!",
+                      "meta": {
+                        "helperText": "Turn on Advanced Mode and add a text block for each below this."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "d7b21da1-5cd1-403e-8b23-9750ee3ed068",
+                  "label": "Notes",
+                  "blocks": [
+                    {
+                      "id": "119bec7c-1368-4fde-a47a-fba3b32f0606",
+                      "label": "Other Notes",
+                      "type": "Text",
+                      "value": "Put other notes here!",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Reference"
+    }
+  ],
+  "version": 5,
+  "fariType": "character"
+}

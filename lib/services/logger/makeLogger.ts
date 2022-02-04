@@ -19,7 +19,7 @@ export function makeLogger(
   return {
     track(event: string, body = {}) {
       //@ts-ignore
-      const googleAnalytics = gtag;
+      const googleAnalytics = window.gtag;
 
       if (!googleAnalytics) {
         return;
