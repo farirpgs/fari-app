@@ -1,6 +1,5 @@
 import { css, cx } from "@emotion/css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import DoNotDisturbIcon from "@mui/icons-material/DoNotDisturb";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import Badge from "@mui/material/Badge";
 import Box, { BoxProps } from "@mui/material/Box";
@@ -24,6 +23,7 @@ import {
   IDiceCommandSetId,
   IRollGroup,
 } from "../../../../../../domains/dice/Dice";
+import { Icons } from "../../../../../../domains/Icons/Icons";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { BlockSelectors } from "../../domains/BlockSelectors/BlockSelectors";
 import { DiceCommandGroup } from "../../domains/DiceCommandGroup/DiceCommandGroup";
@@ -57,7 +57,7 @@ export function BlockDicePool(
   const [hover, setHover] = useState(false);
   const [hoverControlsVisible, setHoverControlsVisible] = useState(false);
   const hasCommands = !!props.block.meta.commands?.length;
-  const canRoll = !props.readonly && hasCommands;
+  const canRoll = !props.readonly;
   const isSelected = diceManager.state.pool.some(
     (p) => p.blockId === props.block.id
   );
@@ -132,11 +132,7 @@ export function BlockDicePool(
           <Grid item xs>
             {renderLabel()}
           </Grid>
-          {isToggleVisible && (
-            <Grid item spacing={1}>
-              {renderToggle()}
-            </Grid>
-          )}
+          {isToggleVisible && <Grid item>{renderToggle()}</Grid>}
         </Grid>
 
         {!props.readonly && (
@@ -261,9 +257,7 @@ export function BlockDicePool(
         position="relative"
         clickable={canRoll}
         tooltipTitle={
-          canRoll
-            ? undefined
-            : t("character-dialog.helper-text.empty-dice-pool")
+          canRoll ? t("character-dialog.helper-text.pool") : undefined
         }
         borderStyle={hasCommands ? "solid" : "dashed"}
         onContextMenu={(e) => {
@@ -293,7 +287,12 @@ export function BlockDicePool(
         <Grid container spacing={1} alignItems="center" justifyContent="center">
           {!hasCommands && (
             <Grid item>
-              <DoNotDisturbIcon />
+              <Icons.ThrowDice
+                className={css({
+                  display: "flex",
+                  fontSize: "2.3rem",
+                })}
+              />
             </Grid>
           )}
           {Object.keys(commandsCount).map((commandId, index) => {
@@ -302,28 +301,26 @@ export function BlockDicePool(
             const count = commandsCount[id];
             return (
               <Grid item key={index}>
-                <Tooltip title={commandSet.label} placement="left">
-                  <Badge
-                    badgeContent={count}
-                    color="default"
-                    invisible={count === 1}
-                    classes={{
-                      badge: css({
-                        background: theme.palette.text.primary,
-                        color: theme.palette.getContrastText(
-                          theme.palette.text.primary
-                        ),
-                      }),
-                    }}
-                  >
-                    <commandSet.icon
-                      className={css({
-                        display: "flex",
-                        fontSize: "2.3rem",
-                      })}
-                    />
-                  </Badge>
-                </Tooltip>
+                <Badge
+                  badgeContent={count}
+                  color="default"
+                  invisible={count === 1}
+                  classes={{
+                    badge: css({
+                      background: theme.palette.text.primary,
+                      color: theme.palette.getContrastText(
+                        theme.palette.text.primary
+                      ),
+                    }),
+                  }}
+                >
+                  <commandSet.icon
+                    className={css({
+                      display: "flex",
+                      fontSize: "2.3rem",
+                    })}
+                  />
+                </Badge>
               </Grid>
             );
           })}

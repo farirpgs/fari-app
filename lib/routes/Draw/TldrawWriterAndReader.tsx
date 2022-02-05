@@ -7,15 +7,13 @@ export function TldrawWriter(props: {
   tldrawProps?: TldrawProps;
 }) {
   const rDocument = React.useRef<TDDocument>(makeNewBlankDocument());
-  const [doc, setDoc] = React.useState<TDDocument>(rDocument.current);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const newDoc = JSON.parse(JSON.stringify(rDocument.current));
-      props.onChange?.(newDoc);
-      setDoc(newDoc);
+      props.onChange?.(rDocument.current);
     }, 2000);
     return () => {
+      props.onChange?.(rDocument.current);
       clearInterval(interval);
     };
   }, []);
@@ -29,7 +27,7 @@ export function TldrawWriter(props: {
       <Tldraw
         showPages={false}
         showMenu={false}
-        document={doc}
+        document={rDocument.current}
         onChange={handleChange}
         {...(props.tldrawProps ?? {})}
       />

@@ -372,7 +372,10 @@ export const CharacterV3Dialog: React.FC<{
           alignItems="center"
         >
           <Grid item>
-            <InputLabel> {t("character-dialog.load-template")}</InputLabel>
+            <InputLabel>
+              {t("character-dialog.load-template")} ({CharacterTemplates.length}
+              )
+            </InputLabel>
           </Grid>
           <Grid item>
             <Autocomplete

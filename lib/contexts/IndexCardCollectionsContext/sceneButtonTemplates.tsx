@@ -71,7 +71,7 @@ export const defaultIndexCardCollection: Array<IIndexCardCollection> = [
         const slotTracker = CharacterFactory.makeBlock<ISlotTrackerBlock>(
           BlockType.SlotTracker
         );
-        slotTracker.label = "Free Invokes";
+        slotTracker.label = "Clock";
         slotTracker.meta.asClock = true;
         slotTracker.value = [
           { label: "", checked: false },
