@@ -1,7 +1,7 @@
 {
   "id": "96e2fb69-ef27-40c4-b3ca-fc8f0ab2d8dd",
   "name": "Bandas Grove Character Sheet",
-  "lastUpdated": 1644083474,
+  "lastUpdated": 1644084160,
   "wide": false,
   "pages": [
     {
@@ -52,7 +52,7 @@
                       "type": "Text",
                       "value": "",
                       "meta": {
-                        "helperText": "We’re all different, and that should be embraced and celebrated!"
+                        "helperText": "We’re all different, and that should be celebrated!"
                       }
                     }
                   ]
@@ -131,7 +131,7 @@
                       "type": "Text",
                       "value": "",
                       "meta": {
-                        "helperText": "Which Plane do you belong to? <br>Ágil, Alohi, Pese Malosi, or Cluthar?&nbsp;"
+                        "helperText": "Are you from Ágil, Alohi, Pese Malosi, or Cluthar?&nbsp;"
                       }
                     }
                   ]
