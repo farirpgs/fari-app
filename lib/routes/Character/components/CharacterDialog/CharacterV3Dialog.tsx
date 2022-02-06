@@ -63,12 +63,12 @@ import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogge
 import { SettingsContext } from "../../../../contexts/SettingsContext/SettingsContext";
 import {
   CharacterTemplates,
-  ICharacterTemplate,
+  ICharacterTemplate
 } from "../../../../domains/character/CharacterType";
 import {
   ICharacter,
   IPage,
-  ISection,
+  ISection
 } from "../../../../domains/character/types";
 import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../../../../domains/dice/Dice";
@@ -78,7 +78,7 @@ import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { useCharacter } from "../../hooks/useCharacter";
 import {
   CharacterSheetThemeContext,
-  useCharacterSheetTheme,
+  useCharacterSheetTheme
 } from "./CharacterSheetThemeContext";
 import { AddBlock } from "./components/AddBlock";
 import { AddSection } from "./components/AddSection";
@@ -114,7 +114,7 @@ const ZoomOptions = [
   },
 ];
 
-const borderSize = 4;
+const borderSize = 2;
 
 export const CharacterV3Dialog: React.FC<{
   open: boolean;
@@ -145,6 +145,7 @@ export const CharacterV3Dialog: React.FC<{
   const characterSheetTheme = useCharacterSheetTheme({
     character: characterManager.state.character,
   });
+  console.log("characterSheetTheme", characterSheetTheme);
   const hasCharacterSheetTheme = !!characterManager.state.character?.theme;
 
   const [tab, setTab] = useState<string>("0");
@@ -458,7 +459,7 @@ export const CharacterV3Dialog: React.FC<{
                 scrollButtons="auto"
                 classes={{
                   flexContainer: css({
-                    borderBottom: `4px solid ${characterSheetTheme.borderColor}`,
+                    borderBottom: `1px solid ${characterSheetTheme.borderColor}`,
                   }),
                   indicator: css({
                     display: "none",
@@ -479,18 +480,17 @@ export const CharacterV3Dialog: React.FC<{
                         // marginRight: ".5rem",
                         // // Pentagone
                         // // https://bennettfeely.com/clippy/
-                        background: characterSheetTheme.textPrimary,
                         marginRight: ".5rem",
                         // clipPath:
                         //   "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
-                        color: `${characterSheetTheme.textPrimaryInverted} !important`,
-                        borderBottom: `${borderSize}px solid ${
-                          isCurrentTab
-                            ? characterSheetTheme.primaryColor
-                            : characterSheetTheme.borderColor
-                        }`,
+                        color: `${characterSheetTheme.textPrimary} !important`,
                         transition: "border linear 200ms",
-                        marginBottom: `-${borderSize}px`,
+                        borderBottom: `4px solid ${
+                          isCurrentTab
+                            ? characterSheetTheme.textPrimary
+                            : "transparent"
+                        }`,
+                        marginBottom: `-2px`,
                       })}
                       value={pageIndex.toString()}
                       label={
@@ -499,7 +499,8 @@ export const CharacterV3Dialog: React.FC<{
                             fontFamily:
                               characterSheetTheme.pageHeadingFontFamily,
                             fontSize: `${characterSheetTheme.pageHeadingFontSize}rem`,
-                            fontWeight: theme.typography.fontWeightBold,
+                            fontWeight:
+                              characterSheetTheme.pageHeadingFontWeight,
                             textTransform: "none",
                             width: "100%",
                           })}
@@ -511,7 +512,9 @@ export const CharacterV3Dialog: React.FC<{
                             readonly={!advanced}
                             border={advanced}
                             borderColor={
-                              characterSheetTheme.textPrimaryInverted
+                              characterSheetTheme.hideSectionBackground
+                                ? characterSheetTheme.textPrimary
+                                : characterSheetTheme.textPrimaryInverted
                             }
                             onChange={(newValue) => {
                               characterManager.actions.renamePage(
@@ -656,10 +659,7 @@ export const CharacterV3Dialog: React.FC<{
               .flatMap((row) => row.columns)
               .flatMap((column) => column.sections)
               .flatMap((section) => section.blocks).length;
-            const borderStyle =
-              advanced || numberOfBlocks === 0
-                ? "none"
-                : `${borderSize}px solid ${characterSheetTheme.borderColor}`;
+
             return (
               <TabPanel
                 key={page.id}
@@ -1489,7 +1489,15 @@ export const CharacterV3Dialog: React.FC<{
   function renderThemeEditor() {
     return (
       <>
-        <Box p="2rem" width="30vw">
+        <Box
+          p="2rem"
+          sx={{
+            width: {
+              sm: "70vw",
+              md: "30vw",
+            },
+          }}
+        >
           <Grid container wrap="nowrap" justifyContent={"space-between"}>
             <Grid item>
               <Typography variant="h5">Theme settings</Typography>
@@ -1524,6 +1532,8 @@ export const CharacterV3Dialog: React.FC<{
               characterManager.state.character?.theme?.pageHeadingFontFamily,
             fontSize:
               characterManager.state.character?.theme?.pageHeadingFontSize,
+            fontWeight:
+              characterManager.state.character?.theme?.pageHeadingFontWeight,
             onFontFamilyChange: (fontFamily) => {
               characterManager.actions.setTheme((theme) => {
                 theme.pageHeadingFontFamily = fontFamily;
@@ -1534,6 +1544,11 @@ export const CharacterV3Dialog: React.FC<{
                 theme.pageHeadingFontSize = fontSize;
               });
             },
+            onFontWeightChange: (fontWeight) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.pageHeadingFontWeight = fontWeight;
+              });
+            },
           })}
           {renderFontThemeEditorControls({
             label: "Sections",
@@ -1542,6 +1557,8 @@ export const CharacterV3Dialog: React.FC<{
               characterManager.state.character?.theme?.sectionHeadingFontFamily,
             fontSize:
               characterManager.state.character?.theme?.sectionHeadingFontSize,
+            fontWeight:
+              characterManager.state.character?.theme?.sectionHeadingFontWeight,
             onFontFamilyChange: (fontFamily) => {
               characterManager.actions.setTheme((theme) => {
                 theme.sectionHeadingFontFamily = fontFamily;
@@ -1552,6 +1569,11 @@ export const CharacterV3Dialog: React.FC<{
                 theme.sectionHeadingFontSize = fontSize;
               });
             },
+            onFontWeightChange: (fontWeight) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.sectionHeadingFontWeight = fontWeight;
+              });
+            },
           })}
           {renderFontThemeEditorControls({
             label: "Labels",
@@ -1559,6 +1581,9 @@ export const CharacterV3Dialog: React.FC<{
             fontFamily:
               characterManager.state.character?.theme?.labelFontFamily,
             fontSize: characterManager.state.character?.theme?.labelFontSize,
+            fontWeight:
+              characterManager.state.character?.theme?.labelFontWeight,
+
             onFontFamilyChange: (fontFamily) => {
               characterManager.actions.setTheme((theme) => {
                 theme.labelFontFamily = fontFamily;
@@ -1569,12 +1594,18 @@ export const CharacterV3Dialog: React.FC<{
                 theme.labelFontSize = fontSize;
               });
             },
+            onFontWeightChange: (fontWeight) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.labelFontWeight = fontWeight;
+              });
+            },
           })}
           {renderFontThemeEditorControls({
             label: "Text",
             initialFontSize: 1,
             fontFamily: characterManager.state.character?.theme?.textFontFamily,
             fontSize: characterManager.state.character?.theme?.textFontSize,
+            fontWeight: characterManager.state.character?.theme?.textFontWeight,
             onFontFamilyChange: (fontFamily) => {
               characterManager.actions.setTheme((theme) => {
                 theme.textFontFamily = fontFamily;
@@ -1583,6 +1614,11 @@ export const CharacterV3Dialog: React.FC<{
             onFontSizeChange: (fontSize) => {
               characterManager.actions.setTheme((theme) => {
                 theme.textFontSize = fontSize;
+              });
+            },
+            onFontWeightChange: (fontWeight) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.textFontWeight = fontWeight;
               });
             },
           })}
@@ -1639,49 +1675,51 @@ export const CharacterV3Dialog: React.FC<{
                 }}
               />
             </Grid>
-            <Grid item xs>
-              <LazyState
-                delay={Delays.field}
-                value={characterManager.state.character?.theme?.primaryColor}
-                onChange={(value) => {
-                  characterManager.actions.setTheme((theme) => {
-                    theme.primaryColor = value;
-                  });
-                }}
-                render={([value, setValue]) => {
-                  return (
-                    <>
-                      <FormHelperText>Primary Color</FormHelperText>
-                      <IndexCardColorPicker
-                        color={value}
-                        hidePastils
-                        onChange={(newColor) => {
-                          setValue(newColor);
-                        }}
-                        render={(renderProps) => {
-                          return (
-                            <CircleIcon
-                              className={css({
-                                border: `2px solid ${theme.palette.text.secondary}`,
-                                borderRadius: "50%",
-                                cursor: "pointer",
-                                width: "3rem",
-                                height: "3rem",
-                              })}
-                              htmlColor={value}
-                              ref={renderProps.ref}
-                              onClick={() => {
-                                renderProps.setColorPickerOpen(true);
-                              }}
-                            />
-                          );
-                        }}
-                      />
-                    </>
-                  );
-                }}
-              />
-            </Grid>
+            {false && (
+              <Grid item xs>
+                <LazyState
+                  delay={Delays.field}
+                  value={characterManager.state.character?.theme?.primaryColor}
+                  onChange={(value) => {
+                    characterManager.actions.setTheme((theme) => {
+                      theme.primaryColor = value;
+                    });
+                  }}
+                  render={([value, setValue]) => {
+                    return (
+                      <>
+                        <FormHelperText>Primary Color</FormHelperText>
+                        <IndexCardColorPicker
+                          color={value}
+                          hidePastils
+                          onChange={(newColor) => {
+                            setValue(newColor);
+                          }}
+                          render={(renderProps) => {
+                            return (
+                              <CircleIcon
+                                className={css({
+                                  border: `2px solid ${theme.palette.text.secondary}`,
+                                  borderRadius: "50%",
+                                  cursor: "pointer",
+                                  width: "3rem",
+                                  height: "3rem",
+                                })}
+                                htmlColor={value}
+                                ref={renderProps.ref}
+                                onClick={() => {
+                                  renderProps.setColorPickerOpen(true);
+                                }}
+                              />
+                            );
+                          }}
+                        />
+                      </>
+                    );
+                  }}
+                />
+              </Grid>
+            )}
           </Grid>
         </Box>
 
@@ -1749,9 +1787,30 @@ export const CharacterV3Dialog: React.FC<{
     initialFontSize: number;
     fontFamily: string | undefined;
     fontSize: number | undefined;
+    fontWeight: any | undefined;
     onFontFamilyChange: (value: string | undefined) => void;
     onFontSizeChange: (value: number | undefined) => void;
+    onFontWeightChange: (value: any | undefined) => void;
   }) {
+    const fontWeights = [
+      "100",
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800",
+      "900",
+      "bold",
+      "bolder",
+      "inherit",
+      "initial",
+      "lighter",
+      "normal",
+      "revert",
+      "unset",
+    ];
     return (
       <>
         <Typography gutterBottom variant="h6">
@@ -1759,64 +1818,92 @@ export const CharacterV3Dialog: React.FC<{
         </Typography>
 
         <Box mb="1rem">
-          <Grid container spacing={2} wrap="nowrap">
-            <Grid item xs>
-              <LazyState
-                delay={Delays.field}
-                value={renderProps.fontFamily}
-                onChange={(value) => {
-                  renderProps.onFontFamilyChange(value);
-                }}
-                render={([value, setValue]) => {
-                  return (
-                    <TextField
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      disabled={!hasCharacterSheetTheme}
-                      label={`Font Family`}
-                      placeholder={FontFamily.Default.split(",").join(", ")}
-                      fullWidth
-                      multiline
-                      variant="standard"
-                      value={value}
-                      onChange={(e) => {
-                        setValue(e.target.value);
-                      }}
-                    />
-                  );
-                }}
-              />
-            </Grid>
-            <Grid item xs>
-              <LazyState
-                delay={Delays.field}
-                value={renderProps.fontSize}
-                onChange={(value) => {
-                  renderProps.onFontSizeChange(value);
-                }}
-                render={([value, setValue]) => {
-                  return (
-                    <>
-                      <InputLabel shrink>{`Font Size`}</InputLabel>
-                      <Slider
-                        defaultValue={renderProps.initialFontSize}
+          <Box mb="1rem">
+            <Grid container spacing={2} wrap="nowrap" alignItems="flex-start">
+              <Grid item xs>
+                <LazyState
+                  delay={Delays.field}
+                  value={renderProps.fontFamily}
+                  onChange={(value) => {
+                    renderProps.onFontFamilyChange(value);
+                  }}
+                  render={([value, setValue]) => {
+                    return (
+                      <TextField
+                        variant="standard"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
                         disabled={!hasCharacterSheetTheme}
-                        step={0.125}
-                        min={1}
-                        max={3}
-                        valueLabelDisplay="auto"
+                        label={`Font Family`}
+                        placeholder={FontFamily.Default.split(",").join(", ")}
+                        fullWidth
+                        multiline
                         value={value}
-                        onChange={(e, value) => {
-                          setValue(value as number);
+                        onChange={(e) => {
+                          setValue(e.target.value);
                         }}
                       />
-                    </>
-                  );
-                }}
-              />
+                    );
+                  }}
+                />
+              </Grid>
             </Grid>
-          </Grid>
+          </Box>
+          <Box>
+            <Grid container spacing={2} wrap="nowrap" alignItems="flex-start">
+              <Grid item xs>
+                <FormControl fullWidth>
+                  <InputLabel variant="standard">Font Weight</InputLabel>
+                  <NativeSelect
+                    defaultValue=""
+                    value={renderProps.fontWeight || ""}
+                    onChange={(event) => {
+                      renderProps.onFontWeightChange(event.target.value);
+                    }}
+                    // label="Font Weight"
+                  >
+                    <option value="">None</option>
+                    {fontWeights.map((fw) => {
+                      return (
+                        <option key={fw} value={fw}>
+                          {fw}
+                        </option>
+                      );
+                    })}
+                  </NativeSelect>
+                </FormControl>
+              </Grid>
+              <Grid item xs>
+                <LazyState
+                  delay={Delays.field}
+                  value={renderProps.fontSize}
+                  onChange={(value) => {
+                    renderProps.onFontSizeChange(value);
+                  }}
+                  render={([value, setValue]) => {
+                    return (
+                      <>
+                        <InputLabel shrink>{`Font Size`}</InputLabel>
+                        <Slider
+                          defaultValue={renderProps.initialFontSize}
+                          disabled={!hasCharacterSheetTheme}
+                          step={0.125}
+                          min={1}
+                          max={3}
+                          valueLabelDisplay="auto"
+                          value={value}
+                          onChange={(e, value) => {
+                            setValue(value as number);
+                          }}
+                        />
+                      </>
+                    );
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </Box>
         </Box>
       </>
     );
@@ -1849,6 +1936,7 @@ export const CharacterV3Dialog: React.FC<{
                   className={css({
                     fontFamily: characterSheetTheme.textFontFamily,
                     fontSize: `${characterSheetTheme.textFontSize}rem`,
+                    fontWeight: characterSheetTheme.textFontWeight,
                   })}
                 >
                   <ContentEditable
@@ -1917,6 +2005,8 @@ export const CharacterV3Dialog: React.FC<{
                                   fontFamily:
                                     characterSheetTheme.textFontFamily,
                                   fontSize: `${characterSheetTheme.textFontSize}rem`,
+                                  fontWeight:
+                                    characterSheetTheme.textFontWeight,
                                 }),
                               },
                             }}

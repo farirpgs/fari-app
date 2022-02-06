@@ -20,7 +20,7 @@ export function ThemedLabel(props: {
         css({
           fontFamily: characterSheetTheme.labelFontFamily,
           fontSize: `${characterSheetTheme.labelFontSize}rem`,
-          fontWeight: theme.typography.fontWeightBold,
+          fontWeight: characterSheetTheme.labelFontWeight,
         })
       )}
     >

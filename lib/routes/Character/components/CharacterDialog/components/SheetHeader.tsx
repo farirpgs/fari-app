@@ -56,7 +56,7 @@ export const SheetHeader: React.FC<{
               className={css({
                 fontFamily: characterSheetTheme.sectionHeadingFontFamily,
                 fontSize: `${characterSheetTheme.sectionHeadingFontSize}rem`,
-                fontWeight: theme.typography.fontWeightBold,
+                fontWeight: characterSheetTheme.sectionHeadingFontWeight,
               })}
             >
               <ContentEditable

@@ -286,12 +286,16 @@ export type ICharacterTheme = {
 
   pageHeadingFontFamily?: string;
   pageHeadingFontSize?: number;
+  pageHeadingFontWeight?: any;
   sectionHeadingFontFamily?: string;
   sectionHeadingFontSize?: number;
+  sectionHeadingFontWeight?: any;
   labelFontFamily?: string;
   labelFontSize?: number;
+  labelFontWeight?: any;
   textFontFamily?: string;
   textFontSize?: number;
+  textFontWeight?: any;
 };
 
 export interface ICharacter {

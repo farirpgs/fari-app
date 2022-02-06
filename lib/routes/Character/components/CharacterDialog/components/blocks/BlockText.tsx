@@ -59,6 +59,7 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
                 className={css({
                   fontFamily: characterSheetTheme.textFontFamily,
                   fontSize: `${characterSheetTheme.textFontSize}rem`,
+                  fontWeight: characterSheetTheme.textFontWeight,
                 })}
               >
                 <ContentEditable

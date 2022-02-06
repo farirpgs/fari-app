@@ -114,13 +114,11 @@ export function CircleTextField(props: {
               "height": "3rem",
               "borderRadius": "50%",
               "background": props.highlight
-                ? characterSheetTheme.primaryColor
+                ? characterSheetTheme.textPrimary
                 : "inherit",
               "&&": {
                 color: props.highlight
-                  ? theme.palette.getContrastText(
-                      characterSheetTheme.primaryColor
-                    )
+                  ? characterSheetTheme.textPrimaryInverted
                   : "inherit",
               },
               "transition": theme.transitions.create(["color", "background"], {

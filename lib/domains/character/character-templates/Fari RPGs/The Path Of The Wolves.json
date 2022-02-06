@@ -1,8 +1,8 @@
 {
   "fariType": "character",
   "id": "bf6607ec-3c21-4147-9a74-198a9e208aea",
-  "lastUpdated": 1644156499,
-  "name": "The Path Of The Wolves",
+  "lastUpdated": 1644189598,
+  "name": "Test",
   "pages": [
     {
       "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
@@ -387,13 +387,17 @@
     "pageHeadingFontFamily": "Bellefair",
     "sectionHeadingFontFamily": "Bellefair",
     "labelFontFamily": "Bellefair",
-    "pageHeadingFontSize": 1.625,
-    "sectionHeadingFontSize": 2.5,
-    "labelFontSize": 1.875,
+    "pageHeadingFontSize": 2,
+    "sectionHeadingFontSize": 1.75,
+    "labelFontSize": 1.25,
     "textFontFamily": "Lato",
     "backgroundColor": "#ffffff",
-    "textFontSize": 1.25,
-    "hideSectionBackground": true
+    "textFontSize": 1,
+    "hideSectionBackground": true,
+    "pageHeadingFontWeight": "normal",
+    "sectionHeadingFontWeight": "normal",
+    "labelFontWeight": "normal",
+    "textFontWeight": "normal"
   },
   "version": 5,
   "wide": false

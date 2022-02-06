@@ -1,8 +1,8 @@
 {
   "fariType": "character",
   "id": "bf6607ec-3c21-4147-9a74-198a9e208aea",
-  "lastUpdated": 1644155744,
-  "name": "Life Beyond Exo Station",
+  "lastUpdated": 1644188789,
+  "name": "Test",
   "pages": [
     {
       "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
@@ -581,13 +581,12 @@
     "pageHeadingFontFamily": "Black Ops One",
     "sectionHeadingFontFamily": "Black Ops One",
     "labelFontFamily": "Black Ops One",
-    "pageHeadingFontSize": 1.5,
-    "sectionHeadingFontSize": 1.5,
+    "pageHeadingFontSize": 1.375,
+    "sectionHeadingFontSize": 1.375,
     "labelFontSize": 1.25,
     "textFontSize": 1,
     "hideSectionBackground": false
   },
   "version": 5,
-  "wide": false,
-  "group": "jjjjijijij"
+  "wide": false
 }
