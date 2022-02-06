@@ -1,8 +1,8 @@
 {
-  "id": "59e78b62-385e-452e-b525-381bfbb7d077",
+  "fariType": "character",
+  "id": "bf6607ec-3c21-4147-9a74-198a9e208aea",
+  "lastUpdated": 1644155744,
   "name": "Life Beyond Exo Station",
-  "lastUpdated": 1643833382,
-  "wide": false,
   "pages": [
     {
       "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
@@ -31,13 +31,6 @@
                       "meta": {}
                     },
                     {
-                      "id": "dfa7fd57-f996-4c45-9aa5-57a05eecf14f",
-                      "label": "Reason",
-                      "type": "Text",
-                      "value": "",
-                      "meta": {}
-                    },
-                    {
                       "id": "729dcfe3-7d29-4a9b-98d8-9279c0371f96",
                       "label": "Ties",
                       "type": "Text",
@@ -50,55 +43,33 @@
                       "type": "Text",
                       "value": "",
                       "meta": {}
+                    },
+                    {
+                      "id": "0443d869-07df-49e2-bf0b-5201b444b672",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
                     }
                   ]
                 },
                 {
-                  "id": "0cd0acb6-f0a1-41d5-83aa-85fd93402aef",
-                  "label": "The Armor",
+                  "id": "78e80eb7-f721-4a3c-973b-79b0d5e02fa1",
+                  "label": "Mods",
                   "blocks": [
                     {
-                      "id": "5f36a8e1-ed3b-43ec-ba38-f9ec48ede1b4",
+                      "id": "0170c60e-fdb5-44e9-ba1c-6b7caadd26ac",
                       "label": "Mod #1",
                       "type": "Text",
                       "value": "",
                       "meta": { "checked": false }
                     },
                     {
-                      "id": "520d1470-19a7-4462-b1d6-22d80432e5c3",
+                      "id": "87093ed2-e3e6-46d1-ae8d-83e148072e5e",
                       "label": "Mod #2",
                       "type": "Text",
                       "value": "",
                       "meta": { "checked": false }
-                    }
-                  ]
-                },
-                {
-                  "id": "91a0c496-f042-420c-9fce-a5d6943dae54",
-                  "label": "Conditions",
-                  "blocks": [
-                    {
-                      "id": "adb954ee-efa6-418e-b717-42803d6c26f7",
-                      "label": "",
-                      "type": "Text",
-                      "value": "",
-                      "meta": { "helperText": "Condition" }
-                    },
-                    {
-                      "id": "03518e25-a005-4667-96d5-9891e766ae90",
-                      "label": "Stress",
-                      "type": "SlotTracker",
-                      "meta": {
-                        "helperText": "<br>",
-                        "width": 1,
-                        "asClock": true
-                      },
-                      "value": [
-                        { "label": "", "checked": false },
-                        { "label": "", "checked": false },
-                        { "label": "", "checked": false },
-                        { "label": "", "checked": false }
-                      ]
                     }
                   ]
                 }
@@ -121,25 +92,62 @@
                   "visibleOnCard": true
                 },
                 {
-                  "id": "b53aaf37-cc74-401b-a9fd-d33fe449c235",
-                  "label": "Actions",
+                  "id": "03365c39-d7b6-445c-b692-5515adecc593",
+                  "label": "Condition",
                   "blocks": [
                     {
-                      "id": "ad01867b-abb1-48e0-b664-0190bf49163b",
+                      "id": "6eb41081-f1f1-4037-81a5-e038c600b896",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "Condition" }
+                    },
+                    {
+                      "id": "a882ad5a-51e2-4c66-9828-b810ae1bf1ac",
+                      "label": "Stress",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "<br>",
+                        "width": 1,
+                        "asClock": true
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "1e2fb330-7333-463f-8e51-f00bdcafdc06",
+                  "label": "Dice",
+                  "blocks": [
+                    {
+                      "id": "de37a895-b4aa-4147-ac94-3314680a9e3a",
                       "label": "1d6",
                       "type": "DicePool",
                       "value": "",
                       "meta": { "commands": ["1d6"], "width": 0.5 }
                     },
                     {
-                      "id": "7881c02b-065a-44f7-be0e-3d8c33c8fa0e",
+                      "id": "cb2b07b4-a013-4a52-a624-6997ef1541fc",
                       "label": "2d6",
                       "type": "DicePool",
                       "value": "",
                       "meta": { "commands": ["1d6", "1d6"], "width": 0.5 }
                     },
                     {
-                      "id": "f4d8e727-f537-4c50-9e76-a8a2f8a96989",
+                      "id": "c1e29e4a-03dd-4168-94b9-a1cec8aeca0e",
                       "label": "3d6",
                       "type": "DicePool",
                       "value": "",
@@ -149,7 +157,7 @@
                       }
                     },
                     {
-                      "id": "71020323-a4e9-411f-8961-605594acfbbd",
+                      "id": "14bda1ad-d175-4cfc-bdc0-ae39dc491887",
                       "label": "4d6",
                       "type": "DicePool",
                       "value": "",
@@ -157,16 +165,30 @@
                         "commands": ["1d6", "1d6", "1d6", "1d6"],
                         "width": 0.5
                       }
-                    },
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "62c6d779-b54d-4629-a323-a4c256304a2d",
+                  "label": "Actions",
+                  "blocks": [
                     {
-                      "id": "00c18c47-7909-4082-ae26-093ec92a8d14",
-                      "label": "PHYSIQUE",
+                      "id": "a9d40344-fd24-41a5-907f-5320003c63ad",
+                      "label": "Physique",
                       "type": "Separator",
                       "meta": { "hasLabel": true },
                       "value": ""
                     },
                     {
-                      "id": "b013ebd0-e134-4299-bdb1-4da7e7637325",
+                      "id": "071388fb-e7c3-40d1-8493-3c9fc6b0c6d0",
                       "label": "Muscle",
                       "type": "SlotTracker",
                       "meta": {},
@@ -178,7 +200,7 @@
                       ]
                     },
                     {
-                      "id": "4adabeb3-fd20-4f6f-b36d-7cb935cf9f74",
+                      "id": "32e52ccb-02ab-4ce8-9c72-d9a6adc638d0",
                       "label": "Finesse",
                       "type": "SlotTracker",
                       "meta": {},
@@ -190,7 +212,7 @@
                       ]
                     },
                     {
-                      "id": "c0b64bfe-6ddc-49bf-9b4e-1465ff604387",
+                      "id": "de086610-e182-42f8-b937-67ec0c79d928",
                       "label": "Move",
                       "type": "SlotTracker",
                       "meta": {},
@@ -202,7 +224,7 @@
                       ]
                     },
                     {
-                      "id": "920dd998-8c1b-4493-bec0-dc98305b0834",
+                      "id": "511f372b-52b3-4e25-a81f-58344b9949e0",
                       "label": "Sneak",
                       "type": "SlotTracker",
                       "meta": {},
@@ -212,16 +234,26 @@
                         { "label": "", "checked": false },
                         { "label": "", "checked": false }
                       ]
-                    },
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "d2a749f4-e22b-4c7f-849b-e00a13581f53",
+                  "label": "",
+                  "blocks": [
                     {
-                      "id": "f0b407be-9335-4923-9501-dbe1d72844f5",
+                      "id": "dca59376-3d74-4047-a970-190fa68a453b",
                       "label": "Insight",
                       "type": "Separator",
                       "meta": { "hasLabel": true },
                       "value": ""
                     },
                     {
-                      "id": "570f2762-6124-4bf4-972d-c6abb6d16ff4",
+                      "id": "add97771-9af7-4598-85a4-d78e1895e1a8",
                       "label": "Shoot",
                       "type": "SlotTracker",
                       "meta": {},
@@ -233,7 +265,7 @@
                       ]
                     },
                     {
-                      "id": "d35ac1c9-e812-4380-a888-24c1e57f16eb",
+                      "id": "28eb12ac-402a-492c-843b-20d620ab4c33",
                       "label": "Tinker",
                       "type": "SlotTracker",
                       "meta": {},
@@ -245,7 +277,7 @@
                       ]
                     },
                     {
-                      "id": "5bd3f3e1-e96c-4114-a87d-2d4fcf6b029a",
+                      "id": "aa4175e3-fd34-41ce-97ad-10c999027fbf",
                       "label": "Study",
                       "type": "SlotTracker",
                       "meta": {},
@@ -257,7 +289,7 @@
                       ]
                     },
                     {
-                      "id": "0ae41d1b-941e-4ca0-912b-6a81d1d3cca8",
+                      "id": "ad381165-715d-4afb-b03b-a105b004d701",
                       "label": "Notice",
                       "type": "SlotTracker",
                       "meta": {},
@@ -267,16 +299,26 @@
                         { "label": "", "checked": false },
                         { "label": "", "checked": false }
                       ]
-                    },
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "58b076b1-4c73-4eb4-bbc9-1df5e5f67588",
+                  "label": "",
+                  "blocks": [
                     {
-                      "id": "dd58968f-b021-489c-b11f-6b9a0e33a445",
+                      "id": "a4774685-62ad-48fd-a864-f80edf372fb8",
                       "label": "Resolve",
                       "type": "Separator",
                       "meta": { "hasLabel": true },
                       "value": ""
                     },
                     {
-                      "id": "bbf2a5cb-bb94-4a03-ae8c-7da135cc5886",
+                      "id": "23ac9d4a-0717-48d2-8e04-87d8a69a472f",
                       "label": "Bond",
                       "type": "SlotTracker",
                       "meta": {},
@@ -288,7 +330,7 @@
                       ]
                     },
                     {
-                      "id": "bc3caf48-228a-4305-87d4-4e2ebbe218d3",
+                      "id": "8c4a6dcd-bff5-431f-9f92-de00f2461a50",
                       "label": "Command",
                       "type": "SlotTracker",
                       "meta": {},
@@ -300,8 +342,8 @@
                       ]
                     },
                     {
-                      "id": "97f85c4a-8e84-4e05-ba20-8229799a1f85",
-                      "label": "FOCUS",
+                      "id": "30e4f821-e27a-4da5-9786-1aa32d7f79d6",
+                      "label": "Focus",
                       "type": "SlotTracker",
                       "meta": {},
                       "value": [
@@ -312,8 +354,8 @@
                       ]
                     },
                     {
-                      "id": "f90a1ac2-1743-4151-82cc-6da25c24c6ab",
-                      "label": "SWAY",
+                      "id": "091ed62b-88aa-4413-858d-670086acf370",
+                      "label": "Sway",
                       "type": "SlotTracker",
                       "meta": {},
                       "value": [
@@ -323,8 +365,35 @@
                         { "label": "", "checked": false }
                       ]
                     }
-                  ],
-                  "visibleOnCard": true
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "1405f419-9c2d-4d95-b314-8cea05f49dab",
+                  "label": "Credits",
+                  "blocks": [
+                    {
+                      "id": "d5178914-c3d8-4d7a-8daf-8c31dcb7f91e",
+                      "label": "Official Life Beyond Exo Station sheet designed by Fari RPGs",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": true },
+                      "value": "https://fari-rpgs.itch.io/life-beyond-exo-station"
+                    },
+                    {
+                      "id": "07e17c76-59c0-4a44-8602-29bf3b089d95",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://gyazo.com/c4b36b19659d96f357e9d1b9fe22926a.png"
+                    }
+                  ]
                 }
               ]
             }
@@ -503,7 +572,6 @@
       ]
     }
   ],
-  "version": 5,
   "theme": {
     "backgroundColor": "#1d2635",
     "fontImport": "@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Lato&display=swap');",
@@ -512,12 +580,14 @@
     "primaryColor": "#84addb",
     "pageHeadingFontFamily": "Black Ops One",
     "sectionHeadingFontFamily": "Black Ops One",
-    "labelFontFamily": "Inter",
-    "pageHeadingFontSize": 1.375,
+    "labelFontFamily": "Black Ops One",
+    "pageHeadingFontSize": 1.5,
     "sectionHeadingFontSize": 1.5,
-    "labelFontSize": 1.125,
-    "textFontSize": 1
+    "labelFontSize": 1.25,
+    "textFontSize": 1,
+    "hideSectionBackground": false
   },
-  "group": "asdasdad",
-  "fariType": "character"
+  "version": 5,
+  "wide": false,
+  "group": "jjjjijijij"
 }

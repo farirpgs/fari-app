@@ -25,7 +25,7 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
     (!!previewContentEditable({ value: props.block.label }) || props.advanced);
   const isSlotTrackerVisible =
     props.block.meta?.checked === true || props.block.meta?.checked === false;
-  const theme = useTheme();
+
   const characterSheetTheme = useContext(CharacterSheetThemeContext);
 
   return (

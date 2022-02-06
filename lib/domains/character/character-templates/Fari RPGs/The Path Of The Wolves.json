@@ -1,0 +1,400 @@
+{
+  "fariType": "character",
+  "id": "bf6607ec-3c21-4147-9a74-198a9e208aea",
+  "lastUpdated": 1644156499,
+  "name": "The Path Of The Wolves",
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "3ed43d4f-1d7c-4a61-b319-d08650d14dc1",
+                  "label": "Details",
+                  "blocks": [
+                    {
+                      "id": "e6218abc-9d13-48fe-925c-7f72a0b66d76",
+                      "label": "Concept",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9ba5cfa6-b7cf-4588-8a74-ba15fe525e79",
+                      "label": "Appearance",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "729dcfe3-7d29-4a9b-98d8-9279c0371f96",
+                      "label": "Ties",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8ff26def-051b-40cb-8865-11b33e12e3d3",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "0443d869-07df-49e2-bf0b-5201b444b672",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "1b6c42f6-0a6d-45a0-bfdf-ce867ca01c63",
+                  "label": "Talents",
+                  "blocks": [
+                    {
+                      "id": "d6fb7f6f-71f7-496d-8bd9-88f846caf4be",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Effect when ...",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "bfa67617-8b56-4d97-a9cb-4de0cf7eafe7",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Position when ...",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "f9b7db3e-11fb-4dec-8ea1-9e01b9de2ab0",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1d6 when ...",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "8b67908f-7d27-44d3-8107-a1862489bad2",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Effect when ...",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "f537a529-ca04-44a5-8f6a-3226012a4548",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Position when ...",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "d6c746d3-9d60-45f0-acd2-e4c346eedb22",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1d6 when ...",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "180d36e8-5820-41a3-926e-d80b0ea4c5f5",
+                  "label": "Momentum",
+                  "blocks": [
+                    {
+                      "id": "f49a1bcb-cbca-4152-90a1-60a4fff20c55",
+                      "label": "Momentum",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": true },
+                      "value": "2"
+                    }
+                  ],
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "03365c39-d7b6-445c-b692-5515adecc593",
+                  "label": "Condition",
+                  "blocks": [
+                    {
+                      "id": "6eb41081-f1f1-4037-81a5-e038c600b896",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "Condition" }
+                    },
+                    {
+                      "id": "a882ad5a-51e2-4c66-9828-b810ae1bf1ac",
+                      "label": "HEALTH",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "<br>",
+                        "width": 1,
+                        "asClock": true
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "1405f419-9c2d-4d95-b314-8cea05f49dab",
+                  "label": "Credits",
+                  "blocks": [
+                    {
+                      "id": "d5178914-c3d8-4d7a-8daf-8c31dcb7f91e",
+                      "label": "Official The Path Of The Wolves sheet designed by Fari RPGs",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": true },
+                      "value": "https://fari-rpgs.itch.io/the-path-of-the-wolves"
+                    },
+                    {
+                      "id": "07e17c76-59c0-4a44-8602-29bf3b089d95",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://gyazo.com/038b8c28bc037e219ae15cb5e2f25776.png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a0088b93-730c-4ee9-ab76-941825c67383",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d9cb48a2-33a2-40e9-acf0-2b26b194adf6",
+                  "label": "Dice",
+                  "blocks": [
+                    {
+                      "id": "33029e8f-8af2-490e-beb1-7b2e60791035",
+                      "label": "Roll 1d6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "02a66c9b-4f09-4338-ab33-9c225e9b6672",
+                      "label": "Roll 2d6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6", "1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "0d833a8d-7a1d-4169-8daa-bf3e3b3af83d",
+                      "label": "Roll 3d6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "7456e6ff-338b-4f87-aff7-3a9c130090a3",
+                      "label": "Roll 4d6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6", "1d6", "1d6", "1d6"],
+                        "width": 0.5
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "4ba92ad1-bb8e-48b4-8638-d98fd2f39ad1",
+                  "label": "Actions",
+                  "blocks": [
+                    {
+                      "id": "a1a327e0-c0cd-45a0-b396-4440648225d6",
+                      "label": "Slash",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "aea24b4e-9bb2-4db6-a21c-812f2ab57ab0",
+                      "label": "Dash",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "19f16946-964e-4616-ac65-7a63ca7f186f",
+                      "label": "Prowl",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "2b86037e-c412-450a-adf0-988d67ab42a9",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "a32556be-ac11-4081-8563-190243ab0320",
+                      "label": "Sign",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "bba59f2d-88d9-4dad-be4a-1bad3d4143a7",
+                      "label": "Alchemy",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "c6b85552-6a58-4e38-8024-0d9c32563c6b",
+                      "label": "Sense",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "78f6767c-4ae0-42fb-a86a-d6f9aa76e7ff",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "65cea7fa-e7a4-4842-a59e-84f3a6393c0f",
+                      "label": "Bond",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "ceaca1f8-99c4-439c-8af3-f5c7c14827a8",
+                      "label": "Intimidate",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "74dc4937-365b-41df-8994-07d10970d790",
+                      "label": "Meditate",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Actions"
+    }
+  ],
+  "theme": {
+    "fontImport": "@import url('https://fonts.googleapis.com/css2?family=Bellefair&family=Lato&display=swap');",
+    "pageHeadingFontFamily": "Bellefair",
+    "sectionHeadingFontFamily": "Bellefair",
+    "labelFontFamily": "Bellefair",
+    "pageHeadingFontSize": 1.625,
+    "sectionHeadingFontSize": 2.5,
+    "labelFontSize": 1.875,
+    "textFontFamily": "Lato",
+    "backgroundColor": "#ffffff",
+    "textFontSize": 1.25,
+    "hideSectionBackground": true
+  },
+  "version": 5,
+  "wide": false
+}

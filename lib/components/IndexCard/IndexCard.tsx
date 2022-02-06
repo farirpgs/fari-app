@@ -143,7 +143,7 @@ export const IndexCard: React.FC<
 > = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
-  const [colorPickerOpen, setColorPickerOpen] = useState(false);
+
   const [hover, setHover] = useState(false);
   const $paletteButton = useRef<HTMLButtonElement | null>(null);
   const $menu = useRef(null);
@@ -320,42 +320,28 @@ export const IndexCard: React.FC<
           >
             <Grid item container justifyContent="flex-start" spacing={1}>
               <Grid item>
-                <IconButton
-                  size="small"
-                  ref={$paletteButton}
-                  data-cy={`${props["data-cy"]}.palette`}
-                  onClick={() => {
-                    setColorPickerOpen((prev) => !prev);
+                <IndexCardColorPicker
+                  color={indexCardManager.state.indexCard.color}
+                  onChange={(color) => indexCardManager.actions.setColor(color)}
+                  render={(renderProps) => {
+                    return (
+                      <IconButton
+                        size="small"
+                        ref={renderProps.ref.current}
+                        data-cy={`${props["data-cy"]}.palette`}
+                        onClick={() => {
+                          renderProps.setColorPickerOpen((prev) => !prev);
+                        }}
+                      >
+                        {renderProps.colorPickerOpen ? (
+                          <PaletteIcon htmlColor={paper.secondary} />
+                        ) : (
+                          <PaletteOutlinedIcon htmlColor={paper.secondary} />
+                        )}
+                      </IconButton>
+                    );
                   }}
-                >
-                  {colorPickerOpen ? (
-                    <PaletteIcon htmlColor={paper.secondary} />
-                  ) : (
-                    <PaletteOutlinedIcon htmlColor={paper.secondary} />
-                  )}
-                </IconButton>
-                <Popover
-                  open={colorPickerOpen}
-                  anchorEl={$paletteButton.current}
-                  onClose={() => {
-                    setColorPickerOpen(false);
-                  }}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  transformOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                >
-                  <IndexCardColorPicker
-                    color={indexCardManager.state.indexCard.color}
-                    onChange={(color) =>
-                      indexCardManager.actions.setColor(color)
-                    }
-                  />
-                </Popover>
+                />
               </Grid>
               {!isSubCard && (
                 <Grid item>
@@ -986,10 +972,18 @@ export const IndexCard: React.FC<
 };
 
 export function IndexCardColorPicker(props: {
-  color: string;
+  color: string | undefined;
   onChange(newColor: string): void;
   hidePastils?: boolean;
+  render: (renderProps: {
+    ref: any;
+    colorPickerOpen: boolean;
+    setColorPickerOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  }) => React.ReactNode;
 }) {
+  const $ref = useRef<any | null>(null);
+  const [colorPickerOpen, setColorPickerOpen] = useState(false);
+
   const [color, setColor] = useLazyState({
     value: props.color,
     onChange: props.onChange,
@@ -998,49 +992,63 @@ export function IndexCardColorPicker(props: {
 
   return (
     <>
-      <ChromePicker
-        color={color}
-        onChange={(color) => {
-          return setColor(color.hex);
+      {props.render({
+        ref: $ref,
+        colorPickerOpen,
+        setColorPickerOpen,
+      })}
+      <Popover
+        open={colorPickerOpen}
+        anchorEl={$ref.current}
+        onClose={() => {
+          setColorPickerOpen(false);
         }}
-        // styles={{
-        //   default: {
-        //     picker: {
-        //       boxShadow: "none",
-        //     },
-        //   },
-        // }}
-      />
-      {!props.hidePastils && (
-        <Box pb=".5rem" bgcolor="white" width="225px">
-          <Grid container justifyContent="center" spacing={1}>
-            {Object.keys(IndexCardColor).map((colorName) => {
-              const color = IndexCardColor[colorName as IndexCardColorTypes];
-              return (
-                <Grid item key={color}>
-                  <IconButton
-                    size="small"
-                    onClick={() => {
-                      setColor(color);
-                      props.onChange(color);
-                    }}
-                  >
-                    <Box
-                      className={css({
-                        width: "1.5rem",
-                        height: "1.5rem",
-                        background: color,
-                        borderRadius: "50%",
-                        border: "1px solid #e0e0e0",
-                      })}
-                    />
-                  </IconButton>
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Box>
-      )}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+      >
+        <ChromePicker
+          color={color}
+          onChange={(color) => {
+            return setColor(color.hex);
+          }}
+        />
+        {!props.hidePastils && (
+          <Box pb=".5rem" bgcolor="white" width="225px">
+            <Grid container justifyContent="center" spacing={1}>
+              {Object.keys(IndexCardColor).map((colorName) => {
+                const color = IndexCardColor[colorName as IndexCardColorTypes];
+                return (
+                  <Grid item key={color}>
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        setColor(color);
+                        props.onChange(color);
+                      }}
+                    >
+                      <Box
+                        className={css({
+                          width: "1.5rem",
+                          height: "1.5rem",
+                          background: color,
+                          borderRadius: "50%",
+                          border: "1px solid #e0e0e0",
+                        })}
+                      />
+                    </IconButton>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Box>
+        )}
+      </Popover>
     </>
   );
 }

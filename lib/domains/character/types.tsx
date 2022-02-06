@@ -282,6 +282,8 @@ export type ICharacterTheme = {
   backgroundColor?: string;
   fontImport?: string;
   primaryColor?: string;
+  hideSectionBackground?: boolean;
+
   pageHeadingFontFamily?: string;
   pageHeadingFontSize?: number;
   sectionHeadingFontFamily?: string;
