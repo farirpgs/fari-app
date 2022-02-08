@@ -18,10 +18,14 @@ export const CharacterSheetThemeContext = createContext<ISuperTheme>(
 
 export function useCharacterSheetTheme(props: {
   character: ICharacter | undefined;
+  enforceDefaultBackground?: boolean;
 }) {
   const theme = useTheme();
+  const defaultBackground = theme.palette.background.paper;
   const background =
-    props.character?.theme?.backgroundColor || theme.palette.background.paper;
+    props.character?.theme?.backgroundColor && !props.enforceDefaultBackground
+      ? props.character.theme.backgroundColor
+      : defaultBackground;
   const textPrimary = getTextColor(theme, background);
   const textPrimaryInverted = getTextColor(theme, textPrimary);
   const isDarkTheme = textPrimary === "#fff";

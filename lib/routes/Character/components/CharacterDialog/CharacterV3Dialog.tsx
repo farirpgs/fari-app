@@ -143,7 +143,7 @@ export const CharacterV3Dialog: React.FC<{
   const characterSheetTheme = useCharacterSheetTheme({
     character: characterManager.state.character,
   });
-  console.log("characterSheetTheme", characterSheetTheme);
+
   const hasCharacterSheetTheme = !!characterManager.state.character?.theme;
 
   const [tab, setTab] = useState<string>("0");
@@ -2163,7 +2163,7 @@ export const CharacterV3Dialog: React.FC<{
                   <ManagerBox
                     label={<>Block #{blockIndex + 1}</>}
                     viewBoxProps={{
-                      padding: "0 .5rem",
+                      padding: "0 .5rem .5rem .5rem",
                     }}
                     advancedBoxProps={{
                       padding: ".5rem",

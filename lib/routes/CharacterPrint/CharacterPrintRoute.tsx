@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid, { GridSize } from "@mui/material/Grid";
 import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
@@ -13,7 +14,10 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { ICharacter, ISection } from "../../domains/character/types";
-import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import {
+  CharacterSheetThemeContext,
+  useCharacterSheetTheme,
+} from "../Character/components/CharacterDialog/CharacterSheetThemeContext";
 import { ManagerBox } from "../Character/components/CharacterDialog/CharacterV3Dialog";
 import { BlockByType } from "../Character/components/CharacterDialog/components/BlockByType";
 
@@ -68,125 +72,112 @@ CharacterPrintRoute.displayName = "CharacterPrintRoute";
 export default CharacterPrintRoute;
 
 function PrintCharacter(props: { character: ICharacter | undefined }) {
-  const theme = useTheme();
-  const headerColor = theme.palette.background.paper;
-  const headerBackgroundColor = useTextColors(
-    theme.palette.background.paper
-  ).primary;
+  const characterSheetTheme = useCharacterSheetTheme({
+    character: props.character,
+    enforceDefaultBackground: true,
+  });
   return (
     <>
-      <Box mb="1rem">
-        <Grid container justifyContent="center">
-          <Grid item>
-            <FateLabel uppercase={false} variant="h4">
-              {props.character?.name}
-            </FateLabel>
+      <CharacterSheetThemeContext.Provider value={characterSheetTheme}>
+        <style>{characterSheetTheme.fontImport}</style>
+        <Box mb="1rem">
+          <Grid container justifyContent="center">
+            <Grid item>
+              <FateLabel uppercase={false} variant="h4">
+                {props.character?.name}
+              </FateLabel>
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
-      <Box>
-        {props.character?.pages.map((page, pageIndex) => {
-          return (
-            <Box
-              key={pageIndex}
-              className={css({
-                pageBreakAfter: "always",
-                marginBottom: "1rem",
-              })}
-            >
+        </Box>
+        <Box>
+          {props.character?.pages.map((page, pageIndex) => {
+            return (
               <Box
+                key={pageIndex}
                 className={css({
-                  borderBottom: `3px solid ${headerBackgroundColor}`,
-                  width: "100%",
-                  display: "flex",
+                  pageBreakAfter: "always",
+                  marginBottom: "1rem",
                 })}
               >
                 <Box
                   className={css({
-                    background: headerBackgroundColor,
-                    color: headerColor,
-                    marginRight: "1rem",
-                    width: "auto",
-                    padding: ".5rem 1rem",
-                    // Pentagone
-                    // https://bennettfeely.com/clippy/
-                    clipPath:
-                      "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
+                    borderBottom: `1px solid ${characterSheetTheme.borderColor}`,
+                    width: "100%",
+                    display: "flex",
                   })}
                 >
-                  <FateLabel
-                    noWrap
+                  <Box
                     className={css({
-                      fontSize: "1.4rem",
+                      marginRight: "1rem",
+                      width: "auto",
+                      padding: ".5rem 1rem",
+                      borderBottom: `4px solid ${characterSheetTheme.textPrimary}`,
                     })}
                   >
-                    {previewContentEditable({ value: page.label })}
-                  </FateLabel>
+                    <Typography
+                      noWrap
+                      className={css({
+                        fontFamily: characterSheetTheme.pageHeadingFontFamily,
+                        fontSize: `${characterSheetTheme.pageHeadingFontSize}rem`,
+                        fontWeight: characterSheetTheme.pageHeadingFontWeight,
+                      })}
+                    >
+                      {previewContentEditable({ value: page.label })}
+                    </Typography>
+                  </Box>
+                </Box>
+                <Box>
+                  {page.rows.map((row, rowIndex) => {
+                    const columnSize = Math.floor(12 / row.columns.length);
+                    return (
+                      <ManagerBox
+                        key={rowIndex}
+                        readonly={true}
+                        label={<>Row #{rowIndex + 1}</>}
+                      >
+                        {row.columns.length > 0 && (
+                          <Grid container>
+                            {row.columns.map((column, columnIndex) => {
+                              return (
+                                <Grid
+                                  item
+                                  key={columnIndex}
+                                  // xs={12}
+                                  xs={columnSize as GridSize}
+                                >
+                                  <ManagerBox
+                                    readonly={true}
+                                    label={<>Column #{columnIndex + 1}</>}
+                                  >
+                                    {column.sections.map((section) => {
+                                      return (
+                                        <PrintSections
+                                          key={section.id}
+                                          section={section}
+                                        />
+                                      );
+                                    })}
+                                  </ManagerBox>
+                                </Grid>
+                              );
+                            })}
+                          </Grid>
+                        )}
+                      </ManagerBox>
+                    );
+                  })}
                 </Box>
               </Box>
-              <Box>
-                {page.rows.map((row, rowIndex) => {
-                  const columnSize = Math.floor(12 / row.columns.length);
-                  return (
-                    <ManagerBox
-                      key={rowIndex}
-                      readonly={true}
-                      label={<>Row #{rowIndex + 1}</>}
-                    >
-                      {row.columns.length > 0 && (
-                        <Grid container>
-                          {row.columns.map((column, columnIndex) => {
-                            return (
-                              <Grid
-                                item
-                                key={columnIndex}
-                                xs={12}
-                                md={columnSize as GridSize}
-                                className={css({
-                                  borderLeft:
-                                    columnIndex === 0
-                                      ? `2px solid ${headerBackgroundColor}`
-                                      : "none",
-                                  borderBottom: `2px solid ${headerBackgroundColor}`,
-                                  borderRight: `2px solid ${headerBackgroundColor}`,
-                                })}
-                              >
-                                <ManagerBox
-                                  readonly={true}
-                                  label={<>Column #{columnIndex + 1}</>}
-                                >
-                                  {column.sections.map((section) => {
-                                    return (
-                                      <PrintSections
-                                        key={section.id}
-                                        section={section}
-                                      />
-                                    );
-                                  })}
-                                </ManagerBox>
-                              </Grid>
-                            );
-                          })}
-                        </Grid>
-                      )}
-                    </ManagerBox>
-                  );
-                })}
-              </Box>
-            </Box>
-          );
-        })}
-      </Box>
+            );
+          })}
+        </Box>
+      </CharacterSheetThemeContext.Provider>
     </>
   );
 }
 
 function PrintSections(props: { section: ISection }) {
-  const theme = useTheme();
-  const headerColor = theme.palette.background.paper;
-  const headerBackgroundColor = useTextColors(
-    theme.palette.background.paper
-  ).primary;
+  const characterSheetTheme = useContext(CharacterSheetThemeContext);
 
   return (
     <>
@@ -199,24 +190,31 @@ function PrintSections(props: { section: ISection }) {
           <Grid item xs>
             <Box
               className={css({
-                // Hexagone
-                // https://bennettfeely.com/clippy/
-                // clipPath:
-                //   "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
-                background: headerBackgroundColor,
-                color: headerColor,
+                background: characterSheetTheme.hideSectionBackground
+                  ? undefined
+                  : characterSheetTheme.textPrimary,
+
+                color: characterSheetTheme.hideSectionBackground
+                  ? characterSheetTheme.textPrimary
+                  : characterSheetTheme.textPrimaryInverted,
                 width: "100%",
-                padding: ".5rem",
+                padding: characterSheetTheme.hideSectionBackground
+                  ? "0 .5rem"
+                  : ".5rem",
               })}
             >
-              <FateLabel
+              <Typography
                 noWrap
                 className={css({
-                  fontSize: "1rem",
+                  fontFamily: characterSheetTheme.sectionHeadingFontFamily,
+                  fontSize: `${characterSheetTheme.sectionHeadingFontSize}rem`,
+                  fontWeight: characterSheetTheme.sectionHeadingFontWeight,
                 })}
               >
-                {previewContentEditable({ value: props.section.label })}
-              </FateLabel>
+                {previewContentEditable({
+                  value: props.section.label,
+                }) || " "}
+              </Typography>
             </Box>
           </Grid>
         </Grid>

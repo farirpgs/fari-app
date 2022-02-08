@@ -28,16 +28,10 @@ export const SheetHeader: React.FC<{
     <Box mb=".5rem">
       <Box
         className={css({
-          // Hexagone
-          // https://bennettfeely.com/clippy/
-          // clipPath:
-          //   "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
           background: characterSheetTheme.hideSectionBackground
             ? undefined
             : characterSheetTheme.textPrimary,
-          // borderBottom: characterSheetTheme.hideSectionBackground
-          //   ? `1px solid ${characterSheetTheme.borderColor}`
-          //   : undefined,
+
           color: characterSheetTheme.hideSectionBackground
             ? characterSheetTheme.textPrimary
             : characterSheetTheme.textPrimaryInverted,
