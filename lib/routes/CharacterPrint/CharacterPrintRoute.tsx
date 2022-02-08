@@ -131,7 +131,6 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
                     <ManagerBox
                       key={rowIndex}
                       readonly={true}
-                      backgroundColor={theme.palette.action.hover}
                       label={<>Row #{rowIndex + 1}</>}
                     >
                       {row.columns.length > 0 && (
@@ -155,9 +154,6 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
                                 <ManagerBox
                                   readonly={true}
                                   label={<>Column #{columnIndex + 1}</>}
-                                  backgroundColor={
-                                    theme.palette.action.selected
-                                  }
                                 >
                                   {column.sections.map((section) => {
                                     return (

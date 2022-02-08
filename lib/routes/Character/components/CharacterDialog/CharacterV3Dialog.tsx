@@ -12,10 +12,8 @@ import FileCopyIcon from "@mui/icons-material/FileCopy";
 import ExportIcon from "@mui/icons-material/GetApp";
 import PaletteIcon from "@mui/icons-material/Palette";
 import PrintIcon from "@mui/icons-material/Print";
-import RedoIcon from "@mui/icons-material/Redo";
 import SaveIcon from "@mui/icons-material/Save";
 import ShareIcon from "@mui/icons-material/Share";
-import UndoIcon from "@mui/icons-material/Undo";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import TabContext from "@mui/lab/TabContext";
@@ -575,9 +573,8 @@ export const CharacterV3Dialog: React.FC<{
                         );
                         setTab((currentPageIndex - 1).toString());
                       }}
-                      size="large"
                     >
-                      <UndoIcon />
+                      <ArrowBackIcon />
                     </IconButton>
                   </span>
                 </Tooltip>
@@ -592,7 +589,6 @@ export const CharacterV3Dialog: React.FC<{
                         );
                         setTab((currentPageIndex + 1).toString());
                       }}
-                      size="large"
                     >
                       <FileCopyIcon />
                     </IconButton>
@@ -615,7 +611,6 @@ export const CharacterV3Dialog: React.FC<{
                         }
                         setTab("0");
                       }}
-                      size="large"
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -634,9 +629,8 @@ export const CharacterV3Dialog: React.FC<{
                         );
                         setTab((currentPageIndex + 1).toString());
                       }}
-                      size="large"
                     >
-                      <RedoIcon />
+                      <ArrowForwardIcon />
                     </IconButton>
                   </span>
                 </Tooltip>
@@ -680,11 +674,25 @@ export const CharacterV3Dialog: React.FC<{
                         key={rowIndex}
                         readonly={!advanced}
                         advancedBoxProps={{
-                          marginBottom: ".5rem",
-                          padding: "0 .5rem",
+                          padding: ".5rem",
                           bgcolor: characterSheetTheme.boxBackgroundColor,
                         }}
                         label={<>Row #{rowIndex + 1}</>}
+                        rightActions={
+                          row.columns.length !== 4 && (
+                            <>
+                              <Grid container>
+                                <Grid item>
+                                  {renderAddColumnButton({
+                                    pageIndex,
+                                    rowIndex,
+                                    columnIndex: 0,
+                                  })}
+                                </Grid>
+                              </Grid>
+                            </>
+                          )
+                        }
                         topActions={
                           <>
                             <Grid container justifyContent="flex-end">
@@ -765,31 +773,6 @@ export const CharacterV3Dialog: React.FC<{
                                   </span>
                                 </Tooltip>
                               </Grid>
-                              <Grid item>
-                                <Tooltip
-                                  title={t(
-                                    "character-dialog.control.add-column"
-                                  )}
-                                >
-                                  <span>
-                                    <IconButton
-                                      disabled={row.columns.length === 4}
-                                      onClick={() => {
-                                        characterManager.actions.addColumn({
-                                          pageIndex: pageIndex,
-                                          rowIndex: rowIndex,
-                                        });
-                                      }}
-                                    >
-                                      <AddIcon
-                                        className={css({
-                                          fontSize: "1rem",
-                                        })}
-                                      />
-                                    </IconButton>
-                                  </span>
-                                </Tooltip>
-                              </Grid>
                             </Grid>
                           </>
                         }
@@ -821,8 +804,8 @@ export const CharacterV3Dialog: React.FC<{
                                     <ManagerBox
                                       readonly={!advanced}
                                       advancedBoxProps={{
-                                        marginBottom: ".5rem",
-                                        padding: "0 .5rem",
+                                        padding: ".5rem",
+                                        height: "100%",
                                         bgcolor:
                                           characterSheetTheme.box2BackgroundColor,
                                       }}
@@ -1041,6 +1024,38 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 
+  function renderAddColumnButton(renderProps: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+  }) {
+    // row.columns.length === 4
+    return (
+      <Box p=".125rem">
+        <Grid container justifyContent="center" spacing={1}>
+          <Grid item>
+            <Tooltip title={t("character-dialog.control.add-column")}>
+              <span>
+                <IconButton
+                  onClick={() => {
+                    characterManager.actions.addColumn({
+                      pageIndex: renderProps.pageIndex,
+                      rowIndex: renderProps.rowIndex,
+                      columnIndex: renderProps.columnIndex,
+                    });
+                  }}
+                  // size="large"
+                >
+                  <AddIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
+          </Grid>
+        </Grid>
+      </Box>
+    );
+  }
+
   function renderSections(
     indexes: { pageIndex: number; rowIndex: number; columnIndex: number },
     page: IPage,
@@ -1097,7 +1112,9 @@ export const CharacterV3Dialog: React.FC<{
                               {section.visibleOnCard ? (
                                 <VisibilityIcon
                                   htmlColor={
-                                    characterSheetTheme.textPrimaryInverted
+                                    characterSheetTheme.hideSectionBackground
+                                      ? characterSheetTheme.textPrimary
+                                      : characterSheetTheme.textPrimaryInverted
                                   }
                                   className={css({
                                     fontSize: "1rem",
@@ -1106,7 +1123,9 @@ export const CharacterV3Dialog: React.FC<{
                               ) : (
                                 <VisibilityOffIcon
                                   htmlColor={
-                                    characterSheetTheme.textPrimaryInverted
+                                    characterSheetTheme.hideSectionBackground
+                                      ? characterSheetTheme.textPrimary
+                                      : characterSheetTheme.textPrimaryInverted
                                   }
                                   className={css({
                                     fontSize: "1rem",
@@ -1138,7 +1157,9 @@ export const CharacterV3Dialog: React.FC<{
                               >
                                 <ArrowUpwardIcon
                                   htmlColor={
-                                    characterSheetTheme.textPrimaryInverted
+                                    characterSheetTheme.hideSectionBackground
+                                      ? characterSheetTheme.textPrimary
+                                      : characterSheetTheme.textPrimaryInverted
                                   }
                                   className={css({
                                     fontSize: "1rem",
@@ -1170,7 +1191,9 @@ export const CharacterV3Dialog: React.FC<{
                               >
                                 <ArrowDownwardIcon
                                   htmlColor={
-                                    characterSheetTheme.textPrimaryInverted
+                                    characterSheetTheme.hideSectionBackground
+                                      ? characterSheetTheme.textPrimary
+                                      : characterSheetTheme.textPrimaryInverted
                                   }
                                   className={css({
                                     fontSize: "1rem",
@@ -1196,7 +1219,9 @@ export const CharacterV3Dialog: React.FC<{
                             >
                               <FileCopyIcon
                                 htmlColor={
-                                  characterSheetTheme.textPrimaryInverted
+                                  characterSheetTheme.hideSectionBackground
+                                    ? characterSheetTheme.textPrimary
+                                    : characterSheetTheme.textPrimaryInverted
                                 }
                                 className={css({
                                   fontSize: "1rem",
@@ -1230,7 +1255,9 @@ export const CharacterV3Dialog: React.FC<{
                             >
                               <DeleteIcon
                                 htmlColor={
-                                  characterSheetTheme.textPrimaryInverted
+                                  characterSheetTheme.hideSectionBackground
+                                    ? characterSheetTheme.textPrimary
+                                    : characterSheetTheme.textPrimaryInverted
                                 }
                                 className={css({
                                   fontSize: "1rem",
@@ -2136,11 +2163,9 @@ export const CharacterV3Dialog: React.FC<{
                   <ManagerBox
                     label={<>Block #{blockIndex + 1}</>}
                     viewBoxProps={{
-                      marginBottom: ".5rem",
                       padding: "0 .5rem",
                     }}
                     advancedBoxProps={{
-                      marginBottom: ".5rem",
                       padding: ".5rem",
                       bgcolor: characterSheetTheme.backgroundColor,
                     }}
@@ -2324,6 +2349,7 @@ export function ManagerBox(props: {
   topActions?: React.ReactNode;
   children: React.ReactNode;
   bottomActions?: React.ReactNode;
+  rightActions?: React.ReactNode;
   readonly?: boolean;
   viewBoxProps?: BoxProps;
   advancedBoxProps?: BoxProps;
@@ -2361,7 +2387,16 @@ export function ManagerBox(props: {
           {props.topActions && <Grid item>{props.topActions}</Grid>}
         </Grid>
       </Box>
-      {props.children}
+      <Grid container wrap="nowrap" spacing={1}>
+        <Grid item xs>
+          {props.children}
+        </Grid>
+        {props.rightActions && (
+          <Grid item className={css({ display: "flex", alignItems: "center" })}>
+            {props.rightActions}
+          </Grid>
+        )}
+      </Grid>
       {props.bottomActions}
     </Box>
   );

@@ -290,15 +290,23 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function addColumn(indexes: { pageIndex: number; rowIndex: number }) {
+  function addColumn(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+  }) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns.push({
-          sections: [],
-        });
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns.splice(
+          indexes.columnIndex + 1,
+          0,
+          {
+            sections: [],
+          }
+        );
       })
     );
   }

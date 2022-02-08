@@ -17,6 +17,7 @@ import {
   ICharacter,
   IDicePoolBlock,
   IImageBlock,
+  IInfoTextBlock,
   ILinkBlock,
   INumericBlock,
   IPointCounterBlock,
@@ -31,6 +32,7 @@ import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors"
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { BlockDicePool } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { BlockImage } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockImage";
+import { BlockInfoText } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockInfoText";
 import { BlockLink } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockLink";
 import { BlockNumeric } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockNumeric";
 import { BlockPointCounter } from "../../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
@@ -87,6 +89,7 @@ export const CharacterCard: React.FC<{
     (section: ISection, block: any) => JSX.Element
   > = {
     Text: renderBlockText,
+    InfoText: renderBlockInfoText,
     Numeric: renderBlockNumeric,
     Image: renderBlockImage,
     Skill: renderBlockSkill,
@@ -205,6 +208,26 @@ export const CharacterCard: React.FC<{
     );
   }
 
+  function renderBlockInfoText(
+    section: ISection,
+    block: IBlock & IInfoTextBlock
+  ) {
+    return (
+      <Grid item xs={12} className={css({ marginTop: ".5rem" })}>
+        <BlockInfoText
+          advanced={false}
+          readonly={true}
+          dataCy={`character-card.${section.label}.${block.label}`}
+          block={block}
+          onLabelChange={() => {}}
+          onValueChange={() => {}}
+          onMetaChange={() => {}}
+          onRoll={() => {}}
+        />
+      </Grid>
+    );
+  }
+
   function renderBlockNumeric(
     section: ISection,
     block: IBlock & INumericBlock
@@ -290,7 +313,7 @@ export const CharacterCard: React.FC<{
             diceManager.actions.addOrRemovePoolElement({
               blockId: block.id,
               blockType: block.type,
-              label: block.label,
+              label: block.label ?? "",
               rollGroup: rollGroup,
             });
           }}
