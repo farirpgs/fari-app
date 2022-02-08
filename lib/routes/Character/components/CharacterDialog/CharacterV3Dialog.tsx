@@ -63,12 +63,12 @@ import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogge
 import { SettingsContext } from "../../../../contexts/SettingsContext/SettingsContext";
 import {
   CharacterTemplates,
-  ICharacterTemplate
+  ICharacterTemplate,
 } from "../../../../domains/character/CharacterType";
 import {
   ICharacter,
   IPage,
-  ISection
+  ISection,
 } from "../../../../domains/character/types";
 import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../../../../domains/dice/Dice";
@@ -78,7 +78,7 @@ import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { useCharacter } from "../../hooks/useCharacter";
 import {
   CharacterSheetThemeContext,
-  useCharacterSheetTheme
+  useCharacterSheetTheme,
 } from "./CharacterSheetThemeContext";
 import { AddBlock } from "./components/AddBlock";
 import { AddSection } from "./components/AddSection";
@@ -483,11 +483,20 @@ export const CharacterV3Dialog: React.FC<{
                         marginRight: ".5rem",
                         // clipPath:
                         //   "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
-                        color: `${characterSheetTheme.textPrimary} !important`,
+                        color: `${
+                          true // characterSheetTheme.hideTabBackground
+                            ? characterSheetTheme.textPrimary
+                            : characterSheetTheme.textPrimaryInverted
+                        } !important`,
+                        background: true // characterSheetTheme.hideTabBackground
+                          ? undefined
+                          : characterSheetTheme.textPrimary,
                         transition: "border linear 200ms",
                         borderBottom: `4px solid ${
                           isCurrentTab
-                            ? characterSheetTheme.textPrimary
+                            ? true // characterSheetTheme.hideTabBackground
+                              ? characterSheetTheme.textPrimary
+                              : characterSheetTheme.textPrimaryInverted
                             : "transparent"
                         }`,
                         marginBottom: `-2px`,
@@ -512,9 +521,9 @@ export const CharacterV3Dialog: React.FC<{
                             readonly={!advanced}
                             border={advanced}
                             borderColor={
-                              characterSheetTheme.hideSectionBackground
-                                ? characterSheetTheme.textPrimary
-                                : characterSheetTheme.textPrimaryInverted
+                              characterSheetTheme.hideTabBackground
+                                ? characterSheetTheme.textPrimaryInverted
+                                : characterSheetTheme.textPrimary
                             }
                             onChange={(newValue) => {
                               characterManager.actions.renamePage(
@@ -632,23 +641,6 @@ export const CharacterV3Dialog: React.FC<{
                   </span>
                 </Tooltip>
               </Grid>
-
-              <Grid item>
-                <Tooltip title={t("character-dialog.control.add-row")}>
-                  <span>
-                    <IconButton
-                      onClick={() => {
-                        characterManager.actions.addRow({
-                          pageIndex: currentPageIndex,
-                        });
-                      }}
-                      size="large"
-                    >
-                      <AddIcon />
-                    </IconButton>
-                  </span>
-                </Tooltip>
-              </Grid>
             </Grid>
           </Box>
         </Collapse>
@@ -682,7 +674,7 @@ export const CharacterV3Dialog: React.FC<{
                     const columnSize = Math.floor(12 / row.columns.length);
                     const canMoveRowUp = rowIndex === 0;
                     const canMoveRowDown = rowIndex === page.rows.length - 1;
-
+                    const isLastRow = rowIndex === page.rows.length - 1;
                     return (
                       <ManagerBox
                         key={rowIndex}
@@ -693,7 +685,7 @@ export const CharacterV3Dialog: React.FC<{
                           bgcolor: characterSheetTheme.boxBackgroundColor,
                         }}
                         label={<>Row #{rowIndex + 1}</>}
-                        actions={
+                        topActions={
                           <>
                             <Grid container justifyContent="flex-end">
                               <Grid item>
@@ -801,6 +793,15 @@ export const CharacterV3Dialog: React.FC<{
                             </Grid>
                           </>
                         }
+                        bottomActions={
+                          <>
+                            {!isLastRow &&
+                              renderAddRowButton({
+                                pageIndex: currentPageIndex,
+                                rowIndex: rowIndex,
+                              })}
+                          </>
+                        }
                       >
                         <Box>
                           {(advanced || numberOfBlocks > 0) && (
@@ -826,7 +827,7 @@ export const CharacterV3Dialog: React.FC<{
                                           characterSheetTheme.box2BackgroundColor,
                                       }}
                                       label={<>Column #{columnIndex + 1}</>}
-                                      actions={
+                                      topActions={
                                         <>
                                           <Grid
                                             container
@@ -942,6 +943,11 @@ export const CharacterV3Dialog: React.FC<{
                       </ManagerBox>
                     );
                   })}
+                  {advanced &&
+                    renderAddRowButton({
+                      pageIndex: currentPageIndex,
+                      rowIndex: 0,
+                    })}
                 </Box>
               </TabPanel>
             );
@@ -978,7 +984,11 @@ export const CharacterV3Dialog: React.FC<{
           <Grid item>
             <Box p=".5rem">
               <Typography>
-                {date.format("lll")} / {"v"}{" "}
+                {date.format("lll")}
+                {" / "}
+                {"v"}
+                {characterManager.state.character?.version}
+                {" / "}
                 {characterManager.state.character?.id.slice(0, 5)}
               </Typography>
             </Box>
@@ -1001,6 +1011,33 @@ export const CharacterV3Dialog: React.FC<{
           </Grid>
         )}
       </Box>
+    );
+  }
+
+  function renderAddRowButton(renderProps: {
+    pageIndex: number;
+    rowIndex: number;
+  }) {
+    return (
+      <Grid container justifyContent="center">
+        <Grid item>
+          <Tooltip title={t("character-dialog.control.add-row")}>
+            <span>
+              <IconButton
+                onClick={() => {
+                  characterManager.actions.addRow({
+                    pageIndex: renderProps.pageIndex,
+                    rowIndex: renderProps.rowIndex,
+                  });
+                }}
+                size="large"
+              >
+                <AddIcon />
+              </IconButton>
+            </span>
+          </Tooltip>
+        </Grid>
+      </Grid>
     );
   }
 
@@ -1755,6 +1792,26 @@ export const CharacterV3Dialog: React.FC<{
         </Box>
         <Box mb="1rem">
           <Grid container wrap="nowrap">
+            {/* <Grid item>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={
+                        !characterManager.state.character?.theme
+                          ?.hideTabBackground
+                      }
+                      onClick={() => {
+                        characterManager.actions.setTheme((theme) => {
+                          theme.hideTabBackground = !theme.hideTabBackground;
+                        });
+                      }}
+                    />
+                  }
+                  label="Display Tab Background"
+                />
+              </FormGroup>
+            </Grid> */}
             <Grid item>
               <FormGroup>
                 <FormControlLabel
@@ -1854,14 +1911,15 @@ export const CharacterV3Dialog: React.FC<{
             <Grid container spacing={2} wrap="nowrap" alignItems="flex-start">
               <Grid item xs>
                 <FormControl fullWidth>
-                  <InputLabel variant="standard">Font Weight</InputLabel>
+                  <InputLabel shrink variant="standard">
+                    Font Weight
+                  </InputLabel>
                   <NativeSelect
                     defaultValue=""
                     value={renderProps.fontWeight || ""}
                     onChange={(event) => {
                       renderProps.onFontWeightChange(event.target.value);
                     }}
-                    // label="Font Weight"
                   >
                     <option value="">None</option>
                     {fontWeights.map((fw) => {
@@ -1889,7 +1947,7 @@ export const CharacterV3Dialog: React.FC<{
                           defaultValue={renderProps.initialFontSize}
                           disabled={!hasCharacterSheetTheme}
                           step={0.125}
-                          min={1}
+                          min={0.5}
                           max={3}
                           valueLabelDisplay="auto"
                           value={value}
@@ -2087,7 +2145,7 @@ export const CharacterV3Dialog: React.FC<{
                       bgcolor: characterSheetTheme.backgroundColor,
                     }}
                     readonly={!advanced}
-                    actions={
+                    topActions={
                       <>
                         <Grid container justifyContent="flex-end">
                           <Grid item>
@@ -2263,9 +2321,9 @@ CharacterV3Dialog.displayName = "CharacterV3Dialog";
 
 export function ManagerBox(props: {
   label: string | React.ReactNode;
-  actions?: React.ReactNode;
+  topActions?: React.ReactNode;
   children: React.ReactNode;
-  outside?: React.ReactNode;
+  bottomActions?: React.ReactNode;
   readonly?: boolean;
   viewBoxProps?: BoxProps;
   advancedBoxProps?: BoxProps;
@@ -2300,11 +2358,11 @@ export function ManagerBox(props: {
               {props.label}
             </Typography>
           </Grid>
-          {props.actions && <Grid item>{props.actions}</Grid>}
+          {props.topActions && <Grid item>{props.topActions}</Grid>}
         </Grid>
       </Box>
       {props.children}
-      {props.outside}
+      {props.bottomActions}
     </Box>
   );
 }

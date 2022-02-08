@@ -35,6 +35,9 @@ export const SheetHeader: React.FC<{
           background: characterSheetTheme.hideSectionBackground
             ? undefined
             : characterSheetTheme.textPrimary,
+          // borderBottom: characterSheetTheme.hideSectionBackground
+          //   ? `1px solid ${characterSheetTheme.borderColor}`
+          //   : undefined,
           color: characterSheetTheme.hideSectionBackground
             ? characterSheetTheme.textPrimary
             : characterSheetTheme.textPrimaryInverted,

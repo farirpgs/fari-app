@@ -266,13 +266,13 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function addRow(indexes: { pageIndex: number }) {
+  function addRow(indexes: { pageIndex: number; rowIndex: number }) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.pages[indexes.pageIndex].rows.push({
+        draft.pages[indexes.pageIndex].rows.splice(indexes.rowIndex + 1, 0, {
           columns: [{ sections: [] }],
         });
       })

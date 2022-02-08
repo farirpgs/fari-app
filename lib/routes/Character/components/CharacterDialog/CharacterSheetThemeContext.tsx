@@ -58,6 +58,7 @@ export function useCharacterSheetTheme(props: {
     props.character?.theme?.primaryColor || theme.palette.primary.main;
   const hideSectionBackground =
     props.character?.theme?.hideSectionBackground || false;
+  const hideTabBackground = props.character?.theme?.hideTabBackground || false;
 
   const boxBackgroundColor = isDarkTheme
     ? lighten(background, 0.1)
@@ -91,6 +92,7 @@ export function useCharacterSheetTheme(props: {
     fontImport: fontImport,
     primaryColor: primaryColor,
     hideSectionBackground: hideSectionBackground,
+    hideTabBackground: hideTabBackground,
 
     pageHeadingFontFamily: pageHeadingFontFamily,
     pageHeadingFontSize: pageHeadingFontSize,

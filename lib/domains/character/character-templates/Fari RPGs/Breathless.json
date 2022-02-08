@@ -1,0 +1,205 @@
+{
+  "fariType": "character",
+  "id": "3c4e155b-c464-40ee-81fa-56b2473e86c1",
+  "lastUpdated": 1644266501,
+  "name": "",
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "3c0a535a-9812-4d94-bd13-f2b9e10fc813",
+                  "label": "Information",
+                  "blocks": [
+                    {
+                      "id": "544e9e31-9713-47d0-a75f-958272a47acd",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "985ac74c-638c-429b-9398-d91ddcd04d02",
+                      "label": "PRONOUNS",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "94297034-e5ac-4387-a341-263c8028880e",
+                      "label": "JOB",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "d50863dc-ecc3-4de0-b7af-509c909898cc",
+                  "label": "Health &amp; STunt",
+                  "blocks": [
+                    {
+                      "id": "17e15d3e-c17a-45ce-92f4-53f60667f624",
+                      "label": "STRESS",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Remove -1 for laying low<br>Remove -2 with med kit<br>"
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "849581c3-1778-41a9-b113-c6c5f327a992",
+                      "label": "Med KIT",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "227f6aa1-2aa0-4681-aedf-b148773d58ef",
+                      "label": "Stunt",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Use D12 — Once per session"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "e0425b68-da9d-478e-b645-5c5fa5f5a351",
+                  "label": "Skills",
+                  "blocks": [
+                    {
+                      "id": "e31f0e54-cb2b-489a-afb2-3d233b207dde",
+                      "label": "",
+                      "type": "InfoText",
+                      "value": "Assign — D10, D8, D6",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d526f346-0112-43fc-bf99-9fd0b0115113",
+                      "label": "BASH",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "bf100dd1-6e7a-4e15-928f-2d3f9ce4b737",
+                      "label": "Dash",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a8cfdd5c-1ddc-448a-ac29-b8489d33308f",
+                      "label": "Sneak",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "58e568ab-007b-4102-b5e4-657221a30bbe",
+                      "label": "Shoot",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "14c92231-430e-4de1-a412-7de002dc89c9",
+                      "label": "Think",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a206f653-47f6-4c91-99ed-0a23da870c23",
+                      "label": "Sway",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "58e53324-0f6a-4017-acf4-c4b75f4ea6ab",
+                  "label": "Backpack",
+                  "blocks": [
+                    {
+                      "id": "3ba245af-e087-44c1-891f-b184aa660563",
+                      "label": "",
+                      "type": "InfoText",
+                      "value": "Minimum — D6",
+                      "meta": {}
+                    },
+                    {
+                      "id": "436a51fa-d49e-44ad-9258-6324c93b2756",
+                      "label": "Item #1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "bf31d3a2-bca3-4521-a54b-28c28fee79e3",
+                      "label": "Item #2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cffc1c3c-3609-4b5d-b3f6-6f9f85d4dc4d",
+                      "label": "Item #3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "version": 5,
+  "theme": {
+    "fontImport": "@import url('http://fonts.cdnfonts.com/css/cheddar-gothic-stencil');\n\n@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');",
+    "backgroundColor": "#ffffff",
+    "pageHeadingFontFamily": "Cheddar Gothic Stencil",
+    "sectionHeadingFontFamily": "Cheddar Gothic Stencil",
+    "labelFontFamily": "Cheddar Gothic Stencil",
+    "pageHeadingFontSize": 1.25,
+    "hideSectionBackground": false,
+    "sectionHeadingFontSize": 2.125,
+    "labelFontSize": 1.5,
+    "textFontSize": 1,
+    "textFontFamily": "Lato",
+    "pageHeadingFontWeight": ""
+  }
+}

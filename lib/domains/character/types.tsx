@@ -136,7 +136,7 @@ export type ITextBlock = {
   meta: IDefaultBlockMeta & {
     checked?: boolean;
   };
-  value: string;
+  value: string | undefined;
 };
 
 export type IInfoTextBlock = {
@@ -282,6 +282,7 @@ export type ICharacterTheme = {
   backgroundColor?: string;
   fontImport?: string;
   primaryColor?: string;
+  hideTabBackground?: boolean;
   hideSectionBackground?: boolean;
 
   pageHeadingFontFamily?: string;

@@ -26,6 +26,7 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
   const isSlotTrackerVisible =
     props.block.meta?.checked === true || props.block.meta?.checked === false;
 
+  const isFieldVisible = props.block.value !== undefined;
   const characterSheetTheme = useContext(CharacterSheetThemeContext);
 
   return (
@@ -54,26 +55,28 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
                 </ThemedLabel>
               </Box>
             )}
-            <Box>
-              <Typography
-                className={css({
-                  fontFamily: characterSheetTheme.textFontFamily,
-                  fontSize: `${characterSheetTheme.textFontSize}rem`,
-                  fontWeight: characterSheetTheme.textFontWeight,
-                })}
-              >
-                <ContentEditable
-                  border
-                  borderColor={characterSheetTheme.borderColor}
-                  data-cy={`${props.dataCy}.value`}
-                  readonly={props.readonly}
-                  value={props.block.value}
-                  onChange={(value) => {
-                    props.onValueChange(value);
-                  }}
-                />
-              </Typography>
-            </Box>
+            {isFieldVisible && (
+              <Box>
+                <Typography
+                  className={css({
+                    fontFamily: characterSheetTheme.textFontFamily,
+                    fontSize: `${characterSheetTheme.textFontSize}rem`,
+                    fontWeight: characterSheetTheme.textFontWeight,
+                  })}
+                >
+                  <ContentEditable
+                    border
+                    borderColor={characterSheetTheme.borderColor}
+                    data-cy={`${props.dataCy}.value`}
+                    readonly={props.readonly}
+                    value={props.block.value ?? ""}
+                    onChange={(value) => {
+                      props.onValueChange(value);
+                    }}
+                  />
+                </Typography>
+              </Box>
+            )}
           </Grid>
           {isSlotTrackerVisible && (
             <Grid item className={css({ marginLeft: "auto" })}>
@@ -128,9 +131,31 @@ export function BlockTextActions(
             color: theme.palette.primary.main,
           })}
           onClick={() => {
+            const value = props.block.value;
+            if (value === undefined) {
+              props.onValueChange("");
+            } else {
+              props.onValueChange(undefined);
+            }
+          }}
+          underline="hover"
+        >
+          {props.block.value === undefined
+            ? t("character-dialog.control.add-field")
+            : t("character-dialog.control.remove-field")}
+        </Link>
+      </Grid>
+      <Grid item>
+        <Link
+          component="button"
+          variant="caption"
+          className={css({
+            color: theme.palette.primary.main,
+          })}
+          onClick={() => {
             const label = props.block.label;
             if (label === undefined) {
-              props.onLabelChange("Label");
+              props.onLabelChange("");
             } else {
               props.onLabelChange(undefined);
             }
