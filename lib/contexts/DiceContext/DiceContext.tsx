@@ -31,7 +31,7 @@ export function useDice(props: {
     () => {
       const defaultSet = props.defaultCommands?.map(
         (c) => CommmandSetOptions[c]
-      ) ?? [CommmandSetOptions["4dF"]];
+      ) ?? [CommmandSetOptions["1d6"]];
       return defaultSet;
     }
   );
