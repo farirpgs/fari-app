@@ -11,7 +11,7 @@ import React, { useContext, useState } from "react";
 import { ConditionalWrapper } from "../../../../../components/ConditionalWrapper/ConditionalWrapper";
 import { Delays } from "../../../../../constants/Delays";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
-import { CharacterSheetThemeContext } from "../CharacterSheetThemeContext";
+import { MiniThemeContext } from "../MiniThemeContext";
 
 export function CircleTextField(props: {
   "data-cy"?: string;
@@ -25,7 +25,7 @@ export function CircleTextField(props: {
   onClick?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
   onContextMenu?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
 }) {
-  const characterSheetTheme = useContext(CharacterSheetThemeContext);
+  const miniTheme = useContext(MiniThemeContext);
 
   const theme = useTheme();
   const [hover, setHover] = useState(false);
@@ -113,12 +113,10 @@ export function CircleTextField(props: {
               "width": "3rem",
               "height": "3rem",
               "borderRadius": "50%",
-              "background": props.highlight
-                ? characterSheetTheme.textPrimary
-                : "inherit",
+              "background": props.highlight ? miniTheme.textPrimary : "inherit",
               "&&": {
                 color: props.highlight
-                  ? characterSheetTheme.textPrimaryInverted
+                  ? miniTheme.textPrimaryInverted
                   : "inherit",
               },
               "transition": theme.transitions.create(["color", "background"], {

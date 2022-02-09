@@ -14,12 +14,12 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { ICharacter, ISection } from "../../domains/character/types";
-import {
-  CharacterSheetThemeContext,
-  useCharacterSheetTheme,
-} from "../Character/components/CharacterDialog/CharacterSheetThemeContext";
 import { ManagerBox } from "../Character/components/CharacterDialog/CharacterV3Dialog";
 import { BlockByType } from "../Character/components/CharacterDialog/components/BlockByType";
+import {
+  MiniThemeContext,
+  useMiniTheme,
+} from "../Character/components/CharacterDialog/MiniThemeContext";
 
 export const CharacterPrintRoute: React.FC<{
   match: {
@@ -72,14 +72,15 @@ CharacterPrintRoute.displayName = "CharacterPrintRoute";
 export default CharacterPrintRoute;
 
 function PrintCharacter(props: { character: ICharacter | undefined }) {
-  const characterSheetTheme = useCharacterSheetTheme({
+  const theme = useTheme();
+  const miniTheme = useMiniTheme({
     character: props.character,
-    enforceDefaultBackground: true,
+    enforceBackground: theme.palette.background.paper,
   });
   return (
     <>
-      <CharacterSheetThemeContext.Provider value={characterSheetTheme}>
-        <style>{characterSheetTheme.fontImport}</style>
+      <MiniThemeContext.Provider value={miniTheme}>
+        <style>{miniTheme.fontImport}</style>
         <Box mb="1rem">
           <Grid container justifyContent="center">
             <Grid item>
@@ -101,7 +102,7 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
               >
                 <Box
                   className={css({
-                    borderBottom: `1px solid ${characterSheetTheme.borderColor}`,
+                    borderBottom: `1px solid ${miniTheme.borderColor}`,
                     width: "100%",
                     display: "flex",
                   })}
@@ -111,15 +112,15 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
                       marginRight: "1rem",
                       width: "auto",
                       padding: ".5rem 1rem",
-                      borderBottom: `4px solid ${characterSheetTheme.textPrimary}`,
+                      borderBottom: `4px solid ${miniTheme.textPrimary}`,
                     })}
                   >
                     <Typography
                       noWrap
                       className={css({
-                        fontFamily: characterSheetTheme.pageHeadingFontFamily,
-                        fontSize: `${characterSheetTheme.pageHeadingFontSize}rem`,
-                        fontWeight: characterSheetTheme.pageHeadingFontWeight,
+                        fontFamily: miniTheme.pageHeadingFontFamily,
+                        fontSize: `${miniTheme.pageHeadingFontSize}rem`,
+                        fontWeight: miniTheme.pageHeadingFontWeight,
                       })}
                     >
                       {previewContentEditable({ value: page.label })}
@@ -171,13 +172,13 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
             );
           })}
         </Box>
-      </CharacterSheetThemeContext.Provider>
+      </MiniThemeContext.Provider>
     </>
   );
 }
 
 function PrintSections(props: { section: ISection }) {
-  const characterSheetTheme = useContext(CharacterSheetThemeContext);
+  const miniTheme = useContext(MiniThemeContext);
 
   return (
     <>
@@ -190,25 +191,23 @@ function PrintSections(props: { section: ISection }) {
           <Grid item xs>
             <Box
               className={css({
-                background: characterSheetTheme.hideSectionBackground
+                background: miniTheme.hideSectionBackground
                   ? undefined
-                  : characterSheetTheme.textPrimary,
+                  : miniTheme.textPrimary,
 
-                color: characterSheetTheme.hideSectionBackground
-                  ? characterSheetTheme.textPrimary
-                  : characterSheetTheme.textPrimaryInverted,
+                color: miniTheme.hideSectionBackground
+                  ? miniTheme.textPrimary
+                  : miniTheme.textPrimaryInverted,
                 width: "100%",
-                padding: characterSheetTheme.hideSectionBackground
-                  ? "0 .5rem"
-                  : ".5rem",
+                padding: miniTheme.hideSectionBackground ? "0 .5rem" : ".5rem",
               })}
             >
               <Typography
                 noWrap
                 className={css({
-                  fontFamily: characterSheetTheme.sectionHeadingFontFamily,
-                  fontSize: `${characterSheetTheme.sectionHeadingFontSize}rem`,
-                  fontWeight: characterSheetTheme.sectionHeadingFontWeight,
+                  fontFamily: miniTheme.sectionHeadingFontFamily,
+                  fontSize: `${miniTheme.sectionHeadingFontSize}rem`,
+                  fontWeight: miniTheme.sectionHeadingFontWeight,
                 })}
               >
                 {previewContentEditable({

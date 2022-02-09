@@ -71,6 +71,10 @@ export const CharacterFactory = {
           from: 4,
           migrate: migrateV4CharacterToV5,
         },
+        {
+          from: 5,
+          migrate: migrateV5CharacterToV6,
+        },
       ]);
       const migrated = migrate(character);
       return migrated;
@@ -454,4 +458,28 @@ function migrateV4CharacterToV5(v4: IV4Character): ICharacter {
   };
 
   return v5;
+}
+
+function migrateV5CharacterToV6(v5: ICharacter): ICharacter {
+  const v6 = produce(v5, (draft) => {
+    draft.pages.forEach((page) => {
+      page.rows.forEach((row) => {
+        page.label = page.label.toUpperCase();
+        row.columns.forEach((col) => {
+          col.sections.forEach((section) => {
+            section.label = section.label.toUpperCase();
+            section.blocks.forEach((block) => {
+              if (block.type !== BlockType.Link) {
+                block.label = block.label?.toUpperCase();
+              }
+            });
+          });
+        });
+      });
+    });
+
+    draft.version = 6;
+  });
+
+  return v6;
 }

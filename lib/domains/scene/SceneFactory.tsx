@@ -1,3 +1,4 @@
+import produce from "immer";
 import {
   IndexCardColor,
   IndexCardColorTypes,
@@ -16,6 +17,7 @@ import {
 import { BlockType, IBlock } from "../character/types";
 import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../Id/Id";
+import { Migrator } from "../migration/Migrator";
 
 export const SceneFactory = {
   make(): IScene {
@@ -102,22 +104,28 @@ export const SceneFactory = {
       }),
     };
   },
-  migrate(s: any): IScene {
+  migrate(scene: any): IScene {
     try {
-      const v2: IScene = migrateV1SceneToV2(s);
-      return v2;
+      const migrate = Migrator.makeMigrationFunction<IScene>([
+        {
+          from: 1,
+          migrate: migrateV1SceneToV2,
+        },
+        {
+          from: 2,
+          migrate: migrateV2SceneToV3,
+        },
+      ]);
+      const migrated = migrate(scene);
+      return migrated;
     } catch (error) {
       console.error(error);
-      return s;
+      return scene;
     }
   },
 };
 
 function migrateV1SceneToV2(v1: ISceneV1): IScene {
-  if (v1.version !== 1) {
-    return v1 as unknown as IScene;
-  }
-
   const publicIndexCards: Array<IIndexCard> = [];
   const privateIndexCards: Array<IIndexCard> = [];
 
@@ -196,4 +204,25 @@ function aspectToIndexCard(aspect: IAspectV1, aspectId: string): IIndexCard {
     subCards: [],
     sub: false,
   };
+}
+
+function migrateV2SceneToV3(v2: IScene): IScene {
+  const v3 = produce(v2, (draft) => {
+    const allIndexCards = [
+      ...draft.indexCards.public,
+      ...draft.indexCards.private,
+    ];
+    allIndexCards.forEach((indexCard) => {
+      indexCard.blocks.forEach((block) => {
+        block.label = block.label?.toUpperCase();
+      });
+      indexCard.subCards.forEach((subCard) => {
+        subCard.blocks.forEach((block) => {
+          block.label = block.label?.toUpperCase();
+        });
+      });
+    });
+    draft.version = 3;
+  });
+  return v3;
 }

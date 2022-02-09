@@ -12,20 +12,20 @@ import { FontFamily } from "../../../../constants/FontFamily";
 import { ICharacter } from "../../../../domains/character/types";
 import { defaultThemeConfiguration } from "../../../../theme";
 
-export const CharacterSheetThemeContext = createContext<ISuperTheme>(
-  undefined as unknown as ISuperTheme
+export const MiniThemeContext = createContext<IMiniTheme>(
+  undefined as unknown as IMiniTheme
 );
 
-export function useCharacterSheetTheme(props: {
-  character: ICharacter | undefined;
-  enforceDefaultBackground?: boolean;
+export function useMiniTheme(props: {
+  character?: ICharacter | undefined;
+  enforceBackground?: string;
 }) {
   const theme = useTheme();
   const defaultBackground = theme.palette.background.paper;
-  const background =
-    props.character?.theme?.backgroundColor && !props.enforceDefaultBackground
-      ? props.character.theme.backgroundColor
-      : defaultBackground;
+  const background = props.enforceBackground
+    ? props.enforceBackground
+    : props.character?.theme?.backgroundColor ?? defaultBackground;
+
   const textPrimary = getTextColor(theme, background);
   const textPrimaryInverted = getTextColor(theme, textPrimary);
   const isDarkTheme = textPrimary === "#fff";
@@ -91,7 +91,7 @@ export function useCharacterSheetTheme(props: {
     return responsiveFontSizes(createTheme(options));
   }, [background, textPrimary, textSecondary]);
 
-  const superTheme = {
+  const miniTheme = {
     backgroundColor: background,
     fontImport: fontImport,
     primaryColor: primaryColor,
@@ -120,10 +120,10 @@ export function useCharacterSheetTheme(props: {
     muiTheme: muiTheme,
   };
 
-  return superTheme;
+  return miniTheme;
 }
 
-export type ISuperTheme = ReturnType<typeof useCharacterSheetTheme>;
+export type IMiniTheme = ReturnType<typeof useMiniTheme>;
 
 function getTextColor(theme: Theme, background: string) {
   try {

@@ -49,6 +49,10 @@ import { BetterDnd } from "../../routes/Character/components/BetterDnD/BetterDnd
 import { AddBlock } from "../../routes/Character/components/CharacterDialog/components/AddBlock";
 import { BlockByType } from "../../routes/Character/components/CharacterDialog/components/BlockByType";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+import {
+  MiniThemeContext as MiniThemeContext,
+  useMiniTheme,
+} from "../../routes/Character/components/CharacterDialog/MiniThemeContext";
 import { ConditionalWrapper } from "../ConditionalWrapper/ConditionalWrapper";
 import {
   ContentEditable,
@@ -145,12 +149,16 @@ export const IndexCard: React.FC<
   const { t } = useTranslate();
 
   const [hover, setHover] = useState(false);
-  const $paletteButton = useRef<HTMLButtonElement | null>(null);
+
   const $menu = useRef(null);
   const indexCardManager = useIndexCard({
     indexCard: props.indexCard,
     onChange: props.onChange,
   });
+  const miniTheme = useMiniTheme({
+    enforceBackground: indexCardManager.state.indexCard.color,
+  });
+
   const hasSubCards = indexCardManager.state.indexCard.subCards.length > 0;
   const isSubCard = indexCardManager.state.indexCard.sub;
 
@@ -177,129 +185,131 @@ export const IndexCard: React.FC<
   const defaultButtonTheme = useThemeFromColor(paper.primary);
 
   return (
-    <Paper
-      elevation={indexCardManager.state.indexCard.pinned ? 4 : 2}
-      className={props.className}
-    >
-      <Box
-        pb={!props.isGM ? "1rem" : "0"}
-        bgcolor={paper.bgColor}
-        color={paper.primary}
-        onClick={() => {
-          setHover(true);
-        }}
-        onPointerEnter={() => {
-          setHover(true);
-        }}
-        onPointerLeave={() => {
-          setHover(false);
-        }}
-        position="relative"
+    <MiniThemeContext.Provider value={miniTheme}>
+      <Paper
+        elevation={indexCardManager.state.indexCard.pinned ? 4 : 2}
+        className={props.className}
       >
-        <ConditionalWrapper
-          condition={props.canMove}
-          wrapper={(children) => {
-            return (
-              <BetterDnd
-                direction="horizontal"
-                key={indexCardManager.state.indexCard.id}
-                index={props.reactDndIndex}
-                type={props.reactDndType}
-                onMove={(dragIndex, hoverIndex) => {
-                  props.onMove(dragIndex, hoverIndex);
-                }}
-                render={(dndRenderProps) => {
-                  return (
-                    <>
-                      <div ref={dndRenderProps.drag}>
-                        <Tooltip title={t("character-dialog.control.move")}>
-                          <IconButton
-                            size="small"
-                            className={css({
-                              position: "absolute",
-                              marginTop: ".5rem",
-                              marginLeft: ".25rem",
-                              cursor: "drag",
-                              display:
-                                !props.canMove || !props.isGM
-                                  ? "none"
-                                  : "block",
-                            })}
-                          >
-                            <DragIndicatorIcon
-                              className={css({
-                                transition: theme.transitions.create("color"),
-                              })}
-                              htmlColor={
-                                dndRenderProps.isOver
-                                  ? paper.primary
-                                  : paper.secondary
-                              }
-                            />
-                          </IconButton>
-                        </Tooltip>
-                      </div>
-                      {children}
-                    </>
-                  );
-                }}
-              />
-            );
+        <Box
+          pb={!props.isGM ? "1rem" : "0"}
+          bgcolor={paper.bgColor}
+          color={paper.primary}
+          onClick={() => {
+            setHover(true);
           }}
+          onPointerEnter={() => {
+            setHover(true);
+          }}
+          onPointerLeave={() => {
+            setHover(false);
+          }}
+          position="relative"
         >
-          <Box>
-            <Grid container>
-              <Grid item xs={12} lg={hasSubCards ? 3 : 12}>
-                <Box display="flex" height="100%" flexDirection="column">
-                  <ThemeProvider theme={defaultButtonTheme}>
-                    <Box
-                      className={css({
-                        fontSize: "1.5rem",
-                        width: "100%",
-                        padding: "0.5rem 0",
-                        borderBottom: `1px solid ${
-                          indexCardManager.state.indexCard.color === "#fff"
-                            ? "#f0a4a4"
-                            : paper.primary
-                        }`,
-                      })}
-                    >
-                      <Box px="1rem">
-                        {renderHeader()}
-                        {renderTitle()}
+          <ConditionalWrapper
+            condition={props.canMove}
+            wrapper={(children) => {
+              return (
+                <BetterDnd
+                  direction="horizontal"
+                  key={indexCardManager.state.indexCard.id}
+                  index={props.reactDndIndex}
+                  type={props.reactDndType}
+                  onMove={(dragIndex, hoverIndex) => {
+                    props.onMove(dragIndex, hoverIndex);
+                  }}
+                  render={(dndRenderProps) => {
+                    return (
+                      <>
+                        <div ref={dndRenderProps.drag}>
+                          <Tooltip title={t("character-dialog.control.move")}>
+                            <IconButton
+                              size="small"
+                              className={css({
+                                position: "absolute",
+                                marginTop: ".5rem",
+                                marginLeft: ".25rem",
+                                cursor: "drag",
+                                display:
+                                  !props.canMove || !props.isGM
+                                    ? "none"
+                                    : "block",
+                              })}
+                            >
+                              <DragIndicatorIcon
+                                className={css({
+                                  transition: theme.transitions.create("color"),
+                                })}
+                                htmlColor={
+                                  dndRenderProps.isOver
+                                    ? paper.primary
+                                    : paper.secondary
+                                }
+                              />
+                            </IconButton>
+                          </Tooltip>
+                        </div>
+                        {children}
+                      </>
+                    );
+                  }}
+                />
+              );
+            }}
+          >
+            <Box>
+              <Grid container>
+                <Grid item xs={12} lg={hasSubCards ? 3 : 12}>
+                  <Box display="flex" height="100%" flexDirection="column">
+                    <ThemeProvider theme={defaultButtonTheme}>
+                      <Box
+                        className={css({
+                          fontSize: "1.5rem",
+                          width: "100%",
+                          padding: "0.5rem 0",
+                          borderBottom: `1px solid ${
+                            indexCardManager.state.indexCard.color === "#fff"
+                              ? "#f0a4a4"
+                              : paper.primary
+                          }`,
+                        })}
+                      >
+                        <Box px="1rem">
+                          {renderHeader()}
+                          {renderTitle()}
+                        </Box>
                       </Box>
-                    </Box>
-                    <Collapse in={open}>
-                      <Box>
-                        <Box>{renderContent()}</Box>
-                        <Box>{renderBlocks()}</Box>
-                      </Box>
-                    </Collapse>
-                    {renderSkills()}
-                    {renderGMActions()}
-                  </ThemeProvider>
-                </Box>
-              </Grid>
-              {hasSubCards && (
-                <Grid
-                  item
-                  xs={12}
-                  lg={9}
-                  className={css({
-                    background:
-                      paper.type === "light"
-                        ? darken(paper.bgColor, 0.1)
-                        : lighten(paper.bgColor, 0.2),
-                  })}
-                >
-                  {renderSubCards()}
+                      <Collapse in={open}>
+                        <Box>
+                          <Box>{renderContent()}</Box>
+                          <Box>{renderBlocks()}</Box>
+                        </Box>
+                      </Collapse>
+                      {renderSkills()}
+                      {renderGMActions()}
+                    </ThemeProvider>
+                  </Box>
                 </Grid>
-              )}
-            </Grid>
-          </Box>
-        </ConditionalWrapper>
-      </Box>
-    </Paper>
+                {hasSubCards && (
+                  <Grid
+                    item
+                    xs={12}
+                    lg={9}
+                    className={css({
+                      background:
+                        paper.type === "light"
+                          ? darken(paper.bgColor, 0.1)
+                          : lighten(paper.bgColor, 0.2),
+                    })}
+                  >
+                    {renderSubCards()}
+                  </Grid>
+                )}
+              </Grid>
+            </Box>
+          </ConditionalWrapper>
+        </Box>
+      </Paper>
+    </MiniThemeContext.Provider>
   );
 
   function renderGMActions() {
@@ -327,7 +337,7 @@ export const IndexCard: React.FC<
                     return (
                       <IconButton
                         size="small"
-                        ref={renderProps.ref.current}
+                        ref={renderProps.ref}
                         data-cy={`${props["data-cy"]}.palette`}
                         onClick={() => {
                           renderProps.setColorPickerOpen((prev) => !prev);

@@ -1,11 +1,10 @@
 import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import React, { useContext } from "react";
 import { ContentEditable } from "../../../../../components/ContentEditable/ContentEditable";
-import { CharacterSheetThemeContext } from "../CharacterSheetThemeContext";
+import { MiniThemeContext } from "../MiniThemeContext";
 
 export const SheetHeader: React.FC<{
   label: string;
@@ -13,32 +12,21 @@ export const SheetHeader: React.FC<{
   actions?: React.ReactNode;
   advanced: boolean;
 }> = (props) => {
-  const theme = useTheme();
-  const characterSheetTheme = useContext(CharacterSheetThemeContext);
-
-  // const isVisible =
-  //   props.label !== undefined &&
-  //   (!!previewContentEditable({ value: props.label }) || props.advanced);
-
-  // if (!isVisible) {
-  //   return null;
-  // }
+  const miniTheme = useContext(MiniThemeContext);
 
   return (
     <Box mb=".5rem">
       <Box
         className={css({
-          background: characterSheetTheme.hideSectionBackground
+          background: miniTheme.hideSectionBackground
             ? undefined
-            : characterSheetTheme.textPrimary,
+            : miniTheme.textPrimary,
 
-          color: characterSheetTheme.hideSectionBackground
-            ? characterSheetTheme.textPrimary
-            : characterSheetTheme.textPrimaryInverted,
+          color: miniTheme.hideSectionBackground
+            ? miniTheme.textPrimary
+            : miniTheme.textPrimaryInverted,
           width: "100%",
-          padding: characterSheetTheme.hideSectionBackground
-            ? "0 .5rem"
-            : ".5rem",
+          padding: miniTheme.hideSectionBackground ? "0 .5rem" : ".5rem",
         })}
       >
         <Grid
@@ -51,16 +39,16 @@ export const SheetHeader: React.FC<{
           <Grid item xs>
             <Typography
               className={css({
-                fontFamily: characterSheetTheme.sectionHeadingFontFamily,
-                fontSize: `${characterSheetTheme.sectionHeadingFontSize}rem`,
-                fontWeight: characterSheetTheme.sectionHeadingFontWeight,
+                fontFamily: miniTheme.sectionHeadingFontFamily,
+                fontSize: `${miniTheme.sectionHeadingFontSize}rem`,
+                fontWeight: miniTheme.sectionHeadingFontWeight,
               })}
             >
               <ContentEditable
                 data-cy={`character-dialog.${props.label}.label`}
                 readonly={!props.advanced || !props.onLabelChange}
                 border={props.advanced && !!props.onLabelChange}
-                borderColor={characterSheetTheme.textPrimaryInverted}
+                borderColor={miniTheme.textPrimaryInverted}
                 value={props.label}
                 onChange={(newLabel) => {
                   props.onLabelChange?.(newLabel);

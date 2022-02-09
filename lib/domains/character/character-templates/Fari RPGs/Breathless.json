@@ -187,7 +187,7 @@
     }
   ],
   "template": "Blank",
-  "version": 5,
+  "version": 6,
   "theme": {
     "fontImport": "@import url('http://fonts.cdnfonts.com/css/cheddar-gothic-stencil');\n\n@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');",
     "backgroundColor": "#ffffff",

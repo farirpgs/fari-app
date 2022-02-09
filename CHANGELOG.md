@@ -2,6 +2,18 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
+# vNext
+
+- [ ] copy index cards blocks
+- [ ]: update slot tracker in character card
+- [ ]: lowest/highest dice roller result
+
+# vTheme Editor
+
+- feat: new character sheet theme editor
+- feat: new themed sheets by Fari RPGs and Pandion Games
+- [ ] Label migration
+
 # v6.0.0
 
 - feat: new cloud infra for real time features
@@ -10,12 +22,6 @@
 - feat: copy/paste blocks from character sheets
 - [ ] readonly draw area
 - [ ] draw area tokens
-
-**v6.next**
-
-- [ ] copy index cards blocks
-- [ ]: update slot tracker in character card
-- [ ]: lowest/highest dice roller result
 
 # v5.3
 

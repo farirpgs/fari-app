@@ -21,7 +21,7 @@ import { ISlotTrackerBlock } from "../../../../../../domains/character/types";
 import { Id } from "../../../../../../domains/Id/Id";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
-import { CharacterSheetThemeContext } from "../../CharacterSheetThemeContext";
+import { MiniThemeContext } from "../../MiniThemeContext";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
@@ -312,14 +312,14 @@ function Clock(props: {
   onClick: (sliceIndex: number) => void;
 }) {
   const theme = useTheme();
-  const characterSheetTheme = useContext(CharacterSheetThemeContext);
+  const miniTheme = useContext(MiniThemeContext);
   const uuid = useState(() => Id.generate())[0];
   const circleCx = 55;
   const circleCy = 55;
   const circleR = 50;
   const filledColor = true
     ? `url(#fari-slot-tracker-clock-pattern-${uuid})`
-    : characterSheetTheme.textPrimary;
+    : miniTheme.textPrimary;
   const checkedSliceStyle = css({
     fill: filledColor,
     cursor: props.disabled ? "inherit" : "pointer",
@@ -360,7 +360,7 @@ function Clock(props: {
             y1="0"
             x2="5"
             y2="5"
-            stroke={characterSheetTheme.textPrimary}
+            stroke={miniTheme.textPrimary}
             strokeWidth="1"
           />
         </pattern>
@@ -372,7 +372,7 @@ function Clock(props: {
           cy={circleCy}
           r={circleR}
           fill={props.slices[0] ? filledColor : "transparent"}
-          stroke={characterSheetTheme.textPrimary}
+          stroke={miniTheme.textPrimary}
           strokeWidth="4px"
           className={sliceStyle}
           onClick={() => {
@@ -414,7 +414,7 @@ function Clock(props: {
               d={d}
               key={i}
               className={checked ? checkedSliceStyle : sliceStyle}
-              stroke={characterSheetTheme.textPrimary}
+              stroke={miniTheme.textPrimary}
               strokeWidth="4px"
               onClick={() => {
                 if (props.disabled) {

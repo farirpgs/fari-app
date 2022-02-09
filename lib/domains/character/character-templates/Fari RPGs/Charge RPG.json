@@ -552,7 +552,7 @@
       ]
     }
   ],
-  "version": 5,
+  "version": 6,
   "theme": {
     "fontImport": "@import url('https://fonts.googleapis.com/css2?family=Inter&family=Oswald&display=swap');",
     "pageHeadingFontFamily": "Oswald",

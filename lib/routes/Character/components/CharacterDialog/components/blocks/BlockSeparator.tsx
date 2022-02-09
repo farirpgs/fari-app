@@ -8,7 +8,7 @@ import React, { useContext } from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { ISeparatorBlock } from "../../../../../../domains/character/types";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
-import { CharacterSheetThemeContext } from "../../CharacterSheetThemeContext";
+import { MiniThemeContext } from "../../MiniThemeContext";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
@@ -19,7 +19,7 @@ export function BlockSeparator(props: IBlockComponentProps<ISeparatorBlock>) {
   const theme = useTheme();
   const dividerHeight = "3px";
   const dividerMargin = ".5rem 0";
-  const characterSheetTheme = useContext(CharacterSheetThemeContext);
+  const miniTheme = useContext(MiniThemeContext);
 
   if (props.block.meta.hideDivider) {
     return null;
@@ -41,7 +41,7 @@ export function BlockSeparator(props: IBlockComponentProps<ISeparatorBlock>) {
                     className={css({
                       height: dividerHeight,
                       margin: dividerMargin,
-                      backgroundColor: characterSheetTheme.borderColor,
+                      backgroundColor: miniTheme.textPrimary,
                     })}
                   />
                 </Grid>
@@ -77,7 +77,7 @@ export function BlockSeparator(props: IBlockComponentProps<ISeparatorBlock>) {
                       className={css({
                         height: dividerHeight,
                         margin: dividerMargin,
-                        backgroundColor: characterSheetTheme.borderColor,
+                        backgroundColor: miniTheme.textPrimary,
                       })}
                     />
                   </Grid>

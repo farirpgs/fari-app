@@ -74,15 +74,12 @@ import { LazyState } from "../../../../hooks/useLazyState/useLazyState";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { useCharacter } from "../../hooks/useCharacter";
-import {
-  CharacterSheetThemeContext,
-  useCharacterSheetTheme,
-} from "./CharacterSheetThemeContext";
 import { AddBlock } from "./components/AddBlock";
 import { AddSection } from "./components/AddSection";
 import { BlockByType } from "./components/BlockByType";
 import { SheetHeader } from "./components/SheetHeader";
 import { ThemedLabel } from "./components/ThemedLabel";
+import { MiniThemeContext, useMiniTheme } from "./MiniThemeContext";
 
 export const smallIconButtonStyle = css({
   label: "CharacterDialog-small-icon-button",
@@ -140,11 +137,11 @@ export const CharacterV3Dialog: React.FC<{
   const [savedSnack, setSavedSnack] = useState(false);
   const charactersManager = useContext(CharactersContext);
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
-  const characterSheetTheme = useCharacterSheetTheme({
+  const miniTheme = useMiniTheme({
     character: characterManager.state.character,
   });
 
-  const hasCharacterSheetTheme = !!characterManager.state.character?.theme;
+  const hasMiniTheme = !!characterManager.state.character?.theme;
 
   const [tab, setTab] = useState<string>("0");
   const currentPageIndex = parseInt(tab);
@@ -218,7 +215,7 @@ export const CharacterV3Dialog: React.FC<{
 
   return (
     <>
-      <style>{characterSheetTheme.fontImport}</style>
+      <style>{miniTheme.fontImport}</style>
       <Prompt
         when={characterManager.state.dirty}
         message={t("manager.leave-without-saving")}
@@ -242,7 +239,7 @@ export const CharacterV3Dialog: React.FC<{
           {t("character-dialog.saved")}
         </Alert>
       </Snackbar>
-      <CharacterSheetThemeContext.Provider value={characterSheetTheme}>
+      <MiniThemeContext.Provider value={miniTheme}>
         {renderSheet()}
         <Drawer
           anchor={"left"}
@@ -264,7 +261,7 @@ export const CharacterV3Dialog: React.FC<{
         >
           {renderThemeEditor()}
         </Drawer>
-      </CharacterSheetThemeContext.Provider>
+      </MiniThemeContext.Provider>
     </>
   );
 
@@ -274,7 +271,7 @@ export const CharacterV3Dialog: React.FC<{
 
     if (props.dialog && characterManager.state.character) {
       return (
-        <ThemeProvider theme={characterSheetTheme.muiTheme}>
+        <ThemeProvider theme={miniTheme.muiTheme}>
           <Dialog
             open={props.open}
             fullWidth
@@ -285,7 +282,7 @@ export const CharacterV3Dialog: React.FC<{
             classes={{
               paper: css({
                 height: "100%",
-                background: characterSheetTheme.backgroundColor,
+                background: miniTheme.backgroundColor,
               }),
             }}
           >
@@ -335,11 +332,11 @@ export const CharacterV3Dialog: React.FC<{
     }
 
     return (
-      <ThemeProvider theme={characterSheetTheme.muiTheme}>
+      <ThemeProvider theme={miniTheme.muiTheme}>
         <Box
           className={css({
-            color: characterSheetTheme.textPrimary,
-            backgroundColor: characterSheetTheme.backgroundColor,
+            color: miniTheme.textPrimary,
+            backgroundColor: miniTheme.backgroundColor,
           })}
         >
           <Container maxWidth={maxWidth}>
@@ -457,7 +454,7 @@ export const CharacterV3Dialog: React.FC<{
                 scrollButtons="auto"
                 classes={{
                   flexContainer: css({
-                    borderBottom: `1px solid ${characterSheetTheme.borderColor}`,
+                    borderBottom: `1px solid ${miniTheme.borderColor}`,
                   }),
                   indicator: css({
                     display: "none",
@@ -474,27 +471,21 @@ export const CharacterV3Dialog: React.FC<{
                       disableRipple
                       key={page.id}
                       className={css({
-                        // color: `${characterSheetTheme.textPrimary} !important`,
-                        // marginRight: ".5rem",
-                        // // Pentagone
-                        // // https://bennettfeely.com/clippy/
                         marginRight: ".5rem",
-                        // clipPath:
-                        //   "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
                         color: `${
-                          true // characterSheetTheme.hideTabBackground
-                            ? characterSheetTheme.textPrimary
-                            : characterSheetTheme.textPrimaryInverted
+                          true // miniTheme.hideTabBackground
+                            ? miniTheme.textPrimary
+                            : miniTheme.textPrimaryInverted
                         } !important`,
-                        background: true // characterSheetTheme.hideTabBackground
+                        background: true // miniTheme.hideTabBackground
                           ? undefined
-                          : characterSheetTheme.textPrimary,
+                          : miniTheme.textPrimary,
                         transition: "border linear 200ms",
                         borderBottom: `4px solid ${
                           isCurrentTab
-                            ? true // characterSheetTheme.hideTabBackground
-                              ? characterSheetTheme.textPrimary
-                              : characterSheetTheme.textPrimaryInverted
+                            ? true // miniTheme.hideTabBackground
+                              ? miniTheme.textPrimary
+                              : miniTheme.textPrimaryInverted
                             : "transparent"
                         }`,
                         marginBottom: `-2px`,
@@ -503,11 +494,9 @@ export const CharacterV3Dialog: React.FC<{
                       label={
                         <Typography
                           className={css({
-                            fontFamily:
-                              characterSheetTheme.pageHeadingFontFamily,
-                            fontSize: `${characterSheetTheme.pageHeadingFontSize}rem`,
-                            fontWeight:
-                              characterSheetTheme.pageHeadingFontWeight,
+                            fontFamily: miniTheme.pageHeadingFontFamily,
+                            fontSize: `${miniTheme.pageHeadingFontSize}rem`,
+                            fontWeight: miniTheme.pageHeadingFontWeight,
                             textTransform: "none",
                             width: "100%",
                           })}
@@ -519,9 +508,9 @@ export const CharacterV3Dialog: React.FC<{
                             readonly={!advanced}
                             border={advanced}
                             borderColor={
-                              characterSheetTheme.hideTabBackground
-                                ? characterSheetTheme.textPrimaryInverted
-                                : characterSheetTheme.textPrimary
+                              miniTheme.hideTabBackground
+                                ? miniTheme.textPrimaryInverted
+                                : miniTheme.textPrimary
                             }
                             onChange={(newValue) => {
                               characterManager.actions.renamePage(
@@ -653,14 +642,14 @@ export const CharacterV3Dialog: React.FC<{
                 className={css({
                   label: "CharacterDialog-tab-panel",
                   padding: "0",
-                  background: characterSheetTheme.backgroundColor,
+                  background: miniTheme.backgroundColor,
                 })}
               >
                 <Box
                   position="relative"
                   className={css({
-                    background: characterSheetTheme.backgroundColor,
-                    color: characterSheetTheme.textPrimary,
+                    background: miniTheme.backgroundColor,
+                    color: miniTheme.textPrimary,
                     paddingTop: ".5rem",
                   })}
                 >
@@ -675,7 +664,7 @@ export const CharacterV3Dialog: React.FC<{
                         readonly={!advanced}
                         advancedBoxProps={{
                           padding: ".5rem",
-                          bgcolor: characterSheetTheme.boxBackgroundColor,
+                          bgcolor: miniTheme.boxBackgroundColor,
                         }}
                         label={<>Row #{rowIndex + 1}</>}
                         rightActions={
@@ -713,9 +702,7 @@ export const CharacterV3Dialog: React.FC<{
                                       }}
                                     >
                                       <ArrowUpwardIcon
-                                        htmlColor={
-                                          characterSheetTheme.textSecondary
-                                        }
+                                        htmlColor={miniTheme.textSecondary}
                                         className={css({
                                           fontSize: "1rem",
                                         })}
@@ -806,8 +793,7 @@ export const CharacterV3Dialog: React.FC<{
                                       advancedBoxProps={{
                                         padding: ".5rem",
                                         height: "100%",
-                                        bgcolor:
-                                          characterSheetTheme.box2BackgroundColor,
+                                        bgcolor: miniTheme.box2BackgroundColor,
                                       }}
                                       label={<>Column #{columnIndex + 1}</>}
                                       topActions={
@@ -1112,9 +1098,9 @@ export const CharacterV3Dialog: React.FC<{
                               {section.visibleOnCard ? (
                                 <VisibilityIcon
                                   htmlColor={
-                                    characterSheetTheme.hideSectionBackground
-                                      ? characterSheetTheme.textPrimary
-                                      : characterSheetTheme.textPrimaryInverted
+                                    miniTheme.hideSectionBackground
+                                      ? miniTheme.textPrimary
+                                      : miniTheme.textPrimaryInverted
                                   }
                                   className={css({
                                     fontSize: "1rem",
@@ -1123,9 +1109,9 @@ export const CharacterV3Dialog: React.FC<{
                               ) : (
                                 <VisibilityOffIcon
                                   htmlColor={
-                                    characterSheetTheme.hideSectionBackground
-                                      ? characterSheetTheme.textPrimary
-                                      : characterSheetTheme.textPrimaryInverted
+                                    miniTheme.hideSectionBackground
+                                      ? miniTheme.textPrimary
+                                      : miniTheme.textPrimaryInverted
                                   }
                                   className={css({
                                     fontSize: "1rem",
@@ -1157,9 +1143,9 @@ export const CharacterV3Dialog: React.FC<{
                               >
                                 <ArrowUpwardIcon
                                   htmlColor={
-                                    characterSheetTheme.hideSectionBackground
-                                      ? characterSheetTheme.textPrimary
-                                      : characterSheetTheme.textPrimaryInverted
+                                    miniTheme.hideSectionBackground
+                                      ? miniTheme.textPrimary
+                                      : miniTheme.textPrimaryInverted
                                   }
                                   className={css({
                                     fontSize: "1rem",
@@ -1191,9 +1177,9 @@ export const CharacterV3Dialog: React.FC<{
                               >
                                 <ArrowDownwardIcon
                                   htmlColor={
-                                    characterSheetTheme.hideSectionBackground
-                                      ? characterSheetTheme.textPrimary
-                                      : characterSheetTheme.textPrimaryInverted
+                                    miniTheme.hideSectionBackground
+                                      ? miniTheme.textPrimary
+                                      : miniTheme.textPrimaryInverted
                                   }
                                   className={css({
                                     fontSize: "1rem",
@@ -1219,9 +1205,9 @@ export const CharacterV3Dialog: React.FC<{
                             >
                               <FileCopyIcon
                                 htmlColor={
-                                  characterSheetTheme.hideSectionBackground
-                                    ? characterSheetTheme.textPrimary
-                                    : characterSheetTheme.textPrimaryInverted
+                                  miniTheme.hideSectionBackground
+                                    ? miniTheme.textPrimary
+                                    : miniTheme.textPrimaryInverted
                                 }
                                 className={css({
                                   fontSize: "1rem",
@@ -1255,9 +1241,9 @@ export const CharacterV3Dialog: React.FC<{
                             >
                               <DeleteIcon
                                 htmlColor={
-                                  characterSheetTheme.hideSectionBackground
-                                    ? characterSheetTheme.textPrimary
-                                    : characterSheetTheme.textPrimaryInverted
+                                  miniTheme.hideSectionBackground
+                                    ? miniTheme.textPrimary
+                                    : miniTheme.textPrimaryInverted
                                 }
                                 className={css({
                                   fontSize: "1rem",
@@ -1449,7 +1435,7 @@ export const CharacterV3Dialog: React.FC<{
                       window.open(`/characters/${props.character?.id}/print`);
                     }}
                   >
-                    <PrintIcon htmlColor={characterSheetTheme.textPrimary} />
+                    <PrintIcon htmlColor={miniTheme.textPrimary} />
                   </IconButton>
                 </Tooltip>
               </Grid>
@@ -1472,7 +1458,7 @@ export const CharacterV3Dialog: React.FC<{
                     }
                   }}
                 >
-                  <DeleteIcon htmlColor={characterSheetTheme.textPrimary} />
+                  <DeleteIcon htmlColor={miniTheme.textPrimary} />
                 </IconButton>
               </Tooltip>
             </Grid>
@@ -1488,7 +1474,7 @@ export const CharacterV3Dialog: React.FC<{
                     );
                   }}
                 >
-                  <ExportIcon htmlColor={characterSheetTheme.textPrimary} />
+                  <ExportIcon htmlColor={miniTheme.textPrimary} />
                 </IconButton>
               </Tooltip>
             </Grid>
@@ -1507,7 +1493,7 @@ export const CharacterV3Dialog: React.FC<{
                         );
                       }}
                     >
-                      <ShareIcon htmlColor={characterSheetTheme.textPrimary} />
+                      <ShareIcon htmlColor={miniTheme.textPrimary} />
                     </IconButton>
                   </Tooltip>
                 </Grid>
@@ -1524,7 +1510,7 @@ export const CharacterV3Dialog: React.FC<{
                     setThemeEditorVisible(true);
                   }}
                 >
-                  <PaletteIcon htmlColor={characterSheetTheme.textPrimary} />
+                  <PaletteIcon htmlColor={miniTheme.textPrimary} />
                 </IconButton>
               </Tooltip>
             </Grid>
@@ -1570,10 +1556,10 @@ export const CharacterV3Dialog: React.FC<{
               <Switch
                 color="primary"
                 data-cy="character-dialog.toggle-advanced"
-                checked={hasCharacterSheetTheme}
+                checked={hasMiniTheme}
                 onClick={(e) => {
                   e.stopPropagation();
-                  if (hasCharacterSheetTheme) {
+                  if (hasMiniTheme) {
                     characterManager.actions.removeTheme();
                   } else {
                     characterManager.actions.setTheme();
@@ -1802,7 +1788,7 @@ export const CharacterV3Dialog: React.FC<{
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  disabled={!hasCharacterSheetTheme}
+                  disabled={!hasMiniTheme}
                   label="Font @import"
                   placeholder="@import url('https://fonts.googleapis.com/css2?family="
                   fullWidth
@@ -1918,7 +1904,7 @@ export const CharacterV3Dialog: React.FC<{
                         InputLabelProps={{
                           shrink: true,
                         }}
-                        disabled={!hasCharacterSheetTheme}
+                        disabled={!hasMiniTheme}
                         label={`Font Family`}
                         placeholder={FontFamily.Default.split(",").join(", ")}
                         fullWidth
@@ -1972,7 +1958,7 @@ export const CharacterV3Dialog: React.FC<{
                         <InputLabel shrink>{`Font Size`}</InputLabel>
                         <Slider
                           defaultValue={renderProps.initialFontSize}
-                          disabled={!hasCharacterSheetTheme}
+                          disabled={!hasMiniTheme}
                           step={0.125}
                           min={0.5}
                           max={3}
@@ -2019,9 +2005,9 @@ export const CharacterV3Dialog: React.FC<{
               <Grid item xs>
                 <Typography
                   className={css({
-                    fontFamily: characterSheetTheme.textFontFamily,
-                    fontSize: `${characterSheetTheme.textFontSize}rem`,
-                    fontWeight: characterSheetTheme.textFontWeight,
+                    fontFamily: miniTheme.textFontFamily,
+                    fontSize: `${miniTheme.textFontSize}rem`,
+                    fontWeight: miniTheme.textFontWeight,
                   })}
                 >
                   <ContentEditable
@@ -2087,11 +2073,9 @@ export const CharacterV3Dialog: React.FC<{
                               classes: {
                                 input: css({
                                   paddingBottom: "0 !important",
-                                  fontFamily:
-                                    characterSheetTheme.textFontFamily,
-                                  fontSize: `${characterSheetTheme.textFontSize}rem`,
-                                  fontWeight:
-                                    characterSheetTheme.textFontWeight,
+                                  fontFamily: miniTheme.textFontFamily,
+                                  fontSize: `${miniTheme.textFontSize}rem`,
+                                  fontWeight: miniTheme.textFontWeight,
                                 }),
                               },
                             }}
@@ -2167,7 +2151,7 @@ export const CharacterV3Dialog: React.FC<{
                     }}
                     advancedBoxProps={{
                       padding: ".5rem",
-                      bgcolor: characterSheetTheme.backgroundColor,
+                      bgcolor: miniTheme.backgroundColor,
                     }}
                     readonly={!advanced}
                     topActions={

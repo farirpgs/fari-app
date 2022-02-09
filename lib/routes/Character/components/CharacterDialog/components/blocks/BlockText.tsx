@@ -11,7 +11,7 @@ import {
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { ITextBlock } from "../../../../../../domains/character/types";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
-import { CharacterSheetThemeContext } from "../../CharacterSheetThemeContext";
+import { MiniThemeContext } from "../../MiniThemeContext";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
@@ -27,7 +27,7 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
     props.block.meta?.checked === true || props.block.meta?.checked === false;
 
   const isFieldVisible = props.block.value !== undefined;
-  const characterSheetTheme = useContext(CharacterSheetThemeContext);
+  const miniTheme = useContext(MiniThemeContext);
 
   return (
     <>
@@ -45,7 +45,7 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
                   <ContentEditable
                     readonly={props.readonly || !props.advanced}
                     border={props.advanced}
-                    borderColor={characterSheetTheme.borderColor}
+                    borderColor={miniTheme.borderColor}
                     data-cy={`${props.dataCy}.label`}
                     value={props.block.label || ""}
                     onChange={(value) => {
@@ -59,14 +59,14 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
               <Box>
                 <Typography
                   className={css({
-                    fontFamily: characterSheetTheme.textFontFamily,
-                    fontSize: `${characterSheetTheme.textFontSize}rem`,
-                    fontWeight: characterSheetTheme.textFontWeight,
+                    fontFamily: miniTheme.textFontFamily,
+                    fontSize: `${miniTheme.textFontSize}rem`,
+                    fontWeight: miniTheme.textFontWeight,
                   })}
                 >
                   <ContentEditable
                     border
-                    borderColor={characterSheetTheme.borderColor}
+                    borderColor={miniTheme.borderColor}
                     data-cy={`${props.dataCy}.value`}
                     readonly={props.readonly}
                     value={props.block.value ?? ""}
