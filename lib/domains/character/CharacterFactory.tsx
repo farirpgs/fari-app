@@ -27,7 +27,7 @@ import {
   IV3Section,
   IV4Character,
   IV4Page,
-  V3Position,
+  V3Position
 } from "./types";
 
 export const CharacterFactory = {

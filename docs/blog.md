@@ -107,7 +107,7 @@ Lets talk about the elephant in the room: **Character Sheets**!
 
 When Fari was initially released in December 2019, managing character wasn't even something that you could do with the app.
 
-Then, you all have been very vocal (in a good way) about the fact that managing characters should be part of the core experience of playing table-top RPGs online.
+Then, you all have been very vocal (in a good way) about the fact that managing characters should be part of the core experience of playing tabletop RPGs online.
 
 Since then, I released two different iteration of the character sheet framework and now is the time for a third take on this.
 

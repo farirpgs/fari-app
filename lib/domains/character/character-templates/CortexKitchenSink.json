@@ -1,0 +1,729 @@
+{
+  "name": "Cortex Kitchen Sink Template Template",
+  "lastUpdated": 1641493679,
+  "wide": true,
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "Character",
+      "sections": {
+        "left": [
+          {
+            "id": "bf15d86c-ef21-4fd6-be35-f17485107af3",
+            "label": "Distinctions",
+            "blocks": [
+              {
+                "id": "distinction1",
+                "label": "Distinction 1",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d8"],
+                  "helperText": "additional flavor&nbsp; or notes here",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "f960d192-491a-4c3b-8018-bd2c5e57753d",
+                "label": "SFX - Hinder",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d4"],
+                  "helperText": "Use this in lieu of a D8 Distinction to gain a Plot Point",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "cf999c8d-2f0f-4110-af1c-9f0cd75a05a9",
+                "label": "SFX Name",
+                "type": "Text",
+                "value": "SFX Effect",
+                "meta": {}
+              },
+              {
+                "id": "9a38e9b1-523c-49f6-a101-2f1d956fd95c",
+                "label": "SFX Name",
+                "type": "Text",
+                "value": "SFX Effect",
+                "meta": {}
+              },
+              {
+                "id": "213e5083-0d59-4e94-a2e2-da74418411d2",
+                "label": "DISTINCTION 2",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d8"],
+                  "width": 0.5,
+                  "helperText": "additional flavor  or notes here"
+                }
+              },
+              {
+                "id": "147f4c49-e602-4f5c-9c72-94d74978999c",
+                "label": "SFX - Hinder",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d4"],
+                  "helperText": "Use this in lieu of a D8 Distinction to gain a Plot Point",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "4efaa15c-c7ce-4288-892a-1affe843220d",
+                "label": "SFX Name",
+                "type": "Text",
+                "value": "SFX Effect",
+                "meta": {}
+              },
+              {
+                "id": "b63ead9a-3d97-42ae-ab5a-f881c436a9ba",
+                "label": "SFX Name",
+                "type": "Text",
+                "value": "SFX Effect",
+                "meta": {}
+              },
+              {
+                "id": "46397d3f-c5fa-40f0-93f0-bbf80ce22a5d",
+                "label": "DISTINCTION 3",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d8"],
+                  "width": 0.5,
+                  "helperText": "additional flavor  or notes here"
+                }
+              },
+              {
+                "id": "1e95e558-617e-4dde-8a8e-5285748711ee",
+                "label": "SFX - Hinder",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d4"],
+                  "helperText": "Use this in lieu of a D8 Distinction to gain a Plot Point",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "7509ee86-ba80-401a-87bb-8e53b63da34c",
+                "label": "SFX Name",
+                "type": "Text",
+                "value": "SFX Effect",
+                "meta": {}
+              },
+              {
+                "id": "213e3d40-4704-4a75-964f-bec014eb4c7f",
+                "label": "SFX Name",
+                "type": "Text",
+                "value": "SFX Effect",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "23e7560b-c66d-4017-966d-d39b8246a840",
+            "label": "Trait Set with out SFX",
+            "blocks": [
+              {
+                "id": "88fb0c1e-3e9d-47ac-a698-8891a2ed8d30",
+                "label": "CortexRPG.com#PrimeSets",
+                "type": "Link",
+                "meta": { "hasDisplayName": true, "helperText": "" },
+                "value": "https://www.cortexrpg.com/compendium/cortex-prime-game-handbook/prime-characters#PrimeSets"
+              },
+              {
+                "id": "899fbe0a-b5a9-460a-a3ee-bb8283539be9",
+                "label": "Agility",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d6"], "width": 0.5 }
+              },
+              {
+                "id": "fb2b04d5-1a51-4373-b77d-231600fec3ec",
+                "label": "Alertness",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d8"], "width": 0.5 }
+              },
+              {
+                "id": "f0e7d9c1-3a7d-4685-b971-bc6ddcec4d38",
+                "label": "Intelligence",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d8"], "width": 0.5 }
+              },
+              {
+                "id": "afef38f4-3c98-45aa-9746-19989c2805ff",
+                "label": "Strength",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d6"], "width": 0.5 }
+              },
+              {
+                "id": "49e8a075-95cb-4a10-bc5a-3ae570dd4f4d",
+                "label": "Vitality",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              },
+              {
+                "id": "7051d915-50ff-4213-847c-d16eb4f32c29",
+                "label": "Willpower",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              }
+            ]
+          },
+          {
+            "id": "5e58e2d0-11f9-40e0-9532-c7375fe3fc79",
+            "label": "Trait Set with attached Stress",
+            "blocks": [
+              {
+                "id": "4f2f82a0-6036-468b-b730-7ccd01b0402c",
+                "label": "CortexRPG.com#PrimeSets",
+                "type": "Link",
+                "meta": { "hasDisplayName": true, "helperText": "" },
+                "value": "https://www.cortexrpg.com/compendium/cortex-prime-game-handbook/prime-characters#PrimeSets"
+              },
+              {
+                "id": "20e0aebb-287e-4d18-a563-11ec34402d25",
+                "label": "Physical",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d6"], "width": 0.5 }
+              },
+              {
+                "id": "ea4a33c2-179f-4e34-8128-8784a68c2943",
+                "label": "Stress",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": [], "width": 0.5 }
+              },
+              {
+                "id": "de1f408a-136a-4120-aab8-8f1690ae7233",
+                "label": "Social",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d8"], "width": 0.5 }
+              },
+              {
+                "id": "c9c97805-3dbc-4d51-a757-aa569c3d8160",
+                "label": "Stress",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": [], "width": 0.5 }
+              },
+              {
+                "id": "20764e72-e49f-4063-8a41-1d60c7d98e22",
+                "label": "Mental",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              },
+              {
+                "id": "de4aaac7-0e25-4413-8463-b016fef1795e",
+                "label": "Stress",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": [], "width": 0.5 }
+              }
+            ]
+          },
+          {
+            "id": "76e32b0b-a3d1-4d1d-8832-c52e248467f1",
+            "label": "REsources",
+            "blocks": [
+              {
+                "id": "65bc4896-c8b6-4c78-9299-650bd67c2ad8",
+                "label": "CortexRPG.com/#Resources",
+                "type": "Link",
+                "meta": { "hasDisplayName": true },
+                "value": "https://www.cortexrpg.com/compendium/cortex-prime-game-handbook/prime-characters#Resources"
+              },
+              {
+                "id": "8ff82334-f8f0-4d6a-92bc-68f43bc3fa09",
+                "label": "Resource Name",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d6", "1d6"],
+                  "helperText": "Change the total of dice being rolled to the total committed per roll. Use the tracker to track usage",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "6f94b4af-c7c9-483c-a47b-7d84e5d5b1a3",
+                "label": "",
+                "type": "SlotTracker",
+                "meta": { "width": 0.5 },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "4924bca7-4fe1-4cdc-9d46-e715b3fe4e18",
+            "label": "Plot Points",
+            "blocks": [
+              {
+                "id": "585a87c1-d907-46f3-bc3f-3072acdd1dac",
+                "label": "",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": true },
+                "value": "0"
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "5029bccd-3992-4d9e-a229-cb8e8e594f85",
+            "label": "Trait Set with SFX and/or Trait Statements",
+            "blocks": [
+              {
+                "id": "94511713-068f-4b47-abc1-c042d588747d",
+                "label": "CortexRPG.com#SixStandardSFX",
+                "type": "Link",
+                "meta": { "hasDisplayName": true },
+                "value": "https://www.cortexrpg.com/compendium/cortex-prime-game-handbook/prime-characters#SixStandardSFX"
+              },
+              {
+                "id": "cb7839ec-2b05-4058-bd56-945c4548dbf6",
+                "label": "Physical ",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d6"],
+                  "helperText": "Copy and label me per trait.&nbsp; Traits with SFX generally start with 2. Each trait generally has at most 3 SFX later<br>You could also use this section for Trait Statements or repurpose the SFX text blocks for that usage<br>",
+                  "checked": false
+                }
+              },
+              {
+                "id": "e5a66fd5-b5ca-4b41-861e-181db70acbdc",
+                "label": "Exchange - Rename me for theme:",
+                "type": "Text",
+                "value": "Step Up\\Double [Trait] for a scene Step Down [Trait]. Recover by [method]",
+                "meta": {}
+              },
+              {
+                "id": "f274af88-348f-4f61-a220-365f631d1522",
+                "label": "Price - RENAME ME FOR THEME:",
+                "type": "Text",
+                "value": "Crate a [narrative label] d8 scene asset. But gain [narrative label] d8 complication. ",
+                "meta": {}
+              },
+              {
+                "id": "0023f1b3-c084-49c0-a312-4f12d5ce07cf",
+                "label": "Swap - RENAME ME FOR THEME:",
+                "type": "Text",
+                "value": "Spend a PP to use [Trait] for [narrative trigger] instead of another trait ",
+                "meta": {}
+              },
+              {
+                "id": "1a910ac0-7f2e-40a1-99f3-a9e7d70a7e0f",
+                "label": "Shutdown - RENAME ME FOR THEME:",
+                "type": "Text",
+                "value": "Gain a PP when you say you can't use  [Trait(s)] because of [narrative trigger]",
+                "meta": {}
+              },
+              {
+                "id": "22644d5c-5bc4-418c-ab18-4cdfa1bbcd4c",
+                "label": "Shutdown - RENAME ME FOR THEME:",
+                "type": "Text",
+                "value": "Gain a PP when you say you can't use  [Trait(s)] because of [narrative trigger]",
+                "meta": {}
+              },
+              {
+                "id": "a43fe5f1-354a-4ad8-b036-26f7710c34f0",
+                "label": "Edit - RENAME ME FOR THEME:",
+                "type": "Text",
+                "value": "Spend a PP to to make a [narrative truth] related to [Trait]",
+                "meta": {}
+              },
+              {
+                "id": "0d9dc8d7-30f2-4d73-90e6-dc38eb8885a0",
+                "label": "Folly - RENAME ME FOR THEME:",
+                "type": "Text",
+                "value": "Gain a PP when making trouble for yourself or party because of [Trait]",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "74cf4aa9-22dc-4176-80de-7c8f7848dc2d",
+            "label": "Power Set Example - Fae",
+            "blocks": [
+              {
+                "id": "7d712c70-cac2-45dd-9e8c-521afb731b34",
+                "label": "Illusions",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d10"] }
+              },
+              {
+                "id": "01bc3362-52f0-47f7-af61-bede1304882b",
+                "label": "Bargained Boons",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d8"] }
+              },
+              {
+                "id": "21ce73ce-f04e-4b65-932d-9c0a727068db",
+                "label": "SFX - A Grand Feast",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Spend a PP to conjure an illusionary grand feast. This can be laid over existing food stuffs and drinks. Your guests will never know.&nbsp;"
+                }
+              },
+              {
+                "id": "eea1b9a8-aad8-4b50-bc08-9fa356423541",
+                "label": "SFX - A Bargain Struck",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "With their agreement, create a d8 Glamour for some one else, but they gain a d8 Fae's Bargain complication. If they have a Fae's Bargain already step it up twice instead.&nbsp;"
+                }
+              },
+              {
+                "id": "b20d1428-e37c-4311-b3a1-cf0c957a9911",
+                "label": "Limit - Cold IRon",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Shutdown Fae when burdened with Cold Iron to gain a PP"
+                }
+              }
+            ]
+          },
+          {
+            "id": "cfebcecf-a99f-44d1-b12c-86d88d922e49",
+            "label": "Skills",
+            "blocks": [
+              {
+                "id": "e7f97b90-e3b9-4ff3-879f-fe722ca7f114",
+                "label": "CortexRPG.com#Skills",
+                "type": "Link",
+                "meta": { "hasDisplayName": true },
+                "value": "https://www.cortexrpg.com/compendium/cortex-prime-game-handbook/prime-characters#Skills"
+              },
+              {
+                "id": "8350ac40-0f14-43d5-9405-73f0a5845eb7",
+                "label": "Craft",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "dd3d67a4-8fec-4a0e-a1c6-7f61e5b094d6",
+                "label": "",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d6"],
+                  "width": 0.5,
+                  "helperText": "Specialty 1"
+                }
+              },
+              {
+                "id": "9b06e61c-32fb-4a0b-98bd-1d716a497a8d",
+                "label": "Drive",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "6bdcde21-27a0-452a-8e46-663898ee92c7",
+                "label": "Fight",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "2834641f-35fa-4b10-9e55-9758f6b532f3",
+                "label": "Fix",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "c3ab6320-ece6-463e-a853-97a96cb382c1",
+                "label": "Fly",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "c91a39d5-ca74-49ce-a923-f10ca3937429",
+                "label": "Focus",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "90083561-5be4-469e-b923-05355f2f3663",
+                "label": "Influence",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "42dc3574-2c3b-47bc-a906-2221e31bfc19",
+                "label": "Know",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d8"], "width": 0.5 }
+              },
+              {
+                "id": "9c03c505-2d21-40df-9627-c573bf9c1902",
+                "label": "Labor",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "434799a0-a59f-4f85-bfe7-9718201d34de",
+                "label": "Move",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "1c09ae19-9b26-47d0-aa4c-d50364c1cf9e",
+                "label": "Notice",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "3a101c6c-8edd-4051-b647-02f2586cef2f",
+                "label": "Operate",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "2ce8b2c3-27b0-4f47-8d2a-b572de05dc0f",
+                "label": "Perform",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "9862040b-1119-4d30-bdb6-1e921cbecdc7",
+                "label": "Shoot",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "995bc2f2-a901-4d41-b03b-c41e7ba80797",
+                "label": "Sneak",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "9e1b2149-f6bb-4a12-bc45-7c48e9452813",
+                "label": "Treat",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "6ddc9c0d-3898-4a96-9de8-b6b0b679e2d5",
+                "label": "Trick",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "918c2083-0701-4507-b240-77ccfa398d82",
+                "label": "Survive",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "04dceedb-0d7f-4c31-ae85-6c88d72b01fa",
+                "label": "THrow",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "5936bcb1-a9bf-4334-9886-0145eb0fe18d",
+      "sections": {
+        "left": [
+          {
+            "id": "37fa0a28-69b6-4d4a-9f40-9c51577c00c0",
+            "label": "Earn Them",
+            "blocks": [
+              {
+                "id": "e8d8d3ff-654f-4b98-af21-955b7252cbcc",
+                "label": "Earning Plot Points",
+                "type": "Link",
+                "meta": { "hasDisplayName": true },
+                "value": "https://www.cortexrpg.com/compendium/cortex-prime-game-handbook/prime-core#EarningPlotPointsasaPlayer"
+              },
+              {
+                "id": "a4c5b780-8fce-4fac-8ca8-836178d05c04",
+                "label": "",
+                "type": "Text",
+                "value": "On a Hitch",
+                "meta": {}
+              },
+              {
+                "id": "e92a5c64-0bca-4445-a5a2-26028a833f5d",
+                "label": "",
+                "type": "Text",
+                "value": "Giving In",
+                "meta": {
+                  "helperText": "Giving In once you've rolled in a contest and been bested., rather than roll again you can give in for a PP"
+                }
+              },
+              {
+                "id": "160918dd-4ffe-44ec-a581-68e32ce8e0cc",
+                "label": "",
+                "type": "Text",
+                "value": "From an SFX",
+                "meta": {
+                  "helperText": "Some SFX allow you to earn PP for taking certain narrative actions"
+                }
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "42a0f500-c33a-4106-84a5-6ab3bc6f9e8b",
+            "label": "Spend Them",
+            "blocks": [
+              {
+                "id": "fc0ffa35-80d9-452f-9226-e137d86ce08e",
+                "label": "Spending Plot Points",
+                "type": "Link",
+                "meta": { "hasDisplayName": true },
+                "value": "https://www.cortexrpg.com/compendium/cortex-prime-game-handbook/prime-core#SpendingPlotPointsasaPlayer"
+              },
+              {
+                "id": "7d154454-a0c6-4055-bea1-3812443d1a3d",
+                "label": "",
+                "type": "Text",
+                "value": "Add More Dice",
+                "meta": {
+                  "helperText": "Add an additional Trait to your Pool with an explanation as to how it applies"
+                }
+              },
+              {
+                "id": "ce67e1bf-829c-4d2d-ae0a-93b25421650c",
+                "label": "",
+                "type": "Text",
+                "value": "Activate an Opportunity",
+                "meta": {
+                  "helperText": "To step down a complication or step up an asset"
+                }
+              },
+              {
+                "id": "70ed8011-75eb-4949-90a0-7d39e3e24669",
+                "label": "",
+                "type": "Text",
+                "value": "Create a Relationship",
+                "meta": {
+                  "helperText": "For the session, create a d6 relationship to a character you didn't previously have a relationship with"
+                }
+              },
+              {
+                "id": "aaf8af8b-88e7-4c11-b72c-aa7c8e45bef1",
+                "label": "",
+                "type": "Text",
+                "value": "Create an Asset",
+                "meta": {
+                  "helperText": "For the scene, create a d6 asset. Give it to yourself or someone else"
+                }
+              },
+              {
+                "id": "d8215eef-86d0-4e4d-a845-7a4b2f9c3ea4",
+                "label": "",
+                "type": "Text",
+                "value": "Extend an Asset",
+                "meta": {
+                  "helperText": "Change a scene asset to a session asset"
+                }
+              },
+              {
+                "id": "934b9f0f-9a02-4b0b-ab7c-c0566739bb10",
+                "label": "",
+                "type": "Text",
+                "value": "Interfere in a Contest",
+                "meta": {
+                  "helperText": "Change a scene asset to a session asset"
+                }
+              },
+              {
+                "id": "f88036eb-8334-418a-8815-d079353b6716",
+                "label": "",
+                "type": "Text",
+                "value": "Share an Asset",
+                "meta": {
+                  "helperText": "Make an asset available to other characters in a scene"
+                }
+              },
+              {
+                "id": "294c9c5e-df10-413e-96fb-a813accaa107",
+                "label": "",
+                "type": "Text",
+                "value": "Include More Results",
+                "meta": {
+                  "helperText": "Add an extra unhitched die from you pool to your total."
+                }
+              },
+              {
+                "id": "96aea46f-011f-48dc-938b-0fc59a47de24",
+                "label": "",
+                "type": "Text",
+                "value": "Roll a Hero Die",
+                "meta": {
+                  "helperText": "Roll and add a Hero Die to your total. This can be done after all rolls before a resolution is narrated"
+                }
+              },
+              {
+                "id": "752b018f-503e-40f5-bef1-c6d6ec00c2bd",
+                "label": "",
+                "type": "Text",
+                "value": "Keep an extra Effect Die",
+                "meta": {
+                  "helperText": "Roll and add a Hero Die to your total. This can be done after all rolls before a resolution is narrated"
+                }
+              },
+              {
+                "id": "2904d664-857b-4afd-aa8d-a1139d3e8fb1",
+                "label": "",
+                "type": "Text",
+                "value": "Stay in the fight",
+                "meta": {
+                  "helperText": "Roll and add a Hero Die to your total. This can be done after all rolls before a resolution is narrated"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "label": "Plot Point Ref"
+    }
+  ],
+  "template": "Blank",
+  "version": 4,
+  "fariType": "character"
+}
