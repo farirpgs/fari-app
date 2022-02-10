@@ -31,13 +31,12 @@ import Select from "@mui/material/Select";
 import { darken, lighten, ThemeProvider, useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import { default as React, useContext, useRef, useState } from "react";
+import { default as React, useRef, useState } from "react";
 import { ChromePicker } from "react-color";
 import { Delays } from "../../constants/Delays";
 import { FontFamily } from "../../constants/FontFamily";
-import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
-import { IDiceRollResult, IRollGroup } from "../../domains/dice/Dice";
+import { IDiceRollResult } from "../../domains/dice/Dice";
 import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
@@ -58,7 +57,6 @@ import {
   ContentEditable,
   previewContentEditable,
 } from "../ContentEditable/ContentEditable";
-import { IndexCardSkills } from "./domains/IndexCardSkills";
 import { useIndexCard } from "./hooks/useIndexCard";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
 
@@ -161,11 +159,6 @@ export const IndexCard: React.FC<
 
   const hasSubCards = indexCardManager.state.indexCard.subCards.length > 0;
   const isSubCard = indexCardManager.state.indexCard.sub;
-
-  const indexCardSkills = IndexCardSkills.getSkills(
-    indexCardManager.state.indexCard.content
-  );
-  const diceManager = useContext(DiceContext);
   const [advanced, setAdvanced] = useState(false);
   const open = !props.indexCardHiddenRecord?.[props.indexCard.id];
   const numberOfColumnsForSubCards = useResponsiveValue({
@@ -280,11 +273,9 @@ export const IndexCard: React.FC<
                       </Box>
                       <Collapse in={open}>
                         <Box>
-                          <Box>{renderContent()}</Box>
                           <Box>{renderBlocks()}</Box>
                         </Box>
                       </Collapse>
-                      {renderSkills()}
                       {renderGMActions()}
                     </ThemeProvider>
                   </Box>
@@ -715,59 +706,6 @@ export const IndexCard: React.FC<
     );
   }
 
-  function renderSkills() {
-    const hasSkills = indexCardSkills.length > 0;
-
-    return (
-      <Collapse in={hasSkills && props.isGM}>
-        <Box px="1rem" py=".5rem">
-          <Grid container spacing={1} alignItems="center">
-            {indexCardSkills.map((skill, skillIndex) => {
-              return (
-                <Grid item key={skillIndex}>
-                  <Link
-                    className={css([
-                      {
-                        cursor: !props.isGM ? "inherit" : "pointer",
-                      },
-                      !props.isGM && {
-                        "color": theme.palette.text.primary,
-                        "&:hover": {
-                          textDecoration: "none",
-                        },
-                      },
-                    ])}
-                    data-cy={`index-card.skill.${skill.label}`}
-                    onClick={() => {
-                      if (!props.isGM) {
-                        return;
-                      }
-                      const modifier = parseInt(skill.modifier) || 0;
-                      const commandOptionList: Array<IRollGroup> = [
-                        {
-                          label: skill.label,
-                          modifier: modifier,
-                          commandSets: [{ id: "4dF" }],
-                        },
-                      ];
-
-                      const result =
-                        diceManager.actions.roll(commandOptionList);
-                      props.onRoll(result);
-                    }}
-                    underline="hover"
-                  >
-                    {skill.label} ({skill.modifier})
-                  </Link>
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Box>
-      </Collapse>
-    );
-  }
-
   function renderHeader() {
     const dragIconMargin = "1.5rem";
     return (
@@ -940,43 +878,6 @@ export const IndexCard: React.FC<
           />
         </Grid>
       </Grid>
-    );
-  }
-
-  function renderContent() {
-    return (
-      <Box
-        className={css({
-          fontSize: "1.1rem",
-          lineHeight: "1.7rem",
-          padding: "0.5rem 0",
-          width: "100%",
-        })}
-      >
-        <Box px="1rem">
-          <Typography variant="overline">
-            <ContentEditable
-              data-cy={`${props["data-cy"]}.content-label`}
-              value={indexCardManager.state.indexCard.contentLabel}
-              onChange={(newLabel) => {
-                indexCardManager.actions.setContentLabel(newLabel);
-              }}
-            />
-          </Typography>
-        </Box>
-
-        <Box p="0 1rem">
-          <ContentEditable
-            data-cy={`${props["data-cy"]}.content`}
-            border
-            placeholder="..."
-            value={indexCardManager.state.indexCard.content}
-            onChange={(newContent) => {
-              indexCardManager.actions.setContent(newContent);
-            }}
-          />
-        </Box>
-      </Box>
     );
   }
 };

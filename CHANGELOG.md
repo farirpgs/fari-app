@@ -7,12 +7,15 @@
 - [ ] copy index cards blocks
 - [ ]: update slot tracker in character card
 - [ ]: lowest/highest dice roller result
+- [ ] draw area tokens
+- [ ] highlight die
+- [ ] support image die (narrative system)
 
 # vTheme Editor
 
 - feat: new character sheet theme editor
 - feat: new themed sheets by Fari RPGs and Pandion Games
-- [ ] Label migration
+- feat: migrated data to support new themes
 
 # v6.0.0
 
@@ -20,8 +23,6 @@
 - feat: new drawing area
 - feat: character sheet now support rows and columns
 - feat: copy/paste blocks from character sheets
-- [ ] readonly draw area
-- [ ] draw area tokens
 
 # v5.3
 

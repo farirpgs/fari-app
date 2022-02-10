@@ -11,9 +11,12 @@ import { AspectType } from "../../hooks/useScene/AspectType";
 import {
   IAspectV1,
   IIndexCard,
+  IIndexCardForV2Scene,
   IScene,
   ISceneV1,
+  IV2Scene,
 } from "../../hooks/useScene/IScene";
+import { CharacterFactory } from "../character/CharacterFactory";
 import { BlockType, IBlock } from "../character/types";
 import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../Id/Id";
@@ -51,8 +54,6 @@ export const SceneFactory = {
       id: Id.generate(),
       titleLabel: "Index Card",
       title: "",
-      contentLabel: "Notes",
-      content: "",
       color: "#fff",
       playedDuringTurn: false,
       pinned: false,
@@ -66,8 +67,6 @@ export const SceneFactory = {
       id: Id.generate(),
       titleLabel: "Index Card",
       title: "",
-      contentLabel: "Notes",
-      content: "",
       color: "#fff",
       playedDuringTurn: false,
       pinned: false,
@@ -153,7 +152,10 @@ function migrateV1SceneToV2(v1: ISceneV1): IScene {
   };
 }
 
-function aspectToIndexCard(aspect: IAspectV1, aspectId: string): IIndexCard {
+function aspectToIndexCard(
+  aspect: IAspectV1,
+  aspectId: string
+): IIndexCardForV2Scene {
   const blocks: Array<IBlock> = [];
 
   for (const track of aspect.tracks) {
@@ -206,23 +208,32 @@ function aspectToIndexCard(aspect: IAspectV1, aspectId: string): IIndexCard {
   };
 }
 
-function migrateV2SceneToV3(v2: IScene): IScene {
+function migrateV2SceneToV3(v2: IV2Scene): IScene {
   const v3 = produce(v2, (draft) => {
     const allIndexCards = [
       ...draft.indexCards.public,
       ...draft.indexCards.private,
     ];
     allIndexCards.forEach((indexCard) => {
-      indexCard.blocks.forEach((block) => {
-        block.label = block.label?.toUpperCase();
-      });
-      indexCard.subCards.forEach((subCard) => {
-        subCard.blocks.forEach((block) => {
-          block.label = block.label?.toUpperCase();
-        });
-      });
+      migrateIndexCard(indexCard);
     });
     draft.version = 3;
   });
+
+  function migrateIndexCard(indexCard: IIndexCardForV2Scene) {
+    const contentBlock = CharacterFactory.makeBlock(BlockType.Text);
+    contentBlock.label = indexCard.contentLabel;
+    indexCard.contentLabel = undefined;
+    contentBlock.value = indexCard.content;
+    indexCard.content = undefined;
+
+    indexCard.blocks.unshift(contentBlock);
+    indexCard.blocks.forEach((block) => {
+      block.label = block.label?.toUpperCase();
+    });
+    indexCard.subCards.forEach((subCard) => {
+      migrateIndexCard(subCard);
+    });
+  }
   return v3;
 }

@@ -1,8 +1,8 @@
 {
-  "id": "bf6607ec-3c21-4147-9a74-198a9e208aea",
-  "name": "Charge",
-  "lastUpdated": 1644154580,
-  "wide": false,
+  "fariType": "character",
+  "id": "2755d81d-abcf-4137-8f03-df29c9e66192",
+  "lastUpdated": 1644440907,
+  "name": "Charge Default",
   "pages": [
     {
       "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
@@ -552,7 +552,6 @@
       ]
     }
   ],
-  "version": 6,
   "theme": {
     "fontImport": "@import url('https://fonts.googleapis.com/css2?family=Inter&family=Oswald&display=swap');",
     "pageHeadingFontFamily": "Oswald",
@@ -562,9 +561,9 @@
     "sectionHeadingFontSize": 1.625,
     "labelFontSize": 1.5,
     "textFontFamily": "Inter",
-    "backgroundColor": "#324149",
+    "backgroundColor": "#ffffff",
     "textFontSize": 1.25
   },
-  "group": "jjjjijijij",
-  "fariType": "character"
+  "version": 6,
+  "wide": false
 }
