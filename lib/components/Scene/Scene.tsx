@@ -1,5 +1,6 @@
 import { css } from "@emotion/css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import CreateIcon from "@mui/icons-material/Create";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import ErrorIcon from "@mui/icons-material/Error";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
@@ -793,6 +794,18 @@ export const Session: React.FC<IProps> = (props) => {
               flexWrap: "wrap",
             })}
           >
+            {playersWithCharacterSheets.length === 0 && (
+              <Box>
+                <Typography variant="h6" color="textSecondary">
+                  No character sheets have been loaded yet.
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  To assign a character sheet to a player, click on their{" "}
+                  <CreateIcon /> button, and select the character sheet you want
+                  to use.
+                </Typography>
+              </Box>
+            )}
             {playersWithCharacterSheets.map((player, index) => {
               const isMe = props.userId === player.id;
               const canControl = isGM || isMe;
@@ -885,6 +898,13 @@ export const Session: React.FC<IProps> = (props) => {
         <TabbedScreen
           tabs={[
             {
+              value: "characters",
+              dataCy: "session.tabs.scene",
+              label: t("menu.characters"),
+              icon: <PeopleAltIcon />,
+              render: renderCharacterCards,
+            },
+            {
               value: "scene",
               dataCy: "session.tabs.characters",
               label: t("menu.scenes"),
@@ -917,13 +937,7 @@ export const Session: React.FC<IProps> = (props) => {
                 />
               ),
             },
-            {
-              value: "characters",
-              dataCy: "session.tabs.scene",
-              label: t("menu.characters"),
-              icon: <PeopleAltIcon />,
-              render: renderCharacterCards,
-            },
+
             {
               value: "draw",
               dataCy: "session.tabs.draw",
@@ -1111,7 +1125,7 @@ export function Scene(props: {
           <Grid container justifyContent="center">
             <Grid item>
               <Typography variant="h6" color="textSecondary">
-                {"No Scene Currently in Play"}
+                {"No Scene has been loaded yet."}
               </Typography>
             </Grid>
           </Grid>
