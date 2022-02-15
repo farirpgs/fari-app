@@ -22,6 +22,7 @@ export function useMiniTheme(props: {
 }) {
   const theme = useTheme();
   const defaultBackground = theme.palette.background.paper;
+
   const background = props.enforceBackground
     ? props.enforceBackground
     : props.character?.theme?.backgroundColor ?? defaultBackground;
@@ -57,6 +58,16 @@ export function useMiniTheme(props: {
     props.character?.theme?.textFontFamily || FontFamily.Default;
   const textFontSize = props.character?.theme?.textFontSize || 1;
   const textFontWeight = props.character?.theme?.textFontWeight || "normal";
+  const infoTextFontFamily =
+    props.character?.theme?.infoTextFontFamily || FontFamily.Default;
+  const infoTextFontSize = props.character?.theme?.infoTextFontSize || 1;
+  const infoTextFontWeight =
+    props.character?.theme?.infoTextFontWeight || "normal";
+  const helperTextFontFamily =
+    props.character?.theme?.helperTextFontFamily || FontFamily.Default;
+  const helperTextFontSize = props.character?.theme?.helperTextFontSize || 0.75;
+  const helperTextFontWeight =
+    props.character?.theme?.helperTextFontWeight || "normal";
 
   const primaryColor =
     props.character?.theme?.primaryColor || theme.palette.primary.main;
@@ -110,6 +121,12 @@ export function useMiniTheme(props: {
     textFontFamily: textFontFamily,
     textFontSize: textFontSize,
     textFontWeight: textFontWeight,
+    infoTextFontFamily: infoTextFontFamily,
+    infoTextFontSize: infoTextFontSize,
+    infoTextFontWeight: infoTextFontWeight,
+    helperTextFontFamily: helperTextFontFamily,
+    helperTextFontSize: helperTextFontSize,
+    helperTextFontWeight: helperTextFontWeight,
 
     textPrimary: textPrimary,
     textSecondary: textSecondary,

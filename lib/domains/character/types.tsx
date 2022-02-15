@@ -297,6 +297,12 @@ export type ICharacterTheme = {
   textFontFamily?: string;
   textFontSize?: number;
   textFontWeight?: any;
+  helperTextFontFamily?: string;
+  helperTextFontSize?: number;
+  helperTextFontWeight?: any;
+  infoTextFontFamily?: string;
+  infoTextFontSize?: number;
+  infoTextFontWeight?: any;
 };
 
 export interface ICharacter {

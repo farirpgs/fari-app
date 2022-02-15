@@ -16,7 +16,6 @@ import {
 import { ThemedLabel } from "../ThemedLabel";
 
 export function BlockSeparator(props: IBlockComponentProps<ISeparatorBlock>) {
-  const theme = useTheme();
   const dividerHeight = "3px";
   const dividerMargin = ".5rem 0";
   const miniTheme = useContext(MiniThemeContext);

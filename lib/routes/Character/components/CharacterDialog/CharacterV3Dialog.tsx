@@ -8,6 +8,7 @@ import CircleIcon from "@mui/icons-material/Circle";
 import CloseIcon from "@mui/icons-material/Close";
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import ExportIcon from "@mui/icons-material/GetApp";
 import PaletteIcon from "@mui/icons-material/Palette";
@@ -18,6 +19,9 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
 import Alert from "@mui/material/Alert";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
@@ -108,8 +112,6 @@ const ZoomOptions = [
     value: 0.6,
   },
 ];
-
-const borderSize = 2;
 
 export const CharacterV3Dialog: React.FC<{
   open: boolean;
@@ -1575,6 +1577,10 @@ export const CharacterV3Dialog: React.FC<{
 
           {renderBasicThemeEditorControls()}
 
+          <Typography gutterBottom variant="h6">
+            Fonts
+          </Typography>
+
           {renderFontThemeEditorControls({
             label: "Pages",
             initialFontSize: 1.25,
@@ -1669,6 +1675,55 @@ export const CharacterV3Dialog: React.FC<{
             onFontWeightChange: (fontWeight) => {
               characterManager.actions.setTheme((theme) => {
                 theme.textFontWeight = fontWeight;
+              });
+            },
+          })}
+          {renderFontThemeEditorControls({
+            label: "Info Text",
+            initialFontSize: 1,
+            fontFamily:
+              characterManager.state.character?.theme?.infoTextFontFamily,
+            fontSize: characterManager.state.character?.theme?.infoTextFontSize,
+            fontWeight:
+              characterManager.state.character?.theme?.infoTextFontWeight,
+            onFontFamilyChange: (fontFamily) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.infoTextFontFamily = fontFamily;
+              });
+            },
+            onFontSizeChange: (fontSize) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.infoTextFontSize = fontSize;
+              });
+            },
+            onFontWeightChange: (fontWeight) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.infoTextFontWeight = fontWeight;
+              });
+            },
+          })}
+          {renderFontThemeEditorControls({
+            label: "Help Text",
+            initialFontSize: 0.75,
+            fontFamily:
+              characterManager.state.character?.theme?.helperTextFontFamily,
+            fontSize:
+              characterManager.state.character?.theme?.helperTextFontSize,
+            fontWeight:
+              characterManager.state.character?.theme?.helperTextFontWeight,
+            onFontFamilyChange: (fontFamily) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.helperTextFontFamily = fontFamily;
+              });
+            },
+            onFontSizeChange: (fontSize) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.helperTextFontSize = fontSize;
+              });
+            },
+            onFontWeightChange: (fontWeight) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.helperTextFontWeight = fontWeight;
               });
             },
           })}
@@ -1883,99 +1938,123 @@ export const CharacterV3Dialog: React.FC<{
     ];
     return (
       <>
-        <Typography gutterBottom variant="h6">
-          {renderProps.label}
-        </Typography>
-
-        <Box mb="1rem">
-          <Box mb="1rem">
-            <Grid container spacing={2} wrap="nowrap" alignItems="flex-start">
-              <Grid item xs>
-                <LazyState
-                  delay={Delays.field}
-                  value={renderProps.fontFamily}
-                  onChange={(value) => {
-                    renderProps.onFontFamilyChange(value);
-                  }}
-                  render={([value, setValue]) => {
-                    return (
-                      <TextField
-                        variant="standard"
-                        InputLabelProps={{
-                          shrink: true,
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1bh-content"
+            id="panel1bh-header"
+          >
+            <Typography sx={{ width: "33%", flexShrink: 0 }}>
+              {renderProps.label}
+            </Typography>
+            <Typography sx={{ color: "text.secondary" }}>
+              {/* ... */}
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Box mb="1rem">
+              <Box mb="1rem">
+                <Grid
+                  container
+                  spacing={2}
+                  wrap="nowrap"
+                  alignItems="flex-start"
+                >
+                  <Grid item xs>
+                    <LazyState
+                      delay={Delays.field}
+                      value={renderProps.fontFamily}
+                      onChange={(value) => {
+                        renderProps.onFontFamilyChange(value);
+                      }}
+                      render={([value, setValue]) => {
+                        return (
+                          <TextField
+                            variant="standard"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            disabled={!hasMiniTheme}
+                            label={`Font Family`}
+                            placeholder={FontFamily.Default.split(",").join(
+                              ", "
+                            )}
+                            fullWidth
+                            multiline
+                            value={value}
+                            onChange={(e) => {
+                              setValue(e.target.value);
+                            }}
+                          />
+                        );
+                      }}
+                    />
+                  </Grid>
+                </Grid>
+              </Box>
+              <Box>
+                <Grid
+                  container
+                  spacing={2}
+                  wrap="nowrap"
+                  alignItems="flex-start"
+                >
+                  <Grid item xs>
+                    <FormControl fullWidth>
+                      <InputLabel shrink variant="standard">
+                        Font Weight
+                      </InputLabel>
+                      <NativeSelect
+                        // defaultValue=""
+                        value={renderProps.fontWeight || ""}
+                        onChange={(event) => {
+                          renderProps.onFontWeightChange(event.target.value);
                         }}
-                        disabled={!hasMiniTheme}
-                        label={`Font Family`}
-                        placeholder={FontFamily.Default.split(",").join(", ")}
-                        fullWidth
-                        multiline
-                        value={value}
-                        onChange={(e) => {
-                          setValue(e.target.value);
-                        }}
-                      />
-                    );
-                  }}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-          <Box>
-            <Grid container spacing={2} wrap="nowrap" alignItems="flex-start">
-              <Grid item xs>
-                <FormControl fullWidth>
-                  <InputLabel shrink variant="standard">
-                    Font Weight
-                  </InputLabel>
-                  <NativeSelect
-                    defaultValue=""
-                    value={renderProps.fontWeight || ""}
-                    onChange={(event) => {
-                      renderProps.onFontWeightChange(event.target.value);
-                    }}
-                  >
-                    <option value="">None</option>
-                    {fontWeights.map((fw) => {
-                      return (
-                        <option key={fw} value={fw}>
-                          {fw}
-                        </option>
-                      );
-                    })}
-                  </NativeSelect>
-                </FormControl>
-              </Grid>
-              <Grid item xs>
-                <LazyState
-                  delay={Delays.field}
-                  value={renderProps.fontSize}
-                  onChange={(value) => {
-                    renderProps.onFontSizeChange(value);
-                  }}
-                  render={([value, setValue]) => {
-                    return (
-                      <>
-                        <InputLabel shrink>{`Font Size`}</InputLabel>
-                        <Slider
-                          defaultValue={renderProps.initialFontSize}
-                          disabled={!hasMiniTheme}
-                          step={0.125}
-                          min={0.5}
-                          max={3}
-                          valueLabelDisplay="auto"
-                          value={value}
-                          onChange={(e, value) => {
-                            setValue(value as number);
-                          }}
-                        />
-                      </>
-                    );
-                  }}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
+                      >
+                        <option value="">None</option>
+                        {fontWeights.map((fw) => {
+                          return (
+                            <option key={fw} value={fw}>
+                              {fw}
+                            </option>
+                          );
+                        })}
+                      </NativeSelect>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs>
+                    <LazyState
+                      delay={Delays.field}
+                      value={renderProps.fontSize}
+                      onChange={(value) => {
+                        renderProps.onFontSizeChange(value);
+                      }}
+                      render={([value, setValue]) => {
+                        return (
+                          <>
+                            <InputLabel shrink>{`Font Size`}</InputLabel>
+                            <Slider
+                              defaultValue={renderProps.initialFontSize}
+                              disabled={!hasMiniTheme}
+                              step={0.125}
+                              min={0.5}
+                              max={3}
+                              valueLabelDisplay="auto"
+                              value={value}
+                              onChange={(e, value) => {
+                                setValue(value as number);
+                              }}
+                            />
+                          </>
+                        );
+                      }}
+                    />
+                  </Grid>
+                </Grid>
+              </Box>
+            </Box>
+          </AccordionDetails>
+        </Accordion>
       </>
     );
   }

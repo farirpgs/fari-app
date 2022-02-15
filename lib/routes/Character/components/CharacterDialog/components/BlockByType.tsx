@@ -5,15 +5,16 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import { useTheme } from "@mui/material/styles";
 import produce from "immer";
-import React from "react";
+import React, { useContext } from "react";
 import {
   ContentEditable,
-  previewContentEditable,
+  previewContentEditable
 } from "../../../../../components/ContentEditable/ContentEditable";
 import { BlockType, IBlock } from "../../../../../domains/character/types";
 import { IDiceRollResult } from "../../../../../domains/dice/Dice";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
+import { MiniThemeContext } from "../MiniThemeContext";
 import { IBlockComponentProps } from "../types/IBlockComponentProps";
 import { BlockDicePool, BlockDicePoolActions } from "./blocks/BlockDicePool";
 import { BlockImage } from "./blocks/BlockImage";
@@ -22,13 +23,13 @@ import { BlockLink, BlockLinkActions } from "./blocks/BlockLink";
 import { BlockNumeric, BlockNumericActions } from "./blocks/BlockNumeric";
 import {
   BlockPointCounter,
-  BlockPointCounterActions,
+  BlockPointCounterActions
 } from "./blocks/BlockPointCounter";
 import { BlockSeparator, BlockSeparatorActions } from "./blocks/BlockSeparator";
 import { BlockSkill, BlockSkillActions } from "./blocks/BlockSkill";
 import {
   BlockSlotTracker,
-  BlockSlotTrackerActions,
+  BlockSlotTrackerActions
 } from "./blocks/BlockSlotTracker";
 import { BlockText, BlockTextActions } from "./blocks/BlockText";
 
@@ -45,6 +46,7 @@ export function BlockByType(
     onRoll(diceRollResult: IDiceRollResult): void;
   }
 ) {
+  const miniTheme = useContext(MiniThemeContext);
   const theme = useTheme();
   const { t } = useTranslate();
   const [block, setBlock] = useLazyState({
@@ -349,7 +351,13 @@ export function BlockByType(
           )}
 
           <Grid item xs>
-            <FormHelperText>
+            <FormHelperText
+              className={css({
+                fontFamily: miniTheme.helperTextFontFamily,
+                fontSize: `${miniTheme.helperTextFontSize}rem`,
+                fontWeight: miniTheme.helperTextFontWeight,
+              })}
+            >
               <ContentEditable
                 readonly={!props.advanced}
                 border={props.advanced}
