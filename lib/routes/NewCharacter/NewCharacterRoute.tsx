@@ -74,10 +74,12 @@ export function NewCharacterRoute() {
 
   return (
     <Page>
-      <PageMeta
-        title={`"${templateNameLabel}" character sheet template, on Fari App`}
-        description={`Use the amazing "${templateNameLabel}" template and get ready to play!`}
-      />
+      {template && (
+        <PageMeta
+          title={`"${template?.fileName}" character sheet template, on Fari App`}
+          description={`Use the amazing "${template?.fileName}" template and get ready to play!`}
+        />
+      )}
       <Fade in={status === "loading"}>
         <Container maxWidth="md">
           <Box display="flex" justifyContent="center">
