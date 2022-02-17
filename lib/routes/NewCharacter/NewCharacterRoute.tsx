@@ -101,7 +101,7 @@ export function NewCharacterRoute() {
               textAlign: "center",
             }}
           >
-            {`You're about to add a new character sheet to your Binder using the "${templateNameLabel}" template.`}
+            {`You're about to add a new character sheet to your Binder using the "${template?.fileName}" template.`}
             <br />
             <br />
             {`Click "Add Template" to continue.`}
