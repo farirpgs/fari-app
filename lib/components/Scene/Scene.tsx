@@ -876,13 +876,10 @@ export const Session: React.FC<IProps> = (props) => {
     // );
 
     return (
-      <Box
-        border={`1px solid ${theme.palette.divider}`}
-        // maxWidth="800px"
-        margin="0 auto"
-      >
+      <Box border={`1px solid ${theme.palette.divider}`} margin="0 auto">
         {isGM ? (
           <TldrawWriter
+            initialDoc={sessionManager.state.session.tlDrawDoc}
             onChange={(state) => {
               sessionManager.actions.updateDrawAreaObjects(state);
             }}

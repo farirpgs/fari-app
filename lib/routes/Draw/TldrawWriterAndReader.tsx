@@ -3,10 +3,13 @@ import { TDDocument, Tldraw, TldrawApp, TldrawProps } from "@tldraw/tldraw";
 import React, { useEffect } from "react";
 
 export function TldrawWriter(props: {
+  initialDoc?: TDDocument;
   onChange?: (doc: TDDocument) => void;
   tldrawProps?: TldrawProps;
 }) {
-  const rDocument = React.useRef<TDDocument>(makeNewBlankDocument());
+  const rDocument = React.useRef<TDDocument>(
+    props.initialDoc || makeNewBlankDocument()
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
