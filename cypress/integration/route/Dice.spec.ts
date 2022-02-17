@@ -37,16 +37,6 @@ describe("/dice", () => {
     cy.get("@dice").invoke("attr", "data-cy-rolling").should("eq", "false");
     cy.get("@dice")
       .invoke("attr", "data-cy-value")
-      .should("be.oneOf", [
-        "-4",
-        "-3",
-        "-2",
-        "-1",
-        "0",
-        "+1",
-        "+2",
-        "+3",
-        "+4",
-      ]);
+      .should("be.oneOf", ["1", "2", "3", "4", "5", "6"]);
   }
 });
