@@ -783,7 +783,9 @@ export const Session: React.FC<IProps> = (props) => {
 
   function renderCharacterCards() {
     const { playersWithCharacterSheets } = sessionManager.computed;
-
+    const count =
+      playersWithCharacterSheets.length +
+      sessionManager.state.session.gm.npcs.length;
     return (
       <>
         <Box>
@@ -794,7 +796,7 @@ export const Session: React.FC<IProps> = (props) => {
               flexWrap: "wrap",
             })}
           >
-            {playersWithCharacterSheets.length === 0 && (
+            {count === 0 && (
               <Box>
                 <Typography variant="h6" color="textSecondary">
                   No character sheets have been loaded yet.
