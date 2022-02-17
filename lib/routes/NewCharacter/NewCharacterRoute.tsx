@@ -52,8 +52,11 @@ export function NewCharacterRoute() {
     async function loadAndRedirect() {
       const template = CharacterTemplates.find((t) => {
         const categoryMatch =
-          kebabCase(t.category) === kebabCase(params.category);
-        const nameMatch = kebabCase(t.fileName) === kebabCase(params.name);
+          kebabCase(t.category.toLowerCase()) ===
+          kebabCase(params.category.toLowerCase());
+        const nameMatch =
+          kebabCase(t.fileName.toLowerCase()) ===
+          kebabCase(params.name.toLowerCase());
         return categoryMatch && nameMatch;
       });
       if (template) {
