@@ -1,3 +1,4 @@
+import LoadingButton from "@mui/lab/LoadingButton";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -8,10 +9,12 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Fade from "@mui/material/Fade";
+import FormHelperText from "@mui/material/FormHelperText";
+import Link from "@mui/material/Link";
 import kebabCase from "lodash/kebabCase";
 import startCase from "lodash/startCase";
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
@@ -19,73 +22,136 @@ import {
   CharacterTemplates,
   ICharacterTemplate,
 } from "../../domains/character/CharacterType";
-import { useQuery } from "../../hooks/useQuery/useQuery";
 
 export function NewCharacterRoute() {
   const charactersManager = useContext(CharactersContext);
-  const query = useQuery<"category" | "name">();
   const history = useHistory();
-  const [error, setError] = useState(false);
+  const [status, setStatus] = useState<"loading" | "success" | "error">(
+    "loading"
+  );
+  const [template, setTemplate] = useState<ICharacterTemplate>();
+  const params = useParams<{
+    category: string;
+    name: string;
+  }>();
+  const templateCategoryLabel = startCase(params.category);
+  const templateNameLabel = startCase(params.name);
 
-  const categoryFromParams = query.get("category") ?? "";
-  const nameFromParam = query.get("name") ?? "";
+  const [loadingTemplate, setLoadingTemplate] = useState(false);
+
+  async function handleLoadTemplate() {
+    setLoadingTemplate(true);
+    const newCharacter = await charactersManager.actions.add(
+      template as ICharacterTemplate
+    );
+    history.push(`/characters/${newCharacter.id}`);
+  }
 
   useEffect(() => {
     loadAndRedirect();
     async function loadAndRedirect() {
       const template = CharacterTemplates.find((t) => {
         const categoryMatch =
-          kebabCase(t.category) === kebabCase(categoryFromParams);
-        const nameMatch = kebabCase(t.fileName) === kebabCase(nameFromParam);
+          kebabCase(t.category) === kebabCase(params.category);
+        const nameMatch = kebabCase(t.fileName) === kebabCase(params.name);
         return categoryMatch && nameMatch;
       });
       if (template) {
-        const newCharacter = await charactersManager.actions.add(
-          template as ICharacterTemplate
-        );
-        history.replace(`/characters/${newCharacter.id}`);
+        setTemplate(template);
+        setStatus("success");
       } else {
-        setError(true);
+        setStatus("error");
       }
     }
-  }, [categoryFromParams, nameFromParam]);
+  }, [params.category, params.name]);
 
-  function handleOnClose() {
+  function handleCancel() {
     history.push(`/`);
   }
 
   return (
     <Page>
       <PageMeta
-        title={`"${startCase(
-          nameFromParam
-        )}" character sheet template, on Fari App`}
-        description={`Use the amazing "${startCase(
-          nameFromParam
-        )}" template and get ready to play!`}
+        title={`"${templateNameLabel}" character sheet template, on Fari App`}
+        description={`Use the amazing "${templateNameLabel}" template and get ready to play!`}
       />
-      <Fade in={true}>
+      <Fade in={status === "loading"}>
         <Container maxWidth="md">
           <Box display="flex" justifyContent="center">
             <CircularProgress />
           </Box>
         </Container>
       </Fade>
-      <Dialog open={error} onClose={handleOnClose}>
-        <DialogTitle>{"Template not found"}</DialogTitle>
+      <Dialog open={status === "success"} onClose={handleCancel}>
+        <DialogTitle
+          sx={{
+            textAlign: "center",
+          }}
+        >
+          {`Add New Sheet To My Binder`}
+        </DialogTitle>
+
         <DialogContent>
-          <DialogContentText>
-            The template you are trying to load does not exist.
+          <DialogContentText
+            component="div"
+            sx={{
+              textAlign: "center",
+            }}
+          >
+            {`You're about to add a new character sheet to your Binder using the "${templateNameLabel}" template.`}
             <br />
             <br />
-            Category: {`"${categoryFromParams}"`}
-            <br />
-            Name: {`"${nameFromParam}"`}
+            {`Click "Add Template" to continue.`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleOnClose} autoFocus>
-            Go to the home page
+          <Button onClick={handleCancel}>{`Cancel`}</Button>
+          <LoadingButton
+            onClick={handleLoadTemplate}
+            autoFocus
+            loading={loadingTemplate}
+          >
+            {`Add Template`}
+          </LoadingButton>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={status === "error"} onClose={handleCancel}>
+        <DialogTitle
+          sx={{
+            textAlign: "center",
+          }}
+        >
+          {`Template not found`}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText component="div">
+            {`The template you are trying to load does not exist.`}
+            <br />
+            <FormHelperText
+              sx={{
+                textAlign: "center",
+              }}
+            >
+              {`Template: ${templateCategoryLabel}/${templateNameLabel}`}
+            </FormHelperText>
+            <FormHelperText
+              sx={{
+                textAlign: "center",
+              }}
+            >
+              <Link
+                href="https://farirpgs.com/discord"
+                target="_blank"
+                rel="no"
+              >
+                {`Get help`}
+              </Link>
+            </FormHelperText>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCancel} autoFocus>
+            {`Back To Home Page`}
           </Button>
         </DialogActions>
       </Dialog>

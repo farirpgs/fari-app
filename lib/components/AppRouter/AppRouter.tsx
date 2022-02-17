@@ -65,8 +65,8 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/characters/new"}
-          render={(props) => {
+          path={"/characters/new/:category/:name"}
+          render={() => {
             return <NewCharacterRoute />;
           }}
         />
