@@ -8,14 +8,14 @@
 - feat: new drawing area
 - feat: character sheet now support rows and columns
 - feat: copy/paste blocks from character sheets
-- [ ] readonly draw area
-- [ ] draw area tokens
 
 **v6.next**
 
 - [ ] copy index cards blocks
-- [ ]: update slot tracker in character card
-- [ ]: lowest/highest dice roller result
+- [ ] update slot tracker in character card
+- [ ] lowest/highest dice roller result
+- [ ] readonly draw area
+- [ ] draw area tokens
 
 # v5.3
 
