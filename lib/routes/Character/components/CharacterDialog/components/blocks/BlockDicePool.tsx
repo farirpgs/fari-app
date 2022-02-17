@@ -17,11 +17,11 @@ import { DiceContext } from "../../../../../../contexts/DiceContext/DiceContext"
 import {
   BlockType,
   IDicePoolBlock,
-  ISkillBlock
+  ISkillBlock,
 } from "../../../../../../domains/character/types";
 import {
   IDiceCommandSetId,
-  IRollGroup
+  IRollGroup,
 } from "../../../../../../domains/dice/Dice";
 import { Icons } from "../../../../../../domains/Icons/Icons";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
@@ -29,7 +29,7 @@ import { BlockSelectors } from "../../domains/BlockSelectors/BlockSelectors";
 import { DiceCommandGroup } from "../../domains/DiceCommandGroup/DiceCommandGroup";
 import {
   IBlockActionComponentProps,
-  IBlockComponentProps
+  IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";

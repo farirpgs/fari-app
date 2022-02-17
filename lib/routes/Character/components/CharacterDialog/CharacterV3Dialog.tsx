@@ -19,6 +19,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
+import { useMediaQuery } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -131,6 +132,7 @@ export const CharacterV3Dialog: React.FC<{
   const query = useQuery<"card" | "advanced">();
   const showCharacterCard = query.get("card") === "true";
   const defaultAdvanced = query.get("advanced") === "true";
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const logger = useLogger();
   const characterManager = useCharacter(props.character);
   const settingsManager = useContext(SettingsContext);
@@ -782,7 +784,6 @@ export const CharacterV3Dialog: React.FC<{
                                 const canMoveColumnLeft = columnIndex === 0;
                                 const canMoveColumnRight =
                                   columnIndex === row.columns.length - 1;
-
                                 return (
                                   <Grid
                                     item

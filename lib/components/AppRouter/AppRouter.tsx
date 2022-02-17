@@ -15,6 +15,9 @@ const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
 const CharacterRoute = React.lazy(
   () => import("../../routes/Character/CharacterRoute")
 );
+const NewCharacterRoute = React.lazy(
+  () => import("../../routes/NewCharacter/NewCharacterRoute")
+);
 const CharacterPrintRoute = React.lazy(
   () => import("../../routes/CharacterPrint/CharacterPrintRoute")
 );
@@ -62,6 +65,13 @@ export const AppRouter = () => {
         />
         <Route
           exact
+          path={"/characters/new/:category/:name"}
+          render={() => {
+            return <NewCharacterRoute />;
+          }}
+        />
+        <Route
+          exact
           path={"/characters/:id"}
           render={(props) => {
             return <CharacterRoute {...props} />;
@@ -74,6 +84,7 @@ export const AppRouter = () => {
             return <CharacterPrintRoute {...props} />;
           }}
         />
+
         <Route
           exact
           path={"/dice"}
