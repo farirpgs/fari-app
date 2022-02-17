@@ -148,7 +148,7 @@ export function Toolbox(props: {
                     </Tooltip>
                   </Grid>
                   <Grid item>
-                    <Tooltip title="Story Builder Decks">
+                    <Tooltip title="Story Dice">
                       <IconButton
                         className={css({
                           border: `1px solid ${theme.palette.primary.main}`,
@@ -168,7 +168,7 @@ export function Toolbox(props: {
                   </Grid>
                 </Grid>
               </Grid>
-            )}{" "}
+            )}
           </Grid>
         </Box>
       </Box>

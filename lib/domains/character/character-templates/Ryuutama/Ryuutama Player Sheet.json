@@ -1,0 +1,1141 @@
+{
+  "name": "Ryuutama PC Sheet Template",
+  "group": "Ryuutama",
+  "lastUpdated": 1643854649,
+  "wide": false,
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "Details/Stats",
+      "sections": {
+        "left": [
+          {
+            "id": "363797f9-ebb7-4825-8fdb-fe3e9a7c96dd",
+            "label": "Details<br>",
+            "blocks": [
+              {
+                "id": "7fd66828-37b5-4b4a-ac41-c304ba99fbab",
+                "label": "Ryuujin",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "0a67c782-b2f6-414a-b2c8-22c3245e56f1",
+                "label": "Created",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "9b8a36d1-096f-4cd7-83e4-97c4f2009e1d",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "228ad978-f5ac-4b8e-8a49-1c91a19c6956",
+                "label": "",
+                "type": "Image",
+                "meta": { "width": 1 },
+                "value": ""
+              },
+              {
+                "id": "b65313f0-6fcf-438c-84df-69ee8db27c6b",
+                "label": "Character Name",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "25074140-0421-4dd5-b22f-fcf61e14702f",
+                "label": "Player Name",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "6e88e5c5-681b-4ec1-9158-5b1db5678d8a",
+                "label": "Level",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "ed973d83-aca3-40b3-8446-a76c1bf4bae9",
+                "label": "XP",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "7b9e84f5-650e-4a78-8126-2830477a593e",
+                "label": "Class",
+                "type": "Text",
+                "value": "… / …<br>",
+                "meta": {}
+              },
+              {
+                "id": "a8312185-5662-408f-9834-f6aeceaab5d0",
+                "label": "Type",
+                "type": "Text",
+                "value": "… / …<br>",
+                "meta": {}
+              },
+              {
+                "id": "9c093a06-9567-4a4a-be39-4c024c869beb",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "709c1bbd-46d8-409f-ae3d-9adfc91b4856",
+                "label": "Mastered Weapon",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "3a1f92dd-5cce-496a-ad38-a402687841d8",
+                "label": "Spec. Terrain",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "517cb2fc-67f5-48bb-b211-5719b88bed28",
+                "label": "Personal Item",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "0b522901-0d8e-4782-9361-8fb91a9001a9",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "c0d09ed3-2747-465b-b723-f62b36ee2068",
+                "label": "IMAGE COLOR / APPEARANCE<br>",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "3849a538-b147-4e15-9841-fc563737e278",
+                "label": "HOMETOWN / REASON FOR TRAVEL<br>",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "176060ee-ce79-47d5-a3f1-ab8c597f24b2",
+                "label": "NOTES<br>",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "caa5ab3c-7c99-4c7e-83af-5cab1843d80e",
+            "label": "Travelling Rules",
+            "blocks": [
+              {
+                "id": "89e1c36c-373b-49a7-bf88-71db5e1a3a7e",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "1) Movement Check [STR + DEX] <br>2) Direction Check [INT + INT] <br>3) Camp Check [DEX + INT]<br>"
+                },
+                "value": ""
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "6cf9d439-c0d7-45d3-818d-086ae29ee200",
+            "label": "Dice Roller",
+            "blocks": [
+              {
+                "id": "29b790ef-86b8-43cd-9dcc-ee92c62095fa",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "» Use below to roll with modifier values."
+                },
+                "value": ""
+              },
+              {
+                "id": "c7de45b8-20c2-4724-86d2-f34907b1572e",
+                "label": "d4",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d4"], "width": 0.5 }
+              },
+              {
+                "id": "ec0b58a1-9d16-4384-8555-65e6b617782f",
+                "label": "d6",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d6"], "width": 0.5 }
+              },
+              {
+                "id": "e6f76d6d-cc3c-4f19-ae36-72a848bed3e7",
+                "label": "d8",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d8"], "width": 0.5 }
+              },
+              {
+                "id": "0f7e506d-f36f-4bcc-9cf9-31d53f1faa4b",
+                "label": "d10",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d10"], "width": 0.5 }
+              },
+              {
+                "id": "9ba95a97-b113-42ca-8f22-f74a9b5ee762",
+                "label": "d12",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d12"], "width": 0.5 }
+              }
+            ]
+          },
+          {
+            "id": "be84b7ed-249f-43d9-8266-3e4b4e05ff02",
+            "label": "Stats",
+            "blocks": [
+              {
+                "id": "f084bf36-bc06-487e-a018-58fd90db0d61",
+                "label": "STR",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "11fce348-a61f-4d7f-8f5f-9044464717ac",
+                "label": "DEX",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "595ce288-063f-476b-82eb-ee5b1e36749b",
+                "label": "INT",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "e156cd90-8a20-4fb8-aba3-d03b9abb316e",
+                "label": "SPI",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "57b8a893-3d50-43d0-ae1a-99291939ad58",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "0b1412d5-2675-42e2-8c46-e40bd0d9c453",
+                "label": "HP",
+                "type": "PointCounter",
+                "meta": {
+                  "max": "1",
+                  "isMainPointCounter": false,
+                  "width": 0.5,
+                  "helperText": "<br>"
+                },
+                "value": "1"
+              },
+              {
+                "id": "b6897293-9edc-42a8-bb43-46315dc8e061",
+                "label": "MP",
+                "type": "PointCounter",
+                "meta": {
+                  "max": "1",
+                  "isMainPointCounter": false,
+                  "width": 0.5,
+                  "helperText": "<br>"
+                },
+                "value": "1"
+              },
+              {
+                "id": "f284ec3b-639b-4a73-be4f-ecdb8a1c7b45",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "» Max HP = STR x 2, Max MP = SPI x 2"
+                },
+                "value": ""
+              },
+              {
+                "id": "3ca8815c-9f47-43b3-8dc8-1b1f3ce4034a",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "c763ed6a-ee32-4c61-bc86-07f9a1af6657",
+                "label": "Fumble Points",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false },
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "id": "a27545f0-a920-44cd-9336-d5aeaaa85db0",
+            "label": "Condition",
+            "blocks": [
+              {
+                "id": "98732c28-d547-4900-a0cd-f55ae4c4a13f",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "width": 1,
+                  "helperText": "» [STR + SPI].&nbsp;*If over 10, add 1 dice size to any 1 stat.<br>"
+                },
+                "value": ""
+              },
+              {
+                "id": "a0e2675d-4d66-479e-a8c2-64ad2a05b624",
+                "label": "<br>",
+                "type": "SlotTracker",
+                "meta": { "helperText": "<br>", "width": 1 },
+                "value": [
+                  { "label": "2", "checked": false },
+                  { "label": "3<br>", "checked": false },
+                  { "label": "4", "checked": false },
+                  { "label": "5", "checked": false },
+                  { "label": "6", "checked": false },
+                  { "label": "7", "checked": false },
+                  { "label": "8", "checked": false },
+                  { "label": "9", "checked": false },
+                  { "label": "10*", "checked": false },
+                  { "label": "11", "checked": false },
+                  { "label": "12", "checked": false },
+                  { "label": "13", "checked": false },
+                  { "label": "14", "checked": false },
+                  { "label": "15", "checked": false },
+                  { "label": "16", "checked": false },
+                  { "label": "17", "checked": false },
+                  { "label": "18", "checked": false },
+                  { "label": "19", "checked": false },
+                  { "label": "20", "checked": false }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "4b260db5-08b1-471f-88ba-bbc4ed8ee3e6",
+            "label": "About this Sheet",
+            "blocks": [
+              {
+                "id": "1ed33c81-086d-4aa0-873e-2e4d32f2ee83",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": true,
+                  "helperText": "Copyright © 2015 KOTODAMA HEAVY INDUSTRIES<br><br>*This Fari character sheet was independently designed by Discord user PistolPants#8314 and is not affiliated with the original game designers and publishers."
+                },
+                "value": "http://kotohi.com/ryuutama/"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "27945a84-443a-4244-bbd2-57f977c23a63",
+      "sections": {
+        "left": [
+          {
+            "id": "16dd1650-710b-415b-a7ed-2a13d0c1af9d",
+            "label": "Class Skill",
+            "blocks": [
+              {
+                "id": "0e7eed27-8783-4c4a-8708-cd34fca32a1c",
+                "label": "name",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "56dfcd5c-124b-474d-b6a3-366ca229ec9d",
+                "label": "Stats Used",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 0.5, "helperText": "[STAT] + [STAT]<br>" }
+              },
+              {
+                "id": "23e179bb-a1f9-42bc-bac3-1a0dcb79c551",
+                "label": "Effect",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 1 }
+              }
+            ]
+          },
+          {
+            "id": "34626a92-4062-49fd-8ee2-80d84bdc1be5",
+            "label": "Class Skill",
+            "blocks": [
+              {
+                "id": "b6da9b5e-a7e8-4275-b6cf-81277a3cdd34",
+                "label": "name",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "851f15f5-cb9f-4b4d-84e5-c0963f60e63d",
+                "label": "Stats Used",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 0.5, "helperText": "[STAT] + [STAT]<br>" }
+              },
+              {
+                "id": "d7b7bf75-9494-41a3-87fe-b057f5c8e140",
+                "label": "Effect",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 1 }
+              }
+            ]
+          },
+          {
+            "id": "98162b5e-6a94-47ad-8e2b-b8197934b5fc",
+            "label": "Class Skill",
+            "blocks": [
+              {
+                "id": "b1d368e8-a4ff-4b92-b61b-36eaaee1700e",
+                "label": "name",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "f6635613-df4c-427a-a010-37e670bc474d",
+                "label": "Stats Used",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 0.5, "helperText": "[STAT] + [STAT]<br>" }
+              },
+              {
+                "id": "f698352a-8122-46d5-afea-0b43947ce4e7",
+                "label": "Effect",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 1 }
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "43899157-8891-4a0e-a258-f3160ed33824",
+            "label": "Class Skill",
+            "blocks": [
+              {
+                "id": "56dc8b28-d1e9-42bf-a1a8-8dbcd8e93179",
+                "label": "name",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "58b3b6f1-8ded-4e3f-b3e0-cc89be9ea481",
+                "label": "Stats Used",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 0.5, "helperText": "[STAT] + [STAT]<br>" }
+              },
+              {
+                "id": "3cfc0546-5a5f-4e91-bcca-05699b502a82",
+                "label": "Effect",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 1 }
+              }
+            ]
+          },
+          {
+            "id": "51a9cfca-6864-4218-978e-0518bbc089b8",
+            "label": "Class Skill",
+            "blocks": [
+              {
+                "id": "959b6723-4325-4ece-badc-5e21cd65d08a",
+                "label": "name",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "8cea441e-fafa-4e27-977b-85ac6a4115fb",
+                "label": "Stats Used",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 0.5, "helperText": "[STAT] + [STAT]<br>" }
+              },
+              {
+                "id": "6e251e29-84e9-4f1e-9626-0a3a49cd72ac",
+                "label": "Effect",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 1 }
+              }
+            ]
+          },
+          {
+            "id": "3a81fff5-6aa4-45fe-bb23-4e66b4145292",
+            "label": "Class Skill",
+            "blocks": [
+              {
+                "id": "3fff4d7b-b473-4514-8d81-a7c547354243",
+                "label": "name",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "35dcaf49-8c11-4769-b640-8c258040725b",
+                "label": "Stats Used",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 0.5, "helperText": "[STAT] + [STAT]<br>" }
+              },
+              {
+                "id": "b28ae171-0d5d-4555-9b7d-6b550539086f",
+                "label": "Effect",
+                "type": "Text",
+                "value": "<br>",
+                "meta": { "width": 1 }
+              }
+            ]
+          }
+        ]
+      },
+      "label": "Class Skills"
+    },
+    {
+      "id": "63603ec1-7523-4506-83b2-d72073397dab",
+      "sections": {
+        "left": [
+          {
+            "id": "4d7e6d14-2dcb-4db5-b1b5-8e52ac6970e5",
+            "label": "About",
+            "blocks": [
+              {
+                "id": "bf8c4b1a-4cea-4c65-b54d-996b7132b4b3",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "Equipped items count as size 0."
+                },
+                "value": ""
+              }
+            ]
+          },
+          {
+            "id": "8c2afc34-43ab-4b71-9f2f-83a239e568d3",
+            "label": "Weapon 1",
+            "blocks": [
+              {
+                "id": "427a6758-ede8-4923-89e3-16104deb66ec",
+                "label": "Weapon",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "7d220689-4f1d-469c-b0de-416f8294a58e",
+                "label": "Accuracy",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "Stats + Bonuses" }
+              },
+              {
+                "id": "c0cac81f-2c57-4b70-9f99-d153b439e007",
+                "label": "Damage",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "Stats + Bonuses" }
+              },
+              {
+                "id": "9983e374-4c50-4984-af74-bd9576644063",
+                "label": "Durability",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "71a7667a-bcf1-4b29-8ca8-dc603ca8e800",
+                "label": "Effect / Notes",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "265bf03c-169f-444c-b79a-bc02d6eab5e9",
+            "label": "Weapon 2",
+            "blocks": [
+              {
+                "id": "0996151f-4082-4003-a109-857b6432bd8c",
+                "label": "Weapon",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "9b5b75d7-e8ef-4b1c-8214-da90e96b9b0a",
+                "label": "Accuracy",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "Stats + Bonuses" }
+              },
+              {
+                "id": "8cdb40a2-6ac7-41fd-a4cb-5522d64c0193",
+                "label": "Damage",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "Stats + Bonuses" }
+              },
+              {
+                "id": "3c96200a-1ad2-43e1-8e37-c7faf7961cc4",
+                "label": "Durability",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "d1255ead-4644-4cdb-ac5d-18eaaf647341",
+                "label": "Effect / Notes",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "f7b1ad14-b6c8-49b7-b1b8-5d7225d9a0c2",
+            "label": "Shield / Armor 1",
+            "blocks": [
+              {
+                "id": "138c1763-180f-48ae-aeb0-a77b05e1ea33",
+                "label": "Shield / Armor",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "01e8c295-1023-4928-a990-67b9aaea8afa",
+                "label": "Defense Points",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "cc8cc7bc-049c-4a2f-a955-bfc4bb113223",
+                "label": "Penalty",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "c057fa89-e5ad-4b73-9afc-6915f2fd0752",
+                "label": "Durability",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "833a0f54-d228-4ade-9175-e9ff8e37ad8d",
+                "label": "Effect / Notes",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "1af8db46-f817-41c1-a940-bf6544ac91f4",
+            "label": "Shield / Armor 2",
+            "blocks": [
+              {
+                "id": "55095724-a20f-42bf-b867-8bec560592e6",
+                "label": "Shield / Armor",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "a70b60d2-0968-40c9-aa57-4f0ff018a084",
+                "label": "Defense Points",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "63c80ac1-4a3b-4aec-875e-818045dfe1c1",
+                "label": "Penalty",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "be0a7bac-6a84-4573-91e3-0389a0a0abdf",
+                "label": "Durability",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "width": 0.5 }
+              },
+              {
+                "id": "14a61b77-42d5-47cb-9c91-5d9bb7553cff",
+                "label": "Effect / Notes",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "834cb404-0f7f-49a5-934f-75f546fbe110",
+            "label": "Traveler's Outfit 1",
+            "blocks": [
+              {
+                "id": "691ba520-229a-4de4-80c3-80f8327b4fd8",
+                "label": "Traveler's Outfit",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "61210354-c5e9-436d-b68f-3086343a9978",
+                "label": "Effect / Notes",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "454f5f50-3f02-4567-9ec2-e2e39a6e8b58",
+            "label": "Traveler's Outfit 2",
+            "blocks": [
+              {
+                "id": "7b3b9814-35ee-414e-8b71-fa954e70c878",
+                "label": "Traveler's Outfit",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "8512a2eb-8051-49c0-9ac1-4fad5d1c7f1c",
+                "label": "Effect / Notes",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "e8b7d646-32d3-40f8-9ada-5904b3276485",
+            "label": "Traveler's Outfit 3",
+            "blocks": [
+              {
+                "id": "c85f1e6d-3d84-4ad6-958b-6261004a45ec",
+                "label": "Traveler's Outfit",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "95c0e540-b017-4a7f-a57e-eb5285e8a8b1",
+                "label": "Effect / Notes",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "5cb8c933-6f39-47d5-98b4-f2ea050625a0",
+            "label": "Traveler's Outfit 4",
+            "blocks": [
+              {
+                "id": "5e6ce24f-313b-4352-b971-0bbd4d70cabd",
+                "label": "Traveler's Outfit",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "49263a13-5a10-42df-a151-83198ca34d6e",
+                "label": "Effect / Notes",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ]
+      },
+      "label": "Equipment"
+    },
+    {
+      "id": "67714a9b-c1a9-4d71-b000-127cf2154156",
+      "sections": {
+        "left": [
+          {
+            "id": "65693702-68a2-4ef6-a5a5-faeb8d8c5250",
+            "label": "About",
+            "blocks": [
+              {
+                "id": "44afc2f7-2550-4bf4-9eec-74a086036e8f",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "[TERRAIN + WEATHER]: Determine bonuses and penalties for Terrain and Weather here.<br>"
+                },
+                "value": ""
+              }
+            ]
+          },
+          {
+            "id": "96029e82-2bee-48fc-b8f7-c9e1192f4c32",
+            "label": "Check Bonus",
+            "blocks": [
+              {
+                "id": "5fff9e08-e8b1-442d-8000-704da3b05fbb",
+                "label": "Level 1 =&gt; 6",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "f99cf927-5082-4370-834d-9c17b8720646",
+                "label": "Grassland",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "87054a8a-bfd4-45f6-9209-ae3404336041",
+                "label": "Wasteland",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "f7e43980-a01e-4d74-8ce3-e9089f021cfb",
+                "label": "Level 2 =&gt; 8",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "34c30a1d-6b8c-4932-965b-23c3ce276ab1",
+                "label": "Woods",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "1fe92b01-b470-4d65-a0d2-b54876b5f0f7",
+                "label": "Highlands",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "17ffad47-9d18-42a6-ada1-cb73e3be2037",
+                "label": "Rocky Terrain",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "be20b5e7-cb31-4244-ae8f-c0790131ea41",
+                "label": "Level 3 =&gt; 10",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "3af5212c-9503-4f73-abc7-d3cf2ab70cf1",
+                "label": "Deep Forest",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "a1ae2673-ef0c-4659-bed5-e41eb0e93c30",
+                "label": "Swamp",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "6570694a-16a6-4977-b483-6201b35027ce",
+                "label": "Mountain",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "66435a1a-084b-439c-b65f-2a232537fa0e",
+                "label": "Level 4 =&gt; 12",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "591df842-3621-4771-b5d3-179e9e5892d7",
+                "label": "Desert",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "b4aa93f9-6334-4d7d-9f1f-bfbba61f170a",
+                "label": "Jungle",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "86f966db-d436-4ba9-a1c5-d8a90437c127",
+                "label": "Level 5 =&gt; 14",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "2657476b-1548-422c-a198-6aa64ac89a2a",
+                "label": "Alpine",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false }
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "2e3010db-ae43-49fb-8f4a-6254f08cec4b",
+            "label": "Check Penalty",
+            "blocks": [
+              {
+                "id": "9b301cc6-ec0b-4971-8984-71ee26cf9d65",
+                "label": "Weather: +1",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "6670ed0f-fa86-485f-ad81-4b69258da4e5",
+                "label": "Rain",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "ab0e61f2-c953-4ce8-a216-49f20449dd83",
+                "label": "Strong Wind",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "af70b170-a4eb-4e96-a6cf-8d487dae43b9",
+                "label": "Fog",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "9c7a3491-90f3-46f7-b74d-0c57f299bed6",
+                "label": "Hot",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "d531acc7-e1e8-473d-99bf-c1e5c87a2a9b",
+                "label": "Cold",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "3dc8f143-3395-4734-9e50-57dce7291019",
+                "label": "Weather: +3",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "1c9be0c3-b005-4128-98d7-b3e010758a4a",
+                "label": "Hard Rain",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "1d4d99b3-9b86-465d-b14f-cc84fcd937bc",
+                "label": "Snow",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "72d02496-526c-4798-91ba-ea6308587344",
+                "label": "Deep Fog",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "18842049-9f38-4f62-a656-915b01c06ccf",
+                "label": "Dark",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "26cd6144-fe91-40ae-94be-93bb83a22651",
+                "label": "Weather: +5",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "68ea34b9-35e6-4699-ab14-ce6e287682b7",
+                "label": "Hurricane",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              },
+              {
+                "id": "ee1fef78-1873-4c53-8453-70827118c634",
+                "label": "Blizzard",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "checked": false, "width": 0.5 }
+              }
+            ]
+          }
+        ]
+      },
+      "label": "Terrain + Weather"
+    },
+    {
+      "id": "e396317d-ae05-430d-9dac-69cb5b3b7f7b",
+      "sections": {
+        "left": [
+          {
+            "id": "242430ed-53fa-4921-926f-f9e0f0cfbf42",
+            "label": "Status Effects",
+            "blocks": [
+              {
+                "id": "54b84e9a-f35a-44d6-8a8b-f499c57a52f0",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "If the next day's Condition Check is higher than the status effect number, it is cured."
+                },
+                "value": ""
+              },
+              {
+                "id": "56bf6a39-52b6-4a59-8347-0ae22b1931a1",
+                "label": "Body",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "e2ba14c6-a2d2-4efc-8255-42cb440533fc",
+                "label": "Injury",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "[DEX] - 1 Die Size", "width": 0.5 }
+              },
+              {
+                "id": "f0cd88eb-8753-47ca-94f3-d45528d883c9",
+                "label": "Poison",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "[STR] - 1 Die Size", "width": 0.5 }
+              },
+              {
+                "id": "8421b679-7df4-4b39-ba4b-8eeed643a4ad",
+                "label": "SICK",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "[ALL] - 1 Die Size", "width": 0.5 }
+              },
+              {
+                "id": "8b7d16c0-22bd-4fa7-bdf1-f5eaa780ae42",
+                "label": "MIND",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "0c3cf46f-5e91-4ec7-b55a-8c8fcee1fd9b",
+                "label": "TIRED",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "[SPI] - 1 Die Size" }
+              },
+              {
+                "id": "8879ca29-aa0a-417d-a9da-422cbd6665c8",
+                "label": "Muddled",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "[INT] - 1 Die Size" }
+              },
+              {
+                "id": "22cb7801-339d-422b-bd70-3c5a41867bc6",
+                "label": "Shock",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 0.5, "helperText": "[ALL] - 1 Die Size" }
+              }
+            ],
+            "visibleOnCard": true
+          }
+        ],
+        "right": []
+      },
+      "label": "Status Effects"
+    }
+  ],
+  "template": "Blank",
+  "version": 4,
+  "fariType": "character"
+}

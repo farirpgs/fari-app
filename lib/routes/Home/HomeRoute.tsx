@@ -150,7 +150,6 @@ export const HomeRoute: React.FC<{}> = () => {
         <LightBox maxWidth="lg" mb={sectionsSeparator}>
           {renderPlayButtons()}
         </LightBox>
-
         <LightBox
           title={t("home-route.sections.getting-started.title")}
           subTitle={t("home-route.sections.getting-started.sub-title")}
@@ -208,7 +207,6 @@ export const HomeRoute: React.FC<{}> = () => {
             <WikiItems />
           </>
         </LightBox>
-
         <DarkBox
           px="2rem"
           py="5rem"

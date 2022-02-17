@@ -1,0 +1,510 @@
+{
+  "id": "0bc427e8-6b84-4b24-9e62-3447560e175f",
+  "name": "",
+  "lastUpdated": 1643791112,
+  "wide": true,
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "Character",
+      "sections": {
+        "left": [
+          {
+            "id": "0c606841-c856-4d14-b703-f87edea050b9",
+            "label": "Stats",
+            "blocks": [
+              {
+                "id": "9e39cb49-ec76-4354-a24b-0f7437b8e0fc",
+                "label": "Space legs",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d6", "1d6"] }
+              },
+              {
+                "id": "d0119e95-af8f-4258-a520-8feb6c6a5c3f",
+                "label": "Weathered",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d6", "1d6"] }
+              },
+              {
+                "id": "52a54148-347b-4f50-9f50-054304ea123e",
+                "label": "Parley",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d6", "1d6"] }
+              },
+              {
+                "id": "6451519f-5c21-4b13-bac7-7887fdf34a28",
+                "label": "Savvy",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d6", "1d6"] }
+              },
+              {
+                "id": "de296de5-b8c8-4991-b267-26877da4c933",
+                "label": "Insight",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d6", "1d6"] }
+              },
+              {
+                "id": "25bfec75-e8e5-485a-b093-963065a5061e",
+                "label": "Resolve",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["1d6", "1d6"] }
+              }
+            ],
+            "visibleOnCard": true
+          },
+          {
+            "id": "890d8a6b-e206-43e2-a565-5ac425c12042",
+            "label": "Experience",
+            "blocks": [
+              {
+                "id": "f3c38aa5-dacc-49cf-a6eb-6be0ce81d8a1",
+                "label": "",
+                "type": "SlotTracker",
+                "meta": {
+                  "helperText": "Take experience whenever you fail a roll and incur a consequence. when you hit 5, level up"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "db0e6f94-519f-4358-ab3d-6c6c795a65d3",
+            "label": "Hurt Conditions",
+            "blocks": [
+              {
+                "id": "1205d7bd-2f7c-486d-8f1e-957bdb6a035c",
+                "label": "Pained",
+                "type": "SlotTracker",
+                "meta": {
+                  "width": 0.5,
+                  "helperText": "Take a -1 penalty to rolls made with Space Legs. You cannot carry anything with the Heavy tag while affected by this condition.&nbsp;"
+                },
+                "value": [
+                  { "label": "taken", "checked": false },
+                  { "label": "delayed", "checked": false }
+                ]
+              },
+              {
+                "id": "121e1759-b7f6-47a4-9441-d4d925555c19",
+                "label": "Debilitated",
+                "type": "SlotTracker",
+                "meta": {
+                  "width": 0.5,
+                  "helperText": "Take a -2 penalty to any roll with Space Legs or Weathered, and you can no longer Struggle Past the Pain. Painkillers will now only restore you to the Pained state."
+                },
+                "value": [
+                  { "label": "taken", "checked": false },
+                  { "label": "delayed", "checked": false }
+                ]
+              },
+              {
+                "id": "8af7a3e2-ce75-471e-8f08-23045e9902ae",
+                "label": "Scarred",
+                "type": "SlotTracker",
+                "meta": {
+                  "helperText": "You’ve died, or something very close to it. At this point, you must get treatment from a Medical professional, or retire your character. You should also mark a point of Hopelessness. Returning a character from this state may be expensive, and you will need time to rehabilitate your body. The Pained condition is now permanently applied to you."
+                },
+                "value": [{ "label": "", "checked": false }]
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "5581ce29-bcea-469d-9616-ef2052f0305d",
+            "label": "Harm trackers",
+            "blocks": [
+              {
+                "id": "810b3f04-6b95-442c-9096-c2efe6a953f0",
+                "label": "Doubt",
+                "type": "SlotTracker",
+                "meta": {
+                  "helperText": "Mark or clear doubt whenever you feel like it's appropriate. Someone else may suggest you take a doubt, but it's up to you"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "H", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "a", "checked": false },
+                  { "label": "F", "checked": false }
+                ]
+              },
+              {
+                "id": "92bfe2fc-475d-4bd9-8f9f-c8d9950cb729",
+                "label": "Hurt",
+                "type": "SlotTracker",
+                "meta": {
+                  "helperText": "Take a hurt when instructed to by a GM or consequence"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "P", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "D", "checked": false },
+                  { "label": "S", "checked": false }
+                ]
+              },
+              {
+                "id": "e0a0869d-1d2e-4927-a8a1-63ef60b4c6e9",
+                "label": "Hopelessness",
+                "type": "SlotTracker",
+                "meta": {
+                  "helperText": "Mark or clear hopelessness whenever you feel like it's appropriate. Someone else may suggest you take a doubt, but it's up to you"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "D", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "D", "checked": false },
+                  { "label": "GU", "checked": false }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "4cba5305-f6ea-4455-871f-fd5a72b84817",
+            "label": "Luck",
+            "blocks": [
+              {
+                "id": "bf849c09-d927-48c2-8625-55566c7d9c01",
+                "label": "Luck",
+                "type": "SlotTracker",
+                "meta": {
+                  "helperText": "Take a point of luck when you rolled a 4 or lower and did not spend a luck"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              }
+            ],
+            "visibleOnCard": true
+          },
+          {
+            "id": "51ef3751-4bf9-4371-8416-be1f9cd3a945",
+            "label": "Doubt Conditions",
+            "blocks": [
+              {
+                "id": "b1c3910b-b180-4bb9-aa1d-15753639f691",
+                "label": "Hesitant",
+                "type": "SlotTracker",
+                "meta": {
+                  "width": 0.5,
+                  "helperText": "When you are hesitant, you may take an extra moment to make a decision, not put your hand up for particular tasks, or wait for someone else to take the lead, and it impacts the morale of the Crew. <br>"
+                },
+                "value": [{ "label": "", "checked": false }]
+              },
+              {
+                "id": "18a4cf0a-8819-4337-b976-b268f1c6bfe0",
+                "label": "Anxious",
+                "type": "SlotTracker",
+                "meta": {
+                  "width": 0.5,
+                  "helperText": "When you are anxious, you are scared of the world around you, either because you don’t think you are strong enough to exist in it, or because you think some force within it is working against you. <br>"
+                },
+                "value": [{ "label": "", "checked": false }]
+              },
+              {
+                "id": "3cad9dd0-a660-4a74-9975-0e225cc1371f",
+                "label": "Take a Fear",
+                "type": "SlotTracker",
+                "meta": {
+                  "helperText": "When you have a fear, name it, it will act as a -1 to any action you take that is hindered by that fear"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "0000868d-75c4-40b6-86c6-498283d19576",
+            "label": "Hoplessness Conditions",
+            "blocks": [
+              {
+                "id": "8ecebcac-236c-4c1a-b865-ba2869fc0b2f",
+                "label": "Distracted",
+                "type": "SlotTracker",
+                "meta": {
+                  "width": 0.5,
+                  "helperText": "Take a -1 to intuition rolls until this is cleared.&nbsp;"
+                },
+                "value": [
+                  { "label": "Taken", "checked": false },
+                  { "label": "Delayed", "checked": false }
+                ]
+              },
+              {
+                "id": "1fc24d65-ff9e-4c9c-96ee-6bfeaf81a506",
+                "label": "Despondent",
+                "type": "SlotTracker",
+                "meta": {
+                  "width": 0.5,
+                  "helperText": "Take a -2 to Intution rolls until this is cleared.<br>"
+                },
+                "value": [
+                  { "label": "Taken", "checked": false },
+                  { "label": "Delayed", "checked": false }
+                ]
+              },
+              {
+                "id": "c286b8ef-c3f8-4418-bee1-cb68f788b715",
+                "label": "Giving Up",
+                "type": "SlotTracker",
+                "meta": {
+                  "width": 1,
+                  "helperText": "&nbsp;If your character is Giving Up, you should retire them"
+                },
+                "value": [{ "label": "", "checked": false }]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "401d8786-e52f-49e0-8fbc-695a21280e5f",
+      "sections": {
+        "left": [
+          {
+            "id": "538736a3-b295-479d-a602-f1d22853d411",
+            "label": "Items",
+            "blocks": [
+              {
+                "id": "4e78c2f7-ae5c-4f77-a671-3665463c3869",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Add as many as you need. Each item should have three tags + an armour or damage rating where relevant"
+                }
+              },
+              {
+                "id": "8ac7f984-e0b4-4ae9-bd9f-56a204c8851a",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Add as many as you need. Each item should have three tags + an armour or damage rating where relevant"
+                }
+              },
+              {
+                "id": "63e0cd05-d311-43a7-9acf-872aea4ab99f",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Add as many as you need. Each item should have three tags + an armour or damage rating where relevant"
+                }
+              },
+              {
+                "id": "dd035d9e-8516-4e0f-9e10-d39a87ee0d63",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Add as many as you need. Each item should have three tags + an armour or damage rating where relevant"
+                }
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "29dcb1bc-5874-4762-8cd1-28a388823765",
+            "label": "Unique Move",
+            "blocks": [
+              {
+                "id": "d54bcf94-f063-4cc9-ab8d-6772ca8077b8",
+                "label": "Text",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "fec89268-95de-4a1d-8bb1-54966b7b789f",
+            "label": "Special Moves",
+            "blocks": [
+              {
+                "id": "bffdca25-858a-497b-b4e8-097efcae43d6",
+                "label": "Text",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 1 }
+              },
+              {
+                "id": "cd1fbfaf-b948-402e-8a3e-28eb90aaa299",
+                "label": "Text",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ]
+      },
+      "label": "Items and Moves"
+    },
+    {
+      "id": "67635cf0-dd40-4602-b9c4-bdea636e700c",
+      "sections": {
+        "left": [
+          {
+            "id": "2b736116-e4c6-4de1-8c85-1c698c2865c5",
+            "label": "Fears or anxieties",
+            "blocks": [
+              {
+                "id": "45237b03-a1ed-43f7-9ddb-f703047e6951",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "Anything you need to remember is affecting you"
+                }
+              }
+            ]
+          },
+          {
+            "id": "4d27776b-5c67-430b-9ea2-fdaa30079800",
+            "label": "Crew Move",
+            "blocks": [
+              {
+                "id": "bb0cd521-d96e-4dae-bda5-d8d41261a1f9",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "Find this in your playbook" }
+              }
+            ]
+          },
+          {
+            "id": "23157235-b848-496d-882c-3eb480acdcab",
+            "label": "Clocks",
+            "blocks": [
+              {
+                "id": "aaeeb58a-abc6-40c0-84fb-1f15bf211b17",
+                "label": "project",
+                "type": "SlotTracker",
+                "meta": {
+                  "asClock": true,
+                  "helperText": "use the plus and minus buttons to make the clock longer or shorter"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "97b1f5c4-bce4-4900-8f09-7704c3405b11",
+            "label": "Relationships",
+            "blocks": [
+              {
+                "id": "1547d7bc-80b0-42a5-8517-28bbf9a4f0f7",
+                "label": "crew member",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "helperText": "add a number between -2 and +2" }
+              },
+              {
+                "id": "85526ad1-d759-4bf7-bbce-9546d4d9a4d9",
+                "label": "Crew member",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "helperText": "add a number between -2 and +2" }
+              },
+              {
+                "id": "8d755e37-bcec-4a96-a7a7-b6e194368b47",
+                "label": "Crew member",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "helperText": "add a number between -2 and +2" }
+              },
+              {
+                "id": "ac92a733-7942-4da8-bcd9-e2fe2e87153e",
+                "label": "Crew member",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "helperText": "add a number between -2 and +2" }
+              },
+              {
+                "id": "ccaa3c06-4a54-4fee-b627-7084d7cc5e3e",
+                "label": "Crew member",
+                "type": "Numeric",
+                "value": "",
+                "meta": { "helperText": "add a number between -2 and +2" }
+              }
+            ]
+          }
+        ]
+      },
+      "label": "Personal"
+    },
+    {
+      "id": "cb7091e0-cf97-4c34-b2bf-61aa50db4fa8",
+      "sections": {
+        "left": [
+          {
+            "id": "7d61d88d-f830-4664-8a37-a6e7edade06a",
+            "label": "Backstory, look, more about you",
+            "blocks": [
+              {
+                "id": "6b27df63-c4f0-4c64-84be-7389eb4c9b04",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": { "width": 1 }
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "527cc750-23c3-4682-8ec4-586137fae88c",
+            "label": "Notes",
+            "blocks": [
+              {
+                "id": "1e41011c-48bd-4be3-88b4-1963a1de4d59",
+                "label": "Anything can go here",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ]
+      },
+      "label": "Notes"
+    }
+  ],
+  "template": "Blank",
+  "version": 4,
+  "fariType": "character"
+}

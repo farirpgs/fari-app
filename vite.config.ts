@@ -18,5 +18,8 @@ export default defineConfig({
   ],
   server: {
     port: 1234,
+    proxy: {
+      "/.netlify/functions/auth": "http://localhost:9999",
+    },
   },
 });

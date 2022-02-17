@@ -1,3 +1,4 @@
+import { TDDocument } from "@tldraw/tldraw";
 import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { IBlock, ICharacter } from "../../domains/character/types";
@@ -89,11 +90,15 @@ export interface IScene {
   notes?: string;
 }
 
+export type IGM = IPlayer & {
+  npcs: Array<IPlayer>;
+};
+
 export interface ISession {
-  gm: IPlayer & { npcs: Array<IPlayer> };
-  players: Array<IPlayer>;
+  gm: IGM;
+  players: Record<string, IPlayer>;
   goodConfetti: number;
   badConfetti: number;
-  drawAreaObjects: IDrawAreaObjects;
+  tlDrawDoc: TDDocument | undefined;
   paused: boolean;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
-import { CharacterTemplates } from "../../domains/character/CharacterType";
+import { ICharacterTemplate } from "../../domains/character/CharacterType";
 import { ICharacter } from "../../domains/character/types";
 import { getUnixFrom } from "../../domains/dayjs/getDayJS";
 import { useAppEntity } from "../../hooks/useAppEntity/useAppEntity";
@@ -19,7 +19,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
     onMigration: CharacterFactory.migrate,
   });
 
-  async function add(type: CharacterTemplates): Promise<ICharacter> {
+  async function add(type: ICharacterTemplate): Promise<ICharacter> {
     const newCharacter = await CharacterFactory.make(type);
 
     entityManager.actions.setEntities((draft: Array<ICharacter>) => {

@@ -515,6 +515,7 @@ export function MyBinder<TFolders extends string>(props: {
       }
       return false;
     });
+
     return (
       <Box>
         <Box>{renderElements(searchElements, true)}</Box>
@@ -608,9 +609,13 @@ export function MyBinder<TFolders extends string>(props: {
           const sortedGroupItems = arraySort(groupItems, [
             (e) => ({ value: e.lastUpdated, direction: "desc" }),
           ]).filter((e) => {
-            const isntInLatestElements =
-              latestElements.find((le) => le.id === e.id) === undefined;
-            return isntInLatestElements;
+            if (search) {
+              return true;
+            } else {
+              const isntInLatestElements =
+                latestElements.find((le) => le.id === e.id) === undefined;
+              return isntInLatestElements;
+            }
           });
 
           if (sortedGroupItems.length === 0) {

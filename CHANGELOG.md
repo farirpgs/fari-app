@@ -2,6 +2,21 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
+# v6.0.0
+
+- feat: new cloud infra for real time features
+- feat: new drawing area
+- feat: character sheet now support rows and columns
+- feat: copy/paste blocks from character sheets
+
+**v6.next**
+
+- [ ] copy index cards blocks
+- [ ] update slot tracker in character card
+- [ ] lowest/highest dice roller result
+- [ ] readonly draw area
+- [ ] draw area tokens
+
 # v5.3
 
 - feat: Dice Pool block enhancements

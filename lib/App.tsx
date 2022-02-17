@@ -36,7 +36,7 @@ import {
   useSettings,
 } from "./contexts/SettingsContext/SettingsContext";
 import { CharacterFactory } from "./domains/character/CharacterFactory";
-import { CharacterTemplates } from "./domains/character/CharacterType";
+import { DefaultTemplates } from "./domains/character/DefaultTemplates";
 import {
   IIndexCardCollection,
   IndexCardCollectionFactory,
@@ -157,13 +157,13 @@ function MyBinderManager() {
     "characters": {
       async onAdd() {
         const newCharacter = await charactersManager.actions.add(
-          CharacterTemplates.Blank
+          DefaultTemplates.BlankTemplate
         );
 
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(newCharacter);
         } else {
-          history.push(`/characters/${newCharacter.id}`);
+          history.push(`/characters/${newCharacter.id}?advanced=true`);
         }
         myBinderManager.actions.close();
       },

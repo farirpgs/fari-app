@@ -2,7 +2,8 @@ import produce from "immer";
 import { getUnix } from "../dayjs/getDayJS";
 import { IDiceCommandSetId } from "../dice/Dice";
 import { Id } from "../Id/Id";
-import { CharacterTemplates } from "./CharacterType";
+import { Migrator } from "../migration/Migrator";
+import { ICharacterTemplate } from "./CharacterType";
 import {
   BlockType,
   IBlock,
@@ -23,320 +24,21 @@ import {
   IV2Character,
   IV3Character,
   IV3Section,
-  V3Position,
+  IV4Character,
+  IV4Page,
+  V3Position
 } from "./types";
 
 export const CharacterFactory = {
   latestVersion: 4,
-  async make(type: CharacterTemplates): Promise<ICharacter> {
-    const templateFunctions: Record<
-      CharacterTemplates,
-      () => Promise<ICharacter>
-    > = {
-      /**
-       * @author @RPDeshaies
-       */
-      [CharacterTemplates.ChargeRPG]: async () => {
-        const jsonData = await import("./character-templates/ChargeRPG.json");
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author @RPDeshaies
-       */
-      [CharacterTemplates.LifeBeyondExoStation]: async () => {
-        const jsonData = await import(
-          "./character-templates/LifeBeyondExoStation.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author @RPDeshaies
-       */
-      [CharacterTemplates.FateCondensed]: async () => {
-        const jsonData = await import(
-          "./character-templates/FateCondensed.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author @RPDeshaies
-       */
-      [CharacterTemplates.FateCore]: async () => {
-        const jsonData = await import("./character-templates/FateCore.json");
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author @RPDeshaies
-       */
-      [CharacterTemplates.FateAccelerated]: async () => {
-        const jsonData = await import(
-          "./character-templates/FateAccelerated.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author @RPDeshaies
-       */
-      [CharacterTemplates.FateOfCthulhu]: async () => {
-        const jsonData = await import(
-          "./character-templates/FateOfCthulhu.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author @LostInBrittany
-       */
-      [CharacterTemplates.DresdenFilesAccelerated]: async () => {
-        const jsonData = await import(
-          "./character-templates/DrescendFilesAccelerated.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.Heartbreaker]: async () => {
-        const jsonData = await import(
-          "./character-templates/Heartbreaker.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author @Pheylorn
-       */
-      [CharacterTemplates.IronEddaAccelerated]: async () => {
-        const jsonData = await import(
-          "./character-templates/IronEddaAccelerated.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author @bhogan
-       */
-      [CharacterTemplates.Maze]: async () => {
-        const jsonData = await import("./character-templates/Maze.json");
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author @Owlbear
-       */
-      [CharacterTemplates.VentureCity]: async () => {
-        const jsonData = await import("./character-templates/VentureCity.json");
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author @RPDeshaies
-       */
-      [CharacterTemplates.Dnd5e]: async () => {
-        const jsonData = await import("./character-templates/DnD5e.json");
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author @RPDeshaies
-       */
-      [CharacterTemplates.TheWitchIsDead]: async () => {
-        const jsonData = await import(
-          "./character-templates/TheWitchIsDead.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.TheWitchIsDead_FR]: async () => {
-        const jsonData = await import(
-          "./character-templates/TheWitchIsDead_FR.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author @Gpoitras
-       */
-      [CharacterTemplates.EdgeOfTheEmpire]: async () => {
-        const jsonData = await import(
-          "./character-templates/EdgeOfTheEmpire.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author @Gpoitras
-       */
-      [CharacterTemplates.EdgeOfTheEmpire_FR]: async () => {
-        const jsonData = await import(
-          "./character-templates/EdgeOfTheEmpire_FR.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author sorcho
-       */
-      [CharacterTemplates.ThePool]: async () => {
-        const jsonData = await import("./character-templates/ThePool.json");
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author sorcho
-       */
-      [CharacterTemplates.TunnelsAndTrolls]: async () => {
-        const jsonData = await import(
-          "./character-templates/TunnelsAndTrolls.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      /**
-       * @author Afty
-       */
-      [CharacterTemplates.StrandsOfFate]: async () => {
-        const jsonData = await import(
-          "./character-templates/StrandsOfFate.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.EvolutionPulse_Hydrah]: async () => {
-        const jsonData = await import(
-          "./character-templates/EvolutionPulse/Hydrah.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.EvolutionPulse_Hyonos]: async () => {
-        const jsonData = await import(
-          "./character-templates/EvolutionPulse/Hyonos.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.EvolutionPulse_LostH]: async () => {
-        const jsonData = await import(
-          "./character-templates/EvolutionPulse/LostH.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.EvolutionPulse_Obscura]: async () => {
-        const jsonData = await import(
-          "./character-templates/EvolutionPulse/Obscura.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.EvolutionPulse_Proxy]: async () => {
-        const jsonData = await import(
-          "./character-templates/EvolutionPulse/Proxy.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.MärchenkriegerLOS]: async () => {
-        const jsonData = await import(
-          "./character-templates/MärchenkriegerLOS.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.FateCondensedSpanish]: async () => {
-        const jsonData = await import(
-          "./character-templates/FateCondensedSpanish.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.FateCoreSpanish]: async () => {
-        const jsonData = await import(
-          "./character-templates/FateCoreSpanish.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.FateCoreGerman]: async () => {
-        const jsonData = await import(
-          "./character-templates/FateCoreGerman.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.FateCondensedTurkish]: async () => {
-        const jsonData = await import(
-          "./character-templates/FateCondensedTurkish.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.FateCondensedBrazilianPortuguese]: async () => {
-        const jsonData = await import(
-          "./character-templates/FateCondensedBrazilianPortuguese.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.FateAcceleratedBrazilianPortuguese]: async () => {
-        const jsonData = await import(
-          "./character-templates/FateAcceleratedBrazilianPortuguese.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.FateAcceleratedPolish]: async () => {
-        const jsonData = await import(
-          "./character-templates/FateAcceleratedPolish.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.FateCondensedPolish]: async () => {
-        const jsonData = await import(
-          "./character-templates/FateCondensedPolish.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.FateCorePolish]: async () => {
-        const jsonData = await import(
-          "./character-templates/FateCorePolish.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.TachyonSquadronCharacter]: async () => {
-        const jsonData = await import(
-          "./character-templates/TachyonSquadronCharacter.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.TachyonSquadronShip]: async () => {
-        const jsonData = await import(
-          "./character-templates/TachyonSquadronShip.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.TachyonSquadronCharacterAndShip]: async () => {
-        const jsonData = await import(
-          "./character-templates/TachyonSquadronCharacterAndShip.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.DresdenFilesRPGCharacter]: async () => {
-        const jsonData = await import(
-          "./character-templates/DresdenFilesRPGCharacter.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.DresdenFilesRPGSpellCaster]: async () => {
-        const jsonData = await import(
-          "./character-templates/DresdenFilesRPGSpellCaster.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.DresdenFilesRPGVampire]: async () => {
-        const jsonData = await import(
-          "./character-templates/DresdenFilesRPGVampire.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.TroikaNuminousEdition]: async () => {
-        const jsonData = await import(
-          "./character-templates/TroikaNuminousEdition.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.CortexKitchenSink]: async () => {
-        const jsonData = await import(
-          "./character-templates/CortexKitchenSink.json"
-        );
-        return this.makeFromJson(jsonData);
-      },
-      [CharacterTemplates.Blank]: async () => {
-        const jsonData = await import("./character-templates/Blank.json");
-        return this.makeFromJson(jsonData);
-      },
-    };
-
-    const newCharacter = await templateFunctions[type]();
+  async make(template: ICharacterTemplate): Promise<ICharacter> {
+    const result = await template.importFunction();
+    const newCharacter = this.makeFromJson(result);
     return {
       ...newCharacter,
       id: Id.generate(),
       name: "",
       group: undefined,
-      template: type,
       lastUpdated: getUnix(),
     };
   },
@@ -349,15 +51,31 @@ export const CharacterFactory = {
     const migratedSheet = this.migrate(newSheet);
     return migratedSheet;
   },
-  migrate(c: any): ICharacter {
+  migrate(character: any): ICharacter {
     try {
-      const v2: IV2Character = migrateV1CharacterToV2(c);
-      const v3: IV3Character = migrateV2CharacterToV3(v2);
-      const v4: ICharacter = migrateV3CharacterToV4(v3);
-      return v4;
+      const migrate = Migrator.makeMigrationFunction<ICharacter>([
+        {
+          from: 1,
+          migrate: migrateV1CharacterToV2,
+        },
+        {
+          from: 2,
+          migrate: migrateV2CharacterToV3,
+        },
+        {
+          from: 3,
+          migrate: migrateV3CharacterToV4,
+        },
+        {
+          from: 4,
+          migrate: migrateV4CharacterToV5,
+        },
+      ]);
+      const migrated = migrate(character);
+      return migrated;
     } catch (error) {
       console.error(error);
-      return c;
+      return character;
     }
   },
   duplicate(c: ICharacter): ICharacter {
@@ -481,16 +199,14 @@ export const CharacterFactory = {
       draft.id = Id.generate();
       draft.label += " Copy";
 
-      draft.sections.left.forEach((s) => {
-        s.id = Id.generate();
-        s.blocks.forEach((b) => {
-          b.id = Id.generate();
-        });
-      });
-      draft.sections.right.forEach((s) => {
-        s.id = Id.generate();
-        s.blocks.forEach((b) => {
-          b.id = Id.generate();
+      draft.rows.forEach((r) => {
+        r.columns.forEach((c) => {
+          c.sections.forEach((s) => {
+            s.id = Id.generate();
+            s.blocks.forEach((b) => {
+              b.id = Id.generate();
+            });
+          });
         });
       });
     });
@@ -654,24 +370,23 @@ export function migrateV2CharacterToV3(v2: IV2Character): IV3Character {
         sections: sections,
       },
     ],
-    template: CharacterTemplates.FateCondensed,
     playedDuringTurn: v2.playedDuringTurn,
     version: 3,
   };
 }
 
-export function migrateV3CharacterToV4(v3: IV3Character): ICharacter {
+export function migrateV3CharacterToV4(v3: IV3Character): IV4Character {
   if (v3.version !== 3) {
-    return v3 as unknown as ICharacter;
+    return v3 as unknown as IV4Character;
   }
 
-  const v4: ICharacter = {
+  const v4: IV4Character = {
     id: v3.id,
     name: v3.name,
     group: v3.group,
     lastUpdated: v3.lastUpdated,
     wide: false,
-    pages: v3.pages.map((page): IPage => {
+    pages: v3.pages.map((page): IV4Page => {
       const leftSections = page.sections.filter(
         (s) => s.position === V3Position.Left
       );
@@ -697,9 +412,36 @@ export function migrateV3CharacterToV4(v3: IV3Character): ICharacter {
         },
       };
     }),
-    template: CharacterTemplates.FateCondensed,
     playedDuringTurn: v3.playedDuringTurn,
     version: 4,
   };
   return v4;
+}
+
+function migrateV4CharacterToV5(v4: IV4Character): ICharacter {
+  const v5: ICharacter = {
+    id: v4.id,
+    name: v4.name,
+    group: v4.group,
+    lastUpdated: v4.lastUpdated,
+    wide: false,
+    pages: v4.pages.map((page): IPage => {
+      return {
+        id: page.id,
+        label: page.label,
+        rows: [
+          {
+            columns: [
+              { sections: page.sections.left },
+              { sections: page.sections.right },
+            ],
+          },
+        ],
+      };
+    }),
+    playedDuringTurn: v4.playedDuringTurn,
+    version: 5,
+  };
+
+  return v5;
 }

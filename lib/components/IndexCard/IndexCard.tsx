@@ -33,6 +33,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { default as React, useContext, useRef, useState } from "react";
 import { ChromePicker } from "react-color";
+import { Delays } from "../../constants/Delays";
 import { FontFamily } from "../../constants/FontFamily";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
@@ -991,7 +992,7 @@ function IndexCardColorPicker(props: {
   const [color, setColor] = useLazyState({
     value: props.color,
     onChange: props.onChange,
-    delay: 75,
+    delay: Delays.colorPicker,
   });
 
   return (

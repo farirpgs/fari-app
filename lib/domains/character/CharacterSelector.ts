@@ -6,14 +6,18 @@ export const CharacterSelector = {
   getCharacterMainPointerBlock(
     character: ICharacter | undefined
   ): IMainPointerBlock {
-    const match = character?.pages
-      .flatMap((p) => [...p.sections.left, ...p.sections.right])
-      .flatMap((s) => s.blocks)
-      .find((block) => {
-        return (
-          block.type === BlockType.PointCounter && block.meta.isMainPointCounter
-        );
-      }) as IMainPointerBlock;
+    const blocks =
+      character?.pages
+        .flatMap((p) => p.rows)
+        .flatMap((r) => r.columns)
+        .flatMap((c) => c.sections)
+        .flatMap((s) => s.blocks) ?? [];
+
+    const match = blocks.find((block) => {
+      return (
+        block.type === BlockType.PointCounter && block.meta.isMainPointCounter
+      );
+    }) as IMainPointerBlock;
 
     return match;
   },

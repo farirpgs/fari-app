@@ -5,9 +5,8 @@ import React, { useContext, useState } from "react";
 import { CharacterCard } from "../lib/components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
 import { Toolbox } from "../lib/components/Toolbox/Toolbox";
 import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
-import LoremIpsumTemplate from "../lib/domains/character/character-templates/LoremIpsum.json";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
-import { CharacterTemplates } from "../lib/domains/character/CharacterType";
+import { ICharacterTemplate } from "../lib/domains/character/CharacterType";
 import { IDiceRollResult } from "../lib/domains/dice/Dice";
 import { StoryProvider } from "./StoryProvider";
 
@@ -89,135 +88,35 @@ const Template: Story<IProps> = (args, context) => {
 export const FateCondensed = Template.bind({});
 (FateCondensed as any).loaders = [
   async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.FateCondensed
-    );
+    const template: ICharacterTemplate = {
+      fileName: "",
+      category: "",
+      importFunction: async () =>
+        import(
+          "../lib/domains/character/character-templates/Fate Condensed/Fate Condensed.json"
+        ),
+    };
+
+    const character = await CharacterFactory.make(template);
+
     return { character };
   },
 ];
 
-export const FateCore = Template.bind({});
-(FateCore as any).loaders = [
+export const Charge = Template.bind({});
+(Charge as any).loaders = [
   async () => {
-    const character = await CharacterFactory.make(CharacterTemplates.FateCore);
-    return { character };
-  },
-];
+    const template: ICharacterTemplate = {
+      fileName: "",
+      category: "",
+      importFunction: async () =>
+        import(
+          "../lib/domains/character/character-templates/Fari RPGs/Charge RPG.json"
+        ),
+    };
 
-export const FateAccelerated = Template.bind({});
-(FateAccelerated as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.FateAccelerated
-    );
-    return { character };
-  },
-];
+    const character = await CharacterFactory.make(template);
 
-export const FateOfCthulhu = Template.bind({});
-(FateOfCthulhu as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.FateOfCthulhu
-    );
     return { character };
   },
 ];
-
-export const DresdenFilesAccelerated = Template.bind({});
-(DresdenFilesAccelerated as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.DresdenFilesAccelerated
-    );
-    return { character };
-  },
-];
-
-export const VentureCity = Template.bind({});
-(VentureCity as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.VentureCity
-    );
-    return { character };
-  },
-];
-
-export const Heartbreaker = Template.bind({});
-(Heartbreaker as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.Heartbreaker
-    );
-    return { character };
-  },
-];
-
-export const IronEddaAccelerated = Template.bind({});
-(IronEddaAccelerated as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.IronEddaAccelerated
-    );
-    return { character };
-  },
-];
-
-export const Maze = Template.bind({});
-(Maze as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(CharacterTemplates.Maze);
-    return { character };
-  },
-];
-
-export const Dnd5e = Template.bind({});
-(Dnd5e as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(CharacterTemplates.Dnd5e);
-    return { character };
-  },
-];
-
-export const TheWitchIsDead = Template.bind({});
-(TheWitchIsDead as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.TheWitchIsDead
-    );
-    return { character };
-  },
-];
-
-export const EdgeOfTheEmpire = Template.bind({});
-(EdgeOfTheEmpire as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.EdgeOfTheEmpire
-    );
-    return { character };
-  },
-];
-
-export const EdgeOfTheEmpire_FR = Template.bind({});
-(EdgeOfTheEmpire_FR as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(
-      CharacterTemplates.EdgeOfTheEmpire_FR
-    );
-    return { character };
-  },
-];
-export const Blank = Template.bind({});
-(Blank as any).loaders = [
-  async () => {
-    const character = await CharacterFactory.make(CharacterTemplates.Blank);
-    return { character };
-  },
-];
-
-export const LoremIpsum = Template.bind({});
-LoremIpsum.args = {
-  characterSheet: CharacterFactory.migrate(LoremIpsumTemplate as any),
-};

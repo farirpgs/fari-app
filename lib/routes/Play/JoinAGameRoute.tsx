@@ -1,4 +1,5 @@
 import { css } from "@emotion/css";
+import { useBroadcastEvent, useEventListener } from "@liveblocks/react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -10,7 +11,14 @@ import InputLabel from "@mui/material/InputLabel";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import React, { useContext, useEffect, useState } from "react";
+import {
+  default as React,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { useHistory } from "react-router";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
 import { Images } from "../../constants/Images";
@@ -18,19 +26,42 @@ import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext"
 import { Icons } from "../../domains/Icons/Icons";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/isWebRTCSupported";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import {
+  IPlayerInteraction,
+  PlayerInteractionFactory,
+} from "./types/IPlayerInteraction";
 
-export const JoinAGame: React.FC<{
-  idFromParams?: string;
-  onSubmitPlayerName(playerName: string): void;
-  connecting: boolean;
-  error: any;
+export const JoinAGameRoute: React.FC<{
+  match: {
+    params: { id?: string };
+  };
 }> = (props) => {
   const { t } = useTranslate();
   const settingsManager = useContext(SettingsContext);
   const [playerName, setPlayerName] = useState(settingsManager.state.userName);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const isGameLinkValid = useRef(false);
+  const history = useHistory();
 
-  function onSubmitPlayerName(playerName: string) {
-    props.onSubmitPlayerName(playerName);
+  const broadcast = useBroadcastEvent();
+
+  useEventListener<IPlayerInteraction>(({ event }) => {
+    if (event.type === "pong") {
+      isGameLinkValid.current = true;
+      history.push(`/play/${props.match.params.id}?name=${playerName}`);
+    }
+  });
+
+  async function onJoin() {
+    broadcast(PlayerInteractionFactory.ping());
+    setLoading(true);
+    setTimeout(() => {
+      if (!isGameLinkValid) {
+        setLoading(false);
+        setError(true);
+      }
+    }, 3000);
   }
 
   useEffect(() => {
@@ -38,7 +69,7 @@ export const JoinAGame: React.FC<{
   }, [playerName]);
 
   return (
-    <Page gameId={props.idFromParams}>
+    <Page>
       <Box>
         <Box pb="1rem">
           <Container maxWidth="xs">
@@ -70,7 +101,7 @@ export const JoinAGame: React.FC<{
         onSubmit={(event) => {
           event.preventDefault();
           event.stopPropagation();
-          onSubmitPlayerName(playerName);
+          onJoin();
         }}
       >
         <Box pb="2rem" textAlign="center">
@@ -82,8 +113,8 @@ export const JoinAGame: React.FC<{
           </Typography>
         </Box>
         <Box pb="1rem">
-          {props.connecting ? (
-            <Fade in key="lol">
+          {loading ? (
+            <Fade in key="loading">
               <Box display="flex" justifyContent="center">
                 <Icons.TwoPeopleMeetingTalkingIcon
                   className={css({ fontSize: "5rem" })}
@@ -92,7 +123,7 @@ export const JoinAGame: React.FC<{
               </Box>
             </Fade>
           ) : (
-            <Fade in key="asd">
+            <Fade in key="waiting">
               <Box display="flex" justifyContent="center">
                 <Icons.TwoPeopleMeetingIcon
                   className={css({ fontSize: "5rem" })}
@@ -143,14 +174,14 @@ export const JoinAGame: React.FC<{
             </Paper>
           </Box>
 
-          <Collapse in={props.connecting}>
+          <Collapse in={loading}>
             <Box pb="2rem">
               <Box display="flex" justifyContent="center">
                 <CircularProgress />
               </Box>
             </Box>
           </Collapse>
-          <Collapse in={props.error}>
+          <Collapse in={error}>
             <Box pb="2rem" textAlign="center">
               <Typography color="error">
                 {t("play-route.join-error")}
@@ -168,4 +199,4 @@ export const JoinAGame: React.FC<{
   }
 };
 
-JoinAGame.displayName = "JoinAGame";
+export default JoinAGameRoute;

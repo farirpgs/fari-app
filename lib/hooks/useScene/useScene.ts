@@ -46,7 +46,7 @@ export function useScene() {
     }
   }
 
-  function overrideScene(newScene: IScene) {
+  function overrideScene(newScene: IScene | undefined) {
     if (newScene) {
       setScene(newScene);
     }

@@ -1,0 +1,182 @@
+{
+  "name": "No Nut November Template Template",
+  "lastUpdated": 1643770001,
+  "wide": false,
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "Character",
+      "sections": {
+        "left": [
+          {
+            "id": "5d08904b-8b29-40da-9ba1-329b09b4bf29",
+            "label": "Character",
+            "blocks": [
+              {
+                "id": "5f936b9f-95f5-4cb9-b75f-48082934300e",
+                "label": "Name",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "4615f73e-6fa2-499a-95d9-6f4c56ecb14f",
+                "label": "Pronouns",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "2434915a-2f78-4776-8d9b-054b47ec46a2",
+                "label": "Mutation",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "e638c5b5-8c41-4292-9b2c-431127ccf14a",
+            "label": "Injuries",
+            "blocks": [
+              {
+                "id": "dbe082e2-51f1-49c1-9f4a-5622e6b3d8ed",
+                "label": "Minor Injuries",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "db1141d7-ec88-455b-a508-028a62e2b502",
+                "label": "Major Injuries",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "86c0b425-02d9-469e-b87c-abb2442c1835",
+                "label": "Lethal injury",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "29e5cef5-d64d-45c1-a014-fbdb4cc9f21b",
+            "label": "Notes",
+            "blocks": [
+              {
+                "id": "f0907ace-3f3d-4508-a1d7-ffd1395a6fdb",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "34d4a973-975c-49d6-99a0-fe0782ff18aa",
+            "label": "Stats",
+            "blocks": [
+              {
+                "id": "bdc0caa1-471b-40b1-8916-df7f7994de3e",
+                "label": "Energy",
+                "type": "PointCounter",
+                "meta": { "isMainPointCounter": false },
+                "value": "0"
+              },
+              {
+                "id": "4036b22c-a499-4cb6-9964-be8f0097f9cc",
+                "label": "Biting",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d8"], "width": 0.5 }
+              },
+              {
+                "id": "17a33d5b-d131-44a2-89b7-36715b669a82",
+                "label": "Climbing",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d8"], "width": 0.5 }
+              },
+              {
+                "id": "86f02535-55d9-415a-8cd6-bac599a9a627",
+                "label": "Sniffing",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d8"], "width": 0.5 }
+              },
+              {
+                "id": "3d5c180f-8a93-40f6-9d37-4fe47ca9ffcf",
+                "label": "Cuddling",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d8"], "width": 0.5 }
+              }
+            ]
+          },
+          {
+            "id": "b085bb04-7dc1-4b5f-9b83-086ce892aa12",
+            "label": "Inventory",
+            "blocks": [
+              {
+                "id": "e02bdc0c-86fe-4803-ba3a-43b9a91cc072",
+                "label": "Weapons",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "93fc6e5e-c7cc-4b21-b7ff-304be013e221",
+                "label": "Armor",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "a6c270f8-852c-41a5-9640-55878edb845a",
+                "label": "Nuts",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "8ba96c75-0b48-428f-b484-d23105b5ac6d",
+                "label": "Gear",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "d7ba8b0c-bcbf-4c30-b5dd-50928ddfe076",
+            "label": "Credits",
+            "blocks": [
+              {
+                "id": "809484a6-12ba-40b8-ab7d-3ec34803300e",
+                "label": "Mitchell Daily",
+                "type": "Link",
+                "meta": { "hasDisplayName": true },
+                "value": "https://mitchelldaily.itch.io/"
+              },
+              {
+                "id": "211d08f2-c159-449f-ba63-5eb1385b2daf",
+                "label": "No Nut November",
+                "type": "Link",
+                "meta": { "hasDisplayName": true, "helperText": "" },
+                "value": "https://mitchelldaily.itch.io/nut"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "template": "Blank",
+  "version": 4,
+  "fariType": "character"
+}

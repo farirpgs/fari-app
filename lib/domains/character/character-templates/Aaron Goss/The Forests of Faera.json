@@ -1,0 +1,650 @@
+{
+  "name": "The Forests of Faera Template",
+  "lastUpdated": 1643976385,
+  "wide": true,
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "Fae Traveller",
+      "sections": {
+        "left": [
+          {
+            "id": "9d598342-e7ed-4fc3-9dbe-19674af09fe0",
+            "label": "Faekind, trait, look",
+            "blocks": [
+              {
+                "id": "e45f0018-f1e3-4eac-8a34-e4edc41feac9",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "Determines your most obvious physical characteristics, ties you to some of the myth and legend of Faera, and tells you about some of the things you are naturally good at."
+                },
+                "value": ""
+              },
+              {
+                "id": "585ed0aa-1764-4073-845d-f0ef77d5f7ba",
+                "label": "faekind",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "addb988e-542c-45eb-a3f7-35eb4723fb6c",
+                "label": "Trait",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "" }
+              },
+              {
+                "id": "b8f799ec-cd37-4f6b-95c3-1fefc2f2cb48",
+                "label": "Look",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "" }
+              }
+            ],
+            "visibleOnCard": false
+          },
+          {
+            "id": "4b1806c6-b38e-4fe2-8bfd-7e3efd12f774",
+            "label": "calling, demeanour, edge",
+            "blocks": [
+              {
+                "id": "7bb499c3-aed7-4627-8961-43ed0923f78a",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "Sets you apart from other faekind as your speciality, forms the core of your passion and personality as a citizen of Faera, and determines what drives you to travel through the forests."
+                },
+                "value": ""
+              },
+              {
+                "id": "bd2dfb1f-06f7-4443-882f-5cc28619ffd4",
+                "label": "calling",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "513efb37-afbe-4207-b477-a21488d4fe28",
+                "label": "demeanour",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "" }
+              },
+              {
+                "id": "fdaed92b-194a-4bb1-a09d-641b00a42ad6",
+                "label": "Edge",
+                "type": "Text",
+                "value": "",
+                "meta": { "checked": false, "helperText": "" }
+              }
+            ]
+          },
+          {
+            "id": "7bd75b1c-e195-4af6-b408-04a57a2bfa6f",
+            "label": "Truths",
+            "blocks": [
+              {
+                "id": "3079b10f-60a6-4072-b196-b4f4baab5f89",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "Stories, myths, legends, and whispers about your faekind or calling that expand your heritage and backstory.<br>"
+                },
+                "value": ""
+              },
+              {
+                "id": "fe0f8a17-253a-406c-897a-e759a016a6c3",
+                "label": "",
+                "type": "Text",
+                "value": "My faekind/calling best known for their...\n",
+                "meta": {}
+              },
+              {
+                "id": "0dc85e60-0913-4699-8574-a1a816c9608e",
+                "label": "",
+                "type": "Text",
+                "value": "My faekind/calling is loved because we like to...\n",
+                "meta": {}
+              },
+              {
+                "id": "c1a28e39-8753-4f29-85b7-448b2e256210",
+                "label": "",
+                "type": "Text",
+                "value": "Faerietale stories say that my faekind/calling is...\n",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "88fa96f8-e31d-426e-a5ba-38786b6ddd69",
+            "label": "lore",
+            "blocks": [
+              {
+                "id": "8479094a-088e-4694-82bb-5ae7e5b4be2e",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "When you encounter something that you feel holds special meaning to your faekind or calling, tell your Guide. Add it here as appropriate.<br>"
+                },
+                "value": ""
+              },
+              {
+                "id": "a807add1-02f6-4f33-be4c-f22ec0f639d1",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "3416aba1-5b2c-43cd-9af3-c1ab22fd4bc4",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "94153a47-5791-4180-aa0e-7fd380abc366",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "159be8ac-6e84-4f49-892f-2532e1448160",
+            "label": "Bonds",
+            "blocks": [
+              {
+                "id": "665f8de1-fafd-470a-a02a-7ace15954bf5",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "Bonds determine how you know the other travellers. You start with at least one bond with another traveller.<br>"
+                },
+                "value": ""
+              },
+              {
+                "id": "098a8cd0-23a0-4de2-b706-de93b3194def",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "ccf57920-f70b-4c2c-97c9-735975bb9ac6",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "47da160b-489c-4531-ba87-1dca5d4a2737",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "" }
+              },
+              {
+                "id": "cf415ab1-8cac-430e-ac13-20c04b16a76f",
+                "label": "",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "" }
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "926062bb-50da-4c84-9a8f-92f9fe5d392e",
+            "label": "portrait",
+            "blocks": [
+              {
+                "id": "d371cffb-918b-4a90-87db-dc8ea20839cf",
+                "label": "",
+                "type": "Image",
+                "meta": {},
+                "value": ""
+              }
+            ]
+          },
+          {
+            "id": "4c7a312e-7181-4534-86ca-4a8ba1534016",
+            "label": "Traveller's Pack",
+            "blocks": [
+              {
+                "id": "da511985-9e35-40d0-a0ae-d32aa4edd440",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "Carries all of your gear and the tokens and keepsakes you might pick up on your travels."
+                },
+                "value": ""
+              },
+              {
+                "id": "8122f824-0e64-4034-ad58-00700187d961",
+                "label": "tasty snack",
+                "type": "Text",
+                "value": "",
+                "meta": { "checked": false, "helperText": "" }
+              },
+              {
+                "id": "239c7c99-0f2f-490e-a097-5a9856319fc6",
+                "label": "mysterious potion",
+                "type": "Text",
+                "value": "",
+                "meta": { "checked": false, "helperText": "" }
+              },
+              {
+                "id": "33503024-fff6-4c55-82ad-61b2b8b809dd",
+                "label": "useful, mundane item",
+                "type": "Text",
+                "value": "",
+                "meta": { "checked": false, "helperText": "" }
+              },
+              {
+                "id": "1588cfd4-4418-4309-8ae8-1b1cbdde175a",
+                "label": "Trinkets &amp; more",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "" }
+              }
+            ],
+            "visibleOnCard": false
+          },
+          {
+            "id": "2a236379-bfb4-4bb5-8589-72ceb6aad434",
+            "label": "Sacrifice",
+            "blocks": [
+              {
+                "id": "b66d6e28-1eb2-475b-a43e-9c0002948689",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "Mark your edge, tasty snack, mysterious potion, or useful, mundane item when you sacrifice it to overcome an obstacle. If you cannot mark one, you cannot sacrifice it to succeed at a cost. If you cannot mark any, tied rolls become complications.<br>"
+                },
+                "value": ""
+              }
+            ]
+          },
+          {
+            "id": "e5dbd405-d102-409b-b609-9117e8f532ea",
+            "label": "distress",
+            "blocks": [
+              {
+                "id": "659502c1-21cb-4d01-8475-a1d208453e67",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "While you are distressed, you cannot perform tests on your own, but you can still help companions in need.<br><br>Mark when you are distressed.<br>",
+                  "width": 0.5
+                },
+                "value": ""
+              },
+              {
+                "id": "436ef229-88a0-49f0-90aa-862ebc4b7f4b",
+                "label": "",
+                "type": "SlotTracker",
+                "meta": { "asClock": true, "width": 0.5 },
+                "value": [{ "label": "", "checked": false }]
+              }
+            ],
+            "visibleOnCard": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "78f513be-f4bf-4fd4-81a7-d8e0617dd437",
+      "sections": {
+        "left": [
+          {
+            "id": "bcb09fb3-b40b-4e4d-a688-d18ab5655e26",
+            "label": "composure",
+            "blocks": [
+              {
+                "id": "e966b2ec-eb76-4988-86ee-e73d96aab456",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "You start with a d8 composure die. If you lose composure, change all in this column to the new die size along the following cascading chain:<br>"
+                },
+                "value": ""
+              },
+              {
+                "id": "b822ad01-1abb-405a-89a8-f559439ff473",
+                "label": "    d8 ➡ d6 ➡ d4    ",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "637feec7-3d6b-4898-903b-9b4a51a7533f",
+                "label": "strength",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "width": 0.5,
+                  "helperText": "The ability that you have honed during your travels (body, mind, or spirit)."
+                }
+              },
+              {
+                "id": "4bf727c2-dc51-4139-a97d-41ef4af44dd2",
+                "label": "weakness",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "width": 0.5,
+                  "helperText": "The ability that you have neglected during your travels (body, mind, or spirit)."
+                }
+              },
+              {
+                "id": "a8d9d4ba-daf9-4ace-add5-dddef43637fa",
+                "label": "",
+                "type": "Link",
+                "meta": { "hasDisplayName": false, "helperText": "‎<br>" },
+                "value": ""
+              },
+              {
+                "id": "78d8216f-5e14-4409-8ddb-ed2d77663f0c",
+                "label": "use an ability",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d8"],
+                  "helperText": "Roll your composure die.",
+                  "width": 1
+                }
+              },
+              {
+                "id": "1c553beb-cbb2-4920-8df0-81cd80c06507",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "949731c2-3de8-4653-a1d5-90c43e856fda",
+                "label": "use your strength",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d8", "1d8"],
+                  "helperText": "Roll your composure die twice and take the higher result.",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "19c1a33c-ea64-43c9-96cc-78098699959d",
+                "label": "use your weakness",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d8", "1d8"],
+                  "helperText": "Roll your composure die twice and take the lower result.",
+                  "width": 0.5
+                }
+              }
+            ],
+            "visibleOnCard": false
+          }
+        ],
+        "right": [
+          {
+            "id": "b8c4a270-f7db-4f5f-b447-8c2cbb89a172",
+            "label": "enchantment",
+            "blocks": [
+              {
+                "id": "e8efeadb-37cd-4f00-885f-fdd594f57fcf",
+                "label": "",
+                "type": "Link",
+                "meta": {
+                  "hasDisplayName": false,
+                  "helperText": "You start with a d4 enchantment die. If you lose composure, change all in this column to the new die size along the following cascading chain:<br>"
+                },
+                "value": ""
+              },
+              {
+                "id": "eb4eec3b-ae5b-4dc1-869e-67e17632b942",
+                "label": "    d4 ➡ d6 ➡ d8    ",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "9857560e-a6ee-4971-94f8-6278164b7c9e",
+                "label": "runes",
+                "type": "Text",
+                "value": "",
+                "meta": {
+                  "helperText": "The enchanted marks on your body through which you channel the magics of the forests (balance, conjuring, distortion, elements, illusion, knowledge, sanctuary, and/or vision)."
+                }
+              },
+              {
+                "id": "503418aa-ca8c-4c22-bda1-77e30df926bc",
+                "label": "",
+                "type": "Link",
+                "meta": { "hasDisplayName": false, "helperText": "‎<br>" },
+                "value": ""
+              },
+              {
+                "id": "18a3d349-f309-46c1-b91c-dfdf408e3dd3",
+                "label": "weave a spell",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d4"],
+                  "helperText": "Roll your enchantment die.<br>"
+                }
+              },
+              {
+                "id": "7273f76f-db17-4525-aefe-28d2591c9a14",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              }
+            ]
+          },
+          {
+            "id": "00dee8b3-eeab-4113-a127-b360219be076",
+            "label": "obstacle",
+            "blocks": [
+              {
+                "id": "4d0e8613-d42a-4729-9325-8c6448c6d2d6",
+                "label": "roll the obstacle die",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d8"],
+                  "helperText": "Roll when the traveller has neither a boon nor a bane, or when they have both."
+                }
+              },
+              {
+                "id": "903c84e1-61a7-4036-8fbd-d6691737872c",
+                "label": "",
+                "type": "Separator",
+                "meta": { "hasLabel": false },
+                "value": ""
+              },
+              {
+                "id": "7a0cd4cc-ff66-41dd-964f-5def516132a2",
+                "label": "roll the obstacle die with a boon",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d6"],
+                  "helperText": "Roll when the traveller has a boon.",
+                  "width": 0.5
+                }
+              },
+              {
+                "id": "6a02fe66-845c-4a20-b266-15c448cba2e9",
+                "label": "ROLL THE OBSTACLE DIE with a bane",
+                "type": "DicePool",
+                "value": "",
+                "meta": {
+                  "commands": ["1d10"],
+                  "helperText": "Roll when the traveller has a bane.",
+                  "width": 0.5
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "label": "Actions"
+    },
+    {
+      "id": "d00a1741-1989-4dbd-bc2f-77c7617264b6",
+      "label": "Mini Traveller Card",
+      "sections": {
+        "left": [
+          {
+            "id": "fa0f7c84-fb70-45cd-a438-93a7502aed84",
+            "label": "Fae Traveller",
+            "blocks": [
+              {
+                "id": "9a83cc35-8b37-4cc7-8224-ef613d41872e",
+                "label": "",
+                "type": "Image",
+                "meta": {},
+                "value": ""
+              },
+              {
+                "id": "5f5db00b-075e-4ae4-a074-380bf9b5a4cc",
+                "label": "🎭",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "87b6b4da-c2d4-42dc-83aa-3e9e126f1311",
+                "label": "Faekind + Calling",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "ce2bfb5f-23a9-4d36-b9d9-2fa26f86ba13",
+                "label": "Info",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "7104c41b-e2b3-4ab3-b93f-331e4fa8844e",
+                "label": "✨",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "c6cf72a1-94b6-4c56-bae3-ba1f2cda1604",
+                "label": "Strength",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "633222a9-4fe6-41b5-af52-8d8b3a42d0ff",
+                "label": "Weakness",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "c65efa80-773e-48aa-b583-a92f2a31f47c",
+                "label": "Runes",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "8fb14018-34ce-404a-913a-cff67c364eda",
+                "label": "🎲",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "a166043c-a1d7-4855-affe-4e98c23fbe96",
+                "label": "Composure",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d8"] }
+              },
+              {
+                "id": "1a624a0e-0a50-45c7-ac7b-57bd7c7aa254",
+                "label": "Enchantment",
+                "type": "DicePool",
+                "value": "",
+                "meta": { "commands": ["1d4"] }
+              },
+              {
+                "id": "565a17b5-564d-4142-9640-e937166167e6",
+                "label": "💥",
+                "type": "Separator",
+                "meta": { "hasLabel": true },
+                "value": ""
+              },
+              {
+                "id": "4b8e68bf-3bea-434d-a170-e4856573c9bd",
+                "label": "Edge",
+                "type": "Text",
+                "value": "",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "162678cb-cf87-4832-8ebd-942735eb2f46",
+                "label": "Snack",
+                "type": "Text",
+                "value": "",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "8a0291ac-43f7-47ca-9380-90bd26e475c9",
+                "label": "Potion",
+                "type": "Text",
+                "value": "",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "5aa903e8-6cb5-4b67-8797-bd30a33410e3",
+                "label": "Item",
+                "type": "Text",
+                "value": "",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "71904af7-f957-4ca3-86ab-8d172b5ff0a9",
+                "label": "Distressed?",
+                "type": "SlotTracker",
+                "meta": { "asClock": true },
+                "value": [{ "label": "", "checked": false }]
+              }
+            ],
+            "visibleOnCard": true
+          }
+        ],
+        "right": []
+      }
+    }
+  ],
+  "template": "Blank",
+  "version": 4,
+  "group": "The Forests of Faera",
+  "fariType": "character"
+}

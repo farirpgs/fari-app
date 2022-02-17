@@ -14,6 +14,7 @@ import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext"
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { ICharacter, ISection } from "../../domains/character/types";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import { ManagerBox } from "../Character/components/CharacterDialog/CharacterV3Dialog";
 import { BlockByType } from "../Character/components/CharacterDialog/components/BlockByType";
 
 export const CharacterPrintRoute: React.FC<{
@@ -85,19 +86,17 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
       </Box>
       <Box>
         {props.character?.pages.map((page, pageIndex) => {
-          const leftSections = page.sections.left;
-          const rightSections = page.sections.right;
           return (
             <Box
               key={pageIndex}
               className={css({
                 pageBreakAfter: "always",
+                marginBottom: "1rem",
               })}
             >
               <Box
                 className={css({
                   borderBottom: `3px solid ${headerBackgroundColor}`,
-                  marginBottom: "1rem",
                   width: "100%",
                   display: "flex",
                 })}
@@ -125,36 +124,59 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
                   </FateLabel>
                 </Box>
               </Box>
-              {/* <Box
-              className={css({
-                columns: "2",
-                columnGap: "1rem",
-                // breakInside: "avoid",
-              })}
-            >
-              <Box
-                className={css({
-                  pageBreakInside: "avoid",
+              <Box>
+                {page.rows.map((row, rowIndex) => {
+                  const columnSize = Math.floor(12 / row.columns.length);
+                  return (
+                    <ManagerBox
+                      key={rowIndex}
+                      readonly={true}
+                      backgroundColor={theme.palette.action.hover}
+                      label={<>Row #{rowIndex + 1}</>}
+                    >
+                      {row.columns.length > 0 && (
+                        <Grid container>
+                          {row.columns.map((column, columnIndex) => {
+                            return (
+                              <Grid
+                                item
+                                key={columnIndex}
+                                xs={12}
+                                md={columnSize as GridSize}
+                                className={css({
+                                  borderLeft:
+                                    columnIndex === 0
+                                      ? `2px solid ${headerBackgroundColor}`
+                                      : "none",
+                                  borderBottom: `2px solid ${headerBackgroundColor}`,
+                                  borderRight: `2px solid ${headerBackgroundColor}`,
+                                })}
+                              >
+                                <ManagerBox
+                                  readonly={true}
+                                  label={<>Column #{columnIndex + 1}</>}
+                                  backgroundColor={
+                                    theme.palette.action.selected
+                                  }
+                                >
+                                  {column.sections.map((section) => {
+                                    return (
+                                      <PrintSections
+                                        key={section.id}
+                                        section={section}
+                                      />
+                                    );
+                                  })}
+                                </ManagerBox>
+                              </Grid>
+                            );
+                          })}
+                        </Grid>
+                      )}
+                    </ManagerBox>
+                  );
                 })}
-              >
-                <PrintSections sections={leftSections} />
               </Box>
-              <Box
-                className={css({
-                  pageBreakInside: "avoid",
-                })}
-              >
-                <PrintSections sections={rightSections} />
-              </Box>
-            </Box> */}
-              <Grid container spacing={1}>
-                <Grid item xs={6}>
-                  <PrintSections sections={leftSections} />
-                </Grid>
-                <Grid item xs={6}>
-                  <PrintSections sections={rightSections} />
-                </Grid>
-              </Grid>
             </Box>
           );
         })}
@@ -163,7 +185,7 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
   );
 }
 
-function PrintSections(props: { sections: Array<ISection> }) {
+function PrintSections(props: { section: ISection }) {
   const theme = useTheme();
   const headerColor = theme.palette.background.paper;
   const headerBackgroundColor = useTextColors(
@@ -172,70 +194,65 @@ function PrintSections(props: { sections: Array<ISection> }) {
 
   return (
     <>
-      {props.sections.map((section, sectionIndex) => {
-        return (
-          <Box
-            key={sectionIndex}
-            className={css({
-              pageBreakInside: "avoid",
-            })}
-          >
-            <Grid container>
-              <Grid item xs>
-                <Box
-                  className={css({
-                    // Hexagone
-                    // https://bennettfeely.com/clippy/
-                    clipPath:
-                      "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
-                    background: headerBackgroundColor,
-                    color: headerColor,
-                    width: "100%",
-                    padding: ".5rem",
-                  })}
-                >
-                  <FateLabel
-                    noWrap
-                    className={css({
-                      fontSize: "1rem",
-                    })}
-                  >
-                    {previewContentEditable({ value: section.label })}
-                  </FateLabel>
+      <Box
+        className={css({
+          pageBreakInside: "avoid",
+        })}
+      >
+        <Grid container>
+          <Grid item xs>
+            <Box
+              className={css({
+                // Hexagone
+                // https://bennettfeely.com/clippy/
+                // clipPath:
+                //   "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
+                background: headerBackgroundColor,
+                color: headerColor,
+                width: "100%",
+                padding: ".5rem",
+              })}
+            >
+              <FateLabel
+                noWrap
+                className={css({
+                  fontSize: "1rem",
+                })}
+              >
+                {previewContentEditable({ value: props.section.label })}
+              </FateLabel>
+            </Box>
+          </Grid>
+        </Grid>
+        <Grid container>
+          {props.section.blocks.map((block) => {
+            const width: GridSize = !!block.meta.width
+              ? ((block.meta.width * 12) as GridSize)
+              : 12;
+            return (
+              <Grid
+                item
+                xs={width}
+                key={block.id}
+                className={css({
+                  pageBreakInside: "avoid",
+                })}
+              >
+                <Box my=".5rem" px=".5rem">
+                  <BlockByType
+                    advanced={false}
+                    readonly={true}
+                    dataCy={`character-card.${props.section.label}.${block.label}`}
+                    block={block}
+                    onChange={() => undefined}
+                    onRoll={() => undefined}
+                  />
                 </Box>
               </Grid>
-            </Grid>
-            <Grid container>
-              {section.blocks.map((block) => {
-                const width: GridSize = !!block.meta.width
-                  ? ((block.meta.width * 12) as GridSize)
-                  : 12;
-                return (
-                  <Grid
-                    item
-                    xs={width}
-                    key={block.id}
-                    className={css({
-                      pageBreakInside: "avoid",
-                    })}
-                  >
-                    <Box my=".5rem" px=".5rem">
-                      <BlockByType
-                        advanced={false}
-                        readonly={true}
-                        dataCy={`character-card.${section.label}.${block.label}`}
-                        block={block}
-                        onChange={() => undefined}
-                        onRoll={() => undefined}
-                      />
-                    </Box>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Box>
-        );
-      })}
+            );
+          })}
+        </Grid>
+      </Box>
     </>
   );
 }

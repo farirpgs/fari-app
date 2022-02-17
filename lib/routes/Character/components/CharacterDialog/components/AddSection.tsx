@@ -12,6 +12,7 @@ export const AddSection: React.FC<{
     <Box p="1rem" justifyContent="center" display="flex">
       <Button
         color="primary"
+        size="small"
         variant="outlined"
         onClick={() => {
           props.onAddSection();
