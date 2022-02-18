@@ -106,7 +106,7 @@ enum SortMode {
   PinnedFirst = "PinnedFirst",
 }
 
-export const paperStyle = css({ borderRadius: "0px", flex: "1 0 auto" });
+const paperStyle = css({ borderRadius: "0px", flex: "1 0 auto" });
 
 type IProps = {
   sessionManager: ReturnType<typeof useSession>;

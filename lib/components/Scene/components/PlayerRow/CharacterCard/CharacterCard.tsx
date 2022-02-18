@@ -1,5 +1,6 @@
 import { css, cx } from "@emotion/css";
-import FaceIcon from "@mui/icons-material/Face";
+import LaunchIcon from "@mui/icons-material/Launch";
+import SaveIcon from "@mui/icons-material/Save";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
@@ -7,7 +8,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Paper from "@mui/material/Paper";
 import { useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
-import React, { useEffect } from "react";
+import React from "react";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
 import { ICharacter } from "../../../../../domains/character/types";
 import { IDiceRollResult } from "../../../../../domains/dice/Dice";
@@ -17,7 +18,6 @@ import { BlockByType } from "../../../../../routes/Character/components/Characte
 import { useCharacter } from "../../../../../routes/Character/hooks/useCharacter";
 import { previewContentEditable } from "../../../../ContentEditable/ContentEditable";
 import { FateLabel } from "../../../../FateLabel/FateLabel";
-import { paperStyle } from "../../../Scene";
 
 export const CharacterCard: React.FC<{
   characterSheet: ICharacter | undefined;
@@ -54,11 +54,11 @@ export const CharacterCard: React.FC<{
     marginTop: "1rem",
   });
 
-  useEffect(() => {
-    if (characterManager.state.character) {
-      props.onChange?.(characterManager.state.character);
-    }
-  }, [characterManager.state.character]);
+  function handleSave() {
+    const updatedCharacter =
+      characterManager.actions.getCharacterWithNewTimestamp();
+    props.onChange?.(updatedCharacter);
+  }
 
   if (!characterManager.state.character) {
     return null;
@@ -76,7 +76,12 @@ export const CharacterCard: React.FC<{
         })
       )}
     >
-      <Paper className={paperStyle}>
+      <Paper
+        className={css({
+          borderRadius: "0px",
+          flex: "1 0 auto",
+        })}
+      >
         <Box>
           <Box
             py=".5rem"
@@ -87,40 +92,93 @@ export const CharacterCard: React.FC<{
               borderBottom: hasSections ? "1px solid #f0a4a4" : undefined,
             })}
           >
-            <Box>
-              <Grid container alignItems="baseline" spacing={2} wrap="nowrap">
-                <Grid item xs zeroMinWidth>
-                  <FateLabel noWrap>{props.characterSheet?.name}</FateLabel>
+            <Grid container alignItems="flex-start" spacing={1} wrap="nowrap">
+              <Grid item xs>
+                <FateLabel
+                  noWrap
+                  sx={{
+                    display: "inline-block",
+                    width: "100%",
+                  }}
+                >
+                  {props.characterSheet?.name}
+                </FateLabel>
+              </Grid>
+              <Grid item>
+                <Grid container spacing={1}>
+                  {props.onCharacterDialogOpen && (
+                    <Grid item>
+                      <Tooltip title={t("player-row.open-character-sheet")}>
+                        <span>
+                          <IconButton
+                            size="small"
+                            data-cy="character-card.open-character-sheet"
+                            onClick={() => {
+                              props.onCharacterDialogOpen?.();
+                              logger.track(
+                                "session.open_character_sheet_from_card"
+                              );
+                            }}
+                          >
+                            <LaunchIcon
+                              className={css({
+                                width: "1.5rem",
+                                height: "1.5rem",
+                              })}
+                            />
+                          </IconButton>
+                        </span>
+                      </Tooltip>
+                    </Grid>
+                  )}
+                  {props.onChange && !props.readonly && (
+                    <Grid item>
+                      <Tooltip title={t("character-dialog.save")}>
+                        <span>
+                          <IconButton
+                            size="small"
+                            data-cy="character-card.open-character-sheet"
+                            onClick={() => {
+                              handleSave();
+                              logger.track(
+                                "session.save_character_sheet_from_card"
+                              );
+                            }}
+                          >
+                            <SaveIcon
+                              color={
+                                characterManager.state.dirty
+                                  ? "primary"
+                                  : undefined
+                              }
+                              className={css({
+                                width: "1.5rem",
+                                height: "1.5rem",
+                              })}
+                            />
+                          </IconButton>
+                        </span>
+                      </Tooltip>
+                    </Grid>
+                  )}
                 </Grid>
-                {props.onCharacterDialogOpen && (
-                  <Grid item>
-                    <Tooltip title={t("player-row.open-character-sheet")}>
-                      <span>
-                        <IconButton
-                          size="small"
-                          data-cy="character-card.open-character-sheet"
-                          onClick={() => {
-                            props.onCharacterDialogOpen?.();
-                            logger.track(
-                              "session.open_character_sheet_from_card"
-                            );
-                          }}
-                        >
-                          <FaceIcon
-                            className={css({
-                              width: "1.5rem",
-                              height: "1.5rem",
-                            })}
-                          />
-                        </IconButton>
-                      </span>
-                    </Tooltip>
+              </Grid>
+            </Grid>
+            <Box>
+              <Grid
+                container
+                justifyContent="flex-end"
+                alignItems="baseline"
+                spacing={1}
+                wrap="nowrap"
+              />
+              <Grid container>
+                {props.playerName && (
+                  <Grid item xs={12}>
+                    <InputLabel shrink>{`(${props.playerName})`}</InputLabel>
                   </Grid>
                 )}
               </Grid>
-              {props.playerName && (
-                <InputLabel shrink>{`(${props.playerName})`}</InputLabel>
-              )}
             </Box>
           </Box>
           {hasSections &&
