@@ -13,10 +13,10 @@ export function TldrawWriter(props: {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      props.onChange?.(rDocument.current);
+      props.onChange?.(JSON.parse(JSON.stringify(rDocument.current)));
     }, 2000);
     return () => {
-      props.onChange?.(rDocument.current);
+      props.onChange?.(JSON.parse(JSON.stringify(rDocument.current)));
       clearInterval(interval);
     };
   }, []);
