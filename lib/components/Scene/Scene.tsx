@@ -206,18 +206,13 @@ export const Session: React.FC<IProps> = (props) => {
     if (isGM) {
       sessionManager.actions.loadPlayerCharacter(playerId, character);
     } else {
-      // TODO
-      // connectionsManager?.actions.sendToHost<IPeerActions>({
-      //   action: "load-character",
-      //   payload: character,
-      // });
       props.onPlayerInteraction?.(
         PlayerInteractionFactory.updatePlayerCharacter(playerId, character)
       );
     }
   };
 
-  const handleAssignDuplicateCharacterSheet = (
+  const handleGMAssignDuplicateCharacterSheet = (
     playerId: string,
     character: ICharacter
   ) => {
@@ -227,13 +222,25 @@ export const Session: React.FC<IProps> = (props) => {
     if (isGM) {
       sessionManager.actions.loadPlayerCharacter(playerId, copy);
     } else {
-      // TODO
-      // connectionsManager?.actions.sendToHost<IPeerActions>({
-      //   action: "load-character",
-      //   payload: copy,
-      // });
+      throw new Error("Player's can't duplicate and assign character sheets");
     }
   };
+
+  function handleUpdateCharacter(
+    playerId: string,
+    updatedCharacter: ICharacter
+  ) {
+    if (isGM) {
+      sessionManager.actions.updatePlayerCharacter(playerId, updatedCharacter);
+    } else {
+      props.onPlayerInteraction?.(
+        PlayerInteractionFactory.updatePlayerCharacter(
+          playerId,
+          updatedCharacter
+        )
+      );
+    }
+  }
 
   const handleOnToggleCharacterSync = (character: ICharacter | undefined) => {
     charactersManager.actions.upsert(character);
@@ -243,7 +250,6 @@ export const Session: React.FC<IProps> = (props) => {
     if (isGM) {
       sessionManager.actions.updateGmRoll(result);
     } else {
-      // TODO
       props.onPlayerInteraction?.(
         PlayerInteractionFactory.updatePlayerRolls(me!.id, result)
       );
@@ -261,8 +267,6 @@ export const Session: React.FC<IProps> = (props) => {
         sessionManager.actions.updateGmRoll(result);
       }
     } else {
-      // TODO
-
       props.onPlayerInteraction?.(
         PlayerInteractionFactory.updatePlayerRolls(me!.id, result)
       );
@@ -277,7 +281,7 @@ export const Session: React.FC<IProps> = (props) => {
     >
       <Box px="1rem">
         <Prompt when={true} message={t("manager.leave-without-saving")} />
-        {/* TODO */}
+
         {/* <Prompt
           when={isGMHostingOnlineOrOfflineGame}
           message={t("play-route.host-leaving-warning")}
@@ -334,8 +338,6 @@ export const Session: React.FC<IProps> = (props) => {
                       if (isGM) {
                         sessionManager.actions.pause();
                       } else {
-                        // TODO
-
                         props.onPlayerInteraction?.(
                           PlayerInteractionFactory.pause()
                         );
@@ -648,20 +650,7 @@ export const Session: React.FC<IProps> = (props) => {
         character={player.character}
         dialog={true}
         onSave={(updatedCharacter) => {
-          if (isGM) {
-            sessionManager.actions.updatePlayerCharacter(
-              player.id,
-              updatedCharacter
-            );
-          } else {
-            // TODO
-            props.onPlayerInteraction?.(
-              PlayerInteractionFactory.updatePlayerCharacter(
-                player.id,
-                updatedCharacter
-              )
-            );
-          }
+          handleUpdateCharacter(player.id, updatedCharacter);
         }}
         onClose={() => {
           setCharacterDialogPlayerId(undefined);
@@ -732,7 +721,7 @@ export const Session: React.FC<IProps> = (props) => {
           myBinderManager.actions.open({
             folder: "characters",
             callback: (character) => {
-              handleAssignDuplicateCharacterSheet(player.id, character);
+              handleGMAssignDuplicateCharacterSheet(player.id, character);
             },
           });
         }}
@@ -749,7 +738,6 @@ export const Session: React.FC<IProps> = (props) => {
               playedInTurnOrder
             );
           } else {
-            // TODO
             props.onPlayerInteraction?.(
               PlayerInteractionFactory.updatePlayerPlayedDuringTurn(
                 player.id,
@@ -828,6 +816,9 @@ export const Session: React.FC<IProps> = (props) => {
                     onCharacterDialogOpen={() => {
                       setCharacterDialogPlayerId(player.id);
                     }}
+                    onChange={(updatedCharacter) => {
+                      handleUpdateCharacter(player.id, updatedCharacter);
+                    }}
                     onRoll={(newDiceRollResult) => {
                       handleSetPlayerRoll(player.id, newDiceRollResult);
                     }}
@@ -856,6 +847,9 @@ export const Session: React.FC<IProps> = (props) => {
                     characterSheet={npc.character}
                     onCharacterDialogOpen={() => {
                       setCharacterDialogPlayerId(npc.id);
+                    }}
+                    onChange={(updatedCharacter) => {
+                      handleUpdateCharacter(npc.id, updatedCharacter);
                     }}
                     onRoll={(newDiceRollResult) => {
                       handleSetPlayerRoll(npc.id, newDiceRollResult);
