@@ -18,6 +18,7 @@ export const DiceContext = React.createContext<IDiceManager>(undefined as any);
 export function useDice(props: {
   defaultCommands: Array<IDiceCommandSetId> | null;
   defaultOptions: IRollDiceOptions;
+  onOptionsChange(options: IRollDiceOptions): void;
   onCommandSetsChange(commandSets: Array<IDiceCommandSetOption>): void;
 }) {
   const [options, setOptions] = useState<IRollDiceOptions>(
@@ -42,6 +43,10 @@ export function useDice(props: {
   useEffect(() => {
     props.onCommandSetsChange(commandSets);
   }, [commandSets]);
+
+  useEffect(() => {
+    props.onOptionsChange(options);
+  }, [options]);
 
   const poolCommandSets = useMemo(() => {
     const poolRollGroups = pool.flatMap((dicePoolElement) => {
