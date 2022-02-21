@@ -7,7 +7,7 @@ import {
   BlockType,
   IBlock,
   ICharacter,
-  IPointCounterBlock,
+  IPointCounterBlock
 } from "../../domains/character/types";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
@@ -42,12 +42,12 @@ export function useSession(props: IProps) {
     })
   );
 
-  const playersWithCharacterSheets = Object.values(session.players).filter(
+  const players = Object.values(session.players);
+  const npcs = session.gm.npcs;
+  const playersWithCharacterSheets = players.filter(
     (player) => !!player.character
   );
-  const npcsWithCharacterSheets = session.gm.npcs.filter(
-    (npc) => !!npc.character
-  );
+  const npcsWithCharacterSheets = npcs.filter((npc) => !!npc.character);
   const sortedPlayersWithCharacterSheets = arraySort(
     playersWithCharacterSheets,
     [
@@ -436,6 +436,7 @@ export function useSession(props: IProps) {
   return {
     state: { session },
     computed: {
+      playersAndNpcsCount: players.length + npcs.length,
       npcsWithCharacterSheets: npcsWithCharacterSheets,
       playersWithCharacterSheets: sortedPlayersWithCharacterSheets,
       hasPlayersWithCharacterSheets,
