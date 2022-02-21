@@ -26,7 +26,6 @@ function StorybookPlayerRow(props: {
         canRoll: props.canRoll,
         canUpdatePoints: props.canUpdatePoints,
         canUpdateInitiative: props.canUpdateInitiative,
-        canLoadDuplicateCharacterSheet: props.canLoadDuplicateCharacterSheet,
         canLoadCharacterSheet: props.canLoadCharacterSheet,
         canRemove: props.canRemove,
         canMarkPrivate: props.canMarkPrivate,
@@ -39,10 +38,7 @@ function StorybookPlayerRow(props: {
       onPlayerRemove={action("onPlayerRemove")}
       onTogglePrivate={action("onTogglePrivate")}
       onCharacterSheetOpen={action("onCharacterSheetOpen")}
-      onAssignOriginalCharacterSheet={action("onLoadCharacterSheet")}
-      onAssignDuplicateCharacterSheet={action(
-        "onLoadAndDuplicateCharacterSheet"
-      )}
+      onAssignCharacterSheet={action("onLoadCharacterSheet")}
     />
   );
 }

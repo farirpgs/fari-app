@@ -50,7 +50,6 @@ import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext"
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { arraySort, IArraySortGetter } from "../../domains/array/arraySort";
-import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
@@ -209,20 +208,6 @@ export const Session: React.FC<IProps> = (props) => {
       props.onPlayerInteraction?.(
         PlayerInteractionFactory.updatePlayerCharacter(playerId, character)
       );
-    }
-  };
-
-  const handleGMAssignDuplicateCharacterSheet = (
-    playerId: string,
-    character: ICharacter
-  ) => {
-    const copy = CharacterFactory.duplicate(character);
-    charactersManager.actions.upsert(copy);
-
-    if (isGM) {
-      sessionManager.actions.loadPlayerCharacter(playerId, copy);
-    } else {
-      throw new Error("Player's can't duplicate and assign character sheets");
     }
   };
 
@@ -690,7 +675,6 @@ export const Session: React.FC<IProps> = (props) => {
           canRoll: canControl,
           canUpdatePoints: canControl,
           canUpdateInitiative: canControl,
-          canLoadDuplicateCharacterSheet: isGM,
           canLoadCharacterSheet: canControl && !player.isGM,
           canRemove: isGM && !player.isGM,
           canMarkPrivate: isGM && isChild,
@@ -709,19 +693,11 @@ export const Session: React.FC<IProps> = (props) => {
             setCharacterDialogPlayerId(player.id);
           }
         }}
-        onAssignOriginalCharacterSheet={() => {
+        onAssignCharacterSheet={() => {
           myBinderManager.actions.open({
             folder: "characters",
             callback: (character) => {
               handleAssignOriginalCharacterSheet(player.id, character);
-            },
-          });
-        }}
-        onAssignDuplicateCharacterSheet={() => {
-          myBinderManager.actions.open({
-            folder: "characters",
-            callback: (character) => {
-              handleGMAssignDuplicateCharacterSheet(player.id, character);
             },
           });
         }}
