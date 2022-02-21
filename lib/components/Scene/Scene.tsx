@@ -794,18 +794,8 @@ export const Session: React.FC<IProps> = (props) => {
               flexWrap: "wrap",
             })}
           >
-            {playersWithCharacterSheets.length === 0 && (
-              <Box>
-                <Typography variant="h6" color="textSecondary">
-                  No character sheets have been loaded yet.
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  To assign a character sheet to a player, click on their{" "}
-                  <CreateIcon /> button, and select the character sheet you want
-                  to use.
-                </Typography>
-              </Box>
-            )}
+            {showEmptyWarnings()}
+
             {playersWithCharacterSheets.map((player, index) => {
               const isMe = props.userId === player.id;
               const canControl = isGM || isMe;
@@ -874,13 +864,10 @@ export const Session: React.FC<IProps> = (props) => {
     // );
 
     return (
-      <Box
-        border={`1px solid ${theme.palette.divider}`}
-        // maxWidth="800px"
-        margin="0 auto"
-      >
+      <Box border={`1px solid ${theme.palette.divider}`} margin="0 auto">
         {isGM ? (
           <TldrawWriter
+            initialDoc={sessionManager.state.session.tlDrawDoc}
             onChange={(state) => {
               sessionManager.actions.updateDrawAreaObjects(state);
             }}
@@ -890,6 +877,47 @@ export const Session: React.FC<IProps> = (props) => {
         )}
       </Box>
     );
+  }
+
+  function showEmptyWarnings() {
+    const { playersWithCharacterSheets, npcsWithCharacterSheets } =
+      sessionManager.computed;
+    const numberOfSheets =
+      playersWithCharacterSheets.length + npcsWithCharacterSheets.length;
+    const showNoPlayersWarning =
+      sessionManager.computed.playersAndNpcsCount === 0;
+    const showNoSheetsWarning = numberOfSheets === 0;
+
+    if (showNoPlayersWarning) {
+      return (
+        <Box>
+          <Typography variant="h6" color="textSecondary">
+            There are no players or GM characters in this session.
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            Copy and send the session link to your friends, or add GM characters
+            using the buttons on the left.
+          </Typography>
+        </Box>
+      );
+    }
+
+    if (showNoSheetsWarning) {
+      return (
+        <Box>
+          <Typography variant="h6" color="textSecondary">
+            No character sheets have been loaded yet.
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            To assign a character sheet to a player, click on their{" "}
+            <CreateIcon /> button, and select the character sheet you want to
+            use.
+          </Typography>
+        </Box>
+      );
+    }
+
+    return null;
   }
 
   function renderSession() {

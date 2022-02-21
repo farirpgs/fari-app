@@ -44,6 +44,9 @@ export function StoryProvider(props: {
       const commandSetIds = commandSetOptions.map((l) => l.id);
       settingsManager.actions.setDiceCommandsIds(commandSetIds);
     },
+    onOptionsChange: (options) => {
+      settingsManager.actions.setDiceOptions(options);
+    },
   });
 
   useEffect(() => {

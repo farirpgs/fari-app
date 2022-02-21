@@ -69,6 +69,9 @@ function AppContexts(props: { children: ReactNode }) {
       const commandSetIds = commandSetOptions.map((l) => l.id);
       settingsManager.actions.setDiceCommandsIds(commandSetIds);
     },
+    onOptionsChange: (options) => {
+      settingsManager.actions.setDiceOptions(options);
+    },
   });
   const myBinderManager = useMyBinder();
 
