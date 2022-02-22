@@ -33,6 +33,10 @@ import { IPlayer } from "../../../../hooks/useScene/IScene";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { usePointCounter } from "../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { CircleTextField } from "../../../../routes/Character/components/CharacterDialog/components/CircleTextField";
+import {
+  MiniThemeContext,
+  useMiniTheme,
+} from "../../../../routes/Character/components/CharacterDialog/MiniThemeContext";
 import { previewContentEditable } from "../../../ContentEditable/ContentEditable";
 import {
   DiceBonusLabel,
@@ -87,6 +91,10 @@ export function PlayerRow(
     },
   });
 
+  const miniTheme = useMiniTheme({
+    enforceBackground: theme.palette.background.paper,
+  });
+
   const lightBackground = useLightBackground();
   const playedDuringTurnColor = props.player.playedDuringTurn
     ? theme.palette.primary.main
@@ -115,40 +123,44 @@ export function PlayerRow(
   return (
     <>
       {renderLoadCharacerSheetDialog()}
-      <Box
-        bgcolor={props.isMe ? lightBackground : theme.palette.background.paper}
-        m=".5rem"
-        data-cy={props["data-cy"]}
-        onClick={() => {
-          setHover(true);
-        }}
-        onPointerEnter={() => {
-          setHover(true);
-        }}
-        onPointerLeave={() => {
-          setHover(false);
-        }}
-      >
+      <MiniThemeContext.Provider value={miniTheme}>
         <Box
-          py=".5rem"
-          px="1rem"
-          className={css({
-            border: `2px solid ${borderColor}`,
-            borderRadius: "8px",
-          })}
+          bgcolor={
+            props.isMe ? lightBackground : theme.palette.background.paper
+          }
+          m=".5rem"
+          data-cy={props["data-cy"]}
+          onClick={() => {
+            setHover(true);
+          }}
+          onPointerEnter={() => {
+            setHover(true);
+          }}
+          onPointerLeave={() => {
+            setHover(false);
+          }}
         >
-          <Box>{renderName()}</Box>
+          <Box
+            py=".5rem"
+            px="1rem"
+            className={css({
+              border: `2px solid ${borderColor}`,
+              borderRadius: "8px",
+            })}
+          >
+            <Box>{renderName()}</Box>
 
-          <Box mb=".5rem">
-            <Box pb=".5rem">{renderDice()}</Box>
-            <Box pb=".5rem">{renderPointCounter()}</Box>
-            <Box pb={props.children ? ".5rem" : undefined}>
-              {renderControls()}
+            <Box mb=".5rem">
+              <Box pb=".5rem">{renderDice()}</Box>
+              <Box pb=".5rem">{renderPointCounter()}</Box>
+              <Box pb={props.children ? ".5rem" : undefined}>
+                {renderControls()}
+              </Box>
+              {props.children}
             </Box>
-            {props.children}
           </Box>
         </Box>
-      </Box>
+      </MiniThemeContext.Provider>
     </>
   );
 

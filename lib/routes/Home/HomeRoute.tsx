@@ -8,7 +8,6 @@ import Button from "@mui/material/Button";
 import Container, { ContainerProps } from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
-import Hidden from "@mui/material/Hidden";
 import Rating from "@mui/material/Rating";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
@@ -30,7 +29,6 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
-import { isWebRTCSupported } from "../../hooks/usePeerJS/isWebRTCSupported";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { WikiItems } from "../SrdsRoute/SrdsRoute";
 
@@ -144,7 +142,6 @@ export const HomeRoute: React.FC<{}> = () => {
               <LightBox
                 textAlign="left"
                 py="2rem"
-                mb={sectionsSeparator}
                 imageSrcs={[
                   "https://gyazo.com/697a63e5e97d9384310d87e7c0b462e1.png",
                   "https://gyazo.com/cc7519a58190e6d12504f9d06908d518.png",
@@ -155,15 +152,10 @@ export const HomeRoute: React.FC<{}> = () => {
             </Box>
           </Box>
         </DarkBox>
-        <LightBox maxWidth="lg" mb={sectionsSeparator}>
-          {renderPlayButtons()}
-        </LightBox>
         <LightBox
-          title={t("home-route.sections.getting-started.title")}
           subTitle={t("home-route.sections.getting-started.sub-title")}
           maxWidth="lg"
           px="2rem"
-          mb={sectionsSeparator}
           py="2rem"
         >
           {renderFirstActionCards()}
@@ -173,7 +165,6 @@ export const HomeRoute: React.FC<{}> = () => {
           subTitle={t("home-route.sections.join-community.sub-title")}
           px="2rem"
           py="5rem"
-          mb={sectionsSeparator}
           maxWidth="sm"
         >
           {renderCommunity()}
@@ -182,7 +173,6 @@ export const HomeRoute: React.FC<{}> = () => {
           title={t("home-route.sections.tools.title")}
           px="2rem"
           py="2rem"
-          mb={sectionsSeparator}
           maxWidth="lg"
         >
           {renderSecondActionCards()}
@@ -196,7 +186,7 @@ export const HomeRoute: React.FC<{}> = () => {
           {renderPatrons()}
         </DarkBox>
         {renderSponsors()}
-        <LightBox px="2rem" mb={sectionsSeparator} maxWidth="lg">
+        <LightBox px="2rem" maxWidth="lg" pt="2rem" pb="5rem">
           {renderThirdActionCards()}
         </LightBox>
         <DarkBox
@@ -204,12 +194,11 @@ export const HomeRoute: React.FC<{}> = () => {
           subTitle={t("home-route.sections.open-source.sub-title")}
           px="2rem"
           py="5rem"
-          mb={sectionsSeparator}
           maxWidth="sm"
         >
           {renderOpenSource()}
         </DarkBox>
-        <LightBox px="2rem" mb={sectionsSeparator} maxWidth="md">
+        <LightBox px="2rem" maxWidth="md" pt="2rem" pb="5rem">
           <>
             <Heading icon={HelpIcon} title={"Wikis & Resources"} />
             <WikiItems />
@@ -219,7 +208,6 @@ export const HomeRoute: React.FC<{}> = () => {
           px="2rem"
           py="5rem"
           maxWidth="sm"
-          mb={sectionsSeparator}
           title={t("home-route.support-fari.title")}
         >
           {renderSupport()}
@@ -320,97 +308,6 @@ export const HomeRoute: React.FC<{}> = () => {
             })}
           </Grid>
         </Container>
-      </Box>
-    );
-  }
-
-  function renderPlayButtons() {
-    return (
-      <Box>
-        <Grid container justifyContent="center" alignItems="flex-start">
-          {isWebRTCSupported() && (
-            <Grid
-              item
-              xs={12}
-              md={4}
-              className={css({
-                display: "flex",
-                justifyContent: "center",
-              })}
-            >
-              <Box height="100%" display="flex" flexDirection="column">
-                <Box mb="2rem">
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    color="primary"
-                    size="large"
-                    className={css({ height: "3rem" })}
-                    onClick={() => {
-                      history.push("/play");
-
-                      logger.track("home.start_online_game");
-                    }}
-                  >
-                    {t("home-route.play-online.button")}
-                  </Button>
-                </Box>
-                <Box py="1rem" textAlign="center">
-                  <Typography variant="h5" align="center">
-                    {t("home-route.play-online.description")}
-                  </Typography>
-                </Box>
-              </Box>
-            </Grid>
-          )}
-
-          <Hidden mdDown>
-            <Divider
-              orientation="vertical"
-              flexItem
-              className={css({
-                margin: "5rem 2rem",
-                height: "3rem",
-              })}
-            />
-          </Hidden>
-
-          <Grid
-            item
-            xs={12}
-            md={4}
-            className={css({
-              display: "flex",
-              justifyContent: "center",
-            })}
-          >
-            <Box height="100%" display="flex" flexDirection="column">
-              <Box mb="2rem">
-                <Button
-                  variant="contained"
-                  fullWidth
-                  color="primary"
-                  size="large"
-                  className={css({ height: "3rem" })}
-                  data-cy="home.play-offline"
-                  onClick={() => {
-                    history.push("/play-offline");
-
-                    logger.track("home.start_offline_game");
-                  }}
-                >
-                  {t("home-route.play-offline.button")}
-                </Button>
-              </Box>
-
-              <Box py="1rem" textAlign="center">
-                <Typography variant="h5" align="center">
-                  {t("home-route.play-offline.description")}
-                </Typography>
-              </Box>
-            </Box>
-          </Grid>
-        </Grid>
       </Box>
     );
   }
@@ -677,7 +574,7 @@ export const HomeRoute: React.FC<{}> = () => {
           {t("home-route.header.subtitle")}
         </Typography>
         <Box mb="1rem" display="flex">
-          <Grid container>
+          <Grid container spacing={2} alignItems="center">
             <Grid item lg={6} xs={12}>
               <Button
                 fullWidth
@@ -691,6 +588,21 @@ export const HomeRoute: React.FC<{}> = () => {
                 }}
               >
                 {t("home-route.header.cta")}
+              </Button>
+            </Grid>
+            <Grid item lg={6} xs={12}>
+              <Button
+                fullWidth
+                variant="outlined"
+                color="primary"
+                size="large"
+                className={css({ height: "3rem" })}
+                onClick={() => {
+                  history.push("/play");
+                  logger.track("home.start_online_game");
+                }}
+              >
+                {t("home-route.play-offline.button")}
               </Button>
             </Grid>
           </Grid>
@@ -878,7 +790,7 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
 
   return (
     <>
-      <Grid container justifyContent="center" spacing={6}>
+      <Grid container justifyContent="center" spacing={3}>
         {props.cards.map((card, index) => {
           return (
             <Grid key={index} item xs={12} sm={6} md={4}>

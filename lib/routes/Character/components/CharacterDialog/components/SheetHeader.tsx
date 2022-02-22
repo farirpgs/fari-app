@@ -21,7 +21,6 @@ export const SheetHeader: React.FC<{
           background: miniTheme.hideSectionBackground
             ? undefined
             : miniTheme.textPrimary,
-
           color: miniTheme.hideSectionBackground
             ? miniTheme.textPrimary
             : miniTheme.textPrimaryInverted,

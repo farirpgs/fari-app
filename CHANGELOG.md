@@ -14,8 +14,11 @@
 # vTheme Editor
 
 - feat: new character sheet theme editor
-- feat: new themed sheets by Fari RPGs and Pandion Games
-- feat: migrated data to support new themes
+  - feat: new themed sheets by Fari RPGs and Pandion Games
+  - feat: migrated data to support new themes
+- feat: better placement of add row button
+- feat: better placement of add column button
+- feat: dice increase/decrease
 
 # v6.0.0
 

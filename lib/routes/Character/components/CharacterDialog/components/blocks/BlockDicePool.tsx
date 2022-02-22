@@ -1,5 +1,7 @@
 import { css, cx } from "@emotion/css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import FastForwardIcon from "@mui/icons-material/FastForward";
+import FastRewindIcon from "@mui/icons-material/FastRewind";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import Badge from "@mui/material/Badge";
 import Box, { BoxProps } from "@mui/material/Box";
@@ -43,7 +45,15 @@ export type IDicePoolElement = {
 };
 
 export type IDicePool = Array<IDicePoolElement>;
-
+const DiceCommandRange: Array<IDiceCommandSetId> = [
+  "1d4",
+  "1d6",
+  "1d8",
+  "1d10",
+  "1d12",
+  "1d20",
+  "1d100",
+];
 export function BlockDicePool(
   props: IBlockComponentProps<IDicePoolBlock | ISkillBlock> & {
     listResults?: boolean;
@@ -75,17 +85,25 @@ export function BlockDicePool(
   const firstCommand = commands[0];
   const isAllTheSameCommand =
     !!firstCommand && commands.every((c) => c === firstCommand);
+  const canChangeDiceSize =
+    isAllTheSameCommand && DiceCommandRange.includes(firstCommand);
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
+    let enterTimeout: NodeJS.Timeout;
+    let leaveTimeout: NodeJS.Timeout;
     if (hover) {
-      timeout = setTimeout(() => {
+      enterTimeout = setTimeout(() => {
         setHoverControlsVisible(true);
-      }, Delays.blockHoverControls);
+      }, Delays.blockHoverEnterControls);
     } else {
-      setHoverControlsVisible(false);
+      leaveTimeout = setTimeout(() => {
+        setHoverControlsVisible(false);
+      }, Delays.blockHoverLeaveControls);
     }
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(enterTimeout);
+      clearTimeout(leaveTimeout);
+    };
   }, [hover]);
 
   function handleOnAddDiceFrom() {
@@ -99,6 +117,33 @@ export function BlockDicePool(
     props.onMetaChange({
       ...props.block.meta,
       commands: commands.slice(1),
+    });
+  }
+
+  function handleDecreaseDice() {
+    const newCommands = commands.map((c) => {
+      const currentDieSize = DiceCommandRange.indexOf(c);
+      const newDieSizeIndex = Math.max(0, currentDieSize - 1);
+      return DiceCommandRange[newDieSizeIndex];
+    });
+    props.onMetaChange({
+      ...props.block.meta,
+      commands: newCommands,
+    });
+  }
+
+  function handleIncreaseDice() {
+    const newCommands = commands.map((c) => {
+      const currentDieSize = DiceCommandRange.indexOf(c);
+      const newDieSizeIndex = Math.min(
+        DiceCommandRange.length - 1,
+        currentDieSize + 1
+      );
+      return DiceCommandRange[newDieSizeIndex];
+    });
+    props.onMetaChange({
+      ...props.block.meta,
+      commands: newCommands,
     });
   }
 
@@ -137,23 +182,53 @@ export function BlockDicePool(
 
         {!props.readonly && (
           <Collapse in={hoverControlsVisible || props.advanced}>
-            <Box>
+            <Box py=".5rem">
               <Grid container alignItems="center">
+                {canChangeDiceSize && (
+                  <Grid item>
+                    <Tooltip title={t("character-dialog.control.decrease")}>
+                      <span>
+                        <IconButton
+                          size="small"
+                          disabled={firstCommand === DiceCommandRange[0]}
+                          color="inherit"
+                          data-cy={`${props.dataCy}.decrease`}
+                          onClick={() => {
+                            handleDecreaseDice();
+                          }}
+                        >
+                          <FastRewindIcon
+                            className={css({
+                              width: "1.1rem",
+                              height: "1.1rem",
+                            })}
+                          />
+                        </IconButton>
+                      </span>
+                    </Tooltip>
+                  </Grid>
+                )}
                 {isAllTheSameCommand && (
                   <Grid item>
                     <Tooltip title={t("character-dialog.control.remove-one")}>
-                      <IconButton
-                        size="small"
-                        color="inherit"
-                        data-cy={`${props.dataCy}.remove-box`}
-                        onClick={() => {
-                          handleOnRemoveDiceFrom();
-                        }}
-                      >
-                        <RemoveCircleOutlineIcon
-                          className={css({ width: "1.1rem", height: "1.1rem" })}
-                        />
-                      </IconButton>
+                      <span>
+                        <IconButton
+                          size="small"
+                          color="inherit"
+                          disabled={commands.length === 1}
+                          data-cy={`${props.dataCy}.remove-one`}
+                          onClick={() => {
+                            handleOnRemoveDiceFrom();
+                          }}
+                        >
+                          <RemoveCircleOutlineIcon
+                            className={css({
+                              width: "1.1rem",
+                              height: "1.1rem",
+                            })}
+                          />
+                        </IconButton>
+                      </span>
                     </Tooltip>
                   </Grid>
                 )}
@@ -161,18 +236,50 @@ export function BlockDicePool(
                 {isAllTheSameCommand && (
                   <Grid item>
                     <Tooltip title={t("character-dialog.control.add-one")}>
-                      <IconButton
-                        color="inherit"
-                        data-cy={`${props.dataCy}.add-box`}
-                        size="small"
-                        onClick={() => {
-                          handleOnAddDiceFrom();
-                        }}
-                      >
-                        <AddCircleOutlineIcon
-                          className={css({ width: "1.1rem", height: "1.1rem" })}
-                        />
-                      </IconButton>
+                      <span>
+                        <IconButton
+                          color="inherit"
+                          data-cy={`${props.dataCy}.add-one`}
+                          size="small"
+                          onClick={() => {
+                            handleOnAddDiceFrom();
+                          }}
+                        >
+                          <AddCircleOutlineIcon
+                            className={css({
+                              width: "1.1rem",
+                              height: "1.1rem",
+                            })}
+                          />
+                        </IconButton>
+                      </span>
+                    </Tooltip>
+                  </Grid>
+                )}
+                {canChangeDiceSize && (
+                  <Grid item>
+                    <Tooltip title={t("character-dialog.control.increase")}>
+                      <span>
+                        <IconButton
+                          size="small"
+                          color="inherit"
+                          disabled={
+                            firstCommand ===
+                            DiceCommandRange[DiceCommandRange.length - 1]
+                          }
+                          data-cy={`${props.dataCy}.increase`}
+                          onClick={() => {
+                            handleIncreaseDice();
+                          }}
+                        >
+                          <FastForwardIcon
+                            className={css({
+                              width: "1.1rem",
+                              height: "1.1rem",
+                            })}
+                          />
+                        </IconButton>
+                      </span>
                     </Tooltip>
                   </Grid>
                 )}

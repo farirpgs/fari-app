@@ -46,7 +46,7 @@ export function DiceMenu(props: {
         open={props.open}
         anchorEl={props.anchorEl}
         transition
-        placement="top"
+        // placement="top"
         style={{ zIndex: zIndex.diceFab }}
         modifiers={[
           {

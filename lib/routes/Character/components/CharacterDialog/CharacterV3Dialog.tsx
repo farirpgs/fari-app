@@ -767,11 +767,14 @@ export const CharacterV3Dialog: React.FC<{
                         }
                         bottomActions={
                           <>
-                            {!isLastRow &&
-                              renderAddRowButton({
-                                pageIndex: currentPageIndex,
-                                rowIndex: rowIndex,
-                              })}
+                            {!isLastRow && (
+                              <Box my=".5rem">
+                                {renderAddRowButton({
+                                  pageIndex: currentPageIndex,
+                                  rowIndex: rowIndex,
+                                })}
+                              </Box>
+                            )}
                           </>
                         }
                       >
@@ -870,6 +873,7 @@ export const CharacterV3Dialog: React.FC<{
                                               >
                                                 <span>
                                                   <IconButton
+                                                    disabled={columnIndex === 0}
                                                     onClick={() => {
                                                       characterManager.actions.deleteColumn(
                                                         {
@@ -913,11 +917,14 @@ export const CharacterV3Dialog: React.FC<{
                       </ManagerBox>
                     );
                   })}
-                  {advanced &&
-                    renderAddRowButton({
-                      pageIndex: currentPageIndex,
-                      rowIndex: 0,
-                    })}
+                  {advanced && (
+                    <Box my=".5rem">
+                      {renderAddRowButton({
+                        pageIndex: currentPageIndex,
+                        rowIndex: page.rows.length,
+                      })}
+                    </Box>
+                  )}
                 </Box>
               </TabPanel>
             );
