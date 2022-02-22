@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import { TDDocument, Tldraw, TldrawApp, TldrawProps } from "@tldraw/tldraw";
 import React, { useEffect } from "react";
 
@@ -76,4 +77,41 @@ export function makeNewBlankDocument(): TDDocument {
       },
     },
   };
+}
+
+export class TlDrawErrorBoundary extends React.Component<
+  {},
+  { hasError: boolean }
+> {
+  constructor(props: {}) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: any) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: any, errorInfo: any) {
+    console.error(error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <Box>
+          <Typography variant="h6" color="textSecondary">
+            The drawing area encountered an error.
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            We are sorry for the inconvenience. The error information was sent
+            to the developer and we will investigate to stabilize this feature
+            as soon as possible.
+          </Typography>
+        </Box>
+      );
+    }
+
+    return this.props.children;
+  }
 }

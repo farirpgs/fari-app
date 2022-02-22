@@ -71,6 +71,7 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import {
+  TlDrawErrorBoundary,
   TldrawReader,
   TldrawWriter,
 } from "../../routes/Draw/TldrawWriterAndReader";
@@ -846,18 +847,20 @@ export const Session: React.FC<IProps> = (props) => {
     // );
 
     return (
-      <Box border={`1px solid ${theme.palette.divider}`} margin="0 auto">
-        {isGM ? (
-          <TldrawWriter
-            initialDoc={sessionManager.state.session.tlDrawDoc}
-            onChange={(state) => {
-              sessionManager.actions.updateDrawAreaObjects(state);
-            }}
-          />
-        ) : (
-          <TldrawReader doc={sessionManager.state.session.tlDrawDoc} />
-        )}
-      </Box>
+      <TlDrawErrorBoundary>
+        <Box border={`1px solid ${theme.palette.divider}`} margin="0 auto">
+          {isGM ? (
+            <TldrawWriter
+              initialDoc={sessionManager.state.session.tlDrawDoc}
+              onChange={(state) => {
+                sessionManager.actions.updateDrawAreaObjects(state);
+              }}
+            />
+          ) : (
+            <TldrawReader doc={sessionManager.state.session.tlDrawDoc} />
+          )}
+        </Box>
+      </TlDrawErrorBoundary>
     );
   }
 
