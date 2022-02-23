@@ -1,0 +1,341 @@
+{
+  "lastUpdated": 1645564800,
+  "name": "2400 Template Template",
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "CHARACTER",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "b91a3f14-4d0e-49d3-bf04-3a839471c5a7",
+                  "label": "DETAILS",
+                  "blocks": [
+                    {
+                      "id": "63a63d3e-d245-427b-be1f-4c799b8e7b95",
+                      "label": "SPECIALITY",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d2369913-f736-4b7a-ae3c-4afe1278188a",
+                      "label": "ORIGIN",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "6f2799e1-825f-4356-8dbf-9de6d6d245fa",
+                  "label": "SKILLS",
+                  "blocks": [
+                    {
+                      "id": "37ce9a2d-5d57-4166-b26f-e9ba83328a88",
+                      "label": "SKILL",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d8"], "hideModifier": true }
+                    },
+                    {
+                      "id": "a4219b22-13ca-47f2-a0ef-cf4ad875c625",
+                      "label": "SKILL",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d8"], "hideModifier": true }
+                    },
+                    {
+                      "id": "e369a493-c729-4437-b6e5-4666139c2694",
+                      "label": "SKILL",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d8"], "hideModifier": true }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "3c002eae-b9ae-4f9e-8a9c-365c6f0a937a",
+                  "label": "GEAR &amp; UPGRADES",
+                  "blocks": [
+                    {
+                      "id": "edbe53a0-e6dd-428e-ae84-de39e552df3c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "e04e79a1-e542-445d-8d5a-26c8bcbd6f75",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "be4960b3-b7c3-4f28-bfd4-968f8e2cc123",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "fc8590d3-e1d1-43a4-8ed3-dc9cd39c2e8c",
+                  "label": "HINDRANCES",
+                  "blocks": [
+                    {
+                      "id": "224011d2-f1ee-4bca-a4c4-f03fa00036c6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a9a2148a-545e-4caa-ac1d-2eb6337c71c0",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c032204c-2908-4e0f-bdc4-086fecc88744",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2981e43c-8a15-4128-b39e-5d6ae8136fd2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a748d904-0d8e-4d32-96e2-d533d3d81427",
+                  "label": "NOTES &amp; CREDITS",
+                  "blocks": [
+                    {
+                      "id": "a0cec517-d0d1-433e-95fe-f07763d21497",
+                      "label": "NOTES",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "2b2d697b-1482-4ec1-8909-9c8ab43e5f55",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "483ec793-c7bb-45cd-9270-5eb11089f5ee",
+                      "label": "CREDITS (₡)",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        { "columns": [{ "sections": [] }] },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c4f958cb-8e19-4d06-a5fe-61e6190d11cc",
+                  "label": "Credits",
+                  "blocks": [
+                    {
+                      "id": "243d0921-1d45-4f58-bd1b-e1b271e62337",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "2400 is by Jason Tocci • https://jasontocci.itch.io/2400<br>Template is by René-Pier Deshaies • https://farirpgs.com<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b812fd83-a36d-4ddd-849a-8f2f10d27498",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://gyazo.com/bd98b2cd9fdf7bd18dbfe18179017766.png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c34ec10a-20b0-487a-b05d-2e052cd5fc54",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "1c2ee836-7ded-4725-b201-ad3cbd343264",
+                  "label": "RULES",
+                  "blocks": [
+                    {
+                      "id": "ea877bba-bffd-4380-a796-fd8d3e092ba1",
+                      "label": "PLAY",
+                      "type": "Text",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4695fbc0-79a2-4e89-afaf-31a9781baeff",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Players describe what their characters do. The GM advises when their action is impossible, requires extra steps, demands a cost, or presents a risk. Players only roll to avoid risks.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7e5a806f-0602-41a4-90c9-ad46406b78b3",
+                      "label": "ROLLING",
+                      "type": "Text",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e810434a-fe48-49f2-9b54-85bee0377d0c",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Roll a d6 skill die—higher with a relevant skill, or d4 if hindered by injury or circumstances. If helped by circumstances, roll an extra d6; if helped by an ally, they roll their skill die and share the risk. Take the highest die.<br><br><b>1–2\tDisaster</b>. Suffer the full risk. GM&nbsp;decides if you succeed at all. If risking&nbsp;&nbsp;death, you die.<br><b>3–4\tSetback</b>. A lesser consequence or&nbsp;&nbsp;partial success. If risking death, you’re&nbsp;&nbsp;maimed.<br><b>5+\tSuccess</b>. The higher the roll, the better.<br><br>If success can’t get you what you want (you make the shot, but it’s bulletproof!), you’ll at least get useful info or set up an advantage.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "34ca8b42-d542-45c3-ac4e-06d3283238ff",
+                      "label": "Play",
+                      "type": "Text",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2b2da015-7839-4ea7-bb03-237975fd81ef",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Players describe what their characters do. The GM advises when their action is impossible, requires extra steps, demands a cost, or presents a risk. Players only roll to avoid risks.: Roll a d6 skill die—higher with a relevant skill, or d4 if hindered by injury or circumstances. If helped by circumstances, roll an extra d6; if helped by an ally, they roll their skill die and share the risk. Take the highest die.",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "0e61b427-611b-4f34-839b-c275bf129664",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "f812d7c2-9b27-4433-9051-8255ab18929d",
+                      "label": "LOAD",
+                      "type": "Text",
+                      "meta": {}
+                    },
+                    {
+                      "id": "536f0312-8b64-45aa-9227-4906f2cc9fa3",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Carry as much as makes sense, but more than one bulky item may hinder you at times.<br><br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "86eff616-d7b4-4cee-b1b1-21d9df9d9dfe",
+                      "label": "ADVANCEMENT",
+                      "type": "Text",
+                      "meta": {}
+                    },
+                    {
+                      "id": "44dc56a9-e701-4c2b-9f00-3d0f8c566376",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "After a job, increase a skill (none⮕d8⮕d10⮕d12), gain d6 credits (₡).",
+                      "meta": {}
+                    },
+                    {
+                      "id": "75c81c54-d08c-49e7-9f60-4b2ac7fe144b",
+                      "label": "DEFENSE",
+                      "type": "Text",
+                      "meta": {}
+                    },
+                    {
+                      "id": "51a71ca7-964f-4c26-a1bf-331e8dd5649d",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Say how one of your items breaks to turn a hit into a brief hindrance. Broken gear is useless until repaired.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "97086811-5c11-47e8-9ebe-71847d50e682",
+                      "label": "HARM",
+                      "type": "Text",
+                      "meta": {}
+                    },
+                    {
+                      "id": "838d9a58-742f-46e4-b47e-a5719442aa39",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "If killed, make a new character to be introduced ASAP. Favor inclusion over realism.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ec9350c9-620f-4ac1-9b7a-de40136945db",
+                      "label": "RUNNING THE GAME",
+                      "type": "Text",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b1210d5e-a2f0-4fce-a929-fc17386d08c5",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Lead the group in setting lines not to cross in play. Fast-forward, pause, or rewind/redo scenes for pacing and safety, and invite players to do likewise. Present dilemmas and problems you don’t know how to solve. Move the spotlight to give everyone time to shine. Test periodically for bad luck (e.g., run out of ammo, or into guards) — roll d6 to check for (1–2) trouble now or (3–4) signs of trouble. Offer rulings to cover gaps in rules; double back during a break to revise unsatisfying rulings as a group.",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "RULES"
+    }
+  ],
+  "template": "Blank",
+  "version": 5,
+  "fariType": "character"
+}
