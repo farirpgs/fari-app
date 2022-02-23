@@ -111,9 +111,6 @@ describe("/characters", () => {
       Fari.get(
         "scene.player-row.gm-npc-0.assign-or-open-character-sheet"
       ).click();
-      Fari.get(
-        "scene.player-row.gm-npc-0.character-sheet-dialog.assign-original"
-      ).click();
 
       cy.contains("Luke Skywalker").click();
 
