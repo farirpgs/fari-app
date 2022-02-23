@@ -39,7 +39,10 @@ const Patrons = [
   "Randy Oest",
   "Ryan Singer",
   "Aeife O'Brien",
+  "David Haslem",
   "Fluffydumplin",
+  "Lynn Jones",
+  "Krister Svanlund",
 ];
 
 const Sponsors: Array<{ image: string; name: string; link: string }> = [
@@ -52,6 +55,11 @@ const Sponsors: Array<{ image: string; name: string; link: string }> = [
     name: "Lokalise",
     image: lokalise,
     link: "https://lokalise.com/",
+  },
+  {
+    name: "Liveblocks",
+    image: "https://gyazo.com/195675f9a76d92c013c6cd33330e6e6b.png",
+    link: "https://liveblocks.io/",
   },
 ];
 
