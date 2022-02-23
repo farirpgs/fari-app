@@ -20,6 +20,13 @@
 - feat: better placement of add column button
 - feat: dice increase/decrease
 
+# v6.1.0
+
+- feat: reuse all blocks in character cards
+- feat: edit character directly from character cards
+- feat: remove "assign/duplicate" character modal
+- feat: stabilize drawing area with error boundary
+
 # v6.0.0
 
 - feat: new cloud infra for real time features

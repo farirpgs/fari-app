@@ -1,21 +1,13 @@
 import { css } from "@emotion/css";
-import CreateIcon from "@mui/icons-material/Create";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
-import FaceIcon from "@mui/icons-material/Face";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import LaunchIcon from "@mui/icons-material/Launch";
 import RestorePageIcon from "@mui/icons-material/RestorePage";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import Fade from "@mui/material/Fade";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
@@ -52,7 +44,6 @@ export function PlayerRow(
       canUpdatePoints: boolean;
       canUpdateInitiative: boolean;
       canLoadCharacterSheet: boolean;
-      canLoadDuplicateCharacterSheet: boolean;
       canRemove: boolean;
       canMarkPrivate: boolean;
     };
@@ -66,8 +57,7 @@ export function PlayerRow(
     onTogglePrivate(): void;
     onPlayerRemove(): void;
     onCharacterSheetOpen(): void;
-    onAssignOriginalCharacterSheet(): void;
-    onAssignDuplicateCharacterSheet(): void;
+    onAssignCharacterSheet(): void;
   } & IDataCyProps
 ) {
   const theme = useTheme();
@@ -101,19 +91,10 @@ export function PlayerRow(
     : theme.palette.text.secondary;
 
   const hasCharacterSheet = !!props.player.character;
-  const [loadCharacterDialogOpen, setLoadCharacterDialogOpen] = useState(false);
 
   const borderColor = hasCharacterSheet
     ? theme.palette.primary.main
     : theme.palette.text.secondary;
-
-  function handleOnLoadCharacterSheet() {
-    if (props.permissions.canLoadDuplicateCharacterSheet) {
-      setLoadCharacterDialogOpen(true);
-    } else {
-      props.onAssignOriginalCharacterSheet();
-    }
-  }
 
   function handleOnRoll() {
     props.onDiceRoll();
@@ -122,7 +103,6 @@ export function PlayerRow(
 
   return (
     <>
-      {renderLoadCharacerSheetDialog()}
       <MiniThemeContext.Provider value={miniTheme}>
         <Box
           bgcolor={
@@ -271,7 +251,7 @@ export function PlayerRow(
               color={hasCharacterSheet ? "default" : "primary"}
               data-cy={`${props["data-cy"]}.swap-character-sheet`}
               onClick={() => {
-                handleOnLoadCharacterSheet();
+                props.onAssignCharacterSheet();
               }}
               size="large"
             >
@@ -552,16 +532,16 @@ export function PlayerRow(
                       if (hasCharacterSheet) {
                         props.onCharacterSheetOpen();
                       } else {
-                        handleOnLoadCharacterSheet();
+                        props.onAssignCharacterSheet();
                       }
 
                       logger.track("session.open_character_sheet");
                     }}
                   >
                     {hasCharacterSheet ? (
-                      <FaceIcon htmlColor={borderColor} />
+                      <LaunchIcon htmlColor={borderColor} />
                     ) : (
-                      <CreateIcon htmlColor={borderColor} />
+                      <UploadFileIcon htmlColor={borderColor} />
                     )}
                   </IconButton>
                 </span>
@@ -585,70 +565,6 @@ export function PlayerRow(
       >
         [{props.player.id.slice(0, 5)}]
       </Typography>
-    );
-  }
-
-  function renderLoadCharacerSheetDialog() {
-    return (
-      <Dialog
-        open={loadCharacterDialogOpen}
-        onClose={() => {
-          setLoadCharacterDialogOpen(false);
-        }}
-      >
-        <DialogTitle>
-          {t("player-row.load-character-sheet-dialog.title")}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {t("player-row.load-character-sheet-dialog.description")}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Box mb=".5rem" width="100%">
-            <Grid
-              container
-              wrap="nowrap"
-              justifyContent="space-around"
-              spacing={2}
-            >
-              <Grid item>
-                <Button
-                  color="primary"
-                  variant="outlined"
-                  endIcon={<GroupAddIcon />}
-                  data-cy={`${props["data-cy"]}.character-sheet-dialog.assign-duplicate`}
-                  onClick={() => {
-                    setLoadCharacterDialogOpen(false);
-                    props.onAssignDuplicateCharacterSheet();
-                    logger.track("session.load_and_duplicate_character");
-                  }}
-                >
-                  {t(
-                    "player-row.load-character-sheet-dialog.load-and-duplicate"
-                  )}
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  autoFocus
-                  color="primary"
-                  variant="outlined"
-                  endIcon={<PersonAddIcon />}
-                  data-cy={`${props["data-cy"]}.character-sheet-dialog.assign-original`}
-                  onClick={() => {
-                    setLoadCharacterDialogOpen(false);
-                    props.onAssignOriginalCharacterSheet();
-                    logger.track("session.load_character");
-                  }}
-                >
-                  {t("player-row.load-character-sheet-dialog.load")}
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
-        </DialogActions>
-      </Dialog>
     );
   }
 }
