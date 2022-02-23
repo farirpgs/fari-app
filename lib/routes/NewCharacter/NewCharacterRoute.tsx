@@ -76,8 +76,8 @@ export function NewCharacterRoute() {
     <Page>
       {template && (
         <PageMeta
-          title={`"${template?.fileName}" character sheet template, on Fari App`}
-          description={`Use the amazing "${template?.fileName}" template and get ready to play!`}
+          title={`${template?.fileName} character sheet template, on Fari App`}
+          description={`Use the amazing ${template?.fileName} template and play in seconds!`}
         />
       )}
       <Fade in={status === "loading"}>
@@ -93,7 +93,7 @@ export function NewCharacterRoute() {
             textAlign: "center",
           }}
         >
-          {`Add New Sheet To My Binder`}
+          {`Create New Sheet`}
         </DialogTitle>
 
         <DialogContent>
@@ -103,10 +103,10 @@ export function NewCharacterRoute() {
               textAlign: "center",
             }}
           >
-            {`You're about to add a new character sheet to your Binder using the "${template?.fileName}" template.`}
+            {`You're about to create a new character sheet using the "${template?.fileName}" template.`}
             <br />
             <br />
-            {`Click "Add Template" to continue.`}
+            {`Click "Use Template" to continue.`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -116,7 +116,7 @@ export function NewCharacterRoute() {
             autoFocus
             loading={loadingTemplate}
           >
-            {`Add Template`}
+            {`Use Template`}
           </LoadingButton>
         </DialogActions>
       </Dialog>

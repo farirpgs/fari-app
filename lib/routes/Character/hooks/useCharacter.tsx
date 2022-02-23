@@ -584,6 +584,35 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
+  function duplicateBlock(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+    blockIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        const block =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex].blocks[indexes.blockIndex];
+        const newBlock = CharacterFactory.duplicateBlock(block);
+
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+          indexes.columnIndex
+        ].sections[indexes.sectionIndex].blocks.splice(
+          indexes.blockIndex + 1,
+          0,
+          newBlock
+        );
+      })
+    );
+  }
+
   function setBlock(
     indexes: {
       pageIndex: number;
@@ -753,6 +782,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       moveDnDBlock,
       moveBlockUp,
       moveBlockDown,
+      duplicateBlock,
       setBlock,
       setBlockMeta,
       toggleBlockMainPointCounter,

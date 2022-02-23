@@ -120,7 +120,7 @@ export function BlockDicePool(
     });
   }
 
-  function handleDecreaseDice() {
+  function handleStepDownDice() {
     const newCommands = commands.map((c) => {
       const currentDieSize = DiceCommandRange.indexOf(c);
       const newDieSizeIndex = Math.max(0, currentDieSize - 1);
@@ -132,7 +132,7 @@ export function BlockDicePool(
     });
   }
 
-  function handleIncreaseDice() {
+  function handleStepUpDice() {
     const newCommands = commands.map((c) => {
       const currentDieSize = DiceCommandRange.indexOf(c);
       const newDieSizeIndex = Math.min(
@@ -186,15 +186,15 @@ export function BlockDicePool(
               <Grid container alignItems="center">
                 {canChangeDiceSize && (
                   <Grid item>
-                    <Tooltip title={t("character-dialog.control.decrease")}>
+                    <Tooltip title={t("character-dialog.control.step-down")}>
                       <span>
                         <IconButton
                           size="small"
                           disabled={firstCommand === DiceCommandRange[0]}
                           color="inherit"
-                          data-cy={`${props.dataCy}.decrease`}
+                          data-cy={`${props.dataCy}.step-down`}
                           onClick={() => {
-                            handleDecreaseDice();
+                            handleStepDownDice();
                           }}
                         >
                           <FastRewindIcon
@@ -258,7 +258,7 @@ export function BlockDicePool(
                 )}
                 {canChangeDiceSize && (
                   <Grid item>
-                    <Tooltip title={t("character-dialog.control.increase")}>
+                    <Tooltip title={t("character-dialog.control.step-up")}>
                       <span>
                         <IconButton
                           size="small"
@@ -267,9 +267,9 @@ export function BlockDicePool(
                             firstCommand ===
                             DiceCommandRange[DiceCommandRange.length - 1]
                           }
-                          data-cy={`${props.dataCy}.increase`}
+                          data-cy={`${props.dataCy}.step-up`}
                           onClick={() => {
-                            handleIncreaseDice();
+                            handleStepUpDice();
                           }}
                         >
                           <FastForwardIcon

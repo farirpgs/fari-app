@@ -6,6 +6,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import CircleIcon from "@mui/icons-material/Circle";
 import CloseIcon from "@mui/icons-material/Close";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -2301,6 +2302,32 @@ export const CharacterV3Dialog: React.FC<{
                             </Tooltip>
                           </Grid>
 
+                          <Grid item>
+                            <Tooltip
+                              title={t(
+                                "character-dialog.control.duplicate-block"
+                              )}
+                            >
+                              <IconButton
+                                size="small"
+                                onClick={() => {
+                                  characterManager.actions.duplicateBlock({
+                                    pageIndex: indexes.pageIndex,
+                                    rowIndex: indexes.rowIndex,
+                                    columnIndex: indexes.columnIndex,
+                                    sectionIndex: indexes.sectionIndex,
+                                    blockIndex: blockIndex,
+                                  });
+                                }}
+                              >
+                                <ContentCopyIcon
+                                  className={css({
+                                    fontSize: "1rem",
+                                  })}
+                                />
+                              </IconButton>
+                            </Tooltip>
+                          </Grid>
                           <Grid item>
                             <Tooltip
                               title={t("character-dialog.control.copy-block")}
