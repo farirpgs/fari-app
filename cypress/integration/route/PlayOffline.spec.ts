@@ -10,9 +10,6 @@ describe("/play-offline", () => {
     Fari.get(
       "scene.player-row.gm-npc-0.assign-or-open-character-sheet"
     ).click();
-    Fari.get(
-      "scene.player-row.gm-npc-0.character-sheet-dialog.assign-original"
-    ).click();
     Fari.get("my-binder.folders.characters.new").click();
     Fari.get(
       "scene.player-row.gm-npc-0.assign-or-open-character-sheet"
@@ -26,9 +23,6 @@ describe("/play-offline", () => {
     Fari.get("scene.add-player").click();
     Fari.get(
       "scene.player-row.gm-npc-1.assign-or-open-character-sheet"
-    ).click();
-    Fari.get(
-      "scene.player-row.gm-npc-1.character-sheet-dialog.assign-original"
     ).click();
     Fari.get("my-binder.folders.characters.new").click();
     Fari.get(

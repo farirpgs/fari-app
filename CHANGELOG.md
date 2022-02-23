@@ -2,12 +2,6 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
-**v6.0.x-character-cards**
-
-- feat: edit character directly from character cards
-- feat: remove "assign/duplicate" character modal
-- feat: stabilize drawing area
-
 **vNext**
 
 - [ ] copy index cards blocks
@@ -15,6 +9,13 @@
 - [ ] lowest/highest dice roller result
 - [ ] readonly draw area
 - [ ] draw area tokens
+
+# v6.1.0
+
+- feat: reuse all blocks in character cards
+- feat: edit character directly from character cards
+- feat: remove "assign/duplicate" character modal
+- feat: stabilize drawing area with error boundary
 
 # v6.0.0
 
