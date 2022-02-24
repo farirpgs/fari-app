@@ -91,7 +91,7 @@ export const HomeRoute: React.FC<{}> = () => {
         description={t("home-route.meta.description")}
       />
       <Box>
-        <DarkBox px="2rem" pb="1rem" mt="-2rem" textAlign="left" linear>
+        <DarkBox px="2rem" mt="-2rem" textAlign="left" linear>
           <Box
             className={css({ maxWidth: FariToolbarMaxWidth, margin: "0 auto" })}
           >
@@ -115,6 +115,7 @@ export const HomeRoute: React.FC<{}> = () => {
                 </FateLabel>
               </Grid>
             </Grid>
+
             <Grid
               container
               justifyContent="center"
@@ -132,6 +133,14 @@ export const HomeRoute: React.FC<{}> = () => {
                 </FateLabel>
               </Grid>
             </Grid>
+            <Box>
+              <a href="https://farirpgs.com" target="_blank" rel="noreferrer">
+                <img
+                  width="10rem"
+                  src="https://i.gyazo.com/ebb95bf9a91c4ec7a8003da894b44541.png"
+                />
+              </a>
+            </Box>
           </Box>
         </DarkBox>
         <DarkBox linear px="2rem">

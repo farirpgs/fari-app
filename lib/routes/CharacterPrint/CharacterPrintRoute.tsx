@@ -18,7 +18,7 @@ import { ManagerBox } from "../Character/components/CharacterDialog/CharacterV3D
 import { BlockByType } from "../Character/components/CharacterDialog/components/BlockByType";
 import {
   MiniThemeContext,
-  useMiniTheme,
+  useMiniTheme
 } from "../Character/components/CharacterDialog/MiniThemeContext";
 
 export const CharacterPrintRoute: React.FC<{
@@ -80,7 +80,7 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
   return (
     <>
       <MiniThemeContext.Provider value={miniTheme}>
-        <style>{miniTheme.fontImport}</style>
+        <style>{miniTheme.style}</style>
         <Box mb="1rem">
           <Grid container justifyContent="center">
             <Grid item>

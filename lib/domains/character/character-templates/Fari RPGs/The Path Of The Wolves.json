@@ -383,7 +383,7 @@
     }
   ],
   "theme": {
-    "fontImport": "@import url('https://fonts.googleapis.com/css2?family=Bellefair&family=Lato&display=swap');",
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Bellefair&family=Lato&display=swap');",
     "pageHeadingFontFamily": "Bellefair",
     "sectionHeadingFontFamily": "Bellefair",
     "labelFontFamily": "Bellefair",

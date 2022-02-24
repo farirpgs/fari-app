@@ -339,7 +339,7 @@
   "version": 6,
   "theme": {
     "pageHeadingFontFamily": "Roboto Condensed",
-    "fontImport": "@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');",
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');",
     "sectionHeadingFontFamily": "Roboto Condensed",
     "labelFontFamily": "Roboto Condensed",
     "backgroundColor": "#ffffff",

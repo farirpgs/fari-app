@@ -11,7 +11,7 @@
 - [ ] highlight die
 - [ ] support image die (narrative system)
 
-# vTheme Editor
+# v6.2.0
 
 - feat: new character sheet theme editor
   - feat: new themed sheets by Fari RPGs and Pandion Games
@@ -19,6 +19,7 @@
 - feat: better placement of add row button
 - feat: better placement of add column button
 - feat: dice increase/decrease
+- feat: updated home page
 
 # v6.1.0
 

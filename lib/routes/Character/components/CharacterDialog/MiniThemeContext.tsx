@@ -36,7 +36,7 @@ export function useMiniTheme(props: {
   const borderColor = isDarkTheme
     ? "rgba(255,255,255,0.12)"
     : "rgba(0,0,0,0.12)";
-  const fontImport = props.character?.theme?.fontImport || "";
+  const style = props.character?.theme?.style || "";
 
   const pageHeadingFontFamily =
     props.character?.theme?.pageHeadingFontFamily || FontFamily.Default;
@@ -104,7 +104,7 @@ export function useMiniTheme(props: {
 
   const miniTheme = {
     backgroundColor: background,
-    fontImport: fontImport,
+    style: style,
     primaryColor: primaryColor,
     hideSectionBackground: hideSectionBackground,
     hideTabBackground: hideTabBackground,

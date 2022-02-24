@@ -76,8 +76,8 @@ export function NewCharacterRoute() {
     <Page>
       {template && (
         <PageMeta
-          title={`${template?.fileName} character sheet template, on Fari App`}
-          description={`Use the amazing ${template?.fileName} template and play in seconds!`}
+          title={`Use the ${template?.fileName} character sheet template on Fari App`}
+          description={`Get started playing TTRPGs online with Fari App using this ${template?.fileName} template!`}
         />
       )}
       <Fade in={status === "loading"}>

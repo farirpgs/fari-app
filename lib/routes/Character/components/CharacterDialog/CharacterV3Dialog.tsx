@@ -218,7 +218,7 @@ export const CharacterV3Dialog: React.FC<{
 
   return (
     <>
-      <style>{miniTheme.fontImport}</style>
+      <style>{miniTheme.style}</style>
       <Prompt
         when={characterManager.state.dirty}
         message={t("manager.leave-without-saving")}
@@ -678,7 +678,7 @@ export const CharacterV3Dialog: React.FC<{
                                   {renderAddColumnButton({
                                     pageIndex,
                                     rowIndex,
-                                    columnIndex: 0,
+                                    columnIndex: row.columns.length,
                                   })}
                                 </Grid>
                               </Grid>
@@ -961,7 +961,7 @@ export const CharacterV3Dialog: React.FC<{
           )}
           <Grid item>
             <Box p=".5rem">
-              <Typography>
+              <Typography variant="caption" color={miniTheme.textSecondary}>
                 {date.format("lll")}
                 {" / "}
                 {"v"}
@@ -1838,10 +1838,10 @@ export const CharacterV3Dialog: React.FC<{
         <Box mb="1rem">
           <LazyState
             delay={Delays.field}
-            value={characterManager.state.character?.theme?.fontImport}
+            value={characterManager.state.character?.theme?.style}
             onChange={(value) => {
               characterManager.actions.setTheme((theme) => {
-                theme.fontImport = value;
+                theme.style = value;
               });
             }}
             render={([value, setValue]) => {
