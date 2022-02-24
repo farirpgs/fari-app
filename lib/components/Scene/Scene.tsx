@@ -1500,6 +1500,12 @@ export function Scene(props: {
                       type
                     );
                   }}
+                  onMoveOut={(idOfIndexCardToMove) => {
+                    sceneManager.actions.moveIndexCardOut(
+                      idOfIndexCardToMove,
+                      type
+                    );
+                  }}
                   isGM={props.isGM}
                   indexCard={indexCard}
                   onRoll={props.onRoll}

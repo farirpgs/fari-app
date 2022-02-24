@@ -232,6 +232,39 @@ export function useScene() {
       })
     );
   }
+
+  function moveIndexCardOut(idOfIndexCardToMove: string, type: IIndexCardType) {
+    setScene(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+
+        let cardToAddBeside: IIndexCard | undefined;
+        let subCardToMove: IIndexCard | undefined;
+
+        const indexCards = draft.indexCards[type];
+
+        for (const [, card] of indexCards.entries()) {
+          for (const [subCardIndex, subCard] of card.subCards.entries()) {
+            if (subCard.id === idOfIndexCardToMove) {
+              subCardToMove = card.subCards.splice(subCardIndex, 1)[0];
+              cardToAddBeside = card;
+            }
+          }
+        }
+
+        if (!subCardToMove) {
+          return;
+        }
+        const index = indexCards.findIndex((c) => c.id === cardToAddBeside?.id);
+        if (index !== -1) {
+          indexCards.splice(index + 1, 0, subCardToMove);
+        }
+      })
+    );
+  }
+
   function moveIndexCard(
     dragIndex: number,
     hoverIndex: number,
@@ -306,6 +339,7 @@ export function useScene() {
       loadScene,
       toggleIndexCardSection,
       moveIndexCard,
+      moveIndexCardOut,
       moveIndexCardTo,
       removeIndexCard,
       duplicateIndexCard,

@@ -280,7 +280,7 @@ export interface IPage {
 
 export type ICharacterTheme = {
   backgroundColor?: string;
-  fontImport?: string;
+  style?: string;
   primaryColor?: string;
   hideTabBackground?: boolean;
   hideSectionBackground?: boolean;

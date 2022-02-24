@@ -135,6 +135,7 @@ export const IndexCard: React.FC<
     onPoolClick(element: IDicePoolElement): void;
     onChange(newIndexCard: IIndexCard): void;
     onMoveTo?(idOfIndexCardToMove: string, idOfIndexCardToMoveTo: string): void;
+    onMoveOut?(idOfIndexCardToMove: string): void;
     onRoll(diceRollResult: IDiceRollResult): void;
     onMove(dragIndex: number, hoverIndex: number): void;
     onRemove(): void;
@@ -439,15 +440,26 @@ export const IndexCard: React.FC<
                               onChange={(e) => {
                                 renderProps.handleOnClose();
                                 if (e.target.value) {
-                                  props.onMoveTo?.(
-                                    indexCardManager.state.indexCard.id,
-                                    e.target.value as string
-                                  );
+                                  if (e.target.value === "move-out") {
+                                    props.onMoveOut?.(
+                                      indexCardManager.state.indexCard.id
+                                    );
+                                  } else {
+                                    props.onMoveTo?.(
+                                      indexCardManager.state.indexCard.id,
+                                      e.target.value as string
+                                    );
+                                  }
                                 }
                               }}
                               variant="standard"
                             >
                               <option value="" />
+                              {isSubCard && (
+                                <option value="move-out">
+                                  {`— ${t("index-card.move-out")} —`}
+                                </option>
+                              )}
                               {cardsForSelect.map((card) => {
                                 const value = previewContentEditable({
                                   value: card.title,
@@ -558,6 +570,9 @@ export const IndexCard: React.FC<
                         idOfIndexCardToMove,
                         idOfIndexCardToMoveTo
                       );
+                    }}
+                    onMoveOut={(idOfIndexCardToMove) => {
+                      props.onMoveOut?.(idOfIndexCardToMove);
                     }}
                     onMove={(dragIndex, hoverIndex) => {
                       indexCardManager.actions.moveIndexCard(
