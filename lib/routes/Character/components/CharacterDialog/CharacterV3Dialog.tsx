@@ -125,7 +125,7 @@ export const CharacterV3Dialog: React.FC<{
   onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
   onToggleSync?(): void;
-  onRoll(diceRollResult: IDiceRollResult): void;
+  onRoll?(diceRollResult: IDiceRollResult): void;
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
@@ -187,17 +187,6 @@ export const CharacterV3Dialog: React.FC<{
       setAdvanced(false);
     }
   }
-
-  const dialogSheetContentStyle = css({
-    label: "CharacterDialog-sheet-content",
-    width: "100%",
-    padding: ".5rem 1rem",
-  });
-  const fullScreenSheetContentStyle = css({
-    label: "CharacterDialog-sheet-content",
-    width: "100%",
-    padding: ".5rem 1rem",
-  });
 
   useEffect(
     function disableAdvancedOnNewCharacterLoad() {
@@ -296,7 +285,12 @@ export const CharacterV3Dialog: React.FC<{
               })}
             >
               <Container maxWidth={maxWidth}>
-                <Box className={dialogSheetContentStyle}>
+                <Box
+                  className={css({
+                    width: "100%",
+                    padding: "1rem 1rem",
+                  })}
+                >
                   {renderNameAndGroup()}
                 </Box>
               </Container>
@@ -309,26 +303,38 @@ export const CharacterV3Dialog: React.FC<{
               dividers
             >
               <Container maxWidth={maxWidth}>
-                <Box className={dialogSheetContentStyle}>
+                <Box
+                  className={css({
+                    width: "100%",
+                    padding: ".5rem 1rem",
+                  })}
+                >
                   {renderPages(characterManager.state.character.pages)}
                 </Box>
               </Container>
             </DialogContent>
-            <DialogActions
-              className={css({
-                label: "CharacterDialog-dialog-wrapper",
-                padding: "0",
-              })}
-            >
-              <Container
-                maxWidth={maxWidth}
-                className={css({ padding: ".5rem" })}
+            {!props.readonly && (
+              <DialogActions
+                className={css({
+                  label: "CharacterDialog-dialog-wrapper",
+                  padding: "0",
+                })}
               >
-                <Box className={dialogSheetContentStyle}>
-                  {renderSheetActions()}
-                </Box>
-              </Container>
-            </DialogActions>
+                <Container
+                  maxWidth={maxWidth}
+                  className={css({ padding: ".5rem" })}
+                >
+                  <Box
+                    className={css({
+                      width: "100%",
+                      padding: ".5rem 1rem",
+                    })}
+                  >
+                    {renderSheetActions()}
+                  </Box>
+                </Container>
+              </DialogActions>
+            )}
           </Dialog>
         </ThemeProvider>
       );
@@ -343,14 +349,31 @@ export const CharacterV3Dialog: React.FC<{
           })}
         >
           <Container maxWidth={maxWidth}>
-            <Box className={fullScreenSheetContentStyle}>
-              <Box py="1rem">{renderSheetActions()}</Box>
-            </Box>
+            {!props.readonly && (
+              <Box
+                className={css({
+                  width: "100%",
+                  padding: ".5rem 1rem",
+                })}
+              >
+                <Box>{renderSheetActions()}</Box>
+              </Box>
+            )}
 
-            <Box className={fullScreenSheetContentStyle}>
+            <Box
+              className={css({
+                width: "100%",
+                padding: "1rem 1rem",
+              })}
+            >
               {renderNameAndGroup()}
             </Box>
-            <Box className={fullScreenSheetContentStyle}>
+            <Box
+              className={css({
+                width: "100%",
+                padding: ".5rem 1rem",
+              })}
+            >
               {renderPages(characterManager.state.character?.pages)}
             </Box>
           </Container>
@@ -982,7 +1005,9 @@ export const CharacterV3Dialog: React.FC<{
                   readonly={false}
                   characterSheet={characterManager.state.character}
                   onCharacterDialogOpen={() => undefined}
-                  onRoll={props.onRoll}
+                  onRoll={(newRollResult) => {
+                    props.onRoll?.(newRollResult);
+                  }}
                 />
               </Box>
             </Grid>
@@ -1365,7 +1390,7 @@ export const CharacterV3Dialog: React.FC<{
     }
 
     return (
-      <>
+      <Box py=".5rem">
         <Grid
           container
           wrap="nowrap"
@@ -1541,7 +1566,7 @@ export const CharacterV3Dialog: React.FC<{
             </Grid>
           </Grid>
         </Grid>
-      </>
+      </Box>
     );
   }
 
@@ -2069,14 +2094,14 @@ export const CharacterV3Dialog: React.FC<{
   function renderNameAndGroup() {
     return (
       <>
-        <Box mb="1rem" px=".5rem">
+        <Box px=".5rem">
           <Grid container>
             <Grid
               item
               container
               sm={12}
               md={6}
-              spacing={2}
+              spacing={1}
               alignItems="flex-end"
             >
               <Grid
@@ -2425,7 +2450,7 @@ export const CharacterV3Dialog: React.FC<{
                         );
                       }}
                       onRoll={(diceRollResult) => {
-                        props.onRoll(diceRollResult);
+                        props.onRoll?.(diceRollResult);
                       }}
                     />
                   </ManagerBox>

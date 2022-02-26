@@ -18,10 +18,13 @@ import { useHistory, useParams } from "react-router";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import {
   CharacterTemplates,
   ICharacterTemplate,
 } from "../../domains/character/CharacterType";
+import { ICharacter } from "../../domains/character/types";
+import { CharacterV3Dialog } from "../Character/components/CharacterDialog/CharacterV3Dialog";
 
 export function NewCharacterRoute() {
   const charactersManager = useContext(CharactersContext);
@@ -39,17 +42,11 @@ export function NewCharacterRoute() {
 
   const [loadingTemplate, setLoadingTemplate] = useState(false);
 
-  async function handleLoadTemplate() {
-    setLoadingTemplate(true);
-    const newCharacter = await charactersManager.actions.add(
-      template as ICharacterTemplate
-    );
-    history.push(`/characters/${newCharacter.id}`);
-  }
+  const isLoading = status === "loading";
 
   useEffect(() => {
-    loadAndRedirect();
-    async function loadAndRedirect() {
+    load();
+    async function load() {
       const template = CharacterTemplates.find((t) => {
         const categoryMatch =
           kebabCase(t.category.toLowerCase()) ===
@@ -60,6 +57,8 @@ export function NewCharacterRoute() {
         return categoryMatch && nameMatch;
       });
       if (template) {
+        const fake = await CharacterFactory.make(template);
+        setFakeCharacter(fake);
         setTemplate(template);
         setStatus("success");
       } else {
@@ -67,25 +66,45 @@ export function NewCharacterRoute() {
       }
     }
   }, [params.category, params.name]);
+  async function handleLoadTemplate() {
+    setLoadingTemplate(true);
+    const newCharacter = await charactersManager.actions.add(
+      template as ICharacterTemplate
+    );
+    history.push(`/characters/${newCharacter.id}`);
+  }
+  const [fakeCharacter, setFakeCharacter] = useState<ICharacter>();
 
   function handleCancel() {
     history.push(`/`);
   }
 
   return (
-    <Page>
+    <Page marginTop="0">
       {template && (
         <PageMeta
           title={`Use the ${template?.fileName} character sheet template on Fari App`}
           description={`Get started playing TTRPGs online with Fari App using this ${template?.fileName} template!`}
         />
       )}
-      <Fade in={status === "loading"}>
-        <Container maxWidth="md">
-          <Box display="flex" justifyContent="center">
-            <CircularProgress />
-          </Box>
-        </Container>
+      {isLoading && (
+        <Fade in>
+          <Container maxWidth="md">
+            <Box display="flex" justifyContent="center">
+              <CircularProgress />
+            </Box>
+          </Container>
+        </Fade>
+      )}
+      <Fade in={status === "success"}>
+        <Box>
+          <CharacterV3Dialog
+            open={true}
+            character={fakeCharacter}
+            dialog={false}
+            readonly={true}
+          />
+        </Box>
       </Fade>
       <Dialog open={status === "success"} onClose={handleCancel}>
         <DialogTitle
