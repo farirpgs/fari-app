@@ -19,7 +19,7 @@ import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext"
 import { useScene } from "../../hooks/useScene/useScene";
 import {
   useSession,
-  useSessionCharacters,
+  useSessionCharacterSheets,
 } from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import {
@@ -107,7 +107,7 @@ export const PlayRoute: React.FC<{
   const sessionManager = useSession({
     userId: userId,
   });
-  const sessionCharactersManager = useSessionCharacters({
+  const sessionCharactersManager = useSessionCharacterSheets({
     userId: userId,
     charactersManager: charactersManager,
   });
@@ -127,6 +127,15 @@ export const PlayRoute: React.FC<{
     value: sceneManager.state.scene,
     onChange: (newValue) => {
       sceneManager.actions.overrideScene(newValue);
+    },
+  });
+
+  useLiveObject({
+    key: "characters",
+    isOwner: isGM,
+    value: sessionCharactersManager.state.characterSheets,
+    onChange: (newValue) => {
+      sessionCharactersManager.actions.overrideCharacterSheets(newValue);
     },
   });
 
@@ -226,6 +235,28 @@ export const PlayRoute: React.FC<{
     }
   }, []);
 
+  function getAlertSevirityColor(connectionState: ConnectionState | undefined) {
+    if (connectionState === "closed") {
+      return "error";
+    }
+    if (connectionState === "failed") {
+      return "error";
+    }
+    if (connectionState === "unavailable") {
+      return "error";
+    }
+    if (connectionState === "authenticating") {
+      return "info";
+    }
+    if (connectionState === "connecting") {
+      return "info";
+    }
+    if (connectionState === "open") {
+      return "success";
+    }
+    return "info";
+  }
+
   return (
     <>
       <PageMeta
@@ -241,7 +272,9 @@ export const PlayRoute: React.FC<{
             horizontal: "center",
           }}
         >
-          <Alert severity="info">Connection: {connectionState}</Alert>
+          <Alert severity={getAlertSevirityColor(connectionState)}>
+            Connection: {connectionState}
+          </Alert>
         </Snackbar>
         <Session
           sessionManager={sessionManager}
