@@ -8,7 +8,7 @@ import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext"
 import { useScene } from "../../hooks/useScene/useScene";
 import {
   useSession,
-  useSessionCharacters,
+  useSessionCharacterSheets,
 } from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -24,7 +24,7 @@ export const PlayOfflineRoute: React.FC<{
   const sessionManager = useSession({
     userId: settingsManager.state.userId,
   });
-  const sessionCharactersManager = useSessionCharacters({
+  const sessionCharactersManager = useSessionCharacterSheets({
     userId: settingsManager.state.userId,
     charactersManager: charactersManager,
   });
