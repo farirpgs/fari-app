@@ -4,7 +4,6 @@ import CreateIcon from "@mui/icons-material/Create";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import ErrorIcon from "@mui/icons-material/Error";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
-import FilterHdrIcon from "@mui/icons-material/FilterHdr";
 import MovieIcon from "@mui/icons-material/Movie";
 import PanToolIcon from "@mui/icons-material/PanTool";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
@@ -67,12 +66,16 @@ import {
 import { useScene } from "../../hooks/useScene/useScene";
 import {
   useSession,
-  useSessionCharacters,
+  useSessionCharacterSheets,
 } from "../../hooks/useScene/useSession";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+import {
+  MiniThemeContext,
+  useMiniTheme,
+} from "../../routes/Character/components/CharacterDialog/MiniThemeContext";
 import {
   IPlayerInteraction,
   PlayerInteractionFactory,
@@ -108,7 +111,7 @@ const paperStyle = css({ borderRadius: "0px", flex: "1 0 auto" });
 
 type IProps = {
   sessionManager: ReturnType<typeof useSession>;
-  sessionCharactersManager: ReturnType<typeof useSessionCharacters>;
+  sessionCharactersManager: ReturnType<typeof useSessionCharacterSheets>;
   sceneManager: ReturnType<typeof useScene>;
   userId: string;
   isLoading?: boolean;
@@ -129,6 +132,10 @@ export const Session: React.FC<IProps> = (props) => {
   useBlockReload(sceneManager.state.dirty);
 
   const theme = useTheme();
+  const miniTheme = useMiniTheme({
+    enforceBackground: theme.palette.background.default,
+  });
+
   const { t } = useTranslate();
   const logger = useLogger();
   const diceManager = useContext(DiceContext);
@@ -615,7 +622,7 @@ export const Session: React.FC<IProps> = (props) => {
 
   function getCharacterSheet(playerId: string) {
     const playerCharacter =
-      sessionCharactersManager.state.sessionCharacters.characters[playerId];
+      sessionCharactersManager.state.characterSheets[playerId];
     return playerCharacter;
   }
 
@@ -755,8 +762,7 @@ export const Session: React.FC<IProps> = (props) => {
 
   function renderCharacterCards() {
     const everyone = sessionManager.computed.everyone;
-    const characters =
-      sessionCharactersManager.state.sessionCharacters.characters;
+    const characters = sessionCharactersManager.state.characterSheets;
     const players = Object.keys(characters).map((characterId) => {
       const playerMatch = everyone.find(
         (player) => player.id === characterId
@@ -778,37 +784,38 @@ export const Session: React.FC<IProps> = (props) => {
             })}
           >
             {showEmptyWarnings()}
-
-            {players.map((player, index) => {
-              const isMe = props.userId === player.id;
-              const canControl = isGM || isMe;
-              return (
-                <Box
-                  key={player?.id || index}
-                  className={css({
-                    width: characterCardWidth,
-                    display: "inline-block",
-                    marginBottom: "1rem",
-                  })}
-                >
-                  <CharacterCard
+            <MiniThemeContext.Provider value={miniTheme}>
+              {players.map((player, index) => {
+                const isMe = props.userId === player.id;
+                const canControl = isGM || isMe;
+                return (
+                  <Box
                     key={player?.id || index}
-                    readonly={!canControl}
-                    playerName={player.playerName}
-                    characterSheet={player.characterSheet}
-                    onCharacterDialogOpen={() => {
-                      setCharacterDialogPlayerId(player.id);
-                    }}
-                    onChange={(updatedCharacter) => {
-                      handleUpdateCharacter(player.id, updatedCharacter);
-                    }}
-                    onRoll={(newDiceRollResult) => {
-                      handleSetPlayerRoll(player.id, newDiceRollResult);
-                    }}
-                  />
-                </Box>
-              );
-            })}
+                    className={css({
+                      width: characterCardWidth,
+                      display: "inline-block",
+                      marginBottom: "1rem",
+                    })}
+                  >
+                    <CharacterCard
+                      key={player?.id || index}
+                      readonly={!canControl}
+                      playerName={player.playerName}
+                      characterSheet={player.characterSheet}
+                      onCharacterDialogOpen={() => {
+                        setCharacterDialogPlayerId(player.id);
+                      }}
+                      onChange={(updatedCharacter) => {
+                        handleUpdateCharacter(player.id, updatedCharacter);
+                      }}
+                      onRoll={(newDiceRollResult) => {
+                        handleSetPlayerRoll(player.id, newDiceRollResult);
+                      }}
+                    />
+                  </Box>
+                );
+              })}
+            </MiniThemeContext.Provider>
           </Box>
         </Box>
       </>
@@ -840,7 +847,7 @@ export const Session: React.FC<IProps> = (props) => {
 
   function showEmptyWarnings() {
     const numberOfSheets = Object.keys(
-      sessionCharactersManager.state.sessionCharacters.characters
+      sessionCharactersManager.state.characterSheets
     ).length;
     const showNoPlayersWarning =
       sessionManager.computed.playersAndNPCs.length === 0;
@@ -924,13 +931,13 @@ export const Session: React.FC<IProps> = (props) => {
               ),
             },
 
-            {
-              value: "draw",
-              dataCy: "session.tabs.draw",
-              label: t("draw-route.meta.title"),
-              icon: <FilterHdrIcon />,
-              render: renderZones,
-            },
+            // {
+            //   value: "draw",
+            //   dataCy: "session.tabs.draw",
+            //   label: t("draw-route.meta.title"),
+            //   icon: <FilterHdrIcon />,
+            //   render: renderZones,
+            // },
           ]}
         />
       </Box>
