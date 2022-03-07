@@ -75,7 +75,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       ...entityManager.actions,
       add,
       addIfDoesntExist,
-      updateIfStoredAndMoreRecent: updateIfStoredAndMoreRecent,
+      updateIfStoredAndMoreRecent,
     },
     selectors: {
       isInStorage,

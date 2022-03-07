@@ -1,4 +1,3 @@
-import { TDDocument } from "@tldraw/tldraw";
 import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { IBlock, ICharacter } from "../../domains/character/types";
@@ -127,7 +126,7 @@ export type ISession = {
   players: Record<string, IPlayer>;
   goodConfetti: number;
   badConfetti: number;
-  tlDrawDoc: TDDocument | undefined;
+  tlDrawDoc: any | undefined;
   paused: boolean;
 };
 

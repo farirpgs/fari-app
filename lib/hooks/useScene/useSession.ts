@@ -1,4 +1,3 @@
-import { TDDocument } from "@tldraw/tldraw";
 import produce from "immer";
 import { useEffect, useState } from "react";
 import { Delays } from "../../constants/Delays";
@@ -13,10 +12,7 @@ import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
-import { makeNewBlankDocument } from "../../routes/Draw/TldrawWriterAndReader";
-import { IPlayer, ISession, ISessionCharacters } from "./IScene";
-
-(window as any).HTMLCanvasElement.prototype.getContext = () => {};
+import { IPlayer, ISession } from "./IScene";
 
 export function useSession(props: { userId: string }) {
   const [session, setSession] = useState<ISession>(
@@ -35,7 +31,7 @@ export function useSession(props: { userId: string }) {
       goodConfetti: 0,
       badConfetti: 0,
       paused: false,
-      tlDrawDoc: makeNewBlankDocument(),
+      tlDrawDoc: undefined,
     })
   );
 
@@ -181,7 +177,7 @@ export function useSession(props: { userId: string }) {
     );
   }
 
-  function updateDrawAreaObjects(doc: TDDocument) {
+  function updateDrawAreaObjects(doc: any) {
     setSession((prev) => {
       return {
         ...prev,
@@ -317,21 +313,6 @@ export function useSession(props: { userId: string }) {
     );
   }
 
-  function reset() {
-    setSession(
-      produce((draft) => {
-        if (!draft) {
-          return;
-        }
-        const everyone = getEveryone(draft);
-        draft.tlDrawDoc = makeNewBlankDocument();
-        everyone.forEach((p) => {
-          p.playedDuringTurn = false;
-        });
-      })
-    );
-  }
-
   function getEveryone(session: ISession) {
     const players = Object.values(session.players);
     return [session.gm, ...players, ...session.gm.npcs];
@@ -356,7 +337,6 @@ export function useSession(props: { userId: string }) {
       fireGoodConfetti,
       removePlayer,
       togglePlayerVisibility,
-      reset,
       updateDrawAreaObjects,
       updateGmRoll,
       updatePlayerPlayedDuringTurn,
@@ -368,27 +348,28 @@ export function useSession(props: { userId: string }) {
   };
 }
 
-export function useSessionCharacters(props: {
+export function useSessionCharacterSheets(props: {
   userId: string;
   charactersManager: ReturnType<typeof useCharacters>;
 }) {
   const { charactersManager } = props;
 
-  const [sessionCharacters, setSessionCharacters] =
-    useState<ISessionCharacters>({
-      characters: {},
-    });
+  const [characterSheets, setCharacterSheets] = useState<
+    Record<string, ICharacter>
+  >({});
 
   useEffect(
     function syncCharacterSheetForMe() {
-      const mySheet = sessionCharacters.characters[props.userId];
+      Object.entries(characterSheets).forEach(([id, characterSheet]) => {
+        const mySheet = id === props.userId;
 
-      if (mySheet) {
-        charactersManager.actions.addIfDoesntExist(mySheet);
-      }
-      charactersManager.actions.updateIfStoredAndMoreRecent(mySheet);
+        if (mySheet) {
+          charactersManager.actions.addIfDoesntExist(characterSheet);
+        }
+        charactersManager.actions.updateIfStoredAndMoreRecent(characterSheet);
+      });
     },
-    [props.userId, sessionCharacters]
+    [props.userId, characterSheets]
   );
 
   function updatePlayerCharacter(
@@ -396,17 +377,16 @@ export function useSessionCharacters(props: {
     character: ICharacter,
     loadCharacterHiddenFieldsInPlayer = false
   ) {
-    setSessionCharacters(
+    setCharacterSheets(
       produce((draft) => {
         if (!draft) {
           return;
         }
 
-        draft.characters[id] = character;
+        draft[id] = character;
 
         if (loadCharacterHiddenFieldsInPlayer) {
-          draft.characters[id].playedDuringTurn =
-            character.playedDuringTurn ?? false;
+          draft[id].playedDuringTurn = character.playedDuringTurn ?? false;
         }
       })
     );
@@ -421,15 +401,15 @@ export function useSessionCharacters(props: {
     points: string,
     maxPoints: string | undefined
   ) {
-    setSessionCharacters(
+    setCharacterSheets(
       produce((draft) => {
         if (!draft) {
           return;
         }
 
-        Object.keys(draft.characters).forEach((key) => {
+        Object.keys(draft).forEach((key) => {
           if (key === id) {
-            const character = draft.characters[key];
+            const character = draft[key];
             const blocks = character.pages
               .flatMap((p) => p.rows)
               .flatMap((r) => r.columns)
@@ -453,29 +433,33 @@ export function useSessionCharacters(props: {
     );
   }
 
+  function overrideCharacterSheets(
+    newCharacterSheets: Record<string, ICharacter> | undefined
+  ) {
+    if (newCharacterSheets) {
+      setCharacterSheets(newCharacterSheets);
+    }
+  }
+
   function removeCharacterSheet(playerId: string) {
-    setSessionCharacters(
+    setCharacterSheets(
       produce((draft) => {
         if (!draft) {
           return;
         }
 
-        delete draft.characters[playerId];
+        delete draft[playerId];
       })
     );
   }
 
   return {
     state: {
-      sessionCharacters,
+      characterSheets,
     },
-    computed: {
-      // playersAndNpcsCount: players.length + npcs.length,
-      // npcsWithCharacterSheets: npcsWithCharacterSheets,
-      // playersWithCharacterSheets: sortedPlayersWithCharacterSheets,
-      // hasPlayersWithCharacterSheets,
-    },
+    computed: {},
     actions: {
+      overrideCharacterSheets,
       updatePlayerCharacter,
       loadPlayerCharacter,
       updatePlayerCharacterMainPointCounter,
