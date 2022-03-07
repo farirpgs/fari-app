@@ -1,6 +1,6 @@
 import legacy from "@vitejs/plugin-legacy";
 import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -21,5 +21,10 @@ export default defineConfig({
     proxy: {
       "/.netlify/functions/auth": "http://localhost:9999",
     },
+  },
+  test: {
+    globals: true,
+    setupFiles: ["test-setup.ts"],
+    environment: "jsdom",
   },
 });

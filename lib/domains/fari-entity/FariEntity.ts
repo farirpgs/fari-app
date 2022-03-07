@@ -71,7 +71,7 @@ export const FariEntity = {
         return migrated;
       }
     } catch (error) {
-      if (!process.env.IS_JEST) {
+      if (!process.env.VITEST) {
         console.error(error);
       }
     }
@@ -90,7 +90,7 @@ export const FariEntity = {
         return migrated;
       }
     } catch (error) {
-      if (!process.env.IS_JEST) {
+      if (!process.env.VITEST) {
         console.error(error);
       }
     }

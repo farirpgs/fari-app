@@ -44,10 +44,10 @@ describe("CharacterFactory.migrate", () => {
           .flatMap((p) => p.rows)
           .flatMap((r) => r.columns)
           .flatMap((c) => c.sections);
-        expect(sections.find((s) => s.label === "Stress")?.blocks).toEqual([
+        expect(sections.find((s) => s.label === "STRESS")?.blocks).toEqual([
           {
             id: expect.anything(),
-            label: "Physical",
+            label: "PHYSICAL",
             meta: {},
             type: "SlotTracker",
             value: [
@@ -65,134 +65,136 @@ describe("CharacterFactory.migrate", () => {
       const result = CharacterFactory.migrate(Warden);
 
       expect(result).toEqual({
+        group: undefined,
         id: expect.anything(),
+        lastUpdated: 1606783644,
         name: "Warden Le Magané",
-        lastUpdated: expect.anything(),
-        wide: false,
         pages: [
           {
             id: expect.anything(),
-            label: "Character",
+            label: "CHARACTER",
             rows: [
               {
                 columns: [
                   {
                     sections: [
                       {
-                        id: expect.anything(),
                         blocks: [
                           {
                             id: expect.anything(),
-                            type: "Text",
+                            label: "HIGH CONCEPT",
                             meta: {},
-                            label: "High Concept",
+                            type: "Text",
                             value:
                               "Survivant à l'apocalypse et à une rencontre contre la Mère des Sans-Visages",
                           },
                           {
                             id: expect.anything(),
-                            type: "Text",
+                            label: "TROUBLE ASPECT",
                             meta: {},
-                            label: "Trouble Aspect",
+                            type: "Text",
                             value:
                               "Mon apparence affreuse traumatise quiconque me regarde (CORRUPTED)",
                           },
                           {
                             id: expect.anything(),
-                            type: "Text",
-                            meta: {},
                             label: "RELATIONSHIP",
+                            meta: {},
+                            type: "Text",
                             value:
                               "J'ai survécu grâce à l'apocalypse Rodolf Salis",
                           },
                           {
                             id: expect.anything(),
-                            type: "Text",
+                            label: "OTHER ASPECT",
                             meta: {},
-                            label: "Other Aspect",
+                            type: "Text",
                             value: "Ancien chasseur de tête / Assassin",
                           },
                           {
                             id: expect.anything(),
-                            type: "Text",
-                            meta: {},
                             label: "OTHER ASPECT",
+                            meta: {},
+                            type: "Text",
                             value: "",
                           },
                         ],
-                        label: "Aspects",
+                        id: expect.anything(),
+                        label: "ASPECTS",
                         visibleOnCard: true,
                       },
                       {
-                        id: expect.anything(),
                         blocks: [
                           {
                             id: expect.anything(),
-                            type: "Text",
+                            label: "THE VOICES, THEY ARE TELLING ME THINGS...",
                             meta: {},
-                            label: "The voices, they are telling me things...",
+                            type: "Text",
                             value: "Use Will instead of Notice (And +2)",
                           },
                           {
                             id: expect.anything(),
-                            type: "Text",
+                            label: "TOUCHED BY THE OCCULT",
                             meta: {},
-                            label: "Touched by the occult",
+                            type: "Text",
                             value:
                               "Use Lore instead of Academics about occult, weird or creepy subjects",
                           },
                           {
                             id: expect.anything(),
-                            type: "Text",
+                            label: "ARMOR OF FEAR",
                             meta: {},
-                            label: "Armor of Fear",
+                            type: "Text",
                             value:
                               "You can use Provoke to defend against Fight attacks, but only until the first time you’re dealt stress in a conflict. You can make your opponents hesitate to attack, but when someone shows them that you’re only human your advantage disappears.",
                           },
                         ],
-                        label: "Stunts & Extras",
+                        id: expect.anything(),
+                        label: "STUNTS & EXTRAS",
+                        visibleOnCard: undefined,
                       },
                       {
-                        id: expect.anything(),
                         blocks: [
                           {
                             id: expect.anything(),
-                            type: "PointCounter",
+                            label: "FATE POINTS",
                             meta: {
                               isMainPointCounter: true,
                               max: "3",
                             },
-                            label: "Fate Points",
+                            type: "PointCounter",
                             value: "1",
                           },
                         ],
-                        label: "Fate Points",
+                        id: expect.anything(),
+                        label: "FATE POINTS",
+                        visibleOnCard: undefined,
                       },
                       {
-                        id: expect.anything(),
                         blocks: [
                           {
                             id: expect.anything(),
-                            type: "Text",
+                            label: "NOTES",
                             meta: {},
-                            label: "Notes",
+                            type: "Text",
                             value: "",
                           },
                         ],
-                        label: "Other",
+                        id: expect.anything(),
+                        label: "OTHER",
+                        visibleOnCard: undefined,
                       },
                     ],
                   },
                   {
                     sections: [
                       {
-                        id: expect.anything(),
                         blocks: [
                           {
                             id: expect.anything(),
-                            type: "SlotTracker",
+                            label: "PHYSICAL",
                             meta: {},
-                            label: "Physical",
+                            type: "SlotTracker",
                             value: [
                               {
                                 checked: false,
@@ -214,9 +216,9 @@ describe("CharacterFactory.migrate", () => {
                           },
                           {
                             id: expect.anything(),
-                            type: "SlotTracker",
+                            label: "MENTAL",
                             meta: {},
-                            label: "Mental",
+                            type: "SlotTracker",
                             value: [
                               {
                                 checked: false,
@@ -246,9 +248,9 @@ describe("CharacterFactory.migrate", () => {
                           },
                           {
                             id: expect.anything(),
-                            type: "SlotTracker",
+                            label: "CORRUPTION",
                             meta: {},
-                            label: "Corruption",
+                            type: "SlotTracker",
                             value: [
                               {
                                 checked: false,
@@ -269,211 +271,214 @@ describe("CharacterFactory.migrate", () => {
                             ],
                           },
                         ],
-                        label: "Stress",
+                        id: expect.anything(),
+                        label: "STRESS",
+                        visibleOnCard: undefined,
                       },
                       {
-                        id: expect.anything(),
                         blocks: [
                           {
                             id: expect.anything(),
-                            type: "Text",
+                            label: "MILD",
                             meta: {},
-                            label: "Mild",
+                            type: "Text",
                             value: "",
                           },
                           {
                             id: expect.anything(),
-                            type: "Text",
+                            label: "MODERATE",
                             meta: {},
-                            label: "Moderate",
+                            type: "Text",
                             value: "",
                           },
                           {
                             id: expect.anything(),
-                            type: "Text",
+                            label: "SEVERE",
                             meta: {},
-                            label: "Severe",
+                            type: "Text",
                             value: "",
                           },
                         ],
-                        label: "Consequences",
+                        id: expect.anything(),
+                        label: "CONSEQUENCES",
+                        visibleOnCard: undefined,
                       },
                       {
-                        id: expect.anything(),
                         blocks: [
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "ACADEMICS",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Academics",
+                            type: "Skill",
                             value: "",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "ATHLETICS",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Athletics",
+                            type: "Skill",
                             value: "2",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "BURGLARY",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Burglary",
+                            type: "Skill",
                             value: "",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "CONTACTS",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Contacts",
+                            type: "Skill",
                             value: "",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "CRAFTS",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Crafts",
+                            type: "Skill",
                             value: "",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "DECEIVE",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Deceive",
+                            type: "Skill",
                             value: "1",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "DRIVE",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Drive",
+                            type: "Skill",
                             value: "",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "EMPATHY",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Empathy",
+                            type: "Skill",
                             value: "1",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "FIGHT",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Fight",
+                            type: "Skill",
                             value: "",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "INVESTIGATE",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Investigate",
+                            type: "Skill",
                             value: "2",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "LORE",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Lore",
+                            type: "Skill",
                             value: "3",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "NOTICE",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Notice",
+                            type: "Skill",
                             value: "",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "PHYSIQUE",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Physique",
+                            type: "Skill",
                             value: "1",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "PROVOKE",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Provoke",
+                            type: "Skill",
                             value: "4",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "RAPPORT",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Rapport",
+                            type: "Skill",
                             value: "2",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "RESOURCES",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Resources",
+                            type: "Skill",
                             value: "",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "SHOOT",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Shoot",
+                            type: "Skill",
                             value: "",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "STEALTH",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Stealth",
+                            type: "Skill",
                             value: "1",
                           },
                           {
                             id: expect.anything(),
-                            type: "Skill",
+                            label: "WILL",
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Will",
+                            type: "Skill",
                             value: "3",
                           },
                         ],
-                        label: "Skills",
+                        id: expect.anything(),
+                        label: "SKILLS",
                         visibleOnCard: true,
                       },
                     ],
@@ -484,7 +489,8 @@ describe("CharacterFactory.migrate", () => {
           },
         ],
         playedDuringTurn: false,
-        version: 5,
+        version: 6,
+        wide: false,
       });
     });
 
@@ -500,7 +506,7 @@ describe("CharacterFactory.migrate", () => {
         pages: [
           {
             id: expect.anything(),
-            label: "Character",
+            label: "CHARACTER",
             rows: [
               {
                 columns: [
@@ -513,11 +519,11 @@ describe("CharacterFactory.migrate", () => {
                             id: expect.anything(),
                             type: "Text",
                             meta: {},
-                            label: "Grand Concept",
+                            label: "GRAND CONCEPT",
                             value: "Mon grand concepte",
                           },
                         ],
-                        label: "Aspects",
+                        label: "ASPECTS",
                         visibleOnCard: true,
                       },
                       {
@@ -527,11 +533,12 @@ describe("CharacterFactory.migrate", () => {
                             id: expect.anything(),
                             type: "Text",
                             meta: {},
-                            label: "Mon super pouvoir",
+                            label: "MON SUPER POUVOIR",
                             value: "Me permet de faire...",
                           },
                         ],
-                        label: "Pouvoirs",
+                        label: "POUVOIRS",
+                        visibleOnCard: undefined,
                       },
                       {
                         id: expect.anything(),
@@ -543,11 +550,12 @@ describe("CharacterFactory.migrate", () => {
                               isMainPointCounter: true,
                               max: "3",
                             },
-                            label: "Fate Points",
+                            label: "FATE POINTS",
                             value: "3",
                           },
                         ],
-                        label: "Fate Points",
+                        label: "FATE POINTS",
+                        visibleOnCard: undefined,
                       },
                       {
                         id: expect.anything(),
@@ -556,11 +564,12 @@ describe("CharacterFactory.migrate", () => {
                             id: expect.anything(),
                             type: "Text",
                             meta: {},
-                            label: "Notes",
+                            label: "NOTES",
                             value: "Some notes...",
                           },
                         ],
-                        label: "Les Notes",
+                        label: "LES NOTES",
+                        visibleOnCard: undefined,
                       },
                     ],
                   },
@@ -573,7 +582,7 @@ describe("CharacterFactory.migrate", () => {
                             id: expect.anything(),
                             type: "SlotTracker",
                             meta: {},
-                            label: "Physique",
+                            label: "PHYSIQUE",
                             value: [
                               {
                                 checked: false,
@@ -594,7 +603,8 @@ describe("CharacterFactory.migrate", () => {
                             ],
                           },
                         ],
-                        label: "Stresse",
+                        label: "STRESSE",
+                        visibleOnCard: undefined,
                       },
                       {
                         id: expect.anything(),
@@ -603,11 +613,12 @@ describe("CharacterFactory.migrate", () => {
                             id: expect.anything(),
                             type: "Text",
                             meta: {},
-                            label: "Mild",
+                            label: "MILD",
                             value: "",
                           },
                         ],
-                        label: "Conséquences",
+                        label: "CONSÉQUENCES",
+                        visibleOnCard: undefined,
                       },
                       {
                         id: expect.anything(),
@@ -618,11 +629,11 @@ describe("CharacterFactory.migrate", () => {
                             meta: {
                               commands: ["4dF"],
                             },
-                            label: "Tout",
+                            label: "TOUT",
                             value: "8",
                           },
                         ],
-                        label: "Attributs",
+                        label: "ATTRIBUTS",
                         visibleOnCard: true,
                       },
                     ],
@@ -633,7 +644,7 @@ describe("CharacterFactory.migrate", () => {
           },
         ],
         playedDuringTurn: false,
-        version: 5,
+        version: 6,
       });
     });
   });

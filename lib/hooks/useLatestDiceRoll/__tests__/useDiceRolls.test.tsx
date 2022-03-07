@@ -1,9 +1,10 @@
 /* eslint-disable react/display-name */
 import { act, renderHook } from "@testing-library/react-hooks";
+import { vi } from "vitest";
 import { Confetti } from "../../../domains/confetti/Confetti";
 import { IDiceRollResult } from "../../../domains/dice/Dice";
 import { useLatestDiceRoll } from "../useLatestDiceRoll";
-jest.mock("../../../domains/confetti/Confetti");
+vi.mock("../../../domains/confetti/Confetti");
 
 beforeEach(() => {
   // @ts-expect-error
@@ -83,7 +84,7 @@ describe("useDiceRolls", () => {
     });
     it("should change colors depending on rolls", async () => {
       // GIVEN
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       const rolls: Array<IDiceRollResult> = [];
 
       // WHEN
@@ -121,7 +122,7 @@ describe("useDiceRolls", () => {
         ],
       });
       act(() => {
-        jest.runAllTimers();
+        vi.runAllTimers();
       });
 
       // THEN
@@ -179,7 +180,7 @@ describe("useDiceRolls", () => {
         ],
       });
       act(() => {
-        jest.runAllTimers();
+        vi.runAllTimers();
       });
 
       // THEN
@@ -257,7 +258,7 @@ describe("useDiceRolls", () => {
         ],
       });
       act(() => {
-        jest.runAllTimers();
+        vi.runAllTimers();
       });
 
       // THEN
@@ -349,7 +350,7 @@ describe("useDiceRolls", () => {
         ],
       });
       act(() => {
-        jest.runAllTimers();
+        vi.runAllTimers();
       });
 
       // THEN
@@ -462,7 +463,7 @@ describe("useDiceRolls", () => {
         ],
       });
       act(() => {
-        jest.runAllTimers();
+        vi.runAllTimers();
       });
 
       // THEN
@@ -474,7 +475,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.color).toEqual("rgb(168, 37, 37)");
     });
     it("should handle labels on load and after and going back to without labels", async () => {
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       // GIVEN
       const rolls: Array<IDiceRollResult> = [];
 
@@ -517,7 +518,7 @@ describe("useDiceRolls", () => {
         ],
       });
       act(() => {
-        jest.runAllTimers();
+        vi.runAllTimers();
       });
 
       // THEN
@@ -575,7 +576,7 @@ describe("useDiceRolls", () => {
         ],
       });
       act(() => {
-        jest.runAllTimers();
+        vi.runAllTimers();
       });
 
       // THEN
@@ -650,7 +651,7 @@ describe("useDiceRolls", () => {
         ],
       });
       act(() => {
-        jest.runAllTimers();
+        vi.runAllTimers();
       });
 
       // THEN

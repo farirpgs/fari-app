@@ -9,16 +9,16 @@ import { InjectionsContext } from "../../../../contexts/InjectionsContext/Inject
 import { useMarkdownFile } from "../useMarkdownFile";
 import { useMarkdownPage } from "../useMarkdownPage";
 
-jest.mock("../../../../constants/env.ts");
-jest.mock("axios");
-jest.mock("@sentry/react");
-jest.mock("@sentry/browser");
+vi.mock("../../../../constants/env.ts");
+vi.mock("axios");
+vi.mock("@sentry/react");
+vi.mock("@sentry/browser");
 
 const fakeLogger = {
-  debug: jest.fn(),
-  info: jest.fn(),
-  warn: jest.fn(),
-  error: jest.fn(),
+  debug: vi.fn(),
+  info: vi.fn(),
+  warn: vi.fn(),
+  error: vi.fn(),
 };
 
 beforeEach(() => {

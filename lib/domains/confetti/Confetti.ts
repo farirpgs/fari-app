@@ -80,6 +80,9 @@ function fire(
     decay?: number;
   }
 ) {
+  if (process.env.VITEST) {
+    return;
+  }
   /**
    * https://www.kirilv.com/canvas-confetti/
    */
