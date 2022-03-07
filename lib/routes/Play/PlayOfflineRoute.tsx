@@ -6,7 +6,10 @@ import { CharactersContext } from "../../contexts/CharactersContext/CharactersCo
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { useScene } from "../../hooks/useScene/useScene";
-import { useSession } from "../../hooks/useScene/useSession";
+import {
+  useSession,
+  useSessionCharacters,
+} from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 export const PlayOfflineRoute: React.FC<{
@@ -19,6 +22,9 @@ export const PlayOfflineRoute: React.FC<{
 
   const sceneManager = useScene();
   const sessionManager = useSession({
+    userId: settingsManager.state.userId,
+  });
+  const sessionCharactersManager = useSessionCharacters({
     userId: settingsManager.state.userId,
     charactersManager: charactersManager,
   });
@@ -42,6 +48,7 @@ export const PlayOfflineRoute: React.FC<{
       <Session
         userId={settingsManager.state.userId}
         sessionManager={sessionManager}
+        sessionCharactersManager={sessionCharactersManager}
         sceneManager={sceneManager}
       />
     </>

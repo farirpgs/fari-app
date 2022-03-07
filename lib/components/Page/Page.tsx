@@ -17,8 +17,6 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import LocalCafeIcon from "@mui/icons-material/LocalCafe";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import MenuIcon from "@mui/icons-material/Menu";
-import SignalWifi0BarIcon from "@mui/icons-material/SignalWifi0Bar";
-import SignalWifi4BarLockIcon from "@mui/icons-material/SignalWifi4BarLock";
 import StorageIcon from "@mui/icons-material/Storage";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import TranslateIcon from "@mui/icons-material/Translate";
@@ -78,8 +76,7 @@ export enum LiveMode {
 export const Page: React.FC<{
   notFound?: JSX.Element;
   gameId?: string;
-  live?: LiveMode;
-  liveLabel?: string;
+  isLive?: boolean;
   drawerWidth?: string;
   maxWidth?: string;
   marginTop?: string;
@@ -101,7 +98,7 @@ export const Page: React.FC<{
   const logger = useLogger();
   const zIndex = useZIndex();
 
-  const isLive = props.live !== undefined;
+  const isLive = props.isLive;
   const highlight = useHighlight();
 
   useEffect(() => {
@@ -388,27 +385,7 @@ export const Page: React.FC<{
                   src={Images.app}
                 />
               </RouterLink>
-              {isLive && (
-                <Box>
-                  <Grid container alignItems="center" spacing={3} wrap="nowrap">
-                    <Grid item>
-                      {props.live === LiveMode.Connecting && (
-                        <SignalWifi0BarIcon />
-                      )}
-                      {props.live === LiveMode.Live && (
-                        <SignalWifi4BarLockIcon />
-                      )}
-                    </Grid>
-                    <Grid item>
-                      <Box maxWidth="150px">
-                        <Typography variant="subtitle1" noWrap>
-                          {/*  */}
-                        </Typography>
-                      </Box>
-                    </Grid>
-                  </Grid>
-                </Box>
-              )}
+
               <Hidden mdDown>{renderMenu(false)}</Hidden>
               <Hidden mdUp>
                 {!isLive && (

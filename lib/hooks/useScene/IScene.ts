@@ -8,7 +8,6 @@ import { AspectType } from "./AspectType";
 export type IPlayer = {
   id: string;
   playerName?: string;
-  character?: ICharacter;
   rolls: Array<IDiceRollResult>;
   playedDuringTurn: boolean;
   isGM: boolean;
@@ -130,4 +129,8 @@ export type ISession = {
   badConfetti: number;
   tlDrawDoc: TDDocument | undefined;
   paused: boolean;
+};
+
+export type ISessionCharacters = {
+  characters: Record<string, ICharacter>;
 };

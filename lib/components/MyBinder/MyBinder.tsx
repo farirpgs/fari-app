@@ -877,13 +877,16 @@ function Element(props: {
         }
         secondary={
           <>
-            <Box>
+            <Box component="span">
               {translatedType && <>{translatedType} - </>}
               <span className={css({ color: theme.palette.text.secondary })}>
                 {listItem.formatDate(props.element.lastUpdated)}
               </span>
             </Box>
-            <Box sx={{ mt: ".5rem", display: { xs: "block", md: "none" } }}>
+            <Box
+              component="span"
+              sx={{ mt: ".5rem", display: { xs: "block", md: "none" } }}
+            >
               {secondaryActions}
             </Box>
           </>

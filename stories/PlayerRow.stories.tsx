@@ -18,6 +18,7 @@ function StorybookPlayerRow(props: {
   canRemove: boolean;
   canMarkPrivate: boolean;
   player: IPlayer;
+  characterSheet: ICharacter;
   highlight: boolean;
 }) {
   return (
@@ -32,6 +33,7 @@ function StorybookPlayerRow(props: {
       }}
       player={props.player}
       isMe={props.highlight}
+      characterSheet={props.characterSheet}
       onDiceRoll={action("onDiceRoll")}
       onPlayedInTurnOrderChange={action("onPlayedInTurnOrderChange")}
       onPointsChange={action("onPointsChange")}
@@ -73,6 +75,7 @@ const Template: Story<IProps> = (args, context) => (
         canRemove={args.canRemove}
         canMarkPrivate={args.canMarkPrivate}
         player={args.player}
+        characterSheet={args.characterSheet}
         highlight={args.highlight}
       />
     </Box>
@@ -126,9 +129,8 @@ PlayerWithACharacterSheet.args = {
   canRoll: true,
   canUpdateInitiative: true,
   canUpdatePoints: true,
-  player: aPlayer({
-    character: aCharacter("Meriadoc Brandybuck"),
-  }),
+  player: aPlayer({}),
+  characterSheet: aCharacter("Meriadoc Brandybuck"),
 };
 
 export const PlayerWithARoll = Template.bind({});
@@ -141,9 +143,9 @@ PlayerWithARoll.args = {
   canUpdateInitiative: true,
   canUpdatePoints: true,
   player: aPlayer({
-    character: aCharacter("Meriadoc Brandybuck"),
     rolls: [aRoll()],
   }),
+  characterSheet: aCharacter("Meriadoc Brandybuck"),
 };
 
 export const PlayerWithARollAndLabel = Template.bind({});
@@ -156,9 +158,9 @@ PlayerWithARollAndLabel.args = {
   canUpdateInitiative: true,
   canUpdatePoints: true,
   player: aPlayer({
-    character: aCharacter("Meriadoc Brandybuck"),
     rolls: [aRollWithLabel()],
   }),
+  characterSheet: aCharacter("Meriadoc Brandybuck"),
 };
 
 export const PlayerWithARollAndModifier = Template.bind({});
@@ -171,9 +173,9 @@ PlayerWithARollAndModifier.args = {
   canUpdateInitiative: true,
   canUpdatePoints: true,
   player: aPlayer({
-    character: aCharacter("Meriadoc Brandybuck"),
     rolls: [aRollWithModifier()],
   }),
+  characterSheet: aCharacter("Meriadoc Brandybuck"),
 };
 
 export const PlayerWithAPoolRoll = Template.bind({});
@@ -186,9 +188,9 @@ PlayerWithAPoolRoll.args = {
   canUpdateInitiative: true,
   canUpdatePoints: true,
   player: aPlayer({
-    character: aCharacter("Meriadoc Brandybuck"),
     rolls: [aPoolRoll()],
   }),
+  characterSheet: aCharacter("Meriadoc Brandybuck"),
 };
 
 export const PlayerReadOnly = Template.bind({});
@@ -211,9 +213,8 @@ PlayerReadOnlyWithCharacter.args = {
   canRoll: false,
   canUpdateInitiative: false,
   canUpdatePoints: false,
-  player: aPlayer({
-    character: aCharacter("Meriadoc Brandybuck"),
-  }),
+  player: aPlayer({}),
+  characterSheet: aCharacter("Meriadoc Brandybuck"),
 };
 
 export const PlayerOutOfBound = Template.bind({});
@@ -255,13 +256,14 @@ PlayerOutOfBoundWithCharacter.args = {
   canRoll: true,
   canUpdateInitiative: true,
   canUpdatePoints: true,
+  characterSheet: aCharacter(
+    "CharacterNameCharacterNameCharacterNameCharacterNameCharacterNameCharacterName"
+  ),
   player: aPlayer({
     playerName:
       "LongNameLongNameLongNameLongNameLongNameLongNameLongNameLongNameLongNameLongName",
     points: "3333333",
-    character: aCharacter(
-      "CharacterNameCharacterNameCharacterNameCharacterNameCharacterNameCharacterName"
-    ),
+
     rolls: [
       {
         total: 3,

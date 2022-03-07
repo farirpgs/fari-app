@@ -12,7 +12,6 @@ describe("useSession", () => {
   it("constructor", () => {
     // GIVEN
     const userId = "111";
-    const useCharactersMock = mockUseCharacters();
 
     const expectDefaultSession: ISession = {
       gm: {
@@ -33,10 +32,8 @@ describe("useSession", () => {
     };
     // WHEN
     const { result } = renderHook(() => {
-      const charactersManager = useCharactersMock();
       return useSession({
         userId,
-        charactersManager,
       });
     });
     // THEN
@@ -47,14 +44,11 @@ describe("useSession", () => {
     it("should map connections to players", () => {
       // GIVEN
       const userId = "111";
-      const useCharactersMock = mockUseCharacters();
 
       // WHEN initial render
       const { result } = renderHook(() => {
-        const charactersManager = useCharactersMock();
         return useSession({
           userId,
-          charactersManager,
         });
       });
       // WHEN initial connection with a player
@@ -72,157 +66,17 @@ describe("useSession", () => {
         playerName: "Character #1",
         rolls: [],
       });
-      return;
-      // WHEN player plays (fp, rolls, initiative)
-      act(() => {
-        result.current.actions.updatePlayerPlayedDuringTurn("1", true);
-        result.current.actions.updatePlayerRoll("1", {
-          rollGroups: [
-            {
-              commandSets: [
-                {
-                  id: "4dF",
-                  commands: [
-                    { value: 1, name: "1dF" },
-                    { value: 1, name: "1dF" },
-                    { value: 1, name: "1dF" },
-                    { value: 1, name: "1dF" },
-                  ],
-                },
-              ],
-            },
-          ],
-
-          total: 4,
-          totalWithoutModifiers: 4,
-          options: { listResults: false },
-        });
-        result.current.actions.updatePlayerCharacterMainPointCounter(
-          "1",
-          "1",
-          "3"
-        );
-      });
-      // THEN connection mappings reflects that
-      expect(result.current.state.session.gm.npcs[0]).toEqual({
-        character: undefined,
-        id: "1",
-        playedDuringTurn: true,
-        isGM: false,
-        private: false,
-        points: "1",
-        offline: false,
-        playerName: "RP",
-        rolls: [
-          {
-            rollGroups: [
-              {
-                commandSets: [
-                  {
-                    id: "4dF",
-                    commands: [
-                      { value: 1, name: "1dF" },
-                      { value: 1, name: "1dF" },
-                      { value: 1, name: "1dF" },
-                      { value: 1, name: "1dF" },
-                    ],
-                  },
-                ],
-              },
-            ],
-            options: {
-              listResults: false,
-            },
-            total: 4,
-            totalWithoutModifiers: 4,
-          },
-        ],
-      });
-      act(() => {
-        // WHEN reseting initiative
-        result.current.actions.resetInitiative();
-      });
-      // THEN initiative is reset
-      expect(result.current.state.session.gm.npcs[0]).toEqual({
-        character: undefined,
-        id: "1",
-        playedDuringTurn: false,
-        isGM: false,
-        private: false,
-        points: "1",
-        offline: false,
-        playerName: "RP",
-        rolls: [
-          {
-            rollGroups: [
-              {
-                commandSets: [
-                  {
-                    id: "4dF",
-                    commands: [
-                      { value: 1, name: "1dF" },
-                      { value: 1, name: "1dF" },
-                      { value: 1, name: "1dF" },
-                      { value: 1, name: "1dF" },
-                    ],
-                  },
-                ],
-              },
-            ],
-            options: {
-              listResults: false,
-            },
-            total: 4,
-            totalWithoutModifiers: 4,
-          },
-        ],
-      });
-      act(() => {
-        // WHEN player adds character sheet
-        result.current.actions.updatePlayerCharacter("1", {
-          myCharacter: "my first character",
-        } as unknown as any);
-      });
-      // THEN player as character
-      expect(result.current.state.session.gm.npcs[0].character).toEqual({
-        myCharacter: "my first character",
-      });
-      act(() => {
-        // WHEN player reloads character sheet
-        result.current.actions.updatePlayerCharacter("1", {
-          myCharacter: "my second character",
-        } as unknown as any);
-      });
-      // THEN player as character
-      expect(result.current.state.session.gm.npcs[0].character).toEqual({
-        myCharacter: "my second character",
-      });
-
-      act(() => {
-        // WHEN player reloads character sheet
-        result.current.actions.updatePlayerCharacter("1", {
-          myCharacter: "my second character",
-        } as unknown as any);
-      });
-      // THEN player as character
-      expect(result.current.state.session.gm.npcs[0].character).toEqual({
-        myCharacter: "my second character",
-      });
     });
   });
 
   describe("confetti", () => {
     // GIVEN
     const userId = "111";
-    const useCharactersMock = mockUseCharacters();
 
     // WHEN initial render
     const { result } = renderHook(() => {
-      const charactersManager = useCharactersMock();
       return useSession({
         userId,
-
-        charactersManager,
       });
     });
     expect(result.current.state.session.goodConfetti).toEqual(0);
@@ -255,7 +109,6 @@ describe("useSession", () => {
       return {
         useSession: useSession({
           userId,
-          charactersManager,
         }),
         useCharacters: charactersManager,
       };
@@ -280,21 +133,15 @@ describe("useSession", () => {
       gm: { npcs: [] },
       players: [{ character: {} }, { character: {} }],
     });
-    expect(
-      result.current.useCharacters.actions.updateIfMoreRecent
-    ).toHaveBeenCalledTimes(2);
   });
 
   describe("offline character", () => {
     const userId = "111";
-    const useCharactersMock = mockUseCharacters();
 
     // WHEN initial render
     const { result } = renderHook(() => {
-      const charactersManager = useCharactersMock();
       return useSession({
         userId,
-        charactersManager,
       });
     });
     // WHEN adding an offline character
@@ -334,7 +181,7 @@ function mockUseCharacters() {
     actions: {
       add: jest.fn(),
       upsert: jest.fn(),
-      updateIfMoreRecent: jest.fn(),
+      updateIfStoredAndMoreRecent: jest.fn(),
       addIfDoesntExist: jest.fn(),
       remove: jest.fn(),
       duplicate: jest.fn(),

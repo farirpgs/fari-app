@@ -89,7 +89,15 @@ export function Toolbox(props: {
               </Grid>
             </Grid>
             {/* CENTER */}
-            <Grid item>
+            <Grid
+              item
+              sx={{
+                display: {
+                  xs: "none",
+                  md: "flex",
+                },
+              }}
+            >
               <Grid
                 container
                 alignItems="center"
@@ -101,7 +109,15 @@ export function Toolbox(props: {
             </Grid>
             {/* RIGHT */}
             {!props.hideDefaultRightActions && (
-              <Grid item>
+              <Grid
+                item
+                sx={{
+                  display: {
+                    xs: "none",
+                    md: "flex",
+                  },
+                }}
+              >
                 <Grid
                   container
                   alignItems="center"

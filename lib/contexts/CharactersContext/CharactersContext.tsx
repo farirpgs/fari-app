@@ -43,7 +43,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
     });
   }
 
-  function updateIfMoreRecent(character: ICharacter | undefined) {
+  function updateIfStoredAndMoreRecent(character: ICharacter | undefined) {
     if (!character) {
       return;
     }
@@ -75,7 +75,7 @@ export function useCharacters(props?: { localStorage: Storage }) {
       ...entityManager.actions,
       add,
       addIfDoesntExist,
-      updateIfMoreRecent,
+      updateIfStoredAndMoreRecent: updateIfStoredAndMoreRecent,
     },
     selectors: {
       isInStorage,

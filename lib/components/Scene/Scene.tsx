@@ -65,16 +65,14 @@ import {
   IScene,
 } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
-import { useSession } from "../../hooks/useScene/useSession";
+import {
+  useSession,
+  useSessionCharacters,
+} from "../../hooks/useScene/useSession";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
-import {
-  TlDrawErrorBoundary,
-  TldrawReader,
-  TldrawWriter,
-} from "../../routes/Draw/TldrawWriterAndReader";
 import {
   IPlayerInteraction,
   PlayerInteractionFactory,
@@ -85,7 +83,7 @@ import {
 } from "../ContentEditable/ContentEditable";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
-import { LiveMode, Page } from "../Page/Page";
+import { Page } from "../Page/Page";
 import { SplitButton } from "../SplitButton/SplitButton";
 import { Toolbox } from "../Toolbox/Toolbox";
 import { WindowPortal } from "../WindowPortal/WindowPortal";
@@ -110,6 +108,7 @@ const paperStyle = css({ borderRadius: "0px", flex: "1 0 auto" });
 
 type IProps = {
   sessionManager: ReturnType<typeof useSession>;
+  sessionCharactersManager: ReturnType<typeof useSessionCharacters>;
   sceneManager: ReturnType<typeof useScene>;
   userId: string;
   isLoading?: boolean;
@@ -120,7 +119,7 @@ type IProps = {
 };
 
 export const Session: React.FC<IProps> = (props) => {
-  const { sessionManager, sceneManager } = props;
+  const { sessionManager, sceneManager, sessionCharactersManager } = props;
 
   const charactersManager = useContext(CharactersContext);
   const myBinderManager = useContext(MyBinderContext);
@@ -204,7 +203,7 @@ export const Session: React.FC<IProps> = (props) => {
     character: ICharacter
   ) => {
     if (isGM) {
-      sessionManager.actions.loadPlayerCharacter(playerId, character);
+      sessionCharactersManager.actions.loadPlayerCharacter(playerId, character);
     } else {
       props.onPlayerInteraction?.(
         PlayerInteractionFactory.updatePlayerCharacter(playerId, character)
@@ -217,7 +216,10 @@ export const Session: React.FC<IProps> = (props) => {
     updatedCharacter: ICharacter
   ) {
     if (isGM) {
-      sessionManager.actions.updatePlayerCharacter(playerId, updatedCharacter);
+      sessionCharactersManager.actions.updatePlayerCharacter(
+        playerId,
+        updatedCharacter
+      );
     } else {
       props.onPlayerInteraction?.(
         PlayerInteractionFactory.updatePlayerCharacter(
@@ -259,12 +261,7 @@ export const Session: React.FC<IProps> = (props) => {
     }
   };
   return (
-    <Page
-      pb="6rem"
-      gameId={props.idFromParams}
-      live={LiveMode.Live}
-      liveLabel={sceneManager.state.scene?.name ?? ""}
-    >
+    <Page pb="6rem" isLive gameId={props.idFromParams}>
       <Box px="1rem">
         <Prompt when={true} message={t("manager.leave-without-saving")} />
 
@@ -616,6 +613,12 @@ export const Session: React.FC<IProps> = (props) => {
     );
   }
 
+  function getCharacterSheet(playerId: string) {
+    const playerCharacter =
+      sessionCharactersManager.state.sessionCharacters.characters[playerId];
+    return playerCharacter;
+  }
+
   function renderPlayerCharacterDialog(options: {
     player: IPlayer;
     canControl: boolean;
@@ -625,15 +628,16 @@ export const Session: React.FC<IProps> = (props) => {
       return null;
     }
 
+    const characterSheet = getCharacterSheet(player.id);
     const isCharacterInStorage = charactersManager.selectors.isInStorage(
-      player.character?.id
+      characterSheet?.id
     );
 
     return (
       <CharacterV3Dialog
         readonly={!canControl}
         open={characterDialogPlayerId === player.id}
-        character={player.character}
+        character={characterSheet}
         dialog={true}
         onSave={(updatedCharacter) => {
           handleUpdateCharacter(player.id, updatedCharacter);
@@ -643,7 +647,7 @@ export const Session: React.FC<IProps> = (props) => {
         }}
         synced={isCharacterInStorage}
         onToggleSync={() => {
-          handleOnToggleCharacterSync(player.character);
+          handleOnToggleCharacterSync(characterSheet);
         }}
         onRoll={(newDiceRollResult) => {
           handleSetPlayerRoll(player.id, newDiceRollResult);
@@ -668,6 +672,7 @@ export const Session: React.FC<IProps> = (props) => {
       dataCyIndex: playerRowDataCyIndex,
       children: playerRowChildren,
     } = options;
+    const characterSheet = getCharacterSheet(player.id);
 
     return (
       <PlayerRow
@@ -683,14 +688,16 @@ export const Session: React.FC<IProps> = (props) => {
         key={player.id}
         isMe={isMe}
         player={player}
+        characterSheet={characterSheet}
         onPlayerRemove={() => {
           sessionManager.actions.removePlayer(player.id);
+          sessionCharactersManager.actions.removeCharacterSheet(player.id);
         }}
         onTogglePrivate={() => {
           sessionManager.actions.togglePlayerVisibility(player.id);
         }}
         onCharacterSheetOpen={() => {
-          if (player.character) {
+          if (characterSheet) {
             setCharacterDialogPlayerId(player.id);
           }
         }}
@@ -725,7 +732,7 @@ export const Session: React.FC<IProps> = (props) => {
         }}
         onPointsChange={(points, maxPoints) => {
           if (isGM) {
-            sessionManager.actions.updatePlayerCharacterMainPointCounter(
+            sessionCharactersManager.actions.updatePlayerCharacterMainPointCounter(
               player.id,
               points,
               maxPoints
@@ -747,7 +754,18 @@ export const Session: React.FC<IProps> = (props) => {
   }
 
   function renderCharacterCards() {
-    const { playersWithCharacterSheets } = sessionManager.computed;
+    const everyone = sessionManager.computed.everyone;
+    const characters =
+      sessionCharactersManager.state.sessionCharacters.characters;
+    const players = Object.keys(characters).map((characterId) => {
+      const playerMatch = everyone.find(
+        (player) => player.id === characterId
+      ) as IPlayer;
+      return {
+        ...playerMatch,
+        characterSheet: characters[characterId],
+      };
+    });
 
     return (
       <>
@@ -761,7 +779,7 @@ export const Session: React.FC<IProps> = (props) => {
           >
             {showEmptyWarnings()}
 
-            {playersWithCharacterSheets.map((player, index) => {
+            {players.map((player, index) => {
               const isMe = props.userId === player.id;
               const canControl = isGM || isMe;
               return (
@@ -777,7 +795,7 @@ export const Session: React.FC<IProps> = (props) => {
                     key={player?.id || index}
                     readonly={!canControl}
                     playerName={player.playerName}
-                    characterSheet={player.character}
+                    characterSheet={player.characterSheet}
                     onCharacterDialogOpen={() => {
                       setCharacterDialogPlayerId(player.id);
                     }}
@@ -791,74 +809,41 @@ export const Session: React.FC<IProps> = (props) => {
                 </Box>
               );
             })}
-            {sessionManager.state.session.gm.npcs.map((npc, index) => {
-              const canControl = isGM;
-              if (npc.private) {
-                return null;
-              }
-              return (
-                <Box
-                  key={npc?.id || index}
-                  className={css({
-                    width: characterCardWidth,
-                    display: "inline-block",
-                    marginBottom: "1rem",
-                  })}
-                >
-                  <CharacterCard
-                    key={npc?.id || index}
-                    readonly={!canControl}
-                    playerName={npc.playerName}
-                    characterSheet={npc.character}
-                    onCharacterDialogOpen={() => {
-                      setCharacterDialogPlayerId(npc.id);
-                    }}
-                    onChange={(updatedCharacter) => {
-                      handleUpdateCharacter(npc.id, updatedCharacter);
-                    }}
-                    onRoll={(newDiceRollResult) => {
-                      handleSetPlayerRoll(npc.id, newDiceRollResult);
-                    }}
-                  />
-                </Box>
-              );
-            })}
           </Box>
         </Box>
       </>
     );
   }
 
-  function renderZones() {
-    // const tokenTitles = Object.values(sessionManager.state.session.players).map(
-    //   (p) => (p.character?.name ?? p.playerName) as string
-    // );
+  // function renderZones() {
+  //   // const tokenTitles = Object.values(sessionManager.state.session.players).map(
+  //   //   (p) => (p.character?.name ?? p.playerName) as string
+  //   // );
 
-    return (
-      <TlDrawErrorBoundary>
-        <Box border={`1px solid ${theme.palette.divider}`} margin="0 auto">
-          {isGM ? (
-            <TldrawWriter
-              initialDoc={sessionManager.state.session.tlDrawDoc}
-              onChange={(state) => {
-                sessionManager.actions.updateDrawAreaObjects(state);
-              }}
-            />
-          ) : (
-            <TldrawReader doc={sessionManager.state.session.tlDrawDoc} />
-          )}
-        </Box>
-      </TlDrawErrorBoundary>
-    );
-  }
+  //   return (
+  //     <TlDrawErrorBoundary>
+  //       <Box border={`1px solid ${theme.palette.divider}`} margin="0 auto">
+  //         {/* {isGM ? (
+  //           <TldrawWriter
+  //             initialDoc={sessionManager.state.session.tlDrawDoc}
+  //             onChange={(state) => {
+  //               sessionManager.actions.updateDrawAreaObjects(state);
+  //             }}
+  //           />
+  //         ) : (
+  //           <TldrawReader doc={sessionManager.state.session.tlDrawDoc} />
+  //         )} */}
+  //       </Box>
+  //     </TlDrawErrorBoundary>
+  //   );
+  // }
 
   function showEmptyWarnings() {
-    const { playersWithCharacterSheets, npcsWithCharacterSheets } =
-      sessionManager.computed;
-    const numberOfSheets =
-      playersWithCharacterSheets.length + npcsWithCharacterSheets.length;
+    const numberOfSheets = Object.keys(
+      sessionCharactersManager.state.sessionCharacters.characters
+    ).length;
     const showNoPlayersWarning =
-      sessionManager.computed.playersAndNpcsCount === 0;
+      sessionManager.computed.playersAndNPCs.length === 0;
     const showNoSheetsWarning = numberOfSheets === 0;
 
     if (showNoPlayersWarning) {

@@ -6,7 +6,9 @@ import {
   useRoom,
   useStorage,
 } from "@liveblocks/react";
-import React, { useContext, useEffect, useMemo } from "react";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -15,12 +17,23 @@ import { CharactersContext } from "../../contexts/CharactersContext/CharactersCo
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { useScene } from "../../hooks/useScene/useScene";
-import { useSession } from "../../hooks/useScene/useSession";
+import {
+  useSession,
+  useSessionCharacters,
+} from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import {
   IPlayerInteraction,
   PlayerInteractionFactory,
 } from "./types/IPlayerInteraction";
+
+type ConnectionState =
+  | "closed"
+  | "authenticating"
+  | "unavailable"
+  | "failed"
+  | "open"
+  | "connecting";
 
 export function useLiveObject<T>(props: {
   key: string;
@@ -74,6 +87,7 @@ export const PlayRoute: React.FC<{
 }> = (props) => {
   const logger = useLogger();
   const { t } = useTranslate();
+  const room = useRoom();
   const settingsManager = useContext(SettingsContext);
   const charactersManager = useContext(CharactersContext);
   const location = useLocation();
@@ -85,9 +99,15 @@ export const PlayRoute: React.FC<{
   const userId = settingsManager.state.userId;
   const sessionId = isPlayer ? idFromParams : userId;
   const shareLink = `${window.location.origin}/play/join/${sessionId}`;
+  const [connectionState, setConnectionState] = useState<ConnectionState>();
+  const [connectionStateSnackBarOpen, setConnectionStateSnackBarOpen] =
+    useState(false);
 
   const sceneManager = useScene();
   const sessionManager = useSession({
+    userId: userId,
+  });
+  const sessionCharactersManager = useSessionCharacters({
     userId: userId,
     charactersManager: charactersManager,
   });
@@ -126,7 +146,7 @@ export const PlayRoute: React.FC<{
       sessionManager.actions.addPlayer(event.payload.player);
     }
     if (event.type === "update-player-points") {
-      sessionManager.actions.updatePlayerCharacterMainPointCounter(
+      sessionCharactersManager.actions.updatePlayerCharacterMainPointCounter(
         event.payload.id,
         event.payload.points,
         event.payload.maxPoints
@@ -139,7 +159,7 @@ export const PlayRoute: React.FC<{
       );
     }
     if (event.type === "update-player-character") {
-      sessionManager.actions.updatePlayerCharacter(
+      sessionCharactersManager.actions.updatePlayerCharacter(
         event.payload.id,
         event.payload.character
       );
@@ -171,6 +191,24 @@ export const PlayRoute: React.FC<{
     }
   }, [playerName]);
 
+  useEffect(() => {
+    const unsubscribe = room.subscribe("connection", (status) => {
+      setConnectionState(status);
+    });
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    setConnectionStateSnackBarOpen(true);
+    const timeout = setTimeout(() => {
+      setConnectionStateSnackBarOpen(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [connectionState]);
+
   const sceneName = sceneManager.state.scene?.name ?? "";
   const pageTitle = useMemo(() => {
     return previewContentEditable({ value: sceneName });
@@ -195,8 +233,19 @@ export const PlayRoute: React.FC<{
         description={t("home-route.play-online.description")}
       />
       <>
+        <Snackbar
+          open={connectionStateSnackBarOpen && !!connectionState}
+          autoHideDuration={5000}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+        >
+          <Alert severity="info">Connection: {connectionState}</Alert>
+        </Snackbar>
         <Session
           sessionManager={sessionManager}
+          sessionCharactersManager={sessionCharactersManager}
           sceneManager={sceneManager}
           isLoading={false}
           idFromParams={idFromParams}

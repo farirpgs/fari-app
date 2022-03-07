@@ -18,6 +18,7 @@ import React, { useState } from "react";
 import { FontFamily } from "../../../../constants/FontFamily";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
+import { ICharacter } from "../../../../domains/character/types";
 import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
 import { Font } from "../../../../domains/font/Font";
 import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
@@ -48,6 +49,8 @@ export function PlayerRow(
       canMarkPrivate: boolean;
     };
     player: IPlayer;
+    characterSheet: ICharacter | undefined;
+    connectionState?: string;
     isMe: boolean;
     children?: JSX.Element;
     onDiceRoll(): void;
@@ -65,7 +68,7 @@ export function PlayerRow(
   const logger = useLogger();
   const [hover, setHover] = useState(false);
   const mainPointerBlock = CharacterSelector.getCharacterMainPointerBlock(
-    props.player.character
+    props.characterSheet
   );
   const pointFromProps = mainPointerBlock?.value ?? props.player.points;
   const maxPointsFromProps = mainPointerBlock?.meta.max ?? undefined;
@@ -90,7 +93,7 @@ export function PlayerRow(
     ? theme.palette.primary.main
     : theme.palette.text.secondary;
 
-  const hasCharacterSheet = !!props.player.character;
+  const hasCharacterSheet = !!props.characterSheet;
 
   const borderColor = hasCharacterSheet
     ? theme.palette.primary.main
@@ -449,7 +452,7 @@ export function PlayerRow(
           color: theme.palette.primary.main,
         })}
       >
-        {name ?? "..."}
+        {name ?? "Untitled"}
       </FateLabel>
     );
   }
@@ -489,7 +492,7 @@ export function PlayerRow(
                   {hasCharacterSheet ? (
                     <>
                       <Grid item xs={12} zeroMinWidth>
-                        {renderMainName(props.player.character?.name)}
+                        {renderMainName(props.characterSheet?.name)}
                       </Grid>
                       <Grid item xs={12} zeroMinWidth>
                         {renderSecondaryName(props.player.playerName)}
@@ -552,7 +555,6 @@ export function PlayerRow(
       </>
     );
   }
-
   function renderPlayerId() {
     return (
       <Typography

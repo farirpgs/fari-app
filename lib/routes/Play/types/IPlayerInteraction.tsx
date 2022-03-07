@@ -61,7 +61,6 @@ export const PlayerInteractionFactory = {
     const newPlayer: IPlayer = {
       id: id,
       playerName: name ?? "",
-      character: undefined,
       rolls: [],
       isGM: false,
       points: "3",
