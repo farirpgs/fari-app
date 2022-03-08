@@ -149,7 +149,7 @@ export function WikiItems() {
             title={t("docs.fari-wiki.title")}
             description={t("docs.fari-wiki.description")}
             bgColor="#0c2b69"
-            imageUrl={Images.logo}
+            imageUrl={Images.logoWhite}
             link="/fari-wiki"
           />
         </Grid>
@@ -219,7 +219,12 @@ export const DocCard: React.FC<{
         },
       })}
     >
-      <AppLink to={props.link}>
+      <AppLink
+        to={props.link}
+        sx={{
+          height: "100%",
+        }}
+      >
         <Card
           raised
           className={css({

@@ -95,52 +95,7 @@ export const HomeRoute: React.FC<{}> = () => {
           <Box
             className={css({ maxWidth: FariToolbarMaxWidth, margin: "0 auto" })}
           >
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              spacing={3}
-            >
-              <Grid item>
-                <img alt="Fari" width="70px" src={Images.app} />
-              </Grid>
-              <Grid item>
-                <FateLabel
-                  variant="h3"
-                  align="center"
-                  color="primary"
-                  uppercase={false}
-                >
-                  {"Fari App"}
-                </FateLabel>
-              </Grid>
-            </Grid>
-
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              spacing={3}
-            >
-              <Grid item>
-                <FateLabel
-                  variant="h6"
-                  align="center"
-                  color="primary"
-                  uppercase={false}
-                >
-                  {t("home-route.header.logo-title")}
-                </FateLabel>
-              </Grid>
-            </Grid>
-            <Box>
-              <a href="https://farirpgs.com" target="_blank" rel="noreferrer">
-                <img
-                  width="10rem"
-                  src="https://i.gyazo.com/ebb95bf9a91c4ec7a8003da894b44541.png"
-                />
-              </a>
-            </Box>
+            <img alt="Fari" height="200px" src={Images.logoTextWhite} />
           </Box>
         </DarkBox>
         <DarkBox linear px="2rem">

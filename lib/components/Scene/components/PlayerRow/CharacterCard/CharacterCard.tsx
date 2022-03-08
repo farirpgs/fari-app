@@ -31,7 +31,7 @@ export const CharacterCard: React.FC<{
   const { t } = useTranslate();
   const theme = useTheme();
   const logger = useLogger();
-  const width = props.width ?? "100%";
+  const width = props.width ?? "inherit";
   const characterManager = useCharacter(props.characterSheet);
 
   const sections = characterManager.state.character?.pages

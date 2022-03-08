@@ -1,6 +1,10 @@
-import app from "../../images/fari/app.png";
 import banner from "../../images/fari/banner.png";
-import logo from "../../images/fari/logo.png";
+import logoBlack from "../../images/fari/logo-black.png";
+import logoTextWhite from "../../images/fari/logo-text-white.png";
+import logoWhite from "../../images/fari/logo-white.png";
+import logoWhiteSvg from "../../images/fari/logo-white.svg";
+import madeByFariRPGsBlack from "../../images/fari/made-by-fari-rpgs-black.png";
+import madeByFariRPGsWhite from "../../images/fari/made-by-fari-rpgs-white.png";
 import accelerated from "../../images/srds/accelerated.jpg";
 import adversaryToolkit from "../../images/srds/adversary-toolkit.jpg";
 import seelieSquireAvatar from "../../images/srds/authors/seelie-squire-avatar.png";
@@ -15,8 +19,12 @@ import seelieSquire from "../../images/srds/seelie-squire.png";
 import systemToolkit from "../../images/srds/system-toolkit.jpg";
 
 export const Images = {
-  app: app as string,
-  logo: logo as string,
+  logoWhite: logoWhite as string,
+  logoBlack: logoBlack as string,
+  logoWhiteSvg: logoWhiteSvg as string,
+  logoTextWhite: logoTextWhite as string,
+  madeByFariRPGsBlack: madeByFariRPGsBlack as string,
+  madeByFariRPGsWhite: madeByFariRPGsWhite as string,
   banner: banner as string,
   systemToolkit: systemToolkit as string,
   adversaryToolkit: adversaryToolkit as string,

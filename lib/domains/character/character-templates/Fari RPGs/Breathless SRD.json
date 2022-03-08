@@ -1,8 +1,8 @@
 {
   "fariType": "character",
-  "id": "9c081995-39e2-4143-a275-c7ad0f36344c",
-  "lastUpdated": 1644678054,
-  "name": "",
+  "id": "23c45006-7a00-4adc-ad6e-a6bd595bee79",
+  "lastUpdated": 1646768145,
+  "name": "breathless",
   "pages": [
     {
       "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
@@ -17,15 +17,15 @@
                   "label": "INFORMATION",
                   "blocks": [
                     {
-                      "id": "544e9e31-9713-47d0-a75f-958272a47acd",
-                      "label": "NAME",
+                      "id": "985ac74c-638c-429b-9398-d91ddcd04d02",
+                      "label": "PRONOUNS",
                       "type": "Text",
                       "value": "",
                       "meta": {}
                     },
                     {
-                      "id": "985ac74c-638c-429b-9398-d91ddcd04d02",
-                      "label": "PRONOUNS",
+                      "id": "46cfd7df-3bab-4f82-8929-2396583a0319",
+                      "label": "JOB",
                       "type": "Text",
                       "value": "",
                       "meta": {}
@@ -66,7 +66,7 @@
                       "type": "Text",
                       "meta": {
                         "checked": false,
-                        "helperText": "Use D12 — Once per session"
+                        "helperText": "Use D12 — To Reset, “catch your breath”<br>"
                       }
                     }
                   ]
@@ -99,40 +99,41 @@
                     },
                     {
                       "id": "bf100dd1-6e7a-4e15-928f-2d3f9ce4b737",
-                      "label": "Dash",
+                      "label": "DASH",
                       "type": "Text",
                       "value": "Initial: d4\nCurrent: d4\n",
                       "meta": {}
                     },
                     {
                       "id": "a8cfdd5c-1ddc-448a-ac29-b8489d33308f",
-                      "label": "Sneak",
+                      "label": "SNEAK",
                       "type": "Text",
                       "value": "Initial: d4\nCurrent: d4\n",
                       "meta": {}
                     },
                     {
                       "id": "58e568ab-007b-4102-b5e4-657221a30bbe",
-                      "label": "Shoot",
+                      "label": "SHOOT",
                       "type": "Text",
                       "value": "Initial: d4\nCurrent: d4\n",
                       "meta": {}
                     },
                     {
                       "id": "14c92231-430e-4de1-a412-7de002dc89c9",
-                      "label": "Think",
+                      "label": "THINK",
                       "type": "Text",
                       "value": "Initial: d4\nCurrent: d4\n",
                       "meta": {}
                     },
                     {
                       "id": "a206f653-47f6-4c91-99ed-0a23da870c23",
-                      "label": "Sway",
+                      "label": "SWAY",
                       "type": "Text",
                       "value": "Initial: d4\nCurrent: d4\n",
                       "meta": {}
                     }
-                  ]
+                  ],
+                  "visibleOnCard": true
                 }
               ]
             },

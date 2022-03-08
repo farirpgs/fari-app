@@ -348,7 +348,7 @@ function GeneratorCard<T extends { label: string }>(props: {
           {isBack && (
             <Box display="flex" justifyContent="center" mb="2rem">
               <img
-                src={Images.app}
+                src={Images.logoWhite}
                 className={css({
                   width: "100px",
                 })}

@@ -254,6 +254,25 @@ export const Page: React.FC<{
           </Box>
 
           <Grid container justifyContent="center">
+            <Grid item>
+              <a
+                href="https://farirpgs.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  alt="Made By Fari RPGs"
+                  height="200px"
+                  src={
+                    theme.palette.mode === "dark"
+                      ? Images.madeByFariRPGsWhite
+                      : Images.madeByFariRPGsBlack
+                  }
+                />
+              </a>
+            </Grid>
+          </Grid>
+          <Grid container justifyContent="center">
             <Grid item xs>
               <Box mb=".5rem">
                 <Typography variant="caption" align="justify">
@@ -372,18 +391,50 @@ export const Page: React.FC<{
                 data-cy="page.menu.home"
                 className={css({
                   textDecoration: "none",
+                  display: props.hideHeaderLogo ? "none" : "inherit",
                 })}
               >
-                <img
-                  alt="Fari"
-                  className={css({
-                    height: "2.5rem",
+                <Button
+                  sx={{
+                    textTransform: "none",
                     marginRight: "1rem",
-                    cursor: "pointer",
-                    display: props.hideHeaderLogo ? "none" : "inherit",
-                  })}
-                  src={Images.app}
-                />
+                  }}
+                >
+                  <Grid container wrap="nowrap" alignItems="center">
+                    <Grid item sx={{ display: "flex" }}>
+                      <img
+                        alt="Fari"
+                        className={css({
+                          height: "3.5rem",
+                          cursor: "pointer",
+                        })}
+                        src={Images.logoWhiteSvg}
+                      />
+                    </Grid>
+                    <Grid item sx={{ display: "flex" }}>
+                      <Typography
+                        noWrap
+                        className={css({
+                          color: "#fff",
+                          whiteSpace: "nowrap",
+                          fontSize: "1.1rem",
+                          fontWeight: theme.typography.fontWeightBold,
+                        })}
+                      >
+                        Fari{" "}
+                        <Typography
+                          component="span"
+                          className={css({
+                            fontSize: "1.1rem",
+                            fontWeight: theme.typography.fontWeightRegular,
+                          })}
+                        >
+                          App
+                        </Typography>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Button>
               </RouterLink>
 
               <Hidden mdDown>{renderMenu(false)}</Hidden>

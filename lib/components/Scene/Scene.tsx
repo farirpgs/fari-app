@@ -141,11 +141,11 @@ export const Session: React.FC<IProps> = (props) => {
   const diceManager = useContext(DiceContext);
 
   const characterCardWidth = useResponsiveValue({
-    xl: "25%",
-    lg: "33%",
-    md: "50%",
-    sm: "100%",
-    xs: "100%",
+    xl: "400px",
+    lg: "400px",
+    md: "400px",
+    sm: "400px",
+    xs: "300px",
   });
 
   const textColors = useTextColors(theme.palette.primary.main);
@@ -763,15 +763,17 @@ export const Session: React.FC<IProps> = (props) => {
   function renderCharacterCards() {
     const everyone = sessionManager.computed.everyone;
     const characters = sessionCharactersManager.state.characterSheets;
-    const players = Object.keys(characters).map((characterId) => {
-      const playerMatch = everyone.find(
-        (player) => player.id === characterId
-      ) as IPlayer;
-      return {
-        ...playerMatch,
-        characterSheet: characters[characterId],
-      };
-    });
+    const playersWithCharacterSheets = Object.keys(characters).map(
+      (characterId) => {
+        const playerMatch = everyone.find(
+          (player) => player.id === characterId
+        ) as IPlayer;
+        return {
+          ...playerMatch,
+          characterSheet: characters[characterId],
+        };
+      }
+    );
 
     return (
       <>
@@ -780,22 +782,24 @@ export const Session: React.FC<IProps> = (props) => {
             className={css({
               display: "flex",
               flexFlow: "row",
-              flexWrap: "wrap",
+              flexWrap: "nowrap",
+              overflow: "hidden",
+              overflowX: "auto",
             })}
           >
             {showEmptyWarnings()}
             <MiniThemeContext.Provider value={miniTheme}>
-              {players.map((player, index) => {
+              {playersWithCharacterSheets.map((player, index) => {
                 const isMe = props.userId === player.id;
                 const canControl = isGM || isMe;
                 return (
                   <Box
                     key={player?.id || index}
-                    className={css({
-                      width: characterCardWidth,
+                    sx={{
                       display: "inline-block",
                       marginBottom: "1rem",
-                    })}
+                      width: characterCardWidth,
+                    }}
                   >
                     <CharacterCard
                       key={player?.id || index}
@@ -916,21 +920,18 @@ export const Session: React.FC<IProps> = (props) => {
                     if (isGM) {
                       sceneManager.actions.updateIndexCard(indexCard, type);
                     } else {
-                      // TODO
-                      // props.onPlayerInteraction?.(
-                      //   `/scene/indexCards/${type}/0`,
-                      //   indexCard
-                      // );
-                      // connectionsManager?.actions.sendToHost<IPeerActions>({
-                      //   action: "update-index-card",
-                      //   payload: { indexCard: indexCard },
-                      // });
+                      props.onPlayerInteraction?.({
+                        type: "update-index-card",
+                        payload: {
+                          indexCard: indexCard,
+                          indexCardType: type,
+                        },
+                      });
                     }
                   }}
                 />
               ),
             },
-
             // {
             //   value: "draw",
             //   dataCy: "session.tabs.draw",
@@ -1254,7 +1255,13 @@ export function Scene(props: {
           <TabContext value={sceneTab}>
             {renderSceneTabs()}
             <Box>
-              <Box py="2rem" position="relative" minHeight="20rem">
+              <Box
+                py="2rem"
+                position="relative"
+                sx={{
+                  overflowX: "auto",
+                }}
+              >
                 <TabPanel value={"public"} className={tabPanelStyle}>
                   {renderIndexCardsForTab(
                     sceneManager.state.scene?.indexCards.public,

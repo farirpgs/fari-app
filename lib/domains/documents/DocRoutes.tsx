@@ -308,7 +308,6 @@ export const DocRoutes: Array<Omit<IDocProps, "page" | "section">> = [
     title: "Fari Wiki",
     loadFunction: DocImport.FariWiki,
     gitHubLink: "https://github.com/fariapp/fari/tree/master/docs/fari-wiki.md",
-    imageUrl: Images.logo,
     sideBar: {
       "+Fari Wiki": ["introduction"],
       "+Getting Started": [

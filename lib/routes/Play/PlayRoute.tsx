@@ -173,6 +173,12 @@ export const PlayRoute: React.FC<{
         event.payload.character
       );
     }
+    if (event.type === "update-index-card") {
+      sceneManager.actions.updateIndexCard(
+        event.payload.indexCard,
+        event.payload.indexCardType
+      );
+    }
     if (event.type === "ping") {
       broadcast(PlayerInteractionFactory.pong(), {
         shouldQueueEventIfNotReady: true,

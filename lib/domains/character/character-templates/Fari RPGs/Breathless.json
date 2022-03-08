@@ -1,7 +1,7 @@
 {
   "fariType": "character",
-  "id": "3c4e155b-c464-40ee-81fa-56b2473e86c1",
-  "lastUpdated": 1644266501,
+  "id": "9d97fb88-3e2c-4b3f-96c9-7da8ddac810a",
+  "lastUpdated": 1646768186,
   "name": "",
   "pages": [
     {
@@ -16,13 +16,6 @@
                   "id": "3c0a535a-9812-4d94-bd13-f2b9e10fc813",
                   "label": "Information",
                   "blocks": [
-                    {
-                      "id": "544e9e31-9713-47d0-a75f-958272a47acd",
-                      "label": "Name",
-                      "type": "Text",
-                      "value": "",
-                      "meta": {}
-                    },
                     {
                       "id": "985ac74c-638c-429b-9398-d91ddcd04d02",
                       "label": "PRONOUNS",
@@ -73,7 +66,7 @@
                       "type": "Text",
                       "meta": {
                         "checked": false,
-                        "helperText": "Use D12 — Once per session"
+                        "helperText": "Use D12 — To Reset, “catch your breath”"
                       }
                     }
                   ]
@@ -139,7 +132,8 @@
                       "value": "Initial: d4\nCurrent: d4\n",
                       "meta": {}
                     }
-                  ]
+                  ],
+                  "visibleOnCard": true
                 }
               ]
             },
@@ -187,7 +181,6 @@
     }
   ],
   "template": "Blank",
-  "version": 6,
   "theme": {
     "style": "@import url('http://fonts.cdnfonts.com/css/cheddar-gothic-stencil');\n\n@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');",
     "backgroundColor": "#ffffff",
@@ -201,5 +194,6 @@
     "textFontSize": 1,
     "textFontFamily": "Lato",
     "pageHeadingFontWeight": ""
-  }
+  },
+  "version": 6
 }
