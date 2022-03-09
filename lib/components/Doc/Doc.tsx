@@ -385,7 +385,7 @@ export const Doc: React.FC<IProps> = (props) => {
               )}
             </Grid>
             <Grid item zeroMinWidth>
-              <FateLabel variant="body2" color="primary">
+              <FateLabel variant="body2" color="secondary">
                 <b>{props.author.title}</b>
               </FateLabel>
             </Grid>
@@ -412,7 +412,7 @@ export const Doc: React.FC<IProps> = (props) => {
                   </Grid>
                   {!isLast && (
                     <Grid item>
-                      <FateLabel color="primary">{"•"}</FateLabel>
+                      <FateLabel color="secondary">{"•"}</FateLabel>
                     </Grid>
                   )}
                 </React.Fragment>
@@ -525,7 +525,7 @@ export const Doc: React.FC<IProps> = (props) => {
                   textAlign: "left",
                 })}
                 variant="outlined"
-                color="primary"
+                color="secondary"
                 data-cy="doc.previous"
                 onClick={() => {
                   handleGoToIndex(previousIndex);
@@ -563,7 +563,7 @@ export const Doc: React.FC<IProps> = (props) => {
                   textAlign: "right",
                 })}
                 variant="outlined"
-                color="primary"
+                color="secondary"
                 data-cy="doc.next"
                 onClick={() => {
                   handleGoToIndex(nextIndex);
@@ -795,7 +795,7 @@ export const DocSideBar: React.FC<{
                     title={categoryName}
                     className={css({
                       color: isCategorySelected
-                        ? theme.palette.primary.main
+                        ? theme.palette.secondary.main
                         : theme.palette.text.primary,
                       fontWeight: isCategorySelected
                         ? theme.typography.fontWeightBold
@@ -854,7 +854,7 @@ export const DocSideBar: React.FC<{
                                 title={index.label}
                                 className={css({
                                   color: isItemSelected
-                                    ? theme.palette.primary.main
+                                    ? theme.palette.secondary.main
                                     : theme.palette.text.primary,
                                   fontWeight: isItemSelected
                                     ? theme.typography.fontWeightBold
@@ -919,14 +919,17 @@ export const DocTableOfContents: React.FC<{
               <AppLink
                 to={child.url ?? ""}
                 className={css({
-                  color:
+                  "color":
                     section === child.id
-                      ? theme.palette.primary.main
+                      ? theme.palette.secondary.main
                       : theme.palette.text.secondary,
-                  fontWeight:
+                  "fontWeight":
                     section === child.id
                       ? theme.typography.fontWeightBold
                       : "inherit",
+                  "&:hover": {
+                    color: theme.palette.secondary.main,
+                  },
                 })}
               >
                 {child.label}

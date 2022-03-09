@@ -216,15 +216,6 @@ export const AppRouter = () => {
 
         <Route
           exact
-          path={"/discord"}
-          render={() => {
-            window.location.href = "https://discord.gg/vMAJFjUraA";
-            return null;
-          }}
-        />
-
-        <Route
-          exact
           path={"/story-builder"}
           render={() => {
             return <StoryBuilderRoute />;

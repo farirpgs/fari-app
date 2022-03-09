@@ -63,7 +63,7 @@ export const AppLightTheme = responsiveFontSizes(
     ...defaultThemeConfiguration,
     palette: {
       primary: { main: "#415f9c" },
-      secondary: { main: "#7891D2" },
+      secondary: { main: "#415f9c" },
     },
   })
 );
@@ -79,10 +79,10 @@ export const AppDarkTheme = responsiveFontSizes(
         paper: "#333333",
       },
       primary: {
-        main: "#b1cbff",
+        main: "#2d436e",
       },
       secondary: {
-        main: "#7891D2",
+        main: "#90caf9",
       },
     },
   })

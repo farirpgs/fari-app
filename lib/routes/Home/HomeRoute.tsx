@@ -95,7 +95,14 @@ export const HomeRoute: React.FC<{}> = () => {
           <Box
             className={css({ maxWidth: FariToolbarMaxWidth, margin: "0 auto" })}
           >
-            <img alt="Fari" height="200px" src={Images.logoTextWhite} />
+            <img
+              alt="Fari"
+              className={css({
+                maxWidth: "100%",
+                width: "600px",
+              })}
+              src={Images.logoTextWhite}
+            />
           </Box>
         </DarkBox>
         <DarkBox linear px="2rem">
@@ -467,7 +474,7 @@ export const HomeRoute: React.FC<{}> = () => {
               variant="outlined"
               size="large"
               component="a"
-              href="https://discord.gg/vMAJFjUraA"
+              href="https://farirpgs.com/discord"
               target="_blank"
               rel="noreferrer"
             >
@@ -806,7 +813,7 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                 <Box display="flex" justifyContent="center">
                   {card.onClick && (
                     <Button
-                      color="primary"
+                      color="secondary"
                       variant="outlined"
                       onClick={(e) => {
                         e.preventDefault;
@@ -818,7 +825,7 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                   )}
                   {card.to && (
                     <Button
-                      color="primary"
+                      color="secondary"
                       variant="outlined"
                       size="large"
                       component={RouterLink}

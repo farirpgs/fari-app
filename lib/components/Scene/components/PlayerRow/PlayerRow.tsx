@@ -449,7 +449,7 @@ export function PlayerRow(
         noWrap
         uppercase={false}
         className={css({
-          color: theme.palette.primary.main,
+          color: theme.palette.secondary.main,
         })}
       >
         {name ?? "Untitled"}

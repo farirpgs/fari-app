@@ -23,7 +23,7 @@ const styles = (theme: Theme) => {
       flex: "1 1 auto",
       opacity: ".6",
       marginLeft: "10px",
-      backgroundColor: "#415f9c",
+      backgroundColor: theme.palette.secondary.main,
     },
   };
   const headerStyle = {
@@ -231,7 +231,7 @@ const styles = (theme: Theme) => {
       },
       "& a, & a code": {
         // Style taken from the Link component
-        "color": theme.palette.primary.main,
+        "color": theme.palette.secondary.main,
         "textDecoration": "none",
         "&:hover": {
           textDecoration: "underline",

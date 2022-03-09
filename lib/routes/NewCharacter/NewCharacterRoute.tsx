@@ -91,7 +91,7 @@ export function NewCharacterRoute() {
         <Fade in>
           <Container maxWidth="md">
             <Box display="flex" justifyContent="center">
-              <CircularProgress />
+              <CircularProgress color="secondary" />
             </Box>
           </Container>
         </Fade>

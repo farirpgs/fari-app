@@ -382,7 +382,7 @@ export const Session: React.FC<IProps> = (props) => {
   function renderIsLoading() {
     return (
       <Box display="flex" justifyContent="center">
-        <CircularProgress />
+        <CircularProgress color="secondary" />
       </Box>
     );
   }
@@ -1155,6 +1155,7 @@ export function Scene(props: {
               aria-label="outlined primary button group"
             >
               <Button
+                color="secondary"
                 data-cy="scene.new-scene"
                 onClick={() => {
                   const confirmed = sceneManager.state.scene
@@ -1170,6 +1171,7 @@ export function Scene(props: {
                 {t("play-route.new-scene")}
               </Button>
               <Button
+                color="secondary"
                 onClick={() => {
                   myBinderManager.actions.open({
                     folder: "scenes",
@@ -1180,6 +1182,7 @@ export function Scene(props: {
                 {t("play-route.load-scene")}
               </Button>
               <Button
+                color="secondary"
                 onClick={() => {
                   myBinderManager.actions.open({
                     folder: "scenes",
@@ -1196,7 +1199,7 @@ export function Scene(props: {
         {sceneManager.state.scene && props.isGM && (
           <Grid item>
             <Button
-              color="primary"
+              color="secondary"
               data-cy="scene.save"
               endIcon={<SaveIcon />}
               variant={sceneManager.state.dirty ? "contained" : "outlined"}
@@ -1657,6 +1660,7 @@ export function Scene(props: {
                   <SplitButton
                     data-cy="scene.add-card"
                     instant
+                    color="secondary"
                     options={[
                       {
                         label: t("play-route.add-index-card").toUpperCase(),
@@ -1716,6 +1720,7 @@ export function Scene(props: {
               </Grid>
               <Grid item>
                 <Button
+                  color="secondary"
                   onClick={() => {
                     hiddenIndexCardRecord.actions.toggleAll();
                   }}

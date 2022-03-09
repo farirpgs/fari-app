@@ -187,7 +187,7 @@ export const JoinAGameRoute: React.FC<{
           <Collapse in={loading}>
             <Box pb="2rem">
               <Box display="flex" justifyContent="center">
-                <CircularProgress />
+                <CircularProgress color="secondary" />
               </Box>
             </Box>
           </Collapse>

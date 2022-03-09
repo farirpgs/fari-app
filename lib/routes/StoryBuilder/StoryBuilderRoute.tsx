@@ -309,7 +309,7 @@ export function StoryDeckTags(props: {
                   ? "filled"
                   : "outlined"
               }
-              color="primary"
+              color="secondary"
               label={tag}
               onClick={() => {
                 props.decksManager.actions.toggleTag(tag as unknown as Tags);

@@ -330,7 +330,7 @@ export function MyBinder<TFolders extends string>(props: {
                   <Box mr=".5rem" width="30px">
                     {where === Where.Folders || !props.canGoBack ? (
                       <IconButton size="small" disabled>
-                        <MenuBookIcon color="primary" />
+                        <MenuBookIcon color="secondary" />
                       </IconButton>
                     ) : (
                       <IconButton size="small" onClick={handleOnGoBack}>
@@ -391,6 +391,7 @@ export function MyBinder<TFolders extends string>(props: {
           <Grid container justifyContent="flex-end">
             <Grid item>
               <AppLink
+                color="secondary"
                 onClick={() => {
                   history.push("/data");
                   props.onClose();
@@ -456,7 +457,7 @@ export function MyBinder<TFolders extends string>(props: {
               <Grid item>
                 <Button
                   variant="outlined"
-                  color="primary"
+                  color="secondary"
                   size="small"
                   data-cy={`my-binder.folders.${currentFolder}.new`}
                   onClick={() => {
@@ -472,7 +473,7 @@ export function MyBinder<TFolders extends string>(props: {
               <Grid item>
                 <Button
                   variant="outlined"
-                  color="primary"
+                  color="secondary"
                   data-cy={`my-binder.folders.${currentFolder}.import`}
                   size="small"
                   component="label"
