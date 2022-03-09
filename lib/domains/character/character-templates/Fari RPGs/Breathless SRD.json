@@ -152,21 +152,21 @@
                     },
                     {
                       "id": "436a51fa-d49e-44ad-9258-6324c93b2756",
-                      "label": "Item #1",
+                      "label": "ITEM #1",
                       "type": "Text",
                       "value": "",
                       "meta": {}
                     },
                     {
                       "id": "bf31d3a2-bca3-4521-a54b-28c28fee79e3",
-                      "label": "Item #2",
+                      "label": "ITEM #2",
                       "type": "Text",
                       "value": "",
                       "meta": {}
                     },
                     {
                       "id": "cffc1c3c-3609-4b5d-b3f6-6f9f85d4dc4d",
-                      "label": "Item #3",
+                      "label": "ITEM #3",
                       "type": "Text",
                       "value": "",
                       "meta": {}
