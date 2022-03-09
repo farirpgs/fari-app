@@ -13,13 +13,21 @@
 
 # v6.2.0
 
+- fix: sync roll issues
 - feat: new character sheet theme editor
   - feat: new themed sheets by Fari RPGs and Pandion Games
   - feat: migrated data to support new themes
-- feat: better placement of add row button
-- feat: better placement of add column button
-- feat: dice increase/decrease
-- feat: updated home page
+- feat: new Info block
+- feat: Text Block now has Add/Remove field controls
+- feat: Text Block now has Add/Remove label controls
+- feat: better placement of character sheet add row button
+- feat: better placement of character sheet add column button
+- feat: duplicate block button
+- feat: dice increase/decrease controls
+- feat: new branding
+- feat: new navbar
+- feat: better dark theme
+- tech: migration to Vitest
 
 # v6.1.0
 

@@ -18,7 +18,7 @@ import { ManagerBox } from "../Character/components/CharacterDialog/CharacterV3D
 import { BlockByType } from "../Character/components/CharacterDialog/components/BlockByType";
 import {
   MiniThemeContext,
-  useMiniTheme
+  useMiniTheme,
 } from "../Character/components/CharacterDialog/MiniThemeContext";
 
 export const CharacterPrintRoute: React.FC<{
