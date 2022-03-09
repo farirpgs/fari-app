@@ -441,6 +441,7 @@ export const Session: React.FC<IProps> = (props) => {
         {isGM && (
           <DialogActions>
             <Button
+              color="secondary"
               onClick={() => {
                 sessionManager.actions.unpause();
               }}
@@ -973,7 +974,7 @@ export const Session: React.FC<IProps> = (props) => {
                 }
               }}
               variant="outlined"
-              color={shareLinkToolTip.open ? "primary" : "inherit"}
+              color={shareLinkToolTip.open ? "secondary" : "inherit"}
               endIcon={<FileCopyIcon />}
             >
               {t("play-route.copy-game-link")}

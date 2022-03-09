@@ -466,8 +466,8 @@ export const Page: React.FC<{
               >
                 <Box
                   p="1.5rem"
-                  color={theme.palette.primary.main}
-                  bgcolor={theme.palette.background.default}
+                  color={"#fff"}
+                  bgcolor={theme.palette.primary.main}
                 >
                   {renderMenu(true)}
                 </Box>

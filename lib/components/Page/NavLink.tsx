@@ -32,6 +32,7 @@ export function NavLink(props: {
           onClick={props.onClick}
           target={props.target}
           className={css({
+            "textTransform": "none",
             "&:hover": {
               background: theme.palette.primary.light,
             },
@@ -48,6 +49,7 @@ export function NavLink(props: {
         color="inherit"
         onClick={props.onClick}
         className={css({
+          "textTransform": "none",
           "&:hover": {
             background: theme.palette.primary.light,
           },
@@ -101,6 +103,7 @@ export function NavLinkCategory(props: {
             onClick={handleOpenSubNav}
             color="inherit"
             className={css({
+              "textTransform": "none",
               "&:hover": {
                 background: theme.palette.primary.light,
               },

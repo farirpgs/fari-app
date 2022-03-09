@@ -148,7 +148,7 @@ export const CharacterCard: React.FC<{
                             <SaveIcon
                               color={
                                 characterManager.state.dirty
-                                  ? "primary"
+                                  ? "secondary"
                                   : undefined
                               }
                               className={css({

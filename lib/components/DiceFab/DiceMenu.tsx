@@ -115,7 +115,7 @@ export function DiceMenu(props: {
                                             .listResults,
                                       });
                                     }}
-                                    color="primary"
+                                    color="secondary"
                                   />
                                 }
                                 label={t("dice-fab.pool")}
@@ -124,7 +124,11 @@ export function DiceMenu(props: {
                           )}
                           {props.onClear && (
                             <Grid item>
-                              <Button variant="text" onClick={props.onClear}>
+                              <Button
+                                color="secondary"
+                                variant="text"
+                                onClick={props.onClear}
+                              >
                                 {"Reset"}
                               </Button>
                             </Grid>
@@ -133,7 +137,7 @@ export function DiceMenu(props: {
                           {props.onCtaClick && (
                             <Grid item>
                               <Button
-                                color="primary"
+                                color="secondary"
                                 variant="contained"
                                 onClick={props.onCtaClick}
                               >
@@ -214,13 +218,13 @@ export function DiceMenu(props: {
                         })}
                         size="large"
                       >
-                        <Badge badgeContent={badgeContent} color="primary">
+                        <Badge badgeContent={badgeContent} color="secondary">
                           <o.icon
                             className={css({
                               fontSize: "3rem",
                               color:
                                 badgeContent > 0
-                                  ? theme.palette.primary.main
+                                  ? theme.palette.secondary.main
                                   : theme.palette.text.secondary,
                             })}
                           />

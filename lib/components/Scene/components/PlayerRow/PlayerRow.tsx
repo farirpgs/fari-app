@@ -90,13 +90,13 @@ export function PlayerRow(
 
   const lightBackground = useLightBackground();
   const playedDuringTurnColor = props.player.playedDuringTurn
-    ? theme.palette.primary.main
+    ? theme.palette.secondary.main
     : theme.palette.text.secondary;
 
   const hasCharacterSheet = !!props.characterSheet;
 
   const borderColor = hasCharacterSheet
-    ? theme.palette.primary.main
+    ? theme.palette.secondary.main
     : theme.palette.text.secondary;
 
   function handleOnRoll() {
@@ -523,11 +523,11 @@ export function PlayerRow(
                   <IconButton
                     size="small"
                     disabled={!canOpenOrLoadSheet}
-                    color={"primary"}
+                    color={"secondary"}
                     data-cy={`${props["data-cy"]}.assign-or-open-character-sheet`}
                     className={css({
                       visibility: canOpenOrLoadSheet ? "visible" : "hidden",
-                      border: `1px solid ${theme.palette.primary.main}`,
+                      border: `1px solid ${theme.palette.secondary.main}`,
                       borderRadius: "50%",
                       boxShadow: theme.shadows[2],
                     })}
