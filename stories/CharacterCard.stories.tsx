@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React, { useContext, useState } from "react";
@@ -8,6 +9,10 @@ import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { ICharacterTemplate } from "../lib/domains/character/CharacterType";
 import { IDiceRollResult } from "../lib/domains/dice/Dice";
+import {
+  MiniThemeContext,
+  useMiniTheme,
+} from "../lib/routes/Character/components/CharacterDialog/MiniThemeContext";
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookCharacterCard(
@@ -30,6 +35,11 @@ function StorybookCharacterCard(
     handleOnNewRoll(result);
   }
 
+  const theme = useTheme();
+  const miniTheme = useMiniTheme({
+    enforceBackground: theme.palette.background.default,
+  });
+
   return (
     <>
       <Toolbox
@@ -40,13 +50,15 @@ function StorybookCharacterCard(
         }}
         hideDefaultRightActions={true}
       />
-      <CharacterCard
-        playerName={props.playerName}
-        readonly={props.readonly}
-        characterSheet={props.characterSheet}
-        onCharacterDialogOpen={action("onCharacterDialogOpen") as any}
-        onRoll={handleOnNewRoll}
-      />
+      <MiniThemeContext value={miniTheme}>
+        <CharacterCard
+          playerName={props.playerName}
+          readonly={props.readonly}
+          characterSheet={props.characterSheet}
+          onCharacterDialogOpen={action("onCharacterDialogOpen") as any}
+          onRoll={handleOnNewRoll}
+        />
+      </MiniThemeContext>
       <Box mt="6rem" />
     </>
   );
