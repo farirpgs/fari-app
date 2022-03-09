@@ -4,7 +4,6 @@ import CreateIcon from "@mui/icons-material/Create";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import ErrorIcon from "@mui/icons-material/Error";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
-import FilterHdrIcon from "@mui/icons-material/FilterHdr";
 import MovieIcon from "@mui/icons-material/Movie";
 import PanToolIcon from "@mui/icons-material/PanTool";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
@@ -50,7 +49,6 @@ import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext"
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { arraySort, IArraySortGetter } from "../../domains/array/arraySort";
-import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
@@ -71,10 +69,7 @@ import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
-import {
-  TldrawReader,
-  TldrawWriter,
-} from "../../routes/Draw/TldrawWriterAndReader";
+import { TlDrawErrorBoundary } from "../../routes/Draw/TldrawWriterAndReader";
 import {
   IPlayerInteraction,
   PlayerInteractionFactory,
@@ -106,7 +101,7 @@ enum SortMode {
   PinnedFirst = "PinnedFirst",
 }
 
-export const paperStyle = css({ borderRadius: "0px", flex: "1 0 auto" });
+const paperStyle = css({ borderRadius: "0px", flex: "1 0 auto" });
 
 type IProps = {
   sessionManager: ReturnType<typeof useSession>;
@@ -206,34 +201,27 @@ export const Session: React.FC<IProps> = (props) => {
     if (isGM) {
       sessionManager.actions.loadPlayerCharacter(playerId, character);
     } else {
-      // TODO
-      // connectionsManager?.actions.sendToHost<IPeerActions>({
-      //   action: "load-character",
-      //   payload: character,
-      // });
       props.onPlayerInteraction?.(
         PlayerInteractionFactory.updatePlayerCharacter(playerId, character)
       );
     }
   };
 
-  const handleAssignDuplicateCharacterSheet = (
+  function handleUpdateCharacter(
     playerId: string,
-    character: ICharacter
-  ) => {
-    const copy = CharacterFactory.duplicate(character);
-    charactersManager.actions.upsert(copy);
-
+    updatedCharacter: ICharacter
+  ) {
     if (isGM) {
-      sessionManager.actions.loadPlayerCharacter(playerId, copy);
+      sessionManager.actions.updatePlayerCharacter(playerId, updatedCharacter);
     } else {
-      // TODO
-      // connectionsManager?.actions.sendToHost<IPeerActions>({
-      //   action: "load-character",
-      //   payload: copy,
-      // });
+      props.onPlayerInteraction?.(
+        PlayerInteractionFactory.updatePlayerCharacter(
+          playerId,
+          updatedCharacter
+        )
+      );
     }
-  };
+  }
 
   const handleOnToggleCharacterSync = (character: ICharacter | undefined) => {
     charactersManager.actions.upsert(character);
@@ -243,7 +231,6 @@ export const Session: React.FC<IProps> = (props) => {
     if (isGM) {
       sessionManager.actions.updateGmRoll(result);
     } else {
-      // TODO
       props.onPlayerInteraction?.(
         PlayerInteractionFactory.updatePlayerRolls(me!.id, result)
       );
@@ -261,8 +248,6 @@ export const Session: React.FC<IProps> = (props) => {
         sessionManager.actions.updateGmRoll(result);
       }
     } else {
-      // TODO
-
       props.onPlayerInteraction?.(
         PlayerInteractionFactory.updatePlayerRolls(me!.id, result)
       );
@@ -277,7 +262,7 @@ export const Session: React.FC<IProps> = (props) => {
     >
       <Box px="1rem">
         <Prompt when={true} message={t("manager.leave-without-saving")} />
-        {/* TODO */}
+
         {/* <Prompt
           when={isGMHostingOnlineOrOfflineGame}
           message={t("play-route.host-leaving-warning")}
@@ -334,8 +319,6 @@ export const Session: React.FC<IProps> = (props) => {
                       if (isGM) {
                         sessionManager.actions.pause();
                       } else {
-                        // TODO
-
                         props.onPlayerInteraction?.(
                           PlayerInteractionFactory.pause()
                         );
@@ -648,20 +631,7 @@ export const Session: React.FC<IProps> = (props) => {
         character={player.character}
         dialog={true}
         onSave={(updatedCharacter) => {
-          if (isGM) {
-            sessionManager.actions.updatePlayerCharacter(
-              player.id,
-              updatedCharacter
-            );
-          } else {
-            // TODO
-            props.onPlayerInteraction?.(
-              PlayerInteractionFactory.updatePlayerCharacter(
-                player.id,
-                updatedCharacter
-              )
-            );
-          }
+          handleUpdateCharacter(player.id, updatedCharacter);
         }}
         onClose={() => {
           setCharacterDialogPlayerId(undefined);
@@ -701,7 +671,6 @@ export const Session: React.FC<IProps> = (props) => {
           canRoll: canControl,
           canUpdatePoints: canControl,
           canUpdateInitiative: canControl,
-          canLoadDuplicateCharacterSheet: isGM,
           canLoadCharacterSheet: canControl && !player.isGM,
           canRemove: isGM && !player.isGM,
           canMarkPrivate: isGM && isChild,
@@ -720,19 +689,11 @@ export const Session: React.FC<IProps> = (props) => {
             setCharacterDialogPlayerId(player.id);
           }
         }}
-        onAssignOriginalCharacterSheet={() => {
+        onAssignCharacterSheet={() => {
           myBinderManager.actions.open({
             folder: "characters",
             callback: (character) => {
               handleAssignOriginalCharacterSheet(player.id, character);
-            },
-          });
-        }}
-        onAssignDuplicateCharacterSheet={() => {
-          myBinderManager.actions.open({
-            folder: "characters",
-            callback: (character) => {
-              handleAssignDuplicateCharacterSheet(player.id, character);
             },
           });
         }}
@@ -749,7 +710,6 @@ export const Session: React.FC<IProps> = (props) => {
               playedInTurnOrder
             );
           } else {
-            // TODO
             props.onPlayerInteraction?.(
               PlayerInteractionFactory.updatePlayerPlayedDuringTurn(
                 player.id,
@@ -816,6 +776,9 @@ export const Session: React.FC<IProps> = (props) => {
                     onCharacterDialogOpen={() => {
                       setCharacterDialogPlayerId(player.id);
                     }}
+                    onChange={(updatedCharacter) => {
+                      handleUpdateCharacter(player.id, updatedCharacter);
+                    }}
                     onRoll={(newDiceRollResult) => {
                       handleSetPlayerRoll(player.id, newDiceRollResult);
                     }}
@@ -845,6 +808,9 @@ export const Session: React.FC<IProps> = (props) => {
                     onCharacterDialogOpen={() => {
                       setCharacterDialogPlayerId(npc.id);
                     }}
+                    onChange={(updatedCharacter) => {
+                      handleUpdateCharacter(npc.id, updatedCharacter);
+                    }}
                     onRoll={(newDiceRollResult) => {
                       handleSetPlayerRoll(npc.id, newDiceRollResult);
                     }}
@@ -864,18 +830,20 @@ export const Session: React.FC<IProps> = (props) => {
     // );
 
     return (
-      <Box border={`1px solid ${theme.palette.divider}`} margin="0 auto">
-        {isGM ? (
-          <TldrawWriter
-            initialDoc={sessionManager.state.session.tlDrawDoc}
-            onChange={(state) => {
-              sessionManager.actions.updateDrawAreaObjects(state);
-            }}
-          />
-        ) : (
-          <TldrawReader doc={sessionManager.state.session.tlDrawDoc} />
-        )}
-      </Box>
+      <TlDrawErrorBoundary>
+        <Box border={`1px solid ${theme.palette.divider}`} margin="0 auto">
+          {/* {isGM ? (
+            <TldrawWriter
+              initialDoc={sessionManager.state.session.tlDrawDoc}
+              onChange={(state) => {
+                sessionManager.actions.updateDrawAreaObjects(state);
+              }}
+            />
+          ) : (
+            <TldrawReader doc={sessionManager.state.session.tlDrawDoc} />
+          )} */}
+        </Box>
+      </TlDrawErrorBoundary>
     );
   }
 
@@ -966,13 +934,13 @@ export const Session: React.FC<IProps> = (props) => {
               ),
             },
 
-            {
-              value: "draw",
-              dataCy: "session.tabs.draw",
-              label: t("draw-route.meta.title"),
-              icon: <FilterHdrIcon />,
-              render: renderZones,
-            },
+            // {
+            //   value: "draw",
+            //   dataCy: "session.tabs.draw",
+            //   label: t("draw-route.meta.title"),
+            //   icon: <FilterHdrIcon />,
+            //   render: renderZones,
+            // },
           ]}
         />
       </Box>
