@@ -33,8 +33,10 @@ describe("/scenes", () => {
       Fari.get("scene.add-card.select.CARD").click({ force: true });
 
       // aspect
-      Fari.get("scene.aspect.0.title").type("Something weird is going on");
-      Fari.get("scene.aspect.0.content").type("There is no war in Ba Sing Se");
+      Fari.get("scene.aspect.4.title").type("Something weird is going on");
+      Fari.find(Fari.get("scene.aspect.4"), "index-card.Text.value").type(
+        "There is no war in Ba Sing Se"
+      );
 
       // remove second
       // Fari.get("scene.aspect.1.reset").click({ force: true });
@@ -54,7 +56,7 @@ describe("/scenes", () => {
       cy.title().should("eq", "Ba Sing Se | Fari");
 
       // delete
-      Fari.get("page.menu.my-binder").click();
+      Fari.get("page.menu.my-binder").click({ force: true });
       Fari.get("my-binder.folders.scenes").click();
       Fari.get("my-binder.element.Ba Sing Se.delete")
         .first()
@@ -70,7 +72,7 @@ describe("/scenes", () => {
       cy.contains("Ba Sing Se").click();
 
       // new scene
-      Fari.get("page.menu.my-binder").click();
+      Fari.get("page.menu.my-binder").click({ force: true });
       Fari.get("my-binder.folders.scenes").click();
       Fari.get("my-binder.folders.scenes.new").click();
 
@@ -92,7 +94,7 @@ describe("/scenes", () => {
       cy.title().should("eq", "Lower Ring | Fari");
 
       // test menu
-      Fari.get("page.menu.my-binder").click();
+      Fari.get("page.menu.my-binder").click({ force: true });
       Fari.get("my-binder.folders.scenes").click();
 
       cy.contains("Ba Sing Se");

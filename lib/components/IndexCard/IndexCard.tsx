@@ -49,7 +49,7 @@ import { AddBlock } from "../../routes/Character/components/CharacterDialog/comp
 import { BlockByType } from "../../routes/Character/components/CharacterDialog/components/BlockByType";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import {
-  MiniThemeContext as MiniThemeContext,
+  MiniThemeContext,
   useMiniTheme,
 } from "../../routes/Character/components/CharacterDialog/MiniThemeContext";
 import { ConditionalWrapper } from "../ConditionalWrapper/ConditionalWrapper";
@@ -186,6 +186,7 @@ export const IndexCard: React.FC<
       >
         <Box
           pb={!props.isGM ? "1rem" : "0"}
+          data-cy={props["data-cy"]}
           bgcolor={paper.bgColor}
           color={paper.primary}
           onClick={() => {

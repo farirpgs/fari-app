@@ -18,6 +18,7 @@ export function NavLink(props: {
   target?: "_blank";
   tooltip?: string;
   onClick?: () => void;
+  ["data-cy"]?: string;
   children: React.ReactNode;
 }) {
   const theme = useTheme();
@@ -31,6 +32,7 @@ export function NavLink(props: {
           to={props.to}
           onClick={props.onClick}
           target={props.target}
+          data-cy={props["data-cy"]}
           className={css({
             "textTransform": "none",
             "&:hover": {
@@ -48,6 +50,7 @@ export function NavLink(props: {
       <Button
         color="inherit"
         onClick={props.onClick}
+        data-cy={props["data-cy"]}
         className={css({
           "textTransform": "none",
           "&:hover": {
@@ -63,6 +66,7 @@ export function NavLink(props: {
 export function NavLinkCategory(props: {
   label: React.ReactNode;
   tooltip?: string;
+  ["data-cy"]?: string;
   subNav?: Array<{
     label: React.ReactNode;
     links: Array<{
@@ -102,6 +106,7 @@ export function NavLinkCategory(props: {
           <Button
             onClick={handleOpenSubNav}
             color="inherit"
+            data-cy={props["data-cy"]}
             className={css({
               "textTransform": "none",
               "&:hover": {

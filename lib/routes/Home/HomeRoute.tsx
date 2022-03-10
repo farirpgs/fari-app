@@ -567,6 +567,7 @@ export const HomeRoute: React.FC<{}> = () => {
                 variant="outlined"
                 color="primary"
                 size="large"
+                data-cy="home.play-offline"
                 className={css({ height: "3rem" })}
                 onClick={() => {
                   history.push("/play");
