@@ -50,7 +50,7 @@ function StorybookCharacterCard(
         }}
         hideDefaultRightActions={true}
       />
-      <MiniThemeContext value={miniTheme}>
+      <MiniThemeContext.Provider value={miniTheme}>
         <CharacterCard
           playerName={props.playerName}
           readonly={props.readonly}
@@ -58,7 +58,7 @@ function StorybookCharacterCard(
           onCharacterDialogOpen={action("onCharacterDialogOpen") as any}
           onRoll={handleOnNewRoll}
         />
-      </MiniThemeContext>
+      </MiniThemeContext.Provider>
       <Box mt="6rem" />
     </>
   );
