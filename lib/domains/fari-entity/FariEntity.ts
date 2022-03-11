@@ -54,7 +54,7 @@ export const FariEntity = {
     const downloadURL = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = downloadURL;
-    link.download = `${props.name}.fari.json`;
+    link.download = `${props.name || "Untitled"}.fari.json`;
     link.click();
   },
   loadEntityFromStorage<T>(props: {

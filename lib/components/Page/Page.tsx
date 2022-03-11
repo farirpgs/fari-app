@@ -258,7 +258,10 @@ export const Page: React.FC<{
               >
                 <img
                   alt="Made By Fari RPGs"
-                  height="200px"
+                  className={css({
+                    width: "400px",
+                    maxWidth: "100%",
+                  })}
                   src={
                     theme.palette.mode === "dark"
                       ? Images.madeByFariRPGsWhite

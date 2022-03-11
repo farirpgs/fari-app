@@ -1094,6 +1094,7 @@ export const CharacterV3Dialog: React.FC<{
               <Box key={section.id}>
                 <>
                   <SheetHeader
+                    index={sectionIndex}
                     label={section.label}
                     advanced={advanced}
                     onLabelChange={(newLabel) => {
@@ -1393,7 +1394,7 @@ export const CharacterV3Dialog: React.FC<{
       <Box py=".5rem">
         <Grid
           container
-          wrap="nowrap"
+          // wrap="nowrap"
           spacing={1}
           justifyContent="space-between"
           alignItems="center"
