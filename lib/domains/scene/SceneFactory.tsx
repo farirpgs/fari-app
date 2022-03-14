@@ -95,10 +95,18 @@ export const SceneFactory = {
     return {
       ...indexCard,
       id: Id.generate(),
+      blocks: indexCard.blocks.map((block) => ({
+        ...block,
+        id: Id.generate(),
+      })),
       subCards: indexCard.subCards.map((sub) => {
         return {
           ...sub,
           id: Id.generate(),
+          blocks: indexCard.blocks.map((block) => ({
+            ...block,
+            id: Id.generate(),
+          })),
         };
       }),
     };
