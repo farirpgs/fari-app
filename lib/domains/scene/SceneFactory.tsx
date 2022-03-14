@@ -103,7 +103,7 @@ export const SceneFactory = {
         return {
           ...sub,
           id: Id.generate(),
-          blocks: indexCard.blocks.map((block) => ({
+          blocks: sub.blocks.map((block) => ({
             ...block,
             id: Id.generate(),
           })),
