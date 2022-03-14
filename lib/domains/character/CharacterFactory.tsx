@@ -37,6 +37,34 @@ export const CharacterFactory = {
     return {
       ...newCharacter,
       id: Id.generate(),
+            pages: newCharacter.pages.map((page) => {
+        return {
+          ...page,
+          id: Id.generate(),
+          rows: page.rows.map((row) => {
+            return {
+              ...row,
+              columns: row.columns.map((column) => {
+                return {
+                  ...column,
+                  sections: column.sections.map((section) => {
+                    return {
+                      ...section,
+                      id: Id.generate(),
+                      blocks: section.blocks.map((block) => {
+                        return {
+                          ...block,
+                          id: Id.generate(),
+                        };
+                      }),
+                    };
+                  }),
+                };
+              }),
+            };
+          }),
+        };
+      }),
       name: "",
       group: undefined,
       lastUpdated: getUnix(),
