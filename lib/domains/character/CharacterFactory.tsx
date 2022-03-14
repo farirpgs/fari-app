@@ -124,7 +124,7 @@ export const CharacterFactory = {
                     return {
                       ...section,
                       id: Id.generate(),
-                      pages: section.blocks.map((block) => {
+                      blocks: section.blocks.map((block) => {
                         return {
                           ...block,
                           id: Id.generate(),
