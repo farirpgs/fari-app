@@ -1,9 +1,9 @@
 import produce from "immer";
-import { CharacterFactory } from "../CharacterFactory";
-import { DefaultTemplates } from "../DefaultTemplates";
-import { ComplexCharacter } from "../mocks/ComplexCharacter";
-import { Warden } from "../mocks/WardenLeMagane";
-import { IV1Character } from "../types";
+import { CharacterFactory } from "./CharacterFactory";
+import { DefaultTemplates } from "./DefaultTemplates";
+import { ComplexCharacter } from "./mocks/ComplexCharacter";
+import { Warden } from "./mocks/WardenLeMagane";
+import { IV1Character } from "./types";
 
 describe("CharacterFactory.migrate", () => {
   describe("v1", () => {
