@@ -1,7 +1,6 @@
 import { css, cx } from "@emotion/css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import HelpIcon from "@mui/icons-material/Help";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import Box, { BoxProps } from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -19,7 +18,6 @@ import lokalise from "../../../images/services/lokalise.png";
 import { RouterLink } from "../../components/AppLink/AppLink";
 import { ConditionalWrapper } from "../../components/ConditionalWrapper/ConditionalWrapper";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
-import { Heading } from "../../components/Heading/Heading";
 import { Kofi } from "../../components/Kofi/Kofi";
 import { FariToolbarMaxWidth, Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -30,7 +28,6 @@ import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext"
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { WikiItems } from "../SrdsRoute/SrdsRoute";
 
 const Patrons = [
   "James Micu",
@@ -169,20 +166,15 @@ export const HomeRoute: React.FC<{}> = () => {
         >
           {renderOpenSource()}
         </DarkBox>
-        <LightBox px="2rem" maxWidth="md" pt="2rem" pb="5rem">
-          <>
-            <Heading icon={HelpIcon} title={"Wikis & Resources"} />
-            <WikiItems />
-          </>
-        </LightBox>
-        <DarkBox
+
+        <LightBox
           px="2rem"
           py="5rem"
           maxWidth="sm"
           title={t("home-route.support-fari.title")}
         >
           {renderSupport()}
-        </DarkBox>
+        </LightBox>
       </Box>
     </Page>
   );

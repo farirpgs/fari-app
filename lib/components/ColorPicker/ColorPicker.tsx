@@ -2,7 +2,7 @@ import { css, cx } from "@emotion/css";
 import { useTheme } from "@mui/material/styles";
 import React from "react";
 import TwitterPicker from "react-color/lib/components/twitter/Twitter";
-import { pickerColors } from "../DrawArea/domains/pickerColors";
+import { pickerColors } from "../../domains/colors/pickerColors";
 
 export const ColorPicker: React.FC<{
   value: string;

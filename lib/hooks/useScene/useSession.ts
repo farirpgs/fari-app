@@ -186,49 +186,6 @@ export function useSession(props: { userId: string }) {
     });
   }
 
-  // function updatePlayersWithConnections(
-  //   connections: Array<Peer.DataConnection>
-  // ) {
-  //   setSession(
-  //     produce((draft) => {
-  //       if (!draft) {
-  //         return;
-  //       }
-
-  //       const players = connections.map<IPlayer>((c) => {
-  //         const meta: IPeerMeta = c.metadata;
-  //         const playerName = meta.playerName;
-  //         const peerJsId = c.label;
-
-  //         const playerMatch = draft.players.find((p) => p.id === peerJsId);
-  //         const playerCharacter = playerMatch?.character;
-
-  //         const rolls = playerMatch?.rolls ?? [];
-  //         const playedDuringTurn = playerMatch?.playedDuringTurn ?? false;
-  //         const points = playerMatch?.points ?? "3";
-
-  //         return {
-  //           id: c.label,
-  //           playerName: playerName,
-  //           character: playerCharacter,
-  //           rolls: rolls,
-  //           isGM: false,
-  //           points: points,
-  //           private: false,
-  //           playedDuringTurn: playedDuringTurn,
-  //           offline: false,
-  //         };
-  //       });
-  //       const allPlayersMinusRemovedPlayersFromStaleConnections =
-  //         players.filter((p) => {
-  //           return removedPlayers.find((id) => id === p.id) === undefined;
-  //         });
-
-  //       draft.players = allPlayersMinusRemovedPlayersFromStaleConnections;
-  //     })
-  //   );
-  // }
-
   function addOfflinePlayer() {
     const id = Id.generate();
     setSession(

@@ -1,17 +1,14 @@
 import { css } from "@emotion/css";
-import BookIcon from "@mui/icons-material/Book";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import CasinoIcon from "@mui/icons-material/Casino";
 import ChatIcon from "@mui/icons-material/Chat";
 import ComputerIcon from "@mui/icons-material/Computer";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
 import FiberNewIcon from "@mui/icons-material/FiberNew";
 import ForumIcon from "@mui/icons-material/Forum";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InfoIcon from "@mui/icons-material/Info";
-import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import LocalCafeIcon from "@mui/icons-material/LocalCafe";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
@@ -47,7 +44,7 @@ import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import {
   IPossibleLanguages,
-  PossibleLanguagesNames,
+  PossibleLanguagesNames
 } from "../../services/internationalization/InternationalizationService";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { CannyChangelog } from "../CannyChangelog/CannyChangelog";
@@ -607,7 +604,7 @@ export const Page: React.FC<{
                         icon: <BugReportIcon />,
                       },
                       {
-                        to: "/discord",
+                        to: "https://farirpgs.com/discord",
                         label: t("menu.discord"),
                         icon: <ForumIcon />,
                         target: "_blank",
@@ -618,29 +615,9 @@ export const Page: React.FC<{
                     label: "Documents",
                     links: [
                       {
-                        to: "/fari-wiki",
+                        to: "https://fari.games/en/resources/fari-rpgs/fari-app-wiki",
                         label: t("menu.fari-wiki"),
                         icon: <InfoIcon />,
-                      },
-                      {
-                        to: "/srds",
-                        label: t("menu.srds"),
-                        icon: <LibraryBooksIcon />,
-                      },
-                      {
-                        to: "/success-with-style",
-                        label: t("menu.success-with-style-blog"),
-                        icon: <DoneOutlineIcon />,
-                      },
-                      {
-                        to: "/seeliesquire",
-                        label: t("menu.seelie-squire"),
-                        icon: <LocalLibraryIcon />,
-                      },
-                      {
-                        to: "/blog",
-                        label: t("menu.blog"),
-                        icon: <BookIcon />,
                       },
                     ],
                   },

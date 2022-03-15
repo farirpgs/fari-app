@@ -1,4 +1,3 @@
-import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { IBlock, ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
@@ -27,7 +26,6 @@ export type IAspectV1 = {
   consequences: Array<{ name: string; value: string }>;
   color: IndexCardColorTypes;
   playedDuringTurn: boolean;
-  drawAreaObjects?: IDrawAreaObjects;
   type: AspectType;
   /**
    * @default false
@@ -55,7 +53,7 @@ export type ISceneV1 = {
   version: number;
   lastUpdated: number;
   notes?: string;
-  drawAreaObjects: IDrawAreaObjects;
+  drawAreaObjects: any;
 };
 
 /**

@@ -54,20 +54,6 @@ This will start and bundle the app using [ViteJS](https://vitejs.dev/) and make 
 
 ViteJS will also update your browser's content (using React Refresh) anytime you do save a file on the disk.
 
-### Updating document content
-
-Fari as a couple of markdown files that it transforms to HTML files so that they can be used inside the app.
-
-This process is done at build time to prevent useless calculation on the client side.
-
-Since it takes a bit of time do transform those documents, and it's not everyday that you modify those documents, the `npm start` doesn't do that process that default.
-
-If you want to update a markdown file and see the changes reflected right away in your browser, you can run
-
-```sh
-npm run start:all
-```
-
 This will run the normal server, but also rebuild the markdown files everytime you modify them.
 
 ## Special Thanks
