@@ -35,41 +35,13 @@ export const CharacterFactory = {
   async make(template: ICharacterTemplate): Promise<ICharacter> {
     const result = await template.importFunction();
     const newCharacter = this.makeFromJson(result);
-    return {
+    const characterWithNewName = {
       ...newCharacter,
-      id: Id.generate(),
-            pages: newCharacter.pages.map((page) => {
-        return {
-          ...page,
-          id: Id.generate(),
-          rows: page.rows.map((row) => {
-            return {
-              ...row,
-              columns: row.columns.map((column) => {
-                return {
-                  ...column,
-                  sections: column.sections.map((section) => {
-                    return {
-                      ...section,
-                      id: Id.generate(),
-                      blocks: section.blocks.map((block) => {
-                        return {
-                          ...block,
-                          id: Id.generate(),
-                        };
-                      }),
-                    };
-                  }),
-                };
-              }),
-            };
-          }),
-        };
-      }),
       name: "",
       group: undefined,
       lastUpdated: getUnix(),
     };
+    return CharacterFactory.resetAllIds(characterWithNewName);
   },
   makeFromJson(jsonData: any): ICharacter {
     const newSheet = {
@@ -112,40 +84,30 @@ export const CharacterFactory = {
     }
   },
   duplicate(character: ICharacter): ICharacter {
-    return {
-      ...character,
-      id: Id.generate(),
-      pages: character.pages.map((page) => {
-        return {
-          ...page,
-          id: Id.generate(),
-          rows: page.rows.map((row) => {
-            return {
-              ...row,
-              columns: row.columns.map((column) => {
-                return {
-                  ...column,
-                  sections: column.sections.map((section) => {
-                    return {
-                      ...section,
-                      id: Id.generate(),
-                      blocks: section.blocks.map((block) => {
-                        return {
-                          ...block,
-                          id: Id.generate(),
-                        };
-                      }),
-                    };
-                  }),
-                };
-              }),
-            };
-          }),
-        };
-      }),
-      lastUpdated: getUnix(),
-      name: `${character?.name} Copy`,
-    };
+    const newCharacter = produce(character, (draft) => {
+      draft.lastUpdated = getUnix();
+      draft.name = `${character?.name} Copy`;
+    });
+
+    return CharacterFactory.resetAllIds(newCharacter);
+  },
+  resetAllIds(character: ICharacter): ICharacter {
+    return produce(character, (draft) => {
+      draft.id = Id.generate();
+      draft.pages.forEach((page) => {
+        page.id = Id.generate();
+        page.rows.forEach((row) => {
+          row.columns.forEach((col) => {
+            col.sections.forEach((section) => {
+              section.id = Id.generate();
+              section.blocks.forEach((block) => {
+                block.id = Id.generate();
+              });
+            });
+          });
+        });
+      });
+    });
   },
   makeATemplate(c: ICharacter): Omit<ICharacter, "id"> & { id: undefined } {
     return {
