@@ -59,10 +59,13 @@ This will run the normal server, but also rebuild the markdown files everytime y
 ## Special Thanks
 
 <a href="https://www.netlify.com">
-  <img width="100px" src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+  <img width="100px" src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"  />
 </a>
 <a href="https://lokalise.com/">
-  <img  width="200px" style="margin-left:16px;" src="./images/services/lokalise.png" alt="[Deploys by Netlify](https://lokalise.com/)" />
+  <img width="200px" style="margin-left:16px;" src="./images/services/lokalise.png"  />
+</a>
+<a href="https://liveblocks.io/">
+  <img  height="100px" style="margin-left:16px;" src="https://gyazo.com/195675f9a76d92c013c6cd33330e6e6b.png"  />
 </a>
 
 - [Netlify](https://netlify.com/) for hosting Fari.
