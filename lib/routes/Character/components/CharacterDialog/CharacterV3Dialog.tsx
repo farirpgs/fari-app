@@ -1535,20 +1535,22 @@ export const CharacterV3Dialog: React.FC<{
               </>
             )}
 
-            <Grid item>
-              <Tooltip title={t("character-dialog.open-theme-editor")}>
-                <IconButton
-                  color="default"
-                  data-cy="character-dialog.open-theme-editor"
-                  size="small"
-                  onClick={() => {
-                    setThemeEditorVisible(true);
-                  }}
-                >
-                  <PaletteIcon htmlColor={miniTheme.textPrimary} />
-                </IconButton>
-              </Tooltip>
-            </Grid>
+            {!props.dialog && (
+              <Grid item>
+                <Tooltip title={t("character-dialog.open-theme-editor")}>
+                  <IconButton
+                    color="default"
+                    data-cy="character-dialog.open-theme-editor"
+                    size="small"
+                    onClick={() => {
+                      setThemeEditorVisible(true);
+                    }}
+                  >
+                    <PaletteIcon htmlColor={miniTheme.textPrimary} />
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+            )}
 
             <Grid item>
               <Button
