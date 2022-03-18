@@ -2,6 +2,7 @@ import { IDiceCommandSetId } from "../dice/Dice";
 
 export enum BlockType {
   Text = "Text",
+  InfoText = "InfoText",
   Numeric = "Numeric",
   Skill = "Skill",
   DicePool = "DicePool",
@@ -135,6 +136,12 @@ export type ITextBlock = {
   meta: IDefaultBlockMeta & {
     checked?: boolean;
   };
+  value: string | undefined;
+};
+
+export type IInfoTextBlock = {
+  type: BlockType.InfoText;
+  meta: IDefaultBlockMeta & {};
   value: string;
 };
 
@@ -210,6 +217,7 @@ export type ISeparatorBlock = {
 
 export type IBlockTypes =
   | ITextBlock
+  | IInfoTextBlock
   | INumericBlock
   | ISkillBlock
   | IDicePoolBlock
@@ -222,7 +230,7 @@ export type IBlockTypes =
 export type IBlock = {
   type: BlockType;
   id: string;
-  label: string;
+  label: string | undefined;
   value: unknown;
 } & IBlockTypes;
 
@@ -270,6 +278,33 @@ export interface IPage {
   rows: Array<IPageRow>;
 }
 
+export type ICharacterTheme = {
+  backgroundColor?: string;
+  style?: string;
+  primaryColor?: string;
+  hideTabBackground?: boolean;
+  hideSectionBackground?: boolean;
+
+  pageHeadingFontFamily?: string;
+  pageHeadingFontSize?: number;
+  pageHeadingFontWeight?: any;
+  sectionHeadingFontFamily?: string;
+  sectionHeadingFontSize?: number;
+  sectionHeadingFontWeight?: any;
+  labelFontFamily?: string;
+  labelFontSize?: number;
+  labelFontWeight?: any;
+  textFontFamily?: string;
+  textFontSize?: number;
+  textFontWeight?: any;
+  helperTextFontFamily?: string;
+  helperTextFontSize?: number;
+  helperTextFontWeight?: any;
+  infoTextFontFamily?: string;
+  infoTextFontSize?: number;
+  infoTextFontWeight?: any;
+};
+
 export interface ICharacter {
   id: string;
   name: string;
@@ -277,7 +312,7 @@ export interface ICharacter {
   wide: boolean;
   zoom?: number;
   pages: Array<IPage>;
-
+  theme?: ICharacterTheme;
   // hidden
   version: number;
   lastUpdated: number;

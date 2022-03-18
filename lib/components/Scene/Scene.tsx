@@ -64,12 +64,18 @@ import {
   IScene,
 } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
-import { useSession } from "../../hooks/useScene/useSession";
+import {
+  useSession,
+  useSessionCharacterSheets,
+} from "../../hooks/useScene/useSession";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
-import { TlDrawErrorBoundary } from "../../routes/Draw/TldrawWriterAndReader";
+import {
+  MiniThemeContext,
+  useMiniTheme,
+} from "../../routes/Character/components/CharacterDialog/MiniThemeContext";
 import {
   IPlayerInteraction,
   PlayerInteractionFactory,
@@ -80,7 +86,7 @@ import {
 } from "../ContentEditable/ContentEditable";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
-import { LiveMode, Page } from "../Page/Page";
+import { Page } from "../Page/Page";
 import { SplitButton } from "../SplitButton/SplitButton";
 import { Toolbox } from "../Toolbox/Toolbox";
 import { WindowPortal } from "../WindowPortal/WindowPortal";
@@ -105,6 +111,7 @@ const paperStyle = css({ borderRadius: "0px", flex: "1 0 auto" });
 
 type IProps = {
   sessionManager: ReturnType<typeof useSession>;
+  sessionCharactersManager: ReturnType<typeof useSessionCharacterSheets>;
   sceneManager: ReturnType<typeof useScene>;
   userId: string;
   isLoading?: boolean;
@@ -115,7 +122,7 @@ type IProps = {
 };
 
 export const Session: React.FC<IProps> = (props) => {
-  const { sessionManager, sceneManager } = props;
+  const { sessionManager, sceneManager, sessionCharactersManager } = props;
 
   const charactersManager = useContext(CharactersContext);
   const myBinderManager = useContext(MyBinderContext);
@@ -125,16 +132,20 @@ export const Session: React.FC<IProps> = (props) => {
   useBlockReload(sceneManager.state.dirty);
 
   const theme = useTheme();
+  const miniTheme = useMiniTheme({
+    enforceBackground: theme.palette.background.default,
+  });
+
   const { t } = useTranslate();
   const logger = useLogger();
   const diceManager = useContext(DiceContext);
 
   const characterCardWidth = useResponsiveValue({
-    xl: "25%",
-    lg: "33%",
-    md: "50%",
-    sm: "100%",
-    xs: "100%",
+    xl: "400px",
+    lg: "400px",
+    md: "400px",
+    sm: "400px",
+    xs: "300px",
   });
 
   const textColors = useTextColors(theme.palette.primary.main);
@@ -199,7 +210,7 @@ export const Session: React.FC<IProps> = (props) => {
     character: ICharacter
   ) => {
     if (isGM) {
-      sessionManager.actions.loadPlayerCharacter(playerId, character);
+      sessionCharactersManager.actions.loadPlayerCharacter(playerId, character);
     } else {
       props.onPlayerInteraction?.(
         PlayerInteractionFactory.updatePlayerCharacter(playerId, character)
@@ -212,7 +223,10 @@ export const Session: React.FC<IProps> = (props) => {
     updatedCharacter: ICharacter
   ) {
     if (isGM) {
-      sessionManager.actions.updatePlayerCharacter(playerId, updatedCharacter);
+      sessionCharactersManager.actions.updatePlayerCharacter(
+        playerId,
+        updatedCharacter
+      );
     } else {
       props.onPlayerInteraction?.(
         PlayerInteractionFactory.updatePlayerCharacter(
@@ -254,12 +268,7 @@ export const Session: React.FC<IProps> = (props) => {
     }
   };
   return (
-    <Page
-      pb="6rem"
-      gameId={props.idFromParams}
-      live={LiveMode.Live}
-      liveLabel={sceneManager.state.scene?.name ?? ""}
-    >
+    <Page pb="6rem" isLive gameId={props.idFromParams}>
       <Box px="1rem">
         <Prompt when={true} message={t("manager.leave-without-saving")} />
 
@@ -373,7 +382,7 @@ export const Session: React.FC<IProps> = (props) => {
   function renderIsLoading() {
     return (
       <Box display="flex" justifyContent="center">
-        <CircularProgress />
+        <CircularProgress color="secondary" />
       </Box>
     );
   }
@@ -432,6 +441,7 @@ export const Session: React.FC<IProps> = (props) => {
         {isGM && (
           <DialogActions>
             <Button
+              color="secondary"
               onClick={() => {
                 sessionManager.actions.unpause();
               }}
@@ -611,6 +621,12 @@ export const Session: React.FC<IProps> = (props) => {
     );
   }
 
+  function getCharacterSheet(playerId: string) {
+    const playerCharacter =
+      sessionCharactersManager.state.characterSheets[playerId];
+    return playerCharacter;
+  }
+
   function renderPlayerCharacterDialog(options: {
     player: IPlayer;
     canControl: boolean;
@@ -620,15 +636,16 @@ export const Session: React.FC<IProps> = (props) => {
       return null;
     }
 
+    const characterSheet = getCharacterSheet(player.id);
     const isCharacterInStorage = charactersManager.selectors.isInStorage(
-      player.character?.id
+      characterSheet?.id
     );
 
     return (
       <CharacterV3Dialog
         readonly={!canControl}
         open={characterDialogPlayerId === player.id}
-        character={player.character}
+        character={characterSheet}
         dialog={true}
         onSave={(updatedCharacter) => {
           handleUpdateCharacter(player.id, updatedCharacter);
@@ -638,7 +655,7 @@ export const Session: React.FC<IProps> = (props) => {
         }}
         synced={isCharacterInStorage}
         onToggleSync={() => {
-          handleOnToggleCharacterSync(player.character);
+          handleOnToggleCharacterSync(characterSheet);
         }}
         onRoll={(newDiceRollResult) => {
           handleSetPlayerRoll(player.id, newDiceRollResult);
@@ -663,6 +680,7 @@ export const Session: React.FC<IProps> = (props) => {
       dataCyIndex: playerRowDataCyIndex,
       children: playerRowChildren,
     } = options;
+    const characterSheet = getCharacterSheet(player.id);
 
     return (
       <PlayerRow
@@ -678,14 +696,16 @@ export const Session: React.FC<IProps> = (props) => {
         key={player.id}
         isMe={isMe}
         player={player}
+        characterSheet={characterSheet}
         onPlayerRemove={() => {
           sessionManager.actions.removePlayer(player.id);
+          sessionCharactersManager.actions.removeCharacterSheet(player.id);
         }}
         onTogglePrivate={() => {
           sessionManager.actions.togglePlayerVisibility(player.id);
         }}
         onCharacterSheetOpen={() => {
-          if (player.character) {
+          if (characterSheet) {
             setCharacterDialogPlayerId(player.id);
           }
         }}
@@ -720,7 +740,7 @@ export const Session: React.FC<IProps> = (props) => {
         }}
         onPointsChange={(points, maxPoints) => {
           if (isGM) {
-            sessionManager.actions.updatePlayerCharacterMainPointCounter(
+            sessionCharactersManager.actions.updatePlayerCharacterMainPointCounter(
               player.id,
               points,
               maxPoints
@@ -742,7 +762,19 @@ export const Session: React.FC<IProps> = (props) => {
   }
 
   function renderCharacterCards() {
-    const { playersWithCharacterSheets } = sessionManager.computed;
+    const everyone = sessionManager.computed.everyone;
+    const characters = sessionCharactersManager.state.characterSheets;
+    const playersWithCharacterSheets = Object.keys(characters).map(
+      (characterId) => {
+        const playerMatch = everyone.find(
+          (player) => player.id === characterId
+        ) as IPlayer;
+        return {
+          ...playerMatch,
+          characterSheet: characters[characterId],
+        };
+      }
+    );
 
     return (
       <>
@@ -751,109 +783,79 @@ export const Session: React.FC<IProps> = (props) => {
             className={css({
               display: "flex",
               flexFlow: "row",
-              flexWrap: "wrap",
+              flexWrap: "nowrap",
+              overflow: "hidden",
+              overflowX: "auto",
             })}
           >
             {showEmptyWarnings()}
-
-            {playersWithCharacterSheets.map((player, index) => {
-              const isMe = props.userId === player.id;
-              const canControl = isGM || isMe;
-              return (
-                <Box
-                  key={player?.id || index}
-                  className={css({
-                    width: characterCardWidth,
-                    display: "inline-block",
-                    marginBottom: "1rem",
-                  })}
-                >
-                  <CharacterCard
+            <MiniThemeContext.Provider value={miniTheme}>
+              {playersWithCharacterSheets.map((player, index) => {
+                const isMe = props.userId === player.id;
+                const canControl = isGM || isMe;
+                return (
+                  <Box
                     key={player?.id || index}
-                    readonly={!canControl}
-                    playerName={player.playerName}
-                    characterSheet={player.character}
-                    onCharacterDialogOpen={() => {
-                      setCharacterDialogPlayerId(player.id);
+                    sx={{
+                      display: "inline-block",
+                      marginBottom: "1rem",
+                      width: characterCardWidth,
                     }}
-                    onChange={(updatedCharacter) => {
-                      handleUpdateCharacter(player.id, updatedCharacter);
-                    }}
-                    onRoll={(newDiceRollResult) => {
-                      handleSetPlayerRoll(player.id, newDiceRollResult);
-                    }}
-                  />
-                </Box>
-              );
-            })}
-            {sessionManager.state.session.gm.npcs.map((npc, index) => {
-              const canControl = isGM;
-              if (npc.private) {
-                return null;
-              }
-              return (
-                <Box
-                  key={npc?.id || index}
-                  className={css({
-                    width: characterCardWidth,
-                    display: "inline-block",
-                    marginBottom: "1rem",
-                  })}
-                >
-                  <CharacterCard
-                    key={npc?.id || index}
-                    readonly={!canControl}
-                    playerName={npc.playerName}
-                    characterSheet={npc.character}
-                    onCharacterDialogOpen={() => {
-                      setCharacterDialogPlayerId(npc.id);
-                    }}
-                    onChange={(updatedCharacter) => {
-                      handleUpdateCharacter(npc.id, updatedCharacter);
-                    }}
-                    onRoll={(newDiceRollResult) => {
-                      handleSetPlayerRoll(npc.id, newDiceRollResult);
-                    }}
-                  />
-                </Box>
-              );
-            })}
+                  >
+                    <CharacterCard
+                      key={player?.id || index}
+                      readonly={!canControl}
+                      playerName={player.playerName}
+                      characterSheet={player.characterSheet}
+                      onCharacterDialogOpen={() => {
+                        setCharacterDialogPlayerId(player.id);
+                      }}
+                      onChange={(updatedCharacter) => {
+                        handleUpdateCharacter(player.id, updatedCharacter);
+                      }}
+                      onRoll={(newDiceRollResult) => {
+                        handleSetPlayerRoll(player.id, newDiceRollResult);
+                      }}
+                    />
+                  </Box>
+                );
+              })}
+            </MiniThemeContext.Provider>
           </Box>
         </Box>
       </>
     );
   }
 
-  function renderZones() {
-    // const tokenTitles = Object.values(sessionManager.state.session.players).map(
-    //   (p) => (p.character?.name ?? p.playerName) as string
-    // );
+  // function renderZones() {
+  //   // const tokenTitles = Object.values(sessionManager.state.session.players).map(
+  //   //   (p) => (p.character?.name ?? p.playerName) as string
+  //   // );
 
-    return (
-      <TlDrawErrorBoundary>
-        <Box border={`1px solid ${theme.palette.divider}`} margin="0 auto">
-          {/* {isGM ? (
-            <TldrawWriter
-              initialDoc={sessionManager.state.session.tlDrawDoc}
-              onChange={(state) => {
-                sessionManager.actions.updateDrawAreaObjects(state);
-              }}
-            />
-          ) : (
-            <TldrawReader doc={sessionManager.state.session.tlDrawDoc} />
-          )} */}
-        </Box>
-      </TlDrawErrorBoundary>
-    );
-  }
+  //   return (
+  //     <TlDrawErrorBoundary>
+  //       <Box border={`1px solid ${theme.palette.divider}`} margin="0 auto">
+  //         {/* {isGM ? (
+  //           <TldrawWriter
+  //             initialDoc={sessionManager.state.session.tlDrawDoc}
+  //             onChange={(state) => {
+  //               sessionManager.actions.updateDrawAreaObjects(state);
+  //             }}
+  //           />
+  //         ) : (
+  //           <TldrawReader doc={sessionManager.state.session.tlDrawDoc} />
+  //         )} */}
+  //       </Box>
+  //     </TlDrawErrorBoundary>
+  //   );
+  // }
 
   function showEmptyWarnings() {
-    const { playersWithCharacterSheets, npcsWithCharacterSheets } =
-      sessionManager.computed;
-    const numberOfSheets =
-      playersWithCharacterSheets.length + npcsWithCharacterSheets.length;
+    const numberOfSheets = Object.keys(
+      sessionCharactersManager.state.characterSheets
+    ).length;
     const showNoPlayersWarning =
-      sessionManager.computed.playersAndNpcsCount === 0;
+      sessionManager.computed.playersAndNPCs.length === 0;
     const showNoSheetsWarning = numberOfSheets === 0;
 
     if (showNoPlayersWarning) {
@@ -919,21 +921,18 @@ export const Session: React.FC<IProps> = (props) => {
                     if (isGM) {
                       sceneManager.actions.updateIndexCard(indexCard, type);
                     } else {
-                      // TODO
-                      // props.onPlayerInteraction?.(
-                      //   `/scene/indexCards/${type}/0`,
-                      //   indexCard
-                      // );
-                      // connectionsManager?.actions.sendToHost<IPeerActions>({
-                      //   action: "update-index-card",
-                      //   payload: { indexCard: indexCard },
-                      // });
+                      props.onPlayerInteraction?.({
+                        type: "update-index-card",
+                        payload: {
+                          indexCard: indexCard,
+                          indexCardType: type,
+                        },
+                      });
                     }
                   }}
                 />
               ),
             },
-
             // {
             //   value: "draw",
             //   dataCy: "session.tabs.draw",
@@ -975,7 +974,7 @@ export const Session: React.FC<IProps> = (props) => {
                 }
               }}
               variant="outlined"
-              color={shareLinkToolTip.open ? "primary" : "inherit"}
+              color={shareLinkToolTip.open ? "secondary" : "inherit"}
               endIcon={<FileCopyIcon />}
             >
               {t("play-route.copy-game-link")}
@@ -1157,6 +1156,7 @@ export function Scene(props: {
               aria-label="outlined primary button group"
             >
               <Button
+                color="secondary"
                 data-cy="scene.new-scene"
                 onClick={() => {
                   const confirmed = sceneManager.state.scene
@@ -1172,6 +1172,7 @@ export function Scene(props: {
                 {t("play-route.new-scene")}
               </Button>
               <Button
+                color="secondary"
                 onClick={() => {
                   myBinderManager.actions.open({
                     folder: "scenes",
@@ -1182,6 +1183,7 @@ export function Scene(props: {
                 {t("play-route.load-scene")}
               </Button>
               <Button
+                color="secondary"
                 onClick={() => {
                   myBinderManager.actions.open({
                     folder: "scenes",
@@ -1198,7 +1200,7 @@ export function Scene(props: {
         {sceneManager.state.scene && props.isGM && (
           <Grid item>
             <Button
-              color="primary"
+              color="secondary"
               data-cy="scene.save"
               endIcon={<SaveIcon />}
               variant={sceneManager.state.dirty ? "contained" : "outlined"}
@@ -1257,7 +1259,13 @@ export function Scene(props: {
           <TabContext value={sceneTab}>
             {renderSceneTabs()}
             <Box>
-              <Box py="2rem" position="relative" minHeight="20rem">
+              <Box
+                py="2rem"
+                position="relative"
+                sx={{
+                  overflowX: "auto",
+                }}
+              >
                 <TabPanel value={"public"} className={tabPanelStyle}>
                   {renderIndexCardsForTab(
                     sceneManager.state.scene?.indexCards.public,
@@ -1495,6 +1503,12 @@ export function Scene(props: {
                       type
                     );
                   }}
+                  onMoveOut={(idOfIndexCardToMove) => {
+                    sceneManager.actions.moveIndexCardOut(
+                      idOfIndexCardToMove,
+                      type
+                    );
+                  }}
                   isGM={props.isGM}
                   indexCard={indexCard}
                   onRoll={props.onRoll}
@@ -1647,6 +1661,7 @@ export function Scene(props: {
                   <SplitButton
                     data-cy="scene.add-card"
                     instant
+                    color="secondary"
                     options={[
                       {
                         label: t("play-route.add-index-card").toUpperCase(),
@@ -1706,6 +1721,7 @@ export function Scene(props: {
               </Grid>
               <Grid item>
                 <Button
+                  color="secondary"
                   onClick={() => {
                     hiddenIndexCardRecord.actions.toggleAll();
                   }}

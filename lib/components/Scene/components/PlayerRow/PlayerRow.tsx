@@ -18,6 +18,7 @@ import React, { useState } from "react";
 import { FontFamily } from "../../../../constants/FontFamily";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
+import { ICharacter } from "../../../../domains/character/types";
 import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
 import { Font } from "../../../../domains/font/Font";
 import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
@@ -25,6 +26,10 @@ import { IPlayer } from "../../../../hooks/useScene/IScene";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { usePointCounter } from "../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { CircleTextField } from "../../../../routes/Character/components/CharacterDialog/components/CircleTextField";
+import {
+  MiniThemeContext,
+  useMiniTheme,
+} from "../../../../routes/Character/components/CharacterDialog/MiniThemeContext";
 import { previewContentEditable } from "../../../ContentEditable/ContentEditable";
 import {
   DiceBonusLabel,
@@ -44,6 +49,8 @@ export function PlayerRow(
       canMarkPrivate: boolean;
     };
     player: IPlayer;
+    characterSheet: ICharacter | undefined;
+    connectionState?: string;
     isMe: boolean;
     children?: JSX.Element;
     onDiceRoll(): void;
@@ -61,7 +68,7 @@ export function PlayerRow(
   const logger = useLogger();
   const [hover, setHover] = useState(false);
   const mainPointerBlock = CharacterSelector.getCharacterMainPointerBlock(
-    props.player.character
+    props.characterSheet
   );
   const pointFromProps = mainPointerBlock?.value ?? props.player.points;
   const maxPointsFromProps = mainPointerBlock?.meta.max ?? undefined;
@@ -77,15 +84,19 @@ export function PlayerRow(
     },
   });
 
+  const miniTheme = useMiniTheme({
+    enforceBackground: theme.palette.background.paper,
+  });
+
   const lightBackground = useLightBackground();
   const playedDuringTurnColor = props.player.playedDuringTurn
-    ? theme.palette.primary.main
+    ? theme.palette.secondary.main
     : theme.palette.text.secondary;
 
-  const hasCharacterSheet = !!props.player.character;
+  const hasCharacterSheet = !!props.characterSheet;
 
   const borderColor = hasCharacterSheet
-    ? theme.palette.primary.main
+    ? theme.palette.secondary.main
     : theme.palette.text.secondary;
 
   function handleOnRoll() {
@@ -95,40 +106,44 @@ export function PlayerRow(
 
   return (
     <>
-      <Box
-        bgcolor={props.isMe ? lightBackground : theme.palette.background.paper}
-        m=".5rem"
-        data-cy={props["data-cy"]}
-        onClick={() => {
-          setHover(true);
-        }}
-        onPointerEnter={() => {
-          setHover(true);
-        }}
-        onPointerLeave={() => {
-          setHover(false);
-        }}
-      >
+      <MiniThemeContext.Provider value={miniTheme}>
         <Box
-          py=".5rem"
-          px="1rem"
-          className={css({
-            border: `2px solid ${borderColor}`,
-            borderRadius: "8px",
-          })}
+          bgcolor={
+            props.isMe ? lightBackground : theme.palette.background.paper
+          }
+          m=".5rem"
+          data-cy={props["data-cy"]}
+          onClick={() => {
+            setHover(true);
+          }}
+          onPointerEnter={() => {
+            setHover(true);
+          }}
+          onPointerLeave={() => {
+            setHover(false);
+          }}
         >
-          <Box>{renderName()}</Box>
+          <Box
+            py=".5rem"
+            px="1rem"
+            className={css({
+              border: `2px solid ${borderColor}`,
+              borderRadius: "8px",
+            })}
+          >
+            <Box>{renderName()}</Box>
 
-          <Box mb=".5rem">
-            <Box pb=".5rem">{renderDice()}</Box>
-            <Box pb=".5rem">{renderPointCounter()}</Box>
-            <Box pb={props.children ? ".5rem" : undefined}>
-              {renderControls()}
+            <Box mb=".5rem">
+              <Box pb=".5rem">{renderDice()}</Box>
+              <Box pb=".5rem">{renderPointCounter()}</Box>
+              <Box pb={props.children ? ".5rem" : undefined}>
+                {renderControls()}
+              </Box>
+              {props.children}
             </Box>
-            {props.children}
           </Box>
         </Box>
-      </Box>
+      </MiniThemeContext.Provider>
     </>
   );
 
@@ -434,10 +449,10 @@ export function PlayerRow(
         noWrap
         uppercase={false}
         className={css({
-          color: theme.palette.primary.main,
+          color: theme.palette.secondary.main,
         })}
       >
-        {name ?? "..."}
+        {name ?? "Untitled"}
       </FateLabel>
     );
   }
@@ -477,7 +492,7 @@ export function PlayerRow(
                   {hasCharacterSheet ? (
                     <>
                       <Grid item xs={12} zeroMinWidth>
-                        {renderMainName(props.player.character?.name)}
+                        {renderMainName(props.characterSheet?.name)}
                       </Grid>
                       <Grid item xs={12} zeroMinWidth>
                         {renderSecondaryName(props.player.playerName)}
@@ -508,11 +523,11 @@ export function PlayerRow(
                   <IconButton
                     size="small"
                     disabled={!canOpenOrLoadSheet}
-                    color={"primary"}
+                    color={"secondary"}
                     data-cy={`${props["data-cy"]}.assign-or-open-character-sheet`}
                     className={css({
                       visibility: canOpenOrLoadSheet ? "visible" : "hidden",
-                      border: `1px solid ${theme.palette.primary.main}`,
+                      border: `1px solid ${theme.palette.secondary.main}`,
                       borderRadius: "50%",
                       boxShadow: theme.shadows[2],
                     })}
@@ -540,7 +555,6 @@ export function PlayerRow(
       </>
     );
   }
-
   function renderPlayerId() {
     return (
       <Typography

@@ -34,6 +34,7 @@ describe("istItem", () => {
       // WHEN
       const result = listItem.formatDate(timestamp);
       // THEN
+
       expect(result).toEqual("Jul 17, 2020 7:00 PM");
     });
   });

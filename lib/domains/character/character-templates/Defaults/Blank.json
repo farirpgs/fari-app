@@ -1,0 +1,15 @@
+{
+  "fariType": "character",
+  "id": "1d8ebddd-3672-4602-b2f4-79be6372e035",
+  "lastUpdated": 1645641605,
+  "name": "My Character",
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "Character",
+      "rows": [{ "columns": [{ "sections": [] }] }]
+    }
+  ],
+  "template": "Blank",
+  "version": 6
+}

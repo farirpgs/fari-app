@@ -89,7 +89,15 @@ export function Toolbox(props: {
               </Grid>
             </Grid>
             {/* CENTER */}
-            <Grid item>
+            <Grid
+              item
+              sx={{
+                display: {
+                  xs: "none",
+                  md: "flex",
+                },
+              }}
+            >
               <Grid
                 container
                 alignItems="center"
@@ -101,7 +109,15 @@ export function Toolbox(props: {
             </Grid>
             {/* RIGHT */}
             {!props.hideDefaultRightActions && (
-              <Grid item>
+              <Grid
+                item
+                sx={{
+                  display: {
+                    xs: "none",
+                    md: "flex",
+                  },
+                }}
+              >
                 <Grid
                   container
                   alignItems="center"
@@ -113,7 +129,7 @@ export function Toolbox(props: {
                     <Tooltip title="Oracle">
                       <IconButton
                         className={css({
-                          border: `1px solid ${theme.palette.primary.main}`,
+                          border: `1px solid ${theme.palette.secondary.main}`,
                           boxShadow: theme.shadows[2],
                         })}
                         onClick={() => {
@@ -122,7 +138,7 @@ export function Toolbox(props: {
                         size="large"
                       >
                         <Icons.EyeIcon
-                          color="primary"
+                          color="secondary"
                           className={css({ width: "2rem", height: "2rem" })}
                         />
                       </IconButton>
@@ -132,7 +148,7 @@ export function Toolbox(props: {
                     <Tooltip title="Story Builder Decks">
                       <IconButton
                         className={css({
-                          border: `1px solid ${theme.palette.primary.main}`,
+                          border: `1px solid ${theme.palette.secondary.main}`,
                           boxShadow: theme.shadows[2],
                         })}
                         onClick={() => {
@@ -141,7 +157,7 @@ export function Toolbox(props: {
                         size="large"
                       >
                         <LocalLibraryIcon
-                          color="primary"
+                          color="secondary"
                           className={css({ width: "2rem", height: "2rem" })}
                         />
                       </IconButton>
@@ -151,7 +167,7 @@ export function Toolbox(props: {
                     <Tooltip title="Story Dice">
                       <IconButton
                         className={css({
-                          border: `1px solid ${theme.palette.primary.main}`,
+                          border: `1px solid ${theme.palette.secondary.main}`,
                           boxShadow: theme.shadows[2],
                         })}
                         onClick={() => {
@@ -160,7 +176,7 @@ export function Toolbox(props: {
                         size="large"
                       >
                         <CasinoIcon
-                          color="primary"
+                          color="secondary"
                           className={css({ width: "2rem", height: "2rem" })}
                         />
                       </IconButton>

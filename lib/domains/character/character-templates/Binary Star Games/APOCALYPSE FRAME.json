@@ -1,8 +1,7 @@
 {
-  "id": "9d55f4fd-a97b-4206-a717-6a9d44c072af",
-  "name": "APOCALYPSE FRAME",
-  "lastUpdated": 1643745247,
-  "wide": false,
+  "fariType": "character",
+  "lastUpdated": 1645644799,
+  "name": " Template",
   "pages": [
     {
       "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
@@ -253,7 +252,7 @@
                     },
                     {
                       "id": "f1c324b3-f497-405d-9d0f-4c39564c2cfb",
-                      "label": "Backup #1 \n(Armament #1 backup)",
+                      "label": "Backup #1 \n(Armament #1 Backup )",
                       "type": "Skill",
                       "value": "0",
                       "meta": {
@@ -277,7 +276,7 @@
                     },
                     {
                       "id": "1aeb955a-2c9c-447c-bb66-b13ae05347f9",
-                      "label": "Backup #2<br>(Armament #2 backup)",
+                      "label": "Backup #2<br>(Armament #2 Backup )",
                       "type": "Skill",
                       "value": "0",
                       "meta": {
@@ -299,7 +298,7 @@
                   "blocks": [
                     {
                       "id": "9443edb3-1f14-4ae6-9e38-33d5e893ae45",
-                      "label": "Integral System",
+                      "label": "Integral System Name",
                       "type": "Text",
                       "value": "Integral System Description",
                       "meta": {
@@ -315,7 +314,7 @@
                   "blocks": [
                     {
                       "id": "46354ac1-5213-40b8-bbe2-5b1a4c3e1103",
-                      "label": "Modular System #1",
+                      "label": "Modular System #1 Name",
                       "type": "Text",
                       "value": "Modular System #1 Description",
                       "meta": {
@@ -325,7 +324,7 @@
                     },
                     {
                       "id": "a9c7cc80-3c0b-4864-a833-df6ede09b66e",
-                      "label": "Modular System #2",
+                      "label": "Modular System #2 Name",
                       "type": "Text",
                       "value": "Modular System #2 Description",
                       "meta": {
@@ -370,7 +369,7 @@
                       "id": "0779c120-50c0-44d9-a8ec-75762573964f",
                       "label": "Frame",
                       "type": "Text",
-                      "value": "Put your Frame's name here!",
+                      "value": "Put your Frame's name and description here!",
                       "meta": { "helperText": "" }
                     }
                   ]
@@ -428,7 +427,7 @@
                       "id": "80af3504-d27c-48a8-9aee-c14a1cd16f7d",
                       "label": "Attributes",
                       "type": "Text",
-                      "value": "Roll your Attributes to determine your approach to a task.\n<br>Roll Drive for direct or forceful action.\n<br>Roll Speed for reflexive or hasty action.\n<br>Roll Control for thoughtful and skillful action.",
+                      "value": "Roll your Attributes to determine your approach to a task.\n<br>• Roll Drive for direct or forceful action.\n<br>• Roll Speed for reflexive or hasty action.\n<br>• Roll Control for thoughtful and skillful action.",
                       "meta": {}
                     },
                     {
@@ -492,7 +491,7 @@
                     },
                     {
                       "id": "90fa5ffc-9ebd-46f5-b285-be877ce1bd1e",
-                      "label": "TAgs",
+                      "label": "Tags",
                       "type": "Text",
                       "value": "Put the other tags for your various Armaments/Systems here!",
                       "meta": {
@@ -522,6 +521,18 @@
       "label": "Reference"
     }
   ],
-  "version": 5,
-  "fariType": "character"
+  "theme": {
+    "hideSectionBackground": false,
+    "pageHeadingFontFamily": "Abel",
+    "sectionHeadingFontFamily": "Audiowide",
+    "labelFontFamily": "Abel",
+    "textFontFamily": "Abel",
+    "helperTextFontFamily": "Abel",
+    "sectionHeadingFontWeight": "normal",
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Abel&family=Audiowide&display=swap');",
+    "pageHeadingFontSize": 1.25,
+    "infoTextFontFamily": "Abel"
+  },
+  "version": 6,
+  "wide": false
 }

@@ -28,7 +28,7 @@ If you want to make a contribution to Fari, you will need to fork / clone this r
 
 ### Prerequisites
 
-1. Install Node `^16.2.0` (to match engine property in `package.json`)
+1. Install Node `^16.2.0` (to match engine property in `package.json`) or use the [devcontainer](https://microsoft.github.io/code-with-engineering-playbook/developer-experience/devcontainers/) provided using [VS Code](https://code.visualstudio.com/).
 
 ### Installation
 
@@ -54,29 +54,18 @@ This will start and bundle the app using [ViteJS](https://vitejs.dev/) and make 
 
 ViteJS will also update your browser's content (using React Refresh) anytime you do save a file on the disk.
 
-### Updating document content
-
-Fari as a couple of markdown files that it transforms to HTML files so that they can be used inside the app.
-
-This process is done at build time to prevent useless calculation on the client side.
-
-Since it takes a bit of time do transform those documents, and it's not everyday that you modify those documents, the `npm start` doesn't do that process that default.
-
-If you want to update a markdown file and see the changes reflected right away in your browser, you can run
-
-```sh
-npm run start:all
-```
-
 This will run the normal server, but also rebuild the markdown files everytime you modify them.
 
 ## Special Thanks
 
 <a href="https://www.netlify.com">
-  <img width="100px" src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+  <img width="100px" src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"  />
 </a>
 <a href="https://lokalise.com/">
-  <img  width="200px" style="margin-left:16px;" src="./images/services/lokalise.png" alt="[Deploys by Netlify](https://lokalise.com/)" />
+  <img width="200px" style="margin-left:16px;" src="./images/services/lokalise.png"  />
+</a>
+<a href="https://liveblocks.io/">
+  <img  height="100px" style="margin-left:16px;" src="https://gyazo.com/195675f9a76d92c013c6cd33330e6e6b.png"  />
 </a>
 
 - [Netlify](https://netlify.com/) for hosting Fari.

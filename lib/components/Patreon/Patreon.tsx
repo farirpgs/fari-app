@@ -43,7 +43,10 @@ export const Patreon: React.FC = () => {
           </Grid>
           <Grid item>
             <Typography
-              className={css({ fontWeight: theme.typography.fontWeightBold })}
+              className={css({
+                fontWeight: theme.typography.fontWeightBold,
+                whiteSpace: "nowrap",
+              })}
             >
               {t("donation.patreon")}
             </Typography>

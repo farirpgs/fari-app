@@ -67,7 +67,7 @@ export const CharacterRoute: React.FC<{
       <PageMeta title={selectedCharacter?.name} />
 
       <Box bgcolor={theme.palette.background.paper}>
-        <Page pb="6rem">
+        <Page pb="6rem" marginTop="0" maxWidth="none">
           {!dialogMode && (
             <Toolbox
               dice={{

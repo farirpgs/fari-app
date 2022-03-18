@@ -1,27 +1,20 @@
-import { TDDocument } from "@tldraw/tldraw";
 import produce from "immer";
 import { useEffect, useState } from "react";
 import { Delays } from "../../constants/Delays";
-import { arraySort } from "../../domains/array/arraySort";
+import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
 import {
   BlockType,
   IBlock,
   ICharacter,
-  IPointCounterBlock
+  IPointCounterBlock,
 } from "../../domains/character/types";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
-import { makeNewBlankDocument } from "../../routes/Draw/TldrawWriterAndReader";
 import { IPlayer, ISession } from "./IScene";
-import { IProps } from "./useScene";
 
-(window as any).HTMLCanvasElement.prototype.getContext = () => {};
-
-export function useSession(props: IProps) {
-  const { userId, charactersManager } = props;
-
+export function useSession(props: { userId: string }) {
   const [session, setSession] = useState<ISession>(
     (): ISession => ({
       gm: {
@@ -38,26 +31,9 @@ export function useSession(props: IProps) {
       goodConfetti: 0,
       badConfetti: 0,
       paused: false,
-      tlDrawDoc: makeNewBlankDocument(),
+      tlDrawDoc: undefined,
     })
   );
-
-  const players = Object.values(session.players);
-  const npcs = session.gm.npcs;
-  const playersWithCharacterSheets = players.filter(
-    (player) => !!player.character
-  );
-  const npcsWithCharacterSheets = npcs.filter((npc) => !!npc.character);
-  const sortedPlayersWithCharacterSheets = arraySort(
-    playersWithCharacterSheets,
-    [
-      (p) => {
-        return { value: p.id === userId, direction: "asc" };
-      },
-    ]
-  );
-  const hasPlayersWithCharacterSheets =
-    !!sortedPlayersWithCharacterSheets.length;
 
   useEffect(() => {
     let timeout: any;
@@ -102,25 +78,6 @@ export function useSession(props: IProps) {
     };
   }, [session.badConfetti]);
 
-  useEffect(
-    function syncCharacterSheetForMe() {
-      const everyone = getEveryone(session);
-
-      everyone.forEach((player) => {
-        if (!player.character) {
-          return;
-        }
-        const isMe = props.userId === player.id;
-
-        if (isMe) {
-          charactersManager.actions.addIfDoesntExist(player.character);
-        }
-        charactersManager.actions.updateIfMoreRecent(player.character);
-      });
-    },
-    [props.userId, session]
-  );
-
   function overrideSession(newSession: ISession | undefined) {
     if (newSession) {
       setSession(newSession);
@@ -132,9 +89,37 @@ export function useSession(props: IProps) {
         if (!draft) {
           return;
         }
-        draft.gm.rolls = [roll, ...draft.gm.rolls];
+        draft.gm.rolls = getNewRolls(roll, draft.gm.rolls);
       })
     );
+  }
+
+  function updatePlayerRoll(id: string | undefined, roll: IDiceRollResult) {
+    setSession(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+        const everyone = getEveryone(draft);
+        everyone.forEach((player) => {
+          if (player.id === id) {
+            player.rolls = getNewRolls(roll, player.rolls);
+          }
+        });
+      })
+    );
+  }
+
+  function getNewRolls(
+    roll: IDiceRollResult,
+    previousRolls: IDiceRollResult[]
+  ) {
+    const newRolls = [roll, ...previousRolls];
+
+    if (newRolls.length === 10) {
+      newRolls.splice(newRolls.length - 5, 5);
+    }
+    return newRolls;
   }
 
   function addPlayer(player: IPlayer) {
@@ -146,21 +131,6 @@ export function useSession(props: IProps) {
         if (!draft.players[player.id]) {
           draft.players[player.id] = player;
         }
-      })
-    );
-  }
-  function updatePlayerRoll(id: string | undefined, roll: IDiceRollResult) {
-    setSession(
-      produce((draft) => {
-        if (!draft) {
-          return;
-        }
-        const everyone = getEveryone(draft);
-        everyone.forEach((player) => {
-          if (player.id === id) {
-            player.rolls = [roll, ...player.rolls];
-          }
-        });
       })
     );
   }
@@ -207,7 +177,7 @@ export function useSession(props: IProps) {
     );
   }
 
-  function updateDrawAreaObjects(doc: TDDocument) {
+  function updateDrawAreaObjects(doc: any) {
     setSession((prev) => {
       return {
         ...prev,
@@ -215,49 +185,6 @@ export function useSession(props: IProps) {
       };
     });
   }
-
-  // function updatePlayersWithConnections(
-  //   connections: Array<Peer.DataConnection>
-  // ) {
-  //   setSession(
-  //     produce((draft) => {
-  //       if (!draft) {
-  //         return;
-  //       }
-
-  //       const players = connections.map<IPlayer>((c) => {
-  //         const meta: IPeerMeta = c.metadata;
-  //         const playerName = meta.playerName;
-  //         const peerJsId = c.label;
-
-  //         const playerMatch = draft.players.find((p) => p.id === peerJsId);
-  //         const playerCharacter = playerMatch?.character;
-
-  //         const rolls = playerMatch?.rolls ?? [];
-  //         const playedDuringTurn = playerMatch?.playedDuringTurn ?? false;
-  //         const points = playerMatch?.points ?? "3";
-
-  //         return {
-  //           id: c.label,
-  //           playerName: playerName,
-  //           character: playerCharacter,
-  //           rolls: rolls,
-  //           isGM: false,
-  //           points: points,
-  //           private: false,
-  //           playedDuringTurn: playedDuringTurn,
-  //           offline: false,
-  //         };
-  //       });
-  //       const allPlayersMinusRemovedPlayersFromStaleConnections =
-  //         players.filter((p) => {
-  //           return removedPlayers.find((id) => id === p.id) === undefined;
-  //         });
-
-  //       draft.players = allPlayersMinusRemovedPlayersFromStaleConnections;
-  //     })
-  //   );
-  // }
 
   function addOfflinePlayer() {
     const id = Id.generate();
@@ -269,7 +196,6 @@ export function useSession(props: IProps) {
         draft.gm.npcs.push({
           id: id,
           playerName: `Character #${draft.gm.npcs.length + 1}`,
-          character: undefined,
           rolls: [],
           playedDuringTurn: false,
           isGM: false,
@@ -325,31 +251,6 @@ export function useSession(props: IProps) {
     );
   }
 
-  function updatePlayerCharacter(
-    id: string,
-    character: ICharacter,
-    loadCharacterHiddenFieldsInPlayer = false
-  ) {
-    setSession(
-      produce((draft) => {
-        const everyone = getEveryone(draft);
-
-        everyone.forEach((p) => {
-          if (p.id === id) {
-            p.character = character;
-            if (loadCharacterHiddenFieldsInPlayer) {
-              p.playedDuringTurn = character.playedDuringTurn ?? false;
-            }
-          }
-        });
-      })
-    );
-  }
-
-  function loadPlayerCharacter(id: string, character: ICharacter) {
-    updatePlayerCharacter(id, character, true);
-  }
-
   function updatePlayerPlayedDuringTurn(
     id: string,
     playedInTurnOrder: boolean
@@ -363,65 +264,6 @@ export function useSession(props: IProps) {
         everyone.forEach((p) => {
           if (p.id === id) {
             p.playedDuringTurn = playedInTurnOrder;
-
-            if (p.character) {
-              p.character.playedDuringTurn = playedInTurnOrder;
-              p.character.lastUpdated = getUnix();
-            }
-          }
-        });
-      })
-    );
-  }
-
-  function reset() {
-    setSession(
-      produce((draft) => {
-        if (!draft) {
-          return;
-        }
-        const everyone = getEveryone(draft);
-        draft.tlDrawDoc = makeNewBlankDocument();
-        everyone.forEach((p) => {
-          p.playedDuringTurn = false;
-        });
-      })
-    );
-  }
-
-  function updatePlayerCharacterMainPointCounter(
-    id: string,
-    points: string,
-    maxPoints: string | undefined
-  ) {
-    setSession(
-      produce((draft) => {
-        if (!draft) {
-          return;
-        }
-        const everyone = getEveryone(draft);
-        everyone.forEach((p) => {
-          if (p.id === id) {
-            p.points = points;
-            if (p.character) {
-              const blocks = p.character.pages
-                .flatMap((p) => p.rows)
-                .flatMap((r) => r.columns)
-                .flatMap((c) => c.sections)
-                .flatMap((s) => s.blocks);
-              for (const block of blocks) {
-                const shouldUpdateBlock =
-                  block.type === BlockType.PointCounter &&
-                  block.meta.isMainPointCounter;
-                if (shouldUpdateBlock) {
-                  const typedBlock = block as IPointCounterBlock & IBlock;
-
-                  typedBlock.value = points;
-                  typedBlock.meta.max = maxPoints;
-                  p.character.lastUpdated = getUnix();
-                }
-              }
-            }
           }
         });
       })
@@ -430,16 +272,19 @@ export function useSession(props: IProps) {
 
   function getEveryone(session: ISession) {
     const players = Object.values(session.players);
-    return [session.gm, ...session.gm.npcs, ...players];
+    return [session.gm, ...players, ...session.gm.npcs];
+  }
+
+  function getPlayersAndNPCs(session: ISession) {
+    const players = Object.values(session.players);
+    return [session.gm, ...players, ...session.gm.npcs];
   }
 
   return {
     state: { session },
     computed: {
-      playersAndNpcsCount: players.length + npcs.length,
-      npcsWithCharacterSheets: npcsWithCharacterSheets,
-      playersWithCharacterSheets: sortedPlayersWithCharacterSheets,
-      hasPlayersWithCharacterSheets,
+      everyone: getEveryone(session),
+      playersAndNPCs: getPlayersAndNPCs(session),
     },
     actions: {
       overrideSession,
@@ -447,19 +292,135 @@ export function useSession(props: IProps) {
       addNpc: addOfflinePlayer,
       fireBadConfetti,
       fireGoodConfetti,
-      loadPlayerCharacter: loadPlayerCharacter,
       removePlayer,
       togglePlayerVisibility,
-      reset,
       updateDrawAreaObjects,
       updateGmRoll,
-      updatePlayerCharacter,
       updatePlayerPlayedDuringTurn,
       updatePlayerRoll,
       addPlayer,
-      updatePlayerCharacterMainPointCounter,
       pause,
       unpause,
+    },
+  };
+}
+
+export function useSessionCharacterSheets(props: {
+  userId: string;
+  charactersManager: ReturnType<typeof useCharacters>;
+}) {
+  const { charactersManager } = props;
+
+  const [characterSheets, setCharacterSheets] = useState<
+    Record<string, ICharacter>
+  >({});
+
+  useEffect(
+    function syncCharacterSheetForMe() {
+      Object.entries(characterSheets).forEach(([id, characterSheet]) => {
+        const mySheet = id === props.userId;
+
+        if (mySheet) {
+          charactersManager.actions.addIfDoesntExist(characterSheet);
+        }
+        charactersManager.actions.updateIfStoredAndMoreRecent(characterSheet);
+      });
+    },
+    [props.userId, characterSheets]
+  );
+
+  function updatePlayerCharacter(
+    id: string,
+    character: ICharacter,
+    loadCharacterHiddenFieldsInPlayer = false
+  ) {
+    setCharacterSheets(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+
+        draft[id] = character;
+
+        if (loadCharacterHiddenFieldsInPlayer) {
+          draft[id].playedDuringTurn = character.playedDuringTurn ?? false;
+        }
+      })
+    );
+  }
+
+  function loadPlayerCharacter(id: string, character: ICharacter) {
+    updatePlayerCharacter(id, character, true);
+  }
+
+  function updatePlayerCharacterMainPointCounter(
+    id: string,
+    points: string,
+    maxPoints: string | undefined
+  ) {
+    setCharacterSheets(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+
+        Object.keys(draft).forEach((key) => {
+          if (key === id) {
+            const character = draft[key];
+            const blocks = character.pages
+              .flatMap((p) => p.rows)
+              .flatMap((r) => r.columns)
+              .flatMap((c) => c.sections)
+              .flatMap((s) => s.blocks);
+            for (const block of blocks) {
+              const shouldUpdateBlock =
+                block.type === BlockType.PointCounter &&
+                block.meta.isMainPointCounter;
+              if (shouldUpdateBlock) {
+                const typedBlock = block as IPointCounterBlock & IBlock;
+
+                typedBlock.value = points;
+                typedBlock.meta.max = maxPoints;
+                character.lastUpdated = getUnix();
+              }
+            }
+          }
+        });
+      })
+    );
+  }
+
+  function overrideCharacterSheets(
+    newCharacterSheets: Record<string, ICharacter> | undefined
+  ) {
+    if (newCharacterSheets) {
+      setCharacterSheets(newCharacterSheets);
+    }
+  }
+
+  function removeCharacterSheet(playerId: string) {
+    setCharacterSheets(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+
+        delete draft[playerId];
+      })
+    );
+  }
+
+  return {
+    state: {
+      characterSheets,
+    },
+    computed: {},
+    actions: {
+      overrideCharacterSheets,
+      updatePlayerCharacter,
+      loadPlayerCharacter,
+      updatePlayerCharacterMainPointCounter,
+      removeCharacterSheet,
     },
   };
 }

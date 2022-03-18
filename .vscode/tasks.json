@@ -39,13 +39,6 @@
       "problemMatcher": [],
       "label": "Extract Translations (i18n.js)",
       "group": "build"
-    },
-    {
-      "type": "npm",
-      "script": "eleventy",
-      "problemMatcher": [],
-      "label": "Build Static Documents (eleventy)",
-      "group": "build"
     }
   ]
 }

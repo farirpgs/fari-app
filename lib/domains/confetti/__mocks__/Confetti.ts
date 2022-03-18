@@ -1,4 +1,4 @@
 export const Confetti = {
-  fireConfetti: jest.fn(),
-  fireCannon: jest.fn(),
+  fireConfetti: vi.fn(),
+  fireCannon: vi.fn(),
 };

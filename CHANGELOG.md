@@ -2,13 +2,32 @@
 
 <page-meta author="René-Pier Deshaies-Gélinas" description="Detailed technical changelog"></page-meta>
 
-**vNext**
+# vNext
 
 - [ ] copy index cards blocks
-- [ ] update slot tracker in character card
-- [ ] lowest/highest dice roller result
-- [ ] readonly draw area
+- [ ]: update slot tracker in character card
+- [ ]: lowest/highest dice roller result
 - [ ] draw area tokens
+- [ ] highlight die
+- [ ] support image die (narrative system)
+
+# v6.2.0
+
+- fix: sync roll issues
+- feat: new character sheet theme editor
+  - feat: new themed sheets by Fari RPGs and Pandion Games
+  - feat: migrated data to support new themes
+- feat: new Info block
+- feat: Text Block now has Add/Remove field controls
+- feat: Text Block now has Add/Remove label controls
+- feat: better placement of character sheet add row button
+- feat: better placement of character sheet add column button
+- feat: duplicate block button
+- feat: dice increase/decrease controls
+- feat: new branding
+- feat: new navbar
+- feat: better dark theme
+- tech: migration to Vitest
 
 # v6.1.0
 
@@ -23,10 +42,6 @@
 - feat: new drawing area
 - feat: character sheet now support rows and columns
 - feat: copy/paste blocks from character sheets
-
-**v6.0.1**
-
-- fix: new character route path search
 
 # v5.3
 

@@ -4,36 +4,46 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import CircleIcon from "@mui/icons-material/Circle";
 import CloseIcon from "@mui/icons-material/Close";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import ContentPasteIcon from "@mui/icons-material/ContentPaste";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import ExportIcon from "@mui/icons-material/GetApp";
+import PaletteIcon from "@mui/icons-material/Palette";
 import PrintIcon from "@mui/icons-material/Print";
-import RedoIcon from "@mui/icons-material/Redo";
 import SaveIcon from "@mui/icons-material/Save";
 import ShareIcon from "@mui/icons-material/Share";
-import UndoIcon from "@mui/icons-material/Undo";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
 import Alert from "@mui/material/Alert";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
 import Collapse from "@mui/material/Collapse";
 import Container from "@mui/material/Container";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import Drawer from "@mui/material/Drawer";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import FormHelperText from "@mui/material/FormHelperText";
 import Grid, { GridSize } from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import InputLabel from "@mui/material/InputLabel";
 import NativeSelect from "@mui/material/NativeSelect";
+import Slider from "@mui/material/Slider";
 import Snackbar from "@mui/material/Snackbar";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
@@ -42,13 +52,15 @@ import Tabs from "@mui/material/Tabs";
 import TextField from "@mui/material/TextField";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { BoxProps } from "@mui/system";
 import React, { useContext, useEffect, useState } from "react";
 import { Prompt } from "react-router";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
-import { FateLabel } from "../../../../components/FateLabel/FateLabel";
+import { IndexCardColorPicker } from "../../../../components/IndexCard/IndexCard";
 import { CharacterCard } from "../../../../components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
+import { Delays } from "../../../../constants/Delays";
 import { env } from "../../../../constants/env";
+import { FontFamily } from "../../../../constants/FontFamily";
 import { CharactersContext } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../../../contexts/SettingsContext/SettingsContext";
@@ -65,14 +77,14 @@ import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../../../../domains/dice/Dice";
 import { LazyState } from "../../../../hooks/useLazyState/useLazyState";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
-import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
-import { useThemeFromColor } from "../../../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { useCharacter } from "../../hooks/useCharacter";
 import { AddBlock } from "./components/AddBlock";
 import { AddSection } from "./components/AddSection";
 import { BlockByType } from "./components/BlockByType";
 import { SheetHeader } from "./components/SheetHeader";
+import { ThemedLabel } from "./components/ThemedLabel";
+import { MiniThemeContext, useMiniTheme } from "./MiniThemeContext";
 
 export const smallIconButtonStyle = css({
   label: "CharacterDialog-small-icon-button",
@@ -102,7 +114,6 @@ const ZoomOptions = [
   },
 ];
 
-const borderSize = 2;
 export const CharacterV3Dialog: React.FC<{
   open: boolean;
   character: ICharacter | undefined;
@@ -114,25 +125,26 @@ export const CharacterV3Dialog: React.FC<{
   onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
   onToggleSync?(): void;
-  onRoll(diceRollResult: IDiceRollResult): void;
+  onRoll?(diceRollResult: IDiceRollResult): void;
 }> = (props) => {
   const { t } = useTranslate();
   const theme = useTheme();
-  const blackButtonTheme = useThemeFromColor(theme.palette.text.primary);
   const query = useQuery<"card" | "advanced">();
   const showCharacterCard = query.get("card") === "true";
   const defaultAdvanced = query.get("advanced") === "true";
-  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const logger = useLogger();
   const characterManager = useCharacter(props.character);
   const settingsManager = useContext(SettingsContext);
   const [advanced, setAdvanced] = useState(defaultAdvanced);
+  const [themeEditorVisible, setThemeEditorVisible] = useState(false);
   const [savedSnack, setSavedSnack] = useState(false);
   const charactersManager = useContext(CharactersContext);
   const date = getDayJSFrom(characterManager.state.character?.lastUpdated);
+  const miniTheme = useMiniTheme({
+    character: characterManager.state.character,
+  });
 
-  const headerBackgroundColors = useTextColors(theme.palette.background.paper);
-  const headerTextColors = useTextColors(headerBackgroundColors.primary);
+  const hasMiniTheme = !!characterManager.state.character?.theme;
 
   const [tab, setTab] = useState<string>("0");
   const currentPageIndex = parseInt(tab);
@@ -176,17 +188,6 @@ export const CharacterV3Dialog: React.FC<{
     }
   }
 
-  const dialogSheetContentStyle = css({
-    label: "CharacterDialog-sheet-content",
-    width: "100%",
-    padding: ".5rem 1rem",
-  });
-  const fullScreenSheetContentStyle = css({
-    label: "CharacterDialog-sheet-content",
-    width: "100%",
-    padding: ".5rem 1rem",
-  });
-
   useEffect(
     function disableAdvancedOnNewCharacterLoad() {
       const isDifferentCharacter =
@@ -206,6 +207,7 @@ export const CharacterV3Dialog: React.FC<{
 
   return (
     <>
+      <style>{miniTheme.style}</style>
       <Prompt
         when={characterManager.state.dirty}
         message={t("manager.leave-without-saving")}
@@ -229,88 +231,154 @@ export const CharacterV3Dialog: React.FC<{
           {t("character-dialog.saved")}
         </Alert>
       </Snackbar>
-      {renderDialog()}
+      <MiniThemeContext.Provider value={miniTheme}>
+        {renderSheet()}
+        <Drawer
+          anchor={"left"}
+          classes={{
+            paper: css({
+              marginTop: "5.5rem",
+              height: "calc(100vh - 5.5rem)",
+            }),
+          }}
+          BackdropProps={{
+            className: css({
+              background: "rgba(0, 0, 0, 0.4)",
+            }),
+          }}
+          open={themeEditorVisible}
+          onClose={() => {
+            setThemeEditorVisible(false);
+          }}
+        >
+          {renderThemeEditor()}
+        </Drawer>
+      </MiniThemeContext.Provider>
     </>
   );
 
-  function renderDialog() {
+  function renderSheet() {
     const shouldUseWideMode = characterManager.state.character?.wide;
     const maxWidth = shouldUseWideMode ? "lg" : "md";
 
     if (props.dialog && characterManager.state.character) {
       return (
-        <Dialog
-          open={props.open}
-          fullWidth
-          keepMounted={false}
-          maxWidth={maxWidth}
-          scroll="paper"
-          onClose={onClose}
-          classes={{
-            paper: css({ height: "100%" }),
-          }}
-        >
-          <DialogTitle
-            className={css({
-              label: "CharacterDialog-dialog-wrapper",
-              padding: "0",
-            })}
+        <ThemeProvider theme={miniTheme.muiTheme}>
+          <Dialog
+            open={props.open}
+            fullWidth
+            keepMounted={false}
+            maxWidth={maxWidth}
+            scroll="paper"
+            onClose={onClose}
+            classes={{
+              paper: css({
+                height: "100%",
+                background: miniTheme.backgroundColor,
+              }),
+            }}
           >
-            <Container maxWidth={maxWidth}>
-              <Box className={dialogSheetContentStyle}>
-                {renderNameAndGroup()}
-              </Box>
-            </Container>
-          </DialogTitle>
-          <DialogContent
-            className={css({
-              label: "CharacterDialog-dialog-wrapper",
-              padding: "0",
-            })}
-            dividers
-          >
-            <Container maxWidth={maxWidth}>
-              <Box className={dialogSheetContentStyle}>
-                {renderPages(characterManager.state.character.pages)}
-              </Box>
-            </Container>
-          </DialogContent>
-          <DialogActions
-            className={css({
-              label: "CharacterDialog-dialog-wrapper",
-              padding: "0",
-            })}
-          >
-            <Container
-              maxWidth={maxWidth}
-              className={css({ padding: ".5rem" })}
+            <DialogTitle
+              className={css({
+                label: "CharacterDialog-dialog-wrapper",
+                padding: "0",
+              })}
             >
-              <Box className={dialogSheetContentStyle}>
-                {renderSheetActions()}
-              </Box>
-            </Container>
-          </DialogActions>
-        </Dialog>
+              <Container maxWidth={maxWidth}>
+                <Box
+                  className={css({
+                    width: "100%",
+                    padding: "1rem 1rem",
+                  })}
+                >
+                  {renderNameAndGroup()}
+                </Box>
+              </Container>
+            </DialogTitle>
+            <DialogContent
+              className={css({
+                label: "CharacterDialog-dialog-wrapper",
+                padding: "0",
+              })}
+              dividers
+            >
+              <Container maxWidth={maxWidth}>
+                <Box
+                  className={css({
+                    width: "100%",
+                    padding: ".5rem 1rem",
+                  })}
+                >
+                  {renderPages(characterManager.state.character.pages)}
+                </Box>
+              </Container>
+            </DialogContent>
+            {!props.readonly && (
+              <DialogActions
+                className={css({
+                  label: "CharacterDialog-dialog-wrapper",
+                  padding: "0",
+                })}
+              >
+                <Container
+                  maxWidth={maxWidth}
+                  className={css({ padding: ".5rem" })}
+                >
+                  <Box
+                    className={css({
+                      width: "100%",
+                      padding: ".5rem 1rem",
+                    })}
+                  >
+                    {renderSheetActions()}
+                  </Box>
+                </Container>
+              </DialogActions>
+            )}
+          </Dialog>
+        </ThemeProvider>
       );
     }
 
     return (
-      <Container maxWidth={maxWidth}>
-        <Box className={fullScreenSheetContentStyle}>
-          {renderSheetActions()}
-        </Box>
+      <ThemeProvider theme={miniTheme.muiTheme}>
+        <Box
+          className={css({
+            color: miniTheme.textPrimary,
+            backgroundColor: miniTheme.backgroundColor,
+          })}
+        >
+          <Container maxWidth={maxWidth}>
+            {!props.readonly && (
+              <Box
+                className={css({
+                  width: "100%",
+                  padding: ".5rem 1rem",
+                })}
+              >
+                <Box>{renderSheetActions()}</Box>
+              </Box>
+            )}
 
-        <Box className={fullScreenSheetContentStyle}>
-          {renderNameAndGroup()}
+            <Box
+              className={css({
+                width: "100%",
+                padding: "1rem 1rem",
+              })}
+            >
+              {renderNameAndGroup()}
+            </Box>
+            <Box
+              className={css({
+                width: "100%",
+                padding: ".5rem 1rem",
+              })}
+            >
+              {renderPages(characterManager.state.character?.pages)}
+            </Box>
+          </Container>
         </Box>
-        <Box className={fullScreenSheetContentStyle}>
-          {renderPages(characterManager.state.character?.pages)}
-        </Box>
-
-        {/* <Box className={fullScreenSheetContentStyle}>
-          {renderSheetActions()}
-        </Box> */}
-      </Container>
+      </ThemeProvider>
     );
   }
 
@@ -343,7 +411,10 @@ export const CharacterV3Dialog: React.FC<{
                 },
               })}
               options={CharacterTemplates}
-              className={css({ width: "300px" })}
+              className={css({
+                width: "300px",
+                color: "red !important",
+              })}
               getOptionLabel={(option) => {
                 return option.fileName;
               }}
@@ -395,7 +466,7 @@ export const CharacterV3Dialog: React.FC<{
             </Grid>
           </Box>
         </Collapse>
-        <Box mb="1rem">
+        <Box>
           <Grid
             container
             alignItems="center"
@@ -409,7 +480,7 @@ export const CharacterV3Dialog: React.FC<{
                 scrollButtons="auto"
                 classes={{
                   flexContainer: css({
-                    borderBottom: `4px solid ${headerBackgroundColors.primary}`,
+                    borderBottom: `1px solid ${miniTheme.borderColor}`,
                   }),
                   indicator: css({
                     display: "none",
@@ -426,26 +497,33 @@ export const CharacterV3Dialog: React.FC<{
                       disableRipple
                       key={page.id}
                       className={css({
-                        background: headerBackgroundColors.primary,
-                        color: `${headerTextColors.primary} !important`,
                         marginRight: ".5rem",
-                        // Pentagone
-                        // https://bennettfeely.com/clippy/
-                        clipPath:
-                          "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
+                        color: `${
+                          true // miniTheme.hideTabBackground
+                            ? miniTheme.textPrimary
+                            : miniTheme.textPrimaryInverted
+                        } !important`,
+                        background: true // miniTheme.hideTabBackground
+                          ? undefined
+                          : miniTheme.textPrimary,
+                        transition: "border linear 200ms",
                         borderBottom: `4px solid ${
                           isCurrentTab
-                            ? theme.palette.secondary.main
-                            : theme.palette.text.primary
+                            ? true // miniTheme.hideTabBackground
+                              ? miniTheme.textPrimary
+                              : miniTheme.textPrimaryInverted
+                            : "transparent"
                         }`,
-                        transition: "border linear 200ms",
-                        marginBottom: "-4px",
+                        marginBottom: `-2px`,
                       })}
                       value={pageIndex.toString()}
                       label={
-                        <FateLabel
+                        <Typography
                           className={css({
-                            fontSize: "1.2rem",
+                            fontFamily: miniTheme.pageHeadingFontFamily,
+                            fontSize: `${miniTheme.pageHeadingFontSize}rem`,
+                            fontWeight: miniTheme.pageHeadingFontWeight,
+                            textTransform: "none",
                             width: "100%",
                           })}
                         >
@@ -455,7 +533,11 @@ export const CharacterV3Dialog: React.FC<{
                             value={page.label}
                             readonly={!advanced}
                             border={advanced}
-                            borderColor={headerTextColors.primary}
+                            borderColor={
+                              miniTheme.hideTabBackground
+                                ? miniTheme.textPrimaryInverted
+                                : miniTheme.textPrimary
+                            }
                             onChange={(newValue) => {
                               characterManager.actions.renamePage(
                                 pageIndex,
@@ -463,7 +545,7 @@ export const CharacterV3Dialog: React.FC<{
                               );
                             }}
                           />
-                        </FateLabel>
+                        </Typography>
                       }
                     />
                   );
@@ -492,7 +574,7 @@ export const CharacterV3Dialog: React.FC<{
           </Grid>
         </Box>
         <Collapse in={advanced}>
-          <Box mb=".5rem">
+          <Box>
             <Grid container justifyContent="space-around" alignItems="center">
               <Grid item>
                 <Tooltip title={t("character-dialog.control.move-page-left")}>
@@ -506,9 +588,8 @@ export const CharacterV3Dialog: React.FC<{
                         );
                         setTab((currentPageIndex - 1).toString());
                       }}
-                      size="large"
                     >
-                      <UndoIcon />
+                      <ArrowBackIcon />
                     </IconButton>
                   </span>
                 </Tooltip>
@@ -523,7 +604,6 @@ export const CharacterV3Dialog: React.FC<{
                         );
                         setTab((currentPageIndex + 1).toString());
                       }}
-                      size="large"
                     >
                       <FileCopyIcon />
                     </IconButton>
@@ -546,7 +626,6 @@ export const CharacterV3Dialog: React.FC<{
                         }
                         setTab("0");
                       }}
-                      size="large"
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -565,26 +644,8 @@ export const CharacterV3Dialog: React.FC<{
                         );
                         setTab((currentPageIndex + 1).toString());
                       }}
-                      size="large"
                     >
-                      <RedoIcon />
-                    </IconButton>
-                  </span>
-                </Tooltip>
-              </Grid>
-
-              <Grid item>
-                <Tooltip title={t("character-dialog.control.add-row")}>
-                  <span>
-                    <IconButton
-                      onClick={() => {
-                        characterManager.actions.addRow({
-                          pageIndex: currentPageIndex,
-                        });
-                      }}
-                      size="large"
-                    >
-                      <AddIcon />
+                      <ArrowForwardIcon />
                     </IconButton>
                   </span>
                 </Tooltip>
@@ -607,29 +668,47 @@ export const CharacterV3Dialog: React.FC<{
                 className={css({
                   label: "CharacterDialog-tab-panel",
                   padding: "0",
+                  background: miniTheme.backgroundColor,
                 })}
               >
                 <Box
                   position="relative"
                   className={css({
-                    border:
-                      advanced || numberOfBlocks === 0
-                        ? "none"
-                        : `${borderSize}px solid ${headerBackgroundColors.primary}`,
+                    background: miniTheme.backgroundColor,
+                    color: miniTheme.textPrimary,
+                    paddingTop: ".5rem",
                   })}
                 >
                   {page.rows.map((row, rowIndex) => {
                     const columnSize = Math.floor(12 / row.columns.length);
                     const canMoveRowUp = rowIndex === 0;
                     const canMoveRowDown = rowIndex === page.rows.length - 1;
-
+                    const isLastRow = rowIndex === page.rows.length - 1;
                     return (
                       <ManagerBox
                         key={rowIndex}
                         readonly={!advanced}
-                        backgroundColor={theme.palette.action.hover}
+                        advancedBoxProps={{
+                          padding: ".5rem",
+                          bgcolor: miniTheme.boxBackgroundColor,
+                        }}
                         label={<>Row #{rowIndex + 1}</>}
-                        actions={
+                        rightActions={
+                          row.columns.length !== 4 && (
+                            <>
+                              <Grid container>
+                                <Grid item>
+                                  {renderAddColumnButton({
+                                    pageIndex,
+                                    rowIndex,
+                                    columnIndex: row.columns.length,
+                                  })}
+                                </Grid>
+                              </Grid>
+                            </>
+                          )
+                        }
+                        topActions={
                           <>
                             <Grid container justifyContent="flex-end">
                               <Grid item>
@@ -649,6 +728,7 @@ export const CharacterV3Dialog: React.FC<{
                                       }}
                                     >
                                       <ArrowUpwardIcon
+                                        htmlColor={miniTheme.textSecondary}
                                         className={css({
                                           fontSize: "1rem",
                                         })}
@@ -706,32 +786,19 @@ export const CharacterV3Dialog: React.FC<{
                                   </span>
                                 </Tooltip>
                               </Grid>
-                              <Grid item>
-                                <Tooltip
-                                  title={t(
-                                    "character-dialog.control.add-column"
-                                  )}
-                                >
-                                  <span>
-                                    <IconButton
-                                      disabled={row.columns.length === 4}
-                                      onClick={() => {
-                                        characterManager.actions.addColumn({
-                                          pageIndex: pageIndex,
-                                          rowIndex: rowIndex,
-                                        });
-                                      }}
-                                    >
-                                      <AddIcon
-                                        className={css({
-                                          fontSize: "1rem",
-                                        })}
-                                      />
-                                    </IconButton>
-                                  </span>
-                                </Tooltip>
-                              </Grid>
                             </Grid>
+                          </>
+                        }
+                        bottomActions={
+                          <>
+                            {!isLastRow && (
+                              <Box my=".5rem">
+                                {renderAddRowButton({
+                                  pageIndex: currentPageIndex,
+                                  rowIndex: rowIndex,
+                                })}
+                              </Box>
+                            )}
                           </>
                         }
                       >
@@ -742,27 +809,22 @@ export const CharacterV3Dialog: React.FC<{
                                 const canMoveColumnLeft = columnIndex === 0;
                                 const canMoveColumnRight =
                                   columnIndex === row.columns.length - 1;
-                                const hideColumnBorders =
-                                  canMoveColumnLeft || advanced || isSmall;
                                 return (
                                   <Grid
                                     item
                                     key={columnIndex}
                                     xs={12}
                                     md={columnSize as GridSize}
-                                    className={css({
-                                      borderLeft: hideColumnBorders
-                                        ? "none"
-                                        : `${borderSize}px solid ${headerBackgroundColors.primary}`,
-                                    })}
                                   >
                                     <ManagerBox
                                       readonly={!advanced}
+                                      advancedBoxProps={{
+                                        padding: ".5rem",
+                                        height: "100%",
+                                        bgcolor: miniTheme.box2BackgroundColor,
+                                      }}
                                       label={<>Column #{columnIndex + 1}</>}
-                                      backgroundColor={
-                                        theme.palette.action.selected
-                                      }
-                                      actions={
+                                      topActions={
                                         <>
                                           <Grid
                                             container
@@ -835,6 +897,7 @@ export const CharacterV3Dialog: React.FC<{
                                               >
                                                 <span>
                                                   <IconButton
+                                                    disabled={columnIndex === 0}
                                                     onClick={() => {
                                                       characterManager.actions.deleteColumn(
                                                         {
@@ -878,6 +941,14 @@ export const CharacterV3Dialog: React.FC<{
                       </ManagerBox>
                     );
                   })}
+                  {advanced && (
+                    <Box my=".5rem">
+                      {renderAddRowButton({
+                        pageIndex: currentPageIndex,
+                        rowIndex: page.rows.length,
+                      })}
+                    </Box>
+                  )}
                 </Box>
               </TabPanel>
             );
@@ -912,10 +983,13 @@ export const CharacterV3Dialog: React.FC<{
             </Grid>
           )}
           <Grid item>
-            <Box pt=".5rem">
-              <Typography>
-                {date.format("lll")} / {"v"}
-                {characterManager.state.character?.version} /{" "}
+            <Box p=".5rem">
+              <Typography variant="caption" color={miniTheme.textSecondary}>
+                {date.format("lll")}
+                {" / "}
+                {"v"}
+                {characterManager.state.character?.version}
+                {" / "}
                 {characterManager.state.character?.id.slice(0, 5)}
               </Typography>
             </Box>
@@ -931,12 +1005,73 @@ export const CharacterV3Dialog: React.FC<{
                   readonly={false}
                   characterSheet={characterManager.state.character}
                   onCharacterDialogOpen={() => undefined}
-                  onRoll={props.onRoll}
+                  onRoll={(newRollResult) => {
+                    props.onRoll?.(newRollResult);
+                  }}
                 />
               </Box>
             </Grid>
           </Grid>
         )}
+      </Box>
+    );
+  }
+
+  function renderAddRowButton(renderProps: {
+    pageIndex: number;
+    rowIndex: number;
+  }) {
+    return (
+      <Grid container justifyContent="center">
+        <Grid item>
+          <Tooltip title={t("character-dialog.control.add-row")}>
+            <span>
+              <IconButton
+                onClick={() => {
+                  characterManager.actions.addRow({
+                    pageIndex: renderProps.pageIndex,
+                    rowIndex: renderProps.rowIndex,
+                  });
+                }}
+                size="large"
+              >
+                <AddIcon />
+              </IconButton>
+            </span>
+          </Tooltip>
+        </Grid>
+      </Grid>
+    );
+  }
+
+  function renderAddColumnButton(renderProps: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+  }) {
+    // row.columns.length === 4
+    return (
+      <Box p=".125rem">
+        <Grid container justifyContent="center" spacing={1}>
+          <Grid item>
+            <Tooltip title={t("character-dialog.control.add-column")}>
+              <span>
+                <IconButton
+                  onClick={() => {
+                    characterManager.actions.addColumn({
+                      pageIndex: renderProps.pageIndex,
+                      rowIndex: renderProps.rowIndex,
+                      columnIndex: renderProps.columnIndex,
+                    });
+                  }}
+                  // size="large"
+                >
+                  <AddIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
+          </Grid>
+        </Grid>
       </Box>
     );
   }
@@ -951,14 +1086,7 @@ export const CharacterV3Dialog: React.FC<{
 
     return (
       <>
-        <Box
-          py={numberOfSections === 0 ? "1rem" : undefined}
-          className={css({
-            border: advanced
-              ? `${borderSize}px solid ${headerBackgroundColors.primary}`
-              : "none",
-          })}
-        >
+        <Box p={numberOfSections === 0 ? ".5rem" : undefined}>
           {sections?.map((section, sectionIndex) => {
             const canMoveSectionUp = !(sectionIndex === 0);
             const canMoveSectionDown = !(sectionIndex === sections.length - 1);
@@ -966,6 +1094,7 @@ export const CharacterV3Dialog: React.FC<{
               <Box key={section.id}>
                 <>
                   <SheetHeader
+                    index={sectionIndex}
                     label={section.label}
                     advanced={advanced}
                     onLabelChange={(newLabel) => {
@@ -1003,14 +1132,22 @@ export const CharacterV3Dialog: React.FC<{
                             >
                               {section.visibleOnCard ? (
                                 <VisibilityIcon
-                                  htmlColor={headerTextColors.primary}
+                                  htmlColor={
+                                    miniTheme.hideSectionBackground
+                                      ? miniTheme.textPrimary
+                                      : miniTheme.textPrimaryInverted
+                                  }
                                   className={css({
                                     fontSize: "1rem",
                                   })}
                                 />
                               ) : (
                                 <VisibilityOffIcon
-                                  htmlColor={headerTextColors.primary}
+                                  htmlColor={
+                                    miniTheme.hideSectionBackground
+                                      ? miniTheme.textPrimary
+                                      : miniTheme.textPrimaryInverted
+                                  }
                                   className={css({
                                     fontSize: "1rem",
                                   })}
@@ -1041,9 +1178,9 @@ export const CharacterV3Dialog: React.FC<{
                               >
                                 <ArrowUpwardIcon
                                   htmlColor={
-                                    !canMoveSectionUp
-                                      ? headerTextColors.disabled
-                                      : headerTextColors.primary
+                                    miniTheme.hideSectionBackground
+                                      ? miniTheme.textPrimary
+                                      : miniTheme.textPrimaryInverted
                                   }
                                   className={css({
                                     fontSize: "1rem",
@@ -1075,9 +1212,9 @@ export const CharacterV3Dialog: React.FC<{
                               >
                                 <ArrowDownwardIcon
                                   htmlColor={
-                                    !canMoveSectionDown
-                                      ? headerTextColors.disabled
-                                      : headerTextColors.primary
+                                    miniTheme.hideSectionBackground
+                                      ? miniTheme.textPrimary
+                                      : miniTheme.textPrimaryInverted
                                   }
                                   className={css({
                                     fontSize: "1rem",
@@ -1102,7 +1239,11 @@ export const CharacterV3Dialog: React.FC<{
                               }}
                             >
                               <FileCopyIcon
-                                htmlColor={headerTextColors.primary}
+                                htmlColor={
+                                  miniTheme.hideSectionBackground
+                                    ? miniTheme.textPrimary
+                                    : miniTheme.textPrimaryInverted
+                                }
                                 className={css({
                                   fontSize: "1rem",
                                 })}
@@ -1134,7 +1275,11 @@ export const CharacterV3Dialog: React.FC<{
                               }}
                             >
                               <DeleteIcon
-                                htmlColor={headerTextColors.primary}
+                                htmlColor={
+                                  miniTheme.hideSectionBackground
+                                    ? miniTheme.textPrimary
+                                    : miniTheme.textPrimaryInverted
+                                }
                                 className={css({
                                   fontSize: "1rem",
                                 })}
@@ -1145,6 +1290,7 @@ export const CharacterV3Dialog: React.FC<{
                       </Grid>
                     }
                   />
+
                   {renderSectionBlocks(page, section, {
                     pageIndex: indexes.pageIndex,
                     rowIndex: indexes.rowIndex,
@@ -1153,70 +1299,66 @@ export const CharacterV3Dialog: React.FC<{
                   })}
 
                   {advanced && (
-                    <Box p=".5rem" mb=".5rem">
-                      <ThemeProvider theme={blackButtonTheme}>
-                        <Grid
-                          container
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <Grid item>
-                            <AddBlock
-                              variant="button"
-                              onAddBlock={(blockType) => {
-                                characterManager.actions.addBlock(
-                                  {
-                                    pageIndex: indexes.pageIndex,
-                                    rowIndex: indexes.rowIndex,
-                                    columnIndex: indexes.columnIndex,
-                                    sectionIndex: sectionIndex,
-                                  },
-                                  blockType
-                                );
-                              }}
-                            />
-                          </Grid>
-                          {settingsManager.computed.hasBlocksInClipboard && (
-                            <Grid item>
-                              <Tooltip
-                                title={t(
-                                  "character-dialog.control.paste-blocks"
-                                )}
-                              >
-                                <span>
-                                  <IconButton
-                                    onClick={() => {
-                                      characterManager.actions.pasteBlocks(
-                                        {
-                                          pageIndex: indexes.pageIndex,
-                                          rowIndex: indexes.rowIndex,
-                                          columnIndex: indexes.columnIndex,
-                                          sectionIndex: sectionIndex,
-                                        },
-                                        settingsManager.state.blocksInClipboard
-                                      );
-                                    }}
-                                  >
-                                    <ContentPasteIcon />
-                                  </IconButton>
-                                </span>
-                              </Tooltip>
-                            </Grid>
-                          )}
-                          <Grid item>
-                            <AddSection
-                              onAddSection={() => {
-                                characterManager.actions.addSection({
+                    <Box p="1rem .5rem">
+                      <Grid
+                        container
+                        justifyContent="center"
+                        alignItems="center"
+                      >
+                        <Grid item>
+                          <AddBlock
+                            variant="button"
+                            onAddBlock={(blockType) => {
+                              characterManager.actions.addBlock(
+                                {
                                   pageIndex: indexes.pageIndex,
                                   rowIndex: indexes.rowIndex,
                                   columnIndex: indexes.columnIndex,
                                   sectionIndex: sectionIndex,
-                                });
-                              }}
-                            />
-                          </Grid>
+                                },
+                                blockType
+                              );
+                            }}
+                          />
                         </Grid>
-                      </ThemeProvider>
+                        {settingsManager.computed.hasBlocksInClipboard && (
+                          <Grid item>
+                            <Tooltip
+                              title={t("character-dialog.control.paste-blocks")}
+                            >
+                              <span>
+                                <IconButton
+                                  onClick={() => {
+                                    characterManager.actions.pasteBlocks(
+                                      {
+                                        pageIndex: indexes.pageIndex,
+                                        rowIndex: indexes.rowIndex,
+                                        columnIndex: indexes.columnIndex,
+                                        sectionIndex: sectionIndex,
+                                      },
+                                      settingsManager.state.blocksInClipboard
+                                    );
+                                  }}
+                                >
+                                  <ContentPasteIcon />
+                                </IconButton>
+                              </span>
+                            </Tooltip>
+                          </Grid>
+                        )}
+                        <Grid item>
+                          <AddSection
+                            onAddSection={() => {
+                              characterManager.actions.addSection({
+                                pageIndex: indexes.pageIndex,
+                                rowIndex: indexes.rowIndex,
+                                columnIndex: indexes.columnIndex,
+                                sectionIndex: sectionIndex,
+                              });
+                            }}
+                          />
+                        </Grid>
+                      </Grid>
                     </Box>
                   )}
                 </>
@@ -1226,18 +1368,16 @@ export const CharacterV3Dialog: React.FC<{
 
           {shouldRenderAddSectionButton && (
             <Box>
-              <ThemeProvider theme={blackButtonTheme}>
-                <AddSection
-                  onAddSection={() => {
-                    characterManager.actions.addSection({
-                      pageIndex: indexes.pageIndex,
-                      rowIndex: indexes.rowIndex,
-                      columnIndex: indexes.columnIndex,
-                      sectionIndex: numberOfSections,
-                    });
-                  }}
-                />
-              </ThemeProvider>
+              <AddSection
+                onAddSection={() => {
+                  characterManager.actions.addSection({
+                    pageIndex: indexes.pageIndex,
+                    rowIndex: indexes.rowIndex,
+                    columnIndex: indexes.columnIndex,
+                    sectionIndex: numberOfSections,
+                  });
+                }}
+              />
             </Box>
           )}
         </Box>
@@ -1251,10 +1391,10 @@ export const CharacterV3Dialog: React.FC<{
     }
 
     return (
-      <>
+      <Box py=".5rem">
         <Grid
           container
-          wrap="nowrap"
+          // wrap="nowrap"
           spacing={1}
           justifyContent="space-between"
           alignItems="center"
@@ -1330,7 +1470,7 @@ export const CharacterV3Dialog: React.FC<{
                       window.open(`/characters/${props.character?.id}/print`);
                     }}
                   >
-                    <PrintIcon />
+                    <PrintIcon htmlColor={miniTheme.textPrimary} />
                   </IconButton>
                 </Tooltip>
               </Grid>
@@ -1353,7 +1493,7 @@ export const CharacterV3Dialog: React.FC<{
                     }
                   }}
                 >
-                  <DeleteIcon />
+                  <DeleteIcon htmlColor={miniTheme.textPrimary} />
                 </IconButton>
               </Tooltip>
             </Grid>
@@ -1369,7 +1509,7 @@ export const CharacterV3Dialog: React.FC<{
                     );
                   }}
                 >
-                  <ExportIcon />
+                  <ExportIcon htmlColor={miniTheme.textPrimary} />
                 </IconButton>
               </Tooltip>
             </Grid>
@@ -1388,12 +1528,27 @@ export const CharacterV3Dialog: React.FC<{
                         );
                       }}
                     >
-                      <ShareIcon />
+                      <ShareIcon htmlColor={miniTheme.textPrimary} />
                     </IconButton>
                   </Tooltip>
                 </Grid>
               </>
             )}
+
+            <Grid item>
+              <Tooltip title={t("character-dialog.open-theme-editor")}>
+                <IconButton
+                  color="default"
+                  data-cy="character-dialog.open-theme-editor"
+                  size="small"
+                  onClick={() => {
+                    setThemeEditorVisible(true);
+                  }}
+                >
+                  <PaletteIcon htmlColor={miniTheme.textPrimary} />
+                </IconButton>
+              </Tooltip>
+            </Grid>
 
             <Grid item>
               <Button
@@ -1412,6 +1567,527 @@ export const CharacterV3Dialog: React.FC<{
             </Grid>
           </Grid>
         </Grid>
+      </Box>
+    );
+  }
+
+  function renderThemeEditor() {
+    return (
+      <>
+        <Box
+          p="2rem"
+          sx={{
+            width: {
+              sm: "70vw",
+              md: "30vw",
+            },
+          }}
+        >
+          <Grid container wrap="nowrap" justifyContent={"space-between"}>
+            <Grid item>
+              <Typography variant="h5">Theme settings</Typography>
+            </Grid>
+            <Grid item>
+              <Switch
+                color="primary"
+                data-cy="character-dialog.toggle-advanced"
+                checked={hasMiniTheme}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (hasMiniTheme) {
+                    characterManager.actions.removeTheme();
+                  } else {
+                    characterManager.actions.setTheme();
+                  }
+                }}
+              />
+            </Grid>
+          </Grid>
+
+          <Typography gutterBottom variant="h6">
+            Basics
+          </Typography>
+
+          {renderBasicThemeEditorControls()}
+
+          <Typography gutterBottom variant="h6">
+            Fonts
+          </Typography>
+
+          {renderFontThemeEditorControls({
+            label: "Pages",
+            initialFontSize: 1.25,
+            fontFamily:
+              characterManager.state.character?.theme?.pageHeadingFontFamily,
+            fontSize:
+              characterManager.state.character?.theme?.pageHeadingFontSize,
+            fontWeight:
+              characterManager.state.character?.theme?.pageHeadingFontWeight,
+            onFontFamilyChange: (fontFamily) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.pageHeadingFontFamily = fontFamily;
+              });
+            },
+            onFontSizeChange: (fontSize) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.pageHeadingFontSize = fontSize;
+              });
+            },
+            onFontWeightChange: (fontWeight) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.pageHeadingFontWeight = fontWeight;
+              });
+            },
+          })}
+          {renderFontThemeEditorControls({
+            label: "Sections",
+            initialFontSize: 1,
+            fontFamily:
+              characterManager.state.character?.theme?.sectionHeadingFontFamily,
+            fontSize:
+              characterManager.state.character?.theme?.sectionHeadingFontSize,
+            fontWeight:
+              characterManager.state.character?.theme?.sectionHeadingFontWeight,
+            onFontFamilyChange: (fontFamily) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.sectionHeadingFontFamily = fontFamily;
+              });
+            },
+            onFontSizeChange: (fontSize) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.sectionHeadingFontSize = fontSize;
+              });
+            },
+            onFontWeightChange: (fontWeight) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.sectionHeadingFontWeight = fontWeight;
+              });
+            },
+          })}
+          {renderFontThemeEditorControls({
+            label: "Labels",
+            initialFontSize: 1,
+            fontFamily:
+              characterManager.state.character?.theme?.labelFontFamily,
+            fontSize: characterManager.state.character?.theme?.labelFontSize,
+            fontWeight:
+              characterManager.state.character?.theme?.labelFontWeight,
+
+            onFontFamilyChange: (fontFamily) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.labelFontFamily = fontFamily;
+              });
+            },
+            onFontSizeChange: (fontSize) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.labelFontSize = fontSize;
+              });
+            },
+            onFontWeightChange: (fontWeight) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.labelFontWeight = fontWeight;
+              });
+            },
+          })}
+          {renderFontThemeEditorControls({
+            label: "Text",
+            initialFontSize: 1,
+            fontFamily: characterManager.state.character?.theme?.textFontFamily,
+            fontSize: characterManager.state.character?.theme?.textFontSize,
+            fontWeight: characterManager.state.character?.theme?.textFontWeight,
+            onFontFamilyChange: (fontFamily) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.textFontFamily = fontFamily;
+              });
+            },
+            onFontSizeChange: (fontSize) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.textFontSize = fontSize;
+              });
+            },
+            onFontWeightChange: (fontWeight) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.textFontWeight = fontWeight;
+              });
+            },
+          })}
+          {renderFontThemeEditorControls({
+            label: "Info Text",
+            initialFontSize: 1,
+            fontFamily:
+              characterManager.state.character?.theme?.infoTextFontFamily,
+            fontSize: characterManager.state.character?.theme?.infoTextFontSize,
+            fontWeight:
+              characterManager.state.character?.theme?.infoTextFontWeight,
+            onFontFamilyChange: (fontFamily) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.infoTextFontFamily = fontFamily;
+              });
+            },
+            onFontSizeChange: (fontSize) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.infoTextFontSize = fontSize;
+              });
+            },
+            onFontWeightChange: (fontWeight) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.infoTextFontWeight = fontWeight;
+              });
+            },
+          })}
+          {renderFontThemeEditorControls({
+            label: "Help Text",
+            initialFontSize: 0.75,
+            fontFamily:
+              characterManager.state.character?.theme?.helperTextFontFamily,
+            fontSize:
+              characterManager.state.character?.theme?.helperTextFontSize,
+            fontWeight:
+              characterManager.state.character?.theme?.helperTextFontWeight,
+            onFontFamilyChange: (fontFamily) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.helperTextFontFamily = fontFamily;
+              });
+            },
+            onFontSizeChange: (fontSize) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.helperTextFontSize = fontSize;
+              });
+            },
+            onFontWeightChange: (fontWeight) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.helperTextFontWeight = fontWeight;
+              });
+            },
+          })}
+        </Box>
+      </>
+    );
+  }
+
+  function renderBasicThemeEditorControls() {
+    return (
+      <>
+        <Box mb="1rem">
+          <Grid container spacing={2} wrap="nowrap">
+            <Grid item xs>
+              <LazyState
+                delay={Delays.field}
+                value={characterManager.state.character?.theme?.backgroundColor}
+                onChange={(value) => {
+                  characterManager.actions.setTheme((theme) => {
+                    theme.backgroundColor = value;
+                  });
+                }}
+                render={([value, setValue]) => {
+                  return (
+                    <>
+                      <FormHelperText>Background Color</FormHelperText>
+                      <IndexCardColorPicker
+                        color={value}
+                        onChange={(newColor) => {
+                          setValue(newColor);
+                        }}
+                        hidePastils
+                        render={(renderProps) => {
+                          return (
+                            <CircleIcon
+                              className={css({
+                                border: `2px solid ${theme.palette.text.secondary}`,
+                                borderRadius: "50%",
+                                cursor: "pointer",
+                                width: "3rem",
+                                height: "3rem",
+                              })}
+                              htmlColor={value}
+                              ref={renderProps.ref}
+                              onClick={() => {
+                                renderProps.setColorPickerOpen(true);
+                              }}
+                            />
+                          );
+                        }}
+                      />
+                    </>
+                  );
+                }}
+              />
+            </Grid>
+            {false && (
+              <Grid item xs>
+                <LazyState
+                  delay={Delays.field}
+                  value={characterManager.state.character?.theme?.primaryColor}
+                  onChange={(value) => {
+                    characterManager.actions.setTheme((theme) => {
+                      theme.primaryColor = value;
+                    });
+                  }}
+                  render={([value, setValue]) => {
+                    return (
+                      <>
+                        <FormHelperText>Primary Color</FormHelperText>
+                        <IndexCardColorPicker
+                          color={value}
+                          hidePastils
+                          onChange={(newColor) => {
+                            setValue(newColor);
+                          }}
+                          render={(renderProps) => {
+                            return (
+                              <CircleIcon
+                                className={css({
+                                  border: `2px solid ${theme.palette.text.secondary}`,
+                                  borderRadius: "50%",
+                                  cursor: "pointer",
+                                  width: "3rem",
+                                  height: "3rem",
+                                })}
+                                htmlColor={value}
+                                ref={renderProps.ref}
+                                onClick={() => {
+                                  renderProps.setColorPickerOpen(true);
+                                }}
+                              />
+                            );
+                          }}
+                        />
+                      </>
+                    );
+                  }}
+                />
+              </Grid>
+            )}
+          </Grid>
+        </Box>
+
+        <Box mb="1rem">
+          <LazyState
+            delay={Delays.field}
+            value={characterManager.state.character?.theme?.style}
+            onChange={(value) => {
+              characterManager.actions.setTheme((theme) => {
+                theme.style = value;
+              });
+            }}
+            render={([value, setValue]) => {
+              return (
+                <TextField
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  disabled={!hasMiniTheme}
+                  label="Font @import"
+                  placeholder="@import url('https://fonts.googleapis.com/css2?family="
+                  fullWidth
+                  multiline
+                  variant="standard"
+                  value={value}
+                  onChange={(e) => {
+                    setValue(e.target.value);
+                  }}
+                />
+              );
+            }}
+          />
+        </Box>
+        <Box mb="1rem">
+          <Grid container wrap="nowrap">
+            {/* <Grid item>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={
+                        !characterManager.state.character?.theme
+                          ?.hideTabBackground
+                      }
+                      onClick={() => {
+                        characterManager.actions.setTheme((theme) => {
+                          theme.hideTabBackground = !theme.hideTabBackground;
+                        });
+                      }}
+                    />
+                  }
+                  label="Display Tab Background"
+                />
+              </FormGroup>
+            </Grid> */}
+            <Grid item>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={
+                        !characterManager.state.character?.theme
+                          ?.hideSectionBackground
+                      }
+                      onClick={() => {
+                        characterManager.actions.setTheme((theme) => {
+                          theme.hideSectionBackground =
+                            !theme.hideSectionBackground;
+                        });
+                      }}
+                    />
+                  }
+                  label="Display Section Background"
+                />
+              </FormGroup>
+            </Grid>
+          </Grid>
+        </Box>
+      </>
+    );
+  }
+
+  function renderFontThemeEditorControls(renderProps: {
+    label: string;
+    initialFontSize: number;
+    fontFamily: string | undefined;
+    fontSize: number | undefined;
+    fontWeight: any | undefined;
+    onFontFamilyChange: (value: string | undefined) => void;
+    onFontSizeChange: (value: number | undefined) => void;
+    onFontWeightChange: (value: any | undefined) => void;
+  }) {
+    const fontWeights = [
+      "100",
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800",
+      "900",
+      "bold",
+      "bolder",
+      "inherit",
+      "initial",
+      "lighter",
+      "normal",
+      "revert",
+      "unset",
+    ];
+    return (
+      <>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1bh-content"
+            id="panel1bh-header"
+          >
+            <Typography sx={{ width: "33%", flexShrink: 0 }}>
+              {renderProps.label}
+            </Typography>
+            <Typography sx={{ color: "text.secondary" }}>
+              {/* ... */}
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Box mb="1rem">
+              <Box mb="1rem">
+                <Grid
+                  container
+                  spacing={2}
+                  wrap="nowrap"
+                  alignItems="flex-start"
+                >
+                  <Grid item xs>
+                    <LazyState
+                      delay={Delays.field}
+                      value={renderProps.fontFamily}
+                      onChange={(value) => {
+                        renderProps.onFontFamilyChange(value);
+                      }}
+                      render={([value, setValue]) => {
+                        return (
+                          <TextField
+                            variant="standard"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
+                            disabled={!hasMiniTheme}
+                            label={`Font Family`}
+                            placeholder={FontFamily.Default.split(",").join(
+                              ", "
+                            )}
+                            fullWidth
+                            multiline
+                            value={value}
+                            onChange={(e) => {
+                              setValue(e.target.value);
+                            }}
+                          />
+                        );
+                      }}
+                    />
+                  </Grid>
+                </Grid>
+              </Box>
+              <Box>
+                <Grid
+                  container
+                  spacing={2}
+                  wrap="nowrap"
+                  alignItems="flex-start"
+                >
+                  <Grid item xs>
+                    <FormControl fullWidth>
+                      <InputLabel shrink variant="standard">
+                        Font Weight
+                      </InputLabel>
+                      <NativeSelect
+                        // defaultValue=""
+                        value={renderProps.fontWeight || ""}
+                        onChange={(event) => {
+                          renderProps.onFontWeightChange(event.target.value);
+                        }}
+                      >
+                        <option value="">None</option>
+                        {fontWeights.map((fw) => {
+                          return (
+                            <option key={fw} value={fw}>
+                              {fw}
+                            </option>
+                          );
+                        })}
+                      </NativeSelect>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs>
+                    <LazyState
+                      delay={Delays.field}
+                      value={renderProps.fontSize}
+                      onChange={(value) => {
+                        renderProps.onFontSizeChange(value);
+                      }}
+                      render={([value, setValue]) => {
+                        return (
+                          <>
+                            <InputLabel shrink>{`Font Size`}</InputLabel>
+                            <Slider
+                              defaultValue={renderProps.initialFontSize}
+                              disabled={!hasMiniTheme}
+                              step={0.125}
+                              min={0.5}
+                              max={3}
+                              valueLabelDisplay="auto"
+                              value={value}
+                              onChange={(e, value) => {
+                                setValue(value as number);
+                              }}
+                            />
+                          </>
+                        );
+                      }}
+                    />
+                  </Grid>
+                </Grid>
+              </Box>
+            </Box>
+          </AccordionDetails>
+        </Accordion>
       </>
     );
   }
@@ -1419,14 +2095,14 @@ export const CharacterV3Dialog: React.FC<{
   function renderNameAndGroup() {
     return (
       <>
-        <Box mb="1rem">
+        <Box px=".5rem">
           <Grid container>
             <Grid
               item
               container
               sm={12}
               md={6}
-              spacing={2}
+              spacing={1}
               alignItems="flex-end"
             >
               <Grid
@@ -1436,10 +2112,16 @@ export const CharacterV3Dialog: React.FC<{
                   flex: "0 0 auto",
                 })}
               >
-                <FateLabel>{t("character-dialog.name")}</FateLabel>
+                <ThemedLabel>{t("character-dialog.name")}</ThemedLabel>
               </Grid>
               <Grid item xs>
-                <Box fontSize="1rem">
+                <Typography
+                  className={css({
+                    fontFamily: miniTheme.textFontFamily,
+                    fontSize: `${miniTheme.textFontSize}rem`,
+                    fontWeight: miniTheme.textFontWeight,
+                  })}
+                >
                   <ContentEditable
                     border
                     autoFocus
@@ -1450,7 +2132,7 @@ export const CharacterV3Dialog: React.FC<{
                       characterManager.actions.setName(value);
                     }}
                   />
-                </Box>
+                </Typography>
               </Grid>
             </Grid>
             <Grid
@@ -1468,7 +2150,7 @@ export const CharacterV3Dialog: React.FC<{
                   flex: "0 0 auto",
                 })}
               >
-                <FateLabel>{t("character-dialog.group")}</FateLabel>
+                <ThemedLabel>{t("character-dialog.group")}</ThemedLabel>
               </Grid>
               <Grid item xs>
                 <LazyState
@@ -1501,7 +2183,12 @@ export const CharacterV3Dialog: React.FC<{
                               ...params.InputProps,
                               disableUnderline: true,
                               classes: {
-                                input: css({ paddingBottom: "0 !important" }),
+                                input: css({
+                                  paddingBottom: "0 !important",
+                                  fontFamily: miniTheme.textFontFamily,
+                                  fontSize: `${miniTheme.textFontSize}rem`,
+                                  fontWeight: miniTheme.textFontWeight,
+                                }),
                               },
                             }}
                             data-cy={`character-dialog.group`}
@@ -1550,14 +2237,13 @@ export const CharacterV3Dialog: React.FC<{
       sectionIndex: number;
     }
   ) {
+    const hasBlock = section.blocks.length > 0;
+    if (!hasBlock) {
+      return null;
+    }
     return (
       <>
-        <Box
-          className={css({
-            marginTop: section.blocks.length === 0 ? ".5rem" : ".5rem",
-            marginBottom: section.blocks.length === 0 ? ".5rem" : ".5rem",
-          })}
-        >
+        <Box>
           <Grid container>
             {section.blocks.map((block, blockIndex) => {
               const canMoveBlockUp = !(blockIndex === 0);
@@ -1570,177 +2256,205 @@ export const CharacterV3Dialog: React.FC<{
                 : 12;
               return (
                 <Grid key={block.id} item xs={width}>
-                  <Box mb=".5rem" px=".5rem">
-                    <ManagerBox
-                      label={<>Bloc #{blockIndex + 1}</>}
-                      readonly={!advanced}
-                      backgroundColor={theme.palette.background.paper}
-                      actions={
-                        <>
-                          <Grid container justifyContent="flex-end">
-                            <Grid item>
-                              <Tooltip
-                                title={t(
-                                  "character-dialog.control.move-section-up"
-                                )}
-                              >
-                                <span>
-                                  <IconButton
-                                    disabled={!canMoveBlockUp}
-                                    size="small"
-                                    onClick={() => {
-                                      characterManager.actions.moveBlockUp({
-                                        pageIndex: indexes.pageIndex,
-                                        rowIndex: indexes.rowIndex,
-                                        columnIndex: indexes.columnIndex,
-                                        sectionIndex: indexes.sectionIndex,
-                                        blockIndex: blockIndex,
-                                      });
-                                    }}
-                                  >
-                                    <ArrowUpwardIcon
-                                      className={css({
-                                        fontSize: "1rem",
-                                      })}
-                                    />
-                                  </IconButton>
-                                </span>
-                              </Tooltip>
-                            </Grid>
-                            <Grid item>
-                              <Tooltip
-                                title={t(
-                                  "character-dialog.control.move-section-down"
-                                )}
-                              >
-                                <span>
-                                  <IconButton
-                                    disabled={!canMoveBlockDown}
-                                    size="small"
-                                    onClick={() => {
-                                      characterManager.actions.moveBlockDown({
-                                        pageIndex: indexes.pageIndex,
-                                        rowIndex: indexes.rowIndex,
-                                        columnIndex: indexes.columnIndex,
-                                        sectionIndex: indexes.sectionIndex,
-                                        blockIndex: blockIndex,
-                                      });
-                                    }}
-                                  >
-                                    <ArrowDownwardIcon
-                                      className={css({
-                                        fontSize: "1rem",
-                                      })}
-                                    />
-                                  </IconButton>
-                                </span>
-                              </Tooltip>
-                            </Grid>
-
-                            <Grid item>
-                              <Tooltip
-                                title={t("character-dialog.control.copy-block")}
-                              >
+                  <ManagerBox
+                    label={<>Block #{blockIndex + 1}</>}
+                    viewBoxProps={{
+                      padding: "0 .5rem .5rem .5rem",
+                    }}
+                    advancedBoxProps={{
+                      padding: ".5rem",
+                      bgcolor: miniTheme.backgroundColor,
+                    }}
+                    readonly={!advanced}
+                    topActions={
+                      <>
+                        <Grid container justifyContent="flex-end">
+                          <Grid item>
+                            <Tooltip
+                              title={t(
+                                "character-dialog.control.move-section-up"
+                              )}
+                            >
+                              <span>
                                 <IconButton
+                                  disabled={!canMoveBlockUp}
                                   size="small"
                                   onClick={() => {
-                                    settingsManager.actions.setBlocksInClipboard(
-                                      [block]
-                                    );
-                                  }}
-                                >
-                                  <FileCopyIcon
-                                    className={css({
-                                      fontSize: "1rem",
-                                    })}
-                                  />
-                                </IconButton>
-                              </Tooltip>
-                            </Grid>
-
-                            <Grid item>
-                              <Tooltip
-                                title={t(
-                                  "character-dialog.control.delete-block"
-                                )}
-                              >
-                                <IconButton
-                                  size="small"
-                                  data-cy={`character-dialog.${section.label}.${block.label}.delete`}
-                                  onClick={() => {
-                                    characterManager.actions.deleteBlock({
+                                    characterManager.actions.moveBlockUp({
                                       pageIndex: indexes.pageIndex,
-                                      sectionIndex: indexes.sectionIndex,
                                       rowIndex: indexes.rowIndex,
                                       columnIndex: indexes.columnIndex,
-                                      blockIndex,
+                                      sectionIndex: indexes.sectionIndex,
+                                      blockIndex: blockIndex,
                                     });
                                   }}
                                 >
-                                  <DeleteIcon
+                                  <ArrowUpwardIcon
                                     className={css({
                                       fontSize: "1rem",
                                     })}
                                   />
                                 </IconButton>
-                              </Tooltip>
-                            </Grid>
+                              </span>
+                            </Tooltip>
                           </Grid>
-                        </>
-                      }
-                    >
-                      <BlockByType
-                        advanced={advanced}
-                        readonly={props.readonly}
-                        dataCy={`character-dialog.${section.label}.${block.label}`}
-                        block={block}
-                        onChange={(newBlock) => {
-                          characterManager.actions.setBlock(
-                            {
-                              pageIndex: indexes.pageIndex,
-                              rowIndex: indexes.rowIndex,
-                              columnIndex: indexes.columnIndex,
-                              sectionIndex: indexes.sectionIndex,
-                              blockIndex,
-                            },
-                            newBlock
-                          );
-                        }}
-                        onToggleSplit={() => {
-                          const shouldUseHalfWidth =
-                            block.meta.width == null || block.meta.width === 1;
-                          const shouldUseThirdWidth = block.meta.width === 0.5;
-                          const newWidth = shouldUseHalfWidth
-                            ? 0.5
-                            : shouldUseThirdWidth
-                            ? 0.33
-                            : 1;
+                          <Grid item>
+                            <Tooltip
+                              title={t(
+                                "character-dialog.control.move-section-down"
+                              )}
+                            >
+                              <span>
+                                <IconButton
+                                  disabled={!canMoveBlockDown}
+                                  size="small"
+                                  onClick={() => {
+                                    characterManager.actions.moveBlockDown({
+                                      pageIndex: indexes.pageIndex,
+                                      rowIndex: indexes.rowIndex,
+                                      columnIndex: indexes.columnIndex,
+                                      sectionIndex: indexes.sectionIndex,
+                                      blockIndex: blockIndex,
+                                    });
+                                  }}
+                                >
+                                  <ArrowDownwardIcon
+                                    className={css({
+                                      fontSize: "1rem",
+                                    })}
+                                  />
+                                </IconButton>
+                              </span>
+                            </Tooltip>
+                          </Grid>
 
-                          characterManager.actions.setBlockMeta(
-                            {
-                              pageIndex: indexes.pageIndex,
-                              rowIndex: indexes.rowIndex,
-                              columnIndex: indexes.columnIndex,
-                              sectionIndex: indexes.sectionIndex,
-                              blockIndex,
-                            },
-                            {
-                              ...block.meta,
-                              width: newWidth,
-                            }
-                          );
-                        }}
-                        onMainPointCounterChange={() => {
-                          characterManager.actions.toggleBlockMainPointCounter(
-                            block.id
-                          );
-                        }}
-                        onRoll={(diceRollResult) => {
-                          props.onRoll(diceRollResult);
-                        }}
-                      />
-                    </ManagerBox>
-                  </Box>
+                          <Grid item>
+                            <Tooltip
+                              title={t(
+                                "character-dialog.control.duplicate-block"
+                              )}
+                            >
+                              <IconButton
+                                size="small"
+                                onClick={() => {
+                                  characterManager.actions.duplicateBlock({
+                                    pageIndex: indexes.pageIndex,
+                                    rowIndex: indexes.rowIndex,
+                                    columnIndex: indexes.columnIndex,
+                                    sectionIndex: indexes.sectionIndex,
+                                    blockIndex: blockIndex,
+                                  });
+                                }}
+                              >
+                                <ContentCopyIcon
+                                  className={css({
+                                    fontSize: "1rem",
+                                  })}
+                                />
+                              </IconButton>
+                            </Tooltip>
+                          </Grid>
+                          <Grid item>
+                            <Tooltip
+                              title={t("character-dialog.control.copy-block")}
+                            >
+                              <IconButton
+                                size="small"
+                                onClick={() => {
+                                  settingsManager.actions.setBlocksInClipboard([
+                                    block,
+                                  ]);
+                                }}
+                              >
+                                <FileCopyIcon
+                                  className={css({
+                                    fontSize: "1rem",
+                                  })}
+                                />
+                              </IconButton>
+                            </Tooltip>
+                          </Grid>
+
+                          <Grid item>
+                            <Tooltip
+                              title={t("character-dialog.control.delete-block")}
+                            >
+                              <IconButton
+                                size="small"
+                                data-cy={`character-dialog.${section.label}.${block.label}.delete`}
+                                onClick={() => {
+                                  characterManager.actions.deleteBlock({
+                                    pageIndex: indexes.pageIndex,
+                                    sectionIndex: indexes.sectionIndex,
+                                    rowIndex: indexes.rowIndex,
+                                    columnIndex: indexes.columnIndex,
+                                    blockIndex,
+                                  });
+                                }}
+                              >
+                                <DeleteIcon
+                                  className={css({
+                                    fontSize: "1rem",
+                                  })}
+                                />
+                              </IconButton>
+                            </Tooltip>
+                          </Grid>
+                        </Grid>
+                      </>
+                    }
+                  >
+                    <BlockByType
+                      advanced={advanced}
+                      readonly={props.readonly}
+                      dataCy={`character-dialog.${section.label}.${block.label}`}
+                      block={block}
+                      onChange={(newBlock) => {
+                        characterManager.actions.setBlock(
+                          {
+                            pageIndex: indexes.pageIndex,
+                            rowIndex: indexes.rowIndex,
+                            columnIndex: indexes.columnIndex,
+                            sectionIndex: indexes.sectionIndex,
+                            blockIndex,
+                          },
+                          newBlock
+                        );
+                      }}
+                      onToggleSplit={() => {
+                        const shouldUseHalfWidth =
+                          block.meta.width == null || block.meta.width === 1;
+                        const shouldUseThirdWidth = block.meta.width === 0.5;
+                        const newWidth = shouldUseHalfWidth
+                          ? 0.5
+                          : shouldUseThirdWidth
+                          ? 0.33
+                          : 1;
+
+                        characterManager.actions.setBlockMeta(
+                          {
+                            pageIndex: indexes.pageIndex,
+                            rowIndex: indexes.rowIndex,
+                            columnIndex: indexes.columnIndex,
+                            sectionIndex: indexes.sectionIndex,
+                            blockIndex,
+                          },
+                          {
+                            ...block.meta,
+                            width: newWidth,
+                          }
+                        );
+                      }}
+                      onMainPointCounterChange={() => {
+                        characterManager.actions.toggleBlockMainPointCounter(
+                          block.id
+                        );
+                      }}
+                      onRoll={(diceRollResult) => {
+                        props.onRoll?.(diceRollResult);
+                      }}
+                    />
+                  </ManagerBox>
                 </Grid>
               );
             })}
@@ -1754,18 +2468,24 @@ CharacterV3Dialog.displayName = "CharacterV3Dialog";
 
 export function ManagerBox(props: {
   label: string | React.ReactNode;
-  actions?: React.ReactNode;
+  topActions?: React.ReactNode;
   children: React.ReactNode;
-  outside?: React.ReactNode;
-  backgroundColor?: string;
+  bottomActions?: React.ReactNode;
+  rightActions?: React.ReactNode;
   readonly?: boolean;
+  viewBoxProps?: BoxProps;
+  advancedBoxProps?: BoxProps;
 }) {
+  const viewBoxProps = props.viewBoxProps || {};
+  const advancedBoxProps = props.advancedBoxProps || {};
   const theme = useTheme();
+
   if (props.readonly) {
-    return <>{props.children}</>;
+    return <Box {...viewBoxProps}>{props.children}</Box>;
   }
+
   return (
-    <Box p=".5rem" mb=".5rem" height="100%" bgcolor={props.backgroundColor}>
+    <Box {...advancedBoxProps}>
       <Box mb=".5rem">
         <Grid container spacing={1} alignContent="center">
           <Grid
@@ -1786,11 +2506,20 @@ export function ManagerBox(props: {
               {props.label}
             </Typography>
           </Grid>
-          {props.actions && <Grid item>{props.actions}</Grid>}
+          {props.topActions && <Grid item>{props.topActions}</Grid>}
         </Grid>
       </Box>
-      {props.children}
-      {props.outside}
+      <Grid container wrap="nowrap" spacing={1}>
+        <Grid item xs>
+          {props.children}
+        </Grid>
+        {props.rightActions && (
+          <Grid item className={css({ display: "flex", alignItems: "center" })}>
+            {props.rightActions}
+          </Grid>
+        )}
+      </Grid>
+      {props.bottomActions}
     </Box>
   );
 }

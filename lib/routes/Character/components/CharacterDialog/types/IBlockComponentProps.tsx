@@ -6,7 +6,7 @@ export type IBlockComponentProps<TBlockType extends IBlockTypes> = {
   advanced: boolean;
   readonly: boolean | undefined;
   block: IBlock & TBlockType;
-  onLabelChange(label: string): void;
+  onLabelChange(label: string | undefined): void;
   onValueChange(value: TBlockType["value"]): void;
   onMetaChange(meta: TBlockType["meta"]): void;
   onRoll(diceRollResult: IDiceRollResult): void;
@@ -14,5 +14,7 @@ export type IBlockComponentProps<TBlockType extends IBlockTypes> = {
 
 export type IBlockActionComponentProps<TBlockType extends IBlockTypes> = {
   block: IBlock & TBlockType;
+  onLabelChange(label: string | undefined): void;
+  onValueChange(value: TBlockType["value"]): void;
   onMetaChange(meta: TBlockType["meta"]): void;
 };

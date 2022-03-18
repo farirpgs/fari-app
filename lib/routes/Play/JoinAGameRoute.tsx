@@ -9,6 +9,7 @@ import Fade from "@mui/material/Fade";
 import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
 import Paper from "@mui/material/Paper";
+import { useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import {
@@ -37,6 +38,7 @@ export const JoinAGameRoute: React.FC<{
   };
 }> = (props) => {
   const { t } = useTranslate();
+  const theme = useTheme();
   const settingsManager = useContext(SettingsContext);
   const [playerName, setPlayerName] = useState(settingsManager.state.userName);
   const [loading, setLoading] = useState(false);
@@ -105,7 +107,15 @@ export const JoinAGameRoute: React.FC<{
         }}
       >
         <Box pb="2rem" textAlign="center">
-          <img alt="Fari" width="150px" src={Images.app} />
+          <img
+            alt="Fari"
+            width="150px"
+            src={
+              theme.palette.mode === "dark"
+                ? Images.logoWhite
+                : Images.logoBlack
+            }
+          />
         </Box>
         <Box pb="2rem" textAlign="center">
           <Typography variant="h4">
@@ -177,7 +187,7 @@ export const JoinAGameRoute: React.FC<{
           <Collapse in={loading}>
             <Box pb="2rem">
               <Box display="flex" justifyContent="center">
-                <CircularProgress />
+                <CircularProgress color="secondary" />
               </Box>
             </Box>
           </Collapse>

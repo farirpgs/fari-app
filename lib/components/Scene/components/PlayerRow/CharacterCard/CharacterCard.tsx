@@ -31,7 +31,7 @@ export const CharacterCard: React.FC<{
   const { t } = useTranslate();
   const theme = useTheme();
   const logger = useLogger();
-  const width = props.width ?? "100%";
+  const width = props.width ?? "inherit";
   const characterManager = useCharacter(props.characterSheet);
 
   const sections = characterManager.state.character?.pages
@@ -148,7 +148,7 @@ export const CharacterCard: React.FC<{
                             <SaveIcon
                               color={
                                 characterManager.state.dirty
-                                  ? "primary"
+                                  ? "secondary"
                                   : undefined
                               }
                               className={css({
@@ -189,6 +189,9 @@ export const CharacterCard: React.FC<{
                     if (!section.visibleOnCard) {
                       return null;
                     }
+                    const sectionLabel = previewContentEditable({
+                      value: section.label,
+                    });
                     return (
                       <Box
                         px="1rem"
@@ -196,13 +199,15 @@ export const CharacterCard: React.FC<{
                         key={section.id}
                         className={css({ clear: "both" })}
                       >
-                        <Box className={sheetHeaderClassName}>
-                          <FateLabel noWrap>
-                            {previewContentEditable({
-                              value: section.label,
-                            })}
-                          </FateLabel>
-                        </Box>
+                        {sectionLabel && (
+                          <Box className={sheetHeaderClassName}>
+                            <FateLabel noWrap>
+                              {previewContentEditable({
+                                value: section.label,
+                              })}
+                            </FateLabel>
+                          </Box>
+                        )}
                         <Box px=".2rem">
                           {section.blocks.map((block, blockIndex) => {
                             return (

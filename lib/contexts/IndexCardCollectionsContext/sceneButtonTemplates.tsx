@@ -13,18 +13,17 @@ export const defaultIndexCardCollection: Array<IIndexCardCollection> = [
       (function () {
         const card = SceneFactory.makeIndexCard();
         card.titleLabel = "Aspect";
-        card.contentLabel = "Notes";
-        const freeInvokes = CharacterFactory.makeBlock(BlockType.SlotTracker);
-        freeInvokes.label = "Free Invokes";
-        freeInvokes.value = [];
+        const notes = CharacterFactory.makeBlock(BlockType.Text);
+        card.blocks.push(notes);
         return card;
       })(),
       (function () {
         const card = SceneFactory.makeIndexCard();
         card.titleLabel = "Boost";
-        card.contentLabel = "Notes";
+        const notes = CharacterFactory.makeBlock(BlockType.Text);
         const freeInvokes = CharacterFactory.makeBlock(BlockType.SlotTracker);
         freeInvokes.label = "Free Invokes";
+        card.blocks.push(notes);
         card.blocks.push(freeInvokes);
         card.color = IndexCardColor.blue;
         return card;
@@ -32,11 +31,12 @@ export const defaultIndexCardCollection: Array<IIndexCardCollection> = [
       (function () {
         const card = SceneFactory.makeIndexCard();
         card.titleLabel = "NPC";
-        card.contentLabel = "Aspects";
+        const notes = CharacterFactory.makeBlock(BlockType.Text);
         const stress = CharacterFactory.makeBlock(BlockType.SlotTracker);
         stress.label = "Stress";
         const consequences = CharacterFactory.makeBlock(BlockType.Text);
         consequences.label = "Consequences";
+        card.blocks.push(notes);
         card.blocks.push(stress);
         card.blocks.push(consequences);
         card.color = IndexCardColor.green;
@@ -45,11 +45,12 @@ export const defaultIndexCardCollection: Array<IIndexCardCollection> = [
       (function () {
         const card = SceneFactory.makeIndexCard();
         card.titleLabel = "Bad Guy";
-        card.contentLabel = "Aspects";
+        const notes = CharacterFactory.makeBlock(BlockType.Text);
         const stress = CharacterFactory.makeBlock(BlockType.SlotTracker);
         stress.label = "Stress";
         const consequences = CharacterFactory.makeBlock(BlockType.Text);
         consequences.label = "Consequences";
+        card.blocks.push(notes);
         card.blocks.push(stress);
         card.blocks.push(consequences);
         card.color = IndexCardColor.red;
@@ -67,7 +68,7 @@ export const defaultIndexCardCollection: Array<IIndexCardCollection> = [
       (function () {
         const card = SceneFactory.makeIndexCard();
         card.titleLabel = "Clock";
-        card.contentLabel = "Notes";
+        const notes = CharacterFactory.makeBlock(BlockType.Text);
         const slotTracker = CharacterFactory.makeBlock<ISlotTrackerBlock>(
           BlockType.SlotTracker
         );
@@ -79,6 +80,7 @@ export const defaultIndexCardCollection: Array<IIndexCardCollection> = [
           { label: "", checked: false },
           { label: "", checked: false },
         ];
+        card.blocks.push(notes);
         card.blocks.push(slotTracker);
         return card;
       })(),

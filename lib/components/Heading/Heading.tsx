@@ -25,10 +25,10 @@ export const Heading: React.FC<
     >
       {Icon && (
         <Box mb=".5rem">
-          <Icon className={css({ fontSize: "3rem" })} color="primary" />
+          <Icon className={css({ fontSize: "3rem" })} color="secondary" />
         </Box>
       )}
-      <FateLabel variant="h4" as="h1" align="center" color="primary">
+      <FateLabel variant="h4" as="h1" align="center" color="secondary">
         {title}
       </FateLabel>
       {subtitle && (
@@ -36,7 +36,7 @@ export const Heading: React.FC<
           variant="h6"
           variantMapping={{ h6: "h2" }}
           align="center"
-          color="primary"
+          color="inherit"
         >
           {subtitle}
         </Typography>

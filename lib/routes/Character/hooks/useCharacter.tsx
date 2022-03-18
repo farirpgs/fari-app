@@ -9,7 +9,8 @@ import {
   BlockType,
   IBlock,
   ICharacter,
-  IPage
+  ICharacterTheme,
+  IPage,
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/Id/Id";
@@ -140,6 +141,28 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
+  function setTheme(setter?: (theme: ICharacterTheme) => void) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.theme = draft.theme ?? {};
+        setter?.(draft.theme);
+      })
+    );
+  }
+  function removeTheme() {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.theme = undefined;
+      })
+    );
+  }
+
   function moveRowDown(indexes: { pageIndex: number; rowIndex: number }) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -243,13 +266,13 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function addRow(indexes: { pageIndex: number }) {
+  function addRow(indexes: { pageIndex: number; rowIndex: number }) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.pages[indexes.pageIndex].rows.push({
+        draft.pages[indexes.pageIndex].rows.splice(indexes.rowIndex + 1, 0, {
           columns: [{ sections: [] }],
         });
       })
@@ -267,15 +290,23 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function addColumn(indexes: { pageIndex: number; rowIndex: number }) {
+  function addColumn(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+  }) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns.push({
-          sections: [],
-        });
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns.splice(
+          indexes.columnIndex + 1,
+          0,
+          {
+            sections: [],
+          }
+        );
       })
     );
   }
@@ -553,6 +584,35 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
+  function duplicateBlock(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+    blockIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        const block =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex].blocks[indexes.blockIndex];
+        const newBlock = CharacterFactory.duplicateBlock(block);
+
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+          indexes.columnIndex
+        ].sections[indexes.sectionIndex].blocks.splice(
+          indexes.blockIndex + 1,
+          0,
+          newBlock
+        );
+      })
+    );
+  }
+
   function setBlock(
     indexes: {
       pageIndex: number;
@@ -699,6 +759,8 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       addPage,
       addRow,
       moveRowUp,
+      removeTheme,
+      setTheme,
       moveRowDown,
       deleteRow,
       addColumn,
@@ -720,6 +782,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       moveDnDBlock,
       moveBlockUp,
       moveBlockDown,
+      duplicateBlock,
       setBlock,
       setBlockMeta,
       toggleBlockMainPointCounter,

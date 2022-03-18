@@ -255,7 +255,11 @@ export const CardCollectionRoute: React.FC<{
               officially rolled out.
               <br />
               If you find any issues with this new feature, report it on the{" "}
-              <a href="/discord" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://farirpgs.com/discord"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Discord Server
               </a>
               .

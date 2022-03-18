@@ -52,22 +52,6 @@ export function useIndexCard(props: {
     );
   }
 
-  function setContentLabel(newLabel: string) {
-    setIndexCard(
-      produce((draft: IIndexCard) => {
-        draft.contentLabel = newLabel;
-      })
-    );
-  }
-
-  function setContent(newContent: string) {
-    setIndexCard(
-      produce((draft: IIndexCard) => {
-        draft.content = newContent;
-      })
-    );
-  }
-
   function toggleInitiative() {
     setIndexCard(
       produce((draft: IIndexCard) => {
@@ -220,9 +204,7 @@ export function useIndexCard(props: {
       reset,
       setBlock,
       setColor,
-      setContent,
       setTitleLabel: setTitleLabel,
-      setContentLabel,
       setTitle,
       toggleInitiative,
       togglePinned,

@@ -129,7 +129,6 @@ export const Empty = Template.bind({});
 Empty.args = {
   indexCard: anIndexCard((draft) => {
     draft.title = "";
-    draft.content = "";
   }),
 };
 
@@ -137,8 +136,6 @@ export const DefaultWithSkills = Template.bind({});
 DefaultWithSkills.args = {
   indexCard: anIndexCard((draft) => {
     draft.title = "Title";
-    draft.content =
-      "Description <br> Description <br> Description <br> [Academic  : 4]";
   }),
 };
 
@@ -147,8 +144,6 @@ Aspect.args = {
   indexCard: anIndexCard((draft) => {
     draft.titleLabel = "Aspect";
     draft.title = "Title";
-    draft.contentLabel = "Notes";
-    draft.content = "Description <br> Description <br> Description <br>";
   }),
 };
 export const Boost = Template.bind({});
@@ -156,8 +151,6 @@ Boost.args = {
   indexCard: anIndexCard((draft) => {
     draft.titleLabel = "Boost";
     draft.title = "Title";
-    draft.contentLabel = "Notes";
-    draft.content = "Description <br> Description <br> Description <br>";
     draft.color = IndexCardColor.blue;
   }),
 };
@@ -186,8 +179,6 @@ NPC.args = {
   indexCard: anIndexCard((draft) => {
     draft.titleLabel = "NPC";
     draft.title = "Title";
-    draft.contentLabel = "Aspects";
-    draft.content = "Description <br> Description <br> Description <br>";
     draft.color = IndexCardColor.green;
   }),
 };
@@ -196,8 +187,6 @@ BadGuy.args = {
   indexCard: anIndexCard((draft) => {
     draft.titleLabel = "NPC";
     draft.title = "Title";
-    draft.contentLabel = "Aspects";
-    draft.content = "Description <br> Description <br> Description <br>";
     draft.color = IndexCardColor.red;
   }),
 };
@@ -205,7 +194,6 @@ export const Index_Card = Template.bind({});
 Index_Card.args = {
   indexCard: anIndexCard((draft) => {
     draft.title = "Title";
-    draft.content = "Description <br> Description <br> Description <br>";
   }),
 };
 
@@ -214,8 +202,6 @@ OutOfBound.args = {
   indexCard: anIndexCard((draft) => {
     draft.title =
       "Orc dps charisma modifier wagon wisdom Orc dps charisma modifier wagon wisdom";
-    draft.content =
-      "Sense troll cartographer agility horse gnoll. Lance advantage advantage wizard falchion polearm. Longsword tavern spirit strength dexterity polearm. Longsword hobgoblin great axe axe lance initiative. Ship dexterity bow light spell casting poleaxe.";
   }),
 };
 
@@ -223,8 +209,6 @@ function anIndexCard(recipe?: (indexCard: IIndexCard) => void): IIndexCard {
   return produce(SceneFactory.makeIndexCard(), (draft) => {
     draft.titleLabel = "Index Card";
     draft.title = "Title";
-    draft.contentLabel = "Notes";
-    draft.content = "Description";
     draft.color = "#fff";
     draft.playedDuringTurn = false;
     draft.pinned = false;

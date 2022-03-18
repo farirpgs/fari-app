@@ -1,31 +1,24 @@
 import { css } from "@emotion/css";
-import BookIcon from "@mui/icons-material/Book";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import CasinoIcon from "@mui/icons-material/Casino";
 import ChatIcon from "@mui/icons-material/Chat";
 import ComputerIcon from "@mui/icons-material/Computer";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FiberNewIcon from "@mui/icons-material/FiberNew";
 import ForumIcon from "@mui/icons-material/Forum";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InfoIcon from "@mui/icons-material/Info";
-import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import LocalCafeIcon from "@mui/icons-material/LocalCafe";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import MenuIcon from "@mui/icons-material/Menu";
-import SignalWifi0BarIcon from "@mui/icons-material/SignalWifi0Bar";
-import SignalWifi4BarLockIcon from "@mui/icons-material/SignalWifi4BarLock";
 import StorageIcon from "@mui/icons-material/Storage";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import TranslateIcon from "@mui/icons-material/Translate";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Collapse from "@mui/material/Collapse";
 import Container from "@mui/material/Container";
 import Drawer from "@mui/material/Drawer";
 import Fade from "@mui/material/Fade";
@@ -33,17 +26,13 @@ import Grid from "@mui/material/Grid";
 import Hidden from "@mui/material/Hidden";
 import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Popover from "@mui/material/Popover";
 import Select from "@mui/material/Select";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
-import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { Link as RouterLink } from "react-router-dom";
 import { env } from "../../constants/env";
 import { Images } from "../../constants/Images";
 import { useZIndex } from "../../constants/zIndex";
@@ -55,15 +44,15 @@ import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import {
   IPossibleLanguages,
-  PossibleLanguagesNames,
+  PossibleLanguagesNames
 } from "../../services/internationalization/InternationalizationService";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { CannyChangelog } from "../CannyChangelog/CannyChangelog";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
-import { FateLabel } from "../FateLabel/FateLabel";
 import { Kofi } from "../Kofi/Kofi";
 import { Patreon } from "../Patreon/Patreon";
 import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
+import { NavLink, NavLinkCategory } from "./NavLink";
 
 let gameIdSingleton: string | undefined = undefined;
 
@@ -78,10 +67,10 @@ export enum LiveMode {
 export const Page: React.FC<{
   notFound?: JSX.Element;
   gameId?: string;
-  live?: LiveMode;
-  liveLabel?: string;
+  isLive?: boolean;
   drawerWidth?: string;
   maxWidth?: string;
+  marginTop?: string;
   pb?: string;
   debug?: Record<string, string>;
   hideHeaderLogo?: boolean;
@@ -100,7 +89,7 @@ export const Page: React.FC<{
   const logger = useLogger();
   const zIndex = useZIndex();
 
-  const isLive = props.live !== undefined;
+  const isLive = props.isLive;
   const highlight = useHighlight();
 
   useEffect(() => {
@@ -143,7 +132,7 @@ export const Page: React.FC<{
                     : props.maxWidth ?? FariMaxWidth,
                   marginLeft: "auto",
                   marginRight: "auto",
-                  marginTop: "2rem",
+                  marginTop: props.marginTop || "2rem",
                   width: "100%",
                   flex: "1 0 auto",
                 })}
@@ -198,9 +187,9 @@ export const Page: React.FC<{
             >
               <Grid item xs={isSmall ? 12 : undefined}>
                 <AppButtonLink
-                  to="https://discord.gg/vMAJFjUraA"
+                  to="https://farirpgs.com/discord"
                   target="_blank"
-                  color="primary"
+                  color="secondary"
                   startIcon={<ChatIcon />}
                 >
                   {t("home-route.sections.join-community.cta")}
@@ -222,6 +211,7 @@ export const Page: React.FC<{
                     target="_blank"
                     rel="noreferrer"
                     underline="hover"
+                    color="secondary"
                   >
                     This site is powered by Netlify
                   </Link>
@@ -232,6 +222,7 @@ export const Page: React.FC<{
                   <AppLink
                     to="/changelog"
                     underline="always"
+                    color="secondary"
                   >{`v${env.version}`}</AppLink>
                 </Typography>
               </Grid>
@@ -256,7 +247,35 @@ export const Page: React.FC<{
           </Box>
 
           <Grid container justifyContent="center">
+            <Grid item>
+              <a
+                href="https://farirpgs.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  alt="Made By Fari RPGs"
+                  className={css({
+                    width: "400px",
+                    maxWidth: "100%",
+                  })}
+                  src={
+                    theme.palette.mode === "dark"
+                      ? Images.madeByFariRPGsWhite
+                      : Images.madeByFariRPGsBlack
+                  }
+                />
+              </a>
+            </Grid>
+          </Grid>
+          <Grid container justifyContent="center">
             <Grid item xs>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  The Fari RPGs, Fari App, Fari Games and Fari Community logos
+                  were designed by Ron Müller.
+                </Typography>
+              </Box>
               <Box mb=".5rem">
                 <Typography variant="caption" align="justify">
                   This site is not affiliated with Evil Hat Productions, LLC.
@@ -299,6 +318,7 @@ export const Page: React.FC<{
                     href="http://game-icons.net"
                     target="_blank"
                     rel="noreferrer"
+                    color={"secondary"}
                     underline="hover"
                   >
                     http://game-icons.net
@@ -307,6 +327,7 @@ export const Page: React.FC<{
                   <Link
                     href="https://icons8.com/icon/569/dice"
                     target="_blank"
+                    color={"secondary"}
                     rel="noreferrer"
                     underline="hover"
                   >
@@ -325,6 +346,7 @@ export const Page: React.FC<{
                   rel="noreferrer"
                   data-cy="page.privacy-policy"
                   underline="hover"
+                  color={"secondary"}
                 >
                   {t("page.privacy-policy")}
                 </Link>
@@ -369,45 +391,52 @@ export const Page: React.FC<{
                 zIndex: zIndex.navBar,
               })}
             >
-              <RouterLink
-                to="/"
-                data-cy="page.menu.home"
-                className={css({
+              <Box
+                sx={{
+                  textTransform: "none",
+                  marginRight: "1rem",
                   textDecoration: "none",
-                })}
+                  display: props.hideHeaderLogo ? "none" : "inherit",
+                }}
               >
-                <img
-                  alt="Fari"
-                  className={css({
-                    height: "2.5rem",
-                    marginRight: "1rem",
-                    cursor: "pointer",
-                    display: props.hideHeaderLogo ? "none" : "inherit",
-                  })}
-                  src={Images.app}
-                />
-              </RouterLink>
-              {isLive && (
-                <Box>
-                  <Grid container alignItems="center" spacing={3} wrap="nowrap">
-                    <Grid item>
-                      {props.live === LiveMode.Connecting && (
-                        <SignalWifi0BarIcon />
-                      )}
-                      {props.live === LiveMode.Live && (
-                        <SignalWifi4BarLockIcon />
-                      )}
+                <NavLink to="/" data-cy="page.menu.home">
+                  <Grid container wrap="nowrap" alignItems="center">
+                    <Grid item sx={{ display: "flex" }}>
+                      <img
+                        alt="Fari"
+                        className={css({
+                          height: "3.5rem",
+                          cursor: "pointer",
+                        })}
+                        src={Images.logoWhiteSvg}
+                      />
                     </Grid>
-                    <Grid item>
-                      <Box maxWidth="150px">
-                        <Typography variant="subtitle1" noWrap>
-                          {/*  */}
+                    <Grid item sx={{ display: "flex" }}>
+                      <Typography
+                        noWrap
+                        className={css({
+                          color: "#fff",
+                          whiteSpace: "nowrap",
+                          fontSize: "1.1rem",
+                          fontWeight: theme.typography.fontWeightBold,
+                        })}
+                      >
+                        Fari{" "}
+                        <Typography
+                          component="span"
+                          className={css({
+                            fontSize: "1.1rem",
+                            fontWeight: theme.typography.fontWeightRegular,
+                          })}
+                        >
+                          App
                         </Typography>
-                      </Box>
+                      </Typography>
                     </Grid>
                   </Grid>
-                </Box>
-              )}
+                </NavLink>
+              </Box>
+
               <Hidden mdDown>{renderMenu(false)}</Hidden>
               <Hidden mdUp>
                 {!isLive && (
@@ -437,8 +466,8 @@ export const Page: React.FC<{
               >
                 <Box
                   p="1.5rem"
-                  color={theme.palette.primary.main}
-                  bgcolor={theme.palette.background.default}
+                  color={"#fff"}
+                  bgcolor={theme.palette.primary.main}
                 >
                   {renderMenu(true)}
                 </Box>
@@ -498,16 +527,17 @@ export const Page: React.FC<{
         {!isLive && (
           <>
             <Grid item xs={xsSize} sm={smSize} className={itemClass}>
-              <PageNavLink
-                label={t("menu.my-binder")}
+              <NavLink
                 data-cy="page.menu.my-binder"
                 onClick={() => {
                   myBinderManager.actions.open();
                 }}
-              />
+              >
+                {t("menu.my-binder")}
+              </NavLink>
             </Grid>
             <Grid item xs={xsSize} sm={smSize} className={itemClass}>
-              <PageNavLink
+              <NavLinkCategory
                 label={t("menu.tools")}
                 data-cy="page.menu.tools"
                 subNav={[
@@ -551,7 +581,7 @@ export const Page: React.FC<{
               />
             </Grid>
             <Grid item xs={xsSize} sm={smSize} className={itemClass}>
-              <PageNavLink
+              <NavLinkCategory
                 label={t("menu.resources")}
                 subNav={[
                   {
@@ -574,7 +604,7 @@ export const Page: React.FC<{
                         icon: <BugReportIcon />,
                       },
                       {
-                        to: "/discord",
+                        to: "https://farirpgs.com/discord",
                         label: t("menu.discord"),
                         icon: <ForumIcon />,
                         target: "_blank",
@@ -585,29 +615,9 @@ export const Page: React.FC<{
                     label: "Documents",
                     links: [
                       {
-                        to: "/fari-wiki",
+                        to: "https://fari.games/en/resources/fari-rpgs/fari-app-wiki",
                         label: t("menu.fari-wiki"),
                         icon: <InfoIcon />,
-                      },
-                      {
-                        to: "/srds",
-                        label: t("menu.srds"),
-                        icon: <LibraryBooksIcon />,
-                      },
-                      {
-                        to: "/success-with-style",
-                        label: t("menu.success-with-style-blog"),
-                        icon: <DoneOutlineIcon />,
-                      },
-                      {
-                        to: "/seeliesquire",
-                        label: t("menu.seelie-squire"),
-                        icon: <LocalLibraryIcon />,
-                      },
-                      {
-                        to: "/blog",
-                        label: t("menu.blog"),
-                        icon: <BookIcon />,
                       },
                     ],
                   },
@@ -641,7 +651,7 @@ export const Page: React.FC<{
         )}
 
         <Grid item xs={xsSize} sm={smSize} className={itemClass}>
-          <PageNavLink
+          <NavLinkCategory
             data-cy="page.menu.languages"
             tooltip={t("menu.languages")}
             label={<TranslateIcon />}
@@ -677,25 +687,22 @@ export const Page: React.FC<{
                 })}
               </Select>
             </Box>
-          </PageNavLink>
+          </NavLinkCategory>
         </Grid>
 
         <Grid item xs={xsSize} sm={smSize} className={itemClass}>
-          <PageNavLink
+          <NavLink
             data-cy="page.use-theme-from-system-preferences"
             tooltip={t("menu.use-theme-from-system-preferences")}
             onClick={() => {
               settingsManager.actions.setThemeMode(undefined);
             }}
-            label={
-              <>
-                <ComputerIcon />
-              </>
-            }
-          />
+          >
+            <ComputerIcon />
+          </NavLink>
         </Grid>
         <Grid item xs={xsSize} sm={smSize} className={itemClass}>
-          <PageNavLink
+          <NavLink
             data-cy="page.toggle-dark-mode"
             tooltip={t("menu.toggle-theme")}
             onClick={() => {
@@ -705,218 +712,25 @@ export const Page: React.FC<{
                 settingsManager.actions.setThemeMode("dark");
               }
             }}
-            label={
-              <>
-                {settingsManager.state.themeMode === "dark" ? (
-                  <LightModeIcon />
-                ) : (
-                  <DarkModeIcon />
-                )}
-              </>
-            }
-          />
+          >
+            {settingsManager.state.themeMode === "dark" ? (
+              <LightModeIcon />
+            ) : (
+              <DarkModeIcon />
+            )}
+          </NavLink>
         </Grid>
         <Grid item xs={xsSize} sm={smSize} className={itemClass}>
-          <PageNavLink
+          <NavLink
             tooltip={t("menu.whats-new")}
             onClick={() => {
               // ignore
             }}
-            label={
-              <>
-                <CannyChangelog mobile={mobile} />
-              </>
-            }
-          />
+          >
+            <CannyChangelog mobile={mobile} />
+          </NavLink>
         </Grid>
       </Grid>
     );
   }
 };
-
-type IPageNavLink = {
-  label: JSX.Element | string;
-  target?: "_blank";
-  ["data-cy"]?: string;
-  to?: string;
-  tooltip?: string;
-  onClick?(event: React.MouseEvent<HTMLAnchorElement>): void;
-};
-
-function PageNavLink(
-  props: IPageNavLink & {
-    subNav?: Array<{
-      label: JSX.Element | string;
-      links: Array<IPageNavLink & { icon?: JSX.Element }>;
-    }>;
-    children?: JSX.Element;
-  }
-) {
-  const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
-  const highlight = useHighlight();
-  const subNav = props.subNav ?? [];
-  const hasSubNav = subNav.length > 0;
-  const hasPopperContent = hasSubNav || !!props.children;
-  const [anchorEl, setAnchorEl] = useState<HTMLAnchorElement | null>(null);
-
-  const open = Boolean(anchorEl);
-
-  function handleOpenSubNav(
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) {
-    if (hasPopperContent) {
-      if (!open) {
-        setAnchorEl(event.currentTarget);
-      } else {
-        handleCloseSubNav();
-      }
-    }
-  }
-
-  function handleCloseSubNav() {
-    setAnchorEl(null);
-  }
-
-  return (
-    <>
-      <Tooltip title={props.tooltip ?? ""}>
-        <div>
-          <AppLink
-            data-cy={props["data-cy"]}
-            target={props.target}
-            className={css({
-              "label": "PageNavLink",
-              "display": "flex",
-              "alignItems": "center",
-              "color": "inherit",
-              "fontWeight": theme.typography.fontWeightMedium,
-              "fontSize": "1.1rem",
-              "&:hover": {
-                color: isSmall ? "inherit" : highlight.hover,
-                textDecoration: "underline",
-              },
-            })}
-            to={props.to}
-            onClick={props.onClick ?? handleOpenSubNav}
-          >
-            {props.label}
-            {hasPopperContent && <ExpandMoreIcon />}
-          </AppLink>
-        </div>
-      </Tooltip>
-
-      <Hidden mdDown>
-        <Popover
-          open={open}
-          onClose={handleCloseSubNav}
-          anchorEl={anchorEl}
-          TransitionProps={{ timeout: theme.transitions.duration.shortest }}
-          className={css({
-            marginTop: "1rem",
-          })}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-        >
-          <Box px="1.5rem" py=".5rem" minWidth="200px">
-            <Box>
-              <Box>{renderSubNav()}</Box>
-              <Box>{props.children}</Box>
-            </Box>
-          </Box>
-        </Popover>
-      </Hidden>
-
-      <Hidden mdUp>
-        <Collapse in={open}>
-          <Box mt=".5rem">
-            <Paper elevation={2}>
-              <Box p="1rem">
-                <Box>{renderSubNav()}</Box>
-                <Box>{props.children}</Box>
-              </Box>
-            </Paper>
-          </Box>
-        </Collapse>
-      </Hidden>
-    </>
-  );
-
-  function renderSubNav() {
-    return (
-      <>
-        {props.subNav?.map((category, categoryIndex) => {
-          return (
-            <Box key={categoryIndex} mt=".5rem" mb="1.5rem">
-              <Box display="flex">
-                <FateLabel color="textSecondary" fontSize=".8rem">
-                  {category.label}
-                </FateLabel>
-              </Box>
-              {category.links.map((link, linkIndex) => {
-                return (
-                  <Box key={linkIndex} my=".5rem">
-                    <Grid
-                      container
-                      wrap="nowrap"
-                      spacing={1}
-                      alignItems="center"
-                    >
-                      {link.icon && (
-                        <Grid item>
-                          <Box
-                            display="flex"
-                            className={css({
-                              "& *": {
-                                color: theme.palette.primary.main,
-                              },
-                            })}
-                          >
-                            {link.icon}
-                          </Box>
-                        </Grid>
-                      )}
-                      <Grid item>
-                        <Tooltip title={link.tooltip ?? ""}>
-                          <div
-                            className={css({
-                              textAlign: "left",
-                            })}
-                          >
-                            <AppLink
-                              to={link.to}
-                              target={link.target}
-                              data-cy={link["data-cy"]}
-                              onClick={link.onClick}
-                              className={css({
-                                "color": theme.palette.primary.main,
-                                "fontWeight": theme.typography.fontWeightMedium,
-
-                                "fontSize": "1rem",
-                                "&:hover": {
-                                  textDecoration: "underline",
-                                },
-                              })}
-                            >
-                              {link.label}
-                            </AppLink>
-                          </div>
-                        </Tooltip>
-                      </Grid>
-                    </Grid>
-                  </Box>
-                );
-              })}
-            </Box>
-          );
-        })}
-      </>
-    );
-  }
-}

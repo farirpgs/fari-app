@@ -1,11 +1,16 @@
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import { useTheme } from "@mui/material/styles";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React from "react";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { BlockType, IBlock } from "../lib/domains/character/types";
 import { BlockByType } from "../lib/routes/Character/components/CharacterDialog/components/BlockByType";
+import {
+  MiniThemeContext,
+  useMiniTheme,
+} from "../lib/routes/Character/components/CharacterDialog/MiniThemeContext";
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookBlock(props: {
@@ -13,18 +18,24 @@ function StorybookBlock(props: {
   advanced: boolean;
   block: IBlock;
 }) {
+  const theme = useTheme();
+  const miniTheme = useMiniTheme({
+    enforceBackground: theme.palette.background.default,
+  });
   return (
     <>
-      <BlockByType
-        readonly={props.readonly}
-        advanced={props.advanced}
-        block={props.block}
-        dataCy="storybook"
-        onRoll={action("onRoll")}
-        onChange={action("onChange")}
-        onMainPointCounterChange={action("onMainPointCounterChange")}
-        onToggleSplit={action("onToggleSplit")}
-      />
+      <MiniThemeContext.Provider value={miniTheme}>
+        <BlockByType
+          readonly={props.readonly}
+          advanced={props.advanced}
+          block={props.block}
+          dataCy="storybook"
+          onRoll={action("onRoll")}
+          onChange={action("onChange")}
+          onMainPointCounterChange={action("onMainPointCounterChange")}
+          onToggleSplit={action("onToggleSplit")}
+        />
+      </MiniThemeContext.Provider>
     </>
   );
 }

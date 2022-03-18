@@ -11,6 +11,7 @@ import {
   ICharacter,
   IDicePoolBlock,
   IImageBlock,
+  IInfoTextBlock,
   ILinkBlock,
   INumericBlock,
   IPage,
@@ -26,7 +27,7 @@ import {
   IV3Section,
   IV4Character,
   IV4Page,
-  V3Position
+  V3Position,
 } from "./types";
 
 export const CharacterFactory = {
@@ -34,13 +35,13 @@ export const CharacterFactory = {
   async make(template: ICharacterTemplate): Promise<ICharacter> {
     const result = await template.importFunction();
     const newCharacter = this.makeFromJson(result);
-    return {
+    const characterWithNewName = {
       ...newCharacter,
-      id: Id.generate(),
       name: "",
       group: undefined,
       lastUpdated: getUnix(),
     };
+    return CharacterFactory.resetAllIds(characterWithNewName);
   },
   makeFromJson(jsonData: any): ICharacter {
     const newSheet = {
@@ -70,6 +71,10 @@ export const CharacterFactory = {
           from: 4,
           migrate: migrateV4CharacterToV5,
         },
+        {
+          from: 5,
+          migrate: migrateV5CharacterToV6,
+        },
       ]);
       const migrated = migrate(character);
       return migrated;
@@ -78,13 +83,31 @@ export const CharacterFactory = {
       return character;
     }
   },
-  duplicate(c: ICharacter): ICharacter {
-    return {
-      ...c,
-      id: Id.generate(),
-      lastUpdated: getUnix(),
-      name: `${c?.name} Copy`,
-    };
+  duplicate(character: ICharacter): ICharacter {
+    const newCharacter = produce(character, (draft) => {
+      draft.lastUpdated = getUnix();
+      draft.name = `${character?.name} Copy`;
+    });
+
+    return CharacterFactory.resetAllIds(newCharacter);
+  },
+  resetAllIds(character: ICharacter): ICharacter {
+    return produce(character, (draft) => {
+      draft.id = Id.generate();
+      draft.pages.forEach((page) => {
+        page.id = Id.generate();
+        page.rows.forEach((row) => {
+          row.columns.forEach((col) => {
+            col.sections.forEach((section) => {
+              section.id = Id.generate();
+              section.blocks.forEach((block) => {
+                block.id = Id.generate();
+              });
+            });
+          });
+        });
+      });
+    });
   },
   makeATemplate(c: ICharacter): Omit<ICharacter, "id"> & { id: undefined } {
     return {
@@ -110,6 +133,15 @@ export const CharacterFactory = {
           checked: undefined,
         },
       } as IBlock & ITextBlock,
+      [BlockType.InfoText]: {
+        id: Id.generate(),
+        label: "Info Text",
+        type: type,
+        value: "",
+        meta: {
+          checked: undefined,
+        },
+      } as IBlock & IInfoTextBlock,
       [BlockType.Numeric]: {
         id: Id.generate(),
         label: "Numeric",
@@ -444,4 +476,28 @@ function migrateV4CharacterToV5(v4: IV4Character): ICharacter {
   };
 
   return v5;
+}
+
+function migrateV5CharacterToV6(v5: ICharacter): ICharacter {
+  const v6 = produce(v5, (draft) => {
+    draft.pages.forEach((page) => {
+      page.rows.forEach((row) => {
+        page.label = page.label.toUpperCase();
+        row.columns.forEach((col) => {
+          col.sections.forEach((section) => {
+            section.label = section.label.toUpperCase();
+            section.blocks.forEach((block) => {
+              if (block.type !== BlockType.Link) {
+                block.label = block.label?.toUpperCase();
+              }
+            });
+          });
+        });
+      });
+    });
+
+    draft.version = 6;
+  });
+
+  return v6;
 }

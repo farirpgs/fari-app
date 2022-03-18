@@ -5,7 +5,7 @@ describe("/dice", () => {
     Fari.start();
 
     Fari.get("page.menu.tools").click({ force: true });
-    Fari.get("page.menu.tools.dice").click();
+    Fari.get("page.menu.tools.dice").click({ force: true });
 
     setAliases();
 

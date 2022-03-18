@@ -30,7 +30,7 @@ import { FariEntity } from "../../domains/fari-entity/FariEntity";
 import { Id } from "../../domains/Id/Id";
 import {
   IIndexCardCollection,
-  IndexCardCollectionFactory
+  IndexCardCollectionFactory,
 } from "../../domains/index-card-collection/IndexCardCollectionFactory";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
@@ -400,7 +400,7 @@ export const DataRoute: React.FC = () => {
           <Grid container spacing={2} alignItems="center">
             <Grid item>
               <Button
-                color="primary"
+                color="secondary"
                 variant="outlined"
                 disabled={!selections.length}
                 onClick={() => {
@@ -413,7 +413,7 @@ export const DataRoute: React.FC = () => {
 
             <Grid item>
               <SplitButton
-                color="primary"
+                color="secondary"
                 variant="outlined"
                 options={[
                   {

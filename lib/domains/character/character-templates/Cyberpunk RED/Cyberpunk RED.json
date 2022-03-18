@@ -1,0 +1,3131 @@
+{
+  "name": "Cyberpunk RED Character - CMPLT Template",
+  "lastUpdated": 1646584267,
+  "wide": true,
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "555e5f31-36c5-423c-b344-362176963e62",
+                  "label": "Persona",
+                  "blocks": [
+                    {
+                      "id": "8df7e302-bf12-4a6f-86aa-202594f0ca44",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://i0.wp.com/rtalsoriangames.com/wp-content/uploads/2019/06/justcyberpunklogo.png?w=2133&ssl=1"
+                    },
+                    {
+                      "id": "faf3f1bc-4bca-4798-8066-203efefe3c8d",
+                      "label": "Handle",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "Name" }
+                    },
+                    {
+                      "id": "0d1fca3e-4cd0-4e96-8638-196e83c68466",
+                      "label": "Role",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "p. 29 / Set your Role's Role Ability to 4<br>Choose: Rockerboys, Solos, Netrunners, Techs, Medtechs, Medias, Execs, Lawmen, Fixers, Nomads"
+                      }
+                    },
+                    {
+                      "id": "0e156ae9-29c4-4d70-b8bf-fd17854e3c58",
+                      "label": "Role Ability",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Synced with Role (in order): Charismatic Impact, Combat Awareness, Interface, Maker, Medicine, Credibility, Teamwork, Backup, Operator, Moto"
+                      }
+                    },
+                    {
+                      "id": "7c0c29ac-fdf1-4a9a-9c24-bce6955143a0",
+                      "label": "Role Ability Rank",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "c93db343-e021-4fa3-b2c5-c1222d3e8448",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "f9730862-0a8b-4790-9dc8-632454f56351",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "c2d3d856-1bb7-421e-82db-f74b2f0a3e63",
+                      "label": "Aliases",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cb44d807-b95d-40d2-bb24-0186b13bce29",
+                      "label": "Improvement Points",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "1",
+                        "isMainPointCounter": false,
+                        "width": 0.5
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "93dc0ffb-fa06-4b54-858f-5a92dcb3b750",
+                      "label": "Reputation",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d2bfc889-fbb8-4494-92c8-4c71057ac7f6",
+                      "label": "Reputation Events",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "3bc7e3a9-8cb0-4f3a-b40e-1a9d1789f5b8",
+                  "label": "About this Sheet",
+                  "blocks": [
+                    {
+                      "id": "b7a74b07-525f-4208-8fe6-4886fce0f6e8",
+                      "label": "",
+                      "type": "Link",
+                      "meta": {
+                        "hasDisplayName": true,
+                        "helperText": "Copyright © 2020 by R. Talsorian Games, Inc.<br><br>*This Fari character sheet was independently designed by Discord user PistolPants#8314 and is not affiliated with the original game designers and publishers."
+                      },
+                      "value": "https://rtalsoriangames.com/cyberpunk/"
+                    },
+                    {
+                      "id": "d19c70fc-95bf-4476-8c9c-67961975d33f",
+                      "label": "» Cyberpunk RED on DriveThruRPG",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": true },
+                      "value": "https://preview.drivethrurpg.com/en/product/333585/cyberpunk-red"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3f5a5b70-b6b3-4b49-b5bf-5fe22aac492c",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "dbd0aa6a-3c5e-4fa2-aa02-d5a088d05413",
+                  "label": "Derived Stats",
+                  "blocks": [
+                    {
+                      "id": "9c32497c-b522-49b6-8c4f-6541fd1bdced",
+                      "label": "HP",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "1",
+                        "isMainPointCounter": true,
+                        "width": 0.33,
+                        "helperText": "p. 79 / 10 + (5*[BODY and WILL averaged, rounding up])"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "323fb867-71e9-4d18-8b30-f4d77b1271e3",
+                      "label": "Seriously Wounded",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "width": 0.33,
+                        "helperText": "﻿﻿-2 to all Actions when Seriously Wounded.<br>p. 79 / Seriously Wounded Wound Threshold is half of their total HP (rounded up)."
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "ef52c739-bea8-4ea7-a7c3-72b24b6b7eef",
+                      "label": "Death Save",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "width": 0.33,
+                        "helperText": "p. 79 / BODY STAT"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "736284e1-e58a-4340-aef6-9b48d20b2cb9",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "f83b1e7a-e1f0-458d-8bd2-d9ce84965441",
+                      "label": "Hum",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "1",
+                        "isMainPointCounter": false,
+                        "width": 0.5,
+                        "helperText": "p. 80 / Humanity (EMP*10)<br>Potential for cyberpsychosis as it diminishes.<br>"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d583e93c-575d-4138-af1d-54b2fabd7991",
+                      "label": "Emp",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "1",
+                        "isMainPointCounter": false,
+                        "width": 0.5,
+                        "helperText": "p. 80 / Empathy"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "c3ea1411-cd9f-4256-8ce3-8332464b114e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "239d225a-1a59-4bdb-a8ae-45c41dd81bd7",
+                      "label": "Critical Injuries",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "6e9e9e88-08a2-4cdf-8923-c022414f561d",
+                      "label": "Addictions",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "8f790862-c5c4-42f8-aa6a-b8ee2109168a",
+                  "label": "Dice Roller",
+                  "blocks": [
+                    {
+                      "id": "651c1e41-e0d0-418e-993b-93750fa011c0",
+                      "label": "Hover over dice names to set dice quantity.<br>Left click icons to roll. Right click icons to add to pool.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e44ee5c7-10c3-4827-8366-617f1b3b7ae4",
+                      "label": "d100",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d100"],
+                        "hideModifier": true,
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "759ad00a-8558-4cae-a936-60344add2a37",
+                      "label": "d10",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d10"],
+                        "hideModifier": true,
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "fed1fd81-7f9d-4d32-b879-3a8c0648b302",
+                      "label": "d6",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "width": 0.33,
+                        "hideModifier": true
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "f8835ae2-cf90-4074-823d-8e8143e4a913",
+                  "label": "Stats",
+                  "blocks": [
+                    {
+                      "id": "a1d152ad-8337-4012-8d06-99f14873b107",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "helperText": "p. 72 / What are the Statistics? | p. 78 / How do you buy STATS? <br>Remember, no STAT higher than 8 or lower than 2.",
+                        "hideDivider": true
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "e989c9c8-5a77-4caa-b5ae-3a95c2057ba9",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "0911fb7b-5dfc-49ba-ab1a-6b65123dfe1d",
+                      "label": "Luck",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "1",
+                        "isMainPointCounter": false,
+                        "width": 1
+                      },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "f14f0cc2-fa09-4cde-bc66-9d55f2e41906",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "4d1cc10d-620f-4853-92f9-dc3953d8d7e6",
+                      "label": "INT",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "44b54e2c-2b1e-4367-8a36-5a51a09564e1",
+                      "label": "REF",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "ac04575b-247b-42bb-8f50-1730e32f7e68",
+                      "label": "Dex",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "b81d1832-0dd4-497a-ab35-1e878a51e150",
+                      "label": "Tech",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "8c3b3a54-1048-4c5b-b92c-1ab2708aa749",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "96310ed8-ac60-4f1e-9021-e5f45e59f7c2",
+                      "label": "Cool",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "4db83558-bb4d-4bb9-9f42-d012c59cb354",
+                      "label": "Will",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "9b093551-0906-4b58-aed4-75400f585a29",
+                      "label": "Move",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "c16d4269-b9e4-41fc-84f0-026412e15d70",
+                      "label": "Body",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c745aca9-112b-4e00-a072-80b724a1b2ee",
+                  "label": "Skills",
+                  "blocks": [
+                    {
+                      "id": "62af6d3c-2a47-435c-9103-8365803bc30c",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "hideDivider": true,
+                        "helperText": "p. 81 / What different Skills are there?<br>p. 90 / How do you buy Skills? <br><br>* / Don't forget your Basic Skills have to be at least Level 2.<br>Remember, no Skill can be higher than 6. <br><br>(x2) / 2 points to buy 1 Level<br>Characters get 86 Skill points to raise up any Skills they want.<br><br>LVL = Skill Level<br>BASE = LVL + STAT<br>"
+                      },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "8aa4aeb4-4e96-4cc0-979e-c8190e2de865",
+                  "label": "Awareness Skills (Will, INT)",
+                  "blocks": [
+                    {
+                      "id": "ebb3a29f-d729-4086-adcb-8dcb5950fee8",
+                      "label": "*Concentration",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": true,
+                        "helperText": "WILL",
+                        "width": 1
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "c8a96153-b4e2-491b-a13f-23a9bc8b46f1",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "b1dd17d5-e6a7-4292-ad9d-f39758ae7f05",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "width": 0.33,
+                        "helperText": ""
+                      },
+                      "value": "4"
+                    },
+                    {
+                      "id": "76417a7f-d765-4bcd-9137-5e07251dbf9e",
+                      "label": "Conceal/Reveal Object",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "3152d2df-32cc-4b2d-9ad8-7c5efdf6e243",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "48a6208f-f982-4337-be47-062969101203",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "8e3f2397-6dcc-490c-8777-71ed6cee0170",
+                      "label": "Lip Reading",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "ef4c1eb4-fd90-45ea-b312-a4c036e8fbce",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "14ed587a-9a6e-4c8a-9b24-0513cdd03085",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "6ebbdb2a-4c83-40fe-ac7b-3ea371f886e1",
+                      "label": "*Perception",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "fdedab37-36a6-448a-952f-fa0b7d28576a",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "8ce0a489-64ed-4321-b87a-b8ea1ce8914a",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "4"
+                    },
+                    {
+                      "id": "2ad32bee-2c80-47ad-8aa3-ab6f9bfd2a12",
+                      "label": "Tracking",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "a5ac8c2e-cfac-4e88-8396-b96c00ca3201",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "c822365d-baf3-4ccb-be4b-5c956e390a07",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "39f75fa4-954e-42b3-afe6-df45e68ec8aa",
+                  "label": "Body Skills (DEX, WILL)",
+                  "blocks": [
+                    {
+                      "id": "829a33ae-ec2b-45f2-9f02-566d1d542815",
+                      "label": "*Athletics",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "DEX" },
+                      "value": ""
+                    },
+                    {
+                      "id": "43e97480-97d8-4ea3-8a9a-99687b7e00bd",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "598d97eb-ef40-406c-8c86-0b9caf1f7464",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "4"
+                    },
+                    {
+                      "id": "29f42e7a-2b1b-4179-b5fe-67547153f8ff",
+                      "label": "Contortionist",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "DEX" },
+                      "value": ""
+                    },
+                    {
+                      "id": "fbc1e9bb-bdda-4815-a5a2-baf3a33e044d",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "1714f823-9cea-487a-b2d0-b382b02dad94",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "f74df7dc-5cf2-437d-a945-3603b19b0fec",
+                      "label": "Dance",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "DEX" },
+                      "value": ""
+                    },
+                    {
+                      "id": "9a9dc8e5-39ae-4c0a-b3e8-ad189af648e9",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "5e49a121-5f1c-4918-9740-26d10f8aad37",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "3d900ef2-a62b-4edd-9f77-4c0fca4b1d51",
+                      "label": "Endurance",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "WILL" },
+                      "value": ""
+                    },
+                    {
+                      "id": "e991fc14-87b1-4997-b4f3-b4bc4ceb4479",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "3df9a636-669f-460f-a6b7-8af0f0954319",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "a175e5bf-b4ad-41eb-83c1-156a1da46247",
+                      "label": "Resist Torture/Drugs",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "WILL" },
+                      "value": ""
+                    },
+                    {
+                      "id": "beac16ba-5efe-492c-b212-599c00b41221",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "4a80b507-3132-4aa3-981f-15f35990d416",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "2ea0b2e0-547a-4325-b589-60d402a84f4d",
+                      "label": "*Stealth",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "DEX" },
+                      "value": ""
+                    },
+                    {
+                      "id": "7d11b4a8-c9a0-4759-bba4-8b17251b39d9",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "fe4e7089-e4a9-4840-b807-15270a5b1d96",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "4"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "789cd72f-0c58-4d51-a9c7-0f783eee2aa5",
+                  "label": "Control Skills (REF)",
+                  "blocks": [
+                    {
+                      "id": "0bc5d68b-e447-42b4-bfc7-0ff65d1829bd",
+                      "label": "Drive Land Vehicle",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "REF" },
+                      "value": ""
+                    },
+                    {
+                      "id": "3b4c480f-dae9-409e-bd0f-5bad4921cdc1",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "302cced1-1bb4-4f18-a580-7637f0fe8cc8",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "417be7f9-1258-4aff-a526-8e7aa4ce8e0d",
+                      "label": "Pilot Air Vehicle (x2)",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "REF" },
+                      "value": ""
+                    },
+                    {
+                      "id": "f6bd40b4-2b12-4fdf-b8ba-267419cda963",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d6e5c374-427c-4f7c-a073-6e7e42bf284f",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "4182be61-eef1-449d-b3e5-9cce7edec783",
+                      "label": "Pilot Sea Vehicle",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "REF" },
+                      "value": ""
+                    },
+                    {
+                      "id": "a8f6dcf0-894c-49eb-bcbc-24757a943fab",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "04b973fe-43c1-46e8-92e1-5c9816087e97",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "58adb328-b9cb-444b-a868-6c30022df4b8",
+                      "label": "Riding",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "REF" },
+                      "value": ""
+                    },
+                    {
+                      "id": "9b6bf13e-cc78-4601-8e52-086d83e22832",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "58116c95-3d9d-417a-9da0-d27bd7704050",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "98798cc2-f3ca-4787-b619-67cc6ae0649b",
+                  "label": "Education Skills (INT)",
+                  "blocks": [
+                    {
+                      "id": "0fc6cc83-6a4a-4e0a-9e6e-5531bcb017ec",
+                      "label": "Accounting",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "15f4160e-01e3-42fe-857f-f7e04b13b3a2",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "b174ce84-1e13-4f31-9d7d-bcdc9639cc67",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "c62c671a-bd3a-4a2e-8c8f-f0152cf7824c",
+                      "label": "Animal Handling",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "ce2a8abd-bbe1-4943-a65a-f3977c7be7c4",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "bf983a89-0a60-4f4a-aa5c-8dce395562a3",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "942eb2bb-3a1f-4d96-8311-c02e885e3862",
+                      "label": "Bureaucracy",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "c4da3f32-dd4b-470f-8c74-cc3b03c3f9e3",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "c772d702-b4e0-4845-9328-113e1354f321",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "76fe0bd2-15ef-447c-8eee-56ecd28840af",
+                      "label": "Business",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "86fdef6f-59f6-4804-84ff-55eb609e689c",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "cbbdc971-db2b-4d15-8206-03447678e759",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "32167640-43f9-48a2-afb9-703c7179160f",
+                      "label": "Composition",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "860fb7f3-b410-42ee-8ada-8462c40e78ac",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "e39795df-bbab-4daf-8e8d-8bd5ae45d92f",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "36a96948-ae3b-4341-a823-61c6f39780a0",
+                      "label": "Criminology",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "f606cb4d-bb5c-4429-8709-5a8e843f42be",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "ffd52f0c-20f9-44c5-9e42-8256b026a8cf",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "e0380943-5e73-49cf-9876-84c48f84046b",
+                      "label": "Cryptography",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "bbef26f7-39d3-4fa7-9305-cb34273e6ad9",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "1b177cb1-a13c-4d63-b3c7-d3a2770a2d67",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "28a18c17-1a88-4884-818f-f682dcc942b7",
+                      "label": "Deduction",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "67ba7442-365c-455c-99ab-9a2934b7e5d2",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "6b2287b6-25eb-4d93-8660-3da51a760877",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "2d998d8d-e5ac-4e30-afd3-5dd087a21a12",
+                      "label": "*Education",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "abdba8b7-8f4d-4482-8c2a-383dd1b92c12",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "3dd115f6-5128-4401-8b84-ce3af1309a6b",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "4"
+                    },
+                    {
+                      "id": "89889b00-ae55-4dbf-baa1-cb600625c261",
+                      "label": "Gamble",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "6ca9d078-bfd7-46ca-8559-c912aa04aaf2",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "e20afd66-d7fe-43a8-acea-18f79aa05cf9",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "ee653597-8e49-47c7-8de1-3a9338161a3f",
+                      "label": "Language",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "abb4e866-1efb-4833-bd8a-ac5d25b14317",
+                      "label": "",
+                      "type": "Text",
+                      "value": "»» *Streetslang",
+                      "meta": { "checked": true }
+                    },
+                    {
+                      "id": "df5c4725-7acd-466c-baa8-15a3c0df4e41",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "3fcd6a4f-1d4c-4087-8519-f8cf063cbb08",
+                      "label": "BASE",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "4"
+                    },
+                    {
+                      "id": "e4e167d9-813a-4f7f-bb70-e955d9c5b78e",
+                      "label": "",
+                      "type": "Text",
+                      "value": "»» ",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "71a069fe-f849-4311-868f-6a09e4c907ff",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "41112a21-91e9-46d2-afef-530848a0e781",
+                      "label": "BASE",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "60c7a165-2d20-433a-bec1-3d5adb548ede",
+                      "label": "",
+                      "type": "Text",
+                      "value": "»» ",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "0fda8d56-cef6-4153-a48d-47a7c58469cd",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "6197242c-f546-4b8e-96c9-6cd53b9c10e7",
+                      "label": "BASE",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "358ea7c8-716b-4130-afcc-8d4cd248b5a9",
+                      "label": "Library Search",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "d5ad2857-9597-45aa-ac3d-01d4833990b2",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "76a2e719-369f-40b3-9d2b-340cac37b9d0",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "b99b60a5-458d-42f3-9e11-458aa0d4d573",
+                      "label": "Local Expert",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "3d4ff46a-d400-4a76-a5b8-9c7ccbeed028",
+                      "label": "",
+                      "type": "Text",
+                      "value": "»» *Your Home",
+                      "meta": { "checked": true }
+                    },
+                    {
+                      "id": "13928713-c462-4224-a514-3517b257fc9d",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "40b54e2b-18cf-4875-8ddb-fbbea34e20c6",
+                      "label": "BASE",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "4"
+                    },
+                    {
+                      "id": "d4453cbf-c0bc-49c4-8c0b-c25971759388",
+                      "label": "",
+                      "type": "Text",
+                      "value": "»» ",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "279aac35-5e72-485d-877a-74ef8d0b5ace",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "0b971cbc-a973-469e-b32f-e5a7c55340bd",
+                      "label": "BASE",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "715f1dd2-391c-4383-b068-0183d1539f3a",
+                      "label": "",
+                      "type": "Text",
+                      "value": "»» ",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "47f9cd19-5b1f-49c6-8a65-3ed111fcc4c7",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "7858a6bb-c47a-4488-8a77-2375bffaa243",
+                      "label": "BASE",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "3729ee18-dd99-499b-83e9-b44526664b44",
+                      "label": "Science",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "160ef1aa-e488-478d-8b3a-8562b31bbc99",
+                      "label": "",
+                      "type": "Text",
+                      "value": "»» ",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "44a435ab-7180-4b94-b240-af6a81ffa98d",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "0f53d5a6-8c03-41a7-ae06-857c18ee03f2",
+                      "label": "BASE",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "f6683677-599c-485f-bf5a-66854239349f",
+                      "label": "",
+                      "type": "Text",
+                      "value": "»» ",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "1a520273-d952-49b2-b938-f8837bf92f6a",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "cf63c8b5-4a45-446c-9e9f-19f85b0134db",
+                      "label": "BASE",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "6ba9441e-bbcb-4b59-bed8-55c13e5b83a9",
+                      "label": "Tactics",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "f10797e2-e32d-43f6-9950-c32dc7c71af3",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "aa20246d-1995-47dc-8356-df25946ac6d8",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "8728b062-e2df-4d08-ad85-9fff8fdb51a7",
+                      "label": "Wilderness Survival",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "INT" },
+                      "value": ""
+                    },
+                    {
+                      "id": "122d6751-dfd2-4146-b15d-b3c1a9262288",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "e0f15ba1-f5e5-4985-9308-cfd5369c6ecd",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "d3a5a020-ea64-41e2-93c1-4eb52a789c29",
+                  "label": "Fighting Skills (DEX)",
+                  "blocks": [
+                    {
+                      "id": "da8e68f7-a585-4ce1-b5be-66c2df295471",
+                      "label": "*Brawling",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "DEX" },
+                      "value": ""
+                    },
+                    {
+                      "id": "24da515a-bad0-46bf-8ab9-c6b02b923a39",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "d772e482-4ff0-4ad2-9c24-ce2590b36cab",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "4"
+                    },
+                    {
+                      "id": "b54f79ae-91b4-4efe-b9c7-d28ec42b3771",
+                      "label": "*Evasion",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "DEX" },
+                      "value": ""
+                    },
+                    {
+                      "id": "b377ce5a-1178-4f08-abf9-57e070e4440a",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "2d082a99-a85a-4b76-870f-20a9ab8a98d2",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "4"
+                    },
+                    {
+                      "id": "70625c52-fa09-41cf-8d64-1b8cab2131f5",
+                      "label": "Martial Arts (x2)",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "DEX" },
+                      "value": ""
+                    },
+                    {
+                      "id": "87604e24-c5dd-4162-8360-5e021ad686b1",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "e6abb1e1-ad25-4db8-85f7-1d6245ff6466",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "33badb57-c6b9-4e8e-8283-30ea162bf0ea",
+                      "label": "Melee Weapon",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "DEX" },
+                      "value": ""
+                    },
+                    {
+                      "id": "1b2981db-4218-4349-b07d-2c5ab011546b",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "9c4f4e3c-c2d3-4ed9-9cce-db61e877a047",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    }
+                  ]
+                },
+                {
+                  "id": "71ea7296-7485-4eef-875c-07e40f7a9ae8",
+                  "label": "Performance Skills (COOL, TECH)",
+                  "blocks": [
+                    {
+                      "id": "71b45b1b-dcd8-4545-bf51-f5a98ec47021",
+                      "label": "Acting",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "COOL" },
+                      "value": ""
+                    },
+                    {
+                      "id": "7b1967d8-8796-4658-9e4e-77ccec3157cd",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "dbc214b4-4cbe-4377-86aa-d504a035e20a",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "1fa54ee0-872a-4292-8bec-bda699f18a4c",
+                      "label": "Play Instrument",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "b0026769-9dfa-4a53-b0b6-19130fc1c72e",
+                      "label": "",
+                      "type": "Text",
+                      "value": "»»",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "f03b9e87-d2f0-42a6-be1b-b48dc9bc96ac",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "317071c6-f01d-47a4-bd05-234d87f8dcf7",
+                      "label": "BASE",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "e6ff7a06-7869-4286-8b63-2ae4017bbf44",
+                      "label": "",
+                      "type": "Text",
+                      "value": "»»",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "bca0f479-8ebe-45ea-ad77-ee5b6801f87c",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "1ffbf998-8ea2-4dbb-acb3-a86b0c3d4783",
+                      "label": "BASE",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    }
+                  ]
+                },
+                {
+                  "id": "650d22f7-d6d6-4e95-9d6a-b1c5679ec0e2",
+                  "label": "Ranged Weapon Skills (REF)",
+                  "blocks": [
+                    {
+                      "id": "211847d5-9610-4f6d-8945-e3eabb288ddc",
+                      "label": "Archery",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "REF" },
+                      "value": ""
+                    },
+                    {
+                      "id": "47322864-9bdd-4684-a5f9-b181d4e5f2c5",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "f07321bd-723b-4fce-9f47-6a57f764f102",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "98843b82-c89d-4d3a-9db0-9609b319a9c1",
+                      "label": "Autofire (x2)",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "REF" },
+                      "value": ""
+                    },
+                    {
+                      "id": "94177757-18a8-44c0-834e-6ddd653e7211",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "3d6c642f-c438-4b89-a5d0-121c24e684b0",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "4096e7dc-558c-4ba9-a521-7104d35658bb",
+                      "label": "Handgun",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "REF" },
+                      "value": ""
+                    },
+                    {
+                      "id": "5a017116-0b46-4f5d-8522-6d56488a58ce",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "a147cfec-daef-403a-8a28-b38742f21e6c",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "92981ba3-4a1c-455a-ab3f-7c4cc2a3a869",
+                      "label": "Heavy Weapons (x2)",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "REF" },
+                      "value": ""
+                    },
+                    {
+                      "id": "530f4a6f-30a4-4abd-92f7-ac419c933991",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "40345667-b3e2-4de8-846b-f70ad9069c17",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "a4956c81-1df4-4ddf-9cd8-3fe9e23448a5",
+                      "label": "Shoulder Arms",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "REF" },
+                      "value": ""
+                    },
+                    {
+                      "id": "fa333638-663b-4bfa-ac7e-8f87ba4857f7",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "3d0d7926-d4f2-4f4f-8ce9-1eececfdfea6",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    }
+                  ]
+                },
+                {
+                  "id": "cd882b65-156c-4c94-add1-93c1246a17f4",
+                  "label": "Social Skills (COOL, EMP)",
+                  "blocks": [
+                    {
+                      "id": "e922c4b4-ee87-479d-b806-98a881dc2beb",
+                      "label": "Bribery",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "COOL" },
+                      "value": ""
+                    },
+                    {
+                      "id": "ffa80d8f-5540-4140-bd60-efcb7c50ff32",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "c1db124f-a670-44c1-854c-0b599e680333",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "98cf28cd-5284-45c7-b2db-4507b91ff854",
+                      "label": "*Conversation",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "EMP" },
+                      "value": ""
+                    },
+                    {
+                      "id": "7c224eac-d841-4459-9e74-b18af3df1883",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "75d87e72-a7e2-40b5-9b4b-8e5bd83eae28",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "6ea66a7f-f4bc-4eb9-a551-bc0f13761679",
+                      "label": "*Human Perception",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "EMP" },
+                      "value": ""
+                    },
+                    {
+                      "id": "2a7c3ecb-3aa8-4489-aa1a-4b5554fafb95",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "03fd7a33-f1cc-4463-9de3-998a6f5a355b",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "a706aa81-43a0-45c5-8336-71e0171c1f81",
+                      "label": "Interrogation",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "COOL" },
+                      "value": ""
+                    },
+                    {
+                      "id": "f1b2729d-56be-4e51-b846-f4507065ed8e",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "106b2503-aad9-41ce-b025-c3e43daafbd9",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "e3075e69-3d40-45ef-b80a-0935690c960d",
+                      "label": "*Persuasion",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "COOL" },
+                      "value": ""
+                    },
+                    {
+                      "id": "23c4e8d7-4a38-455b-bf2d-79643561159d",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "8999fa87-924a-4b28-a52c-1761027c1446",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "4"
+                    },
+                    {
+                      "id": "b0b36db7-2726-42c0-8c71-7f2342f523bc",
+                      "label": "Personal Grooming",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "COOL" },
+                      "value": ""
+                    },
+                    {
+                      "id": "571c765f-afd3-46eb-8c98-be590e84a504",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "7cb80792-bf4f-45a8-bc1e-776295da7045",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "76dc9b12-c2bc-455c-af82-5e2a7249f9f0",
+                      "label": "Streetwise",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "COOL" },
+                      "value": ""
+                    },
+                    {
+                      "id": "7b010d19-d428-4834-af68-a800284f66f1",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "59554f1e-4b4a-4ed6-ba54-893bdc5a6285",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "d818b507-739d-43b2-b0e2-af804a2531a6",
+                      "label": "Trading",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "COOL" },
+                      "value": ""
+                    },
+                    {
+                      "id": "7c35de52-7b52-432e-8741-131849426180",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "befca7f3-5bf4-4717-ade0-5de89af8ef9a",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "efe1c189-1dfc-4751-aaad-a618f74597c7",
+                      "label": "Wardrobe &amp; Style",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "COOL" },
+                      "value": ""
+                    },
+                    {
+                      "id": "60db9ff6-85fa-45a4-82ed-2250652d197d",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "cdee39b7-9d81-476f-86e3-ed404b0fb8ed",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "6fceab34-9d93-4a92-b4ea-430825afe187",
+                  "label": "Technique Skills (TECH)",
+                  "blocks": [
+                    {
+                      "id": "14a5b261-2263-4a14-be28-378941f84731",
+                      "label": "Air Vehicle Tech",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "b1f08386-a88f-463b-a810-d8ddd116144a",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "16eb8b45-3f76-4e9f-bc0e-7b6b8ab20e14",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "6084c95e-407b-45f2-b859-4b43cdde0e10",
+                      "label": "Basic Tech",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "fb916e50-156e-494d-a5ee-8a7dd708e096",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "2d5e6ead-5c3c-4823-bc98-f1b2e2d5c439",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "a538c816-5f9d-46e7-8985-f276d0398a62",
+                      "label": "Cybertech",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "21f667e3-ca9c-4188-87b8-abf0c43c4bf7",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "7bec5730-390e-4e69-9ec5-cd5c1f219508",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "fc36e09d-4e29-46c3-aff7-e32c011b3aef",
+                      "label": "Demolitions (x2)",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "4aa3b7bf-51ae-4362-b333-24507de5f287",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "e6eeb514-6e91-4d71-9a5b-289333465b0b",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "b55b8957-1800-4954-8c85-e0bf99fac451",
+                      "label": "Electronics/Security Tech (x2)",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "4a8dd0d3-9a05-4f73-afd3-d07944e4155a",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "725e3c26-acff-465a-8e37-f0ec7c6c0de1",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "bf79a7a1-42d4-4c53-a3e2-ec012eac2056",
+                      "label": "*First Aid",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "89a20591-2e4a-4d0e-b07f-649d2effcc64",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "8de18baa-ae31-4602-b5ec-428a4ad4f420",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "4"
+                    },
+                    {
+                      "id": "4f9ac15f-9283-47dc-9fea-39fb601fed42",
+                      "label": "Forgery",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": true,
+                        "helperText": "TECH",
+                        "width": 1
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "2a166d3f-c5e2-47d7-9dfb-e72b1710407d",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "bf9bc8a6-9e67-409f-966c-ded47f00fbf3",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "2ac58e0f-a99f-41da-96d3-70df9be34e92",
+                      "label": "Land Vehicle Tech",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "5818a806-dfe0-4e52-9c95-e07900ac0500",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "0d3394f3-4ca6-46fd-ac52-7ca2574ce59d",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "57763218-3536-4bbc-99e7-ef17f4309d42",
+                      "label": "Paint/Draw/Sculpt",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "0255011b-8802-4c5d-bba4-83abce5aaf16",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "3340d886-5c97-4412-ba64-4b14a4452cbc",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "5f1477c8-fb17-4ff3-9866-730d75fe6e14",
+                      "label": "Paramedic (x2)",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "217ea7fd-cbb0-4f16-8be3-c30ab27bfeb6",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "c2b971dd-ba4a-44f1-9b9c-e578527545de",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "f98e3cb0-dbcc-4899-86ad-d48dbd1ade82",
+                      "label": "Photography/Film",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "06c0a014-3419-449f-8592-ba170a3d3ab1",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "a6a8898d-1ab3-46c6-bf43-0c4891c9a7d5",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "bbefcb85-d353-40b1-aa00-789eb679319e",
+                      "label": "Pick Lock",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "ff71c580-a0c2-476b-a62c-d276240d0da4",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "b122d7e6-1997-46f6-bd76-2228aeaf9129",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "f7505f96-f51e-4494-a4ef-8648f65b33ee",
+                      "label": "Pick Pocket",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "87554474-d270-42ac-a0d3-c3b7e53c8abb",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "2b053dff-dfc9-4a3c-9236-29053d241f18",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "9e55c34f-edf1-4a2a-bab3-51330587d551",
+                      "label": "Sea Vehicle Tech",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "f5bd95ee-dc5b-4296-8432-9699005ee456",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "4b26a4d3-2731-4648-83d1-b32ae0144fa6",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    },
+                    {
+                      "id": "593dbe7d-f04e-4c2c-b6ff-84efa39a8da3",
+                      "label": "Weaponstech",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "TECH" },
+                      "value": ""
+                    },
+                    {
+                      "id": "8b35a1e7-7cbd-4c2c-948c-43b27f7201b1",
+                      "label": "LVL",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d0617707-ae7a-423e-9245-00d54db6afe4",
+                      "label": "Base",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Stats / Skills"
+    },
+    {
+      "id": "593bc067-ab8b-4c6c-a9bc-05e82099c198",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c8c83763-5f41-414d-9b3d-408d243c7653",
+                  "label": "Stuff",
+                  "blocks": [
+                    {
+                      "id": "7382e8e3-7b02-41ea-bc70-387a7959239a",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "hideDivider": true,
+                        "helperText": "p. 91 / For a list of Weapons<br>p. 96 / For a list of Armor<br>p. 99 / For a list of Gear<br>p. 102 / For a list of Fashions<br>p. 110 / For a list of Cyberware<br>You have 2550eb to spend on any of the above.<br>You have 800eb to spend specifically on Fashion and Fashionware.<br>"
+                      },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "0fe74280-170b-4626-bd05-1240375a575e",
+                  "label": "Armor",
+                  "blocks": [
+                    {
+                      "id": "3ebd9444-1151-4b0d-a944-f19b77481a4d",
+                      "label": "Head",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "8aa42021-586c-46ce-af0a-39bc40bfa1db",
+                      "label": "SP",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "c0b2366f-18b7-4413-98ff-593302cca78d",
+                      "label": "Penalty",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Penalty applies to REF, DEX &amp; MOVE"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "75145057-8a95-4ae5-80d2-d12e02cff989",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "56f3cb87-cdd9-4968-ad9f-f9a39aa215ea",
+                      "label": "Body",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "f557db7b-1142-4306-b47b-021c0bf73070",
+                      "label": "SP",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "170f4683-3d8a-48c2-8775-9d195ef9d096",
+                      "label": "Penalty",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Penalty applies to REF, DEX &amp; MOVE"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "5fb54173-6a70-4c24-9179-5c00b77363e8",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "0027c475-067f-429d-9de2-4e522e655636",
+                      "label": "Shield",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "826497e3-b589-4d86-a696-d5bfdcdede38",
+                      "label": "SP",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "a6e764df-8b07-4000-82d6-812e3940ce30",
+                      "label": "Penalty",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Penalty applies to REF, DEX &amp; MOVE"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "521bf386-aaf1-4c05-918b-a1e4106096a7",
+                  "label": "Weapons",
+                  "blocks": [
+                    {
+                      "id": "fcbe44fa-4205-4654-a2e2-94288150c344",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "334e90b1-491e-4937-ada5-90368b55b7b7",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "78eccb91-401c-43b2-b8c0-a1452b86162a",
+                      "label": "DMG",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d5b0f2f8-d1cb-4b6a-815a-16a7c7c56160",
+                      "label": "Ammo",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "71c1d747-a2f6-421e-8b12-622767048bb9",
+                      "label": "Rof",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                },
+                {
+                  "id": "bae03106-d9d5-420d-ba40-bc54be517af6",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "8c2a8a82-7daf-4d92-aae4-722d42eafbe0",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "94d75ac3-59bd-42ee-8cee-417c62a47ab3",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "c98742c6-e788-4aa1-82c3-bb1a8eb17a44",
+                      "label": "DMG",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "6f2ee4d6-d617-4d2a-8aec-fb055dac2426",
+                      "label": "Ammo",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "f73f2ce3-ab83-49b8-8856-7a94881cfd2c",
+                      "label": "Rof",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "4927e032-7c77-4536-959f-840249cc4a04",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "14c1ac45-87de-41df-bc11-aa11c8a1a152",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "40c6343b-a2cf-4422-8046-012eb9539824",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "9699e490-b634-4e09-baeb-65f147272622",
+                      "label": "DMG",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "859250da-d6da-4aae-8024-ba83ea8044ae",
+                      "label": "Ammo",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "6ede5d8a-1758-49fe-9e0f-71d38a8b0c6a",
+                      "label": "Rof",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                },
+                {
+                  "id": "d2e2adb0-b808-4902-ab04-f207a9815bf8",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "f0ff73d5-4173-41fa-8b49-0796c3df3841",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "b55a8f54-62a3-46ee-b3c4-07e036fb1043",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "8b1ac113-d832-4f4a-922b-6142f2975eb9",
+                      "label": "DMG",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "f65ce037-faf3-4000-85b2-06ba454cac46",
+                      "label": "Ammo",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "5000245e-ff30-43ff-9156-8401b49dd4bf",
+                      "label": "Rof",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "57b6ed5e-5a0c-41c8-b5c1-92ca4a81603f",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "8fc2b486-2478-4ac2-a67c-5d747458b45c",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "f54281f5-0e08-40c7-8d99-eedf79d06583",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "ac241e00-ee85-4cab-ab1e-bf393cd2f2dc",
+                      "label": "DMG",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "4bd85592-8c8e-4320-b211-28043a09a46c",
+                      "label": "Ammo",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "cc4f9ab6-ec53-4502-8320-2d3a505e033e",
+                      "label": "Rof",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                },
+                {
+                  "id": "00770318-b43a-4088-a3b9-e75806ba203a",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "889b9085-08a1-48d6-84e0-810d2000484c",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "f38d906e-3c25-41b3-b708-20fff17071cf",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "8d2f07bf-a088-4a74-b3dd-c682cc7399eb",
+                      "label": "DMG",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "0a4462bb-628e-47e8-b419-6f4a70e6d44e",
+                      "label": "Ammo",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "4e7f7128-b3b8-4307-a4eb-99445eb7d64b",
+                      "label": "Rof",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "7cf8797e-bf90-4a0f-8056-8ab89810ee0d",
+                  "label": "Gear &amp; Notes",
+                  "blocks": [
+                    {
+                      "id": "64f32682-9513-4be1-85bb-53ca97d18463",
+                      "label": "Ammunition",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "f5fce7a4-e24e-4c93-9abd-06dd3b4157af",
+                      "label": "Cash",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Eurobucks (###eb)"
+                      }
+                    },
+                    {
+                      "id": "cea15885-c9f3-47d9-93f4-e3d5b5962716",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "helperText": "" },
+                      "value": ""
+                    },
+                    {
+                      "id": "6b08787f-44ee-44c1-9998-4637f37a027c",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "ba84b673-5811-4d8f-a8df-d04a7d447fa6",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "6cae3278-1500-4712-8f03-3b0cffd5e523",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "ef4e33de-e2aa-4e7e-8356-769bc17b7bc7",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "3231f0d1-72b0-4042-bd43-d063240fc9ae",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "42173552-7dfe-4c97-ade3-d40036f2ed09",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "fab1fcbe-cc69-4d96-9dbc-268d01d806e9",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "c874d8da-0cb5-4463-95fa-c379eb1af8a6",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "317834d7-5aaf-4490-9444-f76f859f58fd",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "3bc74c58-7620-49e6-a319-6f22e30b959d",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "3195aef3-9fd6-4f0c-ae8f-a7139ff90669",
+                      "label": "Lifestyle &amp; Housing",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": true,
+                        "helperText": "p. 105 / What about Lifestyle &amp; Housing? <br>p. 118 / Run out of cash? To sell your soul for more money…"
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "fdc23bb2-c92b-4ac1-a945-5d2313ccaae2",
+                      "label": "Fashion",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3d23240a-98d5-49ce-9ded-fb4cfb488089",
+                      "label": "Housing",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "4caf5283-c5c3-4bd8-bd99-b5c4c260a0c5",
+                      "label": "Rent",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "889200c4-996f-4e00-9355-2c682f8eef39",
+                      "label": "Lifestyle",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "6fda1513-75ec-49cd-b56d-05b25c9f0f9c",
+                  "label": "Cyberware",
+                  "blocks": [
+                    {
+                      "id": "8e3ee576-58c0-46b5-9167-811bac741763",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "hideDivider": true,
+                        "helperText": "For cyberware with a foundational requirement (i.e. a Cybereye) check the box to indicate you have it. Options go in the slots below.<br>For cyberware without a foundational requirement (i.e. Internal Cyberware) just note each piece in the slots below the category name.<br>"
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "2c752532-2673-4bb5-84b5-7c8471376a02",
+                      "label": "Cyberaudio Suite",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Include: Name, Install, Data, Cost, HL (HUM Loss)."
+                      }
+                    },
+                    {
+                      "id": "052dc81b-4ee6-4b52-86cd-605c8515a1ec",
+                      "label": "Right Cybereye",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Include: Name, Install, Data, Cost, HL (HUM Loss).",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "ae62a397-63f8-4da7-8422-0bfbc3f02dee",
+                      "label": "Left Cybereye",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Include: Name, Install, Data, Cost, HL (HUM Loss).",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "ae442c59-653e-4859-915c-7299141812e3",
+                      "label": "Right Cyberarm",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Include: Name, Install, Data, Cost, HL (HUM Loss).",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "babcff99-df87-4aa4-9dc0-85a34b82b716",
+                      "label": "Left Cyberarm",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Include: Name, Install, Data, Cost, HL (HUM Loss).",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "ca68f3c7-9b18-436c-94f9-16b3ed991cc2",
+                      "label": "Neural Link",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Include: Name, Install, Data, Cost, HL (HUM Loss).",
+                        "width": 1
+                      }
+                    },
+                    {
+                      "id": "05f58f6f-d069-403b-8b38-6b34a3de4328",
+                      "label": "Right Cyberleg",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Include: Name, Install, Data, Cost, HL (HUM Loss).",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "1ad8319e-67bc-4abf-a9f8-5537c7c02a93",
+                      "label": "Left Cyberleg",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Include: Name, Install, Data, Cost, HL (HUM Loss).",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "fe35d020-e853-46f8-9b78-57dd930bfd61",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "1ffb6051-9ed6-4c6d-8742-b0f81d0bc0dd",
+                      "label": "﻿Internal Cyberware",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Include: Name, Install, Data, Cost, HL (HUM Loss).",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "919007d7-2a16-402a-bbad-ed992b949f9c",
+                      "label": "External Cyberware",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Include: Name, Install, Data, Cost, HL (HUM Loss).",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "da28f7f2-31d4-4413-8d4b-b4f72c10dcba",
+                      "label": "Fashionware",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Include: Name, Install, Data, Cost, HL (HUM Loss).",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "21e09a41-3608-4dd3-a235-978cbd239eb2",
+                      "label": "Borgware",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Include: Name, Install, Data, Cost, HL (HUM Loss).",
+                        "width": 0.5
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Stuff"
+    },
+    {
+      "id": "cae7c79f-efa6-41e2-8f5a-85bd6066f646",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "b519ff87-84f2-4200-a961-21b913607019",
+                  "label": "Lifepath",
+                  "blocks": [
+                    {
+                      "id": "95ace69e-15d3-466e-9e5f-70375667a3f5",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "hideDivider": true,
+                        "helperText": "Make sure to run both the general Lifepath and your Role-Based Lifepath.<br>Remember to pick your Cultural Origin Language. You get that as a Skill at Rank 4."
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "0824137a-8b32-4916-b2f3-7394da5e46cb",
+                      "label": "Cultural Origins",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "p. 45 / Your (General) Cultural Region, Languages You Might Know"
+                      }
+                    },
+                    {
+                      "id": "1c3bb1fa-9af5-4e7b-b979-5cf3add6d986",
+                      "label": "Personality",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "p. 46 / What Are You Like?"
+                      }
+                    },
+                    {
+                      "id": "5ac68f55-b8f1-4c03-9611-e5e612e83b64",
+                      "label": "Dress Style",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "p. 47 / Clothing Style"
+                      }
+                    },
+                    {
+                      "id": "ffc88741-b22b-434e-918f-911af852d9f6",
+                      "label": "Personal Style",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "p. 47 / Hairstyle, Affectation You Are Never Without"
+                      }
+                    },
+                    {
+                      "id": "688951a8-2312-4a21-bbcc-d64cefde9ad8",
+                      "label": "What do you value most?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5, "helperText": "p. 48" }
+                    },
+                    {
+                      "id": "4e9535ef-eede-4c84-bd3d-813db5f43f61",
+                      "label": "How Do You Feel About Most People?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5, "helperText": "p. 48" }
+                    },
+                    {
+                      "id": "36dd6412-decc-4a4f-82f5-34dc45ea2990",
+                      "label": "Most Valued Person",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5, "helperText": "p. 48" }
+                    },
+                    {
+                      "id": "ca1efe88-d3ee-4c6c-83f0-cbc0ffd46dd1",
+                      "label": "Most Valued Possession",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5, "helperText": "p. 48" }
+                    },
+                    {
+                      "id": "9deb615e-c4e8-412f-b3b2-dae42ad8bb64",
+                      "label": "Family Background",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5, "helperText": "p. 49" }
+                    },
+                    {
+                      "id": "60b213ed-01ce-41b3-bde7-3de96baf466f",
+                      "label": "Childhood Environment",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5, "helperText": "p. 50" }
+                    },
+                    {
+                      "id": "f8798ddd-b387-48f3-b52a-ca2d13ea5a0c",
+                      "label": "Family Crisis",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5, "helperText": "p. 50" }
+                    },
+                    {
+                      "id": "bc165ce7-5e87-45d5-bfdc-dd46e3d8e8d2",
+                      "label": "Life Goals",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5, "helperText": "p. 53" }
+                    }
+                  ]
+                },
+                {
+                  "id": "3633562b-7411-49f7-bce9-a92b1e8ad227",
+                  "label": "Role-Based Lifepath",
+                  "blocks": [
+                    {
+                      "id": "5eecf1c1-56cd-4f4b-a562-fd2cf05f1693",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pp. 53-69" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "fe2cb587-3774-4aea-8168-9873e11667e2",
+                  "label": "Friends",
+                  "blocks": [
+                    {
+                      "id": "8553deb6-b005-49f0-b43f-4fdb2430acca",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "c3848671-a0bd-43b2-ae93-30b7a5b90def",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "068ca02d-dfeb-43fc-a4a9-9da4c78b5255",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "06ef3280-3c59-4534-8a63-5710ac7cddae",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "hideDivider": true,
+                        "helperText": "p. 51"
+                      },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "1f955117-8f37-4bf4-beae-77e13ee0424a",
+                  "label": "Tragic Love Affairs",
+                  "blocks": [
+                    {
+                      "id": "1d8e4102-9f58-41ed-ad61-cbb316d6970f",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "6d6992eb-7560-46bf-9446-517169501172",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "63b65354-7f44-4631-8882-519bf9cdeb2f",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "27c4bab0-9353-434e-9914-661eff65c9d1",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "hideDivider": true,
+                        "helperText": "p. 52"
+                      },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "fbbbc9ba-46f8-4160-97c2-92b05ab43982",
+                  "label": "Enemies",
+                  "blocks": [
+                    {
+                      "id": "4bd62bef-23f6-4623-99a6-4c17daf1677c",
+                      "label": "Who?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5, "checked": false }
+                    },
+                    {
+                      "id": "4f03300d-f97a-474b-a6f6-7efeb315549f",
+                      "label": "What caused it?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "1f365bbc-a595-4990-8c2c-7528e9163b58",
+                      "label": "What can they throw at you?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "6647d2de-2315-4375-981a-5ea2489444ae",
+                      "label": "What's gonna happen?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "ddc71e35-558a-4c4f-a5f0-8909b98af495",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "f248aea3-bc29-472f-8d2c-00dd1020bf2a",
+                      "label": "Who?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5, "checked": false }
+                    },
+                    {
+                      "id": "e1b307c6-152f-419f-a74e-22878ea4fc36",
+                      "label": "What caused it?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "b1ce5d23-0366-4129-80af-1fe6ce9079a9",
+                      "label": "What can they throw at you?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "4e9eb571-a40d-42c1-aa53-5e14887fc114",
+                      "label": "What's gonna happen?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "e81703b3-ea7d-42e9-b515-200453d25c14",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "4e48a1cf-2305-40c7-ac50-a2843d040fa8",
+                      "label": "Who?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5, "checked": false }
+                    },
+                    {
+                      "id": "1f7935c9-6b48-4d8a-9883-88966709dcb6",
+                      "label": "What caused it?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "a0aa395a-5abe-4d5d-a0dd-25a0bdca1b7a",
+                      "label": "What can they throw at you?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "ccffaedd-2476-4b07-9fcc-bbc8d5500321",
+                      "label": "What's gonna happen?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "29425f91-1493-41d2-bd20-813e15937f6f",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "hideDivider": true,
+                        "helperText": "p. 51-52"
+                      },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Lifepath / Other"
+    }
+  ],
+  "version": 5,
+  "group": "Cyberpunk RED",
+  "fariType": "character"
+}

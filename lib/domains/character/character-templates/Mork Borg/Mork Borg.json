@@ -1,0 +1,331 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1645646285,
+  "name": "Charge Template",
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "CHARACTER",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "af519986-8fd8-4918-88e6-2649d3af8ece",
+                  "label": "Details",
+                  "blocks": [
+                    {
+                      "id": "a0fb3c49-87b7-436c-acbc-3f56aa8d0b2b",
+                      "label": "Description",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2bc1c049-c5b6-4a99-8855-7ec6100dbbe6",
+                      "label": "Class",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "aa8063d7-15d0-47cc-8d68-732926dcfe03",
+                      "label": "Point Counter",
+                      "type": "PointCounter",
+                      "meta": { "max": "0", "isMainPointCounter": false },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "fccb73ac-6544-4ca9-9e52-be2a0a591c87",
+                  "label": "Abilities",
+                  "blocks": [
+                    {
+                      "id": "248733e1-a020-42cb-bc84-60775919f1fb",
+                      "label": "Strength",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d20"] }
+                    },
+                    {
+                      "id": "11879faf-9eef-4877-91a2-d1a9eea2a210",
+                      "label": "Agility",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d20"] }
+                    },
+                    {
+                      "id": "650667ee-8cb8-4838-bf72-88f4fd465cec",
+                      "label": "Presence",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d20"] }
+                    },
+                    {
+                      "id": "7386674f-7501-4ab8-a61d-56473f1010b8",
+                      "label": "Toughness",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d20"] }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "b8d2c423-d48e-4c3c-b00f-cfc725362824",
+                  "label": "Weapons",
+                  "blocks": [
+                    {
+                      "id": "397e3aff-bfb5-44a5-b4ef-bf1c827a45aa",
+                      "label": "Weapon:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "23cfcdf5-fe3d-48c0-90cb-03927e2af054",
+                      "label": "Weapon:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e8c043ca-1ec7-4b87-8538-c6e81595697f",
+                      "label": "Armor:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "e46f2e63-4336-4c05-b92f-43ba1494b9f8",
+                  "label": "Equipments",
+                  "blocks": [
+                    {
+                      "id": "12d17772-edc8-4e2e-b142-1d02b74baeba",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "36988c93-0c82-4e41-91cc-28f7e98803d6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "18edd694-c3ee-457f-9c4c-a80e9a0db587",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "14eddb44-ac71-4ebb-9eb5-558338f02663",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "d2a58e3e-a248-4305-b970-40eb14169d2c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "3a1ae57b-a99c-4eba-8c1f-ff5f4da5d292",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "d6382a34-e54e-4511-9164-732947b7c052",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "80c197af-ab8e-4970-a491-554e69cfcce6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "667301bc-ea8e-48c2-9586-cb797391f944",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "ab6c4cb9-724e-4005-8ff0-d1aa04f97548",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "a7f5b635-0ca3-498d-a2d3-5dbd46a0412d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "2b383783-b71b-4c86-93d3-f8390e5e5070",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "581e0f85-16bd-45c6-b19b-23a611847263",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "dc3ed354-5818-4fdb-9394-9cb3e0955c96",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "091b191d-3bad-4538-9ae6-2e77b6fa1796",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "53e70354-26d5-4712-ad6c-ecc42d762706",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "df892f22-468d-4c24-80c3-0fe86178816b",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Strength + 8 items or DR+2 on Agility/Strength tests",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d591b3e5-88e6-4891-81a2-99cf479e1303",
+                  "label": "Powers",
+                  "blocks": [
+                    {
+                      "id": "9b39c4da-6288-4864-962a-3a4e9b7116b4",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Presence +d4 times per day",
+                      "meta": {}
+                    },
+                    {
+                      "id": "6b069692-5768-4e4a-953e-deec4572fe39",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5c3f3bbc-2e44-426e-a587-e7abcafcef29",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8cb07d7a-2cd3-44ad-ab63-51eb24e06a06",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "31b2cd50-231d-4928-a566-9a90235af2d3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "62cb2579-716d-4263-817b-a6b97c44fcd2",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Presence DR12, or -d2 HP and no Powers for 1hr",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "227b7b29-e4f2-4e52-afe2-a583d4ba0fda",
+                  "label": "Credits",
+                  "blocks": [
+                    {
+                      "id": "827ae8b8-a13d-4fa0-98ef-5b47409c8aa5",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Template is by René-Pier Deshaies • https://farirpgs.com",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e022b469-6238-4716-9127-d243b4a0d88a",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://gyazo.com/0e3d4c988312975123cdfc789c42cfb1.png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "theme": {
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');\n\n@font-face {\n  font-family: Sebaldus-Gotisch;\n  src: url('/fonts/Sebaldus-Gotisch.ttf');\n}",
+    "sectionHeadingFontFamily": "Sebaldus-Gotisch",
+    "pageHeadingFontFamily": "Sebaldus-Gotisch",
+    "labelFontFamily": "Nunito",
+    "labelFontSize": 1.125,
+    "sectionHeadingFontSize": 2,
+    "pageHeadingFontSize": 1.75,
+    "backgroundColor": "#ffe900",
+    "sectionHeadingFontWeight": "500",
+    "labelFontWeight": "900",
+    "textFontFamily": "Nunito",
+    "infoTextFontFamily": "Nunito",
+    "helperTextFontFamily": "Nunito"
+  },
+  "version": 6
+}

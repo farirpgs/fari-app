@@ -2,60 +2,88 @@ import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { useTheme } from "@mui/material/styles";
-import React from "react";
+import Typography from "@mui/material/Typography";
+import React, { useContext } from "react";
 import { ContentEditable } from "../../../../../components/ContentEditable/ContentEditable";
-import { FateLabel } from "../../../../../components/FateLabel/FateLabel";
-import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors";
+import { MiniThemeContext } from "../MiniThemeContext";
 
 export const SheetHeader: React.FC<{
   label: string;
+  index: number;
   onLabelChange?: (newLabel: string) => void;
   actions?: React.ReactNode;
   advanced: boolean;
 }> = (props) => {
   const theme = useTheme();
-  const headerBackgroundColors = useTextColors(theme.palette.background.paper);
-  const headerTextColors = useTextColors(headerBackgroundColors.primary);
-  const sheetHeaderClassName = css({
-    label: "SheetHeader-box",
-    // Hexagone
-    // https://bennettfeely.com/clippy/
-    // clipPath: "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
-    background: headerBackgroundColors.primary,
-    color: headerTextColors.primary,
-    width: "100%",
-    padding: ".5rem",
-  });
+  const miniTheme = useContext(MiniThemeContext);
 
   return (
-    <Box className={sheetHeaderClassName}>
-      <Grid
-        container
-        justifyContent="space-between"
-        wrap="nowrap"
-        spacing={1}
-        alignItems="center"
+    <Box mb=".5rem">
+      <Box
+        className={css({
+          background: miniTheme.hideSectionBackground
+            ? undefined
+            : miniTheme.textPrimary,
+          color: miniTheme.hideSectionBackground
+            ? miniTheme.textPrimary
+            : miniTheme.textPrimaryInverted,
+          width: "100%",
+          padding: miniTheme.hideSectionBackground ? "0 .5rem" : ".5rem",
+        })}
       >
-        <Grid item xs>
-          <FateLabel
-            className={css({
-              fontSize: "1rem",
-            })}
+        {props.advanced && (
+          <Grid
+            container
+            justifyContent="space-between"
+            wrap="nowrap"
+            spacing={1}
+            alignItems="center"
           >
-            <ContentEditable
-              data-cy={`character-dialog.${props.label}.label`}
-              readonly={!props.advanced || !props.onLabelChange}
-              border={props.advanced && !!props.onLabelChange}
-              borderColor={headerTextColors.primary}
-              value={props.label}
-              onChange={(newLabel) => {
-                props.onLabelChange?.(newLabel);
-              }}
-            />
-          </FateLabel>
+            <Grid item xs>
+              <Typography
+                className={css({
+                  fontSize: ".7rem",
+                  color: miniTheme.hideSectionBackground
+                    ? miniTheme.textSecondary
+                    : miniTheme.textPrimaryInverted,
+                  fontWeight: theme.typography.fontWeightBold,
+                })}
+              >
+                {`Section ${props.index + 1}`}
+              </Typography>
+            </Grid>
+            <Grid item>{props.actions}</Grid>
+          </Grid>
+        )}
+        <Grid
+          container
+          justifyContent="space-between"
+          wrap="nowrap"
+          spacing={1}
+          alignItems="center"
+        >
+          <Grid item xs>
+            <Typography
+              className={css({
+                fontFamily: miniTheme.sectionHeadingFontFamily,
+                fontSize: `${miniTheme.sectionHeadingFontSize}rem`,
+                fontWeight: miniTheme.sectionHeadingFontWeight,
+              })}
+            >
+              <ContentEditable
+                data-cy={`character-dialog.${props.label}.label`}
+                readonly={!props.advanced || !props.onLabelChange}
+                border={props.advanced && !!props.onLabelChange}
+                borderColor={miniTheme.textPrimaryInverted}
+                value={props.label}
+                onChange={(newLabel) => {
+                  props.onLabelChange?.(newLabel);
+                }}
+              />
+            </Typography>
+          </Grid>
         </Grid>
-        {props.advanced && <Grid item>{props.actions}</Grid>}
-      </Grid>
+      </Box>
     </Box>
   );
 };

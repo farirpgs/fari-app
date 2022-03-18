@@ -3,6 +3,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import ExposureIcon from "@mui/icons-material/Exposure";
 import Filter1Icon from "@mui/icons-material/Filter1";
 import ImageIcon from "@mui/icons-material/Image";
+import InfoIcon from "@mui/icons-material/Info";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import LinkIcon from "@mui/icons-material/Link";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -84,6 +85,18 @@ export const AddBlock: React.FC<
           </ListItemIcon>
 
           <ListItemText primary={t("character-dialog.block-type.text")} />
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.onAddBlock(BlockType.InfoText);
+            setAnchorEl(undefined);
+          }}
+        >
+          <ListItemIcon>
+            <InfoIcon fontSize="small" />
+          </ListItemIcon>
+
+          <ListItemText primary={t("character-dialog.block-type.info-text")} />
         </MenuItem>
         <MenuItem
           onClick={() => {

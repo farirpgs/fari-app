@@ -79,7 +79,11 @@ export function StoryDice() {
       <Box mb="2rem">
         <Grid container justifyContent="center" alignItems="center" spacing={2}>
           <Grid item>
-            <Button color="primary" variant="contained" onClick={handleRollAll}>
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={handleRollAll}
+            >
               Roll All
             </Button>
           </Grid>

@@ -1,25 +1,22 @@
-import { TDDocument } from "@tldraw/tldraw";
-import { IDrawAreaObjects } from "../../components/DrawArea/hooks/useDrawing";
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { IBlock, ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { AspectType } from "./AspectType";
 
-export interface IPlayer {
+export type IPlayer = {
   id: string;
   playerName?: string;
-  character?: ICharacter;
   rolls: Array<IDiceRollResult>;
   playedDuringTurn: boolean;
   isGM: boolean;
   points: string;
   private: boolean;
-}
+};
 
 /**
  * @deprecated
  */
-export interface IAspectV1 {
+export type IAspectV1 = {
   title: string;
   content: string;
   tracks: Array<{
@@ -29,7 +26,6 @@ export interface IAspectV1 {
   consequences: Array<{ name: string; value: string }>;
   color: IndexCardColorTypes;
   playedDuringTurn: boolean;
-  drawAreaObjects?: IDrawAreaObjects;
   type: AspectType;
   /**
    * @default false
@@ -39,12 +35,12 @@ export interface IAspectV1 {
    * @default false
    */
   isPrivate?: boolean;
-}
+};
 
 /**
  * @deprecated
  */
-export interface ISceneV1 {
+export type ISceneV1 = {
   id: string;
   name: string;
   group: string | undefined;
@@ -57,15 +53,34 @@ export interface ISceneV1 {
   version: number;
   lastUpdated: number;
   notes?: string;
-  drawAreaObjects: IDrawAreaObjects;
-}
+  drawAreaObjects: any;
+};
 
-export interface IIndexCard {
+/**
+ * @deprecated
+ */
+export type IIndexCardForV2Scene = {
+  id: string;
+  title: string;
+  titleLabel: string;
+  contentLabel?: string;
+  content?: string;
+  color: string;
+  playedDuringTurn: boolean;
+  blocks: Array<IBlock>;
+  /**
+   * @default false
+   */
+  pinned: boolean | undefined;
+
+  subCards: Array<IIndexCardForV2Scene>;
+  sub: boolean;
+};
+
+export type IIndexCard = {
   id: string;
   titleLabel: string;
   title: string;
-  contentLabel: string;
-  content: string;
   color: string;
   playedDuringTurn: boolean;
   blocks: Array<IBlock>;
@@ -76,11 +91,21 @@ export interface IIndexCard {
 
   subCards: Array<IIndexCard>;
   sub: boolean;
-}
+};
 
 export type IIndexCardType = "public" | "private";
 
-export interface IScene {
+export type IV2Scene = {
+  id: string;
+  name: string;
+  group: string | undefined;
+  indexCards: Record<IIndexCardType, Array<IIndexCardForV2Scene>>;
+  version: number;
+  lastUpdated: number;
+  notes?: string;
+};
+
+export type IScene = {
   id: string;
   name: string;
   group: string | undefined;
@@ -88,17 +113,21 @@ export interface IScene {
   version: number;
   lastUpdated: number;
   notes?: string;
-}
+};
 
 export type IGM = IPlayer & {
   npcs: Array<IPlayer>;
 };
 
-export interface ISession {
+export type ISession = {
   gm: IGM;
   players: Record<string, IPlayer>;
   goodConfetti: number;
   badConfetti: number;
-  tlDrawDoc: TDDocument | undefined;
+  tlDrawDoc: any | undefined;
   paused: boolean;
-}
+};
+
+export type ISessionCharacters = {
+  characters: Record<string, ICharacter>;
+};

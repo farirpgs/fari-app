@@ -15,10 +15,10 @@ import {
   ContentEditable,
   previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
-import { FateLabel } from "../../../../../../components/FateLabel/FateLabel";
 import { IImageBlock } from "../../../../../../domains/character/types";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { IBlockComponentProps } from "../../types/IBlockComponentProps";
+import { ThemedLabel } from "../ThemedLabel";
 
 export function BlockImage(props: IBlockComponentProps<IImageBlock> & {}) {
   const { t } = useTranslate();
@@ -47,17 +47,17 @@ export function BlockImage(props: IBlockComponentProps<IImageBlock> & {}) {
             wrap="nowrap"
           >
             <Grid item xs>
-              <FateLabel display="inline">
+              <ThemedLabel>
                 <ContentEditable
                   readonly={props.readonly}
                   border={props.advanced}
                   data-cy={`${props.dataCy}.label`}
-                  value={props.block.label}
+                  value={props.block.label || ""}
                   onChange={(value) => {
                     props.onLabelChange(value);
                   }}
                 />
-              </FateLabel>
+              </ThemedLabel>
             </Grid>
           </Grid>
         </Box>

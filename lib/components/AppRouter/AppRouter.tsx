@@ -3,11 +3,8 @@ import React, { useContext } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { InjectionsContext } from "../../contexts/InjectionsContext/InjectionsContext";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
-import { DocRoutes } from "../../domains/documents/DocRoutes";
-import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
 import { StoryBuilderRoute } from "../../routes/StoryBuilder/StoryBuilderRoute";
 import StoryDiceRoute from "../../routes/StoryDice/StoryDiceRoute";
-import { Doc } from "../Doc/Doc";
 import { LoadingRoute } from "./LoadingRoute";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
@@ -43,9 +40,6 @@ const CardCollection = React.lazy(
   () => import("../../routes/CardCollection/CardCollectionRoute")
 );
 const OracleRoute = React.lazy(() => import("../../routes/Oracle/OracleRoute"));
-const SeelieSquireRoute = React.lazy(
-  () => import("../../routes/SeelieSquire/SeelieSquireRoute")
-);
 
 export const AppRouter = () => {
   const location = useLocation();
@@ -164,38 +158,85 @@ export const AppRouter = () => {
           path={"/cards/:id"}
           render={(props) => <CardCollection {...props} />}
         />
-        <Route exact path={"/srds"} render={() => <SrdsRoute />} />
-
-        {DocRoutes.map((docRoute) => (
-          <Route
-            exact
-            key={docRoute.url}
-            path={`${docRoute.url}/:page?`}
-            render={(props) => (
-              <Doc
-                key={docRoute.url}
-                page={props.match.params.page}
-                url={docRoute.url}
-                parent={docRoute.parent}
-                title={docRoute.title}
-                imageUrl={docRoute.imageUrl}
-                loadFunction={docRoute.loadFunction}
-                author={docRoute.author}
-                gitHubLink={docRoute.gitHubLink}
-                sideBar={docRoute.sideBar}
-                sideBarOptions={docRoute.sideBarOptions}
-                defaultSideBarCategory={docRoute.defaultSideBarCategory}
-              />
-            )}
-          />
-        ))}
 
         <Route
-          exact
-          path={"/seeliesquire/:page?"}
-          render={(props) => (
-            <SeelieSquireRoute page={props.match.params.page} />
-          )}
+          path="/srds/condensed"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/resources/fari-rpgs/fari-app-wiki";
+            return null;
+          }}
+        />
+        <Route
+          path="/srds/condensed"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/srds/evilhat/fate-condensed";
+            return null;
+          }}
+        />
+        <Route
+          path="/srds/core"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/srds/evilhat/fate-core";
+            return null;
+          }}
+        />
+        <Route
+          path="/srds/accelerated"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/srds/evilhat/fate-accelerated";
+            return null;
+          }}
+        />
+        <Route
+          path="/srds/system-toolkit"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/srds/evilhat/fate-system-toolkit";
+            return null;
+          }}
+        />
+        <Route
+          path="/srds/adversary-toolkit"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/srds/evilhat/fate-adversary-toolkit";
+            return null;
+          }}
+        />
+        <Route
+          path="/fate-stunts"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/resources/fari-rpgs/fate-stunts";
+            return null;
+          }}
+        />
+        <Route
+          path="/success-with-style"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/resources/fari-rpgs/success-with-style";
+            return null;
+          }}
+        />
+        <Route
+          path="/blog/moments-in-fate"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/srds/fari-rpgs/success-with-style/moments-in-fate";
+            return null;
+          }}
+        />
+        <Route
+          path="/changelog"
+          component={() => {
+            window.location.href = "https://fari.canny.io/changelog/";
+            return null;
+          }}
         />
 
         <Route
@@ -211,15 +252,6 @@ export const AppRouter = () => {
           path={["/bugs", "/bugs/*"]}
           render={() => {
             return <BugsRoute />;
-          }}
-        />
-
-        <Route
-          exact
-          path={"/discord"}
-          render={() => {
-            window.location.href = "https://discord.gg/vMAJFjUraA";
-            return null;
           }}
         />
 

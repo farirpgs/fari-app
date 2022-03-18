@@ -1,3 +1,4 @@
+import produce from "immer";
 import {
   IndexCardColor,
   IndexCardColorTypes,
@@ -10,12 +11,16 @@ import { AspectType } from "../../hooks/useScene/AspectType";
 import {
   IAspectV1,
   IIndexCard,
+  IIndexCardForV2Scene,
   IScene,
   ISceneV1,
+  IV2Scene,
 } from "../../hooks/useScene/IScene";
+import { CharacterFactory } from "../character/CharacterFactory";
 import { BlockType, IBlock } from "../character/types";
 import { getUnix } from "../dayjs/getDayJS";
 import { Id } from "../Id/Id";
+import { Migrator } from "../migration/Migrator";
 
 export const SceneFactory = {
   make(): IScene {
@@ -49,8 +54,6 @@ export const SceneFactory = {
       id: Id.generate(),
       titleLabel: "Index Card",
       title: "",
-      contentLabel: "Notes",
-      content: "",
       color: "#fff",
       playedDuringTurn: false,
       pinned: false,
@@ -64,8 +67,6 @@ export const SceneFactory = {
       id: Id.generate(),
       titleLabel: "Index Card",
       title: "",
-      contentLabel: "Notes",
-      content: "",
       color: "#fff",
       playedDuringTurn: false,
       pinned: false,
@@ -94,30 +95,44 @@ export const SceneFactory = {
     return {
       ...indexCard,
       id: Id.generate(),
+      blocks: indexCard.blocks.map((block) => ({
+        ...block,
+        id: Id.generate(),
+      })),
       subCards: indexCard.subCards.map((sub) => {
         return {
           ...sub,
           id: Id.generate(),
+          blocks: sub.blocks.map((block) => ({
+            ...block,
+            id: Id.generate(),
+          })),
         };
       }),
     };
   },
-  migrate(s: any): IScene {
+  migrate(scene: any): IScene {
     try {
-      const v2: IScene = migrateV1SceneToV2(s);
-      return v2;
+      const migrate = Migrator.makeMigrationFunction<IScene>([
+        {
+          from: 1,
+          migrate: migrateV1SceneToV2,
+        },
+        {
+          from: 2,
+          migrate: migrateV2SceneToV3,
+        },
+      ]);
+      const migrated = migrate(scene);
+      return migrated;
     } catch (error) {
       console.error(error);
-      return s;
+      return scene;
     }
   },
 };
 
 function migrateV1SceneToV2(v1: ISceneV1): IScene {
-  if (v1.version !== 1) {
-    return v1 as unknown as IScene;
-  }
-
   const publicIndexCards: Array<IIndexCard> = [];
   const privateIndexCards: Array<IIndexCard> = [];
 
@@ -145,7 +160,10 @@ function migrateV1SceneToV2(v1: ISceneV1): IScene {
   };
 }
 
-function aspectToIndexCard(aspect: IAspectV1, aspectId: string): IIndexCard {
+function aspectToIndexCard(
+  aspect: IAspectV1,
+  aspectId: string
+): IIndexCardForV2Scene {
   const blocks: Array<IBlock> = [];
 
   for (const track of aspect.tracks) {
@@ -196,4 +214,34 @@ function aspectToIndexCard(aspect: IAspectV1, aspectId: string): IIndexCard {
     subCards: [],
     sub: false,
   };
+}
+
+function migrateV2SceneToV3(v2: IV2Scene): IScene {
+  const v3 = produce(v2, (draft) => {
+    const allIndexCards = [
+      ...draft.indexCards.public,
+      ...draft.indexCards.private,
+    ];
+    allIndexCards.forEach((indexCard) => {
+      migrateIndexCard(indexCard);
+    });
+    draft.version = 3;
+  });
+
+  function migrateIndexCard(indexCard: IIndexCardForV2Scene) {
+    const contentBlock = CharacterFactory.makeBlock(BlockType.Text);
+    contentBlock.label = indexCard.contentLabel;
+    indexCard.contentLabel = undefined;
+    contentBlock.value = indexCard.content;
+    indexCard.content = undefined;
+
+    indexCard.blocks.unshift(contentBlock);
+    indexCard.blocks.forEach((block) => {
+      block.label = block.label?.toUpperCase();
+    });
+    indexCard.subCards.forEach((subCard) => {
+      migrateIndexCard(subCard);
+    });
+  }
+  return v3;
 }

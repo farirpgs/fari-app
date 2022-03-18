@@ -8,8 +8,8 @@ describe("useLazyState", () => {
       "delay set states to prevent performance issues with a delay of %s",
       (delay) => {
         // GIVEN a string value
-        jest.useFakeTimers();
-        const onChange = jest.fn();
+        vi.useFakeTimers();
+        const onChange = vi.fn();
         const initialValue = "initial";
         const { result, rerender } = renderHook(
           (props) => {
@@ -36,7 +36,7 @@ describe("useLazyState", () => {
         expect(onChange).toHaveBeenCalledTimes(0);
 
         // WHEN time passes by
-        jest.runAllTimers();
+        vi.runAllTimers();
 
         // THEN internal state s OK and onChange has been called
         expect(result.current[0]).toEqual("new");
@@ -60,9 +60,9 @@ describe("useLazyState", () => {
     describe("with a normal update", () => {
       it("should not work", () => {
         // GIVEN
-        jest.useFakeTimers();
+        vi.useFakeTimers();
 
-        const onChange = jest.fn();
+        const onChange = vi.fn();
         const initialValue = 0;
         const { result } = renderHook(
           (props) => {
@@ -85,7 +85,7 @@ describe("useLazyState", () => {
           result.current[1](result.current[0] + 1);
         });
 
-        jest.runAllTimers();
+        vi.runAllTimers();
         // THEN the state should be initialized
         expect(result.current[0]).toEqual(1);
         expect(onChange).toHaveBeenCalledWith(1);
@@ -94,9 +94,9 @@ describe("useLazyState", () => {
     describe("with a draft update", () => {
       it("should work", () => {
         // GIVEN
-        jest.useFakeTimers();
+        vi.useFakeTimers();
 
-        const onChange = jest.fn();
+        const onChange = vi.fn();
         const initialValue = 0;
         const { result } = renderHook(
           (props) => {
@@ -119,7 +119,7 @@ describe("useLazyState", () => {
           result.current[1]((draft) => draft + 1);
         });
 
-        jest.runAllTimers();
+        vi.runAllTimers();
         // THEN the state should be initialized
         expect(result.current[0]).toEqual(3);
         expect(onChange).toHaveBeenCalledWith(3);
@@ -128,9 +128,9 @@ describe("useLazyState", () => {
     describe("with a draft update on an object", () => {
       it("should work", () => {
         // GIVEN
-        jest.useFakeTimers();
+        vi.useFakeTimers();
 
-        const onChange = jest.fn();
+        const onChange = vi.fn();
         const initialValue = { counter: 0 };
         const { result } = renderHook(
           (props) => {
@@ -162,7 +162,7 @@ describe("useLazyState", () => {
           }));
         });
 
-        jest.runAllTimers();
+        vi.runAllTimers();
 
         // THEN the state should be update
         expect(result.current[0]).toEqual({ counter: 3 });
@@ -172,9 +172,9 @@ describe("useLazyState", () => {
     describe("with a draft update on an object with immer", () => {
       it("should work", () => {
         // GIVEN
-        jest.useFakeTimers();
+        vi.useFakeTimers();
 
-        const onChange = jest.fn();
+        const onChange = vi.fn();
         const initialValue = { counter: 0 };
         const { result } = renderHook(
           (props) => {
@@ -209,7 +209,7 @@ describe("useLazyState", () => {
           );
         });
 
-        jest.runAllTimers();
+        vi.runAllTimers();
 
         // THEN the state should be update
         expect(result.current[0]).toEqual({ counter: 3 });

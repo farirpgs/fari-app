@@ -7,10 +7,11 @@ import Fade from "@mui/material/Fade";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ConditionalWrapper } from "../../../../../components/ConditionalWrapper/ConditionalWrapper";
 import { Delays } from "../../../../../constants/Delays";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
+import { MiniThemeContext } from "../MiniThemeContext";
 
 export function CircleTextField(props: {
   "data-cy"?: string;
@@ -24,6 +25,8 @@ export function CircleTextField(props: {
   onClick?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
   onContextMenu?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
 }) {
+  const miniTheme = useContext(MiniThemeContext);
+
   const theme = useTheme();
   const [hover, setHover] = useState(false);
   const [focus, setFocus] = useState(false);
@@ -110,22 +113,16 @@ export function CircleTextField(props: {
               "width": "3rem",
               "height": "3rem",
               "borderRadius": "50%",
-
-              "background": props.highlight
-                ? theme.palette.primary.main
-                : "inherit",
+              "background": props.highlight ? miniTheme.textPrimary : "inherit",
               "&&": {
                 color: props.highlight
-                  ? theme.palette.getContrastText(theme.palette.primary.main)
+                  ? miniTheme.textPrimaryInverted
                   : "inherit",
               },
               "transition": theme.transitions.create(["color", "background"], {
                 duration: theme.transitions.duration.shortest,
               }),
               "boxShadow": theme.shadows[1],
-              "& fieldset": {
-                borderColor: "currentColor",
-              },
             }),
           }}
           inputProps={{

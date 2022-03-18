@@ -54,7 +54,7 @@ export const FariEntity = {
     const downloadURL = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = downloadURL;
-    link.download = `${props.name}.fari.json`;
+    link.download = `${props.name || "Untitled"}.fari.json`;
     link.click();
   },
   loadEntityFromStorage<T>(props: {
@@ -71,7 +71,7 @@ export const FariEntity = {
         return migrated;
       }
     } catch (error) {
-      if (!process.env.IS_JEST) {
+      if (!process.env.VITEST) {
         console.error(error);
       }
     }
@@ -90,7 +90,7 @@ export const FariEntity = {
         return migrated;
       }
     } catch (error) {
-      if (!process.env.IS_JEST) {
+      if (!process.env.VITEST) {
         console.error(error);
       }
     }

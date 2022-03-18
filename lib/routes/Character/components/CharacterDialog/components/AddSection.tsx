@@ -11,9 +11,9 @@ export const AddSection: React.FC<{
   return (
     <Box p="1rem" justifyContent="center" display="flex">
       <Button
-        color="primary"
-        size="small"
+        color="inherit"
         variant="outlined"
+        size="small"
         onClick={() => {
           props.onAddSection();
         }}

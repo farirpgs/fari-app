@@ -1,6 +1,10 @@
 import { ICharacter } from "../../../domains/character/types";
 import { IDiceRollResult } from "../../../domains/dice/Dice";
-import { IPlayer } from "../../../hooks/useScene/IScene";
+import {
+  IIndexCard,
+  IIndexCardType,
+  IPlayer,
+} from "../../../hooks/useScene/IScene";
 
 export type IPlayerInteraction =
   | {
@@ -24,6 +28,13 @@ export type IPlayerInteraction =
   | {
       type: "update-player-points";
       payload: { id: string; points: string; maxPoints: string | undefined };
+    }
+  | {
+      type: "update-index-card";
+      payload: {
+        indexCardType: IIndexCardType;
+        indexCard: IIndexCard;
+      };
     }
   | {
       type: "update-player-roll";
@@ -61,7 +72,6 @@ export const PlayerInteractionFactory = {
     const newPlayer: IPlayer = {
       id: id,
       playerName: name ?? "",
-      character: undefined,
       rolls: [],
       isGM: false,
       points: "3",

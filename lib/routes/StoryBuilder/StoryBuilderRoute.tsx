@@ -309,7 +309,7 @@ export function StoryDeckTags(props: {
                   ? "filled"
                   : "outlined"
               }
-              color="primary"
+              color="secondary"
               label={tag}
               onClick={() => {
                 props.decksManager.actions.toggleTag(tag as unknown as Tags);
@@ -348,7 +348,7 @@ function GeneratorCard<T extends { label: string }>(props: {
           {isBack && (
             <Box display="flex" justifyContent="center" mb="2rem">
               <img
-                src={Images.app}
+                src={Images.logoWhite}
                 className={css({
                   width: "100px",
                 })}
