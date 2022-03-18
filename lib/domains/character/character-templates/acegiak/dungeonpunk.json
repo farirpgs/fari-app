@@ -1,0 +1,316 @@
+{
+  "fariType": "character",
+  "id": "4102b457-a8cc-49f2-b5ae-64444e16400a",
+  "lastUpdated": 1647629949,
+  "name": "dungeonpunk",
+  "pages": [
+    {
+      "id": "89764878-8ac4-46cd-b2cb-505b4472f6ca",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5134412f-bc0f-4d31-bfd9-ab9e5c51d3cb",
+                  "label": "Character Details",
+                  "blocks": [
+                    {
+                      "id": "eeda8463-83ba-48fd-84e2-95d1975bace5",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "93db0010-3a5d-4f1e-9720-b13d165e82f3",
+                      "label": "Bonds",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "e671f661-056d-4f91-9a2d-baab58fdc229",
+                  "label": "Dice",
+                  "blocks": [
+                    {
+                      "id": "ed3bdf9e-92d8-4fc2-8454-22b6e45a7ce6",
+                      "label": "1d6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 0.33 }
+                    },
+                    {
+                      "id": "0f6f9dcf-8ab5-4deb-9c43-df148b67101a",
+                      "label": "2d6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6", "1d6"], "width": 0.33 }
+                    },
+                    {
+                      "id": "e0d0b625-1761-43ef-9ec2-3534e5a2bf92",
+                      "label": "3d6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.33
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "3a2c8869-efdf-45db-aa54-3c7e61bb64e9",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "2d2b46df-882b-408b-b0a9-9f77aeec1b1a",
+                      "label": "4d6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6", "1d6", "1d6", "1d6"],
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "f2edd779-e5b7-4c09-9ce9-3e41e5c8be51",
+                      "label": "5d6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6", "1d6", "1d6", "1d6", "1d6"],
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "ed75d4ee-d2dd-4d6d-aa1b-5dbb09888576",
+                      "label": "6d6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6", "1d6", "1d6", "1d6", "1d6", "1d6"],
+                        "width": 0.33
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "1fb03ce8-7497-4d59-9dec-aa9c222f1df0",
+                  "label": "Stats",
+                  "blocks": [
+                    {
+                      "id": "8eb90ec2-caa7-446c-aad4-19dea15868c4",
+                      "label": "Imp",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "0f7e4ccc-9b04-4779-b615-d272067695ea",
+                      "label": "STR",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "e7cfd04a-c57d-4158-b77c-394c52a7dcb9",
+                      "label": "Imp",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "d22e99b9-83c0-49fc-83f2-1067e0a4dcaf",
+                      "label": "DEX",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "7bfc46b5-a427-4fa5-aefa-7e2698213ba8",
+                      "label": "Imp",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "f380e820-8599-4e2d-a873-3fe62134f5b4",
+                      "label": "CON",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "dbb7ca4d-34ff-42a6-ac62-81067ba599ce",
+                      "label": "Imp",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "71a8962c-6d27-4db6-8d9f-4e1ae6659df3",
+                      "label": "INT",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "2277d145-29f8-465a-b727-276a5dbaae5f",
+                      "label": "Imp",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33, "asClock": false },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "53dcf254-0228-437b-a5cf-4ea2f9d7f414",
+                      "label": "CHA",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "50364064-e698-4dc1-93a1-bb96dc403e7e",
+                      "label": "Imp",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33, "asClock": false },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "0adeb148-f4b9-4719-aed2-8464a3f7218c",
+                      "label": "WIS",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "52716fa1-d44a-4064-acae-bf3c8d72bea9",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "c234fedf-9f63-4405-ac00-d7ff32ee9eb0",
+                      "label": "HP",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "1",
+                        "isMainPointCounter": true,
+                        "width": 1
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "edf1808c-026b-4d89-9031-82df06bc750a",
+                      "label": "XP",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "fcd83c1a-2bd3-4e46-90b8-4c7fd4ec00f6",
+                      "label": "Stress",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "2d5f279c-8f0b-4e41-bb13-13018dec33e2",
+                      "label": "Enc",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "4b7e113b-2aa1-497e-804c-737c01460614",
+                      "label": "Gear",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "8efa3c59-6bd8-493f-9691-314f1ad9bed0",
+                  "label": "Moves",
+                  "blocks": [
+                    {
+                      "id": "d50ea4f3-d0fb-4845-805a-c46aad5ceb75",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "016c9283-200f-4224-9109-3bf98a555cf2",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "34e89f61-c9ff-4eb6-bc90-c5f99da21d8f",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "dungeonpunk is public domain (CC0) by Ash McAllan and can be downloaded for PWYW at https://acegiak.itch.io/dungeonpunk and the community wiki can be found at https://dungeonpunk.xyz",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "playedDuringTurn": false,
+  "wide": false,
+  "theme": {
+    "hideSectionBackground": false,
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Basic&family=IM+Fell+DW+Pica&display=swap');",
+    "pageHeadingFontFamily": "IM Fell DW Pica",
+    "sectionHeadingFontFamily": "IM Fell DW Pica",
+    "labelFontFamily": "IM Fell DW Pica",
+    "textFontFamily": "Gentium Book Basic",
+    "textFontSize": 1
+  }
+}
