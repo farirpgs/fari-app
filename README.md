@@ -40,6 +40,7 @@ If you are using the proper node and npm version, you then need to install Fari'
 npm install
 ```
 
+.
 Once the dependencies are installed, Fari will also build some of it's static content (e.g. the content of the SRD) using [11ty](https://www.11ty.dev/) which will convert the markdown files to HTML files insides a `_site` directory.
 
 ### Running the application
