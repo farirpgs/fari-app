@@ -13,6 +13,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import LocalCafeIcon from "@mui/icons-material/LocalCafe";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import MenuIcon from "@mui/icons-material/Menu";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import StorageIcon from "@mui/icons-material/Storage";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import TranslateIcon from "@mui/icons-material/Translate";
@@ -44,7 +45,7 @@ import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import {
   IPossibleLanguages,
-  PossibleLanguagesNames
+  PossibleLanguagesNames,
 } from "../../services/internationalization/InternationalizationService";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { CannyChangelog } from "../CannyChangelog/CannyChangelog";
@@ -528,7 +529,9 @@ export const Page: React.FC<{
           <>
             <Grid item xs={xsSize} sm={smSize} className={itemClass}>
               <NavLink
+                highlight
                 data-cy="page.menu.my-binder"
+                startIcon={<MenuBookIcon />}
                 onClick={() => {
                   myBinderManager.actions.open();
                 }}

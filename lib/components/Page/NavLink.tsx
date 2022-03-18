@@ -19,6 +19,9 @@ export function NavLink(props: {
   tooltip?: string;
   onClick?: () => void;
   ["data-cy"]?: string;
+  highlight?: boolean;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
   children: React.ReactNode;
 }) {
   const theme = useTheme();
@@ -33,6 +36,11 @@ export function NavLink(props: {
           onClick={props.onClick}
           target={props.target}
           data-cy={props["data-cy"]}
+          startIcon={props.startIcon}
+          endIcon={props.endIcon}
+          classes={{
+            startIcon: css({ paddingLeft: "4px" }),
+          }}
           className={css({
             "textTransform": "none",
             "&:hover": {
@@ -51,10 +59,19 @@ export function NavLink(props: {
         color="inherit"
         onClick={props.onClick}
         data-cy={props["data-cy"]}
+        startIcon={props.startIcon}
+        endIcon={props.endIcon}
+        classes={{
+          startIcon: css({ paddingLeft: "4px" }),
+        }}
         className={css({
           "textTransform": "none",
+          "background": props.highlight ? "#fff" : "",
+          "color": props.highlight ? "#000" : "",
           "&:hover": {
-            background: theme.palette.primary.light,
+            background: props.highlight
+              ? "#a6d4fa"
+              : theme.palette.primary.light,
           },
         })}
       >
