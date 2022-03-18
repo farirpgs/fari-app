@@ -1,0 +1,467 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1647110520,
+  "name": "Solar Blades & Cosmic Spells Template Template",
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "&nbsp;Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "1abc55ad-9a4b-4763-a9a1-dee381d3772a",
+                  "label": "Profile",
+                  "blocks": [
+                    {
+                      "id": "7fdee412-098a-4e16-98fd-a2f31f4c6cca",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "2b1b98af-c699-4c23-a6ed-fa6413533475",
+                      "label": "Archetype",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "545f5bec-9baa-4bb8-9e9e-fe9291642769",
+                      "label": "Concept",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "86001aef-2d84-42c5-aba7-7b0889ddd19c",
+                      "label": "Complication",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "64105cc3-ed7b-4746-adf3-4feff3b5981b",
+                      "label": "Species",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "e6753a43-7013-4e0a-9025-17da93cf1fd0",
+                      "label": "Level",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "4eefa2a8-870c-4ab9-a3e0-ff3473e2fcc2",
+                      "label": "Current XP",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "40e1d0e1-0b60-4b03-bf45-e4459134a741",
+                      "label": "XP TO NExt Level",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a6a19be9-393d-4001-bd08-c79fd85436fd",
+                  "label": "Attributes",
+                  "blocks": [
+                    {
+                      "id": "81d5ef2f-c401-4eb9-9070-55ccfb03f720",
+                      "label": "Physical",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "fdb05ff6-2b31-45a8-aea1-de362ac67f9e",
+                      "label": "Agility",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "c0c69f3a-d924-4b85-ba12-8d1b6adaa80c",
+                      "label": "Intelligence",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d86c0f6a-e7dd-4a6b-8984-f08f8c76aea6",
+                      "label": "Wisdom",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "7b9df28c-9fe5-49b4-b046-9ae829fdf4b4",
+                  "label": "Statistics",
+                  "blocks": [
+                    {
+                      "id": "004363e8-bcc4-45cc-b87a-9fbc135edf8e",
+                      "label": "Vitality",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "cfb4dd38-4d3b-4648-8951-954deabf299b",
+                      "label": "Sanity",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "65a893f3-0511-445c-a6ab-a78ec99ce817",
+                      "label": "Luck",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "c4e9221d-77df-4ebe-ba5e-f019357cd587",
+                      "label": "Credits",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "30243e54-8302-45a0-97ba-c2ad7a4f9a3b",
+                  "label": "combat",
+                  "blocks": [
+                    {
+                      "id": "a66950dc-27e6-4863-b8e9-7ef410346350",
+                      "label": "hit points",
+                      "type": "PointCounter",
+                      "meta": { "max": "0", "isMainPointCounter": true },
+                      "value": "0"
+                    },
+                    {
+                      "id": "e311adc1-f35d-407d-a5ee-2857000eb314",
+                      "label": "Armor",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "60aeb424-9783-4013-82a5-d1a2baf4b896",
+                      "label": "Shield",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "cb236096-e30f-435a-b653-ef97de34145b",
+                      "label": "weapon",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "" }
+                    },
+                    {
+                      "id": "d34bb207-6f1c-4f71-ad3f-9041ccedbaa1",
+                      "label": "Size/Range",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "" }
+                    },
+                    {
+                      "id": "fba7715f-f784-412c-96f8-2a75d9cda578",
+                      "label": "Damage",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 0.33 }
+                    },
+                    {
+                      "id": "93cfcd55-b35f-481d-ae51-7a08d129de0c",
+                      "label": "weapon",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "a75925cd-4edc-49d2-a797-bd56ccb60cc9",
+                      "label": "Size/Range",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "" }
+                    },
+                    {
+                      "id": "0a813275-9199-49c1-9caa-6f83e1292271",
+                      "label": "Damage",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 0.33 }
+                    },
+                    {
+                      "id": "19d9fff3-4015-48e1-99fe-dd102592db66",
+                      "label": "weapon",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "a9875267-3638-4b21-8c6b-29a8380a6fca",
+                      "label": "Size/Range",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "" }
+                    },
+                    {
+                      "id": "63e80c99-7cd7-4d76-9b2c-f408395f23a2",
+                      "label": "Damage",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 0.33 }
+                    },
+                    {
+                      "id": "e15a7d7d-1d65-47c5-abfb-7690c4799d41",
+                      "label": "weapon",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "4f0d39fc-fdb2-450c-b965-e8fa82c434e0",
+                      "label": "Size/Range",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "" }
+                    },
+                    {
+                      "id": "2a50a2f1-20f7-426d-ad4f-91720db7bc14",
+                      "label": "Damage",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 0.33 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "378c79d2-6162-4824-af4f-28442ebf1c58",
+                  "label": "Archetype Abilities",
+                  "blocks": [
+                    {
+                      "id": "2cede16a-9334-4642-8304-f5f1a96512ed",
+                      "label": "Ability Name",
+                      "type": "Text",
+                      "value": "<i>Description</i>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "40d3fc4d-e9ab-4efb-9d8b-315a45e314f8",
+                      "label": "Ability Name",
+                      "type": "Text",
+                      "value": "<i>Description</i>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "826f2436-a21b-4b2a-87aa-dd4033a23b97",
+                  "label": "Other Powers",
+                  "blocks": [
+                    {
+                      "id": "309b59e7-072c-4bfc-a000-98176fdef095",
+                      "label": "Ability Name",
+                      "type": "Text",
+                      "value": "<i>Description</i>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c1e11b3b-3dd1-4bca-9d50-8c42a307e17a",
+                      "label": "Ability Name",
+                      "type": "Text",
+                      "value": "<i>Description</i>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c80e6bce-777c-428b-8e00-453eb3b4c9d8",
+                  "label": "Equipment",
+                  "blocks": [
+                    {
+                      "id": "c0dd1fcd-62b1-41bc-bc68-b4887144deac",
+                      "label": "Encumbrance Limit",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "8",
+                        "isMainPointCounter": false,
+                        "width": 1
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "5444e996-42ca-4eef-a0b8-ade2e60ea534",
+                      "label": "Encumbering ",
+                      "type": "Text",
+                      "value": "<b>- \n- \n- \n</b>",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Don't forget durability score"
+                      }
+                    },
+                    {
+                      "id": "e6991c9a-f07c-4f09-9f79-19564f1b1c1b",
+                      "label": "non-encumbering",
+                      "type": "Text",
+                      "value": "<b>- \n- \n- \n</b>",
+                      "meta": { "width": 0.5, "helperText": "" }
+                    },
+                    {
+                      "id": "303b96c3-8752-48f1-8bd6-f7b215eb4d1f",
+                      "label": "Special Items",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "b42da803-f507-40c2-bc18-6e73fc39f5ea",
+                      "label": "Item Name",
+                      "type": "Text",
+                      "value": "<i>Description</i>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "53e4820c-a069-43b9-9f6b-2d982c2c3fc3",
+                      "label": "Item Name",
+                      "type": "Text",
+                      "value": "<i>Description</i>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f46a9b20-2ed2-4e6b-a09b-24012c37042c",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d90d5029-a4f4-4aea-8063-0a52b8c6d4f4",
+                  "label": "Contacts",
+                  "blocks": [
+                    {
+                      "id": "927fee63-e46a-4f39-878d-43bc917b2159",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "288a5ef8-d9e7-454c-92ec-acdc5828363f",
+                  "label": "Notes",
+                  "blocks": [
+                    {
+                      "id": "d6b8c7ab-6a6a-4942-9576-b646467e61a7",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "9d37ee72-3b7c-4449-9954-4241ef136a19",
+                  "label": "Bio",
+                  "blocks": [
+                    {
+                      "id": "0c289823-0614-460c-8dbe-8db9cf64fd1f",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    },
+                    {
+                      "id": "ab414b02-7da0-4f08-b57f-d516c3a58e22",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Template made by cyanomys#0001 on Discord"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Notes"
+    }
+  ],
+  "template": "Blank",
+  "version": 5,
+  "group": "Templates",
+  "wide": false
+}
