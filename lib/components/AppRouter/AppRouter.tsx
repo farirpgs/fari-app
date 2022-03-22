@@ -216,6 +216,14 @@ export const AppRouter = () => {
           }}
         />
         <Route
+          path="/fari-wiki"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/resources/fari-rpgs/fari-app-wiki";
+            return null;
+          }}
+        />
+        <Route
           path="/success-with-style"
           component={() => {
             window.location.href =

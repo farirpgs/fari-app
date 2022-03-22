@@ -380,9 +380,9 @@ export const HomeRoute: React.FC<{}> = () => {
   function renderThirdActionCards() {
     const cards: Array<IHomeRouteCard> = [
       {
-        label: t("home-route.cards.blog.title"),
-        description: t("home-route.cards.blog.description"),
-        ctaLabel: t("home-route.cards.blog.cta"),
+        label: t("home-route.cards.changelog.title"),
+        description: t("home-route.cards.changelog.description"),
+        ctaLabel: t("home-route.cards.changelog.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
           <img
@@ -390,7 +390,7 @@ export const HomeRoute: React.FC<{}> = () => {
             src="https://img.icons8.com/plasticine/100/000000/comments.png"
           />
         ),
-        to: "/blog",
+        to: "https://fari.canny.io/changelog",
       },
       {
         label: t("home-route.cards.wiki.title"),
@@ -406,9 +406,9 @@ export const HomeRoute: React.FC<{}> = () => {
         to: "/fari-wiki",
       },
       {
-        label: t("home-route.cards.srds.title"),
-        description: t("home-route.cards.srds.description"),
-        ctaLabel: t("home-route.cards.srds.cta"),
+        label: t("home-route.cards.fari-games.title"),
+        description: t("home-route.cards.fari-games.description"),
+        ctaLabel: t("home-route.cards.fari-games.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
           <img
@@ -416,7 +416,7 @@ export const HomeRoute: React.FC<{}> = () => {
             src="https://img.icons8.com/plasticine/100/000000/bookmark--v1.png"
           />
         ),
-        to: "/srds",
+        to: "https://fari.games",
       },
     ];
     return (

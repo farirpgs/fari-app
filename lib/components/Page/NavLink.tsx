@@ -88,7 +88,8 @@ export function NavLinkCategory(props: {
     label: React.ReactNode;
     links: Array<{
       "label": React.ReactNode;
-      "to": string | { pathname: string };
+      "to"?: string | { pathname: string };
+      "href"?: string;
       "target"?: "_blank";
       "tooltip"?: string;
       "icon"?: JSX.Element;
@@ -225,23 +226,44 @@ export function NavLinkCategory(props: {
                               textAlign: "left",
                             })}
                           >
-                            <ReactRouterLink
-                              to={link.to}
-                              target={link.target}
-                              onClick={props.onAnyLinkClick}
-                              data-cy={link["data-cy"]}
-                              className={css({
-                                "color": theme.palette.secondary.main,
-                                "fontWeight": theme.typography.fontWeightBold,
-                                "fontSize": "1rem",
-                                "textDecoration": "none",
-                                "&:hover": {
-                                  textDecoration: "underline",
-                                },
-                              })}
-                            >
-                              {link.label}
-                            </ReactRouterLink>
+                            {link.to && (
+                              <ReactRouterLink
+                                to={link.to}
+                                target={link.target}
+                                onClick={props.onAnyLinkClick}
+                                data-cy={link["data-cy"]}
+                                className={css({
+                                  "color": theme.palette.secondary.main,
+                                  "fontWeight": theme.typography.fontWeightBold,
+                                  "fontSize": "1rem",
+                                  "textDecoration": "none",
+                                  "&:hover": {
+                                    textDecoration: "underline",
+                                  },
+                                })}
+                              >
+                                {link.label}
+                              </ReactRouterLink>
+                            )}
+                            {link.href && (
+                              <a
+                                href={link.href}
+                                target={link.target}
+                                onClick={props.onAnyLinkClick}
+                                data-cy={link["data-cy"]}
+                                className={css({
+                                  "color": theme.palette.secondary.main,
+                                  "fontWeight": theme.typography.fontWeightBold,
+                                  "fontSize": "1rem",
+                                  "textDecoration": "none",
+                                  "&:hover": {
+                                    textDecoration: "underline",
+                                  },
+                                })}
+                              >
+                                {link.label}
+                              </a>
+                            )}
                           </div>
                         </Tooltip>
                       </Grid>

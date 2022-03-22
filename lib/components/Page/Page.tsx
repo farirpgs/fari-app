@@ -591,7 +591,7 @@ export const Page: React.FC<{
                     label: "Fari",
                     links: [
                       {
-                        to: "https://fari.canny.io/changelog",
+                        href: "https://fari.canny.io/changelog",
                         label: t("menu.whats-new"),
                         icon: <FiberNewIcon />,
                         target: "_blank",
@@ -607,7 +607,7 @@ export const Page: React.FC<{
                         icon: <BugReportIcon />,
                       },
                       {
-                        to: "https://farirpgs.com/discord",
+                        href: "https://farirpgs.com/discord",
                         label: t("menu.discord"),
                         icon: <ForumIcon />,
                         target: "_blank",
@@ -618,7 +618,7 @@ export const Page: React.FC<{
                     label: "Documents",
                     links: [
                       {
-                        to: "https://fari.games/en/resources/fari-rpgs/fari-app-wiki",
+                        href: "https://fari.games/en/resources/fari-rpgs/fari-app-wiki",
                         label: t("menu.fari-wiki"),
                         icon: <InfoIcon />,
                       },
@@ -628,19 +628,19 @@ export const Page: React.FC<{
                     label: "Support",
                     links: [
                       {
-                        to: "https://www.patreon.com/bePatron?u=43408921",
+                        href: "https://www.patreon.com/bePatron?u=43408921",
                         label: t("menu.patreon"),
                         icon: <ThumbUpIcon />,
                         target: "_blank",
                       },
                       {
-                        to: "https://ko-fi.com/rpdeshaies",
+                        href: "https://ko-fi.com/rpdeshaies",
                         label: t("menu.ko-fi"),
                         icon: <LocalCafeIcon />,
                         target: "_blank",
                       },
                       {
-                        to: "https://github.com/fariapp/fari",
+                        href: "https://github.com/fariapp/fari",
                         label: t("menu.github"),
                         icon: <GitHubIcon />,
                         target: "_blank",
