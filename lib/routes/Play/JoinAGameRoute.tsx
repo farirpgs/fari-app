@@ -128,7 +128,7 @@ export const JoinAGameRoute: React.FC<{
               <Box display="flex" justifyContent="center">
                 <Icons.TwoPeopleMeetingTalkingIcon
                   className={css({ fontSize: "5rem" })}
-                  color="primary"
+                  color="secondary"
                 />
               </Box>
             </Fade>
@@ -137,7 +137,7 @@ export const JoinAGameRoute: React.FC<{
               <Box display="flex" justifyContent="center">
                 <Icons.TwoPeopleMeetingIcon
                   className={css({ fontSize: "5rem" })}
-                  color="primary"
+                  color="secondary"
                 />
               </Box>
             </Fade>
@@ -162,6 +162,7 @@ export const JoinAGameRoute: React.FC<{
                     inputProps={{
                       maxLength: "50",
                     }}
+                    color="secondary"
                     fullWidth
                     required
                     variant="standard"
@@ -173,7 +174,7 @@ export const JoinAGameRoute: React.FC<{
                       <Button
                         type="submit"
                         variant={playerName ? "contained" : "outlined"}
-                        color="primary"
+                        color="secondary"
                       >
                         {t("play-route.join")}
                       </Button>
