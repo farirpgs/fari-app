@@ -516,7 +516,7 @@ export const Pool: React.FC<
               ? theme.palette.getContrastText(theme.palette.background.paper)
               : theme.palette.getContrastText(theme.palette.primary.main),
             "border": props.clickable
-              ? `1px ${borderStyle} ${theme.palette.primary.main}`
+              ? `1px ${borderStyle} ${theme.palette.secondary.main}`
               : `none`,
 
             "boxShadow":
