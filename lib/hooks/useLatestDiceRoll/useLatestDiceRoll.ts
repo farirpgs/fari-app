@@ -58,7 +58,7 @@ export function useLatestDiceRoll(
       ) {
         setColor(darken(theme.palette.error.main, 0.2));
       } else {
-        setColor(theme.palette.primary.main);
+        setColor(theme.palette.secondary.main);
       }
     },
     [rolling, latestPlayerRoll]

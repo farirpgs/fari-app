@@ -425,10 +425,10 @@ export function PlayerRow(
             })}
           >
             <FateLabel
+              color="secondary"
               uppercase={true}
               noWrap
               className={css({
-                color: theme.palette.primary.main,
                 fontSize: ".8rem",
                 fontWeight: theme.typography.fontWeightBold,
                 marginLeft: ".5rem",
