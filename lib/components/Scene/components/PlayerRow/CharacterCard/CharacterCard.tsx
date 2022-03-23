@@ -42,17 +42,6 @@ export const CharacterCard: React.FC<{
 
   const headerColor = theme.palette.background.paper;
   const headerBackgroundColors = useTextColors(theme.palette.background.paper);
-  const sheetHeaderClassName = css({
-    label: "SheetHeader-box",
-    // Hexagone
-    // https://bennettfeely.com/clippy/
-    clipPath: "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
-    background: headerBackgroundColors.primary,
-    color: headerColor,
-    width: "100%",
-    padding: ".5rem",
-    marginTop: "1rem",
-  });
 
   function handleSave() {
     const updatedCharacter =
@@ -89,6 +78,7 @@ export const CharacterCard: React.FC<{
             className={css({
               fontSize: "1.5rem",
               width: "100%",
+              marginBottom: "1rem",
               borderBottom: hasSections ? "1px solid #f0a4a4" : undefined,
             })}
           >
@@ -200,7 +190,19 @@ export const CharacterCard: React.FC<{
                         className={css({ clear: "both" })}
                       >
                         {sectionLabel && (
-                          <Box className={sheetHeaderClassName}>
+                          <Box
+                            className={css({
+                              label: "SheetHeader-box",
+                              // Hexagone
+                              // https://bennettfeely.com/clippy/
+                              clipPath:
+                                "polygon(2% 0%, 100% 0, 100% 70%, 98% 100%, 0 100%, 0% 30%)",
+                              background: headerBackgroundColors.primary,
+                              color: headerColor,
+                              width: "100%",
+                              padding: ".5rem",
+                            })}
+                          >
                             <FateLabel noWrap>
                               {previewContentEditable({
                                 value: section.label,
