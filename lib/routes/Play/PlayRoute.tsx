@@ -5,6 +5,7 @@ import {
   useObject,
   useRoom,
   useStorage,
+  useUpdateMyPresence,
 } from "@liveblocks/react";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
@@ -22,10 +23,12 @@ import {
   useSessionCharacterSheets,
 } from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { PlayersPresence } from "./components/PlayersPresence/PlayersPresence";
 import {
   IPlayerInteraction,
   PlayerInteractionFactory,
 } from "./types/IPlayerInteraction";
+import { IPlayerPresence } from "./types/IPlayerPresence";
 
 type ConnectionState =
   | "closed"
@@ -102,6 +105,7 @@ export const PlayRoute: React.FC<{
   const [connectionState, setConnectionState] = useState<ConnectionState>();
   const [connectionStateSnackBarOpen, setConnectionStateSnackBarOpen] =
     useState(false);
+  const updateMyPresence = useUpdateMyPresence<IPlayerPresence>();
 
   const sceneManager = useScene();
   const sessionManager = useSession({
@@ -111,6 +115,22 @@ export const PlayRoute: React.FC<{
     userId: userId,
     charactersManager: charactersManager,
   });
+
+  const sceneName = sceneManager.state.scene?.name ?? "";
+  const pageTitle = useMemo(() => {
+    return previewContentEditable({ value: sceneName });
+  }, [sceneName]);
+  const me = sessionManager.computed.me;
+  const myCharacter =
+    sessionCharactersManager.state.characterSheets[me?.id ?? ""];
+  const myCharacterName = myCharacter?.name ?? "";
+  useEffect(() => {
+    updateMyPresence({
+      color: me?.color,
+      playerName: me?.playerName,
+      characterName: myCharacterName,
+    });
+  }, [me?.color, me?.playerName, myCharacterName]);
 
   useLiveObject({
     key: "session",
@@ -224,11 +244,6 @@ export const PlayRoute: React.FC<{
     };
   }, [connectionState]);
 
-  const sceneName = sceneManager.state.scene?.name ?? "";
-  const pageTitle = useMemo(() => {
-    return previewContentEditable({ value: sceneName });
-  }, [sceneName]);
-
   useEffect(() => {
     if (isGM) {
       logger.track("play_online_game", {
@@ -282,17 +297,19 @@ export const PlayRoute: React.FC<{
             Connection: {connectionState}
           </Alert>
         </Snackbar>
-        <Session
-          sessionManager={sessionManager}
-          sessionCharactersManager={sessionCharactersManager}
-          sceneManager={sceneManager}
-          isLoading={false}
-          idFromParams={idFromParams}
-          shareLink={shareLink}
-          userId={settingsManager.state.userId}
-          error={undefined}
-          onPlayerInteraction={handlePlayerInteraction}
-        />
+        <PlayersPresence>
+          <Session
+            sessionManager={sessionManager}
+            sessionCharactersManager={sessionCharactersManager}
+            sceneManager={sceneManager}
+            isLoading={false}
+            idFromParams={idFromParams}
+            shareLink={shareLink}
+            userId={settingsManager.state.userId}
+            error={undefined}
+            onPlayerInteraction={handlePlayerInteraction}
+          />
+        </PlayersPresence>
       </>
     </>
   );

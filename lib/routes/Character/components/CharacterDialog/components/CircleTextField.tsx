@@ -19,6 +19,7 @@ export function CircleTextField(props: {
   "readonly"?: boolean;
   "highlight"?: boolean;
   "button"?: boolean;
+  "borderColor"?: string;
   onChange?(value: string): void;
   onIncrement?(): void;
   onDecrement?(): void;
@@ -77,10 +78,10 @@ export function CircleTextField(props: {
         }}
       >
         <TextField
+          variant="standard"
           type="number"
           data-cy={props["data-cy"]}
           value={value}
-          variant="outlined"
           className={css({
             textAlign: "center",
             cursor: cursor,
@@ -113,22 +114,29 @@ export function CircleTextField(props: {
               "width": "3rem",
               "height": "3rem",
               "borderRadius": "50%",
+              "border": `2px solid ${
+                props.borderColor ?? miniTheme.textPrimary
+              }`,
+              "outline": "none",
               "background": props.highlight ? miniTheme.textPrimary : "inherit",
               "&&": {
-                color: props.highlight
-                  ? miniTheme.textPrimaryInverted
-                  : "inherit",
+                color: "inherit",
+              },
+              "&:before": {
+                display: "none",
+              },
+              "&:after": {
+                display: "none",
               },
               "transition": theme.transitions.create(["color", "background"], {
                 duration: theme.transitions.duration.shortest,
               }),
-              "boxShadow": theme.shadows[1],
             }),
           }}
           inputProps={{
             className: css({
               "cursor": cursor,
-              "fontWeight": theme.typography.fontWeightBold,
+              "fontWeight": theme.typography.fontWeightRegular,
               "textAlign": "center",
               // this disables the up/down browser arrows
               "padding": "0",

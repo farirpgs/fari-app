@@ -12,5 +12,6 @@ export function useZIndex() {
     navBar: theme.zIndex.drawer + 1,
     diceFabDie: theme.zIndex.tooltip + 50,
     diceFab: theme.zIndex.tooltip + 100,
+    cursor: theme.zIndex.tooltip + 150,
   };
 }

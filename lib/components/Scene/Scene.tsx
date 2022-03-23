@@ -569,6 +569,7 @@ export const Session: React.FC<IProps> = (props) => {
               isMe: me?.id === gm.id,
               dataCyIndex: "gm",
               isChild: false,
+              color: gm.color,
               children: (
                 <>
                   {gm.npcs.map((npc, npcIndex) => {
@@ -585,6 +586,7 @@ export const Session: React.FC<IProps> = (props) => {
                           <Box mx="-.5rem">
                             {renderPlayerRow({
                               player: npc,
+                              color: gm.color,
                               canControl: me?.id === gm.id,
                               isMe: me?.id === gm.id,
                               isChild: true,
@@ -609,6 +611,7 @@ export const Session: React.FC<IProps> = (props) => {
                     player,
                     canControl,
                     isMe,
+                    color: player.color,
                     isChild: false,
                     dataCyIndex: playerRowIndex,
                   })}
@@ -670,6 +673,7 @@ export const Session: React.FC<IProps> = (props) => {
     isMe: boolean;
     dataCyIndex: number | string;
     isChild: boolean;
+    color: string;
     children?: JSX.Element;
   }) {
     const {
@@ -685,6 +689,8 @@ export const Session: React.FC<IProps> = (props) => {
     return (
       <PlayerRow
         data-cy={`scene.player-row.${playerRowDataCyIndex}`}
+        color={options.color}
+        isChild={isChild}
         permissions={{
           canRoll: canControl,
           canUpdatePoints: canControl,
@@ -764,8 +770,8 @@ export const Session: React.FC<IProps> = (props) => {
   function renderCharacterCards() {
     const everyone = sessionManager.computed.everyone;
     const characters = sessionCharactersManager.state.characterSheets;
-    const playersWithCharacterSheets = Object.keys(characters).map(
-      (characterId) => {
+    const playersWithCharacterSheets = Object.keys(characters)
+      .map((characterId) => {
         const playerMatch = everyone.find(
           (player) => player.id === characterId
         ) as IPlayer;
@@ -773,9 +779,10 @@ export const Session: React.FC<IProps> = (props) => {
           ...playerMatch,
           characterSheet: characters[characterId],
         };
-      }
-    );
-
+      })
+      .sort((a, b) => {
+        return a.id === props.userId ? -1 : b.id === props.userId ? 1 : 0;
+      });
     return (
       <>
         <Box>

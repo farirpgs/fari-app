@@ -11,6 +11,7 @@ export type IPlayer = {
   isGM: boolean;
   points: string;
   private: boolean;
+  color: string;
 };
 
 /**

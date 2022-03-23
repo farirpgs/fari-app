@@ -70,6 +70,7 @@ export const ContentEditable: React.FC<
     className?: string;
     clickable?: boolean;
     onChange?: (value: string, event: FormEvent<HTMLSpanElement>) => void;
+    onKeyDown?: React.KeyboardEventHandler<HTMLSpanElement>;
     readonly?: boolean;
     placeholder?: string;
     autoFocus?: boolean;
@@ -157,6 +158,7 @@ export const ContentEditable: React.FC<
         contentEditable={!props.readonly}
         onInput={handleOnChange}
         onPaste={handleOnPaste}
+        onKeyDown={props.onKeyDown}
         className={cx(
           css({
             "outline": "none",
@@ -170,7 +172,7 @@ export const ContentEditable: React.FC<
               ? `1px solid ${props.borderColor ?? theme.palette.divider}`
               : undefined,
             "&:empty:before": {
-              color: theme.palette.text.secondary,
+              opacity: "50%",
               content: props.placeholder ? `"${props.placeholder}"` : undefined,
             },
             "& b": { fontWeight: "bold" },
