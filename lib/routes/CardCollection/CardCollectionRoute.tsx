@@ -284,7 +284,7 @@ export const CardCollectionRoute: React.FC<{
             <Grid container justifyContent="center" spacing={2}>
               <Grid item>
                 <Button
-                  color="primary"
+                  color="secondary"
                   data-cy="scene.save"
                   endIcon={<SaveIcon />}
                   variant={
