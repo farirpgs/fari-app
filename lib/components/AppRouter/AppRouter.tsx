@@ -223,7 +223,6 @@ export const AppRouter = () => {
             return null;
           }}
         />
-        />
         <Route
           path="/seelie-squire"
           component={() => {
