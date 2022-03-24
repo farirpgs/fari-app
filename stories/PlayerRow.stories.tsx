@@ -7,6 +7,7 @@ import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { BlockType, ICharacter, IPage } from "../lib/domains/character/types";
 import { IDiceRollResult } from "../lib/domains/dice/Dice";
 import { IPlayer } from "../lib/hooks/useScene/IScene";
+import { DefaultPlayerColor } from "../lib/routes/Play/consts/PlayerColors";
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookPlayerRow(props: {
@@ -31,6 +32,8 @@ function StorybookPlayerRow(props: {
         canRemove: props.canRemove,
         canMarkPrivate: props.canMarkPrivate,
       }}
+      color={DefaultPlayerColor}
+      isChild={false}
       player={props.player}
       isMe={props.highlight}
       characterSheet={props.characterSheet}
@@ -482,6 +485,7 @@ function aPlayer(props: Partial<IPlayer> = {}): IPlayer {
     playedDuringTurn: false,
     rolls: [],
     private: false,
+    color: "#000000",
     ...props,
   };
 }

@@ -1,5 +1,6 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
+import { DefaultPlayerColor } from "../../../routes/Play/consts/PlayerColors";
 import { ISession } from "../IScene";
 import { useSession } from "../useSession";
 
@@ -17,6 +18,7 @@ describe("useSession", () => {
         private: false,
         npcs: [],
         isGM: true,
+        color: DefaultPlayerColor,
         points: "3",
       },
       players: {},
@@ -53,6 +55,7 @@ describe("useSession", () => {
       // THEN
       expect(result.current.state.session.gm.npcs[0]).toEqual({
         character: undefined,
+        color: DefaultPlayerColor,
         id: expect.anything(),
         isGM: false,
         private: false,
@@ -154,6 +157,7 @@ describe("useSession", () => {
         {
           character: undefined,
           points: "3",
+          color: DefaultPlayerColor,
           id: playerId,
           playedDuringTurn: false,
           private: false,

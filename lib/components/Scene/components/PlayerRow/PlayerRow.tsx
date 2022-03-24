@@ -198,9 +198,21 @@ export function PlayerRow(
   }
 
   function renderMoreMenu() {
+    const shouldRenderSwapSheetButton =
+      props.permissions.canLoadCharacterSheet && hasCharacterSheet;
+    const shouldRenderRemovePlayerButton = props.permissions.canRemove;
+    const shouldRenderMarkPrivateButton = props.permissions.canRemove;
+    if (
+      !shouldRenderSwapSheetButton &&
+      !shouldRenderRemovePlayerButton &&
+      !shouldRenderMarkPrivateButton
+    ) {
+      return null;
+    }
     return (
       <Box>
         <IconButton
+          data-cy={`${props["data-cy"]}.menu`}
           onClick={(event) => {
             setMenuAnchorEl(event?.currentTarget);
           }}
@@ -210,23 +222,16 @@ export function PlayerRow(
         <Menu
           anchorEl={menuAnchorEl}
           open={!!menuAnchorEl}
-          data-cy={`${props["data-cy"]}.menu`}
           onClose={() => {
             setMenuAnchorEl(false);
           }}
         >
-          {props.permissions.canLoadCharacterSheet && hasCharacterSheet && (
+          {shouldRenderSwapSheetButton && (
             <MenuItem
               data-cy={`${props["data-cy"]}.swap-character-sheet`}
               onClick={() => {
                 setMenuAnchorEl(false);
-                const confirmed = confirm(
-                  t("player-row.remove-player-confirmation")
-                );
-                if (confirmed) {
-                  props.onPlayerRemove();
-                  logger.track("session.remove_player");
-                }
+                props.onAssignCharacterSheet();
               }}
             >
               <ListItemIcon>
@@ -237,7 +242,7 @@ export function PlayerRow(
               </ListItemText>
             </MenuItem>
           )}
-          {props.permissions.canRemove && (
+          {shouldRenderRemovePlayerButton && (
             <MenuItem
               data-cy={`${props["data-cy"]}.remove`}
               onClick={() => {
@@ -257,7 +262,7 @@ export function PlayerRow(
               <ListItemText>{t("player-row.remove-player")}</ListItemText>
             </MenuItem>
           )}
-          {props.permissions.canRemove && (
+          {shouldRenderMarkPrivateButton && (
             <MenuItem
               data-cy={`${props["data-cy"]}.mark-private`}
               onClick={() => {
