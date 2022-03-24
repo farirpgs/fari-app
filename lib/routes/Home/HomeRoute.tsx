@@ -562,8 +562,8 @@ export const HomeRoute: React.FC<{}> = () => {
                 data-cy="home.play-offline"
                 className={css({ height: "3rem" })}
                 onClick={() => {
-                  history.push("/play");
-                  logger.track("home.start_online_game");
+                  history.push("/play-offline");
+                  logger.track("home.start_offline_game");
                 }}
               >
                 {t("home-route.play-offline.button")}
