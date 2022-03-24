@@ -129,8 +129,9 @@ export function NewCharacterRoute() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel}>{`Cancel`}</Button>
+          <Button color="secondary" onClick={handleCancel}>{`Cancel`}</Button>
           <LoadingButton
+            color="secondary"
             onClick={handleLoadTemplate}
             autoFocus
             loading={loadingTemplate}
@@ -164,6 +165,7 @@ export function NewCharacterRoute() {
               }}
             >
               <Link
+                color="secondary"
                 href="https://farirpgs.com/discord"
                 target="_blank"
                 rel="no"
@@ -174,7 +176,7 @@ export function NewCharacterRoute() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel} autoFocus>
+          <Button color="secondary" onClick={handleCancel} autoFocus>
             {`Back To Home Page`}
           </Button>
         </DialogActions>
