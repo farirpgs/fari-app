@@ -247,28 +247,6 @@ export const CardCollectionRoute: React.FC<{
       <PageMeta title={pageTitle} />
       <Page>
         <Container maxWidth="md">
-          <Box my="1rem">
-            <Alert severity="warning">
-              <AlertTitle>Beta Feature</AlertTitle>
-              Card Collections are currently in beta. This means that data
-              related to this feature might end up being lost before it is
-              officially rolled out.
-              <br />
-              If you find any issues with this new feature, report it on the{" "}
-              <a
-                href="https://farirpgs.com/discord"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Discord Server
-              </a>
-              .
-              <br />
-              <br />
-              Thanks!
-              <br />- RP
-            </Alert>
-          </Box>
           <Box mb=".5rem">
             <Alert severity="info">
               <Typography variant="body1">
