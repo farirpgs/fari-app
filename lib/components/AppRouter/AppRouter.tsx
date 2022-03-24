@@ -223,6 +223,15 @@ export const AppRouter = () => {
             return null;
           }}
         />
+        />
+        <Route
+          path="/seelie-squire"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/resources/seelie-squire/book-of-monsters";
+            return null;
+          }}
+        />
         <Route
           path="/success-with-style"
           component={() => {
