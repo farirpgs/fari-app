@@ -93,7 +93,7 @@
     "@vitest/ui": "^0.7.10",
     "chromatic": "^5.8.3",
     "concurrently": "^6.2.0",
-    "cypress": "^7.4.0",
+    "cypress": "^9.5.2",
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.23.2",
