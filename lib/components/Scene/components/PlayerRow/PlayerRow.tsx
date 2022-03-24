@@ -388,7 +388,7 @@ export function PlayerRow(
         wrap="nowrap"
       >
         <Grid item>
-          <Box ml="-.5rem" color={theme.palette.secondary.main}>
+          <Box ml="-.25rem" color={theme.palette.secondary.main}>
             <CircleTextField
               borderColor={theme.palette.secondary.main}
               data-cy={`${props["data-cy"]}.counter`}
