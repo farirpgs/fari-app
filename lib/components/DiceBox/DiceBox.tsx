@@ -69,7 +69,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
     fontWeight: theme.typography.fontWeightBold,
     border: `1px dashed ${
       diceRollsManager.state.rolling || !diceRollsManager.state.finalResult
-        ? theme.palette.primary.main
+        ? theme.palette.secondary.main
         : "transparent"
     }`,
     borderRadius: "4px",

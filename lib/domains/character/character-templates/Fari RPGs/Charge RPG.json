@@ -1,11 +1,11 @@
 {
-  "id": "bf6607ec-3c21-4147-9a74-198a9e208aea",
+  "fariType": "character",
+  "id": "21a70c7c-4b9a-4428-96cb-f7814a04aa99",
+  "lastUpdated": 1648136157,
   "name": "Charge",
-  "lastUpdated": 1645645634,
-  "wide": false,
   "pages": [
     {
-      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "id": "17f52138-4ac1-4e9c-9c49-77420d269aad",
       "label": "CHARACTER",
       "rows": [
         {
@@ -13,39 +13,39 @@
             {
               "sections": [
                 {
-                  "id": "3ed43d4f-1d7c-4a61-b319-d08650d14dc1",
+                  "id": "f240b233-ed09-41b9-a6d5-58af780ee1f4",
                   "label": "DETAILS",
                   "blocks": [
                     {
-                      "id": "e6218abc-9d13-48fe-925c-7f72a0b66d76",
+                      "id": "5507102e-d9f2-4984-a124-6ce7015c07fe",
                       "label": "CONCEPT",
                       "type": "Text",
                       "value": "",
                       "meta": {}
                     },
                     {
-                      "id": "9ba5cfa6-b7cf-4588-8a74-ba15fe525e79",
+                      "id": "4fdfa178-5af3-40b3-a9e0-f37ab9d25276",
                       "label": "APPEARANCE",
                       "type": "Text",
                       "value": "",
                       "meta": {}
                     },
                     {
-                      "id": "729dcfe3-7d29-4a9b-98d8-9279c0371f96",
+                      "id": "926b12fc-c79b-4818-9503-27a0ce2026b3",
                       "label": "TIES",
                       "type": "Text",
                       "value": "\n",
                       "meta": {}
                     },
                     {
-                      "id": "8ff26def-051b-40cb-8865-11b33e12e3d3",
+                      "id": "0ace087b-5f98-4b71-bf4f-4a7fb1328f9c",
                       "label": "",
                       "type": "Text",
                       "value": "",
                       "meta": {}
                     },
                     {
-                      "id": "0443d869-07df-49e2-bf0b-5201b444b672",
+                      "id": "30f33692-c0f1-4ddf-b5f7-00d3354bfa94",
                       "label": "",
                       "type": "Text",
                       "value": "",
@@ -58,11 +58,11 @@
             {
               "sections": [
                 {
-                  "id": "180d36e8-5820-41a3-926e-d80b0ea4c5f5",
+                  "id": "93d7e253-81d6-4ce9-b69e-4014f82e8f24",
                   "label": "MOMENTUM",
                   "blocks": [
                     {
-                      "id": "f49a1bcb-cbca-4152-90a1-60a4fff20c55",
+                      "id": "718cc0f9-dac9-4c06-9655-73247f323db8",
                       "label": "MOMENTUM",
                       "type": "PointCounter",
                       "meta": { "isMainPointCounter": true },
@@ -72,18 +72,18 @@
                   "visibleOnCard": true
                 },
                 {
-                  "id": "03365c39-d7b6-445c-b692-5515adecc593",
+                  "id": "216c272c-61ca-4d1c-997c-3723daee99ca",
                   "label": "CONDITION",
                   "blocks": [
                     {
-                      "id": "6eb41081-f1f1-4037-81a5-e038c600b896",
+                      "id": "ee2de964-5a2f-4743-a5de-55b29dcda3bf",
                       "label": "",
                       "type": "Text",
                       "value": "",
                       "meta": { "helperText": "Condition" }
                     },
                     {
-                      "id": "a882ad5a-51e2-4c66-9828-b810ae1bf1ac",
+                      "id": "167eeb49-fac2-4de3-8316-f307b0cf9a14",
                       "label": "STRESS",
                       "type": "SlotTracker",
                       "meta": {
@@ -109,25 +109,25 @@
             {
               "sections": [
                 {
-                  "id": "1e2fb330-7333-463f-8e51-f00bdcafdc06",
+                  "id": "39beb902-a993-4743-bba9-e9aabb1210a5",
                   "label": "DICE",
                   "blocks": [
                     {
-                      "id": "de37a895-b4aa-4147-ac94-3314680a9e3a",
+                      "id": "4b18a5b7-02b8-4f32-8a0b-2e37f9035c58",
                       "label": "1D6",
                       "type": "DicePool",
                       "value": "",
                       "meta": { "commands": ["1d6"], "width": 0.5 }
                     },
                     {
-                      "id": "cb2b07b4-a013-4a52-a624-6997ef1541fc",
+                      "id": "f32a9e87-5dc4-46c6-90e4-c3babf8eb312",
                       "label": "2D6",
                       "type": "DicePool",
                       "value": "",
                       "meta": { "commands": ["1d6", "1d6"], "width": 0.5 }
                     },
                     {
-                      "id": "c1e29e4a-03dd-4168-94b9-a1cec8aeca0e",
+                      "id": "fbbc720f-6f7a-47c5-89db-894d0edcd4d2",
                       "label": "3D6",
                       "type": "DicePool",
                       "value": "",
@@ -137,7 +137,7 @@
                       }
                     },
                     {
-                      "id": "14bda1ad-d175-4cfc-bdc0-ae39dc491887",
+                      "id": "84579ec7-ccf7-4cf5-ab19-195223ea19bf",
                       "label": "4D6",
                       "type": "DicePool",
                       "value": "",
@@ -146,7 +146,8 @@
                         "width": 0.5
                       }
                     }
-                  ]
+                  ],
+                  "visibleOnCard": true
                 }
               ]
             }
@@ -157,18 +158,18 @@
             {
               "sections": [
                 {
-                  "id": "62c6d779-b54d-4629-a323-a4c256304a2d",
+                  "id": "b7d462bb-c45d-4a22-afdc-9118ebb0bcd9",
                   "label": "ACTIONS",
                   "blocks": [
                     {
-                      "id": "a9d40344-fd24-41a5-907f-5320003c63ad",
+                      "id": "86af53fa-70cb-480d-87c7-b825c2991c73",
                       "label": "PHYSIQUE",
                       "type": "Separator",
                       "meta": { "hasLabel": true },
                       "value": ""
                     },
                     {
-                      "id": "071388fb-e7c3-40d1-8493-3c9fc6b0c6d0",
+                      "id": "5f70fa96-f35e-4848-838b-02758aef8986",
                       "label": "MUSCLE",
                       "type": "SlotTracker",
                       "meta": {},
@@ -180,7 +181,7 @@
                       ]
                     },
                     {
-                      "id": "32e52ccb-02ab-4ce8-9c72-d9a6adc638d0",
+                      "id": "fa78b60d-27ae-41ac-9e86-bcd5f9de0810",
                       "label": "FINESSE",
                       "type": "SlotTracker",
                       "meta": {},
@@ -192,7 +193,7 @@
                       ]
                     },
                     {
-                      "id": "de086610-e182-42f8-b937-67ec0c79d928",
+                      "id": "2e2c1b67-070e-41ad-90da-e61014b53eba",
                       "label": "MOVE",
                       "type": "SlotTracker",
                       "meta": {},
@@ -204,7 +205,7 @@
                       ]
                     },
                     {
-                      "id": "511f372b-52b3-4e25-a81f-58344b9949e0",
+                      "id": "439642ae-0f2b-4126-9f00-94bf4631a0a1",
                       "label": "SNEAK",
                       "type": "SlotTracker",
                       "meta": {},
@@ -215,25 +216,26 @@
                         { "label": "", "checked": false }
                       ]
                     }
-                  ]
+                  ],
+                  "visibleOnCard": true
                 }
               ]
             },
             {
               "sections": [
                 {
-                  "id": "d2a749f4-e22b-4c7f-849b-e00a13581f53",
+                  "id": "6d6f2b04-d830-402a-accb-dad52310b182",
                   "label": "",
                   "blocks": [
                     {
-                      "id": "dca59376-3d74-4047-a970-190fa68a453b",
+                      "id": "a10324db-350c-4172-b125-669132935a29",
                       "label": "INSIGHT",
                       "type": "Separator",
                       "meta": { "hasLabel": true },
                       "value": ""
                     },
                     {
-                      "id": "add97771-9af7-4598-85a4-d78e1895e1a8",
+                      "id": "723daf54-43f4-47bc-8110-0364863ff45b",
                       "label": "SHOOT",
                       "type": "SlotTracker",
                       "meta": {},
@@ -245,7 +247,7 @@
                       ]
                     },
                     {
-                      "id": "28eb12ac-402a-492c-843b-20d620ab4c33",
+                      "id": "4765704b-60bc-47af-bee9-63e4d158338d",
                       "label": "TINKER",
                       "type": "SlotTracker",
                       "meta": {},
@@ -257,7 +259,7 @@
                       ]
                     },
                     {
-                      "id": "aa4175e3-fd34-41ce-97ad-10c999027fbf",
+                      "id": "bdcb70cc-6c8d-408d-9e62-6f6e9901d397",
                       "label": "STUDY",
                       "type": "SlotTracker",
                       "meta": {},
@@ -269,7 +271,7 @@
                       ]
                     },
                     {
-                      "id": "ad381165-715d-4afb-b03b-a105b004d701",
+                      "id": "5d634205-ede5-43c1-b7c5-a2be16e2e14a",
                       "label": "NOTICE",
                       "type": "SlotTracker",
                       "meta": {},
@@ -280,25 +282,26 @@
                         { "label": "", "checked": false }
                       ]
                     }
-                  ]
+                  ],
+                  "visibleOnCard": true
                 }
               ]
             },
             {
               "sections": [
                 {
-                  "id": "58b076b1-4c73-4eb4-bbc9-1df5e5f67588",
+                  "id": "89446f18-1333-49c8-b9f9-230d78f37e68",
                   "label": "",
                   "blocks": [
                     {
-                      "id": "a4774685-62ad-48fd-a864-f80edf372fb8",
+                      "id": "b2083ca2-2271-4056-9e39-a2abb501bf09",
                       "label": "RESOLVE",
                       "type": "Separator",
                       "meta": { "hasLabel": true },
                       "value": ""
                     },
                     {
-                      "id": "23ac9d4a-0717-48d2-8e04-87d8a69a472f",
+                      "id": "684d4e39-a8f0-48fb-8e01-855ff33caeb7",
                       "label": "BOND",
                       "type": "SlotTracker",
                       "meta": {},
@@ -310,7 +313,7 @@
                       ]
                     },
                     {
-                      "id": "8c4a6dcd-bff5-431f-9f92-de00f2461a50",
+                      "id": "af5f7a8d-9645-45e6-876f-8faa9e5323ba",
                       "label": "COMMAND",
                       "type": "SlotTracker",
                       "meta": {},
@@ -322,7 +325,7 @@
                       ]
                     },
                     {
-                      "id": "30e4f821-e27a-4da5-9786-1aa32d7f79d6",
+                      "id": "a4405933-7d2d-45d4-b22f-1150d5d45cbe",
                       "label": "FOCUS",
                       "type": "SlotTracker",
                       "meta": {},
@@ -334,7 +337,7 @@
                       ]
                     },
                     {
-                      "id": "091ed62b-88aa-4413-858d-670086acf370",
+                      "id": "eacb0788-7c07-4231-87a4-6aaa294678da",
                       "label": "SWAY",
                       "type": "SlotTracker",
                       "meta": {},
@@ -345,7 +348,8 @@
                         { "label": "", "checked": false }
                       ]
                     }
-                  ]
+                  ],
+                  "visibleOnCard": true
                 }
               ]
             }
@@ -356,18 +360,18 @@
             {
               "sections": [
                 {
-                  "id": "1405f419-9c2d-4d95-b314-8cea05f49dab",
+                  "id": "cab162e8-5575-4c76-b04f-c93e3894fbce",
                   "label": "CREDITS",
                   "blocks": [
                     {
-                      "id": "67321464-bfa1-4a00-999e-17483771885b",
+                      "id": "4f936f81-02be-47a9-aa09-e03707e1f680",
                       "label": "Info Text",
                       "type": "InfoText",
                       "value": "Template is by René-Pier Deshaies • https://farirpgs.com",
                       "meta": {}
                     },
                     {
-                      "id": "07e17c76-59c0-4a44-8602-29bf3b089d95",
+                      "id": "a15d9893-05e5-4975-9bc7-2069bc7bbf80",
                       "label": "",
                       "type": "Image",
                       "meta": {},
@@ -382,7 +386,7 @@
       ]
     },
     {
-      "id": "d6494bbb-f067-46e1-b1c5-8136afba5e6c",
+      "id": "9e1d32cf-7ccb-414e-bbe0-d3a995a843dd",
       "label": "PROJECTS &AMP; COMPLICATIONS",
       "rows": [
         {
@@ -390,11 +394,11 @@
             {
               "sections": [
                 {
-                  "id": "3ddeeeac-9c3d-48ab-bb69-e840e1d83889",
+                  "id": "b007bcec-9393-4b00-903a-c7aaac6878f8",
                   "label": "PROJECTS",
                   "blocks": [
                     {
-                      "id": "51db55b8-ddf6-4416-8d34-9199817e18cd",
+                      "id": "ed8b305f-6ba8-4a8f-9437-aeedc87d2bc1",
                       "label": "",
                       "type": "SlotTracker",
                       "meta": { "asClock": true, "width": 1 },
@@ -406,7 +410,7 @@
                       ]
                     },
                     {
-                      "id": "0a96cce3-3b0f-4ddf-be0f-883b2454228b",
+                      "id": "35c1daee-3529-4881-bbec-8684b0678ce2",
                       "type": "Text",
                       "value": "",
                       "meta": { "width": 1 }
@@ -418,11 +422,11 @@
             {
               "sections": [
                 {
-                  "id": "90e1e652-610d-49d8-80d2-7043d9ba123b",
+                  "id": "02197442-d18f-49fe-b54b-729f3e2e26c9",
                   "label": "",
                   "blocks": [
                     {
-                      "id": "94dea584-d18b-4c34-be64-a2093fad8a00",
+                      "id": "ccec7139-7b4b-4083-a7e1-26818c656d40",
                       "label": "",
                       "type": "SlotTracker",
                       "meta": { "asClock": true, "width": 1 },
@@ -434,7 +438,7 @@
                       ]
                     },
                     {
-                      "id": "b6e17565-945d-4188-9619-dc498f90f0b3",
+                      "id": "5e0eb2d7-6733-4819-b221-7b2c0dcf577d",
                       "type": "Text",
                       "value": "",
                       "meta": { "width": 1 }
@@ -446,11 +450,11 @@
             {
               "sections": [
                 {
-                  "id": "19a5eefe-a5fd-40e6-9b1e-421c419b7689",
+                  "id": "e6bc2d7a-fc8b-4d55-b6b0-bda4208c901a",
                   "label": "COMPLICATIONS",
                   "blocks": [
                     {
-                      "id": "0bbeaeb7-9324-46fc-927d-4f33e499563f",
+                      "id": "6d949737-368f-4ed3-a508-b9c6d1a70e91",
                       "label": "",
                       "type": "SlotTracker",
                       "meta": { "asClock": true, "width": 1 },
@@ -462,7 +466,7 @@
                       ]
                     },
                     {
-                      "id": "8320f6b7-b969-40de-aec8-261b455b0c63",
+                      "id": "71dd13db-acc6-48c4-bd63-76559f2d0e6d",
                       "type": "Text",
                       "value": "",
                       "meta": { "width": 1 }
@@ -474,11 +478,11 @@
             {
               "sections": [
                 {
-                  "id": "cb3756da-565e-420c-a1d2-0bfc7fa5b6e4",
+                  "id": "7c0f309e-0bde-4c29-892e-8f0f376846db",
                   "label": "",
                   "blocks": [
                     {
-                      "id": "a3631b3d-4adc-41bc-9c45-c70e83c76d72",
+                      "id": "8c204a4e-49d5-4e79-90ef-b558ea1008e4",
                       "label": "",
                       "type": "SlotTracker",
                       "meta": { "asClock": true, "width": 1 },
@@ -490,7 +494,7 @@
                       ]
                     },
                     {
-                      "id": "95f1c4b0-097d-4132-9499-1def7ca0b767",
+                      "id": "61af581b-ac14-4ca7-86fd-b9aabedbc617",
                       "type": "Text",
                       "value": "",
                       "meta": { "width": 1 }
@@ -504,7 +508,7 @@
       ]
     },
     {
-      "id": "3067fea3-6a03-4888-9c8c-826e25066acb",
+      "id": "c6f2e63a-dcc3-45ea-9503-1906eb913221",
       "label": "TALENTS",
       "rows": [
         {
@@ -512,95 +516,95 @@
             {
               "sections": [
                 {
-                  "id": "7495671e-3565-4827-9a40-ddcdeb78a02b",
+                  "id": "ed31b760-952c-414a-8f1f-f51857865e31",
                   "label": "TALENTS",
                   "blocks": [
                     {
-                      "id": "e65adac7-95eb-46f4-b3c4-c4d7e8641448",
+                      "id": "ae08e7ac-061b-4a2d-acff-125286fae2eb",
                       "label": "",
                       "type": "Text",
                       "value": "+1 Action Dot",
                       "meta": { "checked": false }
                     },
                     {
-                      "id": "cbe58c7f-5dcd-41fe-8b53-9a2272907699",
+                      "id": "0b012bc6-8003-433c-9e95-ba14a31a0b2c",
                       "label": "",
                       "type": "Text",
                       "value": "+1 Effect when ...",
                       "meta": { "checked": false }
                     },
                     {
-                      "id": "84c6c532-1f4d-4ecd-b0dc-0bbc5bdb3e1c",
+                      "id": "9fc6243f-5a7a-4796-aa1f-4e2f6832e30a",
                       "label": "",
                       "type": "Text",
                       "value": "+1 Action Dot",
                       "meta": { "checked": false, "helperText": "" }
                     },
                     {
-                      "id": "7fd71e8d-7d8e-4446-84b0-754f9b612a68",
+                      "id": "9e46fb9a-fd17-49b2-815f-3a6d776b0ddc",
                       "label": "",
                       "type": "Text",
                       "value": "+1 Position when ...",
                       "meta": { "checked": false }
                     },
                     {
-                      "id": "18ca255e-baa5-4fb8-9e91-ab3f58dac1dd",
+                      "id": "c88e39bc-533f-4585-a1b5-0caa8c84d57d",
                       "label": "",
                       "type": "Text",
                       "value": "+1 Action Dot",
                       "meta": { "checked": false }
                     },
                     {
-                      "id": "0bb26945-02a2-4372-82d1-377869bd159b",
+                      "id": "3db5f1c4-96f8-4d22-b7c4-b128269b76fe",
                       "label": "",
                       "type": "Text",
                       "value": "+1d6 when ...",
                       "meta": { "checked": false }
                     },
                     {
-                      "id": "47bf8f51-98d5-4060-b498-b56afd837c4f",
+                      "id": "9f6ca82b-6e82-4133-abf7-f5efe2157a85",
                       "label": "",
                       "type": "Text",
                       "value": "+1 Action Dot",
                       "meta": { "checked": false }
                     },
                     {
-                      "id": "807f5f45-f6a1-4ab8-969f-85c110bb4532",
+                      "id": "74dc9222-f8bd-4eb7-a31e-91ea81b7c0a8",
                       "label": "",
                       "type": "Text",
                       "value": "+1 Effect when ...",
                       "meta": { "checked": false }
                     },
                     {
-                      "id": "9d604c61-59a0-4e36-b1a0-e10a15eb3248",
+                      "id": "c06bd701-cedb-4178-b8f2-c6d3dae0e653",
                       "label": "",
                       "type": "Text",
                       "value": "+1 Action Dot",
                       "meta": { "checked": false }
                     },
                     {
-                      "id": "42bac5e2-3289-4da2-b025-b9870f3a2aac",
+                      "id": "49f45dfa-17f3-422b-85f1-c49748d21e26",
                       "label": "",
                       "type": "Text",
                       "value": "+1 Position when ...",
                       "meta": { "checked": false }
                     },
                     {
-                      "id": "75db4502-97c3-4b53-8d60-d9b712e17d90",
+                      "id": "28e10b06-6c90-480e-907c-7016ec3ca8c8",
                       "label": "",
                       "type": "Text",
                       "value": "+1 Action Dot",
                       "meta": { "checked": false }
                     },
                     {
-                      "id": "24058021-fbe9-446c-8f0c-388f4223d348",
+                      "id": "03e36a89-2183-4f80-a696-5edbe6ebd9d7",
                       "label": "",
                       "type": "Text",
                       "value": "+1d6 when ...",
                       "meta": { "checked": false }
                     },
                     {
-                      "id": "1eb169c0-be39-4111-8ad5-bbd7ccecf077",
+                      "id": "758e4ecb-2f42-43ee-8f5a-4b97ace8648e",
                       "label": "",
                       "type": "Text",
                       "value": "+1 Action Dot",
@@ -615,7 +619,6 @@
       ]
     }
   ],
-  "version": 6,
   "theme": {
     "fontImport": "@import url('https://fonts.googleapis.com/css2?family=Inter&family=Oswald&display=swap');",
     "pageHeadingFontFamily": "Oswald",
@@ -628,5 +631,7 @@
     "backgroundColor": "#ffffff",
     "textFontSize": 1.25
   },
-  "fariType": "character"
+  "version": 6,
+  "wide": false,
+  "group": "test"
 }

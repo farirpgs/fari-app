@@ -266,7 +266,7 @@ describe("useDiceRolls", () => {
       expect(view.result.current.state.finalResultTotal).toEqual("0");
 
       expect(view.result.current.state.hasRolledOnce).toEqual(true);
-      expect(view.result.current.state.color).toEqual("#1976d2");
+      expect(view.result.current.state.color).toEqual("#9c27b0");
 
       // WHEN
       view.rerender({
