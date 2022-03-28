@@ -764,16 +764,15 @@ export const Session: React.FC<IProps> = (props) => {
   function renderCharacterCards() {
     const everyone = sessionManager.computed.everyone;
     const characters = sessionCharactersManager.state.characterSheets;
-    const playersWithCharacterSheets = Object.keys(characters)
-      .map((characterId) => {
-        const playerMatch = everyone.find(
-          (player) => player.id === characterId
-        ) as IPlayer;
+    const playersWithCharacterSheets = everyone
+      .map((player) => {
+        const characterSheetMatch = characters[player.id];
         return {
-          ...playerMatch,
-          characterSheet: characters[characterId],
+          ...player,
+          characterSheet: characterSheetMatch,
         };
       })
+      .filter((player) => player.characterSheet)
       .sort((a, b) => {
         return a.id === props.userId ? -1 : b.id === props.userId ? 1 : 0;
       });
