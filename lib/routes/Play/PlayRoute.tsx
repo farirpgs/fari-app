@@ -64,14 +64,10 @@ export function useLiveObject<T>(props: {
       const isSubscriber = !props.isOwner;
       const object = liveObject?.toObject();
       const objectKeys = Object.keys(object ?? {});
-      if (props.canBeEmpty) {
-        if (isSubscriber && object) {
-          props.onChange(object as T);
-        }
-      } else {
-        if (isSubscriber && object && objectKeys.length > 0) {
-          props.onChange(object as T);
-        }
+      if (isSubscriber && object){
+       if (props.canBeEmpty || objectKeys.length > 0) {
+         props.onChange(object as T);
+       }
       }
     }
 
