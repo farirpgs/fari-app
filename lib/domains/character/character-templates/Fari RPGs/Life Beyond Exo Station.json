@@ -1,479 +1,653 @@
 {
   "fariType": "character",
-  "lastUpdated": 1638361264,
+  "id": "401af67b-d4f0-41a8-b2c1-0c99172d4d95",
+  "lastUpdated": 1648505615,
   "name": "Life Beyond Exo Station",
   "pages": [
     {
-      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
-      "label": "Character",
-      "sections": {
-        "left": [
-          {
-            "id": "3ed43d4f-1d7c-4a61-b319-d08650d14dc1",
-            "label": "Details",
-            "blocks": [
-              {
-                "id": "e6218abc-9d13-48fe-925c-7f72a0b66d76",
-                "label": "Concept",
-                "type": "Text",
-                "value": "",
-                "meta": {}
-              },
-              {
-                "id": "9ba5cfa6-b7cf-4588-8a74-ba15fe525e79",
-                "label": "appearance",
-                "type": "Text",
-                "value": "",
-                "meta": {}
-              },
-              {
-                "id": "dfa7fd57-f996-4c45-9aa5-57a05eecf14f",
-                "label": "REason",
-                "type": "Text",
-                "value": "",
-                "meta": {}
-              },
-              {
-                "id": "729dcfe3-7d29-4a9b-98d8-9279c0371f96",
-                "label": "Ties",
-                "type": "Text",
-                "value": "\n",
-                "meta": {}
-              },
-              {
-                "id": "8ff26def-051b-40cb-8865-11b33e12e3d3",
-                "label": "",
-                "type": "Text",
-                "value": "",
-                "meta": {}
-              }
-            ]
-          },
-          {
-            "id": "0cd0acb6-f0a1-41d5-83aa-85fd93402aef",
-            "label": "The Armor",
-            "blocks": [
-              {
-                "id": "5f36a8e1-ed3b-43ec-ba38-f9ec48ede1b4",
-                "label": "Mod #1",
-                "type": "Text",
-                "value": "",
-                "meta": { "checked": false }
-              },
-              {
-                "id": "520d1470-19a7-4462-b1d6-22d80432e5c3",
-                "label": "Mod #2",
-                "type": "Text",
-                "value": "",
-                "meta": { "checked": false }
-              }
-            ]
-          },
-          {
-            "id": "91a0c496-f042-420c-9fce-a5d6943dae54",
-            "label": "Conditions",
-            "blocks": [
-              {
-                "id": "adb954ee-efa6-418e-b717-42803d6c26f7",
-                "label": "",
-                "type": "Text",
-                "value": "",
-                "meta": { "helperText": "Condition" }
-              },
-              {
-                "id": "03518e25-a005-4667-96d5-9891e766ae90",
-                "label": "Stress",
-                "type": "SlotTracker",
-                "meta": { "helperText": "<br>", "width": 1, "asClock": true },
-                "value": [
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false }
-                ]
-              }
-            ]
-          }
-        ],
-        "right": [
-          {
-            "id": "180d36e8-5820-41a3-926e-d80b0ea4c5f5",
-            "label": "Momentum",
-            "blocks": [
-              {
-                "id": "f49a1bcb-cbca-4152-90a1-60a4fff20c55",
-                "label": "Momentum",
-                "type": "PointCounter",
-                "meta": { "isMainPointCounter": true },
-                "value": "2"
-              }
-            ],
-            "visibleOnCard": true
-          },
-          {
-            "id": "b53aaf37-cc74-401b-a9fd-d33fe449c235",
-            "label": "ACtions",
-            "blocks": [
-              {
-                "id": "ad01867b-abb1-48e0-b664-0190bf49163b",
-                "label": "1d6",
-                "type": "DicePool",
-                "value": "",
-                "meta": { "commands": ["1d6"], "width": 0.5 }
-              },
-              {
-                "id": "7881c02b-065a-44f7-be0e-3d8c33c8fa0e",
-                "label": "2d6",
-                "type": "DicePool",
-                "value": "",
-                "meta": { "commands": ["1d6", "1d6"], "width": 0.5 }
-              },
-              {
-                "id": "f4d8e727-f537-4c50-9e76-a8a2f8a96989",
-                "label": "3d6",
-                "type": "DicePool",
-                "value": "",
-                "meta": { "commands": ["1d6", "1d6", "1d6"], "width": 0.5 }
-              },
-              {
-                "id": "71020323-a4e9-411f-8961-605594acfbbd",
-                "label": "4d6",
-                "type": "DicePool",
-                "value": "",
-                "meta": {
-                  "commands": ["1d6", "1d6", "1d6", "1d6"],
-                  "width": 0.5
+      "id": "0bb5706e-6337-49eb-9169-4ec4c7f5f44c",
+      "label": "CHARACTER",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5fcb94d2-6d99-4800-8c50-62f05bc121aa",
+                  "label": "DETAILS",
+                  "blocks": [
+                    {
+                      "id": "31d929a1-d181-4c81-9a86-f6dd3d59bd88",
+                      "label": "CONCEPT",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "bc5643fb-f836-422f-8302-e20de935043f",
+                      "label": "APPEARANCE",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c7fd3dc0-2591-4928-8bc7-e038453c95f5",
+                      "label": "REASON",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "58c979d3-8900-48d2-9136-abc47506d514",
+                      "label": "TIES",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e6d669b1-0181-4f26-8b3e-bd7b8ab765f0",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d1ba2b59-b125-4b77-8c5c-4587d8d4c92c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "0b787c9c-9be0-4e3a-a93d-e2e3bb0b3398",
+                  "label": "THE ARMOR",
+                  "blocks": [
+                    {
+                      "id": "63dfd1fc-74ac-4573-86ad-e6b5fc6744bd",
+                      "label": "MOD #1\n",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8e69fc86-73f6-4168-bf5d-649c6f220a54",
+                      "label": "MOD #2\n",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
                 }
-              },
-              {
-                "id": "00c18c47-7909-4082-ae26-093ec92a8d14",
-                "label": "PHYSIQUE",
-                "type": "Separator",
-                "meta": { "hasLabel": true },
-                "value": ""
-              },
-              {
-                "id": "b013ebd0-e134-4299-bdb1-4da7e7637325",
-                "label": "Muscle",
-                "type": "SlotTracker",
-                "meta": {},
-                "value": [
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false }
-                ]
-              },
-              {
-                "id": "4adabeb3-fd20-4f6f-b36d-7cb935cf9f74",
-                "label": "Finesse",
-                "type": "SlotTracker",
-                "meta": {},
-                "value": [
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false }
-                ]
-              },
-              {
-                "id": "c0b64bfe-6ddc-49bf-9b4e-1465ff604387",
-                "label": "Move",
-                "type": "SlotTracker",
-                "meta": {},
-                "value": [
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false }
-                ]
-              },
-              {
-                "id": "920dd998-8c1b-4493-bec0-dc98305b0834",
-                "label": "Sneak",
-                "type": "SlotTracker",
-                "meta": {},
-                "value": [
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false }
-                ]
-              },
-              {
-                "id": "f0b407be-9335-4923-9501-dbe1d72844f5",
-                "label": "Insight",
-                "type": "Separator",
-                "meta": { "hasLabel": true },
-                "value": ""
-              },
-              {
-                "id": "570f2762-6124-4bf4-972d-c6abb6d16ff4",
-                "label": "Shoot",
-                "type": "SlotTracker",
-                "meta": {},
-                "value": [
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false }
-                ]
-              },
-              {
-                "id": "d35ac1c9-e812-4380-a888-24c1e57f16eb",
-                "label": "Tinker",
-                "type": "SlotTracker",
-                "meta": {},
-                "value": [
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false }
-                ]
-              },
-              {
-                "id": "5bd3f3e1-e96c-4114-a87d-2d4fcf6b029a",
-                "label": "Study",
-                "type": "SlotTracker",
-                "meta": {},
-                "value": [
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false }
-                ]
-              },
-              {
-                "id": "0ae41d1b-941e-4ca0-912b-6a81d1d3cca8",
-                "label": "Notice",
-                "type": "SlotTracker",
-                "meta": {},
-                "value": [
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false }
-                ]
-              },
-              {
-                "id": "dd58968f-b021-489c-b11f-6b9a0e33a445",
-                "label": "Resolve",
-                "type": "Separator",
-                "meta": { "hasLabel": true },
-                "value": ""
-              },
-              {
-                "id": "bbf2a5cb-bb94-4a03-ae8c-7da135cc5886",
-                "label": "Bond",
-                "type": "SlotTracker",
-                "meta": {},
-                "value": [
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false }
-                ]
-              },
-              {
-                "id": "bc3caf48-228a-4305-87d4-4e2ebbe218d3",
-                "label": "Command",
-                "type": "SlotTracker",
-                "meta": {},
-                "value": [
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false }
-                ]
-              },
-              {
-                "id": "97f85c4a-8e84-4e05-ba20-8229799a1f85",
-                "label": "FOCUS",
-                "type": "SlotTracker",
-                "meta": {},
-                "value": [
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false }
-                ]
-              },
-              {
-                "id": "f90a1ac2-1743-4151-82cc-6da25c24c6ab",
-                "label": "SWAY",
-                "type": "SlotTracker",
-                "meta": {},
-                "value": [
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false },
-                  { "label": "", "checked": false }
-                ]
-              }
-            ],
-            "visibleOnCard": true
-          }
-        ]
-      }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "0bf2150a-a6db-48b6-9ba1-e9e3436cc4fb",
+                  "label": "MOMENTUM",
+                  "blocks": [
+                    {
+                      "id": "a22dae17-3e90-4221-9508-e9d36fddb9ab",
+                      "label": "MOMENTUM",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": true },
+                      "value": "2"
+                    }
+                  ],
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "61360992-c8d8-400e-a39b-1f3e8e6e0903",
+                  "label": "CONDITION",
+                  "blocks": [
+                    {
+                      "id": "3c02cc9c-d586-4f08-829c-e224a7232cb0",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "Condition" }
+                    },
+                    {
+                      "id": "92ec1f4f-762f-4d68-9407-901d5b9af7e1",
+                      "label": "STRESS",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "<br>",
+                        "width": 1,
+                        "asClock": true
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "019c90a0-fac0-4e01-a7c7-5a85c8664aa9",
+                  "label": "DICE",
+                  "blocks": [
+                    {
+                      "id": "f90c10b5-66f0-4313-85cf-8c64a9fa9fac",
+                      "label": "1D6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "e100d62e-b3ce-4d21-a74f-3a107f384918",
+                      "label": "2D6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6", "1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "ae7c10bb-ae7e-485e-99af-c0f98431f11b",
+                      "label": "3D6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "462f9603-c27d-4633-928c-a0bc99159929",
+                      "label": "4D6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6", "1d6", "1d6", "1d6"],
+                        "width": 0.5
+                      }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "6042bbda-3296-4a9b-b81e-4259e72309e1",
+                  "label": "ACTIONS",
+                  "blocks": [
+                    {
+                      "id": "4480f263-203d-4a7f-b7ad-338e84f3ffc3",
+                      "label": "PHYSIQUE",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "3a9e4ff7-2839-43a7-9f2a-d6819b70bc08",
+                      "label": "MUSCLE",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "cb3fcaf4-44b4-41a9-91df-7ebd6637e998",
+                      "label": "FINESSE",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "8ea62865-2b8a-4c4b-9649-42d2fee252df",
+                      "label": "MOVE",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "056a3e24-fceb-4e30-b9f0-7a84684010fb",
+                      "label": "SNEAK",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "308dd87d-759f-457b-89a8-a8106f67f349",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "da7f4ab8-9e1f-4078-9547-e8d9266b5c56",
+                      "label": "INSIGHT",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "1ed252e8-2917-4606-b30a-b9c2ca13d2e6",
+                      "label": "SHOOT",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "5a73bb8b-0f75-45e9-b389-0f88120fe7d9",
+                      "label": "TINKER",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "fb68ea78-d7e1-4a8c-b5aa-04d43ab85e9e",
+                      "label": "STUDY",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "99a57c1e-8d73-4e8f-8259-fabf9bbd9c65",
+                      "label": "NOTICE",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "7b1a5ef7-9734-4d8a-b329-7e6f7fe689ff",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "d29324d3-9799-47fa-b5c6-6528035ddade",
+                      "label": "RESOLVE",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "daad3246-f8a9-42e6-92d2-2b7bf612c970",
+                      "label": "BOND",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "cfe902c9-1a50-428f-b93f-6febf1706fb0",
+                      "label": "COMMAND",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "3a908f33-1d50-4e0e-a85a-ddb3ec4cb7d5",
+                      "label": "FOCUS",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "88cde7b4-8812-414d-a090-ec91a4cf7706",
+                      "label": "SWAY",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "61692ea2-3620-4f46-931a-f323e121c83e",
+                  "label": "CREDITS",
+                  "blocks": [
+                    {
+                      "id": "ef90b021-44cb-4910-a483-61c94fe70aef",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Template is by René-Pier Deshaies • https://farirpgs.com",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
-      "id": "d6494bbb-f067-46e1-b1c5-8136afba5e6c",
-      "sections": {
-        "left": [
-          {
-            "id": "3ddeeeac-9c3d-48ab-bb69-e840e1d83889",
-            "label": "Projects",
-            "blocks": [
-              {
-                "id": "cb2c7a36-13e1-4a57-85b3-3b8949da15bb",
-                "label": "Clock",
-                "type": "SlotTracker",
-                "meta": { "asClock": true, "width": 0.5 },
-                "value": [{ "label": "", "checked": false }]
-              },
-              {
-                "id": "1346f6e6-3481-440c-81aa-494c28e17466",
-                "label": "Clock",
-                "type": "SlotTracker",
-                "meta": { "asClock": true, "width": 0.5 },
-                "value": [{ "label": "", "checked": false }]
-              }
-            ]
-          }
-        ],
-        "right": [
-          {
-            "id": "cb3756da-565e-420c-a1d2-0bfc7fa5b6e4",
-            "label": "Complications",
-            "blocks": [
-              {
-                "id": "c3ba22cf-e78f-4382-a2de-73235fac5bca",
-                "label": "Clock",
-                "type": "SlotTracker",
-                "meta": { "asClock": true, "width": 0.5 },
-                "value": [{ "label": "", "checked": false }]
-              },
-              {
-                "id": "707eca9c-d30b-43d9-ade6-25208ec81d4d",
-                "label": "Clock",
-                "type": "SlotTracker",
-                "meta": { "asClock": true, "width": 0.5 },
-                "value": [{ "label": "", "checked": false }]
-              }
-            ]
-          }
-        ]
-      },
-      "label": "Projects &amp; Complications"
+      "id": "48611f51-99c5-4195-9327-b8712c090fb5",
+      "label": "PROJECTS &AMP; COMPLICATIONS",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "ea20948b-b1bc-44c0-bbad-1ae2c6be4147",
+                  "label": "PROJECTS",
+                  "blocks": [
+                    {
+                      "id": "678c605c-b5fe-4898-b69b-d752514ad8aa",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": true, "width": 1 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "11eaf4d4-e202-49bd-bdfc-4f221fec6390",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "7240cc0e-85dd-404a-9da3-2601747137d8",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "0dffb24f-074a-4987-9b99-27ba253ec364",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": true, "width": 1 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "c1b66c8f-8816-4461-82fe-b6778f5d3384",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "de33f1f0-83bd-4b31-b657-bd4a120a3109",
+                  "label": "COMPLICATIONS",
+                  "blocks": [
+                    {
+                      "id": "8385a4ed-5bf9-4778-879e-9105059fb293",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": true, "width": 1 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "bb5c1457-aeb8-4424-bd59-80b380cd5f76",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "fa2cfa56-4d5e-438f-b662-ea9f868133f2",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "134a35a0-11cf-4545-93a0-dd4a70823b95",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": true, "width": 1 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "107a76e3-6a0f-48e6-ba2c-6ba51c4d626f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
-      "id": "3067fea3-6a03-4888-9c8c-826e25066acb",
-      "sections": {
-        "left": [
-          {
-            "id": "7495671e-3565-4827-9a40-ddcdeb78a02b",
-            "label": "Talents",
-            "blocks": [
-              {
-                "id": "e65adac7-95eb-46f4-b3c4-c4d7e8641448",
-                "label": "",
-                "type": "Text",
-                "value": "+1 Action Dot",
-                "meta": { "checked": false }
-              },
-              {
-                "id": "cbe58c7f-5dcd-41fe-8b53-9a2272907699",
-                "label": "",
-                "type": "Text",
-                "value": "+1 Effect when ...",
-                "meta": { "checked": false }
-              },
-              {
-                "id": "84c6c532-1f4d-4ecd-b0dc-0bbc5bdb3e1c",
-                "label": "",
-                "type": "Text",
-                "value": "+1 Action Dot",
-                "meta": { "checked": false }
-              },
-              {
-                "id": "7fd71e8d-7d8e-4446-84b0-754f9b612a68",
-                "label": "",
-                "type": "Text",
-                "value": "+1 Position when ...",
-                "meta": { "checked": false }
-              },
-              {
-                "id": "18ca255e-baa5-4fb8-9e91-ab3f58dac1dd",
-                "label": "",
-                "type": "Text",
-                "value": "+1 Action Dot",
-                "meta": { "checked": false }
-              },
-              {
-                "id": "0bb26945-02a2-4372-82d1-377869bd159b",
-                "label": "",
-                "type": "Text",
-                "value": "+1d6 when ...",
-                "meta": { "checked": false }
-              },
-              {
-                "id": "47bf8f51-98d5-4060-b498-b56afd837c4f",
-                "label": "",
-                "type": "Text",
-                "value": "+1 Action Dot",
-                "meta": { "checked": false }
-              },
-              {
-                "id": "807f5f45-f6a1-4ab8-969f-85c110bb4532",
-                "label": "",
-                "type": "Text",
-                "value": "+1 Effect when ...",
-                "meta": { "checked": false }
-              },
-              {
-                "id": "9d604c61-59a0-4e36-b1a0-e10a15eb3248",
-                "label": "",
-                "type": "Text",
-                "value": "+1 Action Dot",
-                "meta": { "checked": false }
-              },
-              {
-                "id": "42bac5e2-3289-4da2-b025-b9870f3a2aac",
-                "label": "",
-                "type": "Text",
-                "value": "+1 Position when ...",
-                "meta": { "checked": false }
-              },
-              {
-                "id": "75db4502-97c3-4b53-8d60-d9b712e17d90",
-                "label": "",
-                "type": "Text",
-                "value": "+1 Action Dot",
-                "meta": { "checked": false }
-              },
-              {
-                "id": "24058021-fbe9-446c-8f0c-388f4223d348",
-                "label": "",
-                "type": "Text",
-                "value": "+1d6 when ...",
-                "meta": { "checked": false }
-              },
-              {
-                "id": "1eb169c0-be39-4111-8ad5-bbd7ccecf077",
-                "label": "",
-                "type": "Text",
-                "value": "+1 Action Dot",
-                "meta": { "checked": false }
-              }
-            ]
-          }
-        ],
-        "right": []
-      },
-      "label": "Talents"
+      "id": "90d44365-9c86-4537-9ab7-63d99da73c52",
+      "label": "TALENTS",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "35176e10-3a2b-46c6-b1f9-23ab774dada1",
+                  "label": "TALENTS",
+                  "blocks": [
+                    {
+                      "id": "9f1b350b-f4ec-4d67-a0f0-2c87c26a48b7",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Action Dot",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "8fc7f867-34a0-4303-9107-9849928e32bc",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Effect when ...",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "a0addcd1-3df5-4816-a5d1-0fbc32806fd5",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Action Dot",
+                      "meta": { "checked": false, "helperText": "" }
+                    },
+                    {
+                      "id": "fa19fd46-199f-48ef-afea-248eb30f776d",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Position when ...",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "1bf277cf-5be3-44ce-81a9-e4c35ec3bf74",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Action Dot",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "61ac32bb-1671-4a4f-a042-6546ecc5b1fe",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1d6 when ...",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "68b9baed-989f-4c65-aeda-e45c36276d39",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Action Dot",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "0687f7a5-86ac-42d9-8d29-619a39ced3b0",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Effect when ...",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "b80b3682-df83-43b1-bb26-8ee6474c5a35",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Action Dot",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "996d3b04-57c0-4737-ad1b-bdad6e1ce51c",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Position when ...",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "ffa404a2-f490-4e77-b072-ea64107de61e",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Action Dot",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "77568ab5-d938-4c8f-abc0-183567cd1d01",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1d6 when ...",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "945519f0-632e-454c-81c1-cacfa0faf06c",
+                      "label": "",
+                      "type": "Text",
+                      "value": "+1 Action Dot",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
-  "template": "ChargeRPG",
-  "version": 4,
+  "theme": {
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');",
+    "hideSectionBackground": false,
+    "pageHeadingFontFamily": "Black Ops One",
+    "sectionHeadingFontFamily": "Black Ops One",
+    "labelFontFamily": "Black Ops One",
+    "textFontFamily": "Inter",
+    "infoTextFontFamily": "Inter",
+    "helperTextFontFamily": "Inter",
+    "backgroundColor": "#1D2736"
+  },
+  "version": 6,
   "wide": false
 }
