@@ -16,27 +16,21 @@ import {
 import { DefaultPlayerColor } from "../../consts/PlayerColors";
 import { IPlayerCursorRollOutput } from "../../types/IPlayerCursorState";
 
-let timeItHasOpened = 0;
+let topTenLatestRollCommandsSingleton: Array<string> = [];
 
 export default function CursorWithMessage(props: {
-  color: string | undefined;
+  color: string | null | undefined;
   x: number;
   y: number;
-  message?: string;
-  rollOutput?: IPlayerCursorRollOutput;
+  message: string | null | undefined;
+  rollOutput: IPlayerCursorRollOutput | null | undefined;
   readonly?: boolean;
-  label: string | undefined;
-
-  onRollOutputChange?(roll: IPlayerCursorRollOutput | undefined): void;
+  label: string | null | undefined;
+  onRollOutputChange?(roll: IPlayerCursorRollOutput | null | undefined): void;
   onMessageChange?(message: string): void;
-  onClose?(): void;
 }) {
-  const textPlaceholder =
-    timeItHasOpened % 2 === 0 ? "Type a message..." : "2d6 + 2...";
-  useEffect(() => {
-    ++timeItHasOpened;
-  }, []);
-  const [currentMessage, setCurrentMessage] = React.useState("");
+  const textPlaceholder = "Type a message...";
+
   const zIndex = useZIndex();
   const theme = useTheme();
   const color = props.color || DefaultPlayerColor;
@@ -44,19 +38,56 @@ export default function CursorWithMessage(props: {
     enforceBackground: color,
   });
   const textColor = theme.palette.getContrastText(color);
-
-  const shouldRenderMessage =
+  const [topTenLatestRollCommands, setTopTenLatestRollCommands] =
+    React.useState<Array<string>>(topTenLatestRollCommandsSingleton);
+  const [commandToPopIndex, setCommandtoPopIndex] = React.useState(0);
+  const shouldRenderPopover =
     props.message || props.rollOutput || !props.readonly;
+
+  useEffect(() => {
+    topTenLatestRollCommandsSingleton = topTenLatestRollCommands;
+  }, [topTenLatestRollCommands]);
 
   function handleDiceRoll() {
     try {
-      const roll = new DiceRoll(currentMessage);
+      const command = props.message || "";
+      const roll = new DiceRoll(command);
       props.onRollOutputChange?.({
         text: roll.output,
         total: roll.total.toString(),
       });
+      setTopTenLatestRollCommands(
+        [command, ...topTenLatestRollCommands].slice(0, 10)
+      );
+      setCommandtoPopIndex(0);
     } catch (error) {
       props.onRollOutputChange?.(undefined);
+    }
+  }
+
+  function handleMessage(message: string) {
+    props.onMessageChange?.(message);
+    setCommandtoPopIndex(0);
+  }
+
+  function handleRollHistoryPrevious() {
+    const poppedCommand = topTenLatestRollCommands[commandToPopIndex];
+    if (poppedCommand) {
+      props.onMessageChange?.(poppedCommand);
+      const newIndex = Math.min(
+        commandToPopIndex + 1,
+        topTenLatestRollCommands.length - 1
+      );
+      setCommandtoPopIndex(newIndex);
+    }
+  }
+
+  function handleRollHistoryNext() {
+    const poppedCommand = topTenLatestRollCommands[commandToPopIndex];
+    if (poppedCommand) {
+      props.onMessageChange?.(poppedCommand);
+      const newIndex = Math.max(commandToPopIndex - 1, 0);
+      setCommandtoPopIndex(newIndex);
     }
   }
 
@@ -78,7 +109,7 @@ export default function CursorWithMessage(props: {
       >
         {props.readonly && renderCursor()}
 
-        <Grow in={!!shouldRenderMessage}>{renderMessage()}</Grow>
+        <Grow in={!!shouldRenderPopover}>{renderPopover()}</Grow>
       </div>
     </MiniThemeContext.Provider>
   );
@@ -100,13 +131,13 @@ export default function CursorWithMessage(props: {
       >
         <path
           d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19841L11.7841 12.3673H5.65376Z"
-          fill={props.color}
+          fill={color}
         />
       </svg>
     );
   }
 
-  function renderMessage() {
+  function renderPopover() {
     return (
       <div
         className={css({
@@ -115,7 +146,7 @@ export default function CursorWithMessage(props: {
           left: "1.5rem",
           padding: "1rem",
         })}
-        style={{ backgroundColor: props.color, borderRadius: 4 }}
+        style={{ backgroundColor: color, borderRadius: 4 }}
       >
         <Box>
           <Typography
@@ -144,8 +175,7 @@ export default function CursorWithMessage(props: {
             noDelay
             value={props.message || ""}
             onChange={(message) => {
-              props.onMessageChange?.(message);
-              setCurrentMessage(message);
+              handleMessage(message);
             }}
             border
             borderColor={textColor}
@@ -154,10 +184,14 @@ export default function CursorWithMessage(props: {
                 e.preventDefault();
                 e.stopPropagation();
                 handleDiceRoll();
-              } else if (e.key === "Escape") {
+              } else if (e.key === "ArrowUp") {
                 e.preventDefault();
                 e.stopPropagation();
-                props.onClose?.();
+                handleRollHistoryPrevious();
+              } else if (e.key === "ArrowDown") {
+                e.preventDefault();
+                e.stopPropagation();
+                handleRollHistoryNext();
               }
             }}
             readonly={props.readonly}
@@ -166,67 +200,81 @@ export default function CursorWithMessage(props: {
           />
         </ThemedLabel>
         {!props.readonly && (
-          <Typography
-            sx={{
-              color: textColor,
-            }}
-            variant="caption"
-          >
-            {"ESC to close."}
-          </Typography>
+          <Box pt=".5rem">
+            <Typography
+              variant="caption"
+              sx={{ color: textColor, margin: "0", display: "block" }}
+            >
+              {"ESC to close."}
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{ color: textColor, margin: "0", display: "block" }}
+            >
+              {"Supports roll commands."}
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{ color: textColor, margin: "0", display: "block" }}
+            >
+              {"Arrow Up/Down for roll history."}
+            </Typography>
+          </Box>
         )}
-        {props.rollOutput && renderRollOutput()}
+        {renderRollOutput()}
       </div>
     );
   }
 
   function renderRollOutput() {
     return (
-      <Box
-        py=".5rem"
-        sx={{
-          padding: ".5rem",
-          marginTop: ".5rem",
-          background: "#fff",
-          fontSize: "1.5rem",
-          fontFamily: FontFamily.Console,
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
+      <Grow in={!!props.rollOutput}>
         <Box
+          py=".5rem"
           sx={{
+            padding: ".5rem",
+            marginTop: ".5rem",
+            background: "#fff",
+            fontSize: "1.5rem",
+            fontFamily: FontFamily.Console,
             display: "flex",
-            justifyContent: "center",
+            flexDirection: "column",
           }}
         >
-          <Typography
+          <Box
             sx={{
-              fontSize: "2rem",
-              color: "#000",
+              display: "flex",
+              justifyContent: "center",
             }}
-            variant="caption"
           >
-            {props.rollOutput?.total}
-          </Typography>
-        </Box>
+            <Typography
+              sx={{
+                fontSize: "2rem",
+                color: "#000",
+              }}
+              variant="caption"
+            >
+              {props.rollOutput?.total}
+            </Typography>
+          </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Typography
+          <Box
             sx={{
-              color: "#000",
+              display: "flex",
+              justifyContent: "center",
             }}
-            variant="caption"
           >
-            {props.rollOutput?.text}
-          </Typography>
+            <Typography
+              sx={{
+                color: "#000",
+              }}
+              variant="caption"
+            >
+              {props.rollOutput?.text}
+            </Typography>
+          </Box>
         </Box>
-      </Box>
+      </Grow>
     );
   }
 }

@@ -24,11 +24,11 @@ export function PlayersPresence(props: { children: React.ReactNode }) {
         setCursorState((prev) => ({
           ...prev,
           mode: PlayCursorMode.Chat,
-
           message: "",
+          rollOutput: null,
         }));
       } else if (e.key === "Escape") {
-        updateMyPresence({ message: "" });
+        updateMyPresence({ message: "", rollOutput: null });
         setCursorState({ mode: PlayCursorMode.Hidden });
       }
     }
@@ -95,27 +95,26 @@ export function PlayersPresence(props: { children: React.ReactNode }) {
             rollOutput={cursorState.rollOutput}
             onMessageChange={(message) => {
               updateMyPresence({ message: message });
-              setCursorState((prev) => ({
-                ...prev,
-                mode: PlayCursorMode.Chat,
-
-                message: message,
-              }));
+              setCursorState((prev) => {
+                const rollOutput =
+                  prev.mode === PlayCursorMode.Chat ? prev.rollOutput : null;
+                return {
+                  ...prev,
+                  mode: PlayCursorMode.Chat,
+                  message: message,
+                  rollOutput: rollOutput,
+                };
+              });
             }}
             onRollOutputChange={(rollOutput) => {
-              updateMyPresence({ rollOutput: rollOutput });
+              const message = "";
+              updateMyPresence({ message: message, rollOutput: rollOutput });
               setCursorState((prev) => ({
                 ...prev,
                 mode: PlayCursorMode.Chat,
-
-                message: "",
+                message: message,
                 rollOutput: rollOutput,
               }));
-            }}
-            onClose={() => {
-              setCursorState({
-                mode: PlayCursorMode.Hidden,
-              });
             }}
           />
         )}

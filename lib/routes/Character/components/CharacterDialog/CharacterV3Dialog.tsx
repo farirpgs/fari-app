@@ -265,6 +265,7 @@ export const CharacterV3Dialog: React.FC<{
       return (
         <ThemeProvider theme={miniTheme.muiTheme}>
           <Dialog
+            hideBackdrop
             open={props.open}
             fullWidth
             keepMounted={false}

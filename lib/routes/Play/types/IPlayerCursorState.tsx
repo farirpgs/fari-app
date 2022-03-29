@@ -1,18 +1,14 @@
 import { PlayCursorMode } from "../consts/PlayCursorMode";
 
-export type IPlayerCursorState = {
-  mode: PlayCursorMode;
-  message?: string;
-  rollOutput?: IPlayerCursorRollOutput;
-};
-// | {
-//     mode: PlayCursorMode.Hidden;
-//   }
-// | {
-//     mode: PlayCursorMode.Chat;
-//     message: string | undefined;
-//     rollOutput: string | undefined;
-//   };
+export type IPlayerCursorState =
+  | {
+      mode: PlayCursorMode.Hidden;
+    }
+  | {
+      mode: PlayCursorMode.Chat;
+      message: string | null | undefined;
+      rollOutput: IPlayerCursorRollOutput | null | undefined;
+    };
 
 export type IPlayerCursorRollOutput = {
   text: string;
