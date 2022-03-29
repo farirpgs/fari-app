@@ -21,11 +21,12 @@ export function PlayersPresence(props: { children: React.ReactNode }) {
   useEffect(() => {
     function onKeyUp(e: KeyboardEvent) {
       if (e.key === "/") {
-        setCursorState({
+        setCursorState((prev) => ({
+          ...prev,
           mode: PlayCursorMode.Chat,
-          previousMessage: null,
+
           message: "",
-        });
+        }));
       } else if (e.key === "Escape") {
         updateMyPresence({ message: "" });
         setCursorState({ mode: PlayCursorMode.Hidden });
@@ -64,6 +65,7 @@ export function PlayersPresence(props: { children: React.ReactNode }) {
             }
             color={cursor.presence?.color}
             message={cursor.presence?.message}
+            rollOutput={cursor.presence?.rollOutput}
             x={cursor.x}
             y={cursor.y}
             readonly
@@ -90,14 +92,25 @@ export function PlayersPresence(props: { children: React.ReactNode }) {
             y={myWindowCursor.y}
             label={presence?.characterName || presence.playerName}
             message={cursorState.message}
-            previousMessage={cursorState.previousMessage}
+            rollOutput={cursorState.rollOutput}
             onMessageChange={(message) => {
               updateMyPresence({ message: message });
-              setCursorState({
+              setCursorState((prev) => ({
+                ...prev,
                 mode: PlayCursorMode.Chat,
-                previousMessage: null,
+
                 message: message,
-              });
+              }));
+            }}
+            onRollOutputChange={(rollOutput) => {
+              updateMyPresence({ rollOutput: rollOutput });
+              setCursorState((prev) => ({
+                ...prev,
+                mode: PlayCursorMode.Chat,
+
+                message: "",
+                rollOutput: rollOutput,
+              }));
             }}
             onClose={() => {
               setCursorState({

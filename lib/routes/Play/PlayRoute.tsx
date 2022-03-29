@@ -124,6 +124,7 @@ export const PlayRoute: React.FC<{
   const myCharacter =
     sessionCharactersManager.state.characterSheets[me?.id ?? ""];
   const myCharacterName = myCharacter?.name ?? "";
+
   useEffect(() => {
     updateMyPresence({
       color: me?.color,
