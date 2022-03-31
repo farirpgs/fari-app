@@ -285,6 +285,7 @@ export function MyBinder<TFolders extends string>(props: {
         </DialogActions>
       </Dialog>
       <Dialog
+        disableEnforceFocus
         open={props.open}
         onClose={props.onClose}
         fullWidth

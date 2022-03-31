@@ -6,8 +6,8 @@ export type IPlayerCursorState =
     }
   | {
       mode: PlayCursorMode.Chat;
-      message: string | null | undefined;
-      rollOutput: IPlayerCursorRollOutput | null | undefined;
+      message: string | null;
+      rollOutput: IPlayerCursorRollOutput | null;
     };
 
 export type IPlayerCursorRollOutput = {

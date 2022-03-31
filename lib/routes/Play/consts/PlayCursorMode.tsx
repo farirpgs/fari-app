@@ -1,4 +1,4 @@
 export enum PlayCursorMode {
-  Chat,
-  Hidden,
+  Chat = "Chat",
+  Hidden = "Hidden",
 }

@@ -5,7 +5,6 @@ import {
   useObject,
   useRoom,
   useStorage,
-  useUpdateMyPresence,
 } from "@liveblocks/react";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
@@ -25,10 +24,13 @@ import {
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { PlayersPresence } from "./components/PlayersPresence/PlayersPresence";
 import {
+  SessionPresenceUpdaterContext,
+  useSessionPresenceUpdater,
+} from "./contexts/SessionPresenceContext";
+import {
   IPlayerInteraction,
   PlayerInteractionFactory,
 } from "./types/IPlayerInteraction";
-import { IPlayerPresence } from "./types/IPlayerPresence";
 
 type ConnectionState =
   | "closed"
@@ -105,7 +107,6 @@ export const PlayRoute: React.FC<{
   const [connectionState, setConnectionState] = useState<ConnectionState>();
   const [connectionStateSnackBarOpen, setConnectionStateSnackBarOpen] =
     useState(false);
-  const updateMyPresence = useUpdateMyPresence<IPlayerPresence>();
 
   const sceneManager = useScene();
   const sessionManager = useSession({
@@ -125,13 +126,11 @@ export const PlayRoute: React.FC<{
     sessionCharactersManager.state.characterSheets[me?.id ?? ""];
   const myCharacterName = myCharacter?.name ?? "";
 
-  useEffect(() => {
-    updateMyPresence({
-      color: me?.color,
-      playerName: me?.playerName,
-      characterName: myCharacterName,
-    });
-  }, [me?.color, me?.playerName, myCharacterName]);
+  const sessionPresenceUpdater = useSessionPresenceUpdater({
+    characterName: myCharacterName,
+    playerName: me?.playerName,
+    color: me?.color,
+  });
 
   useLiveObject({
     key: "session",
@@ -298,7 +297,8 @@ export const PlayRoute: React.FC<{
             Connection: {connectionState}
           </Alert>
         </Snackbar>
-        <PlayersPresence>
+        <SessionPresenceUpdaterContext.Provider value={sessionPresenceUpdater}>
+          <PlayersPresence />
           <Session
             sessionManager={sessionManager}
             sessionCharactersManager={sessionCharactersManager}
@@ -310,7 +310,7 @@ export const PlayRoute: React.FC<{
             error={undefined}
             onPlayerInteraction={handlePlayerInteraction}
           />
-        </PlayersPresence>
+        </SessionPresenceUpdaterContext.Provider>
       </>
     </>
   );

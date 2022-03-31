@@ -265,7 +265,7 @@ export const CharacterV3Dialog: React.FC<{
       return (
         <ThemeProvider theme={miniTheme.muiTheme}>
           <Dialog
-            hideBackdrop
+            disableEnforceFocus
             open={props.open}
             fullWidth
             keepMounted={false}
@@ -2127,7 +2127,6 @@ export const CharacterV3Dialog: React.FC<{
                 >
                   <ContentEditable
                     border
-                    autoFocus
                     data-cy="character-dialog.name"
                     readonly={props.readonly}
                     value={characterManager.state.character!.name}

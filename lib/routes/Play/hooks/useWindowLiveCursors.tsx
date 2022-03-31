@@ -1,13 +1,10 @@
-import {
-  useMyPresence,
-  useOthers,
-  useUpdateMyPresence,
-} from "@liveblocks/react";
-import { useEffect } from "react";
+import { useMyPresence, useOthers } from "@liveblocks/react";
+import { useContext, useEffect } from "react";
+import { SessionPresenceUpdaterContext } from "../contexts/SessionPresenceContext";
 import { IPlayerPresence } from "../types/IPlayerPresence";
 
 export function useWindowLiveCursors() {
-  const updateMyPresence = useUpdateMyPresence();
+  const sessionPresenceUpdater = useContext(SessionPresenceUpdaterContext);
 
   useEffect(() => {
     const scroll = {
@@ -30,14 +27,14 @@ export function useWindowLiveCursors() {
         y: event.pageY,
       };
       lastPosition = position;
-      updateMyPresence({
+      sessionPresenceUpdater.actions.updateMyPresence({
         cursor: transformPosition(position),
       });
     }
 
     function onPointerLeave() {
-      lastPosition = null;
-      updateMyPresence({ cursor: null });
+      // lastPosition = null;
+      // sessionPresenceUpdater.actions.updateMyPresence({ cursor: null });
     }
 
     function onDocumentScroll() {
@@ -49,7 +46,7 @@ export function useWindowLiveCursors() {
           y: lastPosition.y + offsetY,
         };
         lastPosition = position;
-        updateMyPresence({
+        sessionPresenceUpdater.actions.updateMyPresence({
           cursor: transformPosition(position),
         });
       }
@@ -66,7 +63,7 @@ export function useWindowLiveCursors() {
       document.removeEventListener("pointermove", onPointerMove);
       document.removeEventListener("pointerleave", onPointerLeave);
     };
-  }, [updateMyPresence]);
+  }, []);
 
   const others = useOthers();
 

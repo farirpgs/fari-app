@@ -26,7 +26,7 @@ export default function CursorWithMessage(props: {
   rollOutput: IPlayerCursorRollOutput | null | undefined;
   readonly?: boolean;
   label: string | null | undefined;
-  onRollOutputChange?(roll: IPlayerCursorRollOutput | null | undefined): void;
+  onRollOutputChange?(roll: IPlayerCursorRollOutput | null): void;
   onMessageChange?(message: string): void;
 }) {
   const textPlaceholder = "Type a message...";
@@ -56,12 +56,12 @@ export default function CursorWithMessage(props: {
         text: roll.output,
         total: roll.total.toString(),
       });
-      setTopTenLatestRollCommands(
-        [command, ...topTenLatestRollCommands].slice(0, 10)
-      );
+      const newCommands = [command, ...topTenLatestRollCommands].slice(0, 10);
+      const uniqueCommandsArray = Array.from(new Set(newCommands));
+      setTopTenLatestRollCommands(uniqueCommandsArray);
       setCommandtoPopIndex(0);
     } catch (error) {
-      props.onRollOutputChange?.(undefined);
+      props.onRollOutputChange?.(null);
     }
   }
 
@@ -170,7 +170,7 @@ export default function CursorWithMessage(props: {
               color: textColor,
               background: "transparent",
               outline: "none",
-              minWidth: "12rem",
+              minWidth: "15rem",
             })}
             noDelay
             value={props.message || ""}
@@ -205,7 +205,7 @@ export default function CursorWithMessage(props: {
               variant="caption"
               sx={{ color: textColor, margin: "0", display: "block" }}
             >
-              {"ESC to close."}
+              {"ESC or / to close."}
             </Typography>
             <Typography
               variant="caption"
@@ -229,50 +229,54 @@ export default function CursorWithMessage(props: {
   function renderRollOutput() {
     return (
       <Grow in={!!props.rollOutput}>
-        <Box
-          py=".5rem"
-          sx={{
-            padding: ".5rem",
-            marginTop: ".5rem",
-            background: "#fff",
-            fontSize: "1.5rem",
-            fontFamily: FontFamily.Console,
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Typography
+        <Box>
+          {props.rollOutput && (
+            <Box
+              py=".5rem"
               sx={{
-                fontSize: "2rem",
-                color: "#000",
+                padding: ".5rem",
+                marginTop: ".5rem",
+                background: "#fff",
+                fontSize: "1.5rem",
+                fontFamily: FontFamily.Console,
+                display: "flex",
+                flexDirection: "column",
               }}
-              variant="caption"
             >
-              {props.rollOutput?.total}
-            </Typography>
-          </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: "2rem",
+                    color: "#000",
+                  }}
+                  variant="caption"
+                >
+                  {props.rollOutput?.total}
+                </Typography>
+              </Box>
 
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Typography
-              sx={{
-                color: "#000",
-              }}
-              variant="caption"
-            >
-              {props.rollOutput?.text}
-            </Typography>
-          </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: "#000",
+                  }}
+                  variant="caption"
+                >
+                  {props.rollOutput?.text}
+                </Typography>
+              </Box>
+            </Box>
+          )}
         </Box>
       </Grow>
     );

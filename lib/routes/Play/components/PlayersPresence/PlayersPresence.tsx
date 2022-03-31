@@ -1,7 +1,8 @@
 import { css } from "@emotion/css";
 import { useMyPresence } from "@liveblocks/react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PlayCursorMode } from "../../consts/PlayCursorMode";
+import { SessionPresenceUpdaterContext } from "../../contexts/SessionPresenceContext";
 import {
   useMyWindowLiveCursor,
   useWindowLiveCursors,
@@ -10,25 +11,36 @@ import { IPlayerCursorState } from "../../types/IPlayerCursorState";
 import { IPlayerPresence } from "../../types/IPlayerPresence";
 import CursorWithMessage from "../CursorWithMessage/CursorWithMessage";
 
-export function PlayersPresence(props: { children: React.ReactNode }) {
+export function PlayersPresence() {
   const [cursorState, setCursorState] = useState<IPlayerCursorState>({
     mode: PlayCursorMode.Hidden,
   });
-  const [presence, updateMyPresence] = useMyPresence<IPlayerPresence>();
+  const sessionPresenceUpdater = useContext(SessionPresenceUpdaterContext);
+
+  const [presence] = useMyPresence<IPlayerPresence>();
   const myWindowCursor = useMyWindowLiveCursor();
   const windowCursors = useWindowLiveCursors();
 
   useEffect(() => {
     function onKeyUp(e: KeyboardEvent) {
       if (e.key === "/") {
-        setCursorState((prev) => ({
-          ...prev,
-          mode: PlayCursorMode.Chat,
+        setCursorState((prev) => {
+          if (prev.mode === PlayCursorMode.Hidden) {
+            return {
+              ...prev,
+              mode: PlayCursorMode.Chat,
+              message: "",
+              rollOutput: null,
+            };
+          } else {
+            return { mode: PlayCursorMode.Hidden };
+          }
+        });
+      } else if (e.key === "Escape") {
+        sessionPresenceUpdater.actions.updateMyPresence({
           message: "",
           rollOutput: null,
-        }));
-      } else if (e.key === "Escape") {
-        updateMyPresence({ message: "", rollOutput: null });
+        });
         setCursorState({ mode: PlayCursorMode.Hidden });
       }
     }
@@ -47,13 +59,15 @@ export function PlayersPresence(props: { children: React.ReactNode }) {
       window.removeEventListener("keyup", onKeyUp);
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [updateMyPresence]);
+  }, []);
 
   return (
     <div
       className={css({
         label: "PlayersPresence",
-        position: "relative",
+        position: "absolute",
+        top: 0,
+        left: 0,
       })}
     >
       {windowCursors.map((cursor) => {
@@ -73,8 +87,6 @@ export function PlayersPresence(props: { children: React.ReactNode }) {
         );
       })}
       {renderMyMessage()}
-
-      {props.children}
     </div>
   );
 
@@ -87,14 +99,15 @@ export function PlayersPresence(props: { children: React.ReactNode }) {
       <>
         {myWindowCursor && (
           <CursorWithMessage
-            color={presence?.color}
+            color={presence.color}
             x={myWindowCursor.x}
             y={myWindowCursor.y}
-            label={presence?.characterName || presence.playerName}
+            label={presence.characterName || presence.playerName}
             message={cursorState.message}
             rollOutput={cursorState.rollOutput}
             onMessageChange={(message) => {
-              updateMyPresence({ message: message });
+              sessionPresenceUpdater.actions.updateMessage(message);
+
               setCursorState((prev) => {
                 const rollOutput =
                   prev.mode === PlayCursorMode.Chat ? prev.rollOutput : null;
@@ -107,12 +120,12 @@ export function PlayersPresence(props: { children: React.ReactNode }) {
               });
             }}
             onRollOutputChange={(rollOutput) => {
-              const message = "";
-              updateMyPresence({ message: message, rollOutput: rollOutput });
+              sessionPresenceUpdater.actions.updateRollOutput(rollOutput);
+
               setCursorState((prev) => ({
                 ...prev,
                 mode: PlayCursorMode.Chat,
-                message: message,
+                message: "",
                 rollOutput: rollOutput,
               }));
             }}
