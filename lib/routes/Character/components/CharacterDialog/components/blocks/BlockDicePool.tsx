@@ -503,7 +503,7 @@ export const Pool: React.FC<
       : darken(theme.palette.primary.main, 0.7);
 
   return (
-    <Tooltip title={tooltipTitle ?? ""} placement="top">
+    <Tooltip title={tooltipTitle ?? ""} placement="right">
       <Box
         {...rest}
         className={cx(

@@ -28,6 +28,7 @@
 - feat: new navbar
 - feat: better dark theme
 - tech: migration to Vitest
+- fix: block dice pool tooltip placement (v6.2.7)
 
 # v6.1.0
 
