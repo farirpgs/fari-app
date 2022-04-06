@@ -1,4 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks";
+import { expect } from "vitest";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
 import { ISession } from "../IScene";
 import { useSession } from "../useSession";
@@ -68,12 +69,6 @@ describe("useSession", () => {
     it("should be able to set", () => {
       // GIVEN
       const userId = "111";
-
-      // fixes an implementation problem in Canvas
-      // that renders it difficult to test
-      HTMLCanvasElement.prototype.getContext = () => {
-        // from: https://stackoverflow.com/questions/48828759/unit-test-raises-error-because-of-getcontext-is-not-implemented
-      };
 
       // WHEN initial render
       const { result } = renderHook(() => {
