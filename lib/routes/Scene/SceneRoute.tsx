@@ -47,7 +47,7 @@ export const SceneRoute: React.FC<{
     <>
       <PageMeta title={pageTitle} />
       <Page>
-        <Container>
+        <Container maxWidth="xl">
           <Scene
             sceneManager={sceneManager}
             isGM={true}
