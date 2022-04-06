@@ -9,6 +9,7 @@ import PanToolIcon from "@mui/icons-material/PanTool";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import SaveIcon from "@mui/icons-material/Save";
+import Masonry from "@mui/lab/Masonry";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
 import Alert from "@mui/material/Alert";
@@ -27,8 +28,6 @@ import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
 import InputLabel from "@mui/material/InputLabel";
 import Paper from "@mui/material/Paper";
 import Select from "@mui/material/Select";
@@ -39,6 +38,7 @@ import Tabs from "@mui/material/Tabs";
 import TextField from "@mui/material/TextField";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Prompt } from "react-router";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
@@ -51,7 +51,6 @@ import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext"
 import { arraySort, IArraySortGetter } from "../../domains/array/arraySort";
 import { ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
-import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
 import { Font } from "../../domains/font/Font";
 import { Icons } from "../../domains/Icons/Icons";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
@@ -61,12 +60,12 @@ import {
   IIndexCard,
   IIndexCardType,
   IPlayer,
-  IScene,
+  IScene
 } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import {
   useSession,
-  useSessionCharacterSheets,
+  useSessionCharacterSheets
 } from "../../hooks/useScene/useSession";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -74,15 +73,15 @@ import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDi
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import {
   MiniThemeContext,
-  useMiniTheme,
+  useMiniTheme
 } from "../../routes/Character/components/CharacterDialog/MiniThemeContext";
 import {
   IPlayerInteraction,
-  PlayerInteractionFactory,
+  PlayerInteractionFactory
 } from "../../routes/Play/types/IPlayerInteraction";
 import {
   ContentEditable,
-  previewContentEditable,
+  previewContentEditable
 } from "../ContentEditable/ContentEditable";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
@@ -132,6 +131,8 @@ export const Session: React.FC<IProps> = (props) => {
   useBlockReload(sceneManager.state.dirty);
 
   const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
+
   const miniTheme = useMiniTheme({
     enforceBackground: theme.palette.background.default,
   });
@@ -268,7 +269,7 @@ export const Session: React.FC<IProps> = (props) => {
     }
   };
   return (
-    <Page pb="6rem" isLive gameId={props.idFromParams}>
+    <Page pb="6rem" isLive gameId={props.idFromParams} maxWidth="none">
       <Box px="1rem">
         <Prompt when={true} message={t("manager.leave-without-saving")} />
 
@@ -392,10 +393,16 @@ export const Session: React.FC<IProps> = (props) => {
       <Fade in>
         <Box>
           <Grid container spacing={2}>
-            <Grid item xs={12} md={5} lg={3}>
+            <Grid
+              item
+              className={css({
+                flex: isSmall ? "1 1 auto" : "0 1 auto",
+                minWidth: "25rem",
+              })}
+            >
               {renderSidePanel()}
             </Grid>
-            <Grid item xs={12} md={7} lg={9}>
+            <Grid item xs={12} md>
               {renderSession()}
             </Grid>
           </Grid>
@@ -1062,7 +1069,7 @@ export function Scene(props: {
     theme.palette.background.paper
   ).primary;
   const numberOfColumnsForCards = useResponsiveValue({
-    xl: 3,
+    xl: 4,
     lg: 3,
     md: 2,
     sm: 1,
@@ -1073,6 +1080,7 @@ export function Scene(props: {
   );
 
   const [sort, setSort] = useState<SortMode>(SortMode.None);
+
   const [savedSnack, setSavedSnack] = useState(false);
   const [sceneTab, setSceneTab] = useState<"public" | "private" | "notes">(
     "public"
@@ -1436,68 +1444,86 @@ export function Scene(props: {
     const sortByPinned: IArraySortGetter<IIndexCard> = (indexCard) => {
       return { value: indexCard.pinned, direction: "asc" };
     };
-    const sortByGroup: IArraySortGetter<IIndexCard> = (indexCard) => {
-      return { value: indexCard.subCards.length > 0, direction: "asc" };
-    };
+
     const sorters: Array<IArraySortGetter<IIndexCard>> = [];
-    if (sort === SortMode.GroupFirst) {
-      sorters.push(sortByGroup);
-    } else if (sort === SortMode.PinnedFirst) {
+    if (sort === SortMode.PinnedFirst) {
       sorters.push(sortByPinned);
     }
-    const sortedCards = arraySort(indexCardsFromTab, sorters);
+
+    const cardsWithChildren = indexCardsFromTab.filter((card) => {
+      return card.subCards.length > 0;
+    });
+    const cardsWithoutChildren = indexCardsFromTab.filter((card) => {
+      return card.subCards.length === 0;
+    });
 
     return (
       <Box>
-        <ImageList
-          variant={sortedCards.length >= 10 ? "masonry" : "standard"}
-          cols={numberOfColumnsForCards}
-          gap={16}
-          className={css({
-            overflow: "initial",
-          })}
-        >
-          {sortedCards.map((indexCard, index) => {
+        {renderIndexCardMasonry({
+          columns: 1,
+          allCards: indexCardsFromTab,
+          cards: cardsWithChildren,
+          type: type,
+        })}
+        {renderIndexCardMasonry({
+          columns: numberOfColumnsForCards,
+          allCards: indexCardsFromTab,
+          cards: cardsWithoutChildren,
+          type: type,
+        })}
+      </Box>
+    );
+  }
+
+  function renderIndexCardMasonry(renderProps: {
+    columns: number;
+    cards: Array<IIndexCard>;
+    allCards: Array<IIndexCard>;
+    type: IIndexCardType;
+  }) {
+    if (!renderProps.cards.length) {
+      return null;
+    }
+    return (
+      <Box>
+        <Masonry columns={renderProps.columns}>
+          {renderProps.cards.map((indexCard, index) => {
             const hasChildren = indexCard.subCards.length > 0;
             return (
-              <ImageListItem
-                key={`${indexCard.id}.${type}`}
-                cols={hasChildren ? numberOfColumnsForCards : 1}
-                className={css({
-                  width: "100%",
-                  paddingTop: ".25rem",
-                  paddingBottom: ".25rem",
-                  // Cards with children take 100% of the available space
-                  columnSpan: hasChildren ? "all" : "initial",
-                  /**
-                   * Disables bottom being cut-off in Chrome
-                   */
-                  // breakInside: "avoid",
-                  /**
-                   * Disables bottom being cut-off in Firefox
-                   */
-                  display: hasChildren ? "block" : "inline-block",
-                })}
+              <Box
+                key={indexCard.id}
+                sx={{
+                  padding: ".5rem",
+                  width: hasChildren ? "100% !important" : undefined,
+                }}
               >
                 <IndexCard
-                  type={type}
-                  reactDndIndex={index}
-                  allCards={sortedCards}
-                  canMove={sort === SortMode.None && props.isGM}
-                  key={indexCard.id}
-                  reactDndType={DragAndDropTypes.SceneIndexCards}
+                  type={renderProps.type}
+                  allCards={renderProps.allCards}
+                  canMove={
+                    (sort === SortMode.None ||
+                      indexCard.subCards.length === 0) &&
+                    props.isGM
+                  }
                   data-cy={`scene.aspect.${index}`}
                   id={`index-card-${indexCard.id}`}
                   indexCardHiddenRecord={
                     hiddenIndexCardRecord.state.indexCardHiddenRecord
                   }
+                  onMove={(oldId, newId) => {
+                    sceneManager.actions.moveIndexCard(
+                      oldId,
+                      newId,
+                      renderProps.type
+                    );
+                  }}
                   onToggleVisibility={(indexCard) => {
                     hiddenIndexCardRecord.actions.toggle(indexCard);
                   }}
                   onTogglePrivate={() => {
                     sceneManager.actions.toggleIndexCardSection(
                       indexCard,
-                      type
+                      renderProps.type
                     );
                   }}
                   onMoveTo={(
@@ -1507,40 +1533,39 @@ export function Scene(props: {
                     sceneManager.actions.moveIndexCardTo(
                       idOfIndexCardToMove,
                       idOfIndexCardToMoveTo,
-                      type
+                      renderProps.type
                     );
                   }}
                   onMoveOut={(idOfIndexCardToMove) => {
                     sceneManager.actions.moveIndexCardOut(
                       idOfIndexCardToMove,
-                      type
+                      renderProps.type
                     );
                   }}
                   isGM={props.isGM}
                   indexCard={indexCard}
                   onRoll={props.onRoll}
                   onPoolClick={props.onPoolClick}
-                  onMove={(dragIndex, hoverIndex) => {
-                    sceneManager.actions.moveIndexCard(
-                      dragIndex,
-                      hoverIndex,
-                      type
-                    );
-                  }}
                   onChange={(newIndexCard) => {
-                    props.onIndexCardUpdate(newIndexCard, type);
+                    props.onIndexCardUpdate(newIndexCard, renderProps.type);
                   }}
                   onDuplicate={() => {
-                    sceneManager.actions.duplicateIndexCard(indexCard, type);
+                    sceneManager.actions.duplicateIndexCard(
+                      indexCard,
+                      renderProps.type
+                    );
                   }}
                   onRemove={() => {
-                    sceneManager.actions.removeIndexCard(indexCard.id, type);
+                    sceneManager.actions.removeIndexCard(
+                      indexCard.id,
+                      renderProps.type
+                    );
                   }}
                 />
-              </ImageListItem>
+              </Box>
             );
           })}
-        </ImageList>
+        </Masonry>
       </Box>
     );
   }

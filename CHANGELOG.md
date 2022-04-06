@@ -11,6 +11,15 @@
 - [ ] highlight die
 - [ ] support image die (narrative system)
 
+# v6.3.0
+
+- feat: presence cursor
+- feat: presence message
+- feat: presence dice rolelr
+- feat: masonry
+- feat: better drag and drop
+- feat: larger scene space
+
 # v6.2.0
 
 - fix: sync roll issues
