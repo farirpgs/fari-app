@@ -250,7 +250,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
         onMouseEnter={(event) => {
           handlePopoverOpen(event);
         }}
-        onMouseLeave={(event) => {
+        onMouseLeave={() => {
           handlePopoverClose();
         }}
       >
