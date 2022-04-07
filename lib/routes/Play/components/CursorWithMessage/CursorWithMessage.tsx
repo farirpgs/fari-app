@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Grow from "@mui/material/Grow";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
 import { FontFamily } from "../../../../constants/FontFamily";
 import { useZIndex } from "../../../../constants/zIndex";
@@ -29,8 +29,8 @@ export default function CursorWithMessage(props: {
   onRollOutputChange?(roll: IPlayerCursorRollOutput | null): void;
   onMessageChange?(message: string): void;
 }) {
-  const textPlaceholder = "Type a message...";
-
+  const [mode, setMode] = useState<"message" | "dice">("message");
+  const textPlaceholder = mode === "message" ? "Type a message..." : "2d6 + 2";
   const zIndex = useZIndex();
   const theme = useTheme();
   const color = props.color || DefaultPlayerColor;
@@ -65,9 +65,19 @@ export default function CursorWithMessage(props: {
     }
   }
 
-  function handleMessage(message: string) {
+  function handleMessageChange(message: string) {
     props.onMessageChange?.(message);
     setCommandtoPopIndex(0);
+  }
+
+  function handleModeChange() {
+    if (mode === "message") {
+      setMode("dice");
+      handleMessageChange("");
+    } else {
+      setMode("message");
+      handleMessageChange("");
+    }
   }
 
   function handleRollHistoryPrevious() {
@@ -175,20 +185,24 @@ export default function CursorWithMessage(props: {
             noDelay
             value={props.message || ""}
             onChange={(message) => {
-              handleMessage(message);
+              handleMessageChange(message);
             }}
             border
             borderColor={textColor}
             onKeyDown={(e) => {
-              if (e.key === "Enter") {
+              if (e.key === "Tab") {
+                e.preventDefault();
+                e.stopPropagation();
+                handleModeChange();
+              } else if (e.key === "Enter" && mode === "dice") {
                 e.preventDefault();
                 e.stopPropagation();
                 handleDiceRoll();
-              } else if (e.key === "ArrowUp") {
+              } else if (e.key === "ArrowUp" && mode === "dice") {
                 e.preventDefault();
                 e.stopPropagation();
                 handleRollHistoryPrevious();
-              } else if (e.key === "ArrowDown") {
+              } else if (e.key === "ArrowDown" && mode === "dice") {
                 e.preventDefault();
                 e.stopPropagation();
                 handleRollHistoryNext();
@@ -203,21 +217,27 @@ export default function CursorWithMessage(props: {
           <Box pt=".5rem">
             <Typography
               variant="caption"
-              sx={{ color: textColor, margin: "0", display: "block" }}
+              gutterBottom
+              sx={{ color: textColor, display: "block" }}
             >
-              {"ESC or / to close."}
+              Press <KeyboardKey>Esc or /</KeyboardKey>
+              {" to close"}
             </Typography>
             <Typography
               variant="caption"
-              sx={{ color: textColor, margin: "0", display: "block" }}
+              gutterBottom
+              sx={{ color: textColor, display: "block" }}
             >
-              {"Supports roll commands."}
+              Press <KeyboardKey>Tab</KeyboardKey>
+              {" to enter dice mode."}.
             </Typography>
             <Typography
               variant="caption"
-              sx={{ color: textColor, margin: "0", display: "block" }}
+              gutterBottom
+              sx={{ color: textColor, display: "block" }}
             >
-              {"Arrow Up/Down for roll history."}
+              Press <KeyboardKey>Enter</KeyboardKey>
+              {" to roll."}
             </Typography>
           </Box>
         )}
@@ -281,4 +301,23 @@ export default function CursorWithMessage(props: {
       </Grow>
     );
   }
+}
+
+function KeyboardKey(props: { children: React.ReactNode }) {
+  return (
+    <Box
+      sx={{
+        display: "inline-block",
+        border: "1px solid #ccc",
+        borderRadius: "4px",
+        padding: "0.1em 0.5em",
+        margin: "0 0.2em",
+        color: "#000",
+        boxShadow: "0 1px 0px rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset",
+        backgroundColor: "#f7f7f7",
+      }}
+    >
+      {props.children}
+    </Box>
+  );
 }
