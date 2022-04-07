@@ -83,6 +83,17 @@ export function DiceMenuForCharacterSheet(props: {
                 open={open}
                 anchorEl={anchorEl}
                 commands={commandSetIds}
+                sx={{
+                  marginBottom: "1rem",
+                }}
+                anchorOrigin={{
+                  vertical: "center",
+                  horizontal: "right",
+                }}
+                transformOrigin={{
+                  vertical: "center",
+                  horizontal: "left",
+                }}
                 showPoolToggle={false}
                 onDiceCommandChange={setCommandSetIds}
                 ctaLabel="Select"

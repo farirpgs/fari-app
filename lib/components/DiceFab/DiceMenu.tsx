@@ -5,8 +5,8 @@ import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
-import Popover from "@mui/material/Popover";
-import { useTheme } from "@mui/material/styles";
+import Popover, { PopoverOrigin } from "@mui/material/Popover";
+import { SxProps, useTheme } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import React, { useContext } from "react";
@@ -24,6 +24,9 @@ export function DiceMenu(props: {
   ctaLabel?: string;
   commands: Array<IDiceCommandSetOption>;
   showPoolToggle: boolean;
+  anchorOrigin: PopoverOrigin;
+  transformOrigin: PopoverOrigin;
+  sx?: SxProps;
   onCtaClick?(): void;
   onClose?(): void;
   onClear?(): void;
@@ -36,20 +39,20 @@ export function DiceMenu(props: {
   const { t } = useTranslate();
   const diceManager = useContext(DiceContext);
 
-  return <>{renderPopper()}</>;
+  return <>{renderPopover()}</>;
 
-  function renderPopper() {
+  function renderPopover() {
     return (
       <Popover
         open={props.open}
         anchorEl={props.anchorEl}
+        disableScrollLock
+        sx={props.sx}
         onClose={() => {
           props.onClose?.();
         }}
-        anchorOrigin={{
-          vertical: "center",
-          horizontal: "right",
-        }}
+        anchorOrigin={props.anchorOrigin}
+        transformOrigin={props.transformOrigin}
       >
         <Box
           className={css({
