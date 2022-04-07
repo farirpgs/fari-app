@@ -6,7 +6,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Popover, { PopoverOrigin } from "@mui/material/Popover";
-import { SxProps, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import React, { useContext } from "react";
@@ -26,7 +26,7 @@ export function DiceMenu(props: {
   showPoolToggle: boolean;
   anchorOrigin: PopoverOrigin;
   transformOrigin: PopoverOrigin;
-  sx?: SxProps;
+  sx?: React.CSSProperties;
   onCtaClick?(): void;
   onClose?(): void;
   onClear?(): void;
