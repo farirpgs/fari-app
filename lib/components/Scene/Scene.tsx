@@ -4,6 +4,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import ErrorIcon from "@mui/icons-material/Error";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
+import FilterHdrIcon from "@mui/icons-material/FilterHdr";
 import MovieIcon from "@mui/icons-material/Movie";
 import PanToolIcon from "@mui/icons-material/PanTool";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
@@ -60,12 +61,12 @@ import {
   IIndexCard,
   IIndexCardType,
   IPlayer,
-  IScene
+  IScene,
 } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import {
   useSession,
-  useSessionCharacterSheets
+  useSessionCharacterSheets,
 } from "../../hooks/useScene/useSession";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -73,15 +74,20 @@ import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDi
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import {
   MiniThemeContext,
-  useMiniTheme
+  useMiniTheme,
 } from "../../routes/Character/components/CharacterDialog/MiniThemeContext";
 import {
+  TlDrawErrorBoundary,
+  TldrawReader,
+  TldrawWriter,
+} from "../../routes/Draw/TldrawWriterAndReader";
+import {
   IPlayerInteraction,
-  PlayerInteractionFactory
+  PlayerInteractionFactory,
 } from "../../routes/Play/types/IPlayerInteraction";
 import {
   ContentEditable,
-  previewContentEditable
+  previewContentEditable,
 } from "../ContentEditable/ContentEditable";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard } from "../IndexCard/IndexCard";
@@ -841,28 +847,24 @@ export const Session: React.FC<IProps> = (props) => {
     );
   }
 
-  // function renderZones() {
-  //   // const tokenTitles = Object.values(sessionManager.state.session.players).map(
-  //   //   (p) => (p.character?.name ?? p.playerName) as string
-  //   // );
-
-  //   return (
-  //     <TlDrawErrorBoundary>
-  //       <Box border={`1px solid ${theme.palette.divider}`} margin="0 auto">
-  //         {/* {isGM ? (
-  //           <TldrawWriter
-  //             initialDoc={sessionManager.state.session.tlDrawDoc}
-  //             onChange={(state) => {
-  //               sessionManager.actions.updateDrawAreaObjects(state);
-  //             }}
-  //           />
-  //         ) : (
-  //           <TldrawReader doc={sessionManager.state.session.tlDrawDoc} />
-  //         )} */}
-  //       </Box>
-  //     </TlDrawErrorBoundary>
-  //   );
-  // }
+  function renderZones() {
+    return (
+      <TlDrawErrorBoundary>
+        <Box border={`1px solid ${theme.palette.divider}`} margin="0 auto">
+          {isGM ? (
+            <TldrawWriter
+              state={sessionManager.state.session.tlDrawDoc}
+              onChange={(state) => {
+                sessionManager.actions.updateDrawAreaObjects(state);
+              }}
+            />
+          ) : (
+            <TldrawReader state={sessionManager.state.session.tlDrawDoc} />
+          )}
+        </Box>
+      </TlDrawErrorBoundary>
+    );
+  }
 
   function showEmptyWarnings() {
     const numberOfSheets = Object.keys(
@@ -947,13 +949,13 @@ export const Session: React.FC<IProps> = (props) => {
                 />
               ),
             },
-            // {
-            //   value: "draw",
-            //   dataCy: "session.tabs.draw",
-            //   label: t("draw-route.meta.title"),
-            //   icon: <FilterHdrIcon />,
-            //   render: renderZones,
-            // },
+            {
+              value: "draw",
+              dataCy: "session.tabs.draw",
+              label: t("draw-route.meta.title"),
+              icon: <FilterHdrIcon />,
+              render: renderZones,
+            },
           ]}
         />
       </Box>

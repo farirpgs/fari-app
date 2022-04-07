@@ -12,6 +12,7 @@ import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
+import { IDrawingAreaState } from "../../routes/Draw/TldrawWriterAndReader";
 import {
   DefaultPlayerColor,
   PlayerColors,
@@ -36,7 +37,10 @@ export function useSession(props: { userId: string }) {
       goodConfetti: 0,
       badConfetti: 0,
       paused: false,
-      tlDrawDoc: undefined,
+      tlDrawDoc: {
+        bindings: {},
+        shapes: {},
+      },
     })
   );
   const [playerColorIndex, setPlayerColorIndex] = useState(0);
@@ -190,11 +194,11 @@ export function useSession(props: { userId: string }) {
     );
   }
 
-  function updateDrawAreaObjects(doc: any) {
+  function updateDrawAreaObjects(state: IDrawingAreaState) {
     setSession((prev) => {
       return {
         ...prev,
-        tlDrawDoc: doc,
+        tlDrawDoc: state,
       };
     });
   }
