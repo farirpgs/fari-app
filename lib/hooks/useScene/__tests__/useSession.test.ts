@@ -69,11 +69,7 @@ describe("useSession", () => {
       // GIVEN
       const userId = "111";
 
-      // fixes an implementation problem in Canvas
-      // that renders it difficult to test
-      HTMLCanvasElement.prototype.getContext = () => {
-        // from: https://stackoverflow.com/questions/48828759/unit-test-raises-error-because-of-getcontext-is-not-implemented
-      };
+      HTMLCanvasElement.prototype.getContext = () => {};
 
       // WHEN initial render
       const { result } = renderHook(() => {
