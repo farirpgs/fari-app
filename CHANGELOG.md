@@ -13,12 +13,12 @@
 
 # v6.3.0
 
-- feat: presence cursor
-- feat: presence message
-- feat: presence dice rolelr
-- feat: masonry
-- feat: better drag and drop
-- feat: larger scene space
+- feat: view player cursors using presence
+- feat: view player messages (like a chat) using presence
+- feat: view player custom roll commands using presence
+- feat: true masonry layout for index cards
+- feat: more reliable drag and drop feature for index cards
+- feat: larger screen size support for index cards in scenes
 
 # v6.2.0
 
