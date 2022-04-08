@@ -71,14 +71,13 @@ export const CharacterCard: React.FC<{
           flex: "1 0 auto",
         })}
       >
-        <Box>
+        <Box pb="1rem">
           <Box
             py=".5rem"
             px="1rem"
             className={css({
               fontSize: "1.5rem",
               width: "100%",
-              marginBottom: "1rem",
               borderBottom: hasSections ? "1px solid #f0a4a4" : undefined,
             })}
           >
@@ -185,12 +184,12 @@ export const CharacterCard: React.FC<{
                     return (
                       <Box
                         px="1rem"
-                        pb="1rem"
                         key={section.id}
                         className={css({ clear: "both" })}
                       >
                         {sectionLabel && (
                           <Box
+                            mt="1rem"
                             className={css({
                               label: "SheetHeader-box",
                               // Hexagone

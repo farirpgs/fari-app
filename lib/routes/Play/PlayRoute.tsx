@@ -44,6 +44,7 @@ export function useLiveObject<T>(props: {
   key: string;
   value: T;
   isOwner: boolean;
+  canBeEmpty?: boolean;
   onChange(newValue: T): void;
 }) {
   const liveObject = useObject<T>(props.key);
@@ -68,8 +69,10 @@ export function useLiveObject<T>(props: {
       const isSubscriber = !props.isOwner;
       const object = liveObject?.toObject();
       const objectKeys = Object.keys(object ?? {});
-      if (isSubscriber && object && objectKeys.length > 0) {
-        props.onChange(object as T);
+      if (isSubscriber && object){
+       if (props.canBeEmpty || objectKeys.length > 0) {
+         props.onChange(object as T);
+       }
       }
     }
 
@@ -153,6 +156,7 @@ export const PlayRoute: React.FC<{
   useLiveObject({
     key: "characters",
     isOwner: isGM,
+    canBeEmpty: true,
     value: sessionCharactersManager.state.characterSheets,
     onChange: (newValue) => {
       sessionCharactersManager.actions.overrideCharacterSheets(newValue);

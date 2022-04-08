@@ -813,7 +813,13 @@ export const Session: React.FC<IProps> = (props) => {
             <MiniThemeContext.Provider value={miniTheme}>
               {playersWithCharacterSheets.map((player, index) => {
                 const isMe = props.userId === player.id;
+                const isVisible = isGM || !player.private;
                 const canControl = isGM || isMe;
+
+                if (!isVisible) {
+                  return null;
+                }
+
                 return (
                   <Box
                     key={player?.id || index}

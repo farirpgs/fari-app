@@ -503,7 +503,7 @@ export const Pool: React.FC<
       : darken(theme.palette.primary.main, 0.7);
 
   return (
-    <Tooltip title={tooltipTitle ?? ""} placement="top">
+    <Tooltip title={tooltipTitle ?? ""} placement="right">
       <Box
         {...rest}
         className={cx(
@@ -516,7 +516,7 @@ export const Pool: React.FC<
               ? theme.palette.getContrastText(theme.palette.background.paper)
               : theme.palette.getContrastText(theme.palette.primary.main),
             "border": props.clickable
-              ? `1px ${borderStyle} ${theme.palette.secondary.main}`
+              ? `1px ${borderStyle} ${theme.palette.text.primary}`
               : `none`,
 
             "boxShadow":
