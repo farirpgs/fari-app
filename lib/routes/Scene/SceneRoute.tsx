@@ -1,4 +1,3 @@
-import Container from "@mui/material/Container";
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
@@ -46,21 +45,19 @@ export const SceneRoute: React.FC<{
   return (
     <>
       <PageMeta title={pageTitle} />
-      <Page>
-        <Container maxWidth="xl">
-          <Scene
-            sceneManager={sceneManager}
-            isGM={true}
-            canLoad={false}
-            onRoll={() => {}}
-            onPoolClick={(element) => {
-              diceManager.actions.addOrRemovePoolElement(element);
-            }}
-            onIndexCardUpdate={(indexCard, type) => {
-              sceneManager.actions.updateIndexCard(indexCard, type);
-            }}
-          />
-        </Container>
+      <Page maxWidth="none">
+        <Scene
+          sceneManager={sceneManager}
+          isGM={true}
+          canLoad={false}
+          onRoll={() => {}}
+          onPoolClick={(element) => {
+            diceManager.actions.addOrRemovePoolElement(element);
+          }}
+          onIndexCardUpdate={(indexCard, type) => {
+            sceneManager.actions.updateIndexCard(indexCard, type);
+          }}
+        />
       </Page>
     </>
   );

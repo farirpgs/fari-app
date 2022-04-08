@@ -37,8 +37,8 @@ import { FontFamily } from "../../constants/FontFamily";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
+import { useElementWidth } from "../../hooks/useElementWidth/useElementWidth";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
-import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
 import { IIndexCard, IIndexCardType } from "../../hooks/useScene/IScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
@@ -58,6 +58,8 @@ import {
 } from "../ContentEditable/ContentEditable";
 import { useIndexCard } from "./hooks/useIndexCard";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
+
+export const IndexCardMinWidth = 400;
 
 function FariPopper(props: {
   renderAnchor: (renderProps: {
@@ -153,18 +155,16 @@ export const IndexCard: React.FC<
   const miniTheme = useMiniTheme({
     enforceBackground: indexCardManager.state.indexCard.color,
   });
+  const subCardsContainerRef = useRef<HTMLElement>(null);
+  const subCardsContainerWidth = useElementWidth(subCardsContainerRef);
+  const numberOfColumnsForSubCardsMasonry = Math.floor(
+    subCardsContainerWidth / IndexCardMinWidth
+  );
 
   const hasSubCards = indexCardManager.state.indexCard.subCards.length > 0;
   const isSubCard = indexCardManager.state.indexCard.sub;
   const [advanced, setAdvanced] = useState(false);
   const open = !props.indexCardHiddenRecord?.[props.indexCard.id];
-  const numberOfColumnsForSubCards = useResponsiveValue({
-    xl: 3,
-    lg: 2,
-    md: 2,
-    sm: 1,
-    xs: 1,
-  });
 
   const paper = useTextColors(
     theme.palette.mode === "light"
@@ -531,8 +531,8 @@ export const IndexCard: React.FC<
 
   function renderSubCards() {
     return (
-      <Box px="1rem" py="1rem">
-        <Masonry columns={numberOfColumnsForSubCards}>
+      <Box px="1rem" py="1rem" ref={subCardsContainerRef}>
+        <Masonry columns={numberOfColumnsForSubCardsMasonry}>
           {indexCardManager.state.indexCard.subCards?.map((subCard) => {
             return (
               <Box key={subCard.id}>

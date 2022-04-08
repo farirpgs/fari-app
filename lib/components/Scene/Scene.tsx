@@ -55,6 +55,7 @@ import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { Icons } from "../../domains/Icons/Icons";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
+import { useElementWidth } from "../../hooks/useElementWidth/useElementWidth";
 import { LazyState } from "../../hooks/useLazyState/useLazyState";
 import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
 import {
@@ -90,7 +91,7 @@ import {
   previewContentEditable,
 } from "../ContentEditable/ContentEditable";
 import { FateLabel } from "../FateLabel/FateLabel";
-import { IndexCard } from "../IndexCard/IndexCard";
+import { IndexCard, IndexCardMinWidth } from "../IndexCard/IndexCard";
 import { Page } from "../Page/Page";
 import { SplitButton } from "../SplitButton/SplitButton";
 import { Toolbox } from "../Toolbox/Toolbox";
@@ -1070,13 +1071,13 @@ export function Scene(props: {
   const headerBackgroundColor = useTextColors(
     theme.palette.background.paper
   ).primary;
-  const numberOfColumnsForCards = useResponsiveValue({
-    xl: 4,
-    lg: 3,
-    md: 2,
-    sm: 1,
-    xs: 1,
-  });
+
+  const indexCardsContainerRef = useRef<HTMLElement>(null);
+  const indexCardsContainerWidth = useElementWidth(indexCardsContainerRef);
+  const numberOfColumnsForIndexCardsMasonry = Math.floor(
+    indexCardsContainerWidth / IndexCardMinWidth
+  );
+
   const hiddenIndexCardRecord = useHiddenIndexCardRecord(
     sceneManager.state.scene?.indexCards
   );
@@ -1460,7 +1461,7 @@ export function Scene(props: {
     });
 
     return (
-      <Box>
+      <Box ref={indexCardsContainerRef}>
         {renderIndexCardMasonry({
           columns: 1,
           allCards: indexCardsFromTab,
@@ -1468,7 +1469,7 @@ export function Scene(props: {
           type: type,
         })}
         {renderIndexCardMasonry({
-          columns: numberOfColumnsForCards,
+          columns: numberOfColumnsForIndexCardsMasonry,
           allCards: indexCardsFromTab,
           cards: cardsWithoutChildren,
           type: type,
