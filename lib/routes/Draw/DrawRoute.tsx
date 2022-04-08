@@ -43,7 +43,12 @@ export const DrawRoute: React.FC = () => {
           height="600px"
           margin="0 auto"
         >
-          <TldrawWriter />
+          <TldrawWriter
+            state={{
+              bindings: {},
+              shapes: {},
+            }}
+          />
         </Box>
       </Container>
     </Page>

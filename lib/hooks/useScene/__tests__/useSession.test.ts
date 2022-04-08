@@ -25,7 +25,10 @@ describe("useSession", () => {
       goodConfetti: 0,
       badConfetti: 0,
       paused: false,
-      tlDrawDoc: undefined,
+      tlDrawDoc: {
+        bindings: {},
+        shapes: {},
+      },
     };
     // WHEN
     const { result } = renderHook(() => {

@@ -54,9 +54,7 @@ function StorybookIndexCard(props: {
         <IndexCard
           type="public"
           allCards={[]}
-          reactDndIndex={0}
           canMove={true}
-          reactDndType={"storybook"}
           id="123"
           indexCard={{
             ...props.indexCard,
