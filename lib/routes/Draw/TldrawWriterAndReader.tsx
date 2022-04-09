@@ -90,9 +90,6 @@ export function TldrawWriter(props: {
         onChangePage={(app, shapes, bindings) => {
           handleTldrawChange(app, shapes, bindings);
         }}
-        // onChange={(app) => {
-        //   handleTldrawChange(app);
-        // }}
         onMount={(app) => {
           handleTldrawMount(app);
         }}
