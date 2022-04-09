@@ -42,7 +42,8 @@ export function TldrawWriter(props: {
     if (dirtyRef.current) {
       const shapesObject = Object.fromEntries(shapesRef.current.entries());
       const bindingsObject = Object.fromEntries(bindingsRef.current.entries());
-
+      console.log("shapesObject", shapesObject);
+      console.log("bindingsObject", bindingsObject);
       props.onChange?.({
         shapes: shapesObject,
         bindings: bindingsObject,
@@ -57,9 +58,14 @@ export function TldrawWriter(props: {
     }
   }
 
-  function handleTldrawChange(app: TldrawApp) {
+  function handleTldrawChange(
+    app: TldrawApp,
+    shapes: Record<string, TDShape | undefined>,
+    bindings: Record<string, TDBinding | undefined>
+  ) {
     dirtyRef.current = true;
-    Object.entries(app.shapes).forEach(([id, shape]) => {
+    console.log("change", shapes);
+    Object.entries(shapes).forEach(([id, shape]) => {
       if (!shape) {
         shapesRef.current.delete(id);
       } else {
@@ -67,7 +73,7 @@ export function TldrawWriter(props: {
       }
     });
 
-    Object.entries(app.bindings).forEach(([id, binding]) => {
+    Object.entries(bindings).forEach(([id, binding]) => {
       if (!binding) {
         bindingsRef.current.delete(id);
       } else {
@@ -81,9 +87,12 @@ export function TldrawWriter(props: {
       <Tldraw
         showPages={false}
         showMenu={false}
-        onChange={(app) => {
-          handleTldrawChange(app);
+        onChangePage={(app, shapes, bindings) => {
+          handleTldrawChange(app, shapes, bindings);
         }}
+        // onChange={(app) => {
+        //   handleTldrawChange(app);
+        // }}
         onMount={(app) => {
           handleTldrawMount(app);
         }}
