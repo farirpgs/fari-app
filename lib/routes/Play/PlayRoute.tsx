@@ -64,10 +64,10 @@ export function useLiveObject<T>(props: {
       const isSubscriber = !props.isOwner;
       const object = liveObject?.toObject();
       const objectKeys = Object.keys(object ?? {});
-      if (isSubscriber && object){
-       if (props.canBeEmpty || objectKeys.length > 0) {
-         props.onChange(object as T);
-       }
+      if (isSubscriber && object) {
+        if (props.canBeEmpty || objectKeys.length > 0) {
+          props.onChange(object as T);
+        }
       }
     }
 
@@ -159,6 +159,10 @@ export const PlayRoute: React.FC<{
       sessionManager.actions.addPlayer(event.payload.player);
     }
     if (event.type === "update-player-points") {
+      sessionManager.actions.updatePlayerPoints(
+        event.payload.id,
+        event.payload.points
+      );
       sessionCharactersManager.actions.updatePlayerCharacterMainPointCounter(
         event.payload.id,
         event.payload.points,

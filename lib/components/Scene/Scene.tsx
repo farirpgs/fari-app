@@ -740,6 +740,7 @@ export const Session: React.FC<IProps> = (props) => {
         }}
         onPointsChange={(points, maxPoints) => {
           if (isGM) {
+            sessionManager.actions.updatePlayerPoints(player.id, points);
             sessionCharactersManager.actions.updatePlayerCharacterMainPointCounter(
               player.id,
               points,
