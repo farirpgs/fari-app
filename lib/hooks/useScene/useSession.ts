@@ -121,6 +121,22 @@ export function useSession(props: { userId: string }) {
     );
   }
 
+  function updatePlayerPoints(id: string | undefined, points: string) {
+    setSession(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+        const everyone = getEveryone(draft);
+        everyone.forEach((player) => {
+          if (player.id === id) {
+            player.points = points;
+          }
+        });
+      })
+    );
+  }
+
   function getNewRolls(
     roll: IDiceRollResult,
     previousRolls: IDiceRollResult[]
@@ -316,6 +332,7 @@ export function useSession(props: { userId: string }) {
       togglePlayerVisibility,
       updateDrawAreaObjects,
       updateGmRoll,
+      updatePlayerPoints,
       updatePlayerPlayedDuringTurn,
       updatePlayerRoll,
       addPlayer,

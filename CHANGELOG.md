@@ -38,6 +38,9 @@
 - feat: better dark theme
 - tech: migration to Vitest
 - fix: block dice pool tooltip placement (v6.2.7)
+- fix: various popover position issues (v6.2.9)
+- fix: homeroute link (v6.2.9)
+- feat: new sheet tempaltes (v6.2.9)
 
 # v6.1.0
 
