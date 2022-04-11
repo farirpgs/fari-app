@@ -1,0 +1,665 @@
+{
+  "id": "46369dee-a782-47d6-8908-b0ca6976dd94",
+  "name": "The Wasteland Covenant",
+  "lastUpdated": 1647989959,
+  "wide": true,
+  "pages": [
+    {
+      "id": "281c320d-9f29-46f5-862f-8d012c4e0815",
+      "label": "SETTLEMENT",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9ab488ad-8412-48c7-a64e-755ee2cecc0c",
+                  "label": "NAME",
+                  "blocks": [
+                    {
+                      "id": "a8e6d493-da1f-47d5-a585-38907e1fdb5a",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "e6ee2536-2835-4b30-ac3f-3a81093504aa",
+                  "label": "RESOURCES",
+                  "blocks": [
+                    {
+                      "id": "54e9779f-b1c9-457b-948c-eed9093cb3ac",
+                      "label": "",
+                      "type": "Text",
+                      "value": "RESOURCE LIST",
+                      "meta": {
+                        "helperText": "Metals, Produce, Livestock, Water, Wood, Technology, Medicine"
+                      }
+                    },
+                    {
+                      "id": "f8638890-87cd-42a9-8098-819e882ae520",
+                      "label": "SURPLUS RESOURCE",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "<br>" }
+                    },
+                    {
+                      "id": "d5f86626-6adb-4454-b670-436ac7df756d",
+                      "label": "SCARCE RESOURCE",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "<br>" }
+                    }
+                  ]
+                },
+                {
+                  "id": "f3c68c9e-7147-4903-bb62-97099a03ab88",
+                  "label": "NOTES",
+                  "blocks": [
+                    {
+                      "id": "0f2e74b1-f436-4568-901f-3a20fecf6e60",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d4a6869a-88fa-4d4e-9eec-4c6a57374e77",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d59ee2ae-cbd8-4b29-a433-de56f6b48588",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4749a750-22f4-4952-ae85-acabb669d7d2",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ebef4fde-08ca-4f24-b06e-4eec17d1a141",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1ce12282-805e-49da-96a6-44712d7cb1ad",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "5def3c0d-e670-4c37-9357-6e11cac8a77c",
+                  "label": "QUESTIONS",
+                  "blocks": [
+                    {
+                      "id": "ee72d5bb-74d5-410a-bb62-aed7a9260340",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Settlements ask, Trade Envoys answer",
+                      "meta": {}
+                    },
+                    {
+                      "id": "fa5b7978-427c-417c-9ab8-ea4eb8eb3c41",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "ae90a965-e2ea-45c2-8c38-3f959096c291",
+                      "label": "",
+                      "type": "Text",
+                      "value": "What is your favorite delicacy found only within your Settlement?",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "b9597dec-a655-46fe-a75f-69b1495b37de",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Who have you lost that is close to you and how did you lose them?\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "7820aca9-2054-48f5-8b8f-648052d80404",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Standing beneath the stars and looking to the moon, what memory does it evoke?\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "563d8f2b-59ed-46e0-9bd9-3e00cb58ab28",
+                      "label": "",
+                      "type": "Text",
+                      "value": "You have someone that you can't wait to see when you return home, who are they and what do you do with them to pass the time?\n\r\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "be67306e-9ede-463e-a73e-a20f21d4f510",
+                      "label": "",
+                      "type": "Text",
+                      "value": "What was the worst experience you've had while in the wasteland?\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "f78e05b0-81e6-4d56-a47a-ecf8909151df",
+                      "label": "",
+                      "type": "Text",
+                      "value": "What was the best experience you've had while in the wasteland?\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "e1d890a2-f043-4200-a942-798732109315",
+                      "label": "",
+                      "type": "Text",
+                      "value": "How has your Settlements lack of a Resource made your life harder?\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "6bdecc8d-c677-40e1-b0e5-a80b7942e85c",
+                      "label": "",
+                      "type": "Text",
+                      "value": "What is your favorite celebration, holiday or festival observed by your Settlement?\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "857c53a2-593c-4191-9e40-f0d862418b2d",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Why did you choose to accept a job that takes you away from your home for much of your life?\n\r\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "5be95232-ed80-4d7b-9146-8db799e8b010",
+                      "label": "",
+                      "type": "Text",
+                      "value": "What is your greatest regret?\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "5fc8bbb8-7dd0-47d2-8ed6-4c853295cd36",
+                      "label": "",
+                      "type": "Text",
+                      "value": "What is your favorite hobby or pastime?\n",
+                      "meta": { "checked": false, "helperText": "" }
+                    },
+                    {
+                      "id": "943adf45-d35f-45e2-8794-be7eb2884fe8",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Where do you go, or what do you do, when you need to clear your head and think?\n",
+                      "meta": { "checked": false, "helperText": "" }
+                    },
+                    {
+                      "id": "8208ebbc-e7dc-4910-b447-7834c05f7ee7",
+                      "label": "",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Space to make up your own questions"
+                      }
+                    },
+                    {
+                      "id": "69c3936d-0682-4e03-ac8d-d3b8194d44c3",
+                      "label": "",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Space to make up your own questions"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "TRADE ENVOY",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "e64f1c39-6ce3-42d5-a2a0-a5ab05e637bb",
+                  "label": "NAME",
+                  "blocks": [
+                    {
+                      "id": "5dd2042f-9b4f-446a-9a50-e51414e62726",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "4905d752-f6da-4ff4-ab98-839791dd283e",
+                  "label": "LOOKS",
+                  "blocks": [
+                    {
+                      "id": "3df743ef-9ca2-4a6c-8656-daa49f1b3224",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Choose as many as fit, delete the rest. Or use as inspiration to make up your own"
+                      }
+                    },
+                    {
+                      "id": "e0eacf20-59c2-4673-b748-a0a6d287f9e6",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Kind face; strong face; covered face; honest face; scarred face; tattooed face",
+                      "meta": {}
+                    },
+                    {
+                      "id": "eeb47af4-7988-43e3-a6f6-0273b7b5cb9c",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Scarred hands; clean hands; greasy hands; gloved hands; tattooed hands",
+                      "meta": {}
+                    },
+                    {
+                      "id": "0ced86e2-4044-4da6-97f2-4728d29f5849",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Slim frame; plump frame; muscular frame; hunched frame; mutant frame",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7e5671bd-2b50-4f39-adf9-c70596e8f8c5",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Calm eyes; mournful eyes; fiery eyes; knowing eyes; skittish eyes; covered eyes",
+                      "meta": {}
+                    },
+                    {
+                      "id": "57712d4e-ef9c-4266-82d3-fdc781ebe8c8",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Bald head; scarred head; wild &amp; greasy hair, short cropped hair; punky hair",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "f7a36c0a-3ef0-4499-8bd8-a8ad9fc81ce4",
+                  "label": "NOTES",
+                  "blocks": [
+                    {
+                      "id": "3a9285f4-fd3a-4634-a2b6-e35bf682004d",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d3775c2b-8354-4d47-b490-4591f47f4c20",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c04d98ee-2af3-48af-ae8e-7d52206f7f03",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "402dbcf5-c129-4dfe-af36-85dbd7618d93",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "31a6505d-c391-4d69-ab00-c2ebcd40c32c",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5f8fd55e-91d6-49e1-ac90-4c43d42fefd4",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "bbf9e7da-4b10-474d-a4ad-aa1bb40af4f4",
+                  "label": "Questions",
+                  "blocks": [
+                    {
+                      "id": "44ac0f5f-eba5-4a93-a814-843b6b20482a",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Trade Envoys ask, Settlements answer",
+                      "meta": {}
+                    },
+                    {
+                      "id": "48656f7c-1dcd-4e9c-9220-18c6f298d091",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "82e2df74-f176-48d6-b9a2-4bb4f3177230",
+                      "label": "",
+                      "type": "Text",
+                      "value": "What is the source of your most abundant Resource (and what is that Resource?)",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "5f33cbc4-1ff1-44f0-a6a1-6c4b39ea3823",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Describe the your Settlement’s last major crisis and what evidence of it still exists\r\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "408c4c2d-6891-496c-8ff0-cffc1e2b90cb",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Describe the ritual, celebration or festival that is happening right now\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "278e56d0-3018-43cf-819e-1c88fc689f1a",
+                      "label": "",
+                      "type": "Text",
+                      "value": "What scars does the lack of your most scarce Resource leave on your Settlement (and what is the resource?)\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "51fa5ec3-54fb-4f95-a7f4-45c83cd9f3c0",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Tell me the source of your Settlement’s second most abundant resource. (and what is that Resource?)\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "8328d9eb-758e-40fb-b269-49666fe7e52d",
+                      "label": "",
+                      "type": "Text",
+                      "value": "How is your community united? How are they divided?\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "8aad9a34-c701-49c1-911e-e3fdacba25b4",
+                      "label": "",
+                      "type": "Text",
+                      "value": "What landmark is considered iconic to your settlement?\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "fe2fa265-0700-479a-aaba-dd91d425ec98",
+                      "label": "",
+                      "type": "Text",
+                      "value": "What are the buildings like in your Settlement?\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "8cc3b8e2-b4c2-432d-ac74-4bfdd8c5896d",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Who is the Settlement’s leadership and how do they govern?\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "64ad54fa-f951-4d45-8ae7-caf495300a0d",
+                      "label": "",
+                      "type": "Text",
+                      "value": "What are families like in the Settlement?\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "5a89cf8e-023b-4bf8-ba5c-4dc8dad6d73b",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Construction has just finished within your Settlement, what did you build?\n",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "5d94ed19-e55b-43bb-944c-caf994dcafe7",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Who is a local folk hero or legend amongst your Settlement? What did they do? Are they real?\n",
+                      "meta": { "checked": false, "helperText": "" }
+                    },
+                    {
+                      "id": "42f9004d-2613-4b7a-8ac2-033239f4c12e",
+                      "label": "",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Space to make up your own questions"
+                      }
+                    },
+                    {
+                      "id": "f5e37faf-c878-49cd-a452-6d55668ff499",
+                      "label": "",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Space to make up your own questions"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f5a9a2b9-8da5-452a-a09d-077b40ab20c6",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9714cd45-9a7f-410b-9d1e-7811032d690a",
+                  "label": "LINES",
+                  "blocks": [
+                    {
+                      "id": "92e53a18-729c-4605-9741-f5174f109452",
+                      "label": "Text",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3b937c31-7e99-46ac-915e-8b7989f403fc",
+                      "label": "Text",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "0eb11b20-2e2e-49bd-978a-f9694b1b3a8f",
+                      "label": "Text",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "addcf255-e359-4afb-acf6-433a42afa3fc",
+                  "label": "VEILS",
+                  "blocks": [
+                    {
+                      "id": "db6ae49e-7721-4d24-9342-1afb37cdc563",
+                      "label": "Text",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f36efb53-5880-4161-a76e-557d9e22962e",
+                      "label": "Text",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c528e48d-3655-428a-bbe0-81bca82b0575",
+                      "label": "Text",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "741458af-f05a-4898-8476-86903ec23ed6",
+                  "label": "Questions (p.8)",
+                  "blocks": [
+                    {
+                      "id": "a1916ca7-59b2-4cb3-98b9-0610a6dc6c30",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "<b>As a Trade Envoy:</b><br>•\tYou may not ask a question of this Settlement already asked by another Trade Envoy. \n<br>•\tYou may not ask the same question twice in a given game or campaign.<br><b><br>As a Settlement:<br></b>•\tYou may not ask a Trade Envoy the same question you asked another Trade Envoy.\n<br>•\tYou may not ask a Trade Envoy the same question they were asked by another Settlement.<br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "f07f2674-78d7-4282-af9d-f55c86dc36cf",
+                  "label": "Free Play &amp; Flashbacks",
+                  "blocks": [
+                    {
+                      "id": "7586acf9-992f-4c01-8caa-e0a5a4c41475",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "<b>Free Play (p.7)\n</b><br>Free-form role play exploring a scene, usually triggered by a question or answer. Remember the tables lines and veils and to respect the Envoy’s agency.\n<br><br><b>Flashback (p.9)\n</b><br>It is time for everyone to take a moment and listen while the Trade Envoy or Settlement describes either a scene only they participated in or a cherished memory of a loved one.<br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2b531578-8058-49e9-b113-2bcdc4fb5033",
+                  "label": "Play Cycle (p.11)",
+                  "blocks": [
+                    {
+                      "id": "207bb308-9e10-4678-af83-89d4103a0020",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "<b>1.</b> One player plays a Settlement, everyone else plays Trade Envoys.\n<br><b>2.</b> Each Trade Envoy will arrive one at a time, following steps 3-8.\n<br><b>3.</b> The Settlement describes what an Envoy would see as they approach.\n<br><b>4.</b> Approaching Trade Envoy describes what their character and caravan.\n<br><b>5.</b> Free play may or may not result.\n<br><b>6.</b> Trade Envoy asks a question of the Settlement. Settlement engages in free play, provide a flashback or simply give an evocative description.\n<br><b>7.</b> Trade Envoy may engage with the Settlement’s response in free play.\n<br><b>8.</b> Settlement asks Trade Envoy one question. Trade Envoy engages in free play or triggers a flashback.\n<br><b>9.</b> Once every Trade Envoy has asked and answered a question, we move on to the trade negotiations.\n<br><b>10.</b> Allow any last free play in the current Settlement. A new player takes on the Settlement role and the cycle begins again.<br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "ecd575b2-aec5-4b07-88ce-6f4187f6c7da",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "194b9d97-7c61-40c7-9c8b-1a7cd3e76b45",
+                      "label": "Safety &amp; Consent",
+                      "type": "Text",
+                      "value": "It’s important to remember that everyone is a unique individual that has lived their own life; everyone has their own fears, histories and triggers. When a group of people get together to play games without considering this, it can lead to problems that range from\nuncomfortable situations to complete retraumatization.\n\nTo help avoid this, part of character creation involves filling out a lines and veils sheet so people can indicate what is comfortable for them to have in the game, and what is not. It also lets them limit how much exposure to the stimulus is okay.\n\nA line is a hard limit; it means you don’t want this in the game at all. You don’t want it referenced or hinted at; even happening “off camera” isn’t something you are comfortable with.\n\nA veil is something that you are not comfortable experiencing in detail or as a focus of the game, but some exposure is okay. These are the sort of things that get mentioned in passing, happen “off camera” or fade to black.\n\nI find these tools to work best in conjunction with something like the X-Card by John Stavropoulos or Script Change by Beau Jágr Sheldon, which provide additional tools to stop or affect the action happening at the table.\n\n<b>Script Change: https://briebeau.itch.io/script-change\n\nX-Card: https://tinyurl.com/ttrpgxcard</b>\n\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "e3461976-6f94-4609-97c7-c0eda1523dfd",
+                      "label": "Anonomity",
+                      "type": "Text",
+                      "value": "Some people may not be comfortable with revealing their traumas or triggers to their group; that is completely fine. No one owes you their trauma or fears. To combat this, we ask that the default is an anonymous survey.\r\n\nEveryone will fill out their surveys and pass them to a single person, determined by whatever way is convenient for your group. That person will make sure to thoroughly mix them up while they are face down and then flip them over. Using those forms, that person will then compile them all together into a master list on a clean form. They will then pass them along to the next person so they can do the same.\n\nIn the end, everyone will have a lines and veils sheet with all of the guidelines on it.\r\n\nIf no one has circled that they prefer to remain anonymous, then you may feel free to ask clarifying questions about a line or veil.\r\n\nIf even one person indicates that they prefer to remain anonymous, everyone should do their best to remain anonymous to protect their fellow players\n\r\n",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "REFERENCES\n"
+    }
+  ],
+  "version": 6,
+  "theme": {
+    "pageHeadingFontWeight": "900",
+    "sectionHeadingFontWeight": "bolder",
+    "sectionHeadingFontSize": 1.875,
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@100;400;800&family=Black+Ops+One&family=Chelsea+Market&family=Gugi&family=Kelly+Slab&family=Ruslan+Display&family=Slackey&display=swap');",
+    "sectionHeadingFontFamily": "Big Shoulders Stencil Display",
+    "labelFontFamily": "Big Shoulders Stencil Display",
+    "labelFontWeight": "600",
+    "infoTextFontSize": 0.75,
+    "backgroundColor": "#d4d4d4"
+  },
+  "fariType": "character"
+}

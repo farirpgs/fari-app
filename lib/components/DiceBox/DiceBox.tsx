@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import Grid from "@mui/material/Grid";
 import Grow from "@mui/material/Grow";
-import Popper from "@mui/material/Popper";
+import Popover from "@mui/material/Popover";
 import { useTheme } from "@mui/material/styles";
 import Tooltip, { TooltipProps } from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
@@ -189,6 +189,18 @@ export const DiceBox: React.FC<IProps> = (props) => {
     );
   }
 
+  function handlePopoverOpen(
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) {
+    setAnchorEl(event.target);
+    setOpen(true);
+  }
+
+  function handlePopoverClose() {
+    setAnchorEl(null);
+    setOpen(false);
+  }
+
   return (
     <Box
       display="flex"
@@ -198,47 +210,36 @@ export const DiceBox: React.FC<IProps> = (props) => {
     >
       {renderDice()}
       {!props.disableTooltip && (
-        <Popper
-          open={!!anchorEl && (props.tooltipOpen ?? open)}
+        <Popover
+          open={!!anchorEl && tooltipContent && (props.tooltipOpen ?? open)}
+          disableScrollLock
+          disableRestoreFocus
           anchorEl={anchorEl}
-          transition
-          placement={props.tooltipPlacement}
+          sx={{
+            pointerEvents: "none",
+            marginLeft: "1rem",
+          }}
+          onClose={handlePopoverClose}
           className={css({
             zIndex: zIndex.modal,
           })}
-          modifiers={[
-            {
-              name: "flip",
-              enabled: false,
-            },
-            {
-              name: "offset",
-              options: {
-                offset: [0, 16],
-              },
-            },
-            {
-              name: "preventOverflow",
-              enabled: true,
-              options: {
-                boundariesElement: "viewport",
-              },
-            },
-          ]}
+          anchorOrigin={{
+            vertical: "center",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "center",
+            horizontal: "left",
+          }}
         >
-          {({ TransitionProps }) => (
-            <Grow {...TransitionProps}>
-              <Box
-                // m="1rem"
-                onContextMenu={(e) => {
-                  e.preventDefault();
-                }}
-              >
-                {tooltipContent}
-              </Box>
-            </Grow>
-          )}
-        </Popper>
+          <Box
+            onContextMenu={(e) => {
+              e.preventDefault();
+            }}
+          >
+            {tooltipContent}
+          </Box>
+        </Popover>
       )}
     </Box>
   );
@@ -247,18 +248,13 @@ export const DiceBox: React.FC<IProps> = (props) => {
     return (
       <Box
         onMouseEnter={(event) => {
-          setAnchorEl(event.target);
-          setOpen(true);
+          handlePopoverOpen(event);
         }}
-        onMouseLeave={(event) => {
-          setAnchorEl(event.target);
-          setOpen(false);
+        onMouseLeave={() => {
+          handlePopoverClose();
         }}
       >
         <ButtonBase
-          ref={(p) => {
-            setAnchorEl(p);
-          }}
           className={css({
             color: diceTextColors.primary,
           })}

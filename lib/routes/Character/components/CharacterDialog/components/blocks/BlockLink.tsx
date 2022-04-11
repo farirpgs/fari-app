@@ -103,7 +103,13 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
           ) : (
             <>
               {isValid && props.block.value !== "" ? (
-                <AppLink to={props.block.value} target="_blank">
+                <AppLink
+                  to={props.block.value}
+                  target="_blank"
+                  sx={{
+                    lineHeight: "normal",
+                  }}
+                >
                   {linkText}
                 </AppLink>
               ) : (

@@ -4,10 +4,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
-import Grow from "@mui/material/Grow";
 import IconButton from "@mui/material/IconButton";
-import Paper from "@mui/material/Paper";
-import Popper from "@mui/material/Popper";
+import Popover, { PopoverOrigin } from "@mui/material/Popover";
 import { useTheme } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
@@ -26,6 +24,9 @@ export function DiceMenu(props: {
   ctaLabel?: string;
   commands: Array<IDiceCommandSetOption>;
   showPoolToggle: boolean;
+  anchorOrigin: PopoverOrigin;
+  transformOrigin: PopoverOrigin;
+  sx?: React.CSSProperties;
   onCtaClick?(): void;
   onClose?(): void;
   onClear?(): void;
@@ -38,123 +39,110 @@ export function DiceMenu(props: {
   const { t } = useTranslate();
   const diceManager = useContext(DiceContext);
 
-  return <>{renderPopper()}</>;
+  return <>{renderPopover()}</>;
 
-  function renderPopper() {
+  function renderPopover() {
     return (
-      <Popper
+      <Popover
         open={props.open}
         anchorEl={props.anchorEl}
-        transition
-        // placement="top"
-        style={{ zIndex: zIndex.diceFab }}
-        modifiers={[
-          {
-            name: "offset",
-            options: {
-              offset: [0, 16],
-            },
-          },
-        ]}
+        disableScrollLock
+        sx={props.sx}
+        onClose={() => {
+          props.onClose?.();
+        }}
+        anchorOrigin={props.anchorOrigin}
+        transformOrigin={props.transformOrigin}
       >
-        {({ TransitionProps }) => (
-          <Grow {...TransitionProps}>
-            <Box
-              className={css({
-                padding: "0 1rem",
-                maxWidth: "90vw",
-                zIndex: zIndex.diceFab,
-              })}
-              onContextMenu={(e) => {
-                e.preventDefault();
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            >
-              <Paper elevation={6}>
-                <Box maxHeight="70vh" overflow="auto">
-                  <Box p="1rem">
-                    {renderCommandSetHeader("Fate")}
-                    {renderOptions([
-                      CommmandSetOptions["4dF"],
-                      CommmandSetOptions["1dF"],
-                    ])}
-                    {renderCommandSetHeader("D20s")}
-                    {renderOptions([
-                      CommmandSetOptions["1d4"],
-                      CommmandSetOptions["1d6"],
-                      CommmandSetOptions["1d8"],
-                      CommmandSetOptions["1d10"],
-                      CommmandSetOptions["1d12"],
-                      CommmandSetOptions["1d20"],
-                      CommmandSetOptions["1d100"],
-                    ])}
-                    {renderCommandSetHeader("Misc")}
-                    {renderOptions([
-                      CommmandSetOptions["coin"],
-                      CommmandSetOptions["card"],
-                      CommmandSetOptions["2d6"],
-                    ])}
+        <Box
+          className={css({
+            padding: "0 1rem",
+            maxWidth: "90vw",
+            zIndex: zIndex.diceFab,
+          })}
+          onContextMenu={(e) => {
+            e.preventDefault();
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
+          <Box maxHeight="70vh" overflow="auto">
+            <Box p="1rem">
+              {renderCommandSetHeader("Fate")}
+              {renderOptions([
+                CommmandSetOptions["4dF"],
+                CommmandSetOptions["1dF"],
+              ])}
+              {renderCommandSetHeader("D20s")}
+              {renderOptions([
+                CommmandSetOptions["1d4"],
+                CommmandSetOptions["1d6"],
+                CommmandSetOptions["1d8"],
+                CommmandSetOptions["1d10"],
+                CommmandSetOptions["1d12"],
+                CommmandSetOptions["1d20"],
+                CommmandSetOptions["1d100"],
+              ])}
+              {renderCommandSetHeader("Misc")}
+              {renderOptions([
+                CommmandSetOptions["coin"],
+                CommmandSetOptions["card"],
+                CommmandSetOptions["2d6"],
+              ])}
 
-                    {(props.onClear || props.onCtaClick) && (
-                      <Box mt="1.5rem">
-                        <Grid container justifyContent="center" spacing={2}>
-                          {props.showPoolToggle && (
-                            <Grid item>
-                              <FormControlLabel
-                                control={
-                                  <Switch
-                                    checked={
-                                      diceManager.state.options.listResults
-                                    }
-                                    onChange={() => {
-                                      diceManager.actions.setOptions({
-                                        listResults:
-                                          !diceManager.state.options
-                                            .listResults,
-                                      });
-                                    }}
-                                    color="secondary"
-                                  />
-                                }
-                                label={t("dice-fab.pool")}
-                              />
-                            </Grid>
-                          )}
-                          {props.onClear && (
-                            <Grid item>
-                              <Button
-                                color="secondary"
-                                variant="text"
-                                onClick={props.onClear}
-                              >
-                                {"Reset"}
-                              </Button>
-                            </Grid>
-                          )}
-
-                          {props.onCtaClick && (
-                            <Grid item>
-                              <Button
-                                color="secondary"
-                                variant="contained"
-                                onClick={props.onCtaClick}
-                              >
-                                {props.ctaLabel}
-                              </Button>
-                            </Grid>
-                          )}
-                        </Grid>
-                      </Box>
+              {(props.onClear || props.onCtaClick) && (
+                <Box mt="1.5rem">
+                  <Grid container justifyContent="center" spacing={2}>
+                    {props.showPoolToggle && (
+                      <Grid item>
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              checked={diceManager.state.options.listResults}
+                              onChange={() => {
+                                diceManager.actions.setOptions({
+                                  listResults:
+                                    !diceManager.state.options.listResults,
+                                });
+                              }}
+                              color="secondary"
+                            />
+                          }
+                          label={t("dice-fab.pool")}
+                        />
+                      </Grid>
                     )}
-                  </Box>
+                    {props.onClear && (
+                      <Grid item>
+                        <Button
+                          color="secondary"
+                          variant="text"
+                          onClick={props.onClear}
+                        >
+                          {"Reset"}
+                        </Button>
+                      </Grid>
+                    )}
+
+                    {props.onCtaClick && (
+                      <Grid item>
+                        <Button
+                          color="secondary"
+                          variant="contained"
+                          onClick={props.onCtaClick}
+                        >
+                          {props.ctaLabel}
+                        </Button>
+                      </Grid>
+                    )}
+                  </Grid>
                 </Box>
-              </Paper>
+              )}
             </Box>
-          </Grow>
-        )}
-      </Popper>
+          </Box>
+        </Box>
+      </Popover>
     );
   }
 

@@ -109,6 +109,20 @@ export const DiceFab: React.FC<IProps> = (props) => {
                 anchorEl={anchorEl}
                 commands={diceManager.state.commandGroups}
                 showPoolToggle
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}
+                transformOrigin={{
+                  vertical: "bottom",
+                  horizontal: "center",
+                }}
+                sx={{
+                  marginTop: "-1rem",
+                }}
+                onClose={() => {
+                  handleMenuClose();
+                }}
                 onClear={handleClear}
                 onDiceCommandChange={diceManager.actions.setCommandSets}
               />

@@ -15,7 +15,7 @@ import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import discord from "../../../images/services/discord.png";
 import lokalise from "../../../images/services/lokalise.png";
-import { RouterLink } from "../../components/AppLink/AppLink";
+import { AppButtonLink, RouterLink } from "../../components/AppLink/AppLink";
 import { ConditionalWrapper } from "../../components/ConditionalWrapper/ConditionalWrapper";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Kofi } from "../../components/Kofi/Kofi";
@@ -403,7 +403,7 @@ export const HomeRoute: React.FC<{}> = () => {
             src="https://img.icons8.com/plasticine/100/000000/contract.png"
           />
         ),
-        to: "/fari-wiki",
+        to: "https://fari.games/en/resources/fari-rpgs/fari-app-wiki",
       },
       {
         label: t("home-route.cards.fari-games.title"),
@@ -821,7 +821,7 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                       color="secondary"
                       variant="outlined"
                       size="large"
-                      component={RouterLink}
+                      component={AppButtonLink}
                       to={card.to}
                     >
                       {card.ctaLabel}
