@@ -42,8 +42,7 @@ export function TldrawWriter(props: {
     if (dirtyRef.current) {
       const shapesObject = Object.fromEntries(shapesRef.current.entries());
       const bindingsObject = Object.fromEntries(bindingsRef.current.entries());
-      console.log("shapesObject", shapesObject);
-      console.log("bindingsObject", bindingsObject);
+
       props.onChange?.({
         shapes: shapesObject,
         bindings: bindingsObject,
@@ -64,7 +63,7 @@ export function TldrawWriter(props: {
     bindings: Record<string, TDBinding | undefined>
   ) {
     dirtyRef.current = true;
-    console.log("change", shapes);
+
     Object.entries(shapes).forEach(([id, shape]) => {
       if (!shape) {
         shapesRef.current.delete(id);
@@ -83,19 +82,17 @@ export function TldrawWriter(props: {
   }
 
   return (
-    <Box position="relative" width="100%" height="600px">
-      <Tldraw
-        showPages={false}
-        showMenu={false}
-        onChangePage={(app, shapes, bindings) => {
-          handleTldrawChange(app, shapes, bindings);
-        }}
-        onMount={(app) => {
-          handleTldrawMount(app);
-        }}
-        {...(props.tldrawProps ?? {})}
-      />
-    </Box>
+    <Tldraw
+      showPages={false}
+      showMenu={false}
+      onChangePage={(app, shapes, bindings) => {
+        handleTldrawChange(app, shapes, bindings);
+      }}
+      onMount={(app) => {
+        handleTldrawMount(app);
+      }}
+      {...(props.tldrawProps ?? {})}
+    />
   );
 }
 
@@ -109,15 +106,13 @@ export function TldrawReader(props: { state: IDrawingAreaState }) {
   }, [app, props.state.shapes, props.state.bindings]);
 
   return (
-    <Box position="relative" width="100%" height="600px">
-      <Tldraw
-        onMount={(app) => {
-          setApp(app);
-        }}
-        showPages={false}
-        readOnly
-      />
-    </Box>
+    <Tldraw
+      onMount={(app) => {
+        setApp(app);
+      }}
+      showPages={false}
+      readOnly
+    />
   );
 }
 
