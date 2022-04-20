@@ -1,6 +1,7 @@
 import { css } from "@emotion/css";
 import { useMyPresence } from "@liveblocks/react";
 import React, { useContext, useEffect, useState } from "react";
+import { useZIndex } from "../../../../constants/zIndex";
 import { PlayCursorMode } from "../../consts/PlayCursorMode";
 import { SessionPresenceUpdaterContext } from "../../contexts/SessionPresenceContext";
 import {
@@ -20,6 +21,7 @@ export function PlayersPresence() {
   const [presence] = useMyPresence<IPlayerPresence>();
   const myWindowCursor = useMyWindowLiveCursor();
   const windowCursors = useWindowLiveCursors();
+  const zIndex = useZIndex();
 
   useEffect(() => {
     function onKeyUp(e: KeyboardEvent) {
@@ -33,6 +35,10 @@ export function PlayersPresence() {
               rollOutput: null,
             };
           } else {
+            sessionPresenceUpdater.actions.updateMyPresence({
+              message: "",
+              rollOutput: null,
+            });
             return { mode: PlayCursorMode.Hidden };
           }
         });
@@ -65,9 +71,10 @@ export function PlayersPresence() {
     <div
       className={css({
         label: "PlayersPresence",
-        position: "absolute",
+        position: "fixed",
         top: 0,
         left: 0,
+        zIndex: zIndex.cursor,
       })}
     >
       {windowCursors.map((cursor) => {
