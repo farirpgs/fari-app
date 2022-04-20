@@ -57,6 +57,7 @@ import { Icons } from "../../domains/Icons/Icons";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { useElementWidth } from "../../hooks/useElementWidth/useElementWidth";
 import { LazyState } from "../../hooks/useLazyState/useLazyState";
+import { useLightBackground } from "../../hooks/useLightBackground/useLightBackground";
 import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
 import {
   IIndexCard,
@@ -132,8 +133,9 @@ export const Session: React.FC<IProps> = (props) => {
 
   const charactersManager = useContext(CharactersContext);
   const myBinderManager = useContext(MyBinderContext);
-
+  const [characterIdCard, setCharacterIdCard] = useState<string>("");
   const isGM = !props.idFromParams;
+  const lightBackground = useLightBackground();
 
   useBlockReload(sceneManager.state.dirty);
 
@@ -399,17 +401,24 @@ export const Session: React.FC<IProps> = (props) => {
     return (
       <Fade in>
         <Box>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} wrap={isSmall ? "wrap" : "nowrap"}>
             <Grid
               item
-              className={css({
-                flex: isSmall ? "1 1 auto" : "0 1 auto",
-                minWidth: "25rem",
-              })}
+              sx={{
+                width: isSmall ? "100%" : "25rem",
+                flex: "0 0 auto",
+              }}
             >
               {renderSidePanel()}
             </Grid>
-            <Grid item xs={12} md>
+            <Grid
+              item
+              xs
+              sx={{
+                width: isSmall ? "100%" : undefined,
+                flex: "1 0 auto",
+              }}
+            >
               {renderSession()}
             </Grid>
           </Grid>
@@ -795,61 +804,129 @@ export const Session: React.FC<IProps> = (props) => {
           characterSheet: characters[characterId],
         };
       })
+      .filter((player) => {
+        const isVisible = isGM || !player.private;
+        return isVisible;
+      })
       .sort((a, b) => {
         return a.id === props.userId ? -1 : b.id === props.userId ? 1 : 0;
       });
+
+    const hasCharacters = playersWithCharacterSheets.length > 0;
+    const currentCardId =
+      characterIdCard || playersWithCharacterSheets[0]?.characterSheet.id || "";
     return (
       <>
         <Box>
-          <Box
-            className={css({
-              display: "flex",
-              flexFlow: "row",
-              flexWrap: "nowrap",
-              overflow: "hidden",
-              overflowX: "auto",
-            })}
-          >
-            {showEmptyWarnings()}
-            <MiniThemeContext.Provider value={miniTheme}>
-              {playersWithCharacterSheets.map((player, index) => {
-                const isMe = props.userId === player.id;
-                const isVisible = isGM || !player.private;
-                const canControl = isGM || isMe;
-
-                if (!isVisible) {
-                  return null;
-                }
-
-                return (
+          {showEmptyWarnings()}
+          {hasCharacters && (
+            <Grid container spacing={1} wrap={isSmall ? "wrap" : "nowrap"}>
+              <Grid item xs={12} md={6} lg={6} xl={3}>
+                <Box
+                  sx={{
+                    p: ".5rem",
+                    background: lightBackground,
+                    height: "100%",
+                  }}
+                >
                   <Box
-                    key={player?.id || index}
                     sx={{
-                      display: "inline-block",
-                      marginBottom: "1rem",
-                      width: characterCardWidth,
+                      paddingTop: ".5rem",
+                      paddingBottom: ".5rem",
+                      marginLeft: ".5rem",
+                      marginRight: ".5rem",
+                      borderBottom: `1px solid ${theme.palette.divider}`,
                     }}
                   >
-                    <CharacterCard
-                      key={player?.id || index}
-                      readonly={!canControl}
-                      playerName={player.playerName}
-                      characterSheet={player.characterSheet}
-                      onCharacterDialogOpen={() => {
-                        setCharacterDialogPlayerId(player.id);
+                    <Typography
+                      sx={{
+                        fontSize: "1rem",
                       }}
-                      onChange={(updatedCharacter) => {
-                        handleUpdateCharacter(player.id, updatedCharacter);
-                      }}
-                      onRoll={(newDiceRollResult) => {
-                        handleSetPlayerRoll(player.id, newDiceRollResult);
-                      }}
-                    />
+                      fontWeight={theme.typography.fontWeightBold}
+                      color="secondary"
+                    >
+                      {t("scenes.session.characterCards.title")} (
+                      {playersWithCharacterSheets.length})
+                    </Typography>
                   </Box>
-                );
-              })}
-            </MiniThemeContext.Provider>
-          </Box>
+                  <Box p=".5rem">
+                    <Tabs
+                      orientation="vertical"
+                      variant="scrollable"
+                      textColor="secondary"
+                      indicatorColor="secondary"
+                      value={currentCardId}
+                      onChange={(event, value) => {
+                        setCharacterIdCard(value);
+                      }}
+                      sx={{ borderRight: 1, borderColor: "divider" }}
+                    >
+                      {playersWithCharacterSheets.map((player) => {
+                        return (
+                          <Tab
+                            key={player.id}
+                            label={player.playerName}
+                            value={player.characterSheet.id}
+                          />
+                        );
+                      })}
+                    </Tabs>
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid item xs>
+                <Box>
+                  <TabContext value={currentCardId}>
+                    <TabPanel value="" />
+                    <MiniThemeContext.Provider value={miniTheme}>
+                      {playersWithCharacterSheets.map((player, index) => {
+                        const isMe = props.userId === player.id;
+                        const canControl = isGM || isMe;
+                        return (
+                          <TabPanel
+                            sx={{
+                              padding: "0",
+                            }}
+                            key={player.characterSheet.id}
+                            value={player.characterSheet.id}
+                          >
+                            <Box
+                              sx={{
+                                display: "inline-block",
+                                width: characterCardWidth,
+                                px: ".5rem",
+                              }}
+                            >
+                              <CharacterCard
+                                readonly={!canControl}
+                                playerName={player.playerName}
+                                characterSheet={player.characterSheet}
+                                onCharacterDialogOpen={() => {
+                                  setCharacterDialogPlayerId(player.id);
+                                }}
+                                onChange={(updatedCharacter) => {
+                                  handleUpdateCharacter(
+                                    player.id,
+                                    updatedCharacter
+                                  );
+                                }}
+                                onRoll={(newDiceRollResult) => {
+                                  handleSetPlayerRoll(
+                                    player.id,
+                                    newDiceRollResult
+                                  );
+                                }}
+                              />
+                            </Box>
+                          </TabPanel>
+                        );
+                      })}
+                    </MiniThemeContext.Provider>
+                  </TabContext>
+                </Box>
+              </Grid>
+            </Grid>
+          )}
         </Box>
       </>
     );
@@ -1111,10 +1188,6 @@ export function Scene(props: {
     sceneManager.actions.loadScene(newScene);
   };
 
-  const handleCloneAndLoadScene = (newScene: IScene) => {
-    sceneManager.actions.cloneAndLoadNewScene(newScene);
-  };
-
   return (
     <>
       {renderSavedSnackBar()}
@@ -1214,17 +1287,6 @@ export function Scene(props: {
                 }}
               >
                 {t("play-route.load-scene")}
-              </Button>
-              <Button
-                color="secondary"
-                onClick={() => {
-                  myBinderManager.actions.open({
-                    folder: "scenes",
-                    callback: handleCloneAndLoadScene,
-                  });
-                }}
-              >
-                {t("play-route.clone-and-load-scene")}
               </Button>
             </ButtonGroup>
           </Grid>

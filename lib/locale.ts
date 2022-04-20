@@ -294,6 +294,7 @@ export type ITranslationKeys =
   | "player-row.remove-player-confirmation"
   | "player-row.show-to-players"
   | "player-row.swap-character-sheet"
+  | "scenes.session.characterCards.title"
   | "story-builder-route.meta.description"
   | "story-builder-route.meta.title"
   | "story-dice-route.meta.description"
