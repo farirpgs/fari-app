@@ -29,8 +29,7 @@ export default function CursorWithMessage(props: {
   onRollOutputChange?(roll: IPlayerCursorRollOutput | null): void;
   onMessageChange?(message: string): void;
 }) {
-  const [mode, setMode] = useState<"message" | "dice">("message");
-  const textPlaceholder = mode === "message" ? "Type a message..." : "2d6 + 2";
+  const textPlaceholder = "Type a message...";
   const zIndex = useZIndex();
   const theme = useTheme();
   const color = props.color || DefaultPlayerColor;
@@ -44,6 +43,7 @@ export default function CursorWithMessage(props: {
   const shouldRenderPopover =
     props.message || props.rollOutput || !props.readonly;
 
+  const [hasDiceError, setHasDiceError] = useState(false);
   useEffect(() => {
     topTenLatestRollCommandsSingleton = topTenLatestRollCommands;
   }, [topTenLatestRollCommands]);
@@ -61,23 +61,13 @@ export default function CursorWithMessage(props: {
       setTopTenLatestRollCommands(uniqueCommandsArray);
       setCommandtoPopIndex(0);
     } catch (error) {
-      props.onRollOutputChange?.(null);
+      setHasDiceError(true);
     }
   }
 
   function handleMessageChange(message: string) {
     props.onMessageChange?.(message);
     setCommandtoPopIndex(0);
-  }
-
-  function handleModeChange() {
-    if (mode === "message") {
-      setMode("dice");
-      handleMessageChange("");
-    } else {
-      setMode("message");
-      handleMessageChange("");
-    }
   }
 
   function handleRollHistoryPrevious() {
@@ -181,6 +171,8 @@ export default function CursorWithMessage(props: {
               background: "transparent",
               outline: "none",
               minWidth: "15rem",
+              maxHeight: "10rem",
+              overflow: "hidden",
             })}
             noDelay
             value={props.message || ""}
@@ -188,21 +180,20 @@ export default function CursorWithMessage(props: {
               handleMessageChange(message);
             }}
             border
-            borderColor={textColor}
+            borderColor={
+              hasDiceError ? miniTheme.muiTheme.palette.error.main : textColor
+            }
             onKeyDown={(e) => {
-              if (e.key === "Tab") {
-                e.preventDefault();
-                e.stopPropagation();
-                handleModeChange();
-              } else if (e.key === "Enter" && mode === "dice") {
+              setHasDiceError(false);
+              if (e.key === "Enter") {
                 e.preventDefault();
                 e.stopPropagation();
                 handleDiceRoll();
-              } else if (e.key === "ArrowUp" && mode === "dice") {
+              } else if (e.key === "ArrowUp") {
                 e.preventDefault();
                 e.stopPropagation();
                 handleRollHistoryPrevious();
-              } else if (e.key === "ArrowDown" && mode === "dice") {
+              } else if (e.key === "ArrowDown") {
                 e.preventDefault();
                 e.stopPropagation();
                 handleRollHistoryNext();
@@ -210,7 +201,6 @@ export default function CursorWithMessage(props: {
             }}
             readonly={props.readonly}
             placeholder={textPlaceholder}
-            // maxLength={50}
           />
         </ThemedLabel>
         {!props.readonly && (
@@ -228,16 +218,8 @@ export default function CursorWithMessage(props: {
               gutterBottom
               sx={{ color: textColor, display: "block" }}
             >
-              Press <KeyboardKey>Tab</KeyboardKey>
-              {" to enter dice mode."}.
-            </Typography>
-            <Typography
-              variant="caption"
-              gutterBottom
-              sx={{ color: textColor, display: "block" }}
-            >
               Press <KeyboardKey>Enter</KeyboardKey>
-              {" to roll."}
+              {" to roll dice command."}
             </Typography>
           </Box>
         )}
