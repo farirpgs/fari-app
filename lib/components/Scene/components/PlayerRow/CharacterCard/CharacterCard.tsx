@@ -61,7 +61,6 @@ export const CharacterCard: React.FC<{
       className={cx(
         css({
           width: width,
-          padding: "0 .5rem 1.5rem .5rem",
         })
       )}
     >
@@ -95,31 +94,6 @@ export const CharacterCard: React.FC<{
               </Grid>
               <Grid item>
                 <Grid container spacing={1}>
-                  {props.onCharacterDialogOpen && (
-                    <Grid item>
-                      <Tooltip title={t("player-row.open-character-sheet")}>
-                        <span>
-                          <IconButton
-                            size="small"
-                            data-cy="character-card.open-character-sheet"
-                            onClick={() => {
-                              props.onCharacterDialogOpen?.();
-                              logger.track(
-                                "session.open_character_sheet_from_card"
-                              );
-                            }}
-                          >
-                            <LaunchIcon
-                              className={css({
-                                width: "1.5rem",
-                                height: "1.5rem",
-                              })}
-                            />
-                          </IconButton>
-                        </span>
-                      </Tooltip>
-                    </Grid>
-                  )}
                   {props.onChange && !props.readonly && (
                     <Grid item>
                       <Tooltip title={t("character-dialog.save")}>
@@ -140,6 +114,31 @@ export const CharacterCard: React.FC<{
                                   ? "secondary"
                                   : undefined
                               }
+                              className={css({
+                                width: "1.5rem",
+                                height: "1.5rem",
+                              })}
+                            />
+                          </IconButton>
+                        </span>
+                      </Tooltip>
+                    </Grid>
+                  )}
+                  {props.onCharacterDialogOpen && (
+                    <Grid item>
+                      <Tooltip title={t("player-row.open-character-sheet")}>
+                        <span>
+                          <IconButton
+                            size="small"
+                            data-cy="character-card.open-character-sheet"
+                            onClick={() => {
+                              props.onCharacterDialogOpen?.();
+                              logger.track(
+                                "session.open_character_sheet_from_card"
+                              );
+                            }}
+                          >
+                            <LaunchIcon
                               className={css({
                                 width: "1.5rem",
                                 height: "1.5rem",
