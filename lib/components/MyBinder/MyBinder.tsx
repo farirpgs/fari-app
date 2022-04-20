@@ -885,12 +885,6 @@ function Element(props: {
                 {listItem.formatDate(props.element.lastUpdated)}
               </span>
             </Box>
-            <Box
-              component="span"
-              sx={{ mt: ".5rem", display: { xs: "block", md: "none" } }}
-            >
-              {secondaryActions}
-            </Box>
           </>
         }
       />
