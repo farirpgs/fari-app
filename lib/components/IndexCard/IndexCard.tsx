@@ -152,9 +152,15 @@ export const IndexCard: React.FC<
     indexCard: props.indexCard,
     onChange: props.onChange,
   });
+  const indexCardColor =
+    theme.palette.mode === "light"
+      ? indexCardManager.state.indexCard.color
+      : darken(indexCardManager.state.indexCard.color, 0.5);
+
   const miniTheme = useMiniTheme({
-    enforceBackground: indexCardManager.state.indexCard.color,
+    enforceBackground: indexCardColor,
   });
+
   const subCardsContainerRef = useRef<HTMLElement>(null);
   const subCardsContainerWidth = useElementWidth(subCardsContainerRef);
   const numberOfColumnsForSubCardsMasonry = Math.floor(
@@ -166,11 +172,7 @@ export const IndexCard: React.FC<
   const [advanced, setAdvanced] = useState(false);
   const open = !props.indexCardHiddenRecord?.[props.indexCard.id];
 
-  const paper = useTextColors(
-    theme.palette.mode === "light"
-      ? indexCardManager.state.indexCard.color
-      : darken(indexCardManager.state.indexCard.color, 0.5)
-  );
+  const paper = useTextColors(indexCardColor);
 
   const defaultButtonTheme = useThemeFromColor(paper.primary);
 
