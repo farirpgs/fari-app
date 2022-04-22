@@ -7,7 +7,7 @@ import Popover from "@mui/material/Popover";
 import { useTheme } from "@mui/material/styles";
 import Tooltip, { TooltipProps } from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FontFamily } from "../../constants/FontFamily";
 import { useZIndex } from "../../constants/zIndex";
 import { arraySort } from "../../domains/array/arraySort";
@@ -44,7 +44,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
   const zIndex = useZIndex();
   const diceTextColors = useTextColors(theme.palette.background.paper);
   const [open, setOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<any>(null);
+  const anchorEl = useRef<any>(null);
   const diceRollsManager = useLatestDiceRoll(props.rolls, {
     disableConfettis: props.disableConfettis ?? false,
     onRolling: props.onRolling,
@@ -98,9 +98,6 @@ export const DiceBox: React.FC<IProps> = (props) => {
       className={css({
         background: tooltipBackground,
         borderRadius: "6px",
-        maxWidth: "90vw",
-        maxHeight: "95vh",
-        overflow: "auto",
         color: tooltipColor.primary,
         padding: "1rem",
         boxShadow: theme.shadows[2],
@@ -152,7 +149,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
                             item
                             className={css({
                               fontFamily: FontFamily.Console,
-                              marginRight: "4px",
+                              // marginRight: "4px",
                             })}
                           >
                             {separator}
@@ -189,15 +186,11 @@ export const DiceBox: React.FC<IProps> = (props) => {
     );
   }
 
-  function handlePopoverOpen(
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) {
-    setAnchorEl(event.target);
+  function handlePopoverOpen() {
     setOpen(true);
   }
 
   function handlePopoverClose() {
-    setAnchorEl(null);
     setOpen(false);
   }
 
@@ -211,10 +204,10 @@ export const DiceBox: React.FC<IProps> = (props) => {
       {renderDice()}
       {!props.disableTooltip && (
         <Popover
-          open={!!anchorEl && tooltipContent && (props.tooltipOpen ?? open)}
+          open={tooltipContent && (props.tooltipOpen ?? open)}
           disableScrollLock
           disableRestoreFocus
-          anchorEl={anchorEl}
+          anchorEl={anchorEl.current}
           sx={{
             pointerEvents: "none",
             marginLeft: "1rem",
@@ -247,8 +240,9 @@ export const DiceBox: React.FC<IProps> = (props) => {
   function renderDice() {
     return (
       <Box
+        ref={anchorEl}
         onMouseEnter={(event) => {
-          handlePopoverOpen(event);
+          handlePopoverOpen();
         }}
         onMouseLeave={() => {
           handlePopoverClose();
@@ -306,11 +300,18 @@ export function DiceBoxResult(props: {
   });
   const shouldListResult =
     diceRollsManager.state.finalResult?.options.listResults ?? false;
-  const separator = shouldListResult ? "~" : "+";
+  const separator = shouldListResult ? undefined : "+";
 
   return (
     <>
-      <Grid container justifyContent="flex-start" alignItems="center">
+      <Box
+        sx={{
+          display: "flex",
+          width: "100%",
+          flexWrap: "wrap",
+          gap: ".5rem",
+        }}
+      >
         {diceRollsManager.state.finalResultRolls.map(
           (rollGroup, rollGroupIndex) => {
             const rollGroupTextColor = !props.noColor
@@ -318,7 +319,14 @@ export function DiceBoxResult(props: {
               : undefined;
 
             return (
-              <React.Fragment key={rollGroupIndex}>
+              <Box
+                key={rollGroupIndex}
+                sx={{
+                  display: "inline-flex",
+                  flexWrap: "wrap",
+                  gap: "0.25rem",
+                }}
+              >
                 {rollGroup.commandSets.map((commandSet, commandSetIndex) => {
                   const commandSetOptions = CommmandSetOptions[commandSet.id];
 
@@ -331,19 +339,24 @@ export function DiceBoxResult(props: {
                       ])
                     : commandSet.commands;
                   return (
-                    <React.Fragment key={commandSetIndex}>
-                      {commandSetIndex !== 0 && (
-                        <Grid
-                          item
+                    <Box
+                      sx={{
+                        display: "inline-flex",
+                        flexWrap: "wrap",
+                        gap: "0.25rem",
+                      }}
+                      key={commandSetIndex}
+                    >
+                      {commandSetIndex !== 0 && separator && (
+                        <Box
                           className={css({
                             label:
                               "DiceBoxResult-rollType-DiceCommand-separator",
                             display: "flex",
-                            margin: "0 4px",
                           })}
                         >
                           {separator}
-                        </Grid>
+                        </Box>
                       )}
                       {sortedCommands.map((command, commandIndex) => {
                         const isFate = command.name === "1dF";
@@ -352,98 +365,98 @@ export function DiceBoxResult(props: {
 
                         const IconForPool = commandSetOptions.icon;
                         return (
-                          <React.Fragment key={commandIndex}>
+                          <Box
+                            sx={{
+                              display: "inline-flex",
+                              flexWrap: "wrap",
+                              gap: "0.25rem",
+                            }}
+                            key={commandIndex}
+                          >
                             {commandIndex !== 0 && (
-                              <Grid
-                                item
+                              <Box
                                 className={css({
                                   label:
                                     "DiceBoxResult-rollType-DiceCommand-separator",
                                   display: "flex",
-                                  margin: "0 4px",
                                 })}
                               >
                                 {separator}
-                              </Grid>
+                              </Box>
                             )}
-                            <Grid item>
-                              <Tooltip
-                                title={
-                                  rollGroup.label
-                                    ? `${commandSet.id} (${rollGroup.label})`
-                                    : commandSet.id
-                                }
+
+                            <Tooltip
+                              title={
+                                rollGroup.label
+                                  ? `${commandSet.id} (${rollGroup.label})`
+                                  : commandSet.id
+                              }
+                            >
+                              <Box
+                                className={css({
+                                  color: rollGroupTextColor
+                                    ? rollGroupTextColor
+                                    : undefined,
+                                  borderBottom: rollGroupTextColor
+                                    ? `3px solid ${rollGroupTextColor}`
+                                    : undefined,
+                                })}
                               >
-                                <Box
-                                  className={css({
-                                    color: rollGroupTextColor
-                                      ? rollGroupTextColor
-                                      : undefined,
-                                    borderBottom: rollGroupTextColor
-                                      ? `3px solid ${rollGroupTextColor}`
-                                      : undefined,
-                                  })}
-                                >
-                                  <Grid container alignItems="center">
-                                    <Grid item>
-                                      <Box
-                                        className={css({
-                                          label:
-                                            "DiceBoxResult-rollType-DiceCommand-value",
-                                          fontFamily: isFate
-                                            ? FontFamily.Fate
-                                            : "inherit",
-                                          marginLeft: isFate
-                                            ? ".2rem"
-                                            : ".2rem",
-                                          verticalAlign: "middle",
-                                        })}
-                                      >
-                                        {diceCommandOptions.formatDetailedResult(
-                                          command.value
-                                        )}
-                                      </Box>
-                                    </Grid>
-                                    {!isFate && (
-                                      <Grid item>
-                                        <IconForPool
-                                          className={css({
-                                            display: "flex",
-                                            marginLeft: "4px",
-                                          })}
-                                        />
-                                      </Grid>
-                                    )}
+                                <Grid container alignItems="center">
+                                  <Grid item>
+                                    <Box
+                                      className={css({
+                                        label:
+                                          "DiceBoxResult-rollType-DiceCommand-value",
+                                        fontFamily: isFate
+                                          ? FontFamily.Fate
+                                          : "inherit",
+                                        marginLeft: isFate ? ".2rem" : ".2rem",
+                                        verticalAlign: "middle",
+                                      })}
+                                    >
+                                      {diceCommandOptions.formatDetailedResult(
+                                        command.value
+                                      )}
+                                    </Box>
                                   </Grid>
-                                </Box>
-                              </Tooltip>
-                            </Grid>
-                          </React.Fragment>
+                                  {!isFate && (
+                                    <Grid item>
+                                      <IconForPool
+                                        className={css({
+                                          display: "flex",
+                                          marginLeft: "4px",
+                                        })}
+                                      />
+                                    </Grid>
+                                  )}
+                                </Grid>
+                              </Box>
+                            </Tooltip>
+                          </Box>
                         );
                       })}
-                    </React.Fragment>
+                    </Box>
                   );
                 })}
                 {rollGroup.modifier != null && (
-                  <Grid item>
-                    <Box
-                      className={css({
-                        label: "DiceBoxResult-rollType-DiceCommand-modifier",
-                        // fontFamily: isFate ? FontFamily.Fate : "inherit",
-                        // marginLeft: isFate ? ".2rem" : undefined,
-                        verticalAlign: "middle",
-                      })}
-                    >
-                      &nbsp;{"+"}&nbsp;
-                      {rollGroup.modifier}
-                    </Box>
-                  </Grid>
+                  <Box
+                    className={css({
+                      label: "DiceBoxResult-rollType-DiceCommand-modifier",
+                      // fontFamily: isFate ? FontFamily.Fate : "inherit",
+                      // marginLeft: isFate ? ".2rem" : undefined,
+                      verticalAlign: "middle",
+                    })}
+                  >
+                    &nbsp;{"+"}&nbsp;
+                    {rollGroup.modifier}
+                  </Box>
                 )}
-              </React.Fragment>
+              </Box>
             );
           }
         )}
-      </Grid>
+      </Box>
     </>
   );
 }

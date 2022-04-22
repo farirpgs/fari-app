@@ -277,6 +277,7 @@ export const Session: React.FC<IProps> = (props) => {
       );
     }
   };
+
   return (
     <Page pb="6rem" isLive gameId={props.idFromParams} maxWidth="none">
       <Box px="1rem">

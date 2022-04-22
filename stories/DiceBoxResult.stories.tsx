@@ -1,3 +1,4 @@
+import Box from "@mui/material/Box";
 import { Meta, Story } from "@storybook/react";
 import React from "react";
 import { DiceBoxResult } from "../lib/components/DiceBox/DiceBox";
@@ -12,7 +13,15 @@ export default {
 
 const Template: Story<IProps> = (args, context) => (
   <StoryProvider theme={context.globals.theme}>
-    <DiceBoxResult rolls={args.rolls} />
+    <Box
+      sx={{
+        background: "#000",
+        width: "300px",
+        padding: "1rem",
+      }}
+    >
+      <DiceBoxResult rolls={args.rolls} />
+    </Box>
   </StoryProvider>
 );
 
