@@ -1,0 +1,1577 @@
+{
+  "lastUpdated": 1650077376,
+  "name": "Savage Worlds Adventure Edition Character Sheet Template",
+  "pages": [
+    {
+      "id": "7964354e-d083-44c0-ac45-2f5562e94189",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "e3b84571-09a3-4434-ad5f-dadd99b05210",
+                  "label": "INFO",
+                  "blocks": [
+                    {
+                      "id": "c40617c2-88ff-417a-bb37-40669be1e2ee",
+                      "label": "",
+                      "type": "Image",
+                      "meta": { "width": 1 },
+                      "value": ""
+                    },
+                    {
+                      "id": "7e7f06f4-974f-4699-ae6d-c8c573895853",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "79ac670e-b942-4b5f-9d85-84bff27c365d",
+                      "label": "Race",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "0cbf05fc-9bbe-4f11-b9b0-202d712117f5",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "bb4ff32e-0550-4560-91c3-74923b3eede3",
+                      "label": "Bennies",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "1835b84c-9770-4521-8b6a-b35f1164c403",
+                      "label": "Height",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "58f1f988-6e51-4894-ad1f-31b09401314e",
+                      "label": "Weight",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "7de0fc13-4ebd-4028-a61f-506ffc46a8f0",
+                      "label": "Conviction",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "4225165e-9ba8-4b25-b7a9-7d3b347ee4fa",
+                  "label": "BACKGROUND DETAILS",
+                  "blocks": [
+                    {
+                      "id": "24ff9816-e3e3-4411-b415-b72ce441eaf8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "1715b8ef-7d97-4c52-ac2e-2e01afce8a66",
+                  "label": "NOTES",
+                  "blocks": [
+                    {
+                      "id": "ac9c3423-f19f-4d36-87d5-9180453e8856",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9af60286-49bf-4454-b607-e60ccbfbfcb3",
+                      "label": "Savage Worlds | Pinnacle Entertainment Group",
+                      "type": "Link",
+                      "meta": {
+                        "hasDisplayName": true,
+                        "helperText": "Savage Worlds Adventure Edition (SWADE) © 2020 Pinnacle Entertainment Group.<br><br>*This Fari character sheet was independently designed by Discord user PistolPants#8314 and is not affiliated with the original game designers and publishers."
+                      },
+                      "value": "https://peginc.com/savage-settings/savage-worlds/"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "36f7503b-c0b1-4d7d-ab45-47895e265f14",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "bed9cdf1-9ce8-43ac-9369-e00bb389f193",
+                  "label": "DAMAGE EFFECTS",
+                  "blocks": [
+                    {
+                      "id": "615670ba-0801-452e-ab02-ea7519fc74c9",
+                      "label": "WOUNDS<br>",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "-1", "checked": false },
+                        { "label": "-2", "checked": false },
+                        { "label": "-3", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "5c1c0fb5-1bd7-4eb9-a05b-edb3bffc0ba6",
+                      "label": "INCAPACITATED<br>",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "<br>", "checked": false }]
+                    },
+                    {
+                      "id": "83043606-6ec6-4422-8c45-4810aad5ddea",
+                      "label": "FATIGUE<br>",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "-2<br>", "checked": false },
+                        { "label": "-1", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "731e1559-a65b-4d80-b6e2-373f6f7ca388",
+                      "label": "Injuries",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "a0c12b37-3846-4a7c-bcfb-93c973254ad0",
+                  "label": "DERIVED STATISTICS",
+                  "blocks": [
+                    {
+                      "id": "be3dc169-1a04-4a0b-84f7-cda2ef5dc7b8",
+                      "label": "PACE",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Standard Pace = 6 spaces x 2 yards = 12 yards",
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "d7298dab-9ef4-4b87-b780-5dbaab2f1792",
+                      "label": "PARRY",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "helperText": "= 2 + 1/2 die type value for Fighting skill (total of 2 if no Fighting Skill) + weapon/shield bonuses<br>» This is also the TN required to hit your character in hand-to-hand<br>",
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "aecf8856-f24d-4766-944b-dd7a5eb0a5f7",
+                      "label": "TOUGHNESS",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "helperText": "2 + 1/2 Vigor die value + armor (torso)<br>» Damage threshold (equal or more)",
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "74c630e8-beac-4fc6-a91d-8ce2ebeb3849",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "FOR PARRY/TOUGHNESS WHEN USING d12+mod TRAITS: add half the fixed modifier, rounded down. E.g. d12+1 » use 6 + 0, d12+2 » use 6 + 1<br>",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "aed196b6-6d21-4e0f-b208-096ffeb4016c",
+                  "label": "ATTRIBUTES",
+                  "blocks": [
+                    {
+                      "id": "e6c0b9b0-7bee-4d7d-ad4b-d98c89e01025",
+                      "label": "Agility",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "7f17fae3-0f31-4298-86e3-4cfc4246f2a2",
+                      "label": "Smarts",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "1ab5c59d-bab8-420f-a1b6-af2615feb4cb",
+                      "label": "Spirit",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "578b41df-34cc-48bf-83b9-cc26b7abf7bb",
+                      "label": "Strength",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "02e2d4fe-c9f1-4f57-8752-03c3d7090b52",
+                      "label": "Vigor",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "82a27636-ee39-42c5-af93-4d39e693fdd5",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "» FOR PASSIVE/INNATE ROLLS<br>Every attribute begins as d4. ON START OF CHARACTER: Can spend 5 pts. to level up dice for a stat (1 pt. per die size). Cannot level up over d12 in most cases (unless abilities allow for +1 mod per point).<br>",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c0945fe2-e96a-4086-b914-dd6c79cba16e",
+                  "label": "SKILLS",
+                  "blocks": [
+                    {
+                      "id": "0eb8a037-f211-49c4-bc9d-7fea138b03a0",
+                      "label": "Athletics",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "596ad976-726f-489f-bf7f-84501a2f59e3",
+                      "label": "Common Knowledge",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "9013574e-42cf-4704-aa07-85867435f588",
+                      "label": "Notice",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "06a6b909-08f1-4eeb-87fa-bb1e1a378a94",
+                      "label": "Persuasion",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "fe44c717-6d4b-47d3-9c3c-3177f00ccc14",
+                      "label": "Stealth",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "a0218b69-fdce-43bb-8c67-4ba17f8b9151",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "3267df3d-1db4-4aca-8b89-123ff4a23204",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "35d4c782-ea2b-495b-8f0a-e96f6958ad51",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "db340581-27ef-405f-b0ad-dc4dfa51185b",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "1020f98b-997b-4abe-a635-2ac186434ffd",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "2d0b0068-a67a-4b68-897e-9f71faef369f",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "ce851194-323d-4d87-8f6f-657981722e6f",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "277bd6c0-408f-4573-98b4-b965c2dfe2bb",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "854add2b-23b4-49a8-b517-3f8f34034985",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "fd6c7ed7-8c95-4e22-a604-382e8b202d20",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "c90465b9-67c5-4c67-a4b9-9968fc5f0cd4",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "98a45656-1133-427c-97c1-56779ef4bfd8",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "645f73ea-37fb-442a-b652-3acacc437e5b",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "78ff1d31-b621-47ec-aa40-fe4f173212b6",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "9442e08e-19ad-4b4f-9222-73584a5575a4",
+                      "label": "---",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "4d1f2083-08f2-4ef5-8e36-ad48cb5df8f9",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "» FOR ACTIVE ROLLS<br>Every CORE SKILL (Athletics, Common Knowledge, Notice, Persuasion, Stealth) attribute begins as d4. ON START OF CHARACTER: Can spend 12 pts. to buy skills and level up dice for a stat (1 pt. per die size). Cannot level up over d12 in most cases (unless abilities allow for +1 mod per point). UNSKILLED ATTEMPTS: If an action requires a roll but the player doesn't have the skill required, roll d4 (and Wild Die if with Wild Card) with -2 mod.",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Traits"
+    },
+    {
+      "id": "ba21444e-16a3-4b2b-bd04-f0e34110ecd2",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a47a2c81-83b4-4788-92e6-93cbaa9b8de6",
+                  "label": "GEAR",
+                  "blocks": [
+                    {
+                      "id": "429cec92-055f-406f-86e0-bf9a8fa1d4eb",
+                      "label": "Weight Carried",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "a855e4df-b72d-4683-92b3-03d877e78781",
+                      "label": "Weight Limit",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "735ac6cd-6db6-41b0-9a77-89439956f9a9",
+                      "label": "Penalty",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "ff89d6f0-b1be-4215-85b3-2aa506e074a6",
+                      "label": "Gear",
+                      "type": "Text",
+                      "value": "- \n- \n- <br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "20e4e30c-1bbd-476e-9cc5-77b155410a5d",
+                  "label": "POWERS",
+                  "blocks": [
+                    {
+                      "id": "32288e71-5ad8-40a4-9c74-412e20306528",
+                      "label": "PP",
+                      "type": "PointCounter",
+                      "meta": { "max": "0", "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "02839c3e-cbf3-4f56-b41e-ac485f30d31e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "4184fa77-af95-42b0-a1d9-597d8c721c19",
+                      "label": "Power &amp; Effect",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "83e2cd89-4575-4853-b863-6b65df75b7a6",
+                      "label": "PP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "0e702ce0-4c57-4072-9bd0-496bb44dc49d",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "8e3b030f-a76b-4a9f-9e67-d2f846cb2b05",
+                      "label": "Duration",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "539f40ba-b260-47d6-9458-4bc3162f182a",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "9ac88faf-0cd0-47e2-aed9-4c86632e5c36",
+                      "label": "Power &amp; Effect",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "75dd92d7-5849-42db-a2f2-63ac3a4d38a8",
+                      "label": "PP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "1d1026ef-1826-4d58-933e-f2b2cc898231",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "2120d6f6-7ccc-4ebd-b5b7-80dcf9d48cf3",
+                      "label": "Duration",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "5dfbd320-1617-43f1-b3c1-c19d9247e070",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "19adf1a9-cb13-4409-a2b4-afcdf69e99da",
+                      "label": "Power &amp; Effect",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "85f22c9b-b257-4d73-994a-cd375226f209",
+                      "label": "PP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "bbbd64d0-3f9c-44d5-876e-0606c40fa6ed",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "0e473a60-ee51-4df7-a805-d87d867b0191",
+                      "label": "Duration",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "b9ebb5d0-db63-47af-aa1e-5a24b78dd9df",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "865470d1-577c-4ba0-88a6-1b1087fbeca4",
+                      "label": "Power &amp; Effect",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8ab35879-e3e4-475e-8ec5-c28c08696315",
+                      "label": "PP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e647e113-3d61-4917-9ad0-883d33e3ab19",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "03929d86-cfcb-44f1-a8c8-d61c4ecf692f",
+                      "label": "Duration",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "4a7f7f73-d648-48cd-91b7-38e42ded1169",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "55a75278-7c51-4d14-a178-7d8f731c546d",
+                      "label": "Power &amp; Effect",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5caadd56-61c4-4af8-aa65-816b59dba351",
+                      "label": "PP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "32b563d8-89d7-4904-b68c-1e26859d77ab",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "c14f97d4-5f9c-451b-b6ee-6792d0cc6c58",
+                      "label": "Duration",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "19468c40-ea6f-4493-850d-78d1fc8913af",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "24f1df8f-15ae-4b2a-b4ef-9b5cc8195688",
+                      "label": "Power &amp; Effect",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "87c0de80-75c7-480e-9b4a-734b66b326e2",
+                      "label": "PP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "d7917f1f-2c08-41b4-9b01-1c8f32e05ef3",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "3551f0ae-7857-4419-9a1f-87ae8ab0248d",
+                      "label": "Duration",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "16967f59-25e9-4cf6-9538-f4da3da092dd",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "94d9b6db-5809-4921-b61c-d5289f490e24",
+                      "label": "Power &amp; Effect",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ad0fdc99-da66-400d-a963-358d9811e037",
+                      "label": "PP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "dc1f85b6-2114-4fed-a01b-7e5b84d6f375",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "66a08dbe-d1c7-412f-9bbd-c1809ad7a629",
+                      "label": "Duration",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "1b7b9e3f-6e5b-4a1d-acc7-211120aba7cb",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "b99e8e2e-d3ef-4308-abc9-63c5dc6e5709",
+                      "label": "Power &amp; Effect",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a77d4e10-6614-4df1-a6fa-a865d6c9d567",
+                      "label": "PP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "1b64a3af-2128-40aa-9865-9487c161dd3f",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "0cc4bfca-9eb7-471d-90c2-d532f3540e19",
+                      "label": "Duration",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "c48db129-1163-41df-8bdf-8cc29e108ed6",
+                  "label": "WEAPONS",
+                  "blocks": [
+                    {
+                      "id": "dbe1554c-d5e9-4f84-ac24-d871ab15e8c2",
+                      "label": "Weapon &amp; Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "88e3486f-d4aa-479b-9b94-90369a330d8a",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "#/#/#",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Short / Med / Long (per 2-yard space)"
+                      }
+                    },
+                    {
+                      "id": "9324191e-22b9-424f-97fe-a66433e9975c",
+                      "label": "Damage",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "a1c2c327-0354-44c9-a67e-bf8d5d8deadb",
+                      "label": "AP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "a6ae892e-e69e-4c88-9278-955dcf8d4e61",
+                      "label": "RoF",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "9c5739c4-f23e-4df4-8574-d0bc46c2b31e",
+                      "label": "Weight",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "663b22a0-d26a-485d-b703-e2d965b82c57",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "22fd67be-9239-442c-ada1-8e9eed3f49c1",
+                      "label": "Weapon &amp; Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "08ae8994-d825-4bb5-a124-f033960af7bb",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "#/#/#",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Short / Med / Long (per 2-yard space)"
+                      }
+                    },
+                    {
+                      "id": "1a7c59fa-b86e-41a5-b309-af81c136938d",
+                      "label": "Damage",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "d84b5b06-fa57-4621-818d-8ed89922729b",
+                      "label": "AP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "7c36c982-5d13-461a-ba28-9ef20861bf61",
+                      "label": "RoF",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "9679bdba-911b-4aac-9f4c-05c8e879eb63",
+                      "label": "Weight",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "ce7e5819-939c-49b3-bee6-bbfc78eba46d",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "dde762b9-3548-4cc0-9815-cebd3a356d77",
+                      "label": "Weapon &amp; Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e6e67ef6-969a-49cd-809b-34d5f70a1bd6",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "#/#/#",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Short / Med / Long (per 2-yard space)"
+                      }
+                    },
+                    {
+                      "id": "e98ad873-1370-44b0-91de-f1d12d57a8e8",
+                      "label": "Damage",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "dc929d2d-74a9-479f-a81a-984978225f28",
+                      "label": "AP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "4e727e4a-9b0d-41e3-832c-2e22e4270ddc",
+                      "label": "RoF",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "f1b0868b-0029-4d28-98e5-02d3eb91ff50",
+                      "label": "Weight",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "ba2740a3-c92c-44e5-b488-5e227111c12f",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "81e19597-0c1e-4d9c-9986-cf8e3f15ea8c",
+                      "label": "Weapon &amp; Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "dca27b3e-bfc7-4d76-bbce-be75c83e788f",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "#/#/#",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Short / Med / Long (per 2-yard space)"
+                      }
+                    },
+                    {
+                      "id": "15a947a2-50e5-4cca-b6f5-3575aa9973b8",
+                      "label": "Damage",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "1bf6bbfc-0988-43cf-8273-4cf76cd2857d",
+                      "label": "AP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "5861a9c9-ddc1-47c3-bfb2-6683cd795fc2",
+                      "label": "RoF",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "a4d184e1-b8bb-4a71-b2a9-31f22dcbc208",
+                      "label": "Weight",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "dc5a1122-4e7d-402a-afc2-6781bc590658",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "57594b70-22fc-41ad-bda2-543a4c3ab55c",
+                      "label": "Weapon &amp; Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "206aa350-168c-4cdd-b233-0bb8d18572b0",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "#/#/#",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Short / Med / Long (per 2-yard space)"
+                      }
+                    },
+                    {
+                      "id": "641468f5-8fbb-48bd-8f0c-29eea8634f4b",
+                      "label": "Damage",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "be0296da-4023-4513-97d9-f40a2d8f68c1",
+                      "label": "AP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "95d76d40-2241-47a0-99a9-09dbf04ab68e",
+                      "label": "RoF",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "3706f566-3904-4ed6-bd86-3403837a4174",
+                      "label": "Weight",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "7c9e33d4-dc48-4371-98cd-62d11ef27302",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "834551aa-f002-4a5e-8799-a4dacce32522",
+                      "label": "Weapon &amp; Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5699813d-4dcc-4d77-a889-6a2cbfdbfabb",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "#/#/#",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Short / Med / Long (per 2-yard space)"
+                      }
+                    },
+                    {
+                      "id": "194c5694-bee7-48e0-a7b7-ff849e0d25fb",
+                      "label": "Damage",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "981e6496-6373-4b7e-a5e6-aaa995be74b4",
+                      "label": "AP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e64d881f-7da5-4278-b7d1-6e0501879a3d",
+                      "label": "RoF",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "44a4155e-7831-4918-8bbc-39963eac2a6f",
+                      "label": "Weight",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "28b365a9-e2ab-458e-a850-7832c6c19c44",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "0cf36bbb-b7a2-47bb-9714-a05896adfe36",
+                      "label": "Weapon &amp; Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "00d993a0-5e4b-431f-90fc-74a9f70207f7",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "#/#/#",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Short / Med / Long (per 2-yard space)"
+                      }
+                    },
+                    {
+                      "id": "70685687-733a-4391-a777-5d1bfe30eed9",
+                      "label": "Damage",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "f58f137b-701b-4041-a02e-a20cb2ac57f5",
+                      "label": "AP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "85dc7769-f30f-4055-8064-91b35f143e48",
+                      "label": "RoF",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "c791bda7-31cb-4d8e-a132-2ee09dd452eb",
+                      "label": "Weight",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "f89011bf-23a5-4c9f-9d27-17789c44b10f",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "e4e7f896-0aac-4a75-95f1-b5bd725e3610",
+                      "label": "Weapon &amp; Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "aae4aee6-b3b4-4b24-af27-f76197713f63",
+                      "label": "Range",
+                      "type": "Text",
+                      "value": "#/#/#",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Short / Med / Long (per 2-yard space)"
+                      }
+                    },
+                    {
+                      "id": "3d2ed573-8658-48cd-9fe4-d730cada6a8e",
+                      "label": "Damage",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "fc124a3a-d968-4c43-bece-a0c08c3754d3",
+                      "label": "AP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "f1f09fe8-c0ed-4deb-9b11-f49832b000a0",
+                      "label": "RoF",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "a1aacee6-3559-4576-9f1a-9cdc7f7c32a2",
+                      "label": "Weight",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Gear, Powers, Weapons"
+    },
+    {
+      "id": "a12d704c-b2ed-4a74-9a8b-ff6a3be0013d",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "f3ffa97e-8a57-412f-bda9-d4236c4ea059",
+                  "label": "HINDRANCES",
+                  "blocks": [
+                    {
+                      "id": "eca540da-2f80-4842-9152-05cf30b06d05",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f2e2cddc-5ed7-4856-a6be-52bb7ea56256",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9ab6bb93-e9eb-41d5-97a6-363fc02ae054",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "75d62227-2ef8-4d2c-8861-1daef73b588a",
+                  "label": "EDGES",
+                  "blocks": [
+                    {
+                      "id": "bb81699e-7389-47cc-aefb-96a54b6dd70d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "311bb1df-e48e-4cce-b2ea-3629fa7512e1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9d4613a6-33a2-4fae-82b4-c0d5debc1846",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9ecacd02-6390-4496-ad21-bb31b18973bd",
+                  "label": "ADVANCES",
+                  "blocks": [
+                    {
+                      "id": "443ea57c-1d53-41cc-9c61-4f216c10b950",
+                      "label": "N",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "8e7bca7e-cdd0-4f2e-afa9-9ea03fbafb7a",
+                      "label": "N",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "13da1903-5e4b-4210-89f0-9702e87abe88",
+                      "label": "N",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "7cffb861-9b7b-4e71-bbc4-447d1c5c7d39",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "8213b74f-19de-43f1-a189-f955c0897cb1",
+                      "label": "S",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "d6e994e4-f2c7-4a6b-bfa2-f03b55e37ab1",
+                      "label": "S",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "1d060ef4-8c83-4d2b-ab5d-6d9d988d5db4",
+                      "label": "S",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "3f02e155-2633-416e-b5b7-92c36aa7f643",
+                      "label": "S",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "725016d3-7d2b-4849-83b9-cd54d4898c87",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "2d545146-bc85-4e61-9a08-652e4e9c2a2c",
+                      "label": "V",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "80cd3667-0b16-4f1c-b616-9725507fed22",
+                      "label": "V",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "f9462535-4901-46f5-a6c2-314512c7879b",
+                      "label": "V",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "c4d35d48-cf65-4407-b75a-4693f461e9c2",
+                      "label": "V",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "b2be3107-7be2-4080-87ab-6410dd9dc7ed",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "de7c60fa-3685-4a8b-b595-8f1e3ae3cc5f",
+                      "label": "H",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "2fe3be5c-a76d-4b10-8207-becab591fd3e",
+                      "label": "H",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "195a4bed-0b16-4876-9b31-1d3736cbecf7",
+                      "label": "H",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "e3405a3f-1a24-44cb-bae1-fdfceb236055",
+                      "label": "H",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "8ce65256-61f0-43fa-ae31-017271b5ec87",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "f77ef16d-f193-40cc-b246-5e4af9780e55",
+                      "label": "L",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "c031a717-20b7-4152-851a-494ff043213b",
+                      "label": "L",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "eb76963f-b4fc-45eb-bed3-68e378111ce9",
+                      "label": "L",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "c58fea11-a0e0-4c4d-8360-6fada4b11553",
+                      "label": "L",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Hindrances, Edges, Advances"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "group": "SWADE",
+  "theme": {
+    "hideSectionBackground": false,
+    "labelFontSize": 1.25,
+    "backgroundColor": "#ffffff",
+    "style": " @import url('https://fonts.googleapis.com/css2?family=Akshar:wght@300;500;600&display=swap');",
+    "pageHeadingFontFamily": "Akshar",
+    "pageHeadingFontWeight": "500",
+    "sectionHeadingFontFamily": "Akshar",
+    "sectionHeadingFontWeight": "700",
+    "labelFontWeight": "500",
+    "labelFontFamily": "Akshar",
+    "textFontFamily": "Akshar",
+    "textFontWeight": "500",
+    "textFontSize": 1,
+    "sectionHeadingFontSize": 1.375,
+    "infoTextFontFamily": "Akshar",
+    "infoTextFontWeight": "300",
+    "helperTextFontFamily": "Akshar",
+    "helperTextFontWeight": "300",
+    "helperTextFontSize": 1
+  },
+  "wide": false,
+  "fariType": "character"
+}
