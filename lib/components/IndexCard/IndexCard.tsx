@@ -534,7 +534,12 @@ export const IndexCard: React.FC<
   function renderSubCards() {
     return (
       <Box px="1rem" py="1rem" ref={subCardsContainerRef}>
-        <Masonry columns={numberOfColumnsForSubCardsMasonry}>
+        <Masonry
+          columns={numberOfColumnsForSubCardsMasonry}
+          sx={{
+            alignContent: "flex-start",
+          }}
+        >
           {indexCardManager.state.indexCard.subCards?.map((subCard) => {
             return (
               <Box key={subCard.id}>

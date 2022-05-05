@@ -363,7 +363,12 @@ export const CardCollectionRoute: React.FC<{
       return;
     }
     return (
-      <Masonry columns={renderProps.columns}>
+      <Masonry
+        columns={renderProps.columns}
+        sx={{
+          alignContent: "flex-start",
+        }}
+      >
         {renderProps.cards.map((indexCard, index) => {
           return (
             <Box key={indexCard.id}>

@@ -1567,7 +1567,12 @@ export function Scene(props: {
     }
     return (
       <Box>
-        <Masonry columns={renderProps.columns}>
+        <Masonry
+          columns={renderProps.columns}
+          sx={{
+            alignContent: "flex-start",
+          }}
+        >
           {renderProps.cards.map((indexCard, index) => {
             const hasChildren = indexCard.subCards.length > 0;
             return (
