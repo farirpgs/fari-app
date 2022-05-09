@@ -5,34 +5,40 @@ on:
   push:
     branches: [master]
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [master]
+    branches:
+      - "**"
 
 jobs:
   cypress-run:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     steps:
+      # Checkout
       - name: Checkout
-        uses: actions/checkout@v1
-      # Cache
-      - name: Cache
-        uses: actions/cache@v2
+        uses: actions/checkout@v2
+      # Use Node
+      - name: Use Node
+        uses: actions/setup-node@v2
         with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+          node-version: "16"
+      # Cache
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       # Install
       - name: Install
-        run: yarn install
+        run: npm install
       # Build
       - name: Build
-        run: yarn build
+        run: npm run build
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          start: yarn serve:build
+          start: npm run serve:build
       - name: Upload Cypress Videos
         uses: actions/upload-artifact@v1
         if: always()

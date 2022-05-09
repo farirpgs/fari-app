@@ -1,0 +1,235 @@
+{
+  "id": "bc8447d8-cb0c-4877-bdd0-2fd5b8baaa7e",
+  "version": 3,
+  "name": "Heartbreaker",
+  "template": "Heartbreaker",
+  "lastUpdated": 1617733243,
+  "pages": [
+    {
+      "id": "797ebacd-7f37-4616-a645-72f58b663d08",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "43c81329-5c7e-43b2-b38c-d63e1f324b75",
+          "label": "Aspects",
+          "position": "Left",
+          "visibleOnCard": true,
+          "blocks": [
+            {
+              "id": "f8528f2a-1928-475f-9834-8bd649122647",
+              "label": "How do people describe you?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "f90d3234-7274-412a-8941-f7347443596d",
+              "label": "What causes you the most trouble?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "17f78101-5c22-46ae-8442-0f8e7ba746b6",
+              "label": "How has your heritage or background defined you?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "d191a7e9-a5dd-4548-9b42-fcb2e99f2c18",
+              "label": "What is your signature weapon?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "d8c4287c-df5b-482e-8109-615b1a844c3d",
+              "label": "Why did you join the party?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "5201ec2c-9f96-4efa-a9a6-69376acde000",
+          "label": "Fate Points",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "cb718b55-40b1-4fee-939a-0cb1fe81f806",
+              "label": "Fate Points",
+              "type": "PointCounter",
+              "meta": { "max": "3", "isMainPointCounter": true },
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "id": "bac9cb1a-2c9e-4654-8367-514a4cdd6b2a",
+          "label": "Stunts &amp; Gear",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "141821ca-55fc-403a-b869-4cc1b47e27f1",
+              "label": "Stunt #1",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "4d7e50b4-d4ce-4f9f-8b5e-54031f5196d5",
+              "label": "Stunt #2",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "3e0bbe4a-497c-4a7d-bab4-3ec58455127f",
+              "label": "Stunt #3",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "9eea4d6d-fb42-4d97-a477-c5451ea74192",
+              "label": "Gear",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "07871473-cd27-4ed8-b725-6fa1316fe251",
+          "label": "Notes",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "8977a1e3-d6ed-4b96-8d39-c1f31cd9b76d",
+              "label": "",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "787c1d0d-c6b1-43f8-8666-61eeceb0d7dd",
+          "label": "Credits",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0673fc61-7045-4ced-86e7-5fc0c622a770",
+              "label": "A.C. Luke",
+              "type": "Link",
+              "meta": { "hasDisplayName": true },
+              "value": "https://ac-luke.itch.io/heartbreaker-trifold"
+            }
+          ]
+        },
+        {
+          "id": "c637c27d-9b8c-49c7-a6e1-c202503e2c1a",
+          "label": "Approaches",
+          "position": "Right",
+          "visibleOnCard": true,
+          "blocks": [
+            {
+              "id": "a57eeccb-c78f-4f4c-bb0a-26f36bff946d",
+              "label": "Bold",
+              "type": "Skill",
+              "value": "0",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "d836403f-74e6-4caa-95fc-57a340d19dad",
+              "label": "Clever",
+              "type": "Skill",
+              "value": "0",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "80ed40fb-a164-4f04-9a78-17b28fdfb607",
+              "label": "Mighty",
+              "type": "Skill",
+              "value": "0",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "4a024194-304b-40e7-8d61-32665bf6aa8b",
+              "label": "Quick",
+              "type": "Skill",
+              "value": "0",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "269d4e69-428a-4f01-b7ff-fb53a7214c80",
+              "label": "Subtle",
+              "type": "Skill",
+              "value": "0",
+              "meta": { "commands": ["4dF"] }
+            },
+            {
+              "id": "92e58e85-fd7a-4bb4-a966-6ae18e4bb889",
+              "label": "Wise",
+              "type": "Skill",
+              "value": "0",
+              "meta": { "commands": ["4dF"] }
+            }
+          ]
+        },
+        {
+          "id": "737b9d1e-1eda-414e-b8d2-84453e2aa0da",
+          "label": "Stress",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "89d6a3b7-aae6-4c08-b6d9-715446275ffa",
+              "label": "Stress",
+              "type": "SlotTracker",
+              "meta": {},
+              "value": [
+                { "label": "", "checked": false },
+                { "label": "", "checked": false },
+                { "label": "", "checked": false },
+                { "label": "", "checked": false },
+                { "label": "", "checked": false },
+                { "label": "", "checked": false }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fa292121-b0bd-4825-b71a-a616e6349a27",
+          "label": "Consequences",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "be2279c9-e608-42a9-a142-77da2be6de6a",
+              "label": "MILD",
+              "type": "Numeric",
+              "value": "2",
+              "meta": { "checked": false }
+            },
+            {
+              "id": "0290fdd6-1ea1-4b7c-9824-65ad26e283f2",
+              "label": "MODERATE",
+              "type": "Numeric",
+              "value": "4",
+              "meta": { "checked": false }
+            },
+            {
+              "id": "7596a6de-cc81-40e9-b583-e5fb1f0bf44f",
+              "label": "SEVERE",
+              "type": "Numeric",
+              "value": "6",
+              "meta": { "checked": false }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fariType": "character"
+}

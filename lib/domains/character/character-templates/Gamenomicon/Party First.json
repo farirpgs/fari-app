@@ -1,0 +1,567 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1647894269,
+  "name": " Template",
+  "pages": [
+    {
+      "id": "c32c191b-61bd-4c5c-b2c0-c403da19fe9e",
+      "label": "CHARACTER",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "8feaaf35-6623-49d5-bd10-5eb4719f170a",
+                  "label": "PARTY FIRST",
+                  "blocks": [
+                    {
+                      "id": "a6fd1048-1b05-4249-93ac-7678c0c083b2",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://theproponent.com/wp-content/uploads/2022/03/PF-char-header.jpg"
+                    }
+                  ],
+                  "visibleOnCard": false
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "3a00bf50-e184-477e-9e95-e3776437ace3",
+                  "label": "CHARACTER",
+                  "blocks": [
+                    {
+                      "id": "9309567c-668e-4c15-a35d-6b223b28d406",
+                      "label": "PLAYER",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "57855128-047d-4050-84d4-853e5bd18919",
+                      "label": "NAME",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7668702a-03a6-46a2-811e-bf2ad7d2d9f3",
+                      "label": "CLASS",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5a38b3a3-02e7-46b2-add8-3f5fe73d2a66",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "4abbc432-a7b8-442a-b3ad-566890888452",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c89ce02d-bb29-496d-b24c-31a8e27ea34c",
+                  "label": "POOLS",
+                  "blocks": [
+                    {
+                      "id": "0185b4e8-359d-411f-97ee-e0138e66459c",
+                      "label": "PARTY POINTS",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "helperText": "Start with 1x" }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "a50418b9-123d-442d-9f65-eedcb7ee29ff",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "4ac436b8-9a69-4126-b134-78397bfe719b",
+                      "label": "HEALTH",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Class + 5x Chosen Between Health/Sanity"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "9309a48c-2de4-4c54-85fa-c133a7bc1cd2",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "00590d40-0c5a-46af-b60b-ab2758ab6e49",
+                      "label": "SANITY",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Class + 5x Chosen Between Health/Sanity"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "a0439c09-2634-4b06-b9f1-15c4831b3a6c",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "b5997eb1-2983-49fd-8495-164d214a8748",
+                      "label": "MORALE",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Group Pool. 1x Per character in Party"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "fa761487-8a49-4d18-9e58-d59211cd297d",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "982f4c58-9b40-4bb4-ae89-eddb888c851a",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "8da04882-23b1-422f-ab12-fad01f736cbc",
+                  "label": "ATTRIBUTES",
+                  "blocks": [
+                    {
+                      "id": "829bc8e7-eb5c-4d6b-9595-b696f821a084",
+                      "label": "VIGOR",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "c1983657-18e4-45e0-945d-f062f6847121",
+                      "label": "COMPREHENSION",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "109c86d5-32fc-4883-b45c-e8f61ec8070a",
+                      "label": "PRESENCE",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "d9d1dc3b-5f2f-4f8a-a3cb-b697aff101c6",
+                      "label": "DISCIPLINE",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "2x Each + 2x Chosen + 2x for Class"
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "af0c89d1-40b5-4bcf-bfe2-8f33d65123a4",
+                  "label": "ADVANTAGES",
+                  "blocks": [
+                    {
+                      "id": "72039bfd-6b70-4f3f-8265-989c94bb8796",
+                      "label": "ADVANTAGE 1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "812f2ac5-d188-4101-a763-11341b323465",
+                      "label": "ADVANTAGE 2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "1x Chosen + 1x for Class" }
+                    },
+                    {
+                      "id": "58c590e2-3991-46a3-9f4a-ba77e9e578a6",
+                      "label": "ONCE PER GAME",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "1x for Class" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "31e7d152-30b8-408a-8b04-86a8ad64f427",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "151231d2-3ece-4b4b-86de-09480b8c6b8d",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "6e36d462-4fb1-4c34-b226-215c1c17f0c1",
+                  "label": "SKILLS",
+                  "blocks": [
+                    {
+                      "id": "e4ba02dc-7f7a-4578-b7e8-856e672accf5",
+                      "label": "AIM",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "7b3b4874-fc2a-4c89-8715-4d3c90d04e23",
+                      "label": "ATHLETICS",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "8feedb11-c058-4fa8-88c4-1f7d5e50d424",
+                      "label": "COERCE",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "0eed1d21-cb8a-4c06-9ae6-769896531e7a",
+                      "label": "DRIVE",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "09b32f09-8d02-4478-9e9a-e652588f1b32",
+                      "label": "HIDE",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "12eb6408-381f-4777-9573-98268c140e13",
+                      "label": "INVESTIGATION",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "5bb7252b-814c-44a9-850c-66a45ea3ce8e",
+                      "label": "KNOWLEDGE",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "0e1f3eb6-f207-4cd4-8f53-2f6522d71885",
+                      "label": "MELEE",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "154f72d9-33a0-4e1a-91e4-d736aa41648c",
+                      "label": "MYSTICISM",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "134d3807-294f-4617-a057-c11161c72dfc",
+                      "label": "SOCIALIZE",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "217988cc-3c1e-4f5a-b0aa-7b9129f57f77",
+                      "label": "STEAL",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "721014de-c686-47d8-9ff9-923ff062be5f",
+                      "label": "TECHNOLOGY",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "757f6f42-0f35-4f65-a9eb-d5d21ff17a63",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "0 Each + 10 Chosen + 5 for Class"
+                      }
+                    },
+                    {
+                      "id": "36715eb5-a441-4a5f-a1cd-be5adf7b1a41",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "ae7cee92-044a-4202-89d9-bffb74b6bc42",
+                  "label": "Links and More",
+                  "blocks": [
+                    {
+                      "id": "29939d11-d71a-4094-8bf1-65999dc174fb",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "For more information check out one of these sites.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1753e909-98a6-4dcc-9a08-6e08c1d66b9b",
+                      "label": "",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": false },
+                      "value": "https://www.gamenomicon.com"
+                    },
+                    {
+                      "id": "862d6001-1d96-4000-86f1-68efb3f92158",
+                      "label": "",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": false },
+                      "value": "https://gamenomicon.itch.io"
+                    },
+                    {
+                      "id": "ec9ca8c5-392d-442e-97d5-f7a0fe9aa7e8",
+                      "label": "",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": false },
+                      "value": "https://www.drivethrurpg.com/browse/pub/11735/Gamenomicon"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b109c30e-6f9f-483f-bc71-4118380af153",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2e1a1ce6-4649-4bd4-8d31-38aa4cfd745d",
+                  "label": "Notes",
+                  "blocks": [
+                    {
+                      "id": "b0646ea4-3ec8-410f-87ec-8e49f635ffb0",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "NOTES"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "theme": {
+    "hideSectionBackground": true,
+    "labelFontFamily": "Jockey One",
+    "labelFontWeight": "bolder",
+    "labelFontSize": 1,
+    "sectionHeadingFontFamily": "Jockey One",
+    "textFontFamily": "",
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Inspiration&family=Jockey+One&display=swap');",
+    "pageHeadingFontFamily": "Jockey One",
+    "pageHeadingFontSize": 1.375
+  },
+  "wide": false
+}

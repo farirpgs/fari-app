@@ -1,15 +1,23 @@
 import produce from "immer";
 import isEqual from "lodash/isEqual";
-import { useEffect, useMemo, useState } from "react";
-import { sanitizeContentEditable } from "../../../components/ContentEditable/ContentEditable";
+import { useContext, useEffect, useMemo, useState } from "react";
+import { previewContentEditable } from "../../../components/ContentEditable/ContentEditable";
+import { SettingsContext } from "../../../contexts/SettingsContext/SettingsContext";
+import { CharacterFactory } from "../../../domains/character/CharacterFactory";
+import { ICharacterTemplate } from "../../../domains/character/CharacterType";
 import {
-  CharacterType,
-  defaultCharactersByType,
+  BlockType,
+  IBlock,
   ICharacter,
-} from "../../../contexts/CharactersContext/CharactersContext";
+  ICharacterTheme,
+  IPage,
+} from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
+import { Id } from "../../../domains/Id/Id";
 
 export function useCharacter(characterFromProps?: ICharacter | undefined) {
+  const settingsManager = useContext(SettingsContext);
+
   const [character, setCharacter] = useState<ICharacter | undefined>(
     characterFromProps
   );
@@ -35,20 +43,23 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     }
   }, [characterFromProps]);
 
-  function loadTemplate(type: CharacterType) {
+  async function loadTemplate(template: ICharacterTemplate) {
+    const defaultCharacter = await CharacterFactory.make(template);
+
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        const oldId = draft.id;
-        const oldName = draft.name;
-        const defaultCharacter = defaultCharactersByType[type];
+        const id = draft.id;
+        const name = draft.name || defaultCharacter.name;
+        const group = draft.group || defaultCharacter.group;
 
         return {
           ...defaultCharacter,
-          id: oldId,
-          name: oldName,
+          id: id,
+          name: name,
+          group: group,
           lastUpdated: getUnix(),
         };
       })
@@ -77,432 +88,666 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     );
   }
 
-  function addAspect() {
+  function addPage() {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.aspects.push({
-          name: `Aspect`,
-          value: "",
-        });
+        const newPage: IPage = {
+          id: Id.generate(),
+          rows: [],
+          label: "Page",
+        };
+        draft.pages.push(newPage);
       })
     );
   }
 
-  function addSkill() {
+  function deletePage(pageIndex: number) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.skills.push({
-          name: `Skill`,
-          value: "",
+        draft.pages = draft.pages.filter((p, index) => index !== pageIndex);
+      })
+    );
+  }
+
+  function renamePage(pageIndex: number, value: string) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[pageIndex].label = value;
+      })
+    );
+  }
+
+  function moveRowUp(indexes: { pageIndex: number; rowIndex: number }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows = moveValueInList(
+          draft.pages[indexes.pageIndex].rows,
+          indexes.rowIndex,
+          "up"
+        );
+      })
+    );
+  }
+
+  function setTheme(setter?: (theme: ICharacterTheme) => void) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.theme = draft.theme ?? {};
+        setter?.(draft.theme);
+      })
+    );
+  }
+  function removeTheme() {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.theme = undefined;
+      })
+    );
+  }
+
+  function moveRowDown(indexes: { pageIndex: number; rowIndex: number }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows = moveValueInList(
+          draft.pages[indexes.pageIndex].rows,
+          indexes.rowIndex,
+          "down"
+        );
+      })
+    );
+  }
+
+  function moveColumnLeft(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns =
+          moveValueInList(
+            draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns,
+            indexes.columnIndex,
+            "up"
+          );
+      })
+    );
+  }
+
+  function moveColumnRight(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns =
+          moveValueInList(
+            draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns,
+            indexes.columnIndex,
+            "down"
+          );
+      })
+    );
+  }
+
+  function moveSectionUp(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+          indexes.columnIndex
+        ].sections = moveValueInList(
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections,
+          indexes.sectionIndex,
+          "up"
+        );
+      })
+    );
+  }
+
+  function moveSectionDown(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+          indexes.columnIndex
+        ].sections = moveValueInList(
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections,
+          indexes.sectionIndex,
+          "down"
+        );
+      })
+    );
+  }
+
+  function addRow(indexes: { pageIndex: number; rowIndex: number }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows.splice(indexes.rowIndex + 1, 0, {
+          columns: [{ sections: [] }],
         });
       })
     );
   }
 
-  function moveValueInList(
-    property: keyof Pick<
-      ICharacter,
-      "aspects" | "stressTracks" | "consequences" | "stunts" | "skills"
-    >,
-    index: number,
-    direction: "up" | "down"
+  function deleteRow(indexes: { pageIndex: number; rowIndex: number }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows.splice(indexes.rowIndex, 1);
+      })
+    );
+  }
+
+  function addColumn(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns.splice(
+          indexes.columnIndex + 1,
+          0,
+          {
+            sections: [],
+          }
+        );
+      })
+    );
+  }
+
+  function deleteColumn(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns.splice(
+          indexes.columnIndex,
+          1
+        );
+      })
+    );
+  }
+
+  function addSection(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+          indexes.columnIndex
+        ].sections.splice(indexes.sectionIndex + 1, 0, {
+          id: Id.generate(),
+          label: "Section",
+          blocks: [],
+        });
+      })
+    );
+  }
+
+  function renameSection(
+    indexes: {
+      pageIndex: number;
+      rowIndex: number;
+      columnIndex: number;
+      sectionIndex: number;
+    },
+    label: string
   ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        if (direction === "up") {
-          draft[property] = moveUp(draft[property] as Array<any>, index);
-        }
-        if (direction === "down") {
-          draft[property] = moveDown(draft[property] as Array<any>, index);
-        }
+        const sections =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections;
+        sections[indexes.sectionIndex].label = label;
       })
     );
   }
 
-  function removeAspect(aspectIndex: number) {
+  function toggleSectionVisibleOnCard(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+  }) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.aspects = draft.aspects.filter((aspect, index) => {
-          return index !== aspectIndex;
+
+        const sections =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections;
+        const oldValue = sections[indexes.sectionIndex].visibleOnCard;
+        sections[indexes.sectionIndex].visibleOnCard = !oldValue;
+      })
+    );
+  }
+
+  function movePage(pageIndex: number, direction: "up" | "down") {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages = moveValueInList(draft.pages, pageIndex, direction);
+      })
+    );
+  }
+
+  function deleteSection(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+
+        const column =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ];
+
+        column.sections = column.sections.filter((a, index) => {
+          return index !== indexes.sectionIndex;
         });
       })
     );
   }
 
-  function setAspectName(aspectIndex: number, newName: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.aspects[aspectIndex].name = newName;
-      })
-    );
-  }
-
-  function setAspect(aspectIndex: number, newValue: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.aspects[aspectIndex].value = newValue;
-      })
-    );
-  }
-
-  function setSkillName(aspectIndex: number, newName: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.skills[aspectIndex].name = newName;
-      })
-    );
-  }
-
-  function setSkill(aspectIndex: number, newValue: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.skills[aspectIndex].value = newValue;
-      })
-    );
-  }
-
-  function removeSkill(aspectIndex: number) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.skills = draft.skills.filter((skill, index) => {
-          return index !== aspectIndex;
-        });
-      })
-    );
-  }
-
-  function addStunt() {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.stunts.push({
-          name: "Stunt",
-          value: "",
-        });
-      })
-    );
-  }
-
-  function setStuntName(stuntIndex: number, newName: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.stunts[stuntIndex].name = newName;
-      })
-    );
-  }
-
-  function setStunt(stuntIndex: number, newValue: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.stunts[stuntIndex].value = newValue;
-      })
-    );
-  }
-
-  function removeStunt(stuntIndex: number) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.stunts = draft.stunts.filter((stunt, index) => {
-          return index !== stuntIndex;
-        });
-      })
-    );
-  }
-
-  function addStressTrack() {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.stressTracks.push({
-          name: "Stress",
-          value: [
-            { checked: false, label: "1" },
-            { checked: false, label: "2" },
-            { checked: false, label: "3" },
-          ],
-        });
-      })
-    );
-  }
-  function setStressTrackName(trackIndex: number, newName: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.stressTracks[trackIndex].name = newName;
-      })
-    );
-  }
-
-  function addStressBox(trackIndex: number) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        const numberOfBoxes = draft.stressTracks[trackIndex].value.length;
-        draft.stressTracks[trackIndex].value.push({
-          checked: false,
-          label: `${numberOfBoxes + 1}`,
-        });
-      })
-    );
-  }
-
-  function removeStressBox(trackIndex: number) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        const numberOfBoxes = draft.stressTracks[trackIndex].value.length;
-        draft.stressTracks[trackIndex].value = draft.stressTracks[
-          trackIndex
-        ].value.filter((value, index) => {
-          return index !== numberOfBoxes - 1;
-        });
-      })
-    );
-  }
-
-  function toggleStressBox(trackIndex: number, boxIndex: number) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        const oldValue = draft.stressTracks[trackIndex].value[boxIndex].checked;
-        draft.stressTracks[trackIndex].value[boxIndex].checked = !oldValue;
-      })
-    );
-  }
-
-  function setStressBoxLabel(
-    trackIndex: number,
-    boxIndex: number,
-    newLabel: string
+  function addBlock(
+    indexes: {
+      pageIndex: number;
+      rowIndex: number;
+      columnIndex: number;
+      sectionIndex: number;
+    },
+    type: BlockType
   ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.stressTracks[trackIndex].value[boxIndex].label = newLabel;
+
+        const section =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex];
+        section.blocks.push(
+          CharacterFactory.makeBlock(type, {
+            defaultCommands: settingsManager.state.diceCommandIds,
+          })
+        );
       })
     );
   }
-
-  function removeStressTrack(trackIndex: number) {
+  function pasteBlocks(
+    indexes: {
+      pageIndex: number;
+      rowIndex: number;
+      columnIndex: number;
+      sectionIndex: number;
+    },
+    blocks: Array<IBlock>
+  ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
         if (!draft) {
           return;
         }
-        draft.stressTracks = draft.stressTracks.filter((track, index) => {
-          return index !== trackIndex;
+
+        const section =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex];
+        for (const block of blocks) {
+          section.blocks.push(CharacterFactory.duplicateBlock(block));
+        }
+      })
+    );
+  }
+
+  function duplicatePage(pageIndex: number) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        const pageToDuplicate = draft.pages[pageIndex];
+        draft.pages.splice(
+          pageIndex + 1,
+          0,
+          CharacterFactory.duplicatePage(pageToDuplicate)
+        );
+      })
+    );
+  }
+
+  function moveDnDBlock(
+    indexes: {
+      pageIndex: number;
+      rowIndex: number;
+      columnIndex: number;
+      sectionIndex: number;
+    },
+    dragIndex: number,
+    hoverIndex: number
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+
+        if (dragIndex === undefined || hoverIndex === undefined) {
+          return;
+        }
+
+        const section =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex];
+
+        const dragItem = section.blocks[dragIndex];
+
+        section.blocks.splice(dragIndex, 1);
+        section.blocks.splice(hoverIndex, 0, dragItem);
+      })
+    );
+  }
+
+  function moveBlockUp(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+    blockIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+          indexes.columnIndex
+        ].sections[indexes.sectionIndex].blocks = moveValueInList(
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex].blocks,
+          indexes.blockIndex,
+          "up"
+        );
+      })
+    );
+  }
+
+  function moveBlockDown(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+    blockIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+          indexes.columnIndex
+        ].sections[indexes.sectionIndex].blocks = moveValueInList(
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex].blocks,
+          indexes.blockIndex,
+          "down"
+        );
+      })
+    );
+  }
+
+  function duplicateBlock(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+    blockIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        const block =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex].blocks[indexes.blockIndex];
+        const newBlock = CharacterFactory.duplicateBlock(block);
+
+        draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+          indexes.columnIndex
+        ].sections[indexes.sectionIndex].blocks.splice(
+          indexes.blockIndex + 1,
+          0,
+          newBlock
+        );
+      })
+    );
+  }
+
+  function setBlock(
+    indexes: {
+      pageIndex: number;
+      rowIndex: number;
+      columnIndex: number;
+      sectionIndex: number;
+      blockIndex: number;
+    },
+    block: IBlock
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        const section =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex];
+        section.blocks[indexes.blockIndex] = block;
+      })
+    );
+  }
+
+  function setBlockMeta(
+    indexes: {
+      pageIndex: number;
+      rowIndex: number;
+      columnIndex: number;
+      sectionIndex: number;
+      blockIndex: number;
+    },
+    meta: any
+  ) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        const section =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex];
+        section.blocks[indexes.blockIndex].meta = meta;
+      })
+    );
+  }
+
+  function toggleBlockMainPointCounter(blockId: string) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+
+        for (const page of draft.pages) {
+          for (const row of page.rows) {
+            for (const column of row.columns) {
+              for (const section of column.sections) {
+                for (const block of section.blocks) {
+                  const match = block.id === blockId;
+
+                  if (block.type === BlockType.PointCounter) {
+                    if (match) {
+                      block.meta.isMainPointCounter =
+                        !block.meta.isMainPointCounter;
+                    } else {
+                      block.meta.isMainPointCounter = false;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      })
+    );
+  }
+
+  function deleteBlock(indexes: {
+    pageIndex: number;
+    rowIndex: number;
+    columnIndex: number;
+    sectionIndex: number;
+    blockIndex: number;
+  }) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+        const section =
+          draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns[
+            indexes.columnIndex
+          ].sections[indexes.sectionIndex];
+        section.blocks = section.blocks.filter((field, index) => {
+          return index !== indexes.blockIndex;
         });
       })
     );
   }
 
-  function addConsequence() {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.consequences.push({
-          name: `Consequence`,
-          value: "",
-        });
-      })
-    );
-  }
-
-  function setConsequenceName(consequenceIndex: number, newName: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.consequences[consequenceIndex].name = newName;
-      })
-    );
-  }
-
-  function setConsequence(consequenceIndex: number, newValue: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.consequences[consequenceIndex].value = newValue;
-      })
-    );
-  }
-
-  function removeConsequence(consequenceIndex: number) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.consequences = draft.consequences.filter((consequence, index) => {
-          return index !== consequenceIndex;
-        });
-      })
-    );
-  }
-
-  function updateRefresh(newRefresh: number) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.refresh = newRefresh;
-      })
-    );
-  }
-
-  function setNotes(newNotes: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.notes = newNotes;
-      })
-    );
-  }
-
-  function setAspectsLabel(newAspectsLabel: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.aspectsLabel = newAspectsLabel;
-      })
-    );
-  }
-
-  function setSkillsLabel(newSkillsLabel: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.skillsLabel = newSkillsLabel;
-      })
-    );
-  }
-
-  function setStuntsLabel(newStuntsLabel: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.stuntsLabel = newStuntsLabel;
-      })
-    );
-  }
-
-  function setStressTracksLabel(newStressTracksLabel: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.stressTracksLabel = newStressTracksLabel;
-      })
-    );
-  }
-
-  function setConsequencesLabel(newConsequencesLabel: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.consequencesLabel = newConsequencesLabel;
-      })
-    );
-  }
-
-  function setRefreshLabel(newRefreshLabel: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.refreshLabel = newRefreshLabel;
-      })
-    );
-  }
-
-  function setNotesLabel(newNotesLabel: string) {
-    setCharacter(
-      produce((draft: ICharacter | undefined) => {
-        if (!draft) {
-          return;
-        }
-        draft.notesLabel = newNotesLabel;
-      })
-    );
-  }
-
-  function sanitizeCharacter() {
+  function getCharacterWithNewTimestamp() {
     const updatedCharacter = produce(character!, (draft) => {
       if (!draft) {
         return;
       }
-      draft.name = sanitizeContentEditable(draft.name);
+      draft.name = previewContentEditable({ value: draft.name });
       draft.lastUpdated = getUnix();
     });
     return updatedCharacter;
+  }
+
+  function toggleWideMode() {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+
+        draft.wide = draft.wide == null ? true : !draft.wide;
+      })
+    );
+  }
+
+  function setZoom(zoom: number) {
+    setCharacter(
+      produce((draft: ICharacter | undefined) => {
+        if (!draft) {
+          return;
+        }
+
+        draft.zoom = zoom;
+      })
+    );
   }
 
   return {
@@ -511,42 +756,56 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
       loadTemplate,
       setName,
       setGroup,
-      addAspect,
-      removeAspect,
-      setAspectName,
-      setAspect,
-      addSkill,
-      setSkillName,
-      setSkill,
-      removeSkill,
-      addStunt,
-      setStuntName,
-      setStunt,
-      removeStunt,
-      addStressTrack,
-      setStressTrackName,
-      addStressBox,
-      removeStressBox,
-      toggleStressBox,
-      setStressBoxLabel,
-      removeStressTrack,
-      addConsequence,
-      setConsequenceName,
-      setConsequence,
-      removeConsequence,
-      updateRefresh,
-      setNotes,
-      setAspectsLabel,
-      setSkillsLabel,
-      setStuntsLabel,
-      setStressTracksLabel,
-      setConsequencesLabel,
-      setRefreshLabel,
-      setNotesLabel,
-      moveValueInList,
-      sanitizeCharacter,
+      addPage,
+      addRow,
+      moveRowUp,
+      removeTheme,
+      setTheme,
+      moveRowDown,
+      deleteRow,
+      addColumn,
+      moveColumnLeft,
+      moveColumnRight,
+      deleteColumn,
+      renamePage,
+      deletePage,
+      addSection,
+      moveSectionUp,
+      moveSectionDown,
+      pasteBlocks,
+      renameSection,
+      toggleSectionVisibleOnCard,
+      movePage,
+      deleteSection,
+      addBlock,
+      duplicatePage,
+      moveDnDBlock,
+      moveBlockUp,
+      moveBlockDown,
+      duplicateBlock,
+      setBlock,
+      setBlockMeta,
+      toggleBlockMainPointCounter,
+      deleteBlock,
+      getCharacterWithNewTimestamp,
+      toggleWideMode,
+      setZoom,
     },
   };
+}
+
+export function moveValueInList<T>(
+  list: Array<T>,
+  index: number,
+  direction: "up" | "down"
+) {
+  if (direction === "up") {
+    return moveUp(list, index);
+  }
+  if (direction === "down") {
+    return moveDown(list, index);
+  }
+  return list;
 }
 
 function moveUp<T>(list: Array<T>, index: number) {

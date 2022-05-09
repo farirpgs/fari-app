@@ -1,0 +1,319 @@
+{
+  "id": "bd0b507c-65e9-4d49-b395-5da40a0dd089",
+  "version": 3,
+  "name": "",
+  "lastUpdated": 1616269282,
+  "pages": [
+    {
+      "id": "6e3bbfb9-67e3-4abd-a4ef-79bd3d96881d",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "483230c5-fe7c-4d8e-b48b-8ab416c76adf",
+          "label": "Approaches",
+          "visibleOnCard": true,
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "f2b08320-820e-487a-a698-f5fef8acd684",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Flair",
+              "value": ""
+            },
+            {
+              "id": "ad1642f3-1ebd-4aa0-97ff-2361083d2563",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Focus",
+              "value": ""
+            },
+            {
+              "id": "2cce6863-af05-471a-8c57-5c018d83cf1e",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Force",
+              "value": ""
+            },
+            {
+              "id": "4bfc51a9-47f2-462c-a1a2-007cc0a73920",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Guile",
+              "value": ""
+            },
+            {
+              "id": "b59e867b-de1d-4f40-9214-5b0dacf5879a",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Haste",
+              "value": ""
+            },
+            {
+              "id": "af1eaf6e-3923-4e45-8873-3d1353fd528a",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Intellect",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "28629287-1688-4932-8f7e-3128e92e3f9f",
+          "label": "Aspects",
+          "visibleOnCard": true,
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "c1b28fef-6132-4116-8d22-437c68a20afb",
+              "type": "Text",
+              "meta": {},
+              "label": "High Concept",
+              "value": ""
+            },
+            {
+              "id": "c100dcb6-a871-4639-ac33-1cd32411cc4c",
+              "type": "Text",
+              "meta": {},
+              "label": "Trouble",
+              "value": ""
+            },
+            {
+              "id": "80d2fbc4-0b63-43bb-9b90-6866ec9b1900",
+              "type": "Text",
+              "meta": {},
+              "label": "Relationship",
+              "value": ""
+            },
+            {
+              "id": "133c3730-98f5-4193-8d77-5fdceb01cf3d",
+              "type": "Text",
+              "meta": {},
+              "label": "Other Aspect",
+              "value": ""
+            },
+            {
+              "id": "9f1eb00a-452e-45f0-a1e5-0d0cff965a33",
+              "type": "Text",
+              "meta": {},
+              "label": "Other Aspect",
+              "value": "<p><br></p>"
+            }
+          ]
+        },
+        {
+          "id": "2b08a924-1c82-440a-9998-688d3b1d3f67",
+          "label": "MantleS",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "362fe6b8-c7b3-4506-acf3-2e1844cd380f",
+              "label": "MANTLE #1",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "3068607d-9d40-443b-9f9d-aab022b10f10",
+              "label": "MANTLE #2",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "4ef03c94-ceef-4f8d-8ba8-d102a06fc80f",
+          "label": "Stunts",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "5db9715b-646a-497f-81ec-a7b427520f35",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt #1",
+              "value": ""
+            },
+            {
+              "id": "5c804a4e-f0ce-4bc1-b1a6-e2f67205d088",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt #2",
+              "value": ""
+            },
+            {
+              "id": "722ec106-b79e-4de4-9685-f6b065d6d22c",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt #3",
+              "value": ""
+            },
+            {
+              "id": "a0d975fa-98b5-4dbc-b93d-0f7029dcad9f",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt #4",
+              "value": ""
+            },
+            {
+              "id": "5c325873-20cd-417f-8bb1-c2d9193b9b9e",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt #5",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "24da1ea4-5005-4991-8776-9cd1b5dc8c65",
+          "label": "Fate Points",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "78ecab23-be67-4c56-aed5-156f46710cc2",
+              "meta": { "isMainPointCounter": true, "max": "3" },
+              "type": "PointCounter",
+              "label": "Fate Points",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "id": "4b2a10e4-0f8c-4702-a76c-d0ca5abcd826",
+          "label": "Other",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "3a799651-c0b7-4d5c-adbd-89e2f2397f54",
+              "type": "Text",
+              "meta": {},
+              "label": "Notes",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "787c1d0d-c6b1-43f8-8666-61eeceb0d7dd",
+          "label": "Credits",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0673fc61-7045-4ced-86e7-5fc0c622a770",
+              "label": "Evil Hat Productions",
+              "type": "Link",
+              "meta": { "hasDisplayName": true },
+              "value": "https://www.evilhat.com/home/"
+            }
+          ]
+        },
+        {
+          "id": "b713f63a-66ba-4c41-a50a-54845bf79165",
+          "label": "Stress",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "45cc693f-229c-4964-ae26-8acbbb8e0e0f",
+              "label": "Stress",
+              "meta": {},
+              "type": "SlotTracker",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "2" },
+                { "checked": false, "label": "3" },
+                { "label": "4", "checked": false },
+                { "label": "5", "checked": false },
+                { "label": "6", "checked": false }
+              ]
+            },
+            {
+              "id": "f0500f96-c1e3-4e30-8a5f-5f00e254bcb5",
+              "label": "Other types of stress",
+              "meta": {},
+              "type": "SlotTracker",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "2" },
+                { "checked": false, "label": "3" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "3d12f9eb-91c8-4a5a-b526-5525f88e49f3",
+          "label": "Conditions",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "f3515208-5c23-4c85-90a7-9abb4c32c027",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "4 - In peril",
+              "value": ""
+            },
+            {
+              "id": "3aea3e08-8e8a-4f04-afa5-df4c137ad033",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "6 - Doomed",
+              "value": ""
+            },
+            {
+              "id": "d9cfb9d2-c3d5-4134-b089-4b0bebab5a1e",
+              "label": "Indebted",
+              "type": "SlotTracker",
+              "meta": {},
+              "value": [
+                { "label": "1", "checked": false },
+                { "label": "2", "checked": false },
+                { "label": "3", "checked": false },
+                { "label": "4", "checked": false },
+                { "label": "5", "checked": false }
+              ]
+            },
+            {
+              "id": "2d75ee22-474b-45bd-a0be-72231429095c",
+              "label": "",
+              "meta": {},
+              "type": "SlotTracker",
+              "value": [
+                { "label": "1", "checked": false },
+                { "label": "2", "checked": false },
+                { "label": "3", "checked": false },
+                { "label": "4", "checked": false },
+                { "label": "5", "checked": false }
+              ]
+            },
+            {
+              "id": "d68ebbe5-b3b1-4da2-969c-2d89d47e1fa2",
+              "label": "",
+              "meta": {},
+              "type": "SlotTracker",
+              "value": [
+                { "label": "1", "checked": false },
+                { "label": "2", "checked": false },
+                { "label": "3", "checked": false },
+                { "label": "4", "checked": false },
+                { "label": "5", "checked": false }
+              ]
+            },
+            {
+              "id": "f0824b3c-d990-4edc-a2c4-3df279ef505d",
+              "label": "",
+              "meta": {},
+              "type": "SlotTracker",
+              "value": [
+                { "label": "1", "checked": false },
+                { "label": "2", "checked": false },
+                { "label": "3", "checked": false },
+                { "label": "4", "checked": false },
+                { "label": "5", "checked": false }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fariType": "character",
+  "template": "DresdenFilesAccelerated"
+}

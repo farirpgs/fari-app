@@ -1,15 +1,14 @@
 import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
-import useTheme from "@material-ui/core/styles/useTheme";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
 import React, { useState } from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 const cookieConsentLocalStorageKey = "cookie-consent";
 
 type ICookieConsent = "true" | undefined;
-export const CookieConsent: React.FC<{}> = (props) => {
+export const CookieConsent: React.FC = () => {
   const valueFromStorage = localStorage.getItem(
     cookieConsentLocalStorageKey
   ) as ICookieConsent;
@@ -17,7 +16,6 @@ export const CookieConsent: React.FC<{}> = (props) => {
   const [consent, setConsent] = useState<ICookieConsent>(valueFromStorage);
   const { t } = useTranslate();
   const open = consent !== "true";
-  const theme = useTheme();
 
   function handleClose() {
     setConsent("true");

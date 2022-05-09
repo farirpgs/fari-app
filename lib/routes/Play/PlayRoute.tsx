@@ -1,141 +1,307 @@
-import React, { useContext, useEffect } from "react";
+import { LiveObject } from "@liveblocks/client";
+import {
+  useBroadcastEvent,
+  useEventListener,
+  useObject,
+  useRoom,
+  useStorage,
+} from "@liveblocks/react";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { Scene, SceneMode } from "../../components/Scene/Scene";
+import { Session } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
-import { usePeerConnections } from "../../hooks/usePeerJS/usePeerConnections";
-import { usePeerHost } from "../../hooks/usePeerJS/usePeerHost";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
+import { useScene } from "../../hooks/useScene/useScene";
 import {
-  IPeerMeta,
-  sanitizeSceneName,
-  useScene,
-} from "../../hooks/useScene/useScene";
+  useSession,
+  useSessionCharacterSheets,
+} from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { useUserId } from "../../hooks/useUserId/useUserId";
-import { JoinAGame } from "./JoinAGameRoute";
-import { IPeerActions } from "./types/IPeerActions";
+import {
+  IPlayerInteraction,
+  PlayerInteractionFactory,
+} from "./types/IPlayerInteraction";
 
-const debug = true;
+type ConnectionState =
+  | "closed"
+  | "authenticating"
+  | "unavailable"
+  | "failed"
+  | "open"
+  | "connecting";
+
+export function useLiveObject<T>(props: {
+  key: string;
+  value: T;
+  isOwner: boolean;
+  canBeEmpty?: boolean;
+  onChange(newValue: T): void;
+}) {
+  const liveObject = useObject<T>(props.key);
+  const [root] = useStorage();
+
+  const room = useRoom();
+
+  useEffect(() => {
+    if (props.isOwner) {
+      root?.set(props.key, new LiveObject({}));
+    }
+  }, [root]);
+
+  useEffect(() => {
+    if (props.isOwner) {
+      liveObject?.update(props.value);
+    }
+  }, [props.value]);
+
+  useEffect(() => {
+    function onLiveObjectChange() {
+      const isSubscriber = !props.isOwner;
+      const object = liveObject?.toObject();
+      const objectKeys = Object.keys(object ?? {});
+      if (isSubscriber && object) {
+        if (props.canBeEmpty || objectKeys.length > 0) {
+          props.onChange(object as T);
+        }
+      }
+    }
+
+    onLiveObjectChange();
+
+    if (liveObject == null) {
+      return;
+    }
+
+    return room.subscribe(liveObject, onLiveObjectChange);
+  }, [liveObject]);
+
+  return liveObject;
+}
 
 export const PlayRoute: React.FC<{
   match: {
-    params: { id: string };
+    params: { id?: string };
   };
 }> = (props) => {
   const logger = useLogger();
-
-  const idFromParams = props.match.params.id;
-  const userId = useUserId();
+  const { t } = useTranslate();
+  const room = useRoom();
+  const settingsManager = useContext(SettingsContext);
   const charactersManager = useContext(CharactersContext);
-  const scenesManager = useContext(ScenesContext);
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const idFromParams = props.match.params.id;
+  const playerName = query.get("name");
+  const isGM = !idFromParams;
+  const isPlayer = !isGM;
+  const userId = settingsManager.state.userId;
+  const sessionId = isPlayer ? idFromParams : userId;
+  const shareLink = `${window.location.origin}/play/join/${sessionId}`;
+  const [connectionState, setConnectionState] = useState<ConnectionState>();
+  const [connectionStateSnackBarOpen, setConnectionStateSnackBarOpen] =
+    useState(false);
 
-  const sceneManager = useScene({
+  const sceneManager = useScene();
+  const sessionManager = useSession({
     userId: userId,
-    gameId: idFromParams,
+  });
+  const sessionCharactersManager = useSessionCharacterSheets({
+    userId: userId,
     charactersManager: charactersManager,
   });
-  const sceneName = sceneManager.state.scene.name;
-  const pageTitle = sanitizeSceneName(sceneName);
-  const { t } = useTranslate();
 
-  const hostManager = usePeerHost({
-    onConnectionDataReceive(id: string, peerAction: IPeerActions) {
-      if (peerAction.action === "roll") {
-        sceneManager.actions.updatePlayerRoll(id, peerAction.payload);
-      }
-      if (peerAction.action === "update-fate-point") {
-        sceneManager.actions.updatePlayerFatePoints(id, peerAction.payload);
-      }
-      if (peerAction.action === "played-in-turn-order") {
-        sceneManager.actions.updatePlayerPlayedDuringTurn(
-          id,
-          peerAction.payload
-        );
-      }
-      if (peerAction.action === "update-character") {
-        sceneManager.actions.updatePlayerCharacter(id, peerAction.payload);
-      }
-      if (peerAction.action === "load-character") {
-        sceneManager.actions.updatePlayerCharacterWithHiddenFields(
-          id,
-          peerAction.payload
-        );
-      }
+  useLiveObject({
+    key: "session",
+    isOwner: isGM,
+    value: sessionManager.state.session,
+    onChange: (newValue) => {
+      sessionManager.actions.overrideSession(newValue);
     },
-    debug: debug,
-  });
-  const connectionsManager = usePeerConnections({
-    onHostDataReceive(newScene) {
-      sceneManager.actions.safeSetScene(newScene);
-    },
-    debug: debug,
   });
 
-  const isGM = !idFromParams;
-  const shareLink = `${location.origin}/play/${hostManager.state.hostId}`;
-  const shouldRenderPlayerJoinGameScreen =
-    !isGM && !connectionsManager!.state.isConnectedToHost;
+  useLiveObject({
+    key: "scene",
+    isOwner: isGM,
+    value: sceneManager.state.scene,
+    onChange: (newValue) => {
+      sceneManager.actions.overrideScene(newValue);
+    },
+  });
 
-  useEffect(() => {
-    hostManager.actions.sendToConnections(sceneManager.state.scene);
-  }, [sceneManager.state.scene]);
+  useLiveObject({
+    key: "characters",
+    isOwner: isGM,
+    canBeEmpty: true,
+    value: sessionCharactersManager.state.characterSheets,
+    onChange: (newValue) => {
+      sessionCharactersManager.actions.overrideCharacterSheets(newValue);
+    },
+  });
 
-  useEffect(() => {
-    if (isGM) {
-      sceneManager.actions.updatePlayersWithConnections(
-        hostManager.state.connections
+  const broadcast = useBroadcastEvent();
+
+  useEventListener<IPlayerInteraction>(({ event }) => {
+    if (event.type === "pause") {
+      sessionManager.actions.pause();
+    }
+    if (event.type === "update-player-roll") {
+      sessionManager.actions.updatePlayerRoll(
+        event.payload.id,
+        event.payload.roll
       );
     }
-  }, [hostManager.state.connections]);
+    if (event.type === "add-player") {
+      sessionManager.actions.addPlayer(event.payload.player);
+    }
+    if (event.type === "update-player-points") {
+      sessionManager.actions.updatePlayerPoints(
+        event.payload.id,
+        event.payload.points
+      );
+      sessionCharactersManager.actions.updatePlayerCharacterMainPointCounter(
+        event.payload.id,
+        event.payload.points,
+        event.payload.maxPoints
+      );
+    }
+    if (event.type === "update-player-played-during-turn") {
+      sessionManager.actions.updatePlayerPlayedDuringTurn(
+        event.payload.id,
+        event.payload.playedDuringTurn
+      );
+    }
+    if (event.type === "update-player-character") {
+      sessionCharactersManager.actions.updatePlayerCharacter(
+        event.payload.id,
+        event.payload.character
+      );
+    }
+    if (event.type === "update-index-card") {
+      sceneManager.actions.updateIndexCard(
+        event.payload.indexCard,
+        event.payload.indexCardType
+      );
+    }
+    if (event.type === "ping") {
+      broadcast(PlayerInteractionFactory.pong(), {
+        shouldQueueEventIfNotReady: true,
+      });
+    }
+  });
+
+  function handlePlayerInteraction(interaction: IPlayerInteraction) {
+    broadcast(
+      {
+        type: interaction.type,
+        payload: interaction.payload,
+      },
+      {
+        shouldQueueEventIfNotReady: true,
+      }
+    );
+  }
+
+  useEffect(() => {
+    if (playerName) {
+      handlePlayerInteraction(
+        PlayerInteractionFactory.addPlayer(userId, playerName)
+      );
+    }
+  }, [playerName]);
+
+  useEffect(() => {
+    const unsubscribe = room.subscribe("connection", (status) => {
+      setConnectionState(status);
+    });
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    setConnectionStateSnackBarOpen(true);
+    const timeout = setTimeout(() => {
+      setConnectionStateSnackBarOpen(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [connectionState]);
+
+  const sceneName = sceneManager.state.scene?.name ?? "";
+  const pageTitle = useMemo(() => {
+    return previewContentEditable({ value: sceneName });
+  }, [sceneName]);
 
   useEffect(() => {
     if (isGM) {
-      logger.info("Route:Play");
-      logger.info("Route:Play:GM");
+      logger.track("play_online_game", {
+        as: "gm",
+      });
     } else {
-      logger.info("Route:Play");
-      logger.info("Route:Play:Player");
+      logger.track("play_online_game", {
+        as: "player",
+      });
     }
   }, []);
+
+  function getAlertSevirityColor(connectionState: ConnectionState | undefined) {
+    if (connectionState === "closed") {
+      return "error";
+    }
+    if (connectionState === "failed") {
+      return "error";
+    }
+    if (connectionState === "unavailable") {
+      return "error";
+    }
+    if (connectionState === "authenticating") {
+      return "info";
+    }
+    if (connectionState === "connecting") {
+      return "info";
+    }
+    if (connectionState === "open") {
+      return "success";
+    }
+    return "info";
+  }
 
   return (
     <>
       <PageMeta
-        title={pageTitle?.toUpperCase() || t("home-route.play-online.title")}
+        title={pageTitle || t("home-route.play-online.title")}
         description={t("home-route.play-online.description")}
       />
-      {shouldRenderPlayerJoinGameScreen ? (
-        <JoinAGame
-          idFromParams={idFromParams}
-          connecting={connectionsManager?.state.connectingToHost ?? false}
-          error={connectionsManager?.state.connectingToHostError}
-          onSubmitPlayerName={(playerName) => {
-            connectionsManager?.actions.connect<IPeerMeta>(
-              idFromParams,
-              userId,
-              {
-                playerName: playerName,
-              }
-            );
+      <>
+        <Snackbar
+          open={connectionStateSnackBarOpen && !!connectionState}
+          autoHideDuration={5000}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center",
           }}
-        />
-      ) : (
-        <Scene
-          mode={SceneMode.PlayOnline}
+        >
+          <Alert severity={getAlertSevirityColor(connectionState)}>
+            Connection: {connectionState}
+          </Alert>
+        </Snackbar>
+        <Session
+          sessionManager={sessionManager}
+          sessionCharactersManager={sessionCharactersManager}
           sceneManager={sceneManager}
-          scenesManager={scenesManager}
-          charactersManager={charactersManager}
-          connectionsManager={connectionsManager}
-          isLoading={
-            hostManager.state.loading || connectionsManager.state.loading
-          }
+          isLoading={false}
           idFromParams={idFromParams}
           shareLink={shareLink}
-          userId={userId}
-          error={hostManager.state.error}
+          userId={settingsManager.state.userId}
+          error={undefined}
+          onPlayerInteraction={handlePlayerInteraction}
         />
-      )}
+      </>
     </>
   );
 };

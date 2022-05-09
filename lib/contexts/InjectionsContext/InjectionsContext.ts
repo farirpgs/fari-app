@@ -1,4 +1,6 @@
 import React from "react";
-import { injections } from "../../services/injections";
+import { IInjections } from "../../services/injections";
 
-export const InjectionsContext = React.createContext(injections);
+export const InjectionsContext = React.createContext<IInjections>(
+  undefined as any
+);

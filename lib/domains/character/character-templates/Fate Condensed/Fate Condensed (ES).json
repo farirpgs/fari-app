@@ -1,0 +1,314 @@
+{
+  "id": "802e7985-d633-4a7e-8293-6ded9c5791a9",
+  "version": 3,
+  "name": "Fate Condensed (Spanish)",
+  "group": "Templates",
+  "template": "FateCore",
+  "lastUpdated": 1621522405,
+  "pages": [
+    {
+      "id": "ad0007a1-b704-47b3-a747-2d6b6c9088ae",
+      "label": "Personaje",
+      "sections": [
+        {
+          "id": "12ada81f-926b-4328-8ea5-c70c363eed68",
+          "label": "Aspectos",
+          "visibleOnCard": true,
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "a2797627-f19d-4c84-aa72-ecd79689bdbe",
+              "type": "Text",
+              "meta": {},
+              "label": "Concepto Principal",
+              "value": ""
+            },
+            {
+              "id": "5d339b90-628a-4b2d-84f6-9f0e7ae6835e",
+              "type": "Text",
+              "meta": {},
+              "label": "Complicación",
+              "value": ""
+            },
+            {
+              "id": "036c7d2c-2750-416e-9c56-ac0f1feb2d81",
+              "type": "Text",
+              "meta": {},
+              "label": "Relación",
+              "value": ""
+            },
+            {
+              "id": "c055fba4-e8e5-4577-89ff-55aa0b980192",
+              "type": "Text",
+              "meta": {},
+              "label": "Aspecto Libre",
+              "value": ""
+            },
+            {
+              "id": "6ae57169-6a91-4481-a290-a0aab3e6ea2d",
+              "type": "Text",
+              "meta": {},
+              "label": "ASPECTO LIBRE",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "56700121-2850-488d-af87-e281e0e3a238",
+          "label": "Proezas y Extras",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "04ed59a6-15db-4dd1-802a-1923020dc31b",
+              "type": "Text",
+              "meta": {},
+              "label": "Proeza #1",
+              "value": ""
+            },
+            {
+              "id": "7fcdc950-f5fe-4f14-bb43-091915f76717",
+              "type": "Text",
+              "meta": {},
+              "label": "Proeza #2",
+              "value": ""
+            },
+            {
+              "id": "c5f5e372-be0e-4fa2-b479-5d5b3482d386",
+              "type": "Text",
+              "meta": {},
+              "label": "Proeza #3",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "75723001-1988-4fba-bb80-a120826ba41c",
+          "label": "Otro",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "b5f4a5ca-201e-4e6b-a9d6-8f31a87bdafe",
+              "type": "Text",
+              "meta": {},
+              "label": "Notas",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "03688e60-49b6-4a56-b296-e4f5fb4b068c",
+          "label": "Puntos de Destino",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "c3859a61-99f0-4ab5-b9ac-b8c8600ad2b8",
+              "meta": { "isMainPointCounter": true, "max": "3" },
+              "type": "PointCounter",
+              "label": "Puntos de Destino",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "id": "785a3d42-a626-42c0-9ee0-77dfaf18c025",
+          "label": "Estrés",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "689e0f82-4573-4fed-9231-7980c03afc05",
+              "label": "Físico",
+              "meta": {},
+              "type": "SlotTracker",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "label": "1", "checked": false },
+                { "label": "1", "checked": false }
+              ]
+            },
+            {
+              "id": "98ee4306-1c2e-4676-b412-7d53ecf5f924",
+              "label": "Mental",
+              "meta": {},
+              "type": "SlotTracker",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "label": "1", "checked": false },
+                { "label": "1", "checked": false }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "6796acab-4dfb-4565-9beb-c2e71b51f199",
+          "label": "Consecuencias",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "2be6b8e4-360a-4131-904c-da7d508a8b25",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "Leve",
+              "value": ""
+            },
+            {
+              "id": "458d04f3-967e-47de-b1c9-1410a26fdab6",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "Moderada",
+              "value": ""
+            },
+            {
+              "id": "a863c819-7b2b-43a6-aaab-71af8edae527",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "Grave",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "b579de61-516d-48b1-9f9f-5d5a78178164",
+          "label": "Habilidades",
+          "visibleOnCard": true,
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "195b7243-a3a7-43fa-a9c1-c8ee91e28341",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Atletismo",
+              "value": ""
+            },
+            {
+              "id": "5658fe1e-e2be-46f5-8ad6-94b35dbb51ac",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Carisma",
+              "value": ""
+            },
+            {
+              "id": "82ea0fb9-8d36-4086-91c5-959a08f83516",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Conducir",
+              "value": ""
+            },
+            {
+              "id": "b4c41129-b6c3-42cc-91e0-78b637d76ef9",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Conocimiento Académico",
+              "value": ""
+            },
+            {
+              "id": "a9876667-e3c3-4b6c-b28a-c61973276c61",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Contactos",
+              "value": ""
+            },
+            {
+              "id": "e176a5bb-12ce-44c2-ae67-0c5fbd2821cd",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Disparar",
+              "value": ""
+            },
+            {
+              "id": "f1b596cf-043b-42da-b8da-0fd773696677",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Empatía",
+              "value": ""
+            },
+            {
+              "id": "38e9aad4-0b06-4fb4-9c18-e15244783a96",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Engañar",
+              "value": ""
+            },
+            {
+              "id": "2a2d4d04-c960-44b5-8b8c-ae4974aae09f",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Físico",
+              "value": ""
+            },
+            {
+              "id": "f1a5e55c-a22a-4306-bf1d-9f6b252038b8",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Investigar",
+              "value": ""
+            },
+            {
+              "id": "2aebe085-6d07-4d8c-92f1-d4198417e898",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Máquinas",
+              "value": ""
+            },
+            {
+              "id": "8a7722f0-6b7b-4d67-b21e-8efe5945cc9d",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Pelear",
+              "value": ""
+            },
+            {
+              "id": "84de0cf1-c867-48ad-9057-ca6bf3286ee7",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Percepción",
+              "value": ""
+            },
+            {
+              "id": "650c437d-3bdc-487a-9b20-767f987fc1fd",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Provocar",
+              "value": ""
+            },
+            {
+              "id": "e37990f4-c5cb-4a2e-adef-975a4df3e97b",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Recursos",
+              "value": ""
+            },
+            {
+              "id": "42ffb232-6ceb-49f4-9e2e-a82d32d9b94c",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Robar",
+              "value": ""
+            },
+            {
+              "id": "070e1c74-c007-42fe-a0a1-7dce2dceccd7",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Saber",
+              "value": ""
+            },
+            {
+              "id": "547c08bc-1579-47dd-a23d-7f2074064bad",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Sigilo",
+              "value": ""
+            },
+            {
+              "id": "3ab182dc-2824-439e-b167-4d280e17f485",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Voluntad",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fariType": "character"
+}

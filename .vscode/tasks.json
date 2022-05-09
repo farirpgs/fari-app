@@ -6,11 +6,39 @@
     {
       "type": "npm",
       "script": "validate",
-      "group": {
-        "kind": "build",
-        "isDefault": true
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": true
       },
+      "group": "build",
+      "label": "TSC & Lint & Tests",
       "problemMatcher": ["$tsc", "$eslint-stylish"]
+    },
+    {
+      "type": "npm",
+      "script": "tsc-and-lint",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": true
+      },
+      "group": "build",
+      "label": "TSC & Lint",
+      "problemMatcher": ["$tsc", "$eslint-stylish"]
+    },
+    {
+      "type": "npm",
+      "script": "i18n",
+      "problemMatcher": [],
+      "label": "Extract Translations (i18n.js)",
+      "group": "build"
     }
   ]
 }

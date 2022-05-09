@@ -15,7 +15,7 @@ export class ErrorBoundary extends Component<IProps, IState> {
     this.state = { eventId: null };
   }
 
-  static getDerivedStateFromError(error: any) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 

@@ -1,34 +1,40 @@
 import React, { useContext, useEffect } from "react";
+import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { Scene, SceneMode } from "../../components/Scene/Scene";
+import { Session } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
-import { sanitizeSceneName, useScene } from "../../hooks/useScene/useScene";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
+import { useScene } from "../../hooks/useScene/useScene";
+import {
+  useSession,
+  useSessionCharacterSheets,
+} from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { useUserId } from "../../hooks/useUserId/useUserId";
-
-const debug = false;
 
 export const PlayOfflineRoute: React.FC<{
   match: {
-    params: { id: string };
+    params: { id?: string };
   };
-}> = (props) => {
-  const userId = useUserId();
+}> = () => {
+  const settingsManager = useContext(SettingsContext);
   const charactersManager = useContext(CharactersContext);
-  const scenesManager = useContext(ScenesContext);
 
-  const sceneManager = useScene({
-    userId: userId,
+  const sceneManager = useScene();
+  const sessionManager = useSession({
+    userId: settingsManager.state.userId,
+  });
+  const sessionCharactersManager = useSessionCharacterSheets({
+    userId: settingsManager.state.userId,
     charactersManager: charactersManager,
   });
-  const sceneName = sceneManager.state.scene.name;
-  const pageTitle = sanitizeSceneName(sceneName);
+  const sceneName = sceneManager.state.scene?.name ?? "";
+  const pageTitle = previewContentEditable({ value: sceneName });
+
   const logger = useLogger();
 
   useEffect(() => {
-    logger.info("Route:PlayOffline");
+    logger.track("play_offline_game");
   }, []);
 
   const { t } = useTranslate();
@@ -39,11 +45,11 @@ export const PlayOfflineRoute: React.FC<{
         title={pageTitle || t("home-route.play-offline.title")}
         description={t("home-route.play-offline.description")}
       />
-      <Scene
-        mode={SceneMode.PlayOffline}
+      <Session
+        userId={settingsManager.state.userId}
+        sessionManager={sessionManager}
+        sessionCharactersManager={sessionCharactersManager}
         sceneManager={sceneManager}
-        scenesManager={scenesManager}
-        charactersManager={charactersManager}
       />
     </>
   );

@@ -1,35 +1,32 @@
-interface Colors {
-  chip: string;
-  dark: string;
-  light: string;
-}
-
-export type IndexCardColorTypes = "white" | "red" | "blue" | "green" | "yellow";
-
-export const IndexCardColor: Record<IndexCardColorTypes, Colors> = {
-  white: {
-    chip: "#fff",
-    dark: "#424242",
-    light: "#fff",
-  },
-  red: {
-    chip: "#ff0000",
-    dark: "#390e0f",
-    light: "#ffecec",
-  },
-  blue: {
-    chip: "#00daff",
-    dark: "#0f333a",
-    light: "#e9fcff",
-  },
-  green: {
-    chip: "#00ff4c",
-    dark: "#103d1d",
-    light: "#e8ffef",
-  },
-  yellow: {
-    chip: "#ffee00",
-    dark: "#664b00",
-    light: "#fffddb",
-  },
+export const IndexCardColor = {
+  white: "#fff",
+  red: "#f28b82",
+  orange: "#fbbc04",
+  yellow: "#fff475",
+  green: "#ccff90",
+  teal: "#a7ffeb",
+  blue: "#cbf0f8",
+  darkBlue: "#aecbfa",
+  purple: "#d7aefb",
+  pink: "#fdcfe8",
+  brown: "#e6c9a8",
+  grey: "#e8eaed",
 } as const;
+
+export const DiceLabelsColors = [
+  // IndexCardColor.blue,
+  IndexCardColor.white,
+  IndexCardColor.red,
+  IndexCardColor.orange,
+  IndexCardColor.blue,
+  IndexCardColor.yellow,
+  IndexCardColor.green,
+  IndexCardColor.teal,
+  IndexCardColor.darkBlue,
+  IndexCardColor.purple,
+  IndexCardColor.pink,
+  IndexCardColor.brown,
+  IndexCardColor.grey,
+];
+
+export type IndexCardColorTypes = keyof typeof IndexCardColor;

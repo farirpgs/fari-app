@@ -1,0 +1,357 @@
+{
+  "id": "a219447d-0814-43d4-b1fb-5bae75d233ed",
+  "name": "Charge into the Depths",
+  "lastUpdated": 1644366509,
+  "wide": true,
+  "pages": [
+    {
+      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "label": "Character",
+      "sections": {
+        "left": [
+          {
+            "id": "c06332f5-d2b2-4a38-b704-58f23d605404",
+            "label": "details",
+            "blocks": [
+              {
+                "id": "fa13cbda-fdcb-4276-bbdc-2d035cb2e319",
+                "label": "concept",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "260776c2-f1f8-41a5-a73f-8f1f4479a9b5",
+                "label": "appearance",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "708aeffb-b15c-4ae2-b7bf-3f7fc1ac38dc",
+                "label": "ties",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "631e5fc0-bb6f-456f-80ef-0ed27f247be8",
+            "label": "stats",
+            "blocks": [
+              {
+                "id": "fd7c4386-440b-4c75-ac64-8f8d572155ba",
+                "label": "health",
+                "type": "SlotTracker",
+                "meta": {
+                  "asClock": true,
+                  "helperText": "2 Ticks = -1 Effect; 3 Ticks = -1d6; 4 Ticks = Out of Action, Roll Warrior to see if dead.&nbsp;"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              },
+              {
+                "id": "c94fdac8-a8a6-4b93-9632-9b45aa6cdae1",
+                "label": "Spirit",
+                "type": "SlotTracker",
+                "meta": {
+                  "asClock": true,
+                  "helperText": "2 Ticks = -1 Effect; 3 Ticks = -1d6; 4 Ticks = Out of Action,&nbsp;Roll Cleric to see if you leave the adventuring life.&nbsp;"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              },
+              {
+                "id": "576aac7d-48d4-4d2a-9d83-1602e249964d",
+                "label": "supply",
+                "type": "SlotTracker",
+                "meta": {
+                  "asClock": true,
+                  "helperText": "2 Ticks = -1 Effect; 3 Ticks = -1d6; 4 Ticks = Out of Supply, suffer -1 Health and Supply each day.<br>"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              },
+              {
+                "id": "839b97c8-029a-4287-9e6d-dcf0c3a48262",
+                "label": "",
+                "type": "Text",
+                "value": "Only apply stat penalties where relevant.",
+                "meta": {}
+              }
+            ]
+          },
+          {
+            "id": "0010bd50-4d74-4c4a-80e8-c0b7121f71ec",
+            "label": "warrior talents",
+            "blocks": [
+              {
+                "id": "1849d182-3b2f-4390-ad2c-e5ebd8bfbb5d",
+                "label": "berserker",
+                "type": "Text",
+                "value": "When fighting multiple foes in close combat, pushing yourself costs only 1 momentum. ",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "9e79feae-6728-4268-8d10-4b42ff0ead50",
+                "label": "shieldwall",
+                "type": "Text",
+                "value": "When you Protect an ally, gain +2 momentum. ",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "fadd968a-ebb7-4ea9-a3bc-8dc2af057fdd",
+                "label": "tough",
+                "type": "Text",
+                "value": "When you resist a consequence using your endurance, gain +2d6 to your determination roll per momentum charge.",
+                "meta": { "checked": false, "width": 1 }
+              }
+            ]
+          },
+          {
+            "id": "5a297cd8-afbe-4a5a-a04c-e4a4a38bb45c",
+            "label": "cleric talents",
+            "blocks": [
+              {
+                "id": "3c3e4384-5197-42c2-ab09-a3a56386ac7e",
+                "label": "healer",
+                "type": "Text",
+                "value": "When you help an ally Recover with healing magic, pushing yourself costs only 1 momentum. ",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "d0d37446-3104-4711-9e37-247d967393ee",
+                "label": "prophet",
+                "type": "Text",
+                "value": "You can pray for your Diety to intervene in a situation. This is always a Desperate roll with no Effect (Requires spending momentum or getting a critical). ",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "0db44d16-96a2-4115-98f4-e1cbf209545e",
+                "label": "inspirational",
+                "type": "Text",
+                "value": "When you Assist an ally you may spend up to 2 Momentum to give them +2d6 to their roll.",
+                "meta": { "checked": false, "width": 1 }
+              },
+              {
+                "id": "01150c91-60e2-4f47-b0aa-5f01669c322a",
+                "label": "",
+                "type": "Separator",
+                "meta": {
+                  "hasLabel": false,
+                  "helperText": "Made by Sofia Peralta for the Charge Creation Jam.\n<br>Inspired by Barebones Fantasy by DwD Studios and Ironsworn by Shawn Tomkin.&nbsp;<br>"
+                },
+                "value": ""
+              }
+            ]
+          }
+        ],
+        "right": [
+          {
+            "id": "079ee031-2a23-4471-8b85-3a601bd92ea2",
+            "label": "actions",
+            "blocks": [
+              {
+                "id": "764619d3-845b-47a0-ae6a-7f273c7ef8fe",
+                "label": "warrior",
+                "type": "SlotTracker",
+                "meta": {
+                  "helperText": "Close Combat, Endurance, Intimidation, Strength, Warfare",
+                  "width": 1,
+                  "asClock": false
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              },
+              {
+                "id": "32b773f8-31e1-48a4-8696-b8654feda3a6",
+                "label": "cleric",
+                "type": "SlotTracker",
+                "meta": {
+                  "helperText": "Divine Knowledge, Healing, Oratory, Smite Undead"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              },
+              {
+                "id": "51898f52-52f8-4aa9-88c3-6e3970c4e748",
+                "label": "rogue",
+                "type": "SlotTracker",
+                "meta": {
+                  "helperText": "Disarm Trap, Guile, Insight, Stealth, Trickery"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              },
+              {
+                "id": "2c3e45c8-93f6-4d6f-80c1-c80fff5eb18a",
+                "label": "ranger",
+                "type": "SlotTracker",
+                "meta": {
+                  "helperText": "Navigation, Ranged Combat, Survival, Tracking&nbsp;"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              },
+              {
+                "id": "8ca9ea4c-5e2d-4c1e-a0b0-b277fe562a72",
+                "label": "mage",
+                "type": "SlotTracker",
+                "meta": {
+                  "helperText": "Academic Knowledge, Pick one per action dot: Alteration, Conjuration, Divination, Evocation, Illusion, Restoration"
+                },
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              },
+              {
+                "id": "21e51487-5a01-4e23-9cd9-1b0e62e86db5",
+                "label": "",
+                "type": "Separator",
+                "meta": {
+                  "hasLabel": false,
+                  "helperText": "Assign 3 action dots. A single action cannot start with more than 2 action dots."
+                },
+                "value": ""
+              },
+              {
+                "id": "28b2156d-e97f-4d28-979b-3a535b4a7016",
+                "label": "Momentum",
+                "type": "SlotTracker",
+                "meta": {},
+                "value": [
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false },
+                  { "label": "", "checked": false }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "e0a2df70-96bf-4e2b-9285-84b2c3d3dc84",
+            "label": "rogue talents",
+            "blocks": [
+              {
+                "id": "dcf38980-7d35-4201-b87a-7f3c5a61fd94",
+                "label": "agile",
+                "type": "Text",
+                "value": "When you resist a consequence by deftly dodging it, gain +2d6 to your determination roll per momentum charge.",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "40ae671b-7e91-4506-ab2b-310c11d50f81",
+                "label": "assassin",
+                "type": "Text",
+                "value": "When you use a Flashback to declare you had previously laid a trap, it costs 1 Momentum less and you add +1d6 to the action or fortune roll involved.",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "8172a6e7-59c7-415e-9d30-2bfabae0e403",
+                "label": "AMBUSH",
+                "type": "Text",
+                "value": "When surprising an unaware foe, pushing yourself costs only 1 momentum. ",
+                "meta": { "checked": false, "width": 1 }
+              }
+            ]
+          },
+          {
+            "id": "9df67c0e-cc68-4555-adae-9718cd12ebf1",
+            "label": "ranger talents",
+            "blocks": [
+              {
+                "id": "ee052e2f-f0a2-4756-ad35-a3c527da77bb",
+                "label": "trick shot",
+                "type": "Text",
+                "value": "When performing incredible feats of archery, like cutting a rope with an arrow shot or hitting another arrow in mid-air, pushing yourself costs only 1 momentum.",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "7b0d1ff6-dc4c-493b-bc44-c96f0aaa4eb5",
+                "label": "wanderer",
+                "type": "Text",
+                "value": "You have travelled far and wide and may always attempt a Ranger roll to see if you have knowledge of anything with a Limited Effect.",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "6a986af6-03ce-43e1-9d56-b918783e07f1",
+                "label": "explorer",
+                "type": "Text",
+                "value": "Whenever you make a Determination roll to resist a consequence caused by wilderness, gain +2d6 to your determination roll per momentum charge.",
+                "meta": { "checked": false, "width": 1 }
+              }
+            ]
+          },
+          {
+            "id": "0c18c961-25ac-48a6-b1c9-3524d2564684",
+            "label": "mage talents",
+            "blocks": [
+              {
+                "id": "cb7c55f9-2f3d-4fb9-8cb4-b1aa67a729b6",
+                "label": "warlock",
+                "type": "Text",
+                "value": "You may tick 1 segment of your Health clock to gain 2 Momentum at any time. ",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "8f0f46dc-0533-4d9a-9604-8db8fa946d7f",
+                "label": "ritualist",
+                "type": "Text",
+                "value": "When you use a Flashback to declare you had a specific spell prepared in anticipation, it costs 1 Momentum less and you add +1d6 to the action or fortune roll involved.",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "d228993d-6a66-4604-b96a-1539c1f7d65a",
+                "label": "magic barrier",
+                "type": "Text",
+                "value": "When you resist a magical consequence, gain +2d6 to your determination roll per momentum charge.",
+                "meta": { "checked": false, "width": 1 }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "template": "Blank",
+  "version": 4,
+  "fariType": "character"
+}

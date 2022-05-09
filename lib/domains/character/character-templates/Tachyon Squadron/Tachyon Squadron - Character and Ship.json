@@ -1,0 +1,667 @@
+{
+  "id": "3fb1fb5d-a4f2-452e-88a3-17114b986271",
+  "name": "Tachyon Squadron Combined Sheet",
+  "group": "Tachyon Squadron",
+  "lastUpdated": 1622749491,
+  "wide": false,
+  "pages": [
+    {
+      "id": "92d36d4f-9982-4406-8d3d-588ba1d617df",
+      "label": "Character",
+      "sections": {
+        "left": [
+          {
+            "id": "4bfc893d-dcb7-40a9-b916-576d87aedfdf",
+            "blocks": [
+              {
+                "id": "1f5d0dc0-f3d5-4b57-82cc-2c8946772fa3",
+                "label": "name",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "8237fc9b-e8a8-43eb-8138-0e7181f4db1d",
+                "label": "callsign",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              },
+              {
+                "id": "182805e7-ff2b-4560-bd79-db51e03a992d",
+                "label": "player",
+                "type": "Text",
+                "value": "",
+                "meta": {}
+              }
+            ],
+            "label": "details",
+            "visibleOnCard": true
+          },
+          {
+            "id": "0e140fc9-1216-498a-ba04-02d862e47b0d",
+            "blocks": [
+              {
+                "id": "983e9bd8-be80-4914-8b8d-d40763b78a9e",
+                "type": "Text",
+                "meta": {},
+                "label": "High Concept",
+                "value": ""
+              },
+              {
+                "id": "287d65dd-373c-4eb0-acdf-2c920d38a1ac",
+                "type": "Text",
+                "meta": {},
+                "label": "healthy decompression",
+                "value": ""
+              },
+              {
+                "id": "1a452add-0b46-409d-8274-46032cbb8cd3",
+                "type": "Text",
+                "meta": {},
+                "label": "unhealthy decompression",
+                "value": ""
+              },
+              {
+                "id": "4e5726ec-deb6-41d0-8080-282083a8191f",
+                "type": "Text",
+                "meta": {},
+                "label": "Relationship",
+                "value": ""
+              },
+              {
+                "id": "3e2cba6f-9697-4924-bb8e-85dc08777484",
+                "type": "Text",
+                "meta": {},
+                "label": "relationship",
+                "value": ""
+              },
+              {
+                "id": "5076ec12-8d2a-4027-b0b0-08841d9d4f2d",
+                "type": "Text",
+                "meta": {},
+                "label": "Other Aspect",
+                "value": ""
+              }
+            ],
+            "label": "Aspects",
+            "visibleOnCard": true
+          },
+          {
+            "id": "412af9bd-ce0e-4d02-aa7a-2199839cf05f",
+            "blocks": [
+              {
+                "id": "24d53b94-ad3e-4f0e-90cc-e20c0c86acdf",
+                "type": "Text",
+                "meta": {},
+                "label": "Free stunt",
+                "value": ""
+              },
+              {
+                "id": "bb71b38b-ffc8-4a36-9398-d2d8a609c0bd",
+                "type": "Text",
+                "meta": {},
+                "label": "free stunt",
+                "value": ""
+              },
+              {
+                "id": "51d9d81a-93ba-448a-b883-9db572fe868b",
+                "type": "Text",
+                "meta": {},
+                "label": "Stunt #3",
+                "value": ""
+              }
+            ],
+            "label": "Stunts & Extras",
+            "visibleOnCard": true
+          },
+          {
+            "id": "e65e4a2d-c742-49d9-9166-afccea49849c",
+            "blocks": [
+              {
+                "id": "1ddd6114-1c5e-4574-80b0-e81bdc3fa6e9",
+                "label": "Gear stunt item",
+                "type": "Text",
+                "value": "The effect description",
+                "meta": {
+                  "helperText": "A gear stunt usually changes 1 die to + or -, or gives +1 to the result of a successful action.&nbsp;"
+                }
+              }
+            ],
+            "label": "Gear stunts",
+            "visibleOnCard": true
+          },
+          {
+            "id": "d2fa2451-db76-4074-babd-18f3fdbf828f",
+            "blocks": [
+              {
+                "id": "16b2b1a2-fbb3-46c3-b59b-9f04a03d184c",
+                "type": "Text",
+                "meta": {},
+                "label": "Notes",
+                "value": ""
+              }
+            ],
+            "label": "Other"
+          },
+          {
+            "id": "e065e3f1-c6d4-4141-89c3-9cccce9d1cf3",
+            "blocks": [
+              {
+                "id": "508fc8cc-0908-4d93-9cbe-4550cfccd22b",
+                "meta": { "isMainPointCounter": true, "max": "3" },
+                "type": "PointCounter",
+                "label": "Fate Points",
+                "value": "3"
+              }
+            ],
+            "label": "Fate Points",
+            "visibleOnCard": true
+          }
+        ],
+        "right": [
+          {
+            "id": "6c329999-5dd0-4fe7-b35e-c41da1f0e044",
+            "blocks": [
+              {
+                "id": "0763239f-34a2-4cb8-b5d1-6777abfd16d7",
+                "label": "stress",
+                "meta": { "helperText": "The stress of the character" },
+                "type": "SlotTracker",
+                "value": [
+                  { "checked": false, "label": "1" },
+                  { "label": "1", "checked": false },
+                  { "label": "1", "checked": false },
+                  { "label": "1", "checked": false },
+                  { "label": "1", "checked": false }
+                ]
+              }
+            ],
+            "label": "Stress",
+            "visibleOnCard": true
+          },
+          {
+            "id": "77ab053a-f04e-43e6-816e-14eae187e9f6",
+            "blocks": [
+              {
+                "id": "88cfe567-734d-4c32-86f9-16ac9c3ed8af",
+                "type": "Text",
+                "meta": { "checked": false },
+                "label": "Mild",
+                "value": ""
+              },
+              {
+                "id": "fa7265a3-1b02-4998-a7ae-2b1c335e2574",
+                "type": "Text",
+                "meta": { "checked": false },
+                "label": "Moderate",
+                "value": ""
+              },
+              {
+                "id": "b0163883-8665-4cca-93ed-f9455efee051",
+                "type": "Text",
+                "meta": { "checked": false },
+                "label": "Severe",
+                "value": ""
+              }
+            ],
+            "label": "Consequences",
+            "visibleOnCard": true
+          },
+          {
+            "id": "e607696f-e4f3-420c-9ffc-a4d58ba3e9cf",
+            "blocks": [
+              {
+                "id": "9e3bc184-8f78-4230-970e-91681c53b93a",
+                "meta": {
+                  "commands": ["4dF"],
+                  "helperText": "Shooting your starfighter’s guns."
+                },
+                "type": "Skill",
+                "label": "gunnery",
+                "value": ""
+              },
+              {
+                "id": "72bb37b8-599d-43cd-9168-0cd2bf88699a",
+                "meta": {
+                  "commands": ["4dF"],
+                  "helperText": "Flying a ship, avoiding attacks made against the shipyou’re flying."
+                },
+                "type": "Skill",
+                "label": "Pilot",
+                "value": ""
+              },
+              {
+                "id": "7b9fc4c4-c4dd-4aa5-ab77-7a9f1328203c",
+                "meta": {
+                  "commands": ["4dF"],
+                  "helperText": "Fighting with a ship—putting yourself in positionto attack, analyzing enemy tactics, formulating a plan, etc."
+                },
+                "type": "Skill",
+                "label": "Tactics",
+                "value": ""
+              },
+              {
+                "id": "29ad632c-c00a-48a3-98a5-ddd2eb3872d1",
+                "meta": {
+                  "commands": ["4dF"],
+                  "helperText": "Fixing damage, angling your shields, detectingyour enemies before they detect you."
+                },
+                "type": "Skill",
+                "label": "Technology",
+                "value": ""
+              }
+            ],
+            "label": "Spacefaring Skills",
+            "visibleOnCard": true
+          },
+          {
+            "id": "ff5fdd5a-5f8a-45df-b9c0-88bf511c004b",
+            "blocks": [
+              {
+                "id": "4150ab97-3dbc-440b-952f-56234f71a9dd",
+                "label": "athletics",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["4dF"],
+                  "helperText": "Running, jumping, dodging blaster fire."
+                }
+              },
+              {
+                "id": "142cc706-7047-4830-93ac-3e4b949fb217",
+                "label": "fight",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["4dF"],
+                  "helperText": "Striking, grappling, knives, etc."
+                }
+              },
+              {
+                "id": "da36a89d-e3b6-41c8-8a04-a70e59cf8b17",
+                "label": "notice",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["4dF"],
+                  "helperText": "Perceiving via your body’s senses."
+                }
+              },
+              {
+                "id": "53761211-2763-4c8a-bec7-2f2a19c90d8a",
+                "label": "shoot",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["4dF"],
+                  "helperText": "Using blaster pistols and rifles."
+                }
+              },
+              {
+                "id": "3202185b-0564-4c35-976c-d8a44c61fc45",
+                "label": "sneak",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["4dF"],
+                  "helperText": "Moving undetected, staying hidden."
+                }
+              }
+            ],
+            "label": "action skills",
+            "visibleOnCard": true
+          },
+          {
+            "id": "96607d42-ef27-4c6e-8732-5890111b381e",
+            "blocks": [
+              {
+                "id": "dd3303df-9e2b-41a8-9ef4-a8a550e15f5f",
+                "label": "discipline",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["4dF"],
+                  "helperText": "Keeping your cool, removing stress."
+                }
+              },
+              {
+                "id": "54db3265-6a42-45f8-99b3-6eaacedef473",
+                "label": "empathy",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["4dF"],
+                  "helperText": "Being aware of others’ emotions and intentions."
+                }
+              },
+              {
+                "id": "f9c62749-cc8a-4a93-bbfa-691872160633",
+                "label": "investigate",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["4dF"],
+                  "helperText": "Tracking down information."
+                }
+              },
+              {
+                "id": "f1caa749-8420-494c-862c-a39151a7722b",
+                "label": "PROVOKE",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["4dF"],
+                  "helperText": "Evoking a negative emotion in others."
+                }
+              },
+              {
+                "id": "ae1b1fd4-611e-4811-83d1-6efaf741edb8",
+                "label": "rapport",
+                "type": "Skill",
+                "value": "0",
+                "meta": {
+                  "commands": ["4dF"],
+                  "helperText": "Evoking a positive emotion in others, getting alongwith people."
+                }
+              }
+            ],
+            "label": "social skills",
+            "visibleOnCard": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "daef5a04-33cb-4a59-923d-90c8cab16c58",
+      "sections": { "left": [], "right": [] },
+      "label": "Ship",
+      "sections": {
+        "left": [
+          {
+            "id": "30288451-f2b3-4674-865c-3e91011634bc",
+            "blocks": [
+              {
+                "id": "44008493-9333-49fd-8e86-a30459f1259c",
+                "label": "aspect",
+                "type": "Text",
+                "value": "Old but reliable",
+                "meta": { "helperText": "Aspect&nbsp; of the ship" }
+              },
+              {
+                "id": "4869fda9-d3fe-4b1a-a61d-035b1533d437",
+                "label": "stunt or power",
+                "type": "Text",
+                "value": "Well Armed: Gain Weapon: 1 to Gunnery attacks",
+                "meta": {}
+              },
+              {
+                "id": "77892d33-1e4e-4035-911e-06e7d0eeeae3",
+                "label": "stunt or power",
+                "type": "Text",
+                "value": "Automatic Ejection System",
+                "meta": {}
+              }
+            ],
+            "label": "standard features",
+            "visibleOnCard": true
+          },
+          {
+            "id": "87b2b079-8c88-4be2-b163-4f1d31d071d0",
+            "blocks": [
+              {
+                "id": "591cded4-0469-40c7-bf96-1294126c2db4",
+                "label": "pilot",
+                "type": "Text",
+                "value": "",
+                "meta": { "helperText": "The current pilot of the ship" }
+              },
+              {
+                "id": "5f47a372-25eb-4352-8d8b-b0cb04591711",
+                "label": "detection",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["4dF"] }
+              },
+              {
+                "id": "e40f4478-03d5-405d-9ce3-425ddd9bac76",
+                "label": "minimize detection die",
+                "type": "SlotTracker",
+                "meta": {},
+                "value": [
+                  { "label": "1", "checked": false },
+                  { "label": "2", "checked": false }
+                ]
+              },
+              {
+                "id": "d6b36dec-76f5-4a7a-9501-4adee0c9a4fa",
+                "label": "defend",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["4dF"] }
+              },
+              {
+                "id": "c5f08db6-28fb-41a1-a142-65e0d65e191e",
+                "label": "minimize defend die",
+                "type": "SlotTracker",
+                "meta": {},
+                "value": [
+                  { "label": "1", "checked": false },
+                  { "label": "2", "checked": false }
+                ]
+              },
+              {
+                "id": "3ab9b89e-3022-4410-abe8-49fd0171ad72",
+                "label": "maneuver",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["4dF"] }
+              },
+              {
+                "id": "22161ff5-debf-48ff-b369-9ae410848f30",
+                "label": "minimize maneuver die",
+                "type": "SlotTracker",
+                "meta": {},
+                "value": [
+                  { "label": "1", "checked": false },
+                  { "label": "2", "checked": false }
+                ]
+              },
+              {
+                "id": "b314e7c8-80d1-4d16-a41d-4fed03d33e6f",
+                "label": "attack",
+                "type": "Skill",
+                "value": "0",
+                "meta": { "commands": ["4dF"] }
+              },
+              {
+                "id": "41249978-fba4-43a9-bbf8-ab4b5a4b2b7e",
+                "label": "minimize attack die",
+                "type": "SlotTracker",
+                "meta": {},
+                "value": [
+                  { "label": "1", "checked": false },
+                  { "label": "2", "checked": false }
+                ]
+              }
+            ],
+            "label": "engagement bonuses",
+            "visibleOnCard": true
+          },
+          {
+            "id": "0b420ac2-ea2c-42e0-96b6-bfa0e1bc4eef",
+            "blocks": [
+              {
+                "id": "e8903d39-a411-4b70-b9f3-a08d4e7cfd67",
+                "label": "equipment bay 1",
+                "type": "Text",
+                "value": "",
+                "meta": { "checked": false }
+              },
+              {
+                "id": "eefe3787-0fa4-4dad-8216-d23b4a398c6f",
+                "label": "equipment bay 2",
+                "type": "Text",
+                "value": "",
+                "meta": { "checked": false }
+              }
+            ],
+            "label": "equipment bay"
+          }
+        ],
+        "right": [
+          {
+            "id": "11463db2-c0eb-4c97-b8f5-05779ad6f728",
+            "blocks": [
+              {
+                "id": "f95eb803-56c6-48bf-bf17-b541e14c0829",
+                "label": "shields",
+                "type": "SlotTracker",
+                "meta": {},
+                "value": [
+                  { "label": "1", "checked": false },
+                  { "label": "1", "checked": false },
+                  { "label": "1", "checked": false }
+                ]
+              }
+            ],
+            "label": "system damage",
+            "visibleOnCard": true
+          },
+          {
+            "id": "a2e7e4ff-b617-4869-bb71-f24937955057",
+            "blocks": [
+              {
+                "id": "9e582a38-fe0c-4404-bb14-0881bf145456",
+                "label": "sensors damaged",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Minimize 1 die from Technology actions."
+                }
+              },
+              {
+                "id": "bf8ecbc2-a43e-445e-a75d-81fb40d00226",
+                "label": "targeting systems damaged",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Minimize 1 die from Gunnery actions.&nbsp;"
+                }
+              },
+              {
+                "id": "d7b77b16-ea9d-4591-8a78-eb9cd717c3ef",
+                "label": "sensors and targeting offline",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Minimize 1 die from both Gunnery and Technology actions rolls. Gain aspect: SHOOTS IN THE DARK"
+                }
+              },
+              {
+                "id": "0b68bb9b-e656-427a-93df-2e51c46504ff",
+                "label": "catastrophic damage",
+                "type": "Numeric",
+                "value": "0",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Flash fire! punch out!"
+                }
+              }
+            ],
+            "label": "(+) computer systems damage",
+            "visibleOnCard": true
+          },
+          {
+            "id": "77950b70-e143-4997-b23f-d92d43aa6b50",
+            "blocks": [
+              {
+                "id": "8734396c-cc98-4e05-beb3-9ac86e60e9b5",
+                "label": "afterburner damaged",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Minimize 1 die on Tactics actions."
+                }
+              },
+              {
+                "id": "7ce9ab7d-babf-4d08-ac1c-375a839b5617",
+                "label": "meneuvering jets damaged",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Minimize 1 die on Pilot actions."
+                }
+              },
+              {
+                "id": "5922097b-7bff-4d76-b28a-7a6935ec1de1",
+                "label": "critical damage to drives",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Minimize 1 die on both Tactics and Pilot actions. Gain Aspect: DRIVES READY TO GIVE OUT"
+                }
+              },
+              {
+                "id": "4fe7517f-e348-49fc-ab05-ffdda52e545b",
+                "label": "catastrophic damage",
+                "type": "Numeric",
+                "value": "0",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Catastrophic explosion! Punch out!"
+                }
+              }
+            ],
+            "label": "( ) Propulsion systems damage"
+          },
+          {
+            "id": "60fbee21-c5a9-4abd-9f94-62a7aef583b7",
+            "blocks": [
+              {
+                "id": "3a927383-befc-4725-a7ea-2b08d7d98668",
+                "label": "life support damaged",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Aspect: LIFE SUPPORT DAMAGED"
+                }
+              },
+              {
+                "id": "bb96a149-d0aa-40d9-abf6-2354646eb282",
+                "label": "cockpit hit",
+                "type": "Numeric",
+                "value": "2",
+                "meta": {
+                  "checked": false,
+                  "helperText": "the pilot sustains a hit equal to the attack.&nbsp;"
+                }
+              },
+              {
+                "id": "a3859ff1-7d36-4cfb-8283-8f3bfdc4049c",
+                "label": "catastrophic damage",
+                "type": "Numeric",
+                "value": "",
+                "meta": {
+                  "checked": false,
+                  "helperText": "Structural disintegration! Punch out!"
+                }
+              }
+            ],
+            "label": "(-) Critical systems damage"
+          }
+        ]
+      }
+    }
+  ],
+  "template": "TachyonSquadron",
+  "version": 4,
+  "fariType": "character"
+}

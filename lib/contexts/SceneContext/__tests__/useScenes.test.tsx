@@ -1,6 +1,7 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { ManagerMode } from "../../../components/Manager/Manager";
-import { defaultSceneName, ISavableScene, useScenes } from "../ScenesContext";
+import { getUnix } from "../../../domains/dayjs/getDayJS";
+import { IScene } from "../../../hooks/useScene/IScene";
+import { defaultSceneName, useScenes } from "../ScenesContext";
 
 describe("useScenes", () => {
   describe("local storage load", () => {
@@ -50,24 +51,27 @@ describe("useScenes", () => {
         return useScenes({ localStorage: localStorage as any });
       });
       // WHEN I add a new scene
-      let newScene: ISavableScene | undefined = undefined;
+      let newScene: IScene | undefined = undefined;
       act(() => {
         newScene = result.current.actions.add();
       });
       // THEN the scene is added
       expect(result.current.state.scenes).toEqual([
         {
-          aspects: {},
+          indexCards: {
+            private: [],
+            public: [],
+          },
           id: newScene!.id,
           lastUpdated: newScene!.lastUpdated,
           name: defaultSceneName,
-          version: 1,
+          version: 2,
         },
       ]);
       expect(localStorage.getItem("fari-scenes")).toEqual(
         `[{"id":"${
           newScene!.id
-        }","name":"${defaultSceneName}","aspects":{},"version":1,"lastUpdated":${
+        }","name":"${defaultSceneName}","indexCards":{"public":[],"private":[]},"version":2,"lastUpdated":${
           newScene!.lastUpdated
         }}]`
       );
@@ -82,43 +86,48 @@ describe("useScenes", () => {
 
       expect(result.current.state.scenes).toEqual([
         {
-          aspects: {},
+          indexCards: { public: [], private: [] },
           id: newScene!.id,
           lastUpdated: newScene!.lastUpdated,
           name: "UPDATED NAME",
-          version: 1,
+          version: 2,
         },
       ]);
       expect(localStorage.getItem("fari-scenes")).toEqual(
         `[{"id":"${
           newScene!.id
-        }","name":"UPDATED NAME","aspects":{},"version":1,"lastUpdated":${
+        }","name":"UPDATED NAME","indexCards":{"public":[],"private":[]},"version":2,"lastUpdated":${
           newScene!.lastUpdated
         }}]`
       );
 
-      let playingScene: ISavableScene | undefined = undefined;
+      let playingScene: IScene | undefined = undefined;
       act(() => {
         // WHEN I save a scene I'm already playing
         playingScene = result.current.actions.upsert({
           id: "an id from a live session",
+          lastUpdated: getUnix(),
         } as any);
       });
       // THEN the new scene has been added and is properly sorted
       expect(result.current.state.scenes).toEqual([
         {
-          aspects: undefined,
+          indexCards: undefined,
+          version: undefined,
+          notes: undefined,
+          group: undefined,
           id: "an id from a live session",
           lastUpdated: expect.anything(),
           name: undefined,
-          version: undefined,
         },
         {
-          aspects: {},
+          notes: undefined,
+          group: undefined,
+          indexCards: { public: [], private: [] },
           id: newScene!.id,
           lastUpdated: newScene!.lastUpdated,
           name: "UPDATED NAME",
-          version: 1,
+          version: 2,
         },
       ]);
       expect(localStorage.getItem("fari-scenes")).toEqual(
@@ -126,7 +135,7 @@ describe("useScenes", () => {
           playingScene!.lastUpdated
         }},{"id":"${
           newScene!.id
-        }","name":"UPDATED NAME","aspects":{},"version":1,"lastUpdated":${
+        }","name":"UPDATED NAME","indexCards":{"public":[],"private":[]},"version":2,"lastUpdated":${
           newScene!.lastUpdated
         }}]`
       );
@@ -137,17 +146,19 @@ describe("useScenes", () => {
       // THEN the scene is deleted
       expect(result.current.state.scenes).toEqual([
         {
-          aspects: {},
+          indexCards: { public: [], private: [] },
+          group: undefined,
+          notes: undefined,
           id: newScene!.id,
           lastUpdated: newScene!.lastUpdated,
           name: "UPDATED NAME",
-          version: 1,
+          version: 2,
         },
       ]);
       expect(localStorage.getItem("fari-scenes")).toEqual(
         `[{"id":"${
           newScene!.id
-        }","name":"UPDATED NAME","aspects":{},"version":1,"lastUpdated":${
+        }","name":"UPDATED NAME","indexCards":{"public":[],"private":[]},"version":2,"lastUpdated":${
           newScene!.lastUpdated
         }}]`
       );
@@ -158,32 +169,22 @@ describe("useScenes", () => {
       // THEN nothing happens
       expect(result.current.state.scenes).toEqual([
         {
-          aspects: {},
+          indexCards: { public: [], private: [] },
+          group: undefined,
+          notes: undefined,
           id: newScene!.id,
           lastUpdated: newScene!.lastUpdated,
           name: "UPDATED NAME",
-          version: 1,
+          version: 2,
         },
       ]);
       expect(localStorage.getItem("fari-scenes")).toEqual(
         `[{"id":"${
           newScene!.id
-        }","name":"UPDATED NAME","aspects":{},"version":1,"lastUpdated":${
+        }","name":"UPDATED NAME","indexCards":{"public":[],"private":[]},"version":2,"lastUpdated":${
           newScene!.lastUpdated
         }}]`
       );
-      act(() => {
-        // WHEN I open the manager
-        result.current.actions.openManager(ManagerMode.Use);
-      });
-      // THEN the manager is opened
-      expect(result.current.state.mode).toEqual(ManagerMode.Use);
-      act(() => {
-        // WHEN I close the manager
-        result.current.actions.closeManager();
-      });
-      // THEN the manager is closed
-      expect(result.current.state.mode).toEqual(ManagerMode.Close);
     });
   });
 });

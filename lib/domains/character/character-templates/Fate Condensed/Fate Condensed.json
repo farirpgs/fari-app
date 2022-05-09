@@ -1,0 +1,327 @@
+{
+  "id": "59c260ce-6a4b-4019-89c3-321b12149655",
+  "version": 3,
+  "name": "",
+  "template": "FateCondensed",
+  "lastUpdated": 1619722809,
+  "pages": [
+    {
+      "id": "5d4ba9b2-965c-4892-a095-fe402a311c24",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "bcbd704f-d97c-4965-a93c-3f32116b0812",
+          "label": "Aspects",
+          "visibleOnCard": true,
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "a317428c-9ad2-4a67-bac8-e322429b91d8",
+              "type": "Text",
+              "meta": {},
+              "label": "High Concept",
+              "value": ""
+            },
+            {
+              "id": "c3669618-43e2-4704-8275-5e45ca0276e4",
+              "type": "Text",
+              "meta": {},
+              "label": "Trouble",
+              "value": ""
+            },
+            {
+              "id": "f6649781-a21d-421c-b4e3-50a2e3d169ad",
+              "type": "Text",
+              "meta": {},
+              "label": "Relationship",
+              "value": ""
+            },
+            {
+              "id": "837fbe59-8d4f-40c0-a923-92d15556002c",
+              "type": "Text",
+              "meta": {},
+              "label": "Other Aspect",
+              "value": ""
+            },
+            {
+              "id": "28da6fba-84c1-4b3d-9241-013a4b37e111",
+              "type": "Text",
+              "meta": {},
+              "label": "Other Aspect",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "a82d2f39-1f34-481b-bf17-3e022c42669e",
+          "label": "Stunts & Extras",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "afc7a005-bf28-4daa-b6b0-66510d7a3e00",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt #1",
+              "value": ""
+            },
+            {
+              "id": "b5fdbf0d-df06-446e-85f9-9e5c7fd08421",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt #2",
+              "value": ""
+            },
+            {
+              "id": "b58bb924-390a-4082-b892-13b7ffb20b5e",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt #3",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "f61eb158-460f-4a81-8940-2651b02579dd",
+          "label": "Other",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "f80dd1fa-d4b5-45a3-89b2-403861921b20",
+              "type": "Text",
+              "meta": {},
+              "label": "Notes",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "8d9335ee-93b9-4625-a3fe-0c13709bf69c",
+          "label": "Fate Points",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "4b890878-b715-4d0e-ad64-bfd843696a49",
+              "meta": { "isMainPointCounter": true, "max": "3" },
+              "type": "PointCounter",
+              "label": "Fate Points",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "id": "787c1d0d-c6b1-43f8-8666-61eeceb0d7dd",
+          "label": "Credits",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0673fc61-7045-4ced-86e7-5fc0c622a770",
+              "label": "Evil Hat Productions",
+              "type": "Link",
+              "meta": { "hasDisplayName": true },
+              "value": "https://www.evilhat.com/home/"
+            }
+          ]
+        },
+        {
+          "id": "a86efde7-9a11-444c-8795-030e3620e7ec",
+          "label": "Stress",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "9e5e605d-3cbb-4656-8a51-7a074f8a4444",
+              "label": "Physical",
+              "meta": {},
+              "type": "SlotTracker",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "1" }
+              ]
+            },
+            {
+              "id": "e6449a69-7941-4514-a570-ef1a758c41fe",
+              "label": "Mental",
+              "meta": {},
+              "type": "SlotTracker",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "1" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "23984306-3e6e-402e-b428-8de1a066abed",
+          "label": "Consequences",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "a6d761c8-95c3-4d90-93eb-ee12791dccfc",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "Mild",
+              "value": ""
+            },
+            {
+              "id": "6ab06eb8-88e0-4d01-9530-c664a00484e5",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "Moderate",
+              "value": ""
+            },
+            {
+              "id": "0af133c7-2739-4eaf-9308-329394c8edb3",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "Severe",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "a763c161-3dc2-41e4-9d42-c093ef703b5b",
+          "label": "Skills",
+          "visibleOnCard": true,
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "c189d9aa-c2b6-4b11-81e0-020ef719581b",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Academics",
+              "value": ""
+            },
+            {
+              "id": "3d083993-55f1-46db-9232-a8ab2fd1b044",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Athletics",
+              "value": ""
+            },
+            {
+              "id": "df65e6d3-f659-4b52-9532-2fe5e78a62ed",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Burglary",
+              "value": ""
+            },
+            {
+              "id": "1ee0f8a9-7cc8-4930-ae6f-d34045d43c39",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Contacts",
+              "value": ""
+            },
+            {
+              "id": "6f9c9a53-4210-40ce-91f8-4902719d1dca",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Crafts",
+              "value": ""
+            },
+            {
+              "id": "7aa6f9b5-c1ec-4907-8824-df6e1217e56c",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Deceive",
+              "value": ""
+            },
+            {
+              "id": "8f2464b0-e29a-43eb-a993-476a66f27acb",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Drive",
+              "value": ""
+            },
+            {
+              "id": "b36157e0-545f-4206-aa0d-6bdabc0a416c",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Empathy",
+              "value": ""
+            },
+            {
+              "id": "a90c63e3-7e1b-4708-a07a-d6488c039326",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Fight",
+              "value": ""
+            },
+            {
+              "id": "9743a01b-d1f3-41a4-9ccb-6c9d211f100b",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Investigate",
+              "value": ""
+            },
+            {
+              "id": "32526a17-acc0-4b12-83c4-d7bc2a0f517b",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Lore",
+              "value": ""
+            },
+            {
+              "id": "cfefa899-9613-48c0-bdeb-c9e8d1a439c2",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Notice",
+              "value": ""
+            },
+            {
+              "id": "1ff0aeca-55f5-49cd-9ef9-1d2141fb2c26",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Physique",
+              "value": ""
+            },
+            {
+              "id": "a4a7efe0-8133-4d98-b627-82994edf3e5a",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Provoke",
+              "value": ""
+            },
+            {
+              "id": "495ce8df-60a1-45b4-9cd4-00b32b55c97d",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Rapport",
+              "value": ""
+            },
+            {
+              "id": "5b41fc96-0203-4c75-af67-3c0ff782b750",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Resources",
+              "value": ""
+            },
+            {
+              "id": "17461bb8-e8f7-4221-a030-68df0e599051",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Shoot",
+              "value": ""
+            },
+            {
+              "id": "89979f3d-4b17-48d2-bf07-be02bb083354",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Stealth",
+              "value": ""
+            },
+            {
+              "id": "f0e0d837-d1c8-47bb-9712-16c718ed4423",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Will",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fariType": "character"
+}

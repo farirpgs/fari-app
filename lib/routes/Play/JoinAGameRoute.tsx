@@ -1,48 +1,77 @@
 import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Collapse from "@material-ui/core/Collapse";
-import Container from "@material-ui/core/Container";
-import Fade from "@material-ui/core/Fade";
-import Grid from "@material-ui/core/Grid";
-import InputLabel from "@material-ui/core/InputLabel";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import NoteAddIcon from "@material-ui/icons/NoteAdd";
-import Alert from "@material-ui/lab/Alert";
-import React, { useEffect, useState } from "react";
-import appIcon from "../../../images/blue/app.png";
-import { Page } from "../../components/Page/Page";
+import { useBroadcastEvent, useEventListener } from "@liveblocks/react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Collapse from "@mui/material/Collapse";
+import Container from "@mui/material/Container";
+import Fade from "@mui/material/Fade";
+import Grid from "@mui/material/Grid";
+import InputLabel from "@mui/material/InputLabel";
+import Paper from "@mui/material/Paper";
+import { useTheme } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import {
-  TwoPeopleMeetingIcon,
-  TwoPeopleMeetingTalkingIcon,
-} from "../../domains/Icons/Icons";
-import { isWebRTCSupported } from "../../hooks/usePeerJS/usePeerJS";
+  default as React,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { useHistory } from "react-router";
+import { AppLink } from "../../components/AppLink/AppLink";
+import { Page } from "../../components/Page/Page";
+import { Images } from "../../constants/Images";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
+import { Icons } from "../../domains/Icons/Icons";
+import { isWebRTCSupported } from "../../hooks/usePeerJS/isWebRTCSupported";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import {
+  IPlayerInteraction,
+  PlayerInteractionFactory,
+} from "./types/IPlayerInteraction";
 
-let playerNameSingleton = "";
-
-export const JoinAGame: React.FC<{
-  idFromParams: string;
-  onSubmitPlayerName(playerName: string): void;
-  connecting: boolean;
-  error: any;
+export const JoinAGameRoute: React.FC<{
+  match: {
+    params: { id?: string };
+  };
 }> = (props) => {
   const { t } = useTranslate();
-  const [playerName, setPlayerName] = useState(playerNameSingleton);
+  const theme = useTheme();
+  const settingsManager = useContext(SettingsContext);
+  const [playerName, setPlayerName] = useState(settingsManager.state.userName);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const isGameLinkValid = useRef(false);
+  const history = useHistory();
 
-  function onSubmitPlayerName(playerName: string) {
-    props.onSubmitPlayerName(playerName);
+  const broadcast = useBroadcastEvent();
+
+  useEventListener<IPlayerInteraction>(({ event }) => {
+    if (event.type === "pong") {
+      isGameLinkValid.current = true;
+      history.push(`/play/${props.match.params.id}?name=${playerName}`);
+    }
+  });
+
+  async function onJoin() {
+    broadcast(PlayerInteractionFactory.ping());
+    setLoading(true);
+    setTimeout(() => {
+      if (!isGameLinkValid) {
+        setLoading(false);
+        setError(true);
+      }
+    }, 3000);
   }
 
   useEffect(() => {
-    playerNameSingleton = playerName;
+    settingsManager.actions.setUserName(playerName);
   }, [playerName]);
 
   return (
-    <Page gameId={props.idFromParams}>
+    <Page>
       <Box>
         <Box pb="1rem">
           <Container maxWidth="xs">
@@ -74,11 +103,19 @@ export const JoinAGame: React.FC<{
         onSubmit={(event) => {
           event.preventDefault();
           event.stopPropagation();
-          onSubmitPlayerName(playerName);
+          onJoin();
         }}
       >
         <Box pb="2rem" textAlign="center">
-          <img alt="Fari" width="150px" src={appIcon} />
+          <img
+            alt="Fari"
+            width="150px"
+            src={
+              theme.palette.mode === "dark"
+                ? Images.logoWhite
+                : Images.logoBlack
+            }
+          />
         </Box>
         <Box pb="2rem" textAlign="center">
           <Typography variant="h4">
@@ -86,60 +123,27 @@ export const JoinAGame: React.FC<{
           </Typography>
         </Box>
         <Box pb="1rem">
-          {props.connecting ? (
-            <Fade in key="lol">
+          {loading ? (
+            <Fade in key="loading">
               <Box display="flex" justifyContent="center">
-                <TwoPeopleMeetingTalkingIcon
+                <Icons.TwoPeopleMeetingTalkingIcon
                   className={css({ fontSize: "5rem" })}
-                  color="primary"
+                  color="secondary"
                 />
               </Box>
             </Fade>
           ) : (
-            <Fade in key="asd">
+            <Fade in key="waiting">
               <Box display="flex" justifyContent="center">
-                <TwoPeopleMeetingIcon
+                <Icons.TwoPeopleMeetingIcon
                   className={css({ fontSize: "5rem" })}
-                  color="primary"
+                  color="secondary"
                 />
               </Box>
             </Fade>
           )}
         </Box>
-        <Box pb="1rem">
-          <Alert severity="info">
-            <Box pb=".5rem" fontWeight="bold">
-              <Typography variant="inherit">
-                {"Oh, something is different?"}
-              </Typography>
-            </Box>
-            <Box pb=".5rem">
-              <Typography>
-                {
-                  "I made some changes to this page based on feedback I got from the community."
-                }
-              </Typography>
-            </Box>
-            <Box pb="1rem">
-              <Typography>
-                {
-                  "Just enter your name name in the field below and you will be able to load your character sheet once you've joined the game."
-                }
-              </Typography>
-            </Box>
-            <Box pb=".5rem">
-              <Typography>
-                {"Once inside, simply click the"}
-                <Box display="inline-block" px=".5rem">
-                  <NoteAddIcon />
-                </Box>
-                {
-                  "button besides your name on the left to load a character sheet."
-                }
-              </Typography>
-            </Box>
-          </Alert>
-        </Box>
+
         <Box pb="1rem">
           <Box pb="1rem">
             <Paper>
@@ -158,17 +162,19 @@ export const JoinAGame: React.FC<{
                     inputProps={{
                       maxLength: "50",
                     }}
+                    color="secondary"
                     fullWidth
                     required
+                    variant="standard"
                   />
                 </Box>
                 <Box>
-                  <Grid container justify="flex-end">
+                  <Grid container justifyContent="flex-end">
                     <Grid item>
                       <Button
                         type="submit"
                         variant={playerName ? "contained" : "outlined"}
-                        color="primary"
+                        color="secondary"
                       >
                         {t("play-route.join")}
                       </Button>
@@ -179,17 +185,22 @@ export const JoinAGame: React.FC<{
             </Paper>
           </Box>
 
-          <Collapse in={props.connecting}>
+          <Collapse in={loading}>
             <Box pb="2rem">
               <Box display="flex" justifyContent="center">
-                <CircularProgress />
+                <CircularProgress color="secondary" />
               </Box>
             </Box>
           </Collapse>
-          <Collapse in={props.error}>
+          <Collapse in={error}>
             <Box pb="2rem" textAlign="center">
               <Typography color="error">
                 {t("play-route.join-error")}
+              </Typography>
+              <Typography color="error">
+                <AppLink to="/fari-wiki/connection-issues">
+                  {t("play-route.join-error.connection-issues")}
+                </AppLink>
               </Typography>
             </Box>
           </Collapse>
@@ -199,4 +210,4 @@ export const JoinAGame: React.FC<{
   }
 };
 
-JoinAGame.displayName = "JoinAGame";
+export default JoinAGameRoute;

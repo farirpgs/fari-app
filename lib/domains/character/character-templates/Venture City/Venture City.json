@@ -1,0 +1,392 @@
+{
+  "id": "18330239-c19b-452d-b830-71c97480a8b1",
+  "version": 3,
+  "name": "Venture City 2",
+  "group": "TEMPLATES",
+  "template": "FateCondensed",
+  "lastUpdated": 1616512795,
+  "pages": [
+    {
+      "id": "2bcf11f4-e675-4df9-9912-04d044fc392c",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "06211d21-94ba-4f85-8f1e-6cea26570650",
+          "label": "Aspects",
+          "visibleOnCard": true,
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "d13c5df9-7d4e-4451-b594-a9b60f8013c7",
+              "type": "Text",
+              "meta": {},
+              "label": "High Concept",
+              "value": ""
+            },
+            {
+              "id": "a9051a31-ae50-40df-b636-6d213eee50fa",
+              "type": "Text",
+              "meta": {},
+              "label": "Trouble",
+              "value": ""
+            },
+            {
+              "id": "f2420a48-e50b-4b0c-a41a-201ac102cda8",
+              "type": "Text",
+              "meta": {},
+              "label": "Relationship",
+              "value": ""
+            },
+            {
+              "id": "2dfcc4c7-bf85-4e4d-95ea-3332388d4bfc",
+              "type": "Text",
+              "meta": {},
+              "label": "Other Aspect",
+              "value": ""
+            },
+            {
+              "id": "c112efcc-56fc-41e8-84fa-180f5e8e3466",
+              "type": "Text",
+              "meta": {},
+              "label": "Other Aspect",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "d3663df6-b5f2-4fe4-92d3-792f1c57a25e",
+          "label": "Power Profile",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "953044c1-9cd5-41b0-a63d-9d27721037c5",
+              "label": "Power Stunts",
+              "type": "PointCounter",
+              "meta": {
+                "max": "3",
+                "isMainPointCounter": false,
+                "helperText": "A counter to keep track of purchasing your enhancements. As you purchase Power Synergies, Enhancements, Power Themes, and Special Effects, remove one from this counter. When it reaches 0, you may delete this block."
+              },
+              "value": "3"
+            },
+            {
+              "id": "aec224e6-4713-4b4e-885e-155f50f61a97",
+              "label": "Power Summary",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Describe your power narratively. You can also replace \"Power Summary\" with the name of your power.&nbsp;"
+              }
+            },
+            {
+              "id": "d2dc587a-8a65-449d-9aa7-59b987d92703",
+              "label": "Power Breakdown",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "A list of all Power Synergies, Enhancements, and Power Themes you have purchased with your 3 Power Stunts, 3 Stunts, and 3 Refresh. You gain 2 Special Effects for every Stunt or point of Refresh you spend."
+              }
+            },
+            {
+              "id": "45bba89b-aebc-4901-a5ce-6f9401d80e7b",
+              "label": "Drawback",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "This is an Aspect that lists a downside to your power."
+              }
+            },
+            {
+              "id": "d9f8ce9f-5dae-4f5c-ac46-a81631054dcf",
+              "label": "Special Effects",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Whenever you Succeed With Style on any action related to your power, you may choose one of these to activate.&nbsp;"
+              }
+            },
+            {
+              "id": "a3e10a30-0236-4a90-9e6f-a51d175e5e26",
+              "label": "Collateral Damage",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "An ability that can be used at any time, but inflicts a situation aspect on the area around you based on the collateral damage you caused."
+              }
+            }
+          ]
+        },
+        {
+          "id": "b619fa88-a371-4aa5-a174-ecdae48ef825",
+          "label": "Stunts & Extras",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "e6a66a85-79ee-4170-9396-7946dbcf2521",
+              "type": "Text",
+              "meta": {
+                "helperText": "A stunt that can be used as normal, or that can be used to purchase more Special Effects, Enhancements, and Power Themes. You gain 2 Special Effects for every stunt or point of refresh you spend."
+              },
+              "label": "Stunt #1",
+              "value": ""
+            },
+            {
+              "id": "263fabfb-b323-42de-9581-78d9e86e651e",
+              "type": "Text",
+              "meta": {
+                "helperText": "A stunt that can be used as normal, or that can be used to purchase more Special Effects,&nbsp;Enhancements, and Power Themes. You gain 2 Special Effects for every stunt or point of refresh you spend."
+              },
+              "label": "Stunt #2",
+              "value": ""
+            },
+            {
+              "id": "b9a496e6-3318-4ae4-a6b4-d7c11c06c42c",
+              "type": "Text",
+              "meta": {
+                "helperText": "A stunt that can be used as normal, or that can be used to purchase more Special Effects,&nbsp;Enhancements, and Power Themes. You gain 2 Special Effects for every stunt or point of refresh you spend."
+              },
+              "label": "Stunt #3",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "77e72644-e9a6-48a1-a652-76c0287fdbad",
+          "label": "Other",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "02911bc4-d7dc-4e50-bd19-44fb46c4aa10",
+              "type": "Text",
+              "meta": {},
+              "label": "Notes",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "106ad7fb-452c-45b9-bb1f-5a0fcaf952f4",
+          "label": "Fate Points",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "85dc9aab-63e0-4f7c-ba07-7aa3728e52e3",
+              "meta": { "isMainPointCounter": true, "max": "3" },
+              "type": "PointCounter",
+              "label": "Fate Points",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "id": "787c1d0d-c6b1-43f8-8666-61eeceb0d7dd",
+          "label": "Credits",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0673fc61-7045-4ced-86e7-5fc0c622a770",
+              "label": "Evil Hat Productions",
+              "type": "Link",
+              "meta": { "hasDisplayName": true },
+              "value": "https://www.evilhat.com/home/"
+            }
+          ]
+        },
+        {
+          "id": "2ce7f97a-5b7d-46f1-ae06-cdef55738a96",
+          "label": "Stress",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "d18433d6-4400-4e5d-ade1-f658cc187447",
+              "label": "Physical",
+              "meta": {},
+              "type": "SlotTracker",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "label": "2", "checked": false },
+                { "label": "3", "checked": false },
+                { "label": "4", "checked": false }
+              ]
+            },
+            {
+              "id": "332051f5-fa27-442b-9ea5-dbc712509dd7",
+              "label": "Mental",
+              "meta": {},
+              "type": "SlotTracker",
+              "value": [
+                { "label": "1", "checked": false },
+                { "label": "2", "checked": false },
+                { "label": "3", "checked": false },
+                { "label": "4", "checked": false }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "d827f1f1-d0e2-40ae-bc4b-a06efabd8389",
+          "label": "Consequences",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "5a45176c-5427-4031-a006-454198efb2e8",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "Mild",
+              "value": ""
+            },
+            {
+              "id": "6dd109dc-3c9c-405a-bb2b-25da7f82de4d",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "Moderate",
+              "value": ""
+            },
+            {
+              "id": "a30d9f2f-1b74-4405-813a-e1ae3c4c8bff",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "Severe",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "6ae6a54f-71fb-4826-9ac9-1bee5a7c2dbd",
+          "label": "Skills",
+          "visibleOnCard": true,
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "04f098ad-13ec-490f-a102-fc4e69105d96",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Athletics",
+              "value": ""
+            },
+            {
+              "id": "cff53cfb-6f72-4352-a043-8939ee91f46d",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Burglary",
+              "value": ""
+            },
+            {
+              "id": "be6e6c81-6192-4c5b-b0d6-ea0bab142f48",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Contacts",
+              "value": ""
+            },
+            {
+              "id": "65188b25-dd5d-4bf0-8bad-37565db2b954",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Crafts",
+              "value": ""
+            },
+            {
+              "id": "bd2ffc41-539b-45b4-80a2-76659278dfe5",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Deceive",
+              "value": ""
+            },
+            {
+              "id": "0fe9d3c3-908a-45f2-9df6-584e5054a471",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Drive",
+              "value": ""
+            },
+            {
+              "id": "b8c48f06-0187-4e93-bb89-e16e8ac5c593",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Empathy",
+              "value": ""
+            },
+            {
+              "id": "71073875-bc4c-4c9c-ae19-baeeb5874999",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Fight",
+              "value": ""
+            },
+            {
+              "id": "6b19b34f-719f-4af4-9b93-6207739e3181",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Investigate",
+              "value": ""
+            },
+            {
+              "id": "7d7921f0-b66b-4359-a5b0-1125a1c38eaf",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Lore",
+              "value": ""
+            },
+            {
+              "id": "e8634cb2-1232-4f6c-859f-a122da82c532",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Notice",
+              "value": ""
+            },
+            {
+              "id": "ae8e84e8-d87b-4fa3-8173-f2f73c8a925d",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Physique",
+              "value": ""
+            },
+            {
+              "id": "b709539c-7373-4e0d-97a4-ccc4b68b59b9",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Provoke",
+              "value": ""
+            },
+            {
+              "id": "862c4ffb-bdcc-47b4-bddd-6b018c9799c1",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Rapport",
+              "value": ""
+            },
+            {
+              "id": "a28af005-2e56-432b-acbb-5e39749feedb",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Resources",
+              "value": ""
+            },
+            {
+              "id": "3eb0e18e-7915-4d30-90e0-ff180e22b8cd",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Shoot",
+              "value": ""
+            },
+            {
+              "id": "1434efb2-cafb-4ef8-820c-2af1c5379972",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Stealth",
+              "value": ""
+            },
+            {
+              "id": "6c30a05e-1116-4cf9-8970-1926d08e6413",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Will",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fariType": "character"
+}

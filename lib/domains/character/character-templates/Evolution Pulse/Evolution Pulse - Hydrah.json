@@ -1,0 +1,338 @@
+{
+  "id": "9862e01f-1634-4139-b922-6b020f43eda3",
+  "version": 3,
+  "name": "Hydrah",
+  "group": "Executors",
+  "template": "FateAccelerated",
+  "lastUpdated": 1618440174,
+  "pages": [
+    {
+      "id": "0d1f5f38-3e14-45a9-9222-7e33dc9b357f",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "2edc3824-ab40-4622-bb9c-caae49b5198f",
+          "label": "Aspects",
+          "visibleOnCard": true,
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "6e8fc53a-7278-4f53-bcbd-d3654c163d9d",
+              "type": "Text",
+              "meta": {
+                "helperText": "Hydrahs often live isolated lives, in direct contact with little more than the surviving machines within the ExDatas they protect. pp.54,56"
+              },
+              "label": "High Concept",
+              "value": ""
+            },
+            {
+              "id": "f81f4760-e424-44f8-9283-ebf159bcf065",
+              "type": "Text",
+              "meta": {
+                "helperText": "They are able to assemble, modify and rework the cybernetics of their bodies and so are well suited to any kind of mechanical tasks."
+              },
+              "label": "Trouble",
+              "value": ""
+            },
+            {
+              "id": "0f24e4c3-b83a-4ccf-ac7e-e8f11ec6fb96",
+              "type": "Text",
+              "meta": {
+                "helperText": "Being predominantly machine, they are strong and resilient, almost completely incapable of experiencing physical pain."
+              },
+              "label": "Other Aspect #1",
+              "value": ""
+            },
+            {
+              "id": "b2b7ce96-bd63-4bea-95fb-3247e094bc90",
+              "label": "Other Aspect #2",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Hydrahs often have an acute fondness for the LostH because they remind them of life before rebirth as an amalgamation of man and machine."
+              }
+            },
+            {
+              "id": "fce82334-10ff-4529-a430-e416773e8b50",
+              "label": "Other Aspect #3",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "The technology that makes up so much of them is from the distant past, but is very powerful and effective."
+              }
+            }
+          ]
+        },
+        {
+          "id": "1c1c7934-1425-47f9-a773-6d9911cdc779",
+          "label": "Stunts",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "aef3f7c2-637c-44c7-991d-feffdd2d73d1",
+              "type": "Text",
+              "meta": {
+                "helperText": "A Hydrah's stunts are based on their affinity with terminals and machines as well their deep understanding of the ExDatas within which they move."
+              },
+              "label": "Stunt #1",
+              "value": ""
+            },
+            {
+              "id": "dcba44d7-427c-4017-ae6b-987fa1f463e9",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt #2",
+              "value": ""
+            },
+            {
+              "id": "d3e7c268-6f27-463a-af4a-b2a6fc42af66",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt #3",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "d932ad3a-44e9-4a40-b399-c66210f882ec",
+          "label": "Fate Points",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "06304967-98c9-48a2-990c-9556012c4627",
+              "meta": { "isMainPointCounter": true, "max": "3" },
+              "type": "PointCounter",
+              "label": "Fate Points",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "id": "787c1d0d-c6b1-43f8-8666-61eeceb0d7dd",
+          "label": "Credits",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0673fc61-7045-4ced-86e7-5fc0c622a770",
+              "label": "Dreamlord Press",
+              "type": "Link",
+              "meta": { "hasDisplayName": true },
+              "value": "https://www.dreamlord.it/en/dreamlord/"
+            }
+          ]
+        },
+        {
+          "id": "94e4f440-70a9-4eb2-a0a4-ec3826d58b2c",
+          "label": "Approaches",
+          "visibleOnCard": true,
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "f74e311d-fb87-4749-a213-8253bed1cca1",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "You use your body of metal and wires and gears to impose your will on the world and face dangers. Each of your parts is a potentially destructive weapon. p.57"
+              },
+              "label": "arsenal",
+              "value": ""
+            },
+            {
+              "id": "7aeeac93-ea25-4ee2-9c79-c666cc09f61f",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "You empathize with the LostH and perhaps even remember how to relate to them. The world is lost, but humanity is not. p.58"
+              },
+              "label": "humanity",
+              "value": ""
+            },
+            {
+              "id": "e9db4030-eca6-490b-8355-fb6b1a4c8942",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Your entire operative system is run by the BiOS - a complex interface program allowing you to enter and take advantage of the mechanical and powered components of the ExDatas. p.57"
+              },
+              "label": "interface",
+              "value": ""
+            },
+            {
+              "id": "2683a8a6-985b-485c-b997-8665b324825d",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Your life is run by programmatic routines, if you learn something you will not forget it. When you have to do something that you have already done, you know exactly how to do it for the best. p.58"
+              },
+              "label": "methodical",
+              "value": ""
+            },
+            {
+              "id": "34a2cdd7-afb8-4a49-a152-c0e693976a22",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "Thanks to your mechanical modifications, you have the strength of ten men; what is impossible for many is normal for you. Use your body and presence to impose your will upon the world. p.57"
+              },
+              "label": "mighty",
+              "value": ""
+            },
+            {
+              "id": "923eacbd-7302-426a-ac81-ab48ba076864",
+              "type": "Skill",
+              "meta": {
+                "commands": ["4dF"],
+                "helperText": "ExDatas operate on power and a lot of their functional remnants still need expertise to operate. You know how to analyze a situation and take advantage of the technology you come across. p.58"
+              },
+              "label": "technical",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "fd730a08-1927-4fca-80ed-9d5fd42c9068",
+          "label": "Stress",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "48b8f7fb-450f-4dea-9cc5-c739c941fcd6",
+              "type": "SlotTracker",
+              "meta": {
+                "helperText": "Hydrahs start with an additional physical stress box due to their mostly machine bodies."
+              },
+              "label": "Physical Stress",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "2" },
+                { "checked": false, "label": "3" },
+                { "label": "4", "checked": false }
+              ]
+            },
+            {
+              "id": "eb6e3fed-5d0d-4f5c-9ce5-b2c2410077a5",
+              "type": "SlotTracker",
+              "meta": {},
+              "label": "Mental Stress",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "2" },
+                { "checked": false, "label": "3" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "841f5e0b-1b7b-4927-8693-47eff5548568",
+          "label": "Consequences",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "1425d3d1-99c7-4d01-b447-d13a6f6fbb66",
+              "type": "Text",
+              "meta": {
+                "checked": false,
+                "helperText": "Hydrahs are mostly machine and so are prone to consequences that damage or break the mechanical parts of their bodies."
+              },
+              "label": "[2] - Mild",
+              "value": ""
+            },
+            {
+              "id": "994ca91b-12dd-4e55-856a-1c4e66de7404",
+              "type": "Text",
+              "meta": {
+                "checked": false,
+                "helperText": "Overloading power and unexpected command executions are good consequences, even on the emotional side, when the mind is damaged at the BiOS's control glitches."
+              },
+              "label": "[4] - Moderate",
+              "value": ""
+            },
+            {
+              "id": "a6286494-2093-4fa5-968f-06dc2de2cbff",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "[6] - Severe",
+              "value": ""
+            },
+            {
+              "id": "6f8f4d13-a381-42f9-aca1-2dccb8fedacf",
+              "label": "[8] - critical",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "52d1bf68-f231-4630-9378-f27e610a6b81",
+      "sections": [
+        {
+          "id": "9950d8f5-420a-47ef-9a44-1af116486301",
+          "label": "Seven Questions",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "b5bd1d7b-4b5d-4442-be3e-6bf3416d97f1",
+              "label": "Describe reality seen through your eyes",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "4d53b99d-91ac-4291-b991-a62332e6f311",
+              "label": "Describe Olympus, the AI that guides you",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "bc92bac7-25f7-4bb8-a7ec-d2170cbb81b7",
+              "label": "Describe the Hekath; how do you see them? what are they to you?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "f5a967e7-1255-4440-b6dc-09040a488fc4",
+              "label": "Describe the LostH; what ties you to them? What pushes you to protect them?",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "9a4b1a74-dd1b-4bcd-ac6f-5e6b35394878",
+          "label": "",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "99f4bc2d-0989-403d-a2e2-5d5d47b86434",
+              "label": "Describe your character and what the others see",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "1b43fad9-652c-4a7c-8335-cfa2fbb7538a",
+              "label": "Describe how you act on reality",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "89e9b834-a842-4797-81de-bdbc72908d5e",
+              "label": "Describe what the SafeZones are for you",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        }
+      ],
+      "label": "Seven questions"
+    }
+  ],
+  "fariType": "character"
+}

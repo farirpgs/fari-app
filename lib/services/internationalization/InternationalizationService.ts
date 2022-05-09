@@ -1,79 +1,59 @@
-import i18next, { i18n } from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
+import i18next from "i18next";
+import I18nLanguageDetector from "i18next-browser-languagedetector";
+import I18nHttpApi from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 import { ILogger } from "../logger/makeLogger";
-import { deTranslation } from "./locales/deTranslation";
-import { devTranslation } from "./locales/devTranslation";
-import { enTranslation } from "./locales/enTranslation";
-import { esTranslation } from "./locales/esTranslation";
-import { frTranslation } from "./locales/frTranslation";
-import { itTranslation } from "./locales/itTranslation";
-import { ptbrTranslation } from "./locales/ptbrTranslations";
-import { ruTranslation } from "./locales/ruTranslation";
 
 export const PossibleLanguages = [
   "en",
   "es",
+  "eo",
   "pt-BR",
+  "zh_CN",
   "fr",
+  "gl",
   "ru",
   "de",
   "it",
+  "pl",
   "dev",
 ] as const;
 
 export type IPossibleLanguages = typeof PossibleLanguages[number];
 
-export class InternationalizationService {
-  public i18next: i18n;
+export const PossibleLanguagesNames: Record<IPossibleLanguages, string> = {
+  "en": "English",
+  "es": "Español",
+  "eo": "Esperanto",
+  "pt-BR": "Português Brasileiro",
+  "zh_CN": "简体中文",
+  "fr": "Français",
+  "gl": "Galego",
+  "ru": "Русский",
+  "de": "Deutsch",
+  "it": "Italiano",
+  "pl": "Polski",
+  "dev": "Development",
+};
 
-  constructor(private logger: ILogger) {
-    this.i18next = i18next;
-    this.init();
-  }
+export async function InternationalizationService(logger: ILogger) {
+  const i18n = i18next;
 
-  private async init() {
-    await this.i18next
-      .use(LanguageDetector)
-      .use(initReactI18next)
-      .init({
-        resources: {          
-          "en": {
-            translation: enTranslation,
-          },
-          "es": {
-            translation: esTranslation,
-          },
-          "fr": {
-            translation: frTranslation,
-          },
-          "de": {
-            translation: deTranslation,
-          },
-          "pt-BR": {
-            translation: ptbrTranslation,
-          },
-          "ru": {
-            translation: ruTranslation,
-          },
-          "it": {
-            translation: itTranslation,
-          },
-          "dev": {
-            translation: devTranslation,
-          },
-        },
-        supportedLngs: [...PossibleLanguages],
-        fallbackLng: "en",
-        debug: false,
-        keySeparator: false,
-        interpolation: {
-          escapeValue: false,
-        },
-      });
-    this.logger.info(`I18n:onDetect:${this.i18next.language}`, {
-      language: this.i18next.language,
-      languages: this.i18next.languages,
+  await i18n
+    .use(I18nLanguageDetector)
+    .use(initReactI18next)
+    .use(I18nHttpApi)
+    .init({
+      supportedLngs: [...PossibleLanguages],
+      fallbackLng: "en",
+      debug: false,
+      keySeparator: false,
+      interpolation: {
+        escapeValue: false,
+      },
     });
-  }
+  logger.setTag("language", i18n.language);
+  logger.track(`detect_language`, {
+    language: i18n.language,
+  });
 }

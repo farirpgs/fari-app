@@ -1,31 +1,39 @@
 import { css } from "@emotion/css";
-import Button from "@material-ui/core/Button";
-import ButtonGroup, { ButtonGroupProps } from "@material-ui/core/ButtonGroup";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Grid from "@material-ui/core/Grid";
-import Grow from "@material-ui/core/Grow";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import React from "react";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import Button from "@mui/material/Button";
+import ButtonGroup, { ButtonGroupProps } from "@mui/material/ButtonGroup";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grid from "@mui/material/Grid";
+import Grow from "@mui/material/Grow";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import Paper from "@mui/material/Paper";
+import Popper from "@mui/material/Popper";
+import React, { useEffect } from "react";
 import { zIndex } from "../../constants/zIndex";
 
 export type IOption = {
   label: string;
   onClick: () => void;
+  endIcon?: JSX.Element;
 };
 
 type IProps = {
-  options: Array<IOption>;
+  "data-cy"?: string;
+  "instant"?: boolean;
+  "options": Array<IOption>;
 } & ButtonGroupProps;
 
 export const SplitButton: React.FC<IProps> = (props) => {
-  const { options, ...buttonProps } = props;
+  const { options, instant, ...buttonProps } = props;
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  useEffect(() => {
+    setSelectedIndex(0);
+  }, [options.length]);
 
   function handleClick() {
     options[selectedIndex].onClick();
@@ -34,13 +42,16 @@ export const SplitButton: React.FC<IProps> = (props) => {
   function handleMenuItemClick(index: number) {
     setSelectedIndex(index);
     setOpen(false);
+    if (instant) {
+      props.options[index].onClick();
+    }
   }
 
   function handleToggle() {
     setOpen((prevOpen) => !prevOpen);
   }
 
-  function handleClose(event: React.MouseEvent<Document, MouseEvent>) {
+  function handleClose() {
     setOpen(false);
   }
 
@@ -48,9 +59,16 @@ export const SplitButton: React.FC<IProps> = (props) => {
     <Grid container direction="column" alignItems="center">
       <Grid item xs={12}>
         <ButtonGroup {...buttonProps} ref={anchorRef}>
-          <Button onClick={handleClick}>{options[selectedIndex].label}</Button>
+          <Button
+            data-cy={`${props["data-cy"]}.button`}
+            onClick={handleClick}
+            endIcon={options[selectedIndex]?.endIcon}
+          >
+            {options[selectedIndex]?.label}
+          </Button>
           <Button
             onClick={handleToggle}
+            data-cy={`${props["data-cy"]}.select`}
             className={css({
               padding: 0,
             })}
@@ -79,11 +97,14 @@ export const SplitButton: React.FC<IProps> = (props) => {
                   <MenuList>
                     {options.map((option, index) => (
                       <MenuItem
+                        data-cy={`${props["data-cy"]}.select.${option.label}`}
                         key={option.label}
-                        disabled={index === 2}
                         selected={index === selectedIndex}
                         onClick={() => handleMenuItemClick(index)}
                       >
+                        {option.endIcon && (
+                          <ListItemIcon>{option.endIcon}</ListItemIcon>
+                        )}
                         {option.label}
                       </MenuItem>
                     ))}

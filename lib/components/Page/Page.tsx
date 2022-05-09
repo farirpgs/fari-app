@@ -1,45 +1,64 @@
 import { css } from "@emotion/css";
-import AppBar from "@material-ui/core/AppBar";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Drawer from "@material-ui/core/Drawer";
-import Fade from "@material-ui/core/Fade";
-import Grid from "@material-ui/core/Grid";
-import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
-import Link from "@material-ui/core/Link";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import useTheme from "@material-ui/core/styles/useTheme";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
-import Brightness7Icon from "@material-ui/icons/Brightness7";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import MenuIcon from "@material-ui/icons/Menu";
-import SignalWifi0BarIcon from "@material-ui/icons/SignalWifi0Bar";
-import SignalWifi4BarLockIcon from "@material-ui/icons/SignalWifi4BarLock";
+import BugReportIcon from "@mui/icons-material/BugReport";
+import CasinoIcon from "@mui/icons-material/Casino";
+import ChatIcon from "@mui/icons-material/Chat";
+import ComputerIcon from "@mui/icons-material/Computer";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
+import FiberNewIcon from "@mui/icons-material/FiberNew";
+import ForumIcon from "@mui/icons-material/Forum";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import InfoIcon from "@mui/icons-material/Info";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import LocalCafeIcon from "@mui/icons-material/LocalCafe";
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import MenuIcon from "@mui/icons-material/Menu";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import StorageIcon from "@mui/icons-material/Storage";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import TranslateIcon from "@mui/icons-material/Translate";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Drawer from "@mui/material/Drawer";
+import Fade from "@mui/material/Fade";
+import Grid from "@mui/material/Grid";
+import Hidden from "@mui/material/Hidden";
+import IconButton from "@mui/material/IconButton";
+import Link from "@mui/material/Link";
+import Select from "@mui/material/Select";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { Link as RouterLink } from "react-router-dom";
-import appIcon from "../../../images/blue/app.png";
 import { env } from "../../constants/env";
-import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
-import { DarkModeContext } from "../../contexts/DarkModeContext/DarkModeContext";
+import { Images } from "../../constants/Images";
+import { useZIndex } from "../../constants/zIndex";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
+import { Icons } from "../../domains/Icons/Icons";
+import { useHighlight } from "../../hooks/useHighlight/useHighlight";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { IPossibleTranslationKeys } from "../../services/internationalization/IPossibleTranslationKeys";
-import { AppLink } from "../AppLink/AppLink";
-import { sanitizeContentEditable } from "../ContentEditable/ContentEditable";
+import {
+  IPossibleLanguages,
+  PossibleLanguagesNames,
+} from "../../services/internationalization/InternationalizationService";
+import { AppButtonLink, AppLink } from "../AppLink/AppLink";
+import { CannyChangelog } from "../CannyChangelog/CannyChangelog";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
 import { Kofi } from "../Kofi/Kofi";
-import { ManagerMode } from "../Manager/Manager";
 import { Patreon } from "../Patreon/Patreon";
+import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
+import { NavLink, NavLinkCategory } from "./NavLink";
 
 let gameIdSingleton: string | undefined = undefined;
-const FariMaxWidth = "1920px";
+
+export const FariMaxWidth = "1920px";
+export const FariToolbarMaxWidth = "1280px";
 
 export enum LiveMode {
   Connecting,
@@ -49,25 +68,31 @@ export enum LiveMode {
 export const Page: React.FC<{
   notFound?: JSX.Element;
   gameId?: string;
-  displayDonation?: boolean;
-  live?: LiveMode;
-  liveLabel?: string;
+  isLive?: boolean;
   drawerWidth?: string;
+  maxWidth?: string;
+  marginTop?: string;
   pb?: string;
+  debug?: Record<string, string>;
+  hideHeaderLogo?: boolean;
+  disableAutomaticScrollTop?: boolean;
 }> = (props) => {
   const history = useHistory();
-  const { displayDonation = true } = props;
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameId, setGameId] = useState(gameIdSingleton);
   const shouldDisplayRejoinButton = gameId && !props.gameId;
   const { t, i18n, currentLanguage } = useTranslate();
-  const darkModeManager = useContext(DarkModeContext);
-  const scenesManager = useContext(ScenesContext);
-  const charactersManager = useContext(CharactersContext);
-  const theme = useTheme();
-  const logger = useLogger();
 
-  const isLive = props.live !== undefined;
+  const myBinderManager = useContext(MyBinderContext);
+  const settingsManager = useContext(SettingsContext);
+  const logger = useLogger();
+  const zIndex = useZIndex();
+
+  const isLive = props.isLive;
+  const highlight = useHighlight();
+
   useEffect(() => {
     if (props.gameId) {
       setGameId(props.gameId);
@@ -77,6 +102,8 @@ export const Page: React.FC<{
 
   return (
     <>
+      {!props.disableAutomaticScrollTop && <ScrollToTop />}
+
       {renderHeader()}
       {renderContent()}
     </>
@@ -101,10 +128,12 @@ export const Page: React.FC<{
             ) : (
               <div
                 className={css({
-                  maxWidth: FariMaxWidth,
+                  maxWidth: props.drawerWidth
+                    ? undefined
+                    : props.maxWidth ?? FariMaxWidth,
                   marginLeft: "auto",
                   marginRight: "auto",
-                  marginTop: "2rem",
+                  marginTop: props.marginTop || "2rem",
                   width: "100%",
                   flex: "1 0 auto",
                 })}
@@ -123,7 +152,8 @@ export const Page: React.FC<{
   function renderFooter() {
     return (
       <Box
-        pb={props.pb}
+        // TODO: https://github.com/fariapp/fari/issues/212
+        pb={props.pb ?? "0"}
         displayPrint="none"
         className={css({
           paddingTop: "1rem",
@@ -132,61 +162,82 @@ export const Page: React.FC<{
         })}
       >
         <CookieConsent />
+
         <Container>
-          <Grid container justify="flex-end" spacing={4} alignItems="center">
-            <Grid
-              item
+          {env.isDev && props.debug && (
+            <pre
               className={css({
-                flex: "1 0 auto",
+                whiteSpace: "break-spaces",
               })}
             >
-              <Typography>
-                <Link
-                  href="https://www.netlify.com"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  This site is powered by Netlify
-                </Link>
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography>
-                <AppLink to="/changelog">{`v${env.version}`}</AppLink>
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Select
-                data-cy="page.languages"
-                value={currentLanguage}
-                onChange={(e) => {
-                  i18n.changeLanguage(e.target.value as string);
-                }}
-              >
-                {Object.keys(i18n.options.resources!).map((language) => {
-                  const shouldRenderDev =
-                    language === "dev" && env.context === "localhost";
-                  if (language !== "dev" || shouldRenderDev) {
-                    return (
-                      <MenuItem key={language} value={language}>
-                        {t(
-                          `common.language.${language}` as IPossibleTranslationKeys
-                        )}
-                      </MenuItem>
-                    );
-                  }
-                })}
-              </Select>
-            </Grid>
-          </Grid>
-          {displayDonation && (
+              {Object.keys(props.debug).map((label) => {
+                return (
+                  <Box key={label}>
+                    {label}: {props.debug?.[label]}
+                  </Box>
+                );
+              })}
+            </pre>
+          )}
+          <Box py="1rem">
             <Grid
               container
-              justify="space-between"
+              justifyContent="space-between"
+              alignItems="center"
+              spacing={4}
+            >
+              <Grid item xs={isSmall ? 12 : undefined}>
+                <AppButtonLink
+                  to="https://farirpgs.com/discord"
+                  target="_blank"
+                  color="secondary"
+                  startIcon={<ChatIcon />}
+                >
+                  {t("home-route.sections.join-community.cta")}
+                </AppButtonLink>
+              </Grid>
+            </Grid>
+          </Box>
+          <Box py="1rem">
+            <Grid
+              container
+              justifyContent="space-between"
               spacing={4}
               alignItems="center"
             >
-              <Grid item sm>
+              <Grid item xs={isSmall ? 12 : undefined}>
+                <Typography>
+                  <Link
+                    href="https://www.netlify.com"
+                    target="_blank"
+                    rel="noreferrer"
+                    underline="hover"
+                    color="secondary"
+                  >
+                    This site is powered by Netlify
+                  </Link>
+                </Typography>
+              </Grid>
+              <Grid item xs={isSmall ? 12 : undefined}>
+                <Typography>
+                  <AppLink
+                    to="/changelog"
+                    underline="always"
+                    color="secondary"
+                  >{`v${env.version}`}</AppLink>
+                </Typography>
+              </Grid>
+            </Grid>
+          </Box>
+
+          <Box py="1rem">
+            <Grid
+              container
+              justifyContent="space-between"
+              spacing={4}
+              alignItems="center"
+            >
+              <Grid item xs={isSmall ? 12 : undefined}>
                 <Kofi />
               </Grid>
 
@@ -194,23 +245,38 @@ export const Page: React.FC<{
                 <Patreon />
               </Grid>
             </Grid>
-          )}
-          <Grid container justify="flex-end">
+          </Box>
+
+          <Grid container justifyContent="center">
             <Grid item>
-              <Box mt=".5rem">
-                <Link
-                  href="https://www.iubenda.com/privacy-policy/97549620"
-                  target="_blank"
-                  rel="noreferrer"
-                  data-cy="page.privacy-policy"
-                >
-                  {t("page.privacy-policy")}
-                </Link>
-              </Box>
+              <a
+                href="https://farirpgs.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  alt="Made By Fari RPGs"
+                  className={css({
+                    width: "400px",
+                    maxWidth: "100%",
+                  })}
+                  src={
+                    theme.palette.mode === "dark"
+                      ? Images.madeByFariRPGsWhite
+                      : Images.madeByFariRPGsBlack
+                  }
+                />
+              </a>
             </Grid>
           </Grid>
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid item xs>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  The Fari RPGs, Fari App, Fari Games and Fari Community logos
+                  were designed by Ron Müller.
+                </Typography>
+              </Box>
               <Box mb=".5rem">
                 <Typography variant="caption" align="justify">
                   This site is not affiliated with Evil Hat Productions, LLC.
@@ -239,6 +305,53 @@ export const Page: React.FC<{
                   license (http://creativecommons.org/licenses/by/3.0/).
                 </Typography>
               </Box>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  The Fate Core font is © Evil Hat Productions, LLC and is used
+                  with permission. The Four Actions icons were designed by
+                  Jeremy Keller.
+                </Typography>
+              </Box>
+              <Box mb=".5rem">
+                <Typography variant="caption" align="justify">
+                  Fari uses icons available at{" "}
+                  <Link
+                    href="http://game-icons.net"
+                    target="_blank"
+                    rel="noreferrer"
+                    color={"secondary"}
+                    underline="hover"
+                  >
+                    http://game-icons.net
+                  </Link>{" "}
+                  and{" "}
+                  <Link
+                    href="https://icons8.com/icon/569/dice"
+                    target="_blank"
+                    color={"secondary"}
+                    rel="noreferrer"
+                    underline="hover"
+                  >
+                    Icons8
+                  </Link>
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item>
+              <Box my=".5rem">
+                <Link
+                  href="https://www.iubenda.com/privacy-policy/97549620"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cy="page.privacy-policy"
+                  underline="hover"
+                  color={"secondary"}
+                >
+                  {t("page.privacy-policy")}
+                </Link>
+              </Box>
             </Grid>
           </Grid>
         </Container>
@@ -247,10 +360,8 @@ export const Page: React.FC<{
   }
 
   function renderHeader() {
-    const background = isLive
-      ? theme.palette.primary.main
-      : theme.palette.background.paper;
-    const color = theme.palette.getContrastText(background);
+    const background = highlight.linearBackground;
+    const color = highlight.color;
     return (
       <Box
         displayPrint="none"
@@ -265,136 +376,135 @@ export const Page: React.FC<{
           className={css({
             color: "inherit",
             background: "inherit",
-            zIndex: theme.zIndex.drawer + 1,
+            boxShadow: "none",
+            zIndex: zIndex.navBar,
           })}
         >
-          <Toolbar
-            className={css({
-              margin: "0 auto",
-              maxWidth: FariMaxWidth,
-              minHeight: "72px",
-              width: "100%",
-              padding: "1rem",
-            })}
-          >
-            <RouterLink
-              to="/"
-              data-cy="page.menu.home"
+          <Box className={css({ padding: ".5rem 2.5rem" })}>
+            <Toolbar
               className={css({
-                textDecoration: "none",
+                margin: "0 auto",
+                maxWidth: FariToolbarMaxWidth,
+                minHeight: "72px",
+                width: "100%",
+                padding: "0",
+                position: "relative",
+                zIndex: zIndex.navBar,
               })}
             >
-              <img
-                alt="Fari"
-                className={css({
-                  height: "2.5rem",
+              <Box
+                sx={{
+                  textTransform: "none",
                   marginRight: "1rem",
-                  cursor: "pointer",
-                })}
-                src={appIcon}
-              />
-            </RouterLink>
-
-            <Typography
-              variant="h6"
-              component="h1"
-              className={css({
-                paddingRight: "1rem",
-                cursor: "pointer",
-                userSelect: "none",
-              })}
-            >
-              <div
-                className={css({
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  maxWidth: "25rem",
-                })}
-              >
-                <RouterLink
-                  to="/"
-                  className={css({
-                    color: "inherit",
-                    textDecoration: "none",
-                  })}
-                >
-                  Fari
-                </RouterLink>
-              </div>
-            </Typography>
-            {isLive && (
-              <Box px=".25rem">
-                <Grid container alignItems="center" spacing={1} wrap="nowrap">
-                  <Grid item>
-                    {props.live === LiveMode.Connecting && (
-                      <SignalWifi0BarIcon />
-                    )}
-                    {props.live === LiveMode.Live && (
-                      <SignalWifi4BarLockIcon
-                        className={css({
-                          // color: theme.palette.primary,
-                        })}
-                      />
-                    )}
-                  </Grid>
-                  <Grid item>
-                    <Box maxWidth="150px">
-                      <Typography variant="subtitle1" noWrap>
-                        {sanitizeContentEditable(props.liveLabel)}
-                      </Typography>
-                    </Box>
-                  </Grid>
-                </Grid>
-              </Box>
-            )}
-            <Hidden smDown>{renderMenu(false)}</Hidden>
-            <Hidden mdUp>
-              {!isLive && (
-                <IconButton
-                  color="inherit"
-                  onClick={() => {
-                    setMenuOpen(true);
-                  }}
-                >
-                  <MenuIcon color="inherit" />
-                </IconButton>
-              )}
-            </Hidden>
-            <Drawer
-              anchor="bottom"
-              open={menuOpen}
-              onClose={() => {
-                setMenuOpen(false);
-              }}
-            >
-              <Box p="2rem">{renderMenu(true)}</Box>
-            </Drawer>
-            <Typography
-              className={css({
-                flex: "1 1 auto",
-              })}
-            />
-            <Hidden smDown>
-              {displayDonation && !shouldDisplayRejoinButton && <Kofi />}
-            </Hidden>
-            {shouldDisplayRejoinButton && (
-              <Button
-                color="secondary"
-                onClick={() => {
-                  history.push(`/play/${gameId}`);
+                  textDecoration: "none",
+                  display: props.hideHeaderLogo ? "none" : "inherit",
                 }}
-                variant={"outlined"}
-                className={css({
-                  minWidth: "10rem",
-                })}
               >
-                <Typography variant="button" noWrap>
-                  Rejoin&nbsp;Game
-                </Typography>
-              </Button>
-            )}
-          </Toolbar>
+                <NavLink to="/" data-cy="page.menu.home">
+                  <Grid container wrap="nowrap" alignItems="center">
+                    <Grid item sx={{ display: "flex" }}>
+                      <img
+                        alt="Fari"
+                        className={css({
+                          height: "3.5rem",
+                          cursor: "pointer",
+                        })}
+                        src={Images.logoWhiteSvg}
+                      />
+                    </Grid>
+                    <Grid item sx={{ display: "flex" }}>
+                      <Typography
+                        noWrap
+                        className={css({
+                          color: "#fff",
+                          whiteSpace: "nowrap",
+                          fontSize: "1.1rem",
+                          fontWeight: theme.typography.fontWeightBold,
+                        })}
+                      >
+                        Fari{" "}
+                        <Typography
+                          component="span"
+                          className={css({
+                            fontSize: "1.1rem",
+                            fontWeight: theme.typography.fontWeightRegular,
+                          })}
+                        >
+                          App
+                        </Typography>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </NavLink>
+              </Box>
+
+              <Hidden mdDown>{renderMenu(false)}</Hidden>
+              <Hidden mdUp>
+                {!isLive && (
+                  <IconButton
+                    color="inherit"
+                    className={css({ padding: "0" })}
+                    onClick={() => {
+                      setMenuOpen(true);
+                    }}
+                    size="large"
+                  >
+                    <MenuIcon color="inherit" />
+                  </IconButton>
+                )}
+              </Hidden>
+              <Drawer
+                anchor="bottom"
+                classes={{
+                  paper: css({
+                    maxHeight: "80vh",
+                  }),
+                }}
+                open={menuOpen}
+                onClose={() => {
+                  setMenuOpen(false);
+                }}
+              >
+                <Box
+                  p="1.5rem"
+                  color={"#fff"}
+                  bgcolor={theme.palette.primary.main}
+                >
+                  {renderMenu(true)}
+                </Box>
+              </Drawer>
+              <Typography
+                className={css({
+                  flex: "1 1 auto",
+                })}
+              />
+              <Hidden mdDown>
+                {!shouldDisplayRejoinButton && (
+                  <Box width="250px">
+                    <Patreon />
+                  </Box>
+                )}
+              </Hidden>
+              {shouldDisplayRejoinButton && (
+                <ThemeProvider theme={highlight.highlightTheme}>
+                  <Button
+                    color="primary"
+                    onClick={() => {
+                      history.push(`/play/${gameId}`);
+                    }}
+                    variant={"outlined"}
+                    className={css({
+                      minWidth: "10rem",
+                    })}
+                  >
+                    <Typography variant="button" noWrap>
+                      Rejoin&nbsp;Game
+                    </Typography>
+                  </Button>
+                </ThemeProvider>
+              )}
+            </Toolbar>
+          </Box>
         </AppBar>
       </Box>
     );
@@ -405,123 +515,223 @@ export const Page: React.FC<{
       ? css({ textAlign: "center" })
       : css({ flex: "0 1 auto" });
 
+    const smSize = 8;
+    const xsSize = 12;
+
     return (
-      <Grid container spacing={1} justify={mobile ? "center" : undefined}>
+      <Grid
+        container
+        spacing={3}
+        justifyContent={mobile ? "center" : undefined}
+        alignItems="center"
+      >
         {!isLive && (
           <>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
-                to="/"
-                data-cy="page.menu.play"
-                component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
-              >
-                {t("menu.play")}
-              </Button>
-            </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
-                data-cy="page.menu.scenes"
+            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+              <NavLink
+                highlight
+                data-cy="page.menu.my-binder"
+                startIcon={<MenuBookIcon />}
                 onClick={() => {
-                  scenesManager.actions.openManager(ManagerMode.Manage);
+                  myBinderManager.actions.open();
                 }}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
               >
-                {t("menu.scenes")}
-              </Button>
+                {t("menu.my-binder")}
+              </NavLink>
             </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
-                data-cy="page.menu.characters"
-                onClick={() => {
-                  charactersManager.actions.openManager(ManagerMode.Manage);
-                }}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
-              >
-                {t("menu.characters")}
-              </Button>
+            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+              <NavLinkCategory
+                label={t("menu.tools")}
+                data-cy="page.menu.tools"
+                subNav={[
+                  {
+                    label: t("menu.tools"),
+                    links: [
+                      {
+                        to: "/data",
+                        label: t("menu.data"),
+                        icon: <StorageIcon />,
+                      },
+                      {
+                        to: "/dice",
+                        label: t("menu.dice"),
+                        icon: <Icons.FateDice />,
+                        ["data-cy"]: "page.menu.tools.dice",
+                      },
+                      {
+                        to: "/dice-pool",
+                        label: t("menu.dice-pool"),
+                        icon: <Icons.ThrowDice />,
+                      },
+                      {
+                        to: "/story-builder",
+                        label: "Story Builder",
+                        icon: <LocalLibraryIcon />,
+                      },
+                      {
+                        to: "/story-dice",
+                        label: "Story Dice",
+                        icon: <CasinoIcon />,
+                      },
+                      {
+                        to: "/oracle",
+                        label: t("menu.oracle"),
+                        icon: <Icons.EyeIcon />,
+                      },
+                    ],
+                  },
+                ]}
+              />
             </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
-                to="/dice"
-                data-cy="page.menu.dice"
-                component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
-              >
-                {t("menu.dice")}
-              </Button>
-            </Grid>
-            <Grid item xs={8} sm={8} className={itemClass}>
-              <Button
-                color="inherit"
-                to="/about"
-                component={RouterLink}
-                variant={mobile ? "outlined" : undefined}
-                fullWidth={mobile}
-              >
-                {t("menu.about")}
-              </Button>
+            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+              <NavLinkCategory
+                label={t("menu.resources")}
+                subNav={[
+                  {
+                    label: "Fari",
+                    links: [
+                      {
+                        href: "https://fari.canny.io/changelog",
+                        label: t("menu.whats-new"),
+                        icon: <FiberNewIcon />,
+                        target: "_blank",
+                      },
+                      {
+                        to: "/feature-requests",
+                        label: t("menu.feature-requests"),
+                        icon: <EmojiObjectsIcon />,
+                      },
+                      {
+                        to: "/bugs",
+                        label: t("menu.report-a-bug"),
+                        icon: <BugReportIcon />,
+                      },
+                      {
+                        href: "https://farirpgs.com/discord",
+                        label: t("menu.discord"),
+                        icon: <ForumIcon />,
+                        target: "_blank",
+                      },
+                    ],
+                  },
+                  {
+                    label: "Documents",
+                    links: [
+                      {
+                        href: "https://fari.games/en/resources/fari-rpgs/fari-app-wiki",
+                        label: t("menu.fari-wiki"),
+                        icon: <InfoIcon />,
+                      },
+                    ],
+                  },
+                  {
+                    label: "Support",
+                    links: [
+                      {
+                        href: "https://www.patreon.com/bePatron?u=43408921",
+                        label: t("menu.patreon"),
+                        icon: <ThumbUpIcon />,
+                        target: "_blank",
+                      },
+                      {
+                        href: "https://ko-fi.com/rpdeshaies",
+                        label: t("menu.ko-fi"),
+                        icon: <LocalCafeIcon />,
+                        target: "_blank",
+                      },
+                      {
+                        href: "https://github.com/fariapp/fari",
+                        label: t("menu.github"),
+                        icon: <GitHubIcon />,
+                        target: "_blank",
+                      },
+                    ],
+                  },
+                ]}
+              />
             </Grid>
           </>
         )}
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <Button
-            color="inherit"
-            href="https://github.com/fariapp/fari/discussions"
-            target="_blank"
-            variant={mobile ? "outlined" : undefined}
-            fullWidth={mobile}
+
+        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+          <NavLinkCategory
+            data-cy="page.menu.languages"
+            tooltip={t("menu.languages")}
+            label={<TranslateIcon />}
           >
-            {t("menu.help")}
-          </Button>
+            <Box>
+              <Select
+                fullWidth
+                native
+                value={currentLanguage}
+                inputProps={{
+                  ["data-cy"]: "app.languages",
+                }}
+                onChange={(e) => {
+                  const newLanguage = e.target.value as string;
+                  i18n.changeLanguage(newLanguage);
+                  logger.setTag("language", newLanguage);
+                }}
+                variant="standard"
+              >
+                {Object.keys(PossibleLanguagesNames).map((languageKey) => {
+                  const shouldRenderDev = languageKey === "dev" && env.isDev;
+                  if (languageKey !== "dev" || shouldRenderDev) {
+                    return (
+                      <option key={languageKey} value={languageKey}>
+                        {
+                          PossibleLanguagesNames[
+                            languageKey as IPossibleLanguages
+                          ]
+                        }
+                      </option>
+                    );
+                  }
+                })}
+              </Select>
+            </Box>
+          </NavLinkCategory>
         </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <IconButton
-            color="inherit"
-            href="https://github.com/fariapp/fari"
-            target="_blank"
-            rel="noreferrer"
-            size="small"
-            className={css({
-              padding: "6px 8px",
-            })}
-          >
-            <GitHubIcon />
-          </IconButton>
-        </Grid>
-        <Grid item xs={8} sm={8} className={itemClass}>
-          <IconButton
-            data-cy="page.toggle-dark-mode"
-            color="inherit"
-            size="small"
-            className={css({
-              padding: "6px 8px",
-            })}
+
+        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+          <NavLink
+            data-cy="page.use-theme-from-system-preferences"
+            tooltip={t("menu.use-theme-from-system-preferences")}
             onClick={() => {
-              darkModeManager.actions.setDarkMode(
-                !darkModeManager.state.darkMode
-              );
-              if (darkModeManager.state.darkMode) {
-                logger.info("Page.toggleLightMode");
+              settingsManager.actions.setThemeMode(undefined);
+            }}
+          >
+            <ComputerIcon />
+          </NavLink>
+        </Grid>
+        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+          <NavLink
+            data-cy="page.toggle-dark-mode"
+            tooltip={t("menu.toggle-theme")}
+            onClick={() => {
+              if (settingsManager.state.themeMode === "dark") {
+                settingsManager.actions.setThemeMode("light");
               } else {
-                logger.info("Page.toggleDarkMode");
+                settingsManager.actions.setThemeMode("dark");
               }
             }}
           >
-            {darkModeManager.state.darkMode ? (
-              <Brightness7Icon />
+            {settingsManager.state.themeMode === "dark" ? (
+              <LightModeIcon />
             ) : (
-              <Brightness4Icon />
+              <DarkModeIcon />
             )}
-          </IconButton>
+          </NavLink>
+        </Grid>
+        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+          <NavLink
+            tooltip={t("menu.whats-new")}
+            onClick={() => {
+              // ignore
+            }}
+          >
+            <CannyChangelog mobile={mobile} />
+          </NavLink>
         </Grid>
       </Grid>
     );

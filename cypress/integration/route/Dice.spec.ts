@@ -3,7 +3,9 @@ import { Fari } from "lib/util/Fari";
 describe("/dice", () => {
   it("Should roll dice", () => {
     Fari.start();
-    Fari.get("page.menu.dice").click();
+
+    Fari.get("page.menu.tools").click({ force: true });
+    Fari.get("page.menu.tools.dice").click({ force: true });
 
     setAliases();
 
@@ -35,16 +37,6 @@ describe("/dice", () => {
     cy.get("@dice").invoke("attr", "data-cy-rolling").should("eq", "false");
     cy.get("@dice")
       .invoke("attr", "data-cy-value")
-      .should("be.oneOf", [
-        "-4",
-        "-3",
-        "-2",
-        "-1",
-        "0",
-        "+1",
-        "+2",
-        "+3",
-        "+4",
-      ]);
+      .should("be.oneOf", ["1", "2", "3", "4", "5", "6"]);
   }
 });

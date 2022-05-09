@@ -1,570 +1,720 @@
 import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import Checkbox from "@material-ui/core/Checkbox";
-import Collapse from "@material-ui/core/Collapse";
-import Divider from "@material-ui/core/Divider";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Paper from "@material-ui/core/Paper";
-import useTheme from "@material-ui/core/styles/useTheme";
-import TextField from "@material-ui/core/TextField";
-import Tooltip from "@material-ui/core/Tooltip";
-import Typography from "@material-ui/core/Typography";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import BookmarkIcon from "@material-ui/icons/Bookmark";
-import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
-import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
-import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
-import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
-import RemoveIcon from "@material-ui/icons/Remove";
-import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ControlCameraIcon from "@mui/icons-material/ControlCamera";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import EditAttributesIcon from "@mui/icons-material/EditAttributes";
+import EditAttributesOutlinedIcon from "@mui/icons-material/EditAttributesOutlined";
+import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+import PaletteIcon from "@mui/icons-material/Palette";
+import PaletteOutlinedIcon from "@mui/icons-material/PaletteOutlined";
+import PostAddIcon from "@mui/icons-material/PostAdd";
+import PushPinIcon from "@mui/icons-material/PushPin";
+import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import Fade from "@mui/material/Fade";
+import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import InputLabel from "@mui/material/InputLabel";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Popover from "@mui/material/Popover";
+import Select from "@mui/material/Select";
+import { darken, lighten, ThemeProvider, useTheme } from "@mui/material/styles";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
 import { default as React, useRef, useState } from "react";
+import { ChromePicker } from "react-color";
+import { Delays } from "../../constants/Delays";
+import { FontFamily } from "../../constants/FontFamily";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
-import { AspectType } from "../../hooks/useScene/AspectType";
-import { useScene } from "../../hooks/useScene/useScene";
+import { IDiceRollResult } from "../../domains/dice/Dice";
+import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
+import { useLazyState } from "../../hooks/useLazyState/useLazyState";
+import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
+import { IIndexCard, IIndexCardType } from "../../hooks/useScene/IScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
+import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { ContentEditable } from "../ContentEditable/ContentEditable";
-import { DrawArea } from "../DrawArea/DrawArea";
-import { FateLabel } from "../FateLabel/FateLabel";
+import { BetterDnd } from "../../routes/Character/components/BetterDnD/BetterDnd";
+import { AddBlock } from "../../routes/Character/components/CharacterDialog/components/AddBlock";
+import { BlockByType } from "../../routes/Character/components/CharacterDialog/components/BlockByType";
+import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+import {
+  MiniThemeContext,
+  useMiniTheme,
+} from "../../routes/Character/components/CharacterDialog/MiniThemeContext";
+import { ConditionalWrapper } from "../ConditionalWrapper/ConditionalWrapper";
+import {
+  ContentEditable,
+  previewContentEditable,
+} from "../ContentEditable/ContentEditable";
+import { useIndexCard } from "./hooks/useIndexCard";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
+
+function FariPopper(props: {
+  renderAnchor: (renderProps: {
+    open: boolean;
+    anchorEl: any;
+    handleOnOpen(event: any): void;
+    handleOnClose(): void;
+  }) => JSX.Element;
+  renderPopper: (renderProps: {
+    open: boolean;
+    anchorEl: any;
+    handleOnOpen(event: any): void;
+    handleOnClose(): void;
+  }) => JSX.Element;
+}) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  function handleOnOpen(event: any) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handleOnClose() {
+    setAnchorEl(null);
+  }
+
+  const open = Boolean(anchorEl);
+
+  return (
+    <>
+      {props.renderAnchor({
+        open: open,
+        anchorEl: anchorEl,
+        handleOnOpen: handleOnOpen,
+        handleOnClose: handleOnClose,
+      })}
+      <Popover
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleOnClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        {props.renderPopper({
+          open: open,
+          anchorEl: anchorEl,
+          handleOnOpen: handleOnOpen,
+          handleOnClose: handleOnClose,
+        })}
+      </Popover>
+    </>
+  );
+}
 
 export const IndexCard: React.FC<
   {
-    readonly: boolean;
+    // readonly?: boolean;
     className?: string;
-    id?: string;
-    aspectId: string;
-    sceneManager: ReturnType<typeof useScene>;
+    id: string;
+    type?: IIndexCardType;
+    indexCard: IIndexCard;
+    parentIndexCard?: IIndexCard;
+    allCards: Array<IIndexCard>;
+    reactDndIndex: number;
+    reactDndType: string;
+    canMove: boolean;
+    isGM: boolean;
+    indexCardHiddenRecord?: Record<string, boolean>;
+    onPoolClick(element: IDicePoolElement): void;
+    onChange(newIndexCard: IIndexCard): void;
+    onMoveTo?(idOfIndexCardToMove: string, idOfIndexCardToMoveTo: string): void;
+    onMoveOut?(idOfIndexCardToMove: string): void;
+    onRoll(diceRollResult: IDiceRollResult): void;
+    onMove(dragIndex: number, hoverIndex: number): void;
+    onRemove(): void;
+    onDuplicate(): void;
+    onTogglePrivate?(): void;
+    onToggleVisibility?(indexCard: IIndexCard): void;
   } & IDataCyProps
 > = (props) => {
   const theme = useTheme();
   const { t } = useTranslate();
-  const [menuOpen, setMenuOpen] = useState(false);
+
+  const [hover, setHover] = useState(false);
+
   const $menu = useRef(null);
-  const colorPickerBackground = theme.palette.primary.dark;
-  const aspect = props.sceneManager.state.scene.aspects[props.aspectId];
-  const shouldRenderCheckboxesOrConsequences =
-    aspect.tracks.length > 0 || aspect.consequences.length > 0;
+  const indexCardManager = useIndexCard({
+    indexCard: props.indexCard,
+    onChange: props.onChange,
+  });
+  const miniTheme = useMiniTheme({
+    enforceBackground: indexCardManager.state.indexCard.color,
+  });
 
-  const shouldRenderAspectMenuItems = aspect.type !== AspectType.Boost;
-  const shouldRenderContent = aspect.type !== AspectType.Boost;
-  const shouldRenderPlayedDuringTurnIcon =
-    aspect.type === AspectType.NPC || aspect.type === AspectType.BadGuy;
+  const hasSubCards = indexCardManager.state.indexCard.subCards.length > 0;
+  const isSubCard = indexCardManager.state.indexCard.sub;
+  const [advanced, setAdvanced] = useState(false);
+  const open = !props.indexCardHiddenRecord?.[props.indexCard.id];
+  const numberOfColumnsForSubCards = useResponsiveValue({
+    xl: 3,
+    lg: 2,
+    md: 2,
+    sm: 1,
+    xs: 1,
+  });
 
-  const isDark = theme.palette.type === "dark";
-
-  const paperBackground = isDark
-    ? IndexCardColor[aspect.color].dark
-    : IndexCardColor[aspect.color].light;
-  const paperColor = useTextColors(paperBackground);
-  const playedDuringTurnColor = aspect.playedDuringTurn
-    ? theme.palette.primary.main
-    : paperColor.disabled;
-
-  return (
-    <Paper elevation={aspect.pinned ? 8 : 1} className={props.className}>
-      <Box bgcolor={paperBackground} color={paperColor.primary}>
-        <Box
-          className={css({
-            fontSize: "1.5rem",
-            width: "100%",
-            padding: "0.5rem 0",
-            borderBottom: "1px solid #f0a4a4",
-          })}
-        >
-          <Box p={"0 1rem 1rem 1rem"}>
-            {renderHeader()}
-            {renderTitle()}
-          </Box>
-        </Box>
-        {shouldRenderContent && renderContent()}
-        {shouldRenderCheckboxesOrConsequences &&
-          renderCheckboxesAndConsequences()}
-        <Collapse in={aspect.hasDrawArea}>
-          <Box>
-            <DrawArea
-              objects={aspect!.drawAreaObjects}
-              onChange={(objects) => {
-                if (!aspect.hasDrawArea) {
-                  return;
-                }
-                props.sceneManager.actions.setAspectDrawAreaObjects(
-                  props.aspectId,
-                  objects
-                );
-              }}
-              readonly={props.readonly}
-            />
-          </Box>
-        </Collapse>
-      </Box>
-    </Paper>
+  const paper = useTextColors(
+    theme.palette.mode === "light"
+      ? indexCardManager.state.indexCard.color
+      : darken(indexCardManager.state.indexCard.color, 0.5)
   );
 
-  function renderHeader() {
-    return (
-      <Grid container alignItems="center" spacing={2}>
-        <Grid item className={css({ flex: "1 0 auto" })}>
-          <Typography
-            variant="overline"
-            className={css({
-              fontWeight: aspect.pinned ? "bold" : "inherit",
-              transition: theme.transitions.create("font-weight"),
-            })}
+  const defaultButtonTheme = useThemeFromColor(paper.primary);
+
+  return (
+    <MiniThemeContext.Provider value={miniTheme}>
+      <Paper
+        elevation={indexCardManager.state.indexCard.pinned ? 4 : 2}
+        className={props.className}
+      >
+        <Box
+          pb={!props.isGM ? "1rem" : "0"}
+          data-cy={props["data-cy"]}
+          bgcolor={paper.bgColor}
+          color={paper.primary}
+          onClick={() => {
+            setHover(true);
+          }}
+          onPointerEnter={() => {
+            setHover(true);
+          }}
+          onPointerLeave={() => {
+            setHover(false);
+          }}
+          position="relative"
+        >
+          <ConditionalWrapper
+            condition={props.canMove}
+            wrapper={(children) => {
+              return (
+                <BetterDnd
+                  direction="horizontal"
+                  key={indexCardManager.state.indexCard.id}
+                  index={props.reactDndIndex}
+                  type={props.reactDndType}
+                  onMove={(dragIndex, hoverIndex) => {
+                    props.onMove(dragIndex, hoverIndex);
+                  }}
+                  render={(dndRenderProps) => {
+                    return (
+                      <>
+                        <div ref={dndRenderProps.drag}>
+                          <Tooltip title={t("character-dialog.control.move")}>
+                            <IconButton
+                              size="small"
+                              className={css({
+                                position: "absolute",
+                                marginTop: ".5rem",
+                                marginLeft: ".25rem",
+                                cursor: "drag",
+                                display:
+                                  !props.canMove || !props.isGM
+                                    ? "none"
+                                    : "block",
+                              })}
+                            >
+                              <DragIndicatorIcon
+                                className={css({
+                                  transition: theme.transitions.create("color"),
+                                })}
+                                htmlColor={
+                                  dndRenderProps.isOver
+                                    ? paper.primary
+                                    : paper.secondary
+                                }
+                              />
+                            </IconButton>
+                          </Tooltip>
+                        </div>
+                        {children}
+                      </>
+                    );
+                  }}
+                />
+              );
+            }}
           >
-            {aspect.type === AspectType.Aspect && <>{t("index-card.aspect")}</>}
-            {aspect.type === AspectType.Boost && <>{t("index-card.boost")}</>}
-            {aspect.type === AspectType.NPC && <>{t("index-card.npc")}</>}
-            {aspect.type === AspectType.BadGuy && (
-              <>{t("index-card.bad-guy")}</>
-            )}
-          </Typography>
-        </Grid>
-        {!props.readonly && (
-          <>
-            <Grid item>
-              <Tooltip
-                title={
-                  aspect.pinned ? t("index-card.unpin") : t("index-card.pin")
-                }
-              >
-                <IconButton
-                  ref={$menu}
-                  size="small"
-                  data-cy={`${props["data-cy"]}.pin`}
-                  onClick={() => {
-                    props.sceneManager.actions.toggleAspectPinned(
-                      props.aspectId
-                    );
-                  }}
-                >
-                  {aspect.pinned ? <BookmarkIcon /> : <BookmarkBorderIcon />}
-                </IconButton>
-              </Tooltip>
-            </Grid>
-            <Grid item>
-              <IconButton
-                ref={$menu}
-                size="small"
-                data-cy={`${props["data-cy"]}.menu`}
-                onClick={() => {
-                  setMenuOpen(true);
-                }}
-              >
-                <MoreVertIcon />
-              </IconButton>
-              <Menu
-                classes={{
-                  list: css({
-                    paddingBottom: 0,
-                  }),
-                }}
-                anchorEl={$menu.current}
-                keepMounted
-                open={menuOpen}
-                onClose={() => {
-                  setMenuOpen(false);
-                }}
-              >
-                {shouldRenderAspectMenuItems && renderAspectMenuItems()}
-                {renderGlobalMenuItems()}
-              </Menu>
-            </Grid>
-          </>
-        )}
-      </Grid>
-    );
-  }
-
-  function renderTitle() {
-    return (
-      <Grid container justify="space-between" alignItems="center" spacing={2}>
-        <Grid item xs>
-          <ContentEditable
-            id={props.id}
-            data-cy={`${props["data-cy"]}.title`}
-            value={aspect.title}
-            readonly={props.readonly}
-            onChange={(newTitle) => {
-              props.sceneManager.actions.updateAspectTitle(
-                props.aspectId,
-                newTitle
-              );
-            }}
-          />
-        </Grid>
-        <Grid item>
-          {shouldRenderPlayedDuringTurnIcon && (
-            <IconButton
-              data-cy={`${props["data-cy"]}.initiative`}
-              onClick={() => {
-                props.sceneManager.actions.updateAspectPlayerDuringTurn(
-                  props.aspectId,
-                  !aspect.playedDuringTurn
-                );
-              }}
-              disabled={props.readonly}
-              size="small"
-            >
-              {aspect.playedDuringTurn ? (
-                <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
-              ) : (
-                <EmojiPeopleIcon htmlColor={playedDuringTurnColor} />
-              )}
-            </IconButton>
-          )}
-        </Grid>
-      </Grid>
-    );
-  }
-
-  function renderAspectMenuItems() {
-    return [
-      <MenuItem
-        key="onAddAspectFreeInvoke"
-        data-cy={`${props["data-cy"]}.menu.free-invokes`}
-        onClick={() => {
-          props.sceneManager.actions.addAspectTrack(
-            props.aspectId,
-            t("index-card.free-invokes")
-          );
-        }}
-      >
-        {t("index-card.add-free-invokes-track")}
-      </MenuItem>,
-      <MenuItem
-        key="onAddAspectPhysicalStress"
-        data-cy={`${props["data-cy"]}.menu.physical-stress`}
-        onClick={() => {
-          props.sceneManager.actions.addAspectTrack(
-            props.aspectId,
-            t("index-card.physical-stress")
-          );
-        }}
-      >
-        {t("index-card.add-physical-stress-track")}
-      </MenuItem>,
-      <MenuItem
-        key="onAddAspectMentalStress"
-        data-cy={`${props["data-cy"]}.menu.mental-stress`}
-        onClick={() => {
-          props.sceneManager.actions.addAspectTrack(
-            props.aspectId,
-            t("index-card.mental-stress")
-          );
-        }}
-      >
-        {t("index-card.add-mental-stress-track")}
-      </MenuItem>,
-      <MenuItem
-        key="onAddConsequence"
-        data-cy={`${props["data-cy"]}.menu.consequence`}
-        onClick={() => {
-          props.sceneManager.actions.addAspectConsequence(props.aspectId);
-        }}
-      >
-        {t("index-card.add-1-consequence")}
-      </MenuItem>,
-      <MenuItem
-        key="onAddCountdown"
-        data-cy={`${props["data-cy"]}.menu.track`}
-        onClick={() => {
-          props.sceneManager.actions.addAspectTrack(props.aspectId, "...");
-        }}
-      >
-        {t("index-card.add-track")}
-      </MenuItem>,
-      // <MenuItem
-      //   key="addAspectDrawArea"
-      //   onClick={() => {
-      //     props.sceneManager.actions.addAspectDrawArea(props.aspectId);
-      //   }}
-      // >
-      //   {t("index-card.add-draw-area")}
-      // </MenuItem>,
-      <Divider key="renderAspectMenuItemsDivider" />,
-    ];
-  }
-
-  function renderGlobalMenuItems() {
-    return [
-      <MenuItem
-        data-cy={`${props["data-cy"]}.menu.remove`}
-        key="onRemove"
-        onClick={() => {
-          setMenuOpen(false);
-          props.sceneManager.actions.removeAspect(props.aspectId);
-        }}
-      >
-        {t("index-card.remove")}
-      </MenuItem>,
-      <MenuItem
-        data-cy={`${props["data-cy"]}.menu.reset`}
-        key="onReset"
-        onClick={() => {
-          setMenuOpen(false);
-          props.sceneManager.actions.resetAspect(props.aspectId);
-        }}
-      >
-        {t("index-card.reset")}
-      </MenuItem>,
-      <Divider key="renderGlobalMenuItemsDivider" light />,
-      <MenuItem
-        key="onUpdateAspectColor"
-        className={css({
-          "backgroundColor": colorPickerBackground,
-          "cursor": "inherit",
-          "&:hover": {
-            backgroundColor: colorPickerBackground,
-          },
-        })}
-        disableRipple
-        disableTouchRipple
-      >
-        <Grid container justify="center">
-          {Object.keys(IndexCardColor).map((c: string) => {
-            const colorName = c as IndexCardColorTypes;
-            return (
-              <Grid item key={colorName}>
-                <IconButton
-                  data-cy={`${props["data-cy"]}.menu.color.${colorName}`}
-                  onClick={(e) => {
-                    props.sceneManager.actions.updateAspectColor(
-                      props.aspectId,
-                      colorName
-                    );
-                    e.stopPropagation();
-                  }}
-                  onMouseDown={(e) => e.stopPropagation()}
-                  size="small"
-                >
-                  {colorName === aspect.color ? (
-                    <RadioButtonCheckedIcon
-                      htmlColor={IndexCardColor[colorName].chip}
-                    />
-                  ) : (
-                    <RadioButtonUncheckedIcon
-                      htmlColor={IndexCardColor[colorName].chip}
-                    />
-                  )}
-                </IconButton>
-              </Grid>
-            );
-          })}
-        </Grid>
-      </MenuItem>,
-    ];
-  }
-
-  function renderContent() {
-    const shouldRenderContentTitle =
-      aspect.type === AspectType.NPC || aspect.type === AspectType.BadGuy;
-
-    return (
-      <Box
-        className={css({
-          fontSize: "1.1rem",
-          lineHeight: "1.7rem",
-          padding: "0.5rem 0",
-          width: "100%",
-          borderBottom: `1px solid ${theme.palette.divider}`,
-        })}
-      >
-        {shouldRenderContentTitle && (
-          <Box px="1rem">
-            <Typography variant="overline">
-              {aspect.type === AspectType.NPC && (
-                <>
-                  {t("character-dialog.aspects")} {" & "}
-                  {t("character-dialog.notes")}
-                </>
-              )}
-              {aspect.type === AspectType.BadGuy && (
-                <>
-                  {t("character-dialog.aspects")} {" & "}
-                  {t("character-dialog.notes")}
-                </>
-              )}
-            </Typography>
-          </Box>
-        )}
-        <Box p="0 1rem">
-          <ContentEditable
-            data-cy={`${props["data-cy"]}.content`}
-            readonly={props.readonly}
-            value={aspect.content}
-            onChange={(newContent) => {
-              props.sceneManager.actions.updateAspectContent(
-                props.aspectId,
-                newContent
-              );
-            }}
-          />
-        </Box>
-      </Box>
-    );
-  }
-
-  function renderCheckboxesAndConsequences() {
-    return (
-      <Box
-        className={css({
-          padding: "0.5rem 0",
-          width: "100%",
-          borderBottom: `1px solid ${theme.palette.divider}`,
-        })}
-      >
-        <Box p=".5rem 1rem">
-          {renderTracks()}
-          {renderConsequences()}
-        </Box>
-      </Box>
-    );
-  }
-
-  function renderTracks() {
-    return (
-      <Box>
-        {aspect.tracks.map((stressTrack, trackIndex) => {
-          return (
-            <Box pb=".5rem" key={trackIndex}>
-              <Grid container justify="space-between" wrap="nowrap" spacing={1}>
-                <Grid item className={css({ flex: "1 1 auto" })}>
-                  <FateLabel display="inline" variant="caption">
-                    <ContentEditable
-                      data-cy={`${props["data-cy"]}.stressTrack.${stressTrack.name}.name`}
-                      value={stressTrack.name}
-                      readonly={props.readonly}
-                      onChange={(newTrackName) => {
-                        props.sceneManager.actions.updateAspectTrackName(
-                          props.aspectId,
-                          trackIndex,
-                          newTrackName
-                        );
-                      }}
-                    />
-                  </FateLabel>
-                </Grid>
-                {!props.readonly && (
-                  <Grid item>
-                    <IconButton
-                      size="small"
-                      data-cy={`${props["data-cy"]}.stressTrack.${stressTrack.name}.remove-box`}
-                      onClick={() => {
-                        props.sceneManager.actions.removeAspectTrackBox(
-                          props.aspectId,
-                          trackIndex
-                        );
-                      }}
-                    >
-                      <RemoveCircleOutlineIcon
-                        className={css({
-                          width: "1rem",
-                          height: "1rem",
-                        })}
-                      />
-                    </IconButton>
-                  </Grid>
-                )}
-                {!props.readonly && (
-                  <Grid item>
-                    <IconButton
-                      size="small"
-                      data-cy={`${props["data-cy"]}.stressTrack.${stressTrack.name}.add-box`}
-                      onClick={() => {
-                        props.sceneManager.actions.addAspectTrackBox(
-                          props.aspectId,
-                          trackIndex
-                        );
-                      }}
-                    >
-                      <AddCircleOutlineIcon
-                        className={css({
-                          width: "1rem",
-                          height: "1rem",
-                        })}
-                      />
-                    </IconButton>
-                  </Grid>
-                )}
-                {!props.readonly && (
-                  <Grid item>
-                    <IconButton
-                      size="small"
-                      data-cy={`${props["data-cy"]}.stressTrack.${stressTrack.name}.remove`}
-                      onClick={() => {
-                        props.sceneManager.actions.removeAspectTrack(
-                          props.aspectId,
-                          trackIndex
-                        );
-                      }}
-                    >
-                      <RemoveIcon
-                        className={css({
-                          width: "1rem",
-                          height: "1rem",
-                        })}
-                      />
-                    </IconButton>
-                  </Grid>
-                )}
-              </Grid>
-
-              <Grid container justify="flex-start" spacing={2}>
-                {stressTrack.value.map((stressBox, boxIndex) => {
-                  return (
-                    <Grid item key={boxIndex}>
+            <Box>
+              <Grid container>
+                <Grid item xs={12} lg={hasSubCards ? 3 : 12}>
+                  <Box display="flex" height="100%" flexDirection="column">
+                    <ThemeProvider theme={defaultButtonTheme}>
                       <Box
                         className={css({
-                          display: "flex",
-                          justifyContent: "center",
+                          fontSize: "1.5rem",
+                          width: "100%",
+                          padding: "0.5rem 0",
+                          borderBottom: `1px solid ${
+                            indexCardManager.state.indexCard.color === "#fff"
+                              ? "#f0a4a4"
+                              : paper.primary
+                          }`,
                         })}
                       >
-                        <Checkbox
-                          data-cy={`${props["data-cy"]}.stressTrack.${stressTrack.name}.box.${boxIndex}`}
-                          color="default"
-                          size="small"
-                          checked={stressBox.checked}
-                          onChange={(event) => {
-                            if (props.readonly) {
-                              return;
-                            }
-                            props.sceneManager.actions.toggleAspectTrackBox(
-                              props.aspectId,
-                              trackIndex,
-                              boxIndex
-                            );
-                          }}
-                        />
+                        <Box px="1rem">
+                          {renderHeader()}
+                          {renderTitle()}
+                        </Box>
                       </Box>
-                      <Box>
-                        <FateLabel
-                          variant="caption"
-                          className={css({ textAlign: "center" })}
-                        >
-                          <ContentEditable
-                            readonly={props.readonly}
-                            value={stressBox.label}
-                            onChange={(newBoxLabel) => {
-                              props.sceneManager.actions.updateStressBoxLabel(
-                                props.aspectId,
-                                trackIndex,
-                                boxIndex,
-                                newBoxLabel
-                              );
-                            }}
-                          />
-                        </FateLabel>
-                      </Box>
-                    </Grid>
-                  );
-                })}
+                      <Collapse in={open}>
+                        <Box>
+                          <Box>{renderBlocks()}</Box>
+                        </Box>
+                      </Collapse>
+                      {renderGMActions()}
+                    </ThemeProvider>
+                  </Box>
+                </Grid>
+                {hasSubCards && (
+                  <Grid
+                    item
+                    xs={12}
+                    lg={9}
+                    className={css({
+                      background:
+                        paper.type === "light"
+                          ? darken(paper.bgColor, 0.1)
+                          : lighten(paper.bgColor, 0.2),
+                    })}
+                  >
+                    {renderSubCards()}
+                  </Grid>
+                )}
               </Grid>
+            </Box>
+          </ConditionalWrapper>
+        </Box>
+      </Paper>
+    </MiniThemeContext.Provider>
+  );
+
+  function renderGMActions() {
+    return (
+      <Fade in={hover}>
+        <Box
+          py=".5rem"
+          px="1rem"
+          display="flex"
+          alignItems="flex-end"
+          flex="1 0 auto"
+        >
+          <Grid
+            container
+            wrap="nowrap"
+            justifyContent="space-between"
+            spacing={1}
+          >
+            <Grid item container justifyContent="flex-start" spacing={1}>
+              <Grid item>
+                <IndexCardColorPicker
+                  color={indexCardManager.state.indexCard.color}
+                  onChange={(color) => indexCardManager.actions.setColor(color)}
+                  render={(renderProps) => {
+                    return (
+                      <IconButton
+                        size="small"
+                        ref={renderProps.ref}
+                        data-cy={`${props["data-cy"]}.palette`}
+                        onClick={() => {
+                          renderProps.setColorPickerOpen((prev) => !prev);
+                        }}
+                      >
+                        {renderProps.colorPickerOpen ? (
+                          <PaletteIcon htmlColor={paper.secondary} />
+                        ) : (
+                          <PaletteOutlinedIcon htmlColor={paper.secondary} />
+                        )}
+                      </IconButton>
+                    );
+                  }}
+                />
+              </Grid>
+              {!isSubCard && (
+                <Grid item>
+                  <Tooltip title={t("character-dialog.control.add-sub-card")}>
+                    <IconButton
+                      size="small"
+                      data-cy={`${props["data-cy"]}.menu.add-sub-card`}
+                      onClick={() => {
+                        indexCardManager.actions.addSubCard();
+                      }}
+                    >
+                      <PostAddIcon htmlColor={paper.primary} />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
+              <Grid item>
+                <Tooltip title={t("character-dialog.control.advanced-mode")}>
+                  <IconButton
+                    size="small"
+                    data-cy={`${props["data-cy"]}.menu.advanced`}
+                    onClick={() => {
+                      setAdvanced((prev) => !prev);
+                    }}
+                  >
+                    {advanced ? (
+                      <EditAttributesIcon htmlColor={paper.primary} />
+                    ) : (
+                      <EditAttributesOutlinedIcon htmlColor={paper.primary} />
+                    )}
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+            </Grid>
+            <Grid item container justifyContent="center" spacing={1}>
+              <Grid item>
+                <Tooltip title={t("index-card.add-block")}>
+                  <span>
+                    <AddBlock
+                      variant="icon"
+                      onAddBlock={(blockType) => {
+                        indexCardManager.actions.addBlock(blockType);
+
+                        if (!open) {
+                          props.onToggleVisibility?.(
+                            indexCardManager.state.indexCard
+                          );
+                        }
+
+                        setAdvanced(true);
+                      }}
+                    />
+                  </span>
+                </Tooltip>
+              </Grid>
+            </Grid>
+            <Grid item container justifyContent="flex-end" spacing={1}>
+              {props.isGM && (
+                <Grid item>
+                  <Tooltip title={t("index-card.duplicate")}>
+                    <IconButton
+                      size="small"
+                      data-cy={`${props["data-cy"]}.duplicate`}
+                      onClick={() => {
+                        props.onDuplicate();
+                      }}
+                    >
+                      <FileCopyIcon htmlColor={paper.primary} />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
+              {props.isGM && props.onMoveTo && (
+                <Grid item>
+                  <FariPopper
+                    renderPopper={(renderProps) => {
+                      const cardsForSelect = props.allCards.filter((c) => {
+                        const isCurrent =
+                          c.id !== indexCardManager.state.indexCard.id;
+                        const isParent = c.id !== props.parentIndexCard?.id;
+                        return isCurrent && isParent;
+                      });
+                      return (
+                        <Box p="1rem" minWidth="200px">
+                          <FormControl fullWidth variant="standard">
+                            <InputLabel>{t("index-card.move-to")}</InputLabel>
+
+                            <Select
+                              fullWidth
+                              native
+                              inputProps={{
+                                ["data-cy"]: "app.languages",
+                              }}
+                              onChange={(e) => {
+                                renderProps.handleOnClose();
+                                if (e.target.value) {
+                                  if (e.target.value === "move-out") {
+                                    props.onMoveOut?.(
+                                      indexCardManager.state.indexCard.id
+                                    );
+                                  } else {
+                                    props.onMoveTo?.(
+                                      indexCardManager.state.indexCard.id,
+                                      e.target.value as string
+                                    );
+                                  }
+                                }
+                              }}
+                              variant="standard"
+                            >
+                              <option value="" />
+                              {isSubCard && (
+                                <option value="move-out">
+                                  {`— ${t("index-card.move-out")} —`}
+                                </option>
+                              )}
+                              {cardsForSelect.map((card) => {
+                                const value = previewContentEditable({
+                                  value: card.title,
+                                });
+                                return (
+                                  <option key={card.id} value={card.id}>
+                                    {value}
+                                  </option>
+                                );
+                              })}
+                            </Select>
+                          </FormControl>
+                        </Box>
+                      );
+                    }}
+                    renderAnchor={(renderProps) => {
+                      return (
+                        <Tooltip title={t("index-card.move-to")}>
+                          <span>
+                            <IconButton
+                              disabled={hasSubCards}
+                              size="small"
+                              data-cy={`${props["data-cy"]}.move`}
+                              onClick={(event) => {
+                                renderProps.handleOnOpen(event);
+                              }}
+                            >
+                              <ControlCameraIcon
+                                htmlColor={
+                                  hasSubCards ? paper.disabled : paper.primary
+                                }
+                              />
+                            </IconButton>
+                          </span>
+                        </Tooltip>
+                      );
+                    }}
+                  />
+                </Grid>
+              )}
+
+              {props.isGM && (
+                <Grid item>
+                  <Tooltip title={t("index-card.remove")}>
+                    <IconButton
+                      size="small"
+                      data-cy={`${props["data-cy"]}.remove`}
+                      onClick={() => {
+                        const confirmed = confirm(
+                          t("index-card.remove-confirmation")
+                        );
+                        if (confirmed) {
+                          props.onRemove();
+                        }
+                      }}
+                    >
+                      <DeleteIcon htmlColor={paper.primary} />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
+            </Grid>
+          </Grid>
+        </Box>
+      </Fade>
+    );
+  }
+
+  function renderSubCards() {
+    return (
+      <Box px="1rem" py="1rem">
+        <ImageList
+          variant={"standard"}
+          cols={numberOfColumnsForSubCards}
+          gap={16}
+          className={css({
+            // padding: "1rem 1rem", // for boxShadow padding
+            // margin: "-1rem -1rem", // for boxShadow padding
+          })}
+        >
+          {indexCardManager.state.indexCard.subCards?.map(
+            (subCard, subCardIndex) => {
+              return (
+                <ImageListItem
+                  key={subCard.id}
+                  cols={1}
+                  className={css({
+                    width: "100%",
+                    paddingTop: ".25rem",
+                    paddingBottom: ".25rem",
+                  })}
+                >
+                  <IndexCard
+                    indexCard={subCard}
+                    isGM={props.isGM}
+                    parentIndexCard={indexCardManager.state.indexCard}
+                    allCards={props.allCards}
+                    id={`index-card-${subCard.id}`}
+                    reactDndType={`${DragAndDropTypes.SceneIndexCardsSubCards}.${indexCardManager.state.indexCard.id}`}
+                    canMove={true}
+                    reactDndIndex={subCardIndex}
+                    onPoolClick={props.onPoolClick}
+                    onRoll={props.onRoll}
+                    indexCardHiddenRecord={props.indexCardHiddenRecord}
+                    onToggleVisibility={props.onToggleVisibility}
+                    onMoveTo={(idOfIndexCardToMove, idOfIndexCardToMoveTo) => {
+                      props.onMoveTo?.(
+                        idOfIndexCardToMove,
+                        idOfIndexCardToMoveTo
+                      );
+                    }}
+                    onMoveOut={(idOfIndexCardToMove) => {
+                      props.onMoveOut?.(idOfIndexCardToMove);
+                    }}
+                    onMove={(dragIndex, hoverIndex) => {
+                      indexCardManager.actions.moveIndexCard(
+                        dragIndex,
+                        hoverIndex
+                      );
+                    }}
+                    onChange={(newIndexCard) => {
+                      indexCardManager.actions.updateIndexCard(newIndexCard);
+                    }}
+                    onDuplicate={() => {
+                      indexCardManager.actions.duplicateIndexCard(subCard);
+                    }}
+                    onRemove={() => {
+                      indexCardManager.actions.removeIndexCard(subCard.id);
+                    }}
+                  />
+                </ImageListItem>
+              );
+            }
+          )}
+        </ImageList>
+      </Box>
+    );
+  }
+
+  function renderBlocks() {
+    if (indexCardManager.state.indexCard.blocks.length === 0) {
+      return null;
+    }
+
+    return (
+      <Box px="1rem" py=".5rem">
+        {indexCardManager.state.indexCard.blocks.map((block, blockIndex) => {
+          return (
+            <Box key={block.id} mb=".5rem">
+              <BetterDnd
+                direction="vertical"
+                index={blockIndex}
+                type={`${DragAndDropTypes.SceneIndexCardsBlocks}.${indexCardManager.state.indexCard.id}`}
+                onMove={(dragIndex, hoverIndex) => {
+                  indexCardManager.actions.moveIndexCardBlock(
+                    dragIndex,
+                    hoverIndex
+                  );
+                }}
+                render={(dndRenderProps) => {
+                  return (
+                    <Box>
+                      <Grid container wrap="nowrap" spacing={1}>
+                        {advanced && (
+                          <Grid item>
+                            <div ref={dndRenderProps.drag}>
+                              <Tooltip
+                                title={t("character-dialog.control.move")}
+                              >
+                                <IconButton
+                                  size="small"
+                                  className={css({
+                                    cursor: "drag",
+                                    display: "block",
+                                  })}
+                                >
+                                  <DragIndicatorIcon
+                                    className={css({
+                                      transition:
+                                        theme.transitions.create("color"),
+                                    })}
+                                    htmlColor={
+                                      dndRenderProps.isOver
+                                        ? paper.primary
+                                        : paper.secondary
+                                    }
+                                  />
+                                </IconButton>
+                              </Tooltip>
+                            </div>
+                          </Grid>
+                        )}
+                        <Grid item xs>
+                          <BlockByType
+                            advanced={advanced}
+                            hideHelp
+                            readonly={false}
+                            dataCy={`index-card.${block.label}`}
+                            block={block}
+                            onChange={(newBlock) => {
+                              indexCardManager.actions.setBlock(newBlock);
+                            }}
+                            onRoll={(diceRollResult) => {
+                              props.onRoll(diceRollResult);
+                            }}
+                            otherActions={
+                              <>
+                                <Grid item>
+                                  <Link
+                                    component="button"
+                                    variant="caption"
+                                    color="inherit"
+                                    data-cy={`index-card.${block.label}.duplicate`}
+                                    className={css({
+                                      label: "CharacterDialog-duplicate",
+                                    })}
+                                    onClick={() => {
+                                      indexCardManager.actions.duplicateBlock(
+                                        block
+                                      );
+                                    }}
+                                    underline="hover"
+                                  >
+                                    {t("character-dialog.control.duplicate")}
+                                  </Link>
+                                </Grid>
+                                <Grid item>
+                                  <Link
+                                    component="button"
+                                    variant="caption"
+                                    color="inherit"
+                                    data-cy={`index-card.${block.label}.remove`}
+                                    className={css({
+                                      label: "CharacterDialog-remove",
+                                    })}
+                                    onClick={() => {
+                                      indexCardManager.actions.removeBlock(
+                                        block
+                                      );
+                                    }}
+                                    underline="hover"
+                                  >
+                                    {t("character-dialog.control.remove-block")}
+                                  </Link>
+                                </Grid>
+                              </>
+                            }
+                          />
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  );
+                }}
+              />
             </Box>
           );
         })}
@@ -572,76 +722,260 @@ export const IndexCard: React.FC<
     );
   }
 
-  function renderConsequences() {
+  function renderHeader() {
+    const dragIconMargin = "1.5rem";
     return (
-      <Box>
-        <Grid container justify="center">
-          {aspect.consequences.map((consequence, consequenceIndex) => {
-            const name =
-              consequence.name ||
-              `${t("index-card.consequence")}  (${(consequenceIndex + 1) * 2})`;
-            const value = consequence.value;
+      <Box ml={!props.isGM ? "0" : dragIconMargin}>
+        <Grid container alignItems="flex-start" spacing={1} wrap="nowrap">
+          <Grid item xs>
+            <Typography
+              noWrap
+              variant="overline"
+              className={css({
+                display: "flex",
+                width: "100%",
+                fontWeight: indexCardManager.state.indexCard.pinned
+                  ? "bold"
+                  : "inherit",
+                transition: theme.transitions.create("font-weight"),
+              })}
+            >
+              <ContentEditable
+                data-cy={`${props["data-cy"]}.title-label`}
+                value={indexCardManager.state.indexCard.titleLabel}
+                onChange={(newLabel) => {
+                  indexCardManager.actions.setTitleLabel(newLabel);
+                }}
+              />
+            </Typography>
+          </Grid>
 
-            return (
-              <Grid key={consequenceIndex} item xs={12}>
-                <Box py=".5rem">
-                  <Grid container>
-                    <Grid item className={css({ flex: "1 1 auto" })}>
-                      <FateLabel variant="caption">
-                        <ContentEditable
-                          data-cy={`${props["data-cy"]}.consequence.${name}.name`}
-                          value={name}
-                          readonly={props.readonly}
-                          onChange={(newName) => {
-                            props.sceneManager.actions.updateAspectConsequenceName(
-                              props.aspectId,
-                              consequenceIndex,
-                              newName
-                            );
-                          }}
-                        />
-                      </FateLabel>
-                    </Grid>
-                    <Grid item>
+          <Fade in={hover}>
+            <Grid item>
+              <Grid container spacing={1} justifyContent="flex-end">
+                {!isSubCard && props.isGM && props.onTogglePrivate && (
+                  <Grid item>
+                    <Tooltip
+                      title={
+                        props.type === "public"
+                          ? t("index-card.mark-private")
+                          : t("index-card.mark-public")
+                      }
+                    >
                       <IconButton
                         size="small"
-                        data-cy={`${props["data-cy"]}.consequence.${name}.remove`}
+                        data-cy={`${props["data-cy"]}.menu.visibility`}
                         onClick={() => {
-                          props.sceneManager.actions.removeAspectConsequence(
-                            props.aspectId,
-                            consequenceIndex
-                          );
+                          props.onTogglePrivate?.();
                         }}
                       >
-                        <RemoveIcon
-                          className={css({
-                            width: "1rem",
-                            height: "1rem",
-                          })}
-                        />
+                        {props.type === "public" ? (
+                          <VisibilityOffIcon htmlColor={paper.primary} />
+                        ) : (
+                          <VisibilityIcon htmlColor={paper.primary} />
+                        )}
                       </IconButton>
-                    </Grid>
+                    </Tooltip>
                   </Grid>
-                  <TextField
-                    fullWidth
-                    value={value}
-                    onChange={(event) => {
-                      if (props.readonly) {
-                        return;
+                )}
+                {props.isGM && (
+                  <Grid item>
+                    <Tooltip
+                      title={
+                        indexCardManager.state.indexCard.pinned
+                          ? t("index-card.unpin")
+                          : t("index-card.pin")
                       }
-                      props.sceneManager.actions.updateAspectConsequenceValue(
-                        props.aspectId,
-                        consequenceIndex,
-                        event.target.value
-                      );
-                    }}
-                  />
-                </Box>
+                    >
+                      <IconButton
+                        ref={$menu}
+                        size="small"
+                        data-cy={`${props["data-cy"]}.pin`}
+                        onClick={() => {
+                          indexCardManager.actions.togglePinned();
+                        }}
+                      >
+                        {indexCardManager.state.indexCard.pinned ? (
+                          <PushPinIcon htmlColor={paper.primary} />
+                        ) : (
+                          <PushPinOutlinedIcon htmlColor={paper.primary} />
+                        )}
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                )}
+                <Grid item>
+                  <Tooltip
+                    title={
+                      indexCardManager.state.indexCard.playedDuringTurn
+                        ? t("player-row.played")
+                        : t("player-row.not-played")
+                    }
+                  >
+                    <span>
+                      <IconButton
+                        data-cy={`${props["data-cy"]}.initiative`}
+                        onClick={() => {
+                          indexCardManager.actions.toggleInitiative();
+                        }}
+                        size="small"
+                      >
+                        {indexCardManager.state.indexCard.playedDuringTurn ? (
+                          <DirectionsRunIcon htmlColor={paper.primary} />
+                        ) : (
+                          <EmojiPeopleIcon htmlColor={paper.primary} />
+                        )}
+                      </IconButton>
+                    </span>
+                  </Tooltip>
+                </Grid>
+
+                {props.onToggleVisibility && (
+                  <Grid item>
+                    <Tooltip
+                      title={
+                        open ? t("index-card.collapse") : t("index-card.expand")
+                      }
+                    >
+                      <span>
+                        <IconButton
+                          size="small"
+                          data-cy={`${props["data-cy"]}.collapse`}
+                          onClick={() => {
+                            props.onToggleVisibility?.(
+                              indexCardManager.state.indexCard
+                            );
+                          }}
+                        >
+                          <ArrowForwardIosIcon
+                            htmlColor={paper.primary}
+                            className={css({
+                              transform: open
+                                ? "rotate(270deg)"
+                                : "rotate(90deg)",
+                              transition: theme.transitions.create("transform"),
+                            })}
+                          />
+                        </IconButton>
+                      </span>
+                    </Tooltip>
+                  </Grid>
+                )}
               </Grid>
-            );
-          })}
+            </Grid>
+          </Fade>
         </Grid>
       </Box>
     );
   }
+
+  function renderTitle() {
+    return (
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={2}
+      >
+        <Grid item xs>
+          <ContentEditable
+            id={props.id}
+            data-cy={`${props["data-cy"]}.title`}
+            value={indexCardManager.state.indexCard.title}
+            className={css({
+              fontSize: "1.8rem",
+              fontFamily: FontFamily.HandWriting,
+              lineHeight: "normal",
+              // letterSpacing: "-.5px",
+            })}
+            onChange={(newTitle) => {
+              indexCardManager.actions.setTitle(newTitle);
+            }}
+          />
+        </Grid>
+      </Grid>
+    );
+  }
 };
+
+export function IndexCardColorPicker(props: {
+  color: string | undefined;
+  onChange(newColor: string): void;
+  hidePastils?: boolean;
+  render: (renderProps: {
+    ref: any;
+    colorPickerOpen: boolean;
+    setColorPickerOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  }) => React.ReactNode;
+}) {
+  const $ref = useRef<any | null>(null);
+  const [colorPickerOpen, setColorPickerOpen] = useState(false);
+
+  const [color, setColor] = useLazyState({
+    value: props.color,
+    onChange: props.onChange,
+    delay: Delays.colorPicker,
+  });
+
+  return (
+    <>
+      {props.render({
+        ref: $ref,
+        colorPickerOpen,
+        setColorPickerOpen,
+      })}
+      <Popover
+        open={colorPickerOpen}
+        anchorEl={$ref.current}
+        onClose={() => {
+          setColorPickerOpen(false);
+        }}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+      >
+        <ChromePicker
+          color={color}
+          onChange={(color) => {
+            return setColor(color.hex);
+          }}
+        />
+        {!props.hidePastils && (
+          <Box pb=".5rem" bgcolor="white" width="225px">
+            <Grid container justifyContent="center" spacing={1}>
+              {Object.keys(IndexCardColor).map((colorName) => {
+                const color = IndexCardColor[colorName as IndexCardColorTypes];
+                return (
+                  <Grid item key={color}>
+                    <IconButton
+                      size="small"
+                      onClick={() => {
+                        setColor(color);
+                        props.onChange(color);
+                      }}
+                    >
+                      <Box
+                        className={css({
+                          width: "1.5rem",
+                          height: "1.5rem",
+                          background: color,
+                          borderRadius: "50%",
+                          border: "1px solid #e0e0e0",
+                        })}
+                      />
+                    </IconButton>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Box>
+        )}
+      </Popover>
+    </>
+  );
+}

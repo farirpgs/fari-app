@@ -1,0 +1,672 @@
+{
+  "id": "59c260ce-6a4b-4019-89c3-321b12149655",
+  "version": 3,
+  "name": "",
+  "template": "Dnd5e",
+  "lastUpdated": 1619722885,
+  "pages": [
+    {
+      "id": "9b98fc6a-774f-4f2a-b772-317cb53fd47a",
+      "sections": [
+        {
+          "id": "3746cbad-34d2-40ba-9dfe-b0fd4c7979c4",
+          "label": "Character",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "ae72053f-a3f8-4a11-bef0-65cbfac1772c",
+              "label": "Race",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "ccf38d7f-63a8-4c9c-b505-6620121b13b3",
+              "label": "Class",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "7fea5bc3-4f95-4bec-af46-d3b937ab14db",
+              "label": "Background",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "4c875aee-2ef1-4a0c-84c0-9142bdb447c5",
+              "label": "Alignment",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "4f813471-2fcd-495e-88ed-3ca29e81fbd7",
+              "label": "Level",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "f018ecdb-b891-420a-ba26-cec1a37a65db",
+              "label": "Experience",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "98950481-70ac-478f-85b1-37a37f6c4cd9",
+              "label": "INSPIRATION",
+              "type": "SlotTracker",
+              "meta": {},
+              "value": [{ "label": "", "checked": false }]
+            },
+            {
+              "id": "6c427ead-aac8-4bbd-95f8-1aac8d862f9d",
+              "label": "Proficiencies & Languages:",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "f5816821-56e9-4d15-a7f1-2b3c2eb0f2ee",
+          "label": "Equipment",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "90d974ed-5b9a-4747-bd7e-0366243bb034",
+              "label": "Platinum",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "acb8a5cf-1a98-43aa-aeb6-99125e88c400",
+              "label": "Gold",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "b0cc06a6-10f1-4888-8af5-f8659ba5ea45",
+              "label": "Electrum",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "ed033407-73c4-4ca5-8192-40ca4bd5ef87",
+              "label": "Silver",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "58801cea-89de-4ad1-8bb0-0b7bd75fb099",
+              "label": "Copper",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "da32489d-989a-476b-8298-768736e93d09",
+              "label": "Weight Carried",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "1f677371-89d3-44bb-b38a-38060e6fb322",
+              "label": "Encumbered",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "0d8570d3-9401-480f-90ef-43cb445b8d94",
+              "label": "Push / Drag / Lift",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "f2773102-fc37-40b0-a886-193929f1bc6f",
+              "label": "Equipment",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "978005b2-968e-4c22-a8bc-296ecd925eaf",
+          "label": "Health & Combat",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "df44b09b-27ad-414d-a18c-778fe640093c",
+              "label": "Armor Class",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "7c433bad-1d5e-4c17-841f-a879529b16d0",
+              "label": "Initiative",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"], "checked": false },
+              "value": "0"
+            },
+            {
+              "id": "65adc985-b953-4ae0-8dc5-bd45d9e3ac7a",
+              "label": "Hit Points",
+              "type": "PointCounter",
+              "meta": { "isMainPointCounter": false, "max": "1" },
+              "value": "0"
+            },
+            {
+              "id": "9bbe004f-d1c0-4bea-8830-0733411f65de",
+              "label": "Temporary Hit Points",
+              "type": "PointCounter",
+              "meta": { "isMainPointCounter": false },
+              "value": "0"
+            },
+            {
+              "id": "664b06cb-71d2-4369-9630-c851374a9dd0",
+              "label": "Hit Dice",
+              "type": "PointCounter",
+              "meta": { "isMainPointCounter": false, "max": "1" },
+              "value": "0"
+            },
+            {
+              "id": "788a8281-b6a6-4804-8b11-7a6449ef57b1",
+              "label": "Death Save Success",
+              "type": "SlotTracker",
+              "meta": {},
+              "value": [
+                { "label": "1", "checked": false },
+                { "label": "2", "checked": false },
+                { "label": "3", "checked": false }
+              ]
+            },
+            {
+              "id": "1f53e9b4-bd30-4fc1-b3da-cb7772708436",
+              "label": "Death Save Fail",
+              "type": "SlotTracker",
+              "meta": {},
+              "value": [
+                { "label": "1", "checked": false },
+                { "label": "2", "checked": false },
+                { "label": "3", "checked": false }
+              ]
+            },
+            {
+              "id": "bb281fdd-3d9a-41f3-ab97-bc39b1e59cd8",
+              "label": "Defenses",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "label": "Character"
+    },
+    {
+      "id": "ef5a35a9-132e-4f01-8bd9-b5bb537e88a8",
+      "sections": [
+        {
+          "id": "808275bc-51f6-490f-9ec6-321fa596e3c9",
+          "label": "Saving Throws",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "d2aeaffc-cdba-4217-8b3b-0208cda6285e",
+              "label": "Strength",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "70019ec4-8917-451c-86a4-ec0691d496af",
+              "label": "Dexterity",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "62733675-9955-4344-8566-59ceb255756b",
+              "label": "Constitution",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "d814db3a-ed5b-4d67-af13-9c8f35307a77",
+              "label": "Intelligence",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "a3f63ceb-6ded-40af-a6a9-9a803ff3ed54",
+              "label": "Wisdom",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "634d57c2-cc47-44a6-a64a-99b74adf25fb",
+              "label": "Charisma",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "96c9d2fc-ded0-435d-883f-40a76b65c8ce",
+              "label": "Saving Throw Modifiers",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "5a215389-6074-4643-aae6-73f35df966a8",
+          "label": "Abilities",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "014ef13e-dfbd-42d5-a2ad-031961dd23d2",
+              "label": "Strength",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "3ee650e4-12ad-47df-a87b-479e37e98e46",
+              "label": "Dexterity",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "e1c8dfad-aab6-4b3d-8b2f-a3586657f7b9",
+              "label": "Constitution",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "deb2345c-866f-4235-9470-219bebf6c195",
+              "label": "Intelligence",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "69aeb059-1418-4267-b498-8dffe88dcd1d",
+              "label": "Wisdom",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "b3bc376d-926a-4627-bfeb-d8a437a31315",
+              "label": "Charisma",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "280d8016-9655-4c15-8c1f-0ab55d7ea67c",
+              "label": "Perception",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "df9da21f-60ac-4f1c-8ead-5cf9998d3902",
+              "label": "Insight",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "bf9b5cd5-e011-4c27-b4c0-4afec16a2b9c",
+              "label": "Investigation",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "07b15a34-15e8-4a96-8ed7-3b06debaee40",
+              "label": "Other Ability Notes",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "3c81eef7-65f0-4dcb-a34e-0bbed5b059ce",
+          "label": "Actions",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "2168f578-4f25-4766-bac6-e7e790ee54c0",
+              "label": "Action",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "2cbd2dea-3191-4911-aae6-a247409f8bfb",
+              "label": "Bonus Action",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "4b229f5b-9833-481e-bfce-4debd472ca5d",
+              "label": "Reaction",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "e8377571-af10-4e0a-8b79-5c623942e079",
+              "label": "Special",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "6b3942ef-f5fa-406c-a3de-4e185bc83109",
+          "label": "Skills",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "f0259bbb-31e8-4b1a-a488-12adbf861254",
+              "label": "Acrobatics",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "80b17683-4513-4520-bed4-28b51a365c1c",
+              "label": "Animal Handling",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "21f949ee-d9b0-4c03-aa0b-50080105eabc",
+              "label": "Athletics",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "6d559117-62cd-4e63-b062-83c7878086d2",
+              "label": "Deception",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "66bbe65f-b2f5-4176-8838-3d01669f885c",
+              "label": "History",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "d0309f6a-f2c4-4631-b16f-53dc243d4351",
+              "label": "Insight",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "be485958-0abc-46b4-8be6-aba03e431bbd",
+              "label": "Intimidation",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "453fad7b-3745-4a63-ab81-b3a47c34b404",
+              "label": "Investigation",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "d6e2cd63-932b-4cd5-87b7-12f2b4da5c71",
+              "label": "Medicine",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "5b8d4b66-bb36-4bf5-aa43-dc11edd0454a",
+              "label": "Nature",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "3f488fe1-2adf-4ae8-bb6b-ba649439b184",
+              "label": "Perception",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "c9889f54-65ac-403d-bd17-3006b359b552",
+              "label": "Performance",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "cfc3bd8f-ef26-4fe7-b5a2-56e7c4e6e180",
+              "label": "Persuasion",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "e17d4e42-4e33-43a4-9c07-5986ebf9af86",
+              "label": "Religion",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "0470c757-ee64-42fe-bb51-c6b64bc4fc0f",
+              "label": "Sleight Of Hand:",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "5f9089b7-b822-43c8-9426-ae6cd40344c3",
+              "label": "Stealth",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            },
+            {
+              "id": "eed21edb-cd96-4267-a96e-94973a7caba8",
+              "label": "Survival",
+              "type": "Skill",
+              "meta": { "commands": ["1d20"] },
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "id": "a092f432-67d8-408f-ba52-17ac8aa95bc7",
+          "label": "Spells",
+          "position": "Right",
+          "blocks": []
+        }
+      ],
+      "label": "Actions"
+    },
+    {
+      "id": "31c17526-25be-409f-8fce-bc7499e6192e",
+      "sections": [
+        {
+          "id": "d6104819-cd78-43cd-b4db-fb8d88fd2766",
+          "label": "CLASS FEATURES",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "7fde6271-4020-4d01-937b-148f669e378d",
+              "label": "<br>",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "3d40b1f5-8cd2-48b8-a945-0a26355f4369",
+          "label": "TRAITS",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "6263b6e6-c46c-442d-9f77-b8bb821013b1",
+              "label": "",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "label": "Features and traits"
+    },
+    {
+      "id": "a4711339-5c76-425e-8b76-f4dd4126f8d4",
+      "sections": [
+        {
+          "id": "00fb446e-5791-474b-ada6-66b6166a8dc7",
+          "label": "Background",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "fd3c22c6-8e76-42d4-a39a-de439f5c1b5f",
+              "label": "Age",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "3694122c-ab2b-4935-aa94-8096f3e8f10b",
+              "label": "Height",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "3ac27828-378f-4837-a55f-ac051a61250f",
+              "label": "Weight",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "16660186-702d-42df-be73-b2af21609a30",
+              "label": "Eyes",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "8107b5cb-890b-4cb0-aca0-b8ad32f6eabd",
+              "label": "Skin",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "cba8b10e-753f-4f77-a785-3097f1644774",
+              "label": "Hair",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "c6a1aeca-9553-4886-b154-1fc7c382b399",
+              "label": "Personality Traits",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "6892eb4f-f386-40e9-993f-89e2f5531248",
+              "label": "Ideals",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "3ff832ca-6ec9-4b82-8b83-3af8dc5391be",
+              "label": "Bonds",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "27ce57ab-9cf0-4fca-afc0-58e9570ef702",
+              "label": "Flaws",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "3b98b43b-6402-466a-989d-2b30e8d7a5c7",
+              "label": "Backstory",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "c668f044-77b6-4514-bcc6-9baf9b07abf9",
+              "label": "Allies & Organizations:",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            }
+          ],
+          "visibleOnCard": false
+        },
+        {
+          "id": "e585f3c6-b38c-4906-9df4-855d919276a3",
+          "label": "Notes",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "1416c177-8d6e-4764-b05d-c2a07ea76d82",
+              "label": "",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "label": "Description"
+    }
+  ],
+  "fariType": "character"
+}

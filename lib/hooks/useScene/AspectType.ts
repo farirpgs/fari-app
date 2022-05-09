@@ -1,3 +1,6 @@
+/**
+ * @deprecated
+ */
 export enum AspectType {
   Aspect,
   Boost,

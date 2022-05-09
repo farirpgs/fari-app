@@ -1,29 +1,29 @@
-import Box from "@material-ui/core/Box";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Container from "@material-ui/core/Container";
-import Fade from "@material-ui/core/Fade";
-import React, { Suspense, useEffect, useRef, useState } from "react";
-import { Route, Switch } from "react-router-dom";
-import { SrdImport } from "../../routes/SrdRoute/constants/SrdImport";
-import { SrdsRoute } from "../../routes/SrdsRoute/SrdsRoute";
-import { Page } from "../Page/Page";
+import { LiveblocksProvider, RoomProvider } from "@liveblocks/react";
+import React, { useContext } from "react";
+import { Route, Switch, useLocation } from "react-router-dom";
+import { InjectionsContext } from "../../contexts/InjectionsContext/InjectionsContext";
+import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
+import { StoryBuilderRoute } from "../../routes/StoryBuilder/StoryBuilderRoute";
+import StoryDiceRoute from "../../routes/StoryDice/StoryDiceRoute";
+import { LoadingRoute } from "./LoadingRoute";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
 
-const AboutRoute = React.lazy(() => import("../../routes/About/AboutRoute"));
-const BlogPostRoute = React.lazy(
-  () => import("../../routes/BlogPost/BlogPostRoute")
-);
-const BlogPostsRoute = React.lazy(
-  () => import("../../routes/BlogPosts/BlogPostsRoute")
-);
-const ChangelogRoute = React.lazy(
-  () => import("../../routes/ChangeLog/ChangeLogRoute")
-);
 const CharacterRoute = React.lazy(
   () => import("../../routes/Character/CharacterRoute")
 );
+const NewCharacterRoute = React.lazy(
+  () => import("../../routes/NewCharacter/NewCharacterRoute")
+);
+const CharacterPrintRoute = React.lazy(
+  () => import("../../routes/CharacterPrint/CharacterPrintRoute")
+);
 const DiceRoute = React.lazy(() => import("../../routes/Dice/DiceRoute"));
+const FeatureRequestsRoute = React.lazy(
+  () => import("../../routes/FeatureRequests/FeatureRequestsRoute")
+);
+const BugsRoute = React.lazy(() => import("../../routes/Bugs/BugsRoute"));
+const DataRoute = React.lazy(() => import("../../routes/Data/DataRoute"));
 const DrawRoute = React.lazy(() => import("../../routes/Draw/DrawRoute"));
 const NotFoundRoute = React.lazy(
   () => import("../../routes/NotFound/NotFoundRoute")
@@ -32,46 +32,36 @@ const PlayOfflineRoute = React.lazy(
   () => import("../../routes/Play/PlayOfflineRoute")
 );
 const PlayRoute = React.lazy(() => import("../../routes/Play/PlayRoute"));
+const JoinAGameRoute = React.lazy(
+  () => import("../../routes/Play/JoinAGameRoute")
+);
 const SceneRoute = React.lazy(() => import("../../routes/Scene/SceneRoute"));
+const CardCollection = React.lazy(
+  () => import("../../routes/CardCollection/CardCollectionRoute")
+);
 const OracleRoute = React.lazy(() => import("../../routes/Oracle/OracleRoute"));
-const SrdRoute = React.lazy(() => import("../../routes/SrdRoute/SrdRoute"));
-
-export const LoadingRoute: React.FC = (props) => {
-  const [fadeIn, setFadeIn] = useState(false);
-  const timeout = useRef<any | undefined>(undefined);
-
-  useEffect(() => {
-    timeout.current = setTimeout(() => {
-      setFadeIn(true);
-    }, 400);
-
-    return () => {
-      clearTimeout(timeout.current);
-    };
-  });
-
-  return (
-    <Page displayDonation={false}>
-      <Fade in={fadeIn}>
-        <Container maxWidth="md">
-          <Box display="flex" justifyContent="center">
-            <CircularProgress />
-          </Box>
-        </Container>
-      </Fade>
-    </Page>
-  );
-};
 
 export const AppRouter = () => {
+  const location = useLocation();
+  const settingsManager = useContext(SettingsContext);
+  const injections = useContext(InjectionsContext);
+  const userId = settingsManager.state.userId;
+
   return (
-    <Suspense fallback={<LoadingRoute />}>
+    <React.Suspense fallback={<LoadingRoute pathname={location.pathname} />}>
       <Switch>
         <Route
           exact
           path={"/"}
-          render={(props) => {
+          render={() => {
             return <HomeRoute />;
+          }}
+        />
+        <Route
+          exact
+          path={"/characters/new/:category/:name"}
+          render={() => {
+            return <NewCharacterRoute />;
           }}
         />
         <Route
@@ -83,37 +73,74 @@ export const AppRouter = () => {
         />
         <Route
           exact
-          path={"/dice"}
+          path={"/characters/:id/print"}
           render={(props) => {
-            return <DiceRoute />;
+            return <CharacterPrintRoute {...props} />;
+          }}
+        />
+
+        <Route
+          exact
+          path={"/dice"}
+          render={() => {
+            return <DiceRoute pool={false} key="dice" />;
+          }}
+        />
+        <Route
+          exact
+          path={"/dice-pool"}
+          render={() => {
+            return <DiceRoute pool={true} key="dice-pool" />;
+          }}
+        />
+        <Route
+          exact
+          path={"/data"}
+          render={() => {
+            return <DataRoute />;
           }}
         />
         <Route
           exact
           path={"/oracle"}
-          render={(props) => {
+          render={() => {
             return <OracleRoute />;
           }}
         />
         <Route
           exact
           path={"/draw"}
-          render={(props) => {
+          render={() => {
             return <DrawRoute />;
           }}
         />
         <Route
           exact
-          path={"/play"}
+          path={["/play", "/play/:id"]}
           render={(props) => {
-            return <PlayRoute {...props} />;
+            const sessionId = (props.match.params as any).id || userId;
+
+            return (
+              <LiveblocksProvider client={injections.liveBlocksClient}>
+                <RoomProvider id={sessionId}>
+                  <PlayRoute {...props} />;
+                </RoomProvider>
+              </LiveblocksProvider>
+            );
           }}
         />
         <Route
           exact
-          path={"/play/:id"}
+          path={"/play/join/:id"}
           render={(props) => {
-            return <PlayRoute {...props} />;
+            const sessionId = (props.match.params as any).id;
+            return (
+              <LiveblocksProvider client={injections.liveBlocksClient}>
+                <RoomProvider id={sessionId}>
+                  <JoinAGameRoute {...props} />;
+                </RoomProvider>
+              </LiveblocksProvider>
+            );
           }}
         />
         <Route
@@ -126,78 +153,146 @@ export const AppRouter = () => {
           path={"/scenes/:id"}
           render={(props) => <SceneRoute {...props} />}
         />
-        <Route exact path={"/srds"} render={(props) => <SrdsRoute />} />
         <Route
           exact
-          path={"/srds/condensed/:page?"}
-          render={(props) => (
-            <SrdRoute
-              {...props}
-              prefix="/srds/condensed"
-              title="Fate Condensed"
-              loadFunction={SrdImport.Condensed}
-            />
-          )}
+          path={"/cards/:id"}
+          render={(props) => <CardCollection {...props} />}
+        />
+
+        <Route
+          path="/srds/condensed"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/resources/fari-rpgs/fari-app-wiki";
+            return null;
+          }}
         />
         <Route
-          exact
-          path={"/srds/core/:page?"}
-          render={(props) => (
-            <SrdRoute
-              {...props}
-              prefix="/srds/core"
-              title="Fate Core"
-              loadFunction={SrdImport.Core}
-            />
-          )}
+          path="/srds/condensed"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/srds/evilhat/fate-condensed";
+            return null;
+          }}
         />
         <Route
-          exact
-          path={"/srds/accelerated/:page?"}
-          render={(props) => (
-            <SrdRoute
-              {...props}
-              prefix="/srds/accelerated"
-              title="Fate Accelerated"
-              loadFunction={SrdImport.Accelerated}
-            />
-          )}
+          path="/srds/core"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/srds/evilhat/fate-core";
+            return null;
+          }}
         />
         <Route
+          path="/srds/accelerated"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/srds/evilhat/fate-accelerated";
+            return null;
+          }}
+        />
+        <Route
+          path="/srds/system-toolkit"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/srds/evilhat/fate-system-toolkit";
+            return null;
+          }}
+        />
+        <Route
+          path="/srds/adversary-toolkit"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/srds/evilhat/fate-adversary-toolkit";
+            return null;
+          }}
+        />
+        <Route
+          path="/fate-stunts"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/resources/fari-rpgs/fate-stunts";
+            return null;
+          }}
+        />
+        <Route
+          path="/fari-wiki"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/resources/fari-rpgs/fari-app-wiki";
+            return null;
+          }}
+        />
+        <Route
+          path="/seelie-squire"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/resources/seelie-squire/book-of-monsters";
+            return null;
+          }}
+        />
+        <Route
+          path="/success-with-style"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/resources/fari-rpgs/success-with-style";
+            return null;
+          }}
+        />
+        <Route
+          path="/blog/moments-in-fate"
+          component={() => {
+            window.location.href =
+              "https://fari.games/en/srds/fari-rpgs/success-with-style/moments-in-fate";
+            return null;
+          }}
+        />
+        <Route
+          path="/changelog"
+          component={() => {
+            window.location.href = "https://fari.canny.io/changelog/";
+            return null;
+          }}
+        />
+
+        <Route
           exact
-          path={"/about"}
-          render={(props) => {
-            return <AboutRoute />;
+          path={["/feature-requests", "/feature-requests/*"]}
+          render={() => {
+            return <FeatureRequestsRoute />;
+          }}
+        />
+
+        <Route
+          exact
+          path={["/bugs", "/bugs/*"]}
+          render={() => {
+            return <BugsRoute />;
+          }}
+        />
+
+        <Route
+          exact
+          path={"/story-builder"}
+          render={() => {
+            return <StoryBuilderRoute />;
           }}
         />
         <Route
           exact
-          path={"/blog"}
-          render={(props) => {
-            return <BlogPostsRoute />;
+          path={"/story-dice"}
+          render={() => {
+            return <StoryDiceRoute />;
           }}
         />
-        <Route
-          exact
-          path={"/blog/:slug"}
-          render={(props) => {
-            return <BlogPostRoute slug={props.match.params.slug} />;
-          }}
-        />
-        <Route
-          exact
-          path={"/changelog"}
-          render={(props) => {
-            return <ChangelogRoute />;
-          }}
-        />
+
         <Route
           path="*"
-          render={(props) => {
+          render={() => {
             return <NotFoundRoute />;
           }}
         />
       </Switch>
-    </Suspense>
+    </React.Suspense>
   );
 };

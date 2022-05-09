@@ -1,0 +1,273 @@
+{
+  "id": "beb0c207-bd5f-43c4-b797-b2e476a3442b",
+  "name": "Iron Edda Accelerated Example",
+  "group": "Iron Edda",
+  "lastUpdated": 1616421031,
+  "pages": [
+    {
+      "id": "01f0f30c-b201-472d-8a9d-28941263a182",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "23308e64-d0ce-461b-9da3-6ddd71d46803",
+          "label": "Aspects",
+          "visibleOnCard": true,
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "9e1965db-886d-4fdc-86a9-05941bdcff6c",
+              "type": "Text",
+              "meta": {},
+              "label": "High Concept",
+              "value": ""
+            },
+            {
+              "id": "745b1862-1381-4ead-aabf-8a0b84db84df",
+              "type": "Text",
+              "meta": {},
+              "label": "Trouble",
+              "value": ""
+            },
+            {
+              "id": "0c1a79e3-daf6-4a59-b57a-c1ef9d700c11",
+              "type": "Text",
+              "meta": {},
+              "label": "Clan/bonded",
+              "value": ""
+            },
+            {
+              "id": "6121abe8-73af-4f57-bbdc-fbea1d0ee036",
+              "type": "Text",
+              "meta": {},
+              "label": "sacred item",
+              "value": ""
+            },
+            {
+              "id": "4fc063b3-37b9-481b-b5e5-f570cf2eaf19",
+              "type": "Text",
+              "meta": {},
+              "label": "group",
+              "value": ""
+            },
+            {
+              "id": "7b4fbb15-8327-4f46-958e-811f27cc1473",
+              "label": "destiny",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "345549ba-754d-41f4-ae17-1b2370096aec",
+          "label": "Stunts & Extras",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "b6acf9e2-2f4b-4242-9583-2a4b9b446bf8",
+              "type": "Text",
+              "meta": {},
+              "label": "stunt",
+              "value": ""
+            },
+            {
+              "id": "8c3f777c-cf0a-47a3-ba28-0e35e2ba1653",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt",
+              "value": ""
+            },
+            {
+              "id": "01fa8c7c-3011-4a80-86f8-77dcdbd8011a",
+              "type": "Text",
+              "meta": {},
+              "label": "Stunt",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "a88d58b7-ebc1-4cad-81fa-b1b4be2636bd",
+          "label": "Fate Points",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "6fd39d26-9c65-4209-ae40-d2046cce8e48",
+              "type": "PointCounter",
+              "meta": { "isMainPointCounter": true, "max": "3" },
+              "label": "Fate Points",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "id": "d3dacafd-d93a-470e-bc0b-0e93cfc8c12e",
+          "label": "Other",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "3520d44f-c1a9-4afe-b2ed-67db233c2d32",
+              "type": "Text",
+              "meta": {},
+              "label": "Notes",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "787c1d0d-c6b1-43f8-8666-61eeceb0d7dd",
+          "label": "Credits",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0673fc61-7045-4ced-86e7-5fc0c622a770",
+              "label": "Exploding Rogue",
+              "type": "Link",
+              "meta": { "hasDisplayName": true },
+              "value": "https://www.drivethrurpg.com/product/137962/Iron-Edda-War-of-Metal-and-Bone"
+            }
+          ]
+        },
+        {
+          "id": "b46d61f9-6049-42dc-b18b-0e668ed27a31",
+          "label": "Stress and conditions",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "81babbca-e7e9-4748-90f0-1564281c9a48",
+              "type": "SlotTracker",
+              "meta": {},
+              "label": "stress",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "1" }
+              ]
+            },
+            {
+              "id": "b9ebfec4-b5cb-4107-b6e1-1f5b80de0971",
+              "type": "SlotTracker",
+              "meta": {},
+              "label": "condition",
+              "value": [{ "label": "x", "checked": false }]
+            },
+            {
+              "id": "2cedabb3-5f4e-48ee-8d59-657e7d5941eb",
+              "type": "SlotTracker",
+              "meta": {},
+              "label": "condition",
+              "value": [{ "label": "x", "checked": false }]
+            }
+          ],
+          "visibleOnCard": false
+        },
+        {
+          "id": "a5e9b7f1-1768-460e-83c3-5e58779872d2",
+          "label": "indebted",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "69f00211-d56d-4b05-88b6-b070e01cd767",
+              "label": "INDEBTED",
+              "type": "SlotTracker",
+              "meta": {},
+              "value": [
+                { "label": "1", "checked": false },
+                { "label": "1", "checked": false },
+                { "label": "1", "checked": false },
+                { "label": "1", "checked": false },
+                { "label": "1", "checked": false }
+              ]
+            },
+            {
+              "id": "17049da4-d154-410c-9c5c-e849e6fb8e4f",
+              "label": "DEBTS OWED",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ],
+          "visibleOnCard": true
+        },
+        {
+          "id": "606234f9-092c-4a6d-92a5-21ed59e56e8f",
+          "label": "Consequences",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "30f16062-559c-47d0-b8b2-2210bc4aed1b",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "in peril",
+              "value": ""
+            },
+            {
+              "id": "ab4ee6d2-ac17-443d-b875-c9ace7c1f3c3",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "doomed",
+              "value": ""
+            }
+          ],
+          "visibleOnCard": true
+        },
+        {
+          "id": "73b6d2f6-48f0-4089-aa32-1e9d78df061a",
+          "label": "Approaches",
+          "visibleOnCard": true,
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "351b9c68-df46-4513-bf2f-5ac3e033696a",
+              "type": "Skill",
+              "meta": { "commands": ["4dF"] },
+              "label": "flair",
+              "value": ""
+            },
+            {
+              "id": "9dbe55b6-2fea-4721-91ad-e811a824eb17",
+              "type": "Skill",
+              "meta": { "commands": ["4dF"] },
+              "label": "focus",
+              "value": ""
+            },
+            {
+              "id": "4681cdab-6765-44e9-bca7-7b8db49ef307",
+              "type": "Skill",
+              "meta": { "commands": ["4dF"] },
+              "label": "force",
+              "value": ""
+            },
+            {
+              "id": "a0fcc519-ab6c-451b-be9a-402ebcf0f4d7",
+              "type": "Skill",
+              "meta": { "commands": ["4dF"] },
+              "label": "guile",
+              "value": ""
+            },
+            {
+              "id": "5adf8b28-018d-4993-9099-bdf2c7cabdfe",
+              "type": "Skill",
+              "meta": { "commands": ["4dF"] },
+              "label": "haste",
+              "value": ""
+            },
+            {
+              "id": "38c07823-82a4-40e8-8677-53751fd5f61e",
+              "type": "Skill",
+              "meta": { "commands": ["4dF"] },
+              "label": "intellect",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "FateCondensed",
+  "version": 3,
+  "fariType": "character"
+}

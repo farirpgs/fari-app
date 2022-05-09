@@ -1,22 +1,49 @@
 import { Severity } from "@sentry/react";
-import { SentryService } from "../sentry/SentryService";
+import { env } from "../../constants/env";
+import { makeSentryService } from "../sentry/SentryService";
 
-export function makeLogger(sentryService: SentryService) {
+const shouldConsole = env.isDev && !env.isTest;
+
+type LoggerContext = {
+  tags?: Record<string, any>;
+  extra?: Record<string, any>;
+  contexts?: Record<string, any>;
+  user?: Record<string, any>;
+  level?: Record<string, any>;
+  fingerprint?: Record<string, any>;
+};
+
+export function makeLogger(
+  sentryService: ReturnType<typeof makeSentryService>
+) {
   return {
-    debug(message: string, context?: any) {
-      sentryService.log(message, Severity.Debug, context);
+    track(event: string, body = {}) {
+      //@ts-ignore
+      const googleAnalytics = window.gtag;
+
+      if (!googleAnalytics) {
+        return;
+      }
+
+      googleAnalytics("event", event, body);
     },
-    info(message: string, context?: any) {
-      sentryService.log(message, Severity.Info, context);
+    debug(message: string, context?: LoggerContext) {
+      console.debug(message, context);
     },
-    warn(message: string, context?: any) {
+    info(message: string, context?: LoggerContext) {
+      if (shouldConsole) {
+        console.info(message, context);
+      }
+    },
+    warn(message: string, context?: LoggerContext) {
       sentryService.log(message, Severity.Warning, context);
       console.warn(message, context);
     },
-    error(message: string, context?: any) {
+    error(message: string, context?: LoggerContext) {
       sentryService.log(message, Severity.Error, context);
       console.error(message, context);
     },
+    setTag: sentryService.setTag,
   };
 }
 

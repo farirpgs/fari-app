@@ -1,17 +1,17 @@
 import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import React, { useEffect } from "react";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { Font } from "../../domains/font/Font";
 
-export const NotFoundRoute: React.FC<{}> = (props) => {
+export const NotFoundRoute: React.FC<{}> = () => {
   const logger = useLogger();
 
   useEffect(() => {
-    logger.info("Route:NotFound");
+    logger.track("page_not_found");
   }, []);
 
   return (
@@ -36,9 +36,9 @@ export const NotFoundRoute: React.FC<{}> = (props) => {
           textAlign="center"
         >
           <Typography>
-            <p>The page you are trying to access doesn&apos;t exist.</p>
-            <p>Use the menu to get out of the woods.</p>
+            The page you are trying to access doesn&apos;t exist.{" "}
           </Typography>
+          <Typography>Use the menu to get out of the woods!</Typography>
         </Box>
       </Page>
     </div>

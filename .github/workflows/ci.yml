@@ -5,45 +5,111 @@ on:
   push:
     branches: [master]
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [master]
+    branches:
+      - "**"
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x]
-
+    steps:
+      # Checkout
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Use Node
+      - name: Use Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      # Cache
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      # Install
+      - name: Install
+        run: npm install
+      # Build
+      - name: Build
+        run: CONTEXT=production npm run build
+        env:
+          VITE_GITHUB_RUN_NUMBER: ${{github.run_number}}
+          VITE_GITHUB_SHA: ${{github.sha}}
+      # Validate
+      - name: Validate
+        run: npm run validate
+      # Upload Artifacts
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: dist
+          path: dist
+  deploy-preview:
+    needs: [build]
+    runs-on: ubuntu-latest
+    if: github.repository == 'fariapp/fari-app' && github.ref != 'refs/heads/master' && github.event.repository.fork == false
+    environment:
+      name: Preview
+      url: https://${{github.run_id}}--fari.netlify.app
     steps:
       # Setup
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: Use Node
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: "16"
+      # Cache
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      # Install
+      - name: Install
+        run: npm install
+      # Download Artifacts
+      - name: Download Artifacts
+        uses: actions/download-artifact@master
+        with:
+          name: dist
+          path: dist
+      # Deploy Preview
+      - name: Deploy Preview
+        run: npm run deploy:preview -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --alias $GITHUB_RUN_ID
+  deploy-production:
+    needs: [build]
+    runs-on: ubuntu-latest
+    if: github.repository == 'fariapp/fari-app' && github.ref == 'refs/heads/master' && github.event.repository.fork == false
+    environment:
+      name: Production
+      url: https://fari.app
+    steps:
+      # Setup
+      - uses: actions/checkout@v2
+      - name: Use Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
       # Cache
       - name: Cache
         uses: actions/cache@v2
         with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       # Install
       - name: Install
-        run: yarn install
-      # Build
-      - name: Build
-        run: CONTEXT=production yarn build
-      # Validate
-      - name: Validate
-        run: yarn validate
-      # Deploy Preview
-      - name: Deploy Preview
-        run: yarn deploy:preview --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
-        if: github.repository == 'fariapp/fari' && github.ref != 'refs/heads/master'
+        run: npm install
+      # Download Artifacts
+      - name: Download Artifacts
+        uses: actions/download-artifact@master
+        with:
+          name: dist
+          path: dist
       # Deploy Production
       - name: Deploy Production
-        run: yarn deploy:prod --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
-        if: github.repository == 'fariapp/fari' && github.ref == 'refs/heads/master'
+        run: npm run deploy:prod -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}}

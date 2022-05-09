@@ -1,35 +1,33 @@
+import Container from "@mui/material/Container";
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
-import { ManagerMode } from "../../components/Manager/Manager";
+import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
+import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { Scene, SceneMode } from "../../components/Scene/Scene";
-import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
+import { Scene } from "../../components/Scene/Scene";
+import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
-import { sanitizeSceneName, useScene } from "../../hooks/useScene/useScene";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { useUserId } from "../../hooks/useUserId/useUserId";
+import { useScene } from "../../hooks/useScene/useScene";
 
 export const SceneRoute: React.FC<{
   match: {
     params: { id: string };
   };
 }> = (props) => {
-  const userId = useUserId();
-  const charactersManager = useContext(CharactersContext);
   const scenesManager = useContext(ScenesContext);
-  const sceneManager = useScene({
-    userId: userId,
-    charactersManager: charactersManager,
-  });
-  const sceneName = sceneManager.state.scene.name;
-  const pageTitle = sanitizeSceneName(sceneName);
+  const sceneManager = useScene();
+  const sceneName = sceneManager.state.scene?.name ?? "";
+
+  const diceManager = useContext(DiceContext);
+  const pageTitle = previewContentEditable({ value: sceneName });
   const history = useHistory();
-  const { t } = useTranslate();
   const logger = useLogger();
+  const myBinderManager = useContext(MyBinderContext);
 
   useEffect(() => {
-    logger.info("Route:Scene");
+    logger.track("view_scene");
   }, []);
 
   useEffect(() => {
@@ -38,25 +36,32 @@ export const SceneRoute: React.FC<{
     );
 
     if (sceneToLoad) {
-      sceneManager.actions.loadScene(sceneToLoad, false);
+      sceneManager.actions.loadScene(sceneToLoad);
     } else {
       history.replace("/");
-      scenesManager.actions.openManager(ManagerMode.Manage);
+      myBinderManager.actions.open({ folder: "scenes" });
     }
   }, [props.match.params.id, scenesManager.state.scenes]);
 
   return (
     <>
-      <PageMeta
-        title={pageTitle?.toUpperCase() || t("scenes-route.meta.title")}
-        description={t("scenes-route.meta.description")}
-      />
-      <Scene
-        mode={SceneMode.Manage}
-        sceneManager={sceneManager}
-        scenesManager={scenesManager}
-        charactersManager={charactersManager}
-      />
+      <PageMeta title={pageTitle} />
+      <Page>
+        <Container>
+          <Scene
+            sceneManager={sceneManager}
+            isGM={true}
+            canLoad={false}
+            onRoll={() => {}}
+            onPoolClick={(element) => {
+              diceManager.actions.addOrRemovePoolElement(element);
+            }}
+            onIndexCardUpdate={(indexCard, type) => {
+              sceneManager.actions.updateIndexCard(indexCard, type);
+            }}
+          />
+        </Container>
+      </Page>
     </>
   );
 };

@@ -1,85 +1,89 @@
-import { createMuiTheme, ThemeOptions } from "@material-ui/core/styles";
-import { lighten } from "@material-ui/core/styles/colorManipulator";
-
-const systemFonts = [
-  "-apple-system",
-  "system-ui",
-  "BlinkMacSystemFont",
-  "'Segoe UI'",
-  "Roboto",
-  "'Helvetica Neue'",
-  "Ubuntu",
-  "Arial",
-  "sans-serif",
-];
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeOptions,
+} from "@mui/material/styles";
+import { FontFamily } from "./constants/FontFamily";
 
 export const defaultThemeConfiguration: ThemeOptions = {
   typography: {
     // default 300
-    fontWeightLight: 300,
+    fontWeightLight: 400,
     // default 400
     fontWeightRegular: 400,
     // default 500
-    fontWeightMedium: 500,
+    fontWeightMedium: 600,
     // default 700
     fontWeightBold: 700,
-    fontFamily: [
-      "Inter",
-      "HelveticaNeue",
-      "Helvetica",
-      "Arial",
-      "sans-serif",
-    ].join(","),
+    fontFamily: FontFamily.Default,
   },
-  overrides: {
+  components: {
     MuiCssBaseline: {
-      "@global": {
-        "@media print": {
-          "@page": {
-            size: "A2",
-          },
-          "body": {
-            minWidth: "1200px",
-          },
+      styleOverrides: {
+        "@global": {},
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          whiteSpace: "pre-wrap",
         },
       },
     },
     MuiButton: {
-      root: {
-        borderRadius: "7px",
-      },
-      contained: {
-        fontWeight: 700,
-      },
-      outlined: {
-        fontWeight: 700,
+      styleOverrides: {
+        root: {
+          borderRadius: "4px",
+        },
+        contained: {
+          fontWeight: 700,
+        },
+        outlined: {
+          "fontWeight": 700,
+          "&:hover": {
+            // theme.shadows[1],
+            boxShadow:
+              "0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)",
+          },
+        },
       },
     },
     MuiButtonGroup: {
-      root: {
-        borderRadius: "20px",
+      styleOverrides: {
+        root: {
+          borderRadius: "20px",
+        },
       },
     },
   },
 };
-
-export const AppLightTheme = createMuiTheme({
-  ...defaultThemeConfiguration,
-  palette: {
-    primary: { main: "#415f9c" },
-    secondary: { main: "#7a8cb4" },
-  },
-});
-
-export const AppDarkTheme = createMuiTheme({
-  ...defaultThemeConfiguration,
-  palette: {
-    type: "dark",
-    primary: {
-      main: lighten(AppLightTheme.palette.primary.main, 0.5),
+// https://mycolor.space/?hex=%23415F9B&sub=1
+export const AppLightTheme = responsiveFontSizes(
+  createTheme({
+    ...defaultThemeConfiguration,
+    palette: {
+      primary: { main: "#415f9c" },
+      secondary: { main: "#415f9c" },
     },
-    secondary: {
-      main: lighten(AppLightTheme.palette.secondary.main, 0.2),
+  })
+);
+
+export const AppDarkTheme = responsiveFontSizes(
+  createTheme({
+    ...defaultThemeConfiguration,
+    palette: {
+      mode: "dark",
+      background: {
+        default: "#212121",
+        // paper: "#424242",
+        paper: "#333333",
+      },
+      primary: {
+        main: "#2d436e",
+      },
+      secondary: {
+        main: "#90caf9",
+      },
     },
-  },
-});
+  })
+);

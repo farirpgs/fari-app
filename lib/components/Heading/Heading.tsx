@@ -1,35 +1,47 @@
 import { css } from "@emotion/css";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
+import Box, { BoxProps } from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import React from "react";
 import { FateLabel } from "../FateLabel/FateLabel";
 
-export const Heading: React.FC<{
-  subtitle?: string;
-  icon?: React.ElementType;
-}> = (props) => {
-  const Icon = props.icon;
+export const Heading: React.FC<
+  {
+    title?: string | JSX.Element;
+    subtitle?: string | JSX.Element;
+    icon?: React.ElementType;
+    children?: string | JSX.Element;
+  } & BoxProps
+> = (props) => {
+  const { title, subtitle, icon, ...boxProps } = props;
+  const Icon = icon;
   return (
     <Box
-      pt="1rem"
-      pb="2rem"
+      mt="1rem"
+      mb="2rem"
       display="flex"
       flexDirection="column"
       alignItems="center"
+      {...boxProps}
     >
       {Icon && (
-        <Box pb=".5rem">
-          <Icon className={css({ fontSize: "3rem" })} color="primary" />
+        <Box mb=".5rem">
+          <Icon className={css({ fontSize: "3rem" })} color="secondary" />
         </Box>
       )}
-      <FateLabel variant="h4" align="center" color="primary">
-        {props.children}
+      <FateLabel variant="h4" as="h1" align="center" color="secondary">
+        {title}
       </FateLabel>
-      {props.subtitle && (
-        <Typography variant="h6" align="center" color="secondary">
-          {props.subtitle}
+      {subtitle && (
+        <Typography
+          variant="h6"
+          variantMapping={{ h6: "h2" }}
+          align="center"
+          color="inherit"
+        >
+          {subtitle}
         </Typography>
       )}
+      {props.children}
     </Box>
   );
 };

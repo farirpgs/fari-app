@@ -1,13 +1,20 @@
 import { InternationalizationService } from "./internationalization/InternationalizationService";
+import { makeLiveBlocksClient as makeLiveBlocksClient } from "./liveblocks/makeLiveBlocksClient";
 import { makeLogger } from "./logger/makeLogger";
-import { SentryService } from "./sentry/SentryService";
+import { makeSentryService } from "./sentry/SentryService";
 
-const sentryService = new SentryService();
-const logger = makeLogger(sentryService);
-const internationalizationService = new InternationalizationService(logger);
+export function getDefaultInjections() {
+  const sentryService = makeSentryService();
+  const logger = makeLogger(sentryService);
+  const internationalizationService = InternationalizationService(logger);
+  const liveBlocksClient = makeLiveBlocksClient();
 
-export const injections = {
-  internationalizationService,
-  logger,
-  sentryService,
-};
+  return {
+    internationalizationService,
+    logger,
+    sentryService,
+    liveBlocksClient,
+  };
+}
+
+export type IInjections = ReturnType<typeof getDefaultInjections>;

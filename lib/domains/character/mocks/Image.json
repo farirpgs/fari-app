@@ -1,0 +1,72 @@
+{
+  "id": "19940d9c-d73a-447e-9a1a-e05038d1d724",
+  "version": 3,
+  "name": "Cat",
+  "template": "Blank",
+  "lastUpdated": 1618495447,
+  "pages": [
+    {
+      "id": "6144bcce-71d0-4623-8917-3dffa115b4f7",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "4b67f6ab-2b67-4a18-bd14-ac62660bd117",
+          "label": "Section",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "cae70935-51f7-4824-a554-87b8a04a8998",
+              "label": "nice image",
+              "type": "Image",
+              "meta": {},
+              "value": "https://i.imgur.com/AD3MbBi.jpg"
+            },
+            {
+              "id": "b20118b3-8973-4422-90d8-9eb8c4ffc715",
+              "label": "",
+              "type": "Image",
+              "meta": { "helperText": "Help text" },
+              "value": "https://i.imgur.com/AD3MbBi.jpg"
+            }
+          ]
+        },
+        {
+          "id": "55c3d5d6-b326-4728-b7bb-07d8b3edd97b",
+          "label": "Section",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "93d3093e-ab67-46a5-9b2b-ee42ceb6d136",
+              "label": "no image",
+              "type": "Image",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "ff58c715-e42d-4057-8a67-830a3bb884d4",
+              "label": "bad image",
+              "type": "Image",
+              "meta": {},
+              "value": "asdasdasdasd"
+            },
+            {
+              "id": "d9d410fa-8241-4e05-9b41-4de910ead760",
+              "label": "smallER image",
+              "type": "Image",
+              "meta": {},
+              "value": "http://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/cat-face.png"
+            },
+            {
+              "id": "eeb84892-83f2-441e-ade0-88f63e82d5e5",
+              "label": "gif",
+              "type": "Image",
+              "meta": {},
+              "value": "https://media.tenor.com/images/eff22afc2220e9df92a7aa2f53948f9f/tenor.gif"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fariType": "character"
+}

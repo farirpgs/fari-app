@@ -1,0 +1,121 @@
+{
+  "id": "5c2cbb3e-c4e3-4ac1-9ceb-3fe0d0222813",
+  "version": 3,
+  "name": "The Witch is Dead",
+  "template": "TheWitchIsDead",
+  "lastUpdated": 1616354554,
+  "pages": [
+    {
+      "id": "8dbaf099-213a-47a4-a60f-158b6f585d39",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "87131029-d115-48cb-ab20-bc28e416384a",
+          "label": "Character",
+          "position": "Left",
+          "visibleOnCard": true,
+          "blocks": [
+            {
+              "id": "4ac47041-fadd-4ec9-8d4c-726c22529731",
+              "label": "Name",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "9da8f8d7-6b9e-4efd-aa0a-9967360efc60",
+              "label": "Species",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "bde68672-4a25-47e0-8b77-aac69dcc6fd3",
+              "label": "Magic spell you know",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            },
+            {
+              "id": "386b74f7-b5ad-4c34-ad46-ef51c566323a",
+              "label": "Notes, Revenge Plans, Vitriol",
+              "type": "Text",
+              "meta": {},
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "787c1d0d-c6b1-43f8-8666-61eeceb0d7dd",
+          "label": "Credits",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0673fc61-7045-4ced-86e7-5fc0c622a770",
+              "label": "Grant Howitt",
+              "type": "Link",
+              "meta": { "hasDisplayName": true },
+              "value": "https://rowanrookanddecard.com/"
+            }
+          ]
+        },
+        {
+          "id": "014c6964-09b1-4795-a04f-468e1feff17a",
+          "label": "Skills",
+          "visibleOnCard": true,
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "3f1359eb-cd28-4ca7-b17b-a53ace2b3239",
+              "label": "Clever",
+              "type": "Skill",
+              "meta": {
+                "commands": ["1d10"],
+                "helperText": "Interact with humans, understand them"
+              },
+              "value": "0"
+            },
+            {
+              "id": "93bf00ef-d842-4422-ac61-b34052cd769e",
+              "label": "Fierce",
+              "type": "Skill",
+              "meta": {
+                "commands": ["1d10"],
+                "helperText": "Scare, drag, push, carry, bite, scratch"
+              },
+              "value": "0"
+            },
+            {
+              "id": "32bd17ab-aa78-4256-96f6-142677681245",
+              "label": "Sly",
+              "type": "Skill",
+              "meta": {
+                "commands": ["1d10"],
+                "helperText": "Sneak, steal, hide"
+              },
+              "value": "0"
+            },
+            {
+              "id": "876e96d4-e52c-46fd-90f7-9089cb0fbaf2",
+              "label": "Quick",
+              "type": "Skill",
+              "meta": {
+                "commands": ["1d10"],
+                "helperText": "Outpace, climb, evade"
+              },
+              "value": "0"
+            },
+            {
+              "id": "7b5a2744-b0ce-4089-b5b3-e3fba6d72e18",
+              "label": "Current Danger",
+              "type": "PointCounter",
+              "meta": { "isMainPointCounter": false },
+              "value": "0"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fariType": "character"
+}

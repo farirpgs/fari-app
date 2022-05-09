@@ -1,0 +1,173 @@
+{
+  "id": "2a03f888-7adb-488e-8353-8a1dabc028bd",
+  "name": "",
+  "template": "Mission: Accomplished",
+  "lastUpdated": 1649295687,
+  "pages": [
+    {
+      "id": "cc214a77-74d8-454f-be76-55c1decf679d",
+      "label": "AGENT",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "f3f8aaad-0d07-48f5-ad85-0e9223db2c2a",
+                  "blocks": [
+                    {
+                      "id": "dc520c66-74fb-4918-b596-e4960d8c0342",
+                      "label": "Specialty",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "The role you served on the mission."
+                      }
+                    },
+                    {
+                      "id": "39de1ddc-f6df-49c3-ab6e-6e3fe6934834",
+                      "label": "Fun facts",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Something to help us get to know you as an employee."
+                      }
+                    },
+                    {
+                      "id": "ab91bd83-fd68-4923-b87b-4a0dcc5e75f6",
+                      "label": "Team contribution",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "How you helped accomplish the Primary Objective of the Mission, as laid out on the Mission Dossier."
+                      }
+                    },
+                    {
+                      "id": "61a3918a-bb24-40f9-8e2b-0083998b4274",
+                      "label": "Partners",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Identify and record the agents sitting to your left and right."
+                      }
+                    }
+                  ],
+                  "label": "Agent Record",
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "5160918f-d5d7-48c4-8fbe-831f644c2fd1",
+                  "label": "Commendations &amp; Citations",
+                  "blocks": [
+                    {
+                      "id": "b0245173-d785-4bba-84d3-20112a46acdb",
+                      "label": "Commendations",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "width": 0.5,
+                        "helperText": "Rewards for acting within the values of the 7 Habits of Highly Effective Black Ops Agents"
+                      }
+                    },
+                    {
+                      "id": "583d491e-100c-40f4-bf27-796c74f83553",
+                      "label": "Citations",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "width": 0.5,
+                        "helperText": "Punishment for failing to live up to the 7 Habits of Highly Effective Black Ops Agents"
+                      }
+                    },
+                    {
+                      "id": "0bf1645f-efab-4416-b390-976983801d9c",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "After rolling, remove Commendation Dice that match any of your Citation Dice OR Mission Control's Anarchy Dice.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c1eab5ce-dabf-4446-92ac-e748db3e4124",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "07440e99-3f41-4685-8462-b02cc5d710f2",
+                      "label": "Highest Result",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "width": 0.33,
+                        "helperText": "The highest individual result on your Commendation roll after removing Citations"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "bcc3c6a4-d456-427b-a009-7b4c134b3711",
+                      "label": "Matching Dice",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "width": 0.33,
+                        "helperText": "The number of rolled Commendation Dice that match the Highest Result"
+                      },
+                      "value": "3"
+                    },
+                    {
+                      "id": "0e146e23-407b-4640-8e1b-cb67ed7162a5",
+                      "label": "Remaining Commendations",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "width": 0.33,
+                        "helperText": "How many Commendation Dice remain in front of you"
+                      },
+                      "value": "4"
+                    }
+                  ],
+                  "visibleOnCard": false
+                },
+                {
+                  "id": "981719d4-2759-41e6-9385-152f9a61705f",
+                  "blocks": [
+                    {
+                      "id": "24b4eba8-b145-4a9d-8c66-a1156e223bcf",
+                      "label": "Jeff Stormer",
+                      "type": "Link",
+                      "meta": {
+                        "hasDisplayName": true,
+                        "helperText": "Mission: Accomplished! Game Design",
+                        "width": 0.5
+                      },
+                      "value": "http://www.jeffstormer.com/"
+                    },
+                    {
+                      "id": "9ec56156-164f-4d5f-87bb-7f7cc750d204",
+                      "label": "Connor Glosser",
+                      "type": "Link",
+                      "meta": {
+                        "hasDisplayName": true,
+                        "helperText": "Fari content",
+                        "width": 0.5
+                      },
+                      "value": "https://github.com/cglosser/"
+                    }
+                  ],
+                  "label": "CREDITS"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "version": 6,
+  "fariType": "character"
+}

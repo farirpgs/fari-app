@@ -34,6 +34,7 @@ describe("istItem", () => {
       // WHEN
       const result = listItem.formatDate(timestamp);
       // THEN
+
       expect(result).toEqual("Jul 17, 2020 7:00 PM");
     });
   });
@@ -99,7 +100,7 @@ describe("istItem", () => {
       // WHEN
       const result = listItem.getAbreviation(str);
       // THEN
-      expect(result).toEqual("TG");
+      expect(result).toEqual("T");
     });
   });
 });

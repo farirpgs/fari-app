@@ -1,0 +1,402 @@
+{
+  "id": "020c8288-8f0c-4083-a75f-297287284f6b",
+  "version": 3,
+  "name": "",
+  "template": "Maze",
+  "lastUpdated": 1616523233,
+  "pages": [
+    {
+      "id": "7d7d87eb-dae9-4979-ac7a-fb3529135940",
+      "label": "Character",
+      "sections": [
+        {
+          "id": "9858a2b4-0d7c-4b1b-93b4-004c3519cdf0",
+          "label": "ASPECT",
+          "visibleOnCard": true,
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "f08dda5d-e0e9-412c-8cde-b9b3922bb04d",
+              "type": "Text",
+              "meta": {},
+              "label": "",
+              "value": "<br>"
+            }
+          ]
+        },
+        {
+          "id": "aa46607f-ce72-43d6-a0e1-f19a3a3bb80f",
+          "label": "EDGES",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "12a71233-2e72-491b-89ba-c50f6c1ad324",
+              "type": "Text",
+              "meta": {},
+              "label": "",
+              "value": ""
+            },
+            {
+              "id": "fdc2872a-9eea-4d58-8503-c757273cc4ee",
+              "type": "Text",
+              "meta": {},
+              "label": "",
+              "value": ""
+            },
+            {
+              "id": "6c801cb3-db32-4e17-892c-2f9a2de01219",
+              "type": "Text",
+              "meta": {},
+              "label": "",
+              "value": ""
+            },
+            {
+              "id": "6b25019e-1aeb-4b5a-8d34-ed4e556309cf",
+              "label": "",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            }
+          ],
+          "visibleOnCard": true
+        },
+        {
+          "id": "67e62422-32e6-4cf6-b80f-97f6aeec824b",
+          "label": "CONDITIONS",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "46925558-6df2-45d6-80aa-558562d1cee3",
+              "label": "",
+              "type": "Text",
+              "value": "",
+              "meta": { "checked": false }
+            },
+            {
+              "id": "fd9af5b6-0f9e-4e7b-a769-77e4242a88ef",
+              "label": "STRESS",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "checked": false,
+                "helperText": "DISADVANTAGE on BOOK. Loose CLASS bonus. Clear via sleep, a vice, or a bond."
+              }
+            },
+            {
+              "id": "09ba8beb-307b-4b79-877a-368b44f6c911",
+              "label": "TIRED",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "checked": false,
+                "helperText": "DISADVANTAGE on BOOTS. Clear via a good sleep, or by eating and drinking."
+              }
+            },
+            {
+              "id": "9fb75aa2-8cd4-4786-baf7-2a94b8f85d40",
+              "label": "HURT",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "checked": false,
+                "helperText": "DISADVANTAGE on BLADES and BONES. Clear via healing or an extended rest."
+              }
+            }
+          ],
+          "visibleOnCard": true
+        },
+        {
+          "id": "e4c12f44-5856-4b0c-a003-f4b51d9607fa",
+          "label": "Notes",
+          "position": "Left",
+          "blocks": []
+        },
+        {
+          "id": "787c1d0d-c6b1-43f8-8666-61eeceb0d7dd",
+          "label": "Credits",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0673fc61-7045-4ced-86e7-5fc0c622a770",
+              "label": "9th Level Games",
+              "type": "Link",
+              "meta": { "hasDisplayName": true },
+              "value": "https://www..com/product-page/mazes-zine-a-polymorph-adventure"
+            }
+          ]
+        },
+        {
+          "id": "a5f70fea-74fe-49f1-9d02-c1a9c07325f3",
+          "label": "&nbsp;RoLE &amp; ROLLS",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "15bea89b-eedc-48f8-973f-bbd7ca021961",
+              "label": "ROLL",
+              "type": "DicePool",
+              "value": "",
+              "meta": { "commands": [] }
+            },
+            {
+              "id": "c9754a46-1e0a-4bb0-a4de-d3d779afb5ec",
+              "label": "",
+              "type": "Text",
+              "value": "Role",
+              "meta": {}
+            },
+            {
+              "id": "3cbf82b5-6dd3-4499-b452-2e74a8d452f0",
+              "label": "1<br>Class -<br>",
+              "type": "Text",
+              "value": "<br>",
+              "meta": { "helperText": "Succeed if the class could do it" }
+            },
+            {
+              "id": "a8fc265f-0b50-473c-aca2-6f8eca3f5478",
+              "label": "2, 3<br>BOOKS<br>",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Knowledge, Perception, Skills, Searching, Charisma Senses"
+              }
+            },
+            {
+              "id": "1528f02e-5dce-470e-a5d8-16d80053be01",
+              "label": "3, 4, 5<br>BOOTS<br>",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Movement, Dexterity, Reflexes, Agility, Speed"
+              }
+            },
+            {
+              "id": "b2d1c899-8f63-4a0b-9a5c-1e17b830688a",
+              "label": "4, 5, 6, 7<br>BLADES<br>",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Violence, Weapons, Combat, Fighting, Dodging"
+              }
+            },
+            {
+              "id": "b446a6a0-4dbc-430f-aef1-3a7133fef044",
+              "label": "5, 6, 7, 8, 9<br>BONES<br>",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Endurance, Resistance, Strength, Bravery, Health, Heart"
+              }
+            },
+            {
+              "id": "3d10704f-ad95-48b2-beef-97279a1f42a0",
+              "label": "4/6/8/10<br>CROWN - Highest number on the DIE<br>",
+              "type": "Text",
+              "value": "",
+              "meta": {
+                "helperText": "Choose to succeed at a negotiated cost. The BLEAKER the DARKNESS, the higher the cost."
+              }
+            }
+          ],
+          "visibleOnCard": true
+        },
+        {
+          "id": "6415e339-b74b-4d3b-b33e-b8a627ae3d7f",
+          "label": "HEARTS &amp; STARS",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "a33d9e82-b2ef-4ee4-b5c4-f1081b50af2e",
+              "label": "HEARTS",
+              "type": "PointCounter",
+              "meta": { "max": "10", "isMainPointCounter": false },
+              "value": "10"
+            },
+            {
+              "id": "3f2f8152-928f-456b-a4b4-fe28aa0ad742",
+              "label": "STARS",
+              "type": "PointCounter",
+              "meta": { "max": "1", "isMainPointCounter": true },
+              "value": "1"
+            }
+          ],
+          "visibleOnCard": true
+        }
+      ]
+    },
+    {
+      "id": "3eeb3937-ef2d-43eb-a072-29868b419230",
+      "sections": [
+        {
+          "id": "3def0c2a-f5d5-4554-abfb-1cf0fb12969a",
+          "label": "RoLES",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "f88580a2-05c8-40fa-a69a-427ba08af1f3",
+              "label": "Paragon",
+              "type": "Text",
+              "value": "Roll: D4<br>Hearts: 4 max<br>Stars: 4 max<br>",
+              "meta": { "checked": false }
+            },
+            {
+              "id": "ff485813-a331-4cab-883a-6cf158ecf1f5",
+              "label": "Vanguard",
+              "type": "Text",
+              "value": "Roll: D6<br>Hearts: 6 max<br>Stars: 3 max<br>",
+              "meta": { "checked": false }
+            },
+            {
+              "id": "ce6a415d-06a2-430e-94b1-2043328b89c3",
+              "label": "WarRIOR",
+              "type": "Text",
+              "value": "Roll: D8<br>Hearts: 8 max<br>Stars: 2 max<br>",
+              "meta": { "checked": false }
+            },
+            {
+              "id": "06323494-d6fa-4a04-a6bf-1022620bcfb0",
+              "label": "Sentinel",
+              "type": "Text",
+              "value": "Roll: D10<br>Hearts: 10 max<br>Stars: 1 max<br>",
+              "meta": { "checked": false }
+            }
+          ]
+        },
+        {
+          "id": "3f634ddc-e3a1-4830-9c9a-bfc9db757c6e",
+          "label": "Treasure &amp; Darkness",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "be1f3586-ddf0-42e7-b69e-4dacf1ec62c3",
+              "label": "Treasure - SKINT",
+              "type": "Text",
+              "value": "Each spend only affects a single party member.",
+              "meta": { "checked": false }
+            },
+            {
+              "id": "03b886d1-b2d3-45a2-bb06-ebbd2cc1b0c2",
+              "label": "Treasure - Flush",
+              "type": "Text",
+              "value": "Each spend affects the whole party.",
+              "meta": { "checked": false }
+            },
+            {
+              "id": "82a4254f-8e58-4c2f-aa1f-b7d11e226aa8",
+              "label": "Treasure - Encumbered",
+              "type": "Text",
+              "value": "Disadvantaged on Boots and Bones while traveling or moving",
+              "meta": { "checked": false }
+            },
+            {
+              "id": "dbef9778-1c6e-4d77-b0dc-e371d2ad16bb",
+              "label": "DARKNESS - BRIGHT",
+              "type": "Text",
+              "value": "Advantaged at Death's Door. Crown favors the party members.<br>",
+              "meta": { "checked": false }
+            },
+            {
+              "id": "1d5007cd-a396-4eab-ab75-97b19847f4dc",
+              "label": "DARKNESS - Torchlight",
+              "type": "Text",
+              "value": "",
+              "meta": { "checked": false }
+            },
+            {
+              "id": "d37b3432-320a-4490-a78c-9a9c280c4dcd",
+              "label": "DARKNESS - Bleak",
+              "type": "Text",
+              "value": "Disadvantaged at Death's Door. Crown favors the Maze.",
+              "meta": { "checked": false }
+            }
+          ]
+        },
+        {
+          "id": "7ab2ebc0-03ff-4cd2-8724-ccb99b18221f",
+          "label": "DOwn",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "f52ba487-8f05-43d9-b982-b11653c4417e",
+              "label": "When you receive aid",
+              "type": "Text",
+              "value": "Clear Down, then roll:",
+              "meta": {}
+            },
+            {
+              "id": "efc7b7fe-e942-4295-9dbd-97e2be7837b6",
+              "label": "1<br>Knock upon Death's Door!",
+              "type": "Text",
+              "value": "",
+              "meta": {}
+            },
+            {
+              "id": "7432c60d-70cb-43ea-a0f1-56eb503676b9",
+              "label": "2, 3<br>Wounded",
+              "type": "Text",
+              "value": "Set Hearts and Stars to 1. Take Stress, Tired, and Hurt.&nbsp;",
+              "meta": {}
+            },
+            {
+              "id": "633dbec0-cff2-4f25-b1b4-d56ddea96c91",
+              "label": "4, 5, 6, 7<br>Shook",
+              "type": "Text",
+              "value": "Refill Hearts and up to 1 Star. Take Stress or Tired.&nbsp;",
+              "meta": {}
+            },
+            {
+              "id": "c83145b0-1ab5-4609-8f10-bd05c6ff8f36",
+              "label": "8+<br>Push On",
+              "type": "Text",
+              "value": "Refill Hearts and up to 1 Star.",
+              "meta": {}
+            }
+          ]
+        },
+        {
+          "id": "b3efe784-332b-4017-a633-21e5c2d3c758",
+          "label": "Death's Door",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "d14048c6-ae60-43a8-808b-1ae1e4a2df5d",
+              "label": "1<br>Death<br>",
+              "type": "Text",
+              "value": "Death takes you.",
+              "meta": {}
+            },
+            {
+              "id": "9be58ab3-1f74-4a98-b92d-cac45145510a",
+              "label": "2<br>Stand &amp; Deliver<br>",
+              "type": "Text",
+              "value": "Clear Down. Refill 1 Heart and up to 1 Star.",
+              "meta": {}
+            },
+            {
+              "id": "76761cf0-695b-467f-94af-3e819bb7c443",
+              "label": "3, 4<br>Scarred<br>",
+              "type": "Text",
+              "value": "Take SCARRED, proceed as wounded.",
+              "meta": {}
+            },
+            {
+              "id": "8c256198-58cd-4a8f-8111-be80e181a500",
+              "label": "5, 6, 7<br>Marked<br>",
+              "type": "Text",
+              "value": "Proceed as SHOOK.",
+              "meta": {}
+            },
+            {
+              "id": "5e5b3176-5cc8-4a19-8a21-8c94f09afb4a",
+              "label": "8+<br>Marked<br>",
+              "type": "Text",
+              "value": "Proceed as PUSH ON!",
+              "meta": {}
+            }
+          ]
+        }
+      ],
+      "label": "Player Aids"
+    }
+  ],
+  "fariType": "character"
+}

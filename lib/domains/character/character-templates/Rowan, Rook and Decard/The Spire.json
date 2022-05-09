@@ -1,0 +1,461 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1649015052,
+  "name": "Spire Character Sheet Template",
+  "pages": [
+    {
+      "id": "67f93387-3b4c-48b3-a35a-ac8116f12b0e",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "fd3ab81f-ec12-479f-8650-6f405bcc12fd",
+                  "label": "Player Informations",
+                  "blocks": [
+                    {
+                      "id": "14fe07f5-c1f1-4237-bbfc-f2bbc69a7c05",
+                      "label": "Player Name  \nCharacter Name\nClass\nDurance\n",
+                      "type": "Text",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a9bcbf29-5a24-47ee-80d5-cdd89bc0b23e",
+                  "label": "Skills",
+                  "blocks": [
+                    {
+                      "id": "d9b9efba-673a-4622-acef-7239cb1442a2",
+                      "label": "Compel",
+                      "type": "Text",
+                      "meta": { "checked": false, "width": 1 }
+                    },
+                    {
+                      "id": "62608764-6f7e-4e2e-bb9f-43baa38fdac9",
+                      "label": "Deceive",
+                      "type": "Text",
+                      "meta": { "checked": false, "width": 1 }
+                    },
+                    {
+                      "id": "5e27e678-9a8d-4603-9ff6-defffa714fc1",
+                      "label": "Fight",
+                      "type": "Text",
+                      "meta": { "checked": false, "width": 1 }
+                    },
+                    {
+                      "id": "e2cfb284-9985-42ae-9dbe-debaa5b61a0e",
+                      "label": "Fix",
+                      "type": "Text",
+                      "meta": { "checked": false, "width": 1 }
+                    },
+                    {
+                      "id": "87e6d63e-0b0c-4293-b12a-dda0d044f5db",
+                      "label": "Investigate",
+                      "type": "Text",
+                      "meta": { "checked": false, "width": 1 }
+                    },
+                    {
+                      "id": "2a89f30a-4940-4d54-becb-789d10a59ea8",
+                      "label": "Pursue",
+                      "type": "Text",
+                      "meta": { "checked": false, "width": 1 }
+                    },
+                    {
+                      "id": "8c788d24-1604-4ce2-a535-97f38ed89927",
+                      "label": "Resist",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "dc9607fc-c607-4989-afdd-14c6a8349251",
+                      "label": "Sneak",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "23f91a30-a25f-4beb-807e-7e9c00c40646",
+                      "label": "Steal",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    }
+                  ],
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "ff1a2f98-c2d4-4581-ac2f-3261ce2cc1b8",
+                  "label": "Domains",
+                  "blocks": [
+                    {
+                      "id": "c2985788-3e94-46c0-a576-5831cddb5da4",
+                      "label": "Academia",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "561e6ae7-594a-41ce-b6c6-e907c0401c90",
+                      "label": "Crime",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "d89414d7-8af6-4a56-ab7c-539dfc15444e",
+                      "label": "Commerce",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "56a06b79-d506-449e-bdbb-e52acd03ccc7",
+                      "label": "High Society",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "828042be-479f-4412-99ca-5c0cbcc16316",
+                      "label": "Low Society",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "9a6564aa-ad5c-49af-bbe3-a54e80ea3de5",
+                      "label": "Occult",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "fca08486-0989-42d4-a89c-c2a5021a85ad",
+                      "label": "Order",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "3e5c8d15-41f6-4fa1-b7db-2fbd8b872270",
+                      "label": "Religion",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "f3b59e74-1624-4701-978c-23c69bf4bdda",
+                      "label": "Technology",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "d2d8a7f6-9e1e-46ba-be75-54ecb9355f3d",
+                  "label": "Knacks",
+                  "blocks": [
+                    {
+                      "id": "8a909a9f-36e3-4ee5-859f-0eca310a83f9",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "<br><br><br><br><br><br><br>",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "85dc0a99-8394-488f-8cd7-3f66cf259657",
+                  "label": "Equipement",
+                  "blocks": [
+                    {
+                      "id": "d9ad0cd6-0717-4be3-969d-5451789347c3",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "<br><br><br><br><br><br><br>",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "414b3bda-90ec-4823-ae91-c5c54f6b91a0",
+                  "label": "Refresh",
+                  "blocks": [
+                    {
+                      "id": "19f942f8-11f4-4838-a3b0-382855eca51a",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "<br><br><br><br><br><br><br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "8e71698c-9139-4718-9215-64bde693911d",
+                  "label": "Free Slots &amp; Current Stress\n",
+                  "blocks": [
+                    {
+                      "id": "9d04ba9f-1df4-4ff7-baab-7fb865ed336b",
+                      "label": "Blood",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false, "helperText": "" },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "54273dd5-52b1-4eb4-9ed6-f09b82fba9ac",
+                      "label": "Blood",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9fa655f4-f653-4fe8-b1f0-6ff83b24e0be",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "f13306eb-3be1-47f9-bbb3-ee444f2b6612",
+                      "label": "Mind",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "b6c4e39f-018c-4442-b503-702065aa1328",
+                      "label": "Mind",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d6c52dd5-b8c0-4ec3-b9fc-0b372c903a44",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "7be62f4d-77be-4877-af05-d7df31e99df9",
+                      "label": "Silver",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "64223106-6d37-4f27-ae21-2e9fdb20fc5d",
+                      "label": "Silver",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c8ed85f9-53e3-4d7c-a13a-ffded2018b58",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "c7e4c9e1-dcde-40d1-a974-f47c166afda1",
+                      "label": "Shadow",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "13c253bc-4246-48fe-85a6-0a508283fa33",
+                      "label": "Shadow",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3f027bd8-50f0-4484-9979-261efea9bc81",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "c5811ccd-109e-41f7-9d5b-fbdeb4d72dda",
+                      "label": "Reputation",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "dd8a9985-e2e6-4234-8a34-0acb7a173962",
+                      "label": "Reputation",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3e63e27b-455a-455f-b2fd-5ab081612524",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "2a78930c-7f73-43e6-b90b-8ab28dd90eb0",
+                      "label": "Armor",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "41b34c16-ed04-43d9-9a33-10edd9aa0f28",
+                      "label": "Armour",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1a7d2c34-be79-4fcf-8949-103234139735",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "c393c7d2-b58f-4400-ade7-fd2dfd03b489",
+                  "label": "Fallout",
+                  "blocks": [
+                    {
+                      "id": "77f73b94-e38f-4f28-93d1-40c70063dab7",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "984ffc7c-2b27-4995-8cc8-0d77a9573c24",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "7e57b54d-4f95-4300-b448-b0ef03ed5537",
+                  "label": "Abilities ",
+                  "blocks": [
+                    {
+                      "id": "d47eebe6-a392-44d3-ac29-5229dd8c5a6d",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Abilities"
+    },
+    {
+      "id": "d7b8b104-bced-433a-8113-6700bccc6d58",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5553cec2-6619-4ae1-b5ec-4efe4139d4e1",
+                  "label": "Bonds",
+                  "blocks": [
+                    {
+                      "id": "23686d44-16c4-495f-945b-1acf9d8bbb4e",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Bonds"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "playedDuringTurn": false
+}
