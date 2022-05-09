@@ -1,0 +1,494 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1649535739,
+  "name": "iHunt pt-BR Template",
+  "pages": [
+    {
+      "id": "4e94040f-8640-42a2-a3d9-a9d2e0f5a3fc",
+      "label": "Personagem",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "8441a19f-4e73-43f4-93ea-f545839865f4",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "33b6ff9e-bf95-43a9-b99c-a50423a5fb9b",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "7160db19-5bbf-4965-bc8e-32057af299c5",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "84c857d1-7554-4031-a772-88e893f796f8",
+                      "label": "Nome",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "85230e24-3842-4b25-bd2b-d167fb1bb1db",
+                      "label": "Tara",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "891ba9ee-65d6-49f2-9c35-f5ce8d420677",
+                      "label": "Pontos de Destino / Retorno",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "5",
+                        "isMainPointCounter": false,
+                        "width": 1
+                      },
+                      "value": "5"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "64d2d1c2-a458-4785-bacc-899f1f1911ae",
+                  "label": "ASPECTOS",
+                  "blocks": [
+                    {
+                      "id": "07ca4a12-b268-4ae5-8252-e0decb0b7852",
+                      "label": "Alto-conceito",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "35c1b4cb-39eb-46d5-a19f-9db381fd6b22",
+                      "label": "Drama",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "974bc33b-d4e1-44e5-b9cb-aa8f428bc45e",
+                      "label": "Emprego",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "f9f2d2f1-8c50-4d34-ba4f-cb66a5ed4e8d",
+                      "label": "Quadro dos sonhos",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "d6f127b0-19dc-48a5-b392-e6dcef6a733b",
+                      "label": "Aspecto livre",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "f286bf03-ced1-469d-b397-0ee1d8558e5a",
+                      "label": "Aspecto livre",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a18cbdc1-f89d-4409-8e16-76905f7a0df0",
+                  "label": "PERÍCIAS",
+                  "blocks": [
+                    {
+                      "id": "4790f8ca-2065-4e66-b623-05c74ea3bd64",
+                      "label": "Acadêmico(a)",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "f35a0d8c-954b-48f0-ab62-6a6adcb98fb0",
+                      "label": "Assassino(a)",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "03572dd1-bc26-445c-bc27-cb90b437915f",
+                      "label": "Atleta",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "c0e9c5d4-352f-4796-97bc-5bd8b3179aea",
+                      "label": "Criador(a)",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "32a128e3-a812-45a7-9ba4-8828ca609863",
+                      "label": "Espiã(o)",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "ecaf37d4-d91b-449a-824b-275d7176e435",
+                      "label": "Guerrilheiro(a)",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "520739cd-4c4e-44bb-8fc4-eedb6ba49aec",
+                      "label": "Hacker",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "471a9e06-f0df-4492-a1fd-2e58f17fa30e",
+                      "label": "Influencer",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "e15799bc-80a5-4b81-a7c8-f4e71e480025",
+                      "label": "Investigador(a)",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "19264293-aa94-4152-83cd-e059c0d1ed22",
+                      "label": "Lutador(a)",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "766191c0-33d8-42ad-8002-9ce03ffef573",
+                      "label": "Médico(a)",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "4842185e-6f7d-4eaf-b587-a5f53fb41ed2",
+                      "label": "Ocultista",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "21ac3d58-5879-4cad-997e-433eefc2bd9c",
+                      "label": "Organizador(a)",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "fe3e50a5-5962-43fb-837c-9a583a2a5111",
+                      "label": "Profissional",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "d9eab0c7-6186-4560-80af-ee4c5847f97a",
+                      "label": "Serviço Social",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "a7929403-88e8-4945-b73c-599d31720045",
+                      "label": "Sobrevivente",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "45e7939a-ef02-4fd3-b3c0-c4e2cc51e71e",
+                      "label": "Socialite",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    },
+                    {
+                      "id": "7874bceb-5e35-4148-a1f4-03bb4e819e62",
+                      "label": "Trambiqueiro(a)",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["4dF"], "width": 0.33 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "57c1d03e-2a4d-4e43-b454-2f8a82365b3c",
+                  "label": "FAÇANHAS",
+                  "blocks": [
+                    {
+                      "id": "4b5266ba-5c31-44a0-a4dc-8b70d3c9c3eb",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "fd101011-e9e6-40eb-8530-b1aa0adbe05d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "53c55884-e187-49ca-a613-f9c2944fabc1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "576fad1b-faba-4fbc-82df-6255b0eeacfd",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cd8ba46a-c8d2-418c-b742-f2425a1aa0e1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c634f760-2354-405c-8acc-ac14e0a264d9",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "49600733-c4d4-4e56-99e7-c0c9c0fbcf16",
+                  "label": "ESTRESSES E CONSEQUÊNCIAS",
+                  "blocks": [
+                    {
+                      "id": "c0469723-16b0-4292-a330-3473b1150f7d",
+                      "label": "Estresse Físico",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "29f1e1ca-9bef-416a-8308-82a6be7a0949",
+                      "label": "Estresse Mental",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "86f111d2-b73b-4d4f-9042-5c3974afd51b",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "3dee077d-066f-49a1-bacc-573b14f7c2b9",
+                      "label": "Consequência Leve (2)",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9c74947a-1f2b-402c-a7b3-886e22547390",
+                      "label": "Consequência Moderada (4)",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b733d41a-b95c-47d9-a284-2a816c122627",
+                      "label": "Consequência Grave (6)",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "134c5d08-aa32-4524-b19a-96c25805a64b",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "ca23a73a-05fe-4be1-b43b-4bbc87d67808",
+                  "label": "SELFIES E AVANÇOS",
+                  "blocks": [
+                    {
+                      "id": "b593c8a4-b72a-40c0-8437-257ce3d9a66a",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    },
+                    {
+                      "id": "e038c2ff-9c0e-49e6-9469-2d1c3d8eddbc",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f64fb12e-5df0-4dde-a59a-8b5c96098ab3",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    },
+                    {
+                      "id": "078cc13a-cfee-4ff1-b700-9df261e01e01",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4778428e-d458-4c30-8b15-db3bc8926b2d",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    },
+                    {
+                      "id": "d35f441e-de69-4ee0-b2ad-b355632a2ff1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "9c97e7cb-a596-4cdb-96d2-14d74320763b",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "58b7b779-12b1-4507-8af3-13a4f0226dc8",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    },
+                    {
+                      "id": "9c98bba5-e2e9-43eb-92e5-a7158f1e1c2e",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8a94ab26-2be6-424c-8d3c-82f46cc7aed5",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    },
+                    {
+                      "id": "8ca4cce8-c7a9-4451-8a1a-b1db4500c40a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "13ff1480-cfd7-48da-b165-087083b83e26",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    },
+                    {
+                      "id": "f47199ac-1039-4972-8d5a-15e0273ae00b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Selfies e avanços"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "group": "Templates",
+  "wide": true
+}

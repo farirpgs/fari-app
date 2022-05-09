@@ -1,10 +1,10 @@
 {
   "fariType": "character",
-  "lastUpdated": 1645644799,
+  "lastUpdated": 1651187501,
   "name": " Template",
   "pages": [
     {
-      "id": "3c9177c5-8b6c-4dc9-9b69-e1d16fd690c2",
+      "id": "5f33359e-47b4-44fe-8b3c-eef1c50fdb90",
       "label": "Frame Information",
       "rows": [
         {
@@ -12,11 +12,11 @@
             {
               "sections": [
                 {
-                  "id": "755fc93f-e3e0-446c-98a2-1adc63d26481",
+                  "id": "e248919b-f3bc-4308-a3f6-37938a2bbba0",
                   "label": "Frame",
                   "blocks": [
                     {
-                      "id": "3a48a621-7a33-432a-83c3-156f7dfad26d",
+                      "id": "df8b7120-36b1-4c96-a4eb-fe85ec9b6ecb",
                       "label": "Frame Name",
                       "type": "Text",
                       "value": "Frame description goes here!",
@@ -31,25 +31,25 @@
             {
               "sections": [
                 {
-                  "id": "fb15f44b-2d02-49f5-911a-f4bcb051c0d8",
+                  "id": "3596cfb7-ed0e-48c9-9fbd-725f42097b6e",
                   "label": "Attributes",
                   "blocks": [
                     {
-                      "id": "53507c59-171b-41e9-8afc-ed5833df5fee",
+                      "id": "1e1baab5-4796-4bff-8646-1bcf258741f4",
                       "label": "Drive",
                       "type": "Numeric",
                       "value": "0",
                       "meta": { "width": 1 }
                     },
                     {
-                      "id": "b69558cb-18d1-403a-b080-2c2c49363ca3",
+                      "id": "3d4b1a04-a0fe-4f10-a62f-819064db6d31",
                       "label": "Speed",
                       "type": "Numeric",
                       "value": "0",
                       "meta": { "width": 1 }
                     },
                     {
-                      "id": "63014e84-78ec-456d-b9ec-693ad91d9e6d",
+                      "id": "285ef97c-8e1e-42fd-b251-1d6dfc84844d",
                       "label": "Control",
                       "type": "Numeric",
                       "value": "0",
@@ -62,11 +62,11 @@
             {
               "sections": [
                 {
-                  "id": "216647dd-83e0-4448-86e7-733cb067a050",
+                  "id": "a6034f6e-fdf0-4ecd-b517-58d7ac59e2b2",
                   "label": "Traits",
                   "blocks": [
                     {
-                      "id": "2431d7b2-6130-4f2f-8ca0-4bfcb3025dd4",
+                      "id": "eb9f0557-5a0d-4d56-80d9-4e31976bab8e",
                       "label": "Build Trait",
                       "type": "Text",
                       "value": "Put your build trait here!",
@@ -75,7 +75,7 @@
                       }
                     },
                     {
-                      "id": "d212af14-8e6b-4411-9344-eac60ab5654e",
+                      "id": "09451f4a-ac4d-4f8f-9c90-d227031bba67",
                       "label": "Integral Trait",
                       "type": "Text",
                       "value": "Put your integral trait here!",
@@ -94,11 +94,11 @@
             {
               "sections": [
                 {
-                  "id": "f2c50897-c311-4afc-9771-0fda84f6eb18",
+                  "id": "cb136314-d1bf-41b0-83bc-6145d3edb3a8",
                   "label": "Resources",
                   "blocks": [
                     {
-                      "id": "6af94b21-db9d-4aea-b674-18e6690b6457",
+                      "id": "fe493578-e7d8-4266-a8da-5b0e7c1c5c28",
                       "label": "Vigor",
                       "type": "SlotTracker",
                       "meta": {
@@ -117,13 +117,13 @@
                       ]
                     },
                     {
-                      "id": "3ba7904f-1571-4c75-b30f-4e5df1d074de",
+                      "id": "cb179ef7-5024-4186-964e-548dcdb6bfd6",
                       "label": "Tension",
                       "type": "SlotTracker",
                       "meta": {
                         "asClock": false,
                         "width": 1,
-                        "helperText": "Frame Base + Speed. <br><br>Start every combat at max - 3 Tension."
+                        "helperText": "Frame Base + Speed. <br><br>Start every combat at max Tension."
                       },
                       "value": [
                         { "label": "", "checked": false },
@@ -136,7 +136,7 @@
                       ]
                     },
                     {
-                      "id": "c9d32b7f-41cc-4367-a7bd-7557e6088f38",
+                      "id": "33d26bde-a6ef-4dd6-90fe-e088854825e8",
                       "label": "Ammo",
                       "type": "SlotTracker",
                       "meta": {
@@ -161,11 +161,11 @@
             {
               "sections": [
                 {
-                  "id": "9458b313-32eb-455a-a22b-fcface814d4e",
+                  "id": "4aa6dc52-ca62-4533-87e2-dcc1aed7cc61",
                   "label": "Frame Damage",
                   "blocks": [
                     {
-                      "id": "668f5991-3f4a-4bdf-9e6a-cb7222ffb212",
+                      "id": "152cf1a7-3036-4e6a-86aa-ebeacdd3deaa",
                       "label": "Superstructure",
                       "type": "Numeric",
                       "value": "1",
@@ -175,7 +175,7 @@
                       }
                     },
                     {
-                      "id": "3ae6cc00-3941-4e76-9ddb-89531ec7c9bd",
+                      "id": "470d6568-46f7-4b79-a3e2-6042b48a69de",
                       "label": "Leg",
                       "type": "Numeric",
                       "value": "2",
@@ -185,7 +185,7 @@
                       }
                     },
                     {
-                      "id": "7101939c-9d7f-4db6-be49-68533f8cb18a",
+                      "id": "90338a61-f6b9-4767-83d4-cae2c48f06a0",
                       "label": "Sensor",
                       "type": "Numeric",
                       "value": "3",
@@ -195,7 +195,7 @@
                       }
                     },
                     {
-                      "id": "0160ac29-d8a7-4a7e-92b8-93e85a8ca3f6",
+                      "id": "affc4b08-4b6f-43d3-aacd-4bbdb21b6818",
                       "label": "Arm",
                       "type": "Numeric",
                       "value": "4",
@@ -205,7 +205,7 @@
                       }
                     },
                     {
-                      "id": "9763b70e-368a-4287-9d0a-c05739ebbb1f",
+                      "id": "9dbfaa7d-4f13-4741-a95d-c8dec25d403e",
                       "label": "Shoulder",
                       "type": "Numeric",
                       "value": "5",
@@ -215,7 +215,7 @@
                       }
                     },
                     {
-                      "id": "f1eb1772-3c22-4a26-ac6e-ba3fa154ca88",
+                      "id": "50823fc3-88f3-4bde-b8db-fe7bf797ca4c",
                       "label": "Core",
                       "type": "Numeric",
                       "value": "6",
@@ -235,11 +235,11 @@
             {
               "sections": [
                 {
-                  "id": "a7dce3a7-25aa-447d-8733-e29606adffab",
+                  "id": "bfd609a8-79ef-4531-a445-9bee7b09773a",
                   "label": "Armaments<br>",
                   "blocks": [
                     {
-                      "id": "cefb3e14-7e5d-449a-8134-b9bafe5081ab",
+                      "id": "3ba7b44e-2e39-4b2b-8bd5-46f9be967334",
                       "label": "Armament #1",
                       "type": "Skill",
                       "value": "0",
@@ -251,7 +251,7 @@
                       }
                     },
                     {
-                      "id": "f1c324b3-f497-405d-9d0f-4c39564c2cfb",
+                      "id": "e4751b08-2361-424a-951c-572340ae494e",
                       "label": "Backup #1 \n(Armament #1 Backup )",
                       "type": "Skill",
                       "value": "0",
@@ -263,7 +263,7 @@
                       }
                     },
                     {
-                      "id": "9cf0a929-aff4-4a86-974c-c83cc76667b4",
+                      "id": "d1f8c4f0-04a9-4ae7-9607-e35ea7874089",
                       "label": "Armament #2",
                       "type": "Skill",
                       "value": "0",
@@ -275,7 +275,7 @@
                       }
                     },
                     {
-                      "id": "1aeb955a-2c9c-447c-bb66-b13ae05347f9",
+                      "id": "ea9c340c-f3bc-4eb5-a564-c8480b68a5a8",
                       "label": "Backup #2<br>(Armament #2 Backup )",
                       "type": "Skill",
                       "value": "0",
@@ -293,11 +293,11 @@
             {
               "sections": [
                 {
-                  "id": "12d4088d-8fd6-4c1c-aa27-45230cb2cf1d",
+                  "id": "707a827b-94b1-4cde-8395-047155102058",
                   "label": "Integral System",
                   "blocks": [
                     {
-                      "id": "9443edb3-1f14-4ae6-9e38-33d5e893ae45",
+                      "id": "36854146-c6f8-4b16-bc40-b1e9b67fe4a8",
                       "label": "Integral System Name",
                       "type": "Text",
                       "value": "Integral System Description",
@@ -309,11 +309,11 @@
                   ]
                 },
                 {
-                  "id": "6d5d26ea-e36a-4783-b952-2213b464de8b",
+                  "id": "a0af9731-481a-486f-a641-56456ded91a2",
                   "label": "Modular Systems",
                   "blocks": [
                     {
-                      "id": "46354ac1-5213-40b8-bbe2-5b1a4c3e1103",
+                      "id": "638472e8-943a-4063-ad0d-2326ab26bdcf",
                       "label": "Modular System #1 Name",
                       "type": "Text",
                       "value": "Modular System #1 Description",
@@ -323,7 +323,7 @@
                       }
                     },
                     {
-                      "id": "a9c7cc80-3c0b-4864-a833-df6ede09b66e",
+                      "id": "845567e7-85e0-454e-a540-48970306a881",
                       "label": "Modular System #2 Name",
                       "type": "Text",
                       "value": "Modular System #2 Description",
@@ -341,32 +341,32 @@
       ]
     },
     {
-      "id": "c7242513-51da-48f3-a7dd-83f0aeec1c1d",
+      "id": "0347a2d7-9f7b-41bc-91df-e7e1ea9d7d25",
       "rows": [
         {
           "columns": [
             {
               "sections": [
                 {
-                  "id": "a3fd5558-22c4-4203-b685-ed2050052fcb",
+                  "id": "5140083a-4e80-4e75-80b7-192a5cdd9fc3",
                   "label": "Ace Information",
                   "blocks": [
                     {
-                      "id": "abc78656-ba04-4be2-a6d6-1823f8501a1b",
+                      "id": "3eeacb9e-2488-4700-a813-ff21db516142",
                       "label": "Name",
                       "type": "Text",
                       "value": "Put your Ace's name here!",
                       "meta": { "helperText": "" }
                     },
                     {
-                      "id": "2a9cb1ff-7a01-43cf-a7de-7ad961cbbeee",
+                      "id": "224b9562-4b97-4b37-8a74-0508ed5988d7",
                       "label": "Callsign",
                       "type": "Text",
                       "value": "Put your Ace's callsign here!",
                       "meta": {}
                     },
                     {
-                      "id": "0779c120-50c0-44d9-a8ec-75762573964f",
+                      "id": "0d2eca6b-668f-4914-88bc-3b09e6978b05",
                       "label": "Frame",
                       "type": "Text",
                       "value": "Put your Frame's name and description here!",
@@ -379,14 +379,21 @@
             {
               "sections": [
                 {
-                  "id": "9adad734-605b-4536-9ea4-51dfe40494d7",
+                  "id": "10b6284f-ed43-429f-b4e6-023b5687a133",
                   "label": "Other Information",
                   "blocks": [
                     {
-                      "id": "0a0b042d-e231-4811-b560-85ef753c1bae",
+                      "id": "5dbd4be3-4026-45bf-a896-2104e656c3f6",
                       "label": "Notes",
                       "type": "Text",
                       "value": "Put anything else about your Ace/Frame here!",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f835cf04-7919-4802-a305-ae70b9ac7bd4",
+                      "label": "Current Materials",
+                      "type": "Numeric",
+                      "value": "0",
                       "meta": {}
                     }
                   ]
@@ -399,60 +406,60 @@
       "label": "Ace Information"
     },
     {
-      "id": "303a0444-69d8-470c-b6c2-94cef702c1eb",
+      "id": "8a99b3ea-40cf-48e4-b7e4-c18328055677",
       "rows": [
         {
           "columns": [
             {
               "sections": [
                 {
-                  "id": "2dccccea-04e7-492c-b78c-02610a1ebce1",
+                  "id": "b3320339-3ae5-4228-9de5-af7d9ce2f19b",
                   "label": "Reference",
                   "blocks": [
                     {
-                      "id": "bf53522a-c927-4bf4-9e06-b90b454d3ec9",
+                      "id": "92585070-7519-4317-bf78-989899eb1426",
                       "label": "Rolling",
                       "type": "Text",
                       "value": "Roll the appropriate number of d6's and take the highest. (If you would roll 0 or less, roll two and take the lowest.)\n\n• 1-2: Failure with a consequence (No, and...)\n<br>• 3-4: Success with a consequence (Yes, but...)\n<br>• 5-6: Success with no consequences (Yes)<br>",
                       "meta": {}
                     },
                     {
-                      "id": "58b43485-7998-4f3f-9a3a-6bf02349e266",
+                      "id": "04c2a3a8-1626-4b6c-9d25-f5742a555027",
                       "label": "",
                       "type": "Separator",
                       "meta": { "hasLabel": false },
                       "value": ""
                     },
                     {
-                      "id": "80af3504-d27c-48a8-9aee-c14a1cd16f7d",
+                      "id": "c4dc12eb-73f1-48a9-9672-ad3371c677c0",
                       "label": "Attributes",
                       "type": "Text",
                       "value": "Roll your Attributes to determine your approach to a task.\n<br>• Roll Drive for direct or forceful action.\n<br>• Roll Speed for reflexive or hasty action.\n<br>• Roll Control for thoughtful and skillful action.",
                       "meta": {}
                     },
                     {
-                      "id": "57d7c80d-fe37-412c-9cbf-5a8e2c6faae5",
+                      "id": "6e4c1f82-d7bd-4861-af95-0d88e025cc26",
                       "label": "",
                       "type": "Separator",
                       "meta": { "hasLabel": false },
                       "value": ""
                     },
                     {
-                      "id": "5cf4887b-4697-4267-8e4f-dc92e09d7c23",
+                      "id": "1784d841-9386-424d-b0b7-81ff580e6c60",
                       "label": "Actions",
                       "type": "Text",
                       "value": "You get two actions per turn before spending Tension. You can spend those Actions to do the following:\n<br>• Move to a Near location (no roll required)\n<br>• Sprint to a Far location if there are no enemies in Close, Near, or Far range (no roll required).\n<br>• Attack using an Armament (requires making a roll with the number of dice listed on the Armament). You may also drop your Armament in favor of a Backup Armament before or after attacking.\n<br>• Interact in a significant way with something in the environment (requires an Attribute roll if necessary depending on the interaction).",
                       "meta": {}
                     },
                     {
-                      "id": "537e3605-6f70-4e3b-b15d-62f8b80e057a",
+                      "id": "d50de6a1-e558-4448-b8c6-7d494f0110c5",
                       "label": "",
                       "type": "Separator",
                       "meta": { "hasLabel": false },
                       "value": ""
                     },
                     {
-                      "id": "193b8fd9-e749-4e7d-a2cd-6abbac55757c",
+                      "id": "78c2fad9-c55a-4355-a642-dbbc14c7ce79",
                       "label": "Resources",
                       "type": "Text",
                       "value": "You may spend 1 Tension on your turn to reroll an Attack or gain another Action. Tension can be restored at the end of the GM Turn.\n<br>You may spend 1 Ammo on your turn to use an Integral or Modular System. Ammo is mostly restored at the end of a mission.",
@@ -465,32 +472,32 @@
             {
               "sections": [
                 {
-                  "id": "62a02f36-0b7a-4278-b379-10119c34cfe6",
+                  "id": "5c8161ba-80f9-4f09-99ee-85bfaa23a7a0",
                   "label": "Terms/Tags",
                   "blocks": [
                     {
-                      "id": "2d42c9a8-2b3b-4b77-b444-164b4ea48517",
+                      "id": "03b4c707-4019-4bc2-a319-4f089be3f2a4",
                       "label": "Close",
                       "type": "Text",
                       "value": "A few steps away at most. In the same hex.",
                       "meta": {}
                     },
                     {
-                      "id": "be2ca340-bfb8-4e5e-9482-865b0886c81b",
+                      "id": "4c6a6e2d-7940-4afb-b589-dd5a2f40ec4c",
                       "label": "Near",
                       "type": "Text",
                       "value": "A short distance away. One hex away.",
                       "meta": {}
                     },
                     {
-                      "id": "315875ca-9070-4713-a3c0-2f3cf2742b54",
+                      "id": "612aebd7-0121-4b6c-82e6-0938d7c73f3a",
                       "label": "Far",
                       "type": "Text",
                       "value": "Beyond Near but within range. Two hexes away.",
                       "meta": {}
                     },
                     {
-                      "id": "90fa5ffc-9ebd-46f5-b285-be877ce1bd1e",
+                      "id": "31347f78-7ff4-4bd6-8713-5efe59ae8199",
                       "label": "Tags",
                       "type": "Text",
                       "value": "Put the other tags for your various Armaments/Systems here!",
@@ -501,11 +508,11 @@
                   ]
                 },
                 {
-                  "id": "d7b21da1-5cd1-403e-8b23-9750ee3ed068",
+                  "id": "e242a918-115d-4e06-a4bc-8905154694e7",
                   "label": "Notes",
                   "blocks": [
                     {
-                      "id": "119bec7c-1368-4fde-a47a-fba3b32f0606",
+                      "id": "5a74a454-0f43-48b9-a1d7-255e32cee404",
                       "label": "Other Notes",
                       "type": "Text",
                       "value": "Put other notes here!",

@@ -1,0 +1,320 @@
+{
+  "id": "8f5b8ae6-3d21-4478-8ded-aaafdb047e79",
+  "version": 1,
+  "name": "",
+  "template": "FateCondensed",
+  "lastUpdated": 1652097411,
+  "pages": [
+    {
+      "id": "bcbc25b0-c8af-420d-8e3f-be4972219164",
+      "label": "Personaggio",
+      "sections": [
+        {
+          "id": "5c4187a3-2866-4a41-a57e-a8d92c039efb",
+          "label": "Aspetti",
+          "visibleOnCard": true,
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "13642167-93e0-4c8c-b898-21dc90611442",
+              "type": "Text",
+              "meta": {},
+              "label": "Concetto",
+              "value": ""
+            },
+            {
+              "id": "13f061ec-2fa3-4e37-b3d3-4f3c20c81a78",
+              "type": "Text",
+              "meta": {},
+              "label": "Problema",
+              "value": ""
+            },
+            {
+              "id": "c07241fa-635c-4110-a41d-01e1b2583b41",
+              "type": "Text",
+              "meta": {},
+              "label": "Relazione",
+              "value": ""
+            },
+            {
+              "id": "2b1e8379-beec-4ead-94ea-89b2cca9d79c",
+              "type": "Text",
+              "meta": {},
+              "label": "Altro Aspetto",
+              "value": ""
+            },
+            {
+              "id": "5caf1203-a25a-4c0f-84ea-f89cba948cc3",
+              "type": "Text",
+              "meta": {},
+              "label": "Altro Aspetto",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "8f2b0204-2490-493b-8118-b15231eaf4ad",
+          "label": "Talenti & Extra",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "d704a11c-47c8-43e8-aba9-6e5781f5b742",
+              "type": "Text",
+              "meta": {},
+              "label": "Talento #1",
+              "value": ""
+            },
+            {
+              "id": "7c623914-125d-4854-9a39-a135721d0d1e",
+              "type": "Text",
+              "meta": {},
+              "label": "Talento #2",
+              "value": ""
+            },
+            {
+              "id": "03abbcb8-2dea-4947-a584-6e25383496cc",
+              "type": "Text",
+              "meta": {},
+              "label": "Talento #3",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "d10c5dd4-376e-4bd7-883b-643cae2dd9d6",
+          "label": "Altro",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "6acd4a9c-8931-4c80-b639-9447f931552b",
+              "type": "Text",
+              "meta": {},
+              "label": "Note",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "60ef653d-dc12-4d5b-adb8-241e282528f7",
+          "label": "Punti Fato",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "d1fb769f-1e26-4b06-9beb-396769bbdd4d",
+              "meta": { "isMainPointCounter": true, "max": "3" },
+              "type": "PointCounter",
+              "label": "Punti Fato",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "id": "02f549d9-5579-43fe-ab7b-f0ac05014eaa",
+          "label": "Credits",
+          "position": "Left",
+          "blocks": [
+            {
+              "id": "0edb8759-9701-4d06-b702-7046707af9e5",
+              "label": "Evil Hat Productions",
+              "type": "Link",
+              "meta": { "hasDisplayName": true },
+              "value": "https://www.evilhat.com/home/"
+            }
+          ]
+        },
+        {
+          "id": "ca486073-5324-4464-8784-ea9dd1f28a43",
+          "label": "Stress",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "0d512184-03d0-4177-b7b9-ac74b719f63a",
+              "label": "Fisico",
+              "meta": {},
+              "type": "SlotTracker",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "1" }
+              ]
+            },
+            {
+              "id": "6f544831-d0aa-4a6c-9dba-7ef6b7ff3883",
+              "label": "Mentale",
+              "meta": {},
+              "type": "SlotTracker",
+              "value": [
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "1" },
+                { "checked": false, "label": "1" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "5a8d49d3-7bb9-40f1-935f-ec57a5aa95ed",
+          "label": "Conseguenze",
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "bc62372b-eb46-44f9-835d-cf58c22fdec9",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "Lieve",
+              "value": ""
+            },
+            {
+              "id": "adf71254-fd32-4105-b445-6a34362de21f",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "Moderata",
+              "value": ""
+            },
+            {
+              "id": "16ff0695-da1d-4c81-9c8a-0af56ff345bf",
+              "type": "Text",
+              "meta": { "checked": false },
+              "label": "Grave",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "id": "3e62a399-1713-43ca-a28b-8035fc405966",
+          "label": "Abilità",
+          "visibleOnCard": true,
+          "position": "Right",
+          "blocks": [
+            {
+              "id": "a3997dcc-358a-47c4-98ed-03c1f7e3cf61",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Artigianato",
+              "value": ""
+            },
+            {
+              "id": "84654b0e-65d2-43d8-bfce-7538cc0c2e98",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Atletica",
+              "value": ""
+            },
+            {
+              "id": "4765c741-e4d3-40db-9734-f9a0df450aa7",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Combattere",
+              "value": ""
+            },
+            {
+              "id": "8fd8c7ff-d2ae-4c0e-baca-a07c22180dab",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Conoscenze",
+              "value": ""
+            },
+            {
+              "id": "dc9a2aaa-a9ba-4c50-b4a5-59cc56152711",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Contatti",
+              "value": ""
+            },
+            {
+              "id": "142e65be-6d7a-4880-841d-0691db222199",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Discrezione",
+              "value": ""
+            },
+            {
+              "id": "a18b067d-8487-47d1-9783-0f1c5ae0a756",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Empatia",
+              "value": ""
+            },
+            {
+              "id": "d61067c6-60e5-4a2d-81ed-149bbac86860",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Fisico",
+              "value": ""
+            },
+            {
+              "id": "b3993a91-b60a-4a82-a804-96326fd7965b",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Furtività",
+              "value": ""
+            },
+            {
+              "id": "db337ad2-5ec8-4661-b9a1-b090ecbe8e7c",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Guidare",
+              "value": ""
+            },
+            {
+              "id": "fe3210b2-67f1-4254-819a-bcbfd1a40e22",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Influenzare",
+              "value": ""
+            },
+            {
+              "id": "131ad6f3-e963-44f6-bd54-f7d76dc3d91d",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Investigare",
+              "value": ""
+            },
+            {
+              "id": "b7696cb3-da45-4729-ab34-9a18e326f466",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Percezione",
+              "value": ""
+            },
+            {
+              "id": "984b532d-0545-4284-9617-6b94e076a404",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Provocare",
+              "value": ""
+            },
+            {
+              "id": "eabd0d26-501a-4add-a34c-f0799a7a17fa",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Raggirare",
+              "value": ""
+            },
+            {
+              "id": "d47087b2-0788-41a5-8aa8-386305c73000",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Risorse",
+              "value": ""
+            },
+            {
+              "id": "ea6cdd8b-7997-47fa-99bc-e2dc27c49178",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Sparare",
+              "value": ""
+            },
+            {
+              "id": "644b1fd0-a7f4-4bab-85d9-d0ec6da4bd0d",
+              "meta": { "commands": ["4dF"] },
+              "type": "Skill",
+              "label": "Volontà",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fariType": "character"
+}
