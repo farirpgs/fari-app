@@ -44,6 +44,20 @@ export default function CursorWithMessage(props: {
     props.message || props.rollOutput || !props.readonly;
 
   const [hasDiceError, setHasDiceError] = useState(false);
+  const [stale, setStale] = useState(false);
+
+  useEffect(() => {
+    setStale(false);
+
+    const timeout = setTimeout(() => {
+      setStale(true);
+    }, 2500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [props.x, props.y, props.message, props.rollOutput, props.label]);
+
   useEffect(() => {
     topTenLatestRollCommandsSingleton = topTenLatestRollCommands;
   }, [topTenLatestRollCommands]);
@@ -97,6 +111,7 @@ export default function CursorWithMessage(props: {
         className={css({
           label: "CursorWithMessage",
           position: "absolute",
+          opacity: stale ? 0.15 : 1,
           pointerEvents: "none",
           top: "-10px",
           left: "-10px",
