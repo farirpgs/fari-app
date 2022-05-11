@@ -33,8 +33,8 @@ export function useWindowLiveCursors() {
     }
 
     function onPointerLeave() {
-      // lastPosition = null;
-      // sessionPresenceUpdater.actions.updateMyPresence({ cursor: null });
+      lastPosition = null;
+      sessionPresenceUpdater.actions.updateMyPresence({ cursor: null });
     }
 
     function onDocumentScroll() {
