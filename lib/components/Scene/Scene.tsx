@@ -1,5 +1,6 @@
 import { css } from "@emotion/css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import CircleIcon from "@mui/icons-material/Circle";
 import CreateIcon from "@mui/icons-material/Create";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import ErrorIcon from "@mui/icons-material/Error";
@@ -866,7 +867,49 @@ export const Session: React.FC<IProps> = (props) => {
                         return (
                           <Tab
                             key={player.id}
-                            label={player.playerName}
+                            label={
+                              <>
+                                <Box
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    width: "100%",
+                                    textTransform: "none",
+                                  }}
+                                >
+                                  <Grid
+                                    container
+                                    spacing={1}
+                                    alignItems="center"
+                                  >
+                                    <Grid item>
+                                      <CircleIcon
+                                        sx={{
+                                          marginRight: ".25rem",
+                                        }}
+                                        htmlColor={player.color}
+                                      />
+                                    </Grid>
+                                    <Grid item>
+                                      <Box>
+                                        <Typography variant="body1">
+                                          {player.playerName}
+                                        </Typography>
+                                      </Box>
+                                      <Box
+                                        sx={{
+                                          display: "flex",
+                                        }}
+                                      >
+                                        <Typography variant="body2">
+                                          {player.characterSheet.name}
+                                        </Typography>
+                                      </Box>
+                                    </Grid>
+                                  </Grid>
+                                </Box>
+                              </>
+                            }
                             value={player.characterSheet.id}
                           />
                         );
