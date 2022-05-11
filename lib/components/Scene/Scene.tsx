@@ -891,7 +891,11 @@ export const Session: React.FC<IProps> = (props) => {
                                       />
                                     </Grid>
                                     <Grid item>
-                                      <Box>
+                                      <Box
+                                        sx={{
+                                          display: "flex",
+                                        }}
+                                      >
                                         <Typography variant="body1">
                                           {player.playerName}
                                         </Typography>
