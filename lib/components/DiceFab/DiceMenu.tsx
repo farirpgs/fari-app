@@ -8,12 +8,14 @@ import IconButton from "@mui/material/IconButton";
 import Popover, { PopoverOrigin } from "@mui/material/Popover";
 import { useTheme } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import React, { useContext } from "react";
 import { useZIndex } from "../../constants/zIndex";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import {
-  CommmandSetOptions,
+  Dice,
+  DiceCustomCommand,
   IDiceCommandSetOption,
 } from "../../domains/dice/Dice";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -38,6 +40,11 @@ export function DiceMenu(props: {
   const zIndex = useZIndex();
   const { t } = useTranslate();
   const diceManager = useContext(DiceContext);
+  const customCommand = props.commands[0]?.id.startsWith("[")
+    ? props.commands[0].id
+    : "";
+
+  const customCommandValue = DiceCustomCommand.parse(customCommand);
 
   return <>{renderPopover()}</>;
 
@@ -69,27 +76,23 @@ export function DiceMenu(props: {
         >
           <Box maxHeight="70vh" overflow="auto">
             <Box p="1rem">
-              {renderCommandSetHeader("Fate")}
               {renderOptions([
-                CommmandSetOptions["4dF"],
-                CommmandSetOptions["1dF"],
+                Dice.getSetOptions("1d4"),
+                Dice.getSetOptions("1d6"),
+                Dice.getSetOptions("1d8"),
+                Dice.getSetOptions("1d10"),
+                Dice.getSetOptions("1d12"),
+                Dice.getSetOptions("1d20"),
+                Dice.getSetOptions("1d100"),
               ])}
-              {renderCommandSetHeader("D20s")}
               {renderOptions([
-                CommmandSetOptions["1d4"],
-                CommmandSetOptions["1d6"],
-                CommmandSetOptions["1d8"],
-                CommmandSetOptions["1d10"],
-                CommmandSetOptions["1d12"],
-                CommmandSetOptions["1d20"],
-                CommmandSetOptions["1d100"],
+                Dice.getSetOptions("4dF"),
+                Dice.getSetOptions("1dF"),
+                Dice.getSetOptions("coin"),
+                Dice.getSetOptions("card"),
+                Dice.getSetOptions("2d6"),
               ])}
-              {renderCommandSetHeader("Misc")}
-              {renderOptions([
-                CommmandSetOptions["coin"],
-                CommmandSetOptions["card"],
-                CommmandSetOptions["2d6"],
-              ])}
+              {renderDiceInput()}
 
               {(props.onClear || props.onCtaClick) && (
                 <Box mt="1.5rem">
@@ -146,19 +149,29 @@ export function DiceMenu(props: {
     );
   }
 
-  function renderCommandSetHeader(header: string) {
+  function renderDiceInput() {
+    console.log("customCommand", customCommand, customCommandValue);
     return (
       <Box>
-        <Typography
-          variant="h6"
-          className={css({
-            color: theme.palette.text.primary,
-            textAlign: "center",
-            fontWeight: theme.typography.fontWeightBold,
-          })}
-        >
-          {header}
-        </Typography>
+        <Grid container justifyContent="center">
+          <Grid item xs={8}>
+            <TextField
+              fullWidth
+              label="Custom command"
+              variant="filled"
+              value={customCommandValue}
+              onChange={(e) => {
+                props.onDiceCommandChange(() => {
+                  const newValue = `[${e.target.value}]`;
+                  const commandSetOptions =
+                    DiceCustomCommand.getOptions(newValue);
+
+                  return [commandSetOptions];
+                });
+              }}
+            />
+          </Grid>
+        </Grid>
       </Box>
     );
   }
@@ -168,21 +181,25 @@ export function DiceMenu(props: {
       <>
         <Box pb=".5rem">
           <Grid container spacing={1} justifyContent="center">
-            {options.map((o) => {
+            {options.map((option) => {
               const badgeContent = props.commands.reduce((acc, curr) => {
-                if (o.label === curr.label) {
+                if (option.label === curr.label) {
                   return acc + 1;
                 }
                 return acc;
               }, 0);
               return (
-                <Grid item key={o.label}>
+                <Grid item key={option.label}>
                   <Grid container justifyContent="center" direction="column">
                     <Grid container item justifyContent="center">
                       <IconButton
                         onClick={() => {
-                          props.onDiceCommandChange((t) => {
-                            return [...t, o];
+                          props.onDiceCommandChange((draft) => {
+                            if (customCommand) {
+                              return [option];
+                            }
+
+                            return [...draft, option];
                           });
                         }}
                         onContextMenu={(e) => {
@@ -190,7 +207,7 @@ export function DiceMenu(props: {
                           props.onDiceCommandChange((draft) => {
                             const indexToRemove = draft.findIndex(
                               (selectedOption) =>
-                                selectedOption.label === o.label
+                                selectedOption.label === option.label
                             );
                             if (indexToRemove !== -1) {
                               draft.splice(indexToRemove, 1);
@@ -207,7 +224,7 @@ export function DiceMenu(props: {
                         size="large"
                       >
                         <Badge badgeContent={badgeContent} color="secondary">
-                          <o.icon
+                          <option.icon
                             className={css({
                               fontSize: "3rem",
                               color:
@@ -233,7 +250,7 @@ export function DiceMenu(props: {
                           textAlign: "center",
                         })}
                       >
-                        {o.label}
+                        {option.label}
                       </Typography>
                     </Grid>
                   </Grid>

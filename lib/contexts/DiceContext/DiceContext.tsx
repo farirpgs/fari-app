@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  CommmandSetOptions,
   Dice,
   IDiceCommandSetId,
   IDiceCommandSetOption,
@@ -30,9 +29,9 @@ export function useDice(props: {
 
   const [commandSets, setCommandSets] = useState<Array<IDiceCommandSetOption>>(
     () => {
-      const defaultSet = props.defaultCommands?.map(
-        (c) => CommmandSetOptions[c]
-      ) ?? [CommmandSetOptions["1d6"]];
+      const defaultSet = props.defaultCommands?.map((c) =>
+        Dice.getSetOptions(c)
+      ) ?? [Dice.getSetOptions("1d6")];
       return defaultSet;
     }
   );
@@ -55,7 +54,7 @@ export function useDice(props: {
     const poolRollCommandGroupOptions: Array<IDiceCommandSetOption> =
       poolRollGroups
         .map((commandOption) => {
-          return CommmandSetOptions[commandOption.id];
+          return Dice.getSetOptions(commandOption.id);
         })
         .filter(
           (commandGroupId): commandGroupId is IDiceCommandSetOption =>

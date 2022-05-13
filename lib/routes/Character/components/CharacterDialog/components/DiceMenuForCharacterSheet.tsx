@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { DiceMenu } from "../../../../../components/DiceFab/DiceMenu";
 import { SettingsContext } from "../../../../../contexts/SettingsContext/SettingsContext";
 import {
-  CommmandSetOptions,
+  Dice,
   IDiceCommandSetId,
   IDiceCommandSetOption,
 } from "../../../../../domains/dice/Dice";
@@ -48,7 +48,7 @@ export function DiceMenuForCharacterSheet(props: {
 
   function setCommandsGroupsFromIds(commandIds: Array<IDiceCommandSetId>) {
     const newCommands = commandIds.map((commandId) => {
-      return CommmandSetOptions[commandId];
+      return Dice.getSetOptions(commandId);
     });
     setCommandSetIds(newCommands);
   }

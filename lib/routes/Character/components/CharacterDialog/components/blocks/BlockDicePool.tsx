@@ -28,7 +28,6 @@ import {
 import { Icons } from "../../../../../../domains/Icons/Icons";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { BlockSelectors } from "../../domains/BlockSelectors/BlockSelectors";
-import { DiceCommandGroup } from "../../domains/DiceCommandGroup/DiceCommandGroup";
 import {
   IBlockActionComponentProps,
   IBlockComponentProps,
@@ -404,7 +403,7 @@ export function BlockDicePool(
           )}
           {Object.keys(commandsCount).map((commandId, index) => {
             const id = commandId as IDiceCommandSetId;
-            const commandSet = DiceCommandGroup.getCommandSetById(id);
+            const commandSet = Dice.getSetOptions(id);
             const count = commandsCount[id];
             return (
               <Grid item key={index}>

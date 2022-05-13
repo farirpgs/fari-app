@@ -1,3 +1,4 @@
+import { DiceRoll } from "@dice-roller/rpg-dice-roller";
 import isEqual from "lodash/isEqual";
 import startCase from "lodash/startCase";
 import { Icons } from "../Icons/Icons";
@@ -6,7 +7,7 @@ export type IDiceCommandSetOption = {
   id: IDiceCommandSetId;
   label: string;
   icon: React.ElementType;
-  value: Array<IDiceCommandNames>;
+  value?: Array<IDiceCommandNames>;
   goodRoll?: number;
   badRoll?: number;
   criticalSuccess?: number;
@@ -23,7 +24,8 @@ export type IDiceCommandNames =
   | "1d20"
   | "1d100"
   | "coin"
-  | "card";
+  | "card"
+  | string;
 
 export type IDiceCommandSetId = IDiceCommandNames | "4dF" | "2d6";
 
@@ -240,30 +242,43 @@ export const Dice = {
           modifier: rollGroup.modifier,
           commandSets: rollGroup.commandSets.map<IRollGroupCommandSetResult>(
             (commandGroup) => {
-              const commandGroupOptions = CommmandSetOptions[commandGroup.id];
-              const commandNames = commandGroupOptions.value;
-              return {
-                id: commandGroup.id,
-                icon: commandGroup.icon,
-                commands: commandNames.map<ICommandResult>((commandName) => {
-                  const diceOption = DiceCommandOptions[commandName];
-                  const sides = diceOption.sides;
-                  const side = getRandomDiceSide(sides.length);
-                  const result = sides[side];
+              const commandGroupOptions = Dice.getSetOptions(commandGroup.id);
 
-                  if (typeof result === "number") {
-                    total += result;
-                    totalWithoutModifiers += result;
-                  } else {
-                    containsSomethingElseThanNumberValues = true;
-                  }
+              if (!!commandGroupOptions.value) {
+                const commandNames = commandGroupOptions.value;
+                return {
+                  id: commandGroup.id,
+                  icon: commandGroup.icon,
+                  commands: commandNames.map<ICommandResult>((commandName) => {
+                    const diceOption = DiceCommandOptions[commandName];
 
-                  return {
-                    name: commandName,
-                    value: result,
-                  };
-                }),
-              };
+                    const sides = diceOption.sides;
+                    const side = getRandomDiceSide(sides.length);
+                    const result = sides[side];
+
+                    if (typeof result === "number") {
+                      total += result;
+                      totalWithoutModifiers += result;
+                    } else {
+                      containsSomethingElseThanNumberValues = true;
+                    }
+
+                    return {
+                      name: commandName,
+                      value: result,
+                    };
+                  }),
+                };
+              } else {
+                const parsed = DiceCustomCommand.parse(commandGroup.id);
+                const roll = new DiceRoll(parsed);
+                total += roll.total;
+                totalWithoutModifiers += roll.total;
+                return {
+                  name: parsed,
+                  value: roll.output,
+                };
+              }
             }
           ),
         };
@@ -296,11 +311,11 @@ export const Dice = {
     commands: IDiceCommandNames[] | undefined
   ) {
     const commandGroup = Object.keys(CommmandSetOptions).find((id) => {
-      const group = CommmandSetOptions[id as IDiceCommandSetId];
+      const group = Dice.getSetOptions(id);
       return isEqual(group.value, commands);
     });
 
-    return CommmandSetOptions[commandGroup as IDiceCommandSetId];
+    return Dice.getSetOptions(commandGroup);
   },
 
   simplifyRolls(rollGroupResult: Array<IRollGroupResult>) {
@@ -339,6 +354,32 @@ export const Dice = {
     });
 
     return result;
+  },
+
+  getSetOptions(id: IDiceCommandSetId | undefined): IDiceCommandSetOption {
+    if (!id) {
+      return CommmandSetOptions["1d6"];
+    }
+
+    const options = CommmandSetOptions[id];
+    if (options) {
+      return options;
+    }
+    return DiceCustomCommand.getOptions(id);
+  },
+};
+
+export const DiceCustomCommand = {
+  getOptions(id: string): IDiceCommandSetOption {
+    return {
+      id: id,
+      label: "Custom",
+      icon: Icons.CultureCinemaIcon,
+    };
+  },
+  parse(command: string) {
+    const parsed = command.split("[").join("").split("]").join("");
+    return parsed;
   },
 };
 

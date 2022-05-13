@@ -12,7 +12,6 @@ import { FontFamily } from "../../constants/FontFamily";
 import { useZIndex } from "../../constants/zIndex";
 import { arraySort } from "../../domains/array/arraySort";
 import {
-  CommmandSetOptions,
   Dice,
   DiceCommandOptions,
   IDiceRollResult,
@@ -328,7 +327,7 @@ export function DiceBoxResult(props: {
                 }}
               >
                 {rollGroup.commandSets.map((commandSet, commandSetIndex) => {
-                  const commandSetOptions = CommmandSetOptions[commandSet.id];
+                  const commandSetOptions = Dice.getSetOptions(commandSet.id);
 
                   const sortedCommands = shouldListResult
                     ? arraySort(commandSet.commands, [
