@@ -18,6 +18,7 @@ import { IPlayerCursorRollOutput } from "../../types/IPlayerCursorState";
 
 let topTenLatestRollCommandsSingleton: Array<string> = [];
 
+let openCount = -1;
 export default function CursorWithMessage(props: {
   color: string | null | undefined;
   x: number;
@@ -29,7 +30,13 @@ export default function CursorWithMessage(props: {
   onRollOutputChange?(roll: IPlayerCursorRollOutput | null): void;
   onMessageChange?(message: string): void;
 }) {
-  const textPlaceholder = "Type a message...";
+  const [textPlaceholder] = useState(() => {
+    ++openCount;
+    if (openCount % 2 === 0) {
+      return "Type a message...";
+    }
+    return "2d6 + 3";
+  });
   const zIndex = useZIndex();
   const theme = useTheme();
   const color = props.color || DefaultPlayerColor;
