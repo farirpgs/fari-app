@@ -1,5 +1,6 @@
 import { css } from "@emotion/css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import ChatIcon from "@mui/icons-material/Chat";
 import CircleIcon from "@mui/icons-material/Circle";
 import CreateIcon from "@mui/icons-material/Create";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
@@ -127,6 +128,7 @@ type IProps = {
   shareLink?: string;
   idFromParams?: string;
   onPlayerInteraction?(interaction: IPlayerInteraction): void;
+  onOpenChat?(): void;
 };
 
 export const Session: React.FC<IProps> = (props) => {
@@ -355,6 +357,22 @@ export const Session: React.FC<IProps> = (props) => {
                   </IconButton>
                 </Tooltip>
               </Grid>
+              {props.onOpenChat && (
+                <Grid item>
+                  <Tooltip title={t("play-route.chat")}>
+                    <IconButton
+                      onClick={props.onOpenChat}
+                      color="primary"
+                      size="large"
+                    >
+                      <ChatIcon
+                        className={css({ width: "1.8rem", height: "1.8rem" })}
+                        htmlColor={theme.palette.text.primary}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
 
               {isGM && (
                 <Grid item>
@@ -927,7 +945,7 @@ export const Session: React.FC<IProps> = (props) => {
                   <TabContext value={currentCardId}>
                     <TabPanel value="" />
                     <MiniThemeContext.Provider value={miniTheme}>
-                      {playersWithCharacterSheets.map((player, index) => {
+                      {playersWithCharacterSheets.map((player) => {
                         const isMe = props.userId === player.id;
                         const canControl = isGM || isMe;
                         return (
@@ -1070,6 +1088,7 @@ export const Session: React.FC<IProps> = (props) => {
                   isGM={isGM}
                   canLoad={isGM}
                   onRoll={handleSetMyRoll}
+                  onOpenChat={props.onOpenChat}
                   onPoolClick={(element) => {
                     diceManager.actions.addOrRemovePoolElement(element);
                     diceManager.actions.setPlayerId(gm.id);
@@ -1192,6 +1211,7 @@ export function Scene(props: {
   onRoll(diceRollResult: IDiceRollResult): void;
   onPoolClick(element: IDicePoolElement): void;
   onIndexCardUpdate(indexCard: IIndexCard, type: IIndexCardType): void;
+  onOpenChat?(): void;
 }) {
   const { sceneManager } = props;
   const settingsManager = useContext(SettingsContext);

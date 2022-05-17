@@ -306,17 +306,23 @@ export const PlayRoute: React.FC<{
           </Alert>
         </Snackbar>
         <SessionPresenceUpdaterContext.Provider value={sessionPresenceUpdater}>
-          <PlayersPresence />
-          <Session
-            sessionManager={sessionManager}
-            sessionCharactersManager={sessionCharactersManager}
-            sceneManager={sceneManager}
-            isLoading={false}
-            idFromParams={idFromParams}
-            shareLink={shareLink}
-            userId={settingsManager.state.userId}
-            error={undefined}
-            onPlayerInteraction={handlePlayerInteraction}
+          <PlayersPresence
+            render={(playerPresenceProps) => {
+              return (
+                <Session
+                  sessionManager={sessionManager}
+                  sessionCharactersManager={sessionCharactersManager}
+                  sceneManager={sceneManager}
+                  isLoading={false}
+                  idFromParams={idFromParams}
+                  shareLink={shareLink}
+                  userId={settingsManager.state.userId}
+                  error={undefined}
+                  onPlayerInteraction={handlePlayerInteraction}
+                  onOpenChat={playerPresenceProps.openChat}
+                />
+              );
+            }}
           />
         </SessionPresenceUpdaterContext.Provider>
       </>

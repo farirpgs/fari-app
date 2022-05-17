@@ -241,7 +241,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
     return (
       <Box
         ref={anchorEl}
-        onMouseEnter={(event) => {
+        onMouseEnter={() => {
           handlePopoverOpen();
         }}
         onMouseLeave={() => {

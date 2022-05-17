@@ -12,7 +12,9 @@ import { IPlayerCursorState } from "../../types/IPlayerCursorState";
 import { IPlayerPresence } from "../../types/IPlayerPresence";
 import CursorWithMessage from "../CursorWithMessage/CursorWithMessage";
 
-export function PlayersPresence() {
+export function PlayersPresence(props: {
+  render: (props: { openChat: () => void }) => React.ReactNode;
+}) {
   const [cursorState, setCursorState] = useState<IPlayerCursorState>({
     mode: PlayCursorMode.Hidden,
   });
@@ -26,28 +28,9 @@ export function PlayersPresence() {
   useEffect(() => {
     function onKeyUp(e: KeyboardEvent) {
       if (e.key === "/") {
-        setCursorState((prev) => {
-          if (prev.mode === PlayCursorMode.Hidden) {
-            return {
-              ...prev,
-              mode: PlayCursorMode.Chat,
-              message: "",
-              rollOutput: null,
-            };
-          } else {
-            sessionPresenceUpdater.actions.updateMyPresence({
-              message: "",
-              rollOutput: null,
-            });
-            return { mode: PlayCursorMode.Hidden };
-          }
-        });
+        handleOpenChat();
       } else if (e.key === "Escape") {
-        sessionPresenceUpdater.actions.updateMyPresence({
-          message: "",
-          rollOutput: null,
-        });
-        setCursorState({ mode: PlayCursorMode.Hidden });
+        handleCloseChat();
       }
     }
 
@@ -67,34 +50,66 @@ export function PlayersPresence() {
     };
   }, []);
 
+  function handleCloseChat() {
+    sessionPresenceUpdater.actions.updateMyPresence({
+      message: "",
+      rollOutput: null,
+    });
+    setCursorState({ mode: PlayCursorMode.Hidden });
+  }
+
+  function handleOpenChat() {
+    setCursorState((prev) => {
+      if (prev.mode === PlayCursorMode.Hidden) {
+        return {
+          ...prev,
+          mode: PlayCursorMode.Chat,
+          message: "",
+          rollOutput: null,
+        };
+      } else {
+        sessionPresenceUpdater.actions.updateMyPresence({
+          message: "",
+          rollOutput: null,
+        });
+        return { mode: PlayCursorMode.Hidden };
+      }
+    });
+  }
+
   return (
-    <div
-      className={css({
-        label: "PlayersPresence",
-        position: "fixed",
-        top: 0,
-        left: 0,
-        zIndex: zIndex.cursor,
+    <>
+      <div
+        className={css({
+          label: "PlayersPresence",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex: zIndex.cursor,
+        })}
+      >
+        {windowCursors.map((cursor) => {
+          return (
+            <CursorWithMessage
+              key={cursor.connectionId}
+              label={
+                cursor.presence?.characterName || cursor.presence?.playerName
+              }
+              color={cursor.presence?.color}
+              message={cursor.presence?.message}
+              rollOutput={cursor.presence?.rollOutput}
+              x={cursor.x}
+              y={cursor.y}
+              readonly
+            />
+          );
+        })}
+        {renderMyMessage()}
+      </div>
+      {props.render({
+        openChat: handleOpenChat,
       })}
-    >
-      {windowCursors.map((cursor) => {
-        return (
-          <CursorWithMessage
-            key={cursor.connectionId}
-            label={
-              cursor.presence?.characterName || cursor.presence?.playerName
-            }
-            color={cursor.presence?.color}
-            message={cursor.presence?.message}
-            rollOutput={cursor.presence?.rollOutput}
-            x={cursor.x}
-            y={cursor.y}
-            readonly
-          />
-        );
-      })}
-      {renderMyMessage()}
-    </div>
+    </>
   );
 
   function renderMyMessage() {

@@ -6,6 +6,7 @@ import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
+import { Delays } from "../../../../constants/Delays";
 import { FontFamily } from "../../../../constants/FontFamily";
 import { useZIndex } from "../../../../constants/zIndex";
 import { ThemedLabel } from "../../../Character/components/CharacterDialog/components/ThemedLabel";
@@ -58,7 +59,7 @@ export default function CursorWithMessage(props: {
 
     const timeout = setTimeout(() => {
       setStale(true);
-    }, 2500);
+    }, Delays.cursorStale);
 
     return () => {
       clearTimeout(timeout);
@@ -120,7 +121,7 @@ export default function CursorWithMessage(props: {
           position: "absolute",
           opacity: stale ? 0.15 : 1,
           pointerEvents: "none",
-          top: "-10px",
+          top: "-40px",
           left: "-10px",
           zIndex: zIndex.cursor,
         })}

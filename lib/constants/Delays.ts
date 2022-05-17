@@ -5,4 +5,5 @@ export const Delays = {
   clearSessionConfetti: 5000,
   blockHoverEnterControls: 750,
   blockHoverLeaveControls: 1500,
+  cursorStale: 3000,
 };
