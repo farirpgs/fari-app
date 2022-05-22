@@ -112,6 +112,7 @@ export default function CursorWithMessage(props: {
       setCommandtoPopIndex(newIndex);
     }
   }
+  const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
 
   return (
     <MiniThemeContext.Provider value={miniTheme}>
@@ -126,8 +127,10 @@ export default function CursorWithMessage(props: {
           zIndex: zIndex.cursor,
         })}
         style={{
-          transition: "transform 0.5s cubic-bezier(.17,.93,.38,1)",
-          transform: `translateX(${props.x}px) translateY(${props.y}px)`,
+          transition: isFirefox
+            ? undefined
+            : "transform 0.5s cubic-bezier(.17,.93,.38,1)",
+          transform: `translateX(${props.x}px) translateY(${props.y}px) scale(1)`,
         }}
       >
         {props.readonly && renderCursor()}

@@ -20,6 +20,7 @@ import {
 } from "../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
+import { MasonryResizer } from "../../components/MasonryResizer/MasonryResizer";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { IndexCardCollectionsContext } from "../../contexts/IndexCardCollectionsContext/IndexCardCollectionsContext";
@@ -343,6 +344,9 @@ export const CardCollectionRoute: React.FC<{
 
     return (
       <Box>
+        <MasonryResizer
+          deps={[indexCardCollectionManager.state.cardCollection]}
+        />
         {renderIndexCardsMasonry({
           cards: cardsWithSubCards,
           columns: 1,

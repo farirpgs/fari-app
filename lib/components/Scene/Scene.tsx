@@ -65,12 +65,12 @@ import {
   IIndexCard,
   IIndexCardType,
   IPlayer,
-  IScene,
+  IScene
 } from "../../hooks/useScene/IScene";
 import { useScene } from "../../hooks/useScene/useScene";
 import {
   useSession,
-  useSessionCharacterSheets,
+  useSessionCharacterSheets
 } from "../../hooks/useScene/useSession";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -78,23 +78,24 @@ import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDi
 import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import {
   MiniThemeContext,
-  useMiniTheme,
+  useMiniTheme
 } from "../../routes/Character/components/CharacterDialog/MiniThemeContext";
 import {
   TlDrawErrorBoundary,
   TldrawReader,
-  TldrawWriter,
+  TldrawWriter
 } from "../../routes/Draw/TldrawWriterAndReader";
 import {
   IPlayerInteraction,
-  PlayerInteractionFactory,
+  PlayerInteractionFactory
 } from "../../routes/Play/types/IPlayerInteraction";
 import {
   ContentEditable,
-  previewContentEditable,
+  previewContentEditable
 } from "../ContentEditable/ContentEditable";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard, IndexCardMinWidth } from "../IndexCard/IndexCard";
+import { MasonryResizer } from "../MasonryResizer/MasonryResizer";
 import { Page } from "../Page/Page";
 import { SplitButton } from "../SplitButton/SplitButton";
 import { Toolbox } from "../Toolbox/Toolbox";
@@ -141,6 +142,8 @@ export const Session: React.FC<IProps> = (props) => {
   const lightBackground = useLightBackground();
 
   useBlockReload(sceneManager.state.dirty);
+
+  
 
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
@@ -1634,6 +1637,7 @@ export function Scene(props: {
     }
     return (
       <Box>
+        <MasonryResizer deps={[props.sceneManager.state.scene]} />
         <Masonry
           columns={renderProps.columns}
           sx={{
