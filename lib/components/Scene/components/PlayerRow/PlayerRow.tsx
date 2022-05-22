@@ -420,21 +420,23 @@ export function PlayerRow(
               </Typography>
             </Grid>
             <Grid item>
-              <CircleTextField
-                data-cy={`${props["data-cy"]}.counter.max`}
-                value={pointsManager.state.maxPoints ?? ""}
-                readonly={!props.permissions.canUpdatePoints}
-                highlight
-                onChange={(newMax) => {
-                  pointsManager.actions.setMaxPoints(newMax);
-                }}
-                onIncrement={() => {
-                  pointsManager.actions.incrementMax();
-                }}
-                onDecrement={() => {
-                  pointsManager.actions.decrementMax();
-                }}
-              />
+              <Box color={theme.palette.secondary.main}>
+                <CircleTextField
+                  borderColor={theme.palette.secondary.main}
+                  data-cy={`${props["data-cy"]}.counter.max`}
+                  value={pointsManager.state.maxPoints ?? ""}
+                  readonly={!props.permissions.canUpdatePoints}
+                  onChange={(newMax) => {
+                    pointsManager.actions.setMaxPoints(newMax);
+                  }}
+                  onIncrement={() => {
+                    pointsManager.actions.incrementMax();
+                  }}
+                  onDecrement={() => {
+                    pointsManager.actions.decrementMax();
+                  }}
+                />
+              </Box>
             </Grid>
           </>
         )}
