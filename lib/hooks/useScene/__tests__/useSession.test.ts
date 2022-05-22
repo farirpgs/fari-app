@@ -25,6 +25,7 @@ describe("useSession", () => {
       goodConfetti: 0,
       badConfetti: 0,
       paused: false,
+      playerColorIndex: 0,
       tlDrawDoc: {
         bindings: {},
         shapes: {},

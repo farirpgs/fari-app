@@ -37,13 +37,13 @@ export function useSession(props: { userId: string }) {
       goodConfetti: 0,
       badConfetti: 0,
       paused: false,
+      playerColorIndex: 0,
       tlDrawDoc: {
         bindings: {},
         shapes: {},
       },
     })
   );
-  const [playerColorIndex, setPlayerColorIndex] = useState(0);
   const me = getEveryone(session).find((p) => p.id === props.userId);
 
   useEffect(() => {
@@ -158,14 +158,12 @@ export function useSession(props: { userId: string }) {
         if (!draft.players[player.id]) {
           draft.players[player.id] = {
             ...player,
-            color: PlayerColors[playerColorIndex],
+            color: PlayerColors[draft.playerColorIndex],
           };
         }
+        draft.playerColorIndex++;
       })
     );
-    setPlayerColorIndex((prev) => {
-      return (prev + 1) % PlayerColors.length;
-    });
   }
 
   function fireGoodConfetti() {
