@@ -95,6 +95,7 @@ import {
 } from "../ContentEditable/ContentEditable";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard, IndexCardMinWidth } from "../IndexCard/IndexCard";
+import { MasonryResizer } from "../MasonryResizer/MasonryResizer";
 import { Page } from "../Page/Page";
 import { SplitButton } from "../SplitButton/SplitButton";
 import { Toolbox } from "../Toolbox/Toolbox";
@@ -1634,6 +1635,7 @@ export function Scene(props: {
     }
     return (
       <Box>
+        <MasonryResizer deps={[props.sceneManager.state.scene]} />
         <Masonry
           columns={renderProps.columns}
           sx={{
