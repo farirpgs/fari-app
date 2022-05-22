@@ -1,21 +1,25 @@
 import { css } from "@emotion/css";
+import CircleIcon from "@mui/icons-material/Circle";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import LaunchIcon from "@mui/icons-material/Launch";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import RestorePageIcon from "@mui/icons-material/RestorePage";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Box from "@mui/material/Box";
-import Fade from "@mui/material/Fade";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
-import { FontFamily } from "../../../../constants/FontFamily";
+import React from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
 import { ICharacter } from "../../../../domains/character/types";
@@ -36,7 +40,6 @@ import {
   DiceBox,
   DiceBoxResult,
 } from "../../../DiceBox/DiceBox";
-import { FateLabel } from "../../../FateLabel/FateLabel";
 
 export function PlayerRow(
   props: {
@@ -52,6 +55,8 @@ export function PlayerRow(
     characterSheet: ICharacter | undefined;
     connectionState?: string;
     isMe: boolean;
+    color: string;
+    isChild: boolean;
     children?: JSX.Element;
     onDiceRoll(): void;
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
@@ -66,7 +71,10 @@ export function PlayerRow(
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
-  const [hover, setHover] = useState(false);
+  const hasCharacterSheet = !!props.characterSheet;
+  const canOpenOrLoadSheet =
+    hasCharacterSheet || props.permissions.canLoadCharacterSheet;
+
   const mainPointerBlock = CharacterSelector.getCharacterMainPointerBlock(
     props.characterSheet
   );
@@ -89,15 +97,8 @@ export function PlayerRow(
   });
 
   const lightBackground = useLightBackground();
-  const playedDuringTurnColor = props.player.playedDuringTurn
-    ? theme.palette.secondary.main
-    : theme.palette.text.secondary;
 
-  const hasCharacterSheet = !!props.characterSheet;
-
-  const borderColor = hasCharacterSheet
-    ? theme.palette.secondary.main
-    : theme.palette.text.secondary;
+  const [menuAnchorEl, setMenuAnchorEl] = React.useState<any>(null);
 
   function handleOnRoll() {
     props.onDiceRoll();
@@ -108,44 +109,185 @@ export function PlayerRow(
     <>
       <MiniThemeContext.Provider value={miniTheme}>
         <Box
-          bgcolor={
-            props.isMe ? lightBackground : theme.palette.background.paper
-          }
-          m=".5rem"
+          sx={{
+            backgroundColor: lightBackground,
+            margin: ".5rem",
+          }}
           data-cy={props["data-cy"]}
-          onClick={() => {
-            setHover(true);
-          }}
-          onPointerEnter={() => {
-            setHover(true);
-          }}
-          onPointerLeave={() => {
-            setHover(false);
-          }}
         >
           <Box
-            py=".5rem"
-            px="1rem"
-            className={css({
-              border: `2px solid ${borderColor}`,
-              borderRadius: "8px",
-            })}
+            sx={{
+              padding: "0.5rem 1rem",
+              border: props.isChild
+                ? `2px solid ${theme.palette.secondary.main}`
+                : "none",
+            }}
           >
             <Box>{renderName()}</Box>
 
-            <Box mb=".5rem">
+            <Box
+              sx={{
+                position: "relative",
+              }}
+            >
               <Box pb=".5rem">{renderDice()}</Box>
-              <Box pb=".5rem">{renderPointCounter()}</Box>
-              <Box pb={props.children ? ".5rem" : undefined}>
-                {renderControls()}
+              <Box>
+                <Grid
+                  container
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Grid item>{renderPointCounter()}</Grid>
+                  <Grid item>
+                    <Grid container spacing={1} justifyContent="flex-end">
+                      <Grid item>{renderLoadSheet()}</Grid>
+                      <Grid item>{renderMoreMenu()}</Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
               </Box>
-              {props.children}
+              {/* <Box pb={props.children ? ".5rem" : undefined}>
+                {renderControls()}
+              </Box> */}
             </Box>
+            {props.children}
           </Box>
         </Box>
       </MiniThemeContext.Provider>
     </>
   );
+
+  function renderLoadSheet() {
+    return (
+      <Tooltip
+        title={
+          hasCharacterSheet
+            ? t("player-row.open-character-sheet")
+            : props.permissions.canLoadCharacterSheet
+            ? t("play-route.assign-character-sheet")
+            : ""
+        }
+      >
+        <span>
+          <IconButton
+            size="small"
+            disabled={!canOpenOrLoadSheet}
+            color={"secondary"}
+            data-cy={`${props["data-cy"]}.assign-or-open-character-sheet`}
+            className={css({
+              visibility: canOpenOrLoadSheet ? "visible" : "hidden",
+              border: `1px solid `,
+              borderRadius: "50%",
+              boxShadow: theme.shadows[2],
+            })}
+            onClick={() => {
+              if (hasCharacterSheet) {
+                props.onCharacterSheetOpen();
+              } else {
+                props.onAssignCharacterSheet();
+              }
+
+              logger.track("session.open_character_sheet");
+            }}
+          >
+            {hasCharacterSheet ? <LaunchIcon /> : <UploadFileIcon />}
+          </IconButton>
+        </span>
+      </Tooltip>
+    );
+  }
+
+  function renderMoreMenu() {
+    const shouldRenderSwapSheetButton =
+      props.permissions.canLoadCharacterSheet && hasCharacterSheet;
+    const shouldRenderRemovePlayerButton = props.permissions.canRemove;
+    const shouldRenderMarkPrivateButton = props.permissions.canRemove;
+    if (
+      !shouldRenderSwapSheetButton &&
+      !shouldRenderRemovePlayerButton &&
+      !shouldRenderMarkPrivateButton
+    ) {
+      return null;
+    }
+    return (
+      <Box>
+        <IconButton
+          data-cy={`${props["data-cy"]}.menu`}
+          onClick={(event) => {
+            setMenuAnchorEl(event?.currentTarget);
+          }}
+        >
+          <MoreVertIcon color="secondary" />
+        </IconButton>
+        <Menu
+          anchorEl={menuAnchorEl}
+          open={!!menuAnchorEl}
+          onClose={() => {
+            setMenuAnchorEl(false);
+          }}
+        >
+          {shouldRenderSwapSheetButton && (
+            <MenuItem
+              data-cy={`${props["data-cy"]}.swap-character-sheet`}
+              onClick={() => {
+                setMenuAnchorEl(false);
+                props.onAssignCharacterSheet();
+              }}
+            >
+              <ListItemIcon>
+                <RestorePageIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>
+                {t("player-row.swap-character-sheet")}
+              </ListItemText>
+            </MenuItem>
+          )}
+          {shouldRenderRemovePlayerButton && (
+            <MenuItem
+              data-cy={`${props["data-cy"]}.remove`}
+              onClick={() => {
+                setMenuAnchorEl(false);
+                const confirmed = confirm(
+                  t("player-row.remove-player-confirmation")
+                );
+                if (confirmed) {
+                  props.onPlayerRemove();
+                  logger.track("session.remove_player");
+                }
+              }}
+            >
+              <ListItemIcon>
+                <HighlightOffIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>{t("player-row.remove-player")}</ListItemText>
+            </MenuItem>
+          )}
+          {shouldRenderMarkPrivateButton && (
+            <MenuItem
+              data-cy={`${props["data-cy"]}.mark-private`}
+              onClick={() => {
+                setMenuAnchorEl(false);
+                props.onTogglePrivate();
+              }}
+            >
+              <ListItemIcon>
+                {props.player.private ? (
+                  <VisibilityIcon fontSize="small" />
+                ) : (
+                  <VisibilityOffIcon fontSize="small" />
+                )}
+              </ListItemIcon>
+              <ListItemText>
+                {props.player.private
+                  ? t("player-row.show-to-players")
+                  : t("player-row.hide-from-players")}
+              </ListItemText>
+            </MenuItem>
+          )}
+        </Menu>
+      </Box>
+    );
+  }
 
   function renderDice() {
     return (
@@ -178,17 +320,24 @@ export function PlayerRow(
                 <Grid container alignItems="center">
                   <Grid item xs={12}>
                     <Box
-                      className={css({
+                      sx={{
                         display: "flex",
                         fontSize: ".75rem",
                         textTransform: "uppercase",
                         fontWeight: theme.typography.fontWeightBold,
-                      })}
+                        color: theme.palette.secondary.main,
+                      }}
                     >
                       <DiceBonusLabel rolls={props.player.rolls} noColor />
                     </Box>
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid
+                    item
+                    xs={12}
+                    sx={{
+                      color: theme.palette.secondary.main,
+                    }}
+                  >
                     <DiceBoxResult rolls={props.player.rolls} noColor />
                   </Grid>
                 </Grid>
@@ -197,131 +346,6 @@ export function PlayerRow(
           )}
         </Grid>
       </Box>
-    );
-  }
-
-  function renderControls() {
-    return (
-      <Grid
-        item
-        xs
-        container
-        spacing={1}
-        justifyContent="space-between"
-        wrap="nowrap"
-      >
-        <Grid
-          item
-          xs={6}
-          container
-          alignItems="center"
-          justifyContent="flex-start"
-          spacing={1}
-        >
-          <Grid item>{renderInitiative()}</Grid>
-          <Grid item>{renderPlayerId()}</Grid>
-        </Grid>
-        <Grid
-          item
-          xs={6}
-          container
-          alignItems="center"
-          justifyContent="flex-end"
-          spacing={1}
-        >
-          {props.permissions.canLoadCharacterSheet && (
-            <Grid item>{renderSwapCharacterSheetButton()}</Grid>
-          )}
-
-          {props.permissions.canRemove && (
-            <Grid item>{renderDeleteButton()}</Grid>
-          )}
-          {props.permissions.canRemove && (
-            <Grid item>{renderMarkPrivateButton()}</Grid>
-          )}
-        </Grid>
-      </Grid>
-    );
-  }
-
-  function renderSwapCharacterSheetButton() {
-    return (
-      <Fade in={hover && hasCharacterSheet}>
-        <Tooltip title={t("player-row.swap-character-sheet")}>
-          <span>
-            <IconButton
-              className={css({ padding: "0" })}
-              color={hasCharacterSheet ? "default" : "primary"}
-              data-cy={`${props["data-cy"]}.swap-character-sheet`}
-              onClick={() => {
-                props.onAssignCharacterSheet();
-              }}
-              size="large"
-            >
-              <RestorePageIcon />
-            </IconButton>
-          </span>
-        </Tooltip>
-      </Fade>
-    );
-  }
-  function renderDeleteButton() {
-    return (
-      <Fade in={hover}>
-        <Tooltip title={t("player-row.remove-player")}>
-          <span>
-            <IconButton
-              data-cy={`${props["data-cy"]}.remove`}
-              className={css({ padding: "0" })}
-              onClick={(e) => {
-                e.stopPropagation();
-                const confirmed = confirm(
-                  t("player-row.remove-player-confirmation")
-                );
-                if (confirmed) {
-                  props.onPlayerRemove();
-                  logger.track("session.remove_player");
-                }
-              }}
-              size="large"
-            >
-              <HighlightOffIcon color="error" />
-            </IconButton>
-          </span>
-        </Tooltip>
-      </Fade>
-    );
-  }
-  function renderMarkPrivateButton() {
-    return (
-      <Fade in={hover}>
-        <Tooltip
-          title={
-            props.player.private
-              ? t("player-row.show-to-players")
-              : t("player-row.hide-from-players")
-          }
-        >
-          <span>
-            <IconButton
-              data-cy={`${props["data-cy"]}.mark-private`}
-              className={css({ padding: "0" })}
-              onClick={(e) => {
-                e.stopPropagation();
-
-                props.onTogglePrivate();
-              }}
-              size="large"
-            >
-              {props.player.private ? (
-                <VisibilityIcon />
-              ) : (
-                <VisibilityOffIcon />
-              )}
-            </IconButton>
-          </span>
-        </Tooltip>
-      </Fade>
     );
   }
 
@@ -343,13 +367,11 @@ export function PlayerRow(
               logger.track("session.change_player_initiative");
             }}
             disabled={!props.permissions.canUpdateInitiative}
-            className={css({ padding: "0" })}
-            size="large"
           >
             {props.player.playedDuringTurn ? (
-              <DirectionsRunIcon htmlColor={playedDuringTurnColor} />
+              <DirectionsRunIcon htmlColor={theme.palette.secondary.main} />
             ) : (
-              <EmojiPeopleIcon htmlColor={playedDuringTurnColor} />
+              <EmojiPeopleIcon htmlColor={theme.palette.secondary.main} />
             )}
           </IconButton>
         </span>
@@ -366,12 +388,12 @@ export function PlayerRow(
         wrap="nowrap"
       >
         <Grid item>
-          <Box ml="-.5rem">
+          <Box ml="-.25rem" color={theme.palette.secondary.main}>
             <CircleTextField
+              borderColor={theme.palette.secondary.main}
               data-cy={`${props["data-cy"]}.counter`}
               value={pointsManager.state.points}
               readonly={!props.permissions.canUpdatePoints}
-              highlight
               onChange={(newValue) => {
                 pointsManager.actions.setPoints(newValue);
               }}
@@ -424,9 +446,8 @@ export function PlayerRow(
               marginBottom: ".2rem",
             })}
           >
-            <FateLabel
+            <Typography
               color="secondary"
-              uppercase={true}
               noWrap
               className={css({
                 fontSize: ".8rem",
@@ -435,7 +456,7 @@ export function PlayerRow(
               })}
             >
               {previewContentEditable({ value: mainPointerBlock?.label })}
-            </FateLabel>
+            </Typography>
           </Grid>
         )}
       </Grid>
@@ -444,40 +465,36 @@ export function PlayerRow(
 
   function renderMainName(name: string | undefined) {
     return (
-      <FateLabel
+      <Typography
         title={name}
         noWrap
-        uppercase={false}
         className={css({
           color: theme.palette.secondary.main,
+          fontWeight: theme.typography.fontWeightMedium,
         })}
       >
         {name ?? "Untitled"}
-      </FateLabel>
+      </Typography>
     );
   }
 
   function renderSecondaryName(name: string | undefined) {
     return (
-      <FateLabel
+      <Typography
         noWrap
         title={name}
-        uppercase={false}
         className={css({
           fontSize: ".85rem",
           fontWeight: theme.typography.fontWeightRegular,
-          color: theme.palette.text.secondary,
+          color: theme.palette.secondary.main,
         })}
       >
         {name}
-      </FateLabel>
+      </Typography>
     );
   }
 
   function renderName() {
-    const canOpenOrLoadSheet =
-      hasCharacterSheet || props.permissions.canLoadCharacterSheet;
-
     return (
       <>
         <Box>
@@ -495,13 +512,37 @@ export function PlayerRow(
                         {renderMainName(props.characterSheet?.name)}
                       </Grid>
                       <Grid item xs={12} zeroMinWidth>
-                        {renderSecondaryName(props.player.playerName)}
+                        <Grid container>
+                          <Grid item>
+                            <CircleIcon
+                              sx={{
+                                marginRight: ".25rem",
+                              }}
+                              htmlColor={props.color}
+                            />
+                          </Grid>
+                          <Grid item>
+                            {renderSecondaryName(props.player.playerName)}
+                          </Grid>
+                        </Grid>
                       </Grid>
                     </>
                   ) : (
                     <>
                       <Grid item xs={12} zeroMinWidth>
-                        {renderMainName(props.player.playerName)}
+                        <Grid container>
+                          <Grid item>
+                            <CircleIcon
+                              sx={{
+                                marginRight: ".25rem",
+                              }}
+                              htmlColor={props.color}
+                            />
+                          </Grid>
+                          <Grid item>
+                            {renderMainName(props.player.playerName)}
+                          </Grid>
+                        </Grid>
                       </Grid>
                     </>
                   )}
@@ -509,64 +550,10 @@ export function PlayerRow(
               </Box>
             </Grid>
 
-            <Grid item>
-              <Tooltip
-                title={
-                  hasCharacterSheet
-                    ? t("player-row.open-character-sheet")
-                    : props.permissions.canLoadCharacterSheet
-                    ? t("play-route.assign-character-sheet")
-                    : ""
-                }
-              >
-                <span>
-                  <IconButton
-                    size="small"
-                    disabled={!canOpenOrLoadSheet}
-                    color={"secondary"}
-                    data-cy={`${props["data-cy"]}.assign-or-open-character-sheet`}
-                    className={css({
-                      visibility: canOpenOrLoadSheet ? "visible" : "hidden",
-                      border: `1px solid ${theme.palette.secondary.main}`,
-                      borderRadius: "50%",
-                      boxShadow: theme.shadows[2],
-                    })}
-                    onClick={() => {
-                      if (hasCharacterSheet) {
-                        props.onCharacterSheetOpen();
-                      } else {
-                        props.onAssignCharacterSheet();
-                      }
-
-                      logger.track("session.open_character_sheet");
-                    }}
-                  >
-                    {hasCharacterSheet ? (
-                      <LaunchIcon htmlColor={borderColor} />
-                    ) : (
-                      <UploadFileIcon htmlColor={borderColor} />
-                    )}
-                  </IconButton>
-                </span>
-              </Tooltip>
-            </Grid>
+            <Grid item>{renderInitiative()}</Grid>
           </Grid>
         </Box>
       </>
-    );
-  }
-  function renderPlayerId() {
-    return (
-      <Typography
-        className={css({
-          fontSize: ".8rem",
-          fontFamily: FontFamily.Console,
-          color: theme.palette.text.secondary,
-        })}
-        display="inline"
-      >
-        [{props.player.id.slice(0, 5)}]
-      </Typography>
     );
   }
 }

@@ -1,6 +1,7 @@
 import { css } from "@emotion/css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import SaveIcon from "@mui/icons-material/Save";
+import Masonry from "@mui/lab/Masonry";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -24,9 +25,9 @@ import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { IndexCardCollectionsContext } from "../../contexts/IndexCardCollectionsContext/IndexCardCollectionsContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
-import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
 import { IIndexCardCollection } from "../../domains/index-card-collection/IndexCardCollectionFactory";
 import { SceneFactory } from "../../domains/scene/SceneFactory";
+import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
 import { IIndexCard } from "../../hooks/useScene/IScene";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -112,7 +113,7 @@ function useCardCollection(props: {
     );
   }
 
-  function moveIndexCard(dragIndex: number, hoverIndex: number) {
+  function moveIndexCard(dragId: string, hoverId: string) {
     setCardCollection(
       produce((draft) => {
         if (!draft) {
@@ -122,16 +123,17 @@ function useCardCollection(props: {
           return;
         }
 
-        if (dragIndex === undefined || hoverIndex === undefined) {
+        if (dragId === undefined || hoverId === undefined) {
           return;
         }
 
-        const cards = draft.indexCards;
+        const dragIndex = draft.indexCards.findIndex((c) => c.id === dragId);
+        const hoverIndex = draft.indexCards.findIndex((c) => c.id === hoverId);
 
-        const dragItem = cards[dragIndex];
+        const dragItem = draft.indexCards[dragIndex];
 
-        cards.splice(dragIndex, 1);
-        cards.splice(hoverIndex, 0, dragItem);
+        draft.indexCards.splice(dragIndex, 1);
+        draft.indexCards.splice(hoverIndex, 0, dragItem);
       })
     );
   }
@@ -213,6 +215,13 @@ export const CardCollectionRoute: React.FC<{
   const pageTitle = previewContentEditable({
     value: indexCardCollectionManager.state.cardCollection?.name,
   });
+  const numberOfColumnsForCards = useResponsiveValue({
+    xl: 4,
+    lg: 3,
+    md: 2,
+    sm: 1,
+    xs: 1,
+  });
 
   const { t } = useTranslate();
   const theme = useTheme();
@@ -244,7 +253,7 @@ export const CardCollectionRoute: React.FC<{
   return (
     <>
       <PageMeta title={pageTitle} />
-      <Page>
+      <Page maxWidth="none">
         <Container maxWidth="md">
           <Box mb=".5rem">
             <Alert severity="info">
@@ -316,72 +325,104 @@ export const CardCollectionRoute: React.FC<{
           </Box>
         </Container>
         <Container maxWidth="xl">
-          <Box mb="1rem">
-            {indexCardCollectionManager.state.cardCollection?.indexCards && (
-              <Grid container spacing={2}>
-                {indexCardCollectionManager.state.cardCollection?.indexCards.map(
-                  (indexCard, index) => {
-                    const hasChildren = indexCard.subCards.length > 0;
-                    return (
-                      <Grid item md={hasChildren ? 12 : 4} key={indexCard.id}>
-                        <IndexCard
-                          type={"public"}
-                          reactDndIndex={index}
-                          allCards={
-                            indexCardCollectionManager.state.cardCollection
-                              ?.indexCards ?? []
-                          }
-                          isGM={true}
-                          canMove={true}
-                          key={indexCard.id}
-                          reactDndType={DragAndDropTypes.SceneIndexCards}
-                          data-cy={`card-collection.card.${index}`}
-                          id={`index-card-${indexCard.id}`}
-                          indexCard={indexCard}
-                          onRoll={() => {}}
-                          onPoolClick={() => {}}
-                          onMoveTo={(
-                            idOfIndexCardToMove: string,
-                            idOfIndexCardToMoveTo: string
-                          ) => {
-                            indexCardCollectionManager.actions.moveIndexCardTo(
-                              idOfIndexCardToMove,
-                              idOfIndexCardToMoveTo
-                            );
-                          }}
-                          onMove={(dragIndex, hoverIndex) => {
-                            indexCardCollectionManager.actions.moveIndexCard(
-                              dragIndex,
-                              hoverIndex
-                            );
-                          }}
-                          onChange={(newIndexCard) => {
-                            indexCardCollectionManager.actions.updateIndexCard(
-                              newIndexCard
-                            );
-                          }}
-                          onDuplicate={() => {
-                            indexCardCollectionManager.actions.duplicateIndexCard(
-                              indexCard
-                            );
-                          }}
-                          onRemove={() => {
-                            indexCardCollectionManager.actions.removeIndexCard(
-                              indexCard.id
-                            );
-                          }}
-                        />
-                      </Grid>
-                    );
-                  }
-                )}
-              </Grid>
-            )}
-          </Box>
+          <Box mb="1rem">{renderIndexCards()}</Box>
         </Container>
       </Page>
     </>
   );
+
+  function renderIndexCards() {
+    const cardsWithSubCards =
+      indexCardCollectionManager.state.cardCollection?.indexCards.filter(
+        (card) => card.subCards.length > 0
+      );
+    const cardsWithoutSubCards =
+      indexCardCollectionManager.state.cardCollection?.indexCards.filter(
+        (card) => card.subCards.length === 0
+      );
+
+    return (
+      <Box>
+        {renderIndexCardsMasonry({
+          cards: cardsWithSubCards,
+          columns: 1,
+        })}
+        {renderIndexCardsMasonry({
+          cards: cardsWithoutSubCards,
+          columns: numberOfColumnsForCards,
+        })}
+      </Box>
+    );
+  }
+
+  function renderIndexCardsMasonry(renderProps: {
+    cards: IIndexCard[] | undefined;
+    columns: number;
+  }) {
+    if (!renderProps.cards?.length) {
+      return;
+    }
+    return (
+      <Masonry
+        columns={renderProps.columns}
+        sx={{
+          alignContent: "flex-start",
+        }}
+      >
+        {renderProps.cards.map((indexCard, index) => {
+          return (
+            <Box key={indexCard.id}>
+              <IndexCard
+                type={"public"}
+                allCards={
+                  indexCardCollectionManager.state.cardCollection?.indexCards ??
+                  []
+                }
+                isGM={true}
+                canMove={indexCard.subCards.length === 0}
+                key={indexCard.id}
+                data-cy={`card-collection.card.${index}`}
+                id={`index-card-${indexCard.id}`}
+                indexCard={indexCard}
+                onRoll={() => {}}
+                onPoolClick={() => {}}
+                onMoveTo={(
+                  idOfIndexCardToMove: string,
+                  idOfIndexCardToMoveTo: string
+                ) => {
+                  indexCardCollectionManager.actions.moveIndexCardTo(
+                    idOfIndexCardToMove,
+                    idOfIndexCardToMoveTo
+                  );
+                }}
+                onMove={(dragId, hoverId) => {
+                  indexCardCollectionManager.actions.moveIndexCard(
+                    dragId,
+                    hoverId
+                  );
+                }}
+                onChange={(newIndexCard) => {
+                  indexCardCollectionManager.actions.updateIndexCard(
+                    newIndexCard
+                  );
+                }}
+                onDuplicate={() => {
+                  indexCardCollectionManager.actions.duplicateIndexCard(
+                    indexCard
+                  );
+                }}
+                onRemove={() => {
+                  indexCardCollectionManager.actions.removeIndexCard(
+                    indexCard.id
+                  );
+                }}
+              />
+            </Box>
+          );
+        })}
+      </Masonry>
+    );
+  }
 };
 
 CardCollectionRoute.displayName = "CardCollectionRoute";

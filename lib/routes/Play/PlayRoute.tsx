@@ -22,6 +22,11 @@ import {
   useSessionCharacterSheets,
 } from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { PlayersPresence } from "./components/PlayersPresence/PlayersPresence";
+import {
+  SessionPresenceUpdaterContext,
+  useSessionPresenceUpdater,
+} from "./contexts/SessionPresenceContext";
 import {
   IPlayerInteraction,
   PlayerInteractionFactory,
@@ -113,6 +118,21 @@ export const PlayRoute: React.FC<{
   const sessionCharactersManager = useSessionCharacterSheets({
     userId: userId,
     charactersManager: charactersManager,
+  });
+
+  const sceneName = sceneManager.state.scene?.name ?? "";
+  const pageTitle = useMemo(() => {
+    return previewContentEditable({ value: sceneName });
+  }, [sceneName]);
+  const me = sessionManager.computed.me;
+  const myCharacter =
+    sessionCharactersManager.state.characterSheets[me?.id ?? ""];
+  const myCharacterName = myCharacter?.name ?? "";
+
+  const sessionPresenceUpdater = useSessionPresenceUpdater({
+    characterName: myCharacterName,
+    playerName: me?.playerName,
+    color: me?.color,
   });
 
   useLiveObject({
@@ -232,11 +252,6 @@ export const PlayRoute: React.FC<{
     };
   }, [connectionState]);
 
-  const sceneName = sceneManager.state.scene?.name ?? "";
-  const pageTitle = useMemo(() => {
-    return previewContentEditable({ value: sceneName });
-  }, [sceneName]);
-
   useEffect(() => {
     if (isGM) {
       logger.track("play_online_game", {
@@ -290,17 +305,26 @@ export const PlayRoute: React.FC<{
             Connection: {connectionState}
           </Alert>
         </Snackbar>
-        <Session
-          sessionManager={sessionManager}
-          sessionCharactersManager={sessionCharactersManager}
-          sceneManager={sceneManager}
-          isLoading={false}
-          idFromParams={idFromParams}
-          shareLink={shareLink}
-          userId={settingsManager.state.userId}
-          error={undefined}
-          onPlayerInteraction={handlePlayerInteraction}
-        />
+        <SessionPresenceUpdaterContext.Provider value={sessionPresenceUpdater}>
+          <PlayersPresence
+            render={(playerPresenceProps) => {
+              return (
+                <Session
+                  sessionManager={sessionManager}
+                  sessionCharactersManager={sessionCharactersManager}
+                  sceneManager={sceneManager}
+                  isLoading={false}
+                  idFromParams={idFromParams}
+                  shareLink={shareLink}
+                  userId={settingsManager.state.userId}
+                  error={undefined}
+                  onPlayerInteraction={handlePlayerInteraction}
+                  onOpenChat={playerPresenceProps.openChat}
+                />
+              );
+            }}
+          />
+        </SessionPresenceUpdaterContext.Provider>
       </>
     </>
   );

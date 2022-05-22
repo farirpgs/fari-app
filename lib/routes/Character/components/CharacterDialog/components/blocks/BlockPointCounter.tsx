@@ -154,7 +154,6 @@ export function BlockPointCounter(
           <Grid item>
             <CircleTextField
               data-cy={`${props.dataCy}.value`}
-              highlight={props.block.meta.isMainPointCounter}
               value={pointsManager.state.points}
               onChange={(newValue) => {
                 pointsManager.actions.setPoints(newValue);
@@ -183,7 +182,6 @@ export function BlockPointCounter(
               <Grid item>
                 <CircleTextField
                   data-cy={`${props.dataCy}.max`}
-                  highlight={props.block.meta.isMainPointCounter}
                   value={pointsManager.state.maxPoints ?? ""}
                   onChange={(newMax) => {
                     pointsManager.actions.setMaxPoints(newMax);

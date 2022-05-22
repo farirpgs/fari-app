@@ -285,6 +285,7 @@ export function MyBinder<TFolders extends string>(props: {
         </DialogActions>
       </Dialog>
       <Dialog
+        disableEnforceFocus
         open={props.open}
         onClose={props.onClose}
         fullWidth
@@ -883,12 +884,6 @@ function Element(props: {
               <span className={css({ color: theme.palette.text.secondary })}>
                 {listItem.formatDate(props.element.lastUpdated)}
               </span>
-            </Box>
-            <Box
-              component="span"
-              sx={{ mt: ".5rem", display: { xs: "block", md: "none" } }}
-            >
-              {secondaryActions}
             </Box>
           </>
         }

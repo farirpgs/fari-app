@@ -5,6 +5,7 @@ import {
   IIndexCardType,
   IPlayer,
 } from "../../../hooks/useScene/IScene";
+import { DefaultPlayerColor } from "../consts/PlayerColors";
 
 export type IPlayerInteraction =
   | {
@@ -76,6 +77,7 @@ export const PlayerInteractionFactory = {
       isGM: false,
       points: "3",
       private: false,
+      color: DefaultPlayerColor,
       playedDuringTurn: false,
     };
 

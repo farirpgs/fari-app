@@ -266,8 +266,8 @@ export function useScene() {
   }
 
   function moveIndexCard(
-    dragIndex: number,
-    hoverIndex: number,
+    dragId: string,
+    hoverId: string,
     type: IIndexCardType
   ) {
     setScene(
@@ -275,15 +275,14 @@ export function useScene() {
         if (!draft) {
           return;
         }
-        if (!draft) {
-          return;
-        }
 
-        if (dragIndex === undefined || hoverIndex === undefined) {
+        if (dragId === undefined || hoverId === undefined) {
           return;
         }
 
         const cards = draft.indexCards[type];
+        const dragIndex = cards.findIndex((c) => c.id === dragId);
+        const hoverIndex = cards.findIndex((c) => c.id === hoverId);
 
         const dragItem = cards[dragIndex];
 

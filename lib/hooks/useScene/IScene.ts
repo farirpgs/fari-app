@@ -1,6 +1,7 @@
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { IBlock, ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
+import { IDrawingAreaState } from "../../routes/Draw/TldrawWriterAndReader";
 import { AspectType } from "./AspectType";
 
 export type IPlayer = {
@@ -11,6 +12,7 @@ export type IPlayer = {
   isGM: boolean;
   points: string;
   private: boolean;
+  color: string;
 };
 
 /**
@@ -124,7 +126,7 @@ export type ISession = {
   players: Record<string, IPlayer>;
   goodConfetti: number;
   badConfetti: number;
-  tlDrawDoc: any | undefined;
+  tlDrawDoc: IDrawingAreaState;
   paused: boolean;
 };
 

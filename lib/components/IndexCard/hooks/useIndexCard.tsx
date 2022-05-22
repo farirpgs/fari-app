@@ -165,28 +165,39 @@ export function useIndexCard(props: {
     );
   }
 
-  function moveIndexCard(dragIndex: number, hoverIndex: number) {
+  function moveIndexCard(dragId: string, hoverId: string) {
     setIndexCard(
       produce((draft: IIndexCard) => {
-        if (dragIndex === undefined || hoverIndex === undefined) {
+        if (dragId === undefined || hoverId === undefined) {
           return;
         }
 
+        const dragIndex = draft.subCards.findIndex((c) => c.id === dragId);
+        const hoverIndex = draft.subCards.findIndex((c) => c.id === hoverId);
+
         const dragItem = draft.subCards[dragIndex];
+
         draft.subCards.splice(dragIndex, 1);
         draft.subCards.splice(hoverIndex, 0, dragItem);
       })
     );
   }
 
-  function moveIndexCardBlock(dragIndex: number, hoverIndex: number) {
+  function moveIndexCardBlock(dragId: string, hoverId: string) {
     setIndexCard(
       produce((draft: IIndexCard) => {
-        if (dragIndex === undefined || hoverIndex === undefined) {
+        if (dragId === undefined || hoverId === undefined) {
           return;
         }
 
+        const dragIndex = draft.blocks.findIndex(
+          (block) => block.id === dragId
+        );
+        const hoverIndex = draft.blocks.findIndex(
+          (block) => block.id === hoverId
+        );
         const dragItem = draft.blocks[dragIndex];
+
         draft.blocks.splice(dragIndex, 1);
         draft.blocks.splice(hoverIndex, 0, dragItem);
       })

@@ -11,6 +11,15 @@
 - [ ] highlight die
 - [ ] support image die (narrative system)
 
+# v6.3.0
+
+- feat: view player cursors using presence
+- feat: view player messages (like a chat) using presence
+- feat: view player custom roll commands using presence
+- feat: true masonry layout for index cards
+- feat: more reliable drag and drop feature for index cards
+- feat: larger screen size support for index cards in scenes
+
 # v6.2.0
 
 - fix: sync roll issues

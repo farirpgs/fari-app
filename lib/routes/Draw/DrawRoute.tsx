@@ -38,12 +38,16 @@ export const DrawRoute: React.FC = () => {
 
         <Box
           border={`1px solid ${theme.palette.divider}`}
-          // maxWidth="600px"
+          height="60vh"
           position="relative"
-          height="600px"
           margin="0 auto"
         >
-          <TldrawWriter />
+          <TldrawWriter
+            state={{
+              bindings: {},
+              shapes: {},
+            }}
+          />
         </Box>
       </Container>
     </Page>

@@ -1,4 +1,4 @@
-import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
@@ -46,8 +46,8 @@ export const SceneRoute: React.FC<{
   return (
     <>
       <PageMeta title={pageTitle} />
-      <Page>
-        <Container>
+      <Page maxWidth="none">
+        <Box px="2rem">
           <Scene
             sceneManager={sceneManager}
             isGM={true}
@@ -60,7 +60,7 @@ export const SceneRoute: React.FC<{
               sceneManager.actions.updateIndexCard(indexCard, type);
             }}
           />
-        </Container>
+        </Box>
       </Page>
     </>
   );

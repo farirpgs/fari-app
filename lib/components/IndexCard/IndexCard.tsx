@@ -15,14 +15,13 @@ import PushPinIcon from "@mui/icons-material/PushPin";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Masonry from "@mui/lab/Masonry";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import Fade from "@mui/material/Fade";
 import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
 import InputLabel from "@mui/material/InputLabel";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
@@ -38,8 +37,8 @@ import { FontFamily } from "../../constants/FontFamily";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
+import { useElementWidth } from "../../hooks/useElementWidth/useElementWidth";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
-import { useResponsiveValue } from "../../hooks/useResponsiveValue/useResponsiveValue";
 import { IIndexCard, IIndexCardType } from "../../hooks/useScene/IScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
@@ -59,6 +58,8 @@ import {
 } from "../ContentEditable/ContentEditable";
 import { useIndexCard } from "./hooks/useIndexCard";
 import { IndexCardColor, IndexCardColorTypes } from "./IndexCardColor";
+
+export const IndexCardMinWidth = 400;
 
 function FariPopper(props: {
   renderAnchor: (renderProps: {
@@ -127,8 +128,6 @@ export const IndexCard: React.FC<
     indexCard: IIndexCard;
     parentIndexCard?: IIndexCard;
     allCards: Array<IIndexCard>;
-    reactDndIndex: number;
-    reactDndType: string;
     canMove: boolean;
     isGM: boolean;
     indexCardHiddenRecord?: Record<string, boolean>;
@@ -137,7 +136,7 @@ export const IndexCard: React.FC<
     onMoveTo?(idOfIndexCardToMove: string, idOfIndexCardToMoveTo: string): void;
     onMoveOut?(idOfIndexCardToMove: string): void;
     onRoll(diceRollResult: IDiceRollResult): void;
-    onMove(dragIndex: number, hoverIndex: number): void;
+    onMove(dragIndex: string, hoverIndex: string): void;
     onRemove(): void;
     onDuplicate(): void;
     onTogglePrivate?(): void;
@@ -148,33 +147,32 @@ export const IndexCard: React.FC<
   const { t } = useTranslate();
 
   const [hover, setHover] = useState(false);
-
   const $menu = useRef(null);
   const indexCardManager = useIndexCard({
     indexCard: props.indexCard,
     onChange: props.onChange,
   });
+  const indexCardColor =
+    theme.palette.mode === "light"
+      ? indexCardManager.state.indexCard.color
+      : darken(indexCardManager.state.indexCard.color, 0.5);
+
   const miniTheme = useMiniTheme({
-    enforceBackground: indexCardManager.state.indexCard.color,
+    enforceBackground: indexCardColor,
   });
+
+  const subCardsContainerRef = useRef<HTMLElement>(null);
+  const subCardsContainerWidth = useElementWidth(subCardsContainerRef);
+  const numberOfColumnsForSubCardsMasonry = Math.floor(
+    subCardsContainerWidth / IndexCardMinWidth
+  );
 
   const hasSubCards = indexCardManager.state.indexCard.subCards.length > 0;
   const isSubCard = indexCardManager.state.indexCard.sub;
   const [advanced, setAdvanced] = useState(false);
   const open = !props.indexCardHiddenRecord?.[props.indexCard.id];
-  const numberOfColumnsForSubCards = useResponsiveValue({
-    xl: 3,
-    lg: 2,
-    md: 2,
-    sm: 1,
-    xs: 1,
-  });
 
-  const paper = useTextColors(
-    theme.palette.mode === "light"
-      ? indexCardManager.state.indexCard.color
-      : darken(indexCardManager.state.indexCard.color, 0.5)
-  );
+  const paper = useTextColors(indexCardColor);
 
   const defaultButtonTheme = useThemeFromColor(paper.primary);
 
@@ -207,10 +205,14 @@ export const IndexCard: React.FC<
                 <BetterDnd
                   direction="horizontal"
                   key={indexCardManager.state.indexCard.id}
-                  index={props.reactDndIndex}
-                  type={props.reactDndType}
-                  onMove={(dragIndex, hoverIndex) => {
-                    props.onMove(dragIndex, hoverIndex);
+                  id={indexCardManager.state.indexCard.id}
+                  type={
+                    hasSubCards
+                      ? `${DragAndDropTypes.SceneIndexCardsSubCards}-${indexCardManager.state.indexCard.id}`
+                      : DragAndDropTypes.SceneIndexCards
+                  }
+                  onMove={(dragId, hoverId) => {
+                    props.onMove(dragId, hoverId);
                   }}
                   render={(dndRenderProps) => {
                     return (
@@ -531,71 +533,53 @@ export const IndexCard: React.FC<
 
   function renderSubCards() {
     return (
-      <Box px="1rem" py="1rem">
-        <ImageList
-          variant={"standard"}
-          cols={numberOfColumnsForSubCards}
-          gap={16}
-          className={css({
-            // padding: "1rem 1rem", // for boxShadow padding
-            // margin: "-1rem -1rem", // for boxShadow padding
-          })}
+      <Box px="1rem" py="1rem" ref={subCardsContainerRef}>
+        <Masonry
+          columns={numberOfColumnsForSubCardsMasonry}
+          sx={{
+            alignContent: "flex-start",
+          }}
         >
-          {indexCardManager.state.indexCard.subCards?.map(
-            (subCard, subCardIndex) => {
-              return (
-                <ImageListItem
-                  key={subCard.id}
-                  cols={1}
-                  className={css({
-                    width: "100%",
-                    paddingTop: ".25rem",
-                    paddingBottom: ".25rem",
-                  })}
-                >
-                  <IndexCard
-                    indexCard={subCard}
-                    isGM={props.isGM}
-                    parentIndexCard={indexCardManager.state.indexCard}
-                    allCards={props.allCards}
-                    id={`index-card-${subCard.id}`}
-                    reactDndType={`${DragAndDropTypes.SceneIndexCardsSubCards}.${indexCardManager.state.indexCard.id}`}
-                    canMove={true}
-                    reactDndIndex={subCardIndex}
-                    onPoolClick={props.onPoolClick}
-                    onRoll={props.onRoll}
-                    indexCardHiddenRecord={props.indexCardHiddenRecord}
-                    onToggleVisibility={props.onToggleVisibility}
-                    onMoveTo={(idOfIndexCardToMove, idOfIndexCardToMoveTo) => {
-                      props.onMoveTo?.(
-                        idOfIndexCardToMove,
-                        idOfIndexCardToMoveTo
-                      );
-                    }}
-                    onMoveOut={(idOfIndexCardToMove) => {
-                      props.onMoveOut?.(idOfIndexCardToMove);
-                    }}
-                    onMove={(dragIndex, hoverIndex) => {
-                      indexCardManager.actions.moveIndexCard(
-                        dragIndex,
-                        hoverIndex
-                      );
-                    }}
-                    onChange={(newIndexCard) => {
-                      indexCardManager.actions.updateIndexCard(newIndexCard);
-                    }}
-                    onDuplicate={() => {
-                      indexCardManager.actions.duplicateIndexCard(subCard);
-                    }}
-                    onRemove={() => {
-                      indexCardManager.actions.removeIndexCard(subCard.id);
-                    }}
-                  />
-                </ImageListItem>
-              );
-            }
-          )}
-        </ImageList>
+          {indexCardManager.state.indexCard.subCards?.map((subCard) => {
+            return (
+              <Box key={subCard.id}>
+                <IndexCard
+                  indexCard={subCard}
+                  isGM={props.isGM}
+                  parentIndexCard={indexCardManager.state.indexCard}
+                  allCards={props.allCards}
+                  id={`index-card-${subCard.id}`}
+                  canMove={true}
+                  onPoolClick={props.onPoolClick}
+                  onRoll={props.onRoll}
+                  indexCardHiddenRecord={props.indexCardHiddenRecord}
+                  onToggleVisibility={props.onToggleVisibility}
+                  onMoveTo={(idOfIndexCardToMove, idOfIndexCardToMoveTo) => {
+                    props.onMoveTo?.(
+                      idOfIndexCardToMove,
+                      idOfIndexCardToMoveTo
+                    );
+                  }}
+                  onMoveOut={(idOfIndexCardToMove) => {
+                    props.onMoveOut?.(idOfIndexCardToMove);
+                  }}
+                  onMove={(dragId, hoverId) => {
+                    indexCardManager.actions.moveIndexCard(dragId, hoverId);
+                  }}
+                  onChange={(newIndexCard) => {
+                    indexCardManager.actions.updateIndexCard(newIndexCard);
+                  }}
+                  onDuplicate={() => {
+                    indexCardManager.actions.duplicateIndexCard(subCard);
+                  }}
+                  onRemove={() => {
+                    indexCardManager.actions.removeIndexCard(subCard.id);
+                  }}
+                />
+              </Box>
+            );
+          })}
+        </Masonry>
       </Box>
     );
   }
@@ -607,18 +591,15 @@ export const IndexCard: React.FC<
 
     return (
       <Box px="1rem" py=".5rem">
-        {indexCardManager.state.indexCard.blocks.map((block, blockIndex) => {
+        {indexCardManager.state.indexCard.blocks.map((block) => {
           return (
             <Box key={block.id} mb=".5rem">
               <BetterDnd
                 direction="vertical"
-                index={blockIndex}
+                id={block.id}
                 type={`${DragAndDropTypes.SceneIndexCardsBlocks}.${indexCardManager.state.indexCard.id}`}
-                onMove={(dragIndex, hoverIndex) => {
-                  indexCardManager.actions.moveIndexCardBlock(
-                    dragIndex,
-                    hoverIndex
-                  );
+                onMove={(dragId, hoverId) => {
+                  indexCardManager.actions.moveIndexCardBlock(dragId, hoverId);
                 }}
                 render={(dndRenderProps) => {
                   return (

@@ -79,6 +79,7 @@ describe("/play-offline", () => {
 
     Fari.get("scene.reset-initiative").click();
 
+    Fari.get("scene.player-row.gm-npc-1.menu").click({ force: true });
     Fari.get("scene.player-row.gm-npc-1.remove").click({ force: true });
   });
 });
