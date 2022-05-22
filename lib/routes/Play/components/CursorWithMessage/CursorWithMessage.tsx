@@ -12,7 +12,7 @@ import { useZIndex } from "../../../../constants/zIndex";
 import { ThemedLabel } from "../../../Character/components/CharacterDialog/components/ThemedLabel";
 import {
   MiniThemeContext,
-  useMiniTheme,
+  useMiniTheme
 } from "../../../Character/components/CharacterDialog/MiniThemeContext";
 import { DefaultPlayerColor } from "../../consts/PlayerColors";
 import { IPlayerCursorRollOutput } from "../../types/IPlayerCursorState";

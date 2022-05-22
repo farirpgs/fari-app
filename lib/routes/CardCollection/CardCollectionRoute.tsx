@@ -16,7 +16,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router";
 import {
   ContentEditable,
-  previewContentEditable,
+  previewContentEditable
 } from "../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
