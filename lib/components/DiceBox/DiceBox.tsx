@@ -87,7 +87,7 @@ export const DiceBox: React.FC<IProps> = (props) => {
   const diceRollingAnimationStyle = css({
     animationName: "spin",
     animationDuration: "250ms",
-    animationIterationCount: "infinite",
+    animationIterationCount: "4",
     animationTimingFunction: "linear",
   });
   const shouldListResult =

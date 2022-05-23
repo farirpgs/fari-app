@@ -6,4 +6,5 @@ export const Delays = {
   blockHoverEnterControls: 750,
   blockHoverLeaveControls: 1500,
   cursorStale: 3000,
+  rollingDelay: 1000,
 };

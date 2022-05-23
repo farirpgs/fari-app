@@ -1,9 +1,8 @@
 import { darken, useTheme } from "@mui/material/styles";
 import { useEffect, useRef, useState } from "react";
+import { Delays } from "../../constants/Delays";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { Dice, IDiceRollResult } from "../../domains/dice/Dice";
-
-const rollingDelay = 1000;
 
 function usePrevious<T>(value: T) {
   const ref = useRef<T>(value);
@@ -77,7 +76,7 @@ export function useLatestDiceRoll(
         handleIsRolling();
         timeout = setTimeout(() => {
           handleSetFinalResult();
-        }, rollingDelay);
+        }, Delays.rollingDelay);
       }
       return () => {
         if (timeout) {
