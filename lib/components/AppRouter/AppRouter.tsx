@@ -88,7 +88,7 @@ export const AppRouter = () => {
         />
         ;
         <Route
-          path={"play:id"}
+          path={"play/:id"}
           element={
             <Params
               render={(params: { id: string }) => {
