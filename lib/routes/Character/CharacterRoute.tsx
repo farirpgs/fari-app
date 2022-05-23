@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Toolbox } from "../../components/Toolbox/Toolbox";
@@ -14,13 +14,10 @@ import { IDiceRollResult } from "../../domains/dice/Dice";
 import { useQuery } from "../../hooks/useQuery/useQuery";
 import { CharacterV3Dialog } from "./components/CharacterDialog/CharacterV3Dialog";
 
-export const CharacterRoute: React.FC<{
-  match: {
-    params: { id: string };
-  };
-}> = (props) => {
+function CharacterRoute() {
   const theme = useTheme();
-  const history = useHistory();
+  const params = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const charactersManager = useContext(CharactersContext);
   const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
   const diceManager = useContext(DiceContext);
@@ -42,16 +39,18 @@ export const CharacterRoute: React.FC<{
 
   useEffect(() => {
     const characterToLoad = charactersManager.state.characters.find(
-      (s) => s.id === props.match.params.id
+      (s) => s.id === params.id
     );
 
     if (characterToLoad) {
       setSelectedCharacter(characterToLoad);
     } else {
-      history.replace("/");
+      navigate("/", {
+        replace: true,
+      });
       myBinderManager.actions.open({ folder: "characters" });
     }
-  }, [props.match.params.id, charactersManager.state.characters]);
+  }, [params.id, charactersManager.state.characters]);
 
   const query = useQuery<"dialog" | "readonly">();
   const dialogMode = query.get("dialog") === "true";
@@ -91,7 +90,7 @@ export const CharacterRoute: React.FC<{
       </Box>
     </>
   );
-};
+}
 
 CharacterRoute.displayName = "CharacterRoute";
 export default CharacterRoute;

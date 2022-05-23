@@ -5,7 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import React from "react";
 import {
   Link as ReactRouterLink,
-  LinkProps as ReactRouterLinkProps
+  LinkProps as ReactRouterLinkProps,
 } from "react-router-dom";
 
 type IProps = {
@@ -78,16 +78,15 @@ export const AppLink: React.FC<
 export const AppButtonLink: React.FC<ReactRouterLinkProps & ButtonProps> = (
   props
 ) => {
-  const { to, ...rest } = props;
   const isInternal = (props.to as string).startsWith("/");
 
   if (isInternal) {
     return (
       <Button
-        to={to}
+        to={props.to}
         component={ReactRouterLink}
         rel={props.target === "_blank" ? "noreferrer" : undefined}
-        {...rest}
+        // {...rest}
       >
         {props.children}
       </Button>
@@ -96,10 +95,10 @@ export const AppButtonLink: React.FC<ReactRouterLinkProps & ButtonProps> = (
 
   return (
     <Button
-      href={to as string}
+      href={props.to as string}
       component={"a"}
       rel={props.target === "_blank" ? "noreferrer" : undefined}
-      {...rest}
+      // {...rest}
     >
       {props.children}
     </Button>

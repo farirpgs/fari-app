@@ -12,11 +12,7 @@ import {
 } from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
-export const PlayOfflineRoute: React.FC<{
-  match: {
-    params: { id?: string };
-  };
-}> = () => {
+export const PlayOfflineRoute: React.FC<{}> = () => {
   const settingsManager = useContext(SettingsContext);
   const charactersManager = useContext(CharactersContext);
 

@@ -14,7 +14,7 @@ import Link from "@mui/material/Link";
 import kebabCase from "lodash/kebabCase";
 import startCase from "lodash/startCase";
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
@@ -28,7 +28,7 @@ import { CharacterV3Dialog } from "../Character/components/CharacterDialog/Chara
 
 export function NewCharacterRoute() {
   const charactersManager = useContext(CharactersContext);
-  const history = useHistory();
+  const navigate = useNavigate();
   const [status, setStatus] = useState<"loading" | "success" | "error">(
     "loading"
   );
@@ -50,10 +50,10 @@ export function NewCharacterRoute() {
       const template = CharacterTemplates.find((t) => {
         const categoryMatch =
           kebabCase(t.category.toLowerCase()) ===
-          kebabCase(params.category.toLowerCase());
+          kebabCase(params.category?.toLowerCase());
         const nameMatch =
           kebabCase(t.fileName.toLowerCase()) ===
-          kebabCase(params.name.toLowerCase());
+          kebabCase(params.name?.toLowerCase());
         return categoryMatch && nameMatch;
       });
       if (template) {
@@ -71,12 +71,12 @@ export function NewCharacterRoute() {
     const newCharacter = await charactersManager.actions.add(
       template as ICharacterTemplate
     );
-    history.push(`/characters/${newCharacter.id}`);
+    navigate(`/characters/${newCharacter.id}`);
   }
   const [fakeCharacter, setFakeCharacter] = useState<ICharacter>();
 
   function handleCancel() {
-    history.push(`/`);
+    navigate(`/`);
   }
 
   return (

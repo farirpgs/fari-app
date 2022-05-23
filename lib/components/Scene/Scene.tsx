@@ -43,7 +43,6 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Prompt } from "react-router";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { IndexCardCollectionsContext } from "../../contexts/IndexCardCollectionsContext/IndexCardCollectionsContext";
@@ -56,6 +55,7 @@ import { ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { Icons } from "../../domains/Icons/Icons";
+import { usePrompt } from "../../hooks/useBlocker/useBlocker";
 import { useBlockReload } from "../../hooks/useBlockReload/useBlockReload";
 import { useElementWidth } from "../../hooks/useElementWidth/useElementWidth";
 import { LazyState } from "../../hooks/useLazyState/useLazyState";
@@ -151,6 +151,7 @@ export const Session: React.FC<IProps> = (props) => {
   });
 
   const { t } = useTranslate();
+  usePrompt(t("manager.leave-without-saving"), true);
   const logger = useLogger();
   const diceManager = useContext(DiceContext);
 
@@ -285,12 +286,6 @@ export const Session: React.FC<IProps> = (props) => {
   return (
     <Page pb="6rem" isLive gameId={props.idFromParams} maxWidth="none">
       <Box px="1rem">
-        <Prompt when={true} message={t("manager.leave-without-saving")} />
-
-        {/* <Prompt
-          when={isGMHostingOnlineOrOfflineGame}
-          message={t("play-route.host-leaving-warning")}
-        /> */}
         {renderPauseDialog()}
         {streamerModalOpen && (
           <WindowPortal

@@ -1,10 +1,11 @@
 import { LiveblocksProvider, RoomProvider } from "@liveblocks/react";
 import React, { useContext } from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useParams } from "react-router-dom";
 import { InjectionsContext } from "../../contexts/InjectionsContext/InjectionsContext";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { StoryBuilderRoute } from "../../routes/StoryBuilder/StoryBuilderRoute";
 import StoryDiceRoute from "../../routes/StoryDice/StoryDiceRoute";
+import { ExternalRedirect } from "../ExternalRedirect/ExternalRedirect";
 import { LoadingRoute } from "./LoadingRoute";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
@@ -49,250 +50,171 @@ export const AppRouter = () => {
 
   return (
     <React.Suspense fallback={<LoadingRoute pathname={location.pathname} />}>
-      <Switch>
-        <Route
-          exact
-          path={"/"}
-          render={() => {
-            return <HomeRoute />;
-          }}
-        />
-        <Route
-          exact
-          path={"/characters/new/:category/:name"}
-          render={() => {
-            return <NewCharacterRoute />;
-          }}
-        />
-        <Route
-          exact
-          path={"/characters/:id"}
-          render={(props) => {
-            return <CharacterRoute {...props} />;
-          }}
-        />
-        <Route
-          exact
-          path={"/characters/:id/print"}
-          render={(props) => {
-            return <CharacterPrintRoute {...props} />;
-          }}
-        />
+      <Routes>
+        <Route path={"/"} element={<HomeRoute />}>
+          <Route
+            path={"/characters/new/:category/:name"}
+            element={<NewCharacterRoute />}
+          />
+          <Route path={"/characters/:id"} element={<CharacterRoute />} />
+          <Route
+            path={"/characters/:id/print"}
+            element={<CharacterPrintRoute />}
+          />
+          <Route
+            path={"/dice"}
+            element={<DiceRoute pool={false} key="dice" />}
+          />
+          <Route
+            path={"/dice-pool"}
+            element={<DiceRoute pool={true} key="dice-pool" />}
+          />
+          <Route path={"/data"} element={<DataRoute />} />
+          <Route path={"/oracle"} element={<OracleRoute />} />
+          <Route path={"/draw"} element={<DrawRoute />} />
+          <Route
+            path={"play"}
+            element={
+              <Params
+                render={(params: { id: string }) => {
+                  const sessionId = params.id || userId;
+                  return (
+                    <LiveblocksProvider client={injections.liveBlocksClient}>
+                      <RoomProvider id={sessionId}>
+                        <PlayRoute />;
+                      </RoomProvider>
+                    </LiveblocksProvider>
+                  );
+                }}
+              />
+            }
+          />
+          ;
+          <Route
+            path={"play:id"}
+            element={
+              <Params
+                render={(params: { id: string }) => {
+                  const sessionId = params.id || userId;
+                  return (
+                    <LiveblocksProvider client={injections.liveBlocksClient}>
+                      <RoomProvider id={sessionId}>
+                        <PlayRoute />;
+                      </RoomProvider>
+                    </LiveblocksProvider>
+                  );
+                }}
+              />
+            }
+          />
+          ;
+          <Route
+            path={"/play/join/:id"}
+            element={
+              <Params
+                render={(params: { id: string }) => {
+                  const sessionId = params.id || userId;
+                  return (
+                    <LiveblocksProvider client={injections.liveBlocksClient}>
+                      <RoomProvider id={sessionId}>
+                        <JoinAGameRoute />;
+                      </RoomProvider>
+                    </LiveblocksProvider>
+                  );
+                }}
+              />
+            }
+          />
+          <Route path={"/play-offline"} element={<PlayOfflineRoute />} />
+          <Route path={"/scenes/:id"} element={<SceneRoute />} />
+          <Route path={"/cards/:id"} element={<CardCollection />} />
+          <Route
+            path="/srds/condensed"
+            element={
+              <ExternalRedirect url="https://fari.games/en/resources/fari-rpgs/fari-app-wiki" />
+            }
+          />
+          <Route
+            path="/srds/condensed"
+            element={
+              <ExternalRedirect url="https://fari.games/en/srds/evilhat/fate-condensed" />
+            }
+          />
+          <Route
+            path="/srds/accelerated"
+            element={
+              <ExternalRedirect url="https://fari.games/en/srds/evilhat/fate-accelerated" />
+            }
+          />
+          <Route
+            path="/srds/system-toolkit"
+            element={
+              <ExternalRedirect url="https://fari.games/en/srds/evilhat/fate-system-toolkit" />
+            }
+          />
+          <Route
+            path="/srds/adversary-toolkit"
+            element={
+              <ExternalRedirect url="https://fari.games/en/srds/evilhat/fate-adversary-toolkit" />
+            }
+          />
+          <Route
+            path="/fate-stunts"
+            element={
+              <ExternalRedirect url="https://fari.games/en/resources/fari-rpgs/fate-stunts" />
+            }
+          />
+          <Route
+            path="/fari-wiki"
+            element={
+              <ExternalRedirect url="https://fari.games/en/resources/fari-rpgs/fari-app-wiki" />
+            }
+          />
+          <Route
+            path="/seelie-squire"
+            element={
+              <ExternalRedirect url="https://fari.games/en/resources/seelie-squire/book-of-monsters" />
+            }
+          />
+          <Route
+            path="/success-with-style"
+            element={
+              <ExternalRedirect url="https://fari.games/en/resources/fari-rpgs/success-with-style" />
+            }
+          />
+          <Route
+            path="/blog/moments-in-fate"
+            element={
+              <ExternalRedirect url="https://fari.games/en/srds/fari-rpgs/success-with-style/moments-in-fate" />
+            }
+          />
+          <Route
+            path="/changelog"
+            element={
+              <ExternalRedirect url="https://fari.canny.io/changelog/" />
+            }
+          />
+          <Route
+            path={"/feature-requests"}
+            element={<FeatureRequestsRoute />}
+          />
+          <Route
+            path={"/feature-requests/*"}
+            element={<FeatureRequestsRoute />}
+          />
+          <Route path={"/bugs"} element={<BugsRoute />} />;
+          <Route path={"/bugs/*"} element={<BugsRoute />} />;
+          <Route path={"/story-builder"} element={<StoryBuilderRoute />} />
+          <Route path={"/story-dice"} element={<StoryDiceRoute />} />
+        </Route>
 
-        <Route
-          exact
-          path={"/dice"}
-          render={() => {
-            return <DiceRoute pool={false} key="dice" />;
-          }}
-        />
-        <Route
-          exact
-          path={"/dice-pool"}
-          render={() => {
-            return <DiceRoute pool={true} key="dice-pool" />;
-          }}
-        />
-        <Route
-          exact
-          path={"/data"}
-          render={() => {
-            return <DataRoute />;
-          }}
-        />
-        <Route
-          exact
-          path={"/oracle"}
-          render={() => {
-            return <OracleRoute />;
-          }}
-        />
-        <Route
-          exact
-          path={"/draw"}
-          render={() => {
-            return <DrawRoute />;
-          }}
-        />
-        <Route
-          exact
-          path={["/play", "/play/:id"]}
-          render={(props) => {
-            const sessionId = (props.match.params as any).id || userId;
-
-            return (
-              <LiveblocksProvider client={injections.liveBlocksClient}>
-                <RoomProvider id={sessionId}>
-                  <PlayRoute {...props} />;
-                </RoomProvider>
-              </LiveblocksProvider>
-            );
-          }}
-        />
-        <Route
-          exact
-          path={"/play/join/:id"}
-          render={(props) => {
-            const sessionId = (props.match.params as any).id;
-            return (
-              <LiveblocksProvider client={injections.liveBlocksClient}>
-                <RoomProvider id={sessionId}>
-                  <JoinAGameRoute {...props} />;
-                </RoomProvider>
-              </LiveblocksProvider>
-            );
-          }}
-        />
-        <Route
-          exact
-          path={"/play-offline"}
-          render={(props) => <PlayOfflineRoute {...props} />}
-        />
-        <Route
-          exact
-          path={"/scenes/:id"}
-          render={(props) => <SceneRoute {...props} />}
-        />
-        <Route
-          exact
-          path={"/cards/:id"}
-          render={(props) => <CardCollection {...props} />}
-        />
-
-        <Route
-          path="/srds/condensed"
-          component={() => {
-            window.location.href =
-              "https://fari.games/en/resources/fari-rpgs/fari-app-wiki";
-            return null;
-          }}
-        />
-        <Route
-          path="/srds/condensed"
-          component={() => {
-            window.location.href =
-              "https://fari.games/en/srds/evilhat/fate-condensed";
-            return null;
-          }}
-        />
-        <Route
-          path="/srds/core"
-          component={() => {
-            window.location.href =
-              "https://fari.games/en/srds/evilhat/fate-core";
-            return null;
-          }}
-        />
-        <Route
-          path="/srds/accelerated"
-          component={() => {
-            window.location.href =
-              "https://fari.games/en/srds/evilhat/fate-accelerated";
-            return null;
-          }}
-        />
-        <Route
-          path="/srds/system-toolkit"
-          component={() => {
-            window.location.href =
-              "https://fari.games/en/srds/evilhat/fate-system-toolkit";
-            return null;
-          }}
-        />
-        <Route
-          path="/srds/adversary-toolkit"
-          component={() => {
-            window.location.href =
-              "https://fari.games/en/srds/evilhat/fate-adversary-toolkit";
-            return null;
-          }}
-        />
-        <Route
-          path="/fate-stunts"
-          component={() => {
-            window.location.href =
-              "https://fari.games/en/resources/fari-rpgs/fate-stunts";
-            return null;
-          }}
-        />
-        <Route
-          path="/fari-wiki"
-          component={() => {
-            window.location.href =
-              "https://fari.games/en/resources/fari-rpgs/fari-app-wiki";
-            return null;
-          }}
-        />
-        <Route
-          path="/seelie-squire"
-          component={() => {
-            window.location.href =
-              "https://fari.games/en/resources/seelie-squire/book-of-monsters";
-            return null;
-          }}
-        />
-        <Route
-          path="/success-with-style"
-          component={() => {
-            window.location.href =
-              "https://fari.games/en/resources/fari-rpgs/success-with-style";
-            return null;
-          }}
-        />
-        <Route
-          path="/blog/moments-in-fate"
-          component={() => {
-            window.location.href =
-              "https://fari.games/en/srds/fari-rpgs/success-with-style/moments-in-fate";
-            return null;
-          }}
-        />
-        <Route
-          path="/changelog"
-          component={() => {
-            window.location.href = "https://fari.canny.io/changelog/";
-            return null;
-          }}
-        />
-
-        <Route
-          exact
-          path={["/feature-requests", "/feature-requests/*"]}
-          render={() => {
-            return <FeatureRequestsRoute />;
-          }}
-        />
-
-        <Route
-          exact
-          path={["/bugs", "/bugs/*"]}
-          render={() => {
-            return <BugsRoute />;
-          }}
-        />
-
-        <Route
-          exact
-          path={"/story-builder"}
-          render={() => {
-            return <StoryBuilderRoute />;
-          }}
-        />
-        <Route
-          exact
-          path={"/story-dice"}
-          render={() => {
-            return <StoryDiceRoute />;
-          }}
-        />
-
-        <Route
-          path="*"
-          render={() => {
-            return <NotFoundRoute />;
-          }}
-        />
-      </Switch>
+        <Route path="*" element={<NotFoundRoute />} />
+      </Routes>
     </React.Suspense>
   );
 };
+
+function Params(props: { render: (params: any) => JSX.Element }) {
+  const params = useParams();
+  return props.render(params);
+}

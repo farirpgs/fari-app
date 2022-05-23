@@ -9,7 +9,7 @@ import {
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Session } from "../../components/Scene/Scene";
@@ -47,7 +47,7 @@ export function useLiveObject<T>(props: {
   canBeEmpty?: boolean;
   onChange(newValue: T): void;
 }) {
-  const liveObject = useObject<T>(props.key);
+  const liveObject = useObject<any>(props.key);
   const [root] = useStorage();
 
   const room = useRoom();
@@ -71,7 +71,7 @@ export function useLiveObject<T>(props: {
       const objectKeys = Object.keys(object ?? {});
       if (isSubscriber && object) {
         if (props.canBeEmpty || objectKeys.length > 0) {
-          props.onChange(object as T);
+          props.onChange(object as unknown as T);
         }
       }
     }
@@ -88,11 +88,8 @@ export function useLiveObject<T>(props: {
   return liveObject;
 }
 
-export const PlayRoute: React.FC<{
-  match: {
-    params: { id?: string };
-  };
-}> = (props) => {
+function PlayRoute() {
+  const params = useParams<{ id: string }>();
   const logger = useLogger();
   const { t } = useTranslate();
   const room = useRoom();
@@ -100,7 +97,7 @@ export const PlayRoute: React.FC<{
   const charactersManager = useContext(CharactersContext);
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  const idFromParams = props.match.params.id;
+  const idFromParams = params.id;
   const playerName = query.get("name");
   const isGM = !idFromParams;
   const isPlayer = !isGM;
@@ -165,7 +162,8 @@ export const PlayRoute: React.FC<{
 
   const broadcast = useBroadcastEvent();
 
-  useEventListener<IPlayerInteraction>(({ event }) => {
+  useEventListener((props) => {
+    const event = props.event as IPlayerInteraction;
     if (event.type === "pause") {
       sessionManager.actions.pause();
     }
@@ -328,7 +326,7 @@ export const PlayRoute: React.FC<{
       </>
     </>
   );
-};
+}
 
 PlayRoute.displayName = "PlayRoute";
 export default PlayRoute;
