@@ -108,10 +108,10 @@ export function BlockPointCounter(
       props.onValueChange(newValue);
     },
     onMaxPointsChange(newMax) {
-      props.onMetaChange({
-        ...props.block.meta,
+      props.onMetaChange((prev) => ({
+        ...prev,
         max: newMax,
-      });
+      }));
     },
   });
   const canRefresh =
@@ -258,10 +258,10 @@ export function BlockPointCounterActions(
             color: theme.palette.primary.main,
           })}
           onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              max: props.block.meta.max === undefined ? "1" : undefined,
-            });
+            props.onMetaChange((prev) => ({
+              ...prev,
+              max: prev.max === undefined ? "1" : undefined,
+            }));
           }}
           underline="hover"
         >

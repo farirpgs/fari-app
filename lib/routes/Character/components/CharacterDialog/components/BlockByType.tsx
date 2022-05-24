@@ -8,10 +8,11 @@ import produce from "immer";
 import React, { useContext } from "react";
 import {
   ContentEditable,
-  previewContentEditable
+  previewContentEditable,
 } from "../../../../../components/ContentEditable/ContentEditable";
 import { BlockType, IBlock } from "../../../../../domains/character/types";
 import { IDiceRollResult } from "../../../../../domains/dice/Dice";
+import { useEvent } from "../../../../../hooks/useEvent/useEvent";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { MiniThemeContext } from "../MiniThemeContext";
@@ -23,13 +24,13 @@ import { BlockLink, BlockLinkActions } from "./blocks/BlockLink";
 import { BlockNumeric, BlockNumericActions } from "./blocks/BlockNumeric";
 import {
   BlockPointCounter,
-  BlockPointCounterActions
+  BlockPointCounterActions,
 } from "./blocks/BlockPointCounter";
 import { BlockSeparator, BlockSeparatorActions } from "./blocks/BlockSeparator";
 import { BlockSkill, BlockSkillActions } from "./blocks/BlockSkill";
 import {
   BlockSlotTracker,
-  BlockSlotTrackerActions
+  BlockSlotTrackerActions,
 } from "./blocks/BlockSlotTracker";
 import { BlockText, BlockTextActions } from "./blocks/BlockText";
 
@@ -58,7 +59,7 @@ export function BlockByType(
   });
   const isSeparatorBlock = props.block.type === BlockType.Separator;
 
-  function handleOnLabelChange(label: any) {
+  const handleLabelChange = useEvent((label: any) => {
     setBlock(
       produce((draft: IBlock | undefined) => {
         if (!draft) {
@@ -67,9 +68,9 @@ export function BlockByType(
         draft.label = label;
       })
     );
-  }
+  });
 
-  function handleOnValueChange(value: any) {
+  const handleValueChange = useEvent((value: any) => {
     setBlock(
       produce((draft: IBlock | undefined) => {
         if (!draft) {
@@ -78,19 +79,12 @@ export function BlockByType(
         draft.value = value;
       })
     );
-  }
+  });
 
-  function handleOnMetaChange(meta: any) {
-    setBlock(
-      produce((draft: IBlock | undefined) => {
-        if (!draft) {
-          return;
-        }
+  const handleMetaChange = useEvent((producer: (prev: any) => any) => {
+    setBlock(produce(producer));
+  });
 
-        draft.meta = meta;
-      })
-    );
-  }
   function handleOnHelperTextChange(helperText: string) {
     setBlock(
       produce((draft: IBlock | undefined) => {
@@ -110,11 +104,12 @@ export function BlockByType(
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
-          block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
-          onRoll={props.onRoll}
+          label={props.block.label}
+          value={props.block.value}
+          checked={props.block.meta.checked}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
         />
       )}
       {props.block.type === BlockType.InfoText && (
@@ -123,9 +118,9 @@ export function BlockByType(
           dataCy={props.dataCy}
           readonly={props.readonly}
           block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
           onRoll={props.onRoll}
         />
       )}
@@ -135,9 +130,9 @@ export function BlockByType(
           dataCy={props.dataCy}
           readonly={props.readonly}
           block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
           onRoll={props.onRoll}
         />
       )}
@@ -147,9 +142,9 @@ export function BlockByType(
           dataCy={props.dataCy}
           readonly={props.readonly}
           block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
           onRoll={props.onRoll}
         />
       )}
@@ -159,9 +154,9 @@ export function BlockByType(
           dataCy={props.dataCy}
           readonly={props.readonly}
           block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
           onRoll={props.onRoll}
         />
       )}
@@ -171,9 +166,9 @@ export function BlockByType(
           dataCy={props.dataCy}
           readonly={props.readonly}
           block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
           onRoll={props.onRoll}
         />
       )}
@@ -183,9 +178,9 @@ export function BlockByType(
           dataCy={props.dataCy}
           readonly={props.readonly}
           block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
           onRoll={props.onRoll}
         />
       )}
@@ -196,9 +191,9 @@ export function BlockByType(
           dataCy={props.dataCy}
           readonly={props.readonly}
           block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
           onRoll={props.onRoll}
         />
       )}
@@ -209,9 +204,9 @@ export function BlockByType(
           dataCy={props.dataCy}
           readonly={props.readonly}
           block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
           onRoll={props.onRoll}
         />
       )}
@@ -222,9 +217,9 @@ export function BlockByType(
           dataCy={props.dataCy}
           readonly={props.readonly}
           block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
           onRoll={props.onRoll}
         />
       )}
@@ -240,67 +235,67 @@ export function BlockByType(
         {block.type === BlockType.PointCounter && (
           <BlockPointCounterActions
             block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
             onMainPointCounterChange={props.onMainPointCounterChange}
           />
         )}
         {block.type === BlockType.Text && (
           <BlockTextActions
             block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
           />
         )}
         {block.type === BlockType.Numeric && (
           <BlockNumericActions
             block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
           />
         )}
         {block.type === BlockType.SlotTracker && (
           <BlockSlotTrackerActions
             block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
           />
         )}
 
         {block.type === BlockType.Skill && (
           <BlockSkillActions
             block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
           />
         )}
         {block.type === BlockType.DicePool && (
           <BlockDicePoolActions
             block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
           />
         )}
         {block.type === BlockType.Link && (
           <BlockLinkActions
             block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
           />
         )}
         {block.type === BlockType.Separator && (
           <BlockSeparatorActions
             block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
           />
         )}
 

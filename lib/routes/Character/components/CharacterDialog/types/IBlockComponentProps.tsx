@@ -8,7 +8,9 @@ export type IBlockComponentProps<TBlockType extends IBlockTypes> = {
   block: IBlock & TBlockType;
   onLabelChange(label: string | undefined): void;
   onValueChange(value: TBlockType["value"]): void;
-  onMetaChange(meta: TBlockType["meta"]): void;
+  onMetaChange(
+    producer: (prev: TBlockType["meta"]) => TBlockType["meta"]
+  ): void;
   onRoll(diceRollResult: IDiceRollResult): void;
 };
 
@@ -16,5 +18,15 @@ export type IBlockActionComponentProps<TBlockType extends IBlockTypes> = {
   block: IBlock & TBlockType;
   onLabelChange(label: string | undefined): void;
   onValueChange(value: TBlockType["value"]): void;
-  onMetaChange(meta: TBlockType["meta"]): void;
+  onMetaChange(
+    producer: (prev: TBlockType["meta"]) => TBlockType["meta"]
+  ): void;
+};
+
+export type IBlockHandlers<TBlockType extends IBlockTypes> = {
+  onLabelChange(label: string | undefined): void;
+  onValueChange(value: TBlockType["value"]): void;
+  onMetaChange(
+    producer: (prev: TBlockType["meta"]) => TBlockType["meta"]
+  ): void;
 };

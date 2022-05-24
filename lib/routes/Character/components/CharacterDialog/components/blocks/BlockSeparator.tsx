@@ -107,10 +107,10 @@ export function BlockSeparatorActions(
             color: theme.palette.primary.main,
           })}
           onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              hideDivider: !props.block.meta.hideDivider,
-            });
+            props.onMetaChange((prev) => ({
+              ...prev,
+              hideDivider: !prev.hideDivider,
+            }));
           }}
           underline="hover"
         >
@@ -128,10 +128,10 @@ export function BlockSeparatorActions(
               color: theme.palette.primary.main,
             })}
             onClick={() => {
-              props.onMetaChange({
-                ...props.block.meta,
-                hasLabel: !props.block.meta.hasLabel,
-              });
+              props.onMetaChange((prev) => ({
+                ...prev,
+                hasLabel: !prev.hasLabel,
+              }));
             }}
             underline="hover"
           >

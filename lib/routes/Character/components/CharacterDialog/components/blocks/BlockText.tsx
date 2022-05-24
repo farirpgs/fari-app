@@ -4,30 +4,42 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   ContentEditable,
   previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { ITextBlock } from "../../../../../../domains/character/types";
+import { useEvent } from "../../../../../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { MiniThemeContext } from "../../MiniThemeContext";
 import {
   IBlockActionComponentProps,
-  IBlockComponentProps,
+  IBlockHandlers,
 } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { ThemedLabel } from "../ThemedLabel";
 
-export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
-  const isLabelVisible =
-    props.block.label !== undefined &&
-    (!!previewContentEditable({ value: props.block.label }) || props.advanced);
+export const BlockText = React.memo(function (
+  props: {
+    label: string | undefined;
+    value: string | undefined;
+    checked: boolean | undefined;
+    advanced: boolean;
+    readonly: boolean | undefined;
+    dataCy?: string;
+  } & IBlockHandlers<ITextBlock>
+) {
   const isSlotTrackerVisible =
-    props.block.meta?.checked === true || props.block.meta?.checked === false;
+    props.checked === true || props.checked === false;
+  console.log("BlockText: RENDER");
 
-  const isFieldVisible = props.block.value !== undefined;
-  const miniTheme = useContext(MiniThemeContext);
+  useEffect(() => {
+    console.log("BlockText mount");
+    return () => {
+      console.log("BlockText unmount");
+    };
+  }, []);
 
   return (
     <>
@@ -39,51 +51,26 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
           wrap="nowrap"
         >
           <Grid item xs>
-            {isLabelVisible && (
-              <Box>
-                <ThemedLabel>
-                  <ContentEditable
-                    readonly={props.readonly || !props.advanced}
-                    border={props.advanced}
-                    borderColor={miniTheme.borderColor}
-                    data-cy={`${props.dataCy}.label`}
-                    value={props.block.label || ""}
-                    onChange={(value) => {
-                      props.onLabelChange(value);
-                    }}
-                  />
-                </ThemedLabel>
-              </Box>
-            )}
-            {isFieldVisible && (
-              <Box>
-                <Typography
-                  className={css({
-                    fontFamily: miniTheme.textFontFamily,
-                    fontSize: `${miniTheme.textFontSize}rem`,
-                    fontWeight: miniTheme.textFontWeight,
-                  })}
-                >
-                  <ContentEditable
-                    border
-                    borderColor={miniTheme.borderColor}
-                    data-cy={`${props.dataCy}.value`}
-                    readonly={props.readonly}
-                    value={props.block.value ?? ""}
-                    onChange={(value) => {
-                      props.onValueChange(value);
-                    }}
-                  />
-                </Typography>
-              </Box>
-            )}
+            <BlockTextLabel
+              label={props.label}
+              advanced={props.advanced}
+              readonly={props.readonly}
+              dataCy={props.dataCy}
+              onChange={props.onLabelChange}
+            />
+            <BlockTextValue
+              value={props.value}
+              readonly={props.readonly}
+              dataCy={props.dataCy}
+              onChange={props.onValueChange}
+             />
           </Grid>
           {isSlotTrackerVisible && (
             <Grid item className={css({ marginLeft: "auto" })}>
               <BlockToggleMeta
                 readonly={props.readonly}
                 dataCy={props.dataCy}
-                block={props.block}
+                checked={props.checked}
                 onMetaChange={props.onMetaChange}
               />
             </Grid>
@@ -92,14 +79,107 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
       </Box>
     </>
   );
-}
+});
 BlockText.displayName = "BlockText";
+
+function BlockTextLabel(props: {
+  label: string | undefined;
+  advanced: boolean;
+  readonly: boolean | undefined;
+  dataCy: string | undefined;
+  onChange(value: string): void;
+}) {
+  const isLabelVisible =
+    props.label !== undefined &&
+    (!!previewContentEditable({ value: props.label }) || props.advanced);
+
+  const miniTheme = useContext(MiniThemeContext);
+
+  if (!isLabelVisible) {
+    return null;
+  }
+
+  return (
+    <Box>
+      <ThemedLabel>
+        <ContentEditable
+          readonly={props.readonly || !props.advanced}
+          border={props.advanced}
+          borderColor={miniTheme.borderColor}
+          data-cy={`${props.dataCy}.label`}
+          value={props.label || ""}
+          onChange={props.onChange}
+        />
+      </ThemedLabel>
+    </Box>
+  );
+}
+
+function BlockTextValue(props: {
+  value: string | undefined;
+  dataCy: string | undefined;
+  readonly: boolean | undefined;
+  onChange(value: string): void;
+}) {
+  const isFieldVisible = props.value !== undefined;
+  const miniTheme = useContext(MiniThemeContext);
+
+  if (!isFieldVisible) {
+    return null;
+  }
+  return (
+    <Box>
+      <Typography
+        className={css({
+          fontFamily: miniTheme.textFontFamily,
+          fontSize: `${miniTheme.textFontSize}rem`,
+          fontWeight: miniTheme.textFontWeight,
+        })}
+      >
+        <ContentEditable
+          border
+          borderColor={miniTheme.borderColor}
+          data-cy={`${props.dataCy}.value`}
+          readonly={props.readonly}
+          value={props.value ?? ""}
+          onChange={props.onChange}
+        />
+      </Typography>
+    </Box>
+  );
+}
 
 export function BlockTextActions(
   props: IBlockActionComponentProps<ITextBlock>
 ) {
   const theme = useTheme();
   const { t } = useTranslate();
+
+  const handleAddRemoveToggle = useEvent(() => {
+    props.onMetaChange((prev) => ({
+      ...prev,
+      checked: prev.checked === undefined ? false : undefined,
+    }));
+  });
+
+  const handleAddRemoveField = useEvent(() => {
+    const value = props.block.value;
+    if (value === undefined) {
+      props.onValueChange("");
+    } else {
+      props.onValueChange(undefined);
+    }
+  });
+
+  const handleAddRemoveLabel = useEvent(() => {
+    const label = props.block.label;
+    if (label === undefined) {
+      props.onLabelChange("");
+    } else {
+      props.onLabelChange(undefined);
+    }
+  });
+
   return (
     <>
       <Grid item>
@@ -109,13 +189,7 @@ export function BlockTextActions(
           className={css({
             color: theme.palette.primary.main,
           })}
-          onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              checked:
-                props.block.meta.checked === undefined ? false : undefined,
-            });
-          }}
+          onClick={handleAddRemoveToggle}
           underline="hover"
         >
           {props.block.meta.checked === undefined
@@ -130,14 +204,7 @@ export function BlockTextActions(
           className={css({
             color: theme.palette.primary.main,
           })}
-          onClick={() => {
-            const value = props.block.value;
-            if (value === undefined) {
-              props.onValueChange("");
-            } else {
-              props.onValueChange(undefined);
-            }
-          }}
+          onClick={handleAddRemoveField}
           underline="hover"
         >
           {props.block.value === undefined
@@ -152,14 +219,7 @@ export function BlockTextActions(
           className={css({
             color: theme.palette.primary.main,
           })}
-          onClick={() => {
-            const label = props.block.label;
-            if (label === undefined) {
-              props.onLabelChange("");
-            } else {
-              props.onLabelChange(undefined);
-            }
-          }}
+          onClick={handleAddRemoveLabel}
           underline="hover"
         >
           {props.block.label === undefined
@@ -170,5 +230,4 @@ export function BlockTextActions(
     </>
   );
 }
-
 BlockTextActions.displayName = "BlockTextActions";

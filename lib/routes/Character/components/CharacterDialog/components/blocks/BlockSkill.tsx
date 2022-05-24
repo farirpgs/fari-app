@@ -67,10 +67,10 @@ export function BlockSkillActions(
             color: theme.palette.primary.main,
           })}
           onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              hideModifier: !props.block.meta.hideModifier,
-            });
+            props.onMetaChange((prev) => ({
+              ...prev,
+              hideModifier: !prev.hideModifier,
+            }));
           }}
           underline="hover"
         >
@@ -88,11 +88,10 @@ export function BlockSkillActions(
             color: theme.palette.primary.main,
           })}
           onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              checked:
-                props.block.meta.checked === undefined ? false : undefined,
-            });
+            props.onMetaChange((prev) => ({
+              ...prev,
+              checked: prev.checked === undefined ? false : undefined,
+            }));
           }}
           underline="hover"
         >

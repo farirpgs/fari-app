@@ -57,7 +57,7 @@ export function BlockNumeric(props: IBlockComponentProps<INumericBlock> & {}) {
               <BlockToggleMeta
                 dataCy={props.dataCy}
                 readonly={props.readonly}
-                block={props.block}
+                checked={props.block.meta?.checked}
                 onMetaChange={props.onMetaChange}
               />
             </Grid>
@@ -83,11 +83,10 @@ export function BlockNumericActions(
             color: theme.palette.primary.main,
           })}
           onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              checked:
-                props.block.meta.checked === undefined ? false : undefined,
-            });
+            props.onMetaChange((prev) => ({
+              ...prev,
+              checked: prev.checked === undefined ? false : undefined,
+            }));
           }}
           underline="hover"
         >

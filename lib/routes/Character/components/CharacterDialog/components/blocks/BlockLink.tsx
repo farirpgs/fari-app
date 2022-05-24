@@ -141,10 +141,10 @@ export function BlockLinkActions(
             color: theme.palette.primary.main,
           })}
           onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              hasDisplayName: !props.block.meta?.hasDisplayName,
-            });
+            props.onMetaChange((prev) => ({
+              ...prev,
+              hasDisplayName: !prev?.hasDisplayName,
+            }));
           }}
           underline="hover"
         >

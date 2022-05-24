@@ -107,17 +107,17 @@ export function BlockDicePool(
   }, [hover]);
 
   function handleOnAddDiceFrom() {
-    props.onMetaChange({
-      ...props.block.meta,
+    props.onMetaChange((prev) => ({
+      ...prev,
       commands: [...commands, firstCommand],
-    });
+    }));
   }
 
   function handleOnRemoveDiceFrom() {
-    props.onMetaChange({
-      ...props.block.meta,
+    props.onMetaChange((prev) => ({
+      ...prev,
       commands: commands.slice(1),
-    });
+    }));
   }
 
   function handleStepDownDice() {
@@ -126,10 +126,10 @@ export function BlockDicePool(
       const newDieSizeIndex = Math.max(0, currentDieSize - 1);
       return DiceCommandRange[newDieSizeIndex];
     });
-    props.onMetaChange({
-      ...props.block.meta,
+    props.onMetaChange((prev) => ({
+      ...prev,
       commands: newCommands,
-    });
+    }));
   }
 
   function handleStepUpDice() {
@@ -141,10 +141,10 @@ export function BlockDicePool(
       );
       return DiceCommandRange[newDieSizeIndex];
     });
-    props.onMetaChange({
-      ...props.block.meta,
+    props.onMetaChange((prev) => ({
+      ...prev,
       commands: newCommands,
-    });
+    }));
   }
 
   return (
@@ -296,10 +296,10 @@ export function BlockDicePool(
       <DiceMenuForCharacterSheet
         commandSetIds={commands}
         onChange={(newCommandIds) => {
-          props.onMetaChange({
-            ...props.block.meta,
+          props.onMetaChange((prev) => ({
+            ...prev,
             commands: newCommandIds,
-          });
+          }));
         }}
         render={(diceMenuProps) => (
           <Link
@@ -333,7 +333,7 @@ export function BlockDicePool(
       <BlockToggleMeta
         readonly={props.readonly}
         dataCy={props.dataCy}
-        block={props.block}
+        checked={props.block.meta.checked}
         onMetaChange={props.onMetaChange}
       />
     );
@@ -455,11 +455,10 @@ export function BlockDicePoolActions(
             color: theme.palette.primary.main,
           })}
           onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              checked:
-                props.block.meta.checked === undefined ? false : undefined,
-            });
+            props.onMetaChange((prev) => ({
+              ...prev,
+              checked: prev.checked === undefined ? false : undefined,
+            }));
           }}
           underline="hover"
         >
