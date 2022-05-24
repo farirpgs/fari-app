@@ -203,11 +203,12 @@ export function BlockByType(
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
-          block={block}
+          label={props.block.label}
+          value={props.block.value}
+          hasDisplayName={props.block.meta.hasDisplayName}
           onLabelChange={handleLabelChange}
           onValueChange={handleValueChange}
           onMetaChange={handleMetaChange}
-          onRoll={props.onRoll}
         />
       )}
 
@@ -243,7 +244,9 @@ export function BlockByType(
         )}
         {block.type === BlockType.Text && (
           <BlockTextActions
-            block={block}
+            label={block.label}
+            value={block.value}
+            checked={block.meta.checked}
             onLabelChange={handleLabelChange}
             onValueChange={handleValueChange}
             onMetaChange={handleMetaChange}
@@ -284,7 +287,7 @@ export function BlockByType(
         )}
         {block.type === BlockType.Link && (
           <BlockLinkActions
-            block={block}
+            hasDisplayName={block.meta.hasDisplayName}
             onLabelChange={handleLabelChange}
             onValueChange={handleValueChange}
             onMetaChange={handleMetaChange}

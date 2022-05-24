@@ -8,76 +8,68 @@ import React from "react";
 import { AppLink } from "../../../../../../components/AppLink/AppLink";
 import { Delays } from "../../../../../../constants/Delays";
 import { ILinkBlock } from "../../../../../../domains/character/types";
+import { useEvent } from "../../../../../../hooks/useEvent/useEvent";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
-import {
-  IBlockActionComponentProps,
-  IBlockComponentProps,
-} from "../../types/IBlockComponentProps";
+import { IBlockHandlers } from "../../types/IBlockComponentProps";
 
-function isValidLink(link: string): boolean {
+function isValidLink(link: string = ""): boolean {
   return /^http(s)?:\/\/.*/.test(link) || link === "";
 }
 
-export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
-  const { advanced } = props;
-  const { t } = useTranslate();
-  const [linkState, setLinkState] = useLazyState({
-    value: props.block.value,
-    onChange: props.onValueChange,
-    delay: Delays.field,
-  });
+export const BlockLink = React.memo(
+  (
+    props: {
+      label: string | undefined;
+      value: string | undefined;
+      hasDisplayName: boolean | undefined;
+      advanced: boolean;
+      readonly: boolean | undefined;
+      dataCy?: string;
+    } & IBlockHandlers<ILinkBlock>
+  ) => {
+    const { t } = useTranslate();
+    const [link, setLink] = useLazyState({
+      value: props.value,
+      onChange: props.onValueChange,
+      delay: Delays.field,
+    });
 
-  const [linkLabel, setLinkLabel] = useLazyState({
-    value: props.block.label,
-    onChange: props.onLabelChange,
-    delay: Delays.field,
-  });
+    const [linkLabel, setLinkLabel] = useLazyState({
+      value: props.label,
+      onChange: props.onLabelChange,
+      delay: Delays.field,
+    });
 
-  const linkText =
-    props.block.meta?.hasDisplayName && props.block.label !== ""
-      ? props.block.label
-      : props.block.value;
+    const linkText =
+      props.hasDisplayName && props.label !== "" ? props.label : props.value;
 
-  const isValid = isValidLink(props.block.value);
+    const isValid = isValidLink(props.value);
 
-  return (
-    <Box>
-      <Grid container spacing={1} justifyContent="space-between" wrap="nowrap">
-        <Grid item xs>
-          {advanced ? (
-            <Box>
-              <Box mb=".5rem">
-                <TextField
-                  InputProps={{
-                    readOnly: props.readonly,
-                  }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  placeholder="https://..."
-                  data-cy={`${props.dataCy}.value`}
-                  value={linkState}
-                  label={t("character-dialog.label.link")}
-                  fullWidth
-                  onChange={(e) => {
-                    let linkValue = "";
-                    if (e.target.value) {
-                      linkValue = e.target.value;
-                    }
-                    setLinkState(linkValue);
-                  }}
-                  error={!isValid}
-                  helperText={
-                    isValid
-                      ? undefined
-                      : t("character-dialog.helper-text.invalid-link")
-                  }
-                  variant="standard"
-                />
-              </Box>
+    const handleLinkChange = useEvent(
+      (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        setLink(e.target.value || "");
+      }
+    );
+
+    const handleLinkLabelChange = useEvent(
+      (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        setLinkLabel(e.target.value || "");
+      }
+    );
+
+    return (
+      <Box>
+        <Grid
+          container
+          spacing={1}
+          justifyContent="space-between"
+          wrap="nowrap"
+        >
+          <Grid item xs>
+            {props.advanced ? (
               <Box>
-                {props.block.meta?.hasDisplayName && (
+                <Box mb=".5rem">
                   <TextField
                     InputProps={{
                       readOnly: props.readonly,
@@ -85,76 +77,101 @@ export function BlockLink(props: IBlockComponentProps<ILinkBlock>) {
                     InputLabelProps={{
                       shrink: true,
                     }}
-                    value={linkLabel}
-                    label={t("character-dialog.block-type.link.display-name")}
+                    placeholder="https://..."
+                    data-cy={`${props.dataCy}.value`}
+                    value={link}
+                    label={t("character-dialog.label.link")}
                     fullWidth
-                    onChange={(e) => {
-                      let label = "";
-                      if (e.target.value) {
-                        label = e.target.value;
-                      }
-                      setLinkLabel(label);
-                    }}
+                    onChange={handleLinkChange}
+                    error={!isValid}
+                    helperText={
+                      isValid
+                        ? undefined
+                        : t("character-dialog.helper-text.invalid-link")
+                    }
                     variant="standard"
                   />
-                )}
+                </Box>
+                <Box>
+                  {props.hasDisplayName && (
+                    <TextField
+                      InputProps={{
+                        readOnly: props.readonly,
+                      }}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      value={linkLabel}
+                      label={t("character-dialog.block-type.link.display-name")}
+                      fullWidth
+                      onChange={handleLinkLabelChange}
+                      variant="standard"
+                    />
+                  )}
+                </Box>
               </Box>
-            </Box>
-          ) : (
-            <>
-              {isValid && props.block.value !== "" ? (
-                <AppLink
-                  to={props.block.value}
-                  target="_blank"
-                  sx={{
-                    lineHeight: "normal",
-                  }}
-                >
-                  {linkText}
-                </AppLink>
-              ) : (
-                linkText
-              )}
-            </>
-          )}
+            ) : (
+              <>
+                {isValid && props.value !== "" ? (
+                  <AppLink
+                    to={props.value}
+                    target="_blank"
+                    sx={{
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {linkText}
+                  </AppLink>
+                ) : (
+                  linkText
+                )}
+              </>
+            )}
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
-  );
-}
+      </Box>
+    );
+  }
+);
 
 BlockLink.displayName = "BlockLink";
 
-export function BlockLinkActions(
-  props: IBlockActionComponentProps<ILinkBlock>
-) {
-  const theme = useTheme();
-  const { t } = useTranslate();
+export const BlockLinkActions = React.memo(
+  (
+    props: {
+      hasDisplayName: boolean | undefined;
+    } & IBlockHandlers<ILinkBlock>
+  ) => {
+    const theme = useTheme();
+    const { t } = useTranslate();
 
-  return (
-    <>
-      <Grid item>
-        <Link
-          component="button"
-          variant="caption"
-          className={css({
-            color: theme.palette.primary.main,
-          })}
-          onClick={() => {
-            props.onMetaChange((prev) => ({
-              ...prev,
-              hasDisplayName: !prev?.hasDisplayName,
-            }));
-          }}
-          underline="hover"
-        >
-          {props.block.meta.hasDisplayName
-            ? t("character-dialog.control.hide-display-name")
-            : t("character-dialog.control.show-display-name")}
-        </Link>
-      </Grid>
-    </>
-  );
-}
+    const handleShowHideDisplayName = useEvent(() => {
+      props.onMetaChange((prev) => ({
+        ...prev,
+        hasDisplayName: !prev?.hasDisplayName,
+      }));
+    });
+
+    return (
+      <>
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={handleShowHideDisplayName}
+            underline="hover"
+          >
+            {props.hasDisplayName
+              ? t("character-dialog.control.hide-display-name")
+              : t("character-dialog.control.show-display-name")}
+          </Link>
+        </Grid>
+      </>
+    );
+  }
+);
 
 BlockLinkActions.displayName = "BlockLinkActions";

@@ -13,10 +13,7 @@ import { ITextBlock } from "../../../../../../domains/character/types";
 import { useEvent } from "../../../../../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { MiniThemeContext } from "../../MiniThemeContext";
-import {
-  IBlockActionComponentProps,
-  IBlockHandlers,
-} from "../../types/IBlockComponentProps";
+import { IBlockHandlers } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { ThemedLabel } from "../ThemedLabel";
 
@@ -63,7 +60,7 @@ export const BlockText = React.memo(function (
               readonly={props.readonly}
               dataCy={props.dataCy}
               onChange={props.onValueChange}
-             />
+            />
           </Grid>
           {isSlotTrackerVisible && (
             <Grid item className={css({ marginLeft: "auto" })}>
@@ -149,85 +146,91 @@ function BlockTextValue(props: {
   );
 }
 
-export function BlockTextActions(
-  props: IBlockActionComponentProps<ITextBlock>
-) {
-  const theme = useTheme();
-  const { t } = useTranslate();
+export const BlockTextActions = React.memo(
+  (
+    props: {
+      value: string | undefined;
+      label: string | undefined;
+      checked: boolean | undefined;
+    } & IBlockHandlers<ITextBlock>
+  ) => {
+    const theme = useTheme();
+    const { t } = useTranslate();
 
-  const handleAddRemoveToggle = useEvent(() => {
-    props.onMetaChange((prev) => ({
-      ...prev,
-      checked: prev.checked === undefined ? false : undefined,
-    }));
-  });
+    const handleAddRemoveToggle = useEvent(() => {
+      props.onMetaChange((prev) => ({
+        ...prev,
+        checked: prev.checked === undefined ? false : undefined,
+      }));
+    });
 
-  const handleAddRemoveField = useEvent(() => {
-    const value = props.block.value;
-    if (value === undefined) {
-      props.onValueChange("");
-    } else {
-      props.onValueChange(undefined);
-    }
-  });
+    const handleAddRemoveField = useEvent(() => {
+      const value = props.value;
+      if (value === undefined) {
+        props.onValueChange("");
+      } else {
+        props.onValueChange(undefined);
+      }
+    });
 
-  const handleAddRemoveLabel = useEvent(() => {
-    const label = props.block.label;
-    if (label === undefined) {
-      props.onLabelChange("");
-    } else {
-      props.onLabelChange(undefined);
-    }
-  });
+    const handleAddRemoveLabel = useEvent(() => {
+      const label = props.label;
+      if (label === undefined) {
+        props.onLabelChange("");
+      } else {
+        props.onLabelChange(undefined);
+      }
+    });
 
-  return (
-    <>
-      <Grid item>
-        <Link
-          component="button"
-          variant="caption"
-          className={css({
-            color: theme.palette.primary.main,
-          })}
-          onClick={handleAddRemoveToggle}
-          underline="hover"
-        >
-          {props.block.meta.checked === undefined
-            ? t("character-dialog.control.add-toggle")
-            : t("character-dialog.control.remove-toggle")}
-        </Link>
-      </Grid>
-      <Grid item>
-        <Link
-          component="button"
-          variant="caption"
-          className={css({
-            color: theme.palette.primary.main,
-          })}
-          onClick={handleAddRemoveField}
-          underline="hover"
-        >
-          {props.block.value === undefined
-            ? t("character-dialog.control.add-field")
-            : t("character-dialog.control.remove-field")}
-        </Link>
-      </Grid>
-      <Grid item>
-        <Link
-          component="button"
-          variant="caption"
-          className={css({
-            color: theme.palette.primary.main,
-          })}
-          onClick={handleAddRemoveLabel}
-          underline="hover"
-        >
-          {props.block.label === undefined
-            ? t("character-dialog.control.add-label")
-            : t("character-dialog.control.remove-label")}
-        </Link>
-      </Grid>
-    </>
-  );
-}
+    return (
+      <>
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={handleAddRemoveToggle}
+            underline="hover"
+          >
+            {props.checked === undefined
+              ? t("character-dialog.control.add-toggle")
+              : t("character-dialog.control.remove-toggle")}
+          </Link>
+        </Grid>
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={handleAddRemoveField}
+            underline="hover"
+          >
+            {props.value === undefined
+              ? t("character-dialog.control.add-field")
+              : t("character-dialog.control.remove-field")}
+          </Link>
+        </Grid>
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={handleAddRemoveLabel}
+            underline="hover"
+          >
+            {props.label === undefined
+              ? t("character-dialog.control.add-label")
+              : t("character-dialog.control.remove-label")}
+          </Link>
+        </Grid>
+      </>
+    );
+  }
+);
 BlockTextActions.displayName = "BlockTextActions";
