@@ -5,50 +5,63 @@ import { useTheme } from "@mui/material/styles";
 import React from "react";
 import { Delays } from "../../../../../../constants/Delays";
 import { ISkillBlock } from "../../../../../../domains/character/types";
+import { IDiceRollResult } from "../../../../../../domains/dice/Dice";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import {
   IBlockActionComponentProps,
-  IBlockComponentProps,
+  IBlockHandlers,
 } from "../../types/IBlockComponentProps";
 import { CircleTextField } from "../CircleTextField";
 import { BlockDicePool } from "./BlockDicePool";
 
-export function BlockSkill(props: IBlockComponentProps<ISkillBlock>) {
-  const [state, setState] = useLazyState({
-    value: props.block.value,
-    onChange: props.onValueChange,
-    delay: Delays.field,
-  });
+export const BlockSkill = React.memo(
+  (
+    props: {
+      label: string | undefined;
+      value: string | undefined;
+      checked: boolean | undefined;
+      advanced: boolean;
+      readonly: boolean | undefined;
+      dataCy?: string;
+      onRoll(diceRollResult: IDiceRollResult): void;
+    } & IBlockHandlers<ISkillBlock>
+  ) => {
+    const [state, setState] = useLazyState({
+      value: props.block.value,
+      onChange: props.onValueChange,
+      delay: Delays.field,
+    });
 
-  return (
-    <BlockDicePool
-      advanced={props.advanced}
-      block={props.block}
-      dataCy={props.dataCy}
-      onLabelChange={props.onLabelChange}
-      onMetaChange={props.onMetaChange}
-      onRoll={props.onRoll}
-      onValueChange={props.onValueChange}
-      readonly={props.readonly}
-      mid={
-        <>
-          {!props.block.meta.hideModifier && (
-            <CircleTextField
-              data-cy={`${props.dataCy}.value`}
-              value={state}
-              readonly={props.readonly}
-              onChange={(newState) => {
-                setState(newState);
-              }}
-            />
-          )}
-        </>
-      }
-      listResults={false}
-    />
-  );
-}
+    return (
+      <BlockDicePool
+        advanced={props.advanced}
+        block={props.block}
+        dataCy={props.dataCy}
+        onLabelChange={props.onLabelChange}
+        onValueChange={props.onValueChange}
+        onMetaChange={props.onMetaChange}
+        onRoll={props.onRoll}
+        readonly={props.readonly}
+        mid={
+          <>
+            {!props.block.meta.hideModifier && (
+              <CircleTextField
+                data-cy={`${props.dataCy}.value`}
+                value={state}
+                readonly={props.readonly}
+                onChange={(newState) => {
+                  setState(newState);
+                }}
+              />
+            )}
+          </>
+        }
+        listResults={false}
+      />
+    );
+  }
+);
 BlockSkill.displayName = "BlockSkill";
 
 export function BlockSkillActions(

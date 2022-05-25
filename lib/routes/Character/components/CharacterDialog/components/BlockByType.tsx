@@ -220,11 +220,12 @@ export function BlockByType<TBlockType extends IBlockTypes>(props: {
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
-          block={block}
+          label={block.label}
+          hasLabel={block.meta.hasLabel}
+          hideDivider={block.meta.hideDivider}
           onLabelChange={handleLabelChange}
           onValueChange={handleValueChange}
           onMetaChange={handleMetaChange}
-          onRoll={props.onRoll}
         />
       )}
 
@@ -300,7 +301,11 @@ export function BlockByType<TBlockType extends IBlockTypes>(props: {
         )}
         {block.type === BlockType.Separator && (
           <BlockSeparatorActions
-            block={block}
+            advanced={props.advanced}
+            hasLabel={block.meta.hasLabel}
+            hideDivider={block.meta.hideDivider}
+            readonly={props.readonly}
+            dataCy={props.dataCy}
             onLabelChange={handleLabelChange}
             onValueChange={handleValueChange}
             onMetaChange={handleMetaChange}

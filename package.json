@@ -95,7 +95,7 @@
     "chromatic": "^6.5.4",
     "concurrently": "^7.2.1",
     "cypress": "^9.6.1",
-    "eslint": "^8.16.0",
+    "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
