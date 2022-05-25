@@ -6,95 +6,109 @@ import { useTheme } from "@mui/material/styles";
 import React from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { INumericBlock } from "../../../../../../domains/character/types";
+import { useEvent } from "../../../../../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
-import {
-  IBlockActionComponentProps,
-  IBlockComponentProps,
-} from "../../types/IBlockComponentProps";
+import { IBlockHandlers } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { CircleTextField } from "../CircleTextField";
 import { ThemedLabel } from "../ThemedLabel";
 
-export function BlockNumeric(props: IBlockComponentProps<INumericBlock> & {}) {
-  const isSlotTrackerVisible =
-    props.block.meta?.checked === true || props.block.meta?.checked === false;
+export const BlockNumeric = React.memo(
+  (
+    props: {
+      label: string | undefined;
+      value: string | undefined;
+      checked: boolean | undefined;
+      advanced: boolean;
+      readonly: boolean | undefined;
+      dataCy?: string;
+    } & IBlockHandlers<INumericBlock>
+  ) => {
+    const isSlotTrackerVisible =
+      props.checked === true || props.checked === false;
 
-  return (
-    <>
-      <Box>
-        <Grid
-          container
-          spacing={1}
-          justifyContent="space-between"
-          wrap="nowrap"
-          alignItems="center"
-        >
-          <Grid item>
-            <CircleTextField
-              data-cy={`${props.dataCy}.value`}
-              value={props.block.value}
-              readonly={props.readonly}
-              onChange={(newValue) => {
-                props.onValueChange(newValue);
-              }}
-            />
-          </Grid>
-          <Grid item xs>
-            <ThemedLabel>
-              <ContentEditable
-                readonly={props.readonly}
-                border={props.advanced}
-                data-cy={`${props.dataCy}.label`}
-                value={props.block.label || ""}
-                onChange={(value) => {
-                  props.onLabelChange(value);
-                }}
-              />
-            </ThemedLabel>
-          </Grid>
-          {isSlotTrackerVisible && (
+    return (
+      <>
+        <Box>
+          <Grid
+            container
+            spacing={1}
+            justifyContent="space-between"
+            wrap="nowrap"
+            alignItems="center"
+          >
             <Grid item>
-              <BlockToggleMeta
-                dataCy={props.dataCy}
+              <CircleTextField
+                data-cy={`${props.dataCy}.value`}
+                value={props.value}
                 readonly={props.readonly}
-                checked={props.block.meta?.checked}
-                onMetaChange={props.onMetaChange}
+                onChange={props.onValueChange}
               />
             </Grid>
-          )}
-        </Grid>
-      </Box>
-    </>
-  );
-}
+            <Grid item xs>
+              <ThemedLabel>
+                <ContentEditable
+                  readonly={props.readonly}
+                  border={props.advanced}
+                  data-cy={`${props.dataCy}.label`}
+                  value={props.label || ""}
+                  onChange={props.onLabelChange}
+                />
+              </ThemedLabel>
+            </Grid>
+            {isSlotTrackerVisible && (
+              <Grid item>
+                <BlockToggleMeta
+                  dataCy={props.dataCy}
+                  readonly={props.readonly}
+                  checked={props.checked}
+                  onMetaChange={props.onMetaChange}
+                />
+              </Grid>
+            )}
+          </Grid>
+        </Box>
+      </>
+    );
+  }
+);
 
-export function BlockNumericActions(
-  props: IBlockActionComponentProps<INumericBlock>
-) {
-  const theme = useTheme();
-  const { t } = useTranslate();
-  return (
-    <>
-      <Grid item>
-        <Link
-          component="button"
-          variant="caption"
-          className={css({
-            color: theme.palette.primary.main,
-          })}
-          onClick={() => {
-            props.onMetaChange((prev) => ({
-              ...prev,
-              checked: prev.checked === undefined ? false : undefined,
-            }));
-          }}
-          underline="hover"
-        >
-          {props.block.meta.checked === undefined
-            ? t("character-dialog.control.add-toggle")
-            : t("character-dialog.control.remove-toggle")}
-        </Link>
-      </Grid>
-    </>
-  );
-}
+export const BlockNumericActions = React.memo(
+  (
+    props: {
+      value: string | undefined;
+      label: string | undefined;
+      checked: boolean | undefined;
+    } & IBlockHandlers<INumericBlock>
+  ) => {
+    const theme = useTheme();
+    const { t } = useTranslate();
+
+    const handleAddRemoveToggle = useEvent(() => {
+      props.onMetaChange((prev) => ({
+        ...prev,
+        checked: prev.checked === undefined ? false : undefined,
+      }));
+    });
+
+    return (
+      <>
+        <Grid item>
+          <Link
+            component="button"
+            variant="caption"
+            className={css({
+              color: theme.palette.primary.main,
+            })}
+            onClick={handleAddRemoveToggle}
+            underline="hover"
+          >
+            {props.checked === undefined
+              ? t("character-dialog.control.add-toggle")
+              : t("character-dialog.control.remove-toggle")}
+          </Link>
+        </Grid>
+      </>
+    );
+  }
+);

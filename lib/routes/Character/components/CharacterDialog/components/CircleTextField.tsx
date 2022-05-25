@@ -175,9 +175,7 @@ export function CircleTextField(props: {
               "bottom": "0",
               "&:hover": { background: theme.palette.background.default },
             })}
-            onClick={() => {
-              props.onDecrement?.();
-            }}
+            onClick={props.onDecrement}
           >
             <RemoveCircleOutlineOutlinedIcon
               className={css({ width: "1.1rem", height: "1.1rem" })}
@@ -198,9 +196,7 @@ export function CircleTextField(props: {
               "bottom": "0",
               "&:hover": { background: theme.palette.background.default },
             })}
-            onClick={() => {
-              props.onIncrement?.();
-            }}
+            onClick={props.onIncrement}
           >
             <AddCircleOutlineOutlinedIcon
               className={css({ width: "1.1rem", height: "1.1rem" })}

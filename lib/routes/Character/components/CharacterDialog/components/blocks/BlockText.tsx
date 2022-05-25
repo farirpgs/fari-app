@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import {
   ContentEditable,
   previewContentEditable,
@@ -29,14 +29,6 @@ export const BlockText = React.memo(function (
 ) {
   const isSlotTrackerVisible =
     props.checked === true || props.checked === false;
-  console.log("BlockText: RENDER");
-
-  useEffect(() => {
-    console.log("BlockText mount");
-    return () => {
-      console.log("BlockText unmount");
-    };
-  }, []);
 
   return (
     <>
