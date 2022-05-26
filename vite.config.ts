@@ -16,9 +16,6 @@ export default defineConfig({
       targets: ["defaults", "not IE 11"],
     }),
   ],
-  build: {
-    sourcemap: true,
-  },
   server: {
     port: 1234,
     proxy: {

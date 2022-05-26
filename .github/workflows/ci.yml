@@ -33,7 +33,6 @@ jobs:
       # Build
       - name: Build
         run: |
-          export NODE_OPTIONS='--max-old-space-size=2048'
           CONTEXT=production npm run build
         env:
           VITE_GITHUB_RUN_NUMBER: ${{github.run_number}}
