@@ -16,7 +16,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router";
 import {
   ContentEditable,
-  previewContentEditable
+  previewContentEditable,
 } from "../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
@@ -385,7 +385,7 @@ export const CardCollectionRoute: React.FC<{
                 isGM={true}
                 canMove={indexCard.subCards.length === 0}
                 key={indexCard.id}
-                data-cy={`card-collection.card.${index}`}
+                dataCy={`card-collection.card.${index}`}
                 id={`index-card-${indexCard.id}`}
                 indexCard={indexCard}
                 onRoll={() => {}}

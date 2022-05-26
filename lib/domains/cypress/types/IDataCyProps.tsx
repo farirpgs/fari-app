@@ -1,3 +1,3 @@
 export type IDataCyProps = {
-  "data-cy"?: string;
+  dataCy?: string;
 };

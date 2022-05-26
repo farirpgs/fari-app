@@ -738,7 +738,7 @@ export const Session: React.FC<IProps> = (props) => {
 
     return (
       <PlayerRow
-        data-cy={`scene.player-row.${playerRowDataCyIndex}`}
+        dataCy={`scene.player-row.${playerRowDataCyIndex}`}
         color={options.color}
         isChild={isChild}
         permissions={{
@@ -1478,7 +1478,7 @@ export function Scene(props: {
         >
           <ContentEditable
             autoFocus
-            data-cy="scene.name"
+            dataCy="scene.name"
             value={sceneManager.state.scene?.name ?? ""}
             readonly={!props.isGM}
             onChange={(value) => {
@@ -1673,7 +1673,7 @@ export function Scene(props: {
                       indexCard.subCards.length === 0) &&
                     props.isGM
                   }
-                  data-cy={`scene.aspect.${index}`}
+                  dataCy={`scene.aspect.${index}`}
                   id={`index-card-${indexCard.id}`}
                   indexCardHiddenRecord={
                     hiddenIndexCardRecord.state.indexCardHiddenRecord

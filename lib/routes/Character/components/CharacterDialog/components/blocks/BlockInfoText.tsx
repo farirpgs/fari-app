@@ -25,7 +25,7 @@ export function BlockInfoText(
             <ContentEditable
               readonly={props.readonly || !props.advanced}
               border={props.advanced}
-              data-cy={`${props.dataCy}.value`}
+              dataCy={`${props.dataCy}.value`}
               value={props.block.value}
               onChange={(value) => {
                 props.onValueChange(value);

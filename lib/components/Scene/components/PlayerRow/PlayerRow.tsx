@@ -97,7 +97,7 @@ export function PlayerRow(
   );
 
   return (
-    <PlayerRowContainer isChild={props.isChild}>
+    <PlayerRowContainer isChild={props.isChild} dataCy={props.dataCy}>
       <Box>
         <Grid container wrap="nowrap">
           <Grid item zeroMinWidth xs>
@@ -115,6 +115,7 @@ export function PlayerRow(
               playedDuringTurn={props.playedDuringTurn}
               canUpdateInitiative={props.permissions.canUpdateInitiative}
               onClick={handleClickInitiativeTracker}
+              dataCy={props.dataCy}
             />
           </Grid>
         </Grid>
@@ -141,7 +142,7 @@ export function PlayerRow(
                 value={props.points}
                 max={props.maxPoints}
                 onChange={handlePointsChange}
-                data-cy={props["data-cy"]}
+                dataCy={props["dataCy"]}
               />
             </Grid>
             <Grid item>
@@ -173,7 +174,7 @@ export function PlayerRow(
             size="small"
             disabled={!canOpenOrLoadSheet}
             color={"secondary"}
-            data-cy={`${props["data-cy"]}.assign-or-open-character-sheet`}
+            data-cy={`${props["dataCy"]}.assign-or-open-character-sheet`}
             className={css({
               visibility: canOpenOrLoadSheet ? "visible" : "hidden",
               border: `1px solid `,
@@ -212,7 +213,7 @@ export function PlayerRow(
     return (
       <Box>
         <IconButton
-          data-cy={`${props["data-cy"]}.menu`}
+          data-cy={`${props["dataCy"]}.menu`}
           onClick={(event) => {
             setMenuAnchorEl(event?.currentTarget);
           }}
@@ -228,7 +229,7 @@ export function PlayerRow(
         >
           {shouldRenderSwapSheetButton && (
             <MenuItem
-              data-cy={`${props["data-cy"]}.swap-character-sheet`}
+              data-cy={`${props["dataCy"]}.swap-character-sheet`}
               onClick={() => {
                 setMenuAnchorEl(false);
                 props.onAssignCharacterSheet();
@@ -244,7 +245,7 @@ export function PlayerRow(
           )}
           {shouldRenderRemovePlayerButton && (
             <MenuItem
-              data-cy={`${props["data-cy"]}.remove`}
+              data-cy={`${props["dataCy"]}.remove`}
               onClick={() => {
                 setMenuAnchorEl(false);
                 const confirmed = confirm(
@@ -264,7 +265,7 @@ export function PlayerRow(
           )}
           {shouldRenderMarkPrivateButton && (
             <MenuItem
-              data-cy={`${props["data-cy"]}.mark-private`}
+              data-cy={`${props["dataCy"]}.mark-private`}
               onClick={() => {
                 setMenuAnchorEl(false);
                 props.onTogglePrivate();
@@ -291,11 +292,12 @@ export function PlayerRow(
 }
 PlayerRow.displayName = "PlayerRow";
 
-function PlayerRowContainer(props: {
-  children: React.ReactNode;
-  isChild?: boolean;
-  ["data-cy"]?: string;
-}) {
+function PlayerRowContainer(
+  props: {
+    children: React.ReactNode;
+    isChild?: boolean;
+  } & IDataCyProps
+) {
   const theme = useTheme();
 
   const miniTheme = useMiniTheme({
@@ -312,7 +314,7 @@ function PlayerRowContainer(props: {
             backgroundColor: lightBackground,
             margin: ".5rem",
           }}
-          data-cy={props["data-cy"]}
+          data-cy={props.dataCy}
         >
           <Box
             sx={{
@@ -435,12 +437,13 @@ const PlayerRowName = React.memo(
 );
 
 const PlayerRowTurnTracker = React.memo(
-  (props: {
-    playedDuringTurn: boolean;
-    canUpdateInitiative: boolean;
-    onClick: () => void;
-    ["data-cy"]?: string;
-  }) => {
+  (
+    props: {
+      playedDuringTurn: boolean;
+      canUpdateInitiative: boolean;
+      onClick: () => void;
+    } & IDataCyProps
+  ) => {
     const theme = useTheme();
     const { t } = useTranslate();
     const logger = useLogger();
@@ -463,7 +466,7 @@ const PlayerRowTurnTracker = React.memo(
         >
           <span>
             <IconButton
-              data-cy={`${props["data-cy"]}.toggle-initiative`}
+              data-cy={`${props.dataCy}.toggle-initiative`}
               onClick={handleClick}
               disabled={!props.canUpdateInitiative}
             >
@@ -549,14 +552,15 @@ const PlayerRowDiceRoller = React.memo(
 );
 
 const PlayerRowPoints = React.memo(
-  (props: {
-    label: string | undefined;
-    value: string;
-    max: string | undefined;
-    canUpdate: boolean;
-    onChange(points: string, maxPoints: string | undefined): void;
-    ["data-cy"]?: string;
-  }) => {
+  (
+    props: {
+      label: string | undefined;
+      value: string;
+      max: string | undefined;
+      canUpdate: boolean;
+      onChange(points: string, maxPoints: string | undefined): void;
+    } & IDataCyProps
+  ) => {
     const theme = useTheme();
 
     const pointsManager = usePointCounter({
@@ -581,7 +585,7 @@ const PlayerRowPoints = React.memo(
           <Box ml="-.25rem" color={theme.palette.secondary.main}>
             <CircleTextField
               borderColor={theme.palette.secondary.main}
-              data-cy={`${props["data-cy"]}.counter`}
+              data-cy={`${props.dataCy}.counter`}
               value={pointsManager.state.points}
               readonly={!props.canUpdate}
               onChange={(newValue) => {
@@ -613,7 +617,7 @@ const PlayerRowPoints = React.memo(
               <Box color={theme.palette.secondary.main}>
                 <CircleTextField
                   borderColor={theme.palette.secondary.main}
-                  data-cy={`${props["data-cy"]}.counter.max`}
+                  data-cy={`${props.dataCy}.counter.max`}
                   value={pointsManager.state.maxPoints ?? ""}
                   readonly={!props.canUpdate}
                   onChange={(newMax) => {
