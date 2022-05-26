@@ -52,6 +52,7 @@ import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext"
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { arraySort, IArraySortGetter } from "../../domains/array/arraySort";
+import { CharacterSelector } from "../../domains/character/CharacterSelector";
 import { ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
@@ -730,9 +731,14 @@ export const Session: React.FC<IProps> = (props) => {
     } = options;
     const characterSheet = getCharacterSheet(player.id);
 
+    const mainPointerBlock =
+      CharacterSelector.getCharacterMainPointerBlock(characterSheet);
+    const points = mainPointerBlock?.value ?? player.points;
+    const maxPoints = mainPointerBlock?.meta.max ?? undefined;
+
     return (
       <PlayerRow
-        data-cy={`scene.player-row.${playerRowDataCyIndex}`}
+        dataCy={`scene.player-row.${playerRowDataCyIndex}`}
         color={options.color}
         isChild={isChild}
         permissions={{
@@ -745,8 +751,15 @@ export const Session: React.FC<IProps> = (props) => {
         }}
         key={player.id}
         isMe={isMe}
-        player={player}
-        characterSheet={characterSheet}
+        hasCharacterSheet={!!characterSheet}
+        isPrivate={player.private}
+        playedDuringTurn={player.playedDuringTurn}
+        playerName={player.playerName}
+        rolls={player.rolls}
+        characterName={characterSheet?.name}
+        points={points}
+        maxPoints={maxPoints}
+        pointsLabel={mainPointerBlock?.label}
         onPlayerRemove={() => {
           sessionManager.actions.removePlayer(player.id);
           sessionCharactersManager.actions.removeCharacterSheet(player.id);
@@ -954,7 +967,7 @@ export const Session: React.FC<IProps> = (props) => {
                             sx={{
                               padding: "0",
                             }}
-                            key={player.characterSheet.id}
+                            key={`${player.id}_${player.characterSheet.id}`}
                             value={player.characterSheet.id}
                           >
                             <Box
@@ -1465,7 +1478,7 @@ export function Scene(props: {
         >
           <ContentEditable
             autoFocus
-            data-cy="scene.name"
+            dataCy="scene.name"
             value={sceneManager.state.scene?.name ?? ""}
             readonly={!props.isGM}
             onChange={(value) => {
@@ -1660,7 +1673,7 @@ export function Scene(props: {
                       indexCard.subCards.length === 0) &&
                     props.isGM
                   }
-                  data-cy={`scene.aspect.${index}`}
+                  dataCy={`scene.aspect.${index}`}
                   id={`index-card-${indexCard.id}`}
                   indexCardHiddenRecord={
                     hiddenIndexCardRecord.state.indexCardHiddenRecord

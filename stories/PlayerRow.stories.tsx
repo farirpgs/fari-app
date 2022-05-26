@@ -34,9 +34,16 @@ function StorybookPlayerRow(props: {
       }}
       color={DefaultPlayerColor}
       isChild={false}
-      player={props.player}
+      characterName={props.characterSheet?.name}
+      hasCharacterSheet={!!props.characterSheet}
+      isPrivate={props.player.private}
+      maxPoints={undefined}
+      playedDuringTurn={props.player.playedDuringTurn}
+      playerName={props.player.playerName}
+      points={props.player.points}
+      pointsLabel={"Points Label"}
+      rolls={props.player.rolls}
       isMe={props.highlight}
-      characterSheet={props.characterSheet}
       onDiceRoll={action("onDiceRoll")}
       onPlayedInTurnOrderChange={action("onPlayedInTurnOrderChange")}
       onPointsChange={action("onPointsChange")}

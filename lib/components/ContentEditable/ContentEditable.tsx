@@ -152,7 +152,7 @@ export const ContentEditable: React.FC<
   return (
     <>
       <span
-        data-cy={props["data-cy"]}
+        data-cy={props["dataCy"]}
         id={props.id}
         ref={$ref}
         contentEditable={!props.readonly}

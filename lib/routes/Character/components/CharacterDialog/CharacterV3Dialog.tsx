@@ -2127,7 +2127,7 @@ export const CharacterV3Dialog: React.FC<{
                 >
                   <ContentEditable
                     border
-                    data-cy="character-dialog.name"
+                    dataCy="character-dialog.name"
                     readonly={props.readonly}
                     value={characterManager.state.character!.name}
                     onChange={(value) => {

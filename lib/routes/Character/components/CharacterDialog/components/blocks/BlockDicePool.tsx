@@ -345,7 +345,7 @@ export function BlockDicePool(
         <ContentEditable
           readonly={props.readonly || !props.advanced}
           border={props.advanced}
-          data-cy={`${props.dataCy}.label`}
+          dataCy={`${props.dataCy}.label`}
           value={props.block.label || ""}
           onChange={(value) => {
             props.onLabelChange(value);

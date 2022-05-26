@@ -8,7 +8,7 @@ import produce from "immer";
 import React, { useContext } from "react";
 import {
   ContentEditable,
-  previewContentEditable
+  previewContentEditable,
 } from "../../../../../components/ContentEditable/ContentEditable";
 import { BlockType, IBlock } from "../../../../../domains/character/types";
 import { IDiceRollResult } from "../../../../../domains/dice/Dice";
@@ -23,13 +23,13 @@ import { BlockLink, BlockLinkActions } from "./blocks/BlockLink";
 import { BlockNumeric, BlockNumericActions } from "./blocks/BlockNumeric";
 import {
   BlockPointCounter,
-  BlockPointCounterActions
+  BlockPointCounterActions,
 } from "./blocks/BlockPointCounter";
 import { BlockSeparator, BlockSeparatorActions } from "./blocks/BlockSeparator";
 import { BlockSkill, BlockSkillActions } from "./blocks/BlockSkill";
 import {
   BlockSlotTracker,
-  BlockSlotTrackerActions
+  BlockSlotTrackerActions,
 } from "./blocks/BlockSlotTracker";
 import { BlockText, BlockTextActions } from "./blocks/BlockText";
 
@@ -361,7 +361,7 @@ export function BlockByType(
               <ContentEditable
                 readonly={!props.advanced}
                 border={props.advanced}
-                data-cy={`${props.dataCy}.helper-text`}
+                dataCy={`${props.dataCy}.helper-text`}
                 value={block.meta.helperText ?? ""}
                 onChange={(newHelpText) => {
                   handleOnHelperTextChange(newHelpText);

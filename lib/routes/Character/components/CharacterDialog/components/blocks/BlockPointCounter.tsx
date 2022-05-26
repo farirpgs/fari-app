@@ -130,7 +130,7 @@ export function BlockPointCounter(
               <Grid item className={css({ flex: "1 1 auto" })}>
                 <ThemedLabel className={css({ textAlign: "center" })}>
                   <ContentEditable
-                    data-cy={`${props.dataCy}.label`}
+                    dataCy={`${props.dataCy}.label`}
                     readonly={props.readonly || !props.advanced}
                     border={props.advanced}
                     value={props.block.label || ""}

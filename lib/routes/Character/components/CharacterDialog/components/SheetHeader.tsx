@@ -71,7 +71,7 @@ export const SheetHeader: React.FC<{
               })}
             >
               <ContentEditable
-                data-cy={`character-dialog.${props.label}.label`}
+                dataCy={`character-dialog.${props.label}.label`}
                 readonly={!props.advanced || !props.onLabelChange}
                 border={props.advanced && !!props.onLabelChange}
                 borderColor={miniTheme.textPrimaryInverted}

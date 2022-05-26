@@ -46,7 +46,7 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
                     readonly={props.readonly || !props.advanced}
                     border={props.advanced}
                     borderColor={miniTheme.borderColor}
-                    data-cy={`${props.dataCy}.label`}
+                    dataCy={`${props.dataCy}.label`}
                     value={props.block.label || ""}
                     onChange={(value) => {
                       props.onLabelChange(value);
@@ -67,7 +67,7 @@ export function BlockText(props: IBlockComponentProps<ITextBlock> & {}) {
                   <ContentEditable
                     border
                     borderColor={miniTheme.borderColor}
-                    data-cy={`${props.dataCy}.value`}
+                    dataCy={`${props.dataCy}.value`}
                     readonly={props.readonly}
                     value={props.block.value ?? ""}
                     onChange={(value) => {
