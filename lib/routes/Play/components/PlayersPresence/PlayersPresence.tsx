@@ -1,6 +1,11 @@
 import { css } from "@emotion/css";
 import { useMyPresence } from "@liveblocks/react";
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import { useZIndex } from "../../../../constants/zIndex";
 import { PlayCursorMode } from "../../consts/PlayCursorMode";
 import { SessionPresenceUpdaterContext } from "../../contexts/SessionPresenceContext";
@@ -12,9 +17,11 @@ import { IPlayerCursorState } from "../../types/IPlayerCursorState";
 import { IPlayerPresence } from "../../types/IPlayerPresence";
 import CursorWithMessage from "../CursorWithMessage/CursorWithMessage";
 
-export function PlayersPresence(props: {
-  render: (props: { openChat: () => void }) => React.ReactNode;
-}) {
+export type IPlayersPresenceRef = {
+  openChat: () => void;
+};
+
+export const PlayersPresence = React.forwardRef((props, ref) => {
   const [cursorState, setCursorState] = useState<IPlayerCursorState>({
     mode: PlayCursorMode.Hidden,
   });
@@ -24,6 +31,10 @@ export function PlayersPresence(props: {
   const myWindowCursor = useMyWindowLiveCursor();
   const windowCursors = useWindowLiveCursors();
   const zIndex = useZIndex();
+
+  useImperativeHandle(ref, () => {
+    return { openChat: handleOpenChat };
+  });
 
   useEffect(() => {
     function onKeyUp(e: KeyboardEvent) {
@@ -106,9 +117,6 @@ export function PlayersPresence(props: {
         })}
         {renderMyMessage()}
       </div>
-      {props.render({
-        openChat: handleOpenChat,
-      })}
     </>
   );
 
@@ -156,4 +164,4 @@ export function PlayersPresence(props: {
       </>
     );
   }
-}
+});

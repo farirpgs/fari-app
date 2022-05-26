@@ -19,14 +19,14 @@ import MenuItem from "@mui/material/MenuItem";
 import { useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import isEqual from "lodash/isEqual";
 import React from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
-import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
-import { ICharacter } from "../../../../domains/character/types";
 import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
+import { IDiceRollResult } from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
+import { useEvent } from "../../../../hooks/useEvents/useEvents";
 import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
-import { IPlayer } from "../../../../hooks/useScene/IScene";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { usePointCounter } from "../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
 import { CircleTextField } from "../../../../routes/Character/components/CharacterDialog/components/CircleTextField";
@@ -40,7 +40,6 @@ import {
   DiceBox,
   DiceBoxResult,
 } from "../../../DiceBox/DiceBox";
-
 export function PlayerRow(
   props: {
     permissions: {
@@ -51,9 +50,15 @@ export function PlayerRow(
       canRemove: boolean;
       canMarkPrivate: boolean;
     };
-    player: IPlayer;
-    characterSheet: ICharacter | undefined;
-    connectionState?: string;
+    playerName: string | undefined;
+    hasCharacterSheet: boolean;
+    rolls: Array<IDiceRollResult>;
+    characterName: string | undefined;
+    pointsLabel: string | undefined;
+    points: string;
+    playedDuringTurn: boolean;
+    isPrivate: boolean;
+    maxPoints: string | undefined;
     isMe: boolean;
     color: string;
     isChild: boolean;
@@ -61,7 +66,6 @@ export function PlayerRow(
     onDiceRoll(): void;
     onPlayedInTurnOrderChange(playedDuringTurn: boolean): void;
     onPointsChange(newPoints: string, newMaxPoints: string | undefined): void;
-
     onTogglePrivate(): void;
     onPlayerRemove(): void;
     onCharacterSheetOpen(): void;
@@ -71,97 +75,93 @@ export function PlayerRow(
   const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
-  const hasCharacterSheet = !!props.characterSheet;
+
   const canOpenOrLoadSheet =
-    hasCharacterSheet || props.permissions.canLoadCharacterSheet;
-
-  const mainPointerBlock = CharacterSelector.getCharacterMainPointerBlock(
-    props.characterSheet
-  );
-  const pointFromProps = mainPointerBlock?.value ?? props.player.points;
-  const maxPointsFromProps = mainPointerBlock?.meta.max ?? undefined;
-
-  const pointsManager = usePointCounter({
-    points: pointFromProps,
-    maxPoints: maxPointsFromProps,
-    onPointsChange(newPoints) {
-      props.onPointsChange(newPoints, pointsManager.state.maxPoints);
-    },
-    onMaxPointsChange(newMaxPoints) {
-      props.onPointsChange(pointsManager.state.points, newMaxPoints);
-    },
-  });
-
-  const miniTheme = useMiniTheme({
-    enforceBackground: theme.palette.background.paper,
-  });
-
-  const lightBackground = useLightBackground();
+    props.hasCharacterSheet || props.permissions.canLoadCharacterSheet;
 
   const [menuAnchorEl, setMenuAnchorEl] = React.useState<any>(null);
 
-  function handleOnRoll() {
+  const handleClickInitiativeTracker = useEvent(() => {
+    props.onPlayedInTurnOrderChange(!props.playedDuringTurn);
+  });
+
+  const handleRoll = useEvent(() => {
     props.onDiceRoll();
     logger.track("session.player_reroll_dice");
-  }
+  });
+
+  const handlePointsChange = useEvent(
+    (points: string, maxPoints: string | undefined) => {
+      props.onPointsChange(points, maxPoints);
+    }
+  );
 
   return (
-    <>
-      <MiniThemeContext.Provider value={miniTheme}>
-        <Box
-          sx={{
-            backgroundColor: lightBackground,
-            margin: ".5rem",
-          }}
-          data-cy={props["data-cy"]}
-        >
-          <Box
-            sx={{
-              padding: "0.5rem 1rem",
-              border: props.isChild
-                ? `2px solid ${theme.palette.secondary.main}`
-                : "none",
-            }}
-          >
-            <Box>{renderName()}</Box>
-
-            <Box
-              sx={{
-                position: "relative",
-              }}
-            >
-              <Box pb=".5rem">{renderDice()}</Box>
-              <Box>
-                <Grid
-                  container
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <Grid item>{renderPointCounter()}</Grid>
-                  <Grid item>
-                    <Grid container spacing={1} justifyContent="flex-end">
-                      <Grid item>{renderLoadSheet()}</Grid>
-                      <Grid item>{renderMoreMenu()}</Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Box>
-              {/* <Box pb={props.children ? ".5rem" : undefined}>
-                {renderControls()}
-              </Box> */}
+    <PlayerRowContainer isChild={props.isChild}>
+      <Box>
+        <Grid container wrap="nowrap">
+          <Grid item zeroMinWidth xs>
+            <Box mb=".5rem">
+              <PlayerRowName
+                characterName={props.characterName}
+                color={props.color}
+                playerName={props.playerName}
+              />
             </Box>
-            {props.children}
-          </Box>
+          </Grid>
+
+          <Grid item>
+            <PlayerRowTurnTracker
+              playedDuringTurn={props.playedDuringTurn}
+              canUpdateInitiative={props.permissions.canUpdateInitiative}
+              onClick={handleClickInitiativeTracker}
+            />
+          </Grid>
+        </Grid>
+      </Box>
+      <Box
+        sx={{
+          position: "relative",
+        }}
+      >
+        <Box pb=".5rem">
+          <PlayerRowDiceRoller
+            canRoll={props.permissions.canRoll}
+            rolls={props.rolls}
+            isMe={props.isMe}
+            onRoll={handleRoll}
+          />
         </Box>
-      </MiniThemeContext.Provider>
-    </>
+        <Box>
+          <Grid container justifyContent="space-between" alignItems="center">
+            <Grid item>
+              <PlayerRowPoints
+                label={props.pointsLabel}
+                canUpdate={props.permissions.canUpdatePoints}
+                value={props.points}
+                max={props.maxPoints}
+                onChange={handlePointsChange}
+                data-cy={props["data-cy"]}
+              />
+            </Grid>
+            <Grid item>
+              <Grid container spacing={1} justifyContent="flex-end">
+                <Grid item>{renderLoadSheet()}</Grid>
+                <Grid item>{renderMoreMenu()}</Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+      {props.children}
+    </PlayerRowContainer>
   );
 
   function renderLoadSheet() {
     return (
       <Tooltip
         title={
-          hasCharacterSheet
+          props.hasCharacterSheet
             ? t("player-row.open-character-sheet")
             : props.permissions.canLoadCharacterSheet
             ? t("play-route.assign-character-sheet")
@@ -181,7 +181,7 @@ export function PlayerRow(
               boxShadow: theme.shadows[2],
             })}
             onClick={() => {
-              if (hasCharacterSheet) {
+              if (props.hasCharacterSheet) {
                 props.onCharacterSheetOpen();
               } else {
                 props.onAssignCharacterSheet();
@@ -190,7 +190,7 @@ export function PlayerRow(
               logger.track("session.open_character_sheet");
             }}
           >
-            {hasCharacterSheet ? <LaunchIcon /> : <UploadFileIcon />}
+            {props.hasCharacterSheet ? <LaunchIcon /> : <UploadFileIcon />}
           </IconButton>
         </span>
       </Tooltip>
@@ -199,7 +199,7 @@ export function PlayerRow(
 
   function renderMoreMenu() {
     const shouldRenderSwapSheetButton =
-      props.permissions.canLoadCharacterSheet && hasCharacterSheet;
+      props.permissions.canLoadCharacterSheet && props.hasCharacterSheet;
     const shouldRenderRemovePlayerButton = props.permissions.canRemove;
     const shouldRenderMarkPrivateButton = props.permissions.canRemove;
     if (
@@ -271,14 +271,14 @@ export function PlayerRow(
               }}
             >
               <ListItemIcon>
-                {props.player.private ? (
+                {props.isPrivate ? (
                   <VisibilityIcon fontSize="small" />
                 ) : (
                   <VisibilityOffIcon fontSize="small" />
                 )}
               </ListItemIcon>
               <ListItemText>
-                {props.player.private
+                {props.isPrivate
                   ? t("player-row.show-to-players")
                   : t("player-row.hide-from-players")}
               </ListItemText>
@@ -288,27 +288,224 @@ export function PlayerRow(
       </Box>
     );
   }
+}
+PlayerRow.displayName = "PlayerRow";
 
-  function renderDice() {
+function PlayerRowContainer(props: {
+  children: React.ReactNode;
+  isChild?: boolean;
+  ["data-cy"]?: string;
+}) {
+  const theme = useTheme();
+
+  const miniTheme = useMiniTheme({
+    enforceBackground: theme.palette.background.paper,
+  });
+
+  const lightBackground = useLightBackground();
+
+  return (
+    <>
+      <MiniThemeContext.Provider value={miniTheme}>
+        <Box
+          sx={{
+            backgroundColor: lightBackground,
+            margin: ".5rem",
+          }}
+          data-cy={props["data-cy"]}
+        >
+          <Box
+            sx={{
+              padding: "0.5rem 1rem",
+              border: props.isChild
+                ? `2px solid ${theme.palette.secondary.main}`
+                : "none",
+            }}
+          >
+            {props.children}
+          </Box>
+        </Box>
+      </MiniThemeContext.Provider>
+    </>
+  );
+}
+
+const PlayerRowName = React.memo(
+  (props: {
+    color: string;
+    characterName: string | undefined;
+    playerName: string | undefined;
+  }) => {
+    const theme = useTheme();
+    return (
+      <Box>
+        <Grid container alignItems="center" className={css({ height: "100%" })}>
+          {props.characterName ? (
+            <>
+              <Grid
+                item
+                xs={12}
+                zeroMinWidth
+                sx={{
+                  width: "100%",
+                }}
+              >
+                {renderMainName(props.characterName)}
+              </Grid>
+              <Grid item xs={12} zeroMinWidth>
+                <Grid container>
+                  <Grid item>
+                    <CircleIcon
+                      sx={{
+                        marginRight: ".25rem",
+                      }}
+                      htmlColor={props.color}
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    sx={{
+                      width: "100%",
+                    }}
+                  >
+                    {renderSecondaryName(props.playerName)}
+                  </Grid>
+                </Grid>
+              </Grid>
+            </>
+          ) : (
+            <>
+              <Grid item xs={12} zeroMinWidth>
+                <Grid container>
+                  <Grid item>
+                    <CircleIcon
+                      sx={{
+                        marginRight: ".25rem",
+                      }}
+                      htmlColor={props.color}
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    sx={{
+                      width: "100%",
+                    }}
+                  >
+                    {renderMainName(props.playerName)}
+                  </Grid>
+                </Grid>
+              </Grid>
+            </>
+          )}
+        </Grid>
+      </Box>
+    );
+
+    function renderMainName(name: string | undefined) {
+      return (
+        <Typography
+          title={name}
+          noWrap
+          className={css({
+            color: theme.palette.secondary.main,
+            fontWeight: theme.typography.fontWeightMedium,
+          })}
+        >
+          {name ?? "Untitled"}
+        </Typography>
+      );
+    }
+
+    function renderSecondaryName(name: string | undefined) {
+      return (
+        <Typography
+          noWrap
+          title={name}
+          className={css({
+            fontSize: ".85rem",
+            fontWeight: theme.typography.fontWeightRegular,
+            color: theme.palette.secondary.main,
+          })}
+        >
+          {name}
+        </Typography>
+      );
+    }
+  }
+);
+
+const PlayerRowTurnTracker = React.memo(
+  (props: {
+    playedDuringTurn: boolean;
+    canUpdateInitiative: boolean;
+    onClick: () => void;
+    ["data-cy"]?: string;
+  }) => {
+    const theme = useTheme();
+    const { t } = useTranslate();
+    const logger = useLogger();
+    const handleClick = useEvent(
+      (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.stopPropagation();
+        props.onClick();
+        logger.track("session.change_player_initiative");
+      }
+    );
+
+    return (
+      <Box>
+        <Tooltip
+          title={
+            props.playedDuringTurn
+              ? t("player-row.played")
+              : t("player-row.not-played")
+          }
+        >
+          <span>
+            <IconButton
+              data-cy={`${props["data-cy"]}.toggle-initiative`}
+              onClick={handleClick}
+              disabled={!props.canUpdateInitiative}
+            >
+              {props.playedDuringTurn ? (
+                <DirectionsRunIcon htmlColor={theme.palette.secondary.main} />
+              ) : (
+                <EmojiPeopleIcon htmlColor={theme.palette.secondary.main} />
+              )}
+            </IconButton>
+          </span>
+        </Tooltip>
+      </Box>
+    );
+  }
+);
+
+const PlayerRowDiceRoller = React.memo(
+  (props: {
+    rolls: Array<IDiceRollResult>;
+    isMe: boolean;
+    canRoll: boolean;
+    onRoll(): void;
+  }) => {
+    const theme = useTheme();
+
     return (
       <Box>
         <Grid container spacing={1} wrap="nowrap" alignItems="flex-start">
           <Grid item>
             <Box display="flex" justifyContent="flex-end" height="100%">
               <DiceBox
-                rolls={props.player.rolls}
+                rolls={props.rolls}
                 size="3rem"
                 fontSize="1.5rem"
                 borderSize=".15rem"
                 disableConfettis={props.isMe}
-                disabled={!props.permissions.canRoll}
-                onClick={() => {
-                  handleOnRoll();
-                }}
+                disabled={!props.canRoll}
+                onClick={props.onRoll}
               />
             </Box>
           </Grid>
-          {props.player.rolls.length > 0 && (
+          {props.rolls.length > 0 && (
             <Grid item>
               <Box
                 className={css({
@@ -328,7 +525,7 @@ export function PlayerRow(
                         color: theme.palette.secondary.main,
                       }}
                     >
-                      <DiceBonusLabel rolls={props.player.rolls} noColor />
+                      <DiceBonusLabel rolls={props.rolls} noColor />
                     </Box>
                   </Grid>
                   <Grid
@@ -338,7 +535,7 @@ export function PlayerRow(
                       color: theme.palette.secondary.main,
                     }}
                   >
-                    <DiceBoxResult rolls={props.player.rolls} noColor />
+                    <DiceBoxResult rolls={props.rolls} noColor />
                   </Grid>
                 </Grid>
               </Box>
@@ -347,39 +544,32 @@ export function PlayerRow(
         </Grid>
       </Box>
     );
-  }
+  },
+  isEqual
+);
 
-  function renderInitiative() {
-    return (
-      <Tooltip
-        title={
-          props.player.playedDuringTurn
-            ? t("player-row.played")
-            : t("player-row.not-played")
-        }
-      >
-        <span>
-          <IconButton
-            data-cy={`${props["data-cy"]}.toggle-initiative`}
-            onClick={(e) => {
-              e.stopPropagation();
-              props.onPlayedInTurnOrderChange(!props.player.playedDuringTurn);
-              logger.track("session.change_player_initiative");
-            }}
-            disabled={!props.permissions.canUpdateInitiative}
-          >
-            {props.player.playedDuringTurn ? (
-              <DirectionsRunIcon htmlColor={theme.palette.secondary.main} />
-            ) : (
-              <EmojiPeopleIcon htmlColor={theme.palette.secondary.main} />
-            )}
-          </IconButton>
-        </span>
-      </Tooltip>
-    );
-  }
+const PlayerRowPoints = React.memo(
+  (props: {
+    label: string | undefined;
+    value: string;
+    max: string | undefined;
+    canUpdate: boolean;
+    onChange(points: string, maxPoints: string | undefined): void;
+    ["data-cy"]?: string;
+  }) => {
+    const theme = useTheme();
 
-  function renderPointCounter() {
+    const pointsManager = usePointCounter({
+      points: props.value,
+      maxPoints: props.max,
+      onPointsChange(newPoints) {
+        props.onChange(newPoints, pointsManager.state.maxPoints);
+      },
+      onMaxPointsChange(newMaxPoints) {
+        props.onChange(pointsManager.state.points, newMaxPoints);
+      },
+    });
+
     return (
       <Grid
         container
@@ -393,7 +583,7 @@ export function PlayerRow(
               borderColor={theme.palette.secondary.main}
               data-cy={`${props["data-cy"]}.counter`}
               value={pointsManager.state.points}
-              readonly={!props.permissions.canUpdatePoints}
+              readonly={!props.canUpdate}
               onChange={(newValue) => {
                 pointsManager.actions.setPoints(newValue);
               }}
@@ -425,7 +615,7 @@ export function PlayerRow(
                   borderColor={theme.palette.secondary.main}
                   data-cy={`${props["data-cy"]}.counter.max`}
                   value={pointsManager.state.maxPoints ?? ""}
-                  readonly={!props.permissions.canUpdatePoints}
+                  readonly={!props.canUpdate}
                   onChange={(newMax) => {
                     pointsManager.actions.setMaxPoints(newMax);
                   }}
@@ -440,7 +630,7 @@ export function PlayerRow(
             </Grid>
           </>
         )}
-        {mainPointerBlock?.label && (
+        {props.label && (
           <Grid
             item
             className={css({
@@ -457,106 +647,11 @@ export function PlayerRow(
                 marginLeft: ".5rem",
               })}
             >
-              {previewContentEditable({ value: mainPointerBlock?.label })}
+              {previewContentEditable({ value: props.label })}
             </Typography>
           </Grid>
         )}
       </Grid>
     );
   }
-
-  function renderMainName(name: string | undefined) {
-    return (
-      <Typography
-        title={name}
-        noWrap
-        className={css({
-          color: theme.palette.secondary.main,
-          fontWeight: theme.typography.fontWeightMedium,
-        })}
-      >
-        {name ?? "Untitled"}
-      </Typography>
-    );
-  }
-
-  function renderSecondaryName(name: string | undefined) {
-    return (
-      <Typography
-        noWrap
-        title={name}
-        className={css({
-          fontSize: ".85rem",
-          fontWeight: theme.typography.fontWeightRegular,
-          color: theme.palette.secondary.main,
-        })}
-      >
-        {name}
-      </Typography>
-    );
-  }
-
-  function renderName() {
-    return (
-      <>
-        <Box>
-          <Grid container wrap="nowrap">
-            <Grid item zeroMinWidth xs>
-              <Box mb=".5rem">
-                <Grid
-                  container
-                  alignItems="center"
-                  className={css({ height: "100%" })}
-                >
-                  {hasCharacterSheet ? (
-                    <>
-                      <Grid item xs={12} zeroMinWidth>
-                        {renderMainName(props.characterSheet?.name)}
-                      </Grid>
-                      <Grid item xs={12} zeroMinWidth>
-                        <Grid container>
-                          <Grid item>
-                            <CircleIcon
-                              sx={{
-                                marginRight: ".25rem",
-                              }}
-                              htmlColor={props.color}
-                            />
-                          </Grid>
-                          <Grid item>
-                            {renderSecondaryName(props.player.playerName)}
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </>
-                  ) : (
-                    <>
-                      <Grid item xs={12} zeroMinWidth>
-                        <Grid container>
-                          <Grid item>
-                            <CircleIcon
-                              sx={{
-                                marginRight: ".25rem",
-                              }}
-                              htmlColor={props.color}
-                            />
-                          </Grid>
-                          <Grid item>
-                            {renderMainName(props.player.playerName)}
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </>
-                  )}
-                </Grid>
-              </Box>
-            </Grid>
-
-            <Grid item>{renderInitiative()}</Grid>
-          </Grid>
-        </Box>
-      </>
-    );
-  }
-}
-PlayerRow.displayName = "PlayerRow";
+);
