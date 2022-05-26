@@ -32,7 +32,9 @@ jobs:
         run: npm install
       # Build
       - name: Build
-        run: CONTEXT=production npm run build
+        run: |
+          export NODE_OPTIONS='--max-old-space-size=2048'
+          CONTEXT=production npm run build
         env:
           VITE_GITHUB_RUN_NUMBER: ${{github.run_number}}
           VITE_GITHUB_SHA: ${{github.sha}}
