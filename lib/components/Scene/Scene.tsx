@@ -828,6 +828,7 @@ export const Session: React.FC<IProps> = (props) => {
   function renderCharacterCards() {
     const everyone = sessionManager.computed.everyone;
     const characters = sessionCharactersManager.state.characterSheets;
+
     const playersWithCharacterSheets = Object.keys(characters)
       .map((characterId) => {
         const playerMatch = everyone.find(
@@ -839,8 +840,9 @@ export const Session: React.FC<IProps> = (props) => {
         };
       })
       .filter((player) => {
+        const hasPlayer = !!player.id;
         const isVisible = isGM || !player.private;
-        return isVisible;
+        return isVisible && hasPlayer;
       })
       .sort((a, b) => {
         return a.id === props.userId ? -1 : b.id === props.userId ? 1 : 0;
