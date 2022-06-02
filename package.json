@@ -101,6 +101,7 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "esm": "^3.2.25",
     "fs-extra": "^10.1.0",
+    "jsdom": "^19.0.0",
     "prettier": "^2.6.2",
     "react-test-renderer": "^18.1.0",
     "typescript": "^4.6.4",
