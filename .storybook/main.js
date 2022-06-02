@@ -4,6 +4,7 @@ module.exports = {
   core: {
     builder: "@storybook/builder-vite", // 👈 The builder enabled here.
   },
+  typescript: { reactDocgen: "none" },
   staticDirs: ["../public"],
   stories: [
     "../stories/**/*.stories.mdx",
