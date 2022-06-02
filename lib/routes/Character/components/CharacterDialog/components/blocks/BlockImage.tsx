@@ -51,7 +51,7 @@ export function BlockImage(props: IBlockComponentProps<IImageBlock> & {}) {
                 <ContentEditable
                   readonly={props.readonly}
                   border={props.advanced}
-                  data-cy={`${props.dataCy}.label`}
+                  dataCy={`${props.dataCy}.label`}
                   value={props.block.label || ""}
                   onChange={(value) => {
                     props.onLabelChange(value);

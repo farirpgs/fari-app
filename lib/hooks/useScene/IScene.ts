@@ -128,6 +128,7 @@ export type ISession = {
   badConfetti: number;
   tlDrawDoc: IDrawingAreaState;
   paused: boolean;
+  playerColorIndex: number;
 };
 
 export type ISessionCharacters = {

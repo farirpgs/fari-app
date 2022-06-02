@@ -6,6 +6,7 @@ import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
+import { Delays } from "../../../../constants/Delays";
 import { FontFamily } from "../../../../constants/FontFamily";
 import { useZIndex } from "../../../../constants/zIndex";
 import { ThemedLabel } from "../../../Character/components/CharacterDialog/components/ThemedLabel";
@@ -18,6 +19,7 @@ import { IPlayerCursorRollOutput } from "../../types/IPlayerCursorState";
 
 let topTenLatestRollCommandsSingleton: Array<string> = [];
 
+let openCount = -1;
 export default function CursorWithMessage(props: {
   color: string | null | undefined;
   x: number;
@@ -29,7 +31,13 @@ export default function CursorWithMessage(props: {
   onRollOutputChange?(roll: IPlayerCursorRollOutput | null): void;
   onMessageChange?(message: string): void;
 }) {
-  const textPlaceholder = "Type a message...";
+  const [textPlaceholder] = useState(() => {
+    ++openCount;
+    if (openCount % 2 === 0) {
+      return "Type a message...";
+    }
+    return "2d6 + 3";
+  });
   const zIndex = useZIndex();
   const theme = useTheme();
   const color = props.color || DefaultPlayerColor;
@@ -51,7 +59,7 @@ export default function CursorWithMessage(props: {
 
     const timeout = setTimeout(() => {
       setStale(true);
-    }, 2500);
+    }, Delays.cursorStale);
 
     return () => {
       clearTimeout(timeout);
@@ -104,6 +112,7 @@ export default function CursorWithMessage(props: {
       setCommandtoPopIndex(newIndex);
     }
   }
+  const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
 
   return (
     <MiniThemeContext.Provider value={miniTheme}>
@@ -113,13 +122,15 @@ export default function CursorWithMessage(props: {
           position: "absolute",
           opacity: stale ? 0.15 : 1,
           pointerEvents: "none",
-          top: "-10px",
+          top: "-40px",
           left: "-10px",
           zIndex: zIndex.cursor,
         })}
         style={{
-          transition: "transform 0.5s cubic-bezier(.17,.93,.38,1)",
-          transform: `translateX(${props.x}px) translateY(${props.y}px)`,
+          transition: isFirefox
+            ? undefined
+            : "transform 0.5s cubic-bezier(.17,.93,.38,1)",
+          transform: `translateX(${props.x}px) translateY(${props.y}px) scale(1)`,
         }}
       >
         {props.readonly && renderCursor()}

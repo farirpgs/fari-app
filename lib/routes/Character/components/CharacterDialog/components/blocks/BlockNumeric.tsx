@@ -44,7 +44,7 @@ export function BlockNumeric(props: IBlockComponentProps<INumericBlock> & {}) {
               <ContentEditable
                 readonly={props.readonly}
                 border={props.advanced}
-                data-cy={`${props.dataCy}.label`}
+                dataCy={`${props.dataCy}.label`}
                 value={props.block.label || ""}
                 onChange={(value) => {
                   props.onLabelChange(value);

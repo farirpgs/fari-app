@@ -32,7 +32,8 @@ jobs:
         run: npm install
       # Build
       - name: Build
-        run: CONTEXT=production npm run build
+        run: |
+          CONTEXT=production npm run build
         env:
           VITE_GITHUB_RUN_NUMBER: ${{github.run_number}}
           VITE_GITHUB_SHA: ${{github.sha}}

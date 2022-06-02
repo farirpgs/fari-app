@@ -1,5 +1,6 @@
 import { css } from "@emotion/css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import ChatIcon from "@mui/icons-material/Chat";
 import CircleIcon from "@mui/icons-material/Circle";
 import CreateIcon from "@mui/icons-material/Create";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
@@ -51,6 +52,7 @@ import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext"
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { arraySort, IArraySortGetter } from "../../domains/array/arraySort";
+import { CharacterSelector } from "../../domains/character/CharacterSelector";
 import { ICharacter } from "../../domains/character/types";
 import { IDiceRollResult } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
@@ -94,6 +96,7 @@ import {
 } from "../ContentEditable/ContentEditable";
 import { FateLabel } from "../FateLabel/FateLabel";
 import { IndexCard, IndexCardMinWidth } from "../IndexCard/IndexCard";
+import { MasonryResizer } from "../MasonryResizer/MasonryResizer";
 import { Page } from "../Page/Page";
 import { SplitButton } from "../SplitButton/SplitButton";
 import { Toolbox } from "../Toolbox/Toolbox";
@@ -127,6 +130,7 @@ type IProps = {
   shareLink?: string;
   idFromParams?: string;
   onPlayerInteraction?(interaction: IPlayerInteraction): void;
+  onOpenChat?(): void;
 };
 
 export const Session: React.FC<IProps> = (props) => {
@@ -355,6 +359,22 @@ export const Session: React.FC<IProps> = (props) => {
                   </IconButton>
                 </Tooltip>
               </Grid>
+              {props.onOpenChat && (
+                <Grid item>
+                  <Tooltip title={t("play-route.chat")}>
+                    <IconButton
+                      onClick={props.onOpenChat}
+                      color="primary"
+                      size="large"
+                    >
+                      <ChatIcon
+                        className={css({ width: "1.8rem", height: "1.8rem" })}
+                        htmlColor={theme.palette.text.primary}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
 
               {isGM && (
                 <Grid item>
@@ -711,9 +731,14 @@ export const Session: React.FC<IProps> = (props) => {
     } = options;
     const characterSheet = getCharacterSheet(player.id);
 
+    const mainPointerBlock =
+      CharacterSelector.getCharacterMainPointerBlock(characterSheet);
+    const points = mainPointerBlock?.value ?? player.points;
+    const maxPoints = mainPointerBlock?.meta.max ?? undefined;
+
     return (
       <PlayerRow
-        data-cy={`scene.player-row.${playerRowDataCyIndex}`}
+        dataCy={`scene.player-row.${playerRowDataCyIndex}`}
         color={options.color}
         isChild={isChild}
         permissions={{
@@ -726,8 +751,15 @@ export const Session: React.FC<IProps> = (props) => {
         }}
         key={player.id}
         isMe={isMe}
-        player={player}
-        characterSheet={characterSheet}
+        hasCharacterSheet={!!characterSheet}
+        isPrivate={player.private}
+        playedDuringTurn={player.playedDuringTurn}
+        playerName={player.playerName}
+        rolls={player.rolls}
+        characterName={characterSheet?.name}
+        points={points}
+        maxPoints={maxPoints}
+        pointsLabel={mainPointerBlock?.label}
         onPlayerRemove={() => {
           sessionManager.actions.removePlayer(player.id);
           sessionCharactersManager.actions.removeCharacterSheet(player.id);
@@ -807,8 +839,9 @@ export const Session: React.FC<IProps> = (props) => {
         };
       })
       .filter((player) => {
+        const hasPlayer = !!player.id;
         const isVisible = isGM || !player.private;
-        return isVisible;
+        return isVisible && hasPlayer;
       })
       .sort((a, b) => {
         return a.id === props.userId ? -1 : b.id === props.userId ? 1 : 0;
@@ -927,7 +960,7 @@ export const Session: React.FC<IProps> = (props) => {
                   <TabContext value={currentCardId}>
                     <TabPanel value="" />
                     <MiniThemeContext.Provider value={miniTheme}>
-                      {playersWithCharacterSheets.map((player, index) => {
+                      {playersWithCharacterSheets.map((player) => {
                         const isMe = props.userId === player.id;
                         const canControl = isGM || isMe;
                         return (
@@ -935,7 +968,7 @@ export const Session: React.FC<IProps> = (props) => {
                             sx={{
                               padding: "0",
                             }}
-                            key={player.characterSheet.id}
+                            key={`${player.id}_${player.characterSheet.id}`}
                             value={player.characterSheet.id}
                           >
                             <Box
@@ -1070,6 +1103,7 @@ export const Session: React.FC<IProps> = (props) => {
                   isGM={isGM}
                   canLoad={isGM}
                   onRoll={handleSetMyRoll}
+                  onOpenChat={props.onOpenChat}
                   onPoolClick={(element) => {
                     diceManager.actions.addOrRemovePoolElement(element);
                     diceManager.actions.setPlayerId(gm.id);
@@ -1192,6 +1226,7 @@ export function Scene(props: {
   onRoll(diceRollResult: IDiceRollResult): void;
   onPoolClick(element: IDicePoolElement): void;
   onIndexCardUpdate(indexCard: IIndexCard, type: IIndexCardType): void;
+  onOpenChat?(): void;
 }) {
   const { sceneManager } = props;
   const settingsManager = useContext(SettingsContext);
@@ -1444,7 +1479,7 @@ export function Scene(props: {
         >
           <ContentEditable
             autoFocus
-            data-cy="scene.name"
+            dataCy="scene.name"
             value={sceneManager.state.scene?.name ?? ""}
             readonly={!props.isGM}
             onChange={(value) => {
@@ -1614,6 +1649,7 @@ export function Scene(props: {
     }
     return (
       <Box>
+        <MasonryResizer deps={[props.sceneManager.state.scene]} />
         <Masonry
           columns={renderProps.columns}
           sx={{
@@ -1638,7 +1674,7 @@ export function Scene(props: {
                       indexCard.subCards.length === 0) &&
                     props.isGM
                   }
-                  data-cy={`scene.aspect.${index}`}
+                  dataCy={`scene.aspect.${index}`}
                   id={`index-card-${indexCard.id}`}
                   indexCardHiddenRecord={
                     hiddenIndexCardRecord.state.indexCardHiddenRecord
