@@ -10,11 +10,7 @@ import {
   ContentEditable,
   previewContentEditable,
 } from "../../../../../components/ContentEditable/ContentEditable";
-import {
-  BlockType,
-  IBlock,
-  IBlockTypes,
-} from "../../../../../domains/character/types";
+import { BlockType, IBlock } from "../../../../../domains/character/types";
 import { IDiceRollResult } from "../../../../../domains/dice/Dice";
 import { useEvent } from "../../../../../hooks/useEvent/useEvent";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
@@ -37,11 +33,11 @@ import {
 } from "./blocks/BlockSlotTracker";
 import { BlockText, BlockTextActions } from "./blocks/BlockText";
 
-export function BlockByType<TBlockType extends IBlockTypes>(props: {
+export function BlockByType(props: {
   dataCy: string;
   advanced: boolean;
   readonly: boolean | undefined;
-  block: IBlock & TBlockType;
+  block: IBlock;
   hideHelp?: boolean;
   otherActions?: JSX.Element;
   onChange(newBlock: IBlock): void;
@@ -155,7 +151,13 @@ export function BlockByType<TBlockType extends IBlockTypes>(props: {
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
-          block={block}
+          label={block.label}
+          value={block.value}
+          commands={block.meta.commands}
+          blockId={block.id}
+          blockType={block.type}
+          checked={block.meta.checked}
+          hideModifier={block.meta.hideModifier}
           onLabelChange={handleLabelChange}
           onValueChange={handleValueChange}
           onMetaChange={handleMetaChange}
@@ -167,7 +169,14 @@ export function BlockByType<TBlockType extends IBlockTypes>(props: {
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
-          block={block}
+          label={block.label}
+          value={block.value}
+          commands={block.meta.commands}
+          listResults={true}
+          hideModifier={true}
+          blockId={block.id}
+          blockType={block.type}
+          checked={block.meta.checked}
           onLabelChange={handleLabelChange}
           onValueChange={handleValueChange}
           onMetaChange={handleMetaChange}
@@ -277,7 +286,10 @@ export function BlockByType<TBlockType extends IBlockTypes>(props: {
 
         {block.type === BlockType.Skill && (
           <BlockSkillActions
-            block={block}
+            label={block.label}
+            value={block.value}
+            checked={block.meta.checked}
+            hideModifier={block.meta.hideModifier}
             onLabelChange={handleLabelChange}
             onValueChange={handleValueChange}
             onMetaChange={handleMetaChange}
@@ -285,7 +297,9 @@ export function BlockByType<TBlockType extends IBlockTypes>(props: {
         )}
         {block.type === BlockType.DicePool && (
           <BlockDicePoolActions
-            block={block}
+            label={block.label}
+            value={block.value}
+            checked={block.meta.checked}
             onLabelChange={handleLabelChange}
             onValueChange={handleValueChange}
             onMetaChange={handleMetaChange}

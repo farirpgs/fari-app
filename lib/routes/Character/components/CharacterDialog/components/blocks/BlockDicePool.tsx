@@ -12,6 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import { darken, lighten, useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
+import isEqual from "lodash/isEqual";
 import { default as React, useContext, useEffect, useState } from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { Delays } from "../../../../../../constants/Delays";
@@ -19,22 +20,19 @@ import { DiceContext } from "../../../../../../contexts/DiceContext/DiceContext"
 import {
   BlockType,
   IDicePoolBlock,
-  ISkillBlock
+  ISkillBlock,
 } from "../../../../../../domains/character/types";
 import {
   IDiceCommandSetId,
   IDiceRollResult,
-  IRollGroup
+  IRollGroup,
 } from "../../../../../../domains/dice/Dice";
 import { Icons } from "../../../../../../domains/Icons/Icons";
 import { useEvent } from "../../../../../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { BlockSelectors } from "../../domains/BlockSelectors/BlockSelectors";
 import { DiceCommandGroup } from "../../domains/DiceCommandGroup/DiceCommandGroup";
-import {
-  IBlockActionComponentProps,
-  IBlockHandlers
-} from "../../types/IBlockComponentProps";
+import { IBlockHandlers } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
 import { ThemedLabel } from "../ThemedLabel";
@@ -66,7 +64,8 @@ export const BlockDicePool = React.memo(
       readonly: boolean | undefined;
       blockId: string;
       blockType: BlockType;
-      commands?: Array<IDiceCommandSetId>;
+      hideModifier: boolean | undefined;
+      commands: Array<IDiceCommandSetId> | undefined;
       dataCy?: string;
       listResults?: boolean;
       mid?: React.ReactNode;
@@ -381,7 +380,13 @@ export const BlockDicePool = React.memo(
           borderStyle={hasCommands ? "solid" : "dashed"}
           onContextMenu={(e) => {
             e.preventDefault();
-            const rollGroup = BlockSelectors.getRollGroupFromBlock(props.block);
+            const rollGroup = BlockSelectors.getRollGroupFromBlock({
+              commands: props.commands,
+              label: props.label,
+              hideModifier: props.hideModifier,
+              type: props.blockType,
+              value: props.value,
+            });
 
             diceManager.actions.setOptions({ listResults: listResults });
             diceManager.actions.addOrRemovePoolElement({
@@ -395,7 +400,13 @@ export const BlockDicePool = React.memo(
             if (!canRoll) {
               return;
             }
-            const rollGroup = BlockSelectors.getRollGroupFromBlock(props.block);
+            const rollGroup = BlockSelectors.getRollGroupFromBlock({
+              commands: props.commands,
+              label: props.label,
+              hideModifier: props.hideModifier,
+              type: props.blockType,
+              value: props.value,
+            });
             const diceRollResult = diceManager.actions.roll([rollGroup], {
               listResults: listResults,
             });
@@ -458,7 +469,13 @@ export const BlockDicePool = React.memo(
 BlockDicePool.displayName = "BlockDicePool";
 
 export const BlockDicePoolActions = React.memo(
-  (props: IBlockActionComponentProps<IDicePoolBlock>) => {
+  (
+    props: {
+      value: string | undefined;
+      label: string | undefined;
+      checked: boolean | undefined;
+    } & IBlockHandlers<IDicePoolBlock>
+  ) => {
     const { t } = useTranslate();
     const theme = useTheme();
 
@@ -488,6 +505,9 @@ export const BlockDicePoolActions = React.memo(
         </Grid>
       </>
     );
+  },
+  (prev, next) => {
+    return isEqual(prev, next);
   }
 );
 
