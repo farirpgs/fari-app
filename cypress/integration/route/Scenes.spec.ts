@@ -17,19 +17,19 @@ describe("/scenes", () => {
 
       Fari.get("scene.card-collections").select("Fate");
 
-      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select").click({ force: true });
       Fari.get("scene.add-card.select.ASPECT").click({ force: true });
 
-      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select").click({ force: true });
       Fari.get("scene.add-card.select.BOOST").click({ force: true });
 
-      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select").click({ force: true });
       Fari.get("scene.add-card.select.NPC").click({ force: true });
 
-      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select").click({ force: true });
       Fari.get("scene.add-card.select.BAD GUY").click({ force: true });
 
-      Fari.get("scene.add-card.select").click();
+      Fari.get("scene.add-card.select").click({ force: true });
       Fari.get("scene.add-card.select.CARD").click({ force: true });
 
       // aspect

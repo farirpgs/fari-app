@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import {
   ContentEditable,
-  previewContentEditable
+  previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { IImageBlock } from "../../../../../../domains/character/types";
 import { useEvent } from "../../../../../../hooks/useEvent/useEvent";
@@ -76,7 +76,7 @@ export const BlockImage = React.memo(
                   <ContentEditable
                     readonly={props.readonly}
                     border={props.advanced}
-                    data-cy={`${props.dataCy}.label`}
+                    dataCy={`${props.dataCy}.label`}
                     value={props.label || ""}
                     onChange={handleLabelChange}
                   />

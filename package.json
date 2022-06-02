@@ -9,7 +9,7 @@
     "node": "^16.2.0"
   },
   "scripts": {
-    "ci": "npm install && npm run build && npm run validate",
+    "ci": "npm install --force && npm run build && npm run validate",
     "start": "vite --open",
     "build": "vite build",
     "i18n": "node -r esm i18n.js",
@@ -31,7 +31,7 @@
     "storybook": "start-storybook -p 6006 --static-dir ./public",
     "build-storybook": "build-storybook --static-dir ./public",
     "chromatic": "chromatic --project-token CHROMATIC_PROJECT_TOKEN --exit-zero-on-changes",
-    "clean": "rm -rf node_modules && npm install"
+    "clean": "rm -rf node_modules && npm install --force"
   },
   "dependencies": {
     "@dice-roller/rpg-dice-roller": "^5.1.0",

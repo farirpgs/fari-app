@@ -37,7 +37,7 @@ export const BlockInfoText = React.memo(
               <ContentEditable
                 readonly={props.readonly || !props.advanced}
                 border={props.advanced}
-                data-cy={`${props.dataCy}.value`}
+                dataCy={`${props.dataCy}.value`}
                 value={props.value || ""}
                 onChange={handleValueChange}
               />

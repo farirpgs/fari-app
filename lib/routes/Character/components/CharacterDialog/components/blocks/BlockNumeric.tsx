@@ -39,7 +39,7 @@ export const BlockNumeric = React.memo(
           >
             <Grid item>
               <CircleTextField
-                data-cy={`${props.dataCy}.value`}
+                dataCy={`${props.dataCy}.value`}
                 value={props.value}
                 readonly={props.readonly}
                 onChange={props.onValueChange}
@@ -50,7 +50,7 @@ export const BlockNumeric = React.memo(
                 <ContentEditable
                   readonly={props.readonly}
                   border={props.advanced}
-                  data-cy={`${props.dataCy}.label`}
+                  dataCy={`${props.dataCy}.label`}
                   value={props.label || ""}
                   onChange={props.onLabelChange}
                 />

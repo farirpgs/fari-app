@@ -585,7 +585,7 @@ const PlayerRowPoints = React.memo(
           <Box ml="-.25rem" color={theme.palette.secondary.main}>
             <CircleTextField
               borderColor={theme.palette.secondary.main}
-              data-cy={`${props.dataCy}.counter`}
+              dataCy={`${props.dataCy}.counter`}
               value={pointsManager.state.points}
               readonly={!props.canUpdate}
               onChange={(newValue) => {

@@ -10,22 +10,24 @@ import TextField from "@mui/material/TextField";
 import React, { useContext, useState } from "react";
 import { ConditionalWrapper } from "../../../../../components/ConditionalWrapper/ConditionalWrapper";
 import { Delays } from "../../../../../constants/Delays";
+import { IDataCyProps } from "../../../../../domains/cypress/types/IDataCyProps";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
 import { MiniThemeContext } from "../MiniThemeContext";
 
-export function CircleTextField(props: {
-  "data-cy"?: string;
-  "value": string | undefined;
-  "readonly"?: boolean;
-  "highlight"?: boolean;
-  "button"?: boolean;
-  "borderColor"?: string;
-  onChange?(value: string): void;
-  onIncrement?(): void;
-  onDecrement?(): void;
-  onClick?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
-  onContextMenu?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
-}) {
+export function CircleTextField(
+  props: {
+    value: string | undefined;
+    readonly?: boolean;
+    highlight?: boolean;
+    button?: boolean;
+    borderColor?: string;
+    onChange?(value: string): void;
+    onIncrement?(): void;
+    onDecrement?(): void;
+    onClick?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
+    onContextMenu?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
+  } & IDataCyProps
+) {
   const miniTheme = useContext(MiniThemeContext);
 
   const theme = useTheme();
@@ -80,7 +82,7 @@ export function CircleTextField(props: {
         <TextField
           variant="standard"
           type="number"
-          data-cy={props["data-cy"]}
+          data-cy={props.dataCy}
           value={value}
           className={css({
             textAlign: "center",
@@ -166,7 +168,7 @@ export function CircleTextField(props: {
         <Fade in={areCounterButtonsVisible}>
           <IconButton
             size="small"
-            data-cy={`${props["data-cy"]}.decrement`}
+            data-cy={`${props.dataCy}.decrement`}
             className={css({
               "position": "absolute",
               "background": theme.palette.background.paper,
@@ -187,7 +189,7 @@ export function CircleTextField(props: {
         <Fade in={areCounterButtonsVisible}>
           <IconButton
             size="small"
-            data-cy={`${props["data-cy"]}.increment`}
+            data-cy={`${props.dataCy}.increment`}
             className={css({
               "position": "absolute",
               "background": theme.palette.background.paper,

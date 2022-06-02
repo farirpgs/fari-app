@@ -12,6 +12,7 @@ import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import React, { useEffect } from "react";
 import { zIndex } from "../../constants/zIndex";
+import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 
 export type IOption = {
   label: string;
@@ -20,10 +21,10 @@ export type IOption = {
 };
 
 type IProps = {
-  "data-cy"?: string;
-  "instant"?: boolean;
-  "options": Array<IOption>;
-} & ButtonGroupProps;
+  instant?: boolean;
+  options: Array<IOption>;
+} & IDataCyProps &
+  ButtonGroupProps;
 
 export const SplitButton: React.FC<IProps> = (props) => {
   const { options, instant, ...buttonProps } = props;
@@ -60,7 +61,7 @@ export const SplitButton: React.FC<IProps> = (props) => {
       <Grid item xs={12}>
         <ButtonGroup {...buttonProps} ref={anchorRef}>
           <Button
-            data-cy={`${props["data-cy"]}.button`}
+            data-cy={`${props.dataCy}.button`}
             onClick={handleClick}
             endIcon={options[selectedIndex]?.endIcon}
           >
@@ -68,7 +69,7 @@ export const SplitButton: React.FC<IProps> = (props) => {
           </Button>
           <Button
             onClick={handleToggle}
-            data-cy={`${props["data-cy"]}.select`}
+            data-cy={`${props.dataCy}.select`}
             className={css({
               padding: 0,
             })}
@@ -97,7 +98,7 @@ export const SplitButton: React.FC<IProps> = (props) => {
                   <MenuList>
                     {options.map((option, index) => (
                       <MenuItem
-                        data-cy={`${props["data-cy"]}.select.${option.label}`}
+                        data-cy={`${props.dataCy}.select.${option.label}`}
                         key={option.label}
                         selected={index === selectedIndex}
                         onClick={() => handleMenuItemClick(index)}

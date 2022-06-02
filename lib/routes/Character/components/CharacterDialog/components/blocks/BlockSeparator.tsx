@@ -67,7 +67,7 @@ export const BlockSeparator = React.memo(
                           <ContentEditable
                             readonly={!props.advanced}
                             border={props.advanced}
-                            data-cy={`${props.dataCy}.label`}
+                            dataCy={`${props.dataCy}.label`}
                             value={props.label || ""}
                             onChange={props.onLabelChange}
                           />

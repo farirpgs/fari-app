@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import React, { useContext } from "react";
 import {
   ContentEditable,
-  previewContentEditable
+  previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { ITextBlock } from "../../../../../../domains/character/types";
 import { useEvent } from "../../../../../../hooks/useEvent/useEvent";
@@ -95,7 +95,7 @@ function BlockTextLabel(props: {
           readonly={props.readonly || !props.advanced}
           border={props.advanced}
           borderColor={miniTheme.borderColor}
-          data-cy={`${props.dataCy}.label`}
+          dataCy={`${props.dataCy}.label`}
           value={props.label || ""}
           onChange={props.onChange}
         />
@@ -128,7 +128,7 @@ function BlockTextValue(props: {
         <ContentEditable
           border
           borderColor={miniTheme.borderColor}
-          data-cy={`${props.dataCy}.value`}
+          dataCy={`${props.dataCy}.value`}
           readonly={props.readonly}
           value={props.value ?? ""}
           onChange={props.onChange}

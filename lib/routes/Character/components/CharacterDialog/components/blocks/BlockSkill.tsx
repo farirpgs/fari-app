@@ -60,7 +60,7 @@ export const BlockSkill = React.memo(
           <>
             {!props.hideModifier && (
               <CircleTextField
-                data-cy={`${props.dataCy}.value`}
+                dataCy={`${props.dataCy}.value`}
                 value={state}
                 readonly={props.readonly}
                 onChange={setState}

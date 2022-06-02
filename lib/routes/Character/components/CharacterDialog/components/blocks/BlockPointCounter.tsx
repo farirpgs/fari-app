@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { default as React } from "react";
 import {
   ContentEditable,
-  previewContentEditable
+  previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { Delays } from "../../../../../../constants/Delays";
 import { IPointCounterBlock } from "../../../../../../domains/character/types";
@@ -16,7 +16,7 @@ import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState"
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import {
   IBlockActionComponentProps,
-  IBlockHandlers
+  IBlockHandlers,
 } from "../../types/IBlockComponentProps";
 import { CircleTextField } from "../CircleTextField";
 import { ThemedLabel } from "../ThemedLabel";
@@ -138,7 +138,7 @@ export const BlockPointCounter = React.memo(
                 <Grid item className={css({ flex: "1 1 auto" })}>
                   <ThemedLabel className={css({ textAlign: "center" })}>
                     <ContentEditable
-                      data-cy={`${props.dataCy}.label`}
+                      dataCy={`${props.dataCy}.label`}
                       readonly={props.readonly || !props.advanced}
                       border={props.advanced}
                       value={props.label || ""}
@@ -161,7 +161,7 @@ export const BlockPointCounter = React.memo(
           >
             <Grid item>
               <CircleTextField
-                data-cy={`${props.dataCy}.value`}
+                dataCy={`${props.dataCy}.value`}
                 value={pointsManager.state.points}
                 onChange={(newValue) => {
                   pointsManager.actions.setPoints(newValue);
@@ -189,7 +189,7 @@ export const BlockPointCounter = React.memo(
                 </Grid>
                 <Grid item>
                   <CircleTextField
-                    data-cy={`${props.dataCy}.max`}
+                    dataCy={`${props.dataCy}.max`}
                     value={pointsManager.state.maxPoints ?? ""}
                     onChange={(newMax) => {
                       pointsManager.actions.setMaxPoints(newMax);
