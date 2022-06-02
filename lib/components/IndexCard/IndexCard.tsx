@@ -184,7 +184,7 @@ export const IndexCard: React.FC<
       >
         <Box
           pb={!props.isGM ? "1rem" : "0"}
-          data-cy={props["data-cy"]}
+          data-cy={props["dataCy"]}
           bgcolor={paper.bgColor}
           color={paper.primary}
           onClick={() => {
@@ -333,7 +333,7 @@ export const IndexCard: React.FC<
                       <IconButton
                         size="small"
                         ref={renderProps.ref}
-                        data-cy={`${props["data-cy"]}.palette`}
+                        data-cy={`${props["dataCy"]}.palette`}
                         onClick={() => {
                           renderProps.setColorPickerOpen((prev) => !prev);
                         }}
@@ -353,7 +353,7 @@ export const IndexCard: React.FC<
                   <Tooltip title={t("character-dialog.control.add-sub-card")}>
                     <IconButton
                       size="small"
-                      data-cy={`${props["data-cy"]}.menu.add-sub-card`}
+                      data-cy={`${props["dataCy"]}.menu.add-sub-card`}
                       onClick={() => {
                         indexCardManager.actions.addSubCard();
                       }}
@@ -367,7 +367,7 @@ export const IndexCard: React.FC<
                 <Tooltip title={t("character-dialog.control.advanced-mode")}>
                   <IconButton
                     size="small"
-                    data-cy={`${props["data-cy"]}.menu.advanced`}
+                    data-cy={`${props["dataCy"]}.menu.advanced`}
                     onClick={() => {
                       setAdvanced((prev) => !prev);
                     }}
@@ -409,7 +409,7 @@ export const IndexCard: React.FC<
                   <Tooltip title={t("index-card.duplicate")}>
                     <IconButton
                       size="small"
-                      data-cy={`${props["data-cy"]}.duplicate`}
+                      data-cy={`${props["dataCy"]}.duplicate`}
                       onClick={() => {
                         props.onDuplicate();
                       }}
@@ -485,7 +485,7 @@ export const IndexCard: React.FC<
                             <IconButton
                               disabled={hasSubCards}
                               size="small"
-                              data-cy={`${props["data-cy"]}.move`}
+                              data-cy={`${props["dataCy"]}.move`}
                               onClick={(event) => {
                                 renderProps.handleOnOpen(event);
                               }}
@@ -509,7 +509,7 @@ export const IndexCard: React.FC<
                   <Tooltip title={t("index-card.remove")}>
                     <IconButton
                       size="small"
-                      data-cy={`${props["data-cy"]}.remove`}
+                      data-cy={`${props["dataCy"]}.remove`}
                       onClick={() => {
                         const confirmed = confirm(
                           t("index-card.remove-confirmation")
@@ -722,7 +722,7 @@ export const IndexCard: React.FC<
               })}
             >
               <ContentEditable
-                data-cy={`${props["data-cy"]}.title-label`}
+                dataCy={`${props["dataCy"]}.title-label`}
                 value={indexCardManager.state.indexCard.titleLabel}
                 onChange={(newLabel) => {
                   indexCardManager.actions.setTitleLabel(newLabel);
@@ -745,7 +745,7 @@ export const IndexCard: React.FC<
                     >
                       <IconButton
                         size="small"
-                        data-cy={`${props["data-cy"]}.menu.visibility`}
+                        data-cy={`${props["dataCy"]}.menu.visibility`}
                         onClick={() => {
                           props.onTogglePrivate?.();
                         }}
@@ -771,7 +771,7 @@ export const IndexCard: React.FC<
                       <IconButton
                         ref={$menu}
                         size="small"
-                        data-cy={`${props["data-cy"]}.pin`}
+                        data-cy={`${props["dataCy"]}.pin`}
                         onClick={() => {
                           indexCardManager.actions.togglePinned();
                         }}
@@ -795,7 +795,7 @@ export const IndexCard: React.FC<
                   >
                     <span>
                       <IconButton
-                        data-cy={`${props["data-cy"]}.initiative`}
+                        data-cy={`${props["dataCy"]}.initiative`}
                         onClick={() => {
                           indexCardManager.actions.toggleInitiative();
                         }}
@@ -821,7 +821,7 @@ export const IndexCard: React.FC<
                       <span>
                         <IconButton
                           size="small"
-                          data-cy={`${props["data-cy"]}.collapse`}
+                          data-cy={`${props["dataCy"]}.collapse`}
                           onClick={() => {
                             props.onToggleVisibility?.(
                               indexCardManager.state.indexCard
@@ -861,7 +861,7 @@ export const IndexCard: React.FC<
         <Grid item xs>
           <ContentEditable
             id={props.id}
-            data-cy={`${props["data-cy"]}.title`}
+            dataCy={`${props["dataCy"]}.title`}
             value={indexCardManager.state.indexCard.title}
             className={css({
               fontSize: "1.8rem",

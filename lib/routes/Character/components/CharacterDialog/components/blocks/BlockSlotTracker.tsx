@@ -150,7 +150,7 @@ export function BlockSlotTracker(
                     })}
                   >
                     <ContentEditable
-                      data-cy={`${props.dataCy}.label`}
+                      dataCy={`${props.dataCy}.label`}
                       readonly={props.readonly || !props.advanced}
                       border={props.advanced}
                       value={props.block.label || ""}
@@ -252,7 +252,7 @@ export function BlockSlotTracker(
                 <Box>
                   <ThemedLabel className={css({ textAlign: "center" })}>
                     <ContentEditable
-                      data-cy={`${props.dataCy}.box.${boxIndex}.label`}
+                      dataCy={`${props.dataCy}.box.${boxIndex}.label`}
                       readonly={props.readonly}
                       border={!props.readonly}
                       value={box.label}

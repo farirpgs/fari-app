@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { default as React } from "react";
 import {
   ContentEditable,
-  previewContentEditable,
+  previewContentEditable
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { Delays } from "../../../../../../constants/Delays";
 import { IPointCounterBlock } from "../../../../../../domains/character/types";
@@ -16,7 +16,7 @@ import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState"
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import {
   IBlockActionComponentProps,
-  IBlockHandlers,
+  IBlockHandlers
 } from "../../types/IBlockComponentProps";
 import { CircleTextField } from "../CircleTextField";
 import { ThemedLabel } from "../ThemedLabel";

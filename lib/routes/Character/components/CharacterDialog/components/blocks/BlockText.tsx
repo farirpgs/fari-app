@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import React, { useContext } from "react";
 import {
   ContentEditable,
-  previewContentEditable,
+  previewContentEditable
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { ITextBlock } from "../../../../../../domains/character/types";
 import { useEvent } from "../../../../../../hooks/useEvent/useEvent";

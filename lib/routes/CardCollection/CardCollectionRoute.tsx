@@ -379,7 +379,7 @@ function CardCollectionRoute() {
                 isGM={true}
                 canMove={indexCard.subCards.length === 0}
                 key={indexCard.id}
-                data-cy={`card-collection.card.${index}`}
+                dataCy={`card-collection.card.${index}`}
                 id={`index-card-${indexCard.id}`}
                 indexCard={indexCard}
                 onRoll={() => {}}

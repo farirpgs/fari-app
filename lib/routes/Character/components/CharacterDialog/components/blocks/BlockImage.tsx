@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import {
   ContentEditable,
-  previewContentEditable,
+  previewContentEditable
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { IImageBlock } from "../../../../../../domains/character/types";
 import { useEvent } from "../../../../../../hooks/useEvent/useEvent";

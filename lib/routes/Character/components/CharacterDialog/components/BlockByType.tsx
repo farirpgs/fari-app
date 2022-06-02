@@ -369,7 +369,7 @@ export function BlockByType<TBlockType extends IBlockTypes>(props: {
               <ContentEditable
                 readonly={!props.advanced}
                 border={props.advanced}
-                data-cy={`${props.dataCy}.helper-text`}
+                dataCy={`${props.dataCy}.helper-text`}
                 value={block.meta.helperText ?? ""}
                 onChange={handleOnHelperTextChange}
               />

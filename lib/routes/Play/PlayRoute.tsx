@@ -4,11 +4,11 @@ import {
   useEventListener,
   useObject,
   useRoom,
-  useStorage,
+  useStorage
 } from "@liveblocks/react";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import { default as React, default as React, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -19,17 +19,20 @@ import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext"
 import { useScene } from "../../hooks/useScene/useScene";
 import {
   useSession,
-  useSessionCharacterSheets,
+  useSessionCharacterSheets
 } from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { PlayersPresence } from "./components/PlayersPresence/PlayersPresence";
+import {
+  IPlayersPresenceRef,
+  PlayersPresence
+} from "./components/PlayersPresence/PlayersPresence";
 import {
   SessionPresenceUpdaterContext,
-  useSessionPresenceUpdater,
+  useSessionPresenceUpdater
 } from "./contexts/SessionPresenceContext";
 import {
   IPlayerInteraction,
-  PlayerInteractionFactory,
+  PlayerInteractionFactory
 } from "./types/IPlayerInteraction";
 
 type ConnectionState =
@@ -164,6 +167,8 @@ function PlayRoute() {
 
   useEventListener((props) => {
     const event = props.event as IPlayerInteraction;
+    console.log(`Received player interaction: ${event.type}`, event);
+    
     if (event.type === "pause") {
       sessionManager.actions.pause();
     }
@@ -213,6 +218,7 @@ function PlayRoute() {
   });
 
   function handlePlayerInteraction(interaction: IPlayerInteraction) {
+    console.log(`Sending player interaction: ${interaction.type}`, interaction);
     broadcast(
       {
         type: interaction.type,
@@ -284,6 +290,7 @@ function PlayRoute() {
     return "info";
   }
 
+  const playersPresenceRef = useRef<IPlayersPresenceRef>(null);
   return (
     <>
       <PageMeta
@@ -304,25 +311,20 @@ function PlayRoute() {
           </Alert>
         </Snackbar>
         <SessionPresenceUpdaterContext.Provider value={sessionPresenceUpdater}>
-          <PlayersPresence
-            render={(playerPresenceProps) => {
-              return (
-                <Session
-                  sessionManager={sessionManager}
-                  sessionCharactersManager={sessionCharactersManager}
-                  sceneManager={sceneManager}
-                  isLoading={false}
-                  idFromParams={idFromParams}
-                  shareLink={shareLink}
-                  userId={settingsManager.state.userId}
-                  error={undefined}
-                  onPlayerInteraction={handlePlayerInteraction}
-                  onOpenChat={playerPresenceProps.openChat}
-                />
-              );
-            }}
-          />
+          <PlayersPresence ref={playersPresenceRef} />
         </SessionPresenceUpdaterContext.Provider>
+        <Session
+          sessionManager={sessionManager}
+          sessionCharactersManager={sessionCharactersManager}
+          sceneManager={sceneManager}
+          isLoading={false}
+          idFromParams={idFromParams}
+          shareLink={shareLink}
+          userId={settingsManager.state.userId}
+          error={undefined}
+          onPlayerInteraction={handlePlayerInteraction}
+          onOpenChat={playersPresenceRef.current?.openChat}
+        />
       </>
     </>
   );
