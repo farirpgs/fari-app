@@ -1,1 +1,524 @@
-{"lastUpdated":1651358209,"name":"Friendly Neighborhood Superhero Template","pages":[{"id":"aea865e9-76c9-4604-aca2-1404d4bfbdcf","label":"Character","rows":[{"columns":[{"sections":[{"id":"bfd0054d-f36b-4f98-86db-2399b7443f7b","label":"Identity","blocks":[{"id":"5ac3c64c-55b4-4f22-a4b7-b79f45cfa166","label":"Superhero Name","type":"Text","value":"","meta":{}},{"id":"9daee350-386d-4427-9eb9-8c132e5b25ae","label":"Pronouns","type":"Text","value":"","meta":{}},{"id":"191781c1-312e-407f-8627-f4820d61f062","label":"Secret Identity","type":"Text","value":"","meta":{}},{"id":"b4d1bc41-fe9b-43f7-a349-7c861b572931","label":"Neighborhood Name","type":"Text","value":"","meta":{}},{"id":"b1f7cd9b-1469-4c51-938d-8127e68509ad","label":"","type":"Separator","meta":{"hasLabel":false},"value":""},{"id":"0ffea88c-453d-4528-b9e7-fc014830adb1","label":"Notes","type":"Text","value":"","meta":{}}],"visibleOnCard":true},{"id":"43735f31-8d47-484d-8825-f8c4d516ff52","label":"Progression","blocks":[{"id":"d5716929-4d76-40de-8179-379707134aa1","label":"Progress","type":"Text","value":"","meta":{}},{"id":"2f688dc9-1538-4ffe-ab1c-63997687b01f","label":"Experience","type":"Text","value":"","meta":{}}]},{"id":"69ad42ff-4f84-45c4-9c48-22eb99b8b911","label":"Achievements","blocks":[{"id":"53cc8a8d-f5b6-4164-996c-b0e5684e0c41","label":"Security","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]},{"id":"abd00525-ce9f-432d-8979-3d7ba3af517c","label":"Effectiveness","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]},{"id":"83e96125-2557-40c3-a848-647168eeeace","label":"Control","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]},{"id":"e8b0945e-067e-4e5f-90af-c36402287d4c","label":"Inspiration","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]}]},{"id":"8a58771d-c8f1-4e9c-948b-093a84d6d0a4","label":"Drawbacks","blocks":[{"id":"02de24bc-abd0-4245-8e70-84403cae59e1","label":"Destruction","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]},{"id":"e875ddce-2759-4cbe-a303-4c75449725da","label":"Discredit","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]},{"id":"7bf7dd39-dadb-4ae9-8c27-da2b95ca6868","label":"Miscalculation","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]},{"id":"1652210f-4a52-48c9-a632-697eb783073a","label":"Misreadings","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]},{"id":"9fe3d67f-c66a-433e-a11b-249a2f9d0733","label":"","type":"Separator","meta":{"hasLabel":false},"value":""}]}]},{"sections":[{"id":"5c187738-de15-40c5-bb66-db3a9e45ea8b","label":"Attributes &amp; Abilities","blocks":[{"id":"f0bd3723-7a37-43b8-baaf-8b1c3e36370d","label":"Power","type":"DicePool","value":"","meta":{"commands":["1d6"],"width":0.5,"checked":false,"helperText":"Toggle for marking Streak"}},{"id":"b5e60f24-0b55-444d-a157-1f9d0a363184","label":"Skill","type":"DicePool","value":"","meta":{"commands":["1d6"],"width":0.5,"checked":false,"helperText":"Toggle for marking Streak"}},{"id":"c24728b9-3f69-4e54-b1c7-6adfd5632f99","label":"Mind","type":"DicePool","value":"","meta":{"commands":["1d6"],"width":0.5,"checked":false,"helperText":"Toggle for marking Streak"}},{"id":"40576fce-7f85-41d2-8dc4-c6c2c6025a64","label":"Heart","type":"DicePool","value":"","meta":{"commands":["1d6"],"width":0.5,"checked":false,"helperText":"Toggle for marking Streak"}},{"id":"f7aacb88-d3c6-4c05-93db-e4aa180e5699","label":"","type":"Separator","meta":{"hasLabel":false,"hideDivider":false},"value":""},{"id":"a01cf14a-d026-4912-bb3f-e2721d2c1f88","label":"SUPER!","type":"SlotTracker","meta":{"width":1},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]},{"id":"c0a90d8f-8e58-4926-baec-8cb650f5526b","label":"","type":"Separator","meta":{"hasLabel":false,"hideDivider":false},"value":""},{"id":"e68d792e-328f-4ff0-893f-cb65b06e1a86","label":"Signature Ability #1","type":"Text","value":"","meta":{}},{"id":"fb8a967f-d725-46a5-831f-25a7ce406a43","label":"Ability #1","type":"DicePool","value":"","meta":{"commands":["1d6"],"width":0.5}},{"id":"3a944a5e-bcc5-4083-9333-6a5e83ca2037","label":"Level","type":"SlotTracker","meta":{"width":0.5},"value":[{"label":"","checked":true},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]},{"id":"9a28c969-5a48-4f97-8aa9-bd0089923446","label":"","type":"Separator","meta":{"hasLabel":false,"hideDivider":false},"value":""},{"id":"df6e6a57-9184-4350-ad12-f0e8ea256e76","label":"Signature Ability #2","type":"Text","value":"","meta":{}},{"id":"fa5b65b8-7ef3-445a-a64a-957549ee911e","label":"Ability #2","type":"DicePool","value":"","meta":{"commands":["1d6"],"width":0.5}},{"id":"b9d1bd48-72a3-4519-a76d-3113329f345b","label":"Level","type":"SlotTracker","meta":{"width":0.5},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]},{"id":"f353c677-31e5-454b-8ffb-a40c52d8cd9e","label":"","type":"Separator","meta":{"hasLabel":false,"hideDivider":false},"value":""},{"id":"5dda36e2-9932-4a55-be76-eee5dc60a109","label":"Signature Ability #3","type":"Text","value":"","meta":{}},{"id":"8c1af6f5-a1ef-4e50-8ea2-4503aab0d193","label":"Ability #3","type":"DicePool","value":"","meta":{"commands":["1d6"],"width":0.5}},{"id":"f8a89216-5e86-4732-920d-7ce539a95c07","label":"Level","type":"SlotTracker","meta":{"width":0.5},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]},{"id":"5f7735f7-eec7-43c1-8a07-e38121857e14","label":"","type":"Separator","meta":{"hasLabel":false,"hideDivider":false},"value":""},{"id":"83705d07-dda2-4c69-83ae-0ecd6d336e49","label":"Signature Ability #4","type":"Text","value":"","meta":{}},{"id":"107793d5-bca4-468b-8262-eeed7bb57963","label":"Ability #4","type":"DicePool","value":"","meta":{"commands":["1d6"],"width":0.5}},{"id":"7d1ac1e7-e9d9-4304-b08c-11b769a59fe6","label":"Level","type":"SlotTracker","meta":{"width":0.5},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]},{"id":"1657520a-5c16-4157-b8f2-d3467f76c03e","label":"","type":"Separator","meta":{"hasLabel":false,"hideDivider":false},"value":""},{"id":"7e03a84c-d87c-45bb-b880-31ea539dba72","label":"Signature Ability #5","type":"Text","value":"","meta":{}},{"id":"b02b2dc0-9c54-495d-82fe-2080adf71821","label":"Ability #5","type":"DicePool","value":"","meta":{"commands":["1d6"],"width":0.5}},{"id":"a6cbf420-28ab-40e8-80e0-661fc8b53db8","label":"Level","type":"SlotTracker","meta":{"width":0.5},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]},{"id":"da36f39d-bbeb-4db1-bd58-ec5d21353359","label":"","type":"Separator","meta":{"hasLabel":false,"hideDivider":false},"value":""},{"id":"b713c833-651d-41c5-aa32-1cc7ed8cc8c5","label":"Friendly Neighborhood Superhero on Itch.io","type":"Link","meta":{"hasDisplayName":true,"helperText":"Friendly Neighborhood Superhero by Catscratcher Studio:<br>Matheus Sant’Anna (He/Him) @mathsan<br>Samuel Sant’Anna (He/Him) @savsantanna"},"value":"https://catscratcher.itch.io/friendly-neighborhood-superhero"}],"visibleOnCard":true}]}]}]}],"template":"Blank","version":6,"playedDuringTurn":false,"wide":false,"theme":{},"fariType":"character"}
+{
+  "lastUpdated": 1651358209,
+  "name": "Friendly Neighborhood Superhero Template",
+  "pages": [
+    {
+      "id": "aea865e9-76c9-4604-aca2-1404d4bfbdcf",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "bfd0054d-f36b-4f98-86db-2399b7443f7b",
+                  "label": "Identity",
+                  "blocks": [
+                    {
+                      "id": "5ac3c64c-55b4-4f22-a4b7-b79f45cfa166",
+                      "label": "Superhero Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9daee350-386d-4427-9eb9-8c132e5b25ae",
+                      "label": "Pronouns",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "191781c1-312e-407f-8627-f4820d61f062",
+                      "label": "Secret Identity",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b4d1bc41-fe9b-43f7-a349-7c861b572931",
+                      "label": "Neighborhood Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b1f7cd9b-1469-4c51-938d-8127e68509ad",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "0ffea88c-453d-4528-b9e7-fc014830adb1",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "43735f31-8d47-484d-8825-f8c4d516ff52",
+                  "label": "Progression",
+                  "blocks": [
+                    {
+                      "id": "d5716929-4d76-40de-8179-379707134aa1",
+                      "label": "Progress",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2f688dc9-1538-4ffe-ab1c-63997687b01f",
+                      "label": "Experience",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "69ad42ff-4f84-45c4-9c48-22eb99b8b911",
+                  "label": "Achievements",
+                  "blocks": [
+                    {
+                      "id": "53cc8a8d-f5b6-4164-996c-b0e5684e0c41",
+                      "label": "Security",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "abd00525-ce9f-432d-8979-3d7ba3af517c",
+                      "label": "Effectiveness",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "83e96125-2557-40c3-a848-647168eeeace",
+                      "label": "Control",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "e8b0945e-067e-4e5f-90af-c36402287d4c",
+                      "label": "Inspiration",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "8a58771d-c8f1-4e9c-948b-093a84d6d0a4",
+                  "label": "Drawbacks",
+                  "blocks": [
+                    {
+                      "id": "02de24bc-abd0-4245-8e70-84403cae59e1",
+                      "label": "Destruction",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "e875ddce-2759-4cbe-a303-4c75449725da",
+                      "label": "Discredit",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "7bf7dd39-dadb-4ae9-8c27-da2b95ca6868",
+                      "label": "Miscalculation",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "1652210f-4a52-48c9-a632-697eb783073a",
+                      "label": "Misreadings",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "9fe3d67f-c66a-433e-a11b-249a2f9d0733",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "5c187738-de15-40c5-bb66-db3a9e45ea8b",
+                  "label": "Attributes &amp; Abilities",
+                  "blocks": [
+                    {
+                      "id": "f0bd3723-7a37-43b8-baaf-8b1c3e36370d",
+                      "label": "Power",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "width": 0.5,
+                        "checked": false,
+                        "helperText": "Toggle for marking Streak"
+                      }
+                    },
+                    {
+                      "id": "b5e60f24-0b55-444d-a157-1f9d0a363184",
+                      "label": "Skill",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "width": 0.5,
+                        "checked": false,
+                        "helperText": "Toggle for marking Streak"
+                      }
+                    },
+                    {
+                      "id": "c24728b9-3f69-4e54-b1c7-6adfd5632f99",
+                      "label": "Mind",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "width": 0.5,
+                        "checked": false,
+                        "helperText": "Toggle for marking Streak"
+                      }
+                    },
+                    {
+                      "id": "40576fce-7f85-41d2-8dc4-c6c2c6025a64",
+                      "label": "Heart",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "width": 0.5,
+                        "checked": false,
+                        "helperText": "Toggle for marking Streak"
+                      }
+                    },
+                    {
+                      "id": "f7aacb88-d3c6-4c05-93db-e4aa180e5699",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "a01cf14a-d026-4912-bb3f-e2721d2c1f88",
+                      "label": "SUPER!",
+                      "type": "SlotTracker",
+                      "meta": { "width": 1 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "c0a90d8f-8e58-4926-baec-8cb650f5526b",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "e68d792e-328f-4ff0-893f-cb65b06e1a86",
+                      "label": "Signature Ability #1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "fb8a967f-d725-46a5-831f-25a7ce406a43",
+                      "label": "Ability #1",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "3a944a5e-bcc5-4083-9333-6a5e83ca2037",
+                      "label": "Level",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.5 },
+                      "value": [
+                        { "label": "", "checked": true },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "9a28c969-5a48-4f97-8aa9-bd0089923446",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "df6e6a57-9184-4350-ad12-f0e8ea256e76",
+                      "label": "Signature Ability #2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "fa5b65b8-7ef3-445a-a64a-957549ee911e",
+                      "label": "Ability #2",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "b9d1bd48-72a3-4519-a76d-3113329f345b",
+                      "label": "Level",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.5 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "f353c677-31e5-454b-8ffb-a40c52d8cd9e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "5dda36e2-9932-4a55-be76-eee5dc60a109",
+                      "label": "Signature Ability #3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8c1af6f5-a1ef-4e50-8ea2-4503aab0d193",
+                      "label": "Ability #3",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "f8a89216-5e86-4732-920d-7ce539a95c07",
+                      "label": "Level",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.5 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "5f7735f7-eec7-43c1-8a07-e38121857e14",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "83705d07-dda2-4c69-83ae-0ecd6d336e49",
+                      "label": "Signature Ability #4",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "107793d5-bca4-468b-8262-eeed7bb57963",
+                      "label": "Ability #4",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "7d1ac1e7-e9d9-4304-b08c-11b769a59fe6",
+                      "label": "Level",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.5 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "1657520a-5c16-4157-b8f2-d3467f76c03e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "7e03a84c-d87c-45bb-b880-31ea539dba72",
+                      "label": "Signature Ability #5",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b02b2dc0-9c54-495d-82fe-2080adf71821",
+                      "label": "Ability #5",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "a6cbf420-28ab-40e8-80e0-661fc8b53db8",
+                      "label": "Level",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.5 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "da36f39d-bbeb-4db1-bd58-ec5d21353359",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "b713c833-651d-41c5-aa32-1cc7ed8cc8c5",
+                      "label": "Friendly Neighborhood Superhero on Itch.io",
+                      "type": "Link",
+                      "meta": {
+                        "hasDisplayName": true,
+                        "helperText": "Friendly Neighborhood Superhero by Catscratcher Studio:<br>Matheus Sant’Anna (He/Him) @mathsan<br>Samuel Sant’Anna (He/Him) @savsantanna"
+                      },
+                      "value": "https://catscratcher.itch.io/friendly-neighborhood-superhero"
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "playedDuringTurn": false,
+  "wide": false,
+  "theme": {},
+  "fariType": "character"
+}

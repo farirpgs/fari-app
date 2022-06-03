@@ -1,1 +1,322 @@
-{"name":"Fate Core ITA Template","lastUpdated":1654262352,"wide":true,"pages":[{"id":"5cc562d8-9cdf-45ea-9a18-b02c694bad4f","label":"CHARACTER","rows":[{"columns":[{"sections":[{"id":"d7f1803a-731c-4403-93b4-dbc464d48c7c","blocks":[{"id":"55a2d21e-b8fa-4d44-bfa0-29193478a316","type":"Text","meta":{},"label":"CONCETTO BASE","value":""},{"id":"b6fba16c-1356-46c8-9d3f-dc73aaadf818","type":"Text","meta":{},"label":"PROBLEMA","value":""},{"id":"59f2f924-1ac1-4287-84af-26978652d3a5","type":"Text","meta":{},"label":"RELAZIONE","value":""},{"id":"4a0c64ff-4813-495f-aa4a-3d5745638345","type":"Text","meta":{},"label":"ALTRI ASPETTI","value":""},{"id":"7ab2f2be-79a3-452e-b3f2-c7e8e780c433","type":"Text","meta":{},"label":"ALTRI ASPETTI","value":""}],"label":"ASPETTI","visibleOnCard":true},{"id":"b8f1261b-7918-43af-86c1-d4431f525560","blocks":[{"id":"a67dafb9-ec08-4ff4-8692-d2af7d6e194c","type":"Text","meta":{},"label":"TALENTO #1","value":"RETAGGIO SOLDIER<br>"},{"id":"6c653726-9a87-494f-bdb4-f2997f5430e7","type":"Text","meta":{},"label":"TALENTO #2","value":"OCCHI DI GHIACCIO"},{"id":"8cfaae14-86ec-4f8e-81b6-07e913fcba65","type":"Text","meta":{},"label":"TALENTO #3","value":"RESISTENZA"}],"label":"ACCESSORI &amp; TALENTI"},{"id":"b792e0f6-fc26-47d2-abad-33274c9245ef","blocks":[{"id":"00c6c496-9d97-4155-afd9-b6298f410a32","type":"Text","meta":{},"label":"NOTE","value":""}],"label":"ALTRO"},{"id":"6d9644d9-9136-433a-a4dd-7c07e3c2391c","blocks":[{"id":"6ce567b0-76da-49a5-8213-99004925e16d","meta":{"isMainPointCounter":true,"max":"3"},"type":"PointCounter","label":"FATE POINTS","value":"3"}],"label":"PUNTI FATE"},{"id":"d4e377b5-1d61-429c-a514-db0eab8c14aa","blocks":[{"id":"2dbb2119-f5c3-4f16-9488-a9176a66ac74","label":"Evil Hat Productions","type":"Link","meta":{"hasDisplayName":true},"value":"https://www.evilhat.com/home/"}],"label":"CREDITS"}]},{"sections":[{"id":"9177ca42-97c6-4dca-87bd-ca30082920b0","blocks":[{"id":"910eec37-7d6d-4210-8c31-19d1128e4203","label":"FISICO","meta":{},"type":"SlotTracker","value":[{"checked":false,"label":"1"},{"checked":false,"label":"2"}]},{"id":"5646a4ca-b1f7-4f67-9e3d-aba84870b784","label":"MENTALE","meta":{},"type":"SlotTracker","value":[{"checked":false,"label":"1"},{"checked":false,"label":"2"}]}],"label":"STRESS"},{"id":"61c2318d-a6bc-47ef-8b03-8af6bdf091cb","blocks":[{"id":"ada85924-24e5-44a0-a0f3-681327561633","type":"Text","meta":{"checked":false},"label":"LIEVE","value":""},{"id":"53b1c845-3e50-4a46-ad9b-52c5f56beaef","type":"Text","meta":{"checked":false},"label":"MODERATO","value":""},{"id":"9f164ebe-e41b-4547-8624-48a635252a5f","type":"Text","meta":{"checked":false},"label":"GRAVE","value":""}],"label":"CONSEGUENZE"},{"id":"00b4409a-6613-4c05-b97d-cffd76b62d97","blocks":[{"id":"dc5ee44d-05f7-4938-bc15-d79f64391df0","meta":{"commands":["4dF"]},"type":"Skill","label":"INGEGNERIA","value":""},{"id":"8e71b702-35c8-464d-b10e-7f7754521661","meta":{"commands":["4dF"]},"type":"Skill","label":"ATLETICA","value":""},{"id":"2a22921a-1c7c-4bf8-bc2a-eeaa2d3c955d","meta":{"commands":["4dF"]},"type":"Skill","label":"COMBATTERE","value":""},{"id":"d1987981-8df0-44c9-b2d9-4a9db39a4d28","meta":{"commands":["4dF"]},"type":"Skill","label":"CONOSCENZE","value":""},{"id":"0ebaef1b-914e-492e-8355-abb7b778e54c","meta":{"commands":["4dF"]},"type":"Skill","label":"CONTATTI","value":""},{"id":"63517035-1441-4a67-8d4f-fff71a521a58","meta":{"commands":["4dF"]},"type":"Skill","label":"DISCREZIONE","value":""},{"id":"b8ea333b-4faa-4731-8e65-960619e8486a","meta":{"commands":["4dF"]},"type":"Skill","label":"EMPATIA","value":""},{"id":"44764adf-8a48-4c96-8b89-612f12def350","meta":{"commands":["4dF"]},"type":"Skill","label":"FISICO","value":""},{"id":"96fc50ac-ecfc-4350-a4ed-b60b47130adb","meta":{"commands":["4dF"]},"type":"Skill","label":"FURTIVITA'","value":""},{"id":"d6bc03d3-8777-4579-b63b-7cfb6540eac9","meta":{"commands":["4dF"]},"type":"Skill","label":"GUIDARE","value":""},{"id":"a08b1d76-7fb4-423e-a947-efd5f98d3fd4","meta":{"commands":["4dF"]},"type":"Skill","label":"INFLUENZARE","value":""},{"id":"0d896c39-2dd9-4ee0-9ea0-0861f1d02359","meta":{"commands":["4dF"]},"type":"Skill","label":"INVESTIGARE","value":""},{"id":"e7b0b438-0c51-4ab7-95f2-483f5b061d4e","meta":{"commands":["4dF"]},"type":"Skill","label":"PERCEZIONE","value":""},{"id":"7b40ac0c-2e06-4769-b1ff-c0e631d60e1d","meta":{"commands":["4dF"]},"type":"Skill","label":"PROVOCARE","value":""},{"id":"a788ac9c-68dd-47d8-945a-c0382c206376","meta":{"commands":["4dF"]},"type":"Skill","label":"RAGGIRARE","value":""},{"id":"2bf569cd-076f-4862-8d4c-4f1b94faaded","meta":{"commands":["4dF"]},"type":"Skill","label":"RISORSE","value":""},{"id":"0691328f-efd6-4316-9946-8734cf59364f","meta":{"commands":["4dF"]},"type":"Skill","label":"SPARARE","value":""},{"id":"dd061656-c95a-4b79-b648-0de4adb2ec67","meta":{"commands":["4dF"]},"type":"Skill","label":"VOLONTA'","value":""}],"label":"ABILITA'","visibleOnCard":true}]}]}]}],"version":6,"playedDuringTurn":false,"fariType":"character"}
+{
+  "name": "Fate Core ITA Template",
+  "lastUpdated": 1654262352,
+  "wide": true,
+  "pages": [
+    {
+      "id": "5cc562d8-9cdf-45ea-9a18-b02c694bad4f",
+      "label": "CHARACTER",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d7f1803a-731c-4403-93b4-dbc464d48c7c",
+                  "blocks": [
+                    {
+                      "id": "55a2d21e-b8fa-4d44-bfa0-29193478a316",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "CONCETTO BASE",
+                      "value": ""
+                    },
+                    {
+                      "id": "b6fba16c-1356-46c8-9d3f-dc73aaadf818",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "PROBLEMA",
+                      "value": ""
+                    },
+                    {
+                      "id": "59f2f924-1ac1-4287-84af-26978652d3a5",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "RELAZIONE",
+                      "value": ""
+                    },
+                    {
+                      "id": "4a0c64ff-4813-495f-aa4a-3d5745638345",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "ALTRI ASPETTI",
+                      "value": ""
+                    },
+                    {
+                      "id": "7ab2f2be-79a3-452e-b3f2-c7e8e780c433",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "ALTRI ASPETTI",
+                      "value": ""
+                    }
+                  ],
+                  "label": "ASPETTI",
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "b8f1261b-7918-43af-86c1-d4431f525560",
+                  "blocks": [
+                    {
+                      "id": "a67dafb9-ec08-4ff4-8692-d2af7d6e194c",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "TALENTO #1",
+                      "value": "RETAGGIO SOLDIER<br>"
+                    },
+                    {
+                      "id": "6c653726-9a87-494f-bdb4-f2997f5430e7",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "TALENTO #2",
+                      "value": "OCCHI DI GHIACCIO"
+                    },
+                    {
+                      "id": "8cfaae14-86ec-4f8e-81b6-07e913fcba65",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "TALENTO #3",
+                      "value": "RESISTENZA"
+                    }
+                  ],
+                  "label": "ACCESSORI &amp; TALENTI"
+                },
+                {
+                  "id": "b792e0f6-fc26-47d2-abad-33274c9245ef",
+                  "blocks": [
+                    {
+                      "id": "00c6c496-9d97-4155-afd9-b6298f410a32",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "NOTE",
+                      "value": ""
+                    }
+                  ],
+                  "label": "ALTRO"
+                },
+                {
+                  "id": "6d9644d9-9136-433a-a4dd-7c07e3c2391c",
+                  "blocks": [
+                    {
+                      "id": "6ce567b0-76da-49a5-8213-99004925e16d",
+                      "meta": { "isMainPointCounter": true, "max": "3" },
+                      "type": "PointCounter",
+                      "label": "FATE POINTS",
+                      "value": "3"
+                    }
+                  ],
+                  "label": "PUNTI FATE"
+                },
+                {
+                  "id": "d4e377b5-1d61-429c-a514-db0eab8c14aa",
+                  "blocks": [
+                    {
+                      "id": "2dbb2119-f5c3-4f16-9488-a9176a66ac74",
+                      "label": "Evil Hat Productions",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": true },
+                      "value": "https://www.evilhat.com/home/"
+                    }
+                  ],
+                  "label": "CREDITS"
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "9177ca42-97c6-4dca-87bd-ca30082920b0",
+                  "blocks": [
+                    {
+                      "id": "910eec37-7d6d-4210-8c31-19d1128e4203",
+                      "label": "FISICO",
+                      "meta": {},
+                      "type": "SlotTracker",
+                      "value": [
+                        { "checked": false, "label": "1" },
+                        { "checked": false, "label": "2" }
+                      ]
+                    },
+                    {
+                      "id": "5646a4ca-b1f7-4f67-9e3d-aba84870b784",
+                      "label": "MENTALE",
+                      "meta": {},
+                      "type": "SlotTracker",
+                      "value": [
+                        { "checked": false, "label": "1" },
+                        { "checked": false, "label": "2" }
+                      ]
+                    }
+                  ],
+                  "label": "STRESS"
+                },
+                {
+                  "id": "61c2318d-a6bc-47ef-8b03-8af6bdf091cb",
+                  "blocks": [
+                    {
+                      "id": "ada85924-24e5-44a0-a0f3-681327561633",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "LIEVE",
+                      "value": ""
+                    },
+                    {
+                      "id": "53b1c845-3e50-4a46-ad9b-52c5f56beaef",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "MODERATO",
+                      "value": ""
+                    },
+                    {
+                      "id": "9f164ebe-e41b-4547-8624-48a635252a5f",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "GRAVE",
+                      "value": ""
+                    }
+                  ],
+                  "label": "CONSEGUENZE"
+                },
+                {
+                  "id": "00b4409a-6613-4c05-b97d-cffd76b62d97",
+                  "blocks": [
+                    {
+                      "id": "dc5ee44d-05f7-4938-bc15-d79f64391df0",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "INGEGNERIA",
+                      "value": ""
+                    },
+                    {
+                      "id": "8e71b702-35c8-464d-b10e-7f7754521661",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "ATLETICA",
+                      "value": ""
+                    },
+                    {
+                      "id": "2a22921a-1c7c-4bf8-bc2a-eeaa2d3c955d",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "COMBATTERE",
+                      "value": ""
+                    },
+                    {
+                      "id": "d1987981-8df0-44c9-b2d9-4a9db39a4d28",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "CONOSCENZE",
+                      "value": ""
+                    },
+                    {
+                      "id": "0ebaef1b-914e-492e-8355-abb7b778e54c",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "CONTATTI",
+                      "value": ""
+                    },
+                    {
+                      "id": "63517035-1441-4a67-8d4f-fff71a521a58",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "DISCREZIONE",
+                      "value": ""
+                    },
+                    {
+                      "id": "b8ea333b-4faa-4731-8e65-960619e8486a",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "EMPATIA",
+                      "value": ""
+                    },
+                    {
+                      "id": "44764adf-8a48-4c96-8b89-612f12def350",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "FISICO",
+                      "value": ""
+                    },
+                    {
+                      "id": "96fc50ac-ecfc-4350-a4ed-b60b47130adb",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "FURTIVITA'",
+                      "value": ""
+                    },
+                    {
+                      "id": "d6bc03d3-8777-4579-b63b-7cfb6540eac9",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "GUIDARE",
+                      "value": ""
+                    },
+                    {
+                      "id": "a08b1d76-7fb4-423e-a947-efd5f98d3fd4",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "INFLUENZARE",
+                      "value": ""
+                    },
+                    {
+                      "id": "0d896c39-2dd9-4ee0-9ea0-0861f1d02359",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "INVESTIGARE",
+                      "value": ""
+                    },
+                    {
+                      "id": "e7b0b438-0c51-4ab7-95f2-483f5b061d4e",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "PERCEZIONE",
+                      "value": ""
+                    },
+                    {
+                      "id": "7b40ac0c-2e06-4769-b1ff-c0e631d60e1d",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "PROVOCARE",
+                      "value": ""
+                    },
+                    {
+                      "id": "a788ac9c-68dd-47d8-945a-c0382c206376",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "RAGGIRARE",
+                      "value": ""
+                    },
+                    {
+                      "id": "2bf569cd-076f-4862-8d4c-4f1b94faaded",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "RISORSE",
+                      "value": ""
+                    },
+                    {
+                      "id": "0691328f-efd6-4316-9946-8734cf59364f",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "SPARARE",
+                      "value": ""
+                    },
+                    {
+                      "id": "dd061656-c95a-4b79-b648-0de4adb2ec67",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "VOLONTA'",
+                      "value": ""
+                    }
+                  ],
+                  "label": "ABILITA'",
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "version": 6,
+  "playedDuringTurn": false,
+  "fariType": "character"
+}

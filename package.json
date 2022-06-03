@@ -31,7 +31,8 @@
     "storybook": "start-storybook -p 6006 --static-dir ./public",
     "build-storybook": "build-storybook --static-dir ./public",
     "chromatic": "chromatic --project-token CHROMATIC_PROJECT_TOKEN --exit-zero-on-changes",
-    "clean": "rm -rf node_modules && npm install"
+    "clean": "rm -rf node_modules && npm install",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@dice-roller/rpg-dice-roller": "^5.1.0",
@@ -102,10 +103,16 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "esm": "^3.2.25",
     "fs-extra": "^10.0.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.0",
     "prettier": "^2.6.2",
     "react-test-renderer": "^17.0.2",
     "typescript": "^4.6.3",
     "vite": "^2.9.9",
     "vitest": "^0.9.2"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md,ts,tsx,json}": "prettier --write"
   }
 }

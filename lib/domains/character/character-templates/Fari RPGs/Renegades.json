@@ -1,0 +1,212 @@
+{
+  "fariType": "character",
+  "id": "f1747bd9-41c0-4a93-ae33-ef722603a35a",
+  "lastUpdated": 1654287327,
+  "name": "Renegades",
+  "pages": [
+    {
+      "id": "d034fe35-e346-4a4c-afcb-b54f0fee20d5",
+      "label": "CHARACTER",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "e3bb75ad-3b59-4be5-a9f1-7b9f50591445",
+                  "label": "INFORMATION",
+                  "blocks": [
+                    {
+                      "id": "0d99d03d-0164-4dd0-86c7-124965edfea4",
+                      "label": "PRONOUNS",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ef688c88-856c-428f-83a5-caff474cae7b",
+                      "label": "KIT",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d200e8cf-2c09-464d-82a3-41740109295a",
+                      "label": "KIT SKILL",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "530c47f9-6aa3-42a5-bf9c-ec759f28e861",
+                      "type": "Text",
+                      "value": "Name: \nInitial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "deb819f9-b636-4aa7-90d0-9be0d06ccad7",
+                  "label": "HEALTH",
+                  "blocks": [
+                    {
+                      "id": "5c2a0901-f7b2-4473-a18f-4593d970ee37",
+                      "label": "STRESS",
+                      "type": "SlotTracker",
+                      "meta": { "helperText": "REMOVE BY LAYING LOW<br>" },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "544f4670-2972-4704-a998-484e3ba9e5da",
+                      "label": "TRUTH",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "TO RESET, \"REFOCUS\"<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2e9a8594-8c6f-455e-b70c-b188c715b37d",
+                  "label": "SKILLS",
+                  "blocks": [
+                    {
+                      "id": "ce333164-1d89-44ad-bf66-6840b602907c",
+                      "label": "",
+                      "type": "InfoText",
+                      "value": "ASSIGN — D10, D8, D6",
+                      "meta": {}
+                    },
+                    {
+                      "id": "33907e24-e61f-4c70-9f02-2035327f7a7a",
+                      "label": "BASH",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e8184279-8ce3-452f-b5ef-6dd0f6449c31",
+                      "label": "DASH",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3b06119c-2753-47d4-8ff8-b9898fc7fe1f",
+                      "label": "SNEAK",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "7845b103-1e7b-4fa3-87eb-c9ef1803263b",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "9298ff7e-57b3-44be-a505-ddd10b1f1850",
+                      "label": "",
+                      "type": "InfoText",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e257880c-e814-4762-ab3a-83a94d7e1954",
+                      "label": "SHOOT",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "75939f55-f210-4f60-a7e8-a1728353bd65",
+                      "label": "THINK",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4cebef2b-d70e-4968-98d5-6a5dc0c30167",
+                      "label": "SWAY",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "cb9d0b92-2e07-4cdc-a838-0f641217fe01",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "8fbcdab5-041a-4ad9-9480-782ab22d85fc",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://gyazo.com/8817e83e7cb194b073ed42be68de7493.png"
+                    },
+                    {
+                      "id": "b65dca1c-6a40-4cef-9525-11ab94107244",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Template is by René-Pier Deshaies • https://farirpgs.com<br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "theme": {
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat&display=swap');",
+    "backgroundColor": "#fcfcfc",
+    "pageHeadingFontFamily": "Montserrat",
+    "sectionHeadingFontFamily": "Montserrat",
+    "labelFontFamily": "Montserrat",
+    "pageHeadingFontSize": 1.25,
+    "hideSectionBackground": false,
+    "sectionHeadingFontSize": 2.125,
+    "labelFontSize": 1.5,
+    "textFontSize": 1,
+    "textFontFamily": "Didact Gothic",
+    "pageHeadingFontWeight": "",
+    "infoTextFontFamily": "Didact Gothic",
+    "helperTextFontFamily": "Didact Gothic"
+  },
+  "version": 6
+}
