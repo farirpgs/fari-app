@@ -1,3 +1,4 @@
+import { LiveObject } from "@liveblocks/client";
 import { LiveblocksProvider, RoomProvider } from "@liveblocks/react";
 import React, { useContext } from "react";
 import { Route, Routes, useLocation, useParams } from "react-router-dom";
@@ -42,6 +43,12 @@ const CardCollection = React.lazy(
 );
 const OracleRoute = React.lazy(() => import("../../routes/Oracle/OracleRoute"));
 
+const initialStorage = {
+  scene: new LiveObject(),
+  characters: new LiveObject(),
+  session: new LiveObject(),
+};
+
 export const AppRouter = () => {
   const location = useLocation();
   const settingsManager = useContext(SettingsContext);
@@ -77,7 +84,10 @@ export const AppRouter = () => {
                 const sessionId = params.id || userId;
                 return (
                   <LiveblocksProvider client={injections.liveBlocksClient}>
-                    <RoomProvider id={sessionId}>
+                    <RoomProvider
+                      id={sessionId}
+                      initialStorage={initialStorage}
+                    >
                       <PlayRoute />;
                     </RoomProvider>
                   </LiveblocksProvider>
