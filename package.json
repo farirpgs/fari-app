@@ -112,7 +112,7 @@
     "vitest": "^0.9.2"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
+    "*.{js,ts,tsx}": "eslint --cache --fix",
     "*.{js,css,md,ts,tsx,json}": "prettier --write"
   }
 }
