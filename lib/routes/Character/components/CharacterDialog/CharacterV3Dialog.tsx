@@ -429,7 +429,10 @@ export const CharacterV3Dialog: React.FC<{
                   {...params}
                   label="Template"
                   variant="outlined"
-                  data-cy={`character-dialog.template-input`}
+                  inputProps={{
+                    ...params.inputProps,
+                    ["data-cy"]: `character-dialog.template-input`,
+                  }}
                 />
               )}
             />

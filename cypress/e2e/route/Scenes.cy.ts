@@ -1,7 +1,7 @@
 import { Fari } from "lib/util/Fari";
 
 describe("/scenes", () => {
-  describe("Given I want to create a scene", () => {
+  describe.only("Given I want to create a scene", () => {
     it("should support adding, filling up and removing a scene", () => {
       Fari.start();
       cy.visit("/");
@@ -18,19 +18,21 @@ describe("/scenes", () => {
       Fari.get("scene.card-collections").select("Fate");
 
       Fari.get("scene.add-card.select").click({ force: true });
-      Fari.get("scene.add-card.select.ASPECT").click({ force: true });
+      Fari.get("scene.add-card.select.ASPECT").click({ force: true }).wait(500);
 
       Fari.get("scene.add-card.select").click({ force: true });
-      Fari.get("scene.add-card.select.BOOST").click({ force: true });
+      Fari.get("scene.add-card.select.BOOST").click({ force: true }).wait(500);
 
       Fari.get("scene.add-card.select").click({ force: true });
-      Fari.get("scene.add-card.select.NPC").click({ force: true });
+      Fari.get("scene.add-card.select.NPC").click({ force: true }).wait(500);
 
       Fari.get("scene.add-card.select").click({ force: true });
-      Fari.get("scene.add-card.select.BAD GUY").click({ force: true });
+      Fari.get("scene.add-card.select.BAD GUY")
+        .click({ force: true })
+        .wait(500);
 
       Fari.get("scene.add-card.select").click({ force: true });
-      Fari.get("scene.add-card.select.CARD").click({ force: true });
+      Fari.get("scene.add-card.select.CARD").click({ force: true }).wait(500);
 
       // aspect
       Fari.get("scene.aspect.4.title").type("Something weird is going on");
