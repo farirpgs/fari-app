@@ -4,37 +4,48 @@ import FormHelperText from "@mui/material/FormHelperText";
 import React, { useContext } from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { IInfoTextBlock } from "../../../../../../domains/character/types";
+import { useEvent } from "../../../../../../hooks/useEvent/useEvent";
 import { MiniThemeContext } from "../../MiniThemeContext";
-import { IBlockComponentProps } from "../../types/IBlockComponentProps";
+import { IBlockHandlers } from "../../types/IBlockComponentProps";
 
-export function BlockInfoText(
-  props: IBlockComponentProps<IInfoTextBlock> & {}
-) {
-  const miniTheme = useContext(MiniThemeContext);
-  return (
-    <>
-      <Box>
+export const BlockInfoText = React.memo(
+  (
+    props: {
+      value: string | undefined;
+      advanced: boolean;
+      readonly: boolean | undefined;
+      dataCy?: string;
+    } & IBlockHandlers<IInfoTextBlock>
+  ) => {
+    const miniTheme = useContext(MiniThemeContext);
+
+    const handleValueChange = useEvent((value) => {
+      props.onValueChange(value);
+    });
+
+    return (
+      <>
         <Box>
-          <FormHelperText
-            className={css({
-              fontFamily: miniTheme.infoTextFontFamily,
-              fontSize: `${miniTheme.infoTextFontSize}rem`,
-              fontWeight: miniTheme.infoTextFontWeight,
-            })}
-          >
-            <ContentEditable
-              readonly={props.readonly || !props.advanced}
-              border={props.advanced}
-              dataCy={`${props.dataCy}.value`}
-              value={props.block.value}
-              onChange={(value) => {
-                props.onValueChange(value);
-              }}
-            />
-          </FormHelperText>
+          <Box>
+            <FormHelperText
+              className={css({
+                fontFamily: miniTheme.infoTextFontFamily,
+                fontSize: `${miniTheme.infoTextFontSize}rem`,
+                fontWeight: miniTheme.infoTextFontWeight,
+              })}
+            >
+              <ContentEditable
+                readonly={props.readonly || !props.advanced}
+                border={props.advanced}
+                dataCy={`${props.dataCy}.value`}
+                value={props.value || ""}
+                onChange={handleValueChange}
+              />
+            </FormHelperText>
+          </Box>
         </Box>
-      </Box>
-    </>
-  );
-}
+      </>
+    );
+  }
+);
 BlockInfoText.displayName = "BlockInfoText";

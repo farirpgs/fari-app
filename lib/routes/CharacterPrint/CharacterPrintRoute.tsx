@@ -5,7 +5,7 @@ import Grid, { GridSize } from "@mui/material/Grid";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -20,14 +20,10 @@ import {
   MiniThemeContext,
   useMiniTheme,
 } from "../Character/components/CharacterDialog/MiniThemeContext";
-
-export const CharacterPrintRoute: React.FC<{
-  match: {
-    params: { id: string };
-  };
-}> = (props) => {
+function CharacterPrintRoute() {
   const theme = useTheme();
-  const history = useHistory();
+  const navigate = useNavigate();
+  const params = useParams<{ id: string }>();
   const charactersManager = useContext(CharactersContext);
   const settingsManager = useContext(SettingsContext);
   const [character, setCharacter] = useState<ICharacter | undefined>(undefined);
@@ -42,16 +38,18 @@ export const CharacterPrintRoute: React.FC<{
 
   useEffect(() => {
     const characterToLoad = charactersManager.state.characters.find(
-      (s) => s.id === props.match.params.id
+      (s) => s.id === params.id
     );
 
     if (characterToLoad) {
       setCharacter(characterToLoad);
     } else {
-      history.replace("/");
+      navigate("/", {
+        replace: true,
+      });
       myBinderManager.actions.open({ folder: "characters" });
     }
-  }, [props.match.params.id, charactersManager.state.characters]);
+  }, [params.id, charactersManager.state.characters]);
 
   const maxWidth = character?.wide ? "lg" : "md";
 
@@ -66,7 +64,7 @@ export const CharacterPrintRoute: React.FC<{
       </Box>
     </>
   );
-};
+}
 
 CharacterPrintRoute.displayName = "CharacterPrintRoute";
 export default CharacterPrintRoute;

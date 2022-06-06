@@ -290,10 +290,10 @@ export function BlockSlotTrackerActions(
             color: theme.palette.primary.main,
           })}
           onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              asClock: !props.block.meta.asClock,
-            });
+            props.onMetaChange((prev) => ({
+              ...prev,
+              asClock: !prev.asClock,
+            }));
           }}
         >
           {props.block.meta.asClock

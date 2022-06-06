@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import produce from "immer";
 import isEqual from "lodash/isEqual";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { useHistory } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import {
   ContentEditable,
   previewContentEditable,
@@ -200,11 +200,8 @@ function useCardCollection(props: {
   };
 }
 
-export const CardCollectionRoute: React.FC<{
-  match: {
-    params: { id: string };
-  };
-}> = (props) => {
+function CardCollectionRoute() {
+  const params = useParams<{ id: string }>();
   const indexCardCollectionsManager = useContext(IndexCardCollectionsContext);
   const [selectedCardCollection, setSelectedCardCollection] = useState<
     IIndexCardCollection | undefined
@@ -226,7 +223,7 @@ export const CardCollectionRoute: React.FC<{
 
   const { t } = useTranslate();
   const theme = useTheme();
-  const history = useHistory();
+  const navigate = useNavigate();
   const logger = useLogger();
   const myBinderManager = useContext(MyBinderContext);
 
@@ -237,19 +234,16 @@ export const CardCollectionRoute: React.FC<{
   useEffect(() => {
     const cardToLoad =
       indexCardCollectionsManager.state.indexCardCollections.find(
-        (s) => s.id === props.match.params.id
+        (s) => s.id === params.id
       );
 
     if (cardToLoad) {
       setSelectedCardCollection(cardToLoad);
     } else {
-      history.replace("/");
+      navigate("/", { replace: true });
       myBinderManager.actions.open({ folder: "index-card-collections" });
     }
-  }, [
-    props.match.params.id,
-    indexCardCollectionsManager.state.indexCardCollections,
-  ]);
+  }, [params.id, indexCardCollectionsManager.state.indexCardCollections]);
 
   return (
     <>
@@ -427,7 +421,7 @@ export const CardCollectionRoute: React.FC<{
       </Masonry>
     );
   }
-};
+}
 
 CardCollectionRoute.displayName = "CardCollectionRoute";
 export default CardCollectionRoute;

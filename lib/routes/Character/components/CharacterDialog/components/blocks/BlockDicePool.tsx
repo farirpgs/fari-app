@@ -12,6 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import { darken, lighten, useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
+import isEqual from "lodash/isEqual";
 import { default as React, useContext, useEffect, useState } from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { Delays } from "../../../../../../constants/Delays";
@@ -23,16 +24,15 @@ import {
 } from "../../../../../../domains/character/types";
 import {
   IDiceCommandSetId,
+  IDiceRollResult,
   IRollGroup,
 } from "../../../../../../domains/dice/Dice";
 import { Icons } from "../../../../../../domains/Icons/Icons";
+import { useEvent } from "../../../../../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { BlockSelectors } from "../../domains/BlockSelectors/BlockSelectors";
 import { DiceCommandGroup } from "../../domains/DiceCommandGroup/DiceCommandGroup";
-import {
-  IBlockActionComponentProps,
-  IBlockComponentProps,
-} from "../../types/IBlockComponentProps";
+import { IBlockHandlers } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
 import { ThemedLabel } from "../ThemedLabel";
@@ -54,423 +54,462 @@ const DiceCommandRange: Array<IDiceCommandSetId> = [
   "1d20",
   "1d100",
 ];
-export function BlockDicePool(
-  props: IBlockComponentProps<IDicePoolBlock | ISkillBlock> & {
-    listResults?: boolean;
-    mid?: React.ReactNode;
-  }
-) {
-  const listResults = props.listResults ?? true;
-  const { t } = useTranslate();
-  const theme = useTheme();
-  const diceManager = useContext(DiceContext);
-  const [hover, setHover] = useState(false);
-  const [hoverControlsVisible, setHoverControlsVisible] = useState(false);
-  const hasCommands = !!props.block.meta.commands?.length;
-  const canRoll = !props.readonly;
-  const isSelected = diceManager.state.pool.some(
-    (p) => p.blockId === props.block.id
-  );
-  const isToggleVisible =
-    props.block.meta?.checked === true || props.block.meta?.checked === false;
+export const BlockDicePool = React.memo(
+  (
+    props: {
+      label: string | undefined;
+      value: string | undefined;
+      checked: boolean | undefined;
+      advanced: boolean;
+      readonly: boolean | undefined;
+      blockId: string;
+      blockType: BlockType;
+      hideModifier: boolean | undefined;
+      commands: Array<IDiceCommandSetId> | undefined;
+      dataCy?: string;
+      listResults?: boolean;
+      mid?: React.ReactNode;
+      onRoll(diceRollResult: IDiceRollResult): void;
+    } & IBlockHandlers<IDicePoolBlock | ISkillBlock>
+  ) => {
+    const listResults = props.listResults ?? true;
+    const { t } = useTranslate();
+    const theme = useTheme();
+    const diceManager = useContext(DiceContext);
+    const [hover, setHover] = useState(false);
+    const [hoverControlsVisible, setHoverControlsVisible] = useState(false);
+    const hasCommands = !!props.commands?.length;
+    const canRoll = !props.readonly;
+    const isSelected = diceManager.state.pool.some(
+      (p) => p.blockId === props.blockId
+    );
+    const isToggleVisible = props.checked === true || props.checked === false;
 
-  const commands = props.block.meta.commands || [];
-  const commandsCount = commands.reduce((acc, curr) => {
-    return {
-      ...acc,
-      [curr]: acc[curr] ? acc[curr] + 1 : 1,
-    };
-  }, {} as Record<IDiceCommandSetId, number>);
+    const commands = props.commands || [];
+    const commandsCount = commands.reduce((acc, curr) => {
+      return {
+        ...acc,
+        [curr]: acc[curr] ? acc[curr] + 1 : 1,
+      };
+    }, {} as Record<IDiceCommandSetId, number>);
 
-  const firstCommand = commands[0];
-  const isAllTheSameCommand =
-    !!firstCommand && commands.every((c) => c === firstCommand);
-  const canChangeDiceSize =
-    isAllTheSameCommand && DiceCommandRange.includes(firstCommand);
+    const firstCommand = commands[0];
+    const isAllTheSameCommand =
+      !!firstCommand && commands.every((c) => c === firstCommand);
+    const canChangeDiceSize =
+      isAllTheSameCommand && DiceCommandRange.includes(firstCommand);
 
-  useEffect(() => {
-    let enterTimeout: NodeJS.Timeout;
-    let leaveTimeout: NodeJS.Timeout;
-    if (hover) {
-      enterTimeout = setTimeout(() => {
-        setHoverControlsVisible(true);
-      }, Delays.blockHoverEnterControls);
-    } else {
-      leaveTimeout = setTimeout(() => {
-        setHoverControlsVisible(false);
-      }, Delays.blockHoverLeaveControls);
+    useEffect(() => {
+      let enterTimeout: NodeJS.Timeout;
+      let leaveTimeout: NodeJS.Timeout;
+      if (hover) {
+        enterTimeout = setTimeout(() => {
+          setHoverControlsVisible(true);
+        }, Delays.blockHoverEnterControls);
+      } else {
+        leaveTimeout = setTimeout(() => {
+          setHoverControlsVisible(false);
+        }, Delays.blockHoverLeaveControls);
+      }
+      return () => {
+        clearTimeout(enterTimeout);
+        clearTimeout(leaveTimeout);
+      };
+    }, [hover]);
+
+    function handleOnAddDiceFrom() {
+      props.onMetaChange((prev) => ({
+        ...prev,
+        commands: [...commands, firstCommand],
+      }));
     }
-    return () => {
-      clearTimeout(enterTimeout);
-      clearTimeout(leaveTimeout);
-    };
-  }, [hover]);
 
-  function handleOnAddDiceFrom() {
-    props.onMetaChange({
-      ...props.block.meta,
-      commands: [...commands, firstCommand],
-    });
-  }
+    function handleOnRemoveDiceFrom() {
+      props.onMetaChange((prev) => ({
+        ...prev,
+        commands: commands.slice(1),
+      }));
+    }
 
-  function handleOnRemoveDiceFrom() {
-    props.onMetaChange({
-      ...props.block.meta,
-      commands: commands.slice(1),
-    });
-  }
+    function handleStepDownDice() {
+      const newCommands = commands.map((c) => {
+        const currentDieSize = DiceCommandRange.indexOf(c);
+        const newDieSizeIndex = Math.max(0, currentDieSize - 1);
+        return DiceCommandRange[newDieSizeIndex];
+      });
+      props.onMetaChange((prev) => ({
+        ...prev,
+        commands: newCommands,
+      }));
+    }
 
-  function handleStepDownDice() {
-    const newCommands = commands.map((c) => {
-      const currentDieSize = DiceCommandRange.indexOf(c);
-      const newDieSizeIndex = Math.max(0, currentDieSize - 1);
-      return DiceCommandRange[newDieSizeIndex];
-    });
-    props.onMetaChange({
-      ...props.block.meta,
-      commands: newCommands,
-    });
-  }
+    function handleStepUpDice() {
+      const newCommands = commands.map((c) => {
+        const currentDieSize = DiceCommandRange.indexOf(c);
+        const newDieSizeIndex = Math.min(
+          DiceCommandRange.length - 1,
+          currentDieSize + 1
+        );
+        return DiceCommandRange[newDieSizeIndex];
+      });
+      props.onMetaChange((prev) => ({
+        ...prev,
+        commands: newCommands,
+      }));
+    }
 
-  function handleStepUpDice() {
-    const newCommands = commands.map((c) => {
-      const currentDieSize = DiceCommandRange.indexOf(c);
-      const newDieSizeIndex = Math.min(
-        DiceCommandRange.length - 1,
-        currentDieSize + 1
-      );
-      return DiceCommandRange[newDieSizeIndex];
-    });
-    props.onMetaChange({
-      ...props.block.meta,
-      commands: newCommands,
-    });
-  }
-
-  return (
-    <>
-      <Box
-        onPointerEnter={() => {
-          setHover(true);
-        }}
-        onPointerLeave={() => {
-          setHover(false);
-        }}
-      >
-        <Grid
-          container
-          spacing={1}
-          justifyContent="center"
-          alignItems="center"
-          wrap="nowrap"
+    return (
+      <>
+        <Box
+          onPointerEnter={() => {
+            setHover(true);
+          }}
+          onPointerLeave={() => {
+            setHover(false);
+          }}
         >
           <Grid
-            item
-            className={css({
-              maxWidth: "50%",
-            })}
+            container
+            spacing={1}
+            justifyContent="center"
+            alignItems="center"
+            wrap="nowrap"
           >
-            {renderPool()}
-          </Grid>
-          {props.mid && <Grid item>{props.mid}</Grid>}
+            <Grid
+              item
+              className={css({
+                maxWidth: "50%",
+              })}
+            >
+              {renderPool()}
+            </Grid>
+            {props.mid && <Grid item>{props.mid}</Grid>}
 
-          <Grid item xs>
-            {renderLabel()}
+            <Grid item xs>
+              {renderLabel()}
+            </Grid>
+            {isToggleVisible && <Grid item>{renderToggle()}</Grid>}
           </Grid>
-          {isToggleVisible && <Grid item>{renderToggle()}</Grid>}
-        </Grid>
 
-        {!props.readonly && (
-          <Collapse in={hoverControlsVisible || props.advanced}>
-            <Box py=".5rem">
-              <Grid container alignItems="center">
-                {canChangeDiceSize && (
-                  <Grid item>
-                    <Tooltip title={t("character-dialog.control.step-down")}>
-                      <span>
-                        <IconButton
-                          size="small"
-                          disabled={firstCommand === DiceCommandRange[0]}
-                          color="inherit"
-                          data-cy={`${props.dataCy}.step-down`}
-                          onClick={() => {
-                            handleStepDownDice();
-                          }}
-                        >
-                          <FastRewindIcon
-                            className={css({
-                              width: "1.1rem",
-                              height: "1.1rem",
-                            })}
-                          />
-                        </IconButton>
-                      </span>
-                    </Tooltip>
-                  </Grid>
-                )}
-                {isAllTheSameCommand && (
-                  <Grid item>
-                    <Tooltip title={t("character-dialog.control.remove-one")}>
-                      <span>
-                        <IconButton
-                          size="small"
-                          color="inherit"
-                          disabled={commands.length === 1}
-                          data-cy={`${props.dataCy}.remove-one`}
-                          onClick={() => {
-                            handleOnRemoveDiceFrom();
-                          }}
-                        >
-                          <RemoveCircleOutlineIcon
-                            className={css({
-                              width: "1.1rem",
-                              height: "1.1rem",
-                            })}
-                          />
-                        </IconButton>
-                      </span>
-                    </Tooltip>
-                  </Grid>
-                )}
-                <Grid item>{renderSetDice()}</Grid>
-                {isAllTheSameCommand && (
-                  <Grid item>
-                    <Tooltip title={t("character-dialog.control.add-one")}>
-                      <span>
-                        <IconButton
-                          color="inherit"
-                          data-cy={`${props.dataCy}.add-one`}
-                          size="small"
-                          onClick={() => {
-                            handleOnAddDiceFrom();
-                          }}
-                        >
-                          <AddCircleOutlineIcon
-                            className={css({
-                              width: "1.1rem",
-                              height: "1.1rem",
-                            })}
-                          />
-                        </IconButton>
-                      </span>
-                    </Tooltip>
-                  </Grid>
-                )}
-                {canChangeDiceSize && (
-                  <Grid item>
-                    <Tooltip title={t("character-dialog.control.step-up")}>
-                      <span>
-                        <IconButton
-                          size="small"
-                          color="inherit"
-                          disabled={
-                            firstCommand ===
-                            DiceCommandRange[DiceCommandRange.length - 1]
-                          }
-                          data-cy={`${props.dataCy}.step-up`}
-                          onClick={() => {
-                            handleStepUpDice();
-                          }}
-                        >
-                          <FastForwardIcon
-                            className={css({
-                              width: "1.1rem",
-                              height: "1.1rem",
-                            })}
-                          />
-                        </IconButton>
-                      </span>
-                    </Tooltip>
-                  </Grid>
-                )}
+          {!props.readonly && (
+            <Collapse in={hoverControlsVisible || props.advanced}>
+              <Box py=".5rem">
+                <Grid container alignItems="center">
+                  {canChangeDiceSize && (
+                    <Grid item>
+                      <Tooltip title={t("character-dialog.control.step-down")}>
+                        <span>
+                          <IconButton
+                            size="small"
+                            disabled={firstCommand === DiceCommandRange[0]}
+                            color="inherit"
+                            data-cy={`${props.dataCy}.step-down`}
+                            onClick={() => {
+                              handleStepDownDice();
+                            }}
+                          >
+                            <FastRewindIcon
+                              className={css({
+                                width: "1.1rem",
+                                height: "1.1rem",
+                              })}
+                            />
+                          </IconButton>
+                        </span>
+                      </Tooltip>
+                    </Grid>
+                  )}
+                  {isAllTheSameCommand && (
+                    <Grid item>
+                      <Tooltip title={t("character-dialog.control.remove-one")}>
+                        <span>
+                          <IconButton
+                            size="small"
+                            color="inherit"
+                            disabled={commands.length === 1}
+                            data-cy={`${props.dataCy}.remove-one`}
+                            onClick={() => {
+                              handleOnRemoveDiceFrom();
+                            }}
+                          >
+                            <RemoveCircleOutlineIcon
+                              className={css({
+                                width: "1.1rem",
+                                height: "1.1rem",
+                              })}
+                            />
+                          </IconButton>
+                        </span>
+                      </Tooltip>
+                    </Grid>
+                  )}
+                  <Grid item>{renderSetDice()}</Grid>
+                  {isAllTheSameCommand && (
+                    <Grid item>
+                      <Tooltip title={t("character-dialog.control.add-one")}>
+                        <span>
+                          <IconButton
+                            color="inherit"
+                            data-cy={`${props.dataCy}.add-one`}
+                            size="small"
+                            onClick={() => {
+                              handleOnAddDiceFrom();
+                            }}
+                          >
+                            <AddCircleOutlineIcon
+                              className={css({
+                                width: "1.1rem",
+                                height: "1.1rem",
+                              })}
+                            />
+                          </IconButton>
+                        </span>
+                      </Tooltip>
+                    </Grid>
+                  )}
+                  {canChangeDiceSize && (
+                    <Grid item>
+                      <Tooltip title={t("character-dialog.control.step-up")}>
+                        <span>
+                          <IconButton
+                            size="small"
+                            color="inherit"
+                            disabled={
+                              firstCommand ===
+                              DiceCommandRange[DiceCommandRange.length - 1]
+                            }
+                            data-cy={`${props.dataCy}.step-up`}
+                            onClick={() => {
+                              handleStepUpDice();
+                            }}
+                          >
+                            <FastForwardIcon
+                              className={css({
+                                width: "1.1rem",
+                                height: "1.1rem",
+                              })}
+                            />
+                          </IconButton>
+                        </span>
+                      </Tooltip>
+                    </Grid>
+                  )}
+                </Grid>
+              </Box>
+            </Collapse>
+          )}
+        </Box>
+      </>
+    );
+
+    function renderSetDice() {
+      return (
+        <DiceMenuForCharacterSheet
+          commandSetIds={commands}
+          onChange={(newCommandIds) => {
+            props.onMetaChange((prev) => ({
+              ...prev,
+              commands: newCommandIds,
+            }));
+          }}
+          render={(diceMenuProps) => (
+            <Link
+              component="button"
+              variant="caption"
+              className={css({
+                color: theme.palette.primary.main,
+              })}
+              onClick={(e: any) => {
+                if (!props.readonly) {
+                  diceMenuProps.openMenu(e);
+                }
+
+                if (!diceMenuProps.open) {
+                  diceMenuProps.openMenu(e);
+                } else {
+                  diceMenuProps.closeMenu();
+                }
+              }}
+              underline="hover"
+            >
+              {t("character-dialog.control.set-dice")}
+            </Link>
+          )}
+        />
+      );
+    }
+
+    function renderToggle() {
+      return (
+        <BlockToggleMeta
+          readonly={props.readonly}
+          dataCy={props.dataCy}
+          checked={props.checked}
+          onMetaChange={props.onMetaChange}
+        />
+      );
+    }
+
+    function renderLabel() {
+      return (
+        <ThemedLabel>
+          <ContentEditable
+            readonly={props.readonly || !props.advanced}
+            border={props.advanced}
+            dataCy={`${props.dataCy}.label`}
+            value={props.label || ""}
+            onChange={(value) => {
+              props.onLabelChange(value);
+            }}
+          />
+        </ThemedLabel>
+      );
+    }
+
+    function renderPool() {
+      return (
+        <Pool
+          fontSize="1.2rem"
+          borderRadius="8px"
+          selected={isSelected}
+          position="relative"
+          clickable={canRoll}
+          tooltipTitle={
+            canRoll ? t("character-dialog.helper-text.pool") : undefined
+          }
+          borderStyle={hasCommands ? "solid" : "dashed"}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            const rollGroup = BlockSelectors.getRollGroupFromBlock({
+              commands: props.commands,
+              label: props.label,
+              hideModifier: props.hideModifier,
+              type: props.blockType,
+              value: props.value,
+            });
+
+            diceManager.actions.setOptions({ listResults: listResults });
+            diceManager.actions.addOrRemovePoolElement({
+              blockId: props.blockId,
+              blockType: props.blockType,
+              label: props.label || "",
+              rollGroup: rollGroup,
+            });
+          }}
+          onClick={() => {
+            if (!canRoll) {
+              return;
+            }
+            const rollGroup = BlockSelectors.getRollGroupFromBlock({
+              commands: props.commands,
+              label: props.label,
+              hideModifier: props.hideModifier,
+              type: props.blockType,
+              value: props.value,
+            });
+            const diceRollResult = diceManager.actions.roll([rollGroup], {
+              listResults: listResults,
+            });
+
+            props.onRoll(diceRollResult);
+          }}
+        >
+          <Grid
+            container
+            spacing={1}
+            alignItems="center"
+            justifyContent="center"
+          >
+            {!hasCommands && (
+              <Grid item>
+                <Icons.ThrowDice
+                  className={css({
+                    display: "flex",
+                    fontSize: "2.3rem",
+                  })}
+                />
               </Grid>
-            </Box>
-          </Collapse>
-        )}
-      </Box>
-    </>
-  );
+            )}
+            {Object.keys(commandsCount).map((commandId, index) => {
+              const id = commandId as IDiceCommandSetId;
+              const commandSet = DiceCommandGroup.getCommandSetById(id);
+              const count = commandsCount[id];
+              return (
+                <Grid item key={index}>
+                  <Badge
+                    badgeContent={count}
+                    color="default"
+                    invisible={count === 1}
+                    classes={{
+                      badge: css({
+                        background: theme.palette.text.primary,
+                        color: theme.palette.getContrastText(
+                          theme.palette.text.primary
+                        ),
+                      }),
+                    }}
+                  >
+                    <commandSet.icon
+                      className={css({
+                        display: "flex",
+                        fontSize: "2.3rem",
+                      })}
+                    />
+                  </Badge>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Pool>
+      );
+    }
+  }
+);
 
-  function renderSetDice() {
+BlockDicePool.displayName = "BlockDicePool";
+
+export const BlockDicePoolActions = React.memo(
+  (
+    props: {
+      value: string | undefined;
+      label: string | undefined;
+      checked: boolean | undefined;
+    } & IBlockHandlers<IDicePoolBlock>
+  ) => {
+    const { t } = useTranslate();
+    const theme = useTheme();
+
+    const handleAddRemoveToggle = useEvent(() => {
+      props.onMetaChange((prev) => ({
+        ...prev,
+        checked: prev.checked === undefined ? false : undefined,
+      }));
+    });
+
     return (
-      <DiceMenuForCharacterSheet
-        commandSetIds={commands}
-        onChange={(newCommandIds) => {
-          props.onMetaChange({
-            ...props.block.meta,
-            commands: newCommandIds,
-          });
-        }}
-        render={(diceMenuProps) => (
+      <>
+        <Grid item>
           <Link
             component="button"
             variant="caption"
             className={css({
               color: theme.palette.primary.main,
             })}
-            onClick={(e: any) => {
-              if (!props.readonly) {
-                diceMenuProps.openMenu(e);
-              }
-
-              if (!diceMenuProps.open) {
-                diceMenuProps.openMenu(e);
-              } else {
-                diceMenuProps.closeMenu();
-              }
-            }}
+            onClick={handleAddRemoveToggle}
             underline="hover"
           >
-            {t("character-dialog.control.set-dice")}
+            {props.checked === undefined
+              ? t("character-dialog.control.add-toggle")
+              : t("character-dialog.control.remove-toggle")}
           </Link>
-        )}
-      />
-    );
-  }
-
-  function renderToggle() {
-    return (
-      <BlockToggleMeta
-        readonly={props.readonly}
-        dataCy={props.dataCy}
-        block={props.block}
-        onMetaChange={props.onMetaChange}
-      />
-    );
-  }
-
-  function renderLabel() {
-    return (
-      <ThemedLabel>
-        <ContentEditable
-          readonly={props.readonly || !props.advanced}
-          border={props.advanced}
-          dataCy={`${props.dataCy}.label`}
-          value={props.block.label || ""}
-          onChange={(value) => {
-            props.onLabelChange(value);
-          }}
-        />
-      </ThemedLabel>
-    );
-  }
-
-  function renderPool() {
-    return (
-      <Pool
-        fontSize="1.2rem"
-        borderRadius="8px"
-        selected={isSelected}
-        position="relative"
-        clickable={canRoll}
-        tooltipTitle={
-          canRoll ? t("character-dialog.helper-text.pool") : undefined
-        }
-        borderStyle={hasCommands ? "solid" : "dashed"}
-        onContextMenu={(e) => {
-          e.preventDefault();
-          const rollGroup = BlockSelectors.getRollGroupFromBlock(props.block);
-
-          diceManager.actions.setOptions({ listResults: listResults });
-          diceManager.actions.addOrRemovePoolElement({
-            blockId: props.block.id,
-            blockType: props.block.type,
-            label: props.block.label || "",
-            rollGroup: rollGroup,
-          });
-        }}
-        onClick={() => {
-          if (!canRoll) {
-            return;
-          }
-          const rollGroup = BlockSelectors.getRollGroupFromBlock(props.block);
-          const diceRollResult = diceManager.actions.roll([rollGroup], {
-            listResults: listResults,
-          });
-
-          props.onRoll(diceRollResult);
-        }}
-      >
-        <Grid container spacing={1} alignItems="center" justifyContent="center">
-          {!hasCommands && (
-            <Grid item>
-              <Icons.ThrowDice
-                className={css({
-                  display: "flex",
-                  fontSize: "2.3rem",
-                })}
-              />
-            </Grid>
-          )}
-          {Object.keys(commandsCount).map((commandId, index) => {
-            const id = commandId as IDiceCommandSetId;
-            const commandSet = DiceCommandGroup.getCommandSetById(id);
-            const count = commandsCount[id];
-            return (
-              <Grid item key={index}>
-                <Badge
-                  badgeContent={count}
-                  color="default"
-                  invisible={count === 1}
-                  classes={{
-                    badge: css({
-                      background: theme.palette.text.primary,
-                      color: theme.palette.getContrastText(
-                        theme.palette.text.primary
-                      ),
-                    }),
-                  }}
-                >
-                  <commandSet.icon
-                    className={css({
-                      display: "flex",
-                      fontSize: "2.3rem",
-                    })}
-                  />
-                </Badge>
-              </Grid>
-            );
-          })}
         </Grid>
-      </Pool>
+      </>
     );
+  },
+  (prev, next) => {
+    return isEqual(prev, next);
   }
-}
-
-BlockDicePool.displayName = "BlockDicePool";
-
-export function BlockDicePoolActions(
-  props: IBlockActionComponentProps<IDicePoolBlock>
-) {
-  const { t } = useTranslate();
-  const theme = useTheme();
-
-  return (
-    <>
-      <Grid item>
-        <Link
-          component="button"
-          variant="caption"
-          className={css({
-            color: theme.palette.primary.main,
-          })}
-          onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              checked:
-                props.block.meta.checked === undefined ? false : undefined,
-            });
-          }}
-          underline="hover"
-        >
-          {props.block.meta.checked === undefined
-            ? t("character-dialog.control.add-toggle")
-            : t("character-dialog.control.remove-toggle")}
-        </Link>
-      </Grid>
-    </>
-  );
-}
+);
 
 BlockDicePoolActions.displayName = "BlockDicePoolActions";
 

@@ -65,15 +65,17 @@ export function useWindowLiveCursors() {
     };
   }, []);
 
-  const others = useOthers();
+  const others = useOthers<IPlayerPresence>();
 
   return others
     .toArray()
     .filter((user) => user.presence?.cursor != null)
     .map(({ connectionId, presence, id, info }) => {
+      const x = presence?.cursor?.x ?? 0;
+      const y = presence?.cursor?.y ?? 0;
       return {
-        x: presence?.cursor.x * window.innerWidth,
-        y: presence?.cursor.y,
+        x: x * window.innerWidth,
+        y: y,
         connectionId,
         id,
         info,

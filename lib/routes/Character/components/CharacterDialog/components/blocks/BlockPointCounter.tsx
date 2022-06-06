@@ -16,7 +16,7 @@ import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState"
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import {
   IBlockActionComponentProps,
-  IBlockComponentProps,
+  IBlockHandlers,
 } from "../../types/IBlockComponentProps";
 import { CircleTextField } from "../CircleTextField";
 import { ThemedLabel } from "../ThemedLabel";
@@ -92,134 +92,143 @@ export function usePointCounter(props: {
   };
 }
 
-export function BlockPointCounter(
-  props: IBlockComponentProps<IPointCounterBlock>
-) {
-  const { t } = useTranslate();
+export const BlockPointCounter = React.memo(
+  (
+    props: {
+      label: string | undefined;
+      value: string | undefined;
+      max: string | undefined;
+      advanced: boolean;
+      readonly: boolean | undefined;
+      dataCy?: string;
+    } & IBlockHandlers<IPointCounterBlock>
+  ) => {
+    const { t } = useTranslate();
 
-  const theme = useTheme();
-  const isLabelVisible =
-    !!previewContentEditable({ value: props.block.label }) || props.advanced;
+    const theme = useTheme();
+    const isLabelVisible =
+      !!previewContentEditable({ value: props.label }) || props.advanced;
 
-  const pointsManager = usePointCounter({
-    points: props.block.value,
-    maxPoints: props.block.meta.max,
-    onPointsChange(newValue) {
-      props.onValueChange(newValue);
-    },
-    onMaxPointsChange(newMax) {
-      props.onMetaChange({
-        ...props.block.meta,
-        max: newMax,
-      });
-    },
-  });
-  const canRefresh =
-    props.block.meta.max !== undefined && !props.readonly && !props.advanced;
-  return (
-    <>
-      <Box>
-        {isLabelVisible && (
-          <Box>
-            <Grid
-              container
-              justifyContent={"space-between"}
-              wrap="nowrap"
-              spacing={1}
-            >
-              <Grid item className={css({ flex: "1 1 auto" })}>
-                <ThemedLabel className={css({ textAlign: "center" })}>
-                  <ContentEditable
-                    dataCy={`${props.dataCy}.label`}
-                    readonly={props.readonly || !props.advanced}
-                    border={props.advanced}
-                    value={props.block.label || ""}
-                    onChange={(value) => {
-                      props.onLabelChange(value);
+    const pointsManager = usePointCounter({
+      points: props.value || "",
+      maxPoints: props.max,
+      onPointsChange(newValue) {
+        props.onValueChange(newValue);
+      },
+      onMaxPointsChange(newMax) {
+        props.onMetaChange((prev) => ({
+          ...prev,
+          max: newMax,
+        }));
+      },
+    });
+    const canRefresh =
+      props.max !== undefined && !props.readonly && !props.advanced;
+    return (
+      <>
+        <Box>
+          {isLabelVisible && (
+            <Box>
+              <Grid
+                container
+                justifyContent={"space-between"}
+                wrap="nowrap"
+                spacing={1}
+              >
+                <Grid item className={css({ flex: "1 1 auto" })}>
+                  <ThemedLabel className={css({ textAlign: "center" })}>
+                    <ContentEditable
+                      dataCy={`${props.dataCy}.label`}
+                      readonly={props.readonly || !props.advanced}
+                      border={props.advanced}
+                      value={props.label || ""}
+                      onChange={(value) => {
+                        props.onLabelChange(value);
+                      }}
+                    />
+                  </ThemedLabel>
+                </Grid>
+              </Grid>
+            </Box>
+          )}
+
+          <Grid
+            container
+            justifyContent="center"
+            wrap="nowrap"
+            alignItems="center"
+            spacing={1}
+          >
+            <Grid item>
+              <CircleTextField
+                dataCy={`${props.dataCy}.value`}
+                value={pointsManager.state.points}
+                onChange={(newValue) => {
+                  pointsManager.actions.setPoints(newValue);
+                }}
+                onIncrement={() => {
+                  pointsManager.actions.increment();
+                }}
+                onDecrement={() => {
+                  pointsManager.actions.decrement();
+                }}
+              />
+            </Grid>
+            {props.max !== undefined && (
+              <>
+                <Grid item>
+                  <Typography
+                    className={css({
+                      fontSize: "2rem",
+                      color: theme.palette.text.secondary,
+                      lineHeight: Font.lineHeight(2),
+                    })}
+                  >
+                    {"/"}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <CircleTextField
+                    dataCy={`${props.dataCy}.max`}
+                    value={pointsManager.state.maxPoints ?? ""}
+                    onChange={(newMax) => {
+                      pointsManager.actions.setMaxPoints(newMax);
+                    }}
+                    onIncrement={() => {
+                      pointsManager.actions.incrementMax();
+                    }}
+                    onDecrement={() => {
+                      pointsManager.actions.decrementMax();
                     }}
                   />
-                </ThemedLabel>
-              </Grid>
-            </Grid>
-          </Box>
-        )}
-
-        <Grid
-          container
-          justifyContent="center"
-          wrap="nowrap"
-          alignItems="center"
-          spacing={1}
-        >
-          <Grid item>
-            <CircleTextField
-              data-cy={`${props.dataCy}.value`}
-              value={pointsManager.state.points}
-              onChange={(newValue) => {
-                pointsManager.actions.setPoints(newValue);
-              }}
-              onIncrement={() => {
-                pointsManager.actions.increment();
-              }}
-              onDecrement={() => {
-                pointsManager.actions.decrement();
-              }}
-            />
+                </Grid>
+              </>
+            )}
           </Grid>
-          {props.block.meta.max !== undefined && (
-            <>
+          {canRefresh && (
+            <Grid container justifyContent="center">
               <Grid item>
-                <Typography
+                <Link
+                  component="button"
+                  variant="caption"
                   className={css({
-                    fontSize: "2rem",
-                    color: theme.palette.text.secondary,
-                    lineHeight: Font.lineHeight(2),
+                    color: theme.palette.primary.main,
                   })}
+                  onClick={() => {
+                    pointsManager.actions.refresh();
+                  }}
+                  underline="hover"
                 >
-                  {"/"}
-                </Typography>
+                  {t("character-dialog.control.refresh")}
+                </Link>
               </Grid>
-              <Grid item>
-                <CircleTextField
-                  data-cy={`${props.dataCy}.max`}
-                  value={pointsManager.state.maxPoints ?? ""}
-                  onChange={(newMax) => {
-                    pointsManager.actions.setMaxPoints(newMax);
-                  }}
-                  onIncrement={() => {
-                    pointsManager.actions.incrementMax();
-                  }}
-                  onDecrement={() => {
-                    pointsManager.actions.decrementMax();
-                  }}
-                />
-              </Grid>
-            </>
-          )}
-        </Grid>
-        {canRefresh && (
-          <Grid container justifyContent="center">
-            <Grid item>
-              <Link
-                component="button"
-                variant="caption"
-                className={css({
-                  color: theme.palette.primary.main,
-                })}
-                onClick={() => {
-                  pointsManager.actions.refresh();
-                }}
-                underline="hover"
-              >
-                {t("character-dialog.control.refresh")}
-              </Link>
             </Grid>
-          </Grid>
-        )}
-      </Box>
-    </>
-  );
-}
+          )}
+        </Box>
+      </>
+    );
+  }
+);
 BlockPointCounter.displayName = "BlockPointCounter";
 
 export function BlockPointCounterActions(
@@ -258,10 +267,10 @@ export function BlockPointCounterActions(
             color: theme.palette.primary.main,
           })}
           onClick={() => {
-            props.onMetaChange({
-              ...props.block.meta,
-              max: props.block.meta.max === undefined ? "1" : undefined,
-            });
+            props.onMetaChange((prev) => ({
+              ...prev,
+              max: prev.max === undefined ? "1" : undefined,
+            }));
           }}
           underline="hover"
         >
