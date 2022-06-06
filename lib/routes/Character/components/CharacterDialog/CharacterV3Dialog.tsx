@@ -54,7 +54,6 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { BoxProps } from "@mui/system";
 import React, { useContext, useEffect, useState } from "react";
-import { Prompt } from "react-router";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
 import { IndexCardColorPicker } from "../../../../components/IndexCard/IndexCard";
 import { CharacterCard } from "../../../../components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
@@ -75,6 +74,7 @@ import {
 } from "../../../../domains/character/types";
 import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
 import { IDiceRollResult } from "../../../../domains/dice/Dice";
+import { usePrompt } from "../../../../hooks/useBlocker/useBlocker";
 import { LazyState } from "../../../../hooks/useLazyState/useLazyState";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
@@ -128,6 +128,7 @@ export const CharacterV3Dialog: React.FC<{
   onRoll?(diceRollResult: IDiceRollResult): void;
 }> = (props) => {
   const { t } = useTranslate();
+
   const theme = useTheme();
   const query = useQuery<"card" | "advanced">();
   const showCharacterCard = query.get("card") === "true";
@@ -143,6 +144,7 @@ export const CharacterV3Dialog: React.FC<{
   const miniTheme = useMiniTheme({
     character: characterManager.state.character,
   });
+  usePrompt(t("manager.leave-without-saving"), characterManager.state.dirty);
 
   const hasMiniTheme = !!characterManager.state.character?.theme;
 
@@ -208,10 +210,7 @@ export const CharacterV3Dialog: React.FC<{
   return (
     <>
       <style>{miniTheme.style}</style>
-      <Prompt
-        when={characterManager.state.dirty}
-        message={t("manager.leave-without-saving")}
-      />
+
       <Snackbar
         open={savedSnack}
         autoHideDuration={2000}
@@ -430,7 +429,10 @@ export const CharacterV3Dialog: React.FC<{
                   {...params}
                   label="Template"
                   variant="outlined"
-                  data-cy={`character-dialog.template-input`}
+                  inputProps={{
+                    ...params.inputProps,
+                    ["data-cy"]: `character-dialog.template-input`,
+                  }}
                 />
               )}
             />

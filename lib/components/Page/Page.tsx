@@ -33,7 +33,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { env } from "../../constants/env";
 import { Images } from "../../constants/Images";
 import { useZIndex } from "../../constants/zIndex";
@@ -76,8 +76,9 @@ export const Page: React.FC<{
   debug?: Record<string, string>;
   hideHeaderLogo?: boolean;
   disableAutomaticScrollTop?: boolean;
+  children?: React.ReactNode;
 }> = (props) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const [menuOpen, setMenuOpen] = useState(false);
@@ -490,7 +491,7 @@ export const Page: React.FC<{
                   <Button
                     color="primary"
                     onClick={() => {
-                      history.push(`/play/${gameId}`);
+                      navigate(`/play/${gameId}`);
                     }}
                     variant={"outlined"}
                     className={css({

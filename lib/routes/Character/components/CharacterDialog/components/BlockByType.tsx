@@ -12,10 +12,10 @@ import {
 } from "../../../../../components/ContentEditable/ContentEditable";
 import { BlockType, IBlock } from "../../../../../domains/character/types";
 import { IDiceRollResult } from "../../../../../domains/dice/Dice";
+import { useEvent } from "../../../../../hooks/useEvent/useEvent";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { MiniThemeContext } from "../MiniThemeContext";
-import { IBlockComponentProps } from "../types/IBlockComponentProps";
 import { BlockDicePool, BlockDicePoolActions } from "./blocks/BlockDicePool";
 import { BlockImage } from "./blocks/BlockImage";
 import { BlockInfoText } from "./blocks/BlockInfoText";
@@ -33,19 +33,18 @@ import {
 } from "./blocks/BlockSlotTracker";
 import { BlockText, BlockTextActions } from "./blocks/BlockText";
 
-export function BlockByType(
-  props: Omit<
-    IBlockComponentProps<any>,
-    "onLabelChange" | "onValueChange" | "onMetaChange"
-  > & {
-    hideHelp?: boolean;
-    otherActions?: JSX.Element;
-    onChange(newBlock: IBlock): void;
-    onToggleSplit?(): void;
-    onMainPointCounterChange?(): void;
-    onRoll(diceRollResult: IDiceRollResult): void;
-  }
-) {
+export function BlockByType(props: {
+  dataCy: string;
+  advanced: boolean;
+  readonly: boolean | undefined;
+  block: IBlock;
+  hideHelp?: boolean;
+  otherActions?: JSX.Element;
+  onChange(newBlock: IBlock): void;
+  onToggleSplit?(): void;
+  onMainPointCounterChange?(): void;
+  onRoll(diceRollResult: IDiceRollResult): void;
+}) {
   const miniTheme = useContext(MiniThemeContext);
   const theme = useTheme();
   const { t } = useTranslate();
@@ -58,7 +57,7 @@ export function BlockByType(
   });
   const isSeparatorBlock = props.block.type === BlockType.Separator;
 
-  function handleOnLabelChange(label: any) {
+  const handleLabelChange = useEvent((label: any) => {
     setBlock(
       produce((draft: IBlock | undefined) => {
         if (!draft) {
@@ -67,9 +66,9 @@ export function BlockByType(
         draft.label = label;
       })
     );
-  }
+  });
 
-  function handleOnValueChange(value: any) {
+  const handleValueChange = useEvent((value: any) => {
     setBlock(
       produce((draft: IBlock | undefined) => {
         if (!draft) {
@@ -78,20 +77,13 @@ export function BlockByType(
         draft.value = value;
       })
     );
-  }
+  });
 
-  function handleOnMetaChange(meta: any) {
-    setBlock(
-      produce((draft: IBlock | undefined) => {
-        if (!draft) {
-          return;
-        }
+  const handleMetaChange = useEvent((producer: (prev: any) => any) => {
+    setBlock(produce(producer));
+  });
 
-        draft.meta = meta;
-      })
-    );
-  }
-  function handleOnHelperTextChange(helperText: string) {
+  const handleOnHelperTextChange = useEvent((helperText: string) => {
     setBlock(
       produce((draft: IBlock | undefined) => {
         if (!draft) {
@@ -101,135 +93,152 @@ export function BlockByType(
         draft.meta.helperText = helperText;
       })
     );
-  }
+  });
 
   return (
     <Box my={isSeparatorBlock ? ".5rem" : "0"}>
-      {props.block.type === BlockType.Text && (
+      {block.type === BlockType.Text && (
         <BlockText
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
-          block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
-          onRoll={props.onRoll}
+          label={block.label}
+          value={block.value}
+          checked={block.meta.checked}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
         />
       )}
-      {props.block.type === BlockType.InfoText && (
+      {block.type === BlockType.InfoText && (
         <BlockInfoText
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
-          block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
-          onRoll={props.onRoll}
+          value={block.value}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
         />
       )}
-      {props.block.type === BlockType.Numeric && (
+      {block.type === BlockType.Numeric && (
         <BlockNumeric
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
-          block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
-          onRoll={props.onRoll}
+          label={block.label}
+          value={block.value}
+          checked={block.meta.checked}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
         />
       )}
-      {props.block.type === BlockType.Image && (
+      {block.type === BlockType.Image && (
         <BlockImage
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
-          block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
-          onRoll={props.onRoll}
+          label={block.label}
+          value={block.value}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
         />
       )}
-      {props.block.type === BlockType.Skill && (
+      {block.type === BlockType.Skill && (
         <BlockSkill
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
-          block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
+          label={block.label}
+          value={block.value}
+          commands={block.meta.commands}
+          blockId={block.id}
+          blockType={block.type}
+          checked={block.meta.checked}
+          hideModifier={block.meta.hideModifier}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
           onRoll={props.onRoll}
         />
       )}
-      {props.block.type === BlockType.DicePool && (
+      {block.type === BlockType.DicePool && (
         <BlockDicePool
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
-          block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
+          label={block.label}
+          value={block.value}
+          commands={block.meta.commands}
+          listResults={true}
+          hideModifier={true}
+          blockId={block.id}
+          blockType={block.type}
+          checked={block.meta.checked}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
           onRoll={props.onRoll}
         />
       )}
-      {props.block.type === BlockType.PointCounter && (
+      {block.type === BlockType.PointCounter && (
         <BlockPointCounter
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
-          block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
-          onRoll={props.onRoll}
+          label={block.label}
+          value={block.value}
+          max={block.meta.max}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
         />
       )}
 
-      {props.block.type === BlockType.SlotTracker && (
+      {block.type === BlockType.SlotTracker && (
         <BlockSlotTracker
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
           block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
           onRoll={props.onRoll}
         />
       )}
 
-      {props.block.type === BlockType.Link && (
+      {block.type === BlockType.Link && (
         <BlockLink
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
-          block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
-          onRoll={props.onRoll}
+          label={block.label}
+          value={block.value}
+          hasDisplayName={block.meta.hasDisplayName}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
         />
       )}
 
-      {props.block.type === BlockType.Separator && (
+      {block.type === BlockType.Separator && (
         <BlockSeparator
           advanced={props.advanced}
           dataCy={props.dataCy}
           readonly={props.readonly}
-          block={block}
-          onLabelChange={handleOnLabelChange}
-          onValueChange={handleOnValueChange}
-          onMetaChange={handleOnMetaChange}
-          onRoll={props.onRoll}
+          label={block.label}
+          hasLabel={block.meta.hasLabel}
+          hideDivider={block.meta.hideDivider}
+          onLabelChange={handleLabelChange}
+          onValueChange={handleValueChange}
+          onMetaChange={handleMetaChange}
         />
       )}
 
-      {props.block.type !== BlockType.InfoText && renderBlockHelpText()}
+      {block.type !== BlockType.InfoText && renderBlockHelpText()}
       {props.advanced && renderBlockAdvancedOptions()}
     </Box>
   );
@@ -240,67 +249,80 @@ export function BlockByType(
         {block.type === BlockType.PointCounter && (
           <BlockPointCounterActions
             block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
             onMainPointCounterChange={props.onMainPointCounterChange}
           />
         )}
         {block.type === BlockType.Text && (
           <BlockTextActions
-            block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            label={block.label}
+            value={block.value}
+            checked={block.meta.checked}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
           />
         )}
         {block.type === BlockType.Numeric && (
           <BlockNumericActions
-            block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            label={block.label}
+            value={block.value}
+            checked={block.meta.checked}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
           />
         )}
         {block.type === BlockType.SlotTracker && (
           <BlockSlotTrackerActions
             block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
           />
         )}
 
         {block.type === BlockType.Skill && (
           <BlockSkillActions
-            block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            label={block.label}
+            value={block.value}
+            checked={block.meta.checked}
+            hideModifier={block.meta.hideModifier}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
           />
         )}
         {block.type === BlockType.DicePool && (
           <BlockDicePoolActions
-            block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            label={block.label}
+            value={block.value}
+            checked={block.meta.checked}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
           />
         )}
         {block.type === BlockType.Link && (
           <BlockLinkActions
-            block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            hasDisplayName={block.meta.hasDisplayName}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
           />
         )}
         {block.type === BlockType.Separator && (
           <BlockSeparatorActions
-            block={block}
-            onLabelChange={handleOnLabelChange}
-            onValueChange={handleOnValueChange}
-            onMetaChange={handleOnMetaChange}
+            advanced={props.advanced}
+            hasLabel={block.meta.hasLabel}
+            hideDivider={block.meta.hideDivider}
+            readonly={props.readonly}
+            dataCy={props.dataCy}
+            onLabelChange={handleLabelChange}
+            onValueChange={handleValueChange}
+            onMetaChange={handleMetaChange}
           />
         )}
 
@@ -363,9 +385,7 @@ export function BlockByType(
                 border={props.advanced}
                 dataCy={`${props.dataCy}.helper-text`}
                 value={block.meta.helperText ?? ""}
-                onChange={(newHelpText) => {
-                  handleOnHelperTextChange(newHelpText);
-                }}
+                onChange={handleOnHelperTextChange}
               />
             </FormHelperText>
           </Grid>

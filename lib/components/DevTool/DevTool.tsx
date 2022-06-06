@@ -5,6 +5,7 @@ import { env } from "../../constants/env";
 
 export const DevTool: React.FC<{
   data: any;
+  children?: React.ReactNode;
 }> = (props) => {
   if (env.isDev) {
     return null;

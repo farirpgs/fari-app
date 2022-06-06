@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import React, { useContext, useEffect } from "react";
-import { useHistory } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -11,18 +11,15 @@ import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext"
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
 import { useScene } from "../../hooks/useScene/useScene";
 
-export const SceneRoute: React.FC<{
-  match: {
-    params: { id: string };
-  };
-}> = (props) => {
+function SceneRoute() {
+  const params = useParams<{ id: string }>();
   const scenesManager = useContext(ScenesContext);
   const sceneManager = useScene();
   const sceneName = sceneManager.state.scene?.name ?? "";
 
   const diceManager = useContext(DiceContext);
   const pageTitle = previewContentEditable({ value: sceneName });
-  const history = useHistory();
+  const navigate = useNavigate();
   const logger = useLogger();
   const myBinderManager = useContext(MyBinderContext);
 
@@ -32,16 +29,16 @@ export const SceneRoute: React.FC<{
 
   useEffect(() => {
     const sceneToLoad = scenesManager.state.scenes.find(
-      (s) => s.id === props.match.params.id
+      (s) => s.id === params.id
     );
 
     if (sceneToLoad) {
       sceneManager.actions.loadScene(sceneToLoad);
     } else {
-      history.replace("/");
+      navigate("/", { replace: true });
       myBinderManager.actions.open({ folder: "scenes" });
     }
-  }, [props.match.params.id, scenesManager.state.scenes]);
+  }, [params.id, scenesManager.state.scenes]);
 
   return (
     <>
@@ -64,7 +61,7 @@ export const SceneRoute: React.FC<{
       </Page>
     </>
   );
-};
+}
 
 SceneRoute.displayName = "SceneRoute";
 export default SceneRoute;

@@ -12,7 +12,7 @@ import { ThemeProvider, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useContext, useEffect } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import discord from "../../../images/services/discord.png";
 import lokalise from "../../../images/services/lokalise.png";
 import { AppButtonLink, RouterLink } from "../../components/AppLink/AppLink";
@@ -70,7 +70,7 @@ type IHomeRouteCard = {
 const sectionsSeparator = "4rem";
 
 export const HomeRoute: React.FC<{}> = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { t } = useTranslate();
   const logger = useLogger();
   const lightBackground = useLightBackground();
@@ -546,7 +546,7 @@ export const HomeRoute: React.FC<{}> = () => {
                 size="large"
                 className={css({ height: "3rem" })}
                 onClick={() => {
-                  history.push("/play");
+                  navigate("/play");
                   logger.track("home.start_online_game");
                 }}
               >
@@ -562,7 +562,7 @@ export const HomeRoute: React.FC<{}> = () => {
                 data-cy="home.play-offline"
                 className={css({ height: "3rem" })}
                 onClick={() => {
-                  history.push("/play-offline");
+                  navigate("/play-offline");
                   logger.track("home.start_offline_game");
                 }}
               >

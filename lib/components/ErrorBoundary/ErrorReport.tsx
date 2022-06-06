@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ErrorReport: React.FC<{ eventId: string }> = () => {
+export const ErrorReport: React.FC = () => {
   return (
     <div
       style={{
