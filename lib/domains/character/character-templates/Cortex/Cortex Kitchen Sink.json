@@ -668,7 +668,7 @@
                 "type": "Text",
                 "value": "Interfere in a Contest",
                 "meta": {
-                  "helperText": "Change a scene asset to a session asset"
+                  "helperText": "Join a contest already underway. If the other contestants lose to you, they can give you to renew the contest for another round"
                 }
               },
               {
@@ -704,7 +704,7 @@
                 "type": "Text",
                 "value": "Keep an extra Effect Die",
                 "meta": {
-                  "helperText": "Roll and add a Hero Die to your total. This can be done after all rolls before a resolution is narrated"
+                  "helperText": "Keep an extra effect die, using it to create an additional asset, complication, or stress. You can’t use this if you have no dice left over from your roll"
                 }
               },
               {
