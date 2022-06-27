@@ -1,0 +1,272 @@
+{
+  "fariType": "character",
+  "id": "5b30275f-d6aa-4298-ae9b-2f2fd2772854",
+  "lastUpdated": 1654981776,
+  "name": "SUBSTRATUM",
+  "pages": [
+    {
+      "id": "2b42e102-e4c1-4d12-9e29-4acbb675e0ad",
+      "label": "SCIENTIST",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "3ba13b08-f07b-4d8c-bee6-f8dba697f05a",
+                  "label": "SCIENTIST",
+                  "blocks": [
+                    {
+                      "id": "c80c1342-c2ba-4488-8e5b-ac6b716d0288",
+                      "label": "PRONOUNS",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5373f0cb-875e-4cc9-94b4-e6ff157f39a7",
+                      "label": "SPECIALTY",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "88c88f49-7289-4561-ae4f-9aae00a3beeb",
+                  "label": "HEALTH",
+                  "blocks": [
+                    {
+                      "id": "f23c9082-fcf5-4565-86b5-7c430312e07e",
+                      "label": "STRESS",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Remove -1 for laying low<br>Remove -2 with Deuterium Units",
+                        "asClock": false,
+                        "width": 1
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "1fe44d5c-9d32-46cf-a50a-10085dcb7bcc",
+                      "label": "OVERCLOCK",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Use D12 — To Reset, “take a moment”<br>",
+                        "width": 1
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "99529957-aa06-4d15-98b6-a99d106b833a",
+                  "label": "SKILLS",
+                  "blocks": [
+                    {
+                      "id": "f1a19d2f-d595-4db6-8fb3-5fbfea9b1eb9",
+                      "label": "",
+                      "type": "InfoText",
+                      "value": "Assign — D10, D8, D6",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "a2d60aa6-e47a-461b-aca0-c9f81af2ebee",
+                      "label": "MAKE",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "e43f9565-6540-4048-8956-eb641076de1e",
+                      "label": "BREAK",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "f926650e-3f9c-453f-b850-1b101579f085",
+                      "label": "DASH",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "9804fef3-d1ce-436a-8aad-18b046a1ea21",
+                      "label": "EVADE",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "f5b87c1e-7220-4af4-b98f-b29ddbedbab6",
+                      "label": "THINK",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "ca838b16-4b75-4e7c-84da-92e672d1e7fe",
+                      "label": "SWAY",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": { "width": 0.5 }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "488f317c-69a9-4821-af9d-8c4740206a3f",
+                  "label": "STORAGE UNIT",
+                  "blocks": [
+                    {
+                      "id": "591d594c-66e9-40e4-a637-31f540857fc4",
+                      "label": "",
+                      "type": "InfoText",
+                      "value": "Minimum — D4",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "5066d9e1-b6bd-447c-861a-4e019a3d903a",
+                      "label": "ITEM #1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "c2102016-3a33-4d0b-9d27-9b25ad2574a3",
+                      "label": "ITEM #2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "73adc0a9-73e1-4fe3-960f-5f49872714f3",
+                      "label": "ITEM #3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "629fc5a3-eeb4-4a97-8969-aadd12b85936",
+                      "label": "DEUTERIUM UNITS",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Spend to repair item or reduce stress by 2."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "6e8218e3-ec43-46aa-9906-cc56f5bddebc",
+                      "label": "PORTAL DATUM",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Collect 4 total among group to close the portal."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "7106fb7b-7625-4ef6-a6a8-229ff677a406",
+                  "label": "DEPTH &amp; ENVIRONMENT",
+                  "blocks": [
+                    {
+                      "id": "0a221096-f327-4003-8ec0-8c3dec7f7164",
+                      "label": "CURRENT DEPTH",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "b2c8f4c4-94cf-4f51-bbde-9df32ff148e8",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "9c649c12-5275-4d25-8944-144735448833",
+                      "label": "ENVIRONMENTAL NOTES",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "theme": {
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Syncopate&display=swap');",
+    "backgroundColor": "#041823",
+    "pageHeadingFontFamily": "Montserrat",
+    "sectionHeadingFontFamily": "Syncopate",
+    "labelFontFamily": "Syncopate",
+    "pageHeadingFontSize": 1.25,
+    "hideSectionBackground": false,
+    "sectionHeadingFontSize": 2.125,
+    "labelFontSize": 1.375,
+    "textFontSize": 1,
+    "textFontFamily": "Montserrat",
+    "pageHeadingFontWeight": "",
+    "infoTextFontFamily": "Montserrat",
+    "helperTextFontFamily": "Montserrat",
+    "labelFontWeight": "900"
+  },
+  "version": 6,
+  "wide": false
+}

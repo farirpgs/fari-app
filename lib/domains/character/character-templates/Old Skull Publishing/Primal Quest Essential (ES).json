@@ -1,0 +1,540 @@
+{
+  "id": "a9162642-1998-44ea-998e-5794452630b3",
+  "name": "Primal Quest Essential - Español",
+  "lastUpdated": 1655770696,
+  "wide": false,
+  "pages": [
+    {
+      "id": "74ac30fa-b5f3-42e0-88e7-230e6ea52227",
+      "label": "PERSONAJE",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "29a6ef82-2b5f-44e0-8aab-8abcbf731242",
+                  "label": "DETALLES\n",
+                  "blocks": [
+                    {
+                      "id": "36c4e414-1090-4d69-9f23-1225975e60b6",
+                      "label": "NOMBRE",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e671ccb0-3eb4-42bf-b35f-e273b3d7184d",
+                      "label": "GÉNERO",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "62b01ec9-3ca4-41f3-a47b-489d1b5147a5",
+                      "label": "APARIENCIA",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cabf4409-1464-4583-b449-813e0ba28f24",
+                      "label": "PERSONALIDAD",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "d0fa807d-8856-4323-be8e-2f3e9479fde7",
+                  "label": "ATRIBUTOS",
+                  "blocks": [
+                    {
+                      "id": "b8d8d18c-b964-4e6d-94cc-2e49e2674cda",
+                      "label": "CUERPO",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 1 }
+                    },
+                    {
+                      "id": "60deb6bb-65c0-4ad2-8850-8ffe483afd73",
+                      "label": "MENTE",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 1 }
+                    },
+                    {
+                      "id": "5e9f727d-27b7-49de-8917-e81b1120651c",
+                      "label": "CORAZÓN",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 1 }
+                    },
+                    {
+                      "id": "f0e44757-d99d-4880-86b3-4d4618ace7c2",
+                      "label": "+DN",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": [] }
+                    }
+                  ]
+                },
+                {
+                  "id": "c6e9ef2a-92d5-459b-8391-7bad3bbf261b",
+                  "blocks": [
+                    {
+                      "id": "622b19b1-012e-475d-82e3-b051da4103a7",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "CONCEPTO",
+                      "value": ""
+                    },
+                    {
+                      "id": "4305345c-dafe-4d1a-957e-9fcfda94a73a",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "TALENTO",
+                      "value": ""
+                    },
+                    {
+                      "id": "502c4fa3-f53b-474b-9591-d14e654e9e7c",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "MOTIVACIÓN",
+                      "value": ""
+                    },
+                    {
+                      "id": "2aa33fc3-9ef6-4e4d-9832-b4a6f5ac9e62",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "RELACIÓN",
+                      "value": ""
+                    },
+                    {
+                      "id": "951d2e0f-95f6-4a43-9415-fba4514d67eb",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "PROBLEMA",
+                      "value": ""
+                    }
+                  ],
+                  "label": "ETIQUETAS",
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "5e27314c-0759-47f7-a6ef-7a7322c17fc0",
+                  "blocks": [
+                    {
+                      "id": "1952f8a4-3131-4b9e-aafa-d9981d8299cd",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "ETIQUETA #1",
+                      "value": ""
+                    },
+                    {
+                      "id": "5aa49492-fbc3-46f4-8659-dab4c421d992",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "ETIQUETA #2",
+                      "value": ""
+                    }
+                  ],
+                  "label": "ETIQUETAS EXTRAS"
+                },
+                {
+                  "id": "6e65ad9a-a12f-48e4-9ed8-081e7b297e41",
+                  "blocks": [
+                    {
+                      "id": "4f84eed9-7ec4-49c7-afb7-cdb7748484fd",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "NOTAS",
+                      "value": ""
+                    }
+                  ],
+                  "label": "OTROS"
+                },
+                {
+                  "id": "4217ff51-1741-4c35-8e36-5cbe5492a31f",
+                  "blocks": [
+                    {
+                      "id": "a6531589-a71b-4ab1-a625-e6c60509c2bb",
+                      "label": "La esquina del rol para Primal Quest Essential™ de Diogo Nogueira",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": true },
+                      "value": "https://diogo-old-skull.itch.io/primal-quest-essentials"
+                    }
+                  ],
+                  "label": "CRÉDITOS"
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "8c70f868-9d4c-43cf-9250-df15c025c23f",
+                  "blocks": [
+                    {
+                      "id": "caef3883-3e24-45c1-b756-9b8b95993818",
+                      "label": "PX",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "852b0294-b0fc-4ec1-acc9-d34a1302bac7",
+                      "label": "VITALIDAD",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "0",
+                        "isMainPointCounter": false,
+                        "width": 0.5
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "f92e1665-2c9a-4057-9b87-9555f2617f73",
+                      "label": "DEFENSA",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "b7487584-69d1-4219-bc58-9262b8f98d75",
+                      "label": "FAVORES",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "f9eb372a-3e93-49c5-a17d-f41f6455b79c",
+                      "label": "REVESES",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    }
+                  ],
+                  "label": "OTRAS ESTADÍSTICAS"
+                },
+                {
+                  "id": "8ba60e3c-eeb0-4aa9-97b1-53fbfc195778",
+                  "label": "COMIDA Y AGUA",
+                  "blocks": [
+                    {
+                      "id": "0ccaece0-ca97-4943-9d02-b59f4d866f17",
+                      "label": "COMIDA",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "819028eb-f10c-422b-8972-af5d2e55590a",
+                      "label": "AGUA",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                },
+                {
+                  "id": "5c68e4b9-0c08-4632-9c50-e28c07b58fbf",
+                  "label": "ARMAS",
+                  "blocks": [
+                    {
+                      "id": "f385da20-1927-4696-83cc-6585dec5707f",
+                      "label": "ARMAS",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "7f6bd86c-1ba1-4a78-94a7-eb6e0553d40e",
+                      "label": "RANGO",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "b560adec-8429-41d1-aad7-0c5e6d33dcf2",
+                      "label": "DAÑO",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "976dea0e-300d-439d-9f81-6101c5b7ff69",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "a0288e90-8fa1-4c75-b20e-5948355ed8e2",
+                      "label": "ARMA",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "55717453-1bfd-4bb0-b229-7e505f08b08c",
+                      "label": "RANGO",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "8ba9b003-33b7-49f3-b32a-40d035d66908",
+                      "label": "DAÑO",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "bf14ac93-3948-48c5-8a44-3bfe31845df1",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "4cdb6bd2-2527-4f4a-91d8-0e9f39d517ce",
+                      "label": "ARMA",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "b667c862-699d-4266-aa45-4bb6faba405b",
+                      "label": "RANGO",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "3cfad078-8b38-47ed-aff5-6ef014e03785",
+                      "label": "DAÑO",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "d2b7b445-7b74-4c55-856d-658852238745",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "b2130528-c0b7-4094-a4f7-67d42ec32f60",
+                      "label": "ARMA",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "9cfe6bc8-d5e1-4fa9-95f7-6a0335c02816",
+                      "label": "RANGO",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "14ca3cfc-dd2c-482c-b669-ab5959e0a59e",
+                      "label": "DAÑO",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "36873601-5e48-43a6-980f-700dde71f753",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c3f361a2-35e5-40ad-847c-15d896634289",
+                  "label": "CARGA",
+                  "blocks": [
+                    {
+                      "id": "9e2a454b-c8f8-47de-b9bb-3e789e46a394",
+                      "label": "UMBRAL DE CARGA",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "28446f1d-1578-4f97-af35-10953221bbaf",
+                      "label": "LÍMITE DE CARGA",
+                      "type": "Numeric",
+                      "value": "20",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                },
+                {
+                  "id": "a25f013b-06dd-4deb-8a21-eea6154f607e",
+                  "label": "LISTA DE EQUIPO",
+                  "blocks": [
+                    {
+                      "id": "4658367e-377c-46b2-b0a5-fb5b120046e6",
+                      "label": "UNIDAD #1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "30219ac7-5015-449a-850a-2411a581751f",
+                      "label": "UNIDAD #11",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "3ee147f9-bf82-446f-81df-1e529b5c4f32",
+                      "label": "UNIDAD #2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "d2a08ca4-663c-4bd6-a463-a1f8c7aa82b8",
+                      "label": "UNIDAD #12",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "d46323f8-5a93-4344-99b2-98b085e3ab92",
+                      "label": "UNIDAD #3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "f571519b-937e-447a-9e38-1ef4439bbe41",
+                      "label": "UNIDAD #13",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "eea98f7b-8e3f-4396-9207-eeec7557f980",
+                      "label": "UNIDAD #4",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "576fb6eb-7554-4a9d-872b-2eee5b9e2f82",
+                      "label": "UNIDAD #14",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "e0bd3583-9a67-4682-8da7-3b3faa465ba5",
+                      "label": "UNIDAD #5",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "8a58fb69-7204-4035-9051-9539a8d86f4d",
+                      "label": "UNIDAD #15",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "70f0f26c-2271-49cf-8cf3-acb321f39592",
+                      "label": "UNIDAD #6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "098cff0b-9a01-4e35-b8b8-32e58a91b428",
+                      "label": "UNIDAD #16",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "c879231b-4f77-4751-bd9b-2ec364b24550",
+                      "label": "UNIDAD #7",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "03e13920-b9a0-4015-8828-98cd082cb885",
+                      "label": "UNIDAD #17",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "b9341cde-40b3-4bcf-be97-54115b015168",
+                      "label": "UNIDAD #8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "0f955038-854e-4714-8ec6-3e63539b37a8",
+                      "label": "UNIDAD #18",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "269d4fe1-c3a1-453a-a236-9dd4bc06e8bc",
+                      "label": "UNIDAD #9",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "38839564-b623-43a5-8f31-27d1211753da",
+                      "label": "UNIDAD #19",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "87495f93-8b57-4e9e-bde7-8ee9fd378aac",
+                      "label": "UNIDAD #10",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "ad1c6cff-3482-40d6-ba34-b92fb2f8deed",
+                      "label": "UNIDAD #20",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "EQUIPO"
+    }
+  ],
+  "version": 6,
+  "fariType": "character"
+}

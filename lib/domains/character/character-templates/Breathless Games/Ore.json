@@ -1,0 +1,299 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1656297114,
+  "name": " Template",
+  "pages": [
+    {
+      "id": "c837e4b4-0605-46ae-95c1-52c30865f480",
+      "label": "MINER SHEET",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "05171f80-c912-4e50-9fa6-9ef9fcf819af",
+                  "label": "EMPLOYEE DATA",
+                  "blocks": [
+                    {
+                      "id": "716eabd6-a46d-4f36-8a77-806785d3b371",
+                      "label": "MINER'S NAME",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2384f8b9-e040-4d9e-b205-7ed2fe271365",
+                      "label": "PRONOUN(S)",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1559c971-f624-417e-b982-26e4eb775a01",
+                      "label": "DEBT SOURCE",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "6d10dd49-042f-48e7-983a-62e93516a8fe",
+                      "label": "DEBT",
+                      "type": "Numeric",
+                      "value": "40",
+                      "meta": { "helperText": "Begins at 40 Cred]<br><br>" }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "222f239e-d78f-4c71-9b98-e22a816d3911",
+                  "label": "MEDICAL STATUS",
+                  "blocks": [
+                    {
+                      "id": "ebc727f7-6d52-4365-aab1-7bf9c26cfb23",
+                      "label": "STRESS",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Remove -1 for laying low<br>Remove -2 with med kit<br>"
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "99710199-3897-4c26-b69c-23d08096a115",
+                      "label": "MED KIT",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "800df46b-f7a8-4c44-a0b9-8f9442e840ca",
+                      "label": "STIMPACK",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Use D12 — To Reset, “catch your breath”<br>"
+                      }
+                    }
+                  ],
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "654fa75a-6278-43fd-af1c-cb99e79d4b6d",
+                  "label": "OXYGEN STATUS",
+                  "blocks": [
+                    {
+                      "id": "299b1f7b-db5a-4b67-b367-dc2cc1c0cc29",
+                      "label": "OXYGEN AVAILABLE",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "beeb4914-d6fd-45fd-af1f-b00431817571",
+                      "label": "AMBIENT OXYGEN AVAILABLE",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "408ee821-0707-4489-9f73-921459209c3d",
+                      "label": "OXYGEN COMPROMISED",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Until this status is resolved you cannot 'Catch Your Breath'"
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "39ad2921-8b15-43ae-839b-72f25b38ead1",
+                  "label": "SKILLS",
+                  "blocks": [
+                    {
+                      "id": "8e9c6d24-ae95-4059-a50e-e5344e6f9a60",
+                      "label": "",
+                      "type": "InfoText",
+                      "value": "Assign — D10, D8, D6",
+                      "meta": {}
+                    },
+                    {
+                      "id": "40e6d8eb-402c-496d-8275-d183125f4f97",
+                      "label": "PULVERIZE",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7e9f5668-3e88-4b8c-a847-54de4b8c2206",
+                      "label": "CONVEY",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ab444497-c306-43bf-acec-e52435708d0b",
+                      "label": "BURROW",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "231e8f6e-fb02-48d1-b38a-3cf2e17ea0a0",
+                      "label": "RIG",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5e441714-572c-4194-b701-f1b7e752a90f",
+                      "label": "ASSAY",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4d29e4ae-f2d6-4537-ae60-c8131a81e5e7",
+                      "label": "OPERATE",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "e112468d-7603-4e76-a4d9-7ca78e32bff6",
+                  "label": "BACKPACK",
+                  "blocks": [
+                    {
+                      "id": "fffe8181-66b7-4da5-91be-3f36a26f7031",
+                      "label": "",
+                      "type": "InfoText",
+                      "value": "Minimum — D6",
+                      "meta": {}
+                    },
+                    {
+                      "id": "326ec072-cb5b-4736-a768-451bca5c1c04",
+                      "label": "ITEM  SLOT 1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "6607b80f-4efd-40d6-aca3-2475429d2d44",
+                      "label": "ITEM  SLOT 2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f1a91578-5a37-49ab-a945-43aacc816e47",
+                      "label": "ITEM  SLOT 3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "f42d115f-91e2-4b01-801f-371e9280e0ae",
+                  "label": "LOCKER",
+                  "blocks": [
+                    {
+                      "id": "b38da456-eca1-4933-86c1-f7d6f2f41353",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Minimum — D6",
+                      "meta": {}
+                    },
+                    {
+                      "id": "84dc8f8d-6a76-47f4-9024-b3cb2a778e57",
+                      "label": "ITEM  SLOT 1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2b65a1f3-7051-4c0d-9a75-fd28dbcb1f69",
+                      "label": "ITEM  SLOT 2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1037fbce-dccf-44f2-9e2a-90d050936fdb",
+                      "label": "ITEM  SLOT 3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "1026d109-39ea-4251-bd36-0374bb9323a7",
+                  "label": "A game by Ryan Lucas:  https://theyoungking45.itch.io/",
+                  "blocks": [
+                    {
+                      "id": "b8f83168-1bcf-40dc-ae47-0ca5d4fed9a3",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://kanka-user-assets.s3.eu-central-1.amazonaws.com/locations/1GS7xQyAFEbmc2CUVaBaggUAshDneuuJx2MwIU3s.png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "theme": {
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Lato&display=swap');",
+    "backgroundColor": "#3f332d",
+    "pageHeadingFontFamily": "Barlow Condensed",
+    "sectionHeadingFontFamily": "Barlow Condensed",
+    "labelFontFamily": "helvetica",
+    "pageHeadingFontSize": 1.375,
+    "hideSectionBackground": false,
+    "sectionHeadingFontSize": 2.125,
+    "labelFontSize": 1.5,
+    "textFontSize": 1,
+    "textFontFamily": "Arial",
+    "pageHeadingFontWeight": "",
+    "labelFontWeight": "bolder"
+  },
+  "version": 6
+}
