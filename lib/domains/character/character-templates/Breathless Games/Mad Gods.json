@@ -1,0 +1,261 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1656281207,
+  "name": " Template",
+  "pages": [
+    {
+      "id": "bc04e2bf-11fe-407e-ac1c-4dcbb2d2785c",
+      "label": "",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5070805f-31c3-4677-99fb-0a1299c23d18",
+                  "label": "Concept",
+                  "blocks": [
+                    {
+                      "id": "7b84afad-6372-4c66-8030-5adcf0c16a1a",
+                      "label": "Pronouns",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8e3a7f61-ef69-4cf7-87d1-3be832f9ca06",
+                      "label": "Guise",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "Who you were before awakening" }
+                    },
+                    {
+                      "id": "883d8359-ef85-41d3-92ae-8f75cc6176fe",
+                      "label": "Sepulchre",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "A fragment of your tomb hidden in the folds of the Lie"
+                      }
+                    }
+                  ],
+                  "visibleOnCard": false
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "b2c92e37-79c1-42eb-a072-fddb42c78ac2",
+                  "label": "Health",
+                  "blocks": [
+                    {
+                      "id": "ea62c859-862b-4490-a47a-d7b5be707d96",
+                      "label": "Stress",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Remove -1 for resting in a Sepulchre<br>Remove -2 for resting in your Sepulchre<br>Remove all with a mote of Gnosis<br>"
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "23b4199b-d7ae-46d7-ba6f-601ba8e0a698",
+                      "label": "Mote of Gnosis",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "36208e6c-f5be-49f4-9c06-357de1165f09",
+                      "label": "Fissure",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Use D20 — Reset using a mote of Gnosis<br>"
+                      }
+                    }
+                  ],
+                  "visibleOnCard": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "eb8a6c0f-a6d5-466e-8c23-776698c1d352",
+                  "label": "Collection",
+                  "blocks": [
+                    {
+                      "id": "cd6ecb66-d3e4-4274-b082-8b29e24aa161",
+                      "label": "",
+                      "type": "InfoText",
+                      "value": "Minimum — D6",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1ff0d015-7c28-403a-9826-a9f4b3e3da76",
+                      "label": "Artifact #1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1fc3532b-00ac-4b35-9267-ef5ef468da06",
+                      "label": "Artifact #2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "01e2f118-870f-4afb-969f-9a10d59c867c",
+                      "label": "Artifact #3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": false
+                },
+                {
+                  "id": "8230766e-970d-4de3-9378-f9300efd5ba7",
+                  "label": "The Lie Unraveling",
+                  "blocks": [
+                    {
+                      "id": "05b3ad16-24c4-4585-80d1-6e4bcaa87bdf",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Gain 1 Inhuman trait each time an Art reaches d12",
+                      "meta": {}
+                    },
+                    {
+                      "id": "83ad9b83-ca63-4fc6-845e-4e8855a25c08",
+                      "label": "Inhuman Trait",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1dd6bfbb-7829-4234-b86e-d0990cc27629",
+                      "label": "Inhuman Trait",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "83365f0f-9a5b-4ec1-85f0-ccf7540d93a2",
+                      "label": "Inhuman Trait",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": false
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "424c502c-ee60-4e6b-bc7f-f8c08e3c6d3c",
+                  "label": "Arts",
+                  "blocks": [
+                    {
+                      "id": "5bc47c15-ba7a-44e0-bddf-b07a3d0cf57c",
+                      "label": "",
+                      "type": "InfoText",
+                      "value": "Assign — D10, D8, D6",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5d793e9a-880e-49c5-b3e6-379e7c5054d3",
+                      "label": "Breaking",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4784e3b6-586f-459e-a902-82102729c9ce",
+                      "label": "Making",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2704f3fb-081e-485f-8242-8df4998884f1",
+                      "label": "Mastering",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "63dd13b9-2774-43a5-a642-0a1c4e96639f",
+                      "label": "Changing",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "383065e3-24b7-448f-89be-e750d8346676",
+                      "label": "Traveling",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2d19342d-5432-49e1-b84d-8347c9a32a66",
+                      "label": "Mending",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "theme": {
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap\" rel=\"stylesheet\")",
+    "pageHeadingFontFamily": "Cinzel",
+    "sectionHeadingFontFamily": "Cinzel",
+    "labelFontFamily": "Cinzel",
+    "textFontFamily": "Cinzel",
+    "infoTextFontFamily": "Cinzel",
+    "helperTextFontFamily": "Cinzel",
+    "backgroundColor": "#f7f2f2",
+    "sectionHeadingFontWeight": "",
+    "labelFontWeight": "",
+    "hideSectionBackground": false,
+    "sectionHeadingFontSize": 1.375
+  },
+  "version": 6
+}
