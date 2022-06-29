@@ -175,10 +175,12 @@ export function useIndexCard(props: {
         const dragIndex = draft.subCards.findIndex((c) => c.id === dragId);
         const hoverIndex = draft.subCards.findIndex((c) => c.id === hoverId);
 
-        const dragItem = draft.subCards[dragIndex];
+        if (dragIndex !== -1 && hoverIndex !== -1) {
+          const dragItem = draft.subCards[dragIndex];
 
-        draft.subCards.splice(dragIndex, 1);
-        draft.subCards.splice(hoverIndex, 0, dragItem);
+          draft.subCards.splice(dragIndex, 1);
+          draft.subCards.splice(hoverIndex, 0, dragItem);
+        }
       })
     );
   }

@@ -284,10 +284,11 @@ export function useScene() {
         const dragIndex = cards.findIndex((c) => c.id === dragId);
         const hoverIndex = cards.findIndex((c) => c.id === hoverId);
 
-        const dragItem = cards[dragIndex];
-
-        cards.splice(dragIndex, 1);
-        cards.splice(hoverIndex, 0, dragItem);
+        if (dragIndex !== -1 && hoverIndex !== -1) {
+          const dragItem = cards[dragIndex];
+          cards.splice(dragIndex, 1);
+          cards.splice(hoverIndex, 0, dragItem);
+        }
       })
     );
   }
