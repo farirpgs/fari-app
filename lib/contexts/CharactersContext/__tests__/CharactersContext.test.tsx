@@ -1,4 +1,4 @@
-import { act, renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react";
 import { DefaultTemplates } from "../../../domains/character/DefaultTemplates";
 import { ICharacter } from "../../../domains/character/types";
 import { useCharacters } from "../CharactersContext";

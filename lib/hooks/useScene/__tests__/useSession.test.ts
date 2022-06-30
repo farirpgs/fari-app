@@ -1,4 +1,4 @@
-import { act, renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
 import { DefaultPlayerColor } from "../../../routes/Play/consts/PlayerColors";
 import { ISession } from "../IScene";
