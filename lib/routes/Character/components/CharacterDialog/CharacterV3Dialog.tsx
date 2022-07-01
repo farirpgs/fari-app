@@ -2424,10 +2424,13 @@ export const CharacterV3Dialog: React.FC<{
                         );
                       }}
                       onToggleSplit={() => {
-                        const shouldUseHalfWidth =
+                        const shouldUseTwoThirdWidth =
                           block.meta.width == null || block.meta.width === 1;
+                        const shouldUseHalfWidth = block.meta.width === 0.66;
                         const shouldUseThirdWidth = block.meta.width === 0.5;
-                        const newWidth = shouldUseHalfWidth
+                        const newWidth = shouldUseTwoThirdWidth
+                          ? 0.66
+                          : shouldUseHalfWidth
                           ? 0.5
                           : shouldUseThirdWidth
                           ? 0.33
