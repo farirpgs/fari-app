@@ -80,7 +80,15 @@ export function BlockByType(props: {
   });
 
   const handleMetaChange = useEvent((producer: (prev: any) => any) => {
-    setBlock(produce(producer));
+    setBlock(
+      produce((draft: IBlock | undefined) => {
+        if (!draft) {
+          return;
+        }
+
+        draft.meta = produce(draft.meta, producer);
+      })
+    );
   });
 
   const handleOnHelperTextChange = useEvent((helperText: string) => {
