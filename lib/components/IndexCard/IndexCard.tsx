@@ -597,7 +597,7 @@ export const IndexCard: React.FC<
               <BetterDnd
                 direction="vertical"
                 id={block.id}
-                type={`${DragAndDropTypes.SceneIndexCardsBlocks}.${indexCardManager.state.indexCard.id}`}
+                type={`${DragAndDropTypes.SceneIndexCardsBlocks}.${props.parentIndexCard?.id}`}
                 onMove={(dragId, hoverId) => {
                   indexCardManager.actions.moveIndexCardBlock(dragId, hoverId);
                 }}
