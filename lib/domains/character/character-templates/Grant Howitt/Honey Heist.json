@@ -1,7 +1,8 @@
 {
   "fariType": "character",
-  "lastUpdated": 1657808723,
-  "name": " Template",
+  "id": "214a1e37-8f12-41ab-8677-c31752388427",
+  "lastUpdated": 1657808866,
+  "name": "",
   "pages": [
     {
       "id": "da50a4da-162c-445c-b559-24aff2b504a5",
@@ -57,18 +58,6 @@
                       "meta": {
                         "helperText": "1. Trilby - 2. Top - 3. Bowler - 4. Flat-Cap - 5. Cowboy - 6. Fez - 7. Crown - 8. Roll Twice"
                       }
-                    }
-                  ]
-                },
-                {
-                  "id": "b6108c7c-e8c9-48bd-acad-5dce4291ffa8",
-                  "label": "Notes",
-                  "blocks": [
-                    {
-                      "id": "135fed28-1f12-47a9-94a0-4079e2840b42",
-                      "type": "Text",
-                      "value": "",
-                      "meta": {}
                     }
                   ]
                 }
@@ -150,8 +139,55 @@
               ]
             }
           ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d1bcb018-cb80-4081-adcf-7ad8f90ca1e5",
+                  "label": "Credits",
+                  "blocks": [
+                    {
+                      "id": "fc5e891d-9db7-460d-9c1f-806757667d3a",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Honey Heist is by Grant Howitt • https://gshowitt.itch.io/honey-heist<br>Template is by René-Pier Deshaies • https://farirpgs.com<br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
+    },
+    {
+      "id": "30828c1b-f0bc-49f4-9b66-4520e04857ee",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "63f90263-e01e-4c0c-87d8-1723ab5f831c",
+                  "label": "Notes",
+                  "blocks": [
+                    {
+                      "id": "1b96a3bf-9ea2-4423-813a-ba39adb5f3a8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Notes"
     }
   ],
   "template": "Blank",
