@@ -1,0 +1,159 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1657808723,
+  "name": " Template",
+  "pages": [
+    {
+      "id": "da50a4da-162c-445c-b559-24aff2b504a5",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d65d7f78-a910-4c31-88fc-690d213e4493",
+                  "label": "Your Bear",
+                  "blocks": [
+                    {
+                      "id": "31cd95df-0fe7-4682-8c3e-8bfaccb300a3",
+                      "label": "Name - Pronouns",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a88a6f4d-a826-4d8f-9fdf-c0f4ff4867e3",
+                      "label": "Descriptor",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "1. Rookie - 2. Washed-Up - 3. Retired - 4. Unhinged - 5. Slick - 6. Incompetent"
+                      }
+                    },
+                    {
+                      "id": "704347d2-17a2-4770-bf38-a21b9a8c4e65",
+                      "label": "Bear Type / Skill",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "1. Grizzly (Terrify) - 2. Polar (Swim) - 3. Panda (Eat anything that looks like bamboo.) - 4. Black (Climb) - 5. Sun (Sense Honey) - 6. Honey Badger (Carnage)"
+                      }
+                    },
+                    {
+                      "id": "29d9c16e-5b9c-4075-8770-2573713b0ad1",
+                      "label": "Role",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "1. Muscle - 2. Brains - 3. Driver - 4. Hacker - 5. Thief - 6. Face"
+                      }
+                    },
+                    {
+                      "id": "fe4282ba-74ca-4c16-acf4-4192240f1d00",
+                      "label": "Hat",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "1. Trilby - 2. Top - 3. Bowler - 4. Flat-Cap - 5. Cowboy - 6. Fez - 7. Crown - 8. Roll Twice"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "b6108c7c-e8c9-48bd-acad-5dce4291ffa8",
+                  "label": "Notes",
+                  "blocks": [
+                    {
+                      "id": "135fed28-1f12-47a9-94a0-4079e2840b42",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "e56417f6-6110-4e1b-8592-737d399b8c1f",
+                  "label": "Stats",
+                  "blocks": [
+                    {
+                      "id": "799e1f68-c5a3-423b-9cbf-d2edb120a44a",
+                      "label": "1d6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "21735b39-ebd3-439f-9324-8f08c4421df1",
+                      "label": "2d6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6", "1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "0a19c36d-1dcd-4b07-8d29-b2cf8632bafb",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "ad2c7f1a-1cd9-42be-ad2b-8f2a05e05b55",
+                      "label": "BEAR",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f3abeed9-e8cc-4604-8fa9-6d026f0df9bc",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "- If your bear stat ever reaches 6, you flip out bearstyle and lose it. Presumable to be picked up by animal control in half an hour or so.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "19a7a9d5-9573-4215-92ab-56f1391c8af5",
+                      "label": "CRIMINAL",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ed181453-d59c-418a-a49a-aba4b69df92b",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "- If your criminal stat ever reaches 6, you are lured into a life of crime and betray the party.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "dc7e42a8-f334-410e-a765-47d64dba42fb",
+                      "label": "Frustration",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "When the plan fails and you run into<br>difficulty, move one point from Criminal into Bear.<br>"
+                      }
+                    },
+                    {
+                      "id": "3667442f-87fc-4681-a1f0-4d7112b19af3",
+                      "label": "Greed",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "When the plan goes off without a hitch, move<br>one point from Bear into Criminal.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "version": 6
+}
