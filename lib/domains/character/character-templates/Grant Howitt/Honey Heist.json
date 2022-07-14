@@ -1,0 +1,195 @@
+{
+  "fariType": "character",
+  "id": "214a1e37-8f12-41ab-8677-c31752388427",
+  "lastUpdated": 1657808866,
+  "name": "",
+  "pages": [
+    {
+      "id": "da50a4da-162c-445c-b559-24aff2b504a5",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d65d7f78-a910-4c31-88fc-690d213e4493",
+                  "label": "Your Bear",
+                  "blocks": [
+                    {
+                      "id": "31cd95df-0fe7-4682-8c3e-8bfaccb300a3",
+                      "label": "Name - Pronouns",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a88a6f4d-a826-4d8f-9fdf-c0f4ff4867e3",
+                      "label": "Descriptor",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "1. Rookie - 2. Washed-Up - 3. Retired - 4. Unhinged - 5. Slick - 6. Incompetent"
+                      }
+                    },
+                    {
+                      "id": "704347d2-17a2-4770-bf38-a21b9a8c4e65",
+                      "label": "Bear Type / Skill",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "1. Grizzly (Terrify) - 2. Polar (Swim) - 3. Panda (Eat anything that looks like bamboo.) - 4. Black (Climb) - 5. Sun (Sense Honey) - 6. Honey Badger (Carnage)"
+                      }
+                    },
+                    {
+                      "id": "29d9c16e-5b9c-4075-8770-2573713b0ad1",
+                      "label": "Role",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "1. Muscle - 2. Brains - 3. Driver - 4. Hacker - 5. Thief - 6. Face"
+                      }
+                    },
+                    {
+                      "id": "fe4282ba-74ca-4c16-acf4-4192240f1d00",
+                      "label": "Hat",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "1. Trilby - 2. Top - 3. Bowler - 4. Flat-Cap - 5. Cowboy - 6. Fez - 7. Crown - 8. Roll Twice"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "e56417f6-6110-4e1b-8592-737d399b8c1f",
+                  "label": "Stats",
+                  "blocks": [
+                    {
+                      "id": "799e1f68-c5a3-423b-9cbf-d2edb120a44a",
+                      "label": "1d6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "21735b39-ebd3-439f-9324-8f08c4421df1",
+                      "label": "2d6",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d6", "1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "0a19c36d-1dcd-4b07-8d29-b2cf8632bafb",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "ad2c7f1a-1cd9-42be-ad2b-8f2a05e05b55",
+                      "label": "BEAR",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f3abeed9-e8cc-4604-8fa9-6d026f0df9bc",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "- If your bear stat ever reaches 6, you flip out bearstyle and lose it. Presumable to be picked up by animal control in half an hour or so.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "19a7a9d5-9573-4215-92ab-56f1391c8af5",
+                      "label": "CRIMINAL",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ed181453-d59c-418a-a49a-aba4b69df92b",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "- If your criminal stat ever reaches 6, you are lured into a life of crime and betray the party.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "dc7e42a8-f334-410e-a765-47d64dba42fb",
+                      "label": "Frustration",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "When the plan fails and you run into<br>difficulty, move one point from Criminal into Bear.<br>"
+                      }
+                    },
+                    {
+                      "id": "3667442f-87fc-4681-a1f0-4d7112b19af3",
+                      "label": "Greed",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "When the plan goes off without a hitch, move<br>one point from Bear into Criminal.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d1bcb018-cb80-4081-adcf-7ad8f90ca1e5",
+                  "label": "Credits",
+                  "blocks": [
+                    {
+                      "id": "fc5e891d-9db7-460d-9c1f-806757667d3a",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Honey Heist is by Grant Howitt • https://gshowitt.itch.io/honey-heist<br>Template is by René-Pier Deshaies • https://farirpgs.com<br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "30828c1b-f0bc-49f4-9b66-4520e04857ee",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "63f90263-e01e-4c0c-87d8-1723ab5f831c",
+                  "label": "Notes",
+                  "blocks": [
+                    {
+                      "id": "1b96a3bf-9ea2-4423-813a-ba39adb5f3a8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Notes"
+    }
+  ],
+  "template": "Blank",
+  "version": 6
+}
