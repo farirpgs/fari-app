@@ -1,11 +1,11 @@
 {
   "fariType": "character",
-  "id": "214a1e37-8f12-41ab-8677-c31752388427",
-  "lastUpdated": 1657808866,
+  "id": "23f531ed-c9f6-4337-90fc-ecb5e474a56c",
+  "lastUpdated": 1657821114,
   "name": "",
   "pages": [
     {
-      "id": "da50a4da-162c-445c-b559-24aff2b504a5",
+      "id": "734dda26-14bb-44c3-be11-2a386f2e2b4b",
       "label": "Character",
       "rows": [
         {
@@ -13,18 +13,18 @@
             {
               "sections": [
                 {
-                  "id": "d65d7f78-a910-4c31-88fc-690d213e4493",
+                  "id": "b61f3d0c-e898-44a6-9ae7-3277aac7192f",
                   "label": "Your Bear",
                   "blocks": [
                     {
-                      "id": "31cd95df-0fe7-4682-8c3e-8bfaccb300a3",
+                      "id": "e364c2ad-00eb-49f7-9ae5-40188fafbdab",
                       "label": "Name - Pronouns",
                       "type": "Text",
                       "value": "",
                       "meta": {}
                     },
                     {
-                      "id": "a88a6f4d-a826-4d8f-9fdf-c0f4ff4867e3",
+                      "id": "2a0cd490-0914-400e-8558-cf8b11a5d651",
                       "label": "Descriptor",
                       "type": "Text",
                       "value": "",
@@ -33,7 +33,7 @@
                       }
                     },
                     {
-                      "id": "704347d2-17a2-4770-bf38-a21b9a8c4e65",
+                      "id": "eb2e4d43-b51c-4b52-8264-f2a5064d5bd1",
                       "label": "Bear Type / Skill",
                       "type": "Text",
                       "value": "",
@@ -42,7 +42,7 @@
                       }
                     },
                     {
-                      "id": "29d9c16e-5b9c-4075-8770-2573713b0ad1",
+                      "id": "56cf1b0d-084f-4cd6-8603-7dd91260ad25",
                       "label": "Role",
                       "type": "Text",
                       "value": "",
@@ -51,7 +51,7 @@
                       }
                     },
                     {
-                      "id": "fe4282ba-74ca-4c16-acf4-4192240f1d00",
+                      "id": "78832d81-956d-4bcf-a6fb-261e7bd09571",
                       "label": "Hat",
                       "type": "Text",
                       "value": "",
@@ -59,67 +59,68 @@
                         "helperText": "1. Trilby - 2. Top - 3. Bowler - 4. Flat-Cap - 5. Cowboy - 6. Fez - 7. Crown - 8. Roll Twice"
                       }
                     }
-                  ]
+                  ],
+                  "visibleOnCard": true
                 }
               ]
             },
             {
               "sections": [
                 {
-                  "id": "e56417f6-6110-4e1b-8592-737d399b8c1f",
+                  "id": "78ff510c-541c-401a-999c-5a6cc4525b0b",
                   "label": "Stats",
                   "blocks": [
                     {
-                      "id": "799e1f68-c5a3-423b-9cbf-d2edb120a44a",
+                      "id": "b76b4226-9083-4617-9922-9e2e25ed0774",
                       "label": "1d6",
                       "type": "DicePool",
                       "value": "",
                       "meta": { "commands": ["1d6"], "width": 0.5 }
                     },
                     {
-                      "id": "21735b39-ebd3-439f-9324-8f08c4421df1",
+                      "id": "ece07b8a-9fcc-4110-bd53-c44fc647b213",
                       "label": "2d6",
                       "type": "DicePool",
                       "value": "",
                       "meta": { "commands": ["1d6", "1d6"], "width": 0.5 }
                     },
                     {
-                      "id": "0a19c36d-1dcd-4b07-8d29-b2cf8632bafb",
+                      "id": "adb5b63d-0f21-47da-a8ec-a4438f1f2cd8",
                       "label": "",
                       "type": "Separator",
                       "meta": { "hasLabel": false },
                       "value": ""
                     },
                     {
-                      "id": "ad2c7f1a-1cd9-42be-ad2b-8f2a05e05b55",
+                      "id": "513424dd-767f-4ce2-9f5b-3d5349e0c67c",
                       "label": "BEAR",
                       "type": "Numeric",
                       "value": "3",
                       "meta": {}
                     },
                     {
-                      "id": "f3abeed9-e8cc-4604-8fa9-6d026f0df9bc",
+                      "id": "bd2a5fdb-490f-4824-ac40-3f48d429bb95",
                       "label": "Info Text",
                       "type": "InfoText",
                       "value": "- If your bear stat ever reaches 6, you flip out bearstyle and lose it. Presumable to be picked up by animal control in half an hour or so.<br>",
                       "meta": {}
                     },
                     {
-                      "id": "19a7a9d5-9573-4215-92ab-56f1391c8af5",
+                      "id": "50605951-6c97-4d13-899d-ebbf6b17613e",
                       "label": "CRIMINAL",
                       "type": "Numeric",
                       "value": "3",
                       "meta": {}
                     },
                     {
-                      "id": "ed181453-d59c-418a-a49a-aba4b69df92b",
+                      "id": "ceeced34-719a-44e5-b49e-2b2008d94e6a",
                       "label": "Info Text",
                       "type": "InfoText",
                       "value": "- If your criminal stat ever reaches 6, you are lured into a life of crime and betray the party.<br>",
                       "meta": {}
                     },
                     {
-                      "id": "dc7e42a8-f334-410e-a765-47d64dba42fb",
+                      "id": "c7ac2795-266c-4e94-be72-787c220ed218",
                       "label": "Frustration",
                       "type": "Text",
                       "meta": {
@@ -127,14 +128,15 @@
                       }
                     },
                     {
-                      "id": "3667442f-87fc-4681-a1f0-4d7112b19af3",
+                      "id": "944b6fa3-05b0-4486-98a2-8391c269c128",
                       "label": "Greed",
                       "type": "Text",
                       "meta": {
                         "helperText": "When the plan goes off without a hitch, move<br>one point from Bear into Criminal.<br>"
                       }
                     }
-                  ]
+                  ],
+                  "visibleOnCard": true
                 }
               ]
             }
@@ -145,11 +147,11 @@
             {
               "sections": [
                 {
-                  "id": "d1bcb018-cb80-4081-adcf-7ad8f90ca1e5",
+                  "id": "b1ff9b1c-41c7-4969-8bc6-621e8564207d",
                   "label": "Credits",
                   "blocks": [
                     {
-                      "id": "fc5e891d-9db7-460d-9c1f-806757667d3a",
+                      "id": "846f0e2e-af6c-4f52-91f2-002f4454b756",
                       "label": "Info Text",
                       "type": "InfoText",
                       "value": "Honey Heist is by Grant Howitt • https://gshowitt.itch.io/honey-heist<br>Template is by René-Pier Deshaies • https://farirpgs.com<br>",
@@ -164,18 +166,18 @@
       ]
     },
     {
-      "id": "30828c1b-f0bc-49f4-9b66-4520e04857ee",
+      "id": "6ad7d22b-dbb1-4c3e-bb60-aad0b145dbdf",
       "rows": [
         {
           "columns": [
             {
               "sections": [
                 {
-                  "id": "63f90263-e01e-4c0c-87d8-1723ab5f831c",
+                  "id": "5b41f9e7-a3ed-4870-b07e-24e7e0d5f297",
                   "label": "Notes",
                   "blocks": [
                     {
-                      "id": "1b96a3bf-9ea2-4423-813a-ba39adb5f3a8",
+                      "id": "fecaf850-211e-414d-9337-c6c79050b441",
                       "type": "Text",
                       "value": "",
                       "meta": {}
