@@ -53,6 +53,7 @@ export function TldrawWriter(props: {
 
   function handleTldrawMount(app: TldrawApp) {
     if (props.state.shapes && props.state.bindings) {
+      handleTldrawChange(app, props.state.shapes, props.state.bindings);
       app?.replacePageContent(props.state.shapes, props.state.bindings, {});
     }
   }
@@ -111,6 +112,7 @@ export function TldrawReader(props: { state: IDrawingAreaState }) {
         setApp(app);
       }}
       showPages={false}
+      showMenu={false}
       readOnly
     />
   );
