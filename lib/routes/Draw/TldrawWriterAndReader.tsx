@@ -112,6 +112,7 @@ export function TldrawReader(props: { state: IDrawingAreaState }) {
         setApp(app);
       }}
       showPages={false}
+      showMenu={false}
       readOnly
     />
   );
