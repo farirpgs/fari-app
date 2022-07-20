@@ -1,3 +1,13 @@
+# TODO
+
+- [ ] Chat Feature
+  - [ ] Append from the top
+  - [ ] Max 30 messages
+  - [ ] Different sync entity
+  - [ ] Tab in "player row"
+  - [ ] Remove "Dice roller" from player row
+  - [ ] Chat / Dice Roll from cursor => Chat
+
 # [Fari](https://fari.app) - The Free and Open-Source Virtual Tabletop
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
