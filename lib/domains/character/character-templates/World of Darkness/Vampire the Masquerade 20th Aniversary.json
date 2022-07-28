@@ -1,0 +1,1206 @@
+{
+  "id": "97edc7fe-bc96-42e8-807e-eb1576988382",
+  "lastUpdated": 1659024862,
+  "name": "",
+  "template": "Vampire: the Masquerade 20th Edition",
+  "version": 6,
+  "playedDuringTurn": false,
+  "group": "Templates",
+  "fariType": "character",
+  "pages": [
+    {
+      "id": "f62b654a-32ae-4454-97c0-da42983991fd",
+      "label": "Data",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "7a8412d1-3040-426f-adb3-be0ec33c9254",
+                  "label": "Portrait",
+                  "visibleOnCard": true,
+                  "blocks": [
+                    {
+                      "id": "11166535-c59d-4a82-8999-d2a7ae749690",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "6721310b-e684-4eb5-9b55-5ffa2b70c692",
+                  "label": "",
+                  "visibleOnCard": true,
+                  "blocks": [
+                    {
+                      "id": "82175276-e3f6-468e-8b44-30d206f994dd",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "83efaad9-dd48-4cc9-b508-b70d0ed1378e",
+                      "label": "Player",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1c6334de-3a50-41ee-8f69-5e235c489095",
+                      "label": "Chronicle",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "ebcd9002-77e5-461e-8ede-02af593ba2e5",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "dc582a10-01a1-4295-bc5b-21610ba86855",
+                      "label": "Nature",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "479687c2-8a8a-4a96-9b0c-b6bb97d4c620",
+                      "label": "Demeanor",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "0222dca7-ab56-4fa8-a606-6e784862f2db",
+                      "label": "Concept",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": false
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "4989ff1a-ad47-45ab-a116-a8240ee8be79",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "ad539dfd-3d6b-4a9f-a374-7e6fef5204ee",
+                      "label": "Clan",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "25abc2bd-975e-4aa6-aec7-461e419aa03e",
+                      "label": "Generation",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "52c9e975-2abd-47e1-93be-37ea64c8522e",
+                      "label": "Sire",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2f7a539c-ccd0-4d3a-aba7-f0731c0fa6dd",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "2a6b8354-cec6-4f97-98b3-a2481a539aef",
+                      "label": "Experience",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "56903def-0c62-4b5a-9293-eae7c058313f",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "8dd9923d-a381-4fa3-ba29-8bdb35f759c6",
+                      "label": "Weakness",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "73b1123c-25a9-474c-9fa9-ab4892bba5ed",
+      "label": "Attributes and Abilities",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "018e04d8-5549-4848-8c91-4361b535d8f3",
+                  "label": "Physical",
+                  "blocks": [
+                    {
+                      "id": "ab6266c1-1959-4aa7-bd4c-9fb937cbf076",
+                      "label": "Strength",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d10"]
+                      }
+                    },
+                    {
+                      "id": "507fae7b-1ce2-4bed-9e48-09a7d91f049d",
+                      "label": "Dexterity",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d10"]
+                      }
+                    },
+                    {
+                      "id": "92dec60f-8ce7-4f4d-8828-6528ddcf9b62",
+                      "label": "Stamina",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d10"]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "e2ff8414-e195-467b-bd26-fe2c943f9ddb",
+                  "label": "Social",
+                  "blocks": [
+                    {
+                      "id": "7a87b050-cd50-4338-a527-a8ea4a67b987",
+                      "label": "Charisma",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d10"]
+                      }
+                    },
+                    {
+                      "id": "4207ed20-c36a-40b4-b786-d3b3b12e7055",
+                      "label": "Manipulation",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d10"]
+                      }
+                    },
+                    {
+                      "id": "59e206c1-ae7c-4ae0-9d34-1f449cedee38",
+                      "label": "Appearance",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d10"]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "40031c65-75e7-4dc2-bafd-b9e4a8060742",
+                  "label": "Mental",
+                  "blocks": [
+                    {
+                      "id": "b38e48d7-f86d-4578-a332-2bc071472a11",
+                      "label": "Perception",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d10"]
+                      }
+                    },
+                    {
+                      "id": "ba4cd880-b69f-470b-aa0f-5c3d8eb7f4bb",
+                      "label": "Intelligence",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d10"]
+                      }
+                    },
+                    {
+                      "id": "97bed648-9f61-45ff-ab79-fc21b105023a",
+                      "label": "Wits",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d10"]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "f2c898e0-c610-45f7-9754-965f15b13d52",
+                  "label": "Talents",
+                  "blocks": [
+                    {
+                      "id": "c5d9143a-3c43-4d85-97b0-2ef11aa19fc9",
+                      "label": "Alertness",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "52076f20-328f-4ef2-a36a-6e99fb17af10",
+                      "label": "Athletics",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "2009e3a2-612e-499f-b2c6-8056529f60c8",
+                      "label": "Awareness",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "1c8c0ebd-3684-4128-a1a2-1c8f99169319",
+                      "label": "Brawl",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "120a044f-d420-47b0-895c-687343778ba6",
+                      "label": "Empathy",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "4b8ae756-5023-4e3e-b92d-e78d09802db4",
+                      "label": "Expression",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "33a3b156-2a11-4ba8-8e70-0b026e2cb6ae",
+                      "label": "Intimidation",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "819fcc57-7b75-4a12-967f-9e54f6a9cd16",
+                      "label": "Leadership",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "013b0145-b051-4a95-a463-f1e48e8f7bba",
+                      "label": "Streetwise",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "4b8c7c41-0c58-47c6-a935-b8a2ded968d8",
+                      "label": "Subterfuge",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "16050566-95c1-4729-b29c-bccbc350b71f",
+                      "label": "",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "137137d6-77b8-4859-8d7b-9b54824c42bd",
+                      "label": "",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "5c177d5b-5197-4f9f-b502-3c29a1a580aa",
+                  "label": "Skills",
+                  "blocks": [
+                    {
+                      "id": "6ba80e56-f644-44f0-af3d-606cee3ff8a0",
+                      "label": "Animal Ken",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "4eae041a-1ad0-496d-a9b1-990a2594fcf5",
+                      "label": "Crafts",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "a0c4d7f9-4e96-442e-af9a-da65d3a57a06",
+                      "label": "Drive",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "d901a90e-a341-44c4-8367-8898737d16ba",
+                      "label": "Etiquette",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "90a25fa1-6505-464d-99d1-7ca982d50009",
+                      "label": "Firearms",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "7c09830b-6772-4285-8310-c94fd5ec051a",
+                      "label": "Larceny",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "34f2c367-4f6c-47c1-bce5-6372e5084828",
+                      "label": "Melee",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "7acef04c-4a94-4c7f-a7af-c8a64595a9ec",
+                      "label": "Performance",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "982a9247-7651-410a-9514-20f7a79f7042",
+                      "label": "Stealth",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "9aca4e94-01d6-4028-83bc-eef3adb6a3a4",
+                      "label": "Survival",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "71f03abb-3da4-4d50-ab82-be68c1d48344",
+                      "label": "",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "f430384d-46e2-4d32-986f-e90e5156483b",
+                      "label": "",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "e2b761ea-082f-4943-9722-89dba96a8b8a",
+                  "label": "Knowledges",
+                  "blocks": [
+                    {
+                      "id": "a1a44119-5acb-48f9-a3a5-5ef6e8517b7a",
+                      "label": "Academics",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "9bf5734a-f18a-4b64-9a2d-1f7c513947cd",
+                      "label": "Computer",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "eaf53140-4edd-4cca-ad14-ddd5638a897e",
+                      "label": "Finance",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "97c962c5-d8fa-4f6c-9b26-682bf939f820",
+                      "label": "Investigation",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "2154b644-6564-4891-9fb7-44a9abe7e381",
+                      "label": "Law",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "6694e6d3-485f-4642-a921-31350e6f3ee0",
+                      "label": "Medicine",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "0a81200f-9d6f-4b58-888d-9ea40e3488ed",
+                      "label": "Occult",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "c8af6b2b-8e03-4aa9-9ae7-d23255d1e17c",
+                      "label": "Politics",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "d2be39e2-53b3-4c16-9ffb-3cdfda21fef3",
+                      "label": "Science",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "3cc53f24-10f6-4695-8401-32583a950341",
+                      "label": "Technology",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "093e6a11-9e36-4081-80ed-bfc242e4a1d8",
+                      "label": "",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    },
+                    {
+                      "id": "e466e3ac-2eab-4bb7-bd21-602d0ba86564",
+                      "label": "",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": []
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6d252573-ea4f-45f7-8df4-82be5a304855",
+      "label": "Advantages",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "837d439d-95f4-463d-83a8-38a3faaa0bac",
+                  "label": "Disciplines",
+                  "blocks": [
+                    {
+                      "id": "ca70492b-862e-4b76-bd62-d0e1bdcaacff",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "79254fd1-40a5-475a-b0cb-acaccdaa679a",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5051f197-726c-4142-a79d-dd7c2f7ee7d8",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "22c16ba9-1da7-40ba-8cf1-25b67e7887e4",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7d0ebd4c-2266-472d-b675-08d0ec26dacf",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "86b26383-ea87-4421-a071-d003778a3ac3",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "820115a0-7b3e-446c-bb13-4772f3aa7901",
+                  "label": "Backgrounds",
+                  "blocks": [
+                    {
+                      "id": "9a04d8f2-ce2a-406a-bad1-f18c4d634ca5",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "85e114cc-5f7b-4582-b2d0-1e0d3ac1573d",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7d656d3d-4c19-4ba3-962f-a810270eac8a",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5c77756c-f09e-40df-ab9d-7cfee495a092",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3adf4d9f-d590-459e-a990-ce6f6884e8dc",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "64a93e87-a088-4cee-8ff4-61e46cd617c4",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "92def93c-c5d1-4705-8bca-e14a87ec612d",
+                  "label": "Virtues",
+                  "blocks": [
+                    {
+                      "id": "afbd9181-4f3d-46bc-9e71-bca6cc8e471f",
+                      "label": "Conscience",
+                      "type": "DicePool",
+                      "value": "1d10",
+                      "meta": {
+                        "commands": ["1d10"]
+                      }
+                    },
+                    {
+                      "id": "3898c822-cdf6-494d-b70b-22cbe3b18997",
+                      "label": "Self-Control",
+                      "type": "DicePool",
+                      "value": "1d10",
+                      "meta": {
+                        "commands": ["1d10"]
+                      }
+                    },
+                    {
+                      "id": "320d95af-4ab1-4a97-8a0f-14d0ab2b9c2a",
+                      "label": "Courage",
+                      "type": "DicePool",
+                      "value": "1d10",
+                      "meta": {
+                        "commands": ["1d10"]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "cfae03de-0eee-41fd-bc77-7cf9eb821d6b",
+                  "label": "Merits & Flaws",
+                  "blocks": [
+                    {
+                      "id": "33750efe-4329-4718-ac56-239055c033c3",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b3f81313-3fc4-44b1-a68e-41103bbd80bf",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "be865ac1-a97d-42ac-88a5-2e421d7469d8",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4e2854a5-4b50-40b5-a643-fc7ea978bb8f",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "532a2da5-2e3d-4f5c-99a7-c5d19cdad19a",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1a41f91e-70e0-4caf-bd03-d16ae9f517bf",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "8a9c4baf-aece-4b71-b01e-6e68fb90fc79",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "1fa94db0-4c85-423d-b0c7-cd4b7a8e99fd",
+                      "label": "Humanity",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "0eab1ce0-ba33-4b5c-8038-a358df926051",
+                      "label": "Bearing",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2958d890-8bde-494e-8cf5-37eed7f1b49a",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "36ed622e-0057-43d8-88f4-e20f02869d14",
+                      "label": "Willpower",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d10"]
+                      }
+                    },
+                    {
+                      "id": "2fcfc0ea-2cf2-4a93-b765-a433d061b5da",
+                      "label": "Temporary",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        }
+                      ]
+                    },
+                    {
+                      "id": "4698b86f-81c7-47cf-8e34-5a9d04851605",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "b3140a6c-1b82-4fe1-9540-28497a3a09cf",
+                      "label": "Blood Pool",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        },
+                        {
+                          "label": "",
+                          "checked": false
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "b4fed992-2b33-433e-8f2a-23831ed2f1c4",
+                  "label": "Health",
+                  "blocks": [
+                    {
+                      "id": "531d387a-75af-4a97-ad12-27cac39f7990",
+                      "label": "Bruised",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        {
+                          "label": "",
+                          "checked": false
+                        }
+                      ]
+                    },
+                    {
+                      "id": "8db4ece0-ccc9-4253-80ba-88edd237b1ac",
+                      "label": "Hurt -1",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        {
+                          "label": "",
+                          "checked": false
+                        }
+                      ]
+                    },
+                    {
+                      "id": "2893b914-d7a4-4ea4-ab0b-db5588fe96fb",
+                      "label": "Injured -1",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        {
+                          "label": "",
+                          "checked": false
+                        }
+                      ]
+                    },
+                    {
+                      "id": "57c031c4-3ae6-4955-8ee8-0292a421e563",
+                      "label": "Wounded -2",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        {
+                          "label": "",
+                          "checked": false
+                        }
+                      ]
+                    },
+                    {
+                      "id": "254b67b8-091f-44d4-8c99-9378af1deee7",
+                      "label": "Mauled -2",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        {
+                          "label": "",
+                          "checked": false
+                        }
+                      ]
+                    },
+                    {
+                      "id": "ff055d60-8d3d-4ba9-9d24-c8c552524883",
+                      "label": "Crippled -5",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        {
+                          "label": "",
+                          "checked": false
+                        }
+                      ]
+                    },
+                    {
+                      "id": "c316020b-bd26-4328-8247-42919b449ea0",
+                      "label": "Incapacitated",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        {
+                          "label": "",
+                          "checked": false
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "81eadeaa-f5c0-4de7-97ee-42381e8aaaca",
+      "label": "Notes",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "e973236b-b63c-4b24-b418-c0920a3990ca",
+                  "label": "Notes",
+                  "blocks": [
+                    {
+                      "id": "1506c87b-a654-4776-9e82-9fca5552ef9e",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dce018c4-9378-49ca-94ba-b5d1bce82c70",
+      "label": "Creation",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "748378e6-53d0-42f8-a68b-776afc1feae6",
+                  "label": "Character creation and edition",
+                  "blocks": [
+                    {
+                      "id": "bc6ec112-df55-42ef-b871-fe31f4c3c0ea",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "== Attributes and Abilites ==<br><br>Almost all fields are Dice Pools. If a number is next to the icon, that number is the value of the Trait. If the icon is a d10, but no number is shown, the value of the Trait is 1 (default for Attributes). If the icon is a cup and a die, the value is 0 (default for Abilities).<br><br>If value is 0, click on Set Dice and the the d10 (left click to add, right click to remove). If the value is already 1 or greater, you can just click on ⊕ to add dice or ⊖ to substract.<br><br>To add a Specialty, you must enable the Advanced Mode and fill the Help field.<br><br>== Disciplines and Backgrounds ==<br><br>These fields are Numerics. You just need to write the name of the Trait and its value. If you want to add detail to the Background (who the Allies or Contacts are, where the money comes from in Resources,...), you need to enable the Advanced Mode to fill the Help field.<br><br>== Virtues ==<br><br>Usse the same procedure as with Attributes. If the character is following a Path of Enlightenment, and has the Conviction or Instincts Traits instead of Conscience or Self-Control, you must enable the Advanced Mode and change the name of the Virtue.<br><br>== Merits & Flaws ==<br><br>These are Numeric fields. Just fill the name and the cost.<br><br>== Humanity / Path of Enlightenment ==<br><br>It's a Numeric field. If the character follows a Path of Enlightenment, just replace \"Humanity\" text with the name of the Path. Bearing is a text field that can be simply filled.<br><br>== Willpower ==<br><br>Permanent Willpower is a Dice Pool field, fill it as Attributes. Temporary Willpower is a Slot Tracker. Use ⊕ or ⊖ to adjust the number of circles to the permanent value.<br><br>== Blood Pool ==<br><br>Use ⊕ or ⊖ to set a pool according to the character's Generation.<br><br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ad5b28a2-80f8-451e-8cac-61f0188d68f9",
+      "label": "Usage",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9951de46-54de-493f-8883-39ca6fd4127d",
+                  "label": "Usage",
+                  "blocks": [
+                    {
+                      "id": "f76d5126-0af8-421c-b190-12619446344d",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "== Rolling dice ==<br><br>If you only roll for one Trait (like with Virtues or Willpower), just click on the d10 icon for the Trait.<br><br>If the roll involves two Traits, you need to first right click both icons, then close the character sheet, and click the general roll icon at the bottom left corner.<br><br>== Track Blood or Willpower ==<br><br>When you spend Blood or Willpower, click on one circle to fill it. To replenish it, click again and it will become empty.<br><br>== Track Health ==<br><br>It works the same way. Sadly enough, I haven't found a way to mark the damage as bashing, lethal or aggravated.<br><br>== Suggestions ==<br><br>I'm aware the sheet is not very pretty. If you think you can improve it feel free to make a PR, or just send me any suggestion. English is not my native language. You can make any fix/suggestion on that side too.<br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
