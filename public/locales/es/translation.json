@@ -74,7 +74,7 @@
   "character-dialog.control.wide-mode": "Modo ancho",
   "character-dialog.control.width": "Anchura",
   "character-dialog.control.zoom": "Zoom",
-  "character-dialog.delete": "Borrar el carácter",
+  "character-dialog.delete": "Borrar el personaje",
   "character-dialog.delete-confirmation": "¿Seguro que quieres borrar ese personaje?",
   "character-dialog.delete-section-confirmation": "¿Estás seguro de que quieres eliminar esa sección",
   "character-dialog.export": "Exportar",
