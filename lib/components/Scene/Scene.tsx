@@ -53,7 +53,7 @@ import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext"
 import { arraySort, IArraySortGetter } from "../../domains/array/arraySort";
 import { CharacterSelector } from "../../domains/character/CharacterSelector";
 import { ICharacter } from "../../domains/character/types";
-import { IDiceRollResult } from "../../domains/dice/Dice";
+import { IDicePoolResult } from "../../domains/dice/Dice";
 import { Font } from "../../domains/font/Font";
 import { Icons } from "../../domains/Icons/Icons";
 import { usePrompt } from "../../hooks/useBlocker/useBlocker";
@@ -257,7 +257,7 @@ export const Session: React.FC<IProps> = (props) => {
     charactersManager.actions.upsert(character);
   };
 
-  const handleSetMyRoll = (result: IDiceRollResult) => {
+  const handleSetMyRoll = (result: IDicePoolResult) => {
     if (isGM) {
       sessionManager.actions.updateGmRoll(result);
     } else {
@@ -269,7 +269,7 @@ export const Session: React.FC<IProps> = (props) => {
 
   const handleSetPlayerRoll = (
     playerId: string | undefined,
-    result: IDiceRollResult
+    result: IDicePoolResult
   ) => {
     if (isGM) {
       if (playerId) {
@@ -301,7 +301,7 @@ export const Session: React.FC<IProps> = (props) => {
         )}
 
         <Toolbox
-          dice={{
+          diceFabProps={{
             onRoll: (result) => {
               handleSetMyRoll(result);
             },
@@ -776,10 +776,10 @@ export const Session: React.FC<IProps> = (props) => {
           });
         }}
         onDiceRoll={() => {
-          handleSetPlayerRoll(
-            player.id,
-            diceManager.actions.rollCommandGroups()
-          );
+          // handleSetPlayerRoll(
+          // player.id
+          // diceManager.actions.rollCommandGroups()
+          // );
         }}
         onPlayedInTurnOrderChange={(playedInTurnOrder) => {
           if (isGM) {
@@ -1101,8 +1101,8 @@ export const Session: React.FC<IProps> = (props) => {
                   onRoll={handleSetMyRoll}
                   onOpenChat={props.onOpenChat}
                   onPoolClick={(element) => {
-                    diceManager.actions.addOrRemovePoolElement(element);
-                    diceManager.actions.setPlayerId(gm.id);
+                    // diceManager.actions.addOrRemovePoolElement(element);
+                    // diceManager.actions.setPlayerId(gm.id);
                   }}
                   onIndexCardUpdate={(indexCard, type) => {
                     if (isGM) {
@@ -1219,7 +1219,7 @@ export function Scene(props: {
   sceneManager: ReturnType<typeof useScene>;
   isGM: boolean;
   canLoad: boolean;
-  onRoll(diceRollResult: IDiceRollResult): void;
+  onRoll(diceRollResult: IDicePoolResult): void;
   onPoolClick(element: IDicePoolElement): void;
   onIndexCardUpdate(indexCard: IIndexCard, type: IIndexCardType): void;
   onOpenChat?(): void;

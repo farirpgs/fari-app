@@ -51,7 +51,7 @@ function SceneRoute() {
             canLoad={false}
             onRoll={() => {}}
             onPoolClick={(element) => {
-              diceManager.actions.addOrRemovePoolElement(element);
+              // diceManager.actions.addOrRemovePoolElement(element);
             }}
             onIndexCardUpdate={(indexCard, type) => {
               sceneManager.actions.updateIndexCard(indexCard, type);

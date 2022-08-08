@@ -20,7 +20,7 @@ const NewCharacterRoute = React.lazy(
 const CharacterPrintRoute = React.lazy(
   () => import("../../routes/CharacterPrint/CharacterPrintRoute")
 );
-const DiceRoute = React.lazy(() => import("../../routes/Dice/DiceRoute"));
+const DiceRoute = React.lazy(() => import("../../routes/DiceRoute/DiceRoute"));
 const FeatureRequestsRoute = React.lazy(
   () => import("../../routes/FeatureRequests/FeatureRequestsRoute")
 );
@@ -68,11 +68,7 @@ export const AppRouter = () => {
           path={"/characters/:id/print"}
           element={<CharacterPrintRoute />}
         />
-        <Route path={"dice"} element={<DiceRoute pool={false} key="dice" />} />
-        <Route
-          path={"/dice-pool"}
-          element={<DiceRoute pool={true} key="dice-pool" />}
-        />
+        <Route path={"dice"} element={<DiceRoute key="dice" />} />
         <Route path={"/data"} element={<DataRoute />} />
         <Route path={"/oracle"} element={<OracleRoute />} />
         <Route path={"/draw"} element={<DrawRoute />} />

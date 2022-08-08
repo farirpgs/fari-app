@@ -559,11 +559,7 @@ export const Page: React.FC<{
                         icon: <Icons.FateDice />,
                         ["data-cy"]: "page.menu.tools.dice",
                       },
-                      {
-                        to: "/dice-pool",
-                        label: t("menu.dice-pool"),
-                        icon: <Icons.ThrowDice />,
-                      },
+
                       {
                         to: "/story-builder",
                         label: "Story Builder",

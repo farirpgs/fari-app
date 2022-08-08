@@ -1,6 +1,6 @@
 import produce from "immer";
 import { getUnix } from "../dayjs/getDayJS";
-import { IDiceCommandSetId } from "../dice/Dice";
+import { IDiceCommandId } from "../dice/Dice";
 import { Id } from "../Id/Id";
 import { Migrator } from "../migration/Migrator";
 import { ICharacterTemplate } from "./CharacterType";
@@ -120,7 +120,7 @@ export const CharacterFactory = {
   makeBlock<TType extends IBlockTypes>(
     type: BlockType,
     options: {
-      defaultCommands?: Array<IDiceCommandSetId> | null;
+      defaultCommands?: Array<IDiceCommandId> | null;
     } = {}
   ) {
     const blockDefault: Record<BlockType, IBlock> = {

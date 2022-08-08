@@ -73,7 +73,7 @@ import {
   ISection,
 } from "../../../../domains/character/types";
 import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
-import { IDiceRollResult } from "../../../../domains/dice/Dice";
+import { IDicePoolResult } from "../../../../domains/dice/Dice";
 import { usePrompt } from "../../../../hooks/useBlocker/useBlocker";
 import { LazyState } from "../../../../hooks/useLazyState/useLazyState";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
@@ -125,7 +125,7 @@ export const CharacterV3Dialog: React.FC<{
   onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
   onToggleSync?(): void;
-  onRoll?(diceRollResult: IDiceRollResult): void;
+  onRoll?(diceRollResult: IDicePoolResult): void;
 }> = (props) => {
   const { t } = useTranslate();
 

@@ -4,11 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import React, { useContext, useEffect, useState } from "react";
 import { DiceMenu } from "../../../../../components/DiceFab/DiceMenu";
 import { SettingsContext } from "../../../../../contexts/SettingsContext/SettingsContext";
-import {
-  CommmandSetOptions,
-  IDiceCommandSetId,
-  IDiceCommandSetOption,
-} from "../../../../../domains/dice/Dice";
+import { IDiceCommandId } from "../../../../../domains/dice/Dice";
 import { AppDarkTheme, AppLightTheme } from "../../../../../theme";
 
 type RenderProps = {
@@ -18,15 +14,13 @@ type RenderProps = {
 };
 
 export function DiceMenuForCharacterSheet(props: {
-  commandSetIds: Array<IDiceCommandSetId>;
-  onChange(newCommandIds: Array<IDiceCommandSetId>): void;
+  commandSetIds: Array<IDiceCommandId>;
+  onChange(newCommandIds: Array<IDiceCommandId>): void;
   render(renderProps: RenderProps): JSX.Element;
 }) {
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const open = Boolean(anchorEl);
-  const [commandSetIds, setCommandSetIds] = useState<
-    Array<IDiceCommandSetOption>
-  >([]);
+  const [commandSetIds, setCommandSetIds] = useState<Array<IDiceCommandId>>([]);
 
   function handleOnMenuOpen(event: React.MouseEvent<any, MouseEvent>) {
     setAnchorEl(event.currentTarget);
@@ -34,7 +28,7 @@ export function DiceMenuForCharacterSheet(props: {
 
   function handleOnNewCommandSelect() {
     setAnchorEl(null);
-    props.onChange(commandSetIds.map((c) => c.id));
+    // props.onChange(commandSetIds.map((c) => c.id));
   }
 
   function handleOnClear() {
@@ -46,11 +40,11 @@ export function DiceMenuForCharacterSheet(props: {
     setCommandsGroupsFromIds(props.commandSetIds);
   }
 
-  function setCommandsGroupsFromIds(commandIds: Array<IDiceCommandSetId>) {
-    const newCommands = commandIds.map((commandId) => {
-      return CommmandSetOptions[commandId];
-    });
-    setCommandSetIds(newCommands);
+  function setCommandsGroupsFromIds(commandIds: Array<IDiceCommandId>) {
+    // const newCommands = commandIds.map((commandId) => {
+    //   return CommmandSetOptions[commandId];
+    // });
+    // setCommandSetIds(newCommands);
   }
 
   useEffect(
@@ -82,7 +76,7 @@ export function DiceMenuForCharacterSheet(props: {
               <DiceMenu
                 open={open}
                 anchorEl={anchorEl}
-                commands={commandSetIds}
+                pool={commandSetIds}
                 sx={{
                   marginBottom: "1rem",
                 }}
@@ -94,7 +88,6 @@ export function DiceMenuForCharacterSheet(props: {
                   vertical: "center",
                   horizontal: "left",
                 }}
-                showPoolToggle={false}
                 onDiceCommandChange={setCommandSetIds}
                 ctaLabel="Select"
                 onClear={handleOnClear}

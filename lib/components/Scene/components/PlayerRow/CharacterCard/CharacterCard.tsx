@@ -11,7 +11,7 @@ import Tooltip from "@mui/material/Tooltip";
 import React from "react";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
 import { ICharacter } from "../../../../../domains/character/types";
-import { IDiceRollResult } from "../../../../../domains/dice/Dice";
+import { IDicePoolResult } from "../../../../../domains/dice/Dice";
 import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { BlockByType } from "../../../../../routes/Character/components/CharacterDialog/components/BlockByType";
@@ -25,7 +25,7 @@ export const CharacterCard: React.FC<{
   readonly: boolean;
   width?: string;
   onCharacterDialogOpen?(): void;
-  onRoll(newRollResult: IDiceRollResult): void;
+  onRoll(newRollResult: IDicePoolResult): void;
   onChange?(newCharacter: ICharacter): void;
 }> = (props) => {
   const { t } = useTranslate();

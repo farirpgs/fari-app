@@ -8,7 +8,7 @@ import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { ICharacterTemplate } from "../lib/domains/character/CharacterType";
 import { ICharacter } from "../lib/domains/character/types";
 import { dayJS } from "../lib/domains/dayjs/getDayJS";
-import { IDiceRollResult } from "../lib/domains/dice/Dice";
+import { IDicePoolResult } from "../lib/domains/dice/Dice";
 import { CharacterV3Dialog } from "../lib/routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { StoryProvider } from "./StoryProvider";
 
@@ -18,24 +18,24 @@ function StorybookCharacterSheet(
     "character" | "dialog" | "readonly"
   >
 ) {
-  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
+  const [rolls, setRolls] = useState<Array<IDicePoolResult>>([]);
   const diceManager = useContext(DiceContext);
 
-  function handleOnNewRoll(result: IDiceRollResult) {
+  function handleOnNewRoll(result: IDicePoolResult) {
     setRolls((draft) => {
       return [result, ...draft];
     });
   }
 
   function handleOnRollPool() {
-    const { result } = diceManager.actions.getPoolResult();
-    handleOnNewRoll(result);
+    // const { result } = diceManager.actions.getPoolResult();
+    // handleOnNewRoll(result);
   }
 
   return (
     <>
       <Toolbox
-        dice={{
+        diceFabProps={{
           rollsForDiceBox: rolls,
           onRoll: handleOnNewRoll,
           onRollPool: handleOnRollPool,

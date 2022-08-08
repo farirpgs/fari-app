@@ -25,7 +25,7 @@ import { DiceFab } from "../DiceFab/DiceFab";
 type DiceFabProps = Parameters<typeof DiceFab>[0];
 
 export function Toolbox(props: {
-  dice: DiceFabProps;
+  diceFabProps: DiceFabProps;
   hideDefaultRightActions?: boolean;
   leftActions?: JSX.Element;
   centerActions?: JSX.Element;
@@ -80,9 +80,11 @@ export function Toolbox(props: {
               >
                 <Grid item>
                   <DiceFab
-                    onRoll={props.dice.onRoll}
-                    onRollPool={props.dice.onRollPool}
-                    rollsForDiceBox={props.dice.rollsForDiceBox}
+                    onRoll={props.diceFabProps.onRoll}
+                    onOpen={props.diceFabProps.onOpen}
+                    onClose={props.diceFabProps.onClose}
+                    onHover={props.diceFabProps.onHover}
+                    onLeave={props.diceFabProps.onLeave}
                   />
                 </Grid>
                 {props.leftActions}

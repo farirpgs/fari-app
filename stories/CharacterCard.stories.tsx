@@ -8,7 +8,7 @@ import { Toolbox } from "../lib/components/Toolbox/Toolbox";
 import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { ICharacterTemplate } from "../lib/domains/character/CharacterType";
-import { IDiceRollResult } from "../lib/domains/dice/Dice";
+import { IDicePoolResult } from "../lib/domains/dice/Dice";
 import {
   MiniThemeContext,
   useMiniTheme,
@@ -21,18 +21,18 @@ function StorybookCharacterCard(
     "characterSheet" | "readonly" | "playerName"
   >
 ) {
-  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
+  const [rolls, setRolls] = useState<Array<IDicePoolResult>>([]);
   const diceManager = useContext(DiceContext);
 
-  function handleOnNewRoll(result: IDiceRollResult) {
+  function handleOnNewRoll(result: IDicePoolResult) {
     setRolls((draft) => {
       return [result, ...draft];
     });
   }
 
   function handleOnRollPool() {
-    const { result } = diceManager.actions.getPoolResult();
-    handleOnNewRoll(result);
+    // const { result } = diceManager.actions.getPoolResult();
+    // handleOnNewRoll(result);
   }
 
   const theme = useTheme();
@@ -43,7 +43,7 @@ function StorybookCharacterCard(
   return (
     <>
       <Toolbox
-        dice={{
+        diceFabProps={{
           rollsForDiceBox: rolls,
           onRoll: handleOnNewRoll,
           onRollPool: handleOnRollPool,

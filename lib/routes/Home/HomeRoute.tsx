@@ -342,19 +342,7 @@ export const HomeRoute: React.FC<{}> = () => {
         ),
         to: "/data",
       },
-      {
-        label: t("home-route.cards.dice-pool.title"),
-        description: t("home-route.cards.dice-pool.description"),
-        ctaLabel: t("home-route.cards.dice-pool.cta"),
-        icon: (props: { className: string }) => (
-          // https://icons8.com/icons/plasticine
-          <img
-            className={props.className}
-            src="https://img.icons8.com/plasticine/100/000000/box.png"
-          />
-        ),
-        to: "/dice-pool",
-      },
+
       {
         label: t("home-route.cards.play-solo.title"),
         description: t("home-route.cards.play-solo.description"),

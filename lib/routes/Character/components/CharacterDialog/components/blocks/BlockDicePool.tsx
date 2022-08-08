@@ -23,29 +23,21 @@ import {
   ISkillBlock,
 } from "../../../../../../domains/character/types";
 import {
-  IDiceCommandSetId,
-  IDiceRollResult,
-  IRollGroup,
+  Dice,
+  DiceOptions,
+  IDiceCommandId,
+  IDicePoolResult,
 } from "../../../../../../domains/dice/Dice";
 import { Icons } from "../../../../../../domains/Icons/Icons";
 import { useEvent } from "../../../../../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { BlockSelectors } from "../../domains/BlockSelectors/BlockSelectors";
-import { DiceCommandGroup } from "../../domains/DiceCommandGroup/DiceCommandGroup";
 import { IBlockHandlers } from "../../types/IBlockComponentProps";
 import { BlockToggleMeta } from "../BlockToggleMeta";
 import { DiceMenuForCharacterSheet } from "../DiceMenuForCharacterSheet";
 import { ThemedLabel } from "../ThemedLabel";
 
-export type IDicePoolElement = {
-  blockId: string;
-  blockType: BlockType;
-  label: string;
-  rollGroup: IRollGroup;
-};
-
-export type IDicePool = Array<IDicePoolElement>;
-const DiceCommandRange: Array<IDiceCommandSetId> = [
+const DiceCommandRange: Array<IDiceCommandId> = [
   "1d4",
   "1d6",
   "1d8",
@@ -65,11 +57,11 @@ export const BlockDicePool = React.memo(
       blockId: string;
       blockType: BlockType;
       hideModifier: boolean | undefined;
-      commands: Array<IDiceCommandSetId> | undefined;
+      commands: Array<IDiceCommandId> | undefined;
       dataCy?: string;
       listResults?: boolean;
       mid?: React.ReactNode;
-      onRoll(diceRollResult: IDiceRollResult): void;
+      onRoll(diceRollResult: IDicePoolResult): void;
     } & IBlockHandlers<IDicePoolBlock | ISkillBlock>
   ) => {
     const listResults = props.listResults ?? true;
@@ -80,7 +72,7 @@ export const BlockDicePool = React.memo(
     const [hoverControlsVisible, setHoverControlsVisible] = useState(false);
     const hasCommands = !!props.commands?.length;
     const canRoll = !props.readonly;
-    const isSelected = diceManager.state.pool.some(
+    const isSelected = diceManager.state.blockWithPools.some(
       (p) => p.blockId === props.blockId
     );
     const isToggleVisible = props.checked === true || props.checked === false;
@@ -91,7 +83,7 @@ export const BlockDicePool = React.memo(
         ...acc,
         [curr]: acc[curr] ? acc[curr] + 1 : 1,
       };
-    }, {} as Record<IDiceCommandSetId, number>);
+    }, {} as Record<IDiceCommandId, number>);
 
     const firstCommand = commands[0];
     const isAllTheSameCommand =
@@ -380,7 +372,7 @@ export const BlockDicePool = React.memo(
           borderStyle={hasCommands ? "solid" : "dashed"}
           onContextMenu={(e) => {
             e.preventDefault();
-            const rollGroup = BlockSelectors.getRollGroupFromBlock({
+            const pool = BlockSelectors.getPoolFromBlock({
               commands: props.commands,
               label: props.label,
               hideModifier: props.hideModifier,
@@ -388,30 +380,28 @@ export const BlockDicePool = React.memo(
               value: props.value,
             });
 
-            diceManager.actions.setOptions({ listResults: listResults });
             diceManager.actions.addOrRemovePoolElement({
               blockId: props.blockId,
               blockType: props.blockType,
               label: props.label || "",
-              rollGroup: rollGroup,
+              pool: pool,
             });
           }}
           onClick={() => {
             if (!canRoll) {
               return;
             }
-            const rollGroup = BlockSelectors.getRollGroupFromBlock({
+            const rollGroup = BlockSelectors.getPoolFromBlock({
               commands: props.commands,
               label: props.label,
               hideModifier: props.hideModifier,
               type: props.blockType,
               value: props.value,
             });
-            const diceRollResult = diceManager.actions.roll([rollGroup], {
-              listResults: listResults,
-            });
 
-            props.onRoll(diceRollResult);
+            const results = Dice.rollPool(rollGroup);
+
+            props.onRoll(results);
           }}
         >
           <Grid
@@ -431,8 +421,8 @@ export const BlockDicePool = React.memo(
               </Grid>
             )}
             {Object.keys(commandsCount).map((commandId, index) => {
-              const id = commandId as IDiceCommandSetId;
-              const commandSet = DiceCommandGroup.getCommandSetById(id);
+              const id = commandId as IDiceCommandId;
+              const commandSet = DiceOptions[id];
               const count = commandsCount[id];
               return (
                 <Grid item key={index}>

@@ -10,7 +10,7 @@ import {
 } from "../../domains/character/types";
 import { Confetti } from "../../domains/confetti/Confetti";
 import { getUnix } from "../../domains/dayjs/getDayJS";
-import { IDiceRollResult } from "../../domains/dice/Dice";
+import { IDicePoolResult } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
 import { IDrawingAreaState } from "../../routes/Draw/TldrawWriterAndReader";
 import {
@@ -94,7 +94,7 @@ export function useSession(props: { userId: string }) {
       setSession(newSession);
     }
   }
-  function updateGmRoll(roll: IDiceRollResult) {
+  function updateGmRoll(roll: IDicePoolResult) {
     setSession(
       produce((draft) => {
         if (!draft) {
@@ -105,7 +105,7 @@ export function useSession(props: { userId: string }) {
     );
   }
 
-  function updatePlayerRoll(id: string | undefined, roll: IDiceRollResult) {
+  function updatePlayerRoll(id: string | undefined, roll: IDicePoolResult) {
     setSession(
       produce((draft) => {
         if (!draft) {
@@ -138,8 +138,8 @@ export function useSession(props: { userId: string }) {
   }
 
   function getNewRolls(
-    roll: IDiceRollResult,
-    previousRolls: IDiceRollResult[]
+    roll: IDicePoolResult,
+    previousRolls: IDicePoolResult[]
   ) {
     const newRolls = [roll, ...previousRolls];
 

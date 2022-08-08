@@ -1,13 +1,13 @@
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { IBlock, ICharacter } from "../../domains/character/types";
-import { IDiceRollResult } from "../../domains/dice/Dice";
+import { IDicePoolResult } from "../../domains/dice/Dice";
 import { IDrawingAreaState } from "../../routes/Draw/TldrawWriterAndReader";
 import { AspectType } from "./AspectType";
 
 export type IPlayer = {
   id: string;
   playerName?: string;
-  rolls: Array<IDiceRollResult>;
+  rolls: Array<IDicePoolResult>;
   playedDuringTurn: boolean;
   isGM: boolean;
   points: string;

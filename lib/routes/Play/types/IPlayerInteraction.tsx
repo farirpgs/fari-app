@@ -1,5 +1,5 @@
 import { ICharacter } from "../../../domains/character/types";
-import { IDiceRollResult } from "../../../domains/dice/Dice";
+import { IDicePoolResult } from "../../../domains/dice/Dice";
 import {
   IIndexCard,
   IIndexCardType,
@@ -39,7 +39,7 @@ export type IPlayerInteraction =
     }
   | {
       type: "update-player-roll";
-      payload: { id: string; roll: IDiceRollResult };
+      payload: { id: string; roll: IDicePoolResult };
     }
   | {
       type: "update-player-played-during-turn";
@@ -88,7 +88,7 @@ export const PlayerInteractionFactory = {
       },
     };
   },
-  updatePlayerRolls(id: string, roll: IDiceRollResult): IPlayerInteraction {
+  updatePlayerRolls(id: string, roll: IDicePoolResult): IPlayerInteraction {
     return {
       type: `update-player-roll`,
       payload: { id, roll },

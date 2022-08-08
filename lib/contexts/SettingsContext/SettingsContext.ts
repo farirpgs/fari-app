@@ -1,7 +1,7 @@
 import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useEffect, useState } from "react";
 import { IBlock } from "../../domains/character/types";
-import { IDiceCommandSetId, IRollDiceOptions } from "../../domains/dice/Dice";
+import { IDiceCommandId } from "../../domains/dice/Dice";
 import { Id } from "../../domains/Id/Id";
 import { useStorageEntity } from "../../hooks/useStorageEntities/useStorageEntity";
 
@@ -38,18 +38,12 @@ export function useSettings() {
     localStorage: window.localStorage,
   });
   const [diceCommandIds, setDiceCommandsIds] =
-    useStorageEntity<Array<IDiceCommandSetId> | null>({
+    useStorageEntity<Array<IDiceCommandId> | null>({
       defaultValue: null,
       key: "fari-dice-command-ids",
       localStorage: window.localStorage,
     });
-  const [diceOptions, setDiceOptions] = useStorageEntity<IRollDiceOptions>({
-    defaultValue: {
-      listResults: false,
-    },
-    key: "fari-dice-command-options",
-    localStorage: window.localStorage,
-  });
+
   const [blocksInClipboard, setBlocksInClipboard] = useStorageEntity<
     Array<IBlock>
   >({
@@ -73,7 +67,6 @@ export function useSettings() {
       userId,
       userName,
       diceCommandIds: diceCommandIds,
-      diceOptions,
       gameTemplate,
       blocksInClipboard,
     },
@@ -83,7 +76,6 @@ export function useSettings() {
       setUserName,
       setDiceCommandsIds: setDiceCommandsIds,
       setGameTemplate,
-      setDiceOptions,
       setBlocksInClipboard,
     },
   };

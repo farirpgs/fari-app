@@ -19,13 +19,12 @@ import MenuItem from "@mui/material/MenuItem";
 import { useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import isEqual from "lodash/isEqual";
 import React from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
-import { IDiceRollResult } from "../../../../domains/dice/Dice";
+import { IDicePoolResult } from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
-import { useEvent } from "../../../../hooks/useEvents/useEvents";
+import { useEvent } from "../../../../hooks/useEvent/useEvent";
 import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { usePointCounter } from "../../../../routes/Character/components/CharacterDialog/components/blocks/BlockPointCounter";
@@ -35,11 +34,7 @@ import {
   useMiniTheme,
 } from "../../../../routes/Character/components/CharacterDialog/MiniThemeContext";
 import { previewContentEditable } from "../../../ContentEditable/ContentEditable";
-import {
-  DiceBonusLabel,
-  DiceBox,
-  DiceBoxResult,
-} from "../../../DiceBox/DiceBox";
+
 export function PlayerRow(
   props: {
     permissions: {
@@ -52,7 +47,7 @@ export function PlayerRow(
     };
     playerName: string | undefined;
     hasCharacterSheet: boolean;
-    rolls: Array<IDiceRollResult>;
+    rolls: Array<IDicePoolResult>;
     characterName: string | undefined;
     pointsLabel: string | undefined;
     points: string;
@@ -125,14 +120,6 @@ export function PlayerRow(
           position: "relative",
         }}
       >
-        <Box pb=".5rem">
-          <PlayerRowDiceRoller
-            canRoll={props.permissions.canRoll}
-            rolls={props.rolls}
-            isMe={props.isMe}
-            onRoll={handleRoll}
-          />
-        </Box>
         <Box>
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item>
@@ -481,74 +468,6 @@ const PlayerRowTurnTracker = React.memo(
       </Box>
     );
   }
-);
-
-const PlayerRowDiceRoller = React.memo(
-  (props: {
-    rolls: Array<IDiceRollResult>;
-    isMe: boolean;
-    canRoll: boolean;
-    onRoll(): void;
-  }) => {
-    const theme = useTheme();
-
-    return (
-      <Box>
-        <Grid container spacing={1} wrap="nowrap" alignItems="flex-start">
-          <Grid item>
-            <Box display="flex" justifyContent="flex-end" height="100%">
-              <DiceBox
-                rolls={props.rolls}
-                size="3rem"
-                fontSize="1.5rem"
-                borderSize=".15rem"
-                disableConfettis={props.isMe}
-                disabled={!props.canRoll}
-                onClick={props.onRoll}
-              />
-            </Box>
-          </Grid>
-          {props.rolls.length > 0 && (
-            <Grid item>
-              <Box
-                className={css({
-                  fontWeight: theme.typography.fontWeightBold,
-                  borderRadius: "4px",
-                  padding: ".3rem .5rem",
-                })}
-              >
-                <Grid container alignItems="center">
-                  <Grid item xs={12}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        fontSize: ".75rem",
-                        textTransform: "uppercase",
-                        fontWeight: theme.typography.fontWeightBold,
-                        color: theme.palette.secondary.main,
-                      }}
-                    >
-                      <DiceBonusLabel rolls={props.rolls} noColor />
-                    </Box>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={12}
-                    sx={{
-                      color: theme.palette.secondary.main,
-                    }}
-                  >
-                    <DiceBoxResult rolls={props.rolls} noColor />
-                  </Grid>
-                </Grid>
-              </Box>
-            </Grid>
-          )}
-        </Grid>
-      </Box>
-    );
-  },
-  isEqual
 );
 
 const PlayerRowPoints = React.memo(

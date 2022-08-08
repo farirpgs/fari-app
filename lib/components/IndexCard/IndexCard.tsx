@@ -35,7 +35,7 @@ import { ChromePicker } from "react-color";
 import { Delays } from "../../constants/Delays";
 import { FontFamily } from "../../constants/FontFamily";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
-import { IDiceRollResult } from "../../domains/dice/Dice";
+import { IDicePoolResult } from "../../domains/dice/Dice";
 import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
 import { useElementWidth } from "../../hooks/useElementWidth/useElementWidth";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
@@ -135,7 +135,7 @@ export const IndexCard: React.FC<
     onChange(newIndexCard: IIndexCard): void;
     onMoveTo?(idOfIndexCardToMove: string, idOfIndexCardToMoveTo: string): void;
     onMoveOut?(idOfIndexCardToMove: string): void;
-    onRoll(diceRollResult: IDiceRollResult): void;
+    onRoll(diceRollResult: IDicePoolResult): void;
     onMove(dragIndex: string, hoverIndex: string): void;
     onRemove(): void;
     onDuplicate(): void;

@@ -9,8 +9,8 @@ import {
   ISkillBlock,
 } from "../../../../../../domains/character/types";
 import {
-  IDiceCommandSetId,
-  IDiceRollResult,
+  IDiceCommandId,
+  IDicePoolResult,
 } from "../../../../../../domains/dice/Dice";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
@@ -28,10 +28,10 @@ export const BlockSkill = React.memo(
       advanced: boolean;
       readonly: boolean | undefined;
       blockType: BlockType;
-      commands: Array<IDiceCommandSetId> | undefined;
+      commands: Array<IDiceCommandId> | undefined;
       hideModifier: boolean | undefined;
       dataCy?: string;
-      onRoll(diceRollResult: IDiceRollResult): void;
+      onRoll(diceRollResult: IDicePoolResult): void;
     } & IBlockHandlers<ISkillBlock>
   ) => {
     const [state, setState] = useLazyState({

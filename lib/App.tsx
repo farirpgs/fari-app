@@ -62,15 +62,15 @@ function AppContexts(props: { children: ReactNode }) {
   const scenesManager = useScenes();
   const indexCardCollectionsManager = useIndexCardCollections();
   const diceManager = useDice({
-    defaultCommands: settingsManager.state.diceCommandIds,
-    defaultOptions: settingsManager.state.diceOptions,
-    onCommandSetsChange(commandSetOptions) {
-      const commandSetIds = commandSetOptions.map((l) => l.id);
-      settingsManager.actions.setDiceCommandsIds(commandSetIds);
-    },
-    onOptionsChange: (options) => {
-      settingsManager.actions.setDiceOptions(options);
-    },
+    // defaultCommands: settingsManager.state.diceCommandIds,
+    // defaultOptions: settingsManager.state.diceOptions,
+    // onCommandSetsChange(commandSetOptions) {
+    //   const commandSetIds = commandSetOptions.map((l) => l.id);
+    //   settingsManager.actions.setDiceCommandsIds(commandSetIds);
+    // },
+    // onOptionsChange: (options) => {
+    //   settingsManager.actions.setDiceOptions(options);
+    // },
   });
   const myBinderManager = useMyBinder();
 

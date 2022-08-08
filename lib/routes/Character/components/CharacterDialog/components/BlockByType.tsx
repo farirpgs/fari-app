@@ -11,7 +11,7 @@ import {
   previewContentEditable,
 } from "../../../../../components/ContentEditable/ContentEditable";
 import { BlockType, IBlock } from "../../../../../domains/character/types";
-import { IDiceRollResult } from "../../../../../domains/dice/Dice";
+import { IDicePoolResult } from "../../../../../domains/dice/Dice";
 import { useEvent } from "../../../../../hooks/useEvent/useEvent";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
@@ -43,7 +43,7 @@ export function BlockByType(props: {
   onChange(newBlock: IBlock): void;
   onToggleSplit?(): void;
   onMainPointCounterChange?(): void;
-  onRoll(diceRollResult: IDiceRollResult): void;
+  onRoll(diceRollResult: IDicePoolResult): void;
 }) {
   const miniTheme = useContext(MiniThemeContext);
   const theme = useTheme();
