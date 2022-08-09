@@ -75,7 +75,15 @@ export function DiceRoute(props: {}) {
             variant="persistent"
           >
             <Box sx={{ padding: "2rem" }}>
-              <DiceResult results={results}>
+              <DiceResult
+                animate={true}
+                poolResults={[
+                  {
+                    id: "",
+                    commandResults: results,
+                  },
+                ]}
+              >
                 <Box display="flex" justifyContent={"center"}>
                   <Button variant="outlined" onClick={handleClear}>
                     {"Clear"}

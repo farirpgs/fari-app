@@ -56,14 +56,10 @@ export function DiceResult(props: {
     }
   }, [areAllSelectedValuesNumbers]);
 
-  useEffect(() => {
-    // handleDeselectAll();
-  }, [allResults]);
-
   return (
     <>
       <Stack spacing={2}>
-        {resultsForDetails.length > 0 && (
+        {resultsForDetails.length > 0 && areAllSelectedValuesNumbers && (
           <Box>{renderSelectedResultsDetails()}</Box>
         )}
         <Box>
@@ -77,35 +73,39 @@ export function DiceResult(props: {
   );
 
   function renderResultGridItems() {
-    console.log("props.poolResults", props.poolResults);
     return (
       <>
         {props.poolResults.map((poolResult) => {
           return (
             <Box key={poolResult.id}>
               <Grid container>
-                <Grid item sx={{ display: "flex" }}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Typography
-                      fontWeight={"bold"}
-                      noWrap
+                {poolResult.label && (
+                  <Grid item sx={{ display: "flex" }}>
+                    <Box
                       sx={{
-                        maxHeight: "100px",
-                        textAlign: "center",
-                        writingMode: "vertical-lr",
-                        transform: "rotate(180deg)",
+                        display: "flex",
+                        alignItems: "center",
                       }}
                     >
-                      {poolResult.label}
-                    </Typography>
-                  </Box>
-                </Grid>
-                <Grid item sx={{ marginRight: ".5rem" }}>
+                      <Typography
+                        fontWeight={"bold"}
+                        noWrap
+                        sx={{
+                          maxHeight: "100px",
+                          textAlign: "center",
+                          writingMode: "vertical-lr",
+                          transform: "rotate(180deg)",
+                        }}
+                      >
+                        {poolResult.label}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                )}
+                <Grid
+                  item
+                  sx={{ marginRight: poolResult.label ? ".5rem" : "0" }}
+                >
                   <Grid container spacing={1}>
                     {poolResult.commandResults.map((commandResult) => {
                       const options = DiceCommandOptions[commandResult.command];
@@ -156,6 +156,9 @@ export function DiceResult(props: {
                                         ? theme.palette.primary.main
                                         : theme.palette.divider
                                     }`,
+                                    "pointerEvents": areAllSelectedValuesNumbers
+                                      ? "inherit"
+                                      : "none",
                                     "borderRadius": "4px",
                                     "&:hover": {
                                       background: areAllSelectedValuesNumbers

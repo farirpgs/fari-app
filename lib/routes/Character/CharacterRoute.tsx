@@ -19,32 +19,36 @@ import { CharacterV3Dialog } from "./components/CharacterDialog/CharacterV3Dialo
 
 const HIDE_RESULTS_DELAY = 5000;
 
-function CharacterRoute() {
-  const zIndex = useZIndex();
+function DicePoolResultsSnackBar(props: {
+  dicePoolResults: Array<IDicePoolResult>;
+  open: boolean;
+  onClose?: () => void;
+}) {
   const theme = useTheme();
-  const params = useParams<{ id: string }>();
-  const query = useQuery<"dialog" | "readonly">();
-  const dialogMode = query.get("dialog") === "true";
-  const readonly = query.get("readonly") === "true";
-  const navigate = useNavigate();
-  const charactersManager = useContext(CharactersContext);
-  const [rolls, setRolls] = useState<Array<IDicePoolResult>>([]);
-  const [resultsVisible, setResultsVisible] = useState(false);
-  const myBinderManager = useContext(MyBinderContext);
-  const [selectedCharacter, setSelectedCharacter] = useState<
-    ICharacter | undefined
-  >(undefined);
-  const logger = useLogger();
-
+  const zIndex = useZIndex();
   const hideTimeout = useRef<any>();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (props.open) {
+      handleShowResults();
+    }
+  }, [props.open]);
+
+  useEffect(() => {
+    if (props.dicePoolResults.length > 0) {
+      handleShowResults();
+    }
+  }, [props.dicePoolResults]);
 
   const handleShowResults = useEvent(() => {
-    setResultsVisible(true);
+    setVisible(true);
     hideResultsSoon();
   });
 
   const handleHideResults = useEvent(() => {
-    setResultsVisible(false);
+    setVisible(false);
+    props.onClose?.();
   });
 
   const hideResultsSoon = useEvent(() => {
@@ -55,9 +59,66 @@ function CharacterRoute() {
     }, HIDE_RESULTS_DELAY);
   });
 
+  return (
+    <Snackbar
+      sx={{
+        "bottom": "6.5rem !important",
+        "zIndex": zIndex.diceFab - 1,
+        "& .MuiPaper-root": {
+          width: "100%",
+          maxWidth: "50vw",
+          display: "block",
+          background: theme.palette.background.paper,
+          color: theme.palette.text.primary,
+          // boxShadow: "none",
+        },
+      }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      open={visible && props.dicePoolResults.length > 0}
+      message={
+        <>
+          <Box
+            onPointerEnter={handleShowResults}
+            onClick={handleShowResults}
+            sx={{
+              width: "100%",
+            }}
+          >
+            <DiceResult animate={false} poolResults={props.dicePoolResults} />
+          </Box>
+        </>
+      }
+    />
+  );
+}
+
+function CharacterRoute() {
+  const zIndex = useZIndex();
+  const theme = useTheme();
+  const params = useParams<{ id: string }>();
+  const query = useQuery<"dialog" | "readonly">();
+  const dialogMode = query.get("dialog") === "true";
+  const readonly = query.get("readonly") === "true";
+  const navigate = useNavigate();
+  const charactersManager = useContext(CharactersContext);
+  const [dicePoolResults, setDicePoolResults] = useState<
+    Array<IDicePoolResult>
+  >([]);
+  const myBinderManager = useContext(MyBinderContext);
+  const [selectedCharacter, setSelectedCharacter] = useState<
+    ICharacter | undefined
+  >(undefined);
+  const logger = useLogger();
+  const [resultsVisible, setResultsVisible] = useState(false);
+
   const handleSetRollResult = useEvent((result: Array<IDicePoolResult>) => {
-    setRolls(result);
-    handleShowResults();
+    setDicePoolResults(result);
+  });
+  const handleShowResults = useEvent(() => {
+    setResultsVisible(true);
+  });
+  const handleHideResults = useEvent(() => {
+    setResultsVisible(false);
   });
   const handleSetSingleRollResult = useEvent((result: IDicePoolResult) => {
     handleSetRollResult([result]);
@@ -85,38 +146,11 @@ function CharacterRoute() {
   return (
     <>
       <PageMeta title={selectedCharacter?.name} />
-      <Snackbar
-        sx={{
-          "bottom": "6.5rem !important",
-          "zIndex": zIndex.diceFab - 1,
-
-          "& .MuiPaper-root": {
-            width: "100%",
-            maxWidth: "50vw",
-            display: "block",
-            background: theme.palette.background.paper,
-            color: theme.palette.text.primary,
-            // boxShadow: "none",
-          },
-        }}
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-        // open={resultsVisible && rolls.length > 0}
-        open
-        message={
-          <>
-            <Box
-              onPointerEnter={handleShowResults}
-              onClick={handleShowResults}
-              sx={{
-                width: "100%",
-              }}
-            >
-              <DiceResult animate={false} poolResults={rolls} />
-            </Box>
-          </>
-        }
+      <DicePoolResultsSnackBar
+        open={resultsVisible}
+        onClose={handleHideResults}
+        dicePoolResults={dicePoolResults}
       />
-
       <Box bgcolor={theme.palette.background.paper}>
         <Page pb="6rem" marginTop="0" maxWidth="none">
           {!dialogMode && (
