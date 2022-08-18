@@ -1,3 +1,4 @@
+import IsoIcon from "@mui/icons-material/Iso";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Grid from "@mui/material/Grid";
@@ -77,7 +78,7 @@ export function DiceResult(props: {
       <>
         {props.poolResults.map((poolResult) => {
           return (
-            <Box key={poolResult.id}>
+            <Grid item key={poolResult.id}>
               <Grid container>
                 {poolResult.label && (
                   <Grid item sx={{ display: "flex" }}>
@@ -115,102 +116,39 @@ export function DiceResult(props: {
                       return (
                         <Grid item key={commandResult.id}>
                           <Grow in>
-                            <Tooltip
-                              placement="top"
-                              title={
-                                commandResult.details ? (
-                                  <>
-                                    <Box
-                                      sx={{
-                                        fontSize: "1.5rem",
-                                      }}
-                                    >
-                                      {commandResult.details}
-                                    </Box>
-                                  </>
-                                ) : (
-                                  ""
-                                )
-                              }
-                            >
-                              <Box>
-                                <Stack
-                                  spacing={2}
-                                  sx={{
-                                    "padding": "1rem",
-                                    "transition": theme.transitions.create([
-                                      "background",
-                                      "boxShadow",
-                                    ]),
-                                    "background": selected
-                                      ? theme.palette.action.selectedOpacity
-                                      : theme.palette.background.paper,
-                                    "boxShadow": selected
-                                      ? theme.shadows[2]
-                                      : theme.shadows[0],
-                                    "cursor": areAllSelectedValuesNumbers
-                                      ? "pointer"
-                                      : "inherit",
-                                    "border": `1px solid ${
-                                      selected
-                                        ? theme.palette.primary.main
-                                        : theme.palette.divider
-                                    }`,
-                                    "pointerEvents": areAllSelectedValuesNumbers
-                                      ? "inherit"
-                                      : "none",
-                                    "borderRadius": "4px",
-                                    "&:hover": {
-                                      background: areAllSelectedValuesNumbers
-                                        ? theme.palette.action.hover
-                                        : "inherit",
-                                    },
-                                  }}
-                                  onClick={() =>
-                                    handleDiceResultClick(commandResult.id)
-                                  }
-                                  alignItems={"center"}
-                                >
-                                  <Box
-                                    sx={{
-                                      fontSize: "1.5rem",
-                                      fontWeight: selected
-                                        ? theme.typography.fontWeightBold
-                                        : theme.typography.fontWeightRegular,
-                                    }}
-                                  >
-                                    <AnimatedResult
-                                      id={commandResult.id}
-                                      result={commandResult.value}
-                                      animate={props.animate}
-                                      possibleResults={options.possibleResults}
-                                    />
-                                  </Box>
-                                  <Box>
-                                    <Tooltip title={commandResult.command}>
-                                      <Box>
-                                        <options.icon
-                                          style={{
-                                            fontSize: "2rem",
-                                            color: selected
-                                              ? theme.palette.primary.main
-                                              : theme.palette.action.disabled,
-                                          }}
-                                        />
-                                      </Box>
-                                    </Tooltip>
-                                  </Box>
-                                </Stack>
-                              </Box>
-                            </Tooltip>
+                            <Box>
+                              <ResultCard
+                                title={commandResult.details}
+                                icon={options.icon}
+                                iconTitle={commandResult.command}
+                                selected={selected}
+                                clickable={areAllSelectedValuesNumbers}
+                                onClick={() =>
+                                  handleDiceResultClick(commandResult.id)
+                                }
+                              >
+                                <AnimatedResult
+                                  result={commandResult.value}
+                                  animate={props.animate}
+                                  possibleResults={options.possibleResults}
+                                />
+                              </ResultCard>
+                            </Box>
                           </Grow>
                         </Grid>
                       );
                     })}
+                    {!!poolResult.modifier && (
+                      <Grid item>
+                        <ResultCard title={"Modifier"} icon={IsoIcon}>
+                          {poolResult.modifier}
+                        </ResultCard>
+                      </Grid>
+                    )}
                   </Grid>
                 </Grid>
               </Grid>
-            </Box>
+            </Grid>
           );
         })}
       </>
@@ -264,4 +202,91 @@ export function DiceResult(props: {
       </Stack>
     );
   }
+}
+
+function ResultCard(props: {
+  children: React.ReactNode;
+  icon: React.ElementType<any>;
+  iconTitle?: string;
+  title?: string;
+  selected?: boolean;
+  clickable?: boolean;
+  animate?: boolean;
+  onClick?: () => void;
+}) {
+  const theme = useTheme();
+  return (
+    <Tooltip
+      placement="top"
+      title={
+        props.title ? (
+          <>
+            <Box
+              sx={{
+                fontSize: "1rem",
+              }}
+            >
+              {props.title}
+            </Box>
+          </>
+        ) : (
+          ""
+        )
+      }
+    >
+      <Box>
+        <Stack
+          spacing={2}
+          sx={{
+            "padding": "1rem",
+            "transition": theme.transitions.create(["background", "boxShadow"]),
+            "background": props.selected
+              ? theme.palette.action.selectedOpacity
+              : theme.palette.background.paper,
+            "boxShadow": props.selected ? theme.shadows[2] : theme.shadows[0],
+            "cursor": props.clickable ? "pointer" : "inherit",
+            "border": `1px solid ${
+              props.selected
+                ? theme.palette.primary.main
+                : theme.palette.divider
+            }`,
+            "pointerEvents": props.clickable ? "inherit" : "none",
+            "borderRadius": "4px",
+            "&:hover": {
+              background: props.clickable
+                ? theme.palette.action.hover
+                : "inherit",
+            },
+          }}
+          onClick={props.onClick}
+          alignItems={"center"}
+        >
+          <Box
+            sx={{
+              fontSize: "1.5rem",
+              fontWeight: props.selected
+                ? theme.typography.fontWeightBold
+                : theme.typography.fontWeightRegular,
+            }}
+          >
+            {props.children}
+          </Box>
+          <Box>
+            <Tooltip title={props.iconTitle ?? ""}>
+              <Box>
+                <props.icon
+                  style={{
+                    fontSize: "2rem",
+                    color: props.selected
+                      ? theme.palette.primary.main
+                      : theme.palette.action.disabled,
+                  }}
+                />
+              </Box>
+            </Tooltip>
+          </Box>
+        </Stack>
+      </Box>
+    </Tooltip>
+  );
 }

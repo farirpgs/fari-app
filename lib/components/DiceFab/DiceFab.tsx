@@ -12,7 +12,12 @@ import Zoom from "@mui/material/Zoom";
 import React, { useContext, useEffect, useState } from "react";
 import { useZIndex } from "../../constants/zIndex";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
-import { Dice, IDiceCommandId, IDicePoolResult } from "../../domains/dice/Dice";
+import {
+  Dice,
+  IDiceCommandId,
+  IDicePoolResult,
+  IRollablePool,
+} from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
 import { useEvent } from "../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -34,10 +39,13 @@ export const DiceFab: React.FC<IProps> = (props) => {
   const open = Boolean(anchorEl);
   const { t } = useTranslate();
   const diceManager = useContext(DiceContext);
-  const [pool, setPool] = useState<Array<IDiceCommandId>>([]);
-  const poolToDisplay = [...diceManager.state.selectedCommandIds, ...pool];
+  const [commandIds, setCommandIds] = useState<Array<IDiceCommandId>>([]);
+  const selectedCommandIds = [
+    ...diceManager.state.selectedCommandIds,
+    ...commandIds,
+  ];
 
-  const hasPool = poolToDisplay.length > 0;
+  const hasPool = selectedCommandIds.length > 0;
   const handleMenuOpen = useEvent(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       props.onOpen?.();
@@ -48,12 +56,12 @@ export const DiceFab: React.FC<IProps> = (props) => {
   const handleMenuClose = useEvent(() => {
     props.onClose?.();
     setAnchorEl(null);
-    setPool([]);
+    setCommandIds([]);
     diceManager.actions.clearPool();
   });
 
   const handleClear = useEvent(() => {
-    setPool([]);
+    setCommandIds([]);
   });
 
   const handleFabClick = useEvent(
@@ -68,8 +76,18 @@ export const DiceFab: React.FC<IProps> = (props) => {
   );
 
   function handleRoll() {
-    const results = Dice.rollPools([...diceManager.state.pools]);
+    const poolsToRoll: IRollablePool[] = [...diceManager.state.pools];
 
+    if (commandIds.length > 0) {
+      poolsToRoll.push({
+        label: "Pool",
+        commandIds: commandIds,
+      });
+    }
+
+    const results = Dice.rollPools(poolsToRoll);
+
+    handleClear();
     handleMenuClose();
     props.onRoll?.(results);
   }
@@ -87,7 +105,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
                 key="rolls"
                 open={open}
                 hasPool={hasPool}
-                pool={poolToDisplay}
+                pool={selectedCommandIds}
                 icon={Icons.ThrowDice}
                 label={<>{t("dice-fab.roll")}</>}
                 onHover={props.onHover}
@@ -101,10 +119,10 @@ export const DiceFab: React.FC<IProps> = (props) => {
               <DiceMenu
                 open={open}
                 anchorEl={anchorEl}
-                pool={poolToDisplay}
+                pool={selectedCommandIds}
                 onClose={handleMenuClose}
                 onClear={handleClear}
-                onDiceCommandChange={setPool}
+                onDiceCommandChange={setCommandIds}
                 anchorOrigin={{
                   vertical: "top",
                   horizontal: "center",

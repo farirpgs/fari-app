@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 export function AnimatedResult(props: {
-  id: string;
   result: string;
   animate: boolean;
   possibleResults?: Array<string>;
@@ -43,7 +42,7 @@ export function AnimatedResult(props: {
     }
 
     return () => clearTimeout(timeout);
-  }, [props.id]);
+  }, [props.result]);
 
   return <>{visibleResult}</>;
 }

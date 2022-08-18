@@ -63,7 +63,7 @@ function DicePoolResultsSnackBar(props: {
     <Snackbar
       sx={{
         "bottom": "6.5rem !important",
-        "zIndex": zIndex.diceFab - 1,
+        // "zIndex": zIndex.diceFab - 1,
         "& .MuiPaper-root": {
           width: "100%",
           maxWidth: "50vw",
@@ -74,7 +74,8 @@ function DicePoolResultsSnackBar(props: {
         },
       }}
       anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-      open={visible && props.dicePoolResults.length > 0}
+      // open={visible && props.dicePoolResults.length > 0}
+      open={true}
       message={
         <>
           <Box
@@ -111,17 +112,18 @@ function CharacterRoute() {
   const logger = useLogger();
   const [resultsVisible, setResultsVisible] = useState(false);
 
-  const handleSetRollResult = useEvent((result: Array<IDicePoolResult>) => {
-    setDicePoolResults(result);
-  });
   const handleShowResults = useEvent(() => {
     setResultsVisible(true);
   });
   const handleHideResults = useEvent(() => {
     setResultsVisible(false);
   });
-  const handleSetSingleRollResult = useEvent((result: IDicePoolResult) => {
-    handleSetRollResult([result]);
+  const handleSetRollResults = useEvent((results: Array<IDicePoolResult>) => {
+    setDicePoolResults(results);
+    handleShowResults();
+  });
+  const handleSetRollResult = useEvent((result: IDicePoolResult) => {
+    handleSetRollResults([result]);
   });
 
   useEffect(() => {
@@ -156,7 +158,7 @@ function CharacterRoute() {
           {!dialogMode && (
             <Toolbox
               diceFabProps={{
-                onRoll: handleSetRollResult,
+                onRoll: handleSetRollResults,
                 onHover: handleShowResults,
               }}
             />
@@ -166,7 +168,7 @@ function CharacterRoute() {
             character={selectedCharacter}
             dialog={dialogMode || false}
             readonly={readonly}
-            onRoll={handleSetSingleRollResult}
+            onRoll={handleSetRollResult}
             onSave={(newCharacter) => {
               charactersManager.actions.upsert(newCharacter);
             }}

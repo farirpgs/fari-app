@@ -150,7 +150,7 @@ export const DiceOptions: Record<
       ];
       const details = `${results
         .map((result) => {
-          return symbolMap[result];
+          return result;
         })
         .join(" ")}`;
       return { value: results.reduce((a, b) => a + b, 0).toString(), details };
