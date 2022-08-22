@@ -23,7 +23,7 @@ export function DiceResult(props: {
   const theme = useTheme();
   const allResults = props.poolResults.flatMap((e) => e.commandResults);
   const areAllSelectedValuesNumbers = allResults.every((result) =>
-    result.value.match(/^\d+$/)
+    result.value.match(/^-?\d+$/)
   );
 
   const [selectedCommandResultIds, setSelectedCommandResultIds] = useState<
@@ -156,30 +156,21 @@ export function DiceResult(props: {
   }
 
   function renderSelectedResultsDetails() {
-    const firstResult = resultsForDetails[0];
-    const firstValue = parseInt(`${firstResult?.value}`);
-
     const total = resultsForDetails.reduce((acc, result) => {
       const value = parseInt(`${result.value}`);
-      if (value >= 0) {
-        return acc + value;
-      }
-      return 0;
+      console.log("TOTAL cal", { acc, value });
+      return acc + value;
     }, 0);
     const highest = resultsForDetails.reduce((acc, result) => {
       const value = parseInt(`${result.value}`);
-      if (value >= 0) {
-        return Math.max(acc, value);
-      }
-      return 0;
-    }, firstValue);
+
+      return Math.max(acc, value);
+    }, -9999);
     const lowest = resultsForDetails.reduce((acc, result) => {
       const value = parseInt(`${result.value}`);
-      if (value >= 0) {
-        return Math.min(acc, value);
-      }
-      return 0;
-    }, firstValue);
+
+      return Math.min(acc, value);
+    }, 9999);
 
     return (
       <Stack

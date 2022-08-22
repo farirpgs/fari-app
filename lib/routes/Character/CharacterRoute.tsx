@@ -63,19 +63,16 @@ function DicePoolResultsSnackBar(props: {
     <Snackbar
       sx={{
         "bottom": "6.5rem !important",
-        // "zIndex": zIndex.diceFab - 1,
         "& .MuiPaper-root": {
           width: "100%",
           maxWidth: "50vw",
           display: "block",
           background: theme.palette.background.paper,
           color: theme.palette.text.primary,
-          // boxShadow: "none",
         },
       }}
       anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-      // open={visible && props.dicePoolResults.length > 0}
-      open={true}
+      open={visible && props.dicePoolResults.length > 0}
       message={
         <>
           <Box

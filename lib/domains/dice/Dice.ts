@@ -137,11 +137,7 @@ export const DiceOptions: Record<
     icon: Icons.FateDice,
     roll() {
       const die = [-1, -1, 0, 0, 1, 1];
-      const symbolMap: Record<string, string> = {
-        "-1": "⊟",
-        "0": "☐",
-        "1": "⊞",
-      };
+
       const results = [
         die[getRandomDiceSide(die.length)],
         die[getRandomDiceSide(die.length)],
