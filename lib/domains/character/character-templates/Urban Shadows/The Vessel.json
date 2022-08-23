@@ -1,0 +1,866 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1660544243,
+  "name": "Urban Shadows Character Template - The Vessel Template",
+  "pages": [
+    {
+      "id": "a6e97770-d49f-44f6-844b-65e074a5dca1",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c4a87bf9-c3a8-42c8-b571-52ec51af5f88",
+                  "label": "Faction:  Wild\nArchetype:  The Vessel",
+                  "blocks": []
+                },
+                {
+                  "id": "37695b3c-0cd7-4fac-aefb-76ce07f01701",
+                  "label": "Character Name",
+                  "blocks": [
+                    {
+                      "id": "baf2316b-59a8-4df0-af3e-23471f603c80",
+                      "label": "Adrijan, Aisha, Azra, Caieta, Dakota, Emilia, Faddei, Fatma, Laila, Leland,<br>Katashi, Min-Ho, Nayavu, Palmer, Quanah, Rafi, Soledad, Tabor, Viktor, Zain",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pick one" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "25687ff5-8f5f-471b-b838-ed11e2c12503",
+                  "label": "Look",
+                  "blocks": [
+                    {
+                      "id": "36bbf545-ee9b-4681-b30c-fc05dd89a7b6",
+                      "label": "• Ambiguous, Female, Male, Transgressing",
+                      "type": "Text",
+                      "value": "• Asian or South Asian, Black, Hispanic/Latino, Indigenous, Middle<br>Eastern, White, __________\n• Bohemian Clothing, Professional Clothing, Rough Clothing,<br>Work Clothing",
+                      "meta": { "helperText": "pick as many as apply" }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "0b96d900-092c-4d8e-b2bc-387cd1df9c55",
+                  "label": "Demeanor",
+                  "blocks": [
+                    {
+                      "id": "41deb198-b5e8-4f61-b4b6-0ae8c93d0fd4",
+                      "label": "Distant, Gentle, Jealous, Lurking ",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pick one" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "e0c81eec-330e-4f89-9543-eaec4d527c6f",
+                  "label": "Intro Questions",
+                  "blocks": [
+                    {
+                      "id": "c88126ee-b271-4089-a704-1c602aa88f39",
+                      "label": "• Who are you?\n<br>• How long have you walked the Earth?\n<br>• Who or what is your creator?\n<br>• Why have you chosen to forsake your bondage?\n<br>• What keeps you here in the city?\n<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d1eaf6ba-e0b9-4859-95ed-f2fab834eb67",
+                  "label": "Starting Character Stats",
+                  "blocks": [
+                    {
+                      "id": "68527d12-6e9c-46b9-a17f-9db0ddecacde",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "(Add 1 to one of these)",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d23e0aca-445a-4775-91a2-2341ef28d48b",
+                      "label": "Blood",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "635f2403-1a59-447c-a6a0-104f8ed9ff15",
+                      "label": "Heart",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-2"
+                    },
+                    {
+                      "id": "559d6751-4e41-4748-b275-3ec28b285ef6",
+                      "label": "Mind",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "dd3363c3-3ec1-49c2-ae59-1c3ebb941591",
+                      "label": "Spirit",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "2"
+                    },
+                    {
+                      "id": "33a2eae5-541b-4b56-9c82-0829ad24eb72",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "21a7eb3e-d305-4551-826d-32d5a0dc93d3",
+                  "label": "Starting Factions ",
+                  "blocks": [
+                    {
+                      "id": "dc093edb-83f2-4a6a-87c2-fe1a708a0c85",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "(Add 1 to one of these)",
+                      "meta": {}
+                    },
+                    {
+                      "id": "445a8d2b-6956-4a07-84ff-9be145b2d9d0",
+                      "label": "Mortality",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-2"
+                    },
+                    {
+                      "id": "043d8d48-f702-40ae-8c60-62bce418783d",
+                      "label": "Night",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "a5a6a225-0dd3-40da-860b-9d8dcc512e5d",
+                      "label": "Power",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "d2403f1b-5f1f-4f80-a6dd-f6f397628b74",
+                      "label": "Wild",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "2"
+                    },
+                    {
+                      "id": "e7683261-7cc5-410d-8548-cd2a26e783ff",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5958a418-5249-435f-b034-3c36e42fe558",
+                  "label": "Gear",
+                  "blocks": [
+                    {
+                      "id": "24b3f25c-d3aa-4ae9-ae34-0639e708a03f",
+                      "label": "• A small apartment in the slums, a crappy car or bike, a dumb phone<br>• A token of your bondage<br>• A keepsake from your creator<br>• A clumsy, but effective weapon (3-harm hand/close)",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "56449e3b-f20b-4beb-ac56-98180e15e6f7",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "ab84a01b-d848-4dfa-8167-a92183e4fe79",
+                  "label": "Section",
+                  "blocks": [
+                    {
+                      "id": "a27a2d10-3eed-4db9-89ec-33e13d12d6d1",
+                      "label": "Faint",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "622c7b92-12ab-4d03-a3d8-9047f7d65eae",
+                      "label": "Faint",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "3e9c82ba-a812-435a-be6b-b567379c2abb",
+                      "label": "Grievous",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "02a4f24e-a24d-41eb-be43-61b01ede56b8",
+                      "label": "Grievous",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "c5a59942-30ad-4161-a56b-7d81b1d979ea",
+                      "label": "Critical",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "609343b9-a41a-43b4-972a-1193b8c2693c",
+                      "label": "Critical",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "89dccd0a-02dc-4cd3-b979-613ddf437c00",
+                  "label": "Armor",
+                  "blocks": [
+                    {
+                      "id": "c1cf874b-5a19-4c7d-8d80-2a0c651c003e",
+                      "label": "Current Armor Rating",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "d44f6927-f3e3-4574-8f61-cd8a121d7112",
+                  "label": "S-Harm",
+                  "blocks": [
+                    {
+                      "id": "83db8d44-865b-40ae-b4a1-cb3748f1a64f",
+                      "label": "Incapacitated",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "1ce62aa6-e44c-4a40-b090-c2a9c2926ef9",
+                  "label": "Scars",
+                  "blocks": [
+                    {
+                      "id": "d850f400-4e74-40a9-bce3-01e4af7995fc",
+                      "label": "Shattered (-1 Blood)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Shattered means frightened, weakened, and overly cautious. Shattered characters hesitate when they should move, and their attempts to unleash an<br>attack on someone or escape a situation often come up short."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "667fafc3-951b-4025-a7c1-e18745820f5a",
+                      "label": "Crushed (-1 Heart)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Crushed means traumatized, timid, and uncertain. Crushed characters bear<br>the full weight of the wounds they’ve suffered, and their attempts to persuade an NPC are inhibited by their reticent approach to conflict."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "262a9a4a-e5ea-45cb-800c-e07698fd594c",
+                      "label": "Fractured (-1 Mind)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Fractured means confused, disoriented, and disjointed. Fractured characters<br>are unstable and unsure, and their attempts to figure someone out or mislead, distract, or trick others are unfocused and imprecise."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "670eda03-9cd8-4495-9895-dac7746cab26",
+                      "label": "Broken (-1 Spirit)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Broken means hopeless, forlorn, and cowardly. Broken characters have lost<br>their will to fight, and their attempts to keep their cool or let it out are often<br>half-hearted and incomplete."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Harm"
+    },
+    {
+      "id": "c12447e2-2a66-489e-a937-3d0c2ce9e24f",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "70d06df5-22f1-43b3-bffe-96b9efe9d325",
+                  "label": "Redemption Track",
+                  "blocks": [
+                    {
+                      "id": "a06bef8e-ee99-479d-baa2-0ddc534bee2d",
+                      "label": "Redemption",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "a0d306db-db66-4a95-912b-8d802d25b3e1",
+                  "label": "Corruption Advances",
+                  "blocks": [
+                    {
+                      "id": "7273468d-5e90-4b42-9248-81a37a756a4b",
+                      "label": "Rewrite an instinct",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "fbf4c4b4-f3c0-41ed-a9d5-a9045f620b52",
+                      "label": "Rewrite an instinct",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "2106ca8f-d52b-45fc-b092-ac9453ba8988",
+                      "label": "Rewrite an instinct",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "bb6d0c93-d0c7-496c-9a29-4c45fa2f7d60",
+                      "label": "Take a redemption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "a3b65d80-ba68-4571-9ce6-c04a2d9e0083",
+                      "label": "Take a redemption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "845da078-5423-4094-b325-3726334e50fd",
+                  "label": "Redemption Moves",
+                  "blocks": [
+                    {
+                      "id": "99c0aab4-89d1-445e-a1ae-c15bc63cbc6a",
+                      "label": "Among the Sheep",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When you try to disappear in a crowd, roll with<br>Blood. On a 10+, you vanish into the crowd without a trace; take +1<br>ongoing if you make use of your concealment. On a 7-9, you are silent<br>and invisible, but your deception is fragile and incomplete. On a miss,<br>you’re clearly the wolf. Even the crowd knows it."
+                      }
+                    },
+                    {
+                      "id": "0efa229d-91c6-41bd-8819-bb08dc92d90a",
+                      "label": "Like Them",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "&nbsp;When you try to figure out a member of Mortality, roll with<br>Spirit instead of Mind.<br><br>"
+                      }
+                    },
+                    {
+                      "id": "20f365b4-b55f-41db-b93b-74ec29ab7dc0",
+                      "label": "Absolution",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When you convince someone to be honest with you about<br>their problems, roll with Spirit. On a hit, you may take one Debt they owe<br>(related to the problem) as your own if you promise to see it through.<br>On a 10+, mark redemption when you honor the Debt. On a miss, their<br>problems confuse and perplex you; you owe them a Debt for trying to get<br>mixed up in their business."
+                      }
+                    },
+                    {
+                      "id": "cb823334-b2a2-40da-bee2-72b049d1f607",
+                      "label": "Heartfelt",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": ": Replace your existing intimacy move with the following: When<br>you share a moment of intimacy—physical or emotional—with another<br>person, share one of your human experiences as you understand it. If they<br>reciprocate, mark redemption. If they refuse, they must give you a Debt."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Redemption"
+    },
+    {
+      "id": "06c2b402-543e-4aa9-90c8-8d3d5e328f33",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "59a19b2a-68de-4d21-8fde-b079b154112c",
+                  "label": "Debts",
+                  "blocks": [
+                    {
+                      "id": "032237be-8cf2-4b78-815d-fd8d0527b7c3",
+                      "label": "• Someone convinced you to come to the city to help them with<br>an ongoing problem. They owe you 2 Debts.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f03b0b18-088d-4c2b-a964-b800cdd4fbdc",
+                      "label": "• You injured someone in the process of fulfilling an instinct. Tell<br>them what instinct you were serving. You owe them 2 Debts.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4ea30a1e-ea6c-4d13-9ef4-7917a4a7f72a",
+                      "label": "• Someone has a tie to your creator (or their lineage) and possesses<br>knowledge about your origin they have refused to share. They<br>owe you a Debt.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "e5ee81ab-6415-472b-9abc-0a426312d5e6",
+                  "label": "Vessel Moves",
+                  "blocks": [
+                    {
+                      "id": "7e466aef-89e0-417a-acba-3197b0ff54f5",
+                      "label": "Only Flesh",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "&nbsp;when you come directly at a target, without concern for your<br>own well being, you get 1-armor. If you’re doing so in the service of one of<br>your instincts, you get 2-armor. If you’re wearing armor, use that instead.",
+                        "hideModifier": false
+                      }
+                    },
+                    {
+                      "id": "a4dcd3b9-a13b-4f10-b2c6-b453c2169d20",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "And choose two more:",
+                      "meta": {}
+                    },
+                    {
+                      "id": "149b393c-3044-49ca-8a9f-af5336842b4e",
+                      "label": "Colossus",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When you let it out, add this option to the list:<br>• Ignore all harm suffered the next time you suffer harm"
+                      }
+                    },
+                    {
+                      "id": "485c51d9-cd8c-48ad-be5d-d898516d1dd6",
+                      "label": "Erase the Shem",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you suffer enough harm to kill you, you can<br>choose to shut down for the remainder of the scene instead of marking<br>the harm. In this state, you suffer no additional harm, nor can anyone<br>detect that you are still alive. You perceive everything that takes place<br>around your body, and you can reawaken at will. If someone dismembers you or attempts to destroy your body, your flesh will knit itself back<br>together upon revival, even if it has to travel great distances to be reunited."
+                      }
+                    },
+                    {
+                      "id": "cc6834c5-d788-4701-b672-fc1af808bfe8",
+                      "label": "Machinist",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you commune with a machine, roll with Spirit. On a<br>10+, ask 2. On a 7-9, ask 1.<br>• What secrets are hidden here, friend?<br>• Who made you this way, sister?<br>• What purpose do you serve, brother?<br>• How could I get you to ________, comrade?<br>On a miss, the machine betrays you to your enemies, in whatever way<br>it can."
+                      }
+                    },
+                    {
+                      "id": "c69c258c-2a3a-42ea-9457-b3fc7917df9c",
+                      "label": "Tear It Down",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When you smash through the scenery to get at something<br>you want, roll with Blood. On a 10+, you smash or move through obstacles and get what you want. On a 7-9, you smash or move the scenery<br>and get what you want, but you are disoriented in follow-up actions, leave<br>something behind, or take something with you (your choice). On a miss,<br>you crash through to your goal, but you’re disoriented and off-balance;<br>you suffer 1-harm (ap) and you’re vulnerable to reprisals and attacks."
+                      }
+                    },
+                    {
+                      "id": "7695b5d3-54f2-4071-9132-8a4cb3816314",
+                      "label": "Tireless",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When you fight against a gang, you count as a gang of equivalent size. Calculate armor and harm as normal, but ignore any size difference between you and the gang you’re fighting"
+                      }
+                    },
+                    {
+                      "id": "6797b722-6c56-468a-bf54-d834dfc1825d",
+                      "label": "Hideous Visage",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When you persuade an NPC by revealing your inhuman<br>face and threatening their interests, roll with Spirit instead of Heart.&nbsp;"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "49c5b5b9-ce2b-4b81-a288-0a7f90fe0949",
+                  "label": "Drama Moves",
+                  "blocks": [
+                    {
+                      "id": "b236c5b8-354c-4eba-bb56-09e47e040f73",
+                      "label": "Vessel Corruption Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you resist serving your instincts to attend to your mortal relationships<br>or responsibilities, mark redemption."
+                      }
+                    },
+                    {
+                      "id": "275b4591-e2e6-4bdd-803d-4fde7d25201c",
+                      "label": "Vessel Intimacy Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you share a moment of intimacy—physical or emotional—with another<br>person, ask them an invasive question about being human. If they answer the<br>question honestly, mark redemption. If they deflect the inquiry or offer falsehoods, they must give you a Debt."
+                      }
+                    },
+                    {
+                      "id": "d271d14a-2298-4a5c-892c-facf7b424333",
+                      "label": "Vessel End Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you die, change playbooks, or retire your character, you leave something of your old body behind, containing a remnant of your instincts, as a<br>permanent mark on the city. Tell the MC which instinct became most central<br>to your identity; the city will take that instinct into itself. Add the following<br>option to let it out for all PCs:<br>• Call upon the city to obey its instinct"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "e6e75336-a6fa-437c-b8ce-9b4844845daa",
+                  "label": "Materials",
+                  "blocks": [
+                    {
+                      "id": "86e77f84-5f34-435c-929e-1f499067b1df",
+                      "label": "You are the inanimate made living, a monster with the visage of a mortal. Pick one material for your component parts:\n<br>•The bones and flesh of the dead<br>•A block of stone, hewn to form<br>•Blessed soil, sand, or clay<br>•An empty shell, found and filled\n<br>Once per session, you can heal up to 2-harm by consuming a copious quantity of the materials of which you are made. Anyone who witnesses the consumption sees your true form.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "7c18a54b-6bae-4f4c-804c-0a793eb2a664",
+                  "label": "Instincts",
+                  "blocks": [
+                    {
+                      "id": "d671ad5b-9521-4639-a8bf-bdb9fb75ea78",
+                      "label": "Your creator built you to fulfill a particular function, although you’ve proved to be more adaptable than expected. To help you better serve your purpose,<br>your creator imbued you with a number of powerful instincts. Choose four:\n<br>•To serve the powerful<br>•To protect the valuable<br>•To hunt the disloyal<br>•To pleasure the worthy<br>•To entertain the masses<br>•To break the defiant<br>•To labor in silence\n<br>Resisting an opportunity to fulfill your instinct counts as keeping your cool. If a redemption advance allows you to rewrite an instinct, cross it out and write a new instinct of your own choosing. The old one no longer bothers you.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Moves"
+    },
+    {
+      "id": "ce5e6b44-a087-486b-89f8-cdeff4b70324",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a93c4db4-eaf0-4033-b761-a92bb6d840c2",
+                  "label": "Standard Avances",
+                  "blocks": [
+                    {
+                      "id": "a2bd92d1-569b-4d6e-a623-35c2d47aa8bb",
+                      "label": "+1 Blood (max +3) ",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "f2a0ed3c-1b45-49e7-ac89-34c6fa68557e",
+                      "label": "+1 Heart (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "94cf9325-25a3-4fa3-b6f2-2174d765ee2f",
+                      "label": "+1 Mind (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "7a7e7993-ced4-4761-b08a-6c38e6804cb4",
+                      "label": "+1 Spirit (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "19e84b51-2ad2-4438-8d86-03cd3a861caf",
+                      "label": "A new Vessel move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "1c7ae68f-8d4d-415a-92b7-c82df4930dc1",
+                      "label": "A new Vessel move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "f9b15ed6-0845-44ff-8fe6-ba0203448802",
+                      "label": "A new Vessel move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "454bfd53-0548-4af2-a1e1-468fc3aca258",
+                      "label": "A move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "bbf93ef7-d1bd-4634-9a4e-cee832768bc8",
+                      "label": "A move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "4e6c788a-5d16-4c43-924a-9acd6a269d15",
+                      "label": "Change your Faction",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "97dd5dea-4770-452e-a293-127fe34fbe47",
+                  "label": "Cont...",
+                  "blocks": [
+                    {
+                      "id": "08683173-9c22-40e1-b907-85a87c3318ee",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "After 5 advances you may select:",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9aa29177-b177-4b07-b661-b0e363a0da19",
+                      "label": "+1 to any stat (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "a4a2b6d4-401b-4de4-8220-3cea1f18621d",
+                      "label": "+1 to any stat (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "4aad5b3b-b1de-4f8c-864b-ced591a3d0c9",
+                      "label": "+1 to any Faction (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "bf4e96f0-7e4a-4083-b59b-ed3b2dfb62b1",
+                      "label": "+1 to any Faction (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "bc8dfa69-75bc-4475-adbd-20121584ce01",
+                      "label": "Erase a scar",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "a2af68fd-4116-4207-a3e2-02dedb1b5874",
+                      "label": "Erase a scar",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "21b4aa99-5770-4204-916c-9db586544ccd",
+                      "label": "Join or lead a sphere of materia",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "a0932220-470e-4179-af58-728917a1a9af",
+                      "label": "Advance 3 basic moves",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "e3ed94fd-a419-4661-b94b-ff38979da799",
+                      "label": "Advance 3 basic moves",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Advances"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "group": "Urban Shadows Archetypes"
+}

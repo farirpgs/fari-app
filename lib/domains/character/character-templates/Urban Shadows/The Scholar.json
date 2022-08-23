@@ -1,0 +1,858 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1660544247,
+  "name": "Urban Shadows Character Template - The Scholar Template",
+  "pages": [
+    {
+      "id": "b4b40c80-7867-4124-ad7a-2df2a583c7ac",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2cd9ed32-9034-4814-bcce-87fc5f767e56",
+                  "label": "Faction:  Mortality\nArchetype:  The Scholar",
+                  "blocks": []
+                },
+                {
+                  "id": "7a69b370-a19f-4fe3-9dc7-543a728d2fc1",
+                  "label": "Character Name",
+                  "blocks": [
+                    {
+                      "id": "ad952490-e4d8-436a-8498-a85ed1cee1e2",
+                      "label": "Adrian, Akra, Angelica, Bakari, Crawford, Dalia, Ellis, Emina, Gabriel, Grace,<br>Hart, Jackie, Lionel, Kai, Michaella, Nadia, Rasida, Ricardo, Roderick, Thibault,<br>Valerie, Wanda, Wang, Yana",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pick one" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "366227a5-2e7f-4ac6-9263-df3de458b42f",
+                  "label": "Look",
+                  "blocks": [
+                    {
+                      "id": "c9c74ff0-dbbb-4218-b298-bcc66b2ba9ef",
+                      "label": "• Ambiguous, Female, Male, Transgressing",
+                      "type": "Text",
+                      "value": "• Asian or South Asian, Black, Hispanic/Latino, Indigenous, Middle<br>Eastern, White, __________\n• Corduroys and a Button Up, Expensive Clothing, Hoodie and<br>Slacks, Tweed with Elbow Patches ",
+                      "meta": { "helperText": "pick as many as apply" }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "29bd613f-4d82-4a45-9752-0b1da1cc6ddf",
+                  "label": "Demeanor",
+                  "blocks": [
+                    {
+                      "id": "6447ae33-a026-441b-95a7-1c2d47bbc61e",
+                      "label": "Charming, Cryptic, Shifty, Smug",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pick one" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5e229477-6ff1-4c8f-8874-b214bd6991c1",
+                  "label": "Intro Questions",
+                  "blocks": [
+                    {
+                      "id": "e52a6190-51af-4f84-910e-50a8ccad5abf",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "• Who are you?<br><br>• How long have you been in the city?<br><br>• What arcane mystery brought you to the business?<br><br>• What habits or comforts does your trade offer you?<br><br>• What do you desperately need? <br><br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2af4e3e6-f6c0-4291-8d2d-2d3b12640816",
+                  "label": "Starting Character Stats",
+                  "blocks": [
+                    {
+                      "id": "dcc0a769-b615-41db-8210-f196318acd68",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "(Add 1 to one of these)",
+                      "meta": {}
+                    },
+                    {
+                      "id": "865f79e0-3631-4e81-a380-e142fb41e6f7",
+                      "label": "Blood",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-2"
+                    },
+                    {
+                      "id": "2b2bca82-65f0-4045-83ad-998a2e337d7f",
+                      "label": "Heart",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "1c26cfec-0f83-4fc3-a25d-81ca1e89f107",
+                      "label": "Mind",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "2"
+                    },
+                    {
+                      "id": "0d013044-c9b9-4191-9ce5-a10da9bb510b",
+                      "label": "Spirit",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "9ef38e5d-d038-4080-8cb2-412ce119c379",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "3c2c2520-e15b-4a09-9f97-5994b966e896",
+                  "label": "Starting Factions ",
+                  "blocks": [
+                    {
+                      "id": "742869a6-9060-4241-927e-80d057fb82ad",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "(Add 1 to one of these)",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d8450db9-d878-41e2-a079-5c102c41e070",
+                      "label": "Mortality",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "2"
+                    },
+                    {
+                      "id": "5d8d6eab-a2b1-478e-bb26-6958e77e809c",
+                      "label": "Night",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-1"
+                    },
+                    {
+                      "id": "6e591c59-0c31-48a7-adf3-438711dc99f7",
+                      "label": "Power",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "6f11a3dc-22d3-41e1-a61f-2c8fafd4f3bf",
+                      "label": "Wild",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-1"
+                    },
+                    {
+                      "id": "656ae0ae-b216-4593-80af-4f111b12e83d",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "22afd1d5-2ba1-4df4-984b-c813718c7887",
+                  "label": "Gear",
+                  "blocks": [
+                    {
+                      "id": "75f10082-232e-40b0-a7a1-012a63a04ead",
+                      "label": "• An expensive flat, a midsized car, a smart phone, reading glasses<br>• Messenger bag (pick 1)<br>     • Lucky Bag - When someone searches your bag without your permission, the item they are looking for is not there but instead hidden with your colleagues in your arcane network.<br>     • Unassuming Bag - Your bag disguises any signs and signals that an arcane item may emit. An arcane item placed in the bag is completely undetectable.<br>     • Arcane Bag - The bag itself has an agenda. When you find yourself in a desperate situation, reach into your bag for help. The GM will tell you what item you find...",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6167dc99-42d2-4231-a6c4-572f4b927df5",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "90209242-a264-4cdc-acd6-7471f63fe1a9",
+                  "label": "Arcane Network",
+                  "blocks": [
+                    {
+                      "id": "fbf8c1f4-dbd3-46c7-a135-621d25a4298f",
+                      "label": "Your arcane network is a collection of powerful and knowledgeable mortals<br>who trade in arcane items, relics, and ancient tomes. Some of their interests<br>are legitimate and above board; others are the stuff of backroom deals and<br>smoky rooms. They don’t trust you. You don’t trust them. That’s business.\n<br>Your arcane network has the following features (choose three): \n\ncodes &amp; signals, burner phones, online messaging boards, supernatural bodyguards,<br>ritual meetings, secret drops, a monthly marketplace, secluded safehouses, a<br>neutral appraiser, cops on the payroll\n<br>Your colleagues include these NPCs (at least): \nRaven Locke, Everett “One-Eye” Bunyasarn, Phoenix Pèrez, Diana Stone, The Yoshida Sisters, Count LaMount,<br>Brother Erick, Madam Moorelove, Lady Elaine Malcolm, John Qureshi, Dr. Zang Yi\n<br>Whose collection do you covet? ________________<br>Who keeps things safe for you? ________________<br>Who suspects you’re scamming them? ________________\n<br>When you cash in a Debt with a member of your arcane network to obtain a<br>worthy and useful gift without cost, they must offer you three things. Pick the<br>one you want, but the others will never be “free” again.\n<br>When you hit the streets to consult your arcane network, you can roll with<br>Mind instead of Mortality. Mark Mortality as normal. In addition, add this<br>option to the 7-9 list:<br>• You owe them an object you haven’t yet acquired<br>\nWhen you refuse to honor a Debt to someone to whom you’ve previously<br>sold arcane objects, add this option to the 7-9 list:<br>• Promise to secure a valuable object for them",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "c55297ec-a854-40b0-ac63-c295b7088232",
+                  "label": "Your Private Collection",
+                  "blocks": [
+                    {
+                      "id": "fbf07e02-fa7a-4e33-9130-0ee9ed729c05",
+                      "label": "You have a private collection of ancient tomes, books, and arcane objects<br>that you have acquired over your years of less-than-savory deals. Tell the MC<br>about your most prized possession and what dirty deeds you did to acquire it.\n<br>When you retreat to your private collection to research an occult occurrence, object, or individual, roll with Mind. On a 10+, pick 3. On a 7-9, pick 1.\n<br>• You discover a previously unknown weakness or vulnerability<br>• You discover a previously unknown resource or ally<br>• You don’t attract any supernatural attention to your research<br>\nOn a miss, you discover something terrible in your research that spells doom<br>for you, your friends...or the city itself",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Extras"
+    },
+    {
+      "id": "3993ab69-7fa1-4548-8426-d224228c8636",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "336859a8-7627-4a01-976b-79d1d0f3f797",
+                  "label": "Section",
+                  "blocks": [
+                    {
+                      "id": "3dc97576-8f41-4d85-9856-07b735344fd1",
+                      "label": "Faint",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "9b5474c8-6850-4109-b76f-200d01b1d979",
+                      "label": "Faint",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "fe84a520-3b9f-4f55-875d-83ac70fa3ce8",
+                      "label": "Grievous",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "c770fd5f-4d0f-4fc7-bfc5-ac89de52d589",
+                      "label": "Grievous",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "41a275b1-6f69-47be-bd15-bc23af8b68a4",
+                      "label": "Critical",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "e5300495-ae30-4110-bc07-cffa39131771",
+                      "label": "Critical",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "240f806f-c516-4e3c-beac-9b0d995c89af",
+                  "label": "Section",
+                  "blocks": [
+                    {
+                      "id": "d4d411ea-099c-4087-a6ce-19620fce4449",
+                      "label": "Current Armor Rating",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "4f407f21-d879-47f4-9522-4080942f62e0",
+                  "label": "Section",
+                  "blocks": [
+                    {
+                      "id": "dc886528-b328-45cc-9af0-776a0096d255",
+                      "label": "Incapacitated",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "80c41388-9b93-4a56-b8dc-2dd1b5e80d30",
+                  "label": "Section",
+                  "blocks": [
+                    {
+                      "id": "b6ee10ea-1a77-4acc-8c08-1867a6302432",
+                      "label": "Shattered (-1 Blood)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Shattered means frightened, weakened, and overly cautious. Shattered characters hesitate when they should move, and their attempts to unleash an<br>attack on someone or escape a situation often come up short."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "16f19b7f-2a58-4614-b2c8-e9c0529946ae",
+                      "label": "Crushed (-1 Heart)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Crushed means traumatized, timid, and uncertain. Crushed characters bear<br>the full weight of the wounds they’ve suffered, and their attempts to persuade an NPC are inhibited by their reticent approach to conflict."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "40d614b0-fb08-4646-ac87-728fc041222d",
+                      "label": "Fractured (-1 Mind)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Fractured means confused, disoriented, and disjointed. Fractured characters<br>are unstable and unsure, and their attempts to figure someone out or mislead, distract, or trick others are unfocused and imprecise."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "4ca783d9-0647-4762-944b-7ff9248acc02",
+                      "label": "Broken (-1 Spirit)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Broken means hopeless, forlorn, and cowardly. Broken characters have lost<br>their will to fight, and their attempts to keep their cool or let it out are often<br>half-hearted and incomplete."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Harm"
+    },
+    {
+      "id": "807a3535-b470-486b-a811-f667fec85f03",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "e06692ab-0f56-4be1-98a7-61331d974795",
+                  "label": "Corruption Track",
+                  "blocks": [
+                    {
+                      "id": "d3da77d4-3dd9-470d-b244-9ba45063b89a",
+                      "label": "Corruption ",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "e51bd531-6152-4a65-8e20-137b6fc21081",
+                  "label": "Corruption Advances",
+                  "blocks": [
+                    {
+                      "id": "9b80dd23-c0ad-4459-b635-cbb95f5c36de",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "b1c51863-a293-4091-9c0c-5200f86cdc71",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "739d6c87-1ca5-4c5b-ab28-95bf7e5c94c9",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "07f60bd8-510e-4b83-bf74-0983ac72a8db",
+                      "label": "Take a corruption move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "49712a15-2859-4ca7-96b8-d48a7143c1ad",
+                      "label": "Retire your character. They may return as a Threat.",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "60fccf96-6a83-4b3a-921a-20cc2dfc0c6e",
+                  "label": "Corruption Moves",
+                  "blocks": [
+                    {
+                      "id": "365c4a52-19cd-46db-9eaf-99105b9aaa44",
+                      "label": "Occupational Hazards",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "Mark corruption to keep your cool with Mind<br>instead of Spirit when faced with arcane or supernatural threats."
+                      }
+                    },
+                    {
+                      "id": "dd5472e6-5dd6-4037-95cf-79bc1f288df5",
+                      "label": "In the Bag",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "g: Mark corruption after successfully escaping a situation to<br>reveal that you pilfered an arcane object from the previous scene."
+                      }
+                    },
+                    {
+                      "id": "0df60f99-57fe-4afa-9a77-687a508ba641",
+                      "label": "Don’t Trust Anyone",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When someone double-crosses you, mark corruption to reveal how you already planned for their sudden but inevitable<br>betrayal. You immediately gain the upper hand in the situation."
+                      }
+                    },
+                    {
+                      "id": "c4342810-6806-4fba-ba4a-96fc7594d77b",
+                      "label": "Interested Parties",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When you are outnumbered, outgunned, or surprised,<br>mark corruption for a third party interested in your dealings to interrupt<br>the proceedings. Their intrusion creates an opportunity for you, but you<br>might be going from the frying pan into the fire."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Corruption"
+    },
+    {
+      "id": "d2ee8692-ed13-4d65-9d98-f8e8cbbe7ec3",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "f4a9e527-fa68-4fb1-be3e-4226d80d7ef3",
+                  "label": "Debts",
+                  "blocks": [
+                    {
+                      "id": "74970338-c60e-49bb-88c2-e7e650dd58aa",
+                      "label": "• You’re someone’s hookup for relics and arcane items. They owe<br>you 2 Debts.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1769b9db-7446-4e64-a4d5-3b44c658574e",
+                      "label": "• Someone has been tipping you off to your enemy’s tactics. You<br>owe them 2 Debts.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4ee2f782-ee7d-4dc0-b3d8-a3f5608d7222",
+                      "label": "• You scammed someone out of something rare and priceless they<br>cannot recover. You owe them 3 Debts",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c9b77f0a-01e4-46ed-87bc-2eb659fee30e",
+                  "label": "Scholar Moves (choose 3)",
+                  "blocks": [
+                    {
+                      "id": "4aea8f7b-5958-4dfd-83ba-988e9aa10f07",
+                      "label": "Appraisal",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you appraise an arcane object, roll with Mind. On a hit,<br>ask the MC questions. On a 10+, ask 2. On a 7-9, ask 1.<br>• What rumors or lies shroud this object’s value?<br>• What secrets or powers does this object contain?<br>• Who knows more about this object or its powers?<br>• Who would want to possess this object?<br>On a miss, the object is cursed. The MC will tell you what trouble<br>pursues it.",
+                        "hideModifier": false
+                      }
+                    },
+                    {
+                      "id": "f7626ca9-8a7d-4f50-97b3-c49c342b9a25",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "And choose one more:&nbsp;",
+                      "meta": {}
+                    },
+                    {
+                      "id": "0babe450-c64e-4d94-86bf-2eddc871cd40",
+                      "label": "Cowardly",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you abandon someone to escape a situation, roll with<br>Mind instead of Blood."
+                      }
+                    },
+                    {
+                      "id": "069afd5a-028d-4436-b312-1d62053390ce",
+                      "label": "Expert Negotiator",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you persuade an NPC by offering an arcane<br>item they need, treat a 7-9 as a 10+ result. On a miss, your offers are<br>accepted as though you rolled a 7-9, but they’ve misled you about their<br>interests in the goods.&nbsp;"
+                      }
+                    },
+                    {
+                      "id": "f33e03a0-3de6-498e-ab3a-77f082d0dc5b",
+                      "label": "Arcane Detective",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you interview a knowledgeable NPC while<br>pursuing the arcane, roll with Mind. On a hit, they offer you a concrete<br>lead: an important location, supplier, or tome (your choice). On a 10+,<br>you already have a connection in your arcane network that allows you to<br>make good on this info. On a 7-9, the path forward is blocked or precarious for you at this time. On a miss, they tell you little, but your questions<br>put them in grave danger.&nbsp;"
+                      }
+                    },
+                    {
+                      "id": "a81b593c-9b96-45a8-8757-fe34bca69f9b",
+                      "label": "Wielding the Arcane",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "&nbsp;When you unleash by invoking an arcane item or<br>relic, you may choose to treat your roll as a 10+ without rolling. The item<br>is permanently—and obviously—damaged or consumed by this process."
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "a52099c4-7a26-4a83-92e2-bd0415ed1d4b",
+                  "label": "Drama Moves",
+                  "blocks": [
+                    {
+                      "id": "4635608f-1e83-443c-b32c-7c0a2f17768c",
+                      "label": "Scholar Corruption Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you exploit someone’s ignorance of the arcane for personal gain,<br>mark corruption."
+                      }
+                    },
+                    {
+                      "id": "3337f0aa-df4b-4d61-8242-3002c2e16741",
+                      "label": "Scholar Intimacy Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you share a moment of intimacy—physical or emotional—with another<br>person, they get a Debt on you...and you have what they desire. Ask them to<br>name an item they have been seeking; that item has recently turned up in<br>your arcane network.&nbsp;"
+                      }
+                    },
+                    {
+                      "id": "b348408a-3efb-4091-b92c-f2cff78af7ad",
+                      "label": "Scholar End Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you die or retire your character, choose one character to inherit your<br>collection of tomes and artifacts. They gain the Private Collection move so<br>long as they care for and protect these arcane holdings."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Moves"
+    },
+    {
+      "id": "cb1b1628-5a38-4ca4-8160-9e0cc6296927",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "67e1d433-1d5c-4a63-9a2e-60aeafc37271",
+                  "label": "Standard Avances",
+                  "blocks": [
+                    {
+                      "id": "5db6ac58-832a-4d66-8fca-730ea7162bc5",
+                      "label": "+1 Blood (max +3) ",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "cf4abdeb-ae04-4c18-b5ea-cda9b8addb32",
+                      "label": "+1 Heart (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "2a374ecc-6eb4-44cc-9205-c03bc76cd662",
+                      "label": "+1 Mind (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "35028377-d53e-4020-ae34-488c5e517d12",
+                      "label": "+1 Spirit (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "67e6a1c6-a4d6-4d67-99e2-45238a4cf174",
+                      "label": "A new Scholar Move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "e2559766-19db-4fb9-907a-d6fcedda8738",
+                      "label": "A new Scholar Move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "d626556d-1ce9-41a6-b73e-7280740698bf",
+                      "label": "A move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "a92ab968-3f12-4f0a-8a70-1d0076c2369f",
+                      "label": "A move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "ed07a309-877d-482f-9ba5-a63a150667d3",
+                      "label": "Add two features to your<br>arcane network",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "69fd18e3-7e68-4485-8593-8d0f79fc7084",
+                      "label": "Change your Faction",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "51f8cd42-e5ad-4de8-af54-22ed940ada07",
+                  "label": "Cont...",
+                  "blocks": [
+                    {
+                      "id": "c981641a-8827-429a-b117-8e8a75183731",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "After 5 advances you may select:",
+                      "meta": {}
+                    },
+                    {
+                      "id": "fafa7523-0537-4564-8acc-d8f07ccc41ab",
+                      "label": "+1 to any stat (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "43f074c4-8f59-4bd4-bda5-f9ad8c7a41dc",
+                      "label": "+1 to any Faction (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "ae0bb080-d687-4813-89f8-0e732efbe2ab",
+                      "label": "Erase a scar",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "0a986d44-a722-4031-8e09-b737fdbb84ea",
+                      "label": "Take Channeling and two spells",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "5cf77e20-33c2-4758-8162-2bf46c5145fc",
+                      "label": "Erase a corruption advance",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "af414b64-f43c-4f97-b485-93cfd6ab6c3c",
+                      "label": "Advance 3 basic moves",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "d55bd7f9-04d1-423d-803e-f7cee1ba8036",
+                      "label": "Advance 3 basic moves",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "a35c2b02-2493-42e8-a744-72774d2ff5d6",
+                      "label": "Retire your character to safety",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "ad20fc03-8454-4fde-99d6-35c7e5f7f024",
+                      "label": "Change to a new Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Advances"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "group": "Urban Shadows Archetypes"
+}

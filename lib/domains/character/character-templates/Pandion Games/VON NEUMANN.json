@@ -1,0 +1,717 @@
+{
+  "fariType": "character",
+  "id": "1b6a1aa4-5257-45f6-8d30-ee064204f4b4",
+  "lastUpdated": 1660825996,
+  "name": "VON NEUMANN",
+  "pages": [
+    {
+      "id": "1fcf8afb-e366-45e5-8dc3-64397d511e6a",
+      "label": "&nbsp;PLAYER",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "f5382bcd-dd52-4a2c-bba0-20cdb05b265d",
+                  "label": "HARDWARE SPECIFICATION",
+                  "blocks": [
+                    {
+                      "id": "bb70b98a-3086-4ff1-b38b-47d0007d958b",
+                      "label": "SHIP DESIGNATION",
+                      "type": "Text",
+                      "value": "[NAME]",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8d3993aa-91c6-4ba7-9016-e991ac62fe9b",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "62586250-2864-4576-ac06-399801581e68",
+                      "label": "CPU",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "width": 0.33,
+                        "asClock": false,
+                        "helperText": "MAX | IN USE"
+                      },
+                      "value": [
+                        { "label": "", "checked": true },
+                        { "label": "", "checked": true }
+                      ]
+                    },
+                    {
+                      "id": "9632a8bb-f44b-4c94-a037-239f23932d17",
+                      "label": "MEM",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "width": 0.33,
+                        "asClock": false,
+                        "helperText": "MAX | IN USE"
+                      },
+                      "value": [{ "label": "", "checked": true }]
+                    },
+                    {
+                      "id": "bda87bbd-2f69-490f-8dcc-b37b775e29e4",
+                      "label": "DISK",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "width": 0.33,
+                        "asClock": false,
+                        "helperText": "MAX | IN USE"
+                      },
+                      "value": [{ "label": "", "checked": true }]
+                    },
+                    {
+                      "id": "02963d44-31ce-43d7-b293-6ff9c87fa776",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "3874a0e8-f783-45d9-8506-8f448d36807b",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "21e0fc84-1c38-4208-96f0-83004246b7eb",
+                      "label": "TECHNOLOGY INSTALLED",
+                      "type": "Text",
+                      "value": "BASIC SENSOR PACKAGE (1 CPU)\nBASIC VIRTUAL REALITY (1 CPU, 1 MEM, 1 DISK)\n",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "e8886896-d0a2-4b5b-ab3d-f8681809ac25",
+                  "label": "SOFTWARE DEFINITION",
+                  "blocks": [
+                    {
+                      "id": "f0186cb8-f56a-4bd1-b3af-03661fa3da7e",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e846e5d3-531e-40ba-892e-8bc10d5ba228",
+                      "label": "Age",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "342e322a-38a2-4c50-9190-a8f7fdcff53b",
+                      "label": "Pronouns",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "0ca9b02c-c10d-497c-9ed3-36d7d324b48e",
+                      "label": "Core Trait",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "670a88a9-93a9-4ae6-8e4d-a405be8d275e",
+                      "label": "Reasoning",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 1 }
+                    },
+                    {
+                      "id": "dc07fb32-a498-4246-8830-835d8d0535dd",
+                      "label": "Resiliency",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 1 }
+                    },
+                    {
+                      "id": "76f19a59-e155-41a8-903e-45ed77e95a37",
+                      "label": "Humanism",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 1 }
+                    },
+                    {
+                      "id": "734864e8-7685-47d1-a577-36b5c17a34fa",
+                      "label": "Engineering",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 1 }
+                    },
+                    {
+                      "id": "8b03ae8f-6cd6-4473-842a-6c46683a82e7",
+                      "label": "Curiosity",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": { "commands": ["1d6"], "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "344dc3cd-4d44-4d17-a4ff-da218239da42",
+      "label": "CARGO",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2522ab8b-6356-410b-ada7-a3e13e82f7ea",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "e7e578d9-f804-4689-ab2d-29f05f7d82d5",
+                      "label": "CARGO TRACKING",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "3D Printer", "checked": false },
+                        { "label": "3D Printer", "checked": false },
+                        { "label": "RAMROD", "checked": false },
+                        { "label": "RAMROD", "checked": false },
+                        { "label": "RAMROD", "checked": false },
+                        { "label": "RAMROD", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "f9b9f106-f524-44f2-8924-e4abbddfbe14",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "bf8b32ba-6baf-4023-96ee-b5ea679d2a58",
+                      "label": "RESOURCES AVAILABLE (BULK)",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "add04753-8b26-43fc-804e-864f1c2b636e",
+                      "label": "RESOURCES AVAILABLE (/MONTH)",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "febe62ad-a084-4ae0-9257-acf86ee0256f",
+      "label": "TECHNOLOGY",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2d8a693b-59ce-4ed0-8e61-c4e2e3d0fee3",
+                  "label": "Unlocked",
+                  "blocks": [
+                    {
+                      "id": "ae3ab272-fc82-4f9a-abc6-6763842bcf42",
+                      "label": "Basic Sensor Package (1 CPU)",
+                      "type": "Text",
+                      "value": "Allows for basic data analysis. Requires being in orbit or in-system to use. Fairly short range.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "42f1e54b-f774-4c8d-848a-4b862140b8ba",
+                      "label": "Basic Virtual Reality (1 CPU, 1 Memory when running. 1 Disk)",
+                      "type": "Text",
+                      "value": "A simple room with a desk and screens that allowed you to interface with your programs and ship in a more human-centered way. The graphics are low res, physics are jerky, and it doesn’t feel quite right, but it’s better than nothing.",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "dad22b70-54c7-4e89-af8b-23420c4e4527",
+                  "label": "Under Research",
+                  "blocks": [
+                    {
+                      "id": "3ff45bff-7baa-40bb-a74d-9c44e7a8350d",
+                      "label": "[Tech name]",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "helperText": "Months remaining in research" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d6aab2e8-d311-43c1-bfb8-b09ea3b9d0e2",
+      "label": "SYSTEMS",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2a2a9545-db3a-4d81-9050-1669cf632912",
+                  "label": "[SYSTEM NAME] (copy section per Star System)",
+                  "blocks": [
+                    {
+                      "id": "2b70e99c-1ed8-4f62-ae73-7fc919520274",
+                      "label": "System Information",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "007ef6f3-fa97-41a9-bbc6-d2d7ef4b4c61",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "5e8ece9a-d61e-4587-a2dc-185b0cdef5e6",
+                      "label": "Unique Discoveries",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "95e94764-9a90-4b87-a36e-be067458295f",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "da85f241-8d35-44ca-907d-a4d0e6f88de0",
+                      "label": "Equipment",
+                      "type": "SlotTracker",
+                      "meta": { "width": 1 },
+                      "value": [
+                        { "label": "Space Station", "checked": false },
+                        { "label": "3D Printer(#)", "checked": false },
+                        { "label": "RAMRODs(#)", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "65c82ae2-4060-4bef-8d06-1fd6aa54eae5",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "11c50f7a-d254-44e6-a246-33f1112d4518",
+                      "label": "Resources Stored in System",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 1 },
+                      "value": "0"
+                    }
+                  ]
+                },
+                {
+                  "id": "a67cf71f-2d4e-44a9-9efa-74c98a74ca0b",
+                  "label": "SOL",
+                  "blocks": [
+                    {
+                      "id": "e649a537-b9ed-4ac6-a8f8-f8465c7121c5",
+                      "label": "System Information\r\n",
+                      "type": "Text",
+                      "value": "Distance from SOL: 0.00 LY\nEvolutionary Stage: Main Sequence G2, Yellow\nExpected Planets: 9 (1 - Earth)\nMetallicity: MEDIUM (5,000 resources)\n\nStar System Sweep completed.\nNo Equipment or Mining operations in system\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7280edeb-3db3-43e8-a8eb-7b932981b08a",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "921885d0-b985-4f8f-ac79-b74780f98f91",
+                      "label": "Unique Discoveries",
+                      "type": "Text",
+                      "value": "Singular home of human species - Earth. Unknown state.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "046ebe82-9bb7-4609-83f4-2317e776e12c",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "dc5c3fbe-800c-4679-8097-f01ebc9dafd7",
+                      "label": "Equipment",
+                      "type": "SlotTracker",
+                      "meta": { "width": 1 },
+                      "value": []
+                    },
+                    {
+                      "id": "879d7d73-fde1-48ce-92e2-d80c2f1614cc",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "1c90031e-d437-4243-bc99-a2ec9afa4ac2",
+                      "label": "Resources Stored in System",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 1 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a60f5349-4779-4b83-b4c2-8fc8ef18b054",
+      "label": "REPLICATED PROBES",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a3fa489a-ffd8-4f59-88e4-7bcfdfc9f53c",
+                  "label": "PROBE 1 NAME",
+                  "blocks": [
+                    {
+                      "id": "f903ea23-fd98-4a21-adce-493386e0bfed",
+                      "label": "SHIP DESIGNATION",
+                      "type": "Text",
+                      "value": "[NAME]",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1860821c-6746-4c0b-ba0e-ab9318713b24",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "f61f9c13-d9a3-4c55-9f42-18f6a89c0a2c",
+                      "label": "CURRENT LOCATION",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cdb842d0-ca38-43cc-825f-3967dd7a87cf",
+                      "label": "REPLICANT DETAILS",
+                      "type": "Text",
+                      "value": "Pronouns:\nCore Trait:\nGeneration: \nParent:\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5e9ba5c7-0f3c-46e5-b694-981e5e595506",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "c4581614-21b3-4fe7-9dbd-83c26ece2913",
+                      "label": "NOTES",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "afc63596-681d-470e-8afc-bbe0fda37192",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "af31f550-ab23-42e9-aa43-cbadd6217880",
+                      "label": "CPU",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "width": 0.33,
+                        "asClock": false,
+                        "helperText": "MAX | IN USE"
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "0b64a016-bac1-41e8-9676-1301fa520722",
+                      "label": "MEM",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "width": 0.33,
+                        "asClock": false,
+                        "helperText": "MAX | IN USE"
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "a272c547-5fae-4905-af42-af3df259ea28",
+                      "label": "DISK",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "width": 0.33,
+                        "asClock": false,
+                        "helperText": "MAX | IN USE"
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "981904cc-6270-4e5f-bac2-ed01092009b0",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "b212cdd8-05cb-4320-8110-aead926cdd7a",
+                      "label": "TECHNOLOGY INSTALLED",
+                      "type": "Text",
+                      "value": "BASIC SENSOR PACKAGE (1 CPU)\nBASIC VIRTUAL REALITY (1 CPU, 1 MEM, 1 DISK)\n\n",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "90323234-1332-4a94-9522-73dcbff1a1eb",
+                      "label": "Reasoning",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "3ef8a5ea-4700-4bd0-95a4-73287503c740",
+                      "label": "Resiliency",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "2f743d75-71bb-454a-8f83-2c129b5ce132",
+                      "label": "Humanism",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "5d6befea-d59a-4eac-9519-5e02192c6b3c",
+                      "label": "Engineering",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "7de5ce39-7995-4ebf-b7e3-a2e16cfc0b50",
+                      "label": "Curiosity",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "f0cd7886-91e9-4d76-aa8f-f1d0aff3674e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "cd8d0654-e07b-4c40-8beb-f7e0eacf5368",
+                  "label": "PROBE 2 NAME",
+                  "blocks": [
+                    {
+                      "id": "530b7f21-fe47-452b-b405-30ec42cc5f3a",
+                      "label": "SHIP DESIGNATION",
+                      "type": "Text",
+                      "value": "[NAME]",
+                      "meta": {}
+                    },
+                    {
+                      "id": "785796c4-0f31-45cd-8592-982808f29ccf",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "42bf1ed7-0dac-41c8-b55c-36edaf8feb49",
+                      "label": "CURRENT LOCATION",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "24c7cf98-cacb-419b-98dc-55688b700b39",
+                      "label": "REPLICANT DETAILS",
+                      "type": "Text",
+                      "value": "Pronouns:\nCore Trait:\nGeneration: \nParent:\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cca27423-0c28-4e6f-b930-0885b074e42e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "861b3c9d-6820-4f45-850d-5f84fe4e1007",
+                      "label": "NOTES",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "734686be-2e1b-4a5d-90c1-ac79ce217a2a",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "72864511-99b9-4cd7-a0da-7eee9f4af4a8",
+                      "label": "CPU",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "width": 0.33,
+                        "asClock": false,
+                        "helperText": "MAX | IN USE"
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "483dc4c5-eaae-4c9b-82b1-5e95d7713b84",
+                      "label": "MEM",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "width": 0.33,
+                        "asClock": false,
+                        "helperText": "MAX | IN USE"
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "9e894126-944c-45e7-8c7e-7d9542f2b4c0",
+                      "label": "DISK",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "width": 0.33,
+                        "asClock": false,
+                        "helperText": "MAX | IN USE"
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "2df37dad-4d89-47e4-9149-50a5daf0c5b2",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "857ef293-035d-435b-bb68-e5acea0ad6b9",
+                      "label": "TECHNOLOGY INSTALLED",
+                      "type": "Text",
+                      "value": "BASIC SENSOR PACKAGE (1 CPU)\nBASIC VIRTUAL REALITY (1 CPU, 1 MEM, 1 DISK)\n\n",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "69216430-08e7-4074-aad9-893254adcce7",
+                      "label": "Reasoning",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "c773093e-2c9f-49c9-838c-02e763e4e2ac",
+                      "label": "Resiliency",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "ec5770b8-1881-4dbe-b600-dc8c843539bd",
+                      "label": "Humanism",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "987afaf7-8c75-4270-8d06-6912bddd3965",
+                      "label": "Engineering",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "265e5bd9-d1f8-4717-b832-602e9be7d44a",
+                      "label": "Curiosity",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d6"], "width": 0.5 }
+                    },
+                    {
+                      "id": "4332050f-8ed0-4c3d-9886-ad22d3f1130f",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": false,
+  "theme": {
+    "backgroundColor": "#0c132a",
+    "pageHeadingFontFamily": "inconsolata",
+    "sectionHeadingFontFamily": "inconsolata",
+    "sectionHeadingFontWeight": "900",
+    "labelFontFamily": "inconsolata ",
+    "textFontFamily": "inconsolata ",
+    "infoTextFontFamily": "inconsolata ",
+    "helperTextFontFamily": "inconsolata "
+  }
+}

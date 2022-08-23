@@ -1,0 +1,844 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1660532462,
+  "name": "Urban Shadows Character Template - The Aware Template",
+  "pages": [
+    {
+      "id": "a3a44aa9-cac6-4b84-a999-027ffde89eb5",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "69731bdf-1916-4652-8828-be495228d5c0",
+                  "label": "Faction:  Mortality\nArchetype:  The Aware",
+                  "blocks": []
+                },
+                {
+                  "id": "45523a9f-0eb0-4f63-bc5a-ec598e8a061a",
+                  "label": "Character Name",
+                  "blocks": [
+                    {
+                      "id": "145f5985-b39c-479d-8bd3-955bebe7ad23",
+                      "label": "Alisa, Anthony, Cam, Cleo, Cole, Datu, Devon, Galina, Hairi, Hans, Julius, Kim,<br>Kirsten, Laasya, Lara, Marisa, Miguel, Philip, Rashid, Veronica",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pick one" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "21c2f86d-8905-4840-8998-51f63df230d3",
+                  "label": "Look",
+                  "blocks": [
+                    {
+                      "id": "5dca3292-ceba-4792-a54d-bc06f1ddc486",
+                      "label": "• Ambigous, Female, Male, Transgressing",
+                      "type": "Text",
+                      "value": "• Asian or South Asian, Black, Hispanic/Latino, Indigenous, Middle Eastern, White, __________\n• Business, Casual Clothing, Everyday Clothing, Inconspicuous Clothing, Uniform Clothing<br>",
+                      "meta": { "helperText": "pick as many as apply" }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "5a6a358c-b62f-4195-96c7-3c8c3787abcf",
+                  "label": "Demeanor",
+                  "blocks": [
+                    {
+                      "id": "b435a71c-a6e2-48df-b1f5-3d03cbda784b",
+                      "label": "Aggressive, Charming, Paranoid, Serene",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pick one" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d2a83ac6-49bb-4ba8-b833-d344f91a3474",
+                  "label": "Intro Questions",
+                  "blocks": [
+                    {
+                      "id": "7a137bc1-b1eb-426d-9be8-5547fe9d4e6a",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "• Who are you?<br><br>• How long have you been in the city?<br><br>• What was your greatest accomplishment in the city?<br><br>• Why did you stop?<br><br>• What do you desperately need?<br><br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "0eb28e1e-3bbf-41fd-86a8-2044a7d4b9cb",
+                  "label": "Starting Character Stats",
+                  "blocks": [
+                    {
+                      "id": "b5224c97-9a2e-4948-a56c-aef1c3dfd7de",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "(Add 1 to one of these)",
+                      "meta": {}
+                    },
+                    {
+                      "id": "57510b01-8663-47f6-91b6-cb32d1b80c4e",
+                      "label": "Blood",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-1"
+                    },
+                    {
+                      "id": "374c1eb3-4074-4545-b8d0-52588740356a",
+                      "label": "Heart",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "444462ca-5dbf-44d3-8a92-718cb240bb3c",
+                      "label": "Mind",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "1f26ae7a-29c2-47ee-b19f-e13ae9435df8",
+                      "label": "Spirit",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "a1fc2ecd-2b80-4c20-92e7-cdd614b62c30",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "bcbe5c2e-0534-4ee8-b4b2-3ac7189990eb",
+                  "label": "Starting Factions ",
+                  "blocks": [
+                    {
+                      "id": "a0471781-1a52-4d1d-885f-8f032bf909a7",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "(Add 1 to one of these)",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d2210ef1-1bec-486e-a685-2ff3c690db41",
+                      "label": "Mortality",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "27bb316c-8a5d-4574-9d84-3d8e93bd48df",
+                      "label": "Night",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "30aec462-bf74-446c-bd76-c9312d1d8755",
+                      "label": "Power",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "ef33370d-d928-4e95-86b1-151049c2abbb",
+                      "label": "Wild",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-1"
+                    },
+                    {
+                      "id": "c69152f2-cde5-403f-84bc-27b15f477529",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "0fe8fa45-b8e6-42f9-9107-e0804bbb5210",
+                  "label": "Gear",
+                  "blocks": [
+                    {
+                      "id": "bb08b099-58b7-45ca-905a-b33f38a78e56",
+                      "label": "• A simple apartment, a decent car, a smart phone\n• 1 simple defense weapon\n     • 9mm Beretta (2-harm close loud)\n     • Taser (stun-harm hand)\n     • Snub-nosed revolver (2-harm close loud reload concealable)<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "010c37df-4772-4425-94d0-a24d995a5672",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "68471755-4580-4787-8007-de1271c65c61",
+                  "label": "Harm",
+                  "blocks": [
+                    {
+                      "id": "bcfaf98c-4f78-43e2-8101-b2ef216538f9",
+                      "label": "Faint",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "82441654-8e19-4b89-966c-4205c9183eaf",
+                      "label": "Faint",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "3094104d-3d04-48e6-8ad0-5af3d484fbe9",
+                      "label": "Grievous",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "c1940364-c9b9-4c3b-828f-2a26d2ad68cd",
+                      "label": "Grievous",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "637e02db-55b5-4a76-af85-0dc6cc1ebfad",
+                      "label": "Critical",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "61aa1f21-d0d9-4588-a752-ea8be3faad20",
+                      "label": "Critical",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "998b17ac-568d-44fc-8365-3615680cb2bd",
+                  "label": "Armor",
+                  "blocks": [
+                    {
+                      "id": "29b02cde-eb1a-4f30-b92e-601d711719a8",
+                      "label": "Current Armor Rating",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "d43821eb-68dd-48bc-877f-233753b8e1f6",
+                  "label": "S-Harm",
+                  "blocks": [
+                    {
+                      "id": "8b35e38f-809a-478d-b99f-64b0e071e066",
+                      "label": "Incapacitated",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "a97bf982-c30f-4d38-8141-a44abce3d919",
+                  "label": "Scars",
+                  "blocks": [
+                    {
+                      "id": "ba294de7-669d-4859-9028-71db6f7672e7",
+                      "label": "Shattered (-1 Blood)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Shattered means frightened, weakened, and overly cautious. Shattered characters hesitate when they should move, and their attempts to unleash an<br>attack on someone or escape a situation often come up short."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "e12ea3ee-332b-43eb-9a8a-1c9880d38c21",
+                      "label": "Crushed (-1 Heart)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Crushed means traumatized, timid, and uncertain. Crushed characters bear<br>the full weight of the wounds they’ve suffered, and their attempts to persuade an NPC are inhibited by their reticent approach to conflict."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "cd4815fd-698b-4e92-8496-fe75691869d4",
+                      "label": "Fractured (-1 Mind)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Fractured means confused, disoriented, and disjointed. Fractured characters<br>are unstable and unsure, and their attempts to figure someone out or mislead, distract, or trick others are unfocused and imprecise."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "96269cb9-2cfa-4bc6-87cf-58061859e6a1",
+                      "label": "Broken (-1 Spirit)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Broken means hopeless, forlorn, and cowardly. Broken characters have lost<br>their will to fight, and their attempts to keep their cool or let it out are often<br>half-hearted and incomplete."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Harm"
+    },
+    {
+      "id": "cb2888c2-cdc1-4be4-a6b4-aa34d78a3164",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "32a2e1c6-1b70-41f9-995e-e8fa2dceb120",
+                  "label": "Corruption Track",
+                  "blocks": [
+                    {
+                      "id": "2e99c534-814b-4243-a1ed-e6d077e33016",
+                      "label": "Corruption ",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "d40c2ed8-6fa0-4ec2-aba0-f75ffb52be08",
+                  "label": "Corruption Advances",
+                  "blocks": [
+                    {
+                      "id": "6e20b08b-097d-42ba-ac7c-531157b10190",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "52f6ca0a-18bf-4d81-a8b3-f18a4c20e43e",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "1ae2af73-cb0d-4607-92ae-efc138a0289a",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "d352bec7-93e8-431b-a95c-18878f59d028",
+                      "label": "Take a corruption move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "f5a42a91-93f0-420d-9e30-bd5398ec698d",
+                      "label": "Retire your character. They may return as a Threat.",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "af8647d1-3eb1-4e32-831c-9e9059a41de7",
+                  "label": "Corruption Moves",
+                  "blocks": [
+                    {
+                      "id": "f2349488-ffd5-4653-9c78-1a8e47a5e836",
+                      "label": "In Too Deep",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When a non-mortal tries to *lend you a hand* or *get in your way*, mark corruption to add or subtract 3 from their roll.&nbsp;"
+                      }
+                    },
+                    {
+                      "id": "93e8ebfe-6bdc-4210-bdbd-f4417db38026",
+                      "label": "Eyes on the Door",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When in danger from the supernatural, you can mark<br>corruption to *escape a situation* as if you rolled a 12+.<br>"
+                      }
+                    },
+                    {
+                      "id": "116c8d8b-9cc8-4052-81a1-4444a4a1a629",
+                      "label": "Free Agent",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "Mark corruption to *refuse to honor a debt* owed to a<br>non-mortal as if you rolled a 10+.<br>"
+                      }
+                    },
+                    {
+                      "id": "bc99e9a8-a1af-43ae-8af7-04d2f1a8924f",
+                      "label": "If You Can't Beat 'Em",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "Take two moves from non-mortal Archetypes. <br>Whenever you use these moves, mark corruption."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Corruption"
+    },
+    {
+      "id": "43cb8215-9d17-4072-a02a-4752f750ad60",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2a25b600-3115-450f-a109-d579b84a81ed",
+                  "label": "Debts",
+                  "blocks": [
+                    {
+                      "id": "f99ab0c0-d407-48ac-b333-f8bdf653ec8b",
+                      "label": "• Someone told you their secrets and you haven't told anyone\nabout them yet. They owe you 2 Debts.<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "37a6b240-4284-4d38-8578-1c760299da61",
+                      "label": "• Someone thinks they're protecting you, but it's really more like\nyou're protecting them. You owe each other a Debt. <br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5188fb92-69b8-46a0-adc5-1f771e52df43",
+                      "label": "• You're leveraging dirt you have on someone to get their help with\nsomething. You we them a debt.<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "073993af-cbe9-4989-be3d-9e3d4f59ea5a",
+                  "label": "Aware Moves",
+                  "blocks": [
+                    {
+                      "id": "d121b62d-95cf-466e-a27c-d46aff163d9b",
+                      "label": "Snoop",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["2d6"],
+                        "helperText": "When you keep an eye out for trouble, roll with Mind. On a 10+, <br>hold 3. On a 7-9, hold 1. While you're there, spend your hold to ask the <br>MC questions, 1 for 1:",
+                        "hideModifier": false
+                      }
+                    },
+                    {
+                      "id": "48e06a57-0a5b-4ded-882b-6bad1fc082bb",
+                      "label": "• What's my best way in/out?\n• Who or what here is not what they seem?\n• What happened here recently?\n• What here is the greatest danger to me?\n• Whose turf is this?<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "On a miss, you find yourself in over your head. The MC will tell you why this is a bad spot."
+                      }
+                    },
+                    {
+                      "id": "4c0a0a59-b290-4a6b-a9de-b211b54f3cdc",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "56726c99-c7f2-4011-825f-867f68ff126f",
+                      "label": "And Choose two more:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3cf70320-b0a7-4444-9542-273589cffffb",
+                      "label": "Did your Homework",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you *put a face to a name* with someone <br>politically important (your call), roll with Mind instead of Faction. On a <br>hit, you know a dangerous secret about them or their political machinations. <br>On a 10+, you know how to leverage that information: take a Debt <br>on them as well. On a miss, your snooping has already landed you in hot<br>water with your target; they know you've been looking into their business.<br>"
+                      }
+                    },
+                    {
+                      "id": "d6f52641-295e-4e5f-9098-9222d0b9b484",
+                      "label": "I know a Guy",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you *hit the streets* or *put a face to a name* with Mortality, roll with Mind instead of Faction.&nbsp;"
+                      }
+                    },
+                    {
+                      "id": "10d0d7d2-29d4-4322-b48c-5df8891a759b",
+                      "label": "I Brought Friends",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you CASH IN A DEBT with an NPC, add this <br>option to the list:<br>•&nbsp; Back you up in a dangerous situation. <br>"
+                      }
+                    },
+                    {
+                      "id": "d307aa42-b53c-46fc-9876-5fdde4d35d50",
+                      "label": "Sharpshooter",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you *unleash an attack* with a firearm, roll with <br>Mind instead of Blood. <br>"
+                      }
+                    },
+                    {
+                      "id": "69ea5715-a29d-40d4-be6b-4e0de3e01965",
+                      "label": "Hard-Boiled",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you get into trouble while chasing down a lead, gain<br>armor +1. <br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "87a97202-3b8f-457a-9271-5932fdb3daf1",
+                  "label": "Drama Moves",
+                  "blocks": [
+                    {
+                      "id": "ce4b0748-1101-4245-86d5-21203022cc84",
+                      "label": "Aware Corruption Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you ignore your mortal responsibilities to deal with the supernatural,<br>mark Corruption.<br>"
+                      }
+                    },
+                    {
+                      "id": "8638e357-16e0-41dd-8078-c9f2355f15db",
+                      "label": "Aware Intimacy Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you share a moment of intimacy--physical or emotional--with some-<br>one who isn't moral, mark corruption.<br>"
+                      }
+                    },
+                    {
+                      "id": "b1abf5e1-d6e2-4ca4-bf9c-42d6964018c7",
+                      "label": "Aware End Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you die, each character chooses whether your death inspires or corrupts a part of their being. If it inspires, they erase a corruption advance they've taken (if any). If it corrupts, they immediately take a corruption advance."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Moves"
+    },
+    {
+      "id": "8bc5d9c8-62a3-4f01-8438-8399745aa692",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "977e5bd4-fe5c-42fd-b720-d0b232fc2f09",
+                  "label": "Standard Avances",
+                  "blocks": [
+                    {
+                      "id": "ec3fd6b4-e49c-4f9d-8890-5548012dc957",
+                      "label": "+1 Blood (max +3) ",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "1b222b4f-7da5-43da-a98c-9c7b536dd7c7",
+                      "label": "+1 Heart (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "b9bb211f-9cf3-40f7-aacc-0fa9beb7e851",
+                      "label": "+1 Mind (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "cde09ce8-31dc-49e0-92f9-5bd5aaef397a",
+                      "label": "+1 Spirit (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "090feec9-4b15-469a-8743-089d72f85e41",
+                      "label": "A new Aware Move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "8ad945c4-5642-46f7-80eb-38ce3c2d600c",
+                      "label": "A new Aware Move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "71a0a086-167a-4b9a-b0c7-1beea18ba25e",
+                      "label": "A move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "85fb1544-3b3c-402e-b6c9-3ac770ddd06a",
+                      "label": "Change your Faction",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "4f6c548f-c891-4ab0-a7f6-9bec493ffbdb",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "060c69c6-85f9-4925-8217-572e6e69e85a",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "73474bb1-9ea7-49f5-ae89-c0f1f7baf1f9",
+                  "label": "Cont...",
+                  "blocks": [
+                    {
+                      "id": "8be63373-68c5-4340-bf7f-e17ac2fcff71",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "After 5 advances you may select:",
+                      "meta": {}
+                    },
+                    {
+                      "id": "848dbeca-a6af-4fdb-8609-0782566e4a94",
+                      "label": "+1 to any stat (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "7883edfa-88dc-44c2-84b5-c34d53367b25",
+                      "label": "+1 to any Faction (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "418babfa-0a4e-41f4-b32f-721900cb41ec",
+                      "label": "Erase a scar",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "7e25551d-9f4d-4469-be86-3dd1336b8252",
+                      "label": "Join or lead a watcher's society",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "9c8741ce-fe20-4f8b-bfa7-11297e2dbb85",
+                      "label": "Erase a corruption advance",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "69645b7b-521c-40ab-81fe-98509bcd35ec",
+                      "label": "Erase a corruption advance",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "ed4f4d33-72df-4737-bced-ecb46a51e711",
+                      "label": "Advance 3 basic moves",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "40ebeb82-37e9-4532-aeb1-5c2cb3c1682c",
+                      "label": "Advance 3 basic moves",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "c145e83f-2354-47c7-b991-0a9c0079a568",
+                      "label": "Change to a new Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Advances"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "group": "Urban Shadows Archetypes"
+}
