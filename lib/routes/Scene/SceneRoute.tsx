@@ -43,7 +43,7 @@ function SceneRoute() {
   return (
     <>
       <PageMeta title={pageTitle} />
-      <Page maxWidth="none">
+      <Page maxWidth="none" sx={{ paddingTop: "2rem" }}>
         <Box px="2rem">
           <Scene
             sceneManager={sceneManager}

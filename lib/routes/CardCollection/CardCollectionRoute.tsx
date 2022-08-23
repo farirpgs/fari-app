@@ -248,7 +248,7 @@ function CardCollectionRoute() {
   return (
     <>
       <PageMeta title={pageTitle} />
-      <Page maxWidth="none">
+      <Page maxWidth="none" sx={{ paddingTop: "2rem" }}>
         <Container maxWidth="md">
           <Box mb=".5rem">
             <Alert severity="info">

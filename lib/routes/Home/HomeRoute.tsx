@@ -82,7 +82,7 @@ export const HomeRoute: React.FC<{}> = () => {
   }, []);
 
   return (
-    <Page hideHeaderLogo maxWidth="100vw">
+    <Page hideHeaderLogo maxWidth="100vw" sx={{ paddingTop: "2rem" }}>
       <PageMeta
         title={undefined}
         description={t("home-route.meta.description")}

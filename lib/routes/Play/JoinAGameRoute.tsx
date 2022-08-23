@@ -69,7 +69,7 @@ function JoinAGameRoute() {
   }, [playerName]);
 
   return (
-    <Page>
+    <Page sx={{ paddingTop: "2rem" }}>
       <Box>
         <Box pb="1rem">
           <Container maxWidth="xs">

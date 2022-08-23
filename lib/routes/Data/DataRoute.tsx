@@ -316,7 +316,7 @@ export const DataRoute: React.FC = () => {
   }
 
   return (
-    <Page>
+    <Page sx={{ paddingTop: "2rem" }}>
       <PageMeta
         title={t("data-route.meta.title")}
         description={t("data-route.meta.description")}

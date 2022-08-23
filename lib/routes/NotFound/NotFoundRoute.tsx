@@ -16,7 +16,7 @@ export const NotFoundRoute: React.FC<{}> = () => {
 
   return (
     <div>
-      <Page>
+      <Page sx={{ paddingTop: "2rem" }}>
         <PageMeta title="Page Not Found" noIndex />
         <Box display="flex" justifyContent="center" pt="3rem">
           <Typography

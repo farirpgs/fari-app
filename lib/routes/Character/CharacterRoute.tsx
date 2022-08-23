@@ -151,7 +151,7 @@ function CharacterRoute() {
         dicePoolResults={dicePoolResults}
       />
       <Box bgcolor={theme.palette.background.paper}>
-        <Page pb="6rem" marginTop="0" maxWidth="none">
+        <Page maxWidth="none" sx={{ paddingTop: "2rem" }}>
           {!dialogMode && (
             <Toolbox
               diceFabProps={{

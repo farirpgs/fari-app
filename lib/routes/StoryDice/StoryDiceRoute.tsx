@@ -26,7 +26,7 @@ function Text(props: { children: JSX.Element }) {
 export function StoryDiceRoute() {
   const { t } = useTranslate();
   return (
-    <Page>
+    <Page sx={{ paddingTop: "2rem" }}>
       <PageMeta
         title={t("story-dice-route.meta.title")}
         description={t("story-dice-route.meta.description")}

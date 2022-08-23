@@ -36,7 +36,7 @@ export function StoryBuilderRoute() {
   const { t } = useTranslate();
 
   return (
-    <Page>
+    <Page sx={{ paddingTop: "2rem" }}>
       <PageMeta
         title={t("story-builder-route.meta.title")}
         description={t("story-builder-route.meta.description")}

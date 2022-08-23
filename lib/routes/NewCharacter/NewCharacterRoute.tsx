@@ -80,7 +80,7 @@ export function NewCharacterRoute() {
   }
 
   return (
-    <Page marginTop="0">
+    <Page sx={{ paddingTop: "2rem" }}>
       {template && (
         <PageMeta
           title={`Use the ${template?.fileName} character sheet template on Fari App`}

@@ -84,7 +84,7 @@ export const AppRouter = () => {
                       id={sessionId}
                       initialStorage={initialStorage}
                     >
-                      <PlayRoute />;
+                      <PlayRoute />
                     </RoomProvider>
                   </LiveblocksProvider>
                 );

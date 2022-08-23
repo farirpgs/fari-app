@@ -6,12 +6,10 @@ import CreateIcon from "@mui/icons-material/Create";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import ErrorIcon from "@mui/icons-material/Error";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
-import FilterHdrIcon from "@mui/icons-material/FilterHdr";
-import MovieIcon from "@mui/icons-material/Movie";
 import PanToolIcon from "@mui/icons-material/PanTool";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import SaveIcon from "@mui/icons-material/Save";
+import SendIcon from "@mui/icons-material/Send";
 import Masonry from "@mui/lab/Masonry";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
@@ -76,7 +74,7 @@ import {
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../routes/Character/components/CharacterDialog/CharacterV3Dialog";
-import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+
 import {
   MiniThemeContext,
   useMiniTheme,
@@ -141,6 +139,9 @@ export const Session: React.FC<IProps> = (props) => {
   const [characterIdCard, setCharacterIdCard] = useState<string>("");
   const isGM = !props.idFromParams;
   const lightBackground = useLightBackground();
+  const [leftTab, setLeftTab] = useState<"chat" | "players" | "controls">(
+    "chat"
+  );
 
   useBlockReload(sceneManager.state.dirty);
 
@@ -285,8 +286,17 @@ export const Session: React.FC<IProps> = (props) => {
   };
 
   return (
-    <Page pb="6rem" isLive gameId={props.idFromParams} maxWidth="none">
-      <Box px="1rem">
+    <Page isLive gameId={props.idFromParams} maxWidth="none" hideFooter>
+      <Box
+        sx={{
+          padding: "2rem",
+          top: "0",
+          bottom: "10rem",
+          position: "absolute",
+          width: "100%",
+          height: "calc(100vh - 10rem)",
+        }}
+      >
         {renderPauseDialog()}
         {streamerModalOpen && (
           <WindowPortal
@@ -302,13 +312,16 @@ export const Session: React.FC<IProps> = (props) => {
 
         <Toolbox
           diceFabProps={{
-            onRoll: (result) => {
+            onRoll(result) {
               handleSetMyRoll(result);
             },
-            rollsForDiceBox: me?.rolls ?? [],
-            onRollPool: (result, playerId) => {
-              handleSetPlayerRoll(playerId, result);
-            },
+            // onRoll: (result) => {
+            //   handleSetMyRoll(result);
+            // },
+            // rollsForDiceBox: me?.rolls ?? [],
+            // onRollPool: (result, playerId) => {
+            //   handleSetPlayerRoll(playerId, result);
+            // },
           }}
           centerActions={
             <>
@@ -394,7 +407,7 @@ export const Session: React.FC<IProps> = (props) => {
             </>
           }
         />
-        <Box px="1rem">{props.error ? renderPageError() : renderPage()}</Box>
+        {props.error ? renderPageError() : renderPage()}
       </Box>
     </Page>
   );
@@ -417,29 +430,34 @@ export const Session: React.FC<IProps> = (props) => {
   function renderPageContent() {
     return (
       <Fade in>
-        <Box>
-          <Grid container spacing={2} wrap={isSmall ? "wrap" : "nowrap"}>
-            <Grid
-              item
-              sx={{
-                width: isSmall ? "100%" : "25rem",
-                flex: "0 0 auto",
-              }}
-            >
-              {renderSidePanel()}
-            </Grid>
-            <Grid
-              item
-              xs
-              sx={{
-                width: isSmall ? "100%" : undefined,
-                flex: "1 0 auto",
-              }}
-            >
-              {renderSession()}
-            </Grid>
+        <Grid
+          container
+          spacing={2}
+          wrap={isSmall ? "wrap" : "nowrap"}
+          sx={{
+            height: "100%",
+          }}
+        >
+          <Grid
+            item
+            sx={{
+              width: isSmall ? "100%" : "25rem",
+              flex: "0 0 auto",
+            }}
+          >
+            {renderSidePanel()}
           </Grid>
-        </Box>
+          <Grid
+            item
+            xs
+            sx={{
+              width: isSmall ? "100%" : undefined,
+              flex: "1 0 auto",
+            }}
+          >
+            {renderSessionTabs()}
+          </Grid>
+        </Grid>
       </Fade>
     );
   }
@@ -496,16 +514,83 @@ export const Session: React.FC<IProps> = (props) => {
 
   function renderSidePanel() {
     return (
-      <Box>
-        <Box>{renderManagementActions()}</Box>
+      <>
+        <TabbedScreen
+          tabs={[
+            {
+              label: "Chat",
+              dataCy: "chat-tab",
+              value: "chat",
+              sx: { padding: "0", flex: "1 0 auto" },
+              render: renderChat,
+            },
+            {
+              label: "Players",
+              dataCy: "players-tab",
+              value: "players",
+              sx: { padding: "0", overflow: "auto" },
+              render: renderPlayers,
+            },
+            {
+              label: "Controls",
+              dataCy: "controls-tab",
+              value: "controls",
+              sx: {},
+              render: renderSessionControls,
+            },
+          ]}
+        />
+      </>
+    );
+  }
 
+  function renderChat() {
+    return (
+      <Box
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            flex: "1 0 auto",
+          }}
+        />
+        <Box
+          sx={{
+            padding: ".5rem 1rem",
+            background: "#efefef",
+          }}
+        >
+          <TextField
+            InputProps={{
+              disableUnderline: true,
+              endAdornment: (
+                <IconButton>
+                  <SendIcon />
+                </IconButton>
+              ),
+            }}
+            placeholder="Message"
+            fullWidth
+            variant="standard"
+          />
+        </Box>
+      </Box>
+    );
+  }
+  function renderPlayers() {
+    return (
+      <>
         <Box display="flex" flexDirection="column" height="100%">
           <Box
             className={css({
               backgroundColor: theme.palette.primary.main,
               color: textColors.primary,
-              borderTopLeftRadius: "4px",
-              borderTopRightRadius: "4px",
               minHeight: "4rem",
               padding: ".5rem",
             })}
@@ -660,7 +745,67 @@ export const Session: React.FC<IProps> = (props) => {
             })}
           </Paper>
         </Box>
-      </Box>
+      </>
+    );
+  }
+
+  function renderSessionControls() {
+    return (
+      <>
+        <Box pb="1rem">
+          <Grid
+            container
+            spacing={1}
+            justifyContent="flex-start"
+            alignItems="center"
+          >
+            {props.shareLink && (
+              <>
+                <Grid item>Session Link</Grid>
+                <Grid item>
+                  <input
+                    ref={$shareLinkInputRef}
+                    type="text"
+                    value={props.shareLink}
+                    readOnly
+                    hidden
+                  />
+                  <Tooltip
+                    open={shareLinkToolTip.open}
+                    title="Copied!"
+                    placement="top"
+                  >
+                    <span>
+                      <IconButton
+                        onClick={() => {
+                          if (props.shareLink && $shareLinkInputRef.current) {
+                            try {
+                              $shareLinkInputRef.current.select();
+                              document.execCommand("copy");
+                              navigator.clipboard.writeText(props.shareLink);
+                              setShareLinkToolTip({ open: true });
+                            } catch (error) {
+                              window.open(props.shareLink, "_blank");
+                            }
+
+                            logger.track("session.copy_session_link");
+                          }
+                        }}
+                        // size="small"
+                        // variant="outlined"
+                        color={shareLinkToolTip.open ? "secondary" : "inherit"}
+                      >
+                        <FileCopyIcon />
+                        {/* {t("play-route.copy-game-link")} */}
+                      </IconButton>
+                    </span>
+                  </Tooltip>
+                </Grid>
+              </>
+            )}
+          </Grid>
+        </Box>
+      </>
     );
   }
 
@@ -1009,14 +1154,14 @@ export const Session: React.FC<IProps> = (props) => {
     );
   }
 
-  function renderZones() {
+  function renderDrawArea() {
     return (
       <TlDrawErrorBoundary>
         <Box
           sx={{
             border: `1px solid ${theme.palette.divider}`,
             margin: "0 auto",
-            height: "50vh",
+            height: "100%",
             position: "relative",
             overflow: "hidden",
           }}
@@ -1076,120 +1221,62 @@ export const Session: React.FC<IProps> = (props) => {
     return null;
   }
 
-  function renderSession() {
+  function renderSessionTabs() {
     return (
-      <Box>
-        <TabbedScreen
-          tabs={[
-            {
-              value: "characters",
-              dataCy: "session.tabs.scene",
-              label: t("menu.characters"),
-              icon: <PeopleAltIcon />,
-              render: renderCharacterCards,
-            },
-            {
-              value: "scene",
-              dataCy: "session.tabs.characters",
-              label: t("menu.scenes"),
-              icon: <MovieIcon />,
-              render: () => (
-                <Scene
-                  sceneManager={sceneManager}
-                  isGM={isGM}
-                  canLoad={isGM}
-                  onRoll={handleSetMyRoll}
-                  onOpenChat={props.onOpenChat}
-                  onPoolClick={(element) => {
-                    // diceManager.actions.addOrRemovePoolElement(element);
-                    // diceManager.actions.setPlayerId(gm.id);
-                  }}
-                  onIndexCardUpdate={(indexCard, type) => {
-                    if (isGM) {
-                      sceneManager.actions.updateIndexCard(indexCard, type);
-                    } else {
-                      props.onPlayerInteraction?.({
-                        type: "update-index-card",
-                        payload: {
-                          indexCard: indexCard,
-                          indexCardType: type,
-                        },
-                      });
-                    }
-                  }}
-                />
-              ),
-            },
-            {
-              value: "draw",
-              dataCy: "session.tabs.draw",
-              label: t("draw-route.meta.title"),
-              icon: <FilterHdrIcon />,
-              render: renderZones,
-            },
-          ]}
-        />
-      </Box>
+      <TabbedScreen
+        tabs={[
+          {
+            value: "characters",
+            dataCy: "session.tabs.scene",
+            label: t("menu.characters"),
+            sx: { padding: "0" },
+            render: renderCharacterCards,
+          },
+          {
+            value: "scene",
+            dataCy: "session.tabs.characters",
+            label: t("menu.scenes"),
+            sx: {},
+            render: renderScene,
+          },
+          {
+            value: "draw",
+            dataCy: "session.tabs.draw",
+            label: t("draw-route.meta.title"),
+            sx: { padding: "0", height: "100%" },
+            render: renderDrawArea,
+          },
+        ]}
+      />
     );
   }
 
-  function renderCopyGameLink(link: string) {
+  function renderScene() {
     return (
-      <>
-        <input
-          ref={$shareLinkInputRef}
-          type="text"
-          value={link}
-          readOnly
-          hidden
-        />
-        <Tooltip open={shareLinkToolTip.open} title="Copied!" placement="top">
-          <span>
-            <Button
-              onClick={() => {
-                if (link && $shareLinkInputRef.current) {
-                  try {
-                    $shareLinkInputRef.current.select();
-                    document.execCommand("copy");
-                    navigator.clipboard.writeText(link);
-                    setShareLinkToolTip({ open: true });
-                  } catch (error) {
-                    window.open(link, "_blank");
-                  }
-
-                  logger.track("session.copy_session_link");
-                }
-              }}
-              variant="outlined"
-              color={shareLinkToolTip.open ? "secondary" : "inherit"}
-              endIcon={<FileCopyIcon />}
-            >
-              {t("play-route.copy-game-link")}
-            </Button>
-          </span>
-        </Tooltip>
-      </>
-    );
-  }
-
-  function renderManagementActions() {
-    if (!isGM) {
-      return null;
-    }
-
-    return (
-      <Box pb="1rem">
-        <Grid
-          container
-          spacing={1}
-          justifyContent="space-evenly"
-          alignItems="center"
-        >
-          {props.shareLink && (
-            <Grid item>{renderCopyGameLink(props.shareLink)}</Grid>
-          )}
-        </Grid>
-      </Box>
+      <Scene
+        sceneManager={sceneManager}
+        isGM={isGM}
+        canLoad={isGM}
+        onRoll={handleSetMyRoll}
+        onOpenChat={props.onOpenChat}
+        onPoolClick={(element) => {
+          // diceManager.actions.addOrRemovePoolElement(element);
+          // diceManager.actions.setPlayerId(gm.id);
+        }}
+        onIndexCardUpdate={(indexCard, type) => {
+          if (isGM) {
+            sceneManager.actions.updateIndexCard(indexCard, type);
+          } else {
+            props.onPlayerInteraction?.({
+              type: "update-index-card",
+              payload: {
+                indexCard: indexCard,
+                indexCardType: type,
+              },
+            });
+          }
+        }}
+      />
     );
   }
 

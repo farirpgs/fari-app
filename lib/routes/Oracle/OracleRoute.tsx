@@ -36,7 +36,7 @@ export const OracleRoute = () => {
   const { t } = useTranslate();
 
   return (
-    <Page>
+    <Page sx={{ paddingTop: "2rem" }}>
       <PageMeta
         title={t("oracle-route.meta.title")}
         description={t("oracle-route.meta.description")}

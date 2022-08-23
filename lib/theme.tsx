@@ -18,6 +18,11 @@ export const defaultThemeConfiguration: ThemeOptions = {
     fontFamily: FontFamily.Default,
   },
   components: {
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
     MuiCssBaseline: {
       styleOverrides: {
         "@global": {},

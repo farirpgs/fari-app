@@ -99,19 +99,21 @@ export function PlayerRow(
             <Box mb=".5rem">
               <PlayerRowName
                 characterName={props.characterName}
-                color={props.color}
+                color={props.isChild ? undefined : props.color}
                 playerName={props.playerName}
               />
             </Box>
           </Grid>
 
           <Grid item>
-            <PlayerRowTurnTracker
-              playedDuringTurn={props.playedDuringTurn}
-              canUpdateInitiative={props.permissions.canUpdateInitiative}
-              onClick={handleClickInitiativeTracker}
-              dataCy={props.dataCy}
-            />
+            {!props.isChild && (
+              <CircleIcon
+                sx={{
+                  marginRight: ".25rem",
+                }}
+                htmlColor={props.color}
+              />
+            )}
           </Grid>
         </Grid>
       </Box>
@@ -123,6 +125,22 @@ export function PlayerRow(
         <Box>
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item>
+              <Grid container spacing={1} justifyContent="flex-end">
+                {props.permissions.canLoadCharacterSheet && (
+                  <Grid item>{renderLoadSheet()}</Grid>
+                )}
+                <Grid item>
+                  <PlayerRowTurnTracker
+                    playedDuringTurn={props.playedDuringTurn}
+                    canUpdateInitiative={props.permissions.canUpdateInitiative}
+                    onClick={handleClickInitiativeTracker}
+                    dataCy={props.dataCy}
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+
+            {/* <Grid item>
               <PlayerRowPoints
                 label={props.pointsLabel}
                 canUpdate={props.permissions.canUpdatePoints}
@@ -131,10 +149,9 @@ export function PlayerRow(
                 onChange={handlePointsChange}
                 dataCy={props["dataCy"]}
               />
-            </Grid>
+            </Grid> */}
             <Grid item>
               <Grid container spacing={1} justifyContent="flex-end">
-                <Grid item>{renderLoadSheet()}</Grid>
                 <Grid item>{renderMoreMenu()}</Grid>
               </Grid>
             </Grid>
@@ -164,9 +181,9 @@ export function PlayerRow(
             data-cy={`${props["dataCy"]}.assign-or-open-character-sheet`}
             className={css({
               visibility: canOpenOrLoadSheet ? "visible" : "hidden",
-              border: `1px solid `,
-              borderRadius: "50%",
-              boxShadow: theme.shadows[2],
+              // border: `1px solid `,
+              // borderRadius: "50%",
+              // boxShadow: theme.shadows[2],
             })}
             onClick={() => {
               if (props.hasCharacterSheet) {
@@ -306,8 +323,9 @@ function PlayerRowContainer(
           <Box
             sx={{
               padding: "0.5rem 1rem",
+              borderRadius: "4px",
               border: props.isChild
-                ? `2px solid ${theme.palette.secondary.main}`
+                ? `1px solid ${theme.palette.secondary.main}`
                 : "none",
             }}
           >
@@ -321,9 +339,9 @@ function PlayerRowContainer(
 
 const PlayerRowName = React.memo(
   (props: {
-    color: string;
     characterName: string | undefined;
     playerName: string | undefined;
+    color?: string;
   }) => {
     const theme = useTheme();
     return (
@@ -366,14 +384,6 @@ const PlayerRowName = React.memo(
             <>
               <Grid item xs={12} zeroMinWidth>
                 <Grid container>
-                  <Grid item>
-                    <CircleIcon
-                      sx={{
-                        marginRight: ".25rem",
-                      }}
-                      htmlColor={props.color}
-                    />
-                  </Grid>
                   <Grid
                     item
                     sx={{

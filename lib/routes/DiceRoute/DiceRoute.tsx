@@ -34,12 +34,12 @@ export function DiceRoute(props: {}) {
   });
 
   return (
-    <Page maxWidth="sm">
+    <Page maxWidth="sm" sx={{ paddingTop: "2rem" }}>
       <PageMeta
         title={t("dice-route.meta.title")}
         description={t("dice-route.meta.description")}
       />
-      <Container>
+      <Container sx={{ minHeight: "70vh" }}>
         <Heading icon={Icons.FateDice} title={t("dice-route.meta.title")} />
         <Stack spacing={2}>
           <Grid container justifyContent={"center"}>

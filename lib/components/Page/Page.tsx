@@ -28,7 +28,7 @@ import Hidden from "@mui/material/Hidden";
 import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import Select from "@mui/material/Select";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
+import { SxProps, ThemeProvider, useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -66,17 +66,13 @@ export enum LiveMode {
 }
 
 export const Page: React.FC<{
-  notFound?: JSX.Element;
   gameId?: string;
   isLive?: boolean;
-  drawerWidth?: string;
   maxWidth?: string;
-  marginTop?: string;
-  pb?: string;
-  debug?: Record<string, string>;
   hideHeaderLogo?: boolean;
-  disableAutomaticScrollTop?: boolean;
+  hideFooter?: boolean;
   children?: React.ReactNode;
+  sx?: SxProps;
 }> = (props) => {
   const navigate = useNavigate();
   const theme = useTheme();
@@ -103,7 +99,7 @@ export const Page: React.FC<{
 
   return (
     <>
-      {!props.disableAutomaticScrollTop && <ScrollToTop />}
+      <ScrollToTop />
 
       {renderHeader()}
       {renderContent()}
@@ -113,73 +109,53 @@ export const Page: React.FC<{
   function renderContent() {
     return (
       <Fade in timeout={250}>
-        <div>
-          <div
-            className={css({
+        <Box>
+          <Box
+            sx={{
               height: "100%",
-              paddingBottom: "4rem",
-              minHeight: "calc(100vh - 56px)",
+              // paddingBottom: "4rem",
+              // minHeight: "calc(100vh - 56px)",
               position: "relative",
               display: "flex",
               flexDirection: "column",
-            })}
+            }}
           >
-            {!!props.notFound ? (
-              props.notFound
-            ) : (
-              <div
-                className={css({
-                  maxWidth: props.drawerWidth
-                    ? undefined
-                    : props.maxWidth ?? FariMaxWidth,
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                  marginTop: props.marginTop || "2rem",
-                  width: "100%",
-                  flex: "1 0 auto",
-                })}
-              >
-                {props.children}
-              </div>
-            )}
-          </div>
+            <Box
+              sx={{
+                ...(props.sx || {}),
+                maxWidth: props.maxWidth ?? FariMaxWidth,
+                marginLeft: "auto",
+                marginRight: "auto",
+                width: "100%",
+                flex: "1 0 auto",
+              }}
+            >
+              {props.children}
+            </Box>
+          </Box>
 
           {renderFooter()}
-        </div>
+        </Box>
       </Fade>
     );
   }
 
   function renderFooter() {
+    if (props.hideFooter) {
+      return null;
+    }
     return (
       <Box
         // TODO: https://github.com/fariapp/fari/issues/212
-        pb={props.pb ?? "0"}
         displayPrint="none"
         className={css({
           paddingTop: "1rem",
-          marginLeft: props.drawerWidth ?? undefined,
           borderTop: "1px solid #e0e0e0",
         })}
       >
         <CookieConsent />
 
         <Container>
-          {env.isDev && props.debug && (
-            <pre
-              className={css({
-                whiteSpace: "break-spaces",
-              })}
-            >
-              {Object.keys(props.debug).map((label) => {
-                return (
-                  <Box key={label}>
-                    {label}: {props.debug?.[label]}
-                  </Box>
-                );
-              })}
-            </pre>
-          )}
           <Box py="1rem">
             <Grid
               container
