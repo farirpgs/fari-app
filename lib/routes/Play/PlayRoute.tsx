@@ -12,20 +12,21 @@ import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { Session } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { useScene } from "../../hooks/useScene/useScene";
-import {
-  useSession,
-  useSessionCharacterSheets,
-} from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { useChat } from "./components/Chat/useChat";
 import {
   IPlayersPresenceRef,
   PlayersPresence,
 } from "./components/PlayersPresence/PlayersPresence";
+import { Session } from "./components/Session/Session";
+import {
+  useSession,
+  useSessionCharacterSheets,
+} from "./components/Session/useSession";
 import {
   SessionPresenceUpdaterContext,
   useSessionPresenceUpdater,
@@ -63,7 +64,7 @@ export function useLiveObject<T>(props: {
 
   useEffect(() => {
     if (props.isOwner) {
-      liveObject?.update(props.value);
+      liveObject?.update(props.value as any);
     }
   }, [props.value]);
 
@@ -112,6 +113,7 @@ function PlayRoute() {
     useState(false);
 
   const sceneManager = useScene();
+  const chatManager = useChat();
   const sessionManager = useSession({
     userId: userId,
   });
@@ -141,6 +143,15 @@ function PlayRoute() {
     value: sessionManager.state.session,
     onChange: (newValue) => {
       sessionManager.actions.overrideSession(newValue);
+    },
+  });
+
+  useLiveObject({
+    key: "chat",
+    isOwner: isGM,
+    value: chatManager.state.chat,
+    onChange: (newValue) => {
+      chatManager.actions.overrideChat(newValue);
     },
   });
 
@@ -209,6 +220,9 @@ function PlayRoute() {
         event.payload.indexCard,
         event.payload.indexCardType
       );
+    }
+    if (event.type === "send-message") {
+      chatManager.actions.sendMessage(event.payload.message);
     }
     if (event.type === "ping") {
       broadcast(PlayerInteractionFactory.pong(), {
@@ -314,6 +328,7 @@ function PlayRoute() {
           <PlayersPresence ref={playersPresenceRef} />
         </SessionPresenceUpdaterContext.Provider>
         <Session
+          chatManager={chatManager}
           sessionManager={sessionManager}
           sessionCharactersManager={sessionCharactersManager}
           sceneManager={sceneManager}

@@ -20,7 +20,10 @@ export function LoadingRoute(props: { pathname: string }) {
   });
 
   return (
-    <Page hideHeaderLogo={props.pathname === "/"} sx={{ paddingTop: "2rem" }}>
+    <Page
+      hideHeaderLogo={props.pathname === "/"}
+      sx={{ paddingTop: "20rem", paddingBottom: "50vh" }}
+    >
       <Fade in={fadeIn}>
         <Container maxWidth="md">
           <Box display="flex" justifyContent="center">

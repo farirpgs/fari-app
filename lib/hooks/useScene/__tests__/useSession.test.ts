@@ -1,8 +1,8 @@
 import { act, renderHook } from "@testing-library/react";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
+import { useSession } from "../../../routes/Play/components/Session/useSession";
 import { DefaultPlayerColor } from "../../../routes/Play/consts/PlayerColors";
 import { ISession } from "../IScene";
-import { useSession } from "../useSession";
 
 describe("useSession", () => {
   it("constructor", () => {

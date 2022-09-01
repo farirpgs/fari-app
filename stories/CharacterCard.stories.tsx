@@ -52,7 +52,6 @@ function StorybookCharacterCard(
       />
       <MiniThemeContext.Provider value={miniTheme}>
         <CharacterCard
-          playerName={props.playerName}
           readonly={props.readonly}
           characterSheet={props.characterSheet}
           onCharacterDialogOpen={action("onCharacterDialogOpen") as any}

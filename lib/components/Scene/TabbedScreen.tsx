@@ -25,6 +25,7 @@ export function TabbedScreen(props: {
   return (
     <>
       <Paper
+        elevation={2}
         sx={{
           height: "100%",
           display: "flex",

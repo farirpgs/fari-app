@@ -1,23 +1,20 @@
 import produce from "immer";
 import { useEffect, useState } from "react";
-import { Delays } from "../../constants/Delays";
-import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
+import { Delays } from "../../../../constants/Delays";
+import { useCharacters } from "../../../../contexts/CharactersContext/CharactersContext";
 import {
   BlockType,
   IBlock,
   ICharacter,
   IPointCounterBlock,
-} from "../../domains/character/types";
-import { Confetti } from "../../domains/confetti/Confetti";
-import { getUnix } from "../../domains/dayjs/getDayJS";
-import { IDicePoolResult } from "../../domains/dice/Dice";
-import { Id } from "../../domains/Id/Id";
-import { IDrawingAreaState } from "../../routes/Draw/TldrawWriterAndReader";
-import {
-  DefaultPlayerColor,
-  PlayerColors,
-} from "../../routes/Play/consts/PlayerColors";
-import { IPlayer, ISession } from "./IScene";
+} from "../../../../domains/character/types";
+import { Confetti } from "../../../../domains/confetti/Confetti";
+import { getUnix } from "../../../../domains/dayjs/getDayJS";
+import { IDicePoolResult } from "../../../../domains/dice/Dice";
+import { Id } from "../../../../domains/Id/Id";
+import { IPlayer, ISession } from "../../../../hooks/useScene/IScene";
+import { IDrawingAreaState } from "../../../Draw/TldrawWriterAndReader";
+import { DefaultPlayerColor, PlayerColors } from "../../consts/PlayerColors";
 
 export function useSession(props: { userId: string }) {
   const [session, setSession] = useState<ISession>(

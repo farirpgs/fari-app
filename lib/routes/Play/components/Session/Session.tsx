@@ -1,0 +1,1252 @@
+import { css } from "@emotion/css";
+import ChatIcon from "@mui/icons-material/Chat";
+import CircleIcon from "@mui/icons-material/Circle";
+import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
+import ErrorIcon from "@mui/icons-material/Error";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+import PanToolIcon from "@mui/icons-material/PanTool";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+import TabContext from "@mui/lab/TabContext";
+import TabPanel from "@mui/lab/TabPanel";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Fade from "@mui/material/Fade";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import { darken, useTheme } from "@mui/material/styles";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Page } from "../../../../components/Page/Page";
+import { PlayerRow } from "../../../../components/Scene/components/PlayerRow/PlayerRow";
+import { Scene } from "../../../../components/Scene/Scene";
+import { TabbedScreen } from "../../../../components/Scene/TabbedScreen";
+import { Toolbox } from "../../../../components/Toolbox/Toolbox";
+import { WindowPortal } from "../../../../components/WindowPortal/WindowPortal";
+import { CharactersContext } from "../../../../contexts/CharactersContext/CharactersContext";
+import { DiceContext } from "../../../../contexts/DiceContext/DiceContext";
+import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
+import { MyBinderContext } from "../../../../contexts/MyBinderContext/MyBinderContext";
+import { arraySort } from "../../../../domains/array/arraySort";
+import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
+import { ICharacter } from "../../../../domains/character/types";
+import { IDicePoolResult } from "../../../../domains/dice/Dice";
+import { Font } from "../../../../domains/font/Font";
+import { Icons } from "../../../../domains/Icons/Icons";
+import { usePrompt } from "../../../../hooks/useBlocker/useBlocker";
+import { useBlockReload } from "../../../../hooks/useBlockReload/useBlockReload";
+import { useEvent } from "../../../../hooks/useEvent/useEvent";
+import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
+import { useResponsiveValue } from "../../../../hooks/useResponsiveValue/useResponsiveValue";
+import { IPlayer } from "../../../../hooks/useScene/IScene";
+import { useScene } from "../../../../hooks/useScene/useScene";
+import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
+import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
+import { CharacterV3Dialog } from "../../../Character/components/CharacterDialog/CharacterV3Dialog";
+import {
+  MiniThemeContext,
+  useMiniTheme,
+} from "../../../Character/components/CharacterDialog/MiniThemeContext";
+import {
+  TlDrawErrorBoundary,
+  TldrawReader,
+  TldrawWriter,
+} from "../../../Draw/TldrawWriterAndReader";
+import {
+  IPlayerInteraction,
+  PlayerInteractionFactory,
+} from "../../types/IPlayerInteraction";
+import { Chat } from "../Chat/Chat";
+import { IMessage, useChat } from "../Chat/useChat";
+import { useSession, useSessionCharacterSheets } from "./useSession";
+
+export function Session(props: {
+  sessionManager: ReturnType<typeof useSession>;
+  sessionCharactersManager: ReturnType<typeof useSessionCharacterSheets>;
+  sceneManager: ReturnType<typeof useScene>;
+  chatManager: ReturnType<typeof useChat>;
+  userId: string;
+  isLoading?: boolean;
+  error?: any;
+  shareLink?: string;
+  idFromParams?: string;
+  onPlayerInteraction?(interaction: IPlayerInteraction): void;
+  onOpenChat?(): void;
+}) {
+  const {
+    sessionManager,
+    sceneManager,
+    sessionCharactersManager,
+    chatManager,
+  } = props;
+
+  const charactersManager = useContext(CharactersContext);
+  const myBinderManager = useContext(MyBinderContext);
+  const [characterIdCard, setCharacterIdCard] = useState<string>("");
+  const isGM = !props.idFromParams;
+  const lightBackground = useLightBackground();
+
+  useBlockReload(sceneManager.state.dirty);
+
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
+
+  const miniTheme = useMiniTheme({
+    enforceBackground: theme.palette.background.default,
+  });
+
+  const { t } = useTranslate();
+  usePrompt(t("manager.leave-without-saving"), true);
+  const logger = useLogger();
+  const diceManager = useContext(DiceContext);
+
+  const characterCardWidth = useResponsiveValue({
+    xl: "400px",
+    lg: "400px",
+    md: "400px",
+    sm: "400px",
+    xs: "300px",
+  });
+
+  const textColors = useTextColors(theme.palette.primary.main);
+
+  const [streamerModalOpen, setStreamerModalOpen] = useState(false);
+  const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
+  const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
+    string | undefined
+  >(undefined);
+
+  const $shareLinkInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (shareLinkToolTip.open) {
+      const id = setTimeout(() => {
+        setShareLinkToolTip({ open: false });
+      }, 1000);
+      return () => {
+        clearTimeout(id);
+      };
+    }
+  }, [shareLinkToolTip]);
+
+  //#region TODO: refac into another function
+  const userId = props.userId;
+  const gm = sessionManager.state.session.gm;
+  const players = Object.values(sessionManager.state.session.players) ?? [];
+
+  const sortedPlayers = arraySort(players, [
+    (p) => {
+      return {
+        value: userId === p.id,
+        direction: "asc",
+      };
+    },
+  ]);
+
+  const everyone = sessionManager.computed.everyone;
+  const characters = sessionCharactersManager.state.characterSheets;
+
+  const playersWithCharacterSheets = Object.keys(characters)
+    .map((characterId) => {
+      const playerMatch = everyone.find(
+        (player) => player.id === characterId
+      ) as IPlayer;
+      return {
+        ...playerMatch,
+        characterSheet: characters[characterId],
+      };
+    })
+    .filter((player) => {
+      const hasPlayer = !!player.id;
+      const isVisible = isGM || !player.private;
+      return isVisible && hasPlayer;
+    })
+    .sort((a, b) => {
+      return a.id === props.userId ? -1 : b.id === props.userId ? 1 : 0;
+    });
+
+  const controllablePlayerIds = everyone
+    .filter((player) => {
+      if (isGM) {
+        return true;
+      }
+      return userId === player.id;
+    })
+    .map((p) => p.id);
+
+  const me = everyone.find((player) => {
+    if (isGM) {
+      return player.isGM;
+    }
+    return userId === player.id;
+  });
+  //#endregion
+  const handleGMAddNpc = () => {
+    sessionManager.actions.addNpc();
+  };
+
+  const handleAssignOriginalCharacterSheet = (
+    playerId: string,
+    character: ICharacter
+  ) => {
+    if (isGM) {
+      sessionCharactersManager.actions.loadPlayerCharacter(playerId, character);
+    } else {
+      props.onPlayerInteraction?.(
+        PlayerInteractionFactory.updatePlayerCharacter(playerId, character)
+      );
+    }
+  };
+
+  function handleUpdateCharacter(
+    playerId: string,
+    updatedCharacter: ICharacter
+  ) {
+    if (isGM) {
+      sessionCharactersManager.actions.updatePlayerCharacter(
+        playerId,
+        updatedCharacter
+      );
+    } else {
+      props.onPlayerInteraction?.(
+        PlayerInteractionFactory.updatePlayerCharacter(
+          playerId,
+          updatedCharacter
+        )
+      );
+    }
+  }
+
+  const handleOnToggleCharacterSync = (character: ICharacter | undefined) => {
+    charactersManager.actions.upsert(character);
+  };
+
+  const handleSetMyRoll = (result: IDicePoolResult) => {
+    if (isGM) {
+      sessionManager.actions.updateGmRoll(result);
+    } else {
+      props.onPlayerInteraction?.(
+        PlayerInteractionFactory.updatePlayerRolls(me!.id, result)
+      );
+    }
+  };
+
+  const handleSetPlayerRoll = (
+    playerId: string | undefined,
+    result: IDicePoolResult
+  ) => {
+    if (isGM) {
+      if (playerId) {
+        sessionManager.actions.updatePlayerRoll(playerId, result);
+      } else {
+        sessionManager.actions.updateGmRoll(result);
+      }
+    } else {
+      props.onPlayerInteraction?.(
+        PlayerInteractionFactory.updatePlayerRolls(me!.id, result)
+      );
+    }
+  };
+
+  const handleMessageSubmission = useEvent((message: IMessage) => {
+    if (isGM) {
+      chatManager.actions.sendMessage(message);
+    } else {
+      props.onPlayerInteraction?.(
+        PlayerInteractionFactory.sendMessage(message)
+      );
+    }
+  });
+
+  return (
+    <Page isLive gameId={props.idFromParams} maxWidth="none" hideFooter>
+      <Box
+        sx={{
+          padding: "2rem",
+          top: "0",
+          bottom: "10rem",
+          position: "absolute",
+          width: "100%",
+          height: "calc(100vh - 10rem)",
+        }}
+      >
+        {renderPauseDialog()}
+        {streamerModalOpen && (
+          <WindowPortal
+            onClose={() => {
+              setStreamerModalOpen(false);
+            }}
+          >
+            <div id="lol">
+              <button>Test...</button>
+            </div>
+          </WindowPortal>
+        )}
+
+        <Toolbox
+          diceFabProps={{
+            onRoll(result) {
+              handleSetMyRoll(result);
+            },
+            // onRoll: (result) => {
+            //   handleSetMyRoll(result);
+            // },
+            // rollsForDiceBox: me?.rolls ?? [],
+            // onRollPool: (result, playerId) => {
+            //   handleSetPlayerRoll(playerId, result);
+            // },
+          }}
+          centerActions={
+            <>
+              {isGM && (
+                <Grid item>
+                  <Tooltip title={t("play-route.fire-rainbow-confetti")}>
+                    <IconButton
+                      onClick={() => {
+                        sessionManager.actions.fireGoodConfetti();
+                        logger.track("session.fire_good_confetti");
+                      }}
+                      color="primary"
+                      size="large"
+                    >
+                      <Icons.PartyPopper
+                        className={css({ width: "2rem", height: "2rem" })}
+                        htmlColor={darken(theme.palette.success.main, 0.2)}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
+
+              <Grid item>
+                <Tooltip title={t("play-route.pause-session")}>
+                  <IconButton
+                    onClick={() => {
+                      if (isGM) {
+                        sessionManager.actions.pause();
+                      } else {
+                        props.onPlayerInteraction?.(
+                          PlayerInteractionFactory.pause()
+                        );
+                      }
+                    }}
+                    color="primary"
+                    size="large"
+                  >
+                    <PanToolIcon
+                      className={css({ width: "1.8rem", height: "1.8rem" })}
+                      htmlColor={theme.palette.text.primary}
+                    />
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+              {props.onOpenChat && (
+                <Grid item>
+                  <Tooltip title={t("play-route.chat")}>
+                    <IconButton
+                      onClick={props.onOpenChat}
+                      color="primary"
+                      size="large"
+                    >
+                      <ChatIcon
+                        className={css({ width: "1.8rem", height: "1.8rem" })}
+                        htmlColor={theme.palette.text.primary}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
+
+              {isGM && (
+                <Grid item>
+                  <Tooltip title={t("play-route.fire-red-confetti")}>
+                    <IconButton
+                      onClick={() => {
+                        sessionManager.actions.fireBadConfetti();
+
+                        logger.track("session.fire_fire_confetti");
+                      }}
+                      color="primary"
+                      size="large"
+                    >
+                      <Icons.PartyPopper
+                        className={css({ width: "2rem", height: "2rem" })}
+                        htmlColor={darken(theme.palette.error.main, 0.2)}
+                      />
+                    </IconButton>
+                  </Tooltip>
+                </Grid>
+              )}
+            </>
+          }
+        />
+        {props.error ? renderPageError() : renderPage()}
+      </Box>
+    </Page>
+  );
+
+  function renderPage() {
+    if (props.isLoading) {
+      return renderIsLoading();
+    }
+    return renderPageContent();
+  }
+
+  function renderIsLoading() {
+    return (
+      <Box display="flex" justifyContent="center">
+        <CircularProgress color="secondary" />
+      </Box>
+    );
+  }
+
+  function renderPageContent() {
+    return (
+      <Fade in>
+        <Grid
+          container
+          spacing={2}
+          wrap={isSmall ? "wrap" : "nowrap"}
+          sx={{
+            height: "100%",
+          }}
+        >
+          <Grid
+            item
+            sx={{
+              width: isSmall ? "100%" : "25rem",
+              flex: "0 0 auto",
+            }}
+          >
+            {renderSidePanel()}
+          </Grid>
+          <Grid
+            item
+            xs
+            sx={{
+              width: isSmall ? "100%" : undefined,
+              flex: "1 0 auto",
+            }}
+          >
+            {renderSessionTabs()}
+          </Grid>
+        </Grid>
+      </Fade>
+    );
+  }
+
+  function renderPauseDialog() {
+    return (
+      <Dialog
+        fullWidth
+        maxWidth="sm"
+        open={sessionManager.state.session.paused}
+        keepMounted={false}
+        onClose={() => {
+          if (isGM) {
+            sessionManager.actions.unpause();
+          }
+        }}
+      >
+        <DialogTitle>
+          <Grid container justifyContent="center">
+            <Grid item>{t("play-route.paused-dialog.title")}</Grid>
+          </Grid>
+        </DialogTitle>
+        <DialogContent>
+          <Grid container justifyContent="center">
+            <Grid item>
+              <ErrorIcon
+                className={css({
+                  width: "3rem",
+                  height: "3rem",
+                })}
+              />
+            </Grid>
+          </Grid>
+
+          <DialogContentText textAlign="center">
+            {t("play-route.paused-dialog.content")}
+          </DialogContentText>
+        </DialogContent>
+        {isGM && (
+          <DialogActions>
+            <Button
+              color="secondary"
+              onClick={() => {
+                sessionManager.actions.unpause();
+              }}
+            >
+              {t("play-route.paused-dialog.continue")}
+            </Button>
+          </DialogActions>
+        )}
+      </Dialog>
+    );
+  }
+
+  function renderSidePanel() {
+    return (
+      <>
+        <TabbedScreen
+          tabs={[
+            {
+              label: "Players",
+              dataCy: "players-tab",
+              value: "players",
+              sx: { padding: "0", overflow: "auto" },
+              render: renderPlayers,
+            },
+            {
+              label: "Chat",
+              dataCy: "chat-tab",
+              value: "chat",
+              sx: { padding: "0", flex: "1 0 auto" },
+              render: renderChat,
+            },
+          ]}
+        />
+      </>
+    );
+  }
+
+  function renderChat() {
+    return (
+      <Chat
+        userId={userId}
+        chatManager={chatManager}
+        onMessageSubmit={handleMessageSubmission}
+      />
+    );
+  }
+  function renderPlayers() {
+    return (
+      <>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+          }}
+        >
+          <Box
+            className={css({
+              minHeight: "4rem",
+              padding: ".5rem",
+            })}
+          >
+            <Grid container spacing={2} alignItems="center">
+              <Grid
+                item
+                className={css({
+                  flex: "1 0 auto",
+                })}
+              >
+                <Typography
+                  variant="overline"
+                  className={css({
+                    fontSize: ".8rem",
+                    lineHeight: Font.lineHeight(0.8),
+                    fontWeight: "bold",
+                  })}
+                >
+                  {t("play-route.players")}
+                </Typography>
+                <Box>
+                  <Typography
+                    variant="overline"
+                    className={css({
+                      fontSize: "1.2rem",
+                      lineHeight: Font.lineHeight(1.2),
+                    })}
+                  >
+                    {Object.keys(sessionManager.state.session.players).length +
+                      1}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    className={css({
+                      fontSize: ".8rem",
+                      lineHeight: Font.lineHeight(0.8),
+                    })}
+                  >
+                    {" "}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    className={css({
+                      fontSize: ".8rem",
+                      lineHeight: Font.lineHeight(0.8),
+                    })}
+                  >
+                    {t("play-route.connected")}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item>
+                <Grid container spacing={1}>
+                  {isGM && (
+                    <>
+                      <Grid item>
+                        <Button
+                          data-cy="scene.reset-initiative"
+                          onClick={() => {
+                            sessionManager.actions.resetInitiative();
+                            sceneManager.actions.resetInitiative();
+                            logger.track("session.reset_initiative");
+                          }}
+                          color="inherit"
+                          size="small"
+                          variant="outlined"
+                          endIcon={<EmojiPeopleIcon />}
+                        >
+                          {t("play-route.reset-initiative")}
+                        </Button>
+                      </Grid>
+                      <Grid item>
+                        <Tooltip title={t("play-route.gm-add-gm-character")}>
+                          <span>
+                            <Button
+                              data-cy="scene.add-player"
+                              onClick={() => {
+                                handleGMAddNpc();
+
+                                logger.track("session.add_npc");
+                              }}
+                              color="inherit"
+                              size="small"
+                              variant="outlined"
+                            >
+                              <PersonAddIcon />
+                            </Button>
+                          </span>
+                        </Tooltip>
+                      </Grid>
+                    </>
+                  )}
+                </Grid>
+              </Grid>
+            </Grid>
+          </Box>
+
+          <Box>
+            {renderPlayerRow({
+              player: gm,
+              canControl: me?.id === gm.id,
+              isMe: me?.id === gm.id,
+              dataCyIndex: "gm",
+              isChild: false,
+              color: gm.color,
+              children: (
+                <>
+                  {gm.npcs.map((npc, npcIndex) => {
+                    if (npc.private && !isGM) {
+                      return null;
+                    }
+                    return (
+                      <React.Fragment key={npc.id}>
+                        <Box>
+                          {renderPlayerCharacterDialog({
+                            player: npc,
+                            canControl: me?.id === gm.id,
+                          })}
+                          <Box mx="-.5rem">
+                            {renderPlayerRow({
+                              player: npc,
+                              color: gm.color,
+                              canControl: me?.id === gm.id,
+                              isMe: me?.id === gm.id,
+                              isChild: true,
+                              dataCyIndex: `gm-npc-${npcIndex}`,
+                            })}
+                          </Box>
+                        </Box>
+                      </React.Fragment>
+                    );
+                  })}
+                </>
+              ),
+            })}
+            {sortedPlayers.map((player, playerRowIndex) => {
+              const isMe = me?.id === player.id;
+              const canControl = controllablePlayerIds.includes(player.id);
+
+              return (
+                <React.Fragment key={player.id}>
+                  {renderPlayerCharacterDialog({ player, canControl })}
+                  {renderPlayerRow({
+                    player,
+                    canControl,
+                    isMe,
+                    color: player.color,
+                    isChild: false,
+                    dataCyIndex: playerRowIndex,
+                  })}
+                </React.Fragment>
+              );
+            })}
+            {renderSessionControls()}
+          </Box>
+        </Box>
+      </>
+    );
+  }
+
+  function renderSessionControls() {
+    if (!isGM) {
+      return null;
+    }
+    return (
+      <>
+        <Box sx={{ padding: "1rem 0" }}>
+          <Grid
+            container
+            spacing={1}
+            justifyContent="center"
+            alignItems="center"
+          >
+            {props.shareLink && (
+              <>
+                <Grid item>
+                  <input
+                    ref={$shareLinkInputRef}
+                    type="text"
+                    value={props.shareLink}
+                    readOnly
+                    hidden
+                  />
+                  <Tooltip
+                    open={shareLinkToolTip.open}
+                    title="Copied!"
+                    placement="top"
+                  >
+                    <span>
+                      <Button
+                        onClick={() => {
+                          if (props.shareLink && $shareLinkInputRef.current) {
+                            try {
+                              $shareLinkInputRef.current.select();
+                              document.execCommand("copy");
+                              navigator.clipboard.writeText(props.shareLink);
+                              setShareLinkToolTip({ open: true });
+                            } catch (error) {
+                              window.open(props.shareLink, "_blank");
+                            }
+
+                            logger.track("session.copy_session_link");
+                          }
+                        }}
+                        size="small"
+                        variant="outlined"
+                        color={shareLinkToolTip.open ? "secondary" : "inherit"}
+                      >
+                        <FileCopyIcon />
+                        {t("play-route.copy-game-link")}
+                      </Button>
+                    </span>
+                  </Tooltip>
+                </Grid>
+              </>
+            )}
+          </Grid>
+        </Box>
+      </>
+    );
+  }
+
+  function getCharacterSheet(playerId: string) {
+    const playerCharacter =
+      sessionCharactersManager.state.characterSheets[playerId];
+    return playerCharacter;
+  }
+
+  function renderPlayerCharacterDialog(options: {
+    player: IPlayer;
+    canControl: boolean;
+  }) {
+    const { player, canControl } = options;
+    if (characterDialogPlayerId !== player.id) {
+      return null;
+    }
+
+    const characterSheet = getCharacterSheet(player.id);
+    const isCharacterInStorage = charactersManager.selectors.isInStorage(
+      characterSheet?.id
+    );
+
+    return (
+      <CharacterV3Dialog
+        readonly={!canControl}
+        open={characterDialogPlayerId === player.id}
+        character={characterSheet}
+        dialog={true}
+        onSave={(updatedCharacter) => {
+          handleUpdateCharacter(player.id, updatedCharacter);
+        }}
+        onClose={() => {
+          setCharacterDialogPlayerId(undefined);
+        }}
+        synced={isCharacterInStorage}
+        onToggleSync={() => {
+          handleOnToggleCharacterSync(characterSheet);
+        }}
+        onRoll={(newDiceRollResult) => {
+          handleSetPlayerRoll(player.id, newDiceRollResult);
+        }}
+      />
+    );
+  }
+
+  function renderPlayerRow(options: {
+    player: IPlayer;
+    canControl: boolean;
+    isMe: boolean;
+    dataCyIndex: number | string;
+    isChild: boolean;
+    color: string;
+    children?: JSX.Element;
+  }) {
+    const {
+      player,
+      canControl,
+      isMe,
+      isChild,
+      dataCyIndex: playerRowDataCyIndex,
+      children: playerRowChildren,
+    } = options;
+    const characterSheet = getCharacterSheet(player.id);
+
+    const mainPointerBlock =
+      CharacterSelector.getCharacterMainPointerBlock(characterSheet);
+    const points = mainPointerBlock?.value ?? player.points;
+    const maxPoints = mainPointerBlock?.meta.max ?? undefined;
+
+    return (
+      <PlayerRow
+        dataCy={`scene.player-row.${playerRowDataCyIndex}`}
+        color={options.color}
+        isChild={isChild}
+        permissions={{
+          canRoll: canControl,
+          canUpdatePoints: canControl,
+          canUpdateInitiative: canControl,
+          canLoadCharacterSheet: canControl && !player.isGM,
+          canRemove: isGM && !player.isGM,
+          canMarkPrivate: isGM && isChild,
+        }}
+        key={player.id}
+        isMe={isMe}
+        hasCharacterSheet={!!characterSheet}
+        isPrivate={player.private}
+        playedDuringTurn={player.playedDuringTurn}
+        playerName={player.playerName}
+        rolls={player.rolls}
+        characterName={characterSheet?.name}
+        points={points}
+        maxPoints={maxPoints}
+        pointsLabel={mainPointerBlock?.label}
+        onPlayerRemove={() => {
+          sessionManager.actions.removePlayer(player.id);
+          sessionCharactersManager.actions.removeCharacterSheet(player.id);
+        }}
+        onTogglePrivate={() => {
+          sessionManager.actions.togglePlayerVisibility(player.id);
+        }}
+        onCharacterSheetOpen={() => {
+          if (characterSheet) {
+            setCharacterDialogPlayerId(player.id);
+          }
+        }}
+        onAssignCharacterSheet={() => {
+          myBinderManager.actions.open({
+            folder: "characters",
+            callback: (character) => {
+              handleAssignOriginalCharacterSheet(player.id, character);
+            },
+          });
+        }}
+        onDiceRoll={() => {
+          // handleSetPlayerRoll(
+          // player.id
+          // diceManager.actions.rollCommandGroups()
+          // );
+        }}
+        onPlayedInTurnOrderChange={(playedInTurnOrder) => {
+          if (isGM) {
+            sessionManager.actions.updatePlayerPlayedDuringTurn(
+              player.id,
+              playedInTurnOrder
+            );
+          } else {
+            props.onPlayerInteraction?.(
+              PlayerInteractionFactory.updatePlayerPlayedDuringTurn(
+                player.id,
+                playedInTurnOrder
+              )
+            );
+          }
+        }}
+        onPointsChange={(points, maxPoints) => {
+          if (isGM) {
+            sessionManager.actions.updatePlayerPoints(player.id, points);
+            sessionCharactersManager.actions.updatePlayerCharacterMainPointCounter(
+              player.id,
+              points,
+              maxPoints
+            );
+          } else {
+            props.onPlayerInteraction?.(
+              PlayerInteractionFactory.updatePlayerPoints(
+                player.id,
+                points,
+                maxPoints
+              )
+            );
+          }
+        }}
+      >
+        {playerRowChildren}
+      </PlayerRow>
+    );
+  }
+
+  function renderCharacterCards() {
+    const hasCharacters = playersWithCharacterSheets.length > 0;
+    const currentCardId =
+      characterIdCard || playersWithCharacterSheets[0]?.characterSheet.id || "";
+    return (
+      <>
+        <Box>
+          {showEmptyWarnings()}
+          {hasCharacters && (
+            <Grid container wrap={isSmall ? "wrap" : "nowrap"}>
+              <Grid item xs={12} md={3}>
+                <Box
+                  sx={{
+                    p: ".5rem",
+                    height: "100%",
+                  }}
+                >
+                  <Box>
+                    <Tabs
+                      orientation="vertical"
+                      variant="scrollable"
+                      textColor="secondary"
+                      indicatorColor="secondary"
+                      value={currentCardId}
+                      onChange={(event, value) => {
+                        setCharacterIdCard(value);
+                      }}
+                      sx={{
+                        borderRight: 1,
+                        borderColor: "divider",
+                        background: lightBackground,
+                      }}
+                    >
+                      {playersWithCharacterSheets.map((player) => {
+                        return (
+                          <Tab
+                            key={player.id}
+                            sx={{}}
+                            label={
+                              <>
+                                <Box
+                                  sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    width: "100%",
+
+                                    textTransform: "none",
+                                  }}
+                                >
+                                  <Grid
+                                    container
+                                    spacing={1}
+                                    alignItems="center"
+                                  >
+                                    <Grid item>
+                                      <CircleIcon
+                                        sx={{
+                                          marginRight: ".25rem",
+                                        }}
+                                        htmlColor={player.color}
+                                      />
+                                    </Grid>
+                                    <Grid item>
+                                      <Box
+                                        sx={{
+                                          display: "flex",
+                                        }}
+                                      >
+                                        <Typography variant="body1">
+                                          {player.playerName}
+                                        </Typography>
+                                      </Box>
+                                      <Box
+                                        sx={{
+                                          display: "flex",
+                                        }}
+                                      >
+                                        <Typography variant="body2">
+                                          {player.characterSheet.name}
+                                        </Typography>
+                                      </Box>
+                                    </Grid>
+                                  </Grid>
+                                </Box>
+                              </>
+                            }
+                            value={player.characterSheet.id}
+                          />
+                        );
+                      })}
+                    </Tabs>
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid item xs>
+                <Box>
+                  <TabContext value={currentCardId}>
+                    <TabPanel value="" />
+                    <MiniThemeContext.Provider value={miniTheme}>
+                      {playersWithCharacterSheets.map((player) => {
+                        const isMe = props.userId === player.id;
+                        const canControl = isGM || isMe;
+                        const isCharacterInStorage =
+                          charactersManager.selectors.isInStorage(
+                            player.characterSheet?.id
+                          );
+                        return (
+                          <TabPanel
+                            sx={{
+                              padding: "0",
+                            }}
+                            key={`${player.id}_${player.characterSheet.id}`}
+                            value={player.characterSheet.id}
+                          >
+                            <Box
+                              sx={{
+                                width: "100%",
+                              }}
+                            >
+                              <CharacterV3Dialog
+                                readonly={!canControl}
+                                open={true}
+                                previewain
+                                character={player.characterSheet}
+                                dialog={false}
+                                onSave={(updatedCharacter) => {
+                                  handleUpdateCharacter(
+                                    player.id,
+                                    updatedCharacter
+                                  );
+                                }}
+                                onClose={() => {
+                                  setCharacterDialogPlayerId(undefined);
+                                }}
+                                synced={isCharacterInStorage}
+                                onToggleSync={() => {
+                                  handleOnToggleCharacterSync(
+                                    player.characterSheet
+                                  );
+                                }}
+                                onRoll={(newDiceRollResult) => {
+                                  handleSetPlayerRoll(
+                                    player.id,
+                                    newDiceRollResult
+                                  );
+                                }}
+                              />
+                              {/* <CharacterCard
+                                      readonly={!canControl}
+                                      characterSheet={player.characterSheet}
+                                      onCharacterDialogOpen={() => {
+                                        setCharacterDialogPlayerId(player.id);
+                                      }}
+                                      onChange={(updatedCharacter) => {
+                                        handleUpdateCharacter(
+                                          player.id,
+                                          updatedCharacter
+                                        );
+                                      }}
+                                      onRoll={(newDiceRollResult) => {
+                                        handleSetPlayerRoll(
+                                          player.id,
+                                          newDiceRollResult
+                                        );
+                                      }}
+                                    /> */}
+                            </Box>
+                          </TabPanel>
+                        );
+                      })}
+                    </MiniThemeContext.Provider>
+                  </TabContext>
+                </Box>
+              </Grid>
+            </Grid>
+          )}
+        </Box>
+      </>
+    );
+  }
+
+  function renderDrawArea() {
+    return (
+      <TlDrawErrorBoundary>
+        <Box
+          sx={{
+            border: `1px solid ${theme.palette.divider}`,
+            margin: "0 auto",
+            height: "100%",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          {isGM ? (
+            <TldrawWriter
+              state={sessionManager.state.session.tlDrawDoc}
+              onChange={(state) => {
+                sessionManager.actions.updateDrawAreaObjects(state);
+              }}
+            />
+          ) : (
+            <TldrawReader state={sessionManager.state.session.tlDrawDoc} />
+          )}
+        </Box>
+      </TlDrawErrorBoundary>
+    );
+  }
+
+  function showEmptyWarnings() {
+    const numberOfSheets = Object.keys(
+      sessionCharactersManager.state.characterSheets
+    ).length;
+    const showNoPlayersWarning =
+      sessionManager.computed.playersAndNPCs.length === 0;
+    const showNoSheetsWarning = numberOfSheets === 0;
+
+    if (showNoPlayersWarning) {
+      return (
+        <Box sx={{ padding: "1rem" }}>
+          <Typography variant="h6" color="textSecondary">
+            There are no players or GM characters in this session.
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            Copy and send the session link to your friends, or add GM characters
+            using the buttons on the left.
+          </Typography>
+        </Box>
+      );
+    }
+
+    if (showNoSheetsWarning) {
+      return (
+        <Box sx={{ padding: "1rem" }}>
+          <Typography variant="h6" color="textSecondary">
+            No character sheets have been assigned yet.
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            To assign a character sheet to a player, click on their{" "}
+            <UploadFileIcon /> button, and select the character sheet you want
+            to use.
+          </Typography>
+        </Box>
+      );
+    }
+
+    return null;
+  }
+
+  function renderSessionTabs() {
+    return (
+      <TabbedScreen
+        tabs={[
+          {
+            value: "characters",
+            dataCy: "session.tabs.scene",
+            label: `${t("menu.characters")} (${
+              playersWithCharacterSheets.length
+            })`,
+            sx: { padding: "0" },
+            render: renderCharacterCards,
+          },
+          {
+            value: "scene",
+            dataCy: "session.tabs.characters",
+            label: t("menu.scenes"),
+            sx: {},
+            render: renderScene,
+          },
+          {
+            value: "draw",
+            dataCy: "session.tabs.draw",
+            label: t("draw-route.meta.title"),
+            sx: { padding: "0", height: "100%" },
+            render: renderDrawArea,
+          },
+        ]}
+      />
+    );
+  }
+
+  function renderScene() {
+    return (
+      <Scene
+        sceneManager={sceneManager}
+        isGM={isGM}
+        canLoad={isGM}
+        onRoll={handleSetMyRoll}
+        onOpenChat={props.onOpenChat}
+        onPoolClick={(element) => {
+          // diceManager.actions.addOrRemovePoolElement(element);
+          // diceManager.actions.setPlayerId(gm.id);
+        }}
+        onIndexCardUpdate={(indexCard, type) => {
+          if (isGM) {
+            sceneManager.actions.updateIndexCard(indexCard, type);
+          } else {
+            props.onPlayerInteraction?.({
+              type: "update-index-card",
+              payload: {
+                indexCard: indexCard,
+                indexCardType: type,
+              },
+            });
+          }
+        }}
+      />
+    );
+  }
+
+  function renderPageError() {
+    return (
+      <Box>
+        <Box display="flex" justifyContent="center" pb="2rem">
+          <Typography variant="h4">{t("play-route.error.title")}</Typography>
+        </Box>
+        <Box display="flex" justifyContent="center">
+          <Typography variant="h6">
+            {t("play-route.error.description1")}
+          </Typography>
+        </Box>
+        <Box display="flex" justifyContent="center">
+          <Typography variant="h6">
+            {t("play-route.error.description2")}
+          </Typography>
+        </Box>
+      </Box>
+    );
+  }
+}
+Session.displayName = "Session";

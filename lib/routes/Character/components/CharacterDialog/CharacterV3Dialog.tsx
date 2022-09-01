@@ -116,6 +116,7 @@ const ZoomOptions = [
 
 export const CharacterV3Dialog: React.FC<{
   open: boolean;
+  preview?: boolean;
   character: ICharacter | undefined;
   readonly?: boolean;
   dialog: boolean;
@@ -1003,7 +1004,6 @@ export const CharacterV3Dialog: React.FC<{
             <Grid item xs>
               <Box pt=".5rem" ml="-.5rem">
                 <CharacterCard
-                  playerName=""
                   width="350px"
                   readonly={false}
                   characterSheet={characterManager.state.character}
@@ -1404,34 +1404,40 @@ export const CharacterV3Dialog: React.FC<{
         >
           {!props.readonly && (
             <Grid item container xs={12} sm={6}>
-              <Grid item>
-                <FormControlLabel
-                  label={t("character-dialog.control.advanced-mode")}
-                  control={
-                    <Switch
-                      color="primary"
-                      data-cy="character-dialog.toggle-advanced"
-                      checked={advanced}
-                      onChange={handleOnToggleAdvancedMode}
-                    />
-                  }
-                />
-              </Grid>
-              <Grid item>
-                <FormControlLabel
-                  label={t("character-dialog.control.wide-mode")}
-                  control={
-                    <Switch
-                      color="primary"
-                      data-cy="character-dialog.toggle-wide"
-                      checked={characterManager.state.character?.wide ?? false}
-                      onChange={() => {
-                        characterManager.actions.toggleWideMode();
-                      }}
-                    />
-                  }
-                />
-              </Grid>
+              {!props.preview && (
+                <Grid item>
+                  <FormControlLabel
+                    label={t("character-dialog.control.advanced-mode")}
+                    control={
+                      <Switch
+                        color="primary"
+                        data-cy="character-dialog.toggle-advanced"
+                        checked={advanced}
+                        onChange={handleOnToggleAdvancedMode}
+                      />
+                    }
+                  />
+                </Grid>
+              )}
+              {!props.preview && (
+                <Grid item>
+                  <FormControlLabel
+                    label={t("character-dialog.control.wide-mode")}
+                    control={
+                      <Switch
+                        color="primary"
+                        data-cy="character-dialog.toggle-wide"
+                        checked={
+                          characterManager.state.character?.wide ?? false
+                        }
+                        onChange={() => {
+                          characterManager.actions.toggleWideMode();
+                        }}
+                      />
+                    }
+                  />
+                </Grid>
+              )}
 
               <Grid item>
                 {props.onToggleSync && (
@@ -1462,7 +1468,7 @@ export const CharacterV3Dialog: React.FC<{
             justifyContent="flex-end"
             spacing={2}
           >
-            {!props.dialog && (
+            {!props.dialog && !props.preview && (
               <Grid item>
                 <Tooltip title={t("character-dialog.print")}>
                   <IconButton
@@ -1478,46 +1484,50 @@ export const CharacterV3Dialog: React.FC<{
                 </Tooltip>
               </Grid>
             )}
-            <Grid item>
-              <Tooltip title={t("character-dialog.delete")}>
-                <IconButton
-                  color="default"
-                  data-cy="character-dialog.delete"
-                  size="small"
-                  onClick={() => {
-                    const confirm = window.confirm(
-                      t("character-dialog.delete-confirmation")
-                    );
-
-                    if (confirm) {
-                      charactersManager.actions.remove(
-                        characterManager.state?.character?.id
+            {!props.preview && (
+              <Grid item>
+                <Tooltip title={t("character-dialog.delete")}>
+                  <IconButton
+                    color="default"
+                    data-cy="character-dialog.delete"
+                    size="small"
+                    onClick={() => {
+                      const confirm = window.confirm(
+                        t("character-dialog.delete-confirmation")
                       );
-                    }
-                  }}
-                >
-                  <DeleteIcon htmlColor={miniTheme.textPrimary} />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-            <Grid item>
-              <Tooltip title={t("character-dialog.export")}>
-                <IconButton
-                  color="default"
-                  data-cy="character-dialog.print"
-                  size="small"
-                  onClick={() => {
-                    charactersManager.actions.exportEntity(
-                      characterManager.state.character as ICharacter
-                    );
-                  }}
-                >
-                  <ExportIcon htmlColor={miniTheme.textPrimary} />
-                </IconButton>
-              </Tooltip>
-            </Grid>
 
-            {!props.dialog && (
+                      if (confirm) {
+                        charactersManager.actions.remove(
+                          characterManager.state?.character?.id
+                        );
+                      }
+                    }}
+                  >
+                    <DeleteIcon htmlColor={miniTheme.textPrimary} />
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+            )}
+            {!props.preview && (
+              <Grid item>
+                <Tooltip title={t("character-dialog.export")}>
+                  <IconButton
+                    color="default"
+                    data-cy="character-dialog.print"
+                    size="small"
+                    onClick={() => {
+                      charactersManager.actions.exportEntity(
+                        characterManager.state.character as ICharacter
+                      );
+                    }}
+                  >
+                    <ExportIcon htmlColor={miniTheme.textPrimary} />
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+            )}
+
+            {!props.dialog && !props.preview && (
               <>
                 <Grid item>
                   <Tooltip title={t("character-dialog.export-as-template")}>
@@ -1538,7 +1548,7 @@ export const CharacterV3Dialog: React.FC<{
               </>
             )}
 
-            {!props.dialog && (
+            {!props.dialog && !props.preview && (
               <Grid item>
                 <Tooltip title={t("character-dialog.open-theme-editor")}>
                   <IconButton

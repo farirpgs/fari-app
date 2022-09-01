@@ -4,7 +4,6 @@ import SaveIcon from "@mui/icons-material/Save";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
-import InputLabel from "@mui/material/InputLabel";
 import Paper from "@mui/material/Paper";
 import { useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
@@ -21,7 +20,6 @@ import { FateLabel } from "../../../../FateLabel/FateLabel";
 
 export const CharacterCard: React.FC<{
   characterSheet: ICharacter | undefined;
-  playerName: string | undefined;
   readonly: boolean;
   width?: string;
   onCharacterDialogOpen?(): void;
@@ -152,22 +150,6 @@ export const CharacterCard: React.FC<{
                 </Grid>
               </Grid>
             </Grid>
-            <Box>
-              <Grid
-                container
-                justifyContent="flex-end"
-                alignItems="baseline"
-                spacing={1}
-                wrap="nowrap"
-              />
-              <Grid container>
-                {props.playerName && (
-                  <Grid item xs={12}>
-                    <InputLabel shrink>{`(${props.playerName})`}</InputLabel>
-                  </Grid>
-                )}
-              </Grid>
-            </Box>
           </Box>
           {hasSections &&
             characterManager.state.character?.pages.map((page, pageIndex) => {

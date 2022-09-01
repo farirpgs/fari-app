@@ -5,6 +5,7 @@ import {
   IIndexCardType,
   IPlayer,
 } from "../../../hooks/useScene/IScene";
+import { IMessage } from "../components/Chat/useChat";
 import { DefaultPlayerColor } from "../consts/PlayerColors";
 
 export type IPlayerInteraction =
@@ -48,6 +49,12 @@ export type IPlayerInteraction =
   | {
       type: "update-player-character";
       payload: { id: string; character: ICharacter };
+    }
+  | {
+      type: "send-message";
+      payload: {
+        message: IMessage;
+      };
     };
 
 export const PlayerInteractionFactory = {
@@ -117,6 +124,12 @@ export const PlayerInteractionFactory = {
     return {
       type: `update-player-character`,
       payload: { id, character },
+    };
+  },
+  sendMessage(message: IMessage): IPlayerInteraction {
+    return {
+      type: `send-message`,
+      payload: { message },
     };
   },
 };
