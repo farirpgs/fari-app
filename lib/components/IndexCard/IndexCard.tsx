@@ -449,6 +449,7 @@ export const IndexCard: React.FC<
                                       indexCardManager.state.indexCard.id
                                     );
                                   } else {
+                                    indexCardManager.state.indexCard.sub = true;
                                     props.onMoveTo?.(
                                       indexCardManager.state.indexCard.id,
                                       e.target.value as string
