@@ -139,6 +139,40 @@ function useCardCollection(props: {
     );
   }
 
+  function moveIndexCardOut(idOfIndexCardToMove: string) {
+    setCardCollection(
+      produce((draft) => {
+        if (!draft) {
+          return;
+        }
+
+        let cardToAddBeside: IIndexCard | undefined;
+        let subCardToMove: IIndexCard | undefined;
+
+        const indexCards = draft.indexCards;
+
+        for (const [, card] of indexCards.entries()) {
+          for (const [subCardIndex, subCard] of card.subCards.entries()) {
+            if (subCard.id === idOfIndexCardToMove) {
+              subCardToMove = card.subCards.splice(subCardIndex, 1)[0];
+              cardToAddBeside = card;
+            }
+          }
+        }
+
+        if (!subCardToMove) {
+          return;
+        }
+        const index = indexCards.findIndex((c) => c.id === cardToAddBeside?.id);
+
+        subCardToMove.sub = false;
+        if (index !== -1) {
+          indexCards.splice(index + 1, 0, subCardToMove);
+        }
+      })
+    );
+  }
+
   function moveIndexCardTo(
     idOfIndexCardToMove: string,
     idOfIndexCardToMoveTo: string
@@ -170,6 +204,7 @@ function useCardCollection(props: {
           if (!cardToAdd) {
             return;
           }
+          cardToAdd.sub = true;
 
           for (const card of indexCards) {
             if (card.id === idOfIndexCardToMoveTo) {
@@ -194,6 +229,7 @@ function useCardCollection(props: {
       removeIndexCard,
       duplicateIndexCard,
       moveIndexCard,
+      moveIndexCardOut,
       moveIndexCardTo,
       updateIndexCard,
     },
@@ -397,6 +433,11 @@ export const CardCollectionRoute: React.FC<{
                   indexCardCollectionManager.actions.moveIndexCardTo(
                     idOfIndexCardToMove,
                     idOfIndexCardToMoveTo
+                  );
+                }}
+                onMoveOut={(idOfIndexCardToMove) => {
+                  indexCardCollectionManager.actions.moveIndexCardOut(
+                    idOfIndexCardToMove
                   );
                 }}
                 onMove={(dragId, hoverId) => {

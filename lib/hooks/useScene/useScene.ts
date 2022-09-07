@@ -221,6 +221,7 @@ export function useScene() {
           if (!cardToAdd) {
             return;
           }
+          cardToAdd.sub = true;
 
           for (const card of indexCards) {
             if (card.id === idOfIndexCardToMoveTo) {
