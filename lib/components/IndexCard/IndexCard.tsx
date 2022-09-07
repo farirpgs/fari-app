@@ -444,12 +444,10 @@ export const IndexCard: React.FC<
                                 renderProps.handleOnClose();
                                 if (e.target.value) {
                                   if (e.target.value === "move-out") {
-                                    indexCardManager.state.indexCard.sub = false;
                                     props.onMoveOut?.(
                                       indexCardManager.state.indexCard.id
                                     );
                                   } else {
-                                    indexCardManager.state.indexCard.sub = true;
                                     props.onMoveTo?.(
                                       indexCardManager.state.indexCard.id,
                                       e.target.value as string
@@ -465,13 +463,13 @@ export const IndexCard: React.FC<
                                   {`— ${t("index-card.move-out")} —`}
                                 </option>
                               )}
-                              {cardsForSelect.map((card) => {
+                              {cardsForSelect.map((card, index) => {
                                 const value = previewContentEditable({
                                   value: card.title,
                                 });
                                 return (
                                   <option key={card.id} value={card.id}>
-                                    {value}
+                                    {value || `Untitled ${index + 1}`}
                                   </option>
                                 );
                               })}

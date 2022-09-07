@@ -258,6 +258,8 @@ export function useScene() {
           return;
         }
         const index = indexCards.findIndex((c) => c.id === cardToAddBeside?.id);
+
+        subCardToMove.sub = false;
         if (index !== -1) {
           indexCards.splice(index + 1, 0, subCardToMove);
         }
