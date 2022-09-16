@@ -12,7 +12,7 @@ import { useZIndex } from "../../../../constants/zIndex";
 import { ThemedLabel } from "../../../Character/components/CharacterDialog/components/ThemedLabel";
 import {
   MiniThemeContext,
-  useMiniTheme
+  useMiniTheme,
 } from "../../../Character/components/CharacterDialog/MiniThemeContext";
 import { DefaultPlayerColor } from "../../consts/PlayerColors";
 import { IPlayerCursorRollOutput } from "../../types/IPlayerCursorState";
@@ -122,8 +122,7 @@ export default function CursorWithMessage(props: {
           position: "absolute",
           opacity: stale ? 0.15 : 1,
           pointerEvents: "none",
-          top: "-40px",
-          left: "-10px",
+
           zIndex: zIndex.cursor,
         })}
         style={{
@@ -168,8 +167,8 @@ export default function CursorWithMessage(props: {
       <div
         className={css({
           position: "absolute",
-          top: "2rem",
-          left: "1.5rem",
+          top: "0rem",
+          left: "3rem",
           padding: "1rem",
         })}
         style={{ backgroundColor: color, borderRadius: 4 }}
