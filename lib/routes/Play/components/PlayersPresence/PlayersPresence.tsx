@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import { useMyPresence } from "@liveblocks/react";
 import React, {
   useContext,
@@ -90,15 +89,7 @@ export const PlayersPresence = React.forwardRef((props, ref) => {
 
   return (
     <>
-      <div
-        className={css({
-          label: "PlayersPresence",
-          position: "fixed",
-          top: 0,
-          left: 0,
-          zIndex: zIndex.cursor,
-        })}
-      >
+      <div>
         {windowCursors.map((cursor) => {
           return (
             <CursorWithMessage
