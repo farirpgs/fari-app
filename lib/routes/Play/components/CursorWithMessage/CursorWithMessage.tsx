@@ -1,4 +1,3 @@
-import { DiceRoll } from "@dice-roller/rpg-dice-roller";
 import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Grow from "@mui/material/Grow";
@@ -9,17 +8,19 @@ import { ContentEditable } from "../../../../components/ContentEditable/ContentE
 import { Delays } from "../../../../constants/Delays";
 import { FontFamily } from "../../../../constants/FontFamily";
 import { useZIndex } from "../../../../constants/zIndex";
+import { ChatMessageParser } from "../../../../domains/chat/ChatMessageParser";
 import { ThemedLabel } from "../../../Character/components/CharacterDialog/components/ThemedLabel";
 import {
   MiniThemeContext,
-  useMiniTheme
+  useMiniTheme,
 } from "../../../Character/components/CharacterDialog/MiniThemeContext";
 import { DefaultPlayerColor } from "../../consts/PlayerColors";
 import { IPlayerCursorRollOutput } from "../../types/IPlayerCursorState";
+import { IMessageToSend, IRollMessage, MessageType } from "../Chat/useChat";
 
 let topTenLatestRollCommandsSingleton: Array<string> = [];
-
 let openCount = -1;
+
 export default function CursorWithMessage(props: {
   color: string | null | undefined;
   x: number;
@@ -28,7 +29,7 @@ export default function CursorWithMessage(props: {
   rollOutput: IPlayerCursorRollOutput | null | undefined;
   readonly?: boolean;
   label: string | null | undefined;
-  onRollOutputChange?(roll: IPlayerCursorRollOutput | null): void;
+  onMessageSubmit?(messageToSend: IMessageToSend): void;
   onMessageChange?(message: string): void;
 }) {
   const [textPlaceholder] = useState(() => {
@@ -36,7 +37,7 @@ export default function CursorWithMessage(props: {
     if (openCount % 2 === 0) {
       return "Type a message...";
     }
-    return "2d6 + 3";
+    return "/roll 2d6 + 3";
   });
   const zIndex = useZIndex();
   const theme = useTheme();
@@ -70,20 +71,22 @@ export default function CursorWithMessage(props: {
     topTenLatestRollCommandsSingleton = topTenLatestRollCommands;
   }, [topTenLatestRollCommands]);
 
-  function handleDiceRoll() {
-    try {
-      const command = props.message || "";
-      const roll = new DiceRoll(command);
-      props.onRollOutputChange?.({
-        text: roll.output,
-        total: roll.total.toString(),
-      });
-      const newCommands = [command, ...topTenLatestRollCommands].slice(0, 10);
-      const uniqueCommandsArray = Array.from(new Set(newCommands));
-      setTopTenLatestRollCommands(uniqueCommandsArray);
-      setCommandtoPopIndex(0);
-    } catch (error) {
-      setHasDiceError(true);
+  function handleMessageSubmit() {
+    const message = ChatMessageParser.parse({
+      message: props.message,
+    });
+    if (message) {
+      props.onMessageSubmit?.(message);
+
+      if (message.type === MessageType.Roll) {
+        const newCommands = [
+          (message as IRollMessage).value.command,
+          ...topTenLatestRollCommands,
+        ].slice(0, 10);
+        const uniqueCommandsArray = Array.from(new Set(newCommands));
+        setTopTenLatestRollCommands(uniqueCommandsArray);
+        setCommandtoPopIndex(0);
+      }
     }
   }
 
@@ -214,7 +217,7 @@ export default function CursorWithMessage(props: {
               if (e.key === "Enter") {
                 e.preventDefault();
                 e.stopPropagation();
-                handleDiceRoll();
+                handleMessageSubmit();
               } else if (e.key === "ArrowUp") {
                 e.preventDefault();
                 e.stopPropagation();
@@ -236,8 +239,8 @@ export default function CursorWithMessage(props: {
               gutterBottom
               sx={{ color: textColor, display: "block" }}
             >
-              Press <KeyboardKey>Esc or /</KeyboardKey>
-              {" to close"}
+              Press <KeyboardKey>Esc</KeyboardKey>
+              {" to open or close"}
             </Typography>
             <Typography
               variant="caption"
@@ -245,7 +248,7 @@ export default function CursorWithMessage(props: {
               sx={{ color: textColor, display: "block" }}
             >
               Press <KeyboardKey>Enter</KeyboardKey>
-              {" to roll dice command."}
+              {" to send."}
             </Typography>
           </Box>
         )}

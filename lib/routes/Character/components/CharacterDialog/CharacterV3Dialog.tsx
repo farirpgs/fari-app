@@ -1404,40 +1404,34 @@ export const CharacterV3Dialog: React.FC<{
         >
           {!props.readonly && (
             <Grid item container xs={12} sm={6}>
-              {!props.preview && (
-                <Grid item>
-                  <FormControlLabel
-                    label={t("character-dialog.control.advanced-mode")}
-                    control={
-                      <Switch
-                        color="primary"
-                        data-cy="character-dialog.toggle-advanced"
-                        checked={advanced}
-                        onChange={handleOnToggleAdvancedMode}
-                      />
-                    }
-                  />
-                </Grid>
-              )}
-              {!props.preview && (
-                <Grid item>
-                  <FormControlLabel
-                    label={t("character-dialog.control.wide-mode")}
-                    control={
-                      <Switch
-                        color="primary"
-                        data-cy="character-dialog.toggle-wide"
-                        checked={
-                          characterManager.state.character?.wide ?? false
-                        }
-                        onChange={() => {
-                          characterManager.actions.toggleWideMode();
-                        }}
-                      />
-                    }
-                  />
-                </Grid>
-              )}
+              <Grid item>
+                <FormControlLabel
+                  label={t("character-dialog.control.advanced-mode")}
+                  control={
+                    <Switch
+                      color="primary"
+                      data-cy="character-dialog.toggle-advanced"
+                      checked={advanced}
+                      onChange={handleOnToggleAdvancedMode}
+                    />
+                  }
+                />
+              </Grid>
+              <Grid item>
+                <FormControlLabel
+                  label={t("character-dialog.control.wide-mode")}
+                  control={
+                    <Switch
+                      color="primary"
+                      data-cy="character-dialog.toggle-wide"
+                      checked={characterManager.state.character?.wide ?? false}
+                      onChange={() => {
+                        characterManager.actions.toggleWideMode();
+                      }}
+                    />
+                  }
+                />
+              </Grid>
 
               <Grid item>
                 {props.onToggleSync && (
@@ -1447,6 +1441,7 @@ export const CharacterV3Dialog: React.FC<{
                       control={
                         <Switch
                           color="primary"
+                          disabled={props.synced}
                           checked={props.synced ?? false}
                           readOnly={props.synced}
                           onChange={props.onToggleSync}

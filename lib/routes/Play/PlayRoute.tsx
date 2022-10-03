@@ -17,7 +17,7 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { useChat } from "./components/Chat/useChat";
+import { IMessage, useChat } from "./components/Chat/useChat";
 import {
   IPlayersPresenceRef,
   PlayersPresence,
@@ -305,6 +305,7 @@ function PlayRoute() {
   }
 
   const playersPresenceRef = useRef<IPlayersPresenceRef>(null);
+
   return (
     <>
       <PageMeta
@@ -325,7 +326,26 @@ function PlayRoute() {
           </Alert>
         </Snackbar>
         <SessionPresenceUpdaterContext.Provider value={sessionPresenceUpdater}>
-          <PlayersPresence ref={playersPresenceRef} />
+          <PlayersPresence
+            ref={playersPresenceRef}
+            onMessageSubmit={(messageToSend) => {
+              if (messageToSend) {
+                const message = {
+                  type: messageToSend.type,
+                  fromUserId: userId,
+                  value: messageToSend.value,
+                } as IMessage;
+
+                if (isGM) {
+                  chatManager.actions.sendMessage(message);
+                } else {
+                  handlePlayerInteraction(
+                    PlayerInteractionFactory.sendMessage(message)
+                  );
+                }
+              }
+            }}
+          />
         </SessionPresenceUpdaterContext.Provider>
         <Session
           chatManager={chatManager}

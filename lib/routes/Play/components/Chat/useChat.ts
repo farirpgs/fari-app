@@ -3,15 +3,25 @@ import { useState } from "react";
 
 export enum MessageType {
   Text = "text",
+  Roll = "roll",
 }
 
 export type ITextMessage = {
   type: MessageType.Text;
-  fromUserId: string;
   value: string;
 };
 
-export type IMessage = ITextMessage;
+export type IRollMessage = {
+  type: MessageType.Roll;
+  value: {
+    text: string;
+    total: string;
+    command: string;
+  };
+};
+
+export type IMessageToSend = ITextMessage | IRollMessage;
+export type IMessage = IMessageToSend & { fromUserId: string };
 
 export type IChat = {
   messages: Array<IMessage>;

@@ -67,7 +67,7 @@ import {
   PlayerInteractionFactory,
 } from "../../types/IPlayerInteraction";
 import { Chat } from "../Chat/Chat";
-import { IMessage, useChat } from "../Chat/useChat";
+import { IMessage, IMessageToSend, useChat } from "../Chat/useChat";
 import { useSession, useSessionCharacterSheets } from "./useSession";
 
 export function Session(props: {
@@ -258,7 +258,13 @@ export function Session(props: {
     }
   };
 
-  const handleMessageSubmission = useEvent((message: IMessage) => {
+  const handleMessageSubmission = useEvent((messageToSend: IMessageToSend) => {
+    const message = {
+      type: messageToSend.type,
+      value: messageToSend.value,
+      fromUserId: userId,
+    } as IMessage;
+
     if (isGM) {
       chatManager.actions.sendMessage(message);
     } else {
@@ -511,7 +517,7 @@ export function Session(props: {
               label: "Chat",
               dataCy: "chat-tab",
               value: "chat",
-              sx: { padding: "0", flex: "1 0 auto" },
+              sx: { padding: "0", overflow: "auto", height: "100%" },
               render: renderChat,
             },
           ]}
@@ -521,10 +527,16 @@ export function Session(props: {
   }
 
   function renderChat() {
+    const playersNameMapping = everyone.reduce((acc, player) => {
+      acc[player.id] = player.playerName;
+      return acc;
+    }, {} as Record<string, string | undefined>);
+
     return (
       <Chat
         userId={userId}
         chatManager={chatManager}
+        playersNameMapping={playersNameMapping}
         onMessageSubmit={handleMessageSubmission}
       />
     );
@@ -614,23 +626,19 @@ export function Session(props: {
                         </Button>
                       </Grid>
                       <Grid item>
-                        <Tooltip title={t("play-route.gm-add-gm-character")}>
-                          <span>
-                            <Button
-                              data-cy="scene.add-player"
-                              onClick={() => {
-                                handleGMAddNpc();
-
-                                logger.track("session.add_npc");
-                              }}
-                              color="inherit"
-                              size="small"
-                              variant="outlined"
-                            >
-                              <PersonAddIcon />
-                            </Button>
-                          </span>
-                        </Tooltip>
+                        <Button
+                          data-cy="scene.add-player"
+                          onClick={() => {
+                            handleGMAddNpc();
+                            logger.track("session.add_npc");
+                          }}
+                          color="inherit"
+                          size="small"
+                          variant="outlined"
+                          endIcon={<PersonAddIcon />}
+                        >
+                          {t("play-route.gm-add-gm-character")}
+                        </Button>
                       </Grid>
                     </>
                   )}
@@ -920,7 +928,7 @@ export function Session(props: {
     );
   }
 
-  function renderCharacterCards() {
+  function renderCharacters() {
     const hasCharacters = playersWithCharacterSheets.length > 0;
     const currentCardId =
       characterIdCard || playersWithCharacterSheets[0]?.characterSheet.id || "";
@@ -929,145 +937,139 @@ export function Session(props: {
         <Box>
           {showEmptyWarnings()}
           {hasCharacters && (
-            <Grid container wrap={isSmall ? "wrap" : "nowrap"}>
-              <Grid item xs={12} md={3}>
-                <Box
-                  sx={{
-                    p: ".5rem",
-                    height: "100%",
-                  }}
-                >
-                  <Box>
-                    <Tabs
-                      orientation="vertical"
-                      variant="scrollable"
-                      textColor="secondary"
-                      indicatorColor="secondary"
-                      value={currentCardId}
-                      onChange={(event, value) => {
-                        setCharacterIdCard(value);
-                      }}
-                      sx={{
-                        borderRight: 1,
-                        borderColor: "divider",
-                        background: lightBackground,
-                      }}
-                    >
-                      {playersWithCharacterSheets.map((player) => {
-                        return (
-                          <Tab
-                            key={player.id}
-                            sx={{}}
-                            label={
-                              <>
-                                <Box
-                                  sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    width: "100%",
-
-                                    textTransform: "none",
-                                  }}
-                                >
-                                  <Grid
-                                    container
-                                    spacing={1}
-                                    alignItems="center"
-                                  >
-                                    <Grid item>
-                                      <CircleIcon
-                                        sx={{
-                                          marginRight: ".25rem",
-                                        }}
-                                        htmlColor={player.color}
-                                      />
-                                    </Grid>
-                                    <Grid item>
-                                      <Box
-                                        sx={{
-                                          display: "flex",
-                                        }}
-                                      >
-                                        <Typography variant="body1">
-                                          {player.playerName}
-                                        </Typography>
-                                      </Box>
-                                      <Box
-                                        sx={{
-                                          display: "flex",
-                                        }}
-                                      >
-                                        <Typography variant="body2">
-                                          {player.characterSheet.name}
-                                        </Typography>
-                                      </Box>
-                                    </Grid>
-                                  </Grid>
-                                </Box>
-                              </>
-                            }
-                            value={player.characterSheet.id}
-                          />
-                        );
-                      })}
-                    </Tabs>
-                  </Box>
-                </Box>
-              </Grid>
-              <Grid item xs>
+            <>
+              <Box
+                sx={{
+                  p: ".5rem",
+                  height: "100%",
+                }}
+              >
                 <Box>
-                  <TabContext value={currentCardId}>
-                    <TabPanel value="" />
-                    <MiniThemeContext.Provider value={miniTheme}>
-                      {playersWithCharacterSheets.map((player) => {
-                        const isMe = props.userId === player.id;
-                        const canControl = isGM || isMe;
-                        const isCharacterInStorage =
-                          charactersManager.selectors.isInStorage(
-                            player.characterSheet?.id
-                          );
-                        return (
-                          <TabPanel
+                  <Tabs
+                    orientation="horizontal"
+                    variant="scrollable"
+                    textColor="secondary"
+                    indicatorColor="secondary"
+                    value={currentCardId}
+                    onChange={(event, value) => {
+                      setCharacterIdCard(value);
+                    }}
+                    sx={{
+                      borderRight: 1,
+                      borderColor: "divider",
+                      background: lightBackground,
+                    }}
+                  >
+                    {playersWithCharacterSheets.map((player) => {
+                      return (
+                        <Tab
+                          key={player.id}
+                          sx={{}}
+                          label={
+                            <>
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  width: "100%",
+
+                                  textTransform: "none",
+                                }}
+                              >
+                                <Grid container spacing={1} alignItems="center">
+                                  <Grid item>
+                                    <CircleIcon
+                                      sx={{
+                                        marginRight: ".25rem",
+                                      }}
+                                      htmlColor={player.color}
+                                    />
+                                  </Grid>
+                                  <Grid item>
+                                    <Box
+                                      sx={{
+                                        display: "flex",
+                                      }}
+                                    >
+                                      <Typography variant="body1">
+                                        {player.playerName}
+                                      </Typography>
+                                    </Box>
+                                    <Box
+                                      sx={{
+                                        display: "flex",
+                                      }}
+                                    >
+                                      <Typography variant="body2">
+                                        {player.characterSheet.name}
+                                      </Typography>
+                                    </Box>
+                                  </Grid>
+                                </Grid>
+                              </Box>
+                            </>
+                          }
+                          value={player.characterSheet.id}
+                        />
+                      );
+                    })}
+                  </Tabs>
+                </Box>
+              </Box>
+
+              <Box>
+                <TabContext value={currentCardId}>
+                  <TabPanel value="" />
+                  <MiniThemeContext.Provider value={miniTheme}>
+                    {playersWithCharacterSheets.map((player) => {
+                      const isMe = props.userId === player.id;
+                      const canControl = isGM || isMe;
+                      const isCharacterInStorage =
+                        charactersManager.selectors.isInStorage(
+                          player.characterSheet?.id
+                        );
+                      return (
+                        <TabPanel
+                          sx={{
+                            padding: "0",
+                          }}
+                          key={`${player.id}_${player.characterSheet.id}`}
+                          value={player.characterSheet.id}
+                        >
+                          <Box
                             sx={{
-                              padding: "0",
+                              width: "100%",
                             }}
-                            key={`${player.id}_${player.characterSheet.id}`}
-                            value={player.characterSheet.id}
                           >
-                            <Box
-                              sx={{
-                                width: "100%",
+                            <CharacterV3Dialog
+                              readonly={!canControl}
+                              open={true}
+                              preview={true}
+                              character={player.characterSheet}
+                              dialog={false}
+                              onSave={(updatedCharacter) => {
+                                handleUpdateCharacter(
+                                  player.id,
+                                  updatedCharacter
+                                );
                               }}
-                            >
-                              <CharacterV3Dialog
-                                readonly={!canControl}
-                                open={true}
-                                previewain
-                                character={player.characterSheet}
-                                dialog={false}
-                                onSave={(updatedCharacter) => {
-                                  handleUpdateCharacter(
-                                    player.id,
-                                    updatedCharacter
-                                  );
-                                }}
-                                onClose={() => {
-                                  setCharacterDialogPlayerId(undefined);
-                                }}
-                                synced={isCharacterInStorage}
-                                onToggleSync={() => {
-                                  handleOnToggleCharacterSync(
-                                    player.characterSheet
-                                  );
-                                }}
-                                onRoll={(newDiceRollResult) => {
-                                  handleSetPlayerRoll(
-                                    player.id,
-                                    newDiceRollResult
-                                  );
-                                }}
-                              />
-                              {/* <CharacterCard
+                              onClose={() => {
+                                setCharacterDialogPlayerId(undefined);
+                              }}
+                              synced={isCharacterInStorage}
+                              onToggleSync={() => {
+                                handleOnToggleCharacterSync(
+                                  player.characterSheet
+                                );
+                              }}
+                              onRoll={(newDiceRollResult) => {
+                                handleSetPlayerRoll(
+                                  player.id,
+                                  newDiceRollResult
+                                );
+                              }}
+                            />
+                            {/* <CharacterCard
                                       readonly={!canControl}
                                       characterSheet={player.characterSheet}
                                       onCharacterDialogOpen={() => {
@@ -1086,15 +1088,14 @@ export function Session(props: {
                                         );
                                       }}
                                     /> */}
-                            </Box>
-                          </TabPanel>
-                        );
-                      })}
-                    </MiniThemeContext.Provider>
-                  </TabContext>
-                </Box>
-              </Grid>
-            </Grid>
+                          </Box>
+                        </TabPanel>
+                      );
+                    })}
+                  </MiniThemeContext.Provider>
+                </TabContext>
+              </Box>
+            </>
           )}
         </Box>
       </>
@@ -1154,7 +1155,7 @@ export function Session(props: {
       return (
         <Box sx={{ padding: "1rem" }}>
           <Typography variant="h6" color="textSecondary">
-            No character sheets have been assigned yet.
+            No character sheets in session yet.
           </Typography>
           <Typography variant="body2" color="textSecondary">
             To assign a character sheet to a player, click on their{" "}
@@ -1179,13 +1180,13 @@ export function Session(props: {
               playersWithCharacterSheets.length
             })`,
             sx: { padding: "0" },
-            render: renderCharacterCards,
+            render: renderCharacters,
           },
           {
             value: "scene",
             dataCy: "session.tabs.characters",
             label: t("menu.scenes"),
-            sx: {},
+            sx: { padding: "0" },
             render: renderScene,
           },
           {

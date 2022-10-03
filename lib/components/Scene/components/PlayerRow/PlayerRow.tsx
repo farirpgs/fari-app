@@ -126,9 +126,6 @@ export function PlayerRow(
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item>
               <Grid container spacing={1} justifyContent="flex-end">
-                {props.permissions.canLoadCharacterSheet && (
-                  <Grid item>{renderLoadSheet()}</Grid>
-                )}
                 <Grid item>
                   <PlayerRowTurnTracker
                     playedDuringTurn={props.playedDuringTurn}
@@ -136,20 +133,13 @@ export function PlayerRow(
                     onClick={handleClickInitiativeTracker}
                     dataCy={props.dataCy}
                   />
-                </Grid>
+                </Grid>{" "}
+                {props.permissions.canLoadCharacterSheet && (
+                  <Grid item>{renderLoadSheet()}</Grid>
+                )}
               </Grid>
             </Grid>
 
-            {/* <Grid item>
-              <PlayerRowPoints
-                label={props.pointsLabel}
-                canUpdate={props.permissions.canUpdatePoints}
-                value={props.points}
-                max={props.maxPoints}
-                onChange={handlePointsChange}
-                dataCy={props["dataCy"]}
-              />
-            </Grid> */}
             <Grid item>
               <Grid container spacing={1} justifyContent="flex-end">
                 <Grid item>{renderMoreMenu()}</Grid>
@@ -175,7 +165,7 @@ export function PlayerRow(
       >
         <span>
           <IconButton
-            size="small"
+            // size="small"
             disabled={!canOpenOrLoadSheet}
             color={"secondary"}
             data-cy={`${props["dataCy"]}.assign-or-open-character-sheet`}
@@ -361,14 +351,6 @@ const PlayerRowName = React.memo(
               </Grid>
               <Grid item xs={12} zeroMinWidth>
                 <Grid container>
-                  <Grid item>
-                    <CircleIcon
-                      sx={{
-                        marginRight: ".25rem",
-                      }}
-                      htmlColor={props.color}
-                    />
-                  </Grid>
                   <Grid
                     item
                     sx={{

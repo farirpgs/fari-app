@@ -3,26 +3,37 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import React, { useState } from "react";
+import Typography from "@mui/material/Typography";
+import React, { useEffect, useState } from "react";
+import { ChatMessageParser } from "../../../../domains/chat/ChatMessageParser";
 import { useEvent } from "../../../../hooks/useEvent/useEvent";
-import { IMessage, MessageType, useChat } from "./useChat";
+import { IMessageToSend, MessageType, useChat } from "./useChat";
 
 export function Chat(props: {
   chatManager: ReturnType<typeof useChat>;
   userId: string;
-  onMessageSubmit: (message: IMessage) => void;
+  playersNameMapping: Record<string, string | undefined>;
+  onMessageSubmit: (message: IMessageToSend) => void;
 }) {
   const { chatManager } = props;
   const theme = useTheme();
+  const $chatScrollBoxRef = React.useRef<HTMLDivElement>(null);
 
   const handleOnMessage = useEvent((messageString) => {
-    // TODO: parse other types of messages
-    props.onMessageSubmit({
-      type: MessageType.Text,
-      value: messageString,
-      fromUserId: props.userId,
+    const message = ChatMessageParser.parse({
+      message: messageString,
     });
+    if (message) {
+      props.onMessageSubmit(message);
+    }
   });
+
+  useEffect(() => {
+    if ($chatScrollBoxRef.current) {
+      $chatScrollBoxRef.current.scrollTop =
+        $chatScrollBoxRef.current.scrollHeight;
+    }
+  }, [props.chatManager.state.chat.messages.length]);
 
   return (
     <Box
@@ -30,43 +41,100 @@ export function Chat(props: {
         height: "100%",
         display: "flex",
         flexDirection: "column",
+        position: "relative",
       }}
     >
+      <Box />
       <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          flex: "1 0 auto",
-        }}
-      />
-      <Box
+        ref={$chatScrollBoxRef}
         sx={{
           padding: ".5rem 1rem",
           display: "flex",
           flexDirection: "column",
+          height: "100%",
+          overflow: "auto",
         }}
       >
         {chatManager.state.chat.messages.map((message, i) => {
           const isMe = message.fromUserId === props.userId;
+          const playerName = props.playersNameMapping[message.fromUserId];
+
           return (
-            <>
+            <React.Fragment key={i}>
               <Box
                 sx={{
-                  background: isMe
-                    ? theme.palette.primary.main
-                    : theme.palette.action.hover,
-                  color: isMe ? theme.palette.primary.contrastText : "inherit",
-                  marginBottom: ".5rem",
-                  padding: ".5rem",
-                  borderRadius: "1rem",
-                  maxWidth: "50%",
-                  // minWidth: "4rem",
                   alignSelf: isMe ? "flex-end" : "flex-start",
+                  maxWidth: "50%",
                 }}
               >
-                {message.value}
+                <Box
+                  sx={{
+                    background: isMe
+                      ? theme.palette.primary.main
+                      : theme.palette.action.hover,
+                    color: isMe
+                      ? theme.palette.primary.contrastText
+                      : "inherit",
+                    padding: ".5rem .75rem",
+                    display: "flex",
+                    borderRadius: "1rem",
+                  }}
+                >
+                  {message.type === MessageType.Text && message.value}
+                  {message.type === MessageType.Roll && (
+                    <Box sx={{}}>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontSize: "2rem",
+                          }}
+                          variant="caption"
+                        >
+                          {message.value.total}
+                        </Typography>
+                      </Box>
+
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Typography
+                          sx={
+                            {
+                              // fontSize: "1rem",
+                            }
+                          }
+                          variant="caption"
+                        >
+                          {message.value.text}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  )}
+                </Box>
               </Box>
-            </>
+              <Box
+                sx={{
+                  marginBottom: ".75rem",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontSize: "0.8rem",
+                    textAlign: isMe ? "right" : "left",
+                  }}
+                >
+                  {playerName ?? "--"}
+                </Typography>
+              </Box>
+            </React.Fragment>
           );
         })}
       </Box>
@@ -81,6 +149,7 @@ export function Chat(props: {
     </Box>
   );
 }
+
 function ChatMessageInput(props: {
   onMessageStringSubmit: (messageString: string) => void;
 }) {
@@ -90,8 +159,10 @@ function ChatMessageInput(props: {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        props.onMessageStringSubmit(value);
-        setValue("");
+        if (value) {
+          props.onMessageStringSubmit(value);
+          setValue("");
+        }
       }}
     >
       <TextField
@@ -99,11 +170,17 @@ function ChatMessageInput(props: {
         onChange={(e) => setValue(e.target.value)}
         InputProps={{
           disableUnderline: true,
+          autoFocus: true,
+          autoComplete: "off",
           endAdornment: (
             <IconButton type="submit">
               <SendIcon />
             </IconButton>
           ),
+        }}
+        onKeyDown={(e) => {
+          e.stopPropagation();
+          // e.preventDefault();
         }}
         placeholder="Message"
         fullWidth

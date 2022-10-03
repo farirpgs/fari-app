@@ -146,31 +146,19 @@ export function Scene(props: {
 
   function renderNoScene() {
     return (
-      <Box>
-        <Box mb="1rem">
-          <Grid container justifyContent="center">
+      <Box padding="1rem">
+        <Box>
+          <Grid container>
             <Grid item>
-              <Typography variant="h6" color="textSecondary">
-                {"No Scene has been loaded yet."}
+              <Typography variant="h6" color="textSecondary" gutterBottom>
+                {"No scene has been loaded yet."}
               </Typography>
             </Grid>
           </Grid>
         </Box>
-        <Box mb="4rem">
-          <Grid container justifyContent="center" spacing={1}>
-            {renderSceneActionGridItems()}
-          </Grid>
-        </Box>
         <Box>
-          <Grid container justifyContent="center">
-            <Grid item>
-              <img
-                src="https://img.icons8.com/plasticine/100/000000/alps.png"
-                className={css({
-                  filter: "grayscale(1)",
-                })}
-              />
-            </Grid>
+          <Grid container spacing={1}>
+            {renderSceneActionGridItems()}
           </Grid>
         </Box>
       </Box>
@@ -183,12 +171,13 @@ export function Scene(props: {
         {props.canLoad && (
           <Grid item>
             <ButtonGroup
-              color="primary"
+              color="inherit"
               aria-label="outlined primary button group"
             >
               <Button
-                color="secondary"
+                color="inherit"
                 data-cy="scene.new-scene"
+                size="small"
                 onClick={() => {
                   const confirmed = sceneManager.state.scene
                     ? confirm(t("play-route.reset-scene-confirmation"))
@@ -203,7 +192,8 @@ export function Scene(props: {
                 {t("play-route.new-scene")}
               </Button>
               <Button
-                color="secondary"
+                color="inherit"
+                size="small"
                 onClick={() => {
                   myBinderManager.actions.open({
                     folder: "scenes",
