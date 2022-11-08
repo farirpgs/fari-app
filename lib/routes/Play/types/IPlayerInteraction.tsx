@@ -1,5 +1,4 @@
 import { ICharacter } from "../../../domains/character/types";
-import { IDicePoolResult } from "../../../domains/dice/Dice";
 import {
   IIndexCard,
   IIndexCardType,
@@ -39,12 +38,8 @@ export type IPlayerInteraction =
       };
     }
   | {
-      type: "update-player-roll";
-      payload: { id: string; roll: IDicePoolResult };
-    }
-  | {
-      type: "update-player-played-during-turn";
-      payload: { id: string; playedDuringTurn: boolean };
+      type: "update-player-status";
+      payload: { id: string; status: string };
     }
   | {
       type: "update-player-character";
@@ -80,12 +75,11 @@ export const PlayerInteractionFactory = {
     const newPlayer: IPlayer = {
       id: id,
       playerName: name ?? "",
-      rolls: [],
       isGM: false,
       points: "3",
       private: false,
       color: DefaultPlayerColor,
-      playedDuringTurn: false,
+      status: "",
     };
 
     return {
@@ -95,12 +89,7 @@ export const PlayerInteractionFactory = {
       },
     };
   },
-  updatePlayerRolls(id: string, roll: IDicePoolResult): IPlayerInteraction {
-    return {
-      type: `update-player-roll`,
-      payload: { id, roll },
-    };
-  },
+
   updatePlayerPoints(
     id: string,
     points: string,
@@ -111,13 +100,10 @@ export const PlayerInteractionFactory = {
       payload: { id, points, maxPoints },
     };
   },
-  updatePlayerPlayedDuringTurn(
-    id: string,
-    playedDuringTurn: boolean
-  ): IPlayerInteraction {
+  updatePlayerStatus(id: string, status: string): IPlayerInteraction {
     return {
-      type: `update-player-played-during-turn`,
-      payload: { id, playedDuringTurn },
+      type: `update-player-status`,
+      payload: { id, status },
     };
   },
   updatePlayerCharacter(id: string, character: ICharacter): IPlayerInteraction {

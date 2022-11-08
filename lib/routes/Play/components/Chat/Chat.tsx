@@ -64,7 +64,8 @@ export function Chat(props: {
               <Box
                 sx={{
                   alignSelf: isMe ? "flex-end" : "flex-start",
-                  maxWidth: "50%",
+
+                  maxWidth: "70%",
                 }}
               >
                 <Box
@@ -76,13 +77,25 @@ export function Chat(props: {
                       ? theme.palette.primary.contrastText
                       : "inherit",
                     padding: ".5rem .75rem",
-                    display: "flex",
+                    display: "block",
                     borderRadius: "1rem",
                   }}
                 >
                   {message.type === MessageType.Text && message.value}
                   {message.type === MessageType.Roll && (
                     <Box sx={{}}>
+                      {message.value.label && (
+                        <Box>
+                          <Typography
+                            component={"div"}
+                            variant="caption"
+                            fontWeight="bold"
+                            textAlign={"center"}
+                          >
+                            {message.value.label}
+                          </Typography>
+                        </Box>
+                      )}
                       <Box
                         sx={{
                           display: "flex",
@@ -105,14 +118,7 @@ export function Chat(props: {
                           justifyContent: "center",
                         }}
                       >
-                        <Typography
-                          sx={
-                            {
-                              // fontSize: "1rem",
-                            }
-                          }
-                          variant="caption"
-                        >
+                        <Typography variant="caption">
                           {message.value.text}
                         </Typography>
                       </Box>

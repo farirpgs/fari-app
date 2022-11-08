@@ -202,6 +202,29 @@ export const Dice = {
   },
 };
 
+export const CommandResult = {
+  getTotal(commandResultList: Array<ICommandResult>) {
+    return commandResultList.reduce((acc, result) => {
+      const value = parseInt(`${result.value}`);
+      return acc + value;
+    }, 0);
+  },
+  getHighest(commandResultList: Array<ICommandResult>) {
+    return commandResultList.reduce((acc, result) => {
+      const value = parseInt(`${result.value}`);
+
+      return Math.max(acc, value);
+    }, -9999);
+  },
+  getLowest(commandResultList: Array<ICommandResult>) {
+    return commandResultList.reduce((acc, result) => {
+      const value = parseInt(`${result.value}`);
+
+      return Math.min(acc, value);
+    }, 9999);
+  },
+};
+
 function getRandomDiceSide(numberOfSides: number): number {
   return Math.trunc(Math.random() * numberOfSides);
 }

@@ -80,11 +80,15 @@ export default function CursorWithMessage(props: {
 
       if (message.type === MessageType.Roll) {
         const newCommands = [
-          (message as IRollMessage).value.command,
+          (message as IRollMessage).value.label,
           ...topTenLatestRollCommands,
         ].slice(0, 10);
         const uniqueCommandsArray = Array.from(new Set(newCommands));
-        setTopTenLatestRollCommands(uniqueCommandsArray);
+        const commandArraysWithoutUndefined = uniqueCommandsArray.filter(
+          (command) => command !== undefined
+        ) as Array<string>;
+
+        setTopTenLatestRollCommands(commandArraysWithoutUndefined);
         setCommandtoPopIndex(0);
       }
     }

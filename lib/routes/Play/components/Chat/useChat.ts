@@ -1,5 +1,6 @@
 import produce from "immer";
 import { useState } from "react";
+import { CommandResult, IDicePoolResult } from "../../../../domains/dice/Dice";
 
 export enum MessageType {
   Text = "text",
@@ -11,13 +12,15 @@ export type ITextMessage = {
   value: string;
 };
 
+type RollMessageValue = {
+  text: string;
+  total: string;
+  label: string | undefined;
+};
+
 export type IRollMessage = {
   type: MessageType.Roll;
-  value: {
-    text: string;
-    total: string;
-    command: string;
-  };
+  value: RollMessageValue;
 };
 
 export type IMessageToSend = ITextMessage | IRollMessage;
@@ -53,5 +56,40 @@ export function useChat() {
   return {
     state: { chat },
     actions: { sendMessage, overrideChat },
+    utils: {
+      convertDicePoolResultToMessageValue(
+        result: IDicePoolResult
+      ): RollMessageValue {
+        let text = result.commandResults.reduce((acc, commandResult) => {
+          return `${acc ? `${acc} ` : acc}${commandResult.command} [${
+            commandResult.value
+          }]`;
+        }, "");
+
+        const hasModifier =
+          result.modifier !== null &&
+          result.modifier !== undefined &&
+          result.modifier !== 0;
+        if (hasModifier) {
+          text += ` + ${result.modifier}`;
+        }
+
+        const total = CommandResult.getTotal(result.commandResults);
+        const highest = CommandResult.getHighest(result.commandResults);
+        const lowest = CommandResult.getLowest(result.commandResults);
+        const totalWithModifier = total + (result.modifier || 0);
+
+        if (!hasModifier) {
+          text += `\nHighest: ${highest}`;
+          text += `\nLowest: ${lowest}`;
+        }
+
+        return {
+          text: text,
+          total: totalWithModifier.toString(),
+          label: result.label,
+        };
+      },
+    },
   };
 }

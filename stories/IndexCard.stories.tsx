@@ -2,15 +2,12 @@ import Box from "@mui/material/Box";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import produce from "immer";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { IndexCard } from "../lib/components/IndexCard/IndexCard";
 import { IndexCardColor } from "../lib/components/IndexCard/IndexCardColor";
 import { Toolbox } from "../lib/components/Toolbox/Toolbox";
-import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
-import { IDicePoolResult } from "../lib/domains/dice/Dice";
 import { SceneFactory } from "../lib/domains/scene/SceneFactory";
 import { IIndexCard } from "../lib/hooks/useScene/IScene";
-import { IDicePoolElement } from "../lib/routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookIndexCard(props: {
@@ -20,32 +17,15 @@ function StorybookIndexCard(props: {
   playedDuringTurn: boolean;
   width: string;
 }) {
-  const [rolls, setRolls] = useState<Array<IDicePoolResult>>([]);
-  const diceManager = useContext(DiceContext);
   const [collapse, setCollapse] = useState(false);
 
-  function handleOnNewRoll(result: IDicePoolResult) {
-    setRolls((draft) => {
-      return [result, ...draft];
-    });
-  }
-
-  function handleOnRollPool() {
-    // const { result } = diceManager.actions.getPoolResult();
-    // handleOnNewRoll(result);
-  }
-
-  function handleOnPoolClick(element: IDicePoolElement) {
-    // diceManager.actions.addOrRemovePoolElement(element);
-  }
+  function handleOnNewRoll() {}
 
   return (
     <>
       <Toolbox
         diceFabProps={{
-          rollsForDiceBox: rolls,
           onRoll: handleOnNewRoll,
-          onRollPool: handleOnRollPool,
         }}
         hideDefaultRightActions={true}
       />
@@ -65,10 +45,7 @@ function StorybookIndexCard(props: {
             "123": collapse ? true : false,
           }}
           isGM={props.isGM}
-          onRoll={(diceRollResult) => {
-            handleOnNewRoll(diceRollResult);
-          }}
-          onPoolClick={handleOnPoolClick}
+          onRoll={() => {}}
           onMoveTo={action("onMoveTo") as any}
           onChange={action("onChange") as any}
           onMove={action("onMove") as any}

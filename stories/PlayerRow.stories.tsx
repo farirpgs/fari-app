@@ -37,18 +37,16 @@ function StorybookPlayerRow(props: {
       hasCharacterSheet={!!props.characterSheet}
       isPrivate={props.player.private}
       maxPoints={undefined}
-      playedDuringTurn={props.player.playedDuringTurn}
+      status={props.player.status}
       playerName={props.player.playerName}
       points={props.player.points}
       pointsLabel={"Points Label"}
-      rolls={props.player.rolls}
       isMe={props.highlight}
       onDiceRoll={action("onDiceRoll")}
-      onPlayedInTurnOrderChange={action("onPlayedInTurnOrderChange")}
+      onStatusChange={action("onPlayedInTurnOrderChange")}
       onPointsChange={action("onPointsChange")}
       onPlayerRemove={action("onPlayerRemove")}
       onTogglePrivate={action("onTogglePrivate")}
-      onCharacterSheetOpen={action("onCharacterSheetOpen")}
       onAssignCharacterSheet={action("onLoadCharacterSheet")}
     />
   );
@@ -103,7 +101,6 @@ GameMaster.args = {
   player: aPlayer({
     playerName: "Game Master",
     isGM: true,
-    rolls: [],
   }),
 };
 
@@ -311,8 +308,7 @@ function aPlayer(props: Partial<IPlayer> = {}): IPlayer {
     points: "3",
     playerName: "René-Pier",
     isGM: false,
-    playedDuringTurn: false,
-    rolls: [],
+    status: "",
     private: false,
     color: "#000000",
     ...props,

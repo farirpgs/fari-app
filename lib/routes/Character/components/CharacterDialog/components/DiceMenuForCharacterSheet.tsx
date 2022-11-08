@@ -28,28 +28,21 @@ export function DiceMenuForCharacterSheet(props: {
 
   function handleOnNewCommandSelect() {
     setAnchorEl(null);
-    // props.onChange(commandSetIds.map((c) => c.id));
+    props.onChange(commandSetIds);
   }
 
   function handleOnClear() {
-    setCommandsGroupsFromIds([]);
+    setCommandSetIds([]);
   }
 
   function handleOnMenuClose() {
     setAnchorEl(null);
-    setCommandsGroupsFromIds(props.commandSetIds);
-  }
-
-  function setCommandsGroupsFromIds(commandIds: Array<IDiceCommandId>) {
-    // const newCommands = commandIds.map((commandId) => {
-    //   return CommmandSetOptions[commandId];
-    // });
-    // setCommandSetIds(newCommands);
+    setCommandSetIds(props.commandSetIds);
   }
 
   useEffect(
     function syncPropsWithState() {
-      setCommandsGroupsFromIds(props.commandSetIds);
+      setCommandSetIds(props.commandSetIds);
     },
     [props.commandSetIds]
   );

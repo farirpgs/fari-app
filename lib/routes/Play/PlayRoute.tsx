@@ -183,12 +183,7 @@ function PlayRoute() {
     if (event.type === "pause") {
       sessionManager.actions.pause();
     }
-    if (event.type === "update-player-roll") {
-      sessionManager.actions.updatePlayerRoll(
-        event.payload.id,
-        event.payload.roll
-      );
-    }
+
     if (event.type === "add-player") {
       sessionManager.actions.addPlayer(event.payload.player);
     }
@@ -203,10 +198,10 @@ function PlayRoute() {
         event.payload.maxPoints
       );
     }
-    if (event.type === "update-player-played-during-turn") {
-      sessionManager.actions.updatePlayerPlayedDuringTurn(
+    if (event.type === "update-player-status") {
+      sessionManager.actions.updatePlayerStatus(
         event.payload.id,
-        event.payload.playedDuringTurn
+        event.payload.status
       );
     }
     if (event.type === "update-player-character") {

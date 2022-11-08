@@ -46,7 +46,7 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { BetterDnd } from "../../routes/Character/components/BetterDnD/BetterDnd";
 import { AddBlock } from "../../routes/Character/components/CharacterDialog/components/AddBlock";
 import { BlockByType } from "../../routes/Character/components/CharacterDialog/components/BlockByType";
-import { IDicePoolElement } from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+
 import {
   MiniThemeContext,
   useMiniTheme,
@@ -131,7 +131,6 @@ export const IndexCard: React.FC<
     canMove: boolean;
     isGM: boolean;
     indexCardHiddenRecord?: Record<string, boolean>;
-    onPoolClick(element: IDicePoolElement): void;
     onChange(newIndexCard: IIndexCard): void;
     onMoveTo?(idOfIndexCardToMove: string, idOfIndexCardToMoveTo: string): void;
     onMoveOut?(idOfIndexCardToMove: string): void;
@@ -550,7 +549,6 @@ export const IndexCard: React.FC<
                   allCards={props.allCards}
                   id={`index-card-${subCard.id}`}
                   canMove={true}
-                  onPoolClick={props.onPoolClick}
                   onRoll={props.onRoll}
                   indexCardHiddenRecord={props.indexCardHiddenRecord}
                   onToggleVisibility={props.onToggleVisibility}

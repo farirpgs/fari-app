@@ -9,6 +9,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 import {
+  CommandResult,
   DiceOptions as DiceCommandOptions,
   IDicePoolResult,
 } from "../../../domains/dice/Dice";
@@ -156,22 +157,6 @@ export function DiceResult(props: {
   }
 
   function renderSelectedResultsDetails() {
-    const total = resultsForDetails.reduce((acc, result) => {
-      const value = parseInt(`${result.value}`);
-      console.log("TOTAL cal", { acc, value });
-      return acc + value;
-    }, 0);
-    const highest = resultsForDetails.reduce((acc, result) => {
-      const value = parseInt(`${result.value}`);
-
-      return Math.max(acc, value);
-    }, -9999);
-    const lowest = resultsForDetails.reduce((acc, result) => {
-      const value = parseInt(`${result.value}`);
-
-      return Math.min(acc, value);
-    }, 9999);
-
     return (
       <Stack
         direction="row"
@@ -180,15 +165,15 @@ export function DiceResult(props: {
       >
         <Chip
           color={hasSelectedResults ? "primary" : "default"}
-          label={<>Total: {total}</>}
+          label={<>Total: {CommandResult.getTotal(resultsForDetails)}</>}
         />
         <Chip
           color={hasSelectedResults ? "primary" : "default"}
-          label={<>Highest: {highest}</>}
+          label={<>Highest: {CommandResult.getHighest(resultsForDetails)}</>}
         />
         <Chip
           color={hasSelectedResults ? "primary" : "default"}
-          label={<>Lowest: {lowest}</>}
+          label={<>Lowest: {CommandResult.getLowest(resultsForDetails)}</>}
         />
       </Stack>
     );

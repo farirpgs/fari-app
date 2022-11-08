@@ -22,8 +22,7 @@ export function useSession(props: { userId: string }) {
       gm: {
         id: props.userId,
         playerName: "Game Master",
-        rolls: [],
-        playedDuringTurn: false,
+        status: "",
         points: "3",
         isGM: true,
         private: false,
@@ -90,32 +89,6 @@ export function useSession(props: { userId: string }) {
     if (newSession) {
       setSession(newSession);
     }
-  }
-  function updateGmRoll(roll: IDicePoolResult) {
-    setSession(
-      produce((draft) => {
-        if (!draft) {
-          return;
-        }
-        draft.gm.rolls = getNewRolls(roll, draft.gm.rolls);
-      })
-    );
-  }
-
-  function updatePlayerRoll(id: string | undefined, roll: IDicePoolResult) {
-    setSession(
-      produce((draft) => {
-        if (!draft) {
-          return;
-        }
-        const everyone = getEveryone(draft);
-        everyone.forEach((player) => {
-          if (player.id === id) {
-            player.rolls = getNewRolls(roll, player.rolls);
-          }
-        });
-      })
-    );
   }
 
   function updatePlayerPoints(id: string | undefined, points: string) {
@@ -224,8 +197,7 @@ export function useSession(props: { userId: string }) {
         draft.gm.npcs.push({
           id: id,
           playerName: `Character #${draft.gm.npcs.length + 1}`,
-          rolls: [],
-          playedDuringTurn: false,
+          status: "",
           isGM: false,
           private: false,
           points: "3",
@@ -267,7 +239,7 @@ export function useSession(props: { userId: string }) {
     );
   }
 
-  function resetInitiative() {
+  function resetStatus() {
     setSession(
       produce((draft) => {
         if (!draft) {
@@ -275,16 +247,13 @@ export function useSession(props: { userId: string }) {
         }
         const everyone = getEveryone(draft);
         everyone.forEach((p) => {
-          p.playedDuringTurn = false;
+          p.status = "";
         });
       })
     );
   }
 
-  function updatePlayerPlayedDuringTurn(
-    id: string,
-    playedInTurnOrder: boolean
-  ) {
+  function updatePlayerStatus(id: string, status: string) {
     setSession(
       produce((draft) => {
         if (!draft) {
@@ -293,7 +262,7 @@ export function useSession(props: { userId: string }) {
         const everyone = getEveryone(draft);
         everyone.forEach((p) => {
           if (p.id === id) {
-            p.playedDuringTurn = playedInTurnOrder;
+            p.status = status;
           }
         });
       })
@@ -319,17 +288,15 @@ export function useSession(props: { userId: string }) {
     },
     actions: {
       overrideSession,
-      resetInitiative,
+      resetStatus: resetStatus,
       addNpc: addOfflinePlayer,
       fireBadConfetti,
       fireGoodConfetti,
       removePlayer,
       togglePlayerVisibility,
       updateDrawAreaObjects,
-      updateGmRoll,
       updatePlayerPoints,
-      updatePlayerPlayedDuringTurn,
-      updatePlayerRoll,
+      updatePlayerStatus: updatePlayerStatus,
       addPlayer,
       pause,
       unpause,

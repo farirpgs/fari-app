@@ -1,15 +1,19 @@
 import Box from "@mui/material/Box";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Scene } from "../../components/Scene/Scene";
+import { Toolbox } from "../../components/Toolbox/Toolbox";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { ICommandResult } from "../../domains/dice/Dice";
+import { useEvent } from "../../hooks/useEvent/useEvent";
 import { useScene } from "../../hooks/useScene/useScene";
+import { DiceDrawer } from "../DiceRoute/components/DiceDrawer";
 
 function SceneRoute() {
   const params = useParams<{ id: string }>();
@@ -22,6 +26,11 @@ function SceneRoute() {
   const navigate = useNavigate();
   const logger = useLogger();
   const myBinderManager = useContext(MyBinderContext);
+
+  const [results, setResults] = useState<Array<ICommandResult>>([]);
+  const handleClear = useEvent(() => {
+    setResults([]);
+  });
 
   useEffect(() => {
     logger.track("view_scene");
@@ -49,15 +58,23 @@ function SceneRoute() {
             sceneManager={sceneManager}
             isGM={true}
             canLoad={false}
-            onRoll={() => {}}
-            onPoolClick={(element) => {
-              // diceManager.actions.addOrRemovePoolElement(element);
+            onRoll={(results) => {
+              setResults(results.commandResults);
             }}
             onIndexCardUpdate={(indexCard, type) => {
               sceneManager.actions.updateIndexCard(indexCard, type);
             }}
           />
         </Box>
+        <Toolbox
+          diceFabProps={{
+            onRoll(results) {
+              const commandResults = results.flatMap((r) => r.commandResults);
+              setResults(commandResults);
+            },
+          }}
+        />
+        <DiceDrawer results={results} onClear={handleClear} />
       </Page>
     </>
   );

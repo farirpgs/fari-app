@@ -1,7 +1,6 @@
 import { css } from "@emotion/css";
 import ChatIcon from "@mui/icons-material/Chat";
 import CircleIcon from "@mui/icons-material/Circle";
-import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import ErrorIcon from "@mui/icons-material/Error";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import PanToolIcon from "@mui/icons-material/PanTool";
@@ -67,7 +66,12 @@ import {
   PlayerInteractionFactory,
 } from "../../types/IPlayerInteraction";
 import { Chat } from "../Chat/Chat";
-import { IMessage, IMessageToSend, useChat } from "../Chat/useChat";
+import {
+  IMessage,
+  IMessageToSend,
+  MessageType,
+  useChat,
+} from "../Chat/useChat";
 import { useSession, useSessionCharacterSheets } from "./useSession";
 
 export function Session(props: {
@@ -232,11 +236,16 @@ export function Session(props: {
   };
 
   const handleSetMyRoll = (result: IDicePoolResult) => {
+    const message: IMessage = {
+      type: MessageType.Roll,
+      fromUserId: userId,
+      value: chatManager.utils.convertDicePoolResultToMessageValue(result),
+    };
     if (isGM) {
-      sessionManager.actions.updateGmRoll(result);
+      chatManager.actions.sendMessage(message);
     } else {
       props.onPlayerInteraction?.(
-        PlayerInteractionFactory.updatePlayerRolls(me!.id, result)
+        PlayerInteractionFactory.sendMessage(message)
       );
     }
   };
@@ -245,15 +254,17 @@ export function Session(props: {
     playerId: string | undefined,
     result: IDicePoolResult
   ) => {
+    const message: IMessage = {
+      type: MessageType.Roll,
+      fromUserId: playerId || userId,
+      value: chatManager.utils.convertDicePoolResultToMessageValue(result),
+    };
+
     if (isGM) {
-      if (playerId) {
-        sessionManager.actions.updatePlayerRoll(playerId, result);
-      } else {
-        sessionManager.actions.updateGmRoll(result);
-      }
+      chatManager.actions.sendMessage(message);
     } else {
       props.onPlayerInteraction?.(
-        PlayerInteractionFactory.updatePlayerRolls(me!.id, result)
+        PlayerInteractionFactory.sendMessage(message)
       );
     }
   };
@@ -301,16 +312,11 @@ export function Session(props: {
 
         <Toolbox
           diceFabProps={{
-            onRoll(result) {
-              handleSetMyRoll(result);
+            onRoll(results) {
+              results.forEach((result) => {
+                handleSetMyRoll(result);
+              });
             },
-            // onRoll: (result) => {
-            //   handleSetMyRoll(result);
-            // },
-            // rollsForDiceBox: me?.rolls ?? [],
-            // onRollPool: (result, playerId) => {
-            //   handleSetPlayerRoll(playerId, result);
-            // },
           }}
           centerActions={
             <>
@@ -611,22 +617,6 @@ export function Session(props: {
                     <>
                       <Grid item>
                         <Button
-                          data-cy="scene.reset-initiative"
-                          onClick={() => {
-                            sessionManager.actions.resetInitiative();
-                            sceneManager.actions.resetInitiative();
-                            logger.track("session.reset_initiative");
-                          }}
-                          color="inherit"
-                          size="small"
-                          variant="outlined"
-                          endIcon={<EmojiPeopleIcon />}
-                        >
-                          {t("play-route.reset-initiative")}
-                        </Button>
-                      </Grid>
-                      <Grid item>
-                        <Button
                           data-cy="scene.add-player"
                           onClick={() => {
                             handleGMAddNpc();
@@ -664,10 +654,6 @@ export function Session(props: {
                     return (
                       <React.Fragment key={npc.id}>
                         <Box>
-                          {renderPlayerCharacterDialog({
-                            player: npc,
-                            canControl: me?.id === gm.id,
-                          })}
                           <Box mx="-.5rem">
                             {renderPlayerRow({
                               player: npc,
@@ -691,7 +677,6 @@ export function Session(props: {
 
               return (
                 <React.Fragment key={player.id}>
-                  {renderPlayerCharacterDialog({ player, canControl })}
                   {renderPlayerRow({
                     player,
                     canControl,
@@ -778,43 +763,6 @@ export function Session(props: {
     return playerCharacter;
   }
 
-  function renderPlayerCharacterDialog(options: {
-    player: IPlayer;
-    canControl: boolean;
-  }) {
-    const { player, canControl } = options;
-    if (characterDialogPlayerId !== player.id) {
-      return null;
-    }
-
-    const characterSheet = getCharacterSheet(player.id);
-    const isCharacterInStorage = charactersManager.selectors.isInStorage(
-      characterSheet?.id
-    );
-
-    return (
-      <CharacterV3Dialog
-        readonly={!canControl}
-        open={characterDialogPlayerId === player.id}
-        character={characterSheet}
-        dialog={true}
-        onSave={(updatedCharacter) => {
-          handleUpdateCharacter(player.id, updatedCharacter);
-        }}
-        onClose={() => {
-          setCharacterDialogPlayerId(undefined);
-        }}
-        synced={isCharacterInStorage}
-        onToggleSync={() => {
-          handleOnToggleCharacterSync(characterSheet);
-        }}
-        onRoll={(newDiceRollResult) => {
-          handleSetPlayerRoll(player.id, newDiceRollResult);
-        }}
-      />
-    );
-  }
-
   function renderPlayerRow(options: {
     player: IPlayer;
     canControl: boolean;
@@ -856,9 +804,8 @@ export function Session(props: {
         isMe={isMe}
         hasCharacterSheet={!!characterSheet}
         isPrivate={player.private}
-        playedDuringTurn={player.playedDuringTurn}
+        status={player.status}
         playerName={player.playerName}
-        rolls={player.rolls}
         characterName={characterSheet?.name}
         points={points}
         maxPoints={maxPoints}
@@ -869,11 +816,6 @@ export function Session(props: {
         }}
         onTogglePrivate={() => {
           sessionManager.actions.togglePlayerVisibility(player.id);
-        }}
-        onCharacterSheetOpen={() => {
-          if (characterSheet) {
-            setCharacterDialogPlayerId(player.id);
-          }
         }}
         onAssignCharacterSheet={() => {
           myBinderManager.actions.open({
@@ -889,18 +831,12 @@ export function Session(props: {
           // diceManager.actions.rollCommandGroups()
           // );
         }}
-        onPlayedInTurnOrderChange={(playedInTurnOrder) => {
+        onStatusChange={(newStatus) => {
           if (isGM) {
-            sessionManager.actions.updatePlayerPlayedDuringTurn(
-              player.id,
-              playedInTurnOrder
-            );
+            sessionManager.actions.updatePlayerStatus(player.id, newStatus);
           } else {
             props.onPlayerInteraction?.(
-              PlayerInteractionFactory.updatePlayerPlayedDuringTurn(
-                player.id,
-                playedInTurnOrder
-              )
+              PlayerInteractionFactory.updatePlayerStatus(player.id, newStatus)
             );
           }
         }}
@@ -940,7 +876,6 @@ export function Session(props: {
             <>
               <Box
                 sx={{
-                  p: ".5rem",
                   height: "100%",
                 }}
               >
@@ -1203,30 +1138,32 @@ export function Session(props: {
 
   function renderScene() {
     return (
-      <Scene
-        sceneManager={sceneManager}
-        isGM={isGM}
-        canLoad={isGM}
-        onRoll={handleSetMyRoll}
-        onOpenChat={props.onOpenChat}
-        onPoolClick={(element) => {
-          // diceManager.actions.addOrRemovePoolElement(element);
-          // diceManager.actions.setPlayerId(gm.id);
+      <Box
+        sx={{
+          padding: "1rem",
         }}
-        onIndexCardUpdate={(indexCard, type) => {
-          if (isGM) {
-            sceneManager.actions.updateIndexCard(indexCard, type);
-          } else {
-            props.onPlayerInteraction?.({
-              type: "update-index-card",
-              payload: {
-                indexCard: indexCard,
-                indexCardType: type,
-              },
-            });
-          }
-        }}
-      />
+      >
+        <Scene
+          sceneManager={sceneManager}
+          isGM={isGM}
+          canLoad={isGM}
+          onRoll={handleSetMyRoll}
+          onOpenChat={props.onOpenChat}
+          onIndexCardUpdate={(indexCard, type) => {
+            if (isGM) {
+              sceneManager.actions.updateIndexCard(indexCard, type);
+            } else {
+              props.onPlayerInteraction?.({
+                type: "update-index-card",
+                payload: {
+                  indexCard: indexCard,
+                  indexCardType: type,
+                },
+              });
+            }
+          }}
+        />
+      </Box>
     );
   }
 

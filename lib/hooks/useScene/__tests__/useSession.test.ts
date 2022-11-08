@@ -13,8 +13,7 @@ describe("useSession", () => {
       gm: {
         id: expect.anything(),
         playerName: "Game Master",
-        rolls: [],
-        playedDuringTurn: false,
+        status: "",
         private: false,
         npcs: [],
         isGM: true,

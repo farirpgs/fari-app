@@ -383,7 +383,6 @@ function CardCollectionRoute() {
                 id={`index-card-${indexCard.id}`}
                 indexCard={indexCard}
                 onRoll={() => {}}
-                onPoolClick={() => {}}
                 onMoveTo={(
                   idOfIndexCardToMove: string,
                   idOfIndexCardToMoveTo: string

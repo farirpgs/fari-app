@@ -1,9 +1,5 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Drawer from "@mui/material/Drawer";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/system";
 import React, { useState } from "react";
@@ -15,14 +11,11 @@ import { Icons } from "../../domains/Icons/Icons";
 import { useEvent } from "../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { DiceButtons } from "./components/DiceButtons";
-import { DiceResult } from "./components/DiceResult";
+import { DiceDrawer } from "./components/DiceDrawer";
 
 export function DiceRoute(props: {}) {
-  const theme = useTheme();
   const { t } = useTranslate();
   const [results, setResults] = useState<Array<ICommandResult>>([]);
-
-  const hasResults = results.length > 0;
 
   const handleDiceClick = useEvent((diceCommand: IDiceCommandId) => {
     const result = Dice.roll(diceCommand);
@@ -68,30 +61,7 @@ export function DiceRoute(props: {}) {
               commands={["coin", "card", "2d6", "1dF"]}
             />
           </Stack>
-          <Drawer
-            anchor={"bottom"}
-            open={hasResults}
-            hideBackdrop
-            variant="persistent"
-          >
-            <Box sx={{ padding: "2rem" }}>
-              <DiceResult
-                animate={true}
-                poolResults={[
-                  {
-                    id: "",
-                    commandResults: results,
-                  },
-                ]}
-              >
-                <Box display="flex" justifyContent={"center"}>
-                  <Button variant="outlined" onClick={handleClear}>
-                    {"Clear"}
-                  </Button>
-                </Box>
-              </DiceResult>
-            </Box>
-          </Drawer>
+          <DiceDrawer results={results} onClear={handleClear} />
         </Stack>
       </Container>
     </Page>

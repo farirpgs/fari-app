@@ -66,7 +66,7 @@ export function Scene(props: {
   isGM: boolean;
   canLoad: boolean;
   onRoll(diceRollResult: IDicePoolResult): void;
-  onPoolClick(element: IDicePoolElement): void;
+
   onIndexCardUpdate(indexCard: IIndexCard, type: IIndexCardType): void;
   onOpenChat?(): void;
 }) {
@@ -546,7 +546,6 @@ export function Scene(props: {
                   isGM={props.isGM}
                   indexCard={indexCard}
                   onRoll={props.onRoll}
-                  onPoolClick={props.onPoolClick}
                   onChange={(newIndexCard) => {
                     props.onIndexCardUpdate(newIndexCard, renderProps.type);
                   }}

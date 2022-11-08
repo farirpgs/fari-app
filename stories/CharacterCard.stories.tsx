@@ -2,13 +2,11 @@ import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
-import React, { useContext, useState } from "react";
+import React from "react";
 import { CharacterCard } from "../lib/components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
 import { Toolbox } from "../lib/components/Toolbox/Toolbox";
-import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { ICharacterTemplate } from "../lib/domains/character/CharacterType";
-import { IDicePoolResult } from "../lib/domains/dice/Dice";
 import {
   MiniThemeContext,
   useMiniTheme,
@@ -18,23 +16,9 @@ import { StoryProvider } from "./StoryProvider";
 function StorybookCharacterCard(
   props: Pick<
     Parameters<typeof CharacterCard>["0"],
-    "characterSheet" | "readonly" | "playerName"
+    "characterSheet" | "readonly"
   >
 ) {
-  const [rolls, setRolls] = useState<Array<IDicePoolResult>>([]);
-  const diceManager = useContext(DiceContext);
-
-  function handleOnNewRoll(result: IDicePoolResult) {
-    setRolls((draft) => {
-      return [result, ...draft];
-    });
-  }
-
-  function handleOnRollPool() {
-    // const { result } = diceManager.actions.getPoolResult();
-    // handleOnNewRoll(result);
-  }
-
   const theme = useTheme();
   const miniTheme = useMiniTheme({
     enforceBackground: theme.palette.background.default,
@@ -44,9 +28,7 @@ function StorybookCharacterCard(
     <>
       <Toolbox
         diceFabProps={{
-          rollsForDiceBox: rolls,
-          onRoll: handleOnNewRoll,
-          onRollPool: handleOnRollPool,
+          onRoll: () => {},
         }}
         hideDefaultRightActions={true}
       />
@@ -55,7 +37,7 @@ function StorybookCharacterCard(
           readonly={props.readonly}
           characterSheet={props.characterSheet}
           onCharacterDialogOpen={action("onCharacterDialogOpen") as any}
-          onRoll={handleOnNewRoll}
+          onRoll={() => {}}
         />
       </MiniThemeContext.Provider>
       <Box mt="6rem" />
@@ -69,7 +51,6 @@ export default {
   title: "Main/CharacterCard",
   component: StorybookCharacterCard,
   args: {
-    playerName: "",
     readonly: false,
     characterSheet: undefined,
   },
@@ -89,7 +70,6 @@ const Template: Story<IProps> = (args, context) => {
             } as any
           }
           readonly={args.readonly}
-          playerName={args.playerName}
         />
       </Box>
     </StoryProvider>
