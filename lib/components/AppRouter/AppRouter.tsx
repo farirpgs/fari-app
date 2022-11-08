@@ -102,7 +102,7 @@ export const AppRouter = () => {
                 return (
                   <LiveblocksProvider client={injections.liveBlocksClient}>
                     <RoomProvider id={sessionId}>
-                      <PlayRoute />;
+                      <PlayRoute />
                     </RoomProvider>
                   </LiveblocksProvider>
                 );
@@ -120,7 +120,7 @@ export const AppRouter = () => {
                 return (
                   <LiveblocksProvider client={injections.liveBlocksClient}>
                     <RoomProvider id={sessionId}>
-                      <JoinAGameRoute />;
+                      <JoinAGameRoute />
                     </RoomProvider>
                   </LiveblocksProvider>
                 );
@@ -200,8 +200,8 @@ export const AppRouter = () => {
           path={"/feature-requests/*"}
           element={<FeatureRequestsRoute />}
         />
-        <Route path={"/bugs"} element={<BugsRoute />} />;
-        <Route path={"/bugs/*"} element={<BugsRoute />} />;
+        <Route path={"/bugs"} element={<BugsRoute />} />
+        <Route path={"/bugs/*"} element={<BugsRoute />} />
         <Route path={"/story-builder"} element={<StoryBuilderRoute />} />
         <Route path={"/story-dice"} element={<StoryDiceRoute />} />
         <Route path="*" element={<NotFoundRoute />} />

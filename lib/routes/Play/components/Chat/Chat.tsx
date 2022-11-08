@@ -13,7 +13,8 @@ export function Chat(props: {
   chatManager: ReturnType<typeof useChat>;
   userId: string;
   playersNameMapping: Record<string, string | undefined>;
-  onMessageSubmit: (message: IMessageToSend) => void;
+  onMessageSubmit(message: IMessageToSend): void;
+  onReadAllMessages(): void;
 }) {
   const { chatManager } = props;
   const theme = useTheme();
@@ -26,6 +27,10 @@ export function Chat(props: {
     if (message) {
       props.onMessageSubmit(message);
     }
+  });
+
+  useEffect(() => {
+    props.onReadAllMessages();
   });
 
   useEffect(() => {
@@ -57,90 +62,98 @@ export function Chat(props: {
       >
         {chatManager.state.chat.messages.map((message, i) => {
           const isMe = message.fromUserId === props.userId;
+          const nextMessage = chatManager.state.chat.messages[i + 1];
+          const nextMessageUserId = nextMessage?.fromUserId;
+          const nextMessagePlayerName =
+            props.playersNameMapping[nextMessageUserId];
           const playerName = props.playersNameMapping[message.fromUserId];
+          const shouldDisplayPlayerName = nextMessagePlayerName !== playerName;
 
           return (
-            <React.Fragment key={i}>
+            <Box
+              key={i}
+              sx={{
+                alignSelf: isMe ? "flex-end" : "flex-start",
+                maxWidth: "70%",
+                marginBottom: ".25rem",
+              }}
+            >
               <Box
                 sx={{
-                  alignSelf: isMe ? "flex-end" : "flex-start",
-
-                  maxWidth: "70%",
+                  background: isMe
+                    ? theme.palette.primary.main
+                    : theme.palette.action.hover,
+                  color: isMe ? theme.palette.primary.contrastText : "inherit",
+                  padding: ".5rem .75rem",
+                  display: "block",
+                  borderRadius: "1rem",
                 }}
               >
-                <Box
-                  sx={{
-                    background: isMe
-                      ? theme.palette.primary.main
-                      : theme.palette.action.hover,
-                    color: isMe
-                      ? theme.palette.primary.contrastText
-                      : "inherit",
-                    padding: ".5rem .75rem",
-                    display: "block",
-                    borderRadius: "1rem",
-                  }}
-                >
-                  {message.type === MessageType.Text && message.value}
-                  {message.type === MessageType.Roll && (
-                    <Box sx={{}}>
-                      {message.value.label && (
-                        <Box>
-                          <Typography
-                            component={"div"}
-                            variant="caption"
-                            fontWeight="bold"
-                            textAlign={"center"}
-                          >
-                            {message.value.label}
-                          </Typography>
-                        </Box>
-                      )}
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "center",
-                        }}
-                      >
+                {message.type === MessageType.Text && (
+                  <Typography
+                    sx={{
+                      overflowWrap: "break-word",
+                    }}
+                  >
+                    {message.value}
+                  </Typography>
+                )}
+                {message.type === MessageType.Roll && (
+                  <Box sx={{}}>
+                    {message.value.label && (
+                      <Box>
                         <Typography
-                          sx={{
-                            fontSize: "2rem",
-                          }}
+                          component={"div"}
                           variant="caption"
+                          fontWeight="bold"
+                          textAlign={"center"}
                         >
-                          {message.value.total}
+                          {message.value.label}
                         </Typography>
                       </Box>
-
-                      <Box
+                    )}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography
                         sx={{
-                          display: "flex",
-                          justifyContent: "center",
+                          fontSize: "2rem",
                         }}
+                        variant="caption"
                       >
-                        <Typography variant="caption">
-                          {message.value.text}
-                        </Typography>
-                      </Box>
+                        {message.value.total}
+                      </Typography>
                     </Box>
-                  )}
+
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="caption">
+                        {message.value.text}
+                      </Typography>
+                    </Box>
+                  </Box>
+                )}
+              </Box>
+              {shouldDisplayPlayerName && (
+                <Box sx={{}}>
+                  <Typography
+                    sx={{
+                      fontSize: "0.8rem",
+                      textAlign: isMe ? "right" : "left",
+                    }}
+                  >
+                    {playerName ?? "--"}
+                  </Typography>
                 </Box>
-              </Box>
-              <Box
-                sx={{
-                  marginBottom: ".75rem",
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: "0.8rem",
-                    textAlign: isMe ? "right" : "left",
-                  }}
-                >
-                  {playerName ?? "--"}
-                </Typography>
-              </Box>
-            </React.Fragment>
+              )}
+            </Box>
           );
         })}
       </Box>

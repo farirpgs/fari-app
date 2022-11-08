@@ -77,6 +77,7 @@ export default function CursorWithMessage(props: {
     });
     if (message) {
       props.onMessageSubmit?.(message);
+      props.onMessageChange?.("");
 
       if (message.type === MessageType.Roll) {
         const newCommands = [
@@ -102,7 +103,7 @@ export default function CursorWithMessage(props: {
   function handleRollHistoryPrevious() {
     const poppedCommand = topTenLatestRollCommands[commandToPopIndex];
     if (poppedCommand) {
-      props.onMessageChange?.(poppedCommand);
+      props.onMessageChange?.(`/roll ${poppedCommand}`);
       const newIndex = Math.min(
         commandToPopIndex + 1,
         topTenLatestRollCommands.length - 1
@@ -114,7 +115,7 @@ export default function CursorWithMessage(props: {
   function handleRollHistoryNext() {
     const poppedCommand = topTenLatestRollCommands[commandToPopIndex];
     if (poppedCommand) {
-      props.onMessageChange?.(poppedCommand);
+      props.onMessageChange?.(`/roll ${poppedCommand}`);
       const newIndex = Math.max(commandToPopIndex - 1, 0);
       setCommandtoPopIndex(newIndex);
     }

@@ -285,6 +285,10 @@ export function Session(props: {
     }
   });
 
+  const handleReadAllMessages = useEvent(() => {
+    chatManager.actions.readAll();
+  });
+
   return (
     <Page isLive gameId={props.idFromParams} maxWidth="none" hideFooter>
       <Box
@@ -520,7 +524,7 @@ export function Session(props: {
               render: renderPlayers,
             },
             {
-              label: "Chat",
+              label: `${"Chat"} (${chatManager.state.unreadCount})`,
               dataCy: "chat-tab",
               value: "chat",
               sx: { padding: "0", overflow: "auto", height: "100%" },
@@ -544,6 +548,7 @@ export function Session(props: {
         chatManager={chatManager}
         playersNameMapping={playersNameMapping}
         onMessageSubmit={handleMessageSubmission}
+        onReadAllMessages={handleReadAllMessages}
       />
     );
   }

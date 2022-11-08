@@ -1,7 +1,27 @@
-import React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+
+import { useTheme } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableFooter from "@mui/material/TableFooter";
+import TableRow from "@mui/material/TableRow";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import React, { useEffect, useState } from "react";
+import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
+import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
+import { Dice, ICommandResult } from "../../domains/dice/Dice";
+import { useEvent } from "../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { ITranslationKeys } from "../../locale";
+import { TheOracle } from "./domains/TheOracle";
 
 type IMatrixItem = {
   label: string;
@@ -50,207 +70,199 @@ OracleRoute.displayName = "OracleRoute";
 export default OracleRoute;
 
 export function Oracle() {
-  return null;
-  // const { t } = useTranslate();
-  // const theme = useTheme();
-  // const logger = useLogger();
+  const { t } = useTranslate();
+  const theme = useTheme();
+  const logger = useLogger();
 
-  // const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
-  // const [likeliness, setLikeliness] = useState<number>(0);
-  // const [rolling, setRolling] = useState<boolean>(false);
-  // const [finalRoll, setFinalRoll] = useState<IDiceRollResult>();
-  // const finalRollTotal = finalRoll?.total ?? 0;
-  // const finalResult = finalRollTotal + likeliness;
-  // const oracleValue = TheOracle.getValue(finalResult);
-  // const shouldDisplayFinalResult = !rolling && finalRoll?.total !== undefined;
+  const [result, setResult] = useState<ICommandResult>();
+  const [rolling, setRolling] = useState(false);
+  const [likeliness, setLikeliness] = useState<number>(0);
+  const finalResult = parseInt(result?.value || "0");
+  const oracleValue = TheOracle.getValue(finalResult);
 
-  // function roll() {
-  //   setRolls((draft) => {
-  //     const newRoll = Dice.rollGroups([{ commandSets: [{ id: "4dF" }] }], {
-  //       listResults: false,
-  //     });
+  const roll = useEvent(() => {
+    setRolling(true);
 
-  //     return [newRoll, ...draft];
-  //   });
-  // }
+    setTimeout(() => {
+      setResult(Dice.roll("4dF"));
+      setRolling(false);
+    }, 500);
+  });
 
-  // useEffect(() => {
-  //   if (shouldDisplayFinalResult) {
-  //     logger.track("view_oracle_result", {
-  //       value: oracleValue,
-  //     });
-  //   }
-  // }, [shouldDisplayFinalResult, oracleValue]);
+  useEffect(() => {
+    logger.track("view_oracle_result", {
+      value: oracleValue,
+    });
+  }, [oracleValue]);
 
-  // return (
-  //   <Box>
-  //     <Box py="1rem" />
+  return (
+    <Box>
+      <Box py="1rem" justifyContent={"center"} display="flex">
+        <Button
+          variant="contained"
+          onClick={roll}
+          size="large"
+          disabled={rolling}
+        >
+          Ask The Oracle
+        </Button>
+      </Box>
 
-  //     <Container maxWidth="md">
-  //       <Box display="flex" justifyContent="center" pt="3rem">
-  //         <Box display="flex" textAlign="center" pr="1rem">
-  //           <Box
-  //             className={css({
-  //               writingMode: "vertical-rl",
-  //               textOrientation: "mixed",
-  //               transform: "rotate(-180deg)",
-  //             })}
-  //           >
-  //             <FateLabel
-  //               className={css({ fontWeight: "bold", fontSize: "1.25rem" })}
-  //             >
-  //               {"Likeliness"}
-  //             </FateLabel>
-  //           </Box>
-  //         </Box>
-  //         <TableContainer component={Paper} elevation={4}>
-  //           <Toolbar className={css({ padding: "1rem" })}>
-  //             <FateLabel
-  //               data-cy="oracle.value"
-  //               data-cy-value={shouldDisplayFinalResult && oracleValue}
-  //               variant="h5"
-  //               align="center"
-  //               color="primary"
-  //               className={css({ width: "100%" })}
-  //             >
-  //               {shouldDisplayFinalResult
-  //                 ? t(`oracle.value.${oracleValue}` as ITranslationKeys)
-  //                 : " ..."}
-  //             </FateLabel>
-  //           </Toolbar>
-  //           <Table>
-  //             <TableBody>
-  //               {Likeliness.map((l) => {
-  //                 const isCurrentRow = l.value === likeliness;
-  //                 return (
-  //                   <TableRow key={l.label}>
-  //                     <TableCell
-  //                       align="left"
-  //                       width="280px"
-  //                       className={css({
-  //                         cursor: "pointer",
-  //                         transition: theme.transitions.create("background"),
-  //                         color: isCurrentRow
-  //                           ? theme.palette.primary.contrastText
-  //                           : "inherit",
-  //                         background: isCurrentRow
-  //                           ? theme.palette.primary.main
-  //                           : "inherit",
-  //                       })}
-  //                       data-cy={`oracle.likeliness.${l.value}`}
-  //                       onClick={() => {
-  //                         setLikeliness(l.value);
+      <Container maxWidth="md">
+        <Box display="flex" justifyContent="center" pt="3rem">
+          <Box display="flex" textAlign="center" pr="1rem">
+            <Box
+              sx={{
+                writingMode: "vertical-rl",
+                textOrientation: "mixed",
+                transform: "rotate(-180deg)",
+              }}
+            >
+              <FateLabel sx={{ fontWeight: "bold", fontSize: "1.25rem" }}>
+                {"Likeliness"}
+              </FateLabel>
+            </Box>
+          </Box>
+          <TableContainer component={Paper} elevation={4}>
+            <Toolbar sx={{ padding: "1rem" }}>
+              <FateLabel
+                data-cy="oracle.value"
+                data-cy-value={oracleValue}
+                variant="h5"
+                align="center"
+                color="primary"
+                sx={{ width: "100%" }}
+              >
+                {rolling
+                  ? "..."
+                  : t(`oracle.value.${oracleValue}` as ITranslationKeys)}
+              </FateLabel>
+            </Toolbar>
+            <Table>
+              <TableBody>
+                {Likeliness.map((l) => {
+                  const isCurrentRow = l.value === likeliness;
+                  return (
+                    <TableRow key={l.label}>
+                      <TableCell
+                        align="left"
+                        width="280px"
+                        sx={{
+                          cursor: "pointer",
+                          transition: theme.transitions.create("background"),
+                          color: isCurrentRow
+                            ? theme.palette.primary.contrastText
+                            : "inherit",
+                          background: isCurrentRow
+                            ? theme.palette.primary.main
+                            : "inherit",
+                        }}
+                        data-cy={`oracle.likeliness.${l.value}`}
+                        onClick={() => {
+                          setLikeliness(l.value);
 
-  //                         logger.track("change_oracle_likeliness", {
-  //                           likeliness: l.value,
-  //                         });
-  //                       }}
-  //                     >
-  //                       <FateLabel className={css({ fontWeight: "bold" })}>
-  //                         {l.label} ({formatOracleDiceNumber(l.value)})
-  //                       </FateLabel>
-  //                     </TableCell>
+                          logger.track("change_oracle_likeliness", {
+                            likeliness: l.value,
+                          });
+                        }}
+                      >
+                        <FateLabel sx={{ fontWeight: "bold" }}>
+                          {l.label} ({formatOracleDiceNumber(l.value)})
+                        </FateLabel>
+                      </TableCell>
 
-  //                     {Rolls.map((r) => {
-  //                       const cellValue = l.value + r.value;
-  //                       const formattedValue =
-  //                         formatOracleDiceNumber(cellValue);
+                      {Rolls.map((r) => {
+                        const cellValue = l.value + r.value;
+                        const formattedValue =
+                          formatOracleDiceNumber(cellValue);
 
-  //                       const isCurrentColumn = r.value === finalRollTotal;
+                        const isCurrentColumn = r.value === finalResult;
 
-  //                       const likelinessRow =
-  //                         isCurrentRow && r.value <= finalRollTotal;
-  //                       const rollColumn =
-  //                         isCurrentColumn && l.value <= likeliness;
+                        const likelinessRow =
+                          isCurrentRow && r.value <= finalResult;
+                        const rollColumn =
+                          isCurrentColumn && l.value <= likeliness;
 
-  //                       const shouldHighlightCell =
-  //                         shouldDisplayFinalResult &&
-  //                         (likelinessRow || rollColumn);
+                        const shouldHighlightCell = likelinessRow || rollColumn;
 
-  //                       const isMatch =
-  //                         shouldDisplayFinalResult &&
-  //                         isCurrentColumn &&
-  //                         isCurrentRow;
-  //                       const highlightBackground = isMatch
-  //                         ? theme.palette.primary.main
-  //                         : theme.palette.primary.light;
-  //                       return (
-  //                         <TableCell
-  //                           key={`${l.label}-${r.label}`}
-  //                           align="center"
-  //                           width="50px"
-  //                           className={css({
-  //                             transition:
-  //                               theme.transitions.create("background"),
-  //                             color: shouldHighlightCell
-  //                               ? theme.palette.primary.contrastText
-  //                               : "inherit",
+                        const isMatch = isCurrentColumn && isCurrentRow;
+                        const highlightBackground = isMatch
+                          ? theme.palette.primary.main
+                          : theme.palette.primary.light;
+                        return (
+                          <TableCell
+                            key={`${l.label}-${r.label}`}
+                            align="center"
+                            width="50px"
+                            sx={{
+                              transition:
+                                theme.transitions.create("background"),
+                              color: shouldHighlightCell
+                                ? theme.palette.primary.contrastText
+                                : "inherit",
 
-  //                             background: shouldHighlightCell
-  //                               ? highlightBackground
-  //                               : "inherit",
-  //                           })}
-  //                         >
-  //                           <Typography
-  //                             align="center"
-  //                             className={css({
-  //                               transition:
-  //                                 theme.transitions.create("fontWeight"),
-  //                               fontWeight: isMatch ? "bold" : "inherit",
-  //                             })}
-  //                           >
-  //                             {formattedValue}
-  //                           </Typography>
-  //                         </TableCell>
-  //                       );
-  //                     })}
-  //                   </TableRow>
-  //                 );
-  //               })}
-  //             </TableBody>
-  //             <TableFooter>
-  //               <TableRow>
-  //                 <TableCell />
-  //                 {Rolls.map((r) => {
-  //                   const highlightValue =
-  //                     !rolling && finalRoll?.total === r.value;
+                              background: shouldHighlightCell
+                                ? highlightBackground
+                                : "inherit",
+                            }}
+                          >
+                            <Typography
+                              align="center"
+                              sx={{
+                                transition:
+                                  theme.transitions.create("fontWeight"),
+                                fontWeight: isMatch ? "bold" : "inherit",
+                              }}
+                            >
+                              {formattedValue}
+                            </Typography>
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+              <TableFooter>
+                <TableRow>
+                  <TableCell />
+                  {Rolls.map((r) => {
+                    const highlightValue = finalResult === r.value;
 
-  //                   return (
-  //                     <TableCell
-  //                       key={r.label}
-  //                       align="center"
-  //                       width="50px"
-  //                       className={css({
-  //                         transition: theme.transitions.create(["background"]),
-  //                         color: highlightValue
-  //                           ? theme.palette.primary.contrastText
-  //                           : theme.palette.text.primary,
-  //                         background: highlightValue
-  //                           ? theme.palette.primary.main
-  //                           : "inherit",
-  //                       })}
-  //                     >
-  //                       <FateLabel align="center">
-  //                         {formatOracleDiceNumber(r.value)}
-  //                       </FateLabel>
-  //                     </TableCell>
-  //                   );
-  //                 })}
-  //               </TableRow>
-  //             </TableFooter>
-  //           </Table>
-  //         </TableContainer>
-  //       </Box>
-  //       <Box display="flex" justifyContent="center" pt="1rem">
-  //         <FateLabel
-  //           className={css({ fontWeight: "bold", fontSize: "1.25rem" })}
-  //         >
-  //           {"Roll"}
-  //         </FateLabel>
-  //       </Box>
-  //     </Container>
-  //   </Box>
-  // );
+                    return (
+                      <TableCell
+                        key={r.label}
+                        align="center"
+                        width="50px"
+                        sx={{
+                          transition: theme.transitions.create(["background"]),
+                          color: highlightValue
+                            ? theme.palette.primary.contrastText
+                            : theme.palette.text.primary,
+                          background: highlightValue
+                            ? theme.palette.primary.main
+                            : "inherit",
+                        }}
+                      >
+                        <FateLabel align="center">
+                          {formatOracleDiceNumber(r.value)}
+                        </FateLabel>
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              </TableFooter>
+            </Table>
+          </TableContainer>
+        </Box>
+        <Box display="flex" justifyContent="center" pt="1rem">
+          <FateLabel sx={{ fontWeight: "bold", fontSize: "1.25rem" }}>
+            {"Roll"}
+          </FateLabel>
+        </Box>
+      </Container>
+    </Box>
+  );
 }
 
 function formatOracleDiceNumber(total: number): string {

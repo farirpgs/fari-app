@@ -1,6 +1,7 @@
 import produce from "immer";
 import { useState } from "react";
 import { CommandResult, IDicePoolResult } from "../../../../domains/dice/Dice";
+import { useEvent } from "../../../../hooks/useEvent/useEvent";
 
 export enum MessageType {
   Text = "text",
@@ -34,8 +35,13 @@ export function useChat() {
   const MAX_MESSAGES = 50;
 
   const [chat, setChat] = useState<IChat>({ messages: [] });
+  const [viewedCount, setViewedCount] = useState(0);
 
-  function sendMessage(message: IMessage) {
+  const messageCount = chat.messages.length;
+  const unreadCount = messageCount - viewedCount;
+  const unreadCountVisible = unreadCount > 0 ? unreadCount : 0;
+
+  const sendMessage = useEvent((message: IMessage) => {
     setChat(
       produce((draft) => {
         if (!draft) {
@@ -45,17 +51,21 @@ export function useChat() {
         draft.messages = draft.messages.slice(-MAX_MESSAGES);
       })
     );
-  }
+  });
 
-  function overrideChat(newChat: IChat | undefined) {
+  const overrideChat = useEvent((newChat: IChat | undefined) => {
     if (newChat) {
       setChat(newChat);
     }
-  }
+  });
+
+  const readAll = useEvent(() => {
+    setViewedCount(messageCount);
+  });
 
   return {
-    state: { chat },
-    actions: { sendMessage, overrideChat },
+    state: { chat, messageCount, unreadCount: unreadCountVisible },
+    actions: { sendMessage, overrideChat, readAll },
     utils: {
       convertDicePoolResultToMessageValue(
         result: IDicePoolResult
