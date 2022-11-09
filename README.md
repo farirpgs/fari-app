@@ -1,12 +1,10 @@
 # TODO
 
-- [ ] Chat Feature
-  - [ ] Append from the top
-  - [ ] Max 30 messages
-  - [ ] Different sync entity
-  - [ ] Tab in "player row"
-  - [ ] Remove "Dice roller" from player row
-  - [ ] Chat / Dice Roll from cursor => Chat
+- floating message bar doesnt clear message on enter
+- chat input text doesnt handle LONG text
+- pressing up in chat torepeat last slash command(s)?
+- confettis don't work
+- oracle doesnt load
 
 # [Fari](https://fari.app) - The Free and Open-Source Virtual Tabletop
 
