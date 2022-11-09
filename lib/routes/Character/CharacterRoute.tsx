@@ -6,7 +6,6 @@ import { useNavigate, useParams } from "react-router";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Toolbox } from "../../components/Toolbox/Toolbox";
-import { useZIndex } from "../../constants/zIndex";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
@@ -25,7 +24,6 @@ function DicePoolResultsSnackBar(props: {
   onClose?: () => void;
 }) {
   const theme = useTheme();
-  const zIndex = useZIndex();
   const hideTimeout = useRef<any>();
   const [visible, setVisible] = useState(false);
 
@@ -91,7 +89,6 @@ function DicePoolResultsSnackBar(props: {
 }
 
 function CharacterRoute() {
-  const zIndex = useZIndex();
   const theme = useTheme();
   const params = useParams<{ id: string }>();
   const query = useQuery<"dialog" | "readonly">();

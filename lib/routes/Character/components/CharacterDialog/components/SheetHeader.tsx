@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { useTheme } from "@mui/material/styles";
@@ -20,7 +19,7 @@ export const SheetHeader: React.FC<{
   return (
     <Box mb=".5rem">
       <Box
-        className={css({
+        sx={{
           background: miniTheme.hideSectionBackground
             ? undefined
             : miniTheme.textPrimary,
@@ -29,7 +28,7 @@ export const SheetHeader: React.FC<{
             : miniTheme.textPrimaryInverted,
           width: "100%",
           padding: miniTheme.hideSectionBackground ? "0 .5rem" : ".5rem",
-        })}
+        }}
       >
         {props.advanced && (
           <Grid
@@ -41,13 +40,13 @@ export const SheetHeader: React.FC<{
           >
             <Grid item xs>
               <Typography
-                className={css({
+                sx={{
                   fontSize: ".7rem",
                   color: miniTheme.hideSectionBackground
                     ? miniTheme.textSecondary
                     : miniTheme.textPrimaryInverted,
                   fontWeight: theme.typography.fontWeightBold,
-                })}
+                }}
               >
                 {`Section ${props.index + 1}`}
               </Typography>
@@ -64,11 +63,11 @@ export const SheetHeader: React.FC<{
         >
           <Grid item xs>
             <Typography
-              className={css({
+              sx={{
                 fontFamily: miniTheme.sectionHeadingFontFamily,
                 fontSize: `${miniTheme.sectionHeadingFontSize}rem`,
                 fontWeight: miniTheme.sectionHeadingFontWeight,
-              })}
+              }}
             >
               <ContentEditable
                 dataCy={`character-dialog.${props.label}.label`}

@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
@@ -55,7 +54,7 @@ export const BlockText = React.memo(function (
             />
           </Grid>
           {isSlotTrackerVisible && (
-            <Grid item className={css({ marginLeft: "auto" })}>
+            <Grid item sx={{ marginLeft: "auto" }}>
               <BlockToggleMeta
                 readonly={props.readonly}
                 dataCy={props.dataCy}
@@ -119,11 +118,11 @@ function BlockTextValue(props: {
   return (
     <Box>
       <Typography
-        className={css({
+        sx={{
           fontFamily: miniTheme.textFontFamily,
           fontSize: `${miniTheme.textFontSize}rem`,
           fontWeight: miniTheme.textFontWeight,
-        })}
+        }}
       >
         <ContentEditable
           border
@@ -180,9 +179,9 @@ export const BlockTextActions = React.memo(
           <Link
             component="button"
             variant="caption"
-            className={css({
+            sx={{
               color: theme.palette.primary.main,
-            })}
+            }}
             onClick={handleAddRemoveToggle}
             underline="hover"
           >
@@ -195,9 +194,9 @@ export const BlockTextActions = React.memo(
           <Link
             component="button"
             variant="caption"
-            className={css({
+            sx={{
               color: theme.palette.primary.main,
-            })}
+            }}
             onClick={handleAddRemoveField}
             underline="hover"
           >
@@ -210,9 +209,9 @@ export const BlockTextActions = React.memo(
           <Link
             component="button"
             variant="caption"
-            className={css({
+            sx={{
               color: theme.palette.primary.main,
-            })}
+            }}
             onClick={handleAddRemoveLabel}
             underline="hover"
           >

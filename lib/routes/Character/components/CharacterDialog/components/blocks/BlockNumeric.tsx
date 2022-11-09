@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
@@ -97,9 +96,9 @@ export const BlockNumericActions = React.memo(
           <Link
             component="button"
             variant="caption"
-            className={css({
+            sx={{
               color: theme.palette.primary.main,
-            })}
+            }}
             onClick={handleAddRemoveToggle}
             underline="hover"
           >

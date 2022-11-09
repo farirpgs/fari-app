@@ -6,7 +6,6 @@ import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Scene } from "../../components/Scene/Scene";
 import { Toolbox } from "../../components/Toolbox/Toolbox";
-import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
@@ -21,7 +20,6 @@ function SceneRoute() {
   const sceneManager = useScene();
   const sceneName = sceneManager.state.scene?.name ?? "";
 
-  const diceManager = useContext(DiceContext);
   const pageTitle = previewContentEditable({ value: sceneName });
   const navigate = useNavigate();
   const logger = useLogger();

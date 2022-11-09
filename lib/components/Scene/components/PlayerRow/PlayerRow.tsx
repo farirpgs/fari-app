@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import CircleIcon from "@mui/icons-material/Circle";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
@@ -49,20 +48,14 @@ export function PlayerRow(
     color: string;
     isChild: boolean;
     children?: JSX.Element;
-    onDiceRoll(): void;
     onStatusChange(status: string): void;
-    onPointsChange(newPoints: string, newMaxPoints: string | undefined): void;
     onTogglePrivate(): void;
     onPlayerRemove(): void;
     onAssignCharacterSheet(): void;
   } & IDataCyProps
 ) {
-  const theme = useTheme();
   const { t } = useTranslate();
   const logger = useLogger();
-
-  const canOpenOrLoadSheet =
-    props.hasCharacterSheet || props.permissions.canLoadCharacterSheet;
 
   return (
     <PlayerRowContainer isChild={props.isChild} dataCy={props.dataCy}>
@@ -308,7 +301,7 @@ const PlayerRowName = React.memo(
     const theme = useTheme();
     return (
       <Box>
-        <Grid container alignItems="center" className={css({ height: "100%" })}>
+        <Grid container alignItems="center" sx={{ height: "100%" }}>
           {props.characterName ? (
             <>
               <Grid
@@ -359,10 +352,10 @@ const PlayerRowName = React.memo(
         <Typography
           title={name}
           noWrap
-          className={css({
+          sx={{
             color: theme.palette.secondary.main,
             fontWeight: theme.typography.fontWeightMedium,
-          })}
+          }}
         >
           {name ?? "Untitled"}
         </Typography>
@@ -374,11 +367,11 @@ const PlayerRowName = React.memo(
         <Typography
           noWrap
           title={name}
-          className={css({
+          sx={{
             fontSize: ".85rem",
             fontWeight: theme.typography.fontWeightRegular,
             color: theme.palette.secondary.main,
-          })}
+          }}
         >
           {name}
         </Typography>

@@ -10,7 +10,6 @@ import {
 } from "../../../../domains/character/types";
 import { Confetti } from "../../../../domains/confetti/Confetti";
 import { getUnix } from "../../../../domains/dayjs/getDayJS";
-import { IDicePoolResult } from "../../../../domains/dice/Dice";
 import { Id } from "../../../../domains/Id/Id";
 import { IPlayer, ISession } from "../../../../hooks/useScene/IScene";
 import { IDrawingAreaState } from "../../../Draw/TldrawWriterAndReader";
@@ -105,18 +104,6 @@ export function useSession(props: { userId: string }) {
         });
       })
     );
-  }
-
-  function getNewRolls(
-    roll: IDicePoolResult,
-    previousRolls: IDicePoolResult[]
-  ) {
-    const newRolls = [roll, ...previousRolls];
-
-    if (newRolls.length === 10) {
-      newRolls.splice(newRolls.length - 5, 5);
-    }
-    return newRolls;
   }
 
   function addPlayer(player: IPlayer) {

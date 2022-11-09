@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
@@ -45,11 +44,11 @@ export const BlockSeparator = React.memo(
                 <Grid container spacing={1} alignItems="center">
                   <Grid item xs>
                     <Divider
-                      className={css({
+                      sx={{
                         height: dividerHeight,
                         margin: dividerMargin,
                         backgroundColor: miniTheme.textPrimary,
-                      })}
+                      }}
                     />
                   </Grid>
                   {props.hasLabel && (
@@ -57,12 +56,12 @@ export const BlockSeparator = React.memo(
                       <Grid item>{"//"}</Grid>
                       <Grid item>
                         <ThemedLabel
-                          className={css({
+                          sx={{
                             textAlign: "center",
                             minWidth: "3rem",
                             fontSize: "1.1rem",
                             display: "flex",
-                          })}
+                          }}
                         >
                           <ContentEditable
                             readonly={!props.advanced}
@@ -79,11 +78,11 @@ export const BlockSeparator = React.memo(
                   {props.hasLabel && (
                     <Grid item xs>
                       <Divider
-                        className={css({
+                        sx={{
                           height: dividerHeight,
                           margin: dividerMargin,
                           backgroundColor: miniTheme.textPrimary,
-                        })}
+                        }}
                       />
                     </Grid>
                   )}
@@ -132,9 +131,9 @@ export const BlockSeparatorActions = React.memo(
           <Link
             component="button"
             variant="caption"
-            className={css({
+            sx={{
               color: theme.palette.primary.main,
-            })}
+            }}
             onClick={handleShowHideDivider}
             underline="hover"
           >
@@ -148,9 +147,9 @@ export const BlockSeparatorActions = React.memo(
             <Link
               component="button"
               variant="caption"
-              className={css({
+              sx={{
                 color: theme.palette.primary.main,
-              })}
+              }}
               onClick={handleAddRemoveLabel}
               underline="hover"
             >

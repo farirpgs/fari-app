@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Button from "@mui/material/Button";
 import ButtonGroup, { ButtonGroupProps } from "@mui/material/ButtonGroup";
@@ -70,9 +69,9 @@ export const SplitButton: React.FC<IProps> = (props) => {
           <Button
             onClick={handleToggle}
             data-cy={`${props.dataCy}.select`}
-            className={css({
+            sx={{
               padding: 0,
-            })}
+            }}
           >
             <ArrowDropDownIcon />
           </Button>
@@ -81,7 +80,7 @@ export const SplitButton: React.FC<IProps> = (props) => {
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
-          className={css({ zIndex: zIndex.splitButton })}
+          sx={{ zIndex: zIndex.splitButton }}
           transition
           disablePortal
         >

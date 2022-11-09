@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
@@ -339,10 +338,10 @@ export function BlockByType(props: {
             <Link
               component="button"
               variant="caption"
-              className={css({
+              sx={{
                 label: "CharacterDialog-width",
                 color: theme.palette.primary.main,
-              })}
+              }}
               onClick={() => {
                 props.onToggleSplit?.();
               }}
@@ -374,7 +373,7 @@ export function BlockByType(props: {
         <Grid container alignItems="flex-start" wrap="nowrap">
           {props.advanced && (
             <Grid item>
-              <FormHelperText className={css({ paddingRight: ".2rem" })}>
+              <FormHelperText sx={{ paddingRight: ".2rem" }}>
                 {t("character-dialog.helper-text.help")}
               </FormHelperText>
             </Grid>
@@ -382,11 +381,11 @@ export function BlockByType(props: {
 
           <Grid item xs>
             <FormHelperText
-              className={css({
+              sx={{
                 fontFamily: miniTheme.helperTextFontFamily,
                 fontSize: `${miniTheme.helperTextFontSize}rem`,
                 fontWeight: miniTheme.helperTextFontWeight,
-              })}
+              }}
             >
               <ContentEditable
                 readonly={!props.advanced}

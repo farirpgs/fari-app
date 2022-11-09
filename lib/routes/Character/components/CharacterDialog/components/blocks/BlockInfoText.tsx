@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import FormHelperText from "@mui/material/FormHelperText";
 import React, { useContext } from "react";
@@ -28,11 +27,11 @@ export const BlockInfoText = React.memo(
         <Box>
           <Box>
             <FormHelperText
-              className={css({
+              sx={{
                 fontFamily: miniTheme.infoTextFontFamily,
                 fontSize: `${miniTheme.infoTextFontSize}rem`,
                 fontWeight: miniTheme.infoTextFontWeight,
-              })}
+              }}
             >
               <ContentEditable
                 readonly={props.readonly || !props.advanced}

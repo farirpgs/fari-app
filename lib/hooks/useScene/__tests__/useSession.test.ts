@@ -4,6 +4,8 @@ import { useSession } from "../../../routes/Play/components/Session/useSession";
 import { DefaultPlayerColor } from "../../../routes/Play/consts/PlayerColors";
 import { ISession } from "../IScene";
 
+vi.mock("canvas-confetti");
+
 describe("useSession", () => {
   it("constructor", () => {
     // GIVEN
@@ -63,9 +65,8 @@ describe("useSession", () => {
         isGM: false,
         private: false,
         points: "3",
-        playedDuringTurn: false,
         playerName: "Character #1",
-        rolls: [],
+        status: "",
       });
     });
   });
@@ -159,15 +160,13 @@ describe("useSession", () => {
       expect(result.current.state.session.gm.npcs).toEqual([
         {
           character: undefined,
-          points: "3",
           color: DefaultPlayerColor,
           id: playerId,
-          playedDuringTurn: false,
-          private: false,
-          isGM: false,
-
           playerName: "Character #1",
-          rolls: [],
+          isGM: false,
+          points: "3",
+          private: false,
+          status: "",
         },
       ]);
       // WHEN removing an offline player

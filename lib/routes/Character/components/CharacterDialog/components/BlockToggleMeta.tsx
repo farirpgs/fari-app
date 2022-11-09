@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import CircleIcon from "@mui/icons-material/Circle";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import Checkbox from "@mui/material/Checkbox";
@@ -29,10 +28,10 @@ export function BlockToggleMeta<
       checked={props.checked}
       color="default"
       disabled={props.readonly}
-      className={css({
+      sx={{
         color: "inherit",
         padding: "0",
-      })}
+      }}
       onChange={() => {
         props.onMetaChange((prev) => {
           return {

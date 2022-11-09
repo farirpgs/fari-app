@@ -1,4 +1,3 @@
-import { css, cx } from "@emotion/css";
 import LaunchIcon from "@mui/icons-material/Launch";
 import SaveIcon from "@mui/icons-material/Save";
 import Box from "@mui/material/Box";
@@ -54,29 +53,22 @@ export const CharacterCard: React.FC<{
   const hasSections = numberOfSections > 0;
 
   return (
-    <Box
-      data-cy="character-card"
-      className={cx(
-        css({
-          width: width,
-        })
-      )}
-    >
+    <Box data-cy="character-card" sx={{ width: width }}>
       <Paper
-        className={css({
+        sx={{
           borderRadius: "0px",
           flex: "1 0 auto",
-        })}
+        }}
       >
         <Box pb="1rem">
           <Box
             py=".5rem"
             px="1rem"
-            className={css({
+            sx={{
               fontSize: "1.5rem",
               width: "100%",
               borderBottom: hasSections ? "1px solid #f0a4a4" : undefined,
-            })}
+            }}
           >
             <Grid container alignItems="flex-start" spacing={1} wrap="nowrap">
               <Grid item xs>
@@ -112,10 +104,10 @@ export const CharacterCard: React.FC<{
                                   ? "secondary"
                                   : undefined
                               }
-                              className={css({
+                              sx={{
                                 width: "1.5rem",
                                 height: "1.5rem",
-                              })}
+                              }}
                             />
                           </IconButton>
                         </span>
@@ -137,10 +129,10 @@ export const CharacterCard: React.FC<{
                             }}
                           >
                             <LaunchIcon
-                              className={css({
+                              sx={{
                                 width: "1.5rem",
                                 height: "1.5rem",
-                              })}
+                              }}
                             />
                           </IconButton>
                         </span>
@@ -163,15 +155,11 @@ export const CharacterCard: React.FC<{
                       value: section.label,
                     });
                     return (
-                      <Box
-                        px="1rem"
-                        key={section.id}
-                        className={css({ clear: "both" })}
-                      >
+                      <Box px="1rem" key={section.id} sx={{ clear: "both" }}>
                         {sectionLabel && (
                           <Box
                             mt="1rem"
-                            className={css({
+                            sx={{
                               label: "SheetHeader-box",
                               // Hexagone
                               // https://bennettfeely.com/clippy/
@@ -181,7 +169,7 @@ export const CharacterCard: React.FC<{
                               color: headerColor,
                               width: "100%",
                               padding: ".5rem",
-                            })}
+                            }}
                           >
                             <FateLabel noWrap>
                               {previewContentEditable({

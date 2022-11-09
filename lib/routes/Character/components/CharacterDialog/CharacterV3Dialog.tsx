@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
@@ -85,11 +84,6 @@ import { BlockByType } from "./components/BlockByType";
 import { SheetHeader } from "./components/SheetHeader";
 import { ThemedLabel } from "./components/ThemedLabel";
 import { MiniThemeContext, useMiniTheme } from "./MiniThemeContext";
-
-export const smallIconButtonStyle = css({
-  label: "CharacterDialog-small-icon-button",
-  padding: "0",
-});
 
 const ZoomOptions = [
   {
@@ -235,16 +229,16 @@ export const CharacterV3Dialog: React.FC<{
         {renderSheet()}
         <Drawer
           anchor={"left"}
-          classes={{
-            paper: css({
+          sx={{
+            "& .MuiDialog-paper": {
               marginTop: "5.5rem",
               height: "calc(100vh - 5.5rem)",
-            }),
+            },
           }}
           BackdropProps={{
-            className: css({
+            sx: {
               background: "rgba(0, 0, 0, 0.4)",
-            }),
+            },
           }}
           open={themeEditorVisible}
           onClose={() => {
@@ -272,43 +266,43 @@ export const CharacterV3Dialog: React.FC<{
             maxWidth={maxWidth}
             scroll="paper"
             onClose={onClose}
-            classes={{
-              paper: css({
+            sx={{
+              "& .MuiDialog-paper": {
                 height: "100%",
                 background: miniTheme.backgroundColor,
-              }),
+              },
             }}
           >
             <DialogTitle
-              className={css({
+              sx={{
                 label: "CharacterDialog-dialog-wrapper",
                 padding: "0",
-              })}
+              }}
             >
               <Container maxWidth={maxWidth}>
                 <Box
-                  className={css({
+                  sx={{
                     width: "100%",
                     padding: "1rem 1rem",
-                  })}
+                  }}
                 >
                   {renderNameAndGroup()}
                 </Box>
               </Container>
             </DialogTitle>
             <DialogContent
-              className={css({
+              sx={{
                 label: "CharacterDialog-dialog-wrapper",
                 padding: "0",
-              })}
+              }}
               dividers
             >
               <Container maxWidth={maxWidth}>
                 <Box
-                  className={css({
+                  sx={{
                     width: "100%",
                     padding: ".5rem 1rem",
-                  })}
+                  }}
                 >
                   {renderPages(characterManager.state.character.pages)}
                 </Box>
@@ -316,20 +310,17 @@ export const CharacterV3Dialog: React.FC<{
             </DialogContent>
             {!props.readonly && (
               <DialogActions
-                className={css({
+                sx={{
                   label: "CharacterDialog-dialog-wrapper",
                   padding: "0",
-                })}
+                }}
               >
-                <Container
-                  maxWidth={maxWidth}
-                  className={css({ padding: ".5rem" })}
-                >
+                <Container maxWidth={maxWidth} sx={{ padding: ".5rem" }}>
                   <Box
-                    className={css({
+                    sx={{
                       width: "100%",
                       padding: ".5rem 1rem",
-                    })}
+                    }}
                   >
                     {renderSheetActions()}
                   </Box>
@@ -344,36 +335,36 @@ export const CharacterV3Dialog: React.FC<{
     return (
       <ThemeProvider theme={miniTheme.muiTheme}>
         <Box
-          className={css({
+          sx={{
             color: miniTheme.textPrimary,
             backgroundColor: miniTheme.backgroundColor,
-          })}
+          }}
         >
           <Container maxWidth={maxWidth}>
             {!props.readonly && (
               <Box
-                className={css({
+                sx={{
                   width: "100%",
                   padding: ".5rem 1rem",
-                })}
+                }}
               >
                 <Box>{renderSheetActions()}</Box>
               </Box>
             )}
 
             <Box
-              className={css({
+              sx={{
                 width: "100%",
                 padding: "1rem 1rem",
-              })}
+              }}
             >
               {renderNameAndGroup()}
             </Box>
             <Box
-              className={css({
+              sx={{
                 width: "100%",
                 padding: ".5rem 1rem",
-              })}
+              }}
             >
               {renderPages(characterManager.state.character?.pages)}
             </Box>
@@ -412,10 +403,10 @@ export const CharacterV3Dialog: React.FC<{
                 },
               })}
               options={CharacterTemplates}
-              className={css({
+              sx={{
                 width: "300px",
                 color: "red !important",
-              })}
+              }}
               getOptionLabel={(option) => {
                 return option.fileName;
               }}
@@ -457,11 +448,11 @@ export const CharacterV3Dialog: React.FC<{
 
     return (
       <Box
-        className={css({
+        sx={{
           transform: `scale(${zoom})`,
           transformOrigin: `0 0`,
           width: `calc(100% / ${zoom})`,
-        })}
+        }}
       >
         <Collapse in={shouldRenderLoadTemplate}>
           <Box mb="1rem">
@@ -482,13 +473,13 @@ export const CharacterV3Dialog: React.FC<{
                 value={tab}
                 variant="scrollable"
                 scrollButtons="auto"
-                classes={{
-                  flexContainer: css({
-                    borderBottom: `1px solid ${miniTheme.borderColor}`,
-                  }),
-                  indicator: css({
+                sx={{
+                  "& .MuiTabs-indicator": {
                     display: "none",
-                  }),
+                  },
+                  "& .MuiTabs-flexContainer": {
+                    borderBottom: `1px solid ${miniTheme.borderColor}`,
+                  },
                 }}
                 onChange={(e, newValue) => {
                   setTab(newValue);
@@ -500,7 +491,7 @@ export const CharacterV3Dialog: React.FC<{
                     <Tab
                       disableRipple
                       key={page.id}
-                      className={css({
+                      sx={{
                         marginRight: ".5rem",
                         color: `${
                           true // miniTheme.hideTabBackground
@@ -519,21 +510,21 @@ export const CharacterV3Dialog: React.FC<{
                             : "transparent"
                         }`,
                         marginBottom: `-2px`,
-                      })}
+                      }}
                       value={pageIndex.toString()}
                       label={
                         <Typography
-                          className={css({
+                          sx={{
                             fontFamily: miniTheme.pageHeadingFontFamily,
                             fontSize: `${miniTheme.pageHeadingFontSize}rem`,
                             fontWeight: miniTheme.pageHeadingFontWeight,
                             textTransform: "none",
                             width: "100%",
-                          })}
+                          }}
                         >
                           <ContentEditable
                             clickable
-                            className={css({ width: "100%" })}
+                            sx={{ width: "100%" }}
                             value={page.label}
                             readonly={!advanced}
                             border={advanced}
@@ -669,19 +660,19 @@ export const CharacterV3Dialog: React.FC<{
               <TabPanel
                 key={page.id}
                 value={pageIndex.toString()}
-                className={css({
+                sx={{
                   label: "CharacterDialog-tab-panel",
                   padding: "0",
                   background: miniTheme.backgroundColor,
-                })}
+                }}
               >
                 <Box
                   position="relative"
-                  className={css({
+                  sx={{
                     background: miniTheme.backgroundColor,
                     color: miniTheme.textPrimary,
                     paddingTop: ".5rem",
-                  })}
+                  }}
                 >
                   {page.rows.map((row, rowIndex) => {
                     const columnSize = Math.floor(12 / row.columns.length);
@@ -733,9 +724,9 @@ export const CharacterV3Dialog: React.FC<{
                                     >
                                       <ArrowUpwardIcon
                                         htmlColor={miniTheme.textSecondary}
-                                        className={css({
+                                        sx={{
                                           fontSize: "1rem",
-                                        })}
+                                        }}
                                       />
                                     </IconButton>
                                   </span>
@@ -758,9 +749,9 @@ export const CharacterV3Dialog: React.FC<{
                                       }}
                                     >
                                       <ArrowDownwardIcon
-                                        className={css({
+                                        sx={{
                                           fontSize: "1rem",
-                                        })}
+                                        }}
                                       />
                                     </IconButton>
                                   </span>
@@ -782,9 +773,9 @@ export const CharacterV3Dialog: React.FC<{
                                       }}
                                     >
                                       <DeleteIcon
-                                        className={css({
+                                        sx={{
                                           fontSize: "1rem",
-                                        })}
+                                        }}
                                       />
                                     </IconButton>
                                   </span>
@@ -854,9 +845,9 @@ export const CharacterV3Dialog: React.FC<{
                                                     }}
                                                   >
                                                     <ArrowBackIcon
-                                                      className={css({
+                                                      sx={{
                                                         fontSize: "1rem",
-                                                      })}
+                                                      }}
                                                     />
                                                   </IconButton>
                                                 </span>
@@ -884,9 +875,9 @@ export const CharacterV3Dialog: React.FC<{
                                                     }}
                                                   >
                                                     <ArrowForwardIcon
-                                                      className={css({
+                                                      sx={{
                                                         fontSize: "1rem",
-                                                      })}
+                                                      }}
                                                     />
                                                   </IconButton>
                                                 </span>
@@ -914,9 +905,9 @@ export const CharacterV3Dialog: React.FC<{
                                                     }}
                                                   >
                                                     <DeleteIcon
-                                                      className={css({
+                                                      sx={{
                                                         fontSize: "1rem",
-                                                      })}
+                                                      }}
                                                     />
                                                   </IconButton>
                                                 </span>
@@ -1140,9 +1131,9 @@ export const CharacterV3Dialog: React.FC<{
                                       ? miniTheme.textPrimary
                                       : miniTheme.textPrimaryInverted
                                   }
-                                  className={css({
+                                  sx={{
                                     fontSize: "1rem",
-                                  })}
+                                  }}
                                 />
                               ) : (
                                 <VisibilityOffIcon
@@ -1151,9 +1142,9 @@ export const CharacterV3Dialog: React.FC<{
                                       ? miniTheme.textPrimary
                                       : miniTheme.textPrimaryInverted
                                   }
-                                  className={css({
+                                  sx={{
                                     fontSize: "1rem",
-                                  })}
+                                  }}
                                 />
                               )}
                             </IconButton>
@@ -1185,9 +1176,9 @@ export const CharacterV3Dialog: React.FC<{
                                       ? miniTheme.textPrimary
                                       : miniTheme.textPrimaryInverted
                                   }
-                                  className={css({
+                                  sx={{
                                     fontSize: "1rem",
-                                  })}
+                                  }}
                                 />
                               </IconButton>
                             </span>
@@ -1219,9 +1210,9 @@ export const CharacterV3Dialog: React.FC<{
                                       ? miniTheme.textPrimary
                                       : miniTheme.textPrimaryInverted
                                   }
-                                  className={css({
+                                  sx={{
                                     fontSize: "1rem",
-                                  })}
+                                  }}
                                 />
                               </IconButton>
                             </span>
@@ -1247,9 +1238,9 @@ export const CharacterV3Dialog: React.FC<{
                                     ? miniTheme.textPrimary
                                     : miniTheme.textPrimaryInverted
                                 }
-                                className={css({
+                                sx={{
                                   fontSize: "1rem",
-                                })}
+                                }}
                               />
                             </IconButton>
                           </Tooltip>
@@ -1283,9 +1274,9 @@ export const CharacterV3Dialog: React.FC<{
                                     ? miniTheme.textPrimary
                                     : miniTheme.textPrimaryInverted
                                 }
-                                className={css({
+                                sx={{
                                   fontSize: "1rem",
-                                })}
+                                }}
                               />
                             </IconButton>
                           </Tooltip>
@@ -1802,13 +1793,13 @@ export const CharacterV3Dialog: React.FC<{
                         render={(renderProps) => {
                           return (
                             <CircleIcon
-                              className={css({
+                              sx={{
                                 border: `2px solid ${theme.palette.text.secondary}`,
                                 borderRadius: "50%",
                                 cursor: "pointer",
                                 width: "3rem",
                                 height: "3rem",
-                              })}
+                              }}
                               htmlColor={value}
                               ref={renderProps.ref}
                               onClick={() => {
@@ -1846,13 +1837,13 @@ export const CharacterV3Dialog: React.FC<{
                           render={(renderProps) => {
                             return (
                               <CircleIcon
-                                className={css({
+                                sx={{
                                   border: `2px solid ${theme.palette.text.secondary}`,
                                   borderRadius: "50%",
                                   cursor: "pointer",
                                   width: "3rem",
                                   height: "3rem",
-                                })}
+                                }}
                                 htmlColor={value}
                                 ref={renderProps.ref}
                                 onClick={() => {
@@ -2117,20 +2108,20 @@ export const CharacterV3Dialog: React.FC<{
             >
               <Grid
                 item
-                className={css({
+                sx={{
                   label: "CharacterDialog-name",
                   flex: "0 0 auto",
-                })}
+                }}
               >
                 <ThemedLabel>{t("character-dialog.name")}</ThemedLabel>
               </Grid>
               <Grid item xs>
                 <Typography
-                  className={css({
+                  sx={{
                     fontFamily: miniTheme.textFontFamily,
                     fontSize: `${miniTheme.textFontSize}rem`,
                     fontWeight: miniTheme.textFontWeight,
-                  })}
+                  }}
                 >
                   <ContentEditable
                     border
@@ -2154,10 +2145,10 @@ export const CharacterV3Dialog: React.FC<{
             >
               <Grid
                 item
-                className={css({
+                sx={{
                   label: "CharacterDialog-group",
                   flex: "0 0 auto",
-                })}
+                }}
               >
                 <ThemedLabel>{t("character-dialog.group")}</ThemedLabel>
               </Grid>
@@ -2191,20 +2182,20 @@ export const CharacterV3Dialog: React.FC<{
                             InputProps={{
                               ...params.InputProps,
                               disableUnderline: true,
-                              classes: {
-                                input: css({
+                              sx: {
+                                "& .MuiInputBase-input": {
                                   paddingBottom: "0 !important",
                                   fontFamily: miniTheme.textFontFamily,
                                   fontSize: `${miniTheme.textFontSize}rem`,
                                   fontWeight: miniTheme.textFontWeight,
-                                }),
+                                },
                               },
                             }}
                             data-cy={`character-dialog.group`}
                             disabled={props.readonly}
-                            className={css({
+                            sx={{
                               borderBottom: `1px solid ${theme.palette.divider}`,
-                            })}
+                            }}
                           />
                         )}
                       />
@@ -2218,13 +2209,13 @@ export const CharacterV3Dialog: React.FC<{
               <IconButton
                 size="small"
                 data-cy="character-dialog.close"
-                className={css({
+                sx={{
                   label: "CharacterDialog-dialog-close",
                   position: "absolute",
                   padding: ".5rem",
                   top: ".5rem",
                   right: ".5rem",
-                })}
+                }}
                 onClick={onClose}
               >
                 <CloseIcon />
@@ -2299,9 +2290,9 @@ export const CharacterV3Dialog: React.FC<{
                                   }}
                                 >
                                   <ArrowUpwardIcon
-                                    className={css({
+                                    sx={{
                                       fontSize: "1rem",
-                                    })}
+                                    }}
                                   />
                                 </IconButton>
                               </span>
@@ -2328,9 +2319,9 @@ export const CharacterV3Dialog: React.FC<{
                                   }}
                                 >
                                   <ArrowDownwardIcon
-                                    className={css({
+                                    sx={{
                                       fontSize: "1rem",
-                                    })}
+                                    }}
                                   />
                                 </IconButton>
                               </span>
@@ -2356,9 +2347,9 @@ export const CharacterV3Dialog: React.FC<{
                                 }}
                               >
                                 <ContentCopyIcon
-                                  className={css({
+                                  sx={{
                                     fontSize: "1rem",
-                                  })}
+                                  }}
                                 />
                               </IconButton>
                             </Tooltip>
@@ -2376,9 +2367,9 @@ export const CharacterV3Dialog: React.FC<{
                                 }}
                               >
                                 <FileCopyIcon
-                                  className={css({
+                                  sx={{
                                     fontSize: "1rem",
-                                  })}
+                                  }}
                                 />
                               </IconButton>
                             </Tooltip>
@@ -2402,9 +2393,9 @@ export const CharacterV3Dialog: React.FC<{
                                 }}
                               >
                                 <DeleteIcon
-                                  className={css({
+                                  sx={{
                                     fontSize: "1rem",
-                                  })}
+                                  }}
                                 />
                               </IconButton>
                             </Tooltip>
@@ -2503,17 +2494,17 @@ export function ManagerBox(props: {
           <Grid
             item
             xs
-            className={css({
+            sx={{
               display: "flex",
               alignItems: "center",
-            })}
+            }}
           >
             <Typography
-              className={css({
+              sx={{
                 fontSize: ".7rem",
                 color: theme.palette.text.secondary,
                 fontWeight: theme.typography.fontWeightBold,
-              })}
+              }}
             >
               {props.label}
             </Typography>
@@ -2526,7 +2517,7 @@ export function ManagerBox(props: {
           {props.children}
         </Grid>
         {props.rightActions && (
-          <Grid item className={css({ display: "flex", alignItems: "center" })}>
+          <Grid item sx={{ display: "flex", alignItems: "center" }}>
             {props.rightActions}
           </Grid>
         )}

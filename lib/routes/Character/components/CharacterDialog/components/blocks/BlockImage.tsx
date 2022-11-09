@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -157,19 +156,19 @@ export const BlockImage = React.memo(
           <Box
             width="100%"
             height="4rem"
-            className={css({
+            sx={{
               cursor: "pointer",
               border: `2px dashed ${
                 error ? theme.palette.error.light : theme.palette.divider
               }`,
-            })}
+            }}
             onClick={handleModalDialogClose}
           >
             <Grid
               container
               justifyContent="center"
               alignItems="center"
-              className={css({ height: "100%" })}
+              sx={{ height: "100%" }}
             >
               <Grid item>
                 <Typography
@@ -196,15 +195,16 @@ export const BlockImage = React.memo(
 
       return (
         <Box width="100%" mt=".5rem">
-          <img
-            className={css({
+          <Box
+            component="img"
+            sx={{
               maxWidth: "100%",
               maxHeight: open ? undefined : "250px",
               margin: "0 auto",
               height: "auto",
               display: "flex",
               cursor: clickable ? "pointer" : "inherit",
-            })}
+            }}
             onError={handleError}
             onClick={clickable ? handleModalDialogClose : undefined}
             src={src}

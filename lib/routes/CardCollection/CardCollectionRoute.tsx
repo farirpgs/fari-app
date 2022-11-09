@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import SaveIcon from "@mui/icons-material/Save";
 import Masonry from "@mui/lab/Masonry";
@@ -263,10 +262,10 @@ function CardCollectionRoute() {
             <FateLabel
               variant="h4"
               uppercase={false}
-              className={css({
+              sx={{
                 borderBottom: `1px solid ${theme.palette.divider}`,
                 textAlign: "center",
-              })}
+              }}
             >
               <ContentEditable
                 autoFocus
@@ -279,7 +278,7 @@ function CardCollectionRoute() {
               />
             </FateLabel>
 
-            <FormHelperText className={css({ textAlign: "right" })}>
+            <FormHelperText sx={{ textAlign: "right" }}>
               {t("card-collection-route.card-collection-name")}
             </FormHelperText>
           </Box>

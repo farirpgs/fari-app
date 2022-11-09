@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
 import Box from "@mui/material/Box";
@@ -46,11 +45,11 @@ export function CircleTextField(
 
   return (
     <Box
-      className={css({
+      sx={{
         position: "relative",
         padding: ".2rem",
         cursor: cursor,
-      })}
+      }}
       onClick={(e) => {
         if (props.button) {
           props.onClick?.(e);
@@ -73,9 +72,7 @@ export function CircleTextField(
         condition={props.button}
         wrapper={(children) => {
           return (
-            <ButtonBase className={css({ borderRadius: "50%" })}>
-              {children}
-            </ButtonBase>
+            <ButtonBase sx={{ borderRadius: "50%" }}>{children}</ButtonBase>
           );
         }}
       >
@@ -84,10 +81,10 @@ export function CircleTextField(
           type="number"
           data-cy={props.dataCy}
           value={value}
-          className={css({
+          sx={{
             textAlign: "center",
             cursor: cursor,
-          })}
+          }}
           onFocus={() => {
             setFocus(true);
           }}
@@ -111,7 +108,7 @@ export function CircleTextField(
             }
           }}
           InputProps={{
-            className: css({
+            sx: {
               "cursor": cursor,
               "width": "3rem",
               "height": "3rem",
@@ -133,10 +130,10 @@ export function CircleTextField(
               "transition": theme.transitions.create(["color", "background"], {
                 duration: theme.transitions.duration.shortest,
               }),
-            }),
+            },
           }}
           inputProps={{
-            className: css({
+            sx: {
               "cursor": cursor,
               "fontWeight": theme.typography.fontWeightRegular,
               "textAlign": "center",
@@ -156,7 +153,7 @@ export function CircleTextField(
                 WebkitAppearance: "none",
                 margin: 0,
               },
-            }),
+            },
           }}
           InputLabelProps={{
             shrink: true,
@@ -169,18 +166,18 @@ export function CircleTextField(
           <IconButton
             size="small"
             data-cy={`${props.dataCy}.decrement`}
-            className={css({
+            sx={{
               "position": "absolute",
               "background": theme.palette.background.paper,
               "padding": "0",
               "left": "0",
               "bottom": "0",
               "&:hover": { background: theme.palette.background.default },
-            })}
+            }}
             onClick={props.onDecrement}
           >
             <RemoveCircleOutlineOutlinedIcon
-              className={css({ width: "1.1rem", height: "1.1rem" })}
+              sx={{ width: "1.1rem", height: "1.1rem" }}
             />
           </IconButton>
         </Fade>
@@ -190,18 +187,18 @@ export function CircleTextField(
           <IconButton
             size="small"
             data-cy={`${props.dataCy}.increment`}
-            className={css({
+            sx={{
               "position": "absolute",
               "background": theme.palette.background.paper,
               "padding": "0",
               "right": "0",
               "bottom": "0",
               "&:hover": { background: theme.palette.background.default },
-            })}
+            }}
             onClick={props.onIncrement}
           >
             <AddCircleOutlineOutlinedIcon
-              className={css({ width: "1.1rem", height: "1.1rem" })}
+              sx={{ width: "1.1rem", height: "1.1rem" }}
             />
           </IconButton>
         </Fade>

@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import { useTheme } from "@mui/material/styles";
@@ -93,9 +92,9 @@ export const BlockSkillActions = React.memo(
           <Link
             component="button"
             variant="caption"
-            className={css({
+            sx={{
               color: theme.palette.primary.main,
-            })}
+            }}
             onClick={() => {
               props.onMetaChange((prev) => ({
                 ...prev,
@@ -114,9 +113,9 @@ export const BlockSkillActions = React.memo(
           <Link
             component="button"
             variant="caption"
-            className={css({
+            sx={{
               color: theme.palette.primary.main,
-            })}
+            }}
             onClick={() => {
               props.onMetaChange((prev) => ({
                 ...prev,

@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid, { GridSize } from "@mui/material/Grid";
@@ -93,33 +92,33 @@ function PrintCharacter(props: { character: ICharacter | undefined }) {
             return (
               <Box
                 key={pageIndex}
-                className={css({
+                sx={{
                   pageBreakAfter: "always",
                   marginBottom: "1rem",
-                })}
+                }}
               >
                 <Box
-                  className={css({
+                  sx={{
                     borderBottom: `1px solid ${miniTheme.borderColor}`,
                     width: "100%",
                     display: "flex",
-                  })}
+                  }}
                 >
                   <Box
-                    className={css({
+                    sx={{
                       marginRight: "1rem",
                       width: "auto",
                       padding: ".5rem 1rem",
                       borderBottom: `4px solid ${miniTheme.textPrimary}`,
-                    })}
+                    }}
                   >
                     <Typography
                       noWrap
-                      className={css({
+                      sx={{
                         fontFamily: miniTheme.pageHeadingFontFamily,
                         fontSize: `${miniTheme.pageHeadingFontSize}rem`,
                         fontWeight: miniTheme.pageHeadingFontWeight,
-                      })}
+                      }}
                     >
                       {previewContentEditable({ value: page.label })}
                     </Typography>
@@ -181,14 +180,14 @@ function PrintSections(props: { section: ISection }) {
   return (
     <>
       <Box
-        className={css({
+        sx={{
           pageBreakInside: "avoid",
-        })}
+        }}
       >
         <Grid container>
           <Grid item xs>
             <Box
-              className={css({
+              sx={{
                 background: miniTheme.hideSectionBackground
                   ? undefined
                   : miniTheme.textPrimary,
@@ -198,15 +197,15 @@ function PrintSections(props: { section: ISection }) {
                   : miniTheme.textPrimaryInverted,
                 width: "100%",
                 padding: miniTheme.hideSectionBackground ? "0 .5rem" : ".5rem",
-              })}
+              }}
             >
               <Typography
                 noWrap
-                className={css({
+                sx={{
                   fontFamily: miniTheme.sectionHeadingFontFamily,
                   fontSize: `${miniTheme.sectionHeadingFontSize}rem`,
                   fontWeight: miniTheme.sectionHeadingFontWeight,
-                })}
+                }}
               >
                 {previewContentEditable({
                   value: props.section.label,
@@ -225,9 +224,9 @@ function PrintSections(props: { section: ISection }) {
                 item
                 xs={width}
                 key={block.id}
-                className={css({
+                sx={{
                   pageBreakInside: "avoid",
-                })}
+                }}
               >
                 <Box my=".5rem" px=".5rem">
                   <BlockByType

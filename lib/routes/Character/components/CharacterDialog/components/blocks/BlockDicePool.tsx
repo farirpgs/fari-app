@@ -1,4 +1,3 @@
-import { css, cx } from "@emotion/css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import FastForwardIcon from "@mui/icons-material/FastForward";
 import FastRewindIcon from "@mui/icons-material/FastRewind";
@@ -59,12 +58,10 @@ export const BlockDicePool = React.memo(
       hideModifier: boolean | undefined;
       commands: Array<IDiceCommandId> | undefined;
       dataCy?: string;
-      listResults?: boolean;
       mid?: React.ReactNode;
       onRoll(diceRollResult: IDicePoolResult): void;
     } & IBlockHandlers<IDicePoolBlock | ISkillBlock>
   ) => {
-    const listResults = props.listResults ?? true;
     const { t } = useTranslate();
     const theme = useTheme();
     const diceManager = useContext(DiceContext);
@@ -169,9 +166,9 @@ export const BlockDicePool = React.memo(
           >
             <Grid
               item
-              className={css({
+              sx={{
                 maxWidth: "50%",
-              })}
+              }}
             >
               {renderPool()}
             </Grid>
@@ -201,10 +198,10 @@ export const BlockDicePool = React.memo(
                             }}
                           >
                             <FastRewindIcon
-                              className={css({
+                              sx={{
                                 width: "1.1rem",
                                 height: "1.1rem",
-                              })}
+                              }}
                             />
                           </IconButton>
                         </span>
@@ -225,10 +222,10 @@ export const BlockDicePool = React.memo(
                             }}
                           >
                             <RemoveCircleOutlineIcon
-                              className={css({
+                              sx={{
                                 width: "1.1rem",
                                 height: "1.1rem",
-                              })}
+                              }}
                             />
                           </IconButton>
                         </span>
@@ -249,10 +246,10 @@ export const BlockDicePool = React.memo(
                             }}
                           >
                             <AddCircleOutlineIcon
-                              className={css({
+                              sx={{
                                 width: "1.1rem",
                                 height: "1.1rem",
-                              })}
+                              }}
                             />
                           </IconButton>
                         </span>
@@ -276,10 +273,10 @@ export const BlockDicePool = React.memo(
                             }}
                           >
                             <FastForwardIcon
-                              className={css({
+                              sx={{
                                 width: "1.1rem",
                                 height: "1.1rem",
-                              })}
+                              }}
                             />
                           </IconButton>
                         </span>
@@ -308,9 +305,9 @@ export const BlockDicePool = React.memo(
             <Link
               component="button"
               variant="caption"
-              className={css({
+              sx={{
                 color: theme.palette.primary.main,
-              })}
+              }}
               onClick={(e: any) => {
                 if (!props.readonly) {
                   diceMenuProps.openMenu(e);
@@ -413,10 +410,10 @@ export const BlockDicePool = React.memo(
             {!hasCommands && (
               <Grid item>
                 <Icons.ThrowDice
-                  className={css({
+                  sx={{
                     display: "flex",
                     fontSize: "2.3rem",
-                  })}
+                  }}
                 />
               </Grid>
             )}
@@ -430,20 +427,20 @@ export const BlockDicePool = React.memo(
                     badgeContent={count}
                     color="default"
                     invisible={count === 1}
-                    classes={{
-                      badge: css({
+                    sx={{
+                      "& .MuiBadge-badge": {
                         background: theme.palette.text.primary,
                         color: theme.palette.getContrastText(
                           theme.palette.text.primary
                         ),
-                      }),
+                      },
                     }}
                   >
                     <commandSet.icon
-                      className={css({
+                      sx={{
                         display: "flex",
                         fontSize: "2.3rem",
-                      })}
+                      }}
                     />
                   </Badge>
                 </Grid>
@@ -482,9 +479,9 @@ export const BlockDicePoolActions = React.memo(
           <Link
             component="button"
             variant="caption"
-            className={css({
+            sx={{
               color: theme.palette.primary.main,
-            })}
+            }}
             onClick={handleAddRemoveToggle}
             underline="hover"
           >
@@ -513,7 +510,7 @@ export const Pool: React.FC<
   }
 > = (props) => {
   const {
-    className,
+    sx,
     clickable,
     selected,
     borderRadius,
@@ -535,40 +532,36 @@ export const Pool: React.FC<
     <Tooltip title={tooltipTitle ?? ""} placement="right">
       <Box
         {...rest}
-        className={cx(
-          css({
-            "label": "character-circle-box",
-            "background": !selected
-              ? theme.palette.background.paper
-              : theme.palette.primary.main,
-            "color": !selected
-              ? theme.palette.getContrastText(theme.palette.background.paper)
-              : theme.palette.getContrastText(theme.palette.primary.main),
-            "border": props.clickable
-              ? `1px ${borderStyle} ${theme.palette.text.primary}`
-              : `none`,
+        sx={{
+          "label": "character-circle-box",
+          "background": !selected
+            ? theme.palette.background.paper
+            : theme.palette.primary.main,
+          "color": !selected
+            ? theme.palette.getContrastText(theme.palette.background.paper)
+            : theme.palette.getContrastText(theme.palette.primary.main),
+          "border": props.clickable
+            ? `1px ${borderStyle} ${theme.palette.text.primary}`
+            : `none`,
 
-            "boxShadow":
-              selected || !props.clickable
-                ? theme.shadows[0]
-                : theme.shadows[1],
-            "transition": theme.transitions.create(
-              ["color", "background", "border", "borderWidth", "boxShadow"],
-              { duration: theme.transitions.duration.shorter }
-            ),
-            "borderRadius": borderRadius ?? "24px",
-            "display": "flex",
-            "alignItems": "center",
-            "justifyContent": "center",
-            "cursor": !clickable ? "inherit" : "pointer",
-            "&:hover": {
-              color: !clickable || selected ? undefined : hoverColor,
-              background:
-                !clickable || selected ? undefined : hoverBackgroundColor,
-            },
-          }),
-          className
-        )}
+          "boxShadow":
+            selected || !props.clickable ? theme.shadows[0] : theme.shadows[1],
+          "transition": theme.transitions.create(
+            ["color", "background", "border", "borderWidth", "boxShadow"],
+            { duration: theme.transitions.duration.shorter }
+          ),
+          "borderRadius": borderRadius ?? "24px",
+          "display": "flex",
+          "alignItems": "center",
+          "justifyContent": "center",
+          "cursor": !clickable ? "inherit" : "pointer",
+          "&:hover": {
+            color: !clickable || selected ? undefined : hoverColor,
+            background:
+              !clickable || selected ? undefined : hoverBackgroundColor,
+          },
+          ...sx,
+        }}
       >
         <ButtonBase disabled={!props.clickable}>
           <Box
@@ -576,7 +569,7 @@ export const Pool: React.FC<
             minWidth="50%"
             textAlign="center"
             display="flex"
-            className={css({})}
+            sx={{}}
           >
             {props.children}
           </Box>

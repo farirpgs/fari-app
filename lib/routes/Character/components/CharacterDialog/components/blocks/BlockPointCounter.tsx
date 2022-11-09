@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
@@ -135,8 +134,8 @@ export const BlockPointCounter = React.memo(
                 wrap="nowrap"
                 spacing={1}
               >
-                <Grid item className={css({ flex: "1 1 auto" })}>
-                  <ThemedLabel className={css({ textAlign: "center" })}>
+                <Grid item sx={{ flex: "1 1 auto" }}>
+                  <ThemedLabel sx={{ textAlign: "center" }}>
                     <ContentEditable
                       dataCy={`${props.dataCy}.label`}
                       readonly={props.readonly || !props.advanced}
@@ -178,11 +177,11 @@ export const BlockPointCounter = React.memo(
               <>
                 <Grid item>
                   <Typography
-                    className={css({
+                    sx={{
                       fontSize: "2rem",
                       color: theme.palette.text.secondary,
                       lineHeight: Font.lineHeight(2),
-                    })}
+                    }}
                   >
                     {"/"}
                   </Typography>
@@ -211,9 +210,9 @@ export const BlockPointCounter = React.memo(
                 <Link
                   component="button"
                   variant="caption"
-                  className={css({
+                  sx={{
                     color: theme.palette.primary.main,
-                  })}
+                  }}
                   onClick={() => {
                     pointsManager.actions.refresh();
                   }}
@@ -245,9 +244,9 @@ export function BlockPointCounterActions(
           <Link
             component="button"
             variant="caption"
-            className={css({
+            sx={{
               color: theme.palette.primary.main,
-            })}
+            }}
             onClick={() => {
               props.onMainPointCounterChange?.();
             }}
@@ -263,9 +262,9 @@ export function BlockPointCounterActions(
         <Link
           component="button"
           variant="caption"
-          className={css({
+          sx={{
             color: theme.palette.primary.main,
-          })}
+          }}
           onClick={() => {
             props.onMetaChange((prev) => ({
               ...prev,
