@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import NewReleasesIcon from "@mui/icons-material/NewReleases";
 import React from "react";
 import { useCannyChangelog } from "../../hooks/useCanny/useCanny";
@@ -9,7 +8,7 @@ export function CannyChangelog(props: { mobile: boolean }) {
   });
   return (
     <>
-      <span data-canny-changelog className={css({ display: "flex" })}>
+      <span data-canny-changelog style={{ display: "flex" }}>
         <NewReleasesIcon />
       </span>
     </>
