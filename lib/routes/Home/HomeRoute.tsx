@@ -1,4 +1,3 @@
-import { css, cx } from "@emotion/css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
@@ -89,23 +88,20 @@ export const HomeRoute: React.FC<{}> = () => {
       />
       <Box>
         <DarkBox px="2rem" mt="-2rem" textAlign="left" linear>
-          <Box
-            className={css({ maxWidth: FariToolbarMaxWidth, margin: "0 auto" })}
-          >
-            <img
+          <Box sx={{ maxWidth: FariToolbarMaxWidth, margin: "0 auto" }}>
+            <Box
+              component="img"
               alt="Fari"
-              className={css({
+              sx={{
                 maxWidth: "100%",
                 width: "600px",
-              })}
+              }}
               src={Images.logoTextWhite}
             />
           </Box>
         </DarkBox>
         <DarkBox linear px="2rem">
-          <Box
-            className={css({ maxWidth: FariToolbarMaxWidth, margin: "0 auto" })}
-          >
+          <Box sx={{ maxWidth: FariToolbarMaxWidth, margin: "0 auto" }}>
             <Box>
               <LightBox
                 textAlign="left"
@@ -186,7 +182,7 @@ export const HomeRoute: React.FC<{}> = () => {
           <Typography
             variant="subtitle1"
             align="center"
-            className={css({ whiteSpace: "pre-line" })}
+            sx={{ whiteSpace: "pre-line" }}
           >
             {t("home-route.support-fari.description")}
           </Typography>
@@ -248,11 +244,11 @@ export const HomeRoute: React.FC<{}> = () => {
         px="2rem"
         py="4rem"
         mb={sectionsSeparator}
-        className={css({
+        sx={{
           background: lightBackground,
           borderTop: `1px solid ${theme.palette.divider}`,
           borderBottom: `1px solid ${theme.palette.divider}`,
-        })}
+        }}
       >
         <Container maxWidth="lg">
           <Grid container spacing={4} justifyContent="center">
@@ -260,8 +256,9 @@ export const HomeRoute: React.FC<{}> = () => {
               return (
                 <Grid item key={i}>
                   <a href={sponsor.link} target="_blank" rel="noreferrer">
-                    <img
-                      className={css({ width: "auto", height: "50px" })}
+                    <Box
+                      component="img"
+                      sx={{ width: "auto", height: "50px" }}
                       src={sponsor.image}
                       title={sponsor.name}
                     />
@@ -420,10 +417,10 @@ export const HomeRoute: React.FC<{}> = () => {
         <Grid item md={6} xs={12} container justifyContent="center" spacing={2}>
           <Grid item xs={12}>
             <QuestionAnswerIcon
-              className={css({
+              sx={{
                 width: "50px",
                 height: "auto",
-              })}
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -440,12 +437,13 @@ export const HomeRoute: React.FC<{}> = () => {
         </Grid>
         <Grid item md={6} xs={12} container justifyContent="center" spacing={2}>
           <Grid item xs={12}>
-            <img
+            <Box
+              component="img"
               src={discord}
-              className={css({
+              sx={{
                 width: "50px",
                 height: "auto",
-              })}
+              }}
             />
           </Grid>
           <Grid item xs={12}>
@@ -480,7 +478,7 @@ export const HomeRoute: React.FC<{}> = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <GitHubIcon className={css({ width: "5rem", height: "5rem" })} />
+            <GitHubIcon sx={{ width: "5rem", height: "5rem" }} />
           </a>
         </Grid>
         <Grid item xs={12}>
@@ -505,22 +503,22 @@ export const HomeRoute: React.FC<{}> = () => {
         <Typography
           variant="h3"
           component="h1"
-          className={css({
+          sx={{
             marginBottom: ".5rem",
             textAlign: "left",
             fontWeight: theme.typography.fontWeightBold,
             letterSpacing: "-0.035em",
-          })}
+          }}
         >
           <>{t("home-route.header.title")}</>
         </Typography>
         <Typography
           variant="subtitle1"
           component="h2"
-          className={css({
+          sx={{
             marginBottom: "2rem",
             textAlign: "left",
-          })}
+          }}
         >
           {t("home-route.header.subtitle")}
         </Typography>
@@ -532,7 +530,7 @@ export const HomeRoute: React.FC<{}> = () => {
                 variant="contained"
                 color="primary"
                 size="large"
-                className={css({ height: "3rem" })}
+                sx={{ height: "3rem" }}
                 onClick={() => {
                   navigate("/play");
                   logger.track("home.start_online_game");
@@ -548,7 +546,7 @@ export const HomeRoute: React.FC<{}> = () => {
                 color="primary"
                 size="large"
                 data-cy="home.play-offline"
-                className={css({ height: "3rem" })}
+                sx={{ height: "3rem" }}
                 onClick={() => {
                   navigate("/play-offline");
                   logger.track("home.start_offline_game");
@@ -560,13 +558,13 @@ export const HomeRoute: React.FC<{}> = () => {
           </Grid>
         </Box>
         <Box
-          className={css({
+          sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
             justifyContent: "flex-end",
             flex: "1 0 auto",
-          })}
+          }}
         >
           <Box>
             <Rating
@@ -574,18 +572,16 @@ export const HomeRoute: React.FC<{}> = () => {
               readOnly
               size="large"
               icon={
-                <FavoriteIcon
-                  className={css({ fontSize: "inherit", color: "#ff6d75" })}
-                />
+                <FavoriteIcon sx={{ fontSize: "inherit", color: "#ff6d75" }} />
               }
             />
           </Box>
           <Box>
             <Typography
               variant="subtitle2"
-              className={css({
+              sx={{
                 fontWeight: theme.typography.fontWeightBold,
-              })}
+              }}
             >
               {t("home-route.header.stats")}
             </Typography>
@@ -611,7 +607,7 @@ type ILightBoxProps = {
 function LightBox(props: ILightBoxProps) {
   const {
     children,
-    className,
+    sx,
     maxWidth,
     title,
     subTitle,
@@ -627,12 +623,12 @@ function LightBox(props: ILightBoxProps) {
         <Typography
           variant="h3"
           component="h3"
-          className={css({
+          sx={{
             marginBottom: subTitle ? "1rem" : "3rem",
             textAlign: (textAlign as any) ?? "center",
             fontWeight: theme.typography.fontWeightBold,
             letterSpacing: "-0.035em",
-          })}
+          }}
         >
           {title}
         </Typography>
@@ -640,11 +636,11 @@ function LightBox(props: ILightBoxProps) {
       {subTitle && (
         <Typography
           variant="h5"
-          className={css({
+          sx={{
             marginBottom: "3rem",
             textAlign: (textAlign as any) ?? "center",
             color: theme.palette.text.secondary,
-          })}
+          }}
         >
           {subTitle}
         </Typography>
@@ -654,12 +650,10 @@ function LightBox(props: ILightBoxProps) {
   );
   return (
     <Box
-      className={cx(
-        css({
-          label: "LightBox",
-        }),
-        className
-      )}
+      sx={{
+        label: "LightBox",
+        ...sx,
+      }}
     >
       <Box {...boxProps}>
         <ConditionalWrapper
@@ -682,7 +676,7 @@ function LightBox(props: ILightBoxProps) {
                   return (
                     <Grid key={img} item xs={12} sm>
                       <Box
-                        className={css({
+                        sx={{
                           background: `url(${img})`,
                           borderRadius: "4px",
                           boxShadow: theme.shadows[4],
@@ -690,7 +684,7 @@ function LightBox(props: ILightBoxProps) {
                           minHeight: "300px",
                           width: "100%",
                           height: "100%",
-                        })}
+                        }}
                       />
                     </Grid>
                   );
@@ -707,26 +701,24 @@ function LightBox(props: ILightBoxProps) {
 }
 
 function DarkBox(props: ILightBoxProps & { linear?: boolean }) {
-  const { children, className, linear, ...rest } = props;
+  const { children, sx, linear, ...rest } = props;
   const highlight = useHighlight();
 
   return (
     <ThemeProvider theme={highlight.highlightTheme}>
       <LightBox
-        className={cx(
-          css({
-            "label": "DarkBox",
-            "background": linear
-              ? highlight.linearBackground
-              : highlight.radialBackground,
-            "textAlign": "center",
-            "color": highlight.highlightTheme.palette.text.primary,
-            "& a": {
-              color: highlight.highlightTheme.palette.text.primary,
-            },
-          }),
-          className
-        )}
+        sx={{
+          ...sx,
+          "label": "DarkBox",
+          "background": linear
+            ? highlight.linearBackground
+            : highlight.radialBackground,
+          "textAlign": "center",
+          "color": highlight.highlightTheme.palette.text.primary,
+          "& a": {
+            color: highlight.highlightTheme.palette.text.primary,
+          },
+        }}
         {...rest}
       >
         {children}
@@ -747,7 +739,7 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
           return (
             <Grid key={index} item xs={12} sm={6} md={4}>
               <Box
-                className={css({
+                sx={{
                   "label": "HomeRouteCards-card",
                   "padding": "2.5rem",
                   "height": "100%",
@@ -763,14 +755,14 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                     transform: isSmall ? undefined : "scale(1.005)",
                     boxShadow: isSmall ? undefined : theme.shadows[1],
                   },
-                })}
+                }}
               >
                 <Box display="flex" justifyContent="center" mb="1rem">
                   <card.icon
-                    className={css({
+                    sx={{
                       width: "4rem",
                       height: "4rem",
-                    })}
+                    }}
                   />
                 </Box>
                 <Box mb="1rem">
@@ -784,7 +776,7 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                   </FateLabel>
                 </Box>
                 <Box>
-                  <Typography className={css({ textAlign: "center" })}>
+                  <Typography sx={{ textAlign: "center" }}>
                     {card.description}
                   </Typography>
                 </Box>

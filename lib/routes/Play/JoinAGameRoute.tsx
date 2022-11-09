@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import { useBroadcastEvent, useEventListener } from "@liveblocks/react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -125,7 +124,7 @@ function JoinAGameRoute() {
             <Fade in key="loading">
               <Box display="flex" justifyContent="center">
                 <Icons.TwoPeopleMeetingTalkingIcon
-                  className={css({ fontSize: "5rem" })}
+                  sx={{ fontSize: "5rem" }}
                   color="secondary"
                 />
               </Box>
@@ -134,7 +133,7 @@ function JoinAGameRoute() {
             <Fade in key="waiting">
               <Box display="flex" justifyContent="center">
                 <Icons.TwoPeopleMeetingIcon
-                  className={css({ fontSize: "5rem" })}
+                  sx={{ fontSize: "5rem" }}
                   color="secondary"
                 />
               </Box>

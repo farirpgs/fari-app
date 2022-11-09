@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Grow from "@mui/material/Grow";
 import { useTheme } from "@mui/material/styles";
@@ -124,8 +123,8 @@ export default function CursorWithMessage(props: {
 
   return (
     <MiniThemeContext.Provider value={miniTheme}>
-      <div
-        className={css({
+      <Box
+        sx={{
           label: "CursorWithMessage",
           position: "absolute",
           opacity: stale ? 0.15 : 1,
@@ -133,7 +132,7 @@ export default function CursorWithMessage(props: {
           top: "-40px",
           left: "-10px",
           zIndex: zIndex.cursor,
-        })}
+        }}
         style={{
           transition: isFirefox
             ? undefined
@@ -144,18 +143,19 @@ export default function CursorWithMessage(props: {
         {props.readonly && renderCursor()}
 
         <Grow in={!!shouldRenderPopover}>{renderPopover()}</Grow>
-      </div>
+      </Box>
     </MiniThemeContext.Provider>
   );
 
   function renderCursor() {
     return (
-      <svg
-        className={css({
+      <Box
+        component="svg"
+        sx={{
           position: "relative",
           width: "4rem",
           height: "4rem",
-        })}
+        }}
         width="24"
         height="36"
         viewBox="0 0 24 36"
@@ -167,19 +167,19 @@ export default function CursorWithMessage(props: {
           d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19841L11.7841 12.3673H5.65376Z"
           fill={color}
         />
-      </svg>
+      </Box>
     );
   }
 
   function renderPopover() {
     return (
-      <div
-        className={css({
+      <Box
+        sx={{
           position: "absolute",
           top: "2rem",
           left: "1.5rem",
           padding: "1rem",
-        })}
+        }}
         style={{ backgroundColor: color, borderRadius: 4 }}
       >
         <Box>
@@ -194,20 +194,20 @@ export default function CursorWithMessage(props: {
           </Typography>
         </Box>
         <ThemedLabel
-          className={css({
+          sx={{
             fontSize: "1.5rem",
-          })}
+          }}
         >
           <ContentEditable
             autoFocus
-            className={css({
+            sx={{
               color: textColor,
               background: "transparent",
               outline: "none",
               minWidth: "15rem",
               maxHeight: "10rem",
               overflow: "hidden",
-            })}
+            }}
             noDelay
             value={props.message || ""}
             onChange={(message) => {
@@ -258,7 +258,7 @@ export default function CursorWithMessage(props: {
           </Box>
         )}
         {renderRollOutput()}
-      </div>
+      </Box>
     );
   }
 

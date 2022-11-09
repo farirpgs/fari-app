@@ -1,5 +1,5 @@
-import { css } from "@emotion/css";
 import { useMyPresence } from "@liveblocks/react";
+import Box from "@mui/material/Box";
 import React, {
   useContext,
   useEffect,
@@ -93,14 +93,14 @@ export const PlayersPresence = React.forwardRef(
 
     return (
       <>
-        <div
-          className={css({
+        <Box
+          sx={{
             label: "PlayersPresence",
             position: "fixed",
             top: 0,
             left: 0,
             zIndex: zIndex.cursor,
-          })}
+          }}
         >
           {windowCursors.map((cursor) => {
             return (
@@ -119,7 +119,7 @@ export const PlayersPresence = React.forwardRef(
             );
           })}
           {renderMyMessage()}
-        </div>
+        </Box>
       </>
     );
 

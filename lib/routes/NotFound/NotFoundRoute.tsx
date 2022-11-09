@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import React, { useEffect } from "react";
@@ -20,11 +19,11 @@ export const NotFoundRoute: React.FC<{}> = () => {
         <PageMeta title="Page Not Found" noIndex />
         <Box display="flex" justifyContent="center" pt="3rem">
           <Typography
-            className={css({
+            sx={{
               fontSize: "2rem",
               lineHeight: Font.lineHeight(2),
               textAlign: "center",
-            })}
+            }}
           >
             Page Not Found
           </Typography>

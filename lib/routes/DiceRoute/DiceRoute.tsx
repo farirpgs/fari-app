@@ -13,6 +13,7 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { DiceButtons } from "./components/DiceButtons";
 import { DiceDrawer } from "./components/DiceDrawer";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function DiceRoute(props: {}) {
   const { t } = useTranslate();
   const [results, setResults] = useState<Array<ICommandResult>>([]);

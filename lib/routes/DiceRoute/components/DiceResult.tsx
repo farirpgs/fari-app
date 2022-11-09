@@ -21,7 +21,6 @@ export function DiceResult(props: {
   animate: boolean;
   children?: React.ReactNode;
 }) {
-  const theme = useTheme();
   const allResults = props.poolResults.flatMap((e) => e.commandResults);
   const areAllSelectedValuesNumbers = allResults.every((result) =>
     result.value.match(/^-?\d+$/)

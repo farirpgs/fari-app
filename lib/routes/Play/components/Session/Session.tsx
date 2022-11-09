@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import ChatIcon from "@mui/icons-material/Chat";
 import CircleIcon from "@mui/icons-material/Circle";
 import ErrorIcon from "@mui/icons-material/Error";
@@ -33,7 +32,6 @@ import { TabbedScreen } from "../../../../components/Scene/TabbedScreen";
 import { Toolbox } from "../../../../components/Toolbox/Toolbox";
 import { WindowPortal } from "../../../../components/WindowPortal/WindowPortal";
 import { CharactersContext } from "../../../../contexts/CharactersContext/CharactersContext";
-import { DiceContext } from "../../../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../../../contexts/MyBinderContext/MyBinderContext";
 import { arraySort } from "../../../../domains/array/arraySort";
@@ -46,10 +44,8 @@ import { usePrompt } from "../../../../hooks/useBlocker/useBlocker";
 import { useBlockReload } from "../../../../hooks/useBlockReload/useBlockReload";
 import { useEvent } from "../../../../hooks/useEvent/useEvent";
 import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
-import { useResponsiveValue } from "../../../../hooks/useResponsiveValue/useResponsiveValue";
 import { IPlayer } from "../../../../hooks/useScene/IScene";
 import { useScene } from "../../../../hooks/useScene/useScene";
-import { useTextColors } from "../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { CharacterV3Dialog } from "../../../Character/components/CharacterDialog/CharacterV3Dialog";
 import {
@@ -112,23 +108,9 @@ export function Session(props: {
   const { t } = useTranslate();
   usePrompt(t("manager.leave-without-saving"), true);
   const logger = useLogger();
-  const diceManager = useContext(DiceContext);
-
-  const characterCardWidth = useResponsiveValue({
-    xl: "400px",
-    lg: "400px",
-    md: "400px",
-    sm: "400px",
-    xs: "300px",
-  });
-
-  const textColors = useTextColors(theme.palette.primary.main);
 
   const [streamerModalOpen, setStreamerModalOpen] = useState(false);
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
-  const [characterDialogPlayerId, setCharacterDialogPlayerId] = useState<
-    string | undefined
-  >(undefined);
 
   const $shareLinkInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -336,7 +318,7 @@ export function Session(props: {
                       size="large"
                     >
                       <Icons.PartyPopper
-                        className={css({ width: "2rem", height: "2rem" })}
+                        sx={{ width: "2rem", height: "2rem" }}
                         htmlColor={darken(theme.palette.success.main, 0.2)}
                       />
                     </IconButton>
@@ -360,7 +342,7 @@ export function Session(props: {
                     size="large"
                   >
                     <PanToolIcon
-                      className={css({ width: "1.8rem", height: "1.8rem" })}
+                      sx={{ width: "1.8rem", height: "1.8rem" }}
                       htmlColor={theme.palette.text.primary}
                     />
                   </IconButton>
@@ -375,7 +357,7 @@ export function Session(props: {
                       size="large"
                     >
                       <ChatIcon
-                        className={css({ width: "1.8rem", height: "1.8rem" })}
+                        sx={{ width: "1.8rem", height: "1.8rem" }}
                         htmlColor={theme.palette.text.primary}
                       />
                     </IconButton>
@@ -396,7 +378,7 @@ export function Session(props: {
                       size="large"
                     >
                       <Icons.PartyPopper
-                        className={css({ width: "2rem", height: "2rem" })}
+                        sx={{ width: "2rem", height: "2rem" }}
                         htmlColor={darken(theme.palette.error.main, 0.2)}
                       />
                     </IconButton>
@@ -483,10 +465,10 @@ export function Session(props: {
           <Grid container justifyContent="center">
             <Grid item>
               <ErrorIcon
-                className={css({
+                sx={{
                   width: "3rem",
                   height: "3rem",
-                })}
+                }}
               />
             </Grid>
           </Grid>
@@ -563,54 +545,54 @@ export function Session(props: {
           }}
         >
           <Box
-            className={css({
+            sx={{
               minHeight: "4rem",
               padding: ".5rem",
-            })}
+            }}
           >
             <Grid container spacing={2} alignItems="center">
               <Grid
                 item
-                className={css({
+                sx={{
                   flex: "1 0 auto",
-                })}
+                }}
               >
                 <Typography
                   variant="overline"
-                  className={css({
+                  sx={{
                     fontSize: ".8rem",
                     lineHeight: Font.lineHeight(0.8),
                     fontWeight: "bold",
-                  })}
+                  }}
                 >
                   {t("play-route.players")}
                 </Typography>
                 <Box>
                   <Typography
                     variant="overline"
-                    className={css({
+                    sx={{
                       fontSize: "1.2rem",
                       lineHeight: Font.lineHeight(1.2),
-                    })}
+                    }}
                   >
                     {Object.keys(sessionManager.state.session.players).length +
                       1}
                   </Typography>
                   <Typography
                     variant="caption"
-                    className={css({
+                    sx={{
                       fontSize: ".8rem",
                       lineHeight: Font.lineHeight(0.8),
-                    })}
+                    }}
                   >
                     {" "}
                   </Typography>
                   <Typography
                     variant="caption"
-                    className={css({
+                    sx={{
                       fontSize: ".8rem",
                       lineHeight: Font.lineHeight(0.8),
-                    })}
+                    }}
                   >
                     {t("play-route.connected")}
                   </Typography>
@@ -830,36 +812,12 @@ export function Session(props: {
             },
           });
         }}
-        onDiceRoll={() => {
-          // handleSetPlayerRoll(
-          // player.id
-          // diceManager.actions.rollCommandGroups()
-          // );
-        }}
         onStatusChange={(newStatus) => {
           if (isGM) {
             sessionManager.actions.updatePlayerStatus(player.id, newStatus);
           } else {
             props.onPlayerInteraction?.(
               PlayerInteractionFactory.updatePlayerStatus(player.id, newStatus)
-            );
-          }
-        }}
-        onPointsChange={(points, maxPoints) => {
-          if (isGM) {
-            sessionManager.actions.updatePlayerPoints(player.id, points);
-            sessionCharactersManager.actions.updatePlayerCharacterMainPointCounter(
-              player.id,
-              points,
-              maxPoints
-            );
-          } else {
-            props.onPlayerInteraction?.(
-              PlayerInteractionFactory.updatePlayerPoints(
-                player.id,
-                points,
-                maxPoints
-              )
             );
           }
         }}
@@ -992,9 +950,6 @@ export function Session(props: {
                                   player.id,
                                   updatedCharacter
                                 );
-                              }}
-                              onClose={() => {
-                                setCharacterDialogPlayerId(undefined);
                               }}
                               synced={isCharacterInStorage}
                               onToggleSync={() => {

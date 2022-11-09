@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
@@ -330,7 +329,7 @@ export const DataRoute: React.FC = () => {
           <Grid container spacing={2} alignItems="baseline">
             <Grid item>
               <TextField
-                className={css({ width: "10rem" })}
+                sx={{ width: "10rem" }}
                 helperText={t("data-route.filter-by-name")}
                 label={t("data-route.name")}
                 value={search}
@@ -341,10 +340,7 @@ export const DataRoute: React.FC = () => {
               />
             </Grid>
             <Grid item>
-              <FormControl
-                className={css({ width: "10rem" })}
-                variant="standard"
-              >
+              <FormControl sx={{ width: "10rem" }} variant="standard">
                 <InputLabel>{t("data-route.group")}</InputLabel>
                 <Select
                   value={group}
@@ -368,10 +364,7 @@ export const DataRoute: React.FC = () => {
               </FormControl>
             </Grid>
             <Grid item>
-              <FormControl
-                className={css({ width: "10rem" })}
-                variant="standard"
-              >
+              <FormControl sx={{ width: "10rem" }} variant="standard">
                 <InputLabel>{t("data-route.type")}</InputLabel>
                 <Select
                   value={type}
@@ -431,26 +424,28 @@ export const DataRoute: React.FC = () => {
                 ]}
               />
 
-              <input
+              <Box
+                component="input"
                 ref={$importInput}
                 type="file"
                 accept=".json"
-                className={css({
+                sx={{
                   display: "none",
-                })}
-                onChange={(event) => {
+                }}
+                onChange={(event: any) => {
                   handleOnImport(event.target.files, ImportMode.Import);
                   event.target.value = "";
                 }}
               />
-              <input
+              <Box
+                component="input"
                 ref={$importAndDuplicateInput}
                 type="file"
                 accept=".json"
-                className={css({
+                sx={{
                   display: "none",
-                })}
-                onChange={(event) => {
+                }}
+                onChange={(event: any) => {
                   handleOnImport(
                     event.target.files,
                     ImportMode.ImportAndDuplicate
@@ -493,7 +488,7 @@ export const DataRoute: React.FC = () => {
         </Box>
         <Box height="400px">
           <Box display="flex" height="100%">
-            <Box className={css({ flexGrow: 1 })}>
+            <Box sx={{ flexGrow: 1 }}>
               <DataGrid
                 rows={filteredRows}
                 // showToolbar
