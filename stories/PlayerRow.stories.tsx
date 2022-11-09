@@ -42,9 +42,7 @@ function StorybookPlayerRow(props: {
       points={props.player.points}
       pointsLabel={"Points Label"}
       isMe={props.highlight}
-      onDiceRoll={action("onDiceRoll")}
       onStatusChange={action("onPlayedInTurnOrderChange")}
-      onPointsChange={action("onPointsChange")}
       onPlayerRemove={action("onPlayerRemove")}
       onTogglePrivate={action("onTogglePrivate")}
       onAssignCharacterSheet={action("onLoadCharacterSheet")}

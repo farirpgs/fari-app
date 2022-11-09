@@ -1,10 +1,10 @@
-import { SxProps } from "@mui/material";
+import { BoxProps } from "@mui/material/Box";
 import Typography, { TypographyProps } from "@mui/material/Typography";
 import React from "react";
 
 export const FateLabel: React.FC<
   {
-    sx?: SxProps;
+    sx?: BoxProps["sx"];
     underline?: boolean;
     textColor?: string;
     fontSize?: string | number;

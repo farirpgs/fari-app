@@ -179,7 +179,6 @@ export function BlockByType(props: {
           label={block.label}
           value={block.value}
           commands={block.meta.commands}
-          listResults={true}
           hideModifier={true}
           blockId={block.id}
           blockType={block.type}

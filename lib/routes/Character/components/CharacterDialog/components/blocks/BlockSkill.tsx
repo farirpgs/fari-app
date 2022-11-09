@@ -67,7 +67,6 @@ export const BlockSkill = React.memo(
             )}
           </>
         }
-        listResults={false}
       />
     );
   }
