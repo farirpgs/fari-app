@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -38,15 +37,12 @@ export function NavLink(props: {
           data-cy={props["data-cy"]}
           startIcon={props.startIcon}
           endIcon={props.endIcon}
-          classes={{
-            startIcon: css({ paddingLeft: "4px" }),
-          }}
-          className={css({
+          sx={{
             "textTransform": "none",
             "&:hover": {
               background: theme.palette.primary.light,
             },
-          })}
+          }}
         >
           {props.children}
         </Button>
@@ -61,10 +57,7 @@ export function NavLink(props: {
         data-cy={props["data-cy"]}
         startIcon={props.startIcon}
         endIcon={props.endIcon}
-        classes={{
-          startIcon: css({ paddingLeft: "4px" }),
-        }}
-        className={css({
+        sx={{
           "textTransform": "none",
           "background": props.highlight ? "#fff" : "",
           "color": props.highlight ? "#000" : "",
@@ -73,7 +66,7 @@ export function NavLink(props: {
               ? "#a6d4fa"
               : theme.palette.primary.light,
           },
-        })}
+        }}
       >
         {props.children}
       </Button>
@@ -125,12 +118,12 @@ export function NavLinkCategory(props: {
             onClick={handleOpenSubNav}
             color="inherit"
             data-cy={props["data-cy"]}
-            className={css({
+            sx={{
               "textTransform": "none",
               "&:hover": {
                 background: theme.palette.primary.light,
               },
-            })}
+            }}
             endIcon={<ExpandMoreIcon />}
           >
             <span>{props.label}</span>
@@ -154,9 +147,9 @@ export function NavLinkCategory(props: {
           onClose={handleCloseSubNav}
           anchorEl={anchorEl}
           TransitionProps={{ timeout: theme.transitions.duration.shortest }}
-          className={css({
+          sx={{
             marginTop: "1rem",
-          })}
+          }}
           anchorOrigin={{
             vertical: "bottom",
             horizontal: "left",
@@ -187,10 +180,10 @@ export function NavLinkCategory(props: {
                 <Typography
                   fontWeight="bold"
                   color="textSecondary"
-                  className={css({
+                  sx={{
                     fontSize: ".8rem",
                     textTransform: "uppercase",
-                  })}
+                  }}
                   variant="caption"
                 >
                   {category.label}
@@ -209,11 +202,11 @@ export function NavLinkCategory(props: {
                         <Grid item>
                           <Box
                             display="flex"
-                            className={css({
+                            sx={{
                               "& *": {
                                 color: theme.palette.secondary.main,
                               },
-                            })}
+                            }}
                           >
                             {link.icon}
                           </Box>
@@ -221,18 +214,19 @@ export function NavLinkCategory(props: {
                       )}
                       <Grid item>
                         <Tooltip title={link.tooltip ?? ""}>
-                          <div
-                            className={css({
+                          <Box
+                            sx={{
                               textAlign: "left",
-                            })}
+                            }}
                           >
                             {link.to && (
-                              <ReactRouterLink
+                              <Box
+                                component={ReactRouterLink}
                                 to={link.to}
                                 target={link.target}
                                 onClick={props.onAnyLinkClick}
                                 data-cy={link["data-cy"]}
-                                className={css({
+                                sx={{
                                   "color": theme.palette.secondary.main,
                                   "fontWeight": theme.typography.fontWeightBold,
                                   "fontSize": "1rem",
@@ -240,18 +234,19 @@ export function NavLinkCategory(props: {
                                   "&:hover": {
                                     textDecoration: "underline",
                                   },
-                                })}
+                                }}
                               >
                                 {link.label}
-                              </ReactRouterLink>
+                              </Box>
                             )}
                             {link.href && (
-                              <a
+                              <Box
+                                component="a"
                                 href={link.href}
                                 target={link.target}
                                 onClick={props.onAnyLinkClick}
                                 data-cy={link["data-cy"]}
-                                className={css({
+                                sx={{
                                   "color": theme.palette.secondary.main,
                                   "fontWeight": theme.typography.fontWeightBold,
                                   "fontSize": "1rem",
@@ -259,12 +254,12 @@ export function NavLinkCategory(props: {
                                   "&:hover": {
                                     textDecoration: "underline",
                                   },
-                                })}
+                                }}
                               >
                                 {link.label}
-                              </a>
+                              </Box>
                             )}
-                          </div>
+                          </Box>
                         </Tooltip>
                       </Grid>
                     </Grid>

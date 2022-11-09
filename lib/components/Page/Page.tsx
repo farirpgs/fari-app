@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import CasinoIcon from "@mui/icons-material/Casino";
 import ChatIcon from "@mui/icons-material/Chat";
@@ -28,10 +27,11 @@ import Hidden from "@mui/material/Hidden";
 import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import Select from "@mui/material/Select";
-import { SxProps, ThemeProvider, useTheme } from "@mui/material/styles";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import type { SxProps } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { env } from "../../constants/env";
@@ -148,10 +148,10 @@ export const Page: React.FC<{
       <Box
         // TODO: https://github.com/fariapp/fari/issues/212
         displayPrint="none"
-        className={css({
+        sx={{
           paddingTop: "1rem",
           borderTop: "1px solid #e0e0e0",
-        })}
+        }}
       >
         <CookieConsent />
 
@@ -231,12 +231,13 @@ export const Page: React.FC<{
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img
+                <Box
+                  component="img"
                   alt="Made By Fari RPGs"
-                  className={css({
+                  sx={{
                     width: "400px",
                     maxWidth: "100%",
-                  })}
+                  }}
                   src={
                     theme.palette.mode === "dark"
                       ? Images.madeByFariRPGsWhite
@@ -342,24 +343,24 @@ export const Page: React.FC<{
     return (
       <Box
         displayPrint="none"
-        className={css({
+        sx={{
           color: color,
           background: background,
           transition: theme.transitions.create(["color", "background"]),
-        })}
+        }}
       >
         <AppBar
           position="relative"
-          className={css({
+          sx={{
             color: "inherit",
             background: "inherit",
             boxShadow: "none",
             zIndex: zIndex.navBar,
-          })}
+          }}
         >
-          <Box className={css({ padding: ".5rem 2.5rem" })}>
+          <Box sx={{ padding: ".5rem 2.5rem" }}>
             <Toolbar
-              className={css({
+              sx={{
                 margin: "0 auto",
                 maxWidth: FariToolbarMaxWidth,
                 minHeight: "72px",
@@ -367,7 +368,7 @@ export const Page: React.FC<{
                 padding: "0",
                 position: "relative",
                 zIndex: zIndex.navBar,
-              })}
+              }}
             >
               <Box
                 sx={{
@@ -380,32 +381,33 @@ export const Page: React.FC<{
                 <NavLink to="/" data-cy="page.menu.home">
                   <Grid container wrap="nowrap" alignItems="center">
                     <Grid item sx={{ display: "flex" }}>
-                      <img
+                      <Box
+                        component="img"
                         alt="Fari"
-                        className={css({
+                        sx={{
                           height: "3.5rem",
                           cursor: "pointer",
-                        })}
+                        }}
                         src={Images.logoWhiteSvg}
                       />
                     </Grid>
                     <Grid item sx={{ display: "flex" }}>
                       <Typography
                         noWrap
-                        className={css({
+                        sx={{
                           color: "#fff",
                           whiteSpace: "nowrap",
                           fontSize: "1.1rem",
                           fontWeight: theme.typography.fontWeightBold,
-                        })}
+                        }}
                       >
                         Fari{" "}
                         <Typography
                           component="span"
-                          className={css({
+                          sx={{
                             fontSize: "1.1rem",
                             fontWeight: theme.typography.fontWeightRegular,
-                          })}
+                          }}
                         >
                           App
                         </Typography>
@@ -420,7 +422,7 @@ export const Page: React.FC<{
                 {!isLive && (
                   <IconButton
                     color="inherit"
-                    className={css({ padding: "0" })}
+                    sx={{ padding: "0" }}
                     onClick={() => {
                       setMenuOpen(true);
                     }}
@@ -432,10 +434,10 @@ export const Page: React.FC<{
               </Hidden>
               <Drawer
                 anchor="bottom"
-                classes={{
-                  paper: css({
+                sx={{
+                  "& .MuiPaper-root": {
                     maxHeight: "80vh",
-                  }),
+                  },
                 }}
                 open={menuOpen}
                 onClose={() => {
@@ -451,9 +453,9 @@ export const Page: React.FC<{
                 </Box>
               </Drawer>
               <Typography
-                className={css({
+                sx={{
                   flex: "1 1 auto",
-                })}
+                }}
               />
               <Hidden mdDown>
                 {!shouldDisplayRejoinButton && (
@@ -470,9 +472,9 @@ export const Page: React.FC<{
                       navigate(`/play/${gameId}`);
                     }}
                     variant={"outlined"}
-                    className={css({
+                    sx={{
                       minWidth: "10rem",
-                    })}
+                    }}
                   >
                     <Typography variant="button" noWrap>
                       Rejoin&nbsp;Game
@@ -488,9 +490,9 @@ export const Page: React.FC<{
   }
 
   function renderMenu(mobile: boolean) {
-    const itemClass = mobile
-      ? css({ textAlign: "center" })
-      : css({ flex: "0 1 auto" });
+    const itemClass: SxProps = mobile
+      ? { textAlign: "center !important" }
+      : { flex: "0 1 auto !important" };
 
     const smSize = 8;
     const xsSize = 12;
@@ -504,7 +506,7 @@ export const Page: React.FC<{
       >
         {!isLive && (
           <>
-            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+            <Grid item xs={xsSize} sm={smSize} sx={itemClass}>
               <NavLink
                 highlight
                 data-cy="page.menu.my-binder"
@@ -516,7 +518,7 @@ export const Page: React.FC<{
                 {t("menu.my-binder")}
               </NavLink>
             </Grid>
-            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+            <Grid item xs={xsSize} sm={smSize} sx={itemClass}>
               <NavLinkCategory
                 label={t("menu.tools")}
                 data-cy="page.menu.tools"
@@ -556,7 +558,7 @@ export const Page: React.FC<{
                 ]}
               />
             </Grid>
-            <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+            <Grid item xs={xsSize} sm={smSize} sx={itemClass}>
               <NavLinkCategory
                 label={t("menu.resources")}
                 subNav={[
@@ -626,7 +628,7 @@ export const Page: React.FC<{
           </>
         )}
 
-        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+        <Grid item xs={xsSize} sm={smSize} sx={itemClass}>
           <NavLinkCategory
             data-cy="page.menu.languages"
             tooltip={t("menu.languages")}
@@ -666,7 +668,7 @@ export const Page: React.FC<{
           </NavLinkCategory>
         </Grid>
 
-        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+        <Grid item xs={xsSize} sm={smSize} sx={itemClass}>
           <NavLink
             data-cy="page.use-theme-from-system-preferences"
             tooltip={t("menu.use-theme-from-system-preferences")}
@@ -677,7 +679,7 @@ export const Page: React.FC<{
             <ComputerIcon />
           </NavLink>
         </Grid>
-        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+        <Grid item xs={xsSize} sm={smSize} sx={itemClass}>
           <NavLink
             data-cy="page.toggle-dark-mode"
             tooltip={t("menu.toggle-theme")}
@@ -696,7 +698,7 @@ export const Page: React.FC<{
             )}
           </NavLink>
         </Grid>
-        <Grid item xs={xsSize} sm={smSize} className={itemClass}>
+        <Grid item xs={xsSize} sm={smSize} sx={itemClass}>
           <NavLink
             tooltip={t("menu.whats-new")}
             onClick={() => {

@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
@@ -29,6 +28,7 @@ import ListSubheader from "@mui/material/ListSubheader";
 import Paper from "@mui/material/Paper";
 import Snackbar from "@mui/material/Snackbar";
 import { darken, useTheme } from "@mui/material/styles";
+import type { SxProps } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
@@ -290,13 +290,13 @@ export function MyBinder<TFolders extends string>(props: {
         onClose={props.onClose}
         fullWidth
         maxWidth="md"
-        classes={{
-          paper: css({
+        sx={{
+          "& .MuiDialog-paper": {
             background: theme.palette.background.default,
             height: "100%",
             position: "relative",
             overflow: "auto",
-          }),
+          },
         }}
       >
         <Snackbar
@@ -369,7 +369,7 @@ export function MyBinder<TFolders extends string>(props: {
                   />
                 </Grid>
                 <Grid item>
-                  <SearchIcon className={css({ display: "flex" })} />
+                  <SearchIcon sx={{ display: "flex" }} />
                 </Grid>
               </Grid>
             </Box>
@@ -433,11 +433,12 @@ export function MyBinder<TFolders extends string>(props: {
                   primary={
                     <span>
                       {translatedFolderName}{" "}
-                      <span
-                        className={css({ color: theme.palette.text.secondary })}
+                      <Box
+                        component="span"
+                        sx={{ color: theme.palette.text.secondary }}
                       >
                         ({folderItemCount})
-                      </span>
+                      </Box>
                     </span>
                   }
                 />
@@ -480,13 +481,14 @@ export function MyBinder<TFolders extends string>(props: {
                   component="label"
                 >
                   {t("menu.elements.import")}
-                  <input
+                  <Box
+                    component="input"
                     type="file"
                     accept=".json"
-                    className={css({
+                    sx={{
                       display: "none",
-                    })}
-                    onChange={(event) => {
+                    }}
+                    onChange={(event: any) => {
                       handleOnImport(event);
                     }}
                   />
@@ -594,11 +596,11 @@ export function MyBinder<TFolders extends string>(props: {
                   </Box>
                   <Box>
                     <MenuBookIcon
-                      className={css({
+                      sx={{
                         color: theme.palette.text.secondary,
                         width: "5rem",
                         height: "5rem",
-                      })}
+                      }}
                     />
                   </Box>
                 </Box>
@@ -667,36 +669,38 @@ export function MyBinder<TFolders extends string>(props: {
   function renderHeader(title: string, length: number) {
     return (
       <ListSubheader
-        className={css({
+        sx={{
           padding: "0",
-        })}
+        }}
       >
         <Box
           px="1rem"
-          className={css({
+          sx={{
             background:
               theme.palette.mode === "light"
                 ? darken(theme.palette.background.default, 0.03)
                 : theme.palette.background.paper,
-          })}
+          }}
         >
           <Box>
-            <span
-              className={css({
+            <Box
+              component="span"
+              sx={{
                 fontWeight: theme.typography.fontWeightBold,
 
                 color: theme.palette.text.primary,
-              })}
+              }}
             >
               {title}{" "}
-            </span>
-            <span
-              className={css({
+            </Box>
+            <Box
+              component="span"
+              sx={{
                 color: theme.palette.text.secondary,
-              })}
+              }}
             >
               {`(${length})`}
-            </span>
+            </Box>
           </Box>
         </Box>
       </ListSubheader>
@@ -730,12 +734,12 @@ function Element(props: {
   const color = theme.palette.getContrastText(backgroundColor);
   const [hover, setHover] = useState(false);
 
-  const iconButtonClassName = css({
+  const iconButtonStyle: SxProps = {
     transition: theme.transitions.create(["color"], {
       duration: theme.transitions.duration.shortest,
     }),
     color: hover ? theme.palette.text.primary : theme.palette.text.secondary,
-  });
+  };
   const translatedType = props.displayType
     ? t(`my-binder.folder.${props.element.type}` as ITranslationKeys)
     : undefined;
@@ -748,7 +752,7 @@ function Element(props: {
             <IconButton
               size="small"
               data-cy={`my-binder.element.${props.element.name}.export`}
-              className={iconButtonClassName}
+              sx={iconButtonStyle}
               onPointerEnter={() => {
                 setHover(true);
               }}
@@ -769,7 +773,7 @@ function Element(props: {
             <IconButton
               size="small"
               data-cy={`my-binder.element.${props.element.name}.export-as-template`}
-              className={iconButtonClassName}
+              sx={iconButtonStyle}
               onPointerEnter={() => {
                 setHover(true);
               }}
@@ -790,7 +794,7 @@ function Element(props: {
             <IconButton
               size="small"
               data-cy={`my-binder.element.${props.element.name}.duplicate`}
-              className={iconButtonClassName}
+              sx={iconButtonStyle}
               onPointerEnter={() => {
                 setHover(true);
               }}
@@ -811,7 +815,7 @@ function Element(props: {
             <IconButton
               size="small"
               data-cy={`my-binder.element.${props.element.name}.delete`}
-              className={iconButtonClassName}
+              sx={iconButtonStyle}
               onPointerEnter={() => {
                 setHover(true);
               }}
@@ -861,10 +865,10 @@ function Element(props: {
     >
       <ListItemAvatar sx={{ display: { xs: "none", md: "block" } }}>
         <Avatar
-          className={css({
+          sx={{
             color: color,
             backgroundColor: backgroundColor,
-          })}
+          }}
         >
           {abrev}
         </Avatar>
@@ -881,9 +885,12 @@ function Element(props: {
           <>
             <Box component="span">
               {translatedType && <>{translatedType} - </>}
-              <span className={css({ color: theme.palette.text.secondary })}>
+              <Box
+                component="span"
+                sx={{ color: theme.palette.text.secondary }}
+              >
                 {listItem.formatDate(props.element.lastUpdated)}
-              </span>
+              </Box>
             </Box>
           </>
         }

@@ -28,10 +28,10 @@
     "@typescript-eslint/no-unused-vars": ["warn"],
     "no-restricted-imports": [
       "error",
-      {
-        "name": "@mui/material",
-        "message": "Use @mui/material/MyComponent instead"
-      },
+      // {
+      //   "name": "@mui/material",
+      //   "message": "Use @mui/material/MyComponent instead"
+      // },
       {
         "name": "@mui/lab",
         "message": "Use @mui/lab/MyComponent instead"

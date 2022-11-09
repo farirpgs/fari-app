@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import CloseIcon from "@mui/icons-material/Close";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
@@ -34,7 +33,6 @@ type IProps = {
 const buttonSize = "4rem";
 
 export const DiceFab: React.FC<IProps> = (props) => {
-  const zIndex = useZIndex();
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const open = Boolean(anchorEl);
   const { t } = useTranslate();
@@ -168,15 +166,15 @@ export function DiceFabButton(props: {
 
   return (
     <Box
-      className={css({
+      sx={{
         zIndex: zIndex.diceFab,
-      })}
+      }}
     >
       <Zoom in>
         <Box
-          className={css({
+          sx={{
             position: "relative",
-          })}
+          }}
         >
           <Fab
             variant="circular"
@@ -187,7 +185,7 @@ export function DiceFabButton(props: {
             onContextMenu={(e) => {
               e.preventDefault();
             }}
-            className={css({
+            sx={{
               backgroundColor: props.open
                 ? theme.palette.primary.light
                 : theme.palette.primary.main,
@@ -195,23 +193,23 @@ export function DiceFabButton(props: {
               height: buttonSize,
               marginRight: "6.3rem",
               zIndex: zIndex.diceFab,
-            })}
+            }}
           >
             {props.open ? (
               <CloseIcon
-                className={css({
+                sx={{
                   width: "90%",
                   height: "auto",
                   padding: ".5rem",
-                })}
+                }}
               />
             ) : (
               <Icons.FateDice
-                className={css({
+                sx={{
                   width: "100%",
                   height: "auto",
                   padding: ".5rem",
-                })}
+                }}
               />
             )}
           </Fab>
@@ -227,7 +225,7 @@ export function DiceFabButton(props: {
 
     return (
       <Box
-        className={css({
+        sx={{
           label: "DiceFabButton-fab",
           position: "absolute",
           bottom: "0",
@@ -252,15 +250,15 @@ export function DiceFabButton(props: {
             }
           ),
           maxWidth: hasPool ? "100vw" : "0",
-        })}
+        }}
       >
         <ButtonBase
-          className={css({
+          sx={{
             height: "100%",
             width: "100%",
             paddingLeft: "3rem",
             paddingRight: "1rem",
-          })}
+          }}
           onClick={props.onCtaClick}
           onContextMenu={(e) => {
             e.preventDefault();
@@ -280,13 +278,13 @@ export function DiceFabButton(props: {
               }}
             >
               <Typography
-                className={css({
+                sx={{
                   label: "DiceFabButton-label",
                   whiteSpace: "nowrap",
                   textTransform: "uppercase",
                   fontWeight: theme.typography.fontWeightBold,
                   paddingRight: ".5rem",
-                })}
+                }}
               >
                 {props.label}
               </Typography>

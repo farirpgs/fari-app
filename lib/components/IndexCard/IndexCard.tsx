@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ControlCameraIcon from "@mui/icons-material/ControlCamera";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -220,7 +219,7 @@ export const IndexCard: React.FC<
                           <Tooltip title={t("character-dialog.control.move")}>
                             <IconButton
                               size="small"
-                              className={css({
+                              sx={{
                                 position: "absolute",
                                 marginTop: ".5rem",
                                 marginLeft: ".25rem",
@@ -229,12 +228,12 @@ export const IndexCard: React.FC<
                                   !props.canMove || !props.isGM
                                     ? "none"
                                     : "block",
-                              })}
+                              }}
                             >
                               <DragIndicatorIcon
-                                className={css({
+                                sx={{
                                   transition: theme.transitions.create("color"),
-                                })}
+                                }}
                                 htmlColor={
                                   dndRenderProps.isOver
                                     ? paper.primary
@@ -258,7 +257,7 @@ export const IndexCard: React.FC<
                   <Box display="flex" height="100%" flexDirection="column">
                     <ThemeProvider theme={defaultButtonTheme}>
                       <Box
-                        className={css({
+                        sx={{
                           fontSize: "1.5rem",
                           width: "100%",
                           padding: "0.5rem 0",
@@ -267,7 +266,7 @@ export const IndexCard: React.FC<
                               ? "#f0a4a4"
                               : paper.primary
                           }`,
-                        })}
+                        }}
                       >
                         <Box px="1rem">
                           {renderHeader()}
@@ -288,12 +287,12 @@ export const IndexCard: React.FC<
                     item
                     xs={12}
                     lg={9}
-                    className={css({
+                    sx={{
                       background:
                         paper.type === "light"
                           ? darken(paper.bgColor, 0.1)
                           : lighten(paper.bgColor, 0.2),
-                    })}
+                    }}
                   >
                     {renderSubCards()}
                   </Grid>
@@ -611,16 +610,16 @@ export const IndexCard: React.FC<
                               >
                                 <IconButton
                                   size="small"
-                                  className={css({
+                                  sx={{
                                     cursor: "drag",
                                     display: "block",
-                                  })}
+                                  }}
                                 >
                                   <DragIndicatorIcon
-                                    className={css({
+                                    sx={{
                                       transition:
                                         theme.transitions.create("color"),
-                                    })}
+                                    }}
                                     htmlColor={
                                       dndRenderProps.isOver
                                         ? paper.primary
@@ -653,9 +652,9 @@ export const IndexCard: React.FC<
                                     variant="caption"
                                     color="inherit"
                                     data-cy={`index-card.${block.label}.duplicate`}
-                                    className={css({
+                                    sx={{
                                       label: "CharacterDialog-duplicate",
-                                    })}
+                                    }}
                                     onClick={() => {
                                       indexCardManager.actions.duplicateBlock(
                                         block
@@ -672,9 +671,9 @@ export const IndexCard: React.FC<
                                     variant="caption"
                                     color="inherit"
                                     data-cy={`index-card.${block.label}.remove`}
-                                    className={css({
+                                    sx={{
                                       label: "CharacterDialog-remove",
-                                    })}
+                                    }}
                                     onClick={() => {
                                       indexCardManager.actions.removeBlock(
                                         block
@@ -710,14 +709,14 @@ export const IndexCard: React.FC<
             <Typography
               noWrap
               variant="overline"
-              className={css({
+              sx={{
                 display: "flex",
                 width: "100%",
                 fontWeight: indexCardManager.state.indexCard.pinned
                   ? "bold"
                   : "inherit",
                 transition: theme.transitions.create("font-weight"),
-              })}
+              }}
             >
               <ContentEditable
                 dataCy={`${props["dataCy"]}.title-label`}
@@ -828,12 +827,12 @@ export const IndexCard: React.FC<
                         >
                           <ArrowForwardIosIcon
                             htmlColor={paper.primary}
-                            className={css({
+                            sx={{
                               transform: open
                                 ? "rotate(270deg)"
                                 : "rotate(90deg)",
                               transition: theme.transitions.create("transform"),
-                            })}
+                            }}
                           />
                         </IconButton>
                       </span>
@@ -861,12 +860,11 @@ export const IndexCard: React.FC<
             id={props.id}
             dataCy={`${props["dataCy"]}.title`}
             value={indexCardManager.state.indexCard.title}
-            className={css({
+            sx={{
               fontSize: "1.8rem",
               fontFamily: FontFamily.HandWriting,
               lineHeight: "normal",
-              // letterSpacing: "-.5px",
-            })}
+            }}
             onChange={(newTitle) => {
               indexCardManager.actions.setTitle(newTitle);
             }}
@@ -939,13 +937,13 @@ export function IndexCardColorPicker(props: {
                       }}
                     >
                       <Box
-                        className={css({
+                        sx={{
                           width: "1.5rem",
                           height: "1.5rem",
                           background: color,
                           borderRadius: "50%",
                           border: "1px solid #e0e0e0",
-                        })}
+                        }}
                       />
                     </IconButton>
                   </Grid>

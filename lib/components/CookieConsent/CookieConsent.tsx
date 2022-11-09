@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
@@ -30,10 +29,10 @@ export const CookieConsent: React.FC = () => {
         <>
           {t("cookie-consent.description")}{" "}
           <a
-            className={css({
+            style={{
               color: "inherit",
               textDecoration: "underline",
-            })}
+            }}
             href="https://www.iubenda.com/privacy-policy/97549620"
             target="_blank"
             rel="noreferrer"

@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -7,7 +6,6 @@ import React from "react";
 import { useZIndex } from "../../constants/zIndex";
 import { IDiceCommandId } from "../../domains/dice/Dice";
 import { useEvent } from "../../hooks/useEvent/useEvent";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { DiceButtons } from "../../routes/DiceRoute/components/DiceButtons";
 
 export function DiceMenu(props: {
@@ -24,7 +22,6 @@ export function DiceMenu(props: {
   onDiceCommandChange: React.Dispatch<React.SetStateAction<IDiceCommandId[]>>;
 }) {
   const zIndex = useZIndex();
-  const { t } = useTranslate();
 
   const handleDiceClick = useEvent((newCommand: IDiceCommandId) => {
     props.onDiceCommandChange((prevCommands) => {
@@ -68,11 +65,11 @@ export function DiceMenu(props: {
         transformOrigin={props.transformOrigin}
       >
         <Box
-          className={css({
+          sx={{
             padding: "0 1rem",
             maxWidth: "90vw",
             zIndex: zIndex.diceFab,
-          })}
+          }}
           onContextMenu={(e) => {
             e.preventDefault();
           }}
