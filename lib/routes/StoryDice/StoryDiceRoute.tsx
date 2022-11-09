@@ -1,5 +1,4 @@
-import { css, cx } from "@emotion/css";
-import Box from "@mui/material/Box";
+import Box, { BoxProps } from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ButtonBase from "@mui/material/ButtonBase";
 import Container from "@mui/material/Container";
@@ -121,12 +120,12 @@ export function StoryDie(props: {
   const Icon = icons[props.sideName];
   const showFinalResult = Icon && !rolling;
 
-  const diceRollingAnimationStyle = css({
+  const diceRollingAnimationStyle: BoxProps["sx"] = {
     animationName: "spin",
     animationDuration: "250ms",
     animationIterationCount: "infinite",
     animationTimingFunction: "linear",
-  });
+  };
 
   const firstUpdate = useRef(true);
 
@@ -161,41 +160,37 @@ export function StoryDie(props: {
       }}
     >
       <Box
-        className={cx(
-          css({
-            background: !showFinalResult
-              ? theme.palette.background.paper
-              : theme.palette.primary.main,
-            color: theme.palette.getContrastText(theme.palette.primary.main),
-            borderRadius: "4px",
-            padding: ".5rem",
-            border: `1px dashed ${theme.palette.primary.main}`,
-            cursor: "pointer",
-            boxShadow: theme.shadows[2],
-            transition: theme.transitions.create(["background"], {
-              duration: theme.transitions.duration.shortest,
-            }),
+        sx={{
+          background: !showFinalResult
+            ? theme.palette.background.paper
+            : theme.palette.primary.main,
+          color: theme.palette.getContrastText(theme.palette.primary.main),
+          borderRadius: "4px",
+          padding: ".5rem",
+          border: `1px dashed ${theme.palette.primary.main}`,
+          cursor: "pointer",
+          boxShadow: theme.shadows[2],
+          transition: theme.transitions.create(["background"], {
+            duration: theme.transitions.duration.shortest,
           }),
-          {
-            [diceRollingAnimationStyle]: rolling,
-          }
-        )}
+          ...(rolling && diceRollingAnimationStyle),
+        }}
       >
         {showFinalResult ? (
           <Icon
-            className={css({
+            sx={{
               display: "flex",
               width: "4rem",
               height: "4rem",
-            })}
+            }}
           />
         ) : (
           <Box
-            className={css({
+            sx={{
               display: "flex",
               width: "4rem",
               height: "4rem",
-            })}
+            }}
           />
         )}
       </Box>

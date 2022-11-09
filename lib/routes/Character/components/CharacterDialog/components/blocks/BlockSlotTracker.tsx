@@ -1,9 +1,8 @@
-import { css, cx } from "@emotion/css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CircleIcon from "@mui/icons-material/Circle";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import Box from "@mui/material/Box";
+import Box, { BoxProps } from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import Fade from "@mui/material/Fade";
 import Grid from "@mui/material/Grid";
@@ -27,7 +26,6 @@ import {
   IBlockComponentProps,
 } from "../../types/IBlockComponentProps";
 import { ThemedLabel } from "../ThemedLabel";
-
 export function BlockSlotTracker(
   props: IBlockComponentProps<ISlotTrackerBlock>
 ) {
@@ -143,11 +141,11 @@ export function BlockSlotTracker(
                 </Fade>
               )}
               {isLabelVisible && (
-                <Grid item className={css({ minWidth: "4rem" })}>
+                <Grid item sx={{ minWidth: "4rem" }}>
                   <ThemedLabel
-                    className={css({
+                    sx={{
                       textAlign: props.readonly ? "inherit" : "center",
-                    })}
+                    }}
                   >
                     <ContentEditable
                       dataCy={`${props.dataCy}.label`}
@@ -208,9 +206,9 @@ export function BlockSlotTracker(
             onClick={(slideIndex) => {
               handleToggleBox(slideIndex);
             }}
-            className={css({
+            sx={{
               width: "8rem",
-            })}
+            }}
           />
         </Grid>
       </Grid>
@@ -227,10 +225,10 @@ export function BlockSlotTracker(
           return (
             <Grid item key={boxIndex}>
               <Box
-                className={css({
+                sx={{
                   display: "flex",
                   justifyContent: "center",
-                })}
+                }}
               >
                 <Checkbox
                   data-cy={`${props.dataCy}.box.${boxIndex}.value`}
@@ -239,10 +237,10 @@ export function BlockSlotTracker(
                   checked={box.checked}
                   disabled={props.readonly}
                   color="default"
-                  className={css({
+                  sx={{
                     color: "inherit",
                     padding: "0",
-                  })}
+                  }}
                   onChange={() => {
                     handleToggleBox(boxIndex);
                   }}
@@ -250,7 +248,7 @@ export function BlockSlotTracker(
               </Box>
               {isBoxLabelVisible && (
                 <Box>
-                  <ThemedLabel className={css({ textAlign: "center" })}>
+                  <ThemedLabel sx={{ textAlign: "center" }}>
                     <ContentEditable
                       dataCy={`${props.dataCy}.box.${boxIndex}.label`}
                       readonly={props.readonly}
@@ -286,9 +284,9 @@ export function BlockSlotTrackerActions(
           component="button"
           variant="caption"
           underline="hover"
-          className={css({
+          sx={{
             color: theme.palette.primary.main,
-          })}
+          }}
           onClick={() => {
             props.onMetaChange((prev) => ({
               ...prev,
@@ -306,7 +304,7 @@ export function BlockSlotTrackerActions(
 }
 
 function Clock(props: {
-  className?: string;
+  sx?: BoxProps["sx"];
   slices: Array<boolean>;
   disabled?: boolean;
   onClick: (sliceIndex: number) => void;
@@ -320,31 +318,30 @@ function Clock(props: {
   const filledColor = true
     ? `url(#fari-slot-tracker-clock-pattern-${uuid})`
     : miniTheme.textPrimary;
-  const checkedSliceStyle = css({
+  const checkedSliceStyle: BoxProps["sx"] = {
     fill: filledColor,
     cursor: props.disabled ? "inherit" : "pointer",
     transition: theme.transitions.create(["fill"], { duration: "0.2s" }),
-  });
-  const sliceStyle = css({
+  };
+  const sliceStyle: BoxProps["sx"] = {
     cursor: props.disabled ? "inherit" : "pointer",
     transition: theme.transitions.create(["fill"], { duration: "0.2s" }),
-  });
+  };
 
   if (props.slices.length <= 0) {
     return null;
   }
 
   return (
-    <svg
+    <Box
+      component="svg"
       viewBox="0 0 110 110"
       id="pie"
-      className={cx(
-        css({
-          color: "inherit",
-          fill: "transparent",
-        }),
-        props.className
-      )}
+      sx={{
+        color: "inherit",
+        fill: "transparent",
+        ...props.sx,
+      }}
     >
       <defs>
         <pattern
@@ -367,14 +364,15 @@ function Clock(props: {
       </defs>
 
       {props.slices.length === 1 && (
-        <circle
+        <Box
+          component="circle"
           cx={circleCx}
           cy={circleCy}
           r={circleR}
           fill={props.slices[0] ? filledColor : "transparent"}
           stroke={miniTheme.textPrimary}
           strokeWidth="4px"
-          className={sliceStyle}
+          sx={sliceStyle}
           onClick={() => {
             if (props.disabled) {
               return;
@@ -410,10 +408,11 @@ function Clock(props: {
           const d = `M${circleCx},${circleCy} L${fromCoordX},${fromCoordY} A${circleR},${circleR} 0 0,1 ${toCoordX},${toCoordY}z`;
 
           return (
-            <path
+            <Box
+              component="path"
               d={d}
               key={i}
-              className={checked ? checkedSliceStyle : sliceStyle}
+              sx={checked ? checkedSliceStyle : sliceStyle}
               stroke={miniTheme.textPrimary}
               strokeWidth="4px"
               onClick={() => {
@@ -425,6 +424,6 @@ function Clock(props: {
             />
           );
         })}
-    </svg>
+    </Box>
   );
 }

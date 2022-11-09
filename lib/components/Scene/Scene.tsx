@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import SaveIcon from "@mui/icons-material/Save";
 import Masonry from "@mui/lab/Masonry";
@@ -6,7 +5,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
 import Alert from "@mui/material/Alert";
 import Autocomplete from "@mui/material/Autocomplete";
-import Box from "@mui/material/Box";
+import Box, { BoxProps } from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import FormControl from "@mui/material/FormControl";
@@ -16,6 +15,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
 import { useTheme } from "@mui/material/styles";
+
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import TextField from "@mui/material/TextField";
@@ -232,7 +232,7 @@ export function Scene(props: {
   }
 
   function renderSceneTabsAndContent() {
-    const tabPanelStyle = css({ padding: "0" });
+    const tabPanelStyle: BoxProps["sx"] = { padding: "0" };
 
     return (
       <Box>
@@ -276,19 +276,19 @@ export function Scene(props: {
                   overflowX: "auto",
                 }}
               >
-                <TabPanel value={"public"} className={tabPanelStyle}>
+                <TabPanel value={"public"} sx={tabPanelStyle}>
                   {renderIndexCardsForTab(
                     sceneManager.state.scene?.indexCards.public,
                     "public"
                   )}
                 </TabPanel>
-                <TabPanel value={"private"} className={tabPanelStyle}>
+                <TabPanel value={"private"} sx={tabPanelStyle}>
                   {renderIndexCardsForTab(
                     sceneManager.state.scene?.indexCards.private,
                     "private"
                   )}
                 </TabPanel>
-                <TabPanel value={"notes"} className={tabPanelStyle}>
+                <TabPanel value={"notes"} sx={tabPanelStyle}>
                   {renderSceneNotes()}
                 </TabPanel>
               </Box>
@@ -305,9 +305,9 @@ export function Scene(props: {
         <FateLabel
           variant="h4"
           uppercase={false}
-          className={css({
+          sx={{
             borderBottom: `1px solid ${theme.palette.divider}`,
-          })}
+          }}
         >
           <ContentEditable
             autoFocus
@@ -363,11 +363,11 @@ export function Scene(props: {
                       data-cy="scene.group"
                       inputProps={{
                         ...params.inputProps,
-                        className: css({ padding: "2px" }),
+                        sx: { padding: "2px" },
                       }}
-                      className={css({
+                      sx={{
                         borderBottom: `1px solid ${theme.palette.divider}`,
-                      })}
+                      }}
                     />
                   )}
                 />
@@ -420,9 +420,9 @@ export function Scene(props: {
           <Box py="6rem" textAlign="center">
             <Typography
               variant="h6"
-              className={css({
+              sx={{
                 fontWeight: theme.typography.fontWeightBold,
-              })}
+              }}
             >
               {t("play-route.no-aspects")}
             </Typography>
@@ -571,18 +571,14 @@ export function Scene(props: {
   }
 
   function renderSceneTabs() {
-    const tabClass = css({
+    const tabStyle: BoxProps["sx"] = {
       background: headerBackgroundColor,
       marginRight: ".5rem",
       color: `${headerColor} !important`,
-      // Pentagone
-      // https://bennettfeely.com/clippy/
-      // clipPath: "polygon(0 0, 90% 0, 100% 35%, 100% 100%, 0 100%)",
-    });
-    const tabLabelClass = css({
+    };
+    const tabLabelStyle: BoxProps["sx"] = {
       fontSize: ".8rem",
-      // width: "100%",
-    });
+    };
 
     return (
       <Box>
@@ -590,14 +586,14 @@ export function Scene(props: {
           // variant="scrollable"
           // scrollButtons="auto"
           value={sceneTab}
-          classes={{
-            flexContainer: css({
-              borderBottom: `1px solid ${headerBackgroundColor}`,
-            }),
-            indicator: css({
+          sx={{
+            "& .MuiTabs-indicator": {
               height: ".4rem",
               backgroundColor: theme.palette.secondary.main,
-            }),
+            },
+            "& .MuiTabs-flexContainer": {
+              borderBottom: `1px solid ${headerBackgroundColor}`,
+            },
           }}
           onChange={(e, newValue) => {
             setSceneTab(newValue);
@@ -608,12 +604,12 @@ export function Scene(props: {
             data-cy="scene.tabs.public"
             label={
               <>
-                <FateLabel className={tabLabelClass}>
+                <FateLabel sx={tabLabelStyle}>
                   {t("play-route.public")}
                 </FateLabel>
               </>
             }
-            className={tabClass}
+            sx={tabStyle}
           />
           {props.isGM && (
             <Tab
@@ -621,12 +617,12 @@ export function Scene(props: {
               data-cy="scene.tabs.private"
               label={
                 <>
-                  <FateLabel className={tabLabelClass}>
+                  <FateLabel sx={tabLabelStyle}>
                     {t("play-route.private")}
                   </FateLabel>
                 </>
               }
-              className={tabClass}
+              sx={tabStyle}
             />
           )}
           {props.isGM && (
@@ -635,12 +631,12 @@ export function Scene(props: {
               data-cy="scene.tabs.gm-notes"
               label={
                 <>
-                  <FateLabel className={tabLabelClass}>
+                  <FateLabel sx={tabLabelStyle}>
                     {t("play-route.gm-notes")}
                   </FateLabel>
                 </>
               }
-              className={tabClass}
+              sx={tabStyle}
             />
           )}
         </Tabs>
@@ -691,7 +687,7 @@ export function Scene(props: {
                 </Grid>
                 <Grid item>
                   <SplitButton
-                    dataCy="scene.add-card"
+                    data-cy="scene.add-card"
                     instant
                     color="secondary"
                     options={[

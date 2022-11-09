@@ -1,6 +1,5 @@
-import Box from "@mui/material/Box";
+import Box, { BoxProps } from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
-import type { SxProps } from "@mui/material";
 import DOMPurify, { Config } from "dompurify";
 import lowerCase from "lodash/lowerCase";
 import startCase from "lodash/startCase";
@@ -68,7 +67,7 @@ export const ContentEditablePreview: React.FC<IPreviewContentEditableOptions> =
 export const ContentEditable: React.FC<
   {
     value: string;
-    sx?: SxProps;
+    sx?: BoxProps["sx"];
     clickable?: boolean;
     onChange?: (value: string, event: FormEvent<HTMLSpanElement>) => void;
     onKeyDown?: React.KeyboardEventHandler<HTMLSpanElement>;

@@ -1,7 +1,8 @@
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
+import { BoxProps } from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import { SxProps, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import React, { useState } from "react";
@@ -12,13 +13,13 @@ export function TabbedScreen(props: {
     label: string;
     dataCy: string;
     render(): React.ReactNode;
-    sx?: SxProps;
+    sx?: BoxProps["sx"];
   }>;
 }) {
   const theme = useTheme();
   const [tab, setTab] = useState(props.tabs[0].value);
 
-  const tabSx: SxProps = {
+  const tabSx: BoxProps["sx"] = {
     textTransform: "none",
   };
 

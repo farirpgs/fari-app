@@ -17,7 +17,7 @@ import StorageIcon from "@mui/icons-material/Storage";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import TranslateIcon from "@mui/icons-material/Translate";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
+import Box, { BoxProps } from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Drawer from "@mui/material/Drawer";
@@ -31,7 +31,6 @@ import { ThemeProvider, useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import type { SxProps } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { env } from "../../constants/env";
@@ -72,7 +71,7 @@ export const Page: React.FC<{
   hideHeaderLogo?: boolean;
   hideFooter?: boolean;
   children?: React.ReactNode;
-  sx?: SxProps;
+  sx?: BoxProps["sx"];
 }> = (props) => {
   const navigate = useNavigate();
   const theme = useTheme();
@@ -490,7 +489,7 @@ export const Page: React.FC<{
   }
 
   function renderMenu(mobile: boolean) {
-    const itemClass: SxProps = mobile
+    const itemClass: BoxProps["sx"] = mobile
       ? { textAlign: "center !important" }
       : { flex: "0 1 auto !important" };
 

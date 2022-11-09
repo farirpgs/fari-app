@@ -8,7 +8,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShareIcon from "@mui/icons-material/Share";
 import Alert from "@mui/material/Alert";
 import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
+import Box, { BoxProps } from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -28,7 +28,6 @@ import ListSubheader from "@mui/material/ListSubheader";
 import Paper from "@mui/material/Paper";
 import Snackbar from "@mui/material/Snackbar";
 import { darken, useTheme } from "@mui/material/styles";
-import type { SxProps } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
@@ -734,7 +733,7 @@ function Element(props: {
   const color = theme.palette.getContrastText(backgroundColor);
   const [hover, setHover] = useState(false);
 
-  const iconButtonStyle: SxProps = {
+  const iconButtonStyle: BoxProps["sx"] = {
     transition: theme.transitions.create(["color"], {
       duration: theme.transitions.duration.shortest,
     }),
