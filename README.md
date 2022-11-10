@@ -3,8 +3,6 @@
 - floating message bar doesnt clear message on enter
 - chat input text doesnt handle LONG text
 - pressing up in chat torepeat last slash command(s)?
-- confettis don't work
-- oracle doesnt load
 
 # [Fari](https://fari.app) - The Free and Open-Source Virtual Tabletop
 

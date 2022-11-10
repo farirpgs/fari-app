@@ -72,9 +72,10 @@ export const AppLink: React.FC<
   );
 };
 
-export const AppButtonLink: React.FC<ReactRouterLinkProps & ButtonProps> = (
-  props
-) => {
+export const AppButtonLink = React.forwardRef<
+  any,
+  ReactRouterLinkProps & ButtonProps
+>((props, ref) => {
   const isInternal = (props.to as string).startsWith("/");
 
   if (isInternal) {
@@ -82,8 +83,8 @@ export const AppButtonLink: React.FC<ReactRouterLinkProps & ButtonProps> = (
       <Button
         to={props.to}
         component={ReactRouterLink}
+        ref={ref}
         rel={props.target === "_blank" ? "noreferrer" : undefined}
-        // {...rest}
       >
         {props.children}
       </Button>
@@ -94,13 +95,13 @@ export const AppButtonLink: React.FC<ReactRouterLinkProps & ButtonProps> = (
     <Button
       href={props.to as string}
       component={"a"}
+      ref={ref}
       rel={props.target === "_blank" ? "noreferrer" : undefined}
-      // {...rest}
     >
       {props.children}
     </Button>
   );
-};
+});
 
 export const MUILink = MaterialUILink;
 export const RouterLink = ReactRouterLink;
