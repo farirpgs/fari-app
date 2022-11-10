@@ -48,8 +48,12 @@ export const PlayersPresence = React.forwardRef(
 
     useEffect(() => {
       function onKeyUp(e: KeyboardEvent) {
+        const hasADialogOpened = !!document.querySelector(
+          ".MuiDialog-container"
+        );
+
         if (e.key === "Escape") {
-          if (cursorState.mode === PlayCursorMode.Hidden) {
+          if (cursorState.mode === PlayCursorMode.Hidden && !hasADialogOpened) {
             handleOpenChat();
           } else {
             handleCloseChat();
