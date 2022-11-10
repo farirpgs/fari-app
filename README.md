@@ -1,9 +1,5 @@
 # TODO
 
-- floating message bar doesnt clear message on enter
-- chat input text doesnt handle LONG text
-- pressing up in chat torepeat last slash command(s)?
-
 # [Fari](https://fari.app) - The Free and Open-Source Virtual Tabletop
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
