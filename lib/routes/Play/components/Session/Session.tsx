@@ -18,6 +18,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Fade from "@mui/material/Fade";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
+import Snackbar from "@mui/material/Snackbar";
 import { darken, useTheme } from "@mui/material/styles";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -66,8 +67,11 @@ import {
   IMessage,
   IMessageToSend,
   MessageType,
+  RollMessage,
+  RollMessageValue,
   useChat,
 } from "../Chat/useChat";
+import { DiceRollerMessage } from "../DiceRollMessage/DiceRollMessage";
 import { useSession, useSessionCharacterSheets } from "./useSession";
 
 export function Session(props: {
@@ -111,7 +115,9 @@ export function Session(props: {
 
   const [streamerModalOpen, setStreamerModalOpen] = useState(false);
   const [shareLinkToolTip, setShareLinkToolTip] = useState({ open: false });
-
+  const [rollMessage, setRollMessage] = useState<RollMessageValue>();
+  const [rollSnackVisible, setRollSnackVisible] = useState(false);
+  const rollSnackTimeoutRef = useRef<any>();
   const $shareLinkInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -218,11 +224,13 @@ export function Session(props: {
   };
 
   const handleSetMyRoll = (result: IDicePoolResult) => {
+    const rollMessage = RollMessage.fromDicePoolResult(result);
     const message: IMessage = {
       type: MessageType.Roll,
       fromUserId: userId,
-      value: chatManager.utils.convertDicePoolResultToMessageValue(result),
+      value: rollMessage,
     };
+    handleRollMessageSnackOpen(rollMessage);
     if (isGM) {
       chatManager.actions.sendMessage(message);
     } else {
@@ -236,12 +244,13 @@ export function Session(props: {
     playerId: string | undefined,
     result: IDicePoolResult
   ) => {
+    const rollMessage = RollMessage.fromDicePoolResult(result);
     const message: IMessage = {
       type: MessageType.Roll,
       fromUserId: playerId || userId,
-      value: chatManager.utils.convertDicePoolResultToMessageValue(result),
+      value: rollMessage,
     };
-
+    handleRollMessageSnackOpen(rollMessage);
     if (isGM) {
       chatManager.actions.sendMessage(message);
     } else {
@@ -271,8 +280,42 @@ export function Session(props: {
     chatManager.actions.readAll();
   });
 
+  const handleRollMessageSnackOpen = useEvent((message: RollMessageValue) => {
+    clearTimeout(rollSnackTimeoutRef.current);
+    setRollMessage(message);
+    setRollSnackVisible(true);
+    rollSnackTimeoutRef.current = setTimeout(() => {
+      setRollSnackVisible(false);
+    }, 5000);
+  });
+
+  const handleRollMessageSnackClose = useEvent(
+    (event: React.SyntheticEvent | Event, reason?: string) => {
+      if (reason === "clickaway") {
+        return;
+      }
+      setRollSnackVisible(false);
+    }
+  );
+
   return (
     <Page isLive gameId={props.idFromParams} maxWidth="none" hideFooter>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        open={rollSnackVisible}
+        onClose={handleRollMessageSnackClose}
+        sx={{
+          "& .MuiPaper-root": {
+            width: "100%",
+            display: "block",
+          },
+        }}
+        message={
+          <>
+            <DiceRollerMessage dark message={rollMessage} />
+          </>
+        }
+      />
       <Box
         sx={{
           padding: "2rem",

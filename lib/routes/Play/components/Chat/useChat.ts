@@ -13,10 +13,11 @@ export type ITextMessage = {
   value: string;
 };
 
-type RollMessageValue = {
+export type RollMessageValue = {
   text: string;
   total: string;
   label: string | undefined;
+  command?: string;
 };
 
 export type IRollMessage = {
@@ -66,40 +67,40 @@ export function useChat() {
   return {
     state: { chat, messageCount, unreadCount: unreadCountVisible },
     actions: { sendMessage, overrideChat, readAll },
-    utils: {
-      convertDicePoolResultToMessageValue(
-        result: IDicePoolResult
-      ): RollMessageValue {
-        let text = result.commandResults.reduce((acc, commandResult) => {
-          return `${acc ? `${acc} ` : acc}${commandResult.command} [${
-            commandResult.value
-          }]`;
-        }, "");
-
-        const hasModifier =
-          result.modifier !== null &&
-          result.modifier !== undefined &&
-          result.modifier !== 0;
-        if (hasModifier) {
-          text += ` + ${result.modifier}`;
-        }
-
-        const total = CommandResult.getTotal(result.commandResults);
-        const highest = CommandResult.getHighest(result.commandResults);
-        const lowest = CommandResult.getLowest(result.commandResults);
-        const totalWithModifier = total + (result.modifier || 0);
-
-        if (!hasModifier) {
-          text += `\nHighest: ${highest}`;
-          text += `\nLowest: ${lowest}`;
-        }
-
-        return {
-          text: text,
-          total: totalWithModifier.toString(),
-          label: result.label,
-        };
-      },
-    },
   };
 }
+
+export const RollMessage = {
+  fromDicePoolResult(result: IDicePoolResult): RollMessageValue {
+    let text = result.commandResults.reduce((acc, commandResult) => {
+      return `${acc ? `${acc} ` : acc}${commandResult.command} [${
+        commandResult.value
+      }]`;
+    }, "");
+
+    const hasModifier =
+      result.modifier !== null &&
+      result.modifier !== undefined &&
+      result.modifier !== 0;
+    if (hasModifier) {
+      text += ` + ${result.modifier}`;
+    }
+
+    const total = CommandResult.getTotal(result.commandResults);
+    const highest = CommandResult.getHighest(result.commandResults);
+    const lowest = CommandResult.getLowest(result.commandResults);
+    const totalWithModifier = total + (result.modifier || 0);
+
+    if (!hasModifier) {
+      text += `\nHighest: ${highest}`;
+      text += `\nLowest: ${lowest}`;
+    }
+
+    return {
+      text: text,
+      total: totalWithModifier.toString(),
+      label: result.label,
+      command: undefined,
+    };
+  },
+};

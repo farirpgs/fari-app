@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
 import { Delays } from "../../../../constants/Delays";
-import { FontFamily } from "../../../../constants/FontFamily";
 import { useZIndex } from "../../../../constants/zIndex";
 import { ChatMessageParser } from "../../../../domains/chat/ChatMessageParser";
 import { ThemedLabel } from "../../../Character/components/CharacterDialog/components/ThemedLabel";
@@ -16,6 +15,7 @@ import {
 import { DefaultPlayerColor } from "../../consts/PlayerColors";
 import { IPlayerCursorRollOutput } from "../../types/IPlayerCursorState";
 import { IMessageToSend, IRollMessage, MessageType } from "../Chat/useChat";
+import { DiceRollerMessage } from "../DiceRollMessage/DiceRollMessage";
 
 let topTenLatestRollCommandsSingleton: Array<string> = [];
 let openCount = -1;
@@ -268,49 +268,21 @@ export default function CursorWithMessage(props: {
         <Box>
           {props.rollOutput && (
             <Box
-              py=".5rem"
               sx={{
                 padding: ".5rem",
                 marginTop: ".5rem",
                 background: "#fff",
-                fontSize: "1.5rem",
-                fontFamily: FontFamily.Console,
-                display: "flex",
-                flexDirection: "column",
               }}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: "2rem",
-                    color: "#000",
-                  }}
-                  variant="caption"
-                >
-                  {props.rollOutput?.total}
-                </Typography>
-              </Box>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <Typography
-                  sx={{
-                    color: "#000",
-                  }}
-                  variant="caption"
-                >
-                  {props.rollOutput?.text}
-                </Typography>
-              </Box>
+              <DiceRollerMessage
+                message={
+                  props.rollOutput && {
+                    label: "",
+                    text: props.rollOutput.text,
+                    total: props.rollOutput.total,
+                  }
+                }
+              />
             </Box>
           )}
         </Box>

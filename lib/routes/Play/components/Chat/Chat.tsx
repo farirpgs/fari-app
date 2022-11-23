@@ -7,7 +7,8 @@ import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 import { ChatMessageParser } from "../../../../domains/chat/ChatMessageParser";
 import { useEvent } from "../../../../hooks/useEvent/useEvent";
-import { IMessageToSend, MessageType, useChat } from "./useChat";
+import { DiceRollerMessage } from "../DiceRollMessage/DiceRollMessage";
+import { IMessageToSend, IRollMessage, MessageType, useChat } from "./useChat";
 
 export function Chat(props: {
   chatManager: ReturnType<typeof useChat>;
@@ -20,13 +21,57 @@ export function Chat(props: {
   const theme = useTheme();
   const $chatScrollBoxRef = React.useRef<HTMLDivElement>(null);
 
+  const [chatValueForced, setChatValueForced] = useState("");
+  const [commandToPopIndex, setCommandtoPopIndex] = React.useState(-1);
+  const myCommandHistory = props.chatManager.state.chat.messages
+    .filter((e) => {
+      return e.type === MessageType.Roll && e.fromUserId === props.userId;
+    })
+    .reverse() as Array<IRollMessage>;
+
   const handleOnMessage = useEvent((messageString) => {
     const message = ChatMessageParser.parse({
       message: messageString,
     });
+    setCommandtoPopIndex(-1);
     if (message) {
       props.onMessageSubmit(message);
     }
+  });
+
+  const handleRollHistoryPrevious = useEvent(() => {
+    const newIndex = Math.min(
+      commandToPopIndex + 1,
+      myCommandHistory.length - 1
+    );
+    const poppedCommand = myCommandHistory[newIndex] as IRollMessage;
+    if (poppedCommand) {
+      const commandText = poppedCommand.value.command;
+      if (commandText) {
+        setChatValueForced?.(`/roll ${commandText}`);
+      } else {
+        setChatValueForced?.("");
+      }
+    } else {
+      setChatValueForced?.("");
+    }
+    setCommandtoPopIndex(newIndex);
+  });
+
+  const handleRollHistoryNext = useEvent(() => {
+    const newIndex = Math.max(commandToPopIndex - 1, -1);
+    const poppedCommand = myCommandHistory[newIndex] as IRollMessage;
+    if (poppedCommand) {
+      const commandText = poppedCommand.value.command;
+      if (commandText) {
+        setChatValueForced?.(`/roll ${commandText}`);
+      } else {
+        setChatValueForced?.("");
+      }
+    } else {
+      setChatValueForced?.("");
+    }
+    setCommandtoPopIndex(newIndex);
   });
 
   useEffect(() => {
@@ -49,7 +94,6 @@ export function Chat(props: {
         position: "relative",
       }}
     >
-      <Box />
       <Box
         ref={$chatScrollBoxRef}
         sx={{
@@ -73,7 +117,8 @@ export function Chat(props: {
             <Box
               key={i}
               sx={{
-                alignSelf: isMe ? "flex-end" : "flex-start",
+                marginLeft: isMe ? "auto" : undefined,
+                marginRight: !isMe ? "auto" : undefined,
                 maxWidth: "70%",
                 marginBottom: ".25rem",
               }}
@@ -99,45 +144,8 @@ export function Chat(props: {
                   </Typography>
                 )}
                 {message.type === MessageType.Roll && (
-                  <Box sx={{}}>
-                    {message.value.label && (
-                      <Box>
-                        <Typography
-                          component={"div"}
-                          variant="caption"
-                          fontWeight="bold"
-                          textAlign={"center"}
-                        >
-                          {message.value.label}
-                        </Typography>
-                      </Box>
-                    )}
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          fontSize: "2rem",
-                        }}
-                        variant="caption"
-                      >
-                        {message.value.total}
-                      </Typography>
-                    </Box>
-
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Typography variant="caption">
-                        {message.value.text}
-                      </Typography>
-                    </Box>
+                  <Box>
+                    <DiceRollerMessage dark message={message.value} />
                   </Box>
                 )}
               </Box>
@@ -163,16 +171,36 @@ export function Chat(props: {
           background: "#efefef",
         }}
       >
-        <ChatMessageInput onMessageStringSubmit={handleOnMessage} />
+        <ChatMessageInput
+          value={chatValueForced}
+          onMessageStringSubmit={handleOnMessage}
+          onKeyDown={(e) => {
+            if (e.key === "ArrowUp") {
+              e.preventDefault();
+              e.stopPropagation();
+              handleRollHistoryPrevious();
+            } else if (e.key === "ArrowDown") {
+              e.preventDefault();
+              e.stopPropagation();
+              handleRollHistoryNext();
+            }
+          }}
+        />
       </Box>
     </Box>
   );
 }
 
 function ChatMessageInput(props: {
-  onMessageStringSubmit: (messageString: string) => void;
+  value: string;
+  onMessageStringSubmit(messageString: string): void;
+  onKeyDown?(event: React.KeyboardEvent<HTMLDivElement>): void;
 }) {
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setValue(props.value);
+  }, [props.value]);
 
   return (
     <form
@@ -197,10 +225,7 @@ function ChatMessageInput(props: {
             </IconButton>
           ),
         }}
-        onKeyDown={(e) => {
-          e.stopPropagation();
-          // e.preventDefault();
-        }}
+        onKeyDown={props.onKeyDown}
         placeholder="Message"
         fullWidth
         variant="standard"

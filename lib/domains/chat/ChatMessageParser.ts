@@ -26,6 +26,7 @@ export const ChatMessageParser = {
             text: diceRoll.output,
             total: diceRoll.total.toString(),
             label: command,
+            command,
           },
         };
       }
