@@ -23,17 +23,24 @@ export function Chat(props: {
 
   const [chatValueForced, setChatValueForced] = useState("");
   const [commandToPopIndex, setCommandtoPopIndex] = React.useState(-1);
-  const myCommandHistory = props.chatManager.state.chat.messages
+  const commandHistory = props.chatManager.state.chat.messages
     .filter((e) => {
-      return e.type === MessageType.Roll && e.fromUserId === props.userId;
+      const isRollCommand = e.type === MessageType.Roll && !!e.value.command;
+      const isFromMe = e.fromUserId === props.userId;
+      return isRollCommand && isFromMe;
     })
     .reverse() as Array<IRollMessage>;
+  const uniqueCommandHistory = commandHistory.filter(
+    (current, index, self) =>
+      self.findIndex((t) => t.value.command === current.value.command) === index
+  );
 
   const handleOnMessage = useEvent((messageString) => {
     const message = ChatMessageParser.parse({
       message: messageString,
     });
     setCommandtoPopIndex(-1);
+    setChatValueForced("");
     if (message) {
       props.onMessageSubmit(message);
     }
@@ -42,9 +49,10 @@ export function Chat(props: {
   const handleRollHistoryPrevious = useEvent(() => {
     const newIndex = Math.min(
       commandToPopIndex + 1,
-      myCommandHistory.length - 1
+      uniqueCommandHistory.length - 1
     );
-    const poppedCommand = myCommandHistory[newIndex] as IRollMessage;
+    const poppedCommand = uniqueCommandHistory[newIndex] as IRollMessage;
+
     if (poppedCommand) {
       const commandText = poppedCommand.value.command;
       if (commandText) {
@@ -60,7 +68,7 @@ export function Chat(props: {
 
   const handleRollHistoryNext = useEvent(() => {
     const newIndex = Math.max(commandToPopIndex - 1, -1);
-    const poppedCommand = myCommandHistory[newIndex] as IRollMessage;
+    const poppedCommand = uniqueCommandHistory[newIndex] as IRollMessage;
     if (poppedCommand) {
       const commandText = poppedCommand.value.command;
       if (commandText) {
