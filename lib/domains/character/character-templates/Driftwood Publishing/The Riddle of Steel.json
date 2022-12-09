@@ -1,0 +1,3517 @@
+{
+  "fariType": "character",
+  "id": "6ef26a02-d064-48bb-a8c6-88c89caca9e4",
+  "lastUpdated": 1670511834,
+  "name": "The Riddle of Steel Character Sheet",
+  "pages": [
+    {
+      "id": "9dfd9b3d-3138-4db3-aaf5-c5544795c21e",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "07c8828c-fe3c-48d2-82ce-f7be5f894ccc",
+                  "label": "Persona",
+                  "blocks": [
+                    {
+                      "id": "30200320-8b00-48ea-a0bd-eaeb979708cb",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8e15974c-987a-4804-b44b-8b3b644fb1e9",
+                      "label": "Concept",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a326871b-13ba-448e-a27f-6cc7f4788a43",
+                      "label": "Philosophy",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "c7bc259b-009a-44c0-b3ef-bde7b2d4a3f9",
+                  "label": "Description",
+                  "blocks": [
+                    {
+                      "id": "f3abb2ab-d239-40d9-ae81-53a85d873834",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "213c9377-09ac-4134-b28f-482d3a2c6531",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "140541b1-4e1c-4e29-916b-e54ff398d86b",
+                      "label": "Magic",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "f8358c81-ee64-4aa1-ab49-be51a4eac9b4",
+                      "label": "Class",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "93222fee-64d2-43af-a2fd-89b405932064",
+                  "label": "Priorities",
+                  "blocks": [
+                    {
+                      "id": "cc4f58c3-ed16-4e47-a14e-f202e7e1d723",
+                      "label": "Attrib",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "317055da-013e-4502-9704-256da56160db",
+                      "label": "Skills",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "9a324017-d401-4ff8-99f0-e821863713c7",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "470e5e3b-430c-4dfa-bd93-2c80ddd20dda",
+                      "label": "Prof/Vgr",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "520b5993-d918-4842-80a0-f6c4c10d8e66",
+                      "label": "G&amp;F",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "57cb3e8f-7a19-41a4-876f-578ad0e408c8",
+                  "label": "Homeland",
+                  "blocks": [
+                    {
+                      "id": "66397285-729f-4652-86d5-2aaff16b91c5",
+                      "label": "Culture",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9b809010-44e0-4e78-9505-838e360fa458",
+                      "label": "Religion",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a1fc58b8-8a03-47de-9874-e2d6250ed3e5",
+                      "label": "Gender",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ae599c8e-b19e-44a7-a7d0-5a66631371c4",
+                      "label": "Social Class",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "362f26c8-955f-4533-9f23-1617723c54d5",
+                  "label": "Vitals",
+                  "blocks": [
+                    {
+                      "id": "daae8a36-1def-4207-9880-25e0df9fff9e",
+                      "label": "Birth Year/Real Age",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e2de990c-951e-43d8-9532-ad50a2891584",
+                      "label": "Height",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "9dd44846-dd21-422a-9a99-05848afedac5",
+                      "label": "Weight",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                },
+                {
+                  "id": "30fd6a5b-1147-4894-8ce0-185169a9faa3",
+                  "label": "Relationships",
+                  "blocks": [
+                    {
+                      "id": "85430ff8-75d4-422d-8748-f59d9fc176f1",
+                      "label": "Family",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d10dc286-487a-4471-ab99-9475ff0245ec",
+                      "label": "Friends &amp; Enemies",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4700e44d-c49e-40eb-8f41-fedcbaa0d257",
+                      "label": "Patrons &amp; Clients",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "56087506-c738-4c71-b892-567515a1df66",
+                      "label": "Other",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8b9bda9f-f53e-45ca-8451-3a4c2584830d",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "231f8736-80ab-4898-99cf-43a15af18b97",
+                  "label": "Spiritual Attributes",
+                  "blocks": [
+                    {
+                      "id": "66392a27-55e7-406c-9282-33f3fdcbf9f1",
+                      "label": "Type",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66, "helperText": "" }
+                    },
+                    {
+                      "id": "a6bdde26-29db-4aad-8fa5-a5fa07fb3249",
+                      "label": "Points",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "width": 0.33,
+                        "helperText": ""
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "784a3142-fe8d-44f8-988b-d48ae029d3fc",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66, "helperText": "<br><br>" }
+                    },
+                    {
+                      "id": "c4666ff2-534f-468a-af35-0cc660325292",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "22fdddd5-27c0-4cf6-979e-2751cafffab9",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66, "helperText": "<br><br>" }
+                    },
+                    {
+                      "id": "f7769a53-c058-47a7-add0-9e056f9e6e43",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "fbb8b5fc-b5c8-439a-944f-a5a6e07da27f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66, "helperText": "<br><br>" }
+                    },
+                    {
+                      "id": "be0a089a-03ee-4a2d-86e8-bec2c15c8e36",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "171386c9-6fc2-4b44-9c77-8b8002473c63",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66, "helperText": "<br><br>" }
+                    },
+                    {
+                      "id": "991881a4-3eb8-4401-abd8-bd8619207381",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "10d98f27-a261-44f1-b7a1-13a4947d956f",
+                      "label": "Hover to Add Dice",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": ["1d10"], "width": 0.33 }
+                    },
+                    {
+                      "id": "bf71fa79-ddee-479f-83c9-6590ff3189e1",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "width": 0.33,
+                        "hideDivider": true
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "e1fba0ef-a3ff-4358-ae84-ad9ce672c8a7",
+                      "label": "Insight",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c364b865-3420-411e-83c6-895350250655",
+                  "label": "Temporal",
+                  "blocks": [
+                    {
+                      "id": "535a4169-de93-47a1-9c31-d27023a07f7d",
+                      "label": "Strength",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "59639fd6-ab5e-4076-b791-a8fe92297c8f",
+                      "label": "Agility",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "aa8bdd22-aee8-4945-a78d-f4916bedbb32",
+                      "label": "Toughness",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "8893fc60-0d91-46e1-b21a-29ce78e3f3a9",
+                      "label": "Endurance",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "e68940f4-3bee-4e40-888d-0d2b8dd8f16c",
+                      "label": "Health",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "f3d5897e-7551-4723-9353-a6072fd50ff8",
+                  "label": "Mental",
+                  "blocks": [
+                    {
+                      "id": "859ded90-11ee-4520-9f31-0559a92b34f5",
+                      "label": "Willpower",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "ac64aae5-1870-4544-bd23-e2c396d2d27a",
+                      "label": "Wit",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "ff191300-9d6a-4c1c-a1f6-b7cd25a998bb",
+                      "label": "Mental Aptitude",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "30d4b7f1-70b0-4e23-bf14-24007abdd329",
+                      "label": "Social",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "2ebef1e9-b14e-4d8f-98ad-0db95aa7fa55",
+                      "label": "Perception",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "f7163874-c79d-4b56-aab0-8748b853f421",
+                  "label": "Derived",
+                  "blocks": [
+                    {
+                      "id": "8377a0ac-6824-4724-a85f-32b7d9f890ed",
+                      "label": "Reflex",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "df57de59-fd75-48c6-849e-a238594795e6",
+                      "label": "Aim",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "f9682987-ccd1-4447-baaa-8ee23eb8223e",
+                      "label": "Knockdown",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "f874a6d1-7690-42af-9051-523910e16093",
+                      "label": "Knockout",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "742f5f00-77c6-40c1-9951-c9174b12bc94",
+                      "label": "Move",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "b572ab34-b209-4649-ba79-8dcdf5375ced",
+                  "label": "Sorcery",
+                  "blocks": [
+                    {
+                      "id": "73e16dca-d156-43a4-9a27-6172ce424450",
+                      "label": "Kaa",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "d847da65-6b1e-4a13-805c-8923287cf0d8",
+                      "label": "Form",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "4aeadeae-4028-48e5-8996-fa1a67cba908",
+                      "label": "Art",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 1 }
+                    },
+                    {
+                      "id": "4568a2be-b1f6-4b30-8e70-f12100c5f1ba",
+                      "label": "Discipline",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 1 }
+                    },
+                    {
+                      "id": "e4592a48-4d5e-4ea9-9691-1fe1f2602840",
+                      "label": "Draw",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "ae53ec49-56ba-4ceb-bcc9-2e120d9a862e",
+                  "label": "Proficiencies",
+                  "blocks": [
+                    {
+                      "id": "a4e8f7f6-f480-4c91-8dbb-a57007c56ecc",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "a79e6585-2c5c-4138-8dad-60161679c56d",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "a40d4c1e-55a1-4444-8342-52f6d21cd177",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "96d1e068-6b5c-44b1-8535-6fe14fd3aec2",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "02ede689-bca1-4b04-ad7d-d187f37f5f81",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "a7c67861-f8f5-4ed8-9676-3542236f91e3",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "0f5951fd-3394-417e-9cce-37412b5ec50a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "9e95214d-6ee3-4def-87f0-38a6489d7412",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "1d9a2753-e466-42d8-9b32-a8017f23264f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "580c87c3-a76d-4aaf-89ce-8682d5095a20",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "2c8cd3d6-4b87-4768-9dc6-9ee626971267",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "7f1279d3-8750-42f5-a516-772c206dfc88",
+                      "label": "Summon",
+                      "type": "SlotTracker",
+                      "meta": { "width": 1, "asClock": false },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "2a172dd3-a01c-4050-bc95-e4e7e651af07",
+                      "label": "Sculpture",
+                      "type": "SlotTracker",
+                      "meta": { "width": 1, "asClock": false },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "951714a2-7c30-4ba4-a934-dfeda9e987da",
+                      "label": "Glamour",
+                      "type": "SlotTracker",
+                      "meta": { "width": 1, "asClock": false },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "cee2d5c2-afc0-4e1c-8f7c-5a1ec8e96a9a",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "5e03fec3-d757-4789-a9d7-14cf2e3e68f5",
+                      "label": "Spells of One",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "helperText": "Sorcery Pool=KAA + FORM"
+                      },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "121233d6-ab10-489e-8c91-ea697bc177a8",
+                  "label": "Vagaries",
+                  "blocks": [
+                    {
+                      "id": "d5ecfeea-b077-46fa-bcee-049d45c2828c",
+                      "label": "Banish",
+                      "type": "SlotTracker",
+                      "meta": { "width": 1, "asClock": false },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "5db45dd1-b16a-45d4-b7b6-a46a3b6bfe45",
+                      "label": "Movement",
+                      "type": "SlotTracker",
+                      "meta": { "width": 1, "asClock": false },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "a59ef2b9-8c70-47fe-be05-ced41b7b99e2",
+                      "label": "Conquer",
+                      "type": "SlotTracker",
+                      "meta": { "width": 1, "asClock": false },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "3ad46204-4ce8-491d-9b22-c2b5d903ae98",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "d5b12376-141f-47bc-a2fd-3c9106a4d579",
+                      "label": "Spells of Three",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "helperText": "Sorcery Pool + Art"
+                      },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "c486998b-d565-46b6-bf8c-f8d7c540b09e",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "8ff57e1a-1bc5-4187-a502-d7b01f6214ad",
+                      "label": "Imprison",
+                      "type": "SlotTracker",
+                      "meta": { "width": 1, "asClock": false },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "835b9456-01ab-4562-8351-7ad82f9c539d",
+                      "label": "Growth",
+                      "type": "SlotTracker",
+                      "meta": { "width": 1, "asClock": false },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "e5cdc8b1-abef-4645-b8bc-7b4d98b156f4",
+                      "label": "Vision",
+                      "type": "SlotTracker",
+                      "meta": { "width": 1, "asClock": false },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "f67ae032-1df7-4aa4-be35-644327d51842",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "25f4f304-f492-494e-b81b-2f59691b4417",
+                      "label": "Spells of Many",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "helperText": "Sorcery Pool + Art + Discipline"
+                      },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a8b932f2-5ab5-4a1a-94ac-519d4318168a",
+                  "label": "Gifts &amp; Flaws",
+                  "blocks": [
+                    {
+                      "id": "a78fa40d-708a-4273-ac44-9624bfe21641",
+                      "label": "Gifts",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b472a93e-c68e-4c0a-9301-dac3af4ca3bd",
+                      "label": "Flaws",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d3e519a1-4f43-415d-8c65-cd5fc6a699d1",
+                  "label": "Skills",
+                  "blocks": [
+                    {
+                      "id": "e22baf63-f7b9-4e29-b028-48b87706406d",
+                      "label": "Skill Packets",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "48c8a0e8-e291-4e98-a590-6ee800cce21b",
+                      "label": "Skill",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "28cdba0c-ab7b-4a80-ab47-54e38f6cfc0d",
+                      "label": "Rank",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "a70eb420-c5da-4148-b909-360c6fb3879e",
+                      "label": "Tests",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "4d554e4c-caf7-45aa-ab38-1039b5b25cb2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "83e8796a-6658-4795-aefe-008cf0ca09ba",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "8cd83f23-33bc-4986-b1c5-a0f999448520",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "bc1d5279-ac1c-49db-94b9-f0351c546358",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "0c9bb67f-59b3-4a8d-928d-1b52766c9cc3",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "f9cecd9e-dd44-4fe4-bd91-13010e2c4e12",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "55f23515-381f-4417-a659-c68d6d2d963a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e98c5997-c06a-47a5-ad05-beaf7d3588bb",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "dcd02870-1192-4a86-9e8d-5e35c3f20880",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "5e07451f-62b7-47a6-9c0c-c74829f2b400",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "b8c689e1-fc48-435c-821d-4968bdec4888",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d1d7e8ab-de9a-4a7f-878f-82e305bfb076",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "b24992b3-faa0-4203-bfa8-538833571e9b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e7e82a0b-2138-42bb-b839-39b03a7d153f",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "3579f60a-7aa8-4ce3-a27a-62a7333e9a82",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "c2b94cbf-7acc-4179-b82f-e417729f878e",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "b01935ee-2439-49e1-93e3-750baf3ad35b",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "09bea821-873b-4c87-aed4-853e4f7ee1ca",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "08d753e4-d33e-4059-afbb-78de2e879cdf",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "584f45d6-2a5a-41a7-ba66-679ccbd714f9",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "6ae6aeed-28d0-4c9c-8711-db1829bc3187",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "a6f94e82-8e5c-4cd2-bb47-5535a65816f9",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "98c32142-e73b-4551-98b5-5f3b7a7bb2e2",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "37c6c07a-8500-4226-aab0-56c646301f41",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "ee27689f-6666-4771-98cc-68d1271f00a2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "608b1657-6b62-4536-9bc8-daf39a73f7ce",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "c2aeb941-1e16-4a05-aca4-27d28d1bd835",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "1f8915b7-4fae-4e3a-9f0d-a021860d7a8a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "81ca4c1d-8c22-4a39-aa28-d96f3581e2b6",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "ec2e28ef-e45c-44a4-abc4-db1d7c587e58",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "de9280bc-3f0c-4f7a-8c5e-acca930a7408",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "ff087205-0fff-47a4-8b79-67ab551e969b",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d08fa41c-d210-407f-8af3-b48e13c55f74",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "dbd6e7c7-89d1-4e81-a10d-aca6bf6719f3",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "60cac07b-1dd9-443e-ab21-ae78be54e878",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "b044b84e-aac3-462c-bbab-1d924afad08e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "41425302-621e-4682-a3e4-e5cb294531d9",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "8996eaaa-f2be-4a91-9fc4-8b7ad95ef283",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 },
+                      "label": "Skill"
+                    },
+                    {
+                      "id": "9c248cfb-424b-473c-85b6-9be7287ecd41",
+                      "label": "Rank",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "1fd8517f-8607-40fb-bdf6-863590de5b72",
+                      "label": "Tests",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "f72c793f-a0e8-498a-8615-302edae88407",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "99207246-a332-446d-859d-532c040b6091",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "af4e36c3-975b-4873-8d8d-7f679016a203",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "d7f98c0e-87e5-41d7-9bd8-a309abdd8d8c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "def233c9-59c9-42f9-a03c-ef474b9220cd",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "4dc410d3-9dd0-4176-8439-762b6f6477e7",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "fe119eac-6087-42c0-a120-21b3d3a584ea",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "28dc4257-077f-453e-b22a-deae170a5341",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "097fbf9a-a42e-46f0-b40d-77f360b04448",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "5e36316b-a9da-481a-a88f-ff6eb0d15bf3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "b6681caf-e0ca-489a-ba20-dbc9b0370a36",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "c3949d22-cd9d-4162-a109-cad9aca8585d",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "71428ef5-c21b-4e4a-b913-52c43ae3cb30",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "0acb5934-dd5e-48f9-9936-a6d09138a7f5",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "7a1fdab2-f123-4485-9121-7aa7c6a82541",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "22e92dc5-a6e1-4c6b-a125-32f8e824c0ff",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "d2bdfb36-f8cd-4a48-b721-c39a40e13c69",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "8302af59-839b-4ea6-97e0-6c73de613e47",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "81457915-4cb2-426a-9fe9-f0e14f8972c7",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "bd1f4161-be28-4158-8b70-8f9ec4532897",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "9986cada-c558-4c6d-961d-4d08e041312f",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "6a8f1dbb-5209-4e20-9249-e85b9048a58b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "2859d808-cd50-40e4-9733-caab20e4d462",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "dc4ace23-6b96-4a57-bac8-628d0c5be128",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "5fef75a2-dcd2-477e-9882-2769c1fa1f32",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "1347f7e3-1a08-4749-ac0c-fdf2c30b4732",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "141aafdf-74f4-46b7-8026-92b64696e2bb",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "5ce1a83f-598f-4a57-be14-a82cc1df4cef",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "d1dec464-aa4e-4c86-8902-17c5b66a9b45",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "f94b41fc-81a6-467e-9cab-a108f7a75725",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "c6faa804-7ce5-472d-96b5-3dbd59cd3c51",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "a141992e-4268-415d-b319-172bd1cf859c",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "bebc8c5e-9955-4adf-a049-dd4755d7b337",
+                      "label": "",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Attributes"
+    },
+    {
+      "id": "d56009cb-1adc-48b6-9fbe-d7db7bf16465",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "556816e6-1387-44da-9b37-8087c108ea58",
+                  "label": "Condition",
+                  "blocks": [
+                    {
+                      "id": "e24b34af-6f3e-40e8-8484-728a3fa7b2e7",
+                      "label": "Pool Modifiers",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "width": 0.5,
+                        "helperText": "Mods from Armor"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "64ee5cde-2b4e-4ff0-8700-ec5f5e2b9486",
+                      "label": "Pain",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "0325a18a-1ee1-4ee7-bb15-563dfb89163a",
+                      "label": "Bloodloss",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d892c9fa-62fd-439f-931b-bc7216d6757a",
+                      "label": "Fatigue",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "dc73b576-b539-4475-a5af-a7cdc5830e08",
+                      "label": "Additional Conditions",
+                      "type": "Text",
+                      "value": "<br>",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "4b1be408-e2c1-45a3-81a0-6bfbe3dc37c5",
+                  "label": "Armor",
+                  "blocks": [
+                    {
+                      "id": "29439d28-3bde-4682-89b9-5d89f09396fe",
+                      "label": "Type/Zone",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "" }
+                    },
+                    {
+                      "id": "503c298a-e7c5-43bd-9e19-63ce49bc5713",
+                      "label": "AV",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "4c99bb80-f548-4e73-825e-cc6781dd3cd5",
+                      "label": "CPM",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "cc26d585-f2e6-4eb6-9048-38fbac2b0351",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "" }
+                    },
+                    {
+                      "id": "e52113ee-0c0e-4721-802a-5c4ed06b25a0",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "2d89c99a-1b3a-4d7d-81da-ddbfbf360f29",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "18bfdefe-5993-49f7-964f-9d60bf781758",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "" }
+                    },
+                    {
+                      "id": "6eaa0b60-1664-49f6-9607-3861b0956d7f",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "8a4a3cf8-041f-40f9-b25e-5962fec143e8",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "dfa82798-7c98-4987-a4d3-7845a3c0967e",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "" }
+                    },
+                    {
+                      "id": "96f36989-6431-442b-ac06-9f8931cb5d41",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "df2ed62a-f42c-4f74-b300-c641e98b5af8",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "70556ce7-c32d-4313-8522-11a867f4c23f",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "" }
+                    },
+                    {
+                      "id": "15966c24-f210-4615-b7be-27822a2ba381",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "a38799aa-fa9b-4725-acbd-50a28ea89004",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "f5209e30-9e2b-4f8a-964c-f4a39ae04fa9",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "" }
+                    },
+                    {
+                      "id": "213adeab-5cc3-4443-9f46-b2c0b43def32",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "f7db41a1-8035-46c9-8561-248cf63509a8",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "2519b10e-5d62-42f4-9ab2-777081e6cfb6",
+                  "label": "Hit Locations",
+                  "blocks": [
+                    {
+                      "id": "22f61a50-fa19-49b4-a978-499671078abf",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://i.imgur.com/5Rn87ah.png"
+                    }
+                  ]
+                },
+                {
+                  "id": "765965c5-f720-45d9-8686-bbf37375abe0",
+                  "label": "Wounds",
+                  "blocks": [
+                    {
+                      "id": "1ec6b053-9ddf-47b3-894c-fa06f536b9b3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.66,
+                        "helperText": "Zone - Cut Puncture Bludgeon"
+                      }
+                    },
+                    {
+                      "id": "d0b74593-edeb-4dd7-8782-bcb3b4b1bbc8",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "Level" }
+                    },
+                    {
+                      "id": "b32ba22f-6455-4e9b-be06-c2f3ce4987af",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.66,
+                        "helperText": "Zone - Cut Puncture Bludgeon"
+                      }
+                    },
+                    {
+                      "id": "f4678648-ccb9-40c8-a424-28b5691d9716",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "Level" }
+                    },
+                    {
+                      "id": "d107507c-8121-4774-a33e-3f8c6a7883f6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.66,
+                        "helperText": "Zone - Cut Puncture Bludgeon"
+                      }
+                    },
+                    {
+                      "id": "2115b6fa-ec4f-4ef7-9bac-ce9f583c8c16",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "Level" }
+                    },
+                    {
+                      "id": "e491be27-25e0-432f-a041-471ccd84356c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.66,
+                        "helperText": "Zone - Cut Puncture Bludgeon"
+                      }
+                    },
+                    {
+                      "id": "ae45363a-d8e8-4542-b374-c474d368c51b",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "Level" }
+                    },
+                    {
+                      "id": "0802b71d-c4c1-47e5-b571-096dd79d0705",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.66,
+                        "helperText": "Zone - Cut Puncture Bludgeon"
+                      }
+                    },
+                    {
+                      "id": "87d884b5-4ee5-488b-af99-56c1c98263b3",
+                      "label": "",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "Level" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "15353d48-3239-4f63-9412-b98f2c0ef8db",
+                  "label": "Age &amp; Ageing",
+                  "blocks": [
+                    {
+                      "id": "f7e35018-40f5-4f8a-bd4f-ec8875ddb6be",
+                      "label": "Current Age",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "2595a930-fd66-4510-9cc6-d5acceb7e2e3",
+                      "label": "Months Aged",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33, "asClock": true },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "8bb366cb-807a-4f02-9a22-ff180db037ae",
+                      "label": "Years Aged",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Status"
+    },
+    {
+      "id": "ef9d2e0e-3846-41c7-ae7f-1eea588fbaa9",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "82188b96-d2a4-4270-80bb-078267586b46",
+                  "label": "Dice",
+                  "blocks": [
+                    {
+                      "id": "f073e198-d990-4bf5-8104-29a63e59ff13",
+                      "label": "Exchange #1",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d10"],
+                        "width": 0.33,
+                        "helperText": "Hover to set # of dice"
+                      }
+                    },
+                    {
+                      "id": "d2333840-b7e8-4d07-8676-71f3a7619f0d",
+                      "label": "Combat  Pool",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "0",
+                        "isMainPointCounter": false,
+                        "helperText": "Divvy pool between two exchanges",
+                        "width": 0.33
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "054e0d63-80e6-488e-ae1a-8fc8df6aaa4f",
+                      "label": "Exchange #2",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d10"],
+                        "width": 0.33,
+                        "helperText": "Hover to set # of dice"
+                      }
+                    },
+                    {
+                      "id": "5b325aac-c0cb-43e8-88ee-e3942a6cb24c",
+                      "label": "Current Conflict Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c000cf5d-1730-430d-a908-86073249031b",
+                  "label": "Melee",
+                  "blocks": [
+                    {
+                      "id": "762478ec-2869-48c9-9919-1b75d70880ef",
+                      "label": "Weapon",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "d6ab0202-5847-484a-b90a-b0ec1604ad52",
+                      "label": "Lth",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "19d064af-4e03-4328-9e5a-f8ad0976824d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "ca6bd846-d2ce-4dae-87eb-1cdb4314a105",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "1ebf7e8f-9a19-455a-8a81-31a6cb70142e",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "4c27f114-dcd6-4bee-b505-c5640d703ade",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "b1e551cf-d990-484a-9cd3-2a60c118a26e",
+                  "label": "Cut/Swing",
+                  "blocks": [
+                    {
+                      "id": "f8701b1c-65d5-48f6-b20b-99b0c0816f5e",
+                      "label": "C. ATN",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "68fb09cc-9e41-4a49-83c0-52dc43b12a47",
+                      "label": "C. DMG",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "2ffa537d-bb47-4a97-8bd1-8fb921ea617c",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "90760222-9aea-4f86-8272-d18ea7583b5e",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "b05f5a0f-a653-415b-832d-5af62c00f18a",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "96ba7aac-196a-4032-9b63-bb70c351c896",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "2514b15e-c2c2-4da1-bf0d-81255477f2e6",
+                  "label": "Thrust",
+                  "blocks": [
+                    {
+                      "id": "70f8d24d-ed1d-4429-a9a4-e16b01079313",
+                      "label": "T. ATN",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "e69e3c5f-7cfd-467c-b755-52990fdbb56a",
+                      "label": "T. DMG",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "7c02ca92-2f4f-41b2-bf05-83f1e42dc3a7",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "000ab919-59cb-44a2-b9d4-b8eb890a9d1e",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "8698af50-5473-4d4e-b58d-a60a086d4573",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "9a8c3517-e2d6-4002-ba4a-2896839daefd",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "23e5c56a-9b83-4849-9ec7-ffa159650a04",
+                  "label": "Defense/CP",
+                  "blocks": [
+                    {
+                      "id": "84cfb6c2-8c4f-48b7-a8e6-05746b7af96f",
+                      "label": "DTN",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d654e152-1fb0-4362-961f-a1353c2fc1e5",
+                      "label": "Combat Pool",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.66 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "76c5f8b1-8ae8-4915-ad2d-fc3c240e3683",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "1a7fd20f-36e1-4f76-8d14-27798b9a719a",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.66 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "2d3d4ea3-5eb1-4a74-81a1-bc8db8884f1f",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "de4d0007-975a-4ee4-8448-fc4b8133d395",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.66 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a208d72f-9e1d-4397-acbe-e0952b73a467",
+                  "label": "Missiles",
+                  "blocks": [
+                    {
+                      "id": "212785e2-6172-4252-8ce2-e5a8f69ce6a0",
+                      "label": "Type",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "f94ba952-5330-412d-b587-d80009f1cc97",
+                      "label": "Gr. Draw",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "13ee0a24-787c-44bb-bea4-5c031fce4786",
+                      "label": "Qvr Draw",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "80333275-f334-4bad-a4fb-fcf9793812fc",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "5942be26-bd2a-41f5-80de-c42fee70a0d6",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "30f9cfc9-00c7-4e9f-9819-16347659162d",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "9eaa3938-fdcb-4152-bdca-a56f13c0d39b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "b53cd260-c475-4df8-8e1f-8737c34c8624",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "11b11c6f-4255-4583-86e5-8b4901b7cd68",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "b6a28ab0-7f6b-459e-a658-3827cf245dcf",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "c7693a34-8386-4a6c-94cb-90cc71e9d9a5",
+                      "label": "Speed TN",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "501dd67a-14d3-47ab-a17f-c0c91697937d",
+                      "label": "Attack TN",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "8057a9ac-c5c2-4d02-a8a1-078ddf708187",
+                      "label": "Range Pen.",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "ec090160-3aad-43ca-8a23-b5abcfdf2253",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "4f91034e-0784-4220-8aef-fcbcb1a796f9",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "047f7211-940b-4a99-bcb9-345ccc6bc10b",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "88a70116-537a-407c-a405-9870db71fc06",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "fffe20c6-3679-476d-99b6-bc255919652b",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "0cfc504e-a1c7-4ae9-9566-c57b0617e9e3",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "2a29ae76-7ea8-4348-9658-f92a5a945c18",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "e478c4d0-bd28-4c1a-9f78-0dae55381e99",
+                      "label": "Fixed DMG",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "bab38b80-b0f2-4018-8476-1b79f2a9f7f1",
+                      "label": "Missile Pool",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "345db89a-af5a-4161-a9c8-2cad11187946",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "hideDivider": true,
+                        "width": 0.33
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "b793f648-adf9-4998-919c-52424e9afec8",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "417d5a98-0f88-4a6b-9939-dd4779a79418",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "634a8e51-3b71-4ca3-b91a-417581be0520",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "hideDivider": true,
+                        "width": 0.33
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "985c2491-8fa7-487a-a976-640c256e4dd9",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "9b75d63a-fb61-4f8b-9725-eb2c37584cae",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "b6a08bcf-861c-49b5-be88-9291c1ffc2fb",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "hideDivider": true,
+                        "width": 0.33
+                      },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "4813cf33-f8ee-437b-8a15-fa409095c129",
+                  "label": "Maneuvers",
+                  "blocks": [
+                    {
+                      "id": "59507a25-8703-4569-abe5-1fe4ff8bca1f",
+                      "label": "Offensive",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "2153720b-3345-4d14-8914-9e5511ec0a83",
+                      "label": "Cost",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "cb635d71-4eb4-423a-9796-d897b88e1c4d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "1d1a3e82-d895-4503-8b98-65b58be80a2e",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "0cb1936f-6052-447d-8c88-e240582c7b6c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "d4eab11a-b853-4446-99ef-e7613dc0637a",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "54d4bf0e-74a7-4feb-941a-289fca1c6fdf",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "f9f41f96-6389-46ff-97e7-f6fcb0e7a6d8",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "9e387dab-2101-42c1-9899-5a1ff4fc072d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "94d6c7b9-3d5d-4df3-9da8-3bce116a6657",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "89410ea5-5ff4-4e38-9a65-19d0c886c42e",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "4d774cf4-8f46-489a-9c5b-80a354cfd2a9",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "c9111b7b-df3b-4dad-a37d-4e027805034f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "bd0d57c6-cfc1-4c2b-9b0d-bcdb3f200999",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "55417814-671f-4e0e-b33c-6b2e445b5afc",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "5221a407-6b88-4015-86f3-a5202453a282",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "14438736-621c-450b-b792-9bc2221246d0",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "6786406e-e2dd-4d92-b102-1b4f5e682b57",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "2ab1b91f-44fc-4b3b-bd39-e781bd7babec",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "b57b40c1-4585-4fa1-b083-e28c94567ba9",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "dae9d23c-ba89-4b60-b2c7-6a79634ab3b3",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "f3bd3230-44c2-4c3c-91d6-f4aab8a5b926",
+                      "label": "Defensive",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "f1424767-1a9d-41c0-82a7-877d7daeed3b",
+                      "label": "Cost",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "e5c33291-371e-4f19-ac95-13ecc51c571e",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "eea2b081-c168-4801-afc8-cd66ab77734c",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "2851ecc5-f2b4-45cc-8618-550b19dc25ce",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "141f6eca-68b8-4c6e-a6e1-8ebe4508ee18",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "9148d581-890e-4359-886b-8b348c914751",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "dd7e2300-89fd-41f3-ba5f-4df968b2ceda",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "da5b30db-54c2-4dd4-a10b-5d2e82c82ba2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "63365eb5-447a-4938-a083-b5dca58d3329",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "7aa211f0-8aa3-4da2-a710-a7d032925486",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "601f2c05-cc38-4f4c-956d-325eb9ac7470",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "396a1549-eb1d-45be-826f-22ab3bc04e75",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "36dbbfe8-e0c4-4574-8c83-d4b40f696b2b",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "561e6a3b-0f8a-4ae7-9bf7-654a1c664c0f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "76f15daa-b0cd-41d0-9206-8b9a881307e2",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "0982a6c8-217b-4d2f-b28a-9e4505e43bbd",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "9a2a7eda-3910-46ca-9575-90e845c2d085",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "547824b7-93ba-41b2-b968-bf9d40b96313",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "40efaf30-2b91-4c68-bdca-115fc312e779",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Weapons"
+    },
+    {
+      "id": "ae8a23e8-16e8-49fb-8103-01eafa063009",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "94274f1a-7022-4705-be1b-3f5dd4718f1a",
+                  "label": "Dice",
+                  "blocks": [
+                    {
+                      "id": "dd80c830-eadb-437c-99ca-c30113f05a07",
+                      "label": "Exchange #1",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d10"],
+                        "width": 0.33,
+                        "helperText": "Hover to set # of dice"
+                      }
+                    },
+                    {
+                      "id": "6e5d3a92-9a77-487e-9b9e-4971d471c300",
+                      "label": "Sorcery Pool",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "0",
+                        "isMainPointCounter": false,
+                        "helperText": "Divvy pool between two exchanges",
+                        "width": 0.33
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d79111d1-cf60-41a7-b86d-42860ba2662c",
+                      "label": "Exchange #2",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d10"],
+                        "width": 0.33,
+                        "helperText": "Hover to set # of dice"
+                      }
+                    },
+                    {
+                      "id": "4a212e10-d6e7-4511-b458-9c464dd5b4fe",
+                      "label": "Current Conflict Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "94be2451-6de7-4b4d-b1d6-a993a5f041b0",
+                  "label": "Magic Gifts &amp; Flaws",
+                  "blocks": [
+                    {
+                      "id": "ae5d3bfa-6108-4070-b8ee-dd57b03a016a",
+                      "label": "Magic Gifts",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3df1bf4f-2d30-4d91-87f7-cede0c809863",
+                      "label": "Magic Flaws",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "0a6ebce4-f36c-4620-8c8d-2e6cc26d575a",
+                  "label": "Magical Tradition",
+                  "blocks": [
+                    {
+                      "id": "49e7bf83-e030-496a-a6d7-3d0b8cc31483",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c4e9516b-5152-45b6-af5a-5100e3fe04eb",
+                  "label": "Spell",
+                  "blocks": [
+                    {
+                      "id": "e60beac6-9695-419f-b145-72f02e00991b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "1c319d64-b764-439b-8a55-a74efabc6d44",
+                      "label": "Description",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "e7bf68e1-921f-48f0-b953-9c7168f13b15",
+                      "label": "CTN",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "0c95441c-230f-4147-8d17-8fb74baa9f78",
+                      "label": "Target",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d9452514-a8b5-4b9f-8a0d-a5e7f59eff84",
+                      "label": "Range",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "3fa599a7-0031-442e-950c-357a73f4b542",
+                      "label": "Volume",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "f0e936aa-4f53-44e6-b7d0-56bc354d8b19",
+                      "label": "Duration",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "1428db0a-9cc8-4845-a9c7-d4665fd3973d",
+                      "label": "Level",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c4e5778b-aaf3-4628-8f5d-c34fc2a624f1",
+                  "label": "Spell",
+                  "blocks": [
+                    {
+                      "id": "73f4525f-56f0-456f-8d3c-63e842ec2a0b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "5d50b56f-e439-4e94-8e3e-d8afc18b2718",
+                      "label": "Description",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "901bfe7c-e78c-4616-8edd-369de61ac3a1",
+                      "label": "CTN",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "41df16a9-af0c-4b21-bab3-c07731cd4307",
+                      "label": "Target",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "bfd52696-1326-4bff-9798-64db033eda29",
+                      "label": "Range",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "a11d8cfd-2d6c-4e2c-8e2c-b4d2a45aa60a",
+                      "label": "Volume",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "927060f1-f518-4ab7-a4ca-b642d0845751",
+                      "label": "Duration",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "515d5c95-1e67-4d05-8bb9-4ca760094da4",
+                      "label": "Level",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "f4e37113-15c3-4758-82d9-ca86cf3c1870",
+                  "label": "Spell",
+                  "blocks": [
+                    {
+                      "id": "43c94636-0045-4006-9d6c-31b2d15fa7e6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "ce3839d3-2736-4f5d-9aad-e6289ac5aa30",
+                      "label": "Description",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "a8fec897-0d84-4f44-9690-a945247d8119",
+                      "label": "CTN",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "cbeaf4e4-9563-47fc-a136-28d6051e9e7d",
+                      "label": "Target",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "c0e8c4bf-ed2a-4b9c-b020-0895a062e66e",
+                      "label": "Range",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "c7ef791a-4579-4ec6-82c7-7d317f3bdae7",
+                      "label": "Volume",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "8eb3a1cf-b091-4d29-a4ad-55c6804af454",
+                      "label": "Duration",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "8dec15c9-8ea7-4cf4-b5e4-6ad0d438736f",
+                      "label": "Level",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9191b30c-6d0f-4f06-a195-6d7ab99278b7",
+                  "label": "Spell",
+                  "blocks": [
+                    {
+                      "id": "9697701d-3694-4019-92ef-8316a46486dc",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "71d1f85c-3ca0-456b-8ff5-f71aee2a5b9b",
+                      "label": "Description",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "163c0db9-e7cf-434c-9cfa-a4f99b1956ea",
+                      "label": "CTN",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "16a27ca1-12a9-4b20-8759-8cd6f01a23cf",
+                      "label": "Target",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "581f4d26-a090-4580-b0e0-c6c8cba54ffb",
+                      "label": "Range",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "24808575-080a-48fc-9935-12e100b57670",
+                      "label": "Volume",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "1e2ee2e3-e505-44a5-9901-f2471ed39d94",
+                      "label": "Duration",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "f0469cd0-224e-4495-93d2-289749985d1e",
+                      "label": "Level",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a97a626a-0402-411a-b564-50dec8c825b2",
+                  "label": "Spell",
+                  "blocks": [
+                    {
+                      "id": "943b50ff-1257-427d-8779-3e121ade50a6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "708ecfde-91ac-4f1e-aa96-e0d3cb228f93",
+                      "label": "Description",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "340253d4-b647-494f-8156-77178c100548",
+                      "label": "CTN",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "bf75e2d8-c7f9-4b1c-ab8d-c686d49dac50",
+                      "label": "Target",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "274ca4b4-6ec4-416f-9a78-d9f9541d2609",
+                      "label": "Range",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "a1c7af36-9ffd-4014-a15e-7f75f9714b46",
+                      "label": "Volume",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "6d9a525f-d63f-4fb3-83f3-2b217a649ed2",
+                      "label": "Duration",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "bfc389a4-361e-42a4-a7d5-f3b4afe3f324",
+                      "label": "Level",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Sorcery"
+    },
+    {
+      "id": "84fd5571-2658-44d4-b07b-56407085530f",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "8eb5b582-5a84-4e0f-8395-df5b6404c7dd",
+                  "label": "Income and Property",
+                  "blocks": [
+                    {
+                      "id": "a342e84b-4821-47ff-adfe-7867e0158041",
+                      "label": "Yearly Income",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "addb77ab-78f8-4147-bc56-f5ade6942550",
+                      "label": "Property",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "b42c771a-0dec-4f69-8288-f9b4a63fc407",
+                  "label": "Arms, Armor and Sorcerous Tools",
+                  "blocks": [
+                    {
+                      "id": "d461f015-4ecc-4235-a538-81cc3cca8578",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "27b13c4b-78ee-45a4-85e9-efec52fa5351",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "c44bb1dd-a1f3-4eeb-864d-b698fe9f3a89",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "30c95253-eb58-4650-9ada-c0f651ef159e",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "8e321ee3-59bc-48b1-a149-aca6f9b10e7e",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "8071d5fa-96a3-4f78-996b-e474ea235820",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "24d2aee7-9a81-4273-8edc-23f82bd6eb59",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "01481abb-222d-4ef7-87ed-0690bba26864",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "3b12ab3f-ed61-40e6-bb73-c3b22e93e5e2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "1c191710-830a-41a7-b925-153487818774",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "3f6aec60-b01c-49a0-9557-bc2ccf180d4c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "2283fdf8-1f2f-433f-8b12-5fd51b4c645b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "ee1667a4-5672-4b2b-bdc3-0301bd3a5337",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "53f2f02a-e74d-4cf1-ba7f-fdc0ef96da24",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "1b3c07f5-9848-4e53-a9d5-9df62df140fa",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "8b7c02d2-6774-4210-b0ff-dd3fc9c7e58c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "5c4b1314-5f01-4370-a73a-7a5022bb2f2b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "3b849695-e2f7-41e2-8afe-bbda98fa8ac1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d0327036-71e2-4d76-a01b-8ad88d2932ce",
+                  "label": "Currency &amp; Precious Things",
+                  "blocks": [
+                    {
+                      "id": "652e6d9e-ca5c-4baa-b627-20bc1e91a4ed",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "4623eb47-196e-438c-ab93-41caf3990618",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "ca5d24c5-ac5d-49c3-9226-f73caec4ae52",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "8db96dd6-2542-4cf3-ae90-e2aebcbe0438",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "71886e4f-0ca7-41f2-90a8-78a53f53c59f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "988d3ea0-05af-4722-aecb-8ff4a20e5069",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e977ab3e-706b-42eb-a375-d5c5201bd908",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "faff9e01-b812-4e9f-a93b-12517468e66c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "104d1328-a4f0-40b5-8aa9-eb996e9a1469",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "eb7a1419-24eb-4f6d-bf8c-bbc5bb8a3c82",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "ed86b0ff-bfaf-4977-a79a-dc7fa4853e3f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "0fdd4fc5-43cf-4dc9-9e44-20f4190e5d3a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "9a184abd-fbb8-46bb-9b30-8e3a6d0c1780",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e88bedde-ded5-4641-86de-f8e9793ba8c8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "456a4ce0-904d-4ad3-9955-cd693bc8226e",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "ccde5450-4b01-4ee4-8aa8-f1a6ab3de8c1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "2f223bc3-65a2-4c76-abc3-ae7c9ee25804",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "92a33222-cdd3-4cb2-9d0e-97e6d228e5eb",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "eaf341bd-8861-4341-a037-e6dfc3a4f2ff",
+                  "label": "Stuff",
+                  "blocks": [
+                    {
+                      "id": "d55afc47-170e-4731-95a6-3f290c7e6ebd",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "7c41aa9b-b979-4fab-a911-4e78efec479d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "d5ffaf79-7550-4175-a010-56b5f0aef15e",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "59956949-4e04-47e6-b17c-f4da5922a1be",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "38070088-8269-4776-8869-88f9673cc7fa",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "56907382-b46a-4945-9834-b522d7d5acd8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "aaf8d059-758d-4ee8-b377-00622c5d304d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "91800413-f2fc-49e4-b803-102d010a8d9a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "840829ec-d4f7-40ee-9c91-ec6a21a5c75d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "b1518d74-b706-4518-9a22-6f221a4e8bbd",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "6de87d9f-da2c-4dd0-a941-eb4363d0eb78",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "d7de018b-0973-43bd-ad23-6f922d1ef2d6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "ea041901-5a19-4c8a-810e-6b2cd6359641",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "5f9efd08-3581-47d7-bb10-c485601f68be",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e6215d66-4851-4f99-92e2-cabb9cae392c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "185d41c5-d446-43ee-ac33-fca63ca4d9a4",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "7800b49e-0a79-47f1-a0ae-d52e4b1c0e42",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "3a491746-c1b9-4ae1-80e1-8063db4b4318",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "3b67891a-6551-47c5-b162-60e1a82f459a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "dcfc9232-adc3-4ffc-8934-a476aa72f80b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "8acc99cc-fd2a-44ef-beb0-8e660a4e0a4e",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "2754f0cb-af73-4c21-9d3f-792a6b66cb76",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "4efb91f7-0360-4797-97fc-d38fbb4fb68e",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "447b96ef-a9ed-448c-bde1-2359a3794f73",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "796d3226-5424-4dff-abae-88d302726694",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "50cd6beb-3044-404c-8fe5-047d71d65031",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "162a122c-147c-42d2-a679-2527b10f1000",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "72cfe898-27d2-4ba5-86fc-ad4cdd5099fc",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "fc18fd6e-bcc2-45cf-91d2-a09fe0154894",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "2c8b6863-f028-4ad5-bc62-a56bcc1768a6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Stuff"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "group": "The Riddle of Steel",
+  "theme": { "hideSectionBackground": false },
+  "wide": false,
+  "playedDuringTurn": false
+}
