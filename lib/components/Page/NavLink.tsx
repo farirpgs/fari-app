@@ -24,7 +24,6 @@ export function NavLink(props: {
   children: React.ReactNode;
 }) {
   const theme = useTheme();
-
   if (props.to) {
     return (
       <Tooltip title={props.tooltip ?? ""}>
@@ -40,7 +39,7 @@ export function NavLink(props: {
           sx={{
             "textTransform": "none",
             "&:hover": {
-              background: theme.palette.primary.light,
+              backgroundColor: "rgba(255, 255, 255, 0.08)",
             },
           }}
         >
@@ -59,12 +58,12 @@ export function NavLink(props: {
         endIcon={props.endIcon}
         sx={{
           "textTransform": "none",
-          "background": props.highlight ? "#fff" : "",
-          "color": props.highlight ? "#000" : "",
+          "background": props.highlight ? "#fff" : undefined,
+          "color": props.highlight ? "#000" : undefined,
           "&:hover": {
-            background: props.highlight
-              ? "#a6d4fa"
-              : theme.palette.primary.light,
+            backgroundColor: props.highlight
+              ? "#90caf9"
+              : "rgba(255, 255, 255, 0.08)",
           },
         }}
       >
@@ -121,7 +120,7 @@ export function NavLinkCategory(props: {
             sx={{
               "textTransform": "none",
               "&:hover": {
-                background: theme.palette.primary.light,
+                backgroundColor: "rgba(255, 255, 255, 0.08)",
               },
             }}
             endIcon={<ExpandMoreIcon />}

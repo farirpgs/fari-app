@@ -4,7 +4,6 @@ import ErrorIcon from "@mui/icons-material/Error";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import PanToolIcon from "@mui/icons-material/PanTool";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import UploadFileIcon from "@mui/icons-material/UploadFile";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
 import Box from "@mui/material/Box";
@@ -38,7 +37,10 @@ import { MyBinderContext } from "../../../../contexts/MyBinderContext/MyBinderCo
 import { arraySort } from "../../../../domains/array/arraySort";
 import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
 import { ICharacter } from "../../../../domains/character/types";
-import { IDicePoolResult } from "../../../../domains/dice/Dice";
+import {
+  DiceFabResultLabel,
+  IDicePoolResult,
+} from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
 import { Icons } from "../../../../domains/Icons/Icons";
 import { usePrompt } from "../../../../hooks/useBlocker/useBlocker";
@@ -342,9 +344,29 @@ export function Session(props: {
         <Toolbox
           diceFabProps={{
             onRoll(results) {
+              const singleResult: IDicePoolResult = {
+                id: "Pool",
+                label: results.map((r) => r.label).join(", "),
+                commandResults: [],
+              };
+
+              console.log(results);
               results.forEach((result) => {
-                handleSetMyRoll(result);
+                const commandResults = result.commandResults.map((r) => {
+                  return {
+                    ...r,
+                    details:
+                      result.label !== DiceFabResultLabel
+                        ? result.label
+                        : undefined,
+                  };
+                });
+                singleResult.commandResults = [
+                  ...singleResult.commandResults,
+                  ...commandResults,
+                ];
               });
+              handleSetMyRoll(singleResult);
             },
           }}
           centerActions={
@@ -1095,11 +1117,11 @@ export function Session(props: {
           <Typography variant="h6" color="textSecondary">
             No character sheets in session yet.
           </Typography>
-          <Typography variant="body2" color="textSecondary">
-            To assign a character sheet to a player, click on their{" "}
-            <UploadFileIcon /> button, and select the character sheet you want
-            to use.
-          </Typography>
+          {/* <Typography variant="body2" color="textSecondary">
+            To assign a character sheet to a player, click on the{" "}
+            <AssignmentIndIcon /> button, and select the character sheet you
+            want to use.
+          </Typography> */}
         </Box>
       );
     }

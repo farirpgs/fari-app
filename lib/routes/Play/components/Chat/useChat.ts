@@ -72,11 +72,21 @@ export function useChat() {
 
 export const RollMessage = {
   fromDicePoolResult(result: IDicePoolResult): RollMessageValue {
-    let text = result.commandResults.reduce((acc, commandResult) => {
-      return `${acc ? `${acc} ` : acc}${commandResult.command} [${
-        commandResult.value
-      }]`;
-    }, "");
+    let text = result.commandResults
+      .map((commandResult) => {
+        // return `${acc ? `${acc} ` : acc}${commandResult.command} [${
+        //   commandResult.value
+        // }]`;
+        // make the code above more readable
+        const command = commandResult.command;
+        const value = commandResult.value;
+        const details = commandResult.details || "";
+        const derp = details
+          ? `${details}: ${command}: [${value}]`
+          : `${command}: [${value}]`;
+        return derp;
+      })
+      .join(" — ");
 
     const hasModifier =
       result.modifier !== null &&

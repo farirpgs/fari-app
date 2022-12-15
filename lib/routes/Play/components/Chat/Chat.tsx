@@ -97,6 +97,11 @@ export function Chat(props: {
     <Box
       sx={{
         height: "100%",
+        maxHeight: {
+          xs: "65vh",
+          sm: "65vh",
+          md: "inherit",
+        },
         display: "flex",
         flexDirection: "column",
         position: "relative",
@@ -136,7 +141,9 @@ export function Chat(props: {
                   background: isMe
                     ? theme.palette.primary.main
                     : theme.palette.action.hover,
-                  color: isMe ? theme.palette.primary.contrastText : "inherit",
+                  color: isMe
+                    ? theme.palette.primary.contrastText
+                    : theme.palette.text.primary,
                   padding: ".5rem .75rem",
                   display: "block",
                   borderRadius: "1rem",
@@ -153,7 +160,7 @@ export function Chat(props: {
                 )}
                 {message.type === MessageType.Roll && (
                   <Box>
-                    <DiceRollerMessage dark message={message.value} />
+                    <DiceRollerMessage dark={isMe} message={message.value} />
                   </Box>
                 )}
               </Box>
@@ -176,7 +183,8 @@ export function Chat(props: {
       <Box
         sx={{
           padding: ".5rem 1rem",
-          background: "#efefef",
+          borderTop: `1px solid ${theme.palette.divider}`,
+          background: theme.palette.background.paper,
         }}
       >
         <ChatMessageInput

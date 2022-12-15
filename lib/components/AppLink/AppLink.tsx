@@ -81,6 +81,7 @@ export const AppButtonLink = React.forwardRef<
   if (isInternal) {
     return (
       <Button
+        {...props}
         to={props.to}
         component={ReactRouterLink}
         ref={ref}
@@ -93,6 +94,7 @@ export const AppButtonLink = React.forwardRef<
 
   return (
     <Button
+      {...props}
       href={props.to as string}
       component={"a"}
       ref={ref}

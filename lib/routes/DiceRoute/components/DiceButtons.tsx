@@ -14,7 +14,6 @@ export function DiceButtons(props: {
 }) {
   const theme = useTheme();
   const pool = props.pool || [];
-
   return (
     <Grid container spacing={1} justifyContent="center">
       {props.commands.map((command) => {
@@ -32,7 +31,7 @@ export function DiceButtons(props: {
                   }}
                   size="large"
                 >
-                  <Badge badgeContent={count} color="secondary">
+                  <Badge badgeContent={count} color="primary">
                     <options.icon
                       style={{
                         fontSize: "3rem",

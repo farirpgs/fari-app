@@ -146,7 +146,7 @@ export function Scene(props: {
 
   function renderNoScene() {
     return (
-      <Box padding="1rem">
+      <Box>
         <Box>
           <Grid container>
             <Grid item>

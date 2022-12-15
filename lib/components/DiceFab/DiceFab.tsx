@@ -13,6 +13,7 @@ import { useZIndex } from "../../constants/zIndex";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import {
   Dice,
+  DiceFabResultLabel,
   IDiceCommandId,
   IDicePoolResult,
   IRollablePool,
@@ -78,7 +79,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
 
     if (commandIds.length > 0) {
       poolsToRoll.push({
-        label: "Pool",
+        label: DiceFabResultLabel,
         commandIds: commandIds,
       });
     }
@@ -89,9 +90,6 @@ export const DiceFab: React.FC<IProps> = (props) => {
     handleMenuClose();
     props.onRoll?.(results);
   }
-
-  // const hasSelectedCommands = diceManager.computed.hasSelectedCommands;
-  // const hasPool = diceManager.computed.hasPool;
 
   return (
     <>
@@ -178,7 +176,7 @@ export function DiceFabButton(props: {
         >
           <Fab
             variant="circular"
-            color={props.open ? "secondary" : "primary"}
+            color={props.open ? "primary" : "primary"}
             onClick={props.onFabClick}
             onPointerEnter={props.onHover}
             onPointerLeave={props.onLeave}
@@ -186,9 +184,9 @@ export function DiceFabButton(props: {
               e.preventDefault();
             }}
             sx={{
-              backgroundColor: props.open
-                ? theme.palette.primary.light
-                : theme.palette.primary.main,
+              // backgroundColor: props.open
+              //   ? theme.palette.primary.light
+              //   : theme.palette.primary.main,
               width: buttonSize,
               height: buttonSize,
               marginRight: "6.3rem",
@@ -233,9 +231,7 @@ export function DiceFabButton(props: {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          background: hasPool
-            ? theme.palette.primary.main
-            : theme.palette.primary.light,
+          background: theme.palette.primary.main,
           color: theme.palette.getContrastText(theme.palette.primary.main),
           height: buttonSize,
           borderTopRightRadius: "25px",

@@ -161,8 +161,10 @@ export type IRollablePool = {
   commandIds: Array<IDiceCommandId>;
 };
 
+export const DiceFabResultLabel = "Pool" as const;
+
 export type IDicePoolResult = {
-  id: string;
+  id: string | typeof DiceFabResultLabel /* When coming from the Dice Fab */;
   label?: string;
   modifier?: number;
   commandResults: Array<ICommandResult>;
