@@ -1,0 +1,1604 @@
+{
+  "fariType": "character",
+  "id": "65eaca99-0888-4b7a-907f-a4d8cdeba0c9",
+  "lastUpdated": 1662493344,
+  "name": "Dungeon World - Playguide",
+  "pages": [
+    {
+      "id": "bfde0f61-98fa-4d3a-a5bf-a74f015d1f0b",
+      "label": "Moves",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "3e2622d4-76f9-4704-aef9-b96b66da376d",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "ba5e3533-5176-4685-a1e9-3765741b4209",
+                      "label": "Basic Moves",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "width": 1 },
+                      "value": ""
+                    },
+                    {
+                      "id": "36c64585-b262-474f-8c41-3dcdc05c0671",
+                      "label": "Hack &amp; Slash\r",
+                      "type": "Text",
+                      "value": "When you <b>attack an enemy in melee</b>, roll+STR.\n\n*On a 10+, you deal your damage to the enemy and avoid their attack. At your option, you may choose to do +1d6 damage but expose yourself to the enemy’s attack.\n\n*On a 7–9, you deal your damage to the enemy and the enemy makes an attack against you.\n\n<i>If the enemy is unaware or defenseless, just deal your damage instead of rolling.</i>\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "747f25d8-27fa-4cca-9680-13f2012bf6e6",
+                      "label": "Volley",
+                      "type": "Text",
+                      "value": "When you <b>take aim and shoot at an enemy at range</b>, roll+DEX.\n\n*On a 10+, you have a clear shot: deal your damage.\n\n*On a 7–9, deal your damage, and choose 1:\n\n● You have to move to get the shot placing you in danger as described by the GM\n● You have to take what you can get: -1d6 damage\n● You have to take several shots, reducing your ammo by one.\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "bef71f30-8c7c-4022-b119-dd9a21cb5a40",
+                      "label": "Defend",
+                      "type": "Text",
+                      "value": "When you <b>stand in defense of a person, item, or location under attack</b>, roll+CON.\n\n*On a 10+, hold 3.\n\n*On a 7–9, hold 1.\n\nAs long as you stand in defense, when you or the thing you defend is attacked you may spend hold, 1 for 1, to choose an option:\n\n● Redirect an attack from the thing you defend to yourself\n● Halve the attack’s effect or damage\n● Open up the attacker to an ally giving that ally +1 forward against the attacker\n● Deal damage to the attacker equal to your level\n\n<i>Once you are no longer close enough to the target to reasonably defend it, or take your attention off defense (like going on the offensive), you lose your hold. Note that you can Defend yourself.</i>\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "ff0f6ee3-8ffb-4bbd-a583-bec0770479ba",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "width": 1 },
+                      "value": ""
+                    },
+                    {
+                      "id": "3b933dc7-29b6-4b33-a4b3-23ed5118e41c",
+                      "label": "Defy Danger\r\n",
+                      "type": "Text",
+                      "value": "When you <b>act despite an imminent threat or suffer a calamity</b>, say how you deal with it and roll. If you do it…\n\n…by powering through, +STR\n…by getting out of the way or acting fast, +DEX\n…by enduring, +CON\n…with quick thinking, +INT\n…through mental fortitude, +WIS\n…using charm and social grace, +CHA\n\n*On a 10+, you do what you set out to, the threat doesn’t come to bear.\n\n*On a 7–9, you stumble, hesitate, or flinch: the GM will offer you a worse outcome, hard bargain, or ugly choice.\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "9a497ff2-f7b9-4c25-9bee-893a6184f35b",
+                      "label": "Discern Realities\r\n",
+                      "type": "Text",
+                      "value": "When you <b>closely study a situation or person</b>, roll+WIS.\n\n*On a 10+, ask the GM 3 questions from the list below.\n\n*On a 7–9, ask 1.\n\n● What happened here recently?\n● What is about to happen?\n● What should I be on the lookout for?\n● What here is useful or valuable to me?\n● Who’s really in control here?\n● What here is not what it appears to be?\n\nTake +1 forward when acting on the answers.\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "490fa83b-1ea4-4db0-9cd9-fc5a83c8d68c",
+                      "label": "Aid or Interfere\r\n",
+                      "type": "Text",
+                      "value": "When you <b>help or hinder another Player Character</b>, roll+Bond (the number of times their name is written in your bonds).\n\n*On a 10+, they take +1 or -2 to their roll, your choice.\n\n*On a 7–9, they still get a modifier, but you also expose yourself to danger, retribution, or cost.\n\n<i>Bonuses and penalties from this move don’t stack.</i>\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "8612a0ae-f9e8-43f9-b24f-2f8d0a11d065",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "width": 1 },
+                      "value": ""
+                    },
+                    {
+                      "id": "a986a737-c254-4d82-8dae-60e4af7402ae",
+                      "label": "Parley",
+                      "type": "Text",
+                      "value": "When you <b>have leverage on a GM character (NPC) and manipulate them</b>, roll+CHA. Leverage is something they need or want.\n\n*On a 10+, they do what you ask, as long as you first promise to do what they ask.\n\n*On a 7–9, they will do what you ask, but need some concrete assurance of your promise, right now.\n\n<i>Leverage can be positive or negative, but it is always more than mere sweet talk—it has to have substance. Also, keep in mind that you can break your promise, but that may have consequences later on.</i>\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "897e951f-63aa-4d0a-b82f-ac4ae26c27f8",
+                      "label": "Spout Lore\r\n",
+                      "type": "Text",
+                      "value": "When you <b>consult your accumulated knowledge about something</b>, roll+INT.\n\n*On a 10+, the GM will tell you something interesting and useful about the subject relevant to your situation.\n\n*On a 7–9, the GM will only tell you something interesting—it’s on you to make it useful.\n\nThe GM might ask you “How do you know this?” Tell them the truth, now.\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "3456201e-9412-4ce7-90b8-c463e7fdb5d1",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "width": 1 },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a71bb4a9-7aa4-424b-a439-46105045e0c1",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "746383e5-e220-453a-9782-fe10d6b021f1",
+                      "label": "Special Moves",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "7b98ab77-c7ac-4bcb-bf33-6a54eaba35c4",
+                      "label": "Make Camp\r\n",
+                      "type": "Text",
+                      "value": "When you <b>settle in to rest</b> consume a ration. If you’re somewhere dangerous decide the watch order as well. If you have enough XP you may level up.\n\nWhen you wake from at least a <b>few uninterrupted hours of sleep</b> heal damage equal to half your max HP.\n\n<i>If you’re somewhere civilized, like an inn or a house, you still Make Camp.</i>\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e50b5ec6-3b98-4974-b8de-96c1aee3f362",
+                      "label": "Supply",
+                      "type": "Text",
+                      "value": "When you <b>go to buy something with gold\non hand</b>, if it’s something readily available in the settlement you’re in, you can buy it at market price. If it’s something special, beyond what’s usually available here, or non-mundane, roll+CHA.\n\n*On a 10+, you find what you’re looking for at a fair price.\n\n*On a 7–9, you’ll have to pay more or settle for something that’s not exactly what you wanted, but close.\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "41ee6a43-6cd1-4d8d-aba0-e8e1987d21bc",
+                      "label": "Bolster",
+                      "type": "Text",
+                      "value": "When you<b> spend your leisure time in study, meditation, or hard practice</b>, if you prepare...\n\n*for at least a week, hold 1 Prep.\n\n*for at least a month, hold 3 Prep instead.\n\nWhen your preparation pays off spend 1 Prep for a +1 to any roll. You can only spend 1 Prep per roll.\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "a61f38dc-e8d0-49e8-b6ac-21c67f929706",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "8e761440-e4df-455f-b3c2-a3630bdd33bb",
+                      "label": "Take Watch\r\n",
+                      "type": "Text",
+                      "value": "When <b>you’re on watch and something\napproaches the camp</b> roll+WIS.\n\n*On a 10+, you’re able to wake the camp and prepare a response, everyone in the camp takes +1 forward.\n\n*On a 7–9, you react just a moment too late; your companions in camp are awake but haven’t had time to prepare. They have weapons and armor but little else.\n\n*On a 6-, whatever lurks outside the campfire’s light has the drop on you.\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "fd101c47-b966-4e53-9b1a-301df19872e5",
+                      "label": "Carouse",
+                      "type": "Text",
+                      "value": "When you <b>return triumphant and throw a big party</b>, spend 100 coins and roll +1 for every extra 100 coins spent.\n\n*On a 10+, choose 3.\n\n*On a 7–9, choose 1.\n\n*On a 6-, you still choose 1, but things get really out of hand (the GM will say how).\n\n● You befriend a useful NPC\n● You hear rumors of an opportunity\n● You gain useful information\n● You are not entangled, ensorcelled, or tricked.\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "fbf66278-644b-4612-bc6e-06ac65f2b866",
+                      "label": "Recover",
+                      "type": "Text",
+                      "value": "When you <b>do nothing but rest in comfort and safety</b> after a day of rest you recover all your HP. After three days of rest you remove one debility of your choice. If you’re under the care of a healer (magical or otherwise) you heal a debility for every two days of rest instead.\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "61aa0d76-6ef7-4a6f-a1d2-603a3e3901f3",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "cdbd494e-c3ee-4ddb-bf32-0383d6aa0c74",
+                      "label": "Encumbrance",
+                      "type": "Text",
+                      "value": "When you <b>make a move while carrying weight that exceeds your Load</b>,\n\n*if it is only 1 or 2 over, take -1 to your roll.\n\n*If it is 3 or more over your Load, choose 1:\n\n● drop at least 1 weight and roll at -1\n● automatically fail (treat your roll as 6-)\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "8e5c05df-fc86-4e4b-8881-9299b6672c2e",
+                      "label": "Outstanding Warrants\r\n",
+                      "type": "Text",
+                      "value": "When you <b>return to a civilized place in\nwhich you’ve caused trouble before</b>,\nroll+CHA.\n\n*On a 10+, word has spread of your deeds and everyone recognizes you.\n\n*On a 7–9, as above, and the GM chooses a complication:\n\n● The local constabulary has a warrant out for your arrest\n● Someone has put a price on your head\n● Someone important to you has been put in a bad spot as a result of your actions.\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "4a85c985-3107-4ef9-96f2-42fb606c241f",
+                      "label": "Undertake a Perilous Journey\r\n",
+                      "type": "Text",
+                      "value": "When you <b>travel through hostile territory</b>, choose one member of the party to act as trailblazer, one to scout ahead, and one to be quartermaster.\nIf you don’t have enough party members or choose not to assign a job, treat that job as if it had rolled a 6.\nEach character with a job to do rolls+WIS.\n\n*On a 10+, The...\n● Quartermaster reduces the number of rations required by one\n● Trailblazer reduces the amount of time it takes to reach your destination (the GM will say by how much)\n● Scout will spot any trouble quick enough to let you get the drop on it\n\n*On a 7–9, each role performs their job as expected: the normal number of rations are consumed, the journey takes about as long as expected, no one gets the drop on you but you don’t get the drop on them either.\n\n<i>A journey between two places is measured in rations, with 1 ration being consumed for each day of travel. Each job rolls only once for the entire journey.\nIf you are out exploring the land instead of traveling to a particular location, don’t use this move, but Make Camp along the way.</i>\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "89da496d-7759-4fd0-b26e-a031d708411e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "20ecd4fb-b52a-46f7-99b2-d17b36648819",
+                      "label": "Last Breath\r\n",
+                      "type": "Text",
+                      "value": "When <b>you’re dying</b> you catch a glimpse of\nwhat lies beyond the Black Gates of Death’s Kingdom (the GM will describe it). Then roll (just roll, +nothing—yeah, Death doesn’t care how tough or cool you are).\n\n*On a 10+, you’ve cheated Death—you’re in a bad spot but you’re still alive\n\n*On a 7–9, Death will offer you a bargain.\n\nTake it and stabilize or refuse and pass beyond the Black Gates into whatever fate awaits you.\n\n*On 6-, your fate is sealed. You’re marked as Death’s own and you’ll cross the threshold soon. The GM will tell you when.\n\n<i>When you escape death you are stable at 0 HP, but unconscious until you receive healing.</i>\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "bfc2ee91-6f80-4991-8da7-623b084e895b",
+                      "label": "End of Session\r\n",
+                      "type": "Text",
+                      "value": "When you<b> reach the end of a session</b>, choose one of your bonds that you feel is resolved (completely explored, no longer relevant, or otherwise). Ask the player of the character you have the bond with if they agree. If they do, mark XP and write a new bond with whomever you wish.\n\nOnce bonds have been updated look at your alignment. If you fulfilled that alignment at least once this session, mark XP.\n\nThen answer these three questions as a group:\n\n● Did we learn something new and important about the world?\n● Did we overcome a notable monster or enemy?\n● Did we loot a memorable treasure? For each “yes” answer everyone marks XP\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "2325b98a-e43a-4c63-91af-004dd5263931",
+                      "label": "Level Up\r\n",
+                      "type": "Text",
+                      "value": "When you <b>have downtime (hours or days) and XP equal to (or greater than) your current level+7</b>, you can reflect on your experiences and hone your skills.\n\n● Subtract your current level+7 from your XP.\n● Increase your level by 1.\n● Choose a new advanced move from your class.\n● If you are the wizard, you also get to add a new spell to your spellbook.\n● Choose one of your stats and increase it by 1 (this may change your modifier).\nChanging your Constitution increases your maximum and current HP. Ability scores can’t go higher than 18.\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "7e32e584-b9f2-4c40-a035-0a8a39dd9517",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e8412132-c152-4024-94c1-a1ac5adce427",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "86b11fc8-96f8-4202-8f83-4c2b8e709a1a",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "37a56af3-4da0-4051-8b4e-e2e8e5d71ec4",
+                      "label": "Stats",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "43bfa612-c537-4307-8b9a-a06510240b20",
+                      "label": "Stat Score",
+                      "type": "Text",
+                      "value": "1-3\n4-5\n6-8\n9-12\n13-15\n16-17\n18\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "fb52112c-7807-4817-a862-407f58926522",
+                      "label": "Modifier",
+                      "type": "Text",
+                      "value": "-3\n-2\n-1\n0\n1\n2\n3\n",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "e4c47860-0e74-4612-b60c-d78bd871c7be",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "c1ee9015-6382-463d-8e64-2ee96702a66a",
+                      "label": "Tags Glossary",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "720e130e-c1eb-429e-ab6f-36ff8f926ba7",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "<b><i>Ammo</i></b> - An abstract representation of how much ammunition is left, when it’s gone you're out\n<br><b><i>Applied</i></b> - Needs to be consumed to take effect, or otherwise carefully applied\n<br><b><i>n Armor</i></b> - Subtract n from damage you take, doesn’t stack with other ‘n armor’\n<br><b><i>+n Armor</i></b> - as ‘n Armor’, but can stack with n &amp; +n\n<br><i><b>Awkward</b></i> - It’s unwieldy and tough to use\n<br><b><i>Clumsy </i></b>- It’s tough to move around with. -1 ongoing while using it. This penalty is cumulative\n<br><b><i>Dangerous </i></b>- Unsafe: take the proper precautions or the GM may invoke consequences\n<br><b><i>Forceful </i></b>- It can knock someone back a pace, maybe even off their feet\n<br><b><i>Ignores Armor</i></b> - Armor won’t reduce the damage\n<br><b><i>Messy </i></b>- It does damage in a particularly destructive way, ripping people and things apart\n<br><i><b>n Piercing</b></i> - Treat target as if it had n less armor\n<br><i><b>Precise</b></i> - You can Hack &amp; Slash with +DEX\n<br><i><b>Ration </b></i>- It’s food.\n<br><i><b>Reload </b></i>- After you attack with it, it takes more than a moment to reset for another attack\n<br><i><b>Slow </b></i>- It takes a minute or more to use\n<br><i><b>Stun </b></i>- It dazes the target instead of reducing HP\n<br><i><b>Thrown </b></i>- You can Volley with it, but it has no ammo so it’s gone until you recover it\n<br><i><b>Touch </b></i>- It’s used by touching it to the target’s skin\n<br><i><b>Two-Handed</b></i> - You need both hands to use it well\n<br><i><b>Worn </b></i>- To use it, you have to be wearing it\n<br><i><b>n Uses</b></i> - Can be used n times before it runs out<br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "348b6160-2a1a-4d08-a33c-8c7b48043bcf",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "5ee82300-154e-4e8c-8d98-7dbf61cca046",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "722d52e7-0de9-48ff-bd5e-68083ea7b462",
+                      "label": "Debilities",
+                      "type": "Text",
+                      "value": "<b>Weak (STR): </b>You can’t exert much force. Maybe it’s just fatigue and injury, or maybe your strength was drained by magic.\n\n<b>Shaky (DEX):</b> You’re unsteady on your feet and you’ve got a shake in your hands.\n\n<b>Sick (CON):</b> Something just isn’t right inside. Maybe you’ve got a disease or a wasting illness. Maybe you just drank too much ale last night and it’s coming back to haunt you.\n\n<b>Stunned (INT):</b> That last knock to the head shook something loose. Brain not work so good.\n\n<b>Confused (WIS):</b> Ears ringing. Vision blurred. You’re more than a little out of it.\n\n<b>Scarred (CHA): </b>It may not be permanent, but for now you don’t look so good.\n",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "c409393c-5bb0-4b3f-8e8a-247a3dabe1f9",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "26402872-6916-4b9a-84e8-ca1632aaa559",
+                      "label": "Quick Reference",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "2dab1c98-bafe-4fcd-962b-690350d07d14",
+                      "label": "Weapon Ranges\r\n",
+                      "type": "Text",
+                      "value": "<b>Hand:</b> It’s useful for attacking something\nwithin your reach, no further.\n\n<b>Close: </b>It’s useful for attacking something at arm’s reach plus a foot or two.\n\n<b>Reach:</b> It’s useful for attacking something that’s several feet away — maybe as far as ten.\n\n<b>Near:</b> It’s useful for attacking if you can see the whites of their eyes.\n\n<b>Far: </b>It’s useful for attacking something in shouting distance.\n",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "a08b387f-675f-4641-abef-88bc0f91680b",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "c41a2abe-530f-4051-b8fd-26e86acf5038",
+                      "label": "Using Cover\r\n",
+                      "type": "Text",
+                      "value": "Characters can gain temporary armor by using their surroundings to block damage:\n\n<b>Partial Cover</b> grants <b>+1 Armor</b>\n\n<b>Major Cover</b> grants <b>+2 Armor</b>\n",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "7521cf8b-2b2c-4c69-8f1a-1eb13d0a63b4",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "f183ed56-2878-4517-ab7c-2a9cac9c39bd",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "53496003-929d-462d-a8e9-fb278af06649",
+                      "label": "Writing New Bonds\r\n",
+                      "type": "Text",
+                      "value": "Pick something that happened last session that changes how your character thinks or feels about another player character, and say what action you’ll take because if it.\r\n",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "f32898c3-d044-41ba-a41c-c62a8cd4c86a",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "17e0a018-7904-4e5f-a333-c806b14164f8",
+                      "label": "Changing Alignment\r",
+                      "type": "Text",
+                      "value": "As a character’s viewpoints change you may choose to alter the condition you meet to fulfill your alignment or change to a different alignment entirely. The rulebook contains generic alignment options beyond those your class provides.\r\n",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Rule References"
+    },
+    {
+      "id": "1133a877-cd9a-4da0-8c8a-a083bdfdce1f",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a0664419-0178-4fb4-ae26-790a38f8c341",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "fa570ec0-c50c-431c-ad95-29c41fcf04c7",
+                      "label": "Hireling Moves &amp; Rules",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "a3116294-ff19-4c98-adae-7ebeecb40a57",
+                      "label": "Order Hireling\n",
+                      "type": "Text",
+                      "value": "When a <b>hireling finds themselves in a dangerous, degrading, or just flatout crazy situation due to your orders</b>, roll+Loyalty.\n\n*On a 10+ they stand firm and carry out the order.\n\n*On a 7–9 they do it for now, but come back with serious demands later. Meet them, or the hireling quits on the worst terms.\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "07bca755-3c29-4ef3-b209-2267c7155a59",
+                      "label": "Hireling Quality\n",
+                      "type": "Text",
+                      "value": "Hirelings start with a number of points to distribute across their loyalty and skills based on what type of steading they were recruited in.\n\n<b>Villages </b>— 2–5 points\n<b>Keeps </b>— 5–8 points\n<b>Towns </b>— 4–6 points\n<b>Cities </b>— 6–10 points\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "5652129d-21f1-46d0-8046-de3246148986",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "7b2d9cf3-3553-4671-a161-bcee21dd165d",
+                      "label": "Recruit",
+                      "type": "Text",
+                      "value": "When you <b>put out word that you’re looking to hire help</b>, roll. If you make it known...\n\n...that your pay is generous, take +1\n...what you’re setting out to do, take +1\n...that they’ll get a share of whatever you find, take +1\nIf you have a useful reputation around these parts, take +1\n\n*On a 10+, you’ve got your pick of a number of skilled applicants, your choice who you hire, no penalty for not taking them along.\n\n*On a 7–9, you’ll have to settle for someone close to what you want or turn them away.\n\n*On a 6-, someone influential and ill-suited declares they’d like to come along (a foolhardy youth, a loose-cannon, or a veiled enemy, for example), bring them and take the consequences or turn them away. If you turn away applicants you take -1 forward to recruit.\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "22a284fb-dd2c-4893-a571-5656add8c4ac",
+                      "label": "Gain or Lose Allegiance\n",
+                      "type": "Text",
+                      "value": "When you <b>offer a hireling a bonus or show them special kindness</b>, take +1 Loyalty forward with them.\n\nWhen you <b>treat your hireling with disrespect</b>, take -1 Loyalty forward with them.\n\nWhen you <b>achieve a great deed with the help of a hireling</b>, they gain 1 Loyalty.\n\nWhen you <b>suffer great failure or defeat with a hireling by your side</b>, they lose 1 Loyalty.\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "31c380d3-501f-40e3-ab97-4d4f1e129b62",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "4bd81dbc-964a-40d7-b096-e4eaeb37eab6",
+                      "label": "Paying Hirelings\n",
+                      "type": "Text",
+                      "value": "All hirelings come with a cost that the GM will tell you. Common costs are:\n\n● The Thrill of Victory \n● Fame and Glory\n● Money \n● Debauchery\n● Uncovered Knowledge \n● Good Performed\r\n\nWhen it has been an unreasonably long time since a hireling was paid, they take -1 Loyalty ongoing until their cost is met.\r\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "616c8fd6-7a94-4c3e-a29f-1b212e1ad0e3",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "844dc9b4-76ff-4883-ac1b-40ce62b7553f",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "c8ef717e-c3bd-4b29-8d95-5817e9e461ce",
+                      "label": "Hireling Skills",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "78267474-248a-4fe5-a8fe-164831fff1b1",
+                      "label": "Adept",
+                      "type": "Text",
+                      "value": "<i>A weak mage, able to boost the spells of others.</i>\n\n<b><i>Arcane Assistance</i></b>\nWhen an <b>adept aids in the casting of a spell of lower level than their skill</b>, the spell’s effects have greater range, duration, or potency, but any negative effects incurred from the casting are focused on the adept first. The exact effects of the adept is up to the GM according to the situation and the spell, though they will tell the player before the spell is cast.\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "2d320eaf-e78c-46f6-b495-950c8c1254cd",
+                      "label": "Protector",
+                      "type": "Text",
+                      "value": "<i>Protectors stand between their employer and harm.</i>\n\n<b><i>Sentry</i></b>\nWhen a <b>protector stands between you and an attack</b> you increase your armor against that attack by the defender’s skill, then reduce their skill by 1 until they receive healing or have time to mend.\n\n<b><i>Intervene</i></b>\nWhen a <b>protector helps you defy danger</b> you may opt to take +1 from their aid. If you do you cannot get a 10+ result, a 10+ instead counts as a 7–9.\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "994b6c0d-3332-4ade-908c-ce6b60fb6544",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "af381f8e-30ca-4991-b442-db98acf81f2c",
+                      "label": "Burglar",
+                      "type": "Text",
+                      "value": "<i>Burglars have illicit talents, especially with traps.</i>\n\n<b><i>Experimental Trap Disarming</i></b>\nWhen a burglar leads the way they can detect traps almost in time. If a <b>trap would be sprung while a burglar is leading the way</b> the burglar suffers the full effects but the players get +skill against the trap and add the burglar’s skill to their armor against the trap. Most traps leave a burglar in need of immediate healing. If the players Make Camp near the trap, the burglar can disarm it by the time camp is broken.\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "b20244b1-8046-4fce-b7dc-36dc4b8b8ac0",
+                      "label": "Priest",
+                      "type": "Text",
+                      "value": "<i>Low ranking clergy, able to call upon minor aid.</i>\n\n<b><i>Ministry</i></b>\nWhen you <b>make camp with a priest</b> if you would normally heal you heal +skill HP.\n\n<b><i>First Aid</i></b>\nWhen a <b>priest staunches your wounds</b> heal 2×skill HP. You take -1 forward as their healing is painful and distracting.\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "c333d073-73fc-42b9-9673-c252dc02d8e9",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "ab3e4b5e-1702-470b-a256-ea847b1a8b3a",
+                      "label": "Minstrel",
+                      "type": "Text",
+                      "value": "\r<i>They bring cheer, and a keen knack for haggling.</i>\n\n<b><i>A Hero’s Welcome</i></b>\nWhen you enter a place of food, drink, or entertainment with a minstrel you will be treated as a friend by everyone present (unless your actions prove otherwise). You also subtract the minstrel’s skill from all prices in town.\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "c6736fc6-b717-4f85-bb1b-38a698301c98",
+                      "label": "Warrior",
+                      "type": "Text",
+                      "value": "<i>Handy with a weapon, but not a master of one.</i>\n\n<b><i>Man-at-arms</i></b>\nWhen you deal damage while a warrior aids you add their skill to the damage done. If your attack results in consequences (like a counter attack) the man-at-arms takes the brunt of it.\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "7b499bbb-a4ad-42aa-b305-ee61b3b59792",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "7b04ddfb-12e6-4df9-a04e-f0a6d7478945",
+                      "label": "Tracker",
+                      "type": "Text",
+                      "value": "<i>Knows the secrets of following a trail.</i>\n\n<b><i>Track</i></b>\nWhen a <b>tracker is given time to study a trail while Making Camp</b>, when camp is broken they can follow the trail to the next major change in terrain, travel, or weather.\n\n<b><i>Guide</i></b>\nWhen a <b>tracker leads the way</b> you automatically succeed on any Perilous Journey of a distance (in rations) lower than the tracker’s skill.\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "9c932142-ce14-4a1a-b634-bf1ecb3458d0",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c067291c-5522-4d79-bf71-b5dc15ed4c04",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "0128c97d-42f1-4b55-bf9c-3d65da5ab774",
+                      "label": "Hirelings",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "ee9d1270-c5b6-42a8-8cc5-7816b8f36688",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "65d423b8-1a02-4d0d-a751-4ea7e728b649",
+                      "label": "Name:",
+                      "type": "Text",
+                      "value": "Cost:",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "3374a433-c6db-4e32-8a40-ff8854637cf9",
+                      "label": "Loyalty",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "446d1819-392f-40c4-91c1-fad764943993",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "159e6795-0e0f-497c-a0e8-b8c577265074",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1a74c40f-1318-495d-8d04-e86637771cdc",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2a56ddcf-0848-4d8e-a18e-2946ec825790",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8ec3b249-ed57-43b4-b652-c758c747ce1e",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "42bdcdf6-5a89-4f0d-94a8-01030b20ddf9",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Notes:",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7c408300-c934-423a-b7eb-a041da20148f",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "8c9644c7-af21-44ac-8521-7d0c1ddfcb71",
+                      "label": "Name:",
+                      "type": "Text",
+                      "value": "Cost:",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "d04ec35a-1985-482c-97e0-e5d9b69e3804",
+                      "label": "Loyalty",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "25bf852e-8479-4e68-b49f-8097730ed298",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "44fd765a-37d5-4c47-8b24-b6d3a3243678",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "404599b5-cd0e-449c-ad42-39eee0c5354a",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "afe83745-2c0f-43ba-bb5b-f63051f4a18d",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "6a471032-537d-4ef1-a8b4-f275aef0a825",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "95090c54-ad48-4c68-8f2d-099d17208524",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Notes:",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "8a5b005b-13d2-48a7-8c6d-3b3bbc37f834",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "102d81cf-a195-488d-8e9e-0e95ce489ee1",
+                      "label": "Name:",
+                      "type": "Text",
+                      "value": "Cost:",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "321f903c-044d-4fd5-8c97-cdd752a99ab7",
+                      "label": "Loyalty",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "b92b68ba-8be6-404f-aefe-a0841c54ac76",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "01387ace-075b-41cb-9d2e-3f851c1f145f",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "74ff509f-3170-4588-9f84-42531db69ab5",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5fcfa1b6-9200-48c2-a23e-d163350adf42",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d58d6f06-c2ca-417f-8264-86afb199f1cd",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "6bd7a5d9-2f7b-45d4-9fb2-0acf98f87d7a",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Notes:",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1e95f6c6-2abe-48d5-aab2-8d5eaa747a58",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "9ae20d28-0764-4453-a006-d92a19e42450",
+                      "label": "Name:",
+                      "type": "Text",
+                      "value": "Cost:",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "04f784e0-fb32-4ffb-95d9-6dad595dc0cd",
+                      "label": "Loyalty",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.33 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "18d5bc26-0c11-4a2e-8399-7be9cfd1d7bb",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "175e3283-be8d-46eb-abaa-665e2454ae59",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8e9b299d-eea8-412c-9cb8-db2db5440d9e",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3c0270d6-32b9-4c8d-9678-8f2f6ace555b",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "6d82de2c-f4f4-407b-aa89-e67e8cc3bef0",
+                      "label": "Skill:",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "df394a3f-089d-4580-bd04-93de013be296",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Notes:",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "65ded8f5-84b7-46dd-b1c6-60f3612a6c02",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "1c17d53b-01ba-4dc6-8ae1-ab1acd693e94",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Hirelings"
+    },
+    {
+      "id": "12d3ea65-78f5-43fc-9b27-3aea50420a05",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "420dcfcb-ae2b-4b2a-8050-ac626e5bdca2",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "2f9e2bbd-df89-4d75-a616-651e738ec9f7",
+                      "label": "Equipment",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "fcef9c3e-3992-4466-b3ef-9007216d4154",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "b1321954-ba29-4f66-acdd-95f39f54685d",
+                      "label": "Dungeon Gear",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "69c07c99-ac3d-4648-b0ae-c7cfd3874f80",
+                      "label": "Adventuring Gear",
+                      "type": "Text",
+                      "value": "5 uses, 1 weight, 20 coins",
+                      "meta": {
+                        "helperText": "Adventuring gear is a collection of useful mundane items such as chalk, poles, spikes, ropes, etc. When you rummage through your adventuring gear for some useful mundane item, you find what you need and mark off a use.<br>"
+                      }
+                    },
+                    {
+                      "id": "fd62f93a-9b6f-4121-aceb-6ef2691a6990",
+                      "label": "Bandages",
+                      "type": "Text",
+                      "value": "3 uses, slow, 0 weight, 5 coins\r",
+                      "meta": {
+                        "helperText": "When you have a few minutes to bandage someone else’s wounds, heal them of 4 damage and expend a use.<br>"
+                      }
+                    },
+                    {
+                      "id": "439c29ab-f0bb-4646-ad58-c457cc54ff6c",
+                      "label": "Poultices and Herbs",
+                      "type": "Text",
+                      "value": "2 uses, slow, 1 weight, 10 coins\r\n",
+                      "meta": {
+                        "helperText": "When you carefully treat someone’s wounds with poultices and herbs, heal them of 7 damage and expend a use.\n<br>"
+                      }
+                    },
+                    {
+                      "id": "13de8268-1ca4-491d-919a-fe0a14b7cf26",
+                      "label": "Antitoxin",
+                      "type": "Text",
+                      "value": "0 weight, 10 coins\n",
+                      "meta": {
+                        "helperText": "When you drink antitoxin, you’re cured of one poison affecting you.<br>"
+                      }
+                    },
+                    {
+                      "id": "ff42c9d1-f341-4687-9851-e8d2bd41d9b7",
+                      "label": "Healing Potion",
+                      "type": "Text",
+                      "value": "0 weight, 50 coins\r\n",
+                      "meta": {
+                        "helperText": "When you drink an entire healing potion, heal yourself of 10 damage or remove one debility, your choice.\n<br>"
+                      }
+                    },
+                    {
+                      "id": "507e323d-01cc-4f07-9c5a-aebc025cb65a",
+                      "label": "Keg of Dwarven Stout",
+                      "type": "Text",
+                      "value": "4 weight, 10 coins\n",
+                      "meta": {
+                        "helperText": "When you open a keg of dwarven stout and let everyone drink freely, take +1 to your Carouse roll. If you drink a whole keg yourself, you are very, very drunk.\n<br>"
+                      }
+                    },
+                    {
+                      "id": "306e47e7-1ea2-4afa-8f1a-6c3093375e94",
+                      "label": "Bag of Books",
+                      "type": "Text",
+                      "value": "5 uses, 2 weight, 10 coins\r\n",
+                      "meta": {
+                        "helperText": "When your bag of books contains just the right book for the subject you’re spouting lore on, consult the book, mark off a use, and take +1 to your roll.\n<br>"
+                      }
+                    },
+                    {
+                      "id": "0f862aee-81ad-48c4-a855-64354ba4656c",
+                      "label": "Halfling Pipeleaf",
+                      "type": "Text",
+                      "value": "6 uses, 0 weight, 5 coins\n",
+                      "meta": {
+                        "helperText": "When you share halfling pipeleaf with someone, expend two uses and take +1 forward to parley with them.<br>"
+                      }
+                    },
+                    {
+                      "id": "5625e250-2f26-4b2d-9ec2-50f602d4309e",
+                      "label": "Dungeon Rations",
+                      "type": "Text",
+                      "value": "Ration, 5 uses, 1 weight, 3 coins\n",
+                      "meta": {
+                        "helperText": "Not tasty, but not bad either<br>"
+                      }
+                    },
+                    {
+                      "id": "18edc484-2e12-4080-85f7-6e39358ec540",
+                      "label": "Personal Feast",
+                      "type": "Text",
+                      "value": "Ration, 1 use, 1 weight, 10 coins\n",
+                      "meta": {
+                        "helperText": "Ostentatious to say the least.\n<br>"
+                      }
+                    },
+                    {
+                      "id": "0887d71b-a0bd-401b-8a3f-174a0ec5be77",
+                      "label": "Elven Bread",
+                      "type": "Text",
+                      "value": "Ration, 7 uses, 1 weight, 10 coins\n",
+                      "meta": {
+                        "helperText": "Only the greatest of elf-friends are treated to this rare delicacy.<br>"
+                      }
+                    },
+                    {
+                      "id": "7e569ebb-fcbc-4f56-98fd-642808e48f25",
+                      "label": "Dwarven Hardtack",
+                      "type": "Text",
+                      "value": "Requires Dwarf, ration, 7 uses, 1 weight, 3 coins\r\n",
+                      "meta": {
+                        "helperText": "Dwarves say it tastes like home. Everyone else&nbsp;says it tastes like home, if home is a hog farm, and on fire.\n<br>"
+                      }
+                    },
+                    {
+                      "id": "7e8708b4-a28d-4376-a7fc-c8650f8e9865",
+                      "label": "Poisons",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "6070ce0c-ba8c-40d0-b94e-5d4fc583b8ff",
+                      "label": "Oil of Tagit",
+                      "type": "Text",
+                      "value": "Dangerous, applied, 0 weight, 15 coins",
+                      "meta": {
+                        "helperText": "The target falls into a light sleep."
+                      }
+                    },
+                    {
+                      "id": "5cdba649-64d9-457e-b192-e267433fd1a7",
+                      "label": "Bloodweed",
+                      "type": "Text",
+                      "value": "Dangerous, touch, 0 weight, 12 coins",
+                      "meta": {
+                        "helperText": "Until cured, whenever the afflicted rolls damage, they roll an additional d4 and subtract that result from their normal damage.\n<br>"
+                      }
+                    },
+                    {
+                      "id": "b30d2ed5-276c-41bc-8515-86c812223eb3",
+                      "label": "Goldenroot",
+                      "type": "Text",
+                      "value": "Dangerous, applied, 0 weight, 20 coins",
+                      "meta": {
+                        "helperText": "The target treats the next creature they see as a trusted ally, until proved otherwise.<br>"
+                      }
+                    },
+                    {
+                      "id": "ae90b738-a59a-4dee-92a5-79f8b5d190f5",
+                      "label": "Serpent’s Tears",
+                      "type": "Text",
+                      "value": "Dangerous, touch, 0 weight, 10 coins\r",
+                      "meta": {
+                        "helperText": "Anyone dealing damage against the target rolls twice and takes the better result.&nbsp;<br>"
+                      }
+                    },
+                    {
+                      "id": "4e57c227-d087-4d53-bf22-5263deea6a1e",
+                      "label": "Transport",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "38ad4c82-c6cc-4ec4-89b6-9ce3a61bbde9",
+                      "label": "Cart and Donkey",
+                      "type": "Text",
+                      "value": "load 20, 50 coins",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7ea5e530-585f-447d-80c6-254c37fd467b",
+                      "label": "Horse",
+                      "type": "Text",
+                      "value": "load 10, 75 coins",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e4839440-0225-4c9e-9691-cad47a1accc4",
+                      "label": "Warhorse",
+                      "type": "Text",
+                      "value": "load 12, 400 coins",
+                      "meta": {}
+                    },
+                    {
+                      "id": "198af590-7866-4b62-82a4-a92558ce9639",
+                      "label": "Wagon",
+                      "type": "Text",
+                      "value": "load 40, 150 coins",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8a8230e6-bb9c-492d-9000-3f156d4a99cf",
+                      "label": "Barge",
+                      "type": "Text",
+                      "value": "load 15, 50 coins\r",
+                      "meta": {}
+                    },
+                    {
+                      "id": "0933f084-7e0b-4ecc-98a9-f09326eb5fcb",
+                      "label": "River boat",
+                      "type": "Text",
+                      "value": "load 20, 150 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a0405cc2-f7db-4b02-aff0-a50a7b97940c",
+                      "label": "Merchant ship",
+                      "type": "Text",
+                      "value": "load 200, 5,000 coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2b9c1bc9-f9a0-49e4-b997-ce22ea6e7fec",
+                      "label": "War ship",
+                      "type": "Text",
+                      "value": "load 100, 20,000 coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f4521fa5-b7e6-4b2d-9eb6-55d21424ce71",
+                      "label": "Passage on a safe route",
+                      "type": "Text",
+                      "value": "1 coin\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c50ba174-c01e-45de-bf39-052b85064ee1",
+                      "label": "Passage on a tough route",
+                      "type": "Text",
+                      "value": "10 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "54db09fd-fe0f-4dbd-b2f6-5e31d32e3123",
+                      "label": "Passage on a dangerous route",
+                      "type": "Text",
+                      "value": "100 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b36e083d-2fa9-4040-a3c4-050688f5a68f",
+                      "label": "Meals",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "bc92ccbd-6589-4b65-888b-438a536cf861",
+                      "label": "A hearty meal for one",
+                      "type": "Text",
+                      "value": "1 coin\r",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b0998735-264d-41ee-9ae2-32501cda8612",
+                      "label": "A poor meal for a family",
+                      "type": "Text",
+                      "value": "1 coin\r",
+                      "meta": {}
+                    },
+                    {
+                      "id": "bb2ce368-ea54-4b14-97f8-e6e421bc75d3",
+                      "label": "A feast",
+                      "type": "Text",
+                      "value": "15 coins per person\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a2bf75cf-c260-453e-b73c-07e87e5d2d8b",
+                      "label": "Bribes",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "73755787-059d-4a56-b7ef-f43985b9fd35",
+                      "label": "Peasant dowry",
+                      "type": "Text",
+                      "value": "20-Charisma coins",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8a954ce7-fcb5-4c22-a066-3629f1f19fee",
+                      "label": "Governmental",
+                      "type": "Text",
+                      "value": "50-Charisma coins",
+                      "meta": {}
+                    },
+                    {
+                      "id": "109a0af8-2b59-4ea9-b68b-db7617e480f8",
+                      "label": "Compelling",
+                      "type": "Text",
+                      "value": "80-Charisma coins",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ada1c22c-0129-4401-bd0a-1e7a59b85eac",
+                      "label": "“Protection” for a small business",
+                      "type": "Text",
+                      "value": "100-Charisma coins\r",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3ed73066-2996-4914-8b0d-06cec6776a8b",
+                      "label": "An offer you can’t refuse",
+                      "type": "Text",
+                      "value": "500-Charisma coins\r\n",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "40895cde-0d34-4f1b-8bd2-358fc6be1257",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "3c748f56-bf5e-4181-86cd-cf7e60455ab4",
+                      "label": "Weapons",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": true,
+                        "helperText": "Weapons vary: e.g. ‘dull sword’ -1 damage, ‘masterwork knife’ +1 damage"
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "5e9df04a-9cb7-4b25-8f01-7f6b471a17d2",
+                      "label": "Ragged Bow",
+                      "type": "Text",
+                      "value": "near, 2 weight, 15 coins\r",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2e207831-e2b5-4a67-a429-19e5c03b13f2",
+                      "label": "Fine Bow",
+                      "type": "Text",
+                      "value": "near, far, 2 weight, 60 coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d9be16e6-1374-4716-ad44-4f882e370058",
+                      "label": "Hunter’s Bow",
+                      "type": "Text",
+                      "value": "near, far, 1 weight, 100 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "83c122af-2bce-4fa6-ad47-90839602c95b",
+                      "label": "Crossbow",
+                      "type": "Text",
+                      "value": "near, +1 damage, reload, 3 weight, 35 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b38b38d7-2e69-47e0-8032-c64eda91e748",
+                      "label": "Bundle of Arrows",
+                      "type": "Text",
+                      "value": "3 ammo, 1 weight, 1 coin\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "864dd271-6716-4c33-8eb6-53d698d9c819",
+                      "label": "Elven Arrows",
+                      "type": "Text",
+                      "value": "4 ammo, 1 weight, 20 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "def83c48-b5e7-4022-86b1-f9b30dcac853",
+                      "label": "Club, Shillelagh",
+                      "type": "Text",
+                      "value": "close, 2 weight, 1 coin\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7fb7b0c7-dff6-4e93-8650-4ea8d8dc72ef",
+                      "label": "Staff",
+                      "type": "Text",
+                      "value": "close, two-handed, 1 weight, 1 coin\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "542d4179-9a36-4c30-99e2-f45c015db9d2",
+                      "label": "Dagger, Shiv, Knife",
+                      "type": "Text",
+                      "value": "hand, 1 weight, 2 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ad70b01c-5f67-4faf-939a-45f95490f534",
+                      "label": "Throwing Dagger",
+                      "type": "Text",
+                      "value": "thrown, near, 0 weight, 1 coin\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4f8a7054-f1f5-435e-8da8-a7e750539215",
+                      "label": "Short Sword, Axe, Warhammer, Mace",
+                      "type": "Text",
+                      "value": "close, 1 weight, 8 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7631825a-d8c1-4043-924e-e538e97089b4",
+                      "label": "Long Sword, Battle Axe, Flail",
+                      "type": "Text",
+                      "value": "close, +1 damage, 2 weight, 15 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ac2a553d-f1ea-47dc-b776-799d1a3c836f",
+                      "label": "Spear",
+                      "type": "Text",
+                      "value": "reach, thrown, near, 1 weight, 5 coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8c46592e-e704-48bf-a4cd-ef29173cfcc5",
+                      "label": "Halberd",
+                      "type": "Text",
+                      "value": "reach, +1 damage, two-handed, 2 weight, 9 coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "03a20693-26d5-435c-a18f-cb557a965bee",
+                      "label": "Rapier",
+                      "type": "Text",
+                      "value": "close, precise, 1 weight, 25 coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "51c1a8c8-1f7b-4cb1-9a86-8f61274835a8",
+                      "label": "Dueling Rapier",
+                      "type": "Text",
+                      "value": "close, 1 piercing, precise, 2 weight, 50 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ae607c64-be3d-47f2-a931-1238e4c52c03",
+                      "label": "Armor",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "e9af73c4-82f0-49d2-8c11-7a332020cd77",
+                      "label": "Leather, Chainmail",
+                      "type": "Text",
+                      "value": "1 armor, worn, 1 weight, 10 coins\r",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d3f30e41-cc2f-469a-837d-5bd822bfe8b9",
+                      "label": "Scale Mail",
+                      "type": "Text",
+                      "value": "2 armor, worn, clumsy, 3 weight, 50 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "85c2467f-305e-483b-90da-47a2e41e43e1",
+                      "label": "Plate",
+                      "type": "Text",
+                      "value": "3 armor, worn, clumsy, 4 weight, 350 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "58ff7278-12ff-4d64-87f5-10823ecd1f33",
+                      "label": "Shield",
+                      "type": "Text",
+                      "value": "+1 armor, 2 weight, 15 coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "aebc1b9d-ca71-408d-a6e8-84930582ca95",
+                      "label": "Services",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "032cf31f-5853-4dfe-a034-63998e45e5af",
+                      "label": "Healing from a chirurgeon",
+                      "type": "Text",
+                      "value": "5 coins\r",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cae9cf78-d4d0-4ce7-b200-98f461f486a6",
+                      "label": "Repairs to a mundane item",
+                      "type": "Text",
+                      "value": "25% of the item’s cost\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e9faeddc-360d-44ca-b433-21c6745e6561",
+                      "label": "A custom item from a blacksmith",
+                      "type": "Text",
+                      "value": "Base Item + 50 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c06d2799-4f00-4b80-b438-6ed56b4641fd",
+                      "label": "An evening of song and dance",
+                      "type": "Text",
+                      "value": "18-Charisma coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "0b2326b5-9309-4bc8-b9d8-5053393651ac",
+                      "label": "A night’s “companionship”",
+                      "type": "Text",
+                      "value": "20-Charisma coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cfdf6954-9130-44d4-9a4c-5a71bd639065",
+                      "label": "A week’s stay at a peasant inn",
+                      "type": "Text",
+                      "value": "14-Charisma coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "19de2ebb-4261-4b15-8fe8-79d7695b9adc",
+                      "label": "A week’s stay at a civilized inn",
+                      "type": "Text",
+                      "value": "30-Charisma coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "24739227-09cc-4f26-a053-1237c25876f3",
+                      "label": "A week’s stay at the fanciest inn in town",
+                      "type": "Text",
+                      "value": "43-Charisma coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8e98d8c5-acb1-4650-947a-d59544a65d8d",
+                      "label": "A week’s unskilled mundane labor",
+                      "type": "Text",
+                      "value": "10 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5b7788cf-ba73-4700-82d6-50e1f6ca8aa7",
+                      "label": "A month’s pay for enlistment in an army",
+                      "type": "Text",
+                      "value": "30 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "bbea6b6d-c4eb-42e6-bf2f-1995ab14e07d",
+                      "label": "Escort for a day along a bandit-infested road ",
+                      "type": "Text",
+                      "value": "20 coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d05ff5d3-9b8b-49ac-8f60-48d72b704f30",
+                      "label": "Escort for a day along a monster-infested road",
+                      "type": "Text",
+                      "value": "54 coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3cfd18d7-e4b3-42d8-bbe3-2419c8ec67d9",
+                      "label": "A run-of-the-mill killing",
+                      "type": "Text",
+                      "value": "5 coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "664b2d94-40ef-4a9c-97b6-e5d7e5ef3df7",
+                      "label": "An assassination",
+                      "type": "Text",
+                      "value": "120 coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3e2ccda9-7f1b-4204-aceb-77d6b619872c",
+                      "label": "A month’s prayers for the departed",
+                      "type": "Text",
+                      "value": "1 coin\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "03158745-d76a-4c0c-a3c7-f964567af256",
+                      "label": "Gifts and Finery",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "83f89233-04dc-4ce5-b2ae-1457d89b15e0",
+                      "label": "Peasant gift",
+                      "type": "Text",
+                      "value": "1 coin\r",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d92c0134-2f00-4a44-87d2-df6a6fac3e96",
+                      "label": "Fine gift",
+                      "type": "Text",
+                      "value": "55 coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "97d5393b-fd6e-4158-a5b3-27f9aca6dd1d",
+                      "label": "Noble gift",
+                      "type": "Text",
+                      "value": "200 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "dbd7ef5c-83be-4219-91a6-6f92315d0843",
+                      "label": "Ring or cameo",
+                      "type": "Text",
+                      "value": "75 coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "14cd94a0-3616-4853-96d8-6a82b49d8147",
+                      "label": "Finery",
+                      "type": "Text",
+                      "value": "105 coins\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d047d245-350a-4513-8aea-3959ebeba8e0",
+                      "label": "Fine tapestry",
+                      "type": "Text",
+                      "value": "350+ coins\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "0079a355-ea76-4bd4-b1b1-f9c1c5607c4f",
+                      "label": "Kingly Crown",
+                      "type": "Text",
+                      "value": "5,000 coins\r\n",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "022e6569-501e-4de1-b124-7542f625760e",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "8afceea8-4b50-4385-b30a-96d0b0106a40",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Equipment"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "theme": { "hideSectionBackground": true }
+}

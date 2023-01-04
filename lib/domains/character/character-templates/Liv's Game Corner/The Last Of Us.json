@@ -1,0 +1,303 @@
+{
+  "fariType": "character",
+  "id": "525fae99-5069-4c98-a9fa-315cb825f1ca",
+  "lastUpdated": 1669398491,
+  "name": "",
+  "pages": [
+    {
+      "id": "66ead8a5-24aa-4220-867b-e73c77199ab8",
+      "label": "CHARACTER",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "dd83e5f3-247d-4450-89d8-8525385c9e5d",
+                  "label": "INFORMATION",
+                  "blocks": [
+                    {
+                      "id": "87bb4db4-9c38-4764-8b6d-deffbdadf0ef",
+                      "label": "PRONOUNS",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2e9b3ccb-5341-4477-a589-ed7457067c42",
+                      "label": "STRENGTHS",
+                      "type": "Text",
+                      "value": "1.\n2.\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "96ba81f6-461d-4f10-9f79-1298b635bd56",
+                      "label": "QUIRKS",
+                      "type": "Text",
+                      "value": "1.\n2.\n",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "9d8896fb-88ca-46b5-a6e6-eb85b8bb8c62",
+                  "label": "HEALTH &amp; STUNT",
+                  "blocks": [
+                    {
+                      "id": "8b74021b-13c5-4b08-bb7a-1d9bc6eae5a2",
+                      "label": "STRESS",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Remove -1 for laying low<br>Remove -2 with med kit<br>"
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "bd708929-dabe-40c5-85c7-2cf7ebf841b1",
+                      "label": "MED KIT",
+                      "type": "Text",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "de342115-18a0-4c6f-af42-a8f1044882c6",
+                      "label": "PRESS YOUR LUCK",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Use D12 — To Reset, “catch your breath”<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9ddcdde2-3a0d-4ea2-a3b8-afba46de3115",
+                  "label": "SKILLS",
+                  "blocks": [
+                    {
+                      "id": "76204602-eade-4509-ad30-de5c031e1a02",
+                      "label": "",
+                      "type": "InfoText",
+                      "value": "Assign — D10, D8, D6",
+                      "meta": {}
+                    },
+                    {
+                      "id": "70314f93-0801-4419-892f-7a9b6ba44e38",
+                      "label": "BUFF",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "0c915dfc-2d76-46c7-9a58-15e9d5e576c9",
+                      "label": "QUICK",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c4a65875-19ca-4026-ab60-f17167912170",
+                      "label": "SNEAK",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ae35ff44-e33c-46eb-95ed-80c38ae44ca1",
+                      "label": "HIT",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "05b97055-6e19-4c52-b917-83689b801226",
+                      "label": "SHREWD",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8f426961-4156-4295-aeac-1c70f2b00d27",
+                      "label": "WINK",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "35d516a5-a59d-4042-a408-f84516104d53",
+                  "label": "BACKPACK",
+                  "blocks": [
+                    {
+                      "id": "bc6cfa3c-76ea-458c-a520-010acc6c25d6",
+                      "label": "",
+                      "type": "InfoText",
+                      "value": "Minimum — D6",
+                      "meta": {}
+                    },
+                    {
+                      "id": "fbb0a419-7c60-446a-8eff-ee6318e399f2",
+                      "label": "ITEM #1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c3ed3365-4d9c-47b0-a0a7-a1ee6b1f0a21",
+                      "label": "ITEM #2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "bd2bdd9c-58de-47df-b17d-532bc1ba115f",
+                      "label": "ITEM #3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "38c3a717-b8b6-4598-b21a-a3b856028391",
+                      "label": "GEAR",
+                      "type": "Text",
+                      "value": "Initial: d\nCurrent: d\n",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "f99e96ef-6032-4c0e-9ba8-271cba5c0c1d",
+                  "label": "                                CRAFTING",
+                  "blocks": [
+                    {
+                      "id": "69655214-99d6-47ae-a55c-01e985b1d29a",
+                      "label": "BLADE",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "73517ed9-0bfd-4cad-974c-d1194cbed88f",
+                      "label": "ALCOHOL",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "9225f3ab-081a-453e-85f8-ba9d86846ad3",
+                      "label": "SHROUD",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "ed47ba62-8de6-468f-88d6-ded6b3ea62f8",
+                  "label": "MATERIALS",
+                  "blocks": [
+                    {
+                      "id": "5fecf4ad-d411-42fb-b06c-b7b2affecb39",
+                      "label": "CLOTH",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "a40d6097-1c9d-4358-b001-3f09730b0c3d",
+                      "label": "ADHESIVE",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "46531577-666d-41c8-84aa-819a39baf22f",
+                      "label": "EXPLOSIVE",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "theme": {
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Lato&display=swap');",
+    "backgroundColor": "#ffffff",
+    "pageHeadingFontFamily": "Barlow Condensed",
+    "sectionHeadingFontFamily": "Barlow Condensed",
+    "labelFontFamily": "Barlow Condensed",
+    "pageHeadingFontSize": 1.25,
+    "hideSectionBackground": false,
+    "sectionHeadingFontSize": 2.125,
+    "labelFontSize": 1.5,
+    "textFontSize": 1,
+    "textFontFamily": "Lato",
+    "pageHeadingFontWeight": ""
+  },
+  "version": 6
+}

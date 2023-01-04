@@ -185,7 +185,7 @@ export const Events: Array<ICard> = [
   { label: "Wealth" },
   { label: "Poverty" },
   { label: "Betrayal" },
-  { label: "Dept" },
+  { label: "Debt" },
   { label: "Duty" },
   { label: "Training" },
   { label: "Research" },

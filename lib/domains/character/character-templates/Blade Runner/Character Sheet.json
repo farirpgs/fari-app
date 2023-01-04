@@ -1,0 +1,801 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1672074100,
+  "name": "Blade Runner RPG Character Sheet Template",
+  "pages": [
+    {
+      "id": "7d04b98e-97c3-41b8-82aa-7026a4b74724",
+      "label": "Main",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "534916fe-c6c2-4d19-a3cd-19b732b32b68",
+                  "label": "NAME/TYPE",
+                  "blocks": [
+                    {
+                      "id": "224e59b0-05b5-4adc-b811-2931c225fbf3",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3956a08a-ad0a-4617-bace-e9241219e301",
+                      "label": "Archetype",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "fc2ac1a7-959d-4164-b55d-942213de136c",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "01377e0f-ab1b-4bb4-8b49-e273c87ffa65",
+                      "label": "Human",
+                      "type": "Text",
+                      "meta": { "checked": false, "width": 1 }
+                    },
+                    {
+                      "id": "f86a723c-3d8a-4712-89b2-303b40ebb93e",
+                      "label": "Replicant<br>",
+                      "type": "Text",
+                      "meta": { "checked": false, "width": 1 }
+                    },
+                    {
+                      "id": "26b84b81-20e8-4d97-9b1f-78c29fc76f27",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "587ab3b1-527b-446f-a0d6-6d1daffbdb65",
+                  "label": "KEY FEATURES",
+                  "blocks": [
+                    {
+                      "id": "d74274e5-ebb3-4ab6-8e0f-13b61d1e1889",
+                      "label": "Key Memory",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "163a54f7-9c18-4656-acc7-277e0b7f48bd",
+                      "label": "Key Relationship",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "0edf945c-eda6-4ebc-8d68-b06006ef3609",
+                      "label": "Home",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "cbc583e1-bbff-48ad-b8ee-c4fe835ea219",
+                      "label": "Years on the Force",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "32203944-4fd4-47b9-81f3-6e2eac54a7f4",
+                  "label": "REFERENCES",
+                  "blocks": [
+                    {
+                      "id": "6871c3f4-3e3d-47c0-8a78-df880c0dd595",
+                      "label": "",
+                      "type": "Link",
+                      "meta": {
+                        "hasDisplayName": true,
+                        "helperText": "Blade Runner: The Roleplaying Game is ©2017 Alcon Entertainment, LLC. All rights reserved. Published by Free League Publishing.<br><br>*This Fari character sheet was independently designed by Discord user PistolPants#8314 and is not affiliated with the original game designers and publishers."
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "a7850a6a-1ac6-48ec-bc56-e87d338d1b3c",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "5166d7d5-ffea-443a-a527-eb6846a07f22",
+                      "label": "",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": false, "width": 1 },
+                      "value": "https://www.bladerunner-rpg.com/"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "27b52c2a-ed53-4460-92de-bf75177d6ef0",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d727fe80-ed2b-43a8-869f-dda288b8ec37",
+                  "label": "ATTRIBUTES &amp; SKILLS",
+                  "blocks": [
+                    {
+                      "id": "e7699730-b828-4128-abfb-1d24cb7e45cb",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Rating: D to A. Base Die: d6 to d12.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "77f56e8b-ef89-4213-bc0e-3c015bddc5b6",
+                      "label": "STRENGTH",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66,
+                        "helperText": ""
+                      }
+                    },
+                    {
+                      "id": "aa3e14d3-11f0-48c6-9a51-f06588d4892c",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "7ade5312-333b-4aa3-bc72-a11dcf357715",
+                      "label": "Force",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "e533c716-5478-48b6-a8af-53bc2ba717fb",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "8e45b6b4-ccf6-45d2-9d98-c05935cc7745",
+                      "label": "Hand-to-Hand Combat",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "b17c8eeb-93a8-4e8a-9b9b-918a0a5993ef",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "38bfbef7-a8ec-4eaa-8bab-604d19fe0f32",
+                      "label": "Stamina",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "c9035f25-1b73-45c9-9836-563307c50f9a",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "bd6e69a7-f75e-48bb-9bcf-860aaa7c07ec",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "hideDivider": false,
+                        "width": 1
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "260cbcdf-4dc5-4aaa-8d8d-f4ecfbac0c39",
+                      "label": "AGILITY",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "670cc390-2788-4304-aeb3-d206bad0abc1",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "fe68ddf6-2fe0-496d-a476-f4d27cf71874",
+                      "label": "Firearms",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "7d178ca0-e63a-4584-9f61-e7eec9220f63",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "315a8fc3-714b-45a8-87de-92b7df1f73a4",
+                      "label": "Mobility",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "adf1ded5-0cc0-4403-affc-ab2df8a607c3",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "193663eb-c8f2-4b98-a104-c623ee86c185",
+                      "label": "Stealth",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "0d27f309-9e0d-4815-9e9a-ab35eff6652a",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "df070476-0bf7-493c-8dfa-3442c68feec0",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "0110f7b5-199e-4223-aa9d-30e3bc785ddc",
+                      "label": "INTELLIGENCE",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "540a3c1b-19d6-406b-8ad5-dc6d48dec5fb",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "acd42ebc-2cf9-422f-8261-3111e151445b",
+                      "label": "Medical Aid",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "18e35ccc-c3a9-4eb8-8db9-6220bd1baf63",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e08b2291-41e1-4b48-899a-572591e6bce9",
+                      "label": "Observation",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "d023da31-8440-4d60-ace1-5cbadbe3e158",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "76b3e894-0fca-4f36-a1ab-48dfc1558301",
+                      "label": "Tech",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "82d3a101-8791-4125-9e47-baf6e45358ee",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "608e4e92-cbb4-4559-8541-9fc6be34ef1e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "64f9eb19-7259-4edb-aa21-b620b9a45cf3",
+                      "label": "Driving",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66,
+                        "helperText": "NOTE: Based on MANEUVERABILITY attribute from vehicles."
+                      }
+                    },
+                    {
+                      "id": "3eff30f4-9f4e-4d5e-a422-623470fd9b64",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "4a4c7911-a453-48c4-a241-90959e714872",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "39bced1d-11e5-4ad8-9371-70bef0f4ea71",
+                      "label": "EMPATHY",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "3b841dbb-e970-4ad5-a83d-5591c0876f30",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "661b7e75-1bea-4745-9958-d7343ea9100f",
+                      "label": "Connections",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "a15118f3-962a-4b85-830e-bb29187cada6",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e4b4b85b-2a54-4dee-b0e8-2bcbd65740d6",
+                      "label": "Insight",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "6b3739a4-adda-4dd6-8bc8-d36a2f0964d7",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e456b5e9-2e89-448d-beb4-60742391ca89",
+                      "label": "Manipulation",
+                      "type": "Skill",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "d4d9b165-b026-4ada-bbfc-c26a7e9d6129",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "20691671-26c0-40f2-9732-484553bb9c38",
+                  "label": "SPECIALTIES",
+                  "blocks": [
+                    {
+                      "id": "476dcd1b-5728-4783-967d-c8df5eadd98d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9ef6da8c-82a5-4a35-8578-1392897bfeaf",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8bcf8e15-6aad-4cec-9403-706ba38f7fcd",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "99613106-d479-4043-8155-07db6961a2e1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4e40d016-76a9-408a-a68e-7bad37059b2f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Attributes/Skills/Specialties"
+    },
+    {
+      "id": "3d4cacb7-449c-4fe7-99e5-307702713270",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "55c6ec7f-da91-4cc9-b873-976288995862",
+                  "label": "HEALTH &amp; RESOLVE",
+                  "blocks": [
+                    {
+                      "id": "d3a44000-c0cb-4e99-b98a-47406ca30cb4",
+                      "label": "HEALTH",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "3",
+                        "isMainPointCounter": false,
+                        "helperText": "(STRENGTH Die Size + AGILITY Die Size) / 4. Round up.",
+                        "width": 0.5
+                      },
+                      "value": "3"
+                    },
+                    {
+                      "id": "5ad645d6-2d17-46e2-9b0a-a6cc9237322e",
+                      "label": "Critical Injuries",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "f9fe9d11-b9fb-41d9-8403-488409c0a8a9",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "d7fdb71c-7054-49d8-9667-107c5013621d",
+                      "label": "RESOLVE",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "3",
+                        "isMainPointCounter": false,
+                        "helperText": "(INTELLIGENCE Die Size + EMPATHY Die Size) / 4. Round up.",
+                        "width": 0.5
+                      },
+                      "value": "3"
+                    },
+                    {
+                      "id": "b21a2c14-b72f-4d03-8697-dc1dc5ddb758",
+                      "label": "Critical Stress Effects",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a3940955-b9e9-4e10-9157-25464ba6ea65",
+                  "label": "ARMOR",
+                  "blocks": [
+                    {
+                      "id": "10540eed-92d7-4243-b36f-da921c900577",
+                      "type": "Text",
+                      "value": "<br>",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "8d9c55e9-430b-4fe8-b46b-b7dd1518866c",
+                      "label": "Rating",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                },
+                {
+                  "id": "830520ba-bd05-4739-ac5b-d38e9da30dfd",
+                  "label": "SIGNATURE ITEM",
+                  "blocks": [
+                    {
+                      "id": "c78196c1-06ea-4807-b45f-5d39a70406b2",
+                      "type": "Text",
+                      "value": "<br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "8f43566b-2bc6-4133-8842-9103c1f4e913",
+                  "label": "GEAR",
+                  "blocks": [
+                    {
+                      "id": "f60d2c35-7935-4810-9f27-18bae0e50c89",
+                      "type": "Text",
+                      "value": "- Badge\n- Knowledge Integration Assistant (KIA)\n- Detective Special Spinner<br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2d622cbe-a386-4f31-890a-0c5b4813935c",
+                  "label": "WEAPONS",
+                  "blocks": [
+                    {
+                      "id": "fd931b1c-5118-4f2f-9b6d-68fd1422571e",
+                      "type": "Text",
+                      "value": "… / … / … / … / … / …",
+                      "meta": {
+                        "helperText": "Name / Damage / Crit Die / Type / Min. Range / Max Range"
+                      }
+                    },
+                    {
+                      "id": "f8a8263d-0953-46be-884a-0c5ad2c94a1e",
+                      "type": "Text",
+                      "value": "… / … / … / … / … / …",
+                      "meta": {
+                        "helperText": "Name / Damage / Crit Die / Type / Min. Range / Max Range"
+                      }
+                    },
+                    {
+                      "id": "91d34e17-7aff-49a5-a176-f542f69a9b35",
+                      "type": "Text",
+                      "value": "… / … / … / … / … / …",
+                      "meta": {
+                        "helperText": "Name / Damage / Crit Die / Type / Min. Range / Max Range"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "7cd12fff-2e9f-497a-87ae-05386ec8bb62",
+                  "label": "POINTS",
+                  "blocks": [
+                    {
+                      "id": "f993fa80-de4d-4b7d-b735-78219c51a832",
+                      "label": "Promotion Points",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false, "width": 1 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "cb2bfcd0-905e-4cbc-bbfd-e4ea02b40ed1",
+                      "label": "Humanity Points",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "166cd51c-ad2a-4688-8716-1c9d89ffe7e2",
+                      "label": "Chinyen Points",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Body/Inventory"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "group": "Blade Runner: The Roleplaying Game"
+}

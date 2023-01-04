@@ -461,13 +461,13 @@ export const IndexCard: React.FC<
                                   {`— ${t("index-card.move-out")} —`}
                                 </option>
                               )}
-                              {cardsForSelect.map((card) => {
+                              {cardsForSelect.map((card, index) => {
                                 const value = previewContentEditable({
                                   value: card.title,
                                 });
                                 return (
                                   <option key={card.id} value={card.id}>
-                                    {value}
+                                    {value || `Untitled ${index + 1}`}
                                   </option>
                                 );
                               })}

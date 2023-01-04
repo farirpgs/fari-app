@@ -1,0 +1,766 @@
+{
+  "fariType": "character",
+  "id": "6c94ea6e-2dfd-4db9-a292-4a3051506f91",
+  "lastUpdated": 1662311378,
+  "name": "Grim World - The Battlemaster",
+  "pages": [
+    {
+      "id": "6a970af5-afa7-4715-b313-e68b74c502c1",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5278ff9e-4295-4068-9b7f-a3e3b985a0ff",
+                  "label": "The Battlemaster",
+                  "blocks": [
+                    {
+                      "id": "26982771-4427-4208-a5ed-44b3dfa035a7",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Name",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "8bbce606-611a-41f2-b981-1a00e1e021b9",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Species",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "4754cea3-c47e-4a6a-9d35-bfec001449b7",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Look",
+                      "meta": { "width": 0.33, "helperText": "<br>" }
+                    },
+                    {
+                      "id": "edb93e10-1bf1-4316-8566-c23995c3adf9",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://assets.dicebreaker.com/magic-the-gathering-dominaria-united-karn-point.png/BROK/resize/1920x1920%3E/format/jpg/quality/80/magic-the-gathering-dominaria-united-karn-point.png"
+                    },
+                    {
+                      "id": "19b25a20-2f1c-4527-9611-f5528eade024",
+                      "type": "Text",
+                      "value": "Your spear throw connects but it only enrages the grotesque shambler as its tentacles rip your shield away. It pulls you in close and the beast’s great maw finally opens. You shout, “NOW!” as you throw the blue oil flask straight down its bellowing gullet. The hidden archer is revealed and lets loose an arrow of flame. The explosion tears the shambler apart. You land on your back smiling, as entrails drop nearby. Another plan well done.\r\n",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "4137b177-c693-4de4-9c9f-5f74eca5c40e",
+                      "label": "STATS",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": true,
+                        "helperText": "Assign these scores to your stats: 16 (+2), 15 (+1), 13 (+1), 12 (+0), 9 (+0), 8 (-1) <br>Note: Stats cannot be raised above 18 (+3)"
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "0015ff9c-f9fb-4cb5-bbf0-cc81eb23acd7",
+                      "label": "Strength",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Weak -1"
+                      }
+                    },
+                    {
+                      "id": "033bf548-c3cd-405b-8b80-9a4ae9a23f2b",
+                      "label": "Dexterity",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Shaky -1"
+                      }
+                    },
+                    {
+                      "id": "cf3ad759-115d-4cf8-8b73-f36825610ed6",
+                      "label": "Constitution",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Sick -1"
+                      }
+                    },
+                    {
+                      "id": "05392683-caf6-4e5f-96c1-58273cdad88d",
+                      "label": "Intelligence",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Stunned -1"
+                      }
+                    },
+                    {
+                      "id": "1351870e-ffec-459c-9e6e-bf0c98c3c5e7",
+                      "label": "Wisdom",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Confused -1"
+                      }
+                    },
+                    {
+                      "id": "0d9392fe-fd70-41cf-ab5c-1f97fd601aad",
+                      "label": "Charisma",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Scared -1"
+                      }
+                    },
+                    {
+                      "id": "21430ac9-00ae-4c16-8119-4663b14be138",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "7a9a917d-4d25-4fb5-b8fe-7df97ad9d6f0",
+                      "label": "Damage",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d8"],
+                        "hideModifier": true,
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "6c6a6731-657e-4d74-ac08-90d0c16228d8",
+                      "label": "Armor",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "29e53916-121e-4a20-bc2e-9a6db00846c0",
+                      "label": "Hit Points",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "10",
+                        "isMainPointCounter": false,
+                        "width": 0.33,
+                        "helperText": "Your Max HP is 10 + Constitution<br>"
+                      },
+                      "value": "10"
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "b9ec568f-e9fa-4f8b-82eb-b3dc2a2db621",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "62b4cbf0-6a98-46c3-b52e-a85fa5abbb2d",
+                      "label": "GEAR",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": true,
+                        "helperText": "Your Load is 10+STR. You carry dungeon rations (5 uses, 1 weight), a spyglass (1 weight), and a dagger (hand, 1 weight).<br>"
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "0f1a7200-9f10-42c0-a6b5-45e6b3e9385f",
+                      "label": "Choose your defenses:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "⃞&nbsp; &nbsp;Scale armor (2 armor, clumsy, 3 weight)\n<br>⃞&nbsp; &nbsp;Chainmail (1 armor, 1 weight) and adventuring gear (5 uses, 1 weight)<br>\n"
+                      }
+                    },
+                    {
+                      "id": "e0805e61-9e5e-45ed-9de4-6628461fa536",
+                      "label": "Choose your armament:\n",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "⃞&nbsp; &nbsp;Warhammer (close, 1 weight) and shield (+1 armor, 2 weight)\n<br>⃞&nbsp; &nbsp;Halberd (reach, +1 damage, two-handed, 2 weight)<br>\n"
+                      }
+                    },
+                    {
+                      "id": "f45d31fd-dedc-4095-9029-7802e28438e8",
+                      "label": "Choose one:\n",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "⃞&nbsp; &nbsp;Bag of books (5 uses, 2 weight)\n<br>⃞&nbsp; &nbsp;Bandages (3 uses, slow, 0 weight)<br>\n"
+                      }
+                    },
+                    {
+                      "id": "6cbe7dc7-38e5-4353-a3b8-9155f7aaedee",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "94a9f628-a75c-40e2-8378-35085e6ea799",
+                      "label": "Death Move",
+                      "type": "Text",
+                      "value": "Death: Grand Plan",
+                      "meta": {
+                        "helperText": "It's time. All of your preparation for this moment must finally come to fruition. When you die, your grand plan is revealed and your death proves to be the final gambit. \n<br>Your allies may have known all along or maybe you kept them in the dark, knowing they wouldn’t understand. \n<br>Work with the GM to reveal this master plot. The plan should give your allies a major boon or advantage, or set up your enemies for destruction, or set major world events in motion. Rest in peace, Battlemaster, knowing even now in death, the goals you had in life will soon be achieved.<br>"
+                      }
+                    },
+                    {
+                      "id": "f0e1c4b7-dee8-4c51-8550-ff10d3f868ea",
+                      "label": "Level",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "4d319c69-23f2-4931-b014-d4ffa7413172",
+                      "label": "Experience",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "8468fe67-8435-489d-9824-84f9f45ef7cc",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "e596b4e0-5450-417d-92ea-5960f9de3e7d",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "aa6c279d-0e79-404f-b465-8fd7faa559d6",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "685a6990-078a-4658-909f-67a08a36ba16",
+                  "label": "Alignment",
+                  "blocks": [
+                    {
+                      "id": "b70d783d-45a8-4abe-b510-ff8955b903b4",
+                      "label": "Good",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Endanger yourself to make a plan succeed"
+                      }
+                    },
+                    {
+                      "id": "4b84611a-59f3-4b82-83db-16562b412488",
+                      "label": "Neutral",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Outwit a formidable opponent"
+                      }
+                    },
+                    {
+                      "id": "e5b7e233-27b7-4b18-bd46-12d7ec3e0fc0",
+                      "label": "Evil",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Use someone as bait to give yourself an advantage"
+                      }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "e78b381f-32d9-45a6-b740-17fee6605929",
+                  "label": "Natural Tactician",
+                  "blocks": [
+                    {
+                      "id": "9ce78a46-5899-4c1b-8fca-56c01b33d80e",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "By nature you always have this Tactic active until you Change Tactics.\n<br>\n<br>* Aggressive\n<br>* Cautious\n<br>* Reactive\n<br>* Defensive\n<br>* Reckless\n<br>\n<br>You can always spend 1 Gambit to instantly return to this Tactic.<br>"
+                      },
+                      "value": "Choose a Default Tactic."
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "43d60b11-d4cf-45a0-8c84-2de990223f00",
+                  "label": "Bonds",
+                  "blocks": [
+                    {
+                      "id": "6994ffa6-9b2f-4c64-9cf5-536f6e6471f7",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "_________ has a lot to learn about the ways of battle.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8c81b8d3-7369-4826-99e2-35249afd0703",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "My respect for __________ was earned on the battlefield.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9a6b2add-bcb1-446d-970d-21d3fb79b2ad",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "I can always depend on __________ to follow my stratagems.<br>",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "7491dbf3-6249-4490-b55b-e82be3920cea",
+                  "label": "Gambit",
+                  "blocks": [
+                    {
+                      "id": "b69cff9a-d5af-4f3a-ac8b-9eccb6f1890f",
+                      "label": "Gambit",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "helperText": "When you or someone you have a bond with takes damage from \n<br>an outside source, it was part of your plan the whole time, gain \n<br>+1 Gambit. What some might see as an unwanted setback, you \n<br>know it's merely a stratagem to gain a later advantage. \n<br><br>At any time, reveal your ploy and use Gambits to:\n<br>•  Add +1 to anyone's roll (Cost: 1)\n<br>•  Deal your damage to an enemy (Cost: 2)\n<br>•  Create an obstacle or distraction that a single enemy has to deal \n<br>with before they can do anything else (Cost: 3)\n<br>•  The GM will help you reveal a trap, ambush, or plan that gives \n<br>you and your allies a surprising advantage (Cost: 4)\n<br><br>Multiple Gambits can be used and the effects stack. After the end \n<br>of a battle or when it makes sense, your Gambit count resets to 0.<br>"
+                      },
+                      "value": "0"
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9b387e1f-c688-4962-8276-28a5f8cf1111",
+      "label": "Moves",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2551df82-d028-45a6-acd6-ab81788d8f8c",
+                  "label": "Starting moves",
+                  "blocks": [
+                    {
+                      "id": "236708fb-a31e-4d14-a391-e3a772fa12e1",
+                      "label": "Heavy Armor Training",
+                      "type": "Text",
+                      "value": "You ignore the clumsy tag on armor you wear.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c149ea4b-9cd1-4b49-85f9-0d8e15051c54",
+                      "label": "Tactics",
+                      "type": "Text",
+                      "value": "Your knowledge and training allows you to assess a battle and know the correct tactical approach. Only one Tactic can be active at a time.\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4adf513c-004a-4d8c-bd45-b4a82a57ba7b",
+                      "label": "Aggressive",
+                      "type": "Text",
+                      "meta": { "checked": false, "width": 0.33 }
+                    },
+                    {
+                      "id": "4a007340-d6f9-4ce7-b8c2-b490c67115c9",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "When you Hack and Slash, deal your damage even on a 6-.",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "4f5ef4d8-d61f-488c-b99e-240fb44a0d30",
+                      "label": "Cautious",
+                      "type": "Text",
+                      "meta": { "checked": false, "width": 0.33 }
+                    },
+                    {
+                      "id": "0009e281-bd96-4eae-a5d4-ce05a386198e",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Gain +1 when you Defy Danger.",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "a83c2c97-7bd8-44d2-be8b-0a1abbd33e88",
+                      "label": "Reactive",
+                      "type": "Text",
+                      "meta": { "checked": false, "width": 0.33 }
+                    },
+                    {
+                      "id": "cf36774e-b04d-4f02-b42a-af2c075676ce",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "You cannot Hack and Slash, but you can Counterattack:\n<br>When you are attacked in melee and attempt to counter, roll +DEX. <br>✴On a 7+, you expertly parry the attack. <br>✴On a 10+, you riposte and deal your damage.<br>",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "6c21f484-7e0d-4d95-810a-319efa02fc0e",
+                      "label": "Defensive",
+                      "type": "Text",
+                      "meta": { "checked": false, "width": 0.33 }
+                    },
+                    {
+                      "id": "4d230a31-e68f-41e4-996a-76f266c64d2e",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "When you use the Defend move, treat a 6- as a 7-9.",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "149b0bb3-42c1-4730-a957-eadf7b039615",
+                      "label": "Reckless",
+                      "type": "Text",
+                      "meta": { "checked": false, "width": 0.33 }
+                    },
+                    {
+                      "id": "f100933d-9f04-45dc-945a-9de320efae58",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "When you deal damage, deal +1d4 damage. When you take damage, take +1d4 damage.",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "27245a27-1a26-49d8-bfcf-336157217b53",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "80484234-704b-40bc-ab25-f025b2a08e00",
+                  "label": "Advanced moves lvl 2-5",
+                  "blocks": [
+                    {
+                      "id": "334d1cc9-a6ef-4492-a913-a0abe4993f74",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "When you gain a level from 2-5, choose from these moves."
+                      }
+                    },
+                    {
+                      "id": "a9e063f2-bd6f-42f0-83a0-91f602ae7bc7",
+                      "label": "Block and Strike\r\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Add your shield’s armor to your damage. Additionally, when you wield a shield in Reactive Stance, you can roll +STR for Counterattacks instead."
+                      }
+                    },
+                    {
+                      "id": "60bd43ba-a06b-4224-9b3d-6b614fa339ef",
+                      "label": "Battle Leader",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Take +1 when you Order Hirelings. Often, Hirelings will accept your training as payment for their services."
+                      }
+                    },
+                    {
+                      "id": "31a64710-4dc5-4bda-b5c3-6daa92512185",
+                      "label": "Reckless Aggression",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you're using Reckless Tactics, your melee attacks gain +2 Piercing. When you're using Aggressive Tactics, always roll damage twice and take the better result."
+                      }
+                    },
+                    {
+                      "id": "962b96e8-eeb4-4f30-8774-fa49f6c58849",
+                      "label": "Combat SighT",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you’re using Cautious Tactics and you Defy Danger, on a 10+ you gain a Gambit. When you're using Reactive Tactics and you Counterattack, on a 10+ you can ask the GM one question from the Discern Realities list."
+                      }
+                    },
+                    {
+                      "id": "dec3a8c7-249f-4ec1-91d5-d97e3d10537d",
+                      "label": "Intelligent Defense",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you use your knowledge and training to decide the best defense, you can use the Defend move with INT instead of CON. Furthermore, when you’re using Defensive Tactics, you can always spend 1 Gambit to halve an attack's effect or\n<br>damage directed at you or something you Defend.<br>"
+                      }
+                    },
+                    {
+                      "id": "1bfd132a-309e-44fe-83f3-ae0067309814",
+                      "label": "Battlefield Motivation",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you rally your allies in the midst of battle, spend 1 Gambit. Your allies can ignore the effects of a single debility (their choice) until the debility is made worse or the end of the battle. Optionally, you may choose to do this without spending a Gambit, but you draw unwanted attention to yourself (the GM will tell you how)."
+                      }
+                    },
+                    {
+                      "id": "dad0699f-79f5-4388-90d0-7483878e960d",
+                      "label": "Risky Gambit",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you tell an ally to do something obviously dangerous and they are put in a spot, gain +1 Gambit."
+                      }
+                    },
+                    {
+                      "id": "0a7687eb-16d0-43bd-a3a0-6a204fe5e983",
+                      "label": "Misdirection",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you have an enemy's attention, you can spend 2 Gambits to let an ally make a free attack (as if they rolled a 10+) against the enemy."
+                      }
+                    },
+                    {
+                      "id": "a51436e7-292d-45ba-87bd-e2ebf227a3cb",
+                      "label": "Phase 2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you kill an enemy, you may immediately Change Tactics for free."
+                      }
+                    },
+                    {
+                      "id": "17306947-2bc1-4e65-84be-6cfef66b3774",
+                      "label": "Playing the Long Game",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "At the end of a battle (or when it makes sense) and your Gambit count would reset to 0, you can keep 1 Gambit instead."
+                      }
+                    },
+                    {
+                      "id": "88dcb79d-3996-4cfb-b655-d7ab6f860d38",
+                      "label": "Multiclass Learner",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Get one move from another class (excluding Called Shot and Backstab). Treat your level as one lower for choosing the move. When you select this move, tell everyone the story of how you came to learn it."
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "804ba8d3-ac57-45f8-9445-3149efc99a94",
+                  "label": "Advanced moves lvl 6-10",
+                  "blocks": [
+                    {
+                      "id": "87506f11-484e-4224-9838-f7a5070948e1",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "When you gain a level from 6-10, choose from these or the level 2-5 moves."
+                      }
+                    },
+                    {
+                      "id": "a26dddba-2227-45ef-a877-643b6e49ea8d",
+                      "label": "Lethal GambiT",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "You can spend 3 Gambits to add +1d10 Damage to anyone's attack."
+                      }
+                    },
+                    {
+                      "id": "9ebb6cc6-ebc8-4a5e-b28b-39966f9e0094",
+                      "label": "Ambush Master",
+                      "type": "Text",
+                      "value": "\r\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you and your allies set up a surprise attack or trap, designate a number of Strikers up to your INT modifier (Min: 1, Max: 3). A Striker can be yourself, an ally, or a trap object. The first time each Striker deals damage, they can roll twice and take the better result."
+                      }
+                    },
+                    {
+                      "id": "a895e63d-96a6-4f12-adeb-d4ca0d8dbfcd",
+                      "label": "Combat Assessment",
+                      "type": "Text",
+                      "value": "\r\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "This question is added to your Discern Realities list of choices:\n<br>•  \"What mistake has my enemy made that I can exploit?\"\n<br>When you Change Tactics, on a 12+, you may ask this question for free.<br>"
+                      }
+                    },
+                    {
+                      "id": "4cd54816-f09f-4b25-9d69-bc590ad0a5bf",
+                      "label": "All Part of the Plan",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Spend 2 Gambit to negate the damage of any attack."
+                      }
+                    },
+                    {
+                      "id": "ad62c60b-a370-4f7b-949b-1f417e334470",
+                      "label": "Self Defense Training",
+                      "type": "Text",
+                      "value": "\r\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you know the enemy you’re about to fight, you can spend an hour or two training your allies on how best to Defy Danger. The GM will tell you which stat modifier to use, it’s up to you to explain why it's effective. When you or an ally uses Defy Danger with that method against the enemy, they get an additional +1 to the roll. Such training needs to be practiced daily to be effective."
+                      }
+                    },
+                    {
+                      "id": "5df31005-02e8-4cf0-9851-fb824130794f",
+                      "label": "Battlefield Desperation",
+                      "type": "Text",
+                      "value": "Requires: Battlefield Motivation",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you use Battlefield Motivation, you rally your allies so well that instead of just ignoring a single debility's effects, the debility turns into a +1 bonus for that modifier instead (this modifier cannot go above +3). This lasts until the debility is made worse or the end of the battle.<br>"
+                      }
+                    },
+                    {
+                      "id": "03d2712c-58e3-4d0a-94e6-09ac91956a92",
+                      "label": "Command Ally",
+                      "type": "Text",
+                      "value": "Replaces: Misdirection",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "You can spend 2 Gambits to let an ally make a free attack (as if they rolled a 10+) against an enemy. You may spend an additional Gambit to maximize the damage.<br>"
+                      }
+                    },
+                    {
+                      "id": "6e2edb9e-ee85-4877-a95b-24f574d3e456",
+                      "label": "Surprise Attack",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Choose either Called Shot (Ranger) or Backstab (Thief). You gain this move. If there is already a Ranger or Thief, when you spend a few moments coordinating to use the move at the same time, they can add your +INT modifier to the damage of their first attack (in addition to any other bonuses).<br>"
+                      }
+                    },
+                    {
+                      "id": "bf5b7c3b-1d9f-41ad-ab13-3d678f95d9e5",
+                      "label": "Tactical Teacher",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "You gain an additional Bond:\n<br>I will teach _____________ to have a tactical mind.\n<br>Whoever this bond is with can choose to gain the effects of your current Tactics.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "theme": {
+    "style": "@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Marcellus+SC&family=Spectral+SC&display=swap');",
+    "hideSectionBackground": true,
+    "pageHeadingFontFamily": "Spectral SC",
+    "pageHeadingFontWeight": "400",
+    "sectionHeadingFontFamily": "Spectral SC",
+    "sectionHeadingFontWeight": "600",
+    "labelFontFamily": "Spectral SC",
+    "labelFontWeight": "200",
+    "textFontFamily": "Spectral SC",
+    "textFontWeight": "200",
+    "infoTextFontFamily": "Spectral SC",
+    "infoTextFontWeight": "100",
+    "helperTextFontFamily": "Spectral SC",
+    "helperTextFontWeight": "",
+    "textFontSize": 0.875,
+    "labelFontSize": 1.25,
+    "infoTextFontSize": 1,
+    "helperTextFontSize": 0.625,
+    "sectionHeadingFontSize": 1.5
+  },
+  "playedDuringTurn": false,
+  "group": "Grim World"
+}

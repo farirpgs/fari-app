@@ -1,0 +1,1111 @@
+{
+  "fariType": "character",
+  "id": "c8584e91-b233-4118-8aa7-0c8148cb6b25",
+  "lastUpdated": 1662311276,
+  "name": "Grim World - The Shaman",
+  "pages": [
+    {
+      "id": "f2af5743-d429-43e2-a1f8-c04c7658fcce",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "f4ddc7f5-0440-430b-92d9-5ca01f8167df",
+                  "label": "The Shaman",
+                  "blocks": [
+                    {
+                      "id": "ac3b2f70-3c6e-408b-8e47-03d3c1a2ad9b",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Name",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "7e8a1686-2cbe-48b0-bf4f-e29f0fedff71",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Species",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "20598841-0c7a-4f5b-9dec-02a6aefb58a0",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Look",
+                      "meta": { "width": 0.33, "helperText": "<br>" }
+                    },
+                    {
+                      "id": "224e907d-d1ad-47e6-aff4-c7ccb9df8065",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://wallpaper.dog/large/5545154.jpg"
+                    },
+                    {
+                      "id": "2a1e95e7-afb2-4e30-9295-189935985648",
+                      "type": "Text",
+                      "value": "The carving knife scrapes against bone, the tibia of a satyr not long dead. Your finger spreads the black-green paste, mashed root beetles, painting long whirling lines. You hold the finished totem up to the light, pride unhidden. Your companions watch through squinted eyes as you begin to whisper. The fire dims blue, and then comes the murmur. The spirits are alive this night. And you call each by name.\r\n",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "6d3dfe97-b7d0-4219-aa59-9166ac647aea",
+                      "label": "STATS",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": true,
+                        "helperText": "Assign these scores to your stats: 16 (+2), 15 (+1), 13 (+1), 12 (+0), 9 (+0), 8 (-1) <br>Note: Stats cannot be raised above 18 (+3)"
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "52a0c886-5819-4879-a634-41f1f5e943d3",
+                      "label": "Strength",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Weak -1"
+                      }
+                    },
+                    {
+                      "id": "078a315d-864b-4d75-9eac-1383e953b297",
+                      "label": "Dexterity",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Shaky -1"
+                      }
+                    },
+                    {
+                      "id": "1c856221-34ba-4a28-bf41-8f9f129d5876",
+                      "label": "Constitution",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Sick -1"
+                      }
+                    },
+                    {
+                      "id": "64f17493-72af-4da5-ad65-3743ead6f697",
+                      "label": "Intelligence",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Stunned -1"
+                      }
+                    },
+                    {
+                      "id": "33c52356-35c5-4249-9865-5a7a7c5c8765",
+                      "label": "Wisdom",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Confused -1"
+                      }
+                    },
+                    {
+                      "id": "af9fb2d7-9f44-4d83-ba00-d8b2ce8be84d",
+                      "label": "Charisma",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Scared -1"
+                      }
+                    },
+                    {
+                      "id": "bf79d1b6-ae53-4f3a-a8f2-28cf3a21a89e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "8a971c61-a8b3-49b5-8f62-720fbd7a3230",
+                      "label": "Damage",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "hideModifier": true,
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "3e3f11be-3301-4d75-9459-34e4f9df2fc1",
+                      "label": "Armor",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "22b87e71-9540-440b-afd9-2b3caaea266e",
+                      "label": "Hit Points",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "10",
+                        "isMainPointCounter": false,
+                        "width": 0.33,
+                        "helperText": "Your Max HP is 6 + Constitution<br>"
+                      },
+                      "value": "10"
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "3b980f2f-73fa-4cf8-9101-e385f197001d",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "9ae60d62-aace-44cd-859c-776393407ccd",
+                      "label": "GEAR",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": true,
+                        "helperText": "Your Load is 8+STR. You carry dungeon rations (5 uses, 1 weight), a Spirit Catcher Totem (1 weight), and a carving knife (hand, 1 weight)<br>"
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "60629044-719b-4b46-a603-33d7e68d3312",
+                      "label": "Choose your weapon:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "⃞&nbsp; &nbsp;Ceremonial Dagger (hand, 1 weight)\n<br>⃞&nbsp; &nbsp;Spear (reach, thrown, near, 1 weight)\n<br>⃞&nbsp; &nbsp;Staff (close, two-handed, 1 weight)<br>\n"
+                      }
+                    },
+                    {
+                      "id": "ddade424-c043-4459-a5c9-cf3004b501c7",
+                      "label": "Choose your defenses:\n",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "⃞&nbsp; &nbsp;Painted wooden shield (+1 armor, 1 weight)\n<br>⃞&nbsp; &nbsp;Light armor made of something like hide or bone (1 armor, 1 weight)<br>\n"
+                      }
+                    },
+                    {
+                      "id": "1a107153-09a7-4c5b-bfc1-e544d0141b08",
+                      "label": "Choose one:\n",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "⃞&nbsp; &nbsp;Dreamcap mushrooms (hallucinogenic, 0 weight)\n<br>⃞&nbsp; &nbsp;Poultices and herbs (2 uses, 1 weight)\n<br>⃞&nbsp; &nbsp;Antitoxin (0 weight)\n<br>⃞&nbsp; &nbsp;Ritual Drum (1 weight)<br>\n"
+                      }
+                    },
+                    {
+                      "id": "39927c3b-c461-45a6-a067-8c8cca8929b6",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "e84a344b-d4df-44f3-885c-5a25dbbe0919",
+                      "label": "Death Move",
+                      "type": "Text",
+                      "value": "Death: The Last Totem",
+                      "meta": {
+                        "helperText": "You knew this time would come, that your body could not last forever. As for your spirit, it has only one more task. When you die, all of your existing totems shatter and release the spirits held within. A chrysalis of spiritual energy begins forming near your body. Random objects from the environment and pieces of broken totem fly into the cocoon. Finally, the spiritual maelstrom dissipates. There on the ground is your totemic legacy: an artifact of great power. Work with the GM to create a powerful magic item. It could be an amulet, or spear, or any type of object. Its magical effects should be related to what you desired or stood for in life. Let this be your heirloom, Shaman, your spirit’s endowment to future generations.<br>"
+                      }
+                    },
+                    {
+                      "id": "d381180f-bcc0-4447-8352-e4a86a542188",
+                      "label": "Level",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "de5de17c-bc0b-4ebb-972f-17a105492a3a",
+                      "label": "Experience",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "d6153527-234f-4e75-973b-2e749a540f99",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "02a9e435-e9e9-4d3d-8dba-4e8928b88a69",
+                      "label": "Totem",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "84007729-69b9-4164-b61f-626300edaaed",
+                      "label": "Totem Charges",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.5 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "399f0ca5-0948-42ea-b5cc-858701ab489d",
+                      "label": "Totem",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "74e0998a-a23c-435f-8dfc-e580870aad89",
+                      "label": "Totem Charges",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.5 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "0faa3dd3-b31d-4ce2-be61-2271590463a2",
+                      "label": "Totem",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "d149d338-af13-4899-a07f-5665acf5d41f",
+                      "label": "Totem Charges",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.5 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "b26e6609-891e-4ffb-81ea-cc18eab74f49",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "91ce4a50-fcc8-4ad7-a582-443eb72cc5b0",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "593274d7-f1d7-429d-92fa-35fb69ba35b5",
+                  "label": "Alignment",
+                  "blocks": [
+                    {
+                      "id": "96566ecd-8391-4831-b45b-2605d184df89",
+                      "label": "Good",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Heal or help a troubled spirit.<br>"
+                      }
+                    },
+                    {
+                      "id": "129a1794-8fcd-41bf-a127-63753c5fa016",
+                      "label": "Neutral",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Show someone the wisdom you possess.<br>"
+                      }
+                    },
+                    {
+                      "id": "fc82a263-3c8c-4206-ba07-a99905858bdd",
+                      "label": "Chaotic",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Facilitate a spirit's revenge.<br>"
+                      }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "99938948-eb03-4d28-84d6-bb59acfc4bc3",
+                  "label": "Guardian Spirit\r\n",
+                  "blocks": [
+                    {
+                      "id": "5092650b-79f6-403e-9b7f-ddd4f9a93a9e",
+                      "type": "Text",
+                      "meta": { "helperText": "<br>" },
+                      "value": "Choose a spirit that forever watches over you.\nOnce per attack, when you deal damage and roll a 1, the spirit comes to your aid. Reroll that damage die and...\r\n"
+                    },
+                    {
+                      "id": "17631a97-54a8-4a4c-b2c7-eda1c9d9952d",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "...add the Forceful tag to the attack.<br>",
+                        "checked": false
+                      },
+                      "label": "Boar Spirit"
+                    },
+                    {
+                      "id": "3fffc5d8-8396-40b2-803f-e448c74f5f66",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "...take +2 Armor Forward.<br>",
+                        "checked": false
+                      },
+                      "label": "Beetle Spirit"
+                    },
+                    {
+                      "id": "3933eedc-0a93-4c50-8f48-c4f7c85984c7",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "...take +1 Forward on your next attack.<br>",
+                        "checked": false
+                      },
+                      "label": "Falcon Spirit"
+                    },
+                    {
+                      "id": "6516793b-6c60-4cdf-8885-dfe2c41288ba",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "...take +1 Forward to Defy Danger.<br>",
+                        "checked": false
+                      },
+                      "label": "Irontree Spirit"
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "a696c56a-2a25-4139-bfac-d80c559a66f7",
+                  "label": "Bonds",
+                  "blocks": [
+                    {
+                      "id": "bcff34c2-e381-4203-935c-1036557c5ae0",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "It's clear to me __________ has a troubled spirit<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1da2cbab-04ec-4d13-a036-106318f3ae0d",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "__________ and my spirit are bound together<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d52e0570-da75-4209-a59e-94f18d64c71c",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "I have heard the spirits speak of __________'s power.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "773cf16c-6ec1-4f2d-bd41-b8dd0b989297",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "_________ must learn to respect the spirit realm<br>",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "76946e59-ada9-4837-afb8-60a27abbbd74",
+                  "label": "Spiritual Adviser\r\n",
+                  "blocks": [
+                    {
+                      "id": "d8c1cd8a-488c-4ba2-86d4-7c7b8192d64e",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "You may give Worldly Spirit Totems you have created to your allies. Describe what it looks like and how many Charges it has. \n<br>And don’t forget to teach them the name to say aloud to release the spirit held within. The totems work normally but keep in mind: only you can Spirit Talk.<br>",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8e066122-e89a-4992-a652-79efe1e87320",
+      "label": "Moves",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "b91fa0cc-59ec-444e-9933-53045d7e7b10",
+                  "label": "Starting moves",
+                  "blocks": [
+                    {
+                      "id": "fad0ebc6-81d9-4290-b393-a7e0399f41ca",
+                      "label": "Spirit Pact\n",
+                      "type": "Text",
+                      "value": "You have made a pact with the spirit realm, allowing you to create up to 3 Worldly Spirit Totems. \nDescribe what your totems look like. Are they wooden statues? Hex dolls or symbols carved from bone? Maybe they’re ceremonial masks or the skulls of fallen enemies? You have your own methods, but you always take great pride in crafting totems worthy of the spirits they hold.\r\n",
+                      "meta": {
+                        "helperText": "Totem Appearance: ____________________"
+                      }
+                    },
+                    {
+                      "id": "4b7e1d1d-f525-4781-b87a-2278100c723e",
+                      "label": "Totem Creation\n",
+                      "type": "Text",
+                      "value": "When you spend uninterrupted time (an hour or so) creating a new totem, you can bind any Worldly Spirit on the list, or others the GM tells you about (which may be tied to a location or event). You cannot bind more spirits than your pact allows, you must choose one to release first. Each totem starts with 1 Charge. Saying the spirit's name will release it and consume a Charge. When a totem runs out of Charges, the totem shatters and the spirit cannot return.\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2fc42053-2e75-4705-aa39-cd18c020dc7e",
+                      "label": "Spirit Talk\n",
+                      "type": "Text",
+                      "value": "When you say the name of a spirit bound to a totem you've made, instead of consuming a Charge, you can roll +WIS. \n\n✴On a 10+, the spirit is successfully released and it returns to the totem afterwards. \n\n✴On a 7-9, the spirit is released but choose one:\r\n\n•  You draw unwelcome attention or put yourself in a spot. The GM will tell you how.\r\n•  Your reputation in the spirit realm is damaged. Take -1 Ongoing to Spirit Talk until you have about an hour to perform a ceremony honoring the spirits.\r\n•  A Charge on the totem is still consumed.\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "73632881-6c1e-4b73-8718-c5bc7c69c59d",
+                      "label": "Spirit Catcher\r\n",
+                      "type": "Text",
+                      "value": "When you witness a creature die, you can bind its spirit to a special totem you carry, roll +WIS. \n\n✴On a 10+, the spirit is captured. The GM will tell you what happens when you release the spirit. The effect is something supernatural and associated with the spirit's nature or greatest desire in life. Your Spirit Catcher totem does not have Charges and can be released freely, but the spirit must move on after it is used (Spirit Talking does not work). You can only ever have one Spirit Catcher totem. \n\n✴On a 7-9, the GM will also tell you a complication, such as:\n\r\n•  The spirit is unpredictable\r\n•  There’s an additional undesirable effect\r\n•  The spirit is restless and must be used within a certain amount of time\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8347726d-a5ff-435a-83d7-b5f86eddb8f8",
+                      "label": "Murmur\r\n",
+                      "type": "Text",
+                      "value": "When you Discern Realities, you can also ask: What do the spirits whisper here?\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5b23b738-4f86-49e0-9f0f-f13bca2f3ebb",
+                      "label": "Advanced Moves",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "95ef3801-9501-4702-a69f-5737f08420c2",
+                  "label": "Advanced moves lvl 2-5",
+                  "blocks": [
+                    {
+                      "id": "aea2bcd3-7668-4f26-a347-cee51778e490",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "When you gain a level from 2-5, choose from these moves."
+                      }
+                    },
+                    {
+                      "id": "5f316bec-f689-49e2-b78b-4a44ba9d49bd",
+                      "label": "Chain Lightning\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you release a Lightning Spirit, it can jump to an additional nearby target. Roll an additional 1d6. You can decide which damage die affects which target.<br>"
+                      }
+                    },
+                    {
+                      "id": "b6c89319-f909-45a9-be04-ffdf30b247a1",
+                      "label": "Wise Counsel",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you show someone the wiser path, you can Parley with WIS instead of CHA.<br>"
+                      }
+                    },
+                    {
+                      "id": "f9c813b4-7984-4070-b963-5a62463cd919",
+                      "label": "Web of Whispers",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Whisper Wind spirits no longer count towards your totem limit. Anyone that whispers into a Whisper Wind totem can be heard from all other Whisper Wind totems you’ve made.<br>"
+                      }
+                    },
+                    {
+                      "id": "e77c2330-7e79-46af-b5a9-50b6ccd4b5a0",
+                      "label": "Wandering Spirit",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Your Spirit Pact allows for 1 additional Worldly Spirit Totem, but the spirit realm \n<br>decides what spirit is bound. When you craft this totem, the GM will tell you which Worldly Spirit to use (and it's likely one you haven't used much or at all).&nbsp;<br>"
+                      }
+                    },
+                    {
+                      "id": "9744abc0-1f62-4384-be20-48706a55e175",
+                      "label": "Ancestral Healing",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "You call upon your ancestors to act as Spirits of Mending. When you release a Spirit of Mending to heal an ally, add your level to the amount healed.<br>"
+                      }
+                    },
+                    {
+                      "id": "41649361-d202-45bd-8295-9472309bf6b6",
+                      "label": "Séance",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Your connection to the spirit realm grows stronger. You can now use Spirit Talk when releasing your Spirit Catcher totem as if it were a normal totem.<br>"
+                      }
+                    },
+                    {
+                      "id": "59f5fcb2-5a7a-4816-9512-b37a3d02de2e",
+                      "label": "Inciter",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you Spirit Talk, on a 10+ you can still choose from the 7-9 list. If you do, the spirit's effects double in power or the number of targets doubles (choose one).<br>"
+                      }
+                    },
+                    {
+                      "id": "170625c4-524e-4f16-a72c-4890b2095efe",
+                      "label": "Totemic Defense",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you take damage, say the name of one of the spirits you have bound. The spirit blocks the damage, but its totem is destroyed.<br>"
+                      }
+                    },
+                    {
+                      "id": "db3d23d6-2fcf-4cd8-b20a-bbd243249627",
+                      "label": "Spirit Guide",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Your Spirit Pact allows for 1 additional Worldly Spirit Totem, but it must be given to and used by someone else. Attempting to use it yourself is in violation of your pact and the spirit realm will seek retribution.<br>"
+                      }
+                    },
+                    {
+                      "id": "b2cf0970-c2cd-43d6-9a7c-71ce1214b8ec",
+                      "label": "Vision Quest",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you spend the night alone in nature and consume a vision enhancing substance (such as ghostroot or dreamcap), the spirits will offer you guidance. Tell them something that troubles you. They will do their best to bestow wisdom. Take +1 Forward when acting on the problem.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "375c2a23-5e1b-44c6-824d-3a831eccf567",
+                  "label": "Advanced moves lvl 6-10",
+                  "blocks": [
+                    {
+                      "id": "8e61c798-052d-4494-bec5-904a884aa087",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "When you gain a level from 6-10, choose from these or the level 2-5 moves."
+                      }
+                    },
+                    {
+                      "id": "376de4f2-4a05-4840-873b-e83937d15b9e",
+                      "label": "Totem of the First Spirits",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you spend about a day crafting a grand totem worthy enough for the most ancient of spirits, choose a First Spirit to summon and bind. This totem always has 1 Charge and it always shatters when you call the spirit's name (Spirit Talk does not work). Your Spirit Pact allows you to create and bind only 1 Totem of the First Spirits at a time. Be wary, calling on the First Spirits too often and the spirit realm might begin making demands of you.<br>"
+                      }
+                    },
+                    {
+                      "id": "459bbd4f-03ea-453c-8cb2-7e028edfb92c",
+                      "label": "Totemic Weapon",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Choose a Worldly Spirit to bind to a weapon you carry. When you Hack and Slash or Volley with this weapon, on a 10+ you may also release the spirit for free.<br>"
+                      }
+                    },
+                    {
+                      "id": "48d888e7-9de8-4da5-b606-5bce17d9aded",
+                      "label": "Medium",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you first meet a noteworthy individual, the GM will tell you what the nearby spirits whisper about the person.<br>"
+                      }
+                    },
+                    {
+                      "id": "9a82487b-b19b-481d-86ec-3b38cfc4e834",
+                      "label": "Maker of Talismans",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "It takes a valuable or rare item (such as a gem or the bone of a powerful beast), but you can convert a Worldly Spirit totem into a talisman, giving it 2 Charges instead. When a talisman runs out of Charges, instead of shattering, the spirit just needs rest instead. At the dawn of a new day, or when you spend an hour or so performing a reverence ceremony, the totem's Charges reset to maximum. In every other way, the talisman acts as a totem would.<br>"
+                      }
+                    },
+                    {
+                      "id": "b6cbe20f-838b-4703-9d00-3d09e01d73f0",
+                      "label": "Spirit Walkers",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you and anyone with you sit in a circle around a fire, you may leave your bodies behind and enter the spirit realm. For as long as the fire burns, you may wander the world and see as a spirit sees.<br>"
+                      }
+                    },
+                    {
+                      "id": "4c6ff522-3350-4177-85cd-8d4a979638a0",
+                      "label": "Soulgaze",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you look deeply into someone's eyes and they gaze back, you catch glimpses of each other's soul. Reveal something to them, such as a dark secret, desire, or intention. Something equally meaningful about them is revealed (the GM will tell you what).<br>"
+                      }
+                    },
+                    {
+                      "id": "5245d09a-715e-4a8c-9b4e-705381f15eb8",
+                      "label": "Flame Spirit",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you inhale the spirit of a flame from a campfire or torch, the fire is extinguished and you carry the spirit under your tongue. At any time, you can spit out the flame spirit, dealing your damage and lighting your target on fire.<br>"
+                      }
+                    },
+                    {
+                      "id": "6eacb239-dae0-4595-9a17-24717bd13164",
+                      "label": "Protector",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "The protection of your Guardian Spirit extends to anyone you have a bond with (when they roll a 1 on a damage die).<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "16e31d97-7bb1-4b35-af0e-ec440895613b",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "16aee4d8-dfed-4118-b06a-fed3b206c5df",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "b6f8e0b6-7a0e-4fac-88b9-d6ffe339542f",
+                      "label": "Worldly Spirits",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "cba19ce6-74f3-45f1-8978-d01d59195edc",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "d1ce559b-b2f4-49af-ba67-39dbdd86d2f2",
+                      "label": "Spirit of Mending",
+                      "type": "Text",
+                      "value": "\"naandawi\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Releasing this spirit heals you or a nearby ally for 1d8 damage."
+                      }
+                    },
+                    {
+                      "id": "ab1dbcdb-46dc-4402-a9eb-7d358f758f1a",
+                      "label": "Lightning Spirit",
+                      "type": "Text",
+                      "value": "\"yuka-oom\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When released, lightning streams to a nearby target, dealing 1d6 Damage. This damage ignores armor, unless the target is made of something resistant like stone or wood.<br>"
+                      }
+                    },
+                    {
+                      "id": "569261b2-707e-492f-9f47-bcb828d1bbff",
+                      "label": "Spirit of the Python",
+                      "type": "Text",
+                      "value": "\"chu'a\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Releasing this spirit summons a large snake that quickly wraps itself around your target. The victim cannot move anything but their mouth and the effect lasts until they take damage or you call off the snake spirit. Powerful creatures may be able to break out of the constriction, but if they do so, they take 1d6 Damage.<br>"
+                      }
+                    },
+                    {
+                      "id": "3e555123-6840-4a14-bb6d-80be088adf2d",
+                      "label": "Stubborn Turtle Spirit",
+                      "type": "Text",
+                      "value": "\"mishi-mishi\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "This turtle spirit increases the speaker's Armor by your (the Shaman's) WIS modifier, but only for attacks against the back. Once released, the spirit lasts until the end of battle.<br>"
+                      }
+                    },
+                    {
+                      "id": "a4737fd4-49f9-4e23-8bd8-a2eb93f5fd49",
+                      "label": "Prickly Porcupine Spirit",
+                      "type": "Text",
+                      "value": " \"paheen\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Once released, the porcupine spirit lasts until the end of battle. When the speaker is struck by a melee attack, the attacker takes damage equal to your (the Shaman's) WIS modifier and the damage ignores armor.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "89441629-7099-4024-80f9-4b14ebe14f45",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "1b85ebe6-9475-4f75-a1ce-ae39496cd630",
+                      "label": "Spirit of the Owl",
+                      "type": "Text",
+                      "value": "\"suu'ak\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When released, this owl spirit will stay near you, waiting to bestow its wisdom. Take +1 when Discerning Realities. If you get a 6-, the owl spirit will disappear, but not before giving you one last piece of wisdom (reroll the failure).<br>"
+                      }
+                    },
+                    {
+                      "id": "600d165f-afbc-4f99-8eb0-59c9784d2770",
+                      "label": "Playful Tiger Spirit",
+                      "type": "Text",
+                      "value": "\"amotekun\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Once released, point to the target you wish the spirit tiger to begin stalking. Anytime the target attempts a ranged attack, the tiger will leap out and stop them, preventing the attack. The spirit will then jump away and begin stalking the target again. This lasts until the target dies or you call the tiger away<br>"
+                      }
+                    },
+                    {
+                      "id": "c18b5a72-c732-4794-b6a9-48f7c6f4ca48",
+                      "label": "Ornery Donkey Spirit",
+                      "type": "Text",
+                      "value": "\"balubera\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When released, this particularly stubborn donkey spirit will carry 10 load. Once a day, you must feed it berries or some other delectable food. It lasts until you dismiss it or it was not fed the previous day.<br>"
+                      }
+                    },
+                    {
+                      "id": "41fb1bd0-c79e-407d-bbed-b08d6e83a3dc",
+                      "label": "Whisper Wind Spirit",
+                      "type": "Text",
+                      "value": "\"madweyaashi\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Whenever you whisper, your voice emits from this totem, no matter how far away it is. Once a week, release the spirit and rebind it, or it will begin to grow restless.<br>"
+                      }
+                    },
+                    {
+                      "id": "73ab2cfb-def5-4a2b-90ba-ae1bdc86a924",
+                      "label": "Spirit of Desire",
+                      "type": "Text",
+                      "value": "\"telakapa\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Point this spirit's totem towards someone when you speak its name. The target will be filled with an immense desire to touch the totem. They will stop at nothing and do everything in their power to hold the totem. Once the totem touches their skin, the spirit releases and the desire disappears.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c5f51eed-f4e2-40e2-8ada-4b1c11a06621",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "3a3c1b9d-b11a-4fce-8649-fe6e8246ce2a",
+                      "label": "The Ancient First Spirits",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": true,
+                        "helperText": "The first time something happens is a powerful event in the spirit realm. These are ancient spirits created when the world was young. Only the most wise of Shaman can hope to call upon the First Spirits, but when they do, the world trembles.<br>"
+                      },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "aceeb7c4-df18-4095-b3fe-0f673482680b",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "0a765bfe-817c-43e6-965a-99c2edbb516b",
+                      "label": "Spirit of the First Earthformer",
+                      "type": "Text",
+                      "value": "\"senu-taahi\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "After releasing this spirit, the ground will grow hot and emit a deep rumble. The earth will crack and melt away as a volcano begins to form. When it finally erupts, it will spew lethally hot lava and massive chunks of rocks everywhere nearby.<br>"
+                      }
+                    },
+                    {
+                      "id": "f786329b-2639-45c5-997d-6f4e93d4f467",
+                      "label": "Spirit of First Love",
+                      "type": "Text",
+                      "value": "\"senu-nayok\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you touch this totem to a person’s skin and release the spirit, speak a name. If the person knows whose name you speak, they will fall into deep, naive love with them. This is no meager love potion; the effects are permanent, but note: hearts can still be broken. Beware the wrath of a lover scorned.<br>"
+                      }
+                    },
+                    {
+                      "id": "aca51994-6c75-46b8-b0ef-0f3be3241d71",
+                      "label": "Spirit of First Fear",
+                      "type": "Text",
+                      "value": "\"senu-goshi\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you bind this spirit, speak the name of a specific person or creature. When that person or creature sees the totem, they will be filled with immense terror and stop at nothing to get away from the totem or destroy it. If released, the spirit will haunt the person or creature until you call it off or it's exorcised.<br>"
+                      }
+                    },
+                    {
+                      "id": "c621417a-f379-451c-9e1d-3d68fb13d091",
+                      "label": "Spirit of the First Trade",
+                      "type": "Text",
+                      "value": "\"senu-genv\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you press this totem to someone's skin and release the spirit, choose something about your target, such as their face, magical ability, or even their spirit. Whatever you chose, you will gain it and your target will gain something of yours that is the equivalent (a face for a face, an ability for an ability, a spirit for a spirit). Destroying the totem will reverse the effect.&nbsp;<br>"
+                      }
+                    },
+                    {
+                      "id": "02aaa31a-5ed3-44e7-9401-be0957c9f896",
+                      "label": "Spirits of the First Wolves",
+                      "type": "Text",
+                      "value": "\"senu-hoka\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When released, this pack of ferocious spirit wolves will hunt and pursue a specific person or creature of your choice, no matter how far away they are. When you raise your head to the sky and howl as loud as you can, the pack will howl back and you will know which direction they are. They will continue to stalk the target until you catch up, at which point the pack will disappear.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "50013e9e-8400-457e-957f-f0b0221fff34",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "5aaf5f89-b32a-4e6f-a3ae-217fcc6579f2",
+                      "label": "Spirit of the First Harvest",
+                      "type": "Text",
+                      "value": "\"senu-lesqua\"",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When released, this spirit causes every nearby fruit, vegetable, and crop to immediately grow and ripen, ready to be reaped and gathered. If there is nothing of the sort nearby then edible mushrooms, desert fruit, or something of nourishment will burst forth ready to be eaten.<br>"
+                      }
+                    },
+                    {
+                      "id": "59b6b499-a36d-4e45-b3cc-931686535916",
+                      "label": "Spirit of the First Winter",
+                      "type": "Text",
+                      "value": "\"senu-wanber\"\r",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Upon releasing this spirit, the temperature will plummet and the land around you will be covered in a thick snow. Those who are susceptible to the cold gain the Clumsy tag (-1 ongoing) until they warm up.<br>"
+                      }
+                    },
+                    {
+                      "id": "499fabc3-44a6-4531-9b08-b46a86bc1df2",
+                      "label": "Spirit of the First Spring",
+                      "type": "Text",
+                      "value": "\"senu-doona\"\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When released, every plant as far as you can see will experience immense growth. Flowers will bloom brightly, saplings will grow into tall trees, and all manner of undergrowth will flourish. Every creature nearby (no matter their alignment) will be healed for 2d8 damage.<br>"
+                      }
+                    },
+                    {
+                      "id": "50b136bb-6fca-4580-8055-71a9f0f5824c",
+                      "label": "Spirit of the First Sun",
+                      "type": "Text",
+                      "value": "\"senu-sakuun\"\r\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "No matter the time of day or night, the sun rises to its apex in the sky. The temperature increases rapidly and any water nearby quickly evaporates. Plants dry up and shrivel and anyone caught in direct sunlight risks severe burns.<br>"
+                      }
+                    },
+                    {
+                      "id": "1d2588a5-d4a9-4928-bb0a-00c622f99a72",
+                      "label": "Spirit of the First Storm",
+                      "type": "Text",
+                      "value": "\"senu-yuka\"\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "The sky grows dark with clouds of black when this spirit is released. An immense and powerful storm engulfs the land. Rain and hail pour from the sky, lightning strikes every few seconds, and thunder shakes the earth. You have limited control over the storm, allowing you to do such things as focusing its rage on particular targets or willing its hurricane winds to topple a building.<br>"
+                      }
+                    },
+                    {
+                      "id": "389d82ea-7a49-4129-9b7a-904067a404ba",
+                      "label": "Spirit of First Home",
+                      "type": "Text",
+                      "value": "\"senu-jati\"\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "This spirit can only be bound in a place you consider safe and familiar. Later, when you release this spirit, anyone touching the totem will be dragged through the spirit realm, eventually depositing them back at the binding location .<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Shaman Spirit Totems"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "theme": {
+    "style": "@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Marcellus+SC&family=Spectral+SC&display=swap');",
+    "hideSectionBackground": true,
+    "pageHeadingFontFamily": "Spectral SC",
+    "pageHeadingFontWeight": "400",
+    "sectionHeadingFontFamily": "Spectral SC",
+    "sectionHeadingFontWeight": "600",
+    "labelFontFamily": "Spectral SC",
+    "labelFontWeight": "200",
+    "textFontFamily": "Spectral SC",
+    "textFontWeight": "200",
+    "infoTextFontFamily": "Spectral SC",
+    "infoTextFontWeight": "100",
+    "helperTextFontFamily": "Spectral SC",
+    "helperTextFontWeight": "",
+    "textFontSize": 0.875,
+    "labelFontSize": 1.25,
+    "infoTextFontSize": 1,
+    "helperTextFontSize": 0.625,
+    "sectionHeadingFontSize": 1.5
+  },
+  "playedDuringTurn": false,
+  "group": "Grim World"
+}

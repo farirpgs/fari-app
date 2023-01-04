@@ -1,7 +1,7 @@
 {
   "fariType": "character",
   "id": "1b6a1aa4-5257-45f6-8d30-ee064204f4b4",
-  "lastUpdated": 1660825996,
+  "lastUpdated": 1661564088,
   "name": "VON NEUMANN",
   "pages": [
     {
@@ -35,7 +35,7 @@
                       "label": "CPU",
                       "type": "SlotTracker",
                       "meta": {
-                        "width": 0.33,
+                        "width": 0.5,
                         "asClock": false,
                         "helperText": "MAX | IN USE"
                       },
@@ -49,7 +49,7 @@
                       "label": "MEM",
                       "type": "SlotTracker",
                       "meta": {
-                        "width": 0.33,
+                        "width": 0.5,
                         "asClock": false,
                         "helperText": "MAX | IN USE"
                       },
@@ -60,18 +60,38 @@
                       "label": "DISK",
                       "type": "SlotTracker",
                       "meta": {
-                        "width": 0.33,
+                        "width": 0.5,
                         "asClock": false,
                         "helperText": "MAX | IN USE"
                       },
                       "value": [{ "label": "", "checked": true }]
                     },
                     {
+                      "id": "1c926072-0e9f-4b65-932f-e3f9be6a1c79",
+                      "label": "GPU",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "width": 0.5,
+                        "asClock": false,
+                        "helperText": "MAX | IN USE"
+                      },
+                      "value": []
+                    },
+                    {
                       "id": "02963d44-31ce-43d7-b293-6ff9c87fa776",
                       "label": "",
                       "type": "Separator",
-                      "meta": { "hasLabel": false },
+                      "meta": { "hasLabel": false, "width": 1 },
                       "value": ""
+                    },
+                    {
+                      "id": "f3115c03-6b0c-461f-892d-2721f84408cd",
+                      "label": "Acceleration Modifier",
+                      "type": "Text",
+                      "value": "0.65",
+                      "meta": {
+                        "helperText": "* Light Year Distance = Travel Time to Another Star"
+                      }
                     },
                     {
                       "id": "3874a0e8-f783-45d9-8506-8f448d36807b",

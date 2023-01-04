@@ -129,8 +129,7 @@ export default function CursorWithMessage(props: {
           position: "absolute",
           opacity: stale ? 0.15 : 1,
           pointerEvents: "none",
-          top: "-40px",
-          left: "-10px",
+
           zIndex: zIndex.cursor,
         }}
         style={{
@@ -176,8 +175,8 @@ export default function CursorWithMessage(props: {
       <Box
         sx={{
           position: "absolute",
-          top: "2rem",
-          left: "1.5rem",
+          top: "0rem",
+          left: "3rem",
           padding: "1rem",
         }}
         style={{ backgroundColor: color, borderRadius: 4 }}
