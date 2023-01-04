@@ -24,6 +24,7 @@ export function DiceButtons(props: {
             <Grid container justifyContent="center" direction="column">
               <Grid container item justifyContent="center">
                 <IconButton
+                  data-cy={`dice-buttons.${command}`}
                   onClick={() => props.onClick(command)}
                   onContextMenu={(e) => {
                     e.preventDefault();

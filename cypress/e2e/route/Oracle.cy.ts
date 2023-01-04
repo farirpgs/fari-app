@@ -19,7 +19,7 @@ describe("/oracle", () => {
   });
 
   function askOracle() {
-    Fari.get("dice").click();
+    Fari.get("oracle-route.ask-button").click();
 
     Fari.get("oracle.value")
       .invoke("attr", "data-cy-value")

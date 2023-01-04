@@ -102,6 +102,7 @@ export function Oracle() {
           variant="contained"
           onClick={roll}
           size="large"
+          data-cy="oracle-route.ask-button"
           disabled={rolling}
         >
           Ask The Oracle

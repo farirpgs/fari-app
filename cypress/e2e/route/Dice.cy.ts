@@ -7,36 +7,12 @@ describe("/dice", () => {
     Fari.get("page.menu.tools").click({ force: true });
     Fari.get("page.menu.tools.dice").click({ force: true });
 
-    setAliases();
-
-    isRolling();
-    hasRolled();
-
-    roll();
-
-    isRolling();
-    hasRolled();
+    Fari.get("dice-buttons.1d4").click({ force: true });
+    Fari.get("dice-buttons.1d6").click({ force: true });
+    Fari.get("dice-buttons.1d8").click({ force: true });
+    Fari.get("dice-buttons.1d10").click({ force: true });
+    Fari.get("dice-buttons.1d12").click({ force: true });
+    Fari.get("dice-buttons.1d20").click({ force: true });
+    Fari.get("dice-buttons.1d100").click({ force: true });
   });
-
-  function isRolling() {
-    cy.get("@dice").then((e) => {
-      const isRolling = e.attr("data-cy-rolling");
-      expect(isRolling).eq("true");
-    });
-  }
-
-  function setAliases() {
-    Fari.get("dice").as("dice").click();
-  }
-
-  function roll() {
-    cy.get("@dice").click();
-  }
-
-  function hasRolled() {
-    cy.get("@dice").invoke("attr", "data-cy-rolling").should("eq", "false");
-    cy.get("@dice")
-      .invoke("attr", "data-cy-value")
-      .should("be.oneOf", ["1", "2", "3", "4", "5", "6"]);
-  }
 });

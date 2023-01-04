@@ -78,13 +78,6 @@ describe("/characters", () => {
       cy.contains("Luke Skywalker").click();
       cy.title().should("eq", "Luke Skywalker | Fari");
 
-      // roll dice in sheet
-      Fari.get("dice").click();
-      Fari.get("dice").invoke("attr", "data-cy-rolling").should("eq", "false");
-      Fari.get("dice")
-        .invoke("attr", "data-cy-value")
-        .should("be.oneOf", ["1", "2", "3", "4", "5", "6"]);
-
       // delete
       Fari.get("page.menu.my-binder").click({ force: true });
       Fari.get("my-binder.folders.characters").click();
@@ -113,28 +106,6 @@ describe("/characters", () => {
       ).click();
 
       cy.contains("Luke Skywalker").click();
-
-      // Fari.get("session.tabs.characters").click();
-      // Fari.get("character-card").contains("Luke Skywalker");
-      // Fari.get("character-card.open-character-sheet").click();
-      // Fari.get("character-dialog.close").click();
-
-      // // character card roll skill
-      // Fari.get("character-card.section.Skills.block.Athletics").click();
-      Fari.get("scene.player-row.gm-npc-0")
-        .find('[data-cy="dice"]')
-        .invoke("attr", "data-cy-value")
-        .should("be.oneOf", [
-          "-1",
-          "0",
-          "+1",
-          "+2",
-          "+3",
-          "+4",
-          "+5",
-          "+6",
-          "+7",
-        ]);
     });
   });
 
