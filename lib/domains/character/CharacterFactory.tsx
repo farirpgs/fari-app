@@ -206,7 +206,6 @@ export const CharacterFactory = {
         label: "",
         type: type,
         meta: { hasLabel: false },
-        value: "",
       } as IBlock & ISeparatorBlock,
     };
 

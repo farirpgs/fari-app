@@ -1,6 +1,5 @@
 import { IndexCardColorTypes } from "../../components/IndexCard/IndexCardColor";
 import { IBlock, ICharacter } from "../../domains/character/types";
-import { IDrawingAreaState } from "../../routes/Draw/TldrawWriterAndReader";
 import { AspectType } from "./AspectType";
 
 export type IPlayer = {
@@ -124,7 +123,8 @@ export type ISession = {
   players: Record<string, IPlayer>;
   goodConfetti: number;
   badConfetti: number;
-  tlDrawDoc: IDrawingAreaState;
+
+  tlDrawDoc: any /*IDrawingAreaState */;
   paused: boolean;
   playerColorIndex: number;
 };

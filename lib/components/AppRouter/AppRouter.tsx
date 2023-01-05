@@ -1,9 +1,10 @@
 import { LiveObject } from "@liveblocks/client";
-import { LiveblocksProvider, RoomProvider } from "@liveblocks/react";
 import React, { useContext } from "react";
 import { Route, Routes, useLocation, useParams } from "react-router-dom";
 import { InjectionsContext } from "../../contexts/InjectionsContext/InjectionsContext";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
+import { RoomProvider } from "../../liveblocks.config";
+import { IPlayerPresence } from "../../routes/Play/types/IPlayerPresence";
 import { StoryBuilderRoute } from "../../routes/StoryBuilder/StoryBuilderRoute";
 import StoryDiceRoute from "../../routes/StoryDice/StoryDiceRoute";
 import { ExternalRedirect } from "../ExternalRedirect/ExternalRedirect";
@@ -47,6 +48,15 @@ const initialStorage = {
   scene: new LiveObject(),
   characters: new LiveObject(),
   session: new LiveObject(),
+  chat: new LiveObject(),
+};
+const initialPresence: IPlayerPresence = {
+  characterName: null,
+  color: null,
+  cursor: null,
+  message: null,
+  playerName: null,
+  rollOutput: null,
 };
 
 export const AppRouter = () => {
@@ -79,14 +89,13 @@ export const AppRouter = () => {
               render={(params: { id: string }) => {
                 const sessionId = params.id || userId;
                 return (
-                  <LiveblocksProvider client={injections.liveBlocksClient}>
-                    <RoomProvider
-                      id={sessionId}
-                      initialStorage={initialStorage}
-                    >
-                      <PlayRoute />
-                    </RoomProvider>
-                  </LiveblocksProvider>
+                  <RoomProvider
+                    id={sessionId}
+                    initialPresence={initialPresence}
+                    initialStorage={initialStorage as any}
+                  >
+                    <PlayRoute />
+                  </RoomProvider>
                 );
               }}
             />
@@ -100,11 +109,13 @@ export const AppRouter = () => {
               render={(params: { id: string }) => {
                 const sessionId = params.id || userId;
                 return (
-                  <LiveblocksProvider client={injections.liveBlocksClient}>
-                    <RoomProvider id={sessionId}>
-                      <PlayRoute />
-                    </RoomProvider>
-                  </LiveblocksProvider>
+                  <RoomProvider
+                    id={sessionId}
+                    initialPresence={initialPresence}
+                    initialStorage={initialStorage as any}
+                  >
+                    <PlayRoute />
+                  </RoomProvider>
                 );
               }}
             />
@@ -118,11 +129,13 @@ export const AppRouter = () => {
               render={(params: { id: string }) => {
                 const sessionId = params.id || userId;
                 return (
-                  <LiveblocksProvider client={injections.liveBlocksClient}>
-                    <RoomProvider id={sessionId}>
-                      <JoinAGameRoute />
-                    </RoomProvider>
-                  </LiveblocksProvider>
+                  <RoomProvider
+                    id={sessionId}
+                    initialPresence={initialPresence}
+                    initialStorage={initialStorage as any}
+                  >
+                    <JoinAGameRoute />
+                  </RoomProvider>
                 );
               }}
             />

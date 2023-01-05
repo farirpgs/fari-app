@@ -16,7 +16,7 @@ export function useTranslate() {
       options?: UseTranslationOptions & Record<string, string>,
       noFallback: boolean = false
     ): string => {
-      const value = t(key, options);
+      const value = t(key, options as any);
       const englishValue = i18n.t(key, {
         ...options,
         lng: "en",
@@ -26,7 +26,7 @@ export function useTranslate() {
         lng: "dev",
       });
 
-      const isValidValue = !!value && key !== value;
+      const isValidValue = !!value && key !== (value as any);
       if (!isValidValue) {
         if (noFallback) {
           return "";
@@ -35,7 +35,7 @@ export function useTranslate() {
         return englishValue || devValue;
       }
 
-      return value;
+      return value as unknown as string;
     },
     i18n,
   };

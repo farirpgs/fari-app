@@ -1,4 +1,3 @@
-import { useBroadcastEvent, useEventListener } from "@liveblocks/react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -26,10 +25,8 @@ import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext"
 import { Icons } from "../../domains/Icons/Icons";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/isWebRTCSupported";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import {
-  IPlayerInteraction,
-  PlayerInteractionFactory,
-} from "./types/IPlayerInteraction";
+import { useBroadcastEvent, useEventListener } from "../../liveblocks.config";
+import { PlayerInteractionFactory } from "./types/IPlayerInteraction";
 
 function JoinAGameRoute() {
   const { t } = useTranslate();
@@ -45,7 +42,7 @@ function JoinAGameRoute() {
   const broadcast = useBroadcastEvent();
 
   useEventListener((props) => {
-    const event = props.event as IPlayerInteraction;
+    const event = props.event;
     if (event.type === "pong") {
       isGameLinkValid.current = true;
       navigate(`/play/${params.id}?name=${playerName}`);

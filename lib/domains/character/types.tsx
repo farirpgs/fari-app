@@ -208,7 +208,7 @@ export type ILinkBlock = {
 
 export type ISeparatorBlock = {
   type: BlockType.Separator;
-  value: unknown;
+  value: undefined;
   meta: IDefaultBlockMeta & {
     hasLabel: boolean;
     hideDivider?: boolean;
@@ -231,7 +231,7 @@ export type IBlock = {
   type: BlockType;
   id: string;
   label: string | undefined;
-  value: unknown;
+  // value: unknown;
 } & IBlockTypes;
 
 export interface IV4Page {

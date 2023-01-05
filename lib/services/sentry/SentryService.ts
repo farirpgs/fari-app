@@ -1,5 +1,5 @@
 import * as Sentry from "@sentry/react";
-import { Severity } from "@sentry/react";
+import { SeverityLevel } from "@sentry/react";
 import { env } from "../../constants/env";
 
 const shouldLog =
@@ -17,7 +17,7 @@ export function makeSentryService() {
   return {
     log(
       message: string,
-      severity: Severity,
+      severity: SeverityLevel,
       context: { [key: string]: any } | undefined
     ) {
       if (!shouldLog) {

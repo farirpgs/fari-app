@@ -1,11 +1,3 @@
-import { LiveObject } from "@liveblocks/client";
-import {
-  useBroadcastEvent,
-  useEventListener,
-  useObject,
-  useRoom,
-  useStorage,
-} from "@liveblocks/react";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
@@ -17,6 +9,15 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import {
+  RoomEvent,
+  Storage,
+  useBroadcastEvent,
+  useEventListener,
+  useMutation,
+  useRoom,
+  useStorage,
+} from "../../liveblocks.config";
 import { IMessage, useChat } from "./components/Chat/useChat";
 import {
   IPlayersPresenceRef,
@@ -45,49 +46,51 @@ type ConnectionState =
   | "connecting";
 
 export function useLiveObject<T>(props: {
-  key: string;
+  key: keyof Storage;
   value: T;
   isOwner: boolean;
   canBeEmpty?: boolean;
   onChange(newValue: T): void;
 }) {
-  const liveObject = useObject<any>(props.key);
-  const [root] = useStorage();
-
-  const room = useRoom();
+  const liveObject = useStorage((root) => root[props.key]);
+  // const [root] = useStorage();
 
   useEffect(() => {
-    if (props.isOwner) {
-      root?.set(props.key, new LiveObject({}));
-    }
-  }, [root]);
-
-  useEffect(() => {
-    if (props.isOwner) {
-      liveObject?.update(props.value as any);
-    }
-  }, [props.value]);
-
-  useEffect(() => {
-    function onLiveObjectChange() {
-      const isSubscriber = !props.isOwner;
-      const object = liveObject?.toObject();
-      const objectKeys = Object.keys(object ?? {});
-      if (isSubscriber && object) {
-        if (props.canBeEmpty || objectKeys.length > 0) {
-          props.onChange(object as unknown as T);
-        }
+    console.log("PLAYER: OBJECT CHANGED", liveObject);
+    const isSubscriber = !props.isOwner;
+    const object = liveObject;
+    const objectKeys = Object.keys(object ?? {});
+    if (isSubscriber && object) {
+      if (props.canBeEmpty || objectKeys.length > 0) {
+        props.onChange(object as unknown as T);
       }
     }
-
-    onLiveObjectChange();
-
-    if (liveObject == null) {
-      return;
-    }
-
-    return room.subscribe(liveObject, onLiveObjectChange);
   }, [liveObject]);
+
+  const room = useRoom();
+  const updateLiveObject = useMutation((root, newState) => {
+    /**
+     * https://github.com/liveblocks/liveblocks/blob/66eac7d21963d3b35e6a2987b083e2dc9ee5ffbe/packages/liveblocks-react/src/factory.tsx#L83
+     */
+    const isRoomReady = room.getStorageSnapshot() !== null;
+
+    if (isRoomReady) {
+      console.log("GM: UPDATE LIVE OBJECT", newState, root.storage);
+      (root.storage.get(props.key) as any).set(newState);
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   if (props.isOwner) {
+  //     root?.set(props.key, new LiveObject({}));
+  //   }
+  // }, [root]);
+
+  useEffect(() => {
+    if (props.isOwner) {
+      updateLiveObject(props.value as any);
+    }
+  }, [props.value]);
 
   return liveObject;
 }
@@ -177,7 +180,7 @@ function PlayRoute() {
   const broadcast = useBroadcastEvent();
 
   useEventListener((props) => {
-    const event = props.event as IPlayerInteraction;
+    const event = props.event as unknown as IPlayerInteraction;
     console.log(`Received player interaction: ${event.type}`, event);
 
     if (event.type === "pause") {
@@ -226,17 +229,11 @@ function PlayRoute() {
     }
   });
 
-  function handlePlayerInteraction(interaction: IPlayerInteraction) {
+  function handlePlayerInteraction(interaction: RoomEvent) {
     console.log(`Sending player interaction: ${interaction.type}`, interaction);
-    broadcast(
-      {
-        type: interaction.type,
-        payload: interaction.payload,
-      },
-      {
-        shouldQueueEventIfNotReady: true,
-      }
-    );
+    broadcast(interaction, {
+      shouldQueueEventIfNotReady: true,
+    });
   }
 
   useEffect(() => {

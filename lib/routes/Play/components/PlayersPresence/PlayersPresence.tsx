@@ -1,4 +1,3 @@
-import { useMyPresence } from "@liveblocks/react";
 import Box from "@mui/material/Box";
 import React, {
   useContext,
@@ -7,6 +6,7 @@ import React, {
   useState,
 } from "react";
 import { useZIndex } from "../../../../constants/zIndex";
+import { useMyPresence } from "../../../../liveblocks.config";
 import { PlayCursorMode } from "../../consts/PlayCursorMode";
 import { SessionPresenceUpdaterContext } from "../../contexts/SessionPresenceContext";
 import {
@@ -17,7 +17,6 @@ import {
   IPlayerCursorRollOutput,
   IPlayerCursorState,
 } from "../../types/IPlayerCursorState";
-import { IPlayerPresence } from "../../types/IPlayerPresence";
 import { IMessageToSend, IRollMessage } from "../Chat/useChat";
 import CursorWithMessage from "../CursorWithMessage/CursorWithMessage";
 
@@ -37,7 +36,7 @@ export const PlayersPresence = React.forwardRef(
     });
     const sessionPresenceUpdater = useContext(SessionPresenceUpdaterContext);
 
-    const [presence] = useMyPresence<IPlayerPresence>();
+    const [presence] = useMyPresence();
     const myWindowCursor = useMyWindowLiveCursor();
     const windowCursors = useWindowLiveCursors();
     const zIndex = useZIndex();
