@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -16,186 +15,204 @@ import {
   previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { IImageBlock } from "../../../../../../domains/character/types";
+import { useEvent } from "../../../../../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
-import { IBlockComponentProps } from "../../types/IBlockComponentProps";
+import { IBlockHandlers } from "../../types/IBlockComponentProps";
 import { ThemedLabel } from "../ThemedLabel";
 
-export function BlockImage(props: IBlockComponentProps<IImageBlock> & {}) {
-  const { t } = useTranslate();
-  const theme = useTheme();
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState(false);
-  const isLabelVisible =
-    !!previewContentEditable({ value: props.block.label }) || props.advanced;
+export const BlockImage = React.memo(
+  (
+    props: {
+      label: string | undefined;
+      value: string | undefined;
+      advanced: boolean;
+      readonly: boolean | undefined;
+      dataCy?: string;
+    } & IBlockHandlers<IImageBlock>
+  ) => {
+    const { t } = useTranslate();
+    const theme = useTheme();
+    const [open, setOpen] = useState(false);
+    const [error, setError] = useState(false);
+    const isLabelVisible =
+      !!previewContentEditable({ value: props.label }) || props.advanced;
 
-  function handleOnClose() {
-    setOpen(false);
-  }
+    const handleValueChange = useEvent(
+      (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        setError(false);
+        props.onValueChange(event.target.value);
+      }
+    );
 
-  function handleOnOpen() {
-    setOpen(true);
-  }
+    const handleLabelChange = useEvent((value) => {
+      props.onLabelChange(value);
+    });
 
-  return (
-    <>
-      {isLabelVisible && (
-        <Box>
-          <Grid
-            container
-            spacing={1}
-            justifyContent="space-between"
-            wrap="nowrap"
-          >
-            <Grid item xs>
-              <ThemedLabel>
-                <ContentEditable
-                  readonly={props.readonly}
-                  border={props.advanced}
-                  dataCy={`${props.dataCy}.label`}
-                  value={props.block.label || ""}
-                  onChange={(value) => {
-                    props.onLabelChange(value);
-                  }}
-                />
-              </ThemedLabel>
-            </Grid>
-          </Grid>
-        </Box>
-      )}
-      <Dialog open={open} onClose={handleOnClose}>
-        <DialogTitle>
-          {t("character-dialog.image-block.dialog.title")}
-        </DialogTitle>
-        <DialogContent>
-          {!props.readonly && (
-            <>
-              <DialogContentText>
-                {t("character-dialog.image-block.dialog.description")}
-              </DialogContentText>
-              <Grid
-                container
-                wrap="nowrap"
-                justifyContent="space-around"
-                spacing={2}
-                alignItems="center"
-              >
-                <Grid item xs>
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    value={props.block.value}
-                    onChange={(event) => {
-                      setError(false);
-                      props.onValueChange(event.target.value);
-                    }}
-                    label={t(
-                      "character-dialog.image-block.dialog.image-url-label"
-                    )}
-                    fullWidth
-                    variant="standard"
+    const handleModalDialogOpen = useEvent(() => {
+      setOpen(false);
+    });
+
+    const handleModalDialogClose = useEvent(() => {
+      setOpen(true);
+    });
+
+    const handleError = useEvent(() => {
+      setError(true);
+    });
+
+    return (
+      <>
+        {isLabelVisible && (
+          <Box>
+            <Grid
+              container
+              spacing={1}
+              justifyContent="space-between"
+              wrap="nowrap"
+            >
+              <Grid item xs>
+                <ThemedLabel>
+                  <ContentEditable
+                    readonly={props.readonly}
+                    border={props.advanced}
+                    dataCy={`${props.dataCy}.label`}
+                    value={props.label || ""}
+                    onChange={handleLabelChange}
                   />
-                </Grid>
-                {false && (
-                  <Grid item>
-                    <Button
-                      color="primary"
-                      variant="outlined"
-                      component="a"
-                      href="https://imgur.com/upload"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {t("character-dialog.image-block.dialog.upload")}
-                    </Button>
-                  </Grid>
-                )}
+                </ThemedLabel>
               </Grid>
-            </>
-          )}
-
-          {renderImage(false)}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleOnClose} color="primary">
-            {t("character-dialog.image-block.dialog.close")}
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      {renderImage(true)}
-      {renderNoImageOrError()}
-    </>
-  );
-
-  function renderNoImageOrError() {
-    if (props.block.value && !error) {
-      return null;
-    }
-
-    return (
-      <Box width="100%" mt=".5rem">
-        <Box
-          width="100%"
-          height="4rem"
-          className={css({
-            cursor: "pointer",
-            border: `2px dashed ${
-              error ? theme.palette.error.light : theme.palette.divider
-            }`,
-          })}
-          onClick={() => {
-            handleOnOpen();
-          }}
-        >
-          <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-            className={css({ height: "100%" })}
-          >
-            <Grid item>
-              <Typography
-                color={error ? "error" : "textSecondary"}
-                variant="body2"
-              >
-                {error
-                  ? t("character-dialog.image-block.dialog.error")
-                  : t("character-dialog.image-block.dialog.add-image")}
-              </Typography>
             </Grid>
-          </Grid>
-        </Box>
-      </Box>
-    );
-  }
+          </Box>
+        )}
+        <Dialog open={open} onClose={handleModalDialogOpen}>
+          <DialogTitle>
+            {t("character-dialog.image-block.dialog.title")}
+          </DialogTitle>
+          <DialogContent>
+            {!props.readonly && (
+              <>
+                <DialogContentText>
+                  {t("character-dialog.image-block.dialog.description")}
+                </DialogContentText>
+                <Grid
+                  container
+                  wrap="nowrap"
+                  justifyContent="space-around"
+                  spacing={2}
+                  alignItems="center"
+                >
+                  <Grid item xs>
+                    <TextField
+                      autoFocus
+                      margin="dense"
+                      value={props.value}
+                      onChange={handleValueChange}
+                      label={t(
+                        "character-dialog.image-block.dialog.image-url-label"
+                      )}
+                      fullWidth
+                      variant="standard"
+                    />
+                  </Grid>
+                  {false && (
+                    <Grid item>
+                      <Button
+                        color="primary"
+                        variant="outlined"
+                        component="a"
+                        href="https://imgur.com/upload"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {t("character-dialog.image-block.dialog.upload")}
+                      </Button>
+                    </Grid>
+                  )}
+                </Grid>
+              </>
+            )}
 
-  function renderImage(clickable: boolean) {
-    if (!props.block.value || error) {
-      return null;
+            {renderImage(false)}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleModalDialogOpen} color="primary">
+              {t("character-dialog.image-block.dialog.close")}
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        {renderImage(true)}
+        {renderNoImageOrError()}
+      </>
+    );
+
+    function renderNoImageOrError() {
+      if (props.value && !error) {
+        return null;
+      }
+
+      return (
+        <Box width="100%" mt=".5rem">
+          <Box
+            width="100%"
+            height="4rem"
+            sx={{
+              cursor: "pointer",
+              border: `2px dashed ${
+                error ? theme.palette.error.light : theme.palette.divider
+              }`,
+            }}
+            onClick={handleModalDialogClose}
+          >
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              sx={{ height: "100%" }}
+            >
+              <Grid item>
+                <Typography
+                  color={error ? "error" : "textSecondary"}
+                  variant="body2"
+                >
+                  {error
+                    ? t("character-dialog.image-block.dialog.error")
+                    : t("character-dialog.image-block.dialog.add-image")}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      );
     }
 
-    const src = props.block.value;
+    function renderImage(clickable: boolean) {
+      if (!props.value || error) {
+        return null;
+      }
 
-    return (
-      <Box width="100%" mt=".5rem">
-        <img
-          className={css({
-            maxWidth: "100%",
-            maxHeight: open ? undefined : "250px",
-            margin: "0 auto",
-            height: "auto",
-            display: "flex",
-            cursor: clickable ? "pointer" : "inherit",
-          })}
-          onError={() => {
-            setError(true);
-          }}
-          onClick={clickable ? handleOnOpen : undefined}
-          src={src}
-          alt={props.block.label}
-        />
-      </Box>
-    );
+      const src = props.value;
+
+      return (
+        <Box width="100%" mt=".5rem">
+          <Box
+            component="img"
+            sx={{
+              maxWidth: "100%",
+              maxHeight: open ? undefined : "250px",
+              margin: "0 auto",
+              height: "auto",
+              display: "flex",
+              cursor: clickable ? "pointer" : "inherit",
+            }}
+            onError={handleError}
+            onClick={clickable ? handleModalDialogClose : undefined}
+            src={src}
+            alt={props.label}
+          />
+        </Box>
+      );
+    }
   }
-}
+);
 BlockImage.displayName = "BlockImage";

@@ -1,8 +1,10 @@
-import { act, renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react";
 import { useCharacters } from "../../../contexts/CharactersContext/CharactersContext";
+import { useSession } from "../../../routes/Play/components/Session/useSession";
 import { DefaultPlayerColor } from "../../../routes/Play/consts/PlayerColors";
 import { ISession } from "../IScene";
-import { useSession } from "../useSession";
+
+vi.mock("canvas-confetti");
 
 describe("useSession", () => {
   it("constructor", () => {
@@ -13,8 +15,7 @@ describe("useSession", () => {
       gm: {
         id: expect.anything(),
         playerName: "Game Master",
-        rolls: [],
-        playedDuringTurn: false,
+        status: "",
         private: false,
         npcs: [],
         isGM: true,
@@ -64,9 +65,8 @@ describe("useSession", () => {
         isGM: false,
         private: false,
         points: "3",
-        playedDuringTurn: false,
         playerName: "Character #1",
-        rolls: [],
+        status: "",
       });
     });
   });
@@ -160,15 +160,13 @@ describe("useSession", () => {
       expect(result.current.state.session.gm.npcs).toEqual([
         {
           character: undefined,
-          points: "3",
           color: DefaultPlayerColor,
           id: playerId,
-          playedDuringTurn: false,
-          private: false,
-          isGM: false,
-
           playerName: "Character #1",
-          rolls: [],
+          isGM: false,
+          points: "3",
+          private: false,
+          status: "",
         },
       ]);
       // WHEN removing an offline player

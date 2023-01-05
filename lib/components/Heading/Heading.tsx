@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box, { BoxProps } from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import React from "react";
@@ -25,7 +24,7 @@ export const Heading: React.FC<
     >
       {Icon && (
         <Box mb=".5rem">
-          <Icon className={css({ fontSize: "3rem" })} color="secondary" />
+          <Icon sx={{ fontSize: "3rem" }} color="secondary" />
         </Box>
       )}
       <FateLabel variant="h4" as="h1" align="center" color="secondary">

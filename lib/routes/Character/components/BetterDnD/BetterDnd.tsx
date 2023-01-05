@@ -1,4 +1,4 @@
-import { css, cx } from "@emotion/css";
+import Box, { BoxProps } from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import React, { useRef, useState } from "react";
 import { ConnectDragSource, useDrag, useDrop } from "react-dnd";
@@ -12,7 +12,7 @@ export const BetterDnd: React.FC<{
    */
   type: string;
   id: string;
-  className?: string;
+  sx?: BoxProps["sx"];
   render(renderProps: {
     drag: ConnectDragSource;
     isDragging: boolean;
@@ -66,18 +66,16 @@ export const BetterDnd: React.FC<{
   preview(drop(ref));
 
   return (
-    <div
+    <Box
       ref={ref}
-      className={cx(
-        css({
-          opacity: isDragging ? 0.2 : 1,
-          boxShadow: isDragging
-            ? `0 0 3pt 2pt ${theme.palette.primary.main}`
-            : undefined,
-          position: "relative",
-        }),
-        props.className
-      )}
+      sx={{
+        opacity: isDragging ? 0.2 : 1,
+        boxShadow: isDragging
+          ? `0 0 3pt 2pt ${theme.palette.primary.main}`
+          : undefined,
+        position: "relative",
+        ...props.sx,
+      }}
       onPointerEnter={() => {
         setHover(true);
       }}
@@ -86,6 +84,6 @@ export const BetterDnd: React.FC<{
       }}
     >
       {props.render({ drag, isDragging, isOver: hover })}
-    </div>
+    </Box>
   );
 };

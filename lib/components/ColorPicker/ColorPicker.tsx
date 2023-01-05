@@ -1,4 +1,3 @@
-import { css, cx } from "@emotion/css";
 import { useTheme } from "@mui/material/styles";
 import React from "react";
 import TwitterPicker from "react-color/lib/components/twitter/Twitter";
@@ -19,6 +18,7 @@ export const ColorPicker: React.FC<{
         default: {
           card: {
             background: theme.palette.background.paper,
+            boxShadow: "none",
           },
           swatch: {
             border: `1px solid ${theme.palette.divider}`,
@@ -33,12 +33,6 @@ export const ColorPicker: React.FC<{
       }}
       color={props.value}
       colors={props.colors || pickerColors}
-      className={cx(
-        "data-cy-color-picker",
-        css({
-          boxShadow: "none",
-        })
-      )}
       onChange={(color) => props.onChange(color.hex)}
     />
   );

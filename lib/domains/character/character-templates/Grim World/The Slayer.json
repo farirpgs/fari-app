@@ -1,1 +1,816 @@
-{"fariType":"character","id":"350fba4f-2986-4d2b-8504-aae15f7e1192","lastUpdated":1662311481,"name":"Grim World - The Slayer","pages":[{"id":"947c975f-7dee-4249-8ad3-3a1a0b899636","label":"Character","rows":[{"columns":[{"sections":[{"id":"97b7b83e-c609-4cf0-904b-0f2bb105beef","label":"The Slayer\r\n","blocks":[{"id":"504af9b2-9712-400b-a172-dfa3db87f2ae","label":"","type":"Text","value":"Name","meta":{"width":0.33}},{"id":"e45b516c-819f-4f0c-830f-11ba86a3adf4","label":"","type":"Text","value":"Species","meta":{"width":0.33}},{"id":"401b814b-e80d-4eeb-88f1-6680b130a241","label":"","type":"Text","value":"Look","meta":{"width":0.33,"helperText":"<br>"}},{"id":"5a445644-1be6-4fbd-91e5-b7d5cfb43ae6","label":"","type":"Image","meta":{},"value":"https://i.etsystatic.com/5933544/r/il/b01d79/324149745/il_794xN.324149745.jpg"},{"id":"fee28594-2ebd-4cd2-b91f-385a9ed01561","type":"Text","value":"Dry throat, red eyes, your hands shake, your muscles ache. How long has it been? Food doesn’t help, even if you could keep it down. Sleep? You know it’s futile. No, what you need is... there! Movement in the trees! You leap, the beast roars, there’s blood and fur and something like pain. And then it’s over. You pluck back the blade of silver and your body shivers. Euphoria. You laugh, you sigh. You are the Slayer.\r\n","meta":{"width":1}},{"id":"7d1d7817-536d-4b0a-932a-c520dfab9e88","label":"STATS","type":"Separator","meta":{"hasLabel":true,"helperText":"Assign these scores to your stats: 16 (+2), 15 (+1), 13 (+1), 12 (+0), 9 (+0), 8 (-1) <br>Note: Stats cannot be raised above 18 (+3)"},"value":""},{"id":"726489bb-f78e-479c-bd35-ac04d5aed172","label":"Strength","type":"Numeric","value":"","meta":{"checked":false,"width":0.5,"helperText":"Weak -1"}},{"id":"bc525b93-4a1f-4db6-aac0-a630687e96e7","label":"Dexterity","type":"Numeric","value":"","meta":{"checked":false,"width":0.5,"helperText":"Shaky -1"}},{"id":"e7573fc7-f8e9-4314-af9f-85fa548304be","label":"Constitution","type":"Numeric","value":"","meta":{"checked":false,"width":0.5,"helperText":"Sick -1"}},{"id":"d47027b8-edeb-4cb6-9222-97fe265e607f","label":"Intelligence","type":"Numeric","value":"","meta":{"checked":false,"width":0.5,"helperText":"Stunned -1"}},{"id":"cc69559a-b304-4a07-b45f-fb1d3bb24140","label":"Wisdom","type":"Numeric","value":"","meta":{"checked":false,"width":0.5,"helperText":"Confused -1"}},{"id":"e125630a-95b1-4a24-a620-ddb08a8a34da","label":"Charisma","type":"Numeric","value":"","meta":{"checked":false,"width":0.5,"helperText":"Scared -1"}},{"id":"b1fbed44-d47d-4e0f-8c5e-829a677a8640","label":"","type":"Separator","meta":{"hasLabel":false,"hideDivider":false},"value":""},{"id":"c7acd30c-6e48-4b93-8fde-a860387b9357","label":"Damage","type":"Skill","value":"0","meta":{"commands":["1d10"],"hideModifier":true,"width":0.33}},{"id":"a4f01619-85d4-4430-a5af-616083aad869","label":"Armor","type":"Numeric","value":"","meta":{"width":0.33}},{"id":"03f115f5-2d0b-4f99-8047-2ed6edb1aeb5","label":"Hit Points","type":"PointCounter","meta":{"max":"10","isMainPointCounter":false,"width":0.33,"helperText":"Your Max HP is 8 + Constitution<br>"},"value":"10"}],"visibleOnCard":true}]},{"sections":[{"id":"5357978a-5047-42d7-982c-e7f915d55f99","label":"","blocks":[{"id":"2811ce1d-258b-46ec-8121-d8804b7b49d1","label":"GEAR","type":"Separator","meta":{"hasLabel":true,"helperText":"Your Load is 11+STR. You carry dungeon rations (5 uses, 1 weight), leather armor (1 armor, 1 weight), and your Slayer's Arsenal (4 weight).<br>"},"value":""},{"id":"a39ca2a4-1635-4529-8e71-e6cac6545113","label":"Choose your weapon:","type":"Text","value":"","meta":{"helperText":"⃞&nbsp; &nbsp;Dual battle axes (close +1 damage, 2 weight)\n<br>⃞&nbsp; &nbsp;Spear (close, thrown, near, 1 weight)\n<br>⃞&nbsp; &nbsp;Claymore (close, +1 damage, two-handed, 2 weight)<br>\n"}},{"id":"58b5ee18-8d75-4359-bdde-6bef89240125","label":"\nChoose one:\n","type":"Text","value":"","meta":{"helperText":"⃞&nbsp; &nbsp;Bundle of javelins (2 ammo, thrown, near, 1 weight)\n<br>⃞&nbsp; &nbsp;Crossbow (near, +1 damage, reload, 3 weight)\n<br>⃞&nbsp; &nbsp;A trophy from a recent kill worth 4d8 coins<br>\n"}},{"id":"ea7e4200-b05f-4573-9065-dcc576ed7543","label":"Death Move","type":"Text","value":"Death: Soulbound Slayer\n","meta":{"helperText":"There was a name on your lips when you felt your heart stop. Was it a beast? Was it a person? When you die, say the name aloud. Your soul is now bound to hunt and slay the creature you have named. Your heart might not be beating, you might not even have a heart anymore. Your body might be in shambles. It doesn’t matter. The bloodthirst consumes you. For as long as your quarry lives, you have control over your body. You may act as if you still live, but you permanently have 6 Thirst. Every action you take must be in pursuit of your target or you will quickly lose control. You do not need to eat or sleep. If your body is destroyed in the pursuit, then your soul will be a phantom, haunting your quarry until its death. Find them, Slayer, kill them, and only then may you rest.<br>"}},{"id":"d1d66434-a9fa-4334-9a10-b75afcf68392","label":"","type":"Separator","meta":{"hasLabel":false},"value":""},{"id":"2caebc45-433e-416d-93c2-df95b49c6bdb","label":"Level","type":"Numeric","value":"","meta":{"width":0.5}},{"id":"e967aa07-e147-4df5-a811-2544d621e0f4","label":"Experience","type":"Numeric","value":"","meta":{"width":0.5}},{"id":"d5fd26d1-efb7-42cd-bd29-4bb0768707d2","label":"","type":"Separator","meta":{"hasLabel":false},"value":""}],"visibleOnCard":true}]}]},{"columns":[{"sections":[{"id":"6ba12cce-50ac-4f06-b42c-6e5f61b3020c","label":"","blocks":[{"id":"99c5e84a-d868-41d6-bbe8-3f397b65eeb1","label":"","type":"Separator","meta":{"hasLabel":false},"value":""}]}]}]},{"columns":[{"sections":[{"id":"b17f51b2-4105-4eba-8ba3-864c96273ad0","label":"Alignment","blocks":[{"id":"097fcf65-e673-4600-a491-f99d7ac059f4","label":"Good","type":"Text","meta":{"checked":false,"helperText":"Show mercy despite your thirst."}},{"id":"5fbd138d-8a99-406a-809a-b7228d8c6bc7","label":"Neutral","type":"Text","meta":{"checked":false,"helperText":"Use your thirst to slay a grand foe.<br>"}},{"id":"1c67d6f5-b9b2-46e8-a9c7-f67ee545cebc","label":"Chaotic","type":"Text","meta":{"checked":false,"helperText":"Withhold satisfaction to drive your thirst to dangerous levels.<br>"}},{"id":"ee76c3f9-123f-47d3-99e5-5730dbd2abc1","label":"Evil","type":"Text","meta":{"checked":false,"helperText":"Slay an undeserving creature to sate your thirst."}}],"visibleOnCard":true}]},{"sections":[{"id":"a7d98b07-37c0-4307-969c-abe47c36f6cb","label":"Manifestation\n","blocks":[{"id":"7377203d-ebd3-4f67-bd2a-2f47311c6b08","type":"Text","meta":{"helperText":"<br>"},"value":"Your bloodthirst often manifests itself in unexpected and sometimes even helpful ways. Choose one:\n"},{"id":"a4ddbc3c-daad-4e27-abfb-1ca88e19a3d8","label":"Deadly Throw\n","type":"Text","meta":{"checked":false,"helperText":"When you Volley with a thrown weapon, you can use Slayer's Strike.<br>"}},{"id":"c927b274-4dfd-4967-a5a7-480b0fd2f41c","label":"Adrenaline","type":"Text","meta":{"checked":false,"helperText":"When you Defy Danger with strength, you can roll+THIRST instead<br>"}},{"id":"9f42299f-3e9a-42ed-b46c-a39688a38fa7","label":"Tenacity","type":"Text","meta":{"checked":false,"helperText":"You ignore the -1 effect of CON debilities."}},{"id":"aef629ca-a9c3-417b-b333-554cf51260c8","label":"Penetrating Gaze","type":"Text","meta":{"checked":false,"helperText":"When you Discern Realities on a creature you intend to slay, you can roll+THIRST instead of WIS.<br>"}}],"visibleOnCard":true}]},{"sections":[{"id":"a0b6247f-f051-4340-bfcb-5139279913ec","label":"Bonds","blocks":[{"id":"276b7a49-9ebc-4c79-a99b-2b3e25b6c412","label":"Info Text","type":"InfoText","value":"___________ has seen me at my worst.<br>","meta":{}},{"id":"e053d12a-2f63-48b5-b527-6506652ab1f6","label":"Info Text","type":"InfoText","value":"I can always count on ___________ to lead me to a kill.<br>","meta":{}},{"id":"2d071ebc-20a3-4a12-8b7a-e2d7c50a76cd","label":"Info Text","type":"InfoText","value":"One day, the time may come to slay ___________.<br>","meta":{}},{"id":"cb5c11df-c252-4bb9-9f34-425871239187","label":"Info Text","type":"InfoText","value":"___________ shares my thirst for combat.<br>","meta":{}}],"visibleOnCard":true}]}]}]},{"id":"d754de20-12c4-4674-acb6-31c0c03582ed","label":"Moves","rows":[{"columns":[{"sections":[{"id":"0264aa84-cc43-4c9e-bd0f-c6758339fcb7","label":"Starting moves","blocks":[{"id":"c596ce3d-b8c7-4bbe-a122-b88bde3d933c","label":"Bloodthirst","type":"Text","value":"When you roll 6- on any move, gain 1 Thirst. It has been too long since your last kill, causing your body to begin to show symptoms of withdrawal.\r\n","meta":{}},{"id":"78dc31c7-bbbf-46d7-9fdf-9edb1d0f3110","label":"Withdrawal\n","type":"Text","value":"As your Thirst grows, your health begins to deteriorate. Bloodshot eyes, muddled thoughts, you grow anxious and irritable. Your stomach sours, your muscles ache and tremble. Restlessness quickly turns to insomnia. Death lurks ever closer, you’re sure of it.\r\n","meta":{}},{"id":"3c80ce39-8bce-4079-b4b6-b0e53ecc524b","label":"Thirst","type":"Numeric","value":"","meta":{"width":0.33,"helperText":"When you gain a point of Thirst, take a debility you do not already have. If you have all 6 debilities, take 1d6 damage (ignores armor).<br>"}},{"id":"80c53d6e-8f35-4468-96a8-d2fbd866012d","label":"Slayer's Strike","type":"Text","value":"When you Hack and Slash, you may roll+THIRST instead of STR/DEX.","meta":{}},{"id":"5fb938d2-b222-481d-b530-8a82c82a63f4","label":"Cathartic Kill","type":"Text","value":"When you deal the killing blow to a person, monster, or beast, your Thirst is quenched and resets to 0. Any debilities caused by Withdrawal quickly fade away.\n","meta":{}},{"id":"9ddc03ff-71ef-4d18-b97f-584424be4fcc","label":"Slayer's Arsenal","type":"Text","value":"When you know of a specific weapon, tool, or substance that will aid in the slaying of a creature, unpack all of your slaying gear and start searching. If it’s relatively cheap or common, you have it. If it’s expensive, rare, or unique, roll+STR. \n\n✴On a 10+, the GM will say you have it or something useful. \n\n✴On a 7-9, the GM will pick one:\r\n\n•  You have it, but it needs to be repaired, charged, or assembled\r\n\n•  You have it, but there are serious drawbacks to using it\r\n\n•  You remember having it, but it was stolen or lost\r\n\n•  You don’t have it, but you do find a hint on where it is or how to get it\r\n","meta":{}},{"id":"be836337-eab3-475b-b843-8a80cca53897","label":"Old Friend:","type":"Text","value":"You have an associate that occasionally helps you on particularly difficult hunts. When you really need them, they’re usually not far away. How did you meet? Did something happen to make you allies or do they just owe you a favor? Name them and choose their speciality:\r\n","meta":{}},{"id":"caee8ea5-19d2-43a0-a7d8-c675fcbdb2ce","type":"Text","value":"Librarian: \n","meta":{"checked":false,"helperText":"<br>","width":0.33}},{"id":"4cf1fda1-5b97-49b7-b7c5-56231d29db70","type":"Text","value":"\n","meta":{"helperText":"Experts on lore, they can be called upon to research any subject. Sometimes they need time or a favor, but they always tell you useful information.<br>","width":0.66}},{"id":"cc9a5050-74d2-49c7-bb12-1b98333bbe54","type":"Text","value":"Mercenary:\n","meta":{"checked":false,"helperText":"<br>","width":0.33}},{"id":"443f418d-c086-4ad2-a42b-fa87edf742bf","type":"Text","value":"\n","meta":{"helperText":"A Hireling that you can call upon to help you on a hunt. They have 10 Hireling points and usually no cost, but call upon them too much and they may start requiring something from you or they may call upon you to get them out of trouble.<br>","width":0.66}},{"id":"8d56e0f8-0721-438c-b61c-871bdc4df6cd","type":"Text","value":"Bartender:\n","meta":{"checked":false,"helperText":"<br>","width":0.33}},{"id":"6d87bd05-d5a6-4d5a-85b6-e4cd8782f76b","type":"Text","value":"\n","meta":{"helperText":"Knows everyone who’s worth knowing. Looking for someone? They’ll point you in the right direction. Keen to acquire goods? They’ll set up the deal<br>","width":0.66}},{"id":"6e6e4d9a-acc7-462d-a573-e23e1bfc1729","label":"","type":"Separator","meta":{"hasLabel":false},"value":""}]}]}]},{"columns":[{"sections":[{"id":"7a804cc8-4090-49f7-9c94-4e9a9e79945c","label":"Advanced moves lvl 2-5","blocks":[{"id":"07076991-7ef9-4033-bdce-8faa7feae131","type":"Text","meta":{"helperText":"When you gain a level from 2-5, choose from these moves."}},{"id":"28e47c8c-35da-49f8-af88-43d5a0bec089","label":"Parched\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"When you use Slayer's Strike and deal damage, add your Thirst to the damage.<br>"}},{"id":"2b22d4c9-8896-4ec8-b775-6f542f206408","label":"Useful Symptoms\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"Choose an additional Manifestation.<br>"}},{"id":"f6116467-2ec5-4dca-b897-fde5de2215fe","label":"Marksman\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"When you Volley with bows or crossbows, you can use Slayer's Strike.<br>"}},{"id":"1915128a-e0d7-4abe-8b65-475e0e309c54","label":"Welcome Thirst\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"When you awake in the morning, you can choose to add 1d4 Thirst (and any associated Withdrawal symptoms).<br>"}},{"id":"49d4a3c8-c15c-49f5-9d0f-a179c8d0ee96","label":"Wildling\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"Take a move from the Ranger class list. If there is already a Ranger, they'll need to help you tame the beast or learn the move.<br>"}},{"id":"b07066eb-f5bc-4a99-937b-d85b0af2e70f","label":"Insomnia\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"When you Take Watch, you can roll+THIRST instead. On a 10+, you also deal +1d4 Damage against the approaching enemy<br>"}},{"id":"2a224079-81b7-4836-a725-e44c176843c2","label":"Euphoric Sleep\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"When you Make Camp and sleep with 0 Thirst, you gain all your HP back (instead of just half)<br>"}},{"id":"e195bc82-a274-4a9c-b2c1-988b69778d3c","label":"Ensnare\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"You are a bolas expert. When you throw your bolas to ensnare an enemy, roll +DEX.<br><br>✴On a 7+, the enemy is ensnared. <br><br>✴On a 10+, the bolas cannot be easily untangled.<br>"}},{"id":"4e49718d-808c-425f-bc4f-293162e61c1c","label":"With Friends Like These\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"You've made unlikely allies with monsters or other nasties in the past. Maybe they saved your life or gave you vital information, whatever happened, it was enough to spare them. Because of this, you can occasionally call upon Hirelings that are monsters or corrupted humanoids. Perhaps they're not as bad as everyone thinks? Sometimes, they'll have a Cost associated with their monstrous nature, like needing to feed on human flesh. If it doesn't work out, you can always just slay them, right?<br>"}},{"id":"4ce962dd-2df5-4d8e-a509-8d24b9fa98ec","label":"Sponsor\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"By taking this move, you acknowledge you might have a problem. When an ally attempts to calm your bloodthirst, roll+Bond. <br><br>✴On a 10+, your Thirst is reduced by half (then it’s rounded down). <br><br>✴On a 7-9, your Thirst is reduced by 1.<br>"}}]}]},{"sections":[{"id":"89557b71-6ce7-4ca1-b6d9-21659b3238f4","label":"Advanced moves lvl 6-10","blocks":[{"id":"c197e531-ffb2-41d1-a780-58cf29c436ae","type":"Text","meta":{"helperText":"When you gain a level from 6-10, choose from these or the level 2-5 moves."}},{"id":"f48f253f-431a-46e4-b0d3-44dd3ecf535c","label":"I'll Sleep When You're Dead","type":"Text","value":"","meta":{"checked":false,"helperText":"When you use Slayer's Strike and fail to slay the target, your next attack against that foe deals +1d8 damage.<br>"}},{"id":"2484427a-cf70-483a-9785-028652204b13","label":"Slayer of Giants","type":"Text","value":"","meta":{"checked":false,"helperText":"When you Defy Danger against a Large or Huge enemy, take +1.<br>"}},{"id":"4da37140-99fa-43c1-b21d-8873b25c1da7","label":"Armored Slayer","type":"Text","value":"","meta":{"checked":false,"helperText":"You ignore the clumsy tag on armor<br>"}},{"id":"1a40d2af-ed69-4a95-9098-b9b84f79752d","label":"Taste for the Hunt","type":"Text","value":"","meta":{"checked":false,"helperText":"When you taste something a creature has left behind, such as its blood, hair, or excrement, the GM will tell you the species of the creature. Take +1 Forward against it<br>"}},{"id":"a060e0dc-059f-4ced-880f-465a5766795d","label":"Slaying Gang","type":"Text","value":"","meta":{"checked":false,"helperText":"Add an additional Old Friend or give your existing ally an additional speciality.<br>"}},{"id":"b23ba751-bf8f-48de-9a86-7b62cccd6975","label":"Constriction","type":"Text","value":"Requires: Ensnare","meta":{"checked":false,"helperText":"When you throw your bolas and get a 10+, deal your damage. If this damage would kill the target, they fall unconscious instead.<br>"}},{"id":"3cf646cc-3ce9-46b6-9a4c-1a29882fdeac","label":" Signature Killer\r\n","type":"Text","value":"","meta":{"checked":false,"helperText":"You gain the Signature Weapon from the Fighter playbook. If there is already a Fighter, they must forge your weapon or greatly aid in its procurement.<br>"}},{"id":"100716ad-ddc2-4a2f-a99d-1c8219382805","label":"Corrupted\n","type":"Text","value":"","meta":{"checked":false,"helperText":"Sometime recently or in your past, you had a close call with a virulent monster. You managed to prevent it from fully infecting you, but you remain partially tainted. You gain a benefit (such as unnatural regeneration, speed, or reflexes), but also a detrimental side effect or weakness (such as daylight, silver, or holy relics).<br>"}},{"id":"9118e8b3-e2f7-47d2-9dfb-63734b4775bc","label":"Aegis Ink\n","type":"Text","value":"","meta":{"checked":false,"helperText":"You have a tattoo that offers immunity to a specific magical effect or ability (such as possession, hypnosis, or mind control). Describe what the tattoo looks like. The symbol will protect you as long as it remains intact.<br>"}},{"id":"f708a5cd-e494-421a-96ef-209415175ecc","label":"Bliss\n","type":"Text","value":"","meta":{"checked":false,"helperText":"When you use Cathartic Kill, you are immediately healed for as much Thirst as you possessed.<br>"}}]}]}]}]}],"template":"Blank","version":6,"wide":true,"theme":{"style":"@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Marcellus+SC&family=Spectral+SC&display=swap');","hideSectionBackground":true,"pageHeadingFontFamily":"Spectral SC","pageHeadingFontWeight":"400","sectionHeadingFontFamily":"Spectral SC","sectionHeadingFontWeight":"600","labelFontFamily":"Spectral SC","labelFontWeight":"200","textFontFamily":"Spectral SC","textFontWeight":"200","infoTextFontFamily":"Spectral SC","infoTextFontWeight":"100","helperTextFontFamily":"Spectral SC","helperTextFontWeight":"","textFontSize":0.875,"labelFontSize":1.25,"infoTextFontSize":1,"helperTextFontSize":0.625,"sectionHeadingFontSize":1.5},"playedDuringTurn":false,"group":"Grim World"}
+{
+  "fariType": "character",
+  "id": "350fba4f-2986-4d2b-8504-aae15f7e1192",
+  "lastUpdated": 1662311481,
+  "name": "Grim World - The Slayer",
+  "pages": [
+    {
+      "id": "947c975f-7dee-4249-8ad3-3a1a0b899636",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "97b7b83e-c609-4cf0-904b-0f2bb105beef",
+                  "label": "The Slayer\r\n",
+                  "blocks": [
+                    {
+                      "id": "504af9b2-9712-400b-a172-dfa3db87f2ae",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Name",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e45b516c-819f-4f0c-830f-11ba86a3adf4",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Species",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "401b814b-e80d-4eeb-88f1-6680b130a241",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Look",
+                      "meta": { "width": 0.33, "helperText": "<br>" }
+                    },
+                    {
+                      "id": "5a445644-1be6-4fbd-91e5-b7d5cfb43ae6",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://i.etsystatic.com/5933544/r/il/b01d79/324149745/il_794xN.324149745.jpg"
+                    },
+                    {
+                      "id": "fee28594-2ebd-4cd2-b91f-385a9ed01561",
+                      "type": "Text",
+                      "value": "Dry throat, red eyes, your hands shake, your muscles ache. How long has it been? Food doesn’t help, even if you could keep it down. Sleep? You know it’s futile. No, what you need is... there! Movement in the trees! You leap, the beast roars, there’s blood and fur and something like pain. And then it’s over. You pluck back the blade of silver and your body shivers. Euphoria. You laugh, you sigh. You are the Slayer.\r\n",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "7d1d7817-536d-4b0a-932a-c520dfab9e88",
+                      "label": "STATS",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": true,
+                        "helperText": "Assign these scores to your stats: 16 (+2), 15 (+1), 13 (+1), 12 (+0), 9 (+0), 8 (-1) <br>Note: Stats cannot be raised above 18 (+3)"
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "726489bb-f78e-479c-bd35-ac04d5aed172",
+                      "label": "Strength",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Weak -1"
+                      }
+                    },
+                    {
+                      "id": "bc525b93-4a1f-4db6-aac0-a630687e96e7",
+                      "label": "Dexterity",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Shaky -1"
+                      }
+                    },
+                    {
+                      "id": "e7573fc7-f8e9-4314-af9f-85fa548304be",
+                      "label": "Constitution",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Sick -1"
+                      }
+                    },
+                    {
+                      "id": "d47027b8-edeb-4cb6-9222-97fe265e607f",
+                      "label": "Intelligence",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Stunned -1"
+                      }
+                    },
+                    {
+                      "id": "cc69559a-b304-4a07-b45f-fb1d3bb24140",
+                      "label": "Wisdom",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Confused -1"
+                      }
+                    },
+                    {
+                      "id": "e125630a-95b1-4a24-a620-ddb08a8a34da",
+                      "label": "Charisma",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Scared -1"
+                      }
+                    },
+                    {
+                      "id": "b1fbed44-d47d-4e0f-8c5e-829a677a8640",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "c7acd30c-6e48-4b93-8fde-a860387b9357",
+                      "label": "Damage",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d10"],
+                        "hideModifier": true,
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "a4f01619-85d4-4430-a5af-616083aad869",
+                      "label": "Armor",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "03f115f5-2d0b-4f99-8047-2ed6edb1aeb5",
+                      "label": "Hit Points",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "10",
+                        "isMainPointCounter": false,
+                        "width": 0.33,
+                        "helperText": "Your Max HP is 8 + Constitution<br>"
+                      },
+                      "value": "10"
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "5357978a-5047-42d7-982c-e7f915d55f99",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "2811ce1d-258b-46ec-8121-d8804b7b49d1",
+                      "label": "GEAR",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": true,
+                        "helperText": "Your Load is 11+STR. You carry dungeon rations (5 uses, 1 weight), leather armor (1 armor, 1 weight), and your Slayer's Arsenal (4 weight).<br>"
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "a39ca2a4-1635-4529-8e71-e6cac6545113",
+                      "label": "Choose your weapon:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "⃞&nbsp; &nbsp;Dual battle axes (close +1 damage, 2 weight)\n<br>⃞&nbsp; &nbsp;Spear (close, thrown, near, 1 weight)\n<br>⃞&nbsp; &nbsp;Claymore (close, +1 damage, two-handed, 2 weight)<br>\n"
+                      }
+                    },
+                    {
+                      "id": "58b5ee18-8d75-4359-bdde-6bef89240125",
+                      "label": "\nChoose one:\n",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "⃞&nbsp; &nbsp;Bundle of javelins (2 ammo, thrown, near, 1 weight)\n<br>⃞&nbsp; &nbsp;Crossbow (near, +1 damage, reload, 3 weight)\n<br>⃞&nbsp; &nbsp;A trophy from a recent kill worth 4d8 coins<br>\n"
+                      }
+                    },
+                    {
+                      "id": "ea7e4200-b05f-4573-9065-dcc576ed7543",
+                      "label": "Death Move",
+                      "type": "Text",
+                      "value": "Death: Soulbound Slayer\n",
+                      "meta": {
+                        "helperText": "There was a name on your lips when you felt your heart stop. Was it a beast? Was it a person? When you die, say the name aloud. Your soul is now bound to hunt and slay the creature you have named. Your heart might not be beating, you might not even have a heart anymore. Your body might be in shambles. It doesn’t matter. The bloodthirst consumes you. For as long as your quarry lives, you have control over your body. You may act as if you still live, but you permanently have 6 Thirst. Every action you take must be in pursuit of your target or you will quickly lose control. You do not need to eat or sleep. If your body is destroyed in the pursuit, then your soul will be a phantom, haunting your quarry until its death. Find them, Slayer, kill them, and only then may you rest.<br>"
+                      }
+                    },
+                    {
+                      "id": "d1d66434-a9fa-4334-9a10-b75afcf68392",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "2caebc45-433e-416d-93c2-df95b49c6bdb",
+                      "label": "Level",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "e967aa07-e147-4df5-a811-2544d621e0f4",
+                      "label": "Experience",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "d5fd26d1-efb7-42cd-bd29-4bb0768707d2",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "6ba12cce-50ac-4f06-b42c-6e5f61b3020c",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "99c5e84a-d868-41d6-bbe8-3f397b65eeb1",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "b17f51b2-4105-4eba-8ba3-864c96273ad0",
+                  "label": "Alignment",
+                  "blocks": [
+                    {
+                      "id": "097fcf65-e673-4600-a491-f99d7ac059f4",
+                      "label": "Good",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Show mercy despite your thirst."
+                      }
+                    },
+                    {
+                      "id": "5fbd138d-8a99-406a-809a-b7228d8c6bc7",
+                      "label": "Neutral",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Use your thirst to slay a grand foe.<br>"
+                      }
+                    },
+                    {
+                      "id": "1c67d6f5-b9b2-46e8-a9c7-f67ee545cebc",
+                      "label": "Chaotic",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Withhold satisfaction to drive your thirst to dangerous levels.<br>"
+                      }
+                    },
+                    {
+                      "id": "ee76c3f9-123f-47d3-99e5-5730dbd2abc1",
+                      "label": "Evil",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Slay an undeserving creature to sate your thirst."
+                      }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "a7d98b07-37c0-4307-969c-abe47c36f6cb",
+                  "label": "Manifestation\n",
+                  "blocks": [
+                    {
+                      "id": "7377203d-ebd3-4f67-bd2a-2f47311c6b08",
+                      "type": "Text",
+                      "meta": { "helperText": "<br>" },
+                      "value": "Your bloodthirst often manifests itself in unexpected and sometimes even helpful ways. Choose one:\n"
+                    },
+                    {
+                      "id": "a4ddbc3c-daad-4e27-abfb-1ca88e19a3d8",
+                      "label": "Deadly Throw\n",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you Volley with a thrown weapon, you can use Slayer's Strike.<br>"
+                      }
+                    },
+                    {
+                      "id": "c927b274-4dfd-4967-a5a7-480b0fd2f41c",
+                      "label": "Adrenaline",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you Defy Danger with strength, you can roll+THIRST instead<br>"
+                      }
+                    },
+                    {
+                      "id": "9f42299f-3e9a-42ed-b46c-a39688a38fa7",
+                      "label": "Tenacity",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "You ignore the -1 effect of CON debilities."
+                      }
+                    },
+                    {
+                      "id": "aef629ca-a9c3-417b-b333-554cf51260c8",
+                      "label": "Penetrating Gaze",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you Discern Realities on a creature you intend to slay, you can roll+THIRST instead of WIS.<br>"
+                      }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "a0b6247f-f051-4340-bfcb-5139279913ec",
+                  "label": "Bonds",
+                  "blocks": [
+                    {
+                      "id": "276b7a49-9ebc-4c79-a99b-2b3e25b6c412",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "___________ has seen me at my worst.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e053d12a-2f63-48b5-b527-6506652ab1f6",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "I can always count on ___________ to lead me to a kill.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2d071ebc-20a3-4a12-8b7a-e2d7c50a76cd",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "One day, the time may come to slay ___________.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cb5c11df-c252-4bb9-9f34-425871239187",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "___________ shares my thirst for combat.<br>",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d754de20-12c4-4674-acb6-31c0c03582ed",
+      "label": "Moves",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "0264aa84-cc43-4c9e-bd0f-c6758339fcb7",
+                  "label": "Starting moves",
+                  "blocks": [
+                    {
+                      "id": "c596ce3d-b8c7-4bbe-a122-b88bde3d933c",
+                      "label": "Bloodthirst",
+                      "type": "Text",
+                      "value": "When you roll 6- on any move, gain 1 Thirst. It has been too long since your last kill, causing your body to begin to show symptoms of withdrawal.\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "78dc31c7-bbbf-46d7-9fdf-9edb1d0f3110",
+                      "label": "Withdrawal\n",
+                      "type": "Text",
+                      "value": "As your Thirst grows, your health begins to deteriorate. Bloodshot eyes, muddled thoughts, you grow anxious and irritable. Your stomach sours, your muscles ache and tremble. Restlessness quickly turns to insomnia. Death lurks ever closer, you’re sure of it.\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3c80ce39-8bce-4079-b4b6-b0e53ecc524b",
+                      "label": "Thirst",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": "When you gain a point of Thirst, take a debility you do not already have. If you have all 6 debilities, take 1d6 damage (ignores armor).<br>"
+                      }
+                    },
+                    {
+                      "id": "80c53d6e-8f35-4468-96a8-d2fbd866012d",
+                      "label": "Slayer's Strike",
+                      "type": "Text",
+                      "value": "When you Hack and Slash, you may roll+THIRST instead of STR/DEX.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5fb938d2-b222-481d-b530-8a82c82a63f4",
+                      "label": "Cathartic Kill",
+                      "type": "Text",
+                      "value": "When you deal the killing blow to a person, monster, or beast, your Thirst is quenched and resets to 0. Any debilities caused by Withdrawal quickly fade away.\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9ddc03ff-71ef-4d18-b97f-584424be4fcc",
+                      "label": "Slayer's Arsenal",
+                      "type": "Text",
+                      "value": "When you know of a specific weapon, tool, or substance that will aid in the slaying of a creature, unpack all of your slaying gear and start searching. If it’s relatively cheap or common, you have it. If it’s expensive, rare, or unique, roll+STR. \n\n✴On a 10+, the GM will say you have it or something useful. \n\n✴On a 7-9, the GM will pick one:\r\n\n•  You have it, but it needs to be repaired, charged, or assembled\r\n\n•  You have it, but there are serious drawbacks to using it\r\n\n•  You remember having it, but it was stolen or lost\r\n\n•  You don’t have it, but you do find a hint on where it is or how to get it\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "be836337-eab3-475b-b843-8a80cca53897",
+                      "label": "Old Friend:",
+                      "type": "Text",
+                      "value": "You have an associate that occasionally helps you on particularly difficult hunts. When you really need them, they’re usually not far away. How did you meet? Did something happen to make you allies or do they just owe you a favor? Name them and choose their speciality:\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "caee8ea5-19d2-43a0-a7d8-c675fcbdb2ce",
+                      "type": "Text",
+                      "value": "Librarian: \n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "<br>",
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "4cf1fda1-5b97-49b7-b7c5-56231d29db70",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "helperText": "Experts on lore, they can be called upon to research any subject. Sometimes they need time or a favor, but they always tell you useful information.<br>",
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "cc9a5050-74d2-49c7-bb12-1b98333bbe54",
+                      "type": "Text",
+                      "value": "Mercenary:\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "<br>",
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "443f418d-c086-4ad2-a42b-fa87edf742bf",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "helperText": "A Hireling that you can call upon to help you on a hunt. They have 10 Hireling points and usually no cost, but call upon them too much and they may start requiring something from you or they may call upon you to get them out of trouble.<br>",
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "8d56e0f8-0721-438c-b61c-871bdc4df6cd",
+                      "type": "Text",
+                      "value": "Bartender:\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "<br>",
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "6d87bd05-d5a6-4d5a-85b6-e4cd8782f76b",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "helperText": "Knows everyone who’s worth knowing. Looking for someone? They’ll point you in the right direction. Keen to acquire goods? They’ll set up the deal<br>",
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "6e6e4d9a-acc7-462d-a573-e23e1bfc1729",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "7a804cc8-4090-49f7-9c94-4e9a9e79945c",
+                  "label": "Advanced moves lvl 2-5",
+                  "blocks": [
+                    {
+                      "id": "07076991-7ef9-4033-bdce-8faa7feae131",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "When you gain a level from 2-5, choose from these moves."
+                      }
+                    },
+                    {
+                      "id": "28e47c8c-35da-49f8-af88-43d5a0bec089",
+                      "label": "Parched\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you use Slayer's Strike and deal damage, add your Thirst to the damage.<br>"
+                      }
+                    },
+                    {
+                      "id": "2b22d4c9-8896-4ec8-b775-6f542f206408",
+                      "label": "Useful Symptoms\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Choose an additional Manifestation.<br>"
+                      }
+                    },
+                    {
+                      "id": "f6116467-2ec5-4dca-b897-fde5de2215fe",
+                      "label": "Marksman\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you Volley with bows or crossbows, you can use Slayer's Strike.<br>"
+                      }
+                    },
+                    {
+                      "id": "1915128a-e0d7-4abe-8b65-475e0e309c54",
+                      "label": "Welcome Thirst\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you awake in the morning, you can choose to add 1d4 Thirst (and any associated Withdrawal symptoms).<br>"
+                      }
+                    },
+                    {
+                      "id": "49d4a3c8-c15c-49f5-9d0f-a179c8d0ee96",
+                      "label": "Wildling\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Take a move from the Ranger class list. If there is already a Ranger, they'll need to help you tame the beast or learn the move.<br>"
+                      }
+                    },
+                    {
+                      "id": "b07066eb-f5bc-4a99-937b-d85b0af2e70f",
+                      "label": "Insomnia\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you Take Watch, you can roll+THIRST instead. On a 10+, you also deal +1d4 Damage against the approaching enemy<br>"
+                      }
+                    },
+                    {
+                      "id": "2a224079-81b7-4836-a725-e44c176843c2",
+                      "label": "Euphoric Sleep\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you Make Camp and sleep with 0 Thirst, you gain all your HP back (instead of just half)<br>"
+                      }
+                    },
+                    {
+                      "id": "e195bc82-a274-4a9c-b2c1-988b69778d3c",
+                      "label": "Ensnare\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "You are a bolas expert. When you throw your bolas to ensnare an enemy, roll +DEX.<br><br>✴On a 7+, the enemy is ensnared. <br><br>✴On a 10+, the bolas cannot be easily untangled.<br>"
+                      }
+                    },
+                    {
+                      "id": "4e49718d-808c-425f-bc4f-293162e61c1c",
+                      "label": "With Friends Like These\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "You've made unlikely allies with monsters or other nasties in the past. Maybe they saved your life or gave you vital information, whatever happened, it was enough to spare them. Because of this, you can occasionally call upon Hirelings that are monsters or corrupted humanoids. Perhaps they're not as bad as everyone thinks? Sometimes, they'll have a Cost associated with their monstrous nature, like needing to feed on human flesh. If it doesn't work out, you can always just slay them, right?<br>"
+                      }
+                    },
+                    {
+                      "id": "4ce962dd-2df5-4d8e-a509-8d24b9fa98ec",
+                      "label": "Sponsor\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "By taking this move, you acknowledge you might have a problem. When an ally attempts to calm your bloodthirst, roll+Bond. <br><br>✴On a 10+, your Thirst is reduced by half (then it’s rounded down). <br><br>✴On a 7-9, your Thirst is reduced by 1.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "89557b71-6ce7-4ca1-b6d9-21659b3238f4",
+                  "label": "Advanced moves lvl 6-10",
+                  "blocks": [
+                    {
+                      "id": "c197e531-ffb2-41d1-a780-58cf29c436ae",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "When you gain a level from 6-10, choose from these or the level 2-5 moves."
+                      }
+                    },
+                    {
+                      "id": "f48f253f-431a-46e4-b0d3-44dd3ecf535c",
+                      "label": "I'll Sleep When You're Dead",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you use Slayer's Strike and fail to slay the target, your next attack against that foe deals +1d8 damage.<br>"
+                      }
+                    },
+                    {
+                      "id": "2484427a-cf70-483a-9785-028652204b13",
+                      "label": "Slayer of Giants",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you Defy Danger against a Large or Huge enemy, take +1.<br>"
+                      }
+                    },
+                    {
+                      "id": "4da37140-99fa-43c1-b21d-8873b25c1da7",
+                      "label": "Armored Slayer",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "You ignore the clumsy tag on armor<br>"
+                      }
+                    },
+                    {
+                      "id": "1a40d2af-ed69-4a95-9098-b9b84f79752d",
+                      "label": "Taste for the Hunt",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you taste something a creature has left behind, such as its blood, hair, or excrement, the GM will tell you the species of the creature. Take +1 Forward against it<br>"
+                      }
+                    },
+                    {
+                      "id": "a060e0dc-059f-4ced-880f-465a5766795d",
+                      "label": "Slaying Gang",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Add an additional Old Friend or give your existing ally an additional speciality.<br>"
+                      }
+                    },
+                    {
+                      "id": "b23ba751-bf8f-48de-9a86-7b62cccd6975",
+                      "label": "Constriction",
+                      "type": "Text",
+                      "value": "Requires: Ensnare",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you throw your bolas and get a 10+, deal your damage. If this damage would kill the target, they fall unconscious instead.<br>"
+                      }
+                    },
+                    {
+                      "id": "3cf646cc-3ce9-46b6-9a4c-1a29882fdeac",
+                      "label": " Signature Killer\r\n",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "You gain the Signature Weapon from the Fighter playbook. If there is already a Fighter, they must forge your weapon or greatly aid in its procurement.<br>"
+                      }
+                    },
+                    {
+                      "id": "100716ad-ddc2-4a2f-a99d-1c8219382805",
+                      "label": "Corrupted\n",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Sometime recently or in your past, you had a close call with a virulent monster. You managed to prevent it from fully infecting you, but you remain partially tainted. You gain a benefit (such as unnatural regeneration, speed, or reflexes), but also a detrimental side effect or weakness (such as daylight, silver, or holy relics).<br>"
+                      }
+                    },
+                    {
+                      "id": "9118e8b3-e2f7-47d2-9dfb-63734b4775bc",
+                      "label": "Aegis Ink\n",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "You have a tattoo that offers immunity to a specific magical effect or ability (such as possession, hypnosis, or mind control). Describe what the tattoo looks like. The symbol will protect you as long as it remains intact.<br>"
+                      }
+                    },
+                    {
+                      "id": "f708a5cd-e494-421a-96ef-209415175ecc",
+                      "label": "Bliss\n",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you use Cathartic Kill, you are immediately healed for as much Thirst as you possessed.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "theme": {
+    "style": "@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Marcellus+SC&family=Spectral+SC&display=swap');",
+    "hideSectionBackground": true,
+    "pageHeadingFontFamily": "Spectral SC",
+    "pageHeadingFontWeight": "400",
+    "sectionHeadingFontFamily": "Spectral SC",
+    "sectionHeadingFontWeight": "600",
+    "labelFontFamily": "Spectral SC",
+    "labelFontWeight": "200",
+    "textFontFamily": "Spectral SC",
+    "textFontWeight": "200",
+    "infoTextFontFamily": "Spectral SC",
+    "infoTextFontWeight": "100",
+    "helperTextFontFamily": "Spectral SC",
+    "helperTextFontWeight": "",
+    "textFontSize": 0.875,
+    "labelFontSize": 1.25,
+    "infoTextFontSize": 1,
+    "helperTextFontSize": 0.625,
+    "sectionHeadingFontSize": 1.5
+  },
+  "playedDuringTurn": false,
+  "group": "Grim World"
+}

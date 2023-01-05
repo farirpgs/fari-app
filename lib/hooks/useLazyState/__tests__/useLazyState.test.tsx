@@ -1,4 +1,4 @@
-import { act, renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react";
 import produce from "immer";
 import { useLazyState } from "../useLazyState";
 

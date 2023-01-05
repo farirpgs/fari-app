@@ -1,11 +1,10 @@
-import { css, cx } from "@emotion/css";
 import Button, { ButtonProps } from "@mui/material/Button";
 import MaterialUILink, { LinkProps as MUILinkProps } from "@mui/material/Link";
 import { useTheme } from "@mui/material/styles";
 import React from "react";
 import {
   Link as ReactRouterLink,
-  LinkProps as ReactRouterLinkProps
+  LinkProps as ReactRouterLinkProps,
 } from "react-router-dom";
 
 type IProps = {
@@ -16,24 +15,22 @@ type IProps = {
 export const AppLink: React.FC<
   Omit<ReactRouterLinkProps, "to"> & Omit<MUILinkProps, "to"> & IProps
 > = (props) => {
-  const { to = "", onClick, className: classNameFromProps, ...rest } = props;
+  const { to = "", onClick, sx, ...rest } = props;
   const isInternal = to.startsWith("/");
   const theme = useTheme();
-  const className = cx(
-    css({
-      "label": "AppLink",
-      "fontWeight": theme.typography.fontWeightMedium,
-      "display": "inline-flex",
-      "flexDirection": "row",
-      "alignItems": "center",
-      ":hover": {
-        textDecoration: "none",
-        color: theme.palette.primary.main,
-      },
-    }),
-    classNameFromProps
-  );
 
+  const style = {
+    "label": "AppLink",
+    "fontWeight": theme.typography.fontWeightMedium,
+    "display": "inline-flex",
+    "flexDirection": "row",
+    "alignItems": "center",
+    ":hover": {
+      textDecoration: "none",
+      color: theme.palette.primary.main,
+    },
+    ...sx,
+  };
   if (isInternal) {
     return (
       <MaterialUILink
@@ -45,7 +42,7 @@ export const AppLink: React.FC<
             onClick(event);
           }
         }}
-        className={className}
+        sx={style}
         rel={props.target === "_blank" ? "noreferrer" : undefined}
         {...rest}
         underline="hover"
@@ -59,7 +56,7 @@ export const AppLink: React.FC<
     <MaterialUILink
       href={to as string}
       component={"a"}
-      className={className}
+      sx={style}
       rel={props.target === "_blank" ? "noreferrer" : undefined}
       onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
         if (onClick) {
@@ -75,19 +72,20 @@ export const AppLink: React.FC<
   );
 };
 
-export const AppButtonLink: React.FC<ReactRouterLinkProps & ButtonProps> = (
-  props
-) => {
-  const { to, ...rest } = props;
+export const AppButtonLink = React.forwardRef<
+  any,
+  ReactRouterLinkProps & ButtonProps
+>((props, ref) => {
   const isInternal = (props.to as string).startsWith("/");
 
   if (isInternal) {
     return (
       <Button
-        to={to}
+        {...props}
+        to={props.to}
         component={ReactRouterLink}
+        ref={ref}
         rel={props.target === "_blank" ? "noreferrer" : undefined}
-        {...rest}
       >
         {props.children}
       </Button>
@@ -96,15 +94,16 @@ export const AppButtonLink: React.FC<ReactRouterLinkProps & ButtonProps> = (
 
   return (
     <Button
-      href={to as string}
+      {...props}
+      href={props.to as string}
       component={"a"}
+      ref={ref}
       rel={props.target === "_blank" ? "noreferrer" : undefined}
-      {...rest}
     >
       {props.children}
     </Button>
   );
-};
+});
 
 export const MUILink = MaterialUILink;
 export const RouterLink = ReactRouterLink;

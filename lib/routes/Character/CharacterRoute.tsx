@@ -1,40 +1,124 @@
 import Box from "@mui/material/Box";
+import Snackbar from "@mui/material/Snackbar";
 import { useTheme } from "@mui/material/styles";
-import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Toolbox } from "../../components/Toolbox/Toolbox";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
-import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { ICharacter } from "../../domains/character/types";
-import { IDiceRollResult } from "../../domains/dice/Dice";
+import { IDicePoolResult } from "../../domains/dice/Dice";
+import { useEvent } from "../../hooks/useEvent/useEvent";
 import { useQuery } from "../../hooks/useQuery/useQuery";
+import { DiceResult } from "../DiceRoute/components/DiceResult";
 import { CharacterV3Dialog } from "./components/CharacterDialog/CharacterV3Dialog";
 
-export const CharacterRoute: React.FC<{
-  match: {
-    params: { id: string };
-  };
-}> = (props) => {
+const HIDE_RESULTS_DELAY = 5000;
+
+function DicePoolResultsSnackBar(props: {
+  dicePoolResults: Array<IDicePoolResult>;
+  open: boolean;
+  onClose?: () => void;
+}) {
   const theme = useTheme();
-  const history = useHistory();
+  const hideTimeout = useRef<any>();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (props.open) {
+      handleShowResults();
+    }
+  }, [props.open]);
+
+  useEffect(() => {
+    if (props.dicePoolResults.length > 0) {
+      handleShowResults();
+    }
+  }, [props.dicePoolResults]);
+
+  const handleShowResults = useEvent(() => {
+    setVisible(true);
+    hideResultsSoon();
+  });
+
+  const handleHideResults = useEvent(() => {
+    setVisible(false);
+    props.onClose?.();
+  });
+
+  const hideResultsSoon = useEvent(() => {
+    clearTimeout(hideTimeout.current);
+
+    hideTimeout.current = setTimeout(() => {
+      handleHideResults();
+    }, HIDE_RESULTS_DELAY);
+  });
+
+  return (
+    <Snackbar
+      sx={{
+        "bottom": "6.5rem !important",
+        "& .MuiPaper-root": {
+          width: "100%",
+          maxWidth: "50vw",
+          display: "block",
+          background: theme.palette.background.paper,
+          color: theme.palette.text.primary,
+        },
+      }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      open={visible && props.dicePoolResults.length > 0}
+      message={
+        <>
+          <Box
+            onPointerEnter={handleShowResults}
+            onClick={handleShowResults}
+            sx={{
+              width: "100%",
+            }}
+          >
+            <DiceResult animate={false} poolResults={props.dicePoolResults} />
+          </Box>
+        </>
+      }
+    />
+  );
+}
+
+function CharacterRoute() {
+  const theme = useTheme();
+  const params = useParams<{ id: string }>();
+  const query = useQuery<"dialog" | "readonly">();
+  const dialogMode = query.get("dialog") === "true";
+  const readonly = query.get("readonly") === "true";
+  const navigate = useNavigate();
   const charactersManager = useContext(CharactersContext);
-  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
-  const diceManager = useContext(DiceContext);
+  const [dicePoolResults, setDicePoolResults] = useState<
+    Array<IDicePoolResult>
+  >([]);
   const myBinderManager = useContext(MyBinderContext);
   const [selectedCharacter, setSelectedCharacter] = useState<
     ICharacter | undefined
   >(undefined);
   const logger = useLogger();
+  const [resultsVisible, setResultsVisible] = useState(false);
 
-  function handleSetRollResult(result: IDiceRollResult) {
-    setRolls((draft) => {
-      return [result, ...draft];
-    });
-  }
+  const handleShowResults = useEvent(() => {
+    setResultsVisible(true);
+  });
+  const handleHideResults = useEvent(() => {
+    setResultsVisible(false);
+  });
+  const handleSetRollResults = useEvent((results: Array<IDicePoolResult>) => {
+    setDicePoolResults(results);
+    handleShowResults();
+  });
+  const handleSetRollResult = useEvent((result: IDicePoolResult) => {
+    handleSetRollResults([result]);
+  });
 
   useEffect(() => {
     logger.track("character.view");
@@ -42,38 +126,34 @@ export const CharacterRoute: React.FC<{
 
   useEffect(() => {
     const characterToLoad = charactersManager.state.characters.find(
-      (s) => s.id === props.match.params.id
+      (s) => s.id === params.id
     );
 
     if (characterToLoad) {
       setSelectedCharacter(characterToLoad);
     } else {
-      history.replace("/");
+      navigate("/", {
+        replace: true,
+      });
       myBinderManager.actions.open({ folder: "characters" });
     }
-  }, [props.match.params.id, charactersManager.state.characters]);
-
-  const query = useQuery<"dialog" | "readonly">();
-  const dialogMode = query.get("dialog") === "true";
-  const readonly = query.get("readonly") === "true";
-
-  function handleOnRollPool() {
-    const { result } = diceManager.actions.getPoolResult();
-    handleSetRollResult(result);
-  }
+  }, [params.id, charactersManager.state.characters]);
 
   return (
     <>
       <PageMeta title={selectedCharacter?.name} />
-
+      <DicePoolResultsSnackBar
+        open={resultsVisible}
+        onClose={handleHideResults}
+        dicePoolResults={dicePoolResults}
+      />
       <Box bgcolor={theme.palette.background.paper}>
-        <Page pb="6rem" marginTop="0" maxWidth="none">
+        <Page maxWidth="none" sx={{ paddingTop: "2rem" }}>
           {!dialogMode && (
             <Toolbox
-              dice={{
-                onRoll: handleSetRollResult,
-                rollsForDiceBox: rolls,
-                onRollPool: handleOnRollPool,
+              diceFabProps={{
+                onRoll: handleSetRollResults,
+                onHover: handleShowResults,
               }}
             />
           )}
@@ -91,7 +171,7 @@ export const CharacterRoute: React.FC<{
       </Box>
     </>
   );
-};
+}
 
 CharacterRoute.displayName = "CharacterRoute";
 export default CharacterRoute;

@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import CircleIcon from "@mui/icons-material/Circle";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import Checkbox from "@mui/material/Checkbox";
@@ -16,9 +15,9 @@ export function BlockToggleMeta<
     (ITextBlock | INumericBlock | ISkillBlock | IDicePoolBlock)
 >(props: {
   readonly: boolean | undefined;
-  dataCy: string;
-  block: TBlock;
-  onMetaChange(meta: TBlock["meta"]): void;
+  dataCy: string | undefined;
+  checked: boolean | undefined;
+  onMetaChange(producer: (prev: TBlock["meta"]) => TBlock["meta"]): void;
 }) {
   return (
     <Checkbox
@@ -26,17 +25,19 @@ export function BlockToggleMeta<
       size="small"
       icon={<CircleOutlinedIcon htmlColor="currentColor" />}
       checkedIcon={<CircleIcon htmlColor="currentColor" />}
-      checked={props.block.meta.checked}
+      checked={props.checked}
       color="default"
       disabled={props.readonly}
-      className={css({
+      sx={{
         color: "inherit",
         padding: "0",
-      })}
+      }}
       onChange={() => {
-        props.onMetaChange({
-          ...props.block.meta,
-          checked: !props.block.meta.checked,
+        props.onMetaChange((prev) => {
+          return {
+            ...prev,
+            checked: !prev.checked,
+          };
         });
       }}
     />

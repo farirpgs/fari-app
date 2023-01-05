@@ -1,4 +1,4 @@
-import { IDiceCommandSetId } from "../dice/Dice";
+import { IDiceCommandId } from "../dice/Dice";
 
 export enum BlockType {
   Text = "Text",
@@ -157,7 +157,7 @@ export type ISkillBlock = {
   type: BlockType.Skill;
   meta: IDefaultBlockMeta & {
     checked?: boolean;
-    commands?: Array<IDiceCommandSetId>;
+    commands?: Array<IDiceCommandId>;
     hideModifier?: boolean;
   };
   value: string;
@@ -167,7 +167,7 @@ export type IDicePoolBlock = {
   type: BlockType.DicePool;
   meta: IDefaultBlockMeta & {
     checked?: boolean;
-    commands?: Array<IDiceCommandSetId>;
+    commands?: Array<IDiceCommandId>;
   };
   value: string;
 };

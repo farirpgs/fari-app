@@ -36,17 +36,17 @@ export function StoryProvider(props: {
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
   const diceManager = useDice({
-    defaultCommands: settingsManager.state.diceCommandIds,
-    defaultOptions: {
-      listResults: false,
-    },
-    onCommandSetsChange(commandSetOptions) {
-      const commandSetIds = commandSetOptions.map((l) => l.id);
-      settingsManager.actions.setDiceCommandsIds(commandSetIds);
-    },
-    onOptionsChange: (options) => {
-      settingsManager.actions.setDiceOptions(options);
-    },
+    // defaultCommands: settingsManager.state.diceCommandIds,
+    // defaultOptions: {
+    //   listResults: false,
+    // },
+    // onCommandSetsChange(commandSetOptions) {
+    //   const commandSetIds = commandSetOptions.map((l) => l.id);
+    //   settingsManager.actions.setDiceCommandsIds(commandSetIds);
+    // },
+    // onOptionsChange: (options) => {
+    //   settingsManager.actions.setDiceOptions(options);
+    // },
   });
 
   useEffect(() => {

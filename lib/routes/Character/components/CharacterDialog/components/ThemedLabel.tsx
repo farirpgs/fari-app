@@ -1,10 +1,10 @@
-import { css, cx } from "@emotion/css";
+import { BoxProps } from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import React, { useContext } from "react";
 import { MiniThemeContext } from "../MiniThemeContext";
 
 export function ThemedLabel(props: {
-  className?: string;
+  sx?: BoxProps["sx"];
   children: React.ReactNode;
 }) {
   const miniTheme = useContext(MiniThemeContext);
@@ -13,14 +13,12 @@ export function ThemedLabel(props: {
     <Typography
       display="inline"
       fontSize={"1.2rem"}
-      className={cx(
-        props.className,
-        css({
-          fontFamily: miniTheme.labelFontFamily,
-          fontSize: `${miniTheme.labelFontSize}rem`,
-          fontWeight: miniTheme.labelFontWeight,
-        })
-      )}
+      sx={{
+        fontFamily: miniTheme.labelFontFamily,
+        fontSize: `${miniTheme.labelFontSize}rem`,
+        fontWeight: miniTheme.labelFontWeight,
+        ...props.sx,
+      }}
     >
       {props.children}
     </Typography>

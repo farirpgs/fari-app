@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { useTheme } from "@mui/material/styles";
@@ -11,16 +10,17 @@ export const Patreon: React.FC = () => {
   const { t } = useTranslate();
   const theme = useTheme();
   return (
-    <a
+    <Box
+      component="a"
       target="_blank"
       rel="noreferrer"
       href="https://www.patreon.com/bePatron?u=43408921"
-      className={css({
+      sx={{
         color: "#fff !important",
-      })}
+      }}
     >
       <Box
-        className={css({
+        sx={{
           "background": "rgb(255, 66, 77)",
           "padding": "0.46875rem 1rem",
           "fontSize": "0.875rem",
@@ -29,7 +29,7 @@ export const Patreon: React.FC = () => {
           "& a": {
             color: "#fff !important",
           },
-        })}
+        }}
       >
         <Grid
           container
@@ -43,16 +43,16 @@ export const Patreon: React.FC = () => {
           </Grid>
           <Grid item>
             <Typography
-              className={css({
+              sx={{
                 fontWeight: theme.typography.fontWeightBold,
                 whiteSpace: "nowrap",
-              })}
+              }}
             >
               {t("donation.patreon")}
             </Typography>
           </Grid>
         </Grid>
       </Box>
-    </a>
+    </Box>
   );
 };

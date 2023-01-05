@@ -22,7 +22,7 @@ export function FeatureRequestsRoute() {
     : t("feature-requests-route.meta.title");
 
   return (
-    <Page>
+    <Page sx={{ paddingTop: "2rem" }}>
       <PageMeta
         title={pageTitle}
         description={t("feature-requests-route.meta.description")}

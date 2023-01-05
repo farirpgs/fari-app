@@ -1,4 +1,4 @@
-import { act, renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react";
 import { getUnix } from "../../../domains/dayjs/getDayJS";
 import { IScene } from "../../../hooks/useScene/IScene";
 import { defaultSceneName, useScenes } from "../ScenesContext";

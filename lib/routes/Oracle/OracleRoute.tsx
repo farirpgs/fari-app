@@ -1,7 +1,8 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
+
 import { useTheme } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,12 +13,12 @@ import TableRow from "@mui/material/TableRow";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
-import { DiceBox } from "../../components/DiceBox/DiceBox";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
-import { Dice, IDiceRollResult } from "../../domains/dice/Dice";
+import { Dice, ICommandResult } from "../../domains/dice/Dice";
+import { useEvent } from "../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { ITranslationKeys } from "../../locale";
 import { TheOracle } from "./domains/TheOracle";
@@ -55,7 +56,7 @@ export const OracleRoute = () => {
   const { t } = useTranslate();
 
   return (
-    <Page>
+    <Page sx={{ paddingTop: "2rem" }}>
       <PageMeta
         title={t("oracle-route.meta.title")}
         description={t("oracle-route.meta.description")}
@@ -73,83 +74,69 @@ export function Oracle() {
   const theme = useTheme();
   const logger = useLogger();
 
-  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
+  const [result, setResult] = useState<ICommandResult>();
+  const [rolling, setRolling] = useState(false);
   const [likeliness, setLikeliness] = useState<number>(0);
-  const [rolling, setRolling] = useState<boolean>(false);
-  const [finalRoll, setFinalRoll] = useState<IDiceRollResult>();
-  const finalRollTotal = finalRoll?.total ?? 0;
-  const finalResult = finalRollTotal + likeliness;
+  const finalResult = parseInt(result?.value || "0");
   const oracleValue = TheOracle.getValue(finalResult);
-  const shouldDisplayFinalResult = !rolling && finalRoll?.total !== undefined;
 
-  function roll() {
-    setRolls((draft) => {
-      const newRoll = Dice.rollGroups([{ commandSets: [{ id: "4dF" }] }], {
-        listResults: false,
-      });
+  const roll = useEvent(() => {
+    setRolling(true);
 
-      return [newRoll, ...draft];
-    });
-  }
+    setTimeout(() => {
+      setResult(Dice.roll("4dF"));
+      setRolling(false);
+    }, 500);
+  });
 
   useEffect(() => {
-    if (shouldDisplayFinalResult) {
-      logger.track("view_oracle_result", {
-        value: oracleValue,
-      });
-    }
-  }, [shouldDisplayFinalResult, oracleValue]);
+    logger.track("view_oracle_result", {
+      value: oracleValue,
+    });
+  }, [oracleValue]);
 
   return (
     <Box>
-      <Box py="1rem">
-        <DiceBox
-          rolls={rolls ?? []}
-          size="5rem"
-          fontSize="2rem"
-          borderSize=".2rem"
-          onClick={() => {
-            roll();
-          }}
-          onRolling={(isRolling) => {
-            setRolling(isRolling);
-          }}
-          onFinalResult={(latestRoll) => {
-            setFinalRoll(latestRoll);
-          }}
-        />
+      <Box py="1rem" justifyContent={"center"} display="flex">
+        <Button
+          variant="contained"
+          onClick={roll}
+          size="large"
+          data-cy="oracle-route.ask-button"
+          disabled={rolling}
+        >
+          Ask The Oracle
+        </Button>
       </Box>
 
       <Container maxWidth="md">
         <Box display="flex" justifyContent="center" pt="3rem">
           <Box display="flex" textAlign="center" pr="1rem">
             <Box
-              className={css({
+              sx={{
                 writingMode: "vertical-rl",
                 textOrientation: "mixed",
                 transform: "rotate(-180deg)",
-              })}
+              }}
             >
-              <FateLabel
-                className={css({ fontWeight: "bold", fontSize: "1.25rem" })}
-              >
+              <FateLabel sx={{ fontWeight: "bold", fontSize: "1.25rem" }}>
                 {"Likeliness"}
               </FateLabel>
             </Box>
           </Box>
           <TableContainer component={Paper} elevation={4}>
-            <Toolbar className={css({ padding: "1rem" })}>
+            <Toolbar sx={{ padding: "1rem" }}>
               <FateLabel
                 data-cy="oracle.value"
-                data-cy-value={shouldDisplayFinalResult && oracleValue}
+                data-cy-value={oracleValue}
                 variant="h5"
                 align="center"
                 color="primary"
-                className={css({ width: "100%" })}
+                sx={{ width: "100%" }}
               >
-                {shouldDisplayFinalResult
-                  ? t(`oracle.value.${oracleValue}` as ITranslationKeys)
-                  : " ..."}
+                {rolling
+                  ? "..."
+                  : t(`oracle.value.${oracleValue}` as ITranslationKeys)}
               </FateLabel>
             </Toolbar>
             <Table>
@@ -161,7 +148,7 @@ export function Oracle() {
                       <TableCell
                         align="left"
                         width="280px"
-                        className={css({
+                        sx={{
                           cursor: "pointer",
                           transition: theme.transitions.create("background"),
                           color: isCurrentRow
@@ -170,7 +157,7 @@ export function Oracle() {
                           background: isCurrentRow
                             ? theme.palette.primary.main
                             : "inherit",
-                        })}
+                        }}
                         data-cy={`oracle.likeliness.${l.value}`}
                         onClick={() => {
                           setLikeliness(l.value);
@@ -180,7 +167,7 @@ export function Oracle() {
                           });
                         }}
                       >
-                        <FateLabel className={css({ fontWeight: "bold" })}>
+                        <FateLabel sx={{ fontWeight: "bold" }}>
                           {l.label} ({formatOracleDiceNumber(l.value)})
                         </FateLabel>
                       </TableCell>
@@ -190,21 +177,16 @@ export function Oracle() {
                         const formattedValue =
                           formatOracleDiceNumber(cellValue);
 
-                        const isCurrentColumn = r.value === finalRollTotal;
+                        const isCurrentColumn = r.value === finalResult;
 
                         const likelinessRow =
-                          isCurrentRow && r.value <= finalRollTotal;
+                          isCurrentRow && r.value <= finalResult;
                         const rollColumn =
                           isCurrentColumn && l.value <= likeliness;
 
-                        const shouldHighlightCell =
-                          shouldDisplayFinalResult &&
-                          (likelinessRow || rollColumn);
+                        const shouldHighlightCell = likelinessRow || rollColumn;
 
-                        const isMatch =
-                          shouldDisplayFinalResult &&
-                          isCurrentColumn &&
-                          isCurrentRow;
+                        const isMatch = isCurrentColumn && isCurrentRow;
                         const highlightBackground = isMatch
                           ? theme.palette.primary.main
                           : theme.palette.primary.light;
@@ -213,7 +195,7 @@ export function Oracle() {
                             key={`${l.label}-${r.label}`}
                             align="center"
                             width="50px"
-                            className={css({
+                            sx={{
                               transition:
                                 theme.transitions.create("background"),
                               color: shouldHighlightCell
@@ -223,15 +205,15 @@ export function Oracle() {
                               background: shouldHighlightCell
                                 ? highlightBackground
                                 : "inherit",
-                            })}
+                            }}
                           >
                             <Typography
                               align="center"
-                              className={css({
+                              sx={{
                                 transition:
                                   theme.transitions.create("fontWeight"),
                                 fontWeight: isMatch ? "bold" : "inherit",
-                              })}
+                              }}
                             >
                               {formattedValue}
                             </Typography>
@@ -246,15 +228,14 @@ export function Oracle() {
                 <TableRow>
                   <TableCell />
                   {Rolls.map((r) => {
-                    const highlightValue =
-                      !rolling && finalRoll?.total === r.value;
+                    const highlightValue = finalResult === r.value;
 
                     return (
                       <TableCell
                         key={r.label}
                         align="center"
                         width="50px"
-                        className={css({
+                        sx={{
                           transition: theme.transitions.create(["background"]),
                           color: highlightValue
                             ? theme.palette.primary.contrastText
@@ -262,7 +243,7 @@ export function Oracle() {
                           background: highlightValue
                             ? theme.palette.primary.main
                             : "inherit",
-                        })}
+                        }}
                       >
                         <FateLabel align="center">
                           {formatOracleDiceNumber(r.value)}
@@ -276,9 +257,7 @@ export function Oracle() {
           </TableContainer>
         </Box>
         <Box display="flex" justifyContent="center" pt="1rem">
-          <FateLabel
-            className={css({ fontWeight: "bold", fontSize: "1.25rem" })}
-          >
+          <FateLabel sx={{ fontWeight: "bold", fontSize: "1.25rem" }}>
             {"Roll"}
           </FateLabel>
         </Box>

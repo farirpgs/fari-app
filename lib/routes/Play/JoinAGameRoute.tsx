@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import { useBroadcastEvent, useEventListener } from "@liveblocks/react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -19,7 +18,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { useHistory } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
 import { Images } from "../../constants/Images";
@@ -32,26 +31,24 @@ import {
   PlayerInteractionFactory,
 } from "./types/IPlayerInteraction";
 
-export const JoinAGameRoute: React.FC<{
-  match: {
-    params: { id?: string };
-  };
-}> = (props) => {
+function JoinAGameRoute() {
   const { t } = useTranslate();
   const theme = useTheme();
   const settingsManager = useContext(SettingsContext);
+  const params = useParams<{ id: string }>();
   const [playerName, setPlayerName] = useState(settingsManager.state.userName);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const isGameLinkValid = useRef(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const broadcast = useBroadcastEvent();
 
-  useEventListener<IPlayerInteraction>(({ event }) => {
+  useEventListener((props) => {
+    const event = props.event as IPlayerInteraction;
     if (event.type === "pong") {
       isGameLinkValid.current = true;
-      history.push(`/play/${props.match.params.id}?name=${playerName}`);
+      navigate(`/play/${params.id}?name=${playerName}`);
     }
   });
 
@@ -71,7 +68,7 @@ export const JoinAGameRoute: React.FC<{
   }, [playerName]);
 
   return (
-    <Page>
+    <Page sx={{ paddingTop: "2rem" }}>
       <Box>
         <Box pb="1rem">
           <Container maxWidth="xs">
@@ -127,7 +124,7 @@ export const JoinAGameRoute: React.FC<{
             <Fade in key="loading">
               <Box display="flex" justifyContent="center">
                 <Icons.TwoPeopleMeetingTalkingIcon
-                  className={css({ fontSize: "5rem" })}
+                  sx={{ fontSize: "5rem" }}
                   color="secondary"
                 />
               </Box>
@@ -136,7 +133,7 @@ export const JoinAGameRoute: React.FC<{
             <Fade in key="waiting">
               <Box display="flex" justifyContent="center">
                 <Icons.TwoPeopleMeetingIcon
-                  className={css({ fontSize: "5rem" })}
+                  sx={{ fontSize: "5rem" }}
                   color="secondary"
                 />
               </Box>
@@ -208,6 +205,6 @@ export const JoinAGameRoute: React.FC<{
       </form>
     );
   }
-};
+}
 
 export default JoinAGameRoute;

@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import SaveIcon from "@mui/icons-material/Save";
 import Masonry from "@mui/lab/Masonry";
@@ -13,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import produce from "immer";
 import isEqual from "lodash/isEqual";
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { useHistory } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import {
   ContentEditable,
   previewContentEditable,
@@ -236,11 +235,8 @@ function useCardCollection(props: {
   };
 }
 
-export const CardCollectionRoute: React.FC<{
-  match: {
-    params: { id: string };
-  };
-}> = (props) => {
+function CardCollectionRoute() {
+  const params = useParams<{ id: string }>();
   const indexCardCollectionsManager = useContext(IndexCardCollectionsContext);
   const [selectedCardCollection, setSelectedCardCollection] = useState<
     IIndexCardCollection | undefined
@@ -262,7 +258,7 @@ export const CardCollectionRoute: React.FC<{
 
   const { t } = useTranslate();
   const theme = useTheme();
-  const history = useHistory();
+  const navigate = useNavigate();
   const logger = useLogger();
   const myBinderManager = useContext(MyBinderContext);
 
@@ -273,24 +269,21 @@ export const CardCollectionRoute: React.FC<{
   useEffect(() => {
     const cardToLoad =
       indexCardCollectionsManager.state.indexCardCollections.find(
-        (s) => s.id === props.match.params.id
+        (s) => s.id === params.id
       );
 
     if (cardToLoad) {
       setSelectedCardCollection(cardToLoad);
     } else {
-      history.replace("/");
+      navigate("/", { replace: true });
       myBinderManager.actions.open({ folder: "index-card-collections" });
     }
-  }, [
-    props.match.params.id,
-    indexCardCollectionsManager.state.indexCardCollections,
-  ]);
+  }, [params.id, indexCardCollectionsManager.state.indexCardCollections]);
 
   return (
     <>
       <PageMeta title={pageTitle} />
-      <Page maxWidth="none">
+      <Page maxWidth="none" sx={{ paddingTop: "2rem" }}>
         <Container maxWidth="md">
           <Box mb=".5rem">
             <Alert severity="info">
@@ -305,10 +298,10 @@ export const CardCollectionRoute: React.FC<{
             <FateLabel
               variant="h4"
               uppercase={false}
-              className={css({
+              sx={{
                 borderBottom: `1px solid ${theme.palette.divider}`,
                 textAlign: "center",
-              })}
+              }}
             >
               <ContentEditable
                 autoFocus
@@ -321,7 +314,7 @@ export const CardCollectionRoute: React.FC<{
               />
             </FateLabel>
 
-            <FormHelperText className={css({ textAlign: "right" })}>
+            <FormHelperText sx={{ textAlign: "right" }}>
               {t("card-collection-route.card-collection-name")}
             </FormHelperText>
           </Box>
@@ -425,7 +418,6 @@ export const CardCollectionRoute: React.FC<{
                 id={`index-card-${indexCard.id}`}
                 indexCard={indexCard}
                 onRoll={() => {}}
-                onPoolClick={() => {}}
                 onMoveTo={(
                   idOfIndexCardToMove: string,
                   idOfIndexCardToMoveTo: string
@@ -468,7 +460,7 @@ export const CardCollectionRoute: React.FC<{
       </Masonry>
     );
   }
-};
+}
 
 CardCollectionRoute.displayName = "CardCollectionRoute";
 export default CardCollectionRoute;

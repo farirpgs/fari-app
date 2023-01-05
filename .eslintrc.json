@@ -1,19 +1,21 @@
 {
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true
-  },
+  "root": true,
   "extends": [
     "plugin:react/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "prettier"
   ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react", "@typescript-eslint", "react-hooks"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -21,16 +23,15 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "react-hooks"],
   "rules": {
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["warn"],
     "no-restricted-imports": [
       "error",
-      {
-        "name": "@mui/material",
-        "message": "Use @mui/material/MyComponent instead"
-      },
+      // {
+      //   "name": "@mui/material",
+      //   "message": "Use @mui/material/MyComponent instead"
+      // },
       {
         "name": "@mui/lab",
         "message": "Use @mui/lab/MyComponent instead"

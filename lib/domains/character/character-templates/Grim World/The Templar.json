@@ -1,1 +1,813 @@
-{"fariType":"character","id":"f4d82189-25f4-49c3-9d44-b7e58f360602","lastUpdated":1662311400,"name":"Grim World - The Templar","pages":[{"id":"bb0dee85-d717-4c80-88ff-39978de6997d","label":"Character","rows":[{"columns":[{"sections":[{"id":"a22ab26f-bb94-4eed-94ad-e87c3112eda7","label":"The Templar","blocks":[{"id":"4d4afd26-eb2d-4ef2-a1fe-d66171b1f5ab","label":"","type":"Text","value":"Name","meta":{"width":0.33}},{"id":"631aa34b-701c-4f34-9efe-5b4660d5e407","label":"","type":"Text","value":"Species","meta":{"width":0.33}},{"id":"81ef9ea0-b5a8-4633-8978-3ca3d7501c6a","label":"","type":"Text","value":"Look","meta":{"width":0.33,"helperText":"<br>"}},{"id":"f49813e1-7a2d-4e15-8094-5531fad13da7","label":"","type":"Image","meta":{},"value":"https://i0.wp.com/thetemplarknight.com/wp-content/uploads/2020/04/Bank-of-Templar-3-copy-11.png?resize=640%2C640&ssl=1"},{"id":"3d794248-635a-423d-b81f-77f408af1c22","type":"Text","value":"You must seek out the seeds of heresy and evil; you must show this vile world it can be made clean once more. Foul beasts and blasphemers shall be the kindling to your righteous fires. And if the cleansing flame grows so hot that you too must be consumed, then you will burn in contentment, knowing you leave the world closer to absolution.\r\n","meta":{"width":1}},{"id":"e82ba21a-4b49-4145-b49e-e2d948ce6231","label":"STATS","type":"Separator","meta":{"hasLabel":true,"helperText":"Assign these scores to your stats: 16 (+2), 15 (+1), 13 (+1), 12 (+0), 9 (+0), 8 (-1) <br>Note: Stats cannot be raised above 18 (+3)"},"value":""},{"id":"d22b2bc0-0018-4c3b-9873-4f28e7967762","label":"Strength","type":"Numeric","value":"","meta":{"checked":false,"width":0.5,"helperText":"Weak -1"}},{"id":"cf9ef334-ad26-46a9-b791-324672591f84","label":"Dexterity","type":"Numeric","value":"","meta":{"checked":false,"width":0.5,"helperText":"Shaky -1"}},{"id":"e645a65b-36b7-400e-8081-e1ee2dcfe6a5","label":"Constitution","type":"Numeric","value":"","meta":{"checked":false,"width":0.5,"helperText":"Sick -1"}},{"id":"4a9a274d-3c50-4b02-9e0c-087b11b25fe4","label":"Intelligence","type":"Numeric","value":"","meta":{"checked":false,"width":0.5,"helperText":"Stunned -1"}},{"id":"da05f959-a50f-4285-83a4-654d4cbf8653","label":"Wisdom","type":"Numeric","value":"","meta":{"checked":false,"width":0.5,"helperText":"Confused -1"}},{"id":"ea7ff119-cf40-4b13-a9ea-abf3c3916bb8","label":"Charisma","type":"Numeric","value":"","meta":{"checked":false,"width":0.5,"helperText":"Scared -1"}},{"id":"485debad-fa05-46ec-8133-b3ba99d84b8f","label":"","type":"Separator","meta":{"hasLabel":false,"hideDivider":false},"value":""},{"id":"f400d46f-afc2-421c-bcb4-4251e3a7bd4e","label":"Damage","type":"Skill","value":"0","meta":{"commands":["1d8"],"hideModifier":true,"width":0.33}},{"id":"18be6bd5-9e18-4531-82ae-3cc7cdc62d0b","label":"Armor","type":"Numeric","value":"","meta":{"width":0.33}},{"id":"a7e3bdfd-ec20-41c3-a003-354d51c85ba3","label":"Hit Points","type":"PointCounter","meta":{"max":"10","isMainPointCounter":false,"width":0.33,"helperText":"Your Max HP is 8 + Constitution<br>"},"value":"10"}],"visibleOnCard":true}]},{"sections":[{"id":"b424fa5b-676e-4658-a447-4a478e6be30f","label":"","blocks":[{"id":"d5fe7106-23eb-476e-8a5b-333679c75ae3","label":"GEAR","type":"Separator","meta":{"hasLabel":true,"helperText":"Your Load is 10+STR. You carry dungeon rations (5 uses, 1 weight), interrogation tools and a penance device, such as a cilice, whip, or knout (1 weight).<br>"},"value":""},{"id":"8e6a351e-f4de-4b83-b7d1-fe351b17f840","label":"Choose your weapon:","type":"Text","value":"","meta":{"helperText":"⃞&nbsp; &nbsp;Short sword (close, 1 weight) and shield (+1 armor, 2 weight)\n<br>⃞&nbsp; &nbsp;Flail (close, +1 damage, 2 weight)<br>\n"}},{"id":"3fe60cdd-d4bc-461d-813c-2a418b984c28","label":"Choose your defenses:\n","type":"Text","value":"","meta":{"helperText":"⃞&nbsp; &nbsp;Chainmail (1 armor, 1 weight)\n<br>⃞&nbsp; &nbsp;Shield (+1 armor, 2 weight)<br>\n"}},{"id":"2b0c9c72-a499-45d0-b160-38624c170735","label":"Choose one:\n","type":"Text","value":"","meta":{"helperText":"⃞&nbsp; &nbsp;Bag of books (5 uses, 2 weight)\n<br>⃞&nbsp; &nbsp;A recent offering of 3d6 coins<br>\n"}},{"id":"5236d377-1f6b-4c0e-bc59-987cf9b7ae8e","label":"","type":"Separator","meta":{"hasLabel":false},"value":""},{"id":"93ef903d-a99c-49c9-a9d8-9e85588f83d7","label":"Death Move","type":"Text","value":"Death: Angel of Wrath","meta":{"helperText":"Let the cleansing fires consume the vile and unworthy. Let them know my wrath. When you die, your eyes boil and burn away as holy light pours out of you. Every inch of you radiates hallowed flame. You wield the sword of vengeance, the shield of righteousness, and your gaze pierces the souls of all you look upon. The ground you touch is forever consecrated. Until your wrath is delivered to those deserving nearby, you succeed at every roll and deal max damage. The GM will soon tell you your work here is done. Embrace serenity, Templar, you have left this putrid world one step closer to absolution.<br>"}},{"id":"c6389ce5-9470-4e0e-9da7-a4a3a769dd30","label":"Level","type":"Text","value":"","meta":{"width":0.5}},{"id":"a326f109-5e7f-45fa-b639-27f6c42721ab","label":"Experience","type":"Text","value":"","meta":{"width":0.5}},{"id":"576efc55-930f-4e28-b9e3-5ed02e0854e2","label":"","type":"Separator","meta":{"hasLabel":false},"value":""}],"visibleOnCard":true}]}]},{"columns":[{"sections":[{"id":"9b65b85b-1e9f-4c65-b37c-7c017f922a93","label":"","blocks":[{"id":"0f1ce9cc-5421-4df8-bdf6-bb759e05a741","label":"","type":"Separator","meta":{"hasLabel":false},"value":""}]}]}]},{"columns":[{"sections":[{"id":"dfe874e1-c2fd-45aa-bde0-2fcacddbf1ef","label":"Alignment","blocks":[{"id":"ee61bcd7-125f-4044-84e4-2da2b5f309f3","label":"Lawful","type":"Text","meta":{"checked":false,"helperText":"Show no mercy when extracting a confession.<br>"}},{"id":"827d5082-738a-4286-90a7-a9c00cacc4a0","label":"Good","type":"Text","meta":{"checked":false,"helperText":"Uncover a vile or dangerous truth.<br>"}},{"id":"2f0dfa9a-aa1e-43c3-8473-eb198e977209","label":"Evil","type":"Text","meta":{"checked":false,"helperText":"Cause a heretic great pain before they expire.<br>"}}],"visibleOnCard":true}]},{"sections":[{"id":"66fa20ba-aced-4795-831b-0874e54d0c32","label":"Facets of Inquisition\r\n","blocks":[{"id":"3daca90d-477b-4a34-80f9-f2e82f31cfc3","type":"Text","meta":{"helperText":"<br>"},"value":"here are many facets of inquisition, choose one you favor:\n"},{"id":"202a763b-19f4-4c50-82a7-664f4324595b","type":"Text","meta":{"helperText":"+1 to Parley when the character fears you.<br>","checked":false},"label":"Fear"},{"id":"72a90c78-e825-4c14-89f0-8eb6f0975b66","type":"Text","meta":{"helperText":"+1 Piercing against surprised enemies.<br>","checked":false},"label":"Surprise"},{"id":"5597ed23-1fd6-44f6-b21c-a3e070f55758","type":"Text","meta":{"helperText":"When Quartermaster on a Perilous Journey, treat 7-9 as 10+<br>","checked":false},"label":"Ruthless Efficiency"},{"id":"1504c5bd-1a25-46ea-ad3d-38662dafcdf9","type":"Text","meta":{"helperText":"Ignore the effects of Charisma debilities.<br>","checked":false},"label":"Fanatical Devotion"}],"visibleOnCard":true}]},{"sections":[{"id":"56349dee-f0dd-4f78-a7aa-b6da20a6a25f","label":"Bonds","blocks":[{"id":"aae59b64-a21e-4bd0-a567-f213942da3eb","label":"Info Text","type":"InfoText","value":"I worry ____________ is practicing heresy.<br>","meta":{}},{"id":"9d3d325f-6b8e-4688-a2d6-85356e8a0ffc","label":"Info Text","type":"InfoText","value":"I don't trust ____________, but they make a powerful ally.<br>","meta":{}},{"id":"53eb5a77-3368-4f2d-9315-8ff465b02af8","label":"Info Text","type":"InfoText","value":"___________ saw me stray from the righteous path. Never again.<br>","meta":{}},{"id":"65f61a1f-c965-449c-b308-b0af5df3fb62","label":"Info Text","type":"InfoText","value":"I have heard the secret confessions of ___________.<br>","meta":{}}],"visibleOnCard":true}]},{"sections":[{"id":"88059e64-d8a7-4ff4-8b26-c9fb55b26b8b","label":"Confession\n","blocks":[{"id":"aa8903e7-4997-4a7e-b38d-50d7db948093","label":"Info Text","type":"InfoText","value":"When you hear someone else confess a sinful act or wrongdoing, you can grant them absolution. The confession can be a recent action or something that happened in the character’s past. Roll+CHA.<br><br>✴On a 10+, they are healed for 1d8 damage. <br><br>✴On a 7-9, they are healed, but the confession sullies your mind and you must immediately perform penance, take 1d4 damage (ignores armor).<br>","meta":{"width":1}}],"visibleOnCard":true}]}]}]},{"id":"c285c57f-e601-4bf2-8a23-fdb4a550e19c","label":"Moves","rows":[{"columns":[{"sections":[{"id":"55f99c31-3825-4e61-8280-e0ff667c06f0","label":"Starting moves","blocks":[{"id":"80e0fe04-e370-4ac5-8651-fd2781c96ed1","label":"Wrath Embodied\n","type":"Text","value":"You are heavenly vengeance made manifest and Wrath is your currency. The more pure your soul, the more holy power can pass through you. If your soul is immaculate, then you have 3 Wrath (the max). \n\nWhen you spend time performing your purification ritual (an uninterrupted hour or so), set your Wrath to the max.\r\n","meta":{}},{"id":"6a416201-b28c-4cab-ba85-50168e4bebde","label":"Penance\n","type":"Text","value":"When you quickly perform penance, take 1d4 damage (ignores armor) and gain 1 Wrath. Penance is self-punishment, such as tightening a cilice, using a whip or knout, or other forms of mortification of the flesh. This type of brutal penance might be painful, but it's the only way to purify your soul quickly, such as in the midst of a battle.\r\n","meta":{}},{"id":"204d6269-a28c-4a49-b2b7-55bfbf81705e","label":"","type":"Separator","meta":{"hasLabel":false,"width":0.33},"value":""},{"id":"dff501f8-cf22-4f65-90f0-b5c1cafebe59","label":"Wrath","type":"PointCounter","meta":{"max":"3","isMainPointCounter":false,"width":0.33},"value":"0"},{"id":"5430639d-515d-4fd0-aa66-eefcbfa8aef2","label":"","type":"Separator","meta":{"hasLabel":false,"width":0.33},"value":""},{"id":"4d45fe1c-83ad-4d4d-a903-c4ea947870c7","type":"Text","value":"Smite\n","meta":{"helperText":"When you Hack and Slash, on a 10+ you may spend a Wrath to deal +1d4 extra damage.<br>"}},{"id":"fb6df2c9-aef6-4624-a31a-8455e03449fc","type":"Text","value":"Divine Force\r\n","meta":{"helperText":"When you Volley, on a 10+ you may spend a Wrath to forcefully knock back all enemies who are close by to where your volley landed.<br>"}},{"id":"6363daed-54e0-4418-92d9-1c24f9be82f3","type":"Text","value":"Blinding Light\r\n","meta":{"helperText":"When you Defy Danger, on a 10+ you may spend a Wrath to emit an immensely bright holy light that temporarily blinds your attacker.<br>"}},{"id":"8d16759b-bb25-4c97-b419-538b28d9e248","type":"Text","value":"Consecrated Ground\n","meta":{"helperText":"When you Defend, on a 10+ you may spend a Wrath to consecrate the ground around you. When an enemy first enters consecrated ground, they take damage equal to your level.<br>"}},{"id":"22d77cb5-005e-4a52-95a9-cace9c805e20","label":"Inquisitor\r\n","type":"Text","value":"When you hold a captive for questioning, roll+CHA. \n\n✴On a 7+, the captive (the GM) will tell you three statements: two are true, but one is a lie. \n\n✴On a 10+, the GM will tell you one of the three statements that is definitely true (leaving the 2 unknown statements). If you choose to press the captive further, pick a statement that you guess to be the lie. Your methods cause significant emotional or physical scars, but if you picked the lie correctly, the captive will break and truthfully answer any questions you ask.\r\n\n✴On a 6-, they won't break, or they hold back, or something went very, very wrong. Oops!\r\n","meta":{}},{"id":"4d4df88e-8bc0-442e-9ec6-26f4b50837e0","label":"Advanced Moves","type":"Separator","meta":{"hasLabel":true},"value":""}]}]}]},{"columns":[{"sections":[{"id":"c8002767-fae1-4ad5-96d8-d6988efa1212","label":"Advanced moves lvl 2-5","blocks":[{"id":"f6b4dfd1-fb1a-4228-8f6a-38ab1451a51e","type":"Text","meta":{"helperText":"When you gain a level from 2-5, choose from these moves."}},{"id":"5a733762-7abf-43b9-b0b9-693090025e6a","label":"Red Hot Wrath\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"The weapon you wield glows hot with holy power, add your current Wrath to your damage. Additionally, Smite costs no Wrath on a 10+<br>"}},{"id":"7202ab82-3c8f-4148-9ee9-6f046610452e","label":"Armor of Wrath\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"The armor you wear is charged by the purity of your soul. You ignore the clumsy tag on all armor. When an enemy's skin touches your armor, they take your current Wrath in damage (ignores armor).<br>"}},{"id":"d47b896a-2b64-4b50-9298-1ae9b223a708","label":"Clean Conscience\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"When you hear someone's Confession, they deal +1d4 damage on their next attack.<br>"}},{"id":"6ee123e6-1a3e-4673-aeb2-fae4b501bad2","label":"Prophetic Dream\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"When you sleep for at least a few hours, you have a vague dream warning you of a danger that will be faced in the next day or so. You awaken with 1 Prophecy. Spend a Prophecy to make a Defy Danger an automatic success (10+).<br>"}},{"id":"17a0f591-d0f3-41e8-ae41-f1aef0a3994a","label":"Keen to Inquire\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"When you use Confession or Inquisitor, you can roll+Wrath instead of +CHA.<br>"}},{"id":"7886c854-13ae-4d57-86f1-6de4d83a974d","label":"Stench of Guilt\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"You can sense the guilt that weighs on someone as if it were an odor. Most people have at least a minor stink, but some reek of guilt. Beware of those who have no stench; you know how rare the truly pious are. It's much more likely you have found genuine evil that feels no guilt at all.<br>"}},{"id":"945e6ae9-a92b-4de2-aaed-18961969db21","label":"Warming Up\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"When an ally Aids you, instead of taking a +1, you can choose to gain 1 Wrath.<br>"}},{"id":"65555248-8229-417a-9f22-0a4eef9ead06","label":"White Knight\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"Choose one move from the Paladin class list. If there is already a Paladin, you must have similar beliefs or goals, or at least a mutual respect<br>"}},{"id":"9db2f65e-03a3-4874-a887-483f9fcaba8d","label":"Cleansing Censer\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"You gain a blessed censer that emits holy flames of purification. It hangs from a chain and can be used as a melee weapon with Reach and +1 damage. When you Make Camp and purify the campsite, anyone who sleeps at least a few hours is healed to full HP<br>"}},{"id":"bb8a9aaf-48f4-446d-ba1d-1cb19d508c99","label":"Judgment\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"When you declare someone deserves punishment, spend 1 Wrath. The next time they deal damage, they are also harmed for 1d6 damage (ignores armor). Describe what form this punishment takes (it may appear coincidental or blatantly celestial).<br>"}},{"id":"72076f11-b626-4a49-a18c-067760610d2d","label":"Holy Vengeance\n","type":"Text","value":"\n","meta":{"checked":false,"helperText":"When you kill an enemy that has done you harm, you gain 1 Wrath.<br>"}}]}]},{"sections":[{"id":"090ea562-4f62-4bde-b956-2c6aa5451a1f","label":"Advanced moves lvl 6-10","blocks":[{"id":"a709b711-6434-4c71-a55c-5222e64b69c5","type":"Text","meta":{"helperText":"When you gain a level from 6-10, choose from these or the level 2-5 moves."}},{"id":"ee1f8f4c-9930-49ca-acee-9a3c87513524","label":"Soul Fire","type":"Text","value":"","meta":{"checked":false,"helperText":"Smite now deals +1d8 extra damage instead and can be used on a 7+.<br>"}},{"id":"8c504b91-63fb-4122-b1d8-f56fb364ed37","label":"Nobody Expects","type":"Text","value":"","meta":{"checked":false,"helperText":"You gain the benefits of all Facets of Inquisition.<br>"}},{"id":"efabda7d-0225-403b-bad8-dae54e2965d4","label":"Friend of Sinners","type":"Text","value":"","meta":{"checked":false,"helperText":"When you hear someone's Confession, on a 7+ they are healed for 2d8 damage instead and penance is not owed. On a 10+, you are also healed for 1d8 damage.<br>"}},{"id":"ff218555-8ced-47d2-9021-7fe59b1f1444","label":"Vivid Prophecy","type":"Text","value":"Requires: Prophetic Dream","meta":{"checked":false,"helperText":"When you have a Prophetic Dream, you awaken with 2 Prophecy instead and your dreams can be about anyone you have a bond with.<br>"}},{"id":"4c4d5f14-e8c5-46f9-a61b-d646b0543b94","label":"We Have Ways","type":"Text","value":"Requires: Prophetic Dream","meta":{"checked":false,"helperText":"When you act as Inquisitor, you can treat a 6- as a 7-9, or a 7-9 as a 10+, but the captive dies at the end of your brutal interrogation.<br>"}},{"id":"455161ed-2409-4318-bfa3-b7052616893e","label":"Zealotry","type":"Text","value":"","meta":{"checked":false,"helperText":"When you use your holy authority to convince a believer to do something clearly dangerous, roll+CHA.<br><br>✴On a 7+, they do it, but you must spend a Wrath for each option you select. <br><br>✴On a 10+, you can choose one option for free.\n<br><br>•  They'll try as hard as they possibly can without hesitation\n<br>•  They won't give up when faced with certain death\n<br>•  They'll spread the word and try to get other believers to help<br>"}},{"id":"e0b096f9-5ea0-4264-8581-4efa9b83fba4","label":"Holy Crusade","type":"Text","value":"Requires: White Knight","meta":{"checked":false,"helperText":"Choose an additional move from the Paladin class list. If there is already a Paladin, they can choose to take a move from the Templar list when they gain a level.<br>"}},{"id":"fe28da38-70fc-4689-a5c5-69b50e2657cd","label":"Miracle of Healing","type":"Text","value":"Requires: Cleansing Censer","meta":{"checked":false,"helperText":"When you Make Camp using your Cleansing Censer, anyone who sleeps at least a few hours can choose to heal to full HP or remove 1 Debility.<br>"}},{"id":"480286ce-d92c-41f1-9e17-4ec25adac74e","label":"Bless Ally","type":"Text","value":"","meta":{"checked":false,"helperText":"When you Aid an ally, you may spend a Wrath to choose one:\n<br>•  Their weapon is blessed and deals +1d8 damage on the next attack.\n<br>•  Their armor is blessed and the next damage they take is halved.<br>"}},{"id":"797240f9-b8c4-4571-a311-58e29c97c928","label":"Wrathful","type":"Text","value":"","meta":{"checked":false,"helperText":"You can choose to use Divine Force, Blinding Light, and Consecrated Ground on a 7+ instead of a 10+. Furthermore, on a 12+, you gain the effect for free.<br>"}}]}]}]}]}],"template":"Blank","version":6,"wide":true,"theme":{"style":"@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Marcellus+SC&family=Spectral+SC&display=swap');","hideSectionBackground":true,"pageHeadingFontFamily":"Spectral SC","pageHeadingFontWeight":"400","sectionHeadingFontFamily":"Spectral SC","sectionHeadingFontWeight":"600","labelFontFamily":"Spectral SC","labelFontWeight":"200","textFontFamily":"Spectral SC","textFontWeight":"200","infoTextFontFamily":"Spectral SC","infoTextFontWeight":"100","helperTextFontFamily":"Spectral SC","helperTextFontWeight":"","textFontSize":0.875,"labelFontSize":1.25,"infoTextFontSize":1,"helperTextFontSize":0.625,"sectionHeadingFontSize":1.5},"playedDuringTurn":false,"group":"Grim World"}
+{
+  "fariType": "character",
+  "id": "f4d82189-25f4-49c3-9d44-b7e58f360602",
+  "lastUpdated": 1662311400,
+  "name": "Grim World - The Templar",
+  "pages": [
+    {
+      "id": "bb0dee85-d717-4c80-88ff-39978de6997d",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a22ab26f-bb94-4eed-94ad-e87c3112eda7",
+                  "label": "The Templar",
+                  "blocks": [
+                    {
+                      "id": "4d4afd26-eb2d-4ef2-a1fe-d66171b1f5ab",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Name",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "631aa34b-701c-4f34-9efe-5b4660d5e407",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Species",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "81ef9ea0-b5a8-4633-8978-3ca3d7501c6a",
+                      "label": "",
+                      "type": "Text",
+                      "value": "Look",
+                      "meta": { "width": 0.33, "helperText": "<br>" }
+                    },
+                    {
+                      "id": "f49813e1-7a2d-4e15-8094-5531fad13da7",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://i0.wp.com/thetemplarknight.com/wp-content/uploads/2020/04/Bank-of-Templar-3-copy-11.png?resize=640%2C640&ssl=1"
+                    },
+                    {
+                      "id": "3d794248-635a-423d-b81f-77f408af1c22",
+                      "type": "Text",
+                      "value": "You must seek out the seeds of heresy and evil; you must show this vile world it can be made clean once more. Foul beasts and blasphemers shall be the kindling to your righteous fires. And if the cleansing flame grows so hot that you too must be consumed, then you will burn in contentment, knowing you leave the world closer to absolution.\r\n",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "e82ba21a-4b49-4145-b49e-e2d948ce6231",
+                      "label": "STATS",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": true,
+                        "helperText": "Assign these scores to your stats: 16 (+2), 15 (+1), 13 (+1), 12 (+0), 9 (+0), 8 (-1) <br>Note: Stats cannot be raised above 18 (+3)"
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "d22b2bc0-0018-4c3b-9873-4f28e7967762",
+                      "label": "Strength",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Weak -1"
+                      }
+                    },
+                    {
+                      "id": "cf9ef334-ad26-46a9-b791-324672591f84",
+                      "label": "Dexterity",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Shaky -1"
+                      }
+                    },
+                    {
+                      "id": "e645a65b-36b7-400e-8081-e1ee2dcfe6a5",
+                      "label": "Constitution",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Sick -1"
+                      }
+                    },
+                    {
+                      "id": "4a9a274d-3c50-4b02-9e0c-087b11b25fe4",
+                      "label": "Intelligence",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Stunned -1"
+                      }
+                    },
+                    {
+                      "id": "da05f959-a50f-4285-83a4-654d4cbf8653",
+                      "label": "Wisdom",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Confused -1"
+                      }
+                    },
+                    {
+                      "id": "ea7ff119-cf40-4b13-a9ea-abf3c3916bb8",
+                      "label": "Charisma",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.5,
+                        "helperText": "Scared -1"
+                      }
+                    },
+                    {
+                      "id": "485debad-fa05-46ec-8133-b3ba99d84b8f",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "f400d46f-afc2-421c-bcb4-4251e3a7bd4e",
+                      "label": "Damage",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d8"],
+                        "hideModifier": true,
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "18be6bd5-9e18-4531-82ae-3cc7cdc62d0b",
+                      "label": "Armor",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "a7e3bdfd-ec20-41c3-a003-354d51c85ba3",
+                      "label": "Hit Points",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "10",
+                        "isMainPointCounter": false,
+                        "width": 0.33,
+                        "helperText": "Your Max HP is 8 + Constitution<br>"
+                      },
+                      "value": "10"
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "b424fa5b-676e-4658-a447-4a478e6be30f",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "d5fe7106-23eb-476e-8a5b-333679c75ae3",
+                      "label": "GEAR",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": true,
+                        "helperText": "Your Load is 10+STR. You carry dungeon rations (5 uses, 1 weight), interrogation tools and a penance device, such as a cilice, whip, or knout (1 weight).<br>"
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "8e6a351e-f4de-4b83-b7d1-fe351b17f840",
+                      "label": "Choose your weapon:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "⃞&nbsp; &nbsp;Short sword (close, 1 weight) and shield (+1 armor, 2 weight)\n<br>⃞&nbsp; &nbsp;Flail (close, +1 damage, 2 weight)<br>\n"
+                      }
+                    },
+                    {
+                      "id": "3fe60cdd-d4bc-461d-813c-2a418b984c28",
+                      "label": "Choose your defenses:\n",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "⃞&nbsp; &nbsp;Chainmail (1 armor, 1 weight)\n<br>⃞&nbsp; &nbsp;Shield (+1 armor, 2 weight)<br>\n"
+                      }
+                    },
+                    {
+                      "id": "2b0c9c72-a499-45d0-b160-38624c170735",
+                      "label": "Choose one:\n",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "⃞&nbsp; &nbsp;Bag of books (5 uses, 2 weight)\n<br>⃞&nbsp; &nbsp;A recent offering of 3d6 coins<br>\n"
+                      }
+                    },
+                    {
+                      "id": "5236d377-1f6b-4c0e-bc59-987cf9b7ae8e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "93ef903d-a99c-49c9-a9d8-9e85588f83d7",
+                      "label": "Death Move",
+                      "type": "Text",
+                      "value": "Death: Angel of Wrath",
+                      "meta": {
+                        "helperText": "Let the cleansing fires consume the vile and unworthy. Let them know my wrath. When you die, your eyes boil and burn away as holy light pours out of you. Every inch of you radiates hallowed flame. You wield the sword of vengeance, the shield of righteousness, and your gaze pierces the souls of all you look upon. The ground you touch is forever consecrated. Until your wrath is delivered to those deserving nearby, you succeed at every roll and deal max damage. The GM will soon tell you your work here is done. Embrace serenity, Templar, you have left this putrid world one step closer to absolution.<br>"
+                      }
+                    },
+                    {
+                      "id": "c6389ce5-9470-4e0e-9da7-a4a3a769dd30",
+                      "label": "Level",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "a326f109-5e7f-45fa-b639-27f6c42721ab",
+                      "label": "Experience",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "576efc55-930f-4e28-b9e3-5ed02e0854e2",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9b65b85b-1e9f-4c65-b37c-7c017f922a93",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "0f1ce9cc-5421-4df8-bdf6-bb759e05a741",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "dfe874e1-c2fd-45aa-bde0-2fcacddbf1ef",
+                  "label": "Alignment",
+                  "blocks": [
+                    {
+                      "id": "ee61bcd7-125f-4044-84e4-2da2b5f309f3",
+                      "label": "Lawful",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Show no mercy when extracting a confession.<br>"
+                      }
+                    },
+                    {
+                      "id": "827d5082-738a-4286-90a7-a9c00cacc4a0",
+                      "label": "Good",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Uncover a vile or dangerous truth.<br>"
+                      }
+                    },
+                    {
+                      "id": "2f0dfa9a-aa1e-43c3-8473-eb198e977209",
+                      "label": "Evil",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Cause a heretic great pain before they expire.<br>"
+                      }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "66fa20ba-aced-4795-831b-0874e54d0c32",
+                  "label": "Facets of Inquisition\r\n",
+                  "blocks": [
+                    {
+                      "id": "3daca90d-477b-4a34-80f9-f2e82f31cfc3",
+                      "type": "Text",
+                      "meta": { "helperText": "<br>" },
+                      "value": "here are many facets of inquisition, choose one you favor:\n"
+                    },
+                    {
+                      "id": "202a763b-19f4-4c50-82a7-664f4324595b",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "+1 to Parley when the character fears you.<br>",
+                        "checked": false
+                      },
+                      "label": "Fear"
+                    },
+                    {
+                      "id": "72a90c78-e825-4c14-89f0-8eb6f0975b66",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "+1 Piercing against surprised enemies.<br>",
+                        "checked": false
+                      },
+                      "label": "Surprise"
+                    },
+                    {
+                      "id": "5597ed23-1fd6-44f6-b21c-a3e070f55758",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "When Quartermaster on a Perilous Journey, treat 7-9 as 10+<br>",
+                        "checked": false
+                      },
+                      "label": "Ruthless Efficiency"
+                    },
+                    {
+                      "id": "1504c5bd-1a25-46ea-ad3d-38662dafcdf9",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "Ignore the effects of Charisma debilities.<br>",
+                        "checked": false
+                      },
+                      "label": "Fanatical Devotion"
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "56349dee-f0dd-4f78-a7aa-b6da20a6a25f",
+                  "label": "Bonds",
+                  "blocks": [
+                    {
+                      "id": "aae59b64-a21e-4bd0-a567-f213942da3eb",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "I worry ____________ is practicing heresy.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9d3d325f-6b8e-4688-a2d6-85356e8a0ffc",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "I don't trust ____________, but they make a powerful ally.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "53eb5a77-3368-4f2d-9315-8ff465b02af8",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "___________ saw me stray from the righteous path. Never again.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "65f61a1f-c965-449c-b308-b0af5df3fb62",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "I have heard the secret confessions of ___________.<br>",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "88059e64-d8a7-4ff4-8b26-c9fb55b26b8b",
+                  "label": "Confession\n",
+                  "blocks": [
+                    {
+                      "id": "aa8903e7-4997-4a7e-b38d-50d7db948093",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "When you hear someone else confess a sinful act or wrongdoing, you can grant them absolution. The confession can be a recent action or something that happened in the character’s past. Roll+CHA.<br><br>✴On a 10+, they are healed for 1d8 damage. <br><br>✴On a 7-9, they are healed, but the confession sullies your mind and you must immediately perform penance, take 1d4 damage (ignores armor).<br>",
+                      "meta": { "width": 1 }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c285c57f-e601-4bf2-8a23-fdb4a550e19c",
+      "label": "Moves",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "55f99c31-3825-4e61-8280-e0ff667c06f0",
+                  "label": "Starting moves",
+                  "blocks": [
+                    {
+                      "id": "80e0fe04-e370-4ac5-8651-fd2781c96ed1",
+                      "label": "Wrath Embodied\n",
+                      "type": "Text",
+                      "value": "You are heavenly vengeance made manifest and Wrath is your currency. The more pure your soul, the more holy power can pass through you. If your soul is immaculate, then you have 3 Wrath (the max). \n\nWhen you spend time performing your purification ritual (an uninterrupted hour or so), set your Wrath to the max.\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "6a416201-b28c-4cab-ba85-50168e4bebde",
+                      "label": "Penance\n",
+                      "type": "Text",
+                      "value": "When you quickly perform penance, take 1d4 damage (ignores armor) and gain 1 Wrath. Penance is self-punishment, such as tightening a cilice, using a whip or knout, or other forms of mortification of the flesh. This type of brutal penance might be painful, but it's the only way to purify your soul quickly, such as in the midst of a battle.\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "204d6269-a28c-4a49-b2b7-55bfbf81705e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "width": 0.33 },
+                      "value": ""
+                    },
+                    {
+                      "id": "dff501f8-cf22-4f65-90f0-b5c1cafebe59",
+                      "label": "Wrath",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "3",
+                        "isMainPointCounter": false,
+                        "width": 0.33
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "5430639d-515d-4fd0-aa66-eefcbfa8aef2",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "width": 0.33 },
+                      "value": ""
+                    },
+                    {
+                      "id": "4d45fe1c-83ad-4d4d-a903-c4ea947870c7",
+                      "type": "Text",
+                      "value": "Smite\n",
+                      "meta": {
+                        "helperText": "When you Hack and Slash, on a 10+ you may spend a Wrath to deal +1d4 extra damage.<br>"
+                      }
+                    },
+                    {
+                      "id": "fb6df2c9-aef6-4624-a31a-8455e03449fc",
+                      "type": "Text",
+                      "value": "Divine Force\r\n",
+                      "meta": {
+                        "helperText": "When you Volley, on a 10+ you may spend a Wrath to forcefully knock back all enemies who are close by to where your volley landed.<br>"
+                      }
+                    },
+                    {
+                      "id": "6363daed-54e0-4418-92d9-1c24f9be82f3",
+                      "type": "Text",
+                      "value": "Blinding Light\r\n",
+                      "meta": {
+                        "helperText": "When you Defy Danger, on a 10+ you may spend a Wrath to emit an immensely bright holy light that temporarily blinds your attacker.<br>"
+                      }
+                    },
+                    {
+                      "id": "8d16759b-bb25-4c97-b419-538b28d9e248",
+                      "type": "Text",
+                      "value": "Consecrated Ground\n",
+                      "meta": {
+                        "helperText": "When you Defend, on a 10+ you may spend a Wrath to consecrate the ground around you. When an enemy first enters consecrated ground, they take damage equal to your level.<br>"
+                      }
+                    },
+                    {
+                      "id": "22d77cb5-005e-4a52-95a9-cace9c805e20",
+                      "label": "Inquisitor\r\n",
+                      "type": "Text",
+                      "value": "When you hold a captive for questioning, roll+CHA. \n\n✴On a 7+, the captive (the GM) will tell you three statements: two are true, but one is a lie. \n\n✴On a 10+, the GM will tell you one of the three statements that is definitely true (leaving the 2 unknown statements). If you choose to press the captive further, pick a statement that you guess to be the lie. Your methods cause significant emotional or physical scars, but if you picked the lie correctly, the captive will break and truthfully answer any questions you ask.\r\n\n✴On a 6-, they won't break, or they hold back, or something went very, very wrong. Oops!\r\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4d4df88e-8bc0-442e-9ec6-26f4b50837e0",
+                      "label": "Advanced Moves",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c8002767-fae1-4ad5-96d8-d6988efa1212",
+                  "label": "Advanced moves lvl 2-5",
+                  "blocks": [
+                    {
+                      "id": "f6b4dfd1-fb1a-4228-8f6a-38ab1451a51e",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "When you gain a level from 2-5, choose from these moves."
+                      }
+                    },
+                    {
+                      "id": "5a733762-7abf-43b9-b0b9-693090025e6a",
+                      "label": "Red Hot Wrath\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "The weapon you wield glows hot with holy power, add your current Wrath to your damage. Additionally, Smite costs no Wrath on a 10+<br>"
+                      }
+                    },
+                    {
+                      "id": "7202ab82-3c8f-4148-9ee9-6f046610452e",
+                      "label": "Armor of Wrath\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "The armor you wear is charged by the purity of your soul. You ignore the clumsy tag on all armor. When an enemy's skin touches your armor, they take your current Wrath in damage (ignores armor).<br>"
+                      }
+                    },
+                    {
+                      "id": "d47b896a-2b64-4b50-9298-1ae9b223a708",
+                      "label": "Clean Conscience\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you hear someone's Confession, they deal +1d4 damage on their next attack.<br>"
+                      }
+                    },
+                    {
+                      "id": "6ee123e6-1a3e-4673-aeb2-fae4b501bad2",
+                      "label": "Prophetic Dream\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you sleep for at least a few hours, you have a vague dream warning you of a danger that will be faced in the next day or so. You awaken with 1 Prophecy. Spend a Prophecy to make a Defy Danger an automatic success (10+).<br>"
+                      }
+                    },
+                    {
+                      "id": "17a0f591-d0f3-41e8-ae41-f1aef0a3994a",
+                      "label": "Keen to Inquire\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you use Confession or Inquisitor, you can roll+Wrath instead of +CHA.<br>"
+                      }
+                    },
+                    {
+                      "id": "7886c854-13ae-4d57-86f1-6de4d83a974d",
+                      "label": "Stench of Guilt\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "You can sense the guilt that weighs on someone as if it were an odor. Most people have at least a minor stink, but some reek of guilt. Beware of those who have no stench; you know how rare the truly pious are. It's much more likely you have found genuine evil that feels no guilt at all.<br>"
+                      }
+                    },
+                    {
+                      "id": "945e6ae9-a92b-4de2-aaed-18961969db21",
+                      "label": "Warming Up\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When an ally Aids you, instead of taking a +1, you can choose to gain 1 Wrath.<br>"
+                      }
+                    },
+                    {
+                      "id": "65555248-8229-417a-9f22-0a4eef9ead06",
+                      "label": "White Knight\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Choose one move from the Paladin class list. If there is already a Paladin, you must have similar beliefs or goals, or at least a mutual respect<br>"
+                      }
+                    },
+                    {
+                      "id": "9db2f65e-03a3-4874-a887-483f9fcaba8d",
+                      "label": "Cleansing Censer\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "You gain a blessed censer that emits holy flames of purification. It hangs from a chain and can be used as a melee weapon with Reach and +1 damage. When you Make Camp and purify the campsite, anyone who sleeps at least a few hours is healed to full HP<br>"
+                      }
+                    },
+                    {
+                      "id": "bb8a9aaf-48f4-446d-ba1d-1cb19d508c99",
+                      "label": "Judgment\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you declare someone deserves punishment, spend 1 Wrath. The next time they deal damage, they are also harmed for 1d6 damage (ignores armor). Describe what form this punishment takes (it may appear coincidental or blatantly celestial).<br>"
+                      }
+                    },
+                    {
+                      "id": "72076f11-b626-4a49-a18c-067760610d2d",
+                      "label": "Holy Vengeance\n",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you kill an enemy that has done you harm, you gain 1 Wrath.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "090ea562-4f62-4bde-b956-2c6aa5451a1f",
+                  "label": "Advanced moves lvl 6-10",
+                  "blocks": [
+                    {
+                      "id": "a709b711-6434-4c71-a55c-5222e64b69c5",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "When you gain a level from 6-10, choose from these or the level 2-5 moves."
+                      }
+                    },
+                    {
+                      "id": "ee1f8f4c-9930-49ca-acee-9a3c87513524",
+                      "label": "Soul Fire",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Smite now deals +1d8 extra damage instead and can be used on a 7+.<br>"
+                      }
+                    },
+                    {
+                      "id": "8c504b91-63fb-4122-b1d8-f56fb364ed37",
+                      "label": "Nobody Expects",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "You gain the benefits of all Facets of Inquisition.<br>"
+                      }
+                    },
+                    {
+                      "id": "efabda7d-0225-403b-bad8-dae54e2965d4",
+                      "label": "Friend of Sinners",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you hear someone's Confession, on a 7+ they are healed for 2d8 damage instead and penance is not owed. On a 10+, you are also healed for 1d8 damage.<br>"
+                      }
+                    },
+                    {
+                      "id": "ff218555-8ced-47d2-9021-7fe59b1f1444",
+                      "label": "Vivid Prophecy",
+                      "type": "Text",
+                      "value": "Requires: Prophetic Dream",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you have a Prophetic Dream, you awaken with 2 Prophecy instead and your dreams can be about anyone you have a bond with.<br>"
+                      }
+                    },
+                    {
+                      "id": "4c4d5f14-e8c5-46f9-a61b-d646b0543b94",
+                      "label": "We Have Ways",
+                      "type": "Text",
+                      "value": "Requires: Prophetic Dream",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you act as Inquisitor, you can treat a 6- as a 7-9, or a 7-9 as a 10+, but the captive dies at the end of your brutal interrogation.<br>"
+                      }
+                    },
+                    {
+                      "id": "455161ed-2409-4318-bfa3-b7052616893e",
+                      "label": "Zealotry",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you use your holy authority to convince a believer to do something clearly dangerous, roll+CHA.<br><br>✴On a 7+, they do it, but you must spend a Wrath for each option you select. <br><br>✴On a 10+, you can choose one option for free.\n<br><br>•  They'll try as hard as they possibly can without hesitation\n<br>•  They won't give up when faced with certain death\n<br>•  They'll spread the word and try to get other believers to help<br>"
+                      }
+                    },
+                    {
+                      "id": "e0b096f9-5ea0-4264-8581-4efa9b83fba4",
+                      "label": "Holy Crusade",
+                      "type": "Text",
+                      "value": "Requires: White Knight",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Choose an additional move from the Paladin class list. If there is already a Paladin, they can choose to take a move from the Templar list when they gain a level.<br>"
+                      }
+                    },
+                    {
+                      "id": "fe28da38-70fc-4689-a5c5-69b50e2657cd",
+                      "label": "Miracle of Healing",
+                      "type": "Text",
+                      "value": "Requires: Cleansing Censer",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you Make Camp using your Cleansing Censer, anyone who sleeps at least a few hours can choose to heal to full HP or remove 1 Debility.<br>"
+                      }
+                    },
+                    {
+                      "id": "480286ce-d92c-41f1-9e17-4ec25adac74e",
+                      "label": "Bless Ally",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When you Aid an ally, you may spend a Wrath to choose one:\n<br>•  Their weapon is blessed and deals +1d8 damage on the next attack.\n<br>•  Their armor is blessed and the next damage they take is halved.<br>"
+                      }
+                    },
+                    {
+                      "id": "797240f9-b8c4-4571-a311-58e29c97c928",
+                      "label": "Wrathful",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "You can choose to use Divine Force, Blinding Light, and Consecrated Ground on a 7+ instead of a 10+. Furthermore, on a 12+, you gain the effect for free.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "theme": {
+    "style": "@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Marcellus+SC&family=Spectral+SC&display=swap');",
+    "hideSectionBackground": true,
+    "pageHeadingFontFamily": "Spectral SC",
+    "pageHeadingFontWeight": "400",
+    "sectionHeadingFontFamily": "Spectral SC",
+    "sectionHeadingFontWeight": "600",
+    "labelFontFamily": "Spectral SC",
+    "labelFontWeight": "200",
+    "textFontFamily": "Spectral SC",
+    "textFontWeight": "200",
+    "infoTextFontFamily": "Spectral SC",
+    "infoTextFontWeight": "100",
+    "helperTextFontFamily": "Spectral SC",
+    "helperTextFontWeight": "",
+    "textFontSize": 0.875,
+    "labelFontSize": 1.25,
+    "infoTextFontSize": 1,
+    "helperTextFontSize": 0.625,
+    "sectionHeadingFontSize": 1.5
+  },
+  "playedDuringTurn": false,
+  "group": "Grim World"
+}

@@ -5,7 +5,6 @@ import React from "react";
 import { PlayerRow } from "../lib/components/Scene/components/PlayerRow/PlayerRow";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { BlockType, ICharacter, IPage } from "../lib/domains/character/types";
-import { IDiceRollResult } from "../lib/domains/dice/Dice";
 import { IPlayer } from "../lib/hooks/useScene/IScene";
 import { DefaultPlayerColor } from "../lib/routes/Play/consts/PlayerColors";
 import { StoryProvider } from "./StoryProvider";
@@ -38,18 +37,14 @@ function StorybookPlayerRow(props: {
       hasCharacterSheet={!!props.characterSheet}
       isPrivate={props.player.private}
       maxPoints={undefined}
-      playedDuringTurn={props.player.playedDuringTurn}
+      status={props.player.status}
       playerName={props.player.playerName}
       points={props.player.points}
       pointsLabel={"Points Label"}
-      rolls={props.player.rolls}
       isMe={props.highlight}
-      onDiceRoll={action("onDiceRoll")}
-      onPlayedInTurnOrderChange={action("onPlayedInTurnOrderChange")}
-      onPointsChange={action("onPointsChange")}
+      onStatusChange={action("onPlayedInTurnOrderChange")}
       onPlayerRemove={action("onPlayerRemove")}
       onTogglePrivate={action("onTogglePrivate")}
-      onCharacterSheetOpen={action("onCharacterSheetOpen")}
       onAssignCharacterSheet={action("onLoadCharacterSheet")}
     />
   );
@@ -104,7 +99,6 @@ GameMaster.args = {
   player: aPlayer({
     playerName: "Game Master",
     isGM: true,
-    rolls: [],
   }),
 };
 
@@ -152,9 +146,7 @@ PlayerWithARoll.args = {
   canRoll: true,
   canUpdateInitiative: true,
   canUpdatePoints: true,
-  player: aPlayer({
-    rolls: [aRoll()],
-  }),
+  player: aPlayer({}),
   characterSheet: aCharacter("Meriadoc Brandybuck"),
 };
 
@@ -167,9 +159,7 @@ PlayerWithARollAndLabel.args = {
   canRoll: true,
   canUpdateInitiative: true,
   canUpdatePoints: true,
-  player: aPlayer({
-    rolls: [aRollWithLabel()],
-  }),
+  player: aPlayer({}),
   characterSheet: aCharacter("Meriadoc Brandybuck"),
 };
 
@@ -182,9 +172,7 @@ PlayerWithARollAndModifier.args = {
   canRoll: true,
   canUpdateInitiative: true,
   canUpdatePoints: true,
-  player: aPlayer({
-    rolls: [aRollWithModifier()],
-  }),
+  player: aPlayer({}),
   characterSheet: aCharacter("Meriadoc Brandybuck"),
 };
 
@@ -197,9 +185,7 @@ PlayerWithAPoolRoll.args = {
   canRoll: true,
   canUpdateInitiative: true,
   canUpdatePoints: true,
-  player: aPlayer({
-    rolls: [aPoolRoll()],
-  }),
+  player: aPlayer({}),
   characterSheet: aCharacter("Meriadoc Brandybuck"),
 };
 
@@ -240,21 +226,6 @@ PlayerOutOfBound.args = {
     playerName:
       "LongNameLongNameLongNameLongNameLongNameLongNameLongNameLongNameLongNameLongName",
     points: "3333333",
-    rolls: [
-      {
-        total: 3,
-        totalWithoutModifiers: 3,
-        options: { listResults: false },
-        rollGroups: [
-          {
-            commandSets: new Array(50).fill(1).map(() => ({
-              id: "1dF",
-              commands: [{ value: 1, name: "1dF" }],
-            })),
-          },
-        ],
-      },
-    ],
   }),
 };
 export const PlayerOutOfBoundWithCharacter = Template.bind({});
@@ -273,22 +244,6 @@ PlayerOutOfBoundWithCharacter.args = {
     playerName:
       "LongNameLongNameLongNameLongNameLongNameLongNameLongNameLongNameLongNameLongName",
     points: "3333333",
-
-    rolls: [
-      {
-        total: 3,
-        totalWithoutModifiers: 3,
-        options: { listResults: false },
-        rollGroups: [
-          {
-            commandSets: new Array(50).fill(1).map(() => ({
-              id: "1dF",
-              commands: [{ value: 1, name: "1dF" }],
-            })),
-          },
-        ],
-      },
-    ],
   }),
 };
 
@@ -305,146 +260,8 @@ PlayerOutOfBoundPool.args = {
     playerName:
       "LongNameLongNameLongNameLongNameLongNameLongNameLongNameLongNameLongNameLongName",
     points: "3333333",
-    rolls: [
-      {
-        total: 3,
-        totalWithoutModifiers: 3,
-        options: { listResults: false },
-        rollGroups: [
-          {
-            commandSets: new Array(50)
-              .fill(1)
-              .fill(1)
-              .map(() => ({
-                id: "1dF",
-                commands: [{ value: 1, name: "1dF" }],
-              })),
-          },
-        ],
-      },
-    ],
   }),
 };
-
-function aRoll(): IDiceRollResult {
-  return {
-    total: 3,
-    totalWithoutModifiers: 3,
-    options: { listResults: false },
-    rollGroups: [
-      {
-        commandSets: [
-          {
-            id: "4dF",
-            commands: [
-              { value: 1, name: "1dF" },
-              { value: 1, name: "1dF" },
-              { value: 1, name: "1dF" },
-              { value: 1, name: "1dF" },
-            ],
-          },
-        ],
-      },
-    ],
-  };
-}
-function aRollWithModifier(): IDiceRollResult {
-  return {
-    total: 7,
-    totalWithoutModifiers: 3,
-    options: { listResults: false },
-    rollGroups: [
-      {
-        label: "Atheltic",
-        modifier: 4,
-        commandSets: [
-          {
-            id: "4dF",
-            commands: [
-              { value: 1, name: "1dF" },
-              { value: 1, name: "1dF" },
-              { value: 1, name: "1dF" },
-              { value: 0, name: "1dF" },
-            ],
-          },
-        ],
-      },
-    ],
-  };
-}
-
-function aPoolRoll(): IDiceRollResult {
-  return {
-    total: 6,
-    totalWithoutModifiers: 6,
-    options: { listResults: true },
-    rollGroups: [
-      {
-        label: "Atheltic",
-        commandSets: [
-          {
-            id: "1d12",
-            commands: [{ value: 1, name: "1d12" }],
-          },
-          {
-            id: "1d12",
-            commands: [{ value: 2, name: "1d12" }],
-          },
-          {
-            id: "1d12",
-            commands: [{ value: 3, name: "1d12" }],
-          },
-        ],
-      },
-      {
-        label: "Fight",
-        commandSets: [
-          {
-            id: "1d12",
-            commands: [{ value: 4, name: "1d12" }],
-          },
-          {
-            id: "1d12",
-            commands: [{ value: 5, name: "1d12" }],
-          },
-        ],
-      },
-      {
-        label: "Shoot",
-        commandSets: [
-          {
-            id: "1d12",
-            commands: [{ value: 6, name: "1d12" }],
-          },
-        ],
-      },
-    ],
-  };
-}
-
-function aRollWithLabel(): IDiceRollResult {
-  return {
-    total: 7,
-    totalWithoutModifiers: 3,
-    options: { listResults: false },
-    rollGroups: [
-      {
-        label: "Ahtletic",
-        commandSets: [
-          {
-            id: "4dF",
-            commands: [
-              { value: 1, name: "1dF" },
-              { value: 1, name: "1dF" },
-              { value: 1, name: "1dF" },
-              { value: 1, name: "1dF" },
-            ],
-          },
-        ],
-      },
-    ],
-  };
-}
 
 function aCharacter(name: string): ICharacter {
   return {
@@ -489,8 +306,7 @@ function aPlayer(props: Partial<IPlayer> = {}): IPlayer {
     points: "3",
     playerName: "René-Pier",
     isGM: false,
-    playedDuringTurn: false,
-    rolls: [],
+    status: "",
     private: false,
     color: "#000000",
     ...props,

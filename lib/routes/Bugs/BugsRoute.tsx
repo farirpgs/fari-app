@@ -22,7 +22,7 @@ export function BugsRoute() {
     : t("bugs-route.meta.title");
 
   return (
-    <Page>
+    <Page sx={{ paddingTop: "2rem" }}>
       <PageMeta
         title={pageTitle}
         description={t("bugs-route.meta.description")}

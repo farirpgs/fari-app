@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import ReplayIcon from "@mui/icons-material/Replay";
 import Box from "@mui/material/Box";
@@ -36,7 +35,7 @@ export function StoryBuilderRoute() {
   const { t } = useTranslate();
 
   return (
-    <Page>
+    <Page sx={{ paddingTop: "2rem" }}>
       <PageMeta
         title={t("story-builder-route.meta.title")}
         description={t("story-builder-route.meta.description")}
@@ -347,11 +346,12 @@ function GeneratorCard<T extends { label: string }>(props: {
         >
           {isBack && (
             <Box display="flex" justifyContent="center" mb="2rem">
-              <img
+              <Box
+                component="img"
                 src={Images.logoWhite}
-                className={css({
+                sx={{
                   width: "100px",
-                })}
+                }}
               />
             </Box>
           )}
@@ -360,10 +360,10 @@ function GeneratorCard<T extends { label: string }>(props: {
               <FateLabel
                 align="center"
                 variant="subtitle1"
-                className={css({
+                sx={{
                   overflowWrap: "break-word",
                   color: renderProps.colors.secondary,
-                })}
+                }}
               >
                 {renderProps.subTitle}
                 {"..."}
@@ -374,7 +374,7 @@ function GeneratorCard<T extends { label: string }>(props: {
             <FateLabel
               align="center"
               variant="h5"
-              className={css({ overflowWrap: "break-word" })}
+              sx={{ overflowWrap: "break-word" }}
             >
               {renderProps.title}
             </FateLabel>
@@ -382,10 +382,10 @@ function GeneratorCard<T extends { label: string }>(props: {
           {isFront && (
             <Box display="flex" justifyContent="center" mt="3rem">
               <ReplayIcon
-                className={css({
+                sx={{
                   width: "2rem",
                   height: "2rem",
-                })}
+                }}
               />
             </Box>
           )}
@@ -477,7 +477,7 @@ function Card(props: {
   const preventClick = props.disabled || flipAfterAnimation;
 
   return (
-    <div
+    <Box
       onClick={() => {
         if (preventClick) {
           return;
@@ -488,17 +488,17 @@ function Card(props: {
           handleReFlip();
         }
       }}
-      className={css({
+      sx={{
         label: "card",
         width: "300px",
         height: "400px",
         perspective: "1000px", // 3d effect
         cursor: preventClick ? "default" : "pointer",
         filter: props.disabled ? "grayscale(100%)" : undefined,
-      })}
+      }}
     >
-      <div
-        className={css({
+      <Box
+        sx={{
           label: "card-inner",
           position: "relative",
           width: "100%",
@@ -509,10 +509,10 @@ function Card(props: {
           borderRadius: "8px",
           boxShadow: theme.shadows[2],
           transform: !flip ? "rotateY(180deg)" : undefined,
-        })}
+        }}
       >
-        <div
-          className={css({
+        <Box
+          sx={{
             position: "absolute",
             width: "100%",
             height: "100%",
@@ -520,12 +520,12 @@ function Card(props: {
             backfaceVisibility: "hidden",
             background: frontColors.bgColor,
             color: frontColors.primary,
-          })}
+          }}
         >
           {props.renderFront({ colors: frontColors })}
-        </div>
-        <div
-          className={css({
+        </Box>
+        <Box
+          sx={{
             position: "absolute",
             width: "100%",
             height: "100%",
@@ -534,11 +534,11 @@ function Card(props: {
             transform: "rotateY(180deg)",
             background: backColors.bgColor,
             color: backColors.primary,
-          })}
+          }}
         >
           {props.renderBack({ colors: backColors })}
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 }

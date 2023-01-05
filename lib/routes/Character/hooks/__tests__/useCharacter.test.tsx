@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { act, renderHook } from "@testing-library/react-hooks";
+import { act, renderHook, waitFor } from "@testing-library/react";
 import { CharacterFactory } from "../../../../domains/character/CharacterFactory";
 import { DefaultTemplates } from "../../../../domains/character/DefaultTemplates";
 import { ICharacter } from "../../../../domains/character/types";
@@ -192,7 +192,7 @@ describe("useCharacter", () => {
         lastUpdated: 1,
       };
       // WHEN
-      const { result, waitForNextUpdate } = renderHook(
+      const { result } = renderHook(
         () => {
           return useCharacter(character);
         },
@@ -200,6 +200,7 @@ describe("useCharacter", () => {
           initialProps: { character: character },
         }
       );
+
       // THEN
       expect(result.current.state.character).toEqual(character);
 
@@ -209,10 +210,11 @@ describe("useCharacter", () => {
       });
 
       // Wait for JSON download
-      await waitForNextUpdate();
-      expect(result.current.state.character?.lastUpdated).not.toEqual(
-        character.lastUpdated
-      );
+      await waitFor(() => {
+        expect(result.current.state.character?.lastUpdated).not.toEqual(
+          character.lastUpdated
+        );
+      });
 
       // id: "1", // kept ID
       // name: "Luke Skywalker", // kept name

@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
@@ -9,7 +8,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShareIcon from "@mui/icons-material/Share";
 import Alert from "@mui/material/Alert";
 import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
+import Box, { BoxProps } from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -32,7 +31,7 @@ import { darken, useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { arraySort } from "../../domains/array/arraySort";
 import { LazyState, useLazyState } from "../../hooks/useLazyState/useLazyState";
@@ -85,7 +84,7 @@ export function MyBinder<TFolders extends string>(props: {
   const { t } = useTranslate();
   const logger = useLogger();
   const theme = useTheme();
-  const history = useHistory();
+  const navigate = useNavigate();
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const [search, setSearch] = useState(props.search);
   const [folder, setFolder] = useLazyState({
@@ -290,13 +289,13 @@ export function MyBinder<TFolders extends string>(props: {
         onClose={props.onClose}
         fullWidth
         maxWidth="md"
-        classes={{
-          paper: css({
+        sx={{
+          "& .MuiDialog-paper": {
             background: theme.palette.background.default,
             height: "100%",
             position: "relative",
             overflow: "auto",
-          }),
+          },
         }}
       >
         <Snackbar
@@ -369,7 +368,7 @@ export function MyBinder<TFolders extends string>(props: {
                   />
                 </Grid>
                 <Grid item>
-                  <SearchIcon className={css({ display: "flex" })} />
+                  <SearchIcon sx={{ display: "flex" }} />
                 </Grid>
               </Grid>
             </Box>
@@ -394,7 +393,7 @@ export function MyBinder<TFolders extends string>(props: {
               <AppLink
                 color="secondary"
                 onClick={() => {
-                  history.push("/data");
+                  navigate("/data");
                   props.onClose();
                 }}
               >
@@ -433,11 +432,12 @@ export function MyBinder<TFolders extends string>(props: {
                   primary={
                     <span>
                       {translatedFolderName}{" "}
-                      <span
-                        className={css({ color: theme.palette.text.secondary })}
+                      <Box
+                        component="span"
+                        sx={{ color: theme.palette.text.secondary }}
                       >
                         ({folderItemCount})
-                      </span>
+                      </Box>
                     </span>
                   }
                 />
@@ -480,13 +480,14 @@ export function MyBinder<TFolders extends string>(props: {
                   component="label"
                 >
                   {t("menu.elements.import")}
-                  <input
+                  <Box
+                    component="input"
                     type="file"
                     accept=".json"
-                    className={css({
+                    sx={{
                       display: "none",
-                    })}
-                    onChange={(event) => {
+                    }}
+                    onChange={(event: any) => {
                       handleOnImport(event);
                     }}
                   />
@@ -594,11 +595,11 @@ export function MyBinder<TFolders extends string>(props: {
                   </Box>
                   <Box>
                     <MenuBookIcon
-                      className={css({
+                      sx={{
                         color: theme.palette.text.secondary,
                         width: "5rem",
                         height: "5rem",
-                      })}
+                      }}
                     />
                   </Box>
                 </Box>
@@ -667,36 +668,38 @@ export function MyBinder<TFolders extends string>(props: {
   function renderHeader(title: string, length: number) {
     return (
       <ListSubheader
-        className={css({
+        sx={{
           padding: "0",
-        })}
+        }}
       >
         <Box
           px="1rem"
-          className={css({
+          sx={{
             background:
               theme.palette.mode === "light"
                 ? darken(theme.palette.background.default, 0.03)
                 : theme.palette.background.paper,
-          })}
+          }}
         >
           <Box>
-            <span
-              className={css({
+            <Box
+              component="span"
+              sx={{
                 fontWeight: theme.typography.fontWeightBold,
 
                 color: theme.palette.text.primary,
-              })}
+              }}
             >
               {title}{" "}
-            </span>
-            <span
-              className={css({
+            </Box>
+            <Box
+              component="span"
+              sx={{
                 color: theme.palette.text.secondary,
-              })}
+              }}
             >
               {`(${length})`}
-            </span>
+            </Box>
           </Box>
         </Box>
       </ListSubheader>
@@ -730,12 +733,12 @@ function Element(props: {
   const color = theme.palette.getContrastText(backgroundColor);
   const [hover, setHover] = useState(false);
 
-  const iconButtonClassName = css({
+  const iconButtonStyle: BoxProps["sx"] = {
     transition: theme.transitions.create(["color"], {
       duration: theme.transitions.duration.shortest,
     }),
     color: hover ? theme.palette.text.primary : theme.palette.text.secondary,
-  });
+  };
   const translatedType = props.displayType
     ? t(`my-binder.folder.${props.element.type}` as ITranslationKeys)
     : undefined;
@@ -748,7 +751,7 @@ function Element(props: {
             <IconButton
               size="small"
               data-cy={`my-binder.element.${props.element.name}.export`}
-              className={iconButtonClassName}
+              sx={iconButtonStyle}
               onPointerEnter={() => {
                 setHover(true);
               }}
@@ -769,7 +772,7 @@ function Element(props: {
             <IconButton
               size="small"
               data-cy={`my-binder.element.${props.element.name}.export-as-template`}
-              className={iconButtonClassName}
+              sx={iconButtonStyle}
               onPointerEnter={() => {
                 setHover(true);
               }}
@@ -790,7 +793,7 @@ function Element(props: {
             <IconButton
               size="small"
               data-cy={`my-binder.element.${props.element.name}.duplicate`}
-              className={iconButtonClassName}
+              sx={iconButtonStyle}
               onPointerEnter={() => {
                 setHover(true);
               }}
@@ -811,7 +814,7 @@ function Element(props: {
             <IconButton
               size="small"
               data-cy={`my-binder.element.${props.element.name}.delete`}
-              className={iconButtonClassName}
+              sx={iconButtonStyle}
               onPointerEnter={() => {
                 setHover(true);
               }}
@@ -861,10 +864,10 @@ function Element(props: {
     >
       <ListItemAvatar sx={{ display: { xs: "none", md: "block" } }}>
         <Avatar
-          className={css({
+          sx={{
             color: color,
             backgroundColor: backgroundColor,
-          })}
+          }}
         >
           {abrev}
         </Avatar>
@@ -881,9 +884,12 @@ function Element(props: {
           <>
             <Box component="span">
               {translatedType && <>{translatedType} - </>}
-              <span className={css({ color: theme.palette.text.secondary })}>
+              <Box
+                component="span"
+                sx={{ color: theme.palette.text.secondary }}
+              >
                 {listItem.formatDate(props.element.lastUpdated)}
-              </span>
+              </Box>
             </Box>
           </>
         }

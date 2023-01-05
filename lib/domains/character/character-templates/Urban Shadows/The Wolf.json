@@ -1,1 +1,895 @@
-{"fariType":"character","lastUpdated":1660544305,"name":"Urban Shadows Character Template - The Wolf Template","pages":[{"id":"d7524c0b-657b-4742-a9e9-e3be5af1b8fb","label":"Character","rows":[{"columns":[{"sections":[{"id":"9a5211c5-2e13-43db-916a-183507aa6256","label":"Faction:  Night\nArchetype:  The Wolf","blocks":[]},{"id":"929c91ed-b936-42ec-89f0-ea9eed711a69","label":"Character Name","blocks":[{"id":"fe12ae34-66d7-43e4-ad3a-a3432d7accba","label":"Anders, Brenda, Carmen, Christian, Dana, Habib, Junot, Kareem, Lee, Lucia,<br>Mani, Matt, Mel, Robin, Roxanne, Suze, Tori, Trent, Vanessa, Vic","type":"Text","value":"","meta":{"helperText":"pick one"}}]}]}]},{"columns":[{"sections":[{"id":"0fadc23b-4486-408b-be3a-fa0fe14aaba4","label":"Look","blocks":[{"id":"e3db344a-c34b-4e56-aa05-7c1e8e851373","label":"• Ambiguous, Female, Male, Transgressing","type":"Text","value":"• Asian or South Asian, Black, Hispanic/Latino, Indigenous, Middle<br>Eastern, White, __________\n•  Baggy Clothing, Concealing Clothing, Dark Clothing, Dirty Clothing","meta":{"helperText":"pick as many as apply"}}]}]},{"sections":[{"id":"a337f49b-f0da-45f4-8f84-4b7e4c609123","label":"Demeanor","blocks":[{"id":"b0020a78-7457-400f-98e0-92fd3a69cda8","label":"Aggressive, Excitable, Feral, Violent","type":"Text","value":"","meta":{"helperText":"pick one"}}]}]}]},{"columns":[{"sections":[{"id":"a7e4b889-4988-48b6-8d45-ab94d7356c00","label":"Intro Questions","blocks":[{"id":"20f73300-9950-45f5-9b68-5759a769b842","label":"• Who are you?\n<br>• How long have you been in the city?\n<br>• What is the best part of the change?\n<br>• Who is the most important person in your territory?\n<br>• What do you desperately need?\n<br>","type":"Text","value":"","meta":{}}]}]}]},{"columns":[{"sections":[{"id":"fb23a3c3-9566-4ae8-8b72-5ba6345bca24","label":"Starting Character Stats","blocks":[{"id":"93c667d8-5357-4c60-9d67-3b2809d42daf","label":"Info Text","type":"InfoText","value":"(Add 1 to one of these)","meta":{}},{"id":"49cefdfd-9d7b-4dd9-95e7-998a241d5144","label":"Blood","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"1"},{"id":"5737e5c0-29ec-4499-87fd-e65d185bd00f","label":"Heart","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"-1"},{"id":"52530637-d5dd-4646-a2ff-ee9e705b4e5e","label":"Mind","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"0"},{"id":"f968a2c0-74e3-4179-9280-780b82f9533a","label":"Spirit","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"1"},{"id":"373548b5-2ca5-4b91-9cc2-9946ebc9d4bd","label":"","type":"Separator","meta":{"hasLabel":false},"value":""}]}]},{"sections":[{"id":"b04cc0e5-2a35-4ac7-9f44-cf0bae3a3e34","label":"Starting Factions ","blocks":[{"id":"af324c0d-08dc-41a6-a24f-c04887162ecf","label":"Info Text","type":"InfoText","value":"(Add 1 to one of these)","meta":{}},{"id":"4554b623-13cb-4a82-ac85-0b2e49652358","label":"Mortality","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"0"},{"id":"ce0c8fa8-99cd-45d7-86c0-30c921bbf51c","label":"Night","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"1"},{"id":"c08abedc-b3be-4993-990a-264b8711464b","label":"Power","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"-1"},{"id":"46809536-af0c-4df9-bdc2-1eb4c50b9e45","label":"Wild","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"1"},{"id":"7bf5d10c-8f49-4af4-88f0-461e19fe8737","label":"","type":"Separator","meta":{"hasLabel":false},"value":""}]}]}]},{"columns":[{"sections":[{"id":"1df2d8d7-6211-4e65-8fbe-fc7bee191393","label":"Gear","blocks":[{"id":"aee4d273-c808-431f-8d95-58fe8a601ab4","label":"• A duffel bag with your personal belongings, a shitty cell phone<br>• 2 practical weapons<br>     • Snubnosed revolver (2-harm close loud reload concealable)<br>     • 9mm Beretta (2-harm close loud)<br>     • Butterfly knife (2-harm hand concealable)<br>     • Switchblade (2-harm hand concealable)<br>     • Baseball bat (2-harm hand)","type":"Text","value":"","meta":{}}]}]}]}]},{"id":"cb38cb97-e2de-4403-9c63-487db1e7accc","rows":[{"columns":[{"sections":[{"id":"62b88766-d3ed-4045-8473-26c113b8035d","label":"Section","blocks":[{"id":"746ba81f-03e5-4d84-aeeb-a81ea2ee40ce","label":"Faint","type":"Numeric","value":"1","meta":{"checked":false}},{"id":"54529a87-1e70-4797-b92c-82b00dfe40b6","label":"Faint","type":"Numeric","value":"1","meta":{"checked":false}},{"id":"bc3ce043-dee4-4adf-8216-a4dacb31ba65","label":"Grievous","type":"Numeric","value":"2","meta":{"checked":false}},{"id":"17bfc25f-fb40-4fa9-aef0-939f3ea04121","label":"Grievous","type":"Numeric","value":"2","meta":{"checked":false}},{"id":"f0fe7a6b-a018-472f-80f3-aa56d1202e0f","label":"Critical","type":"Numeric","value":"3","meta":{"checked":false}},{"id":"7e474bfd-435e-4215-90ae-adc0a4fa1949","label":"Critical","type":"Numeric","value":"3","meta":{"checked":false}}]},{"id":"9890d870-01d9-4ef3-a458-c538317ed8df","label":"Armor","blocks":[{"id":"c1126a79-6ff2-4380-8457-390a0c4fe210","label":"Current Armor Rating","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"0"}]}]},{"sections":[{"id":"42ee81b5-117c-4478-bb6e-66af862c78cc","label":"S-Harm","blocks":[{"id":"521d4baa-0434-4765-b7f1-d1efaa5c5b91","label":"Incapacitated","type":"Numeric","value":"1","meta":{"checked":false}}]},{"id":"c3f3dc42-3984-46c8-a011-b9b48a2b3b58","label":"Scars","blocks":[{"id":"95fe7985-6d9a-4b75-a2c3-9ce4209336fa","label":"Shattered (-1 Blood)","type":"SlotTracker","meta":{"helperText":"Shattered means frightened, weakened, and overly cautious. Shattered characters hesitate when they should move, and their attempts to unleash an<br>attack on someone or escape a situation often come up short."},"value":[{"label":"","checked":false}]},{"id":"048b6b34-f01f-4235-aea4-c4249c7a52e5","label":"Crushed (-1 Heart)","type":"SlotTracker","meta":{"helperText":"Crushed means traumatized, timid, and uncertain. Crushed characters bear<br>the full weight of the wounds they’ve suffered, and their attempts to persuade an NPC are inhibited by their reticent approach to conflict."},"value":[{"label":"","checked":false}]},{"id":"ae978330-dd62-47c0-8c70-96b021768c82","label":"Fractured (-1 Mind)","type":"SlotTracker","meta":{"helperText":"Fractured means confused, disoriented, and disjointed. Fractured characters<br>are unstable and unsure, and their attempts to figure someone out or mislead, distract, or trick others are unfocused and imprecise."},"value":[{"label":"","checked":false}]},{"id":"4855e096-3dbc-4957-9103-c5eedcf1e1d8","label":"Broken (-1 Spirit)","type":"SlotTracker","meta":{"helperText":"Broken means hopeless, forlorn, and cowardly. Broken characters have lost<br>their will to fight, and their attempts to keep their cool or let it out are often<br>half-hearted and incomplete."},"value":[{"label":"","checked":false}]}]}]}]}],"label":"Harm"},{"id":"79933a05-eaa8-4493-a9b8-59af02736e8c","rows":[{"columns":[{"sections":[{"id":"5b84865c-2a37-4f3a-9de5-2c1bed00353c","label":"Corruption Track","blocks":[{"id":"9be5a1b6-a882-4c1f-8a6a-aacc6d9e1361","label":"Corruption ","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]}]},{"id":"cbb5dd33-bebd-4800-a648-e1fca2c9c601","label":"Corruption Advances","blocks":[{"id":"1c45737c-ec19-41ca-b753-70bb5a6faad5","label":"Take a corruption move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"221f7aea-ce65-4a21-a0fd-1d87375dd9bf","label":"Take a corruption move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"fa456f28-46c0-4b06-a749-c8e87680917e","label":"Take a corruption move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"caf044a8-add9-4caf-ac7f-d4b4713bb3ef","label":"Take a corruption move from another Archetype","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"f9b4fd56-33a5-41fd-90c9-ab1a7e68ce46","label":"Retire your character. They may return as a Threat.","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]}]}]},{"sections":[{"id":"d650a6cc-5152-4d52-af60-6de83b67a503","label":"Corruption Moves","blocks":[{"id":"23057512-4cb9-4d6e-a9e9-f5edb13f3953","label":"One with the Beast","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"Mark corruption to add 2 more qualities to your<br>transformation until the end of the session."}},{"id":"7a858982-65ce-4804-9aaf-3e330a958a54","label":"Force of Nature","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"You get +1 Blood (max +4). Whenever you roll with<br>Blood and roll a 12+, mark corruption."}},{"id":"9039f815-1e54-414f-8fc0-143df0b8238c","label":"Sun and Moon","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"Mark corruption to transform into your wolf form at will"}},{"id":"3ff8b73a-1a6b-4498-bb03-fb5445d60c41","label":"Familiar Territory","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"Mark corruption to know the source of the greatest<br>danger to your territory, even if it has concealed itself with magic or misdirection"}}]}]}]}],"label":"Corruption"},{"id":"e7613a6d-552b-401d-a75f-49298a4aa9c4","rows":[{"columns":[{"sections":[{"id":"d057e454-6acd-4eb8-90ee-a9328f844468","label":"The Transformation","blocks":[{"id":"7fee17b3-04ab-4abf-ac4d-781845166f12","label":"Info Text","type":"InfoText","value":"By default, you change into your wolf form when the full moon rises; you gain natural weaponry (2-harm) and 1-armor; you can resist the change, but it’s not easy; and you can only change back at sunrise.","meta":{}},{"id":"cb042046-51df-4cc9-8d38-472b6092eb8b","label":"Choose 2:<br>•You inflict +1 harm while transformed<br>•You gain armor+1 while transformed<br>•Your harm is armor piercing (ap)<br>•You transform every night, not just during the full moon<br>•Gain +1 ongoing to escape while transformed<br>•When battling groups, you fight like a small group<br>•You are all but immune to magical attacks while transformed\n\nChoose 2:<br>•Silver weapons ignore your armor<br>•Sometimes you lose control while transformed<br>•When you transform, you keep your cool or declare a hunt<br>•You can’t resist the change when it comes<br>•The transformation takes a while and causes you a lot of pain<br>","type":"Text","value":"","meta":{}}]}]},{"sections":[{"id":"2b9d9cae-0aae-443b-aa50-7ac9a81fe555","label":"Your Territory","blocks":[{"id":"9ce70623-8fca-483a-94b5-b7dbd4fd4643","label":"Info Text","type":"InfoText","value":"You’ve claimed an area of the city as your own. By default, your territory covers a city block or two and has the trouble: +crime.","meta":{}},{"id":"e54bc9ff-ed5f-43be-88b4-a6e21c2b19a5","label":"Choose 2:<br>•Your territory spans several city blocks (add blessing: +influence)<br>•People here work hard to keep the streets safe (remove +crime)<br>•You are widely accepted as this place’s protector (add blessing: +supported)<br>•Your territory includes grounds for you to roam and hunt (add blessing: +hunting ground)<br>•You’ve made a deal with someone, or something, to protect your territory when you’re not around (add blessing: +guardian)<br>\nChoose 2:<br>•Your territory owes fealty to someone more powerful than you (add trouble: +obligations)<br>•Someone more powerful wants your territory and is working to get it (add<br>trouble: +encroachment)<br>•Mortals in the area are actively trying to revitalize local businesses and infrastructure (add trouble: +upheaval)<br>•Your territory is plagued by a mystical or supernatural presence (add trouble: +haunted)<br>•You have offered protection within your territory to someone, and now their problems are yours (add trouble: +fealty)","type":"Text","value":"","meta":{}}]}]}]},{"columns":[{"sections":[{"id":"5bcba2f5-e825-4b6f-a563-5bfdc70c5ce0","label":"Debts","blocks":[{"id":"c293075d-4329-44d5-9917-8214b5f89689","label":"• Someone is hiding you from someone, or something, powerful.<br>You owe them a Debt.","type":"Text","value":"","meta":{}},{"id":"ef9500d9-5fb6-47ee-9e39-58f52cbaf2f5","label":"• Someone hired you for a job and you fucked it up. You owe them<br>2 Debts.","type":"Text","value":"","meta":{}},{"id":"f7a974ec-e61a-41e1-890b-7780473208c1","label":"• Someone lives in your territory, benefiting from your protection.<br>They owe you a Debt.","type":"Text","value":"","meta":{}}]}]}]},{"columns":[{"sections":[{"id":"3c7edef6-5d67-4eb7-bbf9-80a04c76e9d9","label":"Wolf Moves","blocks":[{"id":"38bc9f45-d883-494a-82d3-ba0df8917939","label":"Comes with the Territory","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"If you’re actively patrolling your territory at the<br>start of the session, roll with Blood. On a 10+, your territory is secure and<br>trouble is at a minimum; take +1 ongoing to *hitting the streets* in your<br>territory. On a 7-9, one of your troubles surfaces (your choice), but things<br>are mostly stable. On a miss, or if you aren’t attending to your territory,<br>things go south and your troubles are fast and furious","hideModifier":false}},{"id":"de566e92-60fb-4d38-a906-4656c15b50f9","label":"Info Text","type":"InfoText","value":"And choose two more:","meta":{}},{"id":"c97e0347-5999-4cdb-af43-d36c909aba45","label":"Bloodhound","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"&nbsp;When you hunt someone, roll with Blood. On a hit, you<br>know exactly where to find them and can follow their scent until you do.<br>On a 10+, take +1 forward against them. On a miss, someone unpleasant<br>finds you first"}},{"id":"1a489903-2596-435f-b4ee-c219177f69ba","label":"Info Text","type":"InfoText","value":"And choose one more:&nbsp;","meta":{}},{"id":"c1e1f72e-d090-419c-b2a4-4e73bcd3d47f","label":"Regeneration","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"&nbsp;When you *let it out*, add this option to the list:<br>• Your wounds close; heal 1-harm"}},{"id":"625194b3-e510-4264-ab15-d7ec5aea16d5","label":"Alpha Dog","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"When you *persuade an NPC* in your territory, roll with Blood<br>instead of Heart. <br><br>"}},{"id":"52a42e26-857c-4945-8914-36db4cea167e","label":"From the Brink","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"You can exit your wolf form at will. When you do, roll<br>with Spirit. On a hit, you change back. On a 7-9, take 1-harm or mark<br>corruption. On a miss, you change but the transformation is incomplete,<br>lengthy, or painful"}},{"id":"03a8e8b5-b2fe-46aa-9cd7-106832af3524","label":"Reckless","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":": If you jump right into danger without hedging your bets, you<br>get armor+1. If you’re leading a group, it gets armor+1 also.&nbsp;"}}]}]},{"sections":[{"id":"38b3e84e-b8ea-408b-b03e-494729e08d2d","label":"Drama Moves","blocks":[{"id":"f916a126-1519-4a53-85d1-6170d75ba2ec","label":"Wolf Corruption Move<br>","type":"Text","value":"","meta":{"helperText":"When you begin a hunt for someone, mark corruption.&nbsp;"}},{"id":"f88b71c9-1a27-454b-b6d9-febaac50d507","label":"Wolf Intimacy Move<br>","type":"Text","value":"","meta":{"helperText":"When you share a moment of intimacy—physical or emotional—with another<br>person, you create a primal bond with them; you always know where to<br>find them and when they’re in trouble. This bond lasts until the end of the<br>next session."}},{"id":"9cac1e94-b4fc-43d9-939b-58b597d3a914","label":"Wolf End Move<br>","type":"Text","value":"","meta":{"helperText":"When you die or retire your character, anyone in the scene you wish to protect escapes and reaches safety, no matter the odds.&nbsp;"}}]}]}]}],"label":"Moves"},{"id":"ebe8b1f2-7620-4221-a376-3bb8ca52020a","rows":[{"columns":[{"sections":[{"id":"3746c35e-c25d-48c0-93b9-d62e64c0e718","label":"Standard Avances","blocks":[{"id":"8c0ae24d-3886-4fa3-87e6-2e5e7ffd8c24","label":"+1 Blood (max +3) ","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"fdf20f9b-5f68-4cdc-b66f-9a9b7f603d1b","label":"+1 Heart (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"37f9d250-db1f-462b-8330-9d583fd76230","label":"+1 Mind (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"4afba9a7-e9a4-4aed-9715-ac865aa72c9c","label":"+1 Spirit (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"32e37f36-3b55-4e59-bf27-522e1b0b652c","label":"A new Wolf Move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"2ae1c09b-1729-4b75-942e-372c071fa53b","label":"A new Wolf Move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"a506067e-9933-4fe1-9ca6-cf1967130269","label":"Add 2 qualities to your transformation","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"915d0507-d6fb-4d74-ab98-483f56ca6a82","label":"A move from another Archetype","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"6d73e677-e16d-4152-954b-12003ba9c4b0","label":"Change your Faction","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"c926f4fa-5213-4ea8-84d8-92a695ecfb63","label":"Join or lead a wolf pack","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]}]}]},{"sections":[{"id":"95452955-40bb-4882-876f-b0a43be9f5a2","label":"Cont...","blocks":[{"id":"db46584a-f67e-4364-89a2-23a31293602a","label":"Info Text","type":"InfoText","value":"After 5 advances you may select:","meta":{}},{"id":"08719599-7aea-4168-b422-c808a81bc562","label":"+1 to any stat (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"72e3c76d-7b67-45c7-bcbc-73b12b40624e","label":"+1 to any Faction (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"587d3f8f-3a6a-4c5f-8e25-1968f08a9163","label":"Erase a scar","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"fa9c848e-91cc-4bd3-b0ab-a11b637eed16","label":"Resolve a trouble","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"deaea06f-103e-4474-bc1d-78af76b90818","label":"Erase a corruption advance","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"8a6b0f05-6087-44b9-8e1d-2d39b8fd1ac9","label":"Erase a corruption advance","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"b7fc1ed7-8f1a-4bef-85ae-5d16597e6e59","label":"Advance 3 basic moves","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"ae08d91a-e616-43c1-9c89-87bb3c2a07e9","label":"Advance 3 basic moves","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"3a2d86ed-cc90-46ac-9f44-c640b21f1f6c","label":"Retire your character to safety","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"010fcc8e-2f3a-4712-8e8d-5983a9f44e57","label":"Change to a new Archetype","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]}]}]}]}],"label":"Advances"}],"template":"Blank","version":6,"wide":true,"group":"Urban Shadows Archetypes"}
+{
+  "fariType": "character",
+  "lastUpdated": 1660544305,
+  "name": "Urban Shadows Character Template - The Wolf Template",
+  "pages": [
+    {
+      "id": "d7524c0b-657b-4742-a9e9-e3be5af1b8fb",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9a5211c5-2e13-43db-916a-183507aa6256",
+                  "label": "Faction:  Night\nArchetype:  The Wolf",
+                  "blocks": []
+                },
+                {
+                  "id": "929c91ed-b936-42ec-89f0-ea9eed711a69",
+                  "label": "Character Name",
+                  "blocks": [
+                    {
+                      "id": "fe12ae34-66d7-43e4-ad3a-a3432d7accba",
+                      "label": "Anders, Brenda, Carmen, Christian, Dana, Habib, Junot, Kareem, Lee, Lucia,<br>Mani, Matt, Mel, Robin, Roxanne, Suze, Tori, Trent, Vanessa, Vic",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pick one" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "0fadc23b-4486-408b-be3a-fa0fe14aaba4",
+                  "label": "Look",
+                  "blocks": [
+                    {
+                      "id": "e3db344a-c34b-4e56-aa05-7c1e8e851373",
+                      "label": "• Ambiguous, Female, Male, Transgressing",
+                      "type": "Text",
+                      "value": "• Asian or South Asian, Black, Hispanic/Latino, Indigenous, Middle<br>Eastern, White, __________\n•  Baggy Clothing, Concealing Clothing, Dark Clothing, Dirty Clothing",
+                      "meta": { "helperText": "pick as many as apply" }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "a337f49b-f0da-45f4-8f84-4b7e4c609123",
+                  "label": "Demeanor",
+                  "blocks": [
+                    {
+                      "id": "b0020a78-7457-400f-98e0-92fd3a69cda8",
+                      "label": "Aggressive, Excitable, Feral, Violent",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pick one" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a7e4b889-4988-48b6-8d45-ab94d7356c00",
+                  "label": "Intro Questions",
+                  "blocks": [
+                    {
+                      "id": "20f73300-9950-45f5-9b68-5759a769b842",
+                      "label": "• Who are you?\n<br>• How long have you been in the city?\n<br>• What is the best part of the change?\n<br>• Who is the most important person in your territory?\n<br>• What do you desperately need?\n<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "fb23a3c3-9566-4ae8-8b72-5ba6345bca24",
+                  "label": "Starting Character Stats",
+                  "blocks": [
+                    {
+                      "id": "93c667d8-5357-4c60-9d67-3b2809d42daf",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "(Add 1 to one of these)",
+                      "meta": {}
+                    },
+                    {
+                      "id": "49cefdfd-9d7b-4dd9-95e7-998a241d5144",
+                      "label": "Blood",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "5737e5c0-29ec-4499-87fd-e65d185bd00f",
+                      "label": "Heart",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-1"
+                    },
+                    {
+                      "id": "52530637-d5dd-4646-a2ff-ee9e705b4e5e",
+                      "label": "Mind",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "f968a2c0-74e3-4179-9280-780b82f9533a",
+                      "label": "Spirit",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "373548b5-2ca5-4b91-9cc2-9946ebc9d4bd",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "b04cc0e5-2a35-4ac7-9f44-cf0bae3a3e34",
+                  "label": "Starting Factions ",
+                  "blocks": [
+                    {
+                      "id": "af324c0d-08dc-41a6-a24f-c04887162ecf",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "(Add 1 to one of these)",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4554b623-13cb-4a82-ac85-0b2e49652358",
+                      "label": "Mortality",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "ce0c8fa8-99cd-45d7-86c0-30c921bbf51c",
+                      "label": "Night",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "c08abedc-b3be-4993-990a-264b8711464b",
+                      "label": "Power",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-1"
+                    },
+                    {
+                      "id": "46809536-af0c-4df9-bdc2-1eb4c50b9e45",
+                      "label": "Wild",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "7bf5d10c-8f49-4af4-88f0-461e19fe8737",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "1df2d8d7-6211-4e65-8fbe-fc7bee191393",
+                  "label": "Gear",
+                  "blocks": [
+                    {
+                      "id": "aee4d273-c808-431f-8d95-58fe8a601ab4",
+                      "label": "• A duffel bag with your personal belongings, a shitty cell phone<br>• 2 practical weapons<br>     • Snubnosed revolver (2-harm close loud reload concealable)<br>     • 9mm Beretta (2-harm close loud)<br>     • Butterfly knife (2-harm hand concealable)<br>     • Switchblade (2-harm hand concealable)<br>     • Baseball bat (2-harm hand)",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cb38cb97-e2de-4403-9c63-487db1e7accc",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "62b88766-d3ed-4045-8473-26c113b8035d",
+                  "label": "Section",
+                  "blocks": [
+                    {
+                      "id": "746ba81f-03e5-4d84-aeeb-a81ea2ee40ce",
+                      "label": "Faint",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "54529a87-1e70-4797-b92c-82b00dfe40b6",
+                      "label": "Faint",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "bc3ce043-dee4-4adf-8216-a4dacb31ba65",
+                      "label": "Grievous",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "17bfc25f-fb40-4fa9-aef0-939f3ea04121",
+                      "label": "Grievous",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "f0fe7a6b-a018-472f-80f3-aa56d1202e0f",
+                      "label": "Critical",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "7e474bfd-435e-4215-90ae-adc0a4fa1949",
+                      "label": "Critical",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "9890d870-01d9-4ef3-a458-c538317ed8df",
+                  "label": "Armor",
+                  "blocks": [
+                    {
+                      "id": "c1126a79-6ff2-4380-8457-390a0c4fe210",
+                      "label": "Current Armor Rating",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "42ee81b5-117c-4478-bb6e-66af862c78cc",
+                  "label": "S-Harm",
+                  "blocks": [
+                    {
+                      "id": "521d4baa-0434-4765-b7f1-d1efaa5c5b91",
+                      "label": "Incapacitated",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "c3f3dc42-3984-46c8-a011-b9b48a2b3b58",
+                  "label": "Scars",
+                  "blocks": [
+                    {
+                      "id": "95fe7985-6d9a-4b75-a2c3-9ce4209336fa",
+                      "label": "Shattered (-1 Blood)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Shattered means frightened, weakened, and overly cautious. Shattered characters hesitate when they should move, and their attempts to unleash an<br>attack on someone or escape a situation often come up short."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "048b6b34-f01f-4235-aea4-c4249c7a52e5",
+                      "label": "Crushed (-1 Heart)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Crushed means traumatized, timid, and uncertain. Crushed characters bear<br>the full weight of the wounds they’ve suffered, and their attempts to persuade an NPC are inhibited by their reticent approach to conflict."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "ae978330-dd62-47c0-8c70-96b021768c82",
+                      "label": "Fractured (-1 Mind)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Fractured means confused, disoriented, and disjointed. Fractured characters<br>are unstable and unsure, and their attempts to figure someone out or mislead, distract, or trick others are unfocused and imprecise."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "4855e096-3dbc-4957-9103-c5eedcf1e1d8",
+                      "label": "Broken (-1 Spirit)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Broken means hopeless, forlorn, and cowardly. Broken characters have lost<br>their will to fight, and their attempts to keep their cool or let it out are often<br>half-hearted and incomplete."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Harm"
+    },
+    {
+      "id": "79933a05-eaa8-4493-a9b8-59af02736e8c",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5b84865c-2a37-4f3a-9de5-2c1bed00353c",
+                  "label": "Corruption Track",
+                  "blocks": [
+                    {
+                      "id": "9be5a1b6-a882-4c1f-8a6a-aacc6d9e1361",
+                      "label": "Corruption ",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "cbb5dd33-bebd-4800-a648-e1fca2c9c601",
+                  "label": "Corruption Advances",
+                  "blocks": [
+                    {
+                      "id": "1c45737c-ec19-41ca-b753-70bb5a6faad5",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "221f7aea-ce65-4a21-a0fd-1d87375dd9bf",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "fa456f28-46c0-4b06-a749-c8e87680917e",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "caf044a8-add9-4caf-ac7f-d4b4713bb3ef",
+                      "label": "Take a corruption move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "f9b4fd56-33a5-41fd-90c9-ab1a7e68ce46",
+                      "label": "Retire your character. They may return as a Threat.",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "d650a6cc-5152-4d52-af60-6de83b67a503",
+                  "label": "Corruption Moves",
+                  "blocks": [
+                    {
+                      "id": "23057512-4cb9-4d6e-a9e9-f5edb13f3953",
+                      "label": "One with the Beast",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "Mark corruption to add 2 more qualities to your<br>transformation until the end of the session."
+                      }
+                    },
+                    {
+                      "id": "7a858982-65ce-4804-9aaf-3e330a958a54",
+                      "label": "Force of Nature",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "You get +1 Blood (max +4). Whenever you roll with<br>Blood and roll a 12+, mark corruption."
+                      }
+                    },
+                    {
+                      "id": "9039f815-1e54-414f-8fc0-143df0b8238c",
+                      "label": "Sun and Moon",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "Mark corruption to transform into your wolf form at will"
+                      }
+                    },
+                    {
+                      "id": "3ff8b73a-1a6b-4498-bb03-fb5445d60c41",
+                      "label": "Familiar Territory",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "Mark corruption to know the source of the greatest<br>danger to your territory, even if it has concealed itself with magic or misdirection"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Corruption"
+    },
+    {
+      "id": "e7613a6d-552b-401d-a75f-49298a4aa9c4",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d057e454-6acd-4eb8-90ee-a9328f844468",
+                  "label": "The Transformation",
+                  "blocks": [
+                    {
+                      "id": "7fee17b3-04ab-4abf-ac4d-781845166f12",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "By default, you change into your wolf form when the full moon rises; you gain natural weaponry (2-harm) and 1-armor; you can resist the change, but it’s not easy; and you can only change back at sunrise.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cb042046-51df-4cc9-8d38-472b6092eb8b",
+                      "label": "Choose 2:<br>•You inflict +1 harm while transformed<br>•You gain armor+1 while transformed<br>•Your harm is armor piercing (ap)<br>•You transform every night, not just during the full moon<br>•Gain +1 ongoing to escape while transformed<br>•When battling groups, you fight like a small group<br>•You are all but immune to magical attacks while transformed\n\nChoose 2:<br>•Silver weapons ignore your armor<br>•Sometimes you lose control while transformed<br>•When you transform, you keep your cool or declare a hunt<br>•You can’t resist the change when it comes<br>•The transformation takes a while and causes you a lot of pain<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "2b9d9cae-0aae-443b-aa50-7ac9a81fe555",
+                  "label": "Your Territory",
+                  "blocks": [
+                    {
+                      "id": "9ce70623-8fca-483a-94b5-b7dbd4fd4643",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "You’ve claimed an area of the city as your own. By default, your territory covers a city block or two and has the trouble: +crime.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e54bc9ff-ed5f-43be-88b4-a6e21c2b19a5",
+                      "label": "Choose 2:<br>•Your territory spans several city blocks (add blessing: +influence)<br>•People here work hard to keep the streets safe (remove +crime)<br>•You are widely accepted as this place’s protector (add blessing: +supported)<br>•Your territory includes grounds for you to roam and hunt (add blessing: +hunting ground)<br>•You’ve made a deal with someone, or something, to protect your territory when you’re not around (add blessing: +guardian)<br>\nChoose 2:<br>•Your territory owes fealty to someone more powerful than you (add trouble: +obligations)<br>•Someone more powerful wants your territory and is working to get it (add<br>trouble: +encroachment)<br>•Mortals in the area are actively trying to revitalize local businesses and infrastructure (add trouble: +upheaval)<br>•Your territory is plagued by a mystical or supernatural presence (add trouble: +haunted)<br>•You have offered protection within your territory to someone, and now their problems are yours (add trouble: +fealty)",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5bcba2f5-e825-4b6f-a563-5bfdc70c5ce0",
+                  "label": "Debts",
+                  "blocks": [
+                    {
+                      "id": "c293075d-4329-44d5-9917-8214b5f89689",
+                      "label": "• Someone is hiding you from someone, or something, powerful.<br>You owe them a Debt.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ef9500d9-5fb6-47ee-9e39-58f52cbaf2f5",
+                      "label": "• Someone hired you for a job and you fucked it up. You owe them<br>2 Debts.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f7a974ec-e61a-41e1-890b-7780473208c1",
+                      "label": "• Someone lives in your territory, benefiting from your protection.<br>They owe you a Debt.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "3c7edef6-5d67-4eb7-bbf9-80a04c76e9d9",
+                  "label": "Wolf Moves",
+                  "blocks": [
+                    {
+                      "id": "38bc9f45-d883-494a-82d3-ba0df8917939",
+                      "label": "Comes with the Territory",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "If you’re actively patrolling your territory at the<br>start of the session, roll with Blood. On a 10+, your territory is secure and<br>trouble is at a minimum; take +1 ongoing to *hitting the streets* in your<br>territory. On a 7-9, one of your troubles surfaces (your choice), but things<br>are mostly stable. On a miss, or if you aren’t attending to your territory,<br>things go south and your troubles are fast and furious",
+                        "hideModifier": false
+                      }
+                    },
+                    {
+                      "id": "de566e92-60fb-4d38-a906-4656c15b50f9",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "And choose two more:",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c97e0347-5999-4cdb-af43-d36c909aba45",
+                      "label": "Bloodhound",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "&nbsp;When you hunt someone, roll with Blood. On a hit, you<br>know exactly where to find them and can follow their scent until you do.<br>On a 10+, take +1 forward against them. On a miss, someone unpleasant<br>finds you first"
+                      }
+                    },
+                    {
+                      "id": "1a489903-2596-435f-b4ee-c219177f69ba",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "And choose one more:&nbsp;",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c1e1f72e-d090-419c-b2a4-4e73bcd3d47f",
+                      "label": "Regeneration",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "&nbsp;When you *let it out*, add this option to the list:<br>• Your wounds close; heal 1-harm"
+                      }
+                    },
+                    {
+                      "id": "625194b3-e510-4264-ab15-d7ec5aea16d5",
+                      "label": "Alpha Dog",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you *persuade an NPC* in your territory, roll with Blood<br>instead of Heart. <br><br>"
+                      }
+                    },
+                    {
+                      "id": "52a42e26-857c-4945-8914-36db4cea167e",
+                      "label": "From the Brink",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "You can exit your wolf form at will. When you do, roll<br>with Spirit. On a hit, you change back. On a 7-9, take 1-harm or mark<br>corruption. On a miss, you change but the transformation is incomplete,<br>lengthy, or painful"
+                      }
+                    },
+                    {
+                      "id": "03a8e8b5-b2fe-46aa-9cd7-106832af3524",
+                      "label": "Reckless",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": ": If you jump right into danger without hedging your bets, you<br>get armor+1. If you’re leading a group, it gets armor+1 also.&nbsp;"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "38b3e84e-b8ea-408b-b03e-494729e08d2d",
+                  "label": "Drama Moves",
+                  "blocks": [
+                    {
+                      "id": "f916a126-1519-4a53-85d1-6170d75ba2ec",
+                      "label": "Wolf Corruption Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you begin a hunt for someone, mark corruption.&nbsp;"
+                      }
+                    },
+                    {
+                      "id": "f88b71c9-1a27-454b-b6d9-febaac50d507",
+                      "label": "Wolf Intimacy Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you share a moment of intimacy—physical or emotional—with another<br>person, you create a primal bond with them; you always know where to<br>find them and when they’re in trouble. This bond lasts until the end of the<br>next session."
+                      }
+                    },
+                    {
+                      "id": "9cac1e94-b4fc-43d9-939b-58b597d3a914",
+                      "label": "Wolf End Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you die or retire your character, anyone in the scene you wish to protect escapes and reaches safety, no matter the odds.&nbsp;"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Moves"
+    },
+    {
+      "id": "ebe8b1f2-7620-4221-a376-3bb8ca52020a",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "3746c35e-c25d-48c0-93b9-d62e64c0e718",
+                  "label": "Standard Avances",
+                  "blocks": [
+                    {
+                      "id": "8c0ae24d-3886-4fa3-87e6-2e5e7ffd8c24",
+                      "label": "+1 Blood (max +3) ",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "fdf20f9b-5f68-4cdc-b66f-9a9b7f603d1b",
+                      "label": "+1 Heart (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "37f9d250-db1f-462b-8330-9d583fd76230",
+                      "label": "+1 Mind (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "4afba9a7-e9a4-4aed-9715-ac865aa72c9c",
+                      "label": "+1 Spirit (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "32e37f36-3b55-4e59-bf27-522e1b0b652c",
+                      "label": "A new Wolf Move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "2ae1c09b-1729-4b75-942e-372c071fa53b",
+                      "label": "A new Wolf Move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "a506067e-9933-4fe1-9ca6-cf1967130269",
+                      "label": "Add 2 qualities to your transformation",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "915d0507-d6fb-4d74-ab98-483f56ca6a82",
+                      "label": "A move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "6d73e677-e16d-4152-954b-12003ba9c4b0",
+                      "label": "Change your Faction",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "c926f4fa-5213-4ea8-84d8-92a695ecfb63",
+                      "label": "Join or lead a wolf pack",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "95452955-40bb-4882-876f-b0a43be9f5a2",
+                  "label": "Cont...",
+                  "blocks": [
+                    {
+                      "id": "db46584a-f67e-4364-89a2-23a31293602a",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "After 5 advances you may select:",
+                      "meta": {}
+                    },
+                    {
+                      "id": "08719599-7aea-4168-b422-c808a81bc562",
+                      "label": "+1 to any stat (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "72e3c76d-7b67-45c7-bcbc-73b12b40624e",
+                      "label": "+1 to any Faction (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "587d3f8f-3a6a-4c5f-8e25-1968f08a9163",
+                      "label": "Erase a scar",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "fa9c848e-91cc-4bd3-b0ab-a11b637eed16",
+                      "label": "Resolve a trouble",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "deaea06f-103e-4474-bc1d-78af76b90818",
+                      "label": "Erase a corruption advance",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "8a6b0f05-6087-44b9-8e1d-2d39b8fd1ac9",
+                      "label": "Erase a corruption advance",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "b7fc1ed7-8f1a-4bef-85ae-5d16597e6e59",
+                      "label": "Advance 3 basic moves",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "ae08d91a-e616-43c1-9c89-87bb3c2a07e9",
+                      "label": "Advance 3 basic moves",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "3a2d86ed-cc90-46ac-9f44-c640b21f1f6c",
+                      "label": "Retire your character to safety",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "010fcc8e-2f3a-4712-8e8d-5983a9f44e57",
+                      "label": "Change to a new Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Advances"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "group": "Urban Shadows Archetypes"
+}

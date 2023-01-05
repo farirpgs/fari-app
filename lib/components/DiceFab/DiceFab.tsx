@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import CloseIcon from "@mui/icons-material/Close";
 import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
@@ -13,102 +12,113 @@ import React, { useContext, useEffect, useState } from "react";
 import { useZIndex } from "../../constants/zIndex";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
 import {
-  IDiceCommandSetOption,
-  IDiceRollResult,
+  Dice,
+  DiceFabResultLabel,
+  IDiceCommandId,
+  IDicePoolResult,
+  IRollablePool,
 } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
+import { useEvent } from "../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { DiceBox } from "../DiceBox/DiceBox";
 import { DiceMenu } from "./DiceMenu";
 
 type IProps = {
-  onRoll(result: IDiceRollResult): void;
-  onRollPool(result: IDiceRollResult, playerId: string | undefined): void;
-  rollsForDiceBox?: Array<IDiceRollResult>;
+  onRoll(result: Array<IDicePoolResult>): void;
+  onOpen?: () => void;
+  onClose?: () => void;
+  onHover?: () => void;
+  onLeave?: () => void;
 };
 
 const buttonSize = "4rem";
 
 export const DiceFab: React.FC<IProps> = (props) => {
-  const zIndex = useZIndex();
-  const diceManager = useContext(DiceContext);
   const [anchorEl, setAnchorEl] = useState<any>(null);
   const open = Boolean(anchorEl);
   const { t } = useTranslate();
+  const diceManager = useContext(DiceContext);
+  const [commandIds, setCommandIds] = useState<Array<IDiceCommandId>>([]);
+  const selectedCommandIds = [
+    ...diceManager.state.selectedCommandIds,
+    ...commandIds,
+  ];
 
-  const ButtonIcon = getButtonIcon(diceManager.state.commandGroups);
-
-  function handleMenuOpen(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) {
-    setAnchorEl(event.currentTarget);
-  }
-
-  function handleMenuClose() {
-    setAnchorEl(null);
-  }
-
-  function handleClear() {
-    diceManager.actions.clear();
-  }
-
-  function handleFabClick(
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
-    e.stopPropagation();
-    if (!open) {
-      handleMenuOpen(e);
-    } else {
-      handleMenuClose();
+  const hasPool = selectedCommandIds.length > 0;
+  const handleMenuOpen = useEvent(
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      props.onOpen?.();
+      setAnchorEl(event.currentTarget);
     }
-  }
+  );
+
+  const handleMenuClose = useEvent(() => {
+    props.onClose?.();
+    setAnchorEl(null);
+    setCommandIds([]);
+    diceManager.actions.clearPool();
+  });
+
+  const handleClear = useEvent(() => {
+    setCommandIds([]);
+  });
+
+  const handleFabClick = useEvent(
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      e.stopPropagation();
+      if (!open) {
+        handleMenuOpen(e);
+      } else {
+        handleMenuClose();
+      }
+    }
+  );
 
   function handleRoll() {
-    const result = diceManager.actions.rollCommandGroups();
+    const poolsToRoll: IRollablePool[] = [...diceManager.state.pools];
 
-    props.onRoll?.(result);
+    if (commandIds.length > 0) {
+      poolsToRoll.push({
+        label: DiceFabResultLabel,
+        commandIds: commandIds,
+      });
+    }
+
+    const results = Dice.rollPools(poolsToRoll);
+
+    handleClear();
     handleMenuClose();
+    props.onRoll?.(results);
   }
-
-  function handleRollPool() {
-    const { result, playerId } = diceManager.actions.getPoolResult();
-
-    props.onRollPool(result, playerId);
-    handleMenuClose();
-  }
-
-  const hasSelectedCommands = diceManager.computed.hasSelectedCommands;
-  const hasPool = diceManager.computed.hasPool;
 
   return (
     <>
       <Grid container spacing={2} alignItems="center">
-        {props.rollsForDiceBox && <Grid item>{renderDiceBox()}</Grid>}
-
         <Grid item>
           <ClickAwayListener onClickAway={handleMenuClose}>
             <Box>
               <DiceFabButton
                 key="rolls"
-                showCloseButton={open}
-                isRollButtonVisible={hasPool ? true : hasSelectedCommands}
-                icon={ButtonIcon}
+                open={open}
+                hasPool={hasPool}
+                pool={selectedCommandIds}
+                icon={Icons.ThrowDice}
                 label={<>{t("dice-fab.roll")}</>}
+                onHover={props.onHover}
+                onLeave={props.onLeave}
                 onFabClick={handleFabClick}
                 onCtaClick={() => {
-                  if (hasPool) {
-                    handleRollPool();
-                  } else {
-                    handleRoll();
-                  }
+                  handleRoll();
                 }}
               />
 
               <DiceMenu
                 open={open}
                 anchorEl={anchorEl}
-                commands={diceManager.state.commandGroups}
-                showPoolToggle
+                pool={selectedCommandIds}
+                onClose={handleMenuClose}
+                onClear={handleClear}
+                onDiceCommandChange={setCommandIds}
                 anchorOrigin={{
                   vertical: "top",
                   horizontal: "center",
@@ -120,11 +130,6 @@ export const DiceFab: React.FC<IProps> = (props) => {
                 sx={{
                   marginTop: "-1rem",
                 }}
-                onClose={() => {
-                  handleMenuClose();
-                }}
-                onClear={handleClear}
-                onDiceCommandChange={diceManager.actions.setCommandSets}
               />
             </Box>
           </ClickAwayListener>
@@ -132,96 +137,77 @@ export const DiceFab: React.FC<IProps> = (props) => {
       </Grid>
     </>
   );
-
-  function renderDiceBox() {
-    return (
-      <DiceBox
-        className={css({
-          zIndex: zIndex.diceFabDie,
-        })}
-        rolls={props.rollsForDiceBox ?? []}
-        tooltipPlacement="top"
-        size="3.5rem"
-        fontSize="2rem"
-        borderSize=".2rem"
-        onClick={() => {
-          handleRoll();
-        }}
-      />
-    );
-  }
-
-  function getButtonIcon(commandGroups: IDiceCommandSetOption[]) {
-    const [firstCommandGroup] = commandGroups;
-
-    const ButtonIcon = firstCommandGroup?.icon ?? Icons.ThrowDice;
-    return ButtonIcon;
-  }
 };
 
 export function DiceFabButton(props: {
-  showCloseButton: boolean;
-  isRollButtonVisible: boolean;
+  open: boolean;
+  hasPool: boolean;
+  pool: Array<IDiceCommandId>;
   onFabClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void;
   onCtaClick(): void;
+  onHover?(): void;
+  onLeave?(): void;
   icon: React.ElementType;
   label: JSX.Element;
 }) {
   const zIndex = useZIndex();
   const theme = useTheme();
 
-  const [delayedIsRollButtonVisible, setDelayedisRollButtonVisible] =
-    useState(false);
-  const diceManager = useContext(DiceContext);
+  const [hasPool, setHasPool] = useState(false);
 
   useEffect(
     function () {
-      setDelayedisRollButtonVisible(props.isRollButtonVisible);
+      setHasPool(props.hasPool);
     },
-    [props.isRollButtonVisible]
+    [props.hasPool]
   );
 
   return (
     <Box
-      className={css({
+      sx={{
         zIndex: zIndex.diceFab,
-      })}
+      }}
     >
       <Zoom in>
         <Box
-          className={css({
+          sx={{
             position: "relative",
-          })}
+          }}
         >
           <Fab
             variant="circular"
-            color={props.showCloseButton ? "secondary" : "primary"}
+            color={props.open ? "primary" : "primary"}
             onClick={props.onFabClick}
+            onPointerEnter={props.onHover}
+            onPointerLeave={props.onLeave}
             onContextMenu={(e) => {
               e.preventDefault();
             }}
-            className={css({
+            sx={{
+              // backgroundColor: props.open
+              //   ? theme.palette.primary.light
+              //   : theme.palette.primary.main,
               width: buttonSize,
               height: buttonSize,
               marginRight: "6.3rem",
               zIndex: zIndex.diceFab,
-            })}
+            }}
           >
-            {props.showCloseButton ? (
+            {props.open ? (
               <CloseIcon
-                className={css({
+                sx={{
                   width: "90%",
                   height: "auto",
                   padding: ".5rem",
-                })}
+                }}
               />
             ) : (
-              <props.icon
-                className={css({
+              <Icons.FateDice
+                sx={{
                   width: "100%",
                   height: "auto",
                   padding: ".5rem",
-                })}
+                }}
               />
             )}
           </Fab>
@@ -233,10 +219,11 @@ export function DiceFabButton(props: {
   );
 
   function renderRollButton() {
-    const numberOfPoolElements = diceManager.state.pool.length;
+    const numberOfPoolElements = props.pool.length;
+
     return (
       <Box
-        className={css({
+        sx={{
           label: "DiceFabButton-fab",
           position: "absolute",
           bottom: "0",
@@ -244,19 +231,13 @@ export function DiceFabButton(props: {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          background: diceManager.computed.hasPool
-            ? theme.palette.primary.dark
-            : theme.palette.primary.main,
+          background: theme.palette.primary.main,
           color: theme.palette.getContrastText(theme.palette.primary.main),
           height: buttonSize,
           borderTopRightRadius: "25px",
           borderBottomRightRadius: "25px",
           boxShadow: theme.shadows[2],
-          border: `4px solid ${
-            diceManager.computed.hasPool
-              ? theme.palette.primary.light
-              : theme.palette.primary.main
-          }`,
+
           overflow: "hidden",
           transition: theme.transitions.create(
             ["max-width", "background", "border"],
@@ -264,31 +245,42 @@ export function DiceFabButton(props: {
               duration: theme.transitions.duration.complex,
             }
           ),
-          maxWidth: delayedIsRollButtonVisible ? "100vw" : "0",
-        })}
+          maxWidth: hasPool ? "100vw" : "0",
+        }}
       >
         <ButtonBase
-          className={css({
+          sx={{
             height: "100%",
             width: "100%",
             paddingLeft: "3rem",
             paddingRight: "1rem",
-          })}
+          }}
           onClick={props.onCtaClick}
           onContextMenu={(e) => {
             e.preventDefault();
           }}
         >
           <Box ml=".5rem" mr=".25rem">
-            <Badge badgeContent={numberOfPoolElements} color="secondary">
+            <Badge
+              badgeContent={numberOfPoolElements}
+              sx={{
+                "& .MuiBadge-badge": {
+                  marginRight: "-.1rem",
+                  background: theme.palette.background.paper,
+                  color: theme.palette.getContrastText(
+                    theme.palette.background.paper
+                  ),
+                },
+              }}
+            >
               <Typography
-                className={css({
+                sx={{
                   label: "DiceFabButton-label",
                   whiteSpace: "nowrap",
                   textTransform: "uppercase",
                   fontWeight: theme.typography.fontWeightBold,
                   paddingRight: ".5rem",
-                })}
+                }}
               >
                 {props.label}
               </Typography>

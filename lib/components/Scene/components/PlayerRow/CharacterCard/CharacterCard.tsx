@@ -1,17 +1,15 @@
-import { css, cx } from "@emotion/css";
 import LaunchIcon from "@mui/icons-material/Launch";
 import SaveIcon from "@mui/icons-material/Save";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
-import InputLabel from "@mui/material/InputLabel";
 import Paper from "@mui/material/Paper";
 import { useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import React from "react";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
 import { ICharacter } from "../../../../../domains/character/types";
-import { IDiceRollResult } from "../../../../../domains/dice/Dice";
+import { IDicePoolResult } from "../../../../../domains/dice/Dice";
 import { useTextColors } from "../../../../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 import { BlockByType } from "../../../../../routes/Character/components/CharacterDialog/components/BlockByType";
@@ -21,11 +19,10 @@ import { FateLabel } from "../../../../FateLabel/FateLabel";
 
 export const CharacterCard: React.FC<{
   characterSheet: ICharacter | undefined;
-  playerName: string | undefined;
   readonly: boolean;
   width?: string;
   onCharacterDialogOpen?(): void;
-  onRoll(newRollResult: IDiceRollResult): void;
+  onRoll(newRollResult: IDicePoolResult): void;
   onChange?(newCharacter: ICharacter): void;
 }> = (props) => {
   const { t } = useTranslate();
@@ -56,29 +53,22 @@ export const CharacterCard: React.FC<{
   const hasSections = numberOfSections > 0;
 
   return (
-    <Box
-      data-cy="character-card"
-      className={cx(
-        css({
-          width: width,
-        })
-      )}
-    >
+    <Box data-cy="character-card" sx={{ width: width }}>
       <Paper
-        className={css({
+        sx={{
           borderRadius: "0px",
           flex: "1 0 auto",
-        })}
+        }}
       >
         <Box pb="1rem">
           <Box
             py=".5rem"
             px="1rem"
-            className={css({
+            sx={{
               fontSize: "1.5rem",
               width: "100%",
               borderBottom: hasSections ? "1px solid #f0a4a4" : undefined,
-            })}
+            }}
           >
             <Grid container alignItems="flex-start" spacing={1} wrap="nowrap">
               <Grid item xs>
@@ -114,10 +104,10 @@ export const CharacterCard: React.FC<{
                                   ? "secondary"
                                   : undefined
                               }
-                              className={css({
+                              sx={{
                                 width: "1.5rem",
                                 height: "1.5rem",
-                              })}
+                              }}
                             />
                           </IconButton>
                         </span>
@@ -139,10 +129,10 @@ export const CharacterCard: React.FC<{
                             }}
                           >
                             <LaunchIcon
-                              className={css({
+                              sx={{
                                 width: "1.5rem",
                                 height: "1.5rem",
-                              })}
+                              }}
                             />
                           </IconButton>
                         </span>
@@ -152,22 +142,6 @@ export const CharacterCard: React.FC<{
                 </Grid>
               </Grid>
             </Grid>
-            <Box>
-              <Grid
-                container
-                justifyContent="flex-end"
-                alignItems="baseline"
-                spacing={1}
-                wrap="nowrap"
-              />
-              <Grid container>
-                {props.playerName && (
-                  <Grid item xs={12}>
-                    <InputLabel shrink>{`(${props.playerName})`}</InputLabel>
-                  </Grid>
-                )}
-              </Grid>
-            </Box>
           </Box>
           {hasSections &&
             characterManager.state.character?.pages.map((page, pageIndex) => {
@@ -181,15 +155,11 @@ export const CharacterCard: React.FC<{
                       value: section.label,
                     });
                     return (
-                      <Box
-                        px="1rem"
-                        key={section.id}
-                        className={css({ clear: "both" })}
-                      >
+                      <Box px="1rem" key={section.id} sx={{ clear: "both" }}>
                         {sectionLabel && (
                           <Box
                             mt="1rem"
-                            className={css({
+                            sx={{
                               label: "SheetHeader-box",
                               // Hexagone
                               // https://bennettfeely.com/clippy/
@@ -199,7 +169,7 @@ export const CharacterCard: React.FC<{
                               color: headerColor,
                               width: "100%",
                               padding: ".5rem",
-                            })}
+                            }}
                           >
                             <FateLabel noWrap>
                               {previewContentEditable({

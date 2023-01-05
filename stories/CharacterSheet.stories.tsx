@@ -1,14 +1,12 @@
 import Box from "@mui/material/Box";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
-import React, { useContext, useState } from "react";
+import React from "react";
 import { Toolbox } from "../lib/components/Toolbox/Toolbox";
-import { DiceContext } from "../lib/contexts/DiceContext/DiceContext";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { ICharacterTemplate } from "../lib/domains/character/CharacterType";
 import { ICharacter } from "../lib/domains/character/types";
 import { dayJS } from "../lib/domains/dayjs/getDayJS";
-import { IDiceRollResult } from "../lib/domains/dice/Dice";
 import { CharacterV3Dialog } from "../lib/routes/Character/components/CharacterDialog/CharacterV3Dialog";
 import { StoryProvider } from "./StoryProvider";
 
@@ -18,27 +16,11 @@ function StorybookCharacterSheet(
     "character" | "dialog" | "readonly"
   >
 ) {
-  const [rolls, setRolls] = useState<Array<IDiceRollResult>>([]);
-  const diceManager = useContext(DiceContext);
-
-  function handleOnNewRoll(result: IDiceRollResult) {
-    setRolls((draft) => {
-      return [result, ...draft];
-    });
-  }
-
-  function handleOnRollPool() {
-    const { result } = diceManager.actions.getPoolResult();
-    handleOnNewRoll(result);
-  }
-
   return (
     <>
       <Toolbox
-        dice={{
-          rollsForDiceBox: rolls,
-          onRoll: handleOnNewRoll,
-          onRollPool: handleOnRollPool,
+        diceFabProps={{
+          onRoll: () => {},
         }}
         hideDefaultRightActions={true}
       />
@@ -48,7 +30,6 @@ function StorybookCharacterSheet(
         character={props.character}
         readonly={props.readonly}
         synced={false}
-        onRoll={handleOnNewRoll}
         onClose={action("onClose")}
         onSave={action("onSave")}
         onToggleSync={action("onToggleSync")}

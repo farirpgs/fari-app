@@ -1,4 +1,4 @@
-import { css, cx } from "@emotion/css";
+import Box, { BoxProps } from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import DOMPurify, { Config } from "dompurify";
 import lowerCase from "lodash/lowerCase";
@@ -67,7 +67,7 @@ export const ContentEditablePreview: React.FC<IPreviewContentEditableOptions> =
 export const ContentEditable: React.FC<
   {
     value: string;
-    className?: string;
+    sx?: BoxProps["sx"];
     clickable?: boolean;
     onChange?: (value: string, event: FormEvent<HTMLSpanElement>) => void;
     onKeyDown?: React.KeyboardEventHandler<HTMLSpanElement>;
@@ -151,7 +151,8 @@ export const ContentEditable: React.FC<
 
   return (
     <>
-      <span
+      <Box
+        component="span"
         data-cy={props["dataCy"]}
         id={props.id}
         ref={$ref}
@@ -159,35 +160,33 @@ export const ContentEditable: React.FC<
         onInput={handleOnChange}
         onPaste={handleOnPaste}
         onKeyDown={props.onKeyDown}
-        className={cx(
-          css({
-            "outline": "none",
-            "wordBreak": "break-word",
-            "display": "inline-block",
-            "width": "100%",
-            "cursor": hasCursorPointer ? "pointer" : "text",
-            "color": "inherit",
-            "textDecoration": props.underline ? "underline" : undefined,
-            "borderBottom": props.border
-              ? `1px solid ${props.borderColor ?? theme.palette.divider}`
-              : undefined,
-            "&:empty:before": {
-              opacity: "50%",
-              content: props.placeholder ? `"${props.placeholder}"` : undefined,
-            },
-            "& b": { fontWeight: "bold" },
-            "& i": { fontStyle: "italic" },
-            "& img": {
-              maxWidth: "90% !important" as any,
-              padding: ".5rem !important" as any,
-              margin: "0 auto !important" as any,
-              display: "flex !important" as any,
-              position: "relative !important" as any,
-              cursor: "pointer !important" as any,
-            },
-          }),
-          props.className
-        )}
+        sx={{
+          "outline": "none",
+          "wordBreak": "break-word",
+          "display": "inline-block",
+          "width": "100%",
+          "cursor": hasCursorPointer ? "pointer" : "text",
+          "color": "inherit",
+          "textDecoration": props.underline ? "underline" : undefined,
+          "borderBottom": props.border
+            ? `1px solid ${props.borderColor ?? theme.palette.divider}`
+            : undefined,
+          "&:empty:before": {
+            opacity: "50%",
+            content: props.placeholder ? `"${props.placeholder}"` : undefined,
+          },
+          "& b": { fontWeight: "bold" },
+          "& i": { fontStyle: "italic" },
+          "& img": {
+            maxWidth: "90% !important" as any,
+            padding: ".5rem !important" as any,
+            margin: "0 auto !important" as any,
+            display: "flex !important" as any,
+            position: "relative !important" as any,
+            cursor: "pointer !important" as any,
+          },
+          ...props.sx,
+        }}
       />
     </>
   );

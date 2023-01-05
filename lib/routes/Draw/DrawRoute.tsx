@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material/styles";
@@ -15,7 +14,7 @@ export const DrawRoute: React.FC = () => {
   const theme = useTheme();
 
   return (
-    <Page>
+    <Page sx={{ paddingTop: "2rem" }}>
       <PageMeta
         title={t("draw-route.meta.title")}
         description={t("draw-route.meta.description")}
@@ -27,10 +26,7 @@ export const DrawRoute: React.FC = () => {
           flexDirection="column"
           alignItems="center"
         >
-          <Icons.IllustrationIcon
-            className={css({ fontSize: "3rem" })}
-            color="primary"
-          />
+          <Icons.IllustrationIcon sx={{ fontSize: "3rem" }} color="primary" />
           <FateLabel variant="h4" align="center" color="primary">
             {"Draw"}
           </FateLabel>

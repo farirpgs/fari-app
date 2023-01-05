@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import CasinoIcon from "@mui/icons-material/Casino";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import Box from "@mui/material/Box";
@@ -25,7 +24,7 @@ import { DiceFab } from "../DiceFab/DiceFab";
 type DiceFabProps = Parameters<typeof DiceFab>[0];
 
 export function Toolbox(props: {
-  dice: DiceFabProps;
+  diceFabProps: DiceFabProps;
   hideDefaultRightActions?: boolean;
   leftActions?: JSX.Element;
   centerActions?: JSX.Element;
@@ -44,7 +43,7 @@ export function Toolbox(props: {
       {renderStoryDiceDialog()}
       {renderOracleDialog()}
       <Box
-        className={css({
+        sx={{
           width: "100%",
           height: "6rem",
           position: "fixed",
@@ -53,22 +52,22 @@ export function Toolbox(props: {
           zIndex: zIndex.drawer,
           bottom: "0",
           left: "0",
-        })}
+        }}
       >
         <Box
-          className={css({
+          sx={{
             maxWidth: "1920px",
             height: "100%",
             margin: "0 auto",
             paddingLeft: "2rem",
             paddingRight: "2rem",
-          })}
+          }}
         >
           <Grid
             container
             alignItems="center"
             justifyContent="space-between"
-            className={css({ height: "100%" })}
+            sx={{ height: "100%" }}
           >
             {/* LEFT */}
             <Grid item>
@@ -80,9 +79,11 @@ export function Toolbox(props: {
               >
                 <Grid item>
                   <DiceFab
-                    onRoll={props.dice.onRoll}
-                    onRollPool={props.dice.onRollPool}
-                    rollsForDiceBox={props.dice.rollsForDiceBox}
+                    onRoll={props.diceFabProps.onRoll}
+                    onOpen={props.diceFabProps.onOpen}
+                    onClose={props.diceFabProps.onClose}
+                    onHover={props.diceFabProps.onHover}
+                    onLeave={props.diceFabProps.onLeave}
                   />
                 </Grid>
                 {props.leftActions}
@@ -128,10 +129,10 @@ export function Toolbox(props: {
                   <Grid item>
                     <Tooltip title="Oracle">
                       <IconButton
-                        className={css({
+                        sx={{
                           border: `1px solid ${theme.palette.secondary.main}`,
                           boxShadow: theme.shadows[2],
-                        })}
+                        }}
                         onClick={() => {
                           setOpenOracle(true);
                         }}
@@ -139,7 +140,7 @@ export function Toolbox(props: {
                       >
                         <Icons.EyeIcon
                           color="secondary"
-                          className={css({ width: "2rem", height: "2rem" })}
+                          sx={{ width: "2rem", height: "2rem" }}
                         />
                       </IconButton>
                     </Tooltip>
@@ -147,10 +148,10 @@ export function Toolbox(props: {
                   <Grid item>
                     <Tooltip title="Story Builder Decks">
                       <IconButton
-                        className={css({
+                        sx={{
                           border: `1px solid ${theme.palette.secondary.main}`,
                           boxShadow: theme.shadows[2],
-                        })}
+                        }}
                         onClick={() => {
                           setOpenStoryBuilderDecks(true);
                         }}
@@ -158,7 +159,7 @@ export function Toolbox(props: {
                       >
                         <LocalLibraryIcon
                           color="secondary"
-                          className={css({ width: "2rem", height: "2rem" })}
+                          sx={{ width: "2rem", height: "2rem" }}
                         />
                       </IconButton>
                     </Tooltip>
@@ -166,10 +167,10 @@ export function Toolbox(props: {
                   <Grid item>
                     <Tooltip title="Story Dice">
                       <IconButton
-                        className={css({
+                        sx={{
                           border: `1px solid ${theme.palette.secondary.main}`,
                           boxShadow: theme.shadows[2],
-                        })}
+                        }}
                         onClick={() => {
                           setOpenStoryDice(true);
                         }}
@@ -177,7 +178,7 @@ export function Toolbox(props: {
                       >
                         <CasinoIcon
                           color="secondary"
-                          className={css({ width: "2rem", height: "2rem" })}
+                          sx={{ width: "2rem", height: "2rem" }}
                         />
                       </IconButton>
                     </Tooltip>

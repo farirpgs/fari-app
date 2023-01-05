@@ -1,1 +1,847 @@
-{"fariType":"character","lastUpdated":1660548333,"name":"Urban Shadows Character Template - The Dragon Template","pages":[{"id":"21f91cd9-76f9-49a1-9fa8-f98feed35e08","label":"Character","rows":[{"columns":[{"sections":[{"id":"a8fdf13f-ec12-46ee-8122-7a103999c34e","label":"Faction:  Wild\nArchetype:  The Dragon","blocks":[]},{"id":"aa80ede1-2492-49b7-a6ce-c1941201185d","label":"Character Name","blocks":[{"id":"8e25e481-f519-4ddc-a300-6e5c44de6502","label":"Agnes, Alexei, Anna, David, Doyle, Helix, Jana, Lucius, Lucretia, Patrick,<br>Paulina, Ryan, Rufus, Sasha, Titiana, Victoria","type":"Text","value":"","meta":{"helperText":"pick one"}}]}]}]},{"columns":[{"sections":[{"id":"665ec12c-6dd5-4113-abc4-968081e9bd4d","label":"Look","blocks":[{"id":"78530e35-9920-440f-b749-dc87198c6637","label":"• Ambiguous, Female, Male, Transgressing","type":"Text","value":"• Asian or South Asian, Black, Hispanic/Latino, Indigenous, Middle<br>Eastern, White, __________\n• Old-fashioned Clothing, Formal Clothing, Unremarkable Clothing, Ceremonial Clothing","meta":{"helperText":"pick as many as apply"}}]}]},{"sections":[{"id":"268c57bf-2d39-4c7b-ad76-34fad1eb3972","label":"Demeanor","blocks":[{"id":"03f3be6b-a8b1-480b-9fd3-98ef48b80bb7","label":"Antiquated, Brooding, Corporate, Seductive ","type":"Text","value":"","meta":{"helperText":"pick one"}}]}]}]},{"columns":[{"sections":[{"id":"eb441a5e-8c9d-4e72-a5e8-ea2c39b608c4","label":"Intro Questions","blocks":[{"id":"01ad9e7b-c597-45f7-a895-cc98d1561602","label":"•  Who are you?<br>•  How long have you been in the city?<br>•  How do memories of your previous life manifest?<br>•  What are your most painful memories of your former life?<br>•  Who has hinted they might know more about your line?\n<br>","type":"Text","value":"","meta":{}}]}]}]},{"columns":[{"sections":[{"id":"8ac84b1b-6566-4696-ad7d-69096eae3752","label":"Starting Character Stats","blocks":[{"id":"f15c625b-e102-4d9b-b337-387bd56de63b","label":"Info Text","type":"InfoText","value":"(Add 1 to one of these)","meta":{}},{"id":"2cf7a61c-6d53-4106-aab8-eb691c8254e4","label":"Blood","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"-2"},{"id":"04186b40-aef2-4a13-8307-ec1d7098b42f","label":"Heart","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"0"},{"id":"fda883ee-cfed-417e-93fb-c48311dc47ac","label":"Mind","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"1"},{"id":"d10432c4-4802-41fe-939e-68f7964f0500","label":"Spirit","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"2"},{"id":"053a0ac2-6dbe-48ad-9971-3e2d07f012e5","label":"","type":"Separator","meta":{"hasLabel":false},"value":""}]}]},{"sections":[{"id":"e73331b5-4661-4454-ad34-313c2d3ddbf0","label":"Starting Factions ","blocks":[{"id":"996fec01-b680-4915-b959-da6e6878ff83","label":"Info Text","type":"InfoText","value":"(Add 1 to one of these)","meta":{}},{"id":"f978b491-2537-466f-a01b-9ce1c7e60354","label":"Mortality","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"-2"},{"id":"c435bc4f-d688-4d65-a435-a4953289b3c0","label":"Night","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"-1"},{"id":"42989551-4c14-4b31-a808-61bf421d35e9","label":"Power","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"2"},{"id":"9817d0af-3114-43de-a19c-a6a0aac528f3","label":"Wild","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"2"},{"id":"1e5a7e57-c5a4-40ff-8cb5-49d95b122bbf","label":"","type":"Separator","meta":{"hasLabel":false},"value":""}]}]}]},{"columns":[{"sections":[{"id":"aa867f7e-9d0a-4339-b03e-7284b52f6d05","label":"Gear","blocks":[{"id":"1b00825d-b06a-43d3-8599-f4bdc3a4b99d","label":"• A downtown apartment, an average car, a smart phone<br>• A mark or sign of your lineage<br>• An heirloom from a past life:<br>     • A ceremonial dagger (2-harm hand messy)<br>     • An ancient sword or spear (3-harm close messy)<br>     • Enchanted clothing or armor (+1-armor)<br>     • A notable arcane tome or device","type":"Text","value":"","meta":{}}]}]}]}]},{"id":"27eac1ae-5af3-425e-a322-74266a20bdf2","rows":[{"columns":[{"sections":[{"id":"e75912eb-40e4-4455-b365-c3c098a8b554","label":"Your Brood","blocks":[{"id":"dfb31b66-5925-4d3d-93bb-919900797409","label":"There are four others born in this era who were once dragons like you; their<br>fate is intertwined with yours from lifetime to lifetime. When you first meet<br>someone, you (or the MC) may declare they are one of your brood.<br>When you share a moment of intimacy with a broodmate, replace your<br>intimacy move with the following: The MC will reveal who your broodmate<br>was to you in times forgotten. Unlock the advance associated with them.<br>     » Your Lover (advance 3 basic moves)<br>     » Your Confidante (take a move from another archetype)<br>     » Your Rival (take a corruption move from another archetype)<br>     » Your Sire (take +1 to any stat [max +3])<br>     » Your Betrayer (take a corruption advance)<br>     » Your Sibling (erase a corruption advance)<br>\n» When you gaze deeply into a broodmate’s eyes, roll with Spirit to read<br>their aura. On a hit, you learn their immediate thoughts and lingering<br>desires; ask them any two questions and they must answer truthfully. On<br>a 7–9, they ask two questions as well; you must answer them truthfully<br>or mark corruption. On a miss, your intense connection is overwhelming<br>and obvious; you learn little, but attract the attention of your enemies.\n<br>» When you seek a broodmate, you may perform a ritual known to<br>dragons; the MC will tell you what components are required. If you seek<br>a particular broodmate by name, the MC will reveal their location; if you<br>seek an undiscovered broodmate, the MC will tell you where to find the<br>broodmate closest to your current location. Mark corruption during the<br>ritual to keep your own identity and location a secret from your target.\n<br>» When you harm a broodmate—even accidentally or unintentionally—<br>mark corruption. If you kill a broodmate, take a corruption advance.","type":"Text","value":"","meta":{}}]},{"id":"ef2c29e2-94aa-4579-907e-0bb130b8db93","label":"THE ORDO DRACONIS","blocks":[{"id":"01723b99-3248-4b99-847c-51c012dedfb3","label":"In ancient times, you and your brood ruled as gods over the meager mortal<br>lives of men. Now you are hunted by those who once cast you down and<br>bound you to these fragile forms: the Ordo Draconis.\n<br>The Ordo Draconis gathers in secret to plot amidst (choose 1): \n\na mundane congregation, a prestigious university, a thriving trade association, a bold<br>political party, a enigmatic scientific league, a persecuted religious sect \n\nThey are weak individually but have gathered certain strengths (choose 3):<br>» They are numerous and ubiquitous.<br>» They are precise and unerring.<br>» They are heavily armed and supplied.<br>» They are themselves immortal.<br>» They wield sorcery and ritual.<br>» They posses artifacts of your lineage.<br>» They hold positions of political power.<br>» They hold Debts over your allies.<br>\nTell the MC what you picked, and that the Ordo is a group of revolutionaries at the center of the Storm. They’ll know what you mean.","type":"Text","value":"","meta":{}}]}]}]}],"label":"Extras"},{"id":"33a49448-8353-4249-a581-20cdad286e90","rows":[{"columns":[{"sections":[{"id":"d8b0c38d-d6b1-4e1f-ad7c-b701eb0b3a7a","label":"Section","blocks":[{"id":"e2545172-56e4-4913-b6fc-1ec9940b5dd1","label":"Faint","type":"Numeric","value":"1","meta":{"checked":false}},{"id":"a34ba981-d13d-4330-9e44-c3eef2af5ba5","label":"Faint","type":"Numeric","value":"1","meta":{"checked":false}},{"id":"c4176649-2806-4d12-88e3-38383478e130","label":"Grievous","type":"Numeric","value":"2","meta":{"checked":false}},{"id":"62d804b4-d608-422d-858f-8b694e67b62f","label":"Grievous","type":"Numeric","value":"2","meta":{"checked":false}},{"id":"94c041b7-29e3-426e-9461-19e1f0901591","label":"Critical","type":"Numeric","value":"3","meta":{"checked":false}},{"id":"99c321ec-3781-464f-8039-40a157e7221e","label":"Critical","type":"Numeric","value":"3","meta":{"checked":false}}]},{"id":"85750050-e7e6-41f2-98cb-ef38093abc48","label":"Armor","blocks":[{"id":"28ecca7b-f24b-46d9-a469-42665d15a7a1","label":"Current Armor Rating","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"0"}]}]},{"sections":[{"id":"c7a82c27-7667-41fc-8564-443ada276f27","label":"S-Harm","blocks":[{"id":"29429b38-1e2e-494f-b9ef-8af49b5e4efd","label":"Incapacitated","type":"Numeric","value":"1","meta":{"checked":false}}]},{"id":"68f9f2e5-7763-4999-a548-bfbbb548164e","label":"Scars","blocks":[{"id":"67d38780-3cbb-46c2-b3d7-caba6905a6be","label":"Shattered (-1 Blood)","type":"SlotTracker","meta":{"helperText":"Shattered means frightened, weakened, and overly cautious. Shattered characters hesitate when they should move, and their attempts to unleash an<br>attack on someone or escape a situation often come up short."},"value":[{"label":"","checked":false}]},{"id":"362e2053-623f-4fe7-99c1-db16c21f3527","label":"Crushed (-1 Heart)","type":"SlotTracker","meta":{"helperText":"Crushed means traumatized, timid, and uncertain. Crushed characters bear<br>the full weight of the wounds they’ve suffered, and their attempts to persuade an NPC are inhibited by their reticent approach to conflict."},"value":[{"label":"","checked":false}]},{"id":"e9a31473-d171-4082-8b88-5501ea168844","label":"Fractured (-1 Mind)","type":"SlotTracker","meta":{"helperText":"Fractured means confused, disoriented, and disjointed. Fractured characters<br>are unstable and unsure, and their attempts to figure someone out or mislead, distract, or trick others are unfocused and imprecise."},"value":[{"label":"","checked":false}]},{"id":"17d1deb3-a281-4572-99bd-30b3483630de","label":"Broken (-1 Spirit)","type":"SlotTracker","meta":{"helperText":"Broken means hopeless, forlorn, and cowardly. Broken characters have lost<br>their will to fight, and their attempts to keep their cool or let it out are often<br>half-hearted and incomplete."},"value":[{"label":"","checked":false}]}]}]}]}],"label":"Harm"},{"id":"0f6b6aa5-5ee7-4915-8a76-db5e8f5b5e46","rows":[{"columns":[{"sections":[{"id":"00dfa66e-21b4-416b-8ed4-11a64a277e69","label":"Corruption Track","blocks":[{"id":"22629c21-46dd-474b-98d4-f4939d25927f","label":"Corruption ","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]}]},{"id":"67f61c7c-6cc9-40f7-b086-ac179e3dd954","label":"Corruption Advances","blocks":[{"id":"8542ddc9-0f79-49ab-8a31-dbd042a66695","label":"Take a corruption move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"989ac874-59d3-4b46-8b13-c2acd9d4a284","label":"Take a corruption move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"008824ba-8d69-4b74-b93e-340ca7874dad","label":"Take a corruption move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"c1e3e3ce-3b48-4a0d-9cfe-cf8b47efcb83","label":"Take a corruption move from another Archetype","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"4bddbadc-f694-4342-82b4-32d969b74f5d","label":"Retire your character. They may return as a Threat.","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]}]}]},{"sections":[{"id":"9a046848-ed1b-4703-8182-5799e9b326f0","label":"Corruption Moves","blocks":[{"id":"44824441-79b4-446a-a361-478bb91ef0d5","label":"Stuff of Nightmares","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"&nbsp;Mark corruption to take on draconic features for a<br>scene. Choose two or mark an additional corruption to choose all three:<br>» You grow wings and can fly<br>» You have rock-hard scales instead of skin, gain armor+1<br>» You grow huge fangs and claws (3-harm hand bloody)"}},{"id":"07254c7d-96d0-4736-9fd9-e723dfe736b4","label":"Drake","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"&nbsp;Mark corruption to project fire (3-harm close area fire). When<br>you unleash using these flames, roll with Spirit instead of Blood.<br><br>"}},{"id":"88b6fa92-3162-4652-91f2-762f620cfd6f","label":"Eyes of Ember","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"Mark corruption and cash in a Debt to persuade someone as if you rolled a 12+. Even if you haven’t advanced the move, the<br>NPC will see things through to the end."}},{"id":"6c636177-350d-4cfd-9681-e95e15e96d80","label":"Dragon Sickness","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"When someone steals something from you, mark<br>corruption to inflict a curse upon them that only you can lift, and hold<br>three. Spend that hold, one for one, to inflict 1 harm (ap) upon the<br>cursed character. They can avoid the harm by keeping the item close<br>and marking corruption, one for one. Returning the item immediately<br>lifts the curse, but you may also release your remaining hold at any time"}}]}]}]}],"label":"Corruption"},{"id":"4f184824-7a95-4b19-a4e2-b3b4b1bf6627","rows":[{"columns":[{"sections":[{"id":"2297ad28-1bdf-477f-9f5c-1a1d94465814","label":"Debts","blocks":[{"id":"d3971d7a-c678-49e2-a607-72e49bdc1f5e","label":"• Someone knows you betrayed them, but they don’t know the whole story.<br>You owe them a Debt.","type":"Text","value":"","meta":{}},{"id":"5daf68d8-380c-47da-bdc1-034676692837","label":"• Someone stole something from you and lost it to the Ordo Draconis.<br>They owe you two Debts.","type":"Text","value":"","meta":{}},{"id":"1ae90f16-d0e6-4b02-8040-945e6fcfcad5","label":"• Someone is keeping a mortal friend or family member safe on your<br>behalf. You owe them a Debt.","type":"Text","value":"","meta":{}}]}]}]},{"columns":[{"sections":[{"id":"6721ffb0-e709-4afd-997d-aee8a4ea1e6b","label":"Dragon Moves","blocks":[{"id":"1a393137-e71d-43db-9b64-40ee0b6c9a2d","label":"Info Text","type":"InfoText","value":"Choose two:","meta":{}},{"id":"dfda59a0-68b4-4956-bcb8-55c9f3a1fd59","label":"Ancient Appetites","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"When you first come to learn of the existence of<br>an object fit for your collection (your call), roll with Spirit. On a hit, your<br>instincts and visions point you toward an acquisition. On a 10+, pick 1.<br>On a 7–9, pick 2:<br>» Its location is a secret held by an enemy of your lineage.<br>» It’s guarded by forces stronger than you can overcome alone.<br>» It’s located somewhere inherently dangerous to you and your allies.<br>» It’s clearly a trap set by your enemies to lure you into the open.<br>On a miss, your path forward is painfully clear…but the MC picks three","hideModifier":false}},{"id":"df967c91-5e9f-4831-839a-68d15d57c52d","label":"All Things Laid Bare","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"&nbsp;When you figure someone out by investigating<br>their lineage or history, add the following options to the list:<br>» What secrets has your lineage concealed from the world?<br>» Who are your true allies in times of need?"}},{"id":"fb62eb03-c903-4da2-8be4-5d7197f76182","label":"Fire Born","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"When you let it out, add the following option to the list:<br>» Ignore all environmental harm (fire, electricity, etc.), mundane or<br>magical, for the scene. Mortals who witness your resistance construct mundane explanations to account for your abilities."}},{"id":"a2194c1f-6aac-4582-912a-e4185aa318a7","label":"Don’t You Know Me?","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"When you try to mislead or trick someone into<br>believing that you are an important or powerful person, roll with Spirit<br>instead of Mind. On a miss, your bold gambit leaves you vulnerable to<br>your worst enemies."}}]}]},{"sections":[{"id":"4dfcfea0-dcdd-4bbc-b270-ac4d8112c0c5","label":"Drama Moves","blocks":[{"id":"1b538e40-9180-4669-adab-2b68705f90a3","label":"Dragon Corruption Move<br>","type":"Text","value":"","meta":{"helperText":"When you knowingly pass the true costs of your misdeeds or acquisitions<br>onto your friends or loved ones, mark corruption."}},{"id":"39c1c403-0a40-4d25-bf06-3da9e30c3455","label":"Dragon Intimacy Move<br>","type":"Text","value":"","meta":{"helperText":"When you share a moment of intimacy—physical or emotional—with<br>another person, ask them to afrm something beautiful about your draconic<br>nature. If they do it, you suddenly realize that you have something useful<br>to them: an arcane item, a reclusive contact, or information (their choice).<br>If they refuse your request, you must take something from them to silence<br>your insecurities. Bide your time, if you must."}},{"id":"1fb8f93e-5b9e-429a-8eac-8aaade770504","label":"Dragon End Move<br>","type":"Text","value":"","meta":{"helperText":"When you die, your ancient spirit rips free from your body to wreak havoc<br>and pain on the world before you are reborn. Anyone or anything nearby<br>at the moment of your death sufers 6-harm (ap)."}}]}]}]}],"label":"Moves"},{"id":"84711cae-e456-4453-9f23-489948a7f9e3","rows":[{"columns":[{"sections":[{"id":"33fa74a0-13db-45b1-8c51-47c7c8199b76","label":"Standard Avances","blocks":[{"id":"16ac26a8-2805-4732-9336-dba4872c1a5a","label":"+1 Blood (max +3) ","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"f3916044-4b3d-4194-bbb2-ce4c6cb1fa09","label":"+1 Heart (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"97b0bf42-45c4-48f6-a327-e99b2169172b","label":"+1 Mind (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"5d95409a-67d9-4ed7-a195-6527542b6c9b","label":"+1 Spirit (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"7f442580-f599-46e0-8919-3596aacbb36e","label":"A new Dragon move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"294404fd-478b-4158-b751-a9445d22f9c6","label":"A new Dragon move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"652606d7-5930-420e-a1ad-f4b45fbcf01b","label":"A move from another Archetype","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"adc2bf44-5d4a-423d-96fc-c3de9e1d5bf7","label":"A move from another Archetype","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"785379dc-6819-446f-9f4b-2c25be81f3b9","label":"Change your Faction","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"fa827b16-33b7-400a-a48e-41b0a8659345","label":"Gain a Sanctum","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]}]}]},{"sections":[{"id":"5e40038f-5ad0-4b59-bbcd-d7d74027fe9a","label":"Cont...","blocks":[{"id":"ccc34a2e-e01d-4e0a-b843-9093893436cd","label":"Info Text","type":"InfoText","value":"After 5 advances you may select:","meta":{}},{"id":"76b187a4-dbad-4e74-8c8a-8cc0268bf79e","label":"+1 to any stat (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"e9211a95-ba9c-4549-9ee4-758b228ce0f4","label":"+1 to any Faction (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"0575a0de-51df-43d9-8ff3-d55bda24ce71","label":"Erase a scar","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"b21931fd-f0e4-49a5-b8fe-25d31ed7da61","label":"Erase a scar","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"2e83e16d-5ede-4188-b4a7-3da34357e785","label":"Erase a corruption advance","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"b4aea6b0-9ebf-44ba-bda9-e8f55ccc114d","label":"Advance 3 basic moves","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"28728792-527c-4f02-bddd-c48725b010ac","label":"Advance 3 basic moves","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"6f04e142-0727-4e3c-9785-c6b989c9d98c","label":"Retire your character to safety","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"204fb951-bc8a-47c5-8e20-e667831a5533","label":"Change to a new Archetype","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]}]}]}]}],"label":"Advances"}],"template":"Blank","version":6,"wide":true,"group":"Urban Shadows Archetypes"}
+{
+  "fariType": "character",
+  "lastUpdated": 1660548333,
+  "name": "Urban Shadows Character Template - The Dragon Template",
+  "pages": [
+    {
+      "id": "21f91cd9-76f9-49a1-9fa8-f98feed35e08",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a8fdf13f-ec12-46ee-8122-7a103999c34e",
+                  "label": "Faction:  Wild\nArchetype:  The Dragon",
+                  "blocks": []
+                },
+                {
+                  "id": "aa80ede1-2492-49b7-a6ce-c1941201185d",
+                  "label": "Character Name",
+                  "blocks": [
+                    {
+                      "id": "8e25e481-f519-4ddc-a300-6e5c44de6502",
+                      "label": "Agnes, Alexei, Anna, David, Doyle, Helix, Jana, Lucius, Lucretia, Patrick,<br>Paulina, Ryan, Rufus, Sasha, Titiana, Victoria",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pick one" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "665ec12c-6dd5-4113-abc4-968081e9bd4d",
+                  "label": "Look",
+                  "blocks": [
+                    {
+                      "id": "78530e35-9920-440f-b749-dc87198c6637",
+                      "label": "• Ambiguous, Female, Male, Transgressing",
+                      "type": "Text",
+                      "value": "• Asian or South Asian, Black, Hispanic/Latino, Indigenous, Middle<br>Eastern, White, __________\n• Old-fashioned Clothing, Formal Clothing, Unremarkable Clothing, Ceremonial Clothing",
+                      "meta": { "helperText": "pick as many as apply" }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "268c57bf-2d39-4c7b-ad76-34fad1eb3972",
+                  "label": "Demeanor",
+                  "blocks": [
+                    {
+                      "id": "03f3be6b-a8b1-480b-9fd3-98ef48b80bb7",
+                      "label": "Antiquated, Brooding, Corporate, Seductive ",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pick one" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "eb441a5e-8c9d-4e72-a5e8-ea2c39b608c4",
+                  "label": "Intro Questions",
+                  "blocks": [
+                    {
+                      "id": "01ad9e7b-c597-45f7-a895-cc98d1561602",
+                      "label": "•  Who are you?<br>•  How long have you been in the city?<br>•  How do memories of your previous life manifest?<br>•  What are your most painful memories of your former life?<br>•  Who has hinted they might know more about your line?\n<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "8ac84b1b-6566-4696-ad7d-69096eae3752",
+                  "label": "Starting Character Stats",
+                  "blocks": [
+                    {
+                      "id": "f15c625b-e102-4d9b-b337-387bd56de63b",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "(Add 1 to one of these)",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2cf7a61c-6d53-4106-aab8-eb691c8254e4",
+                      "label": "Blood",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-2"
+                    },
+                    {
+                      "id": "04186b40-aef2-4a13-8307-ec1d7098b42f",
+                      "label": "Heart",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "fda883ee-cfed-417e-93fb-c48311dc47ac",
+                      "label": "Mind",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "d10432c4-4802-41fe-939e-68f7964f0500",
+                      "label": "Spirit",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "2"
+                    },
+                    {
+                      "id": "053a0ac2-6dbe-48ad-9971-3e2d07f012e5",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "e73331b5-4661-4454-ad34-313c2d3ddbf0",
+                  "label": "Starting Factions ",
+                  "blocks": [
+                    {
+                      "id": "996fec01-b680-4915-b959-da6e6878ff83",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "(Add 1 to one of these)",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f978b491-2537-466f-a01b-9ce1c7e60354",
+                      "label": "Mortality",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-2"
+                    },
+                    {
+                      "id": "c435bc4f-d688-4d65-a435-a4953289b3c0",
+                      "label": "Night",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-1"
+                    },
+                    {
+                      "id": "42989551-4c14-4b31-a808-61bf421d35e9",
+                      "label": "Power",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "2"
+                    },
+                    {
+                      "id": "9817d0af-3114-43de-a19c-a6a0aac528f3",
+                      "label": "Wild",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "2"
+                    },
+                    {
+                      "id": "1e5a7e57-c5a4-40ff-8cb5-49d95b122bbf",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "aa867f7e-9d0a-4339-b03e-7284b52f6d05",
+                  "label": "Gear",
+                  "blocks": [
+                    {
+                      "id": "1b00825d-b06a-43d3-8599-f4bdc3a4b99d",
+                      "label": "• A downtown apartment, an average car, a smart phone<br>• A mark or sign of your lineage<br>• An heirloom from a past life:<br>     • A ceremonial dagger (2-harm hand messy)<br>     • An ancient sword or spear (3-harm close messy)<br>     • Enchanted clothing or armor (+1-armor)<br>     • A notable arcane tome or device",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "27eac1ae-5af3-425e-a322-74266a20bdf2",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "e75912eb-40e4-4455-b365-c3c098a8b554",
+                  "label": "Your Brood",
+                  "blocks": [
+                    {
+                      "id": "dfb31b66-5925-4d3d-93bb-919900797409",
+                      "label": "There are four others born in this era who were once dragons like you; their<br>fate is intertwined with yours from lifetime to lifetime. When you first meet<br>someone, you (or the MC) may declare they are one of your brood.<br>When you share a moment of intimacy with a broodmate, replace your<br>intimacy move with the following: The MC will reveal who your broodmate<br>was to you in times forgotten. Unlock the advance associated with them.<br>     » Your Lover (advance 3 basic moves)<br>     » Your Confidante (take a move from another archetype)<br>     » Your Rival (take a corruption move from another archetype)<br>     » Your Sire (take +1 to any stat [max +3])<br>     » Your Betrayer (take a corruption advance)<br>     » Your Sibling (erase a corruption advance)<br>\n» When you gaze deeply into a broodmate’s eyes, roll with Spirit to read<br>their aura. On a hit, you learn their immediate thoughts and lingering<br>desires; ask them any two questions and they must answer truthfully. On<br>a 7–9, they ask two questions as well; you must answer them truthfully<br>or mark corruption. On a miss, your intense connection is overwhelming<br>and obvious; you learn little, but attract the attention of your enemies.\n<br>» When you seek a broodmate, you may perform a ritual known to<br>dragons; the MC will tell you what components are required. If you seek<br>a particular broodmate by name, the MC will reveal their location; if you<br>seek an undiscovered broodmate, the MC will tell you where to find the<br>broodmate closest to your current location. Mark corruption during the<br>ritual to keep your own identity and location a secret from your target.\n<br>» When you harm a broodmate—even accidentally or unintentionally—<br>mark corruption. If you kill a broodmate, take a corruption advance.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "ef2c29e2-94aa-4579-907e-0bb130b8db93",
+                  "label": "THE ORDO DRACONIS",
+                  "blocks": [
+                    {
+                      "id": "01723b99-3248-4b99-847c-51c012dedfb3",
+                      "label": "In ancient times, you and your brood ruled as gods over the meager mortal<br>lives of men. Now you are hunted by those who once cast you down and<br>bound you to these fragile forms: the Ordo Draconis.\n<br>The Ordo Draconis gathers in secret to plot amidst (choose 1): \n\na mundane congregation, a prestigious university, a thriving trade association, a bold<br>political party, a enigmatic scientific league, a persecuted religious sect \n\nThey are weak individually but have gathered certain strengths (choose 3):<br>» They are numerous and ubiquitous.<br>» They are precise and unerring.<br>» They are heavily armed and supplied.<br>» They are themselves immortal.<br>» They wield sorcery and ritual.<br>» They posses artifacts of your lineage.<br>» They hold positions of political power.<br>» They hold Debts over your allies.<br>\nTell the MC what you picked, and that the Ordo is a group of revolutionaries at the center of the Storm. They’ll know what you mean.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Extras"
+    },
+    {
+      "id": "33a49448-8353-4249-a581-20cdad286e90",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d8b0c38d-d6b1-4e1f-ad7c-b701eb0b3a7a",
+                  "label": "Section",
+                  "blocks": [
+                    {
+                      "id": "e2545172-56e4-4913-b6fc-1ec9940b5dd1",
+                      "label": "Faint",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "a34ba981-d13d-4330-9e44-c3eef2af5ba5",
+                      "label": "Faint",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "c4176649-2806-4d12-88e3-38383478e130",
+                      "label": "Grievous",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "62d804b4-d608-422d-858f-8b694e67b62f",
+                      "label": "Grievous",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "94c041b7-29e3-426e-9461-19e1f0901591",
+                      "label": "Critical",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "99c321ec-3781-464f-8039-40a157e7221e",
+                      "label": "Critical",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "85750050-e7e6-41f2-98cb-ef38093abc48",
+                  "label": "Armor",
+                  "blocks": [
+                    {
+                      "id": "28ecca7b-f24b-46d9-a469-42665d15a7a1",
+                      "label": "Current Armor Rating",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "c7a82c27-7667-41fc-8564-443ada276f27",
+                  "label": "S-Harm",
+                  "blocks": [
+                    {
+                      "id": "29429b38-1e2e-494f-b9ef-8af49b5e4efd",
+                      "label": "Incapacitated",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "68f9f2e5-7763-4999-a548-bfbbb548164e",
+                  "label": "Scars",
+                  "blocks": [
+                    {
+                      "id": "67d38780-3cbb-46c2-b3d7-caba6905a6be",
+                      "label": "Shattered (-1 Blood)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Shattered means frightened, weakened, and overly cautious. Shattered characters hesitate when they should move, and their attempts to unleash an<br>attack on someone or escape a situation often come up short."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "362e2053-623f-4fe7-99c1-db16c21f3527",
+                      "label": "Crushed (-1 Heart)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Crushed means traumatized, timid, and uncertain. Crushed characters bear<br>the full weight of the wounds they’ve suffered, and their attempts to persuade an NPC are inhibited by their reticent approach to conflict."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "e9a31473-d171-4082-8b88-5501ea168844",
+                      "label": "Fractured (-1 Mind)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Fractured means confused, disoriented, and disjointed. Fractured characters<br>are unstable and unsure, and their attempts to figure someone out or mislead, distract, or trick others are unfocused and imprecise."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "17d1deb3-a281-4572-99bd-30b3483630de",
+                      "label": "Broken (-1 Spirit)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Broken means hopeless, forlorn, and cowardly. Broken characters have lost<br>their will to fight, and their attempts to keep their cool or let it out are often<br>half-hearted and incomplete."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Harm"
+    },
+    {
+      "id": "0f6b6aa5-5ee7-4915-8a76-db5e8f5b5e46",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "00dfa66e-21b4-416b-8ed4-11a64a277e69",
+                  "label": "Corruption Track",
+                  "blocks": [
+                    {
+                      "id": "22629c21-46dd-474b-98d4-f4939d25927f",
+                      "label": "Corruption ",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "67f61c7c-6cc9-40f7-b086-ac179e3dd954",
+                  "label": "Corruption Advances",
+                  "blocks": [
+                    {
+                      "id": "8542ddc9-0f79-49ab-8a31-dbd042a66695",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "989ac874-59d3-4b46-8b13-c2acd9d4a284",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "008824ba-8d69-4b74-b93e-340ca7874dad",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "c1e3e3ce-3b48-4a0d-9cfe-cf8b47efcb83",
+                      "label": "Take a corruption move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "4bddbadc-f694-4342-82b4-32d969b74f5d",
+                      "label": "Retire your character. They may return as a Threat.",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "9a046848-ed1b-4703-8182-5799e9b326f0",
+                  "label": "Corruption Moves",
+                  "blocks": [
+                    {
+                      "id": "44824441-79b4-446a-a361-478bb91ef0d5",
+                      "label": "Stuff of Nightmares",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "&nbsp;Mark corruption to take on draconic features for a<br>scene. Choose two or mark an additional corruption to choose all three:<br>» You grow wings and can fly<br>» You have rock-hard scales instead of skin, gain armor+1<br>» You grow huge fangs and claws (3-harm hand bloody)"
+                      }
+                    },
+                    {
+                      "id": "07254c7d-96d0-4736-9fd9-e723dfe736b4",
+                      "label": "Drake",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "&nbsp;Mark corruption to project fire (3-harm close area fire). When<br>you unleash using these flames, roll with Spirit instead of Blood.<br><br>"
+                      }
+                    },
+                    {
+                      "id": "88b6fa92-3162-4652-91f2-762f620cfd6f",
+                      "label": "Eyes of Ember",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "Mark corruption and cash in a Debt to persuade someone as if you rolled a 12+. Even if you haven’t advanced the move, the<br>NPC will see things through to the end."
+                      }
+                    },
+                    {
+                      "id": "6c636177-350d-4cfd-9681-e95e15e96d80",
+                      "label": "Dragon Sickness",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When someone steals something from you, mark<br>corruption to inflict a curse upon them that only you can lift, and hold<br>three. Spend that hold, one for one, to inflict 1 harm (ap) upon the<br>cursed character. They can avoid the harm by keeping the item close<br>and marking corruption, one for one. Returning the item immediately<br>lifts the curse, but you may also release your remaining hold at any time"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Corruption"
+    },
+    {
+      "id": "4f184824-7a95-4b19-a4e2-b3b4b1bf6627",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2297ad28-1bdf-477f-9f5c-1a1d94465814",
+                  "label": "Debts",
+                  "blocks": [
+                    {
+                      "id": "d3971d7a-c678-49e2-a607-72e49bdc1f5e",
+                      "label": "• Someone knows you betrayed them, but they don’t know the whole story.<br>You owe them a Debt.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5daf68d8-380c-47da-bdc1-034676692837",
+                      "label": "• Someone stole something from you and lost it to the Ordo Draconis.<br>They owe you two Debts.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1ae90f16-d0e6-4b02-8040-945e6fcfcad5",
+                      "label": "• Someone is keeping a mortal friend or family member safe on your<br>behalf. You owe them a Debt.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "6721ffb0-e709-4afd-997d-aee8a4ea1e6b",
+                  "label": "Dragon Moves",
+                  "blocks": [
+                    {
+                      "id": "1a393137-e71d-43db-9b64-40ee0b6c9a2d",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Choose two:",
+                      "meta": {}
+                    },
+                    {
+                      "id": "dfda59a0-68b4-4956-bcb8-55c9f3a1fd59",
+                      "label": "Ancient Appetites",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When you first come to learn of the existence of<br>an object fit for your collection (your call), roll with Spirit. On a hit, your<br>instincts and visions point you toward an acquisition. On a 10+, pick 1.<br>On a 7–9, pick 2:<br>» Its location is a secret held by an enemy of your lineage.<br>» It’s guarded by forces stronger than you can overcome alone.<br>» It’s located somewhere inherently dangerous to you and your allies.<br>» It’s clearly a trap set by your enemies to lure you into the open.<br>On a miss, your path forward is painfully clear…but the MC picks three",
+                        "hideModifier": false
+                      }
+                    },
+                    {
+                      "id": "df967c91-5e9f-4831-839a-68d15d57c52d",
+                      "label": "All Things Laid Bare",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "&nbsp;When you figure someone out by investigating<br>their lineage or history, add the following options to the list:<br>» What secrets has your lineage concealed from the world?<br>» Who are your true allies in times of need?"
+                      }
+                    },
+                    {
+                      "id": "fb62eb03-c903-4da2-8be4-5d7197f76182",
+                      "label": "Fire Born",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you let it out, add the following option to the list:<br>» Ignore all environmental harm (fire, electricity, etc.), mundane or<br>magical, for the scene. Mortals who witness your resistance construct mundane explanations to account for your abilities."
+                      }
+                    },
+                    {
+                      "id": "a2194c1f-6aac-4582-912a-e4185aa318a7",
+                      "label": "Don’t You Know Me?",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you try to mislead or trick someone into<br>believing that you are an important or powerful person, roll with Spirit<br>instead of Mind. On a miss, your bold gambit leaves you vulnerable to<br>your worst enemies."
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "4dfcfea0-dcdd-4bbc-b270-ac4d8112c0c5",
+                  "label": "Drama Moves",
+                  "blocks": [
+                    {
+                      "id": "1b538e40-9180-4669-adab-2b68705f90a3",
+                      "label": "Dragon Corruption Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you knowingly pass the true costs of your misdeeds or acquisitions<br>onto your friends or loved ones, mark corruption."
+                      }
+                    },
+                    {
+                      "id": "39c1c403-0a40-4d25-bf06-3da9e30c3455",
+                      "label": "Dragon Intimacy Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you share a moment of intimacy—physical or emotional—with<br>another person, ask them to afrm something beautiful about your draconic<br>nature. If they do it, you suddenly realize that you have something useful<br>to them: an arcane item, a reclusive contact, or information (their choice).<br>If they refuse your request, you must take something from them to silence<br>your insecurities. Bide your time, if you must."
+                      }
+                    },
+                    {
+                      "id": "1fb8f93e-5b9e-429a-8eac-8aaade770504",
+                      "label": "Dragon End Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you die, your ancient spirit rips free from your body to wreak havoc<br>and pain on the world before you are reborn. Anyone or anything nearby<br>at the moment of your death sufers 6-harm (ap)."
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Moves"
+    },
+    {
+      "id": "84711cae-e456-4453-9f23-489948a7f9e3",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "33fa74a0-13db-45b1-8c51-47c7c8199b76",
+                  "label": "Standard Avances",
+                  "blocks": [
+                    {
+                      "id": "16ac26a8-2805-4732-9336-dba4872c1a5a",
+                      "label": "+1 Blood (max +3) ",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "f3916044-4b3d-4194-bbb2-ce4c6cb1fa09",
+                      "label": "+1 Heart (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "97b0bf42-45c4-48f6-a327-e99b2169172b",
+                      "label": "+1 Mind (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "5d95409a-67d9-4ed7-a195-6527542b6c9b",
+                      "label": "+1 Spirit (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "7f442580-f599-46e0-8919-3596aacbb36e",
+                      "label": "A new Dragon move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "294404fd-478b-4158-b751-a9445d22f9c6",
+                      "label": "A new Dragon move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "652606d7-5930-420e-a1ad-f4b45fbcf01b",
+                      "label": "A move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "adc2bf44-5d4a-423d-96fc-c3de9e1d5bf7",
+                      "label": "A move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "785379dc-6819-446f-9f4b-2c25be81f3b9",
+                      "label": "Change your Faction",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "fa827b16-33b7-400a-a48e-41b0a8659345",
+                      "label": "Gain a Sanctum",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "5e40038f-5ad0-4b59-bbcd-d7d74027fe9a",
+                  "label": "Cont...",
+                  "blocks": [
+                    {
+                      "id": "ccc34a2e-e01d-4e0a-b843-9093893436cd",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "After 5 advances you may select:",
+                      "meta": {}
+                    },
+                    {
+                      "id": "76b187a4-dbad-4e74-8c8a-8cc0268bf79e",
+                      "label": "+1 to any stat (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "e9211a95-ba9c-4549-9ee4-758b228ce0f4",
+                      "label": "+1 to any Faction (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "0575a0de-51df-43d9-8ff3-d55bda24ce71",
+                      "label": "Erase a scar",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "b21931fd-f0e4-49a5-b8fe-25d31ed7da61",
+                      "label": "Erase a scar",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "2e83e16d-5ede-4188-b4a7-3da34357e785",
+                      "label": "Erase a corruption advance",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "b4aea6b0-9ebf-44ba-bda9-e8f55ccc114d",
+                      "label": "Advance 3 basic moves",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "28728792-527c-4f02-bddd-c48725b010ac",
+                      "label": "Advance 3 basic moves",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "6f04e142-0727-4e3c-9785-c6b989c9d98c",
+                      "label": "Retire your character to safety",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "204fb951-bc8a-47c5-8e20-e667831a5533",
+                      "label": "Change to a new Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Advances"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "group": "Urban Shadows Archetypes"
+}

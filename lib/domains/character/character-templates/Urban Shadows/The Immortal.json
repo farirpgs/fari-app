@@ -1,1 +1,828 @@
-{"fariType":"character","lastUpdated":1660548334,"name":"Urban Shadows Character Template - The Immortal Template","pages":[{"id":"07a7bc32-8662-46ed-bd86-192c03a9c6e5","label":"Character","rows":[{"columns":[{"sections":[{"id":"edc2d9ce-fbd5-41e8-b1ba-c7852e478ed0","label":"Faction:  Power\nArchetype:  The Immortal","blocks":[]},{"id":"4652769d-6780-46e1-b80d-bfb190c054aa","label":"Character Name","blocks":[{"id":"dd0e4654-5f4d-4353-b8c8-f3b5dd3d8be3","label":"Anna, Aethelfled, Boris, Brandon Ebele, Essex, Hildred, Hiro, Linsey,<br>Mildred, Nathaniel, Khari, Thorn, Tsutomu, Zacariah","type":"Text","value":"","meta":{"helperText":"pick one"}}]}]}]},{"columns":[{"sections":[{"id":"259f9190-3a0d-4f73-9c9c-0eec465fadd6","label":"Look","blocks":[{"id":"f05eb17f-e1bb-414e-88f8-bc3d0e9ef6ff","label":"• Ambigous, Female, Male, Transgressing","type":"Text","value":"• Asian or South Asian, Black, Hispanic/Latino, Indigenous, Middle Eastern, White, __________\n• Antiquated Clothing, Comfortable Clothing, Eccentric/Strange Clothing, Expensive Clothing","meta":{"helperText":"pick as many as apply"}}]}]},{"sections":[{"id":"07419e1c-faed-4461-9d18-98985b43753f","label":"Demeanor","blocks":[{"id":"2dbac1c7-1b60-4e14-96d9-420279a2be39","label":"Conniving, Detached, Reserved, Self-Satisfied","type":"Text","value":"","meta":{"helperText":"pick one"}}]}]}]},{"columns":[{"sections":[{"id":"9e324f32-65e1-433c-a3e1-37a6d0ff3438","label":"Intro Questions","blocks":[{"id":"7d296455-9374-4872-8003-3d9336d1d3b0","label":"Info Text","type":"InfoText","value":"» Who were you? Who are you now?<br><br>» How long have you lived in this city?<br><br>» Which mortal do you trust with your secrets?<br><br>» What do you loathe about your immortal existence?<br><br>» What still entices you about an ordinary mortal life?<br><br>","meta":{}}]}]}]},{"columns":[{"sections":[{"id":"95b45ce6-0596-45ce-bd32-793a012af224","label":"Starting Character Stats","blocks":[{"id":"3fa4dfab-b809-469a-968d-d823fccbf105","label":"Info Text","type":"InfoText","value":"(Add 1 to one of these)","meta":{}},{"id":"33a7b4ff-1131-4b7b-9c6b-2b213a2cafbe","label":"Blood","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"0"},{"id":"c55632d5-b768-4513-9ce6-fce1a1588f48","label":"Heart","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"2"},{"id":"ad27fc03-6609-467d-9a91-f5972f932845","label":"Mind","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"1"},{"id":"f95b173e-914c-4937-81f0-3cd76adf7926","label":"Spirit","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"-2"},{"id":"cbc835d8-bac4-4e0e-99c3-c72af87c7a1e","label":"","type":"Separator","meta":{"hasLabel":false},"value":""}]}]},{"sections":[{"id":"a78f3945-f467-4d26-a24f-dab137f2d687","label":"Starting Factions ","blocks":[{"id":"7db06005-b6ce-491e-ad89-a75a06a2e55c","label":"Info Text","type":"InfoText","value":"(Add 1 to one of these)","meta":{}},{"id":"2b009990-becc-45e5-8489-7242f6f285c8","label":"Mortality","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"0"},{"id":"5168c85b-f10c-43dc-ad79-e4874617bbce","label":"Night","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"0"},{"id":"210a9df7-3a92-4a05-bc50-9ce144bb11ca","label":"Power","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"1"},{"id":"99cb7e99-cba8-4ee1-accf-a960c0a17abb","label":"Wild","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"0"},{"id":"37f629d1-0430-4004-ac6c-a47298d70a4a","label":"","type":"Separator","meta":{"hasLabel":false},"value":""}]}]}]},{"columns":[{"sections":[{"id":"73feb4ad-f252-4806-9df0-3ef1ae3d51e3","label":"Gear","blocks":[{"id":"81544cb4-aa83-4940-907f-95b8114233f5","label":"» A palatial penthouse, a luxury car and drives, a smart phone<br>» An elegant weapon<br>     »Silenced 9mm Glock (2-harm close)<br>     »Sword Cane (2-harm hand)<br>     »Throwing Daggers (2-harm intimate/close)<br>     »Katana (3-harm hand messy)<br>» A small black book of notes and records, written in a dead language","type":"Text","value":"","meta":{}}]}]}]}]},{"id":"655ed9f1-bcba-4b18-882d-e19a3a6d314a","rows":[{"columns":[{"sections":[{"id":"4fe5c7d8-517f-41c3-986d-dcca1cc190d5","label":"Harm","blocks":[{"id":"875f5fb8-bed1-4f5b-8d97-85941d74fd9f","label":"Faint","type":"Numeric","value":"1","meta":{"checked":false}},{"id":"39954260-b6d9-4bad-beb8-097df04f37eb","label":"Faint","type":"Numeric","value":"1","meta":{"checked":false}},{"id":"3a3de271-b9e4-4147-aaf8-0a10a5e530b3","label":"Grievous","type":"Numeric","value":"2","meta":{"checked":false}},{"id":"6f8bf832-3859-4388-9ebb-05738b469195","label":"Grievous","type":"Numeric","value":"2","meta":{"checked":false}},{"id":"d7c03611-2922-42d1-aca2-6ea15b4dc3cc","label":"Critical","type":"Numeric","value":"3","meta":{"checked":false}},{"id":"1ee46d65-9ec8-40d6-819e-eff1a6cfd509","label":"Critical","type":"Numeric","value":"3","meta":{"checked":false}}]},{"id":"afb210c7-aae3-4184-9d6f-c23fccf51d38","label":"Armor","blocks":[{"id":"694d9e92-ef93-4c71-9dd1-5a8ecf78690a","label":"Current Armor Rating","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"0"}]}]},{"sections":[{"id":"96b34211-3e3d-4013-9681-562960e74675","label":"S-Harm","blocks":[{"id":"994faf54-3550-4cc3-a011-6084bdc638a3","label":"Incapacitated","type":"Numeric","value":"1","meta":{"checked":false}}]},{"id":"1ff12166-2860-432e-93c5-4fbd0c3a6487","label":"Scars","blocks":[{"id":"0da7b06b-a8eb-4993-ae83-d67ff21e1517","label":"Shattered (-1 Blood)","type":"SlotTracker","meta":{"helperText":"Shattered means frightened, weakened, and overly cautious. Shattered characters hesitate when they should move, and their attempts to unleash an<br>attack on someone or escape a situation often come up short."},"value":[{"label":"","checked":false}]},{"id":"124474c9-5a6f-42fa-b10c-5fc8c5537aad","label":"Crushed (-1 Heart)","type":"SlotTracker","meta":{"helperText":"Crushed means traumatized, timid, and uncertain. Crushed characters bear<br>the full weight of the wounds they’ve suffered, and their attempts to persuade an NPC are inhibited by their reticent approach to conflict."},"value":[{"label":"","checked":false}]},{"id":"e9beb91d-4499-457a-b219-1c9c8e3da354","label":"Fractured (-1 Mind)","type":"SlotTracker","meta":{"helperText":"Fractured means confused, disoriented, and disjointed. Fractured characters<br>are unstable and unsure, and their attempts to figure someone out or mislead, distract, or trick others are unfocused and imprecise."},"value":[{"label":"","checked":false}]},{"id":"4d8d5e90-6558-4f02-ae91-32a536fef890","label":"Broken (-1 Spirit)","type":"SlotTracker","meta":{"helperText":"Broken means hopeless, forlorn, and cowardly. Broken characters have lost<br>their will to fight, and their attempts to keep their cool or let it out are often<br>half-hearted and incomplete."},"value":[{"label":"","checked":false}]}]}]}]}],"label":"Harm"},{"id":"d17df1b9-f169-4ede-8e9d-f884f63343e6","rows":[{"columns":[{"sections":[{"id":"c4c6950d-9fa3-4ead-a708-b8c85c9c93dc","label":"Corruption Track","blocks":[{"id":"5ce0b181-a3aa-4885-9484-e5429fb80dde","label":"Corruption ","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]}]},{"id":"0455d3f4-2b1c-4b6c-80ff-704d5be3b779","label":"Corruption Advances","blocks":[{"id":"eb8db77f-9889-4259-a930-3e358b3fb51f","label":"Take a corruption move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"ceca509b-7e7a-4f57-8a76-de7cea0e3b61","label":"Take a corruption move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"57997718-7189-459f-9a54-21147fb6b700","label":"Take a corruption move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"55567aa6-2c44-49f8-a29a-8dd74b691dcf","label":"Take a corruption move from another Archetype","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"be83fe3f-a238-4be7-806e-11a228f5ba19","label":"Retire your character. They may return as a Threat.","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]}]}]},{"sections":[{"id":"a6c7ff28-e4ea-4ec0-9e58-64e740e6d9e7","label":"Corruption Moves","blocks":[{"id":"6f951471-045c-4137-b641-f55b99f18808","label":"Ahead of the Game","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"&nbsp;Mark corruption to roll with Heart instead of Faction<br>when you make the start of session move. Mark any Faction you wish, and<br>take a Debt on someone involved in the situation, even on a miss."}},{"id":"2bbd68e7-bcaf-491b-b8f2-794438648862","label":"Poker Face","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"When someone asks you a question after figuring you out,<br>mark corruption to force them to pick a different question from the list.<br>Mark corruption to mislead or trick an NPC as if you rolled a 10+"}},{"id":"600abc3c-dcde-4a67-a6dd-e37a36040bbf","label":"Under My Thumb","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"When you cash in a Debt, mark corruption to give a<br>player character -2 to refuse to honor a Debt (after rolling) or to make<br>an NPC give you two things from the list.&nbsp;"}},{"id":"a43ab844-17ad-43a9-963b-97c4b2a393ef","label":"Mirror, Mirror","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"&nbsp;When you breathe new life into the mouth of a corpse,<br>mark corruption to animate their lifeless body. While animate, they must<br>answer two questions truthfully; any further conversation may require<br>you to persuade or mislead them to gain any additional information.<br>Once the effect dissipates, you cannot animate them a second time"}}]}]}]}],"label":"Corruption"},{"id":"fdd9bcd5-f1d5-4def-a67c-722009253328","rows":[{"columns":[{"sections":[{"id":"fa5ec8f5-cbe5-4dc4-82b5-77181ec75627","label":"Debts","blocks":[{"id":"bc2f49b8-4edc-48bb-b452-37735347e474","label":"» You have been watching someone’s lineage closely, keeping them safe<br>from harm. They owe you two Debts","type":"Text","value":"","meta":{}},{"id":"049b54b8-b4a6-44e4-ac36-d1b493c6dfe5","label":"» Someone has seen you die and come back to life. They haven’t told<br>anyone your secrets. You owe them a Debt.","type":"Text","value":"","meta":{}},{"id":"99e40dc3-0104-4437-9c30-bdef67babe22","label":"» Someone usually accompanies you when you head straight into danger.<br>Tell them why you trust them. You owe them two Debts.","type":"Text","value":"","meta":{}}]}]}]},{"columns":[{"sections":[{"id":"9fd9196d-913d-4771-84e7-61fd7312c23b","label":"Immortal Moves","blocks":[{"id":"aa4ec31f-1100-43f8-b9df-965c8369a79a","label":"Chameleon","type":"Skill","value":"0","meta":{"commands":["2d6"],"helperText":"When you perform an important ritual of another Faction in<br>their presence, roll with Heart. On a hit, all the members of that Faction<br>must treat you as if you were one of their own for the rest of the scene.<br>On a 10+, hold 3. On a 7-9, hold 2. Spend that hold 1 for 1 to roll with<br>Heart instead of their Faction to put a face to a name, investigate a<br>place of power, or drop someone’s name. On a miss, your observance<br>opens up an opportunity for your enemies within the targeted Faction to<br>strike openly at you or your interests.","hideModifier":false}},{"id":"2f1b7072-f29b-4484-a656-29cfe80abad1","label":"Dauntless","type":"Skill","value":"0","meta":{"commands":["2d6"],"helperText":"When you keep your cool in the face of violent threats or<br>intimidation, treat a 7-9 as a 10+ result. On a miss, you can stand your<br>ground as if you rolled a 7-9, but your resilience tips your hand; your<br>opposition learns something valuable about your schemes.","hideModifier":false}},{"id":"7b9882f9-5274-4eed-82a8-3f070c728e86","label":"And Choose one more:","type":"Text","value":"","meta":{}},{"id":"152ad086-aad0-4e8e-b47b-8da4e869df89","label":"Neck Deep","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"&nbsp;You’ve been in the city a long time. Add +1 to any Faction<br>that’s not your own and name an NPC from that Faction with whom you<br>have extended history. Take + 1 ongoing when you hit the streets to<br>visit your old friend. On a miss, something from your past has come back<br>to haunt you both."}},{"id":"39821c20-6050-4660-862e-128d6ae9f458","label":"Mortal Lover","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"You once had an intimate and lengthy relationship with a<br>mortal; you learned something of value from their short life. Tell the MC<br>what token you carry with you to sustain their memory and take a move<br>from a Mortality archetype."}},{"id":"af2947fe-a576-40b3-9709-a42f214dfc21","label":"Duelist","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"When you unleash an attack with an elegant weapon, roll<br>with Heart instead of Blood. On a miss, you are disarmed, outgunned, or<br>overwhelmed (MC’s choice)."}},{"id":"3e6ed421-3b5f-4d57-ab89-c5a11fb10d21","label":"Objets d’art","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"You have acquired a number of objects, relics, and artifacts<br>over your many lifetimes. You have enough space to house them at<br>your penthouse and one or two staff (Min-jun and Orlando, maybe) to<br>care for the most priceless items. Once per session, you may obtain an<br>item from your collection that will serve as a perfect gift to an NPC of<br>your choice; tell the MC where you got it from originally. If you bring an<br>arcane item home to add to your holdings, you can research it as if you<br>were a scholar consulting his private collection (Dark Streets, p29)."}}]}]},{"sections":[{"id":"40698d0e-3d57-4978-8763-6a27f0dfe102","label":"Drama Moves","blocks":[{"id":"e32dba40-67a2-4693-b4f0-bbd530b66ec4","label":"Immortal Corruption Move<br>","type":"Text","value":"","meta":{"helperText":"When you give someone a false prophecy, mark corruption.&nbsp;"}},{"id":"82c48702-f2da-47c9-bc61-3106bdd1aee1","label":"Immortal Intimacy Move<br>","type":"Text","value":"","meta":{"helperText":"When you share a moment of intimacy—physical or emotional—with another<br>person, you gain a specific and clear vision about that person’s future. You<br>can ask up to 3 questions about the vision; mark corruption for each.&nbsp;"}},{"id":"3cdb7abe-ee6b-46b4-9139-92de4646f88e","label":"Immortal End Move<br>","type":"Text","value":"","meta":{"helperText":"When you die or retire your character, announce a proclamation upon the<br>world that will reverberate in dreams worldwide. Detail the signs of its coming.<br>The MC will make your prophecy come to pass, sooner rather than later"}}]}]}]}],"label":"Moves"},{"id":"313bd937-b4c7-48f4-9c11-8cbaded9a4df","rows":[{"columns":[{"sections":[{"id":"2a91c391-cbd7-4097-a376-1d943fdc9cd3","label":"Standard Avances","blocks":[{"id":"c19bf259-7746-46e3-b51c-328a3d228e4f","label":"+1 Blood (max +3) ","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"84a19273-ba10-419f-a2ff-8fd860f4a4cd","label":"+1 Heart (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"cbcaa462-dda8-47c6-8b46-1248737a8295","label":"+1 Mind (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"02119108-d419-446c-b55b-f5c4cf3589e0","label":"+1 Spirit (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"a2435a60-df27-4fb1-bee8-750c5c05ca23","label":"A new Immortal Move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"5cbb7c7b-7098-4761-b753-24d1fd290b7e","label":"A new Immortal Move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"a167d869-b076-4703-b099-f17cc03afd6c","label":"A move from another Archetype","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"a288c98b-c290-4d1d-b529-c8e5e874ff3e","label":"A move from another Archetype","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"e054adfa-f271-40a0-a5d9-c0daba130a24","label":"Change your Faction","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"417a261a-3b64-4a2e-b6e1-6919d1918928","label":"Change your Faction","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]}]}]},{"sections":[{"id":"9b7e6ad9-5413-4a67-bfa3-03c0f5384513","label":"Cont...","blocks":[{"id":"a4e9bee4-6269-40c9-940b-4c633be66a3e","label":"Info Text","type":"InfoText","value":"After 5 advances you may select:","meta":{}},{"id":"ccd011fb-1de0-4014-8b80-64973f43ee81","label":"+1 to any stat (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"8190239e-0739-4f5b-a791-67e0042670bf","label":"+1 to any stat (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"a4fa303b-582e-4650-9ce8-b4927f7302b5","label":"+1 to any Faction (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"04fb948a-8b9f-4eb8-86f6-3476ce710923","label":"Erase a scar","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"9d769488-dab9-4dea-a15f-16288933d3c8","label":"Take Foretellings and prophetic tools","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"989f35b7-a489-44f0-a634-2efa60be255a","label":"Erase a corruption advance","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"2b0e43ce-4dd9-4d3e-bdb9-fe7b3577bc2b","label":"Advance 3 basic moves","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"d0f98992-453c-4b55-9a04-48a21385e5c3","label":"Advance 3 basic moves","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"bb1df445-e32e-4d78-9911-fdfc1bb723d9","label":"Change to a new Archetype","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]}]}]}]}],"label":"Advances"}],"template":"Blank","version":6,"wide":true,"group":"Urban Shadows Archetypes"}
+{
+  "fariType": "character",
+  "lastUpdated": 1660548334,
+  "name": "Urban Shadows Character Template - The Immortal Template",
+  "pages": [
+    {
+      "id": "07a7bc32-8662-46ed-bd86-192c03a9c6e5",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "edc2d9ce-fbd5-41e8-b1ba-c7852e478ed0",
+                  "label": "Faction:  Power\nArchetype:  The Immortal",
+                  "blocks": []
+                },
+                {
+                  "id": "4652769d-6780-46e1-b80d-bfb190c054aa",
+                  "label": "Character Name",
+                  "blocks": [
+                    {
+                      "id": "dd0e4654-5f4d-4353-b8c8-f3b5dd3d8be3",
+                      "label": "Anna, Aethelfled, Boris, Brandon Ebele, Essex, Hildred, Hiro, Linsey,<br>Mildred, Nathaniel, Khari, Thorn, Tsutomu, Zacariah",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pick one" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "259f9190-3a0d-4f73-9c9c-0eec465fadd6",
+                  "label": "Look",
+                  "blocks": [
+                    {
+                      "id": "f05eb17f-e1bb-414e-88f8-bc3d0e9ef6ff",
+                      "label": "• Ambigous, Female, Male, Transgressing",
+                      "type": "Text",
+                      "value": "• Asian or South Asian, Black, Hispanic/Latino, Indigenous, Middle Eastern, White, __________\n• Antiquated Clothing, Comfortable Clothing, Eccentric/Strange Clothing, Expensive Clothing",
+                      "meta": { "helperText": "pick as many as apply" }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "07419e1c-faed-4461-9d18-98985b43753f",
+                  "label": "Demeanor",
+                  "blocks": [
+                    {
+                      "id": "2dbac1c7-1b60-4e14-96d9-420279a2be39",
+                      "label": "Conniving, Detached, Reserved, Self-Satisfied",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pick one" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9e324f32-65e1-433c-a3e1-37a6d0ff3438",
+                  "label": "Intro Questions",
+                  "blocks": [
+                    {
+                      "id": "7d296455-9374-4872-8003-3d9336d1d3b0",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "» Who were you? Who are you now?<br><br>» How long have you lived in this city?<br><br>» Which mortal do you trust with your secrets?<br><br>» What do you loathe about your immortal existence?<br><br>» What still entices you about an ordinary mortal life?<br><br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "95b45ce6-0596-45ce-bd32-793a012af224",
+                  "label": "Starting Character Stats",
+                  "blocks": [
+                    {
+                      "id": "3fa4dfab-b809-469a-968d-d823fccbf105",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "(Add 1 to one of these)",
+                      "meta": {}
+                    },
+                    {
+                      "id": "33a7b4ff-1131-4b7b-9c6b-2b213a2cafbe",
+                      "label": "Blood",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "c55632d5-b768-4513-9ce6-fce1a1588f48",
+                      "label": "Heart",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "2"
+                    },
+                    {
+                      "id": "ad27fc03-6609-467d-9a91-f5972f932845",
+                      "label": "Mind",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "f95b173e-914c-4937-81f0-3cd76adf7926",
+                      "label": "Spirit",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-2"
+                    },
+                    {
+                      "id": "cbc835d8-bac4-4e0e-99c3-c72af87c7a1e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "a78f3945-f467-4d26-a24f-dab137f2d687",
+                  "label": "Starting Factions ",
+                  "blocks": [
+                    {
+                      "id": "7db06005-b6ce-491e-ad89-a75a06a2e55c",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "(Add 1 to one of these)",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2b009990-becc-45e5-8489-7242f6f285c8",
+                      "label": "Mortality",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "5168c85b-f10c-43dc-ad79-e4874617bbce",
+                      "label": "Night",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "210a9df7-3a92-4a05-bc50-9ce144bb11ca",
+                      "label": "Power",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "99cb7e99-cba8-4ee1-accf-a960c0a17abb",
+                      "label": "Wild",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "37f629d1-0430-4004-ac6c-a47298d70a4a",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "73feb4ad-f252-4806-9df0-3ef1ae3d51e3",
+                  "label": "Gear",
+                  "blocks": [
+                    {
+                      "id": "81544cb4-aa83-4940-907f-95b8114233f5",
+                      "label": "» A palatial penthouse, a luxury car and drives, a smart phone<br>» An elegant weapon<br>     »Silenced 9mm Glock (2-harm close)<br>     »Sword Cane (2-harm hand)<br>     »Throwing Daggers (2-harm intimate/close)<br>     »Katana (3-harm hand messy)<br>» A small black book of notes and records, written in a dead language",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "655ed9f1-bcba-4b18-882d-e19a3a6d314a",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "4fe5c7d8-517f-41c3-986d-dcca1cc190d5",
+                  "label": "Harm",
+                  "blocks": [
+                    {
+                      "id": "875f5fb8-bed1-4f5b-8d97-85941d74fd9f",
+                      "label": "Faint",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "39954260-b6d9-4bad-beb8-097df04f37eb",
+                      "label": "Faint",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "3a3de271-b9e4-4147-aaf8-0a10a5e530b3",
+                      "label": "Grievous",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "6f8bf832-3859-4388-9ebb-05738b469195",
+                      "label": "Grievous",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "d7c03611-2922-42d1-aca2-6ea15b4dc3cc",
+                      "label": "Critical",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "1ee46d65-9ec8-40d6-819e-eff1a6cfd509",
+                      "label": "Critical",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "afb210c7-aae3-4184-9d6f-c23fccf51d38",
+                  "label": "Armor",
+                  "blocks": [
+                    {
+                      "id": "694d9e92-ef93-4c71-9dd1-5a8ecf78690a",
+                      "label": "Current Armor Rating",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "96b34211-3e3d-4013-9681-562960e74675",
+                  "label": "S-Harm",
+                  "blocks": [
+                    {
+                      "id": "994faf54-3550-4cc3-a011-6084bdc638a3",
+                      "label": "Incapacitated",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "1ff12166-2860-432e-93c5-4fbd0c3a6487",
+                  "label": "Scars",
+                  "blocks": [
+                    {
+                      "id": "0da7b06b-a8eb-4993-ae83-d67ff21e1517",
+                      "label": "Shattered (-1 Blood)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Shattered means frightened, weakened, and overly cautious. Shattered characters hesitate when they should move, and their attempts to unleash an<br>attack on someone or escape a situation often come up short."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "124474c9-5a6f-42fa-b10c-5fc8c5537aad",
+                      "label": "Crushed (-1 Heart)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Crushed means traumatized, timid, and uncertain. Crushed characters bear<br>the full weight of the wounds they’ve suffered, and their attempts to persuade an NPC are inhibited by their reticent approach to conflict."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "e9beb91d-4499-457a-b219-1c9c8e3da354",
+                      "label": "Fractured (-1 Mind)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Fractured means confused, disoriented, and disjointed. Fractured characters<br>are unstable and unsure, and their attempts to figure someone out or mislead, distract, or trick others are unfocused and imprecise."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "4d8d5e90-6558-4f02-ae91-32a536fef890",
+                      "label": "Broken (-1 Spirit)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Broken means hopeless, forlorn, and cowardly. Broken characters have lost<br>their will to fight, and their attempts to keep their cool or let it out are often<br>half-hearted and incomplete."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Harm"
+    },
+    {
+      "id": "d17df1b9-f169-4ede-8e9d-f884f63343e6",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c4c6950d-9fa3-4ead-a708-b8c85c9c93dc",
+                  "label": "Corruption Track",
+                  "blocks": [
+                    {
+                      "id": "5ce0b181-a3aa-4885-9484-e5429fb80dde",
+                      "label": "Corruption ",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "0455d3f4-2b1c-4b6c-80ff-704d5be3b779",
+                  "label": "Corruption Advances",
+                  "blocks": [
+                    {
+                      "id": "eb8db77f-9889-4259-a930-3e358b3fb51f",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "ceca509b-7e7a-4f57-8a76-de7cea0e3b61",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "57997718-7189-459f-9a54-21147fb6b700",
+                      "label": "Take a corruption move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "55567aa6-2c44-49f8-a29a-8dd74b691dcf",
+                      "label": "Take a corruption move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "be83fe3f-a238-4be7-806e-11a228f5ba19",
+                      "label": "Retire your character. They may return as a Threat.",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "a6c7ff28-e4ea-4ec0-9e58-64e740e6d9e7",
+                  "label": "Corruption Moves",
+                  "blocks": [
+                    {
+                      "id": "6f951471-045c-4137-b641-f55b99f18808",
+                      "label": "Ahead of the Game",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "&nbsp;Mark corruption to roll with Heart instead of Faction<br>when you make the start of session move. Mark any Faction you wish, and<br>take a Debt on someone involved in the situation, even on a miss."
+                      }
+                    },
+                    {
+                      "id": "2bbd68e7-bcaf-491b-b8f2-794438648862",
+                      "label": "Poker Face",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When someone asks you a question after figuring you out,<br>mark corruption to force them to pick a different question from the list.<br>Mark corruption to mislead or trick an NPC as if you rolled a 10+"
+                      }
+                    },
+                    {
+                      "id": "600abc3c-dcde-4a67-a6dd-e37a36040bbf",
+                      "label": "Under My Thumb",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When you cash in a Debt, mark corruption to give a<br>player character -2 to refuse to honor a Debt (after rolling) or to make<br>an NPC give you two things from the list.&nbsp;"
+                      }
+                    },
+                    {
+                      "id": "a43ab844-17ad-43a9-963b-97c4b2a393ef",
+                      "label": "Mirror, Mirror",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "&nbsp;When you breathe new life into the mouth of a corpse,<br>mark corruption to animate their lifeless body. While animate, they must<br>answer two questions truthfully; any further conversation may require<br>you to persuade or mislead them to gain any additional information.<br>Once the effect dissipates, you cannot animate them a second time"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Corruption"
+    },
+    {
+      "id": "fdd9bcd5-f1d5-4def-a67c-722009253328",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "fa5ec8f5-cbe5-4dc4-82b5-77181ec75627",
+                  "label": "Debts",
+                  "blocks": [
+                    {
+                      "id": "bc2f49b8-4edc-48bb-b452-37735347e474",
+                      "label": "» You have been watching someone’s lineage closely, keeping them safe<br>from harm. They owe you two Debts",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "049b54b8-b4a6-44e4-ac36-d1b493c6dfe5",
+                      "label": "» Someone has seen you die and come back to life. They haven’t told<br>anyone your secrets. You owe them a Debt.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "99e40dc3-0104-4437-9c30-bdef67babe22",
+                      "label": "» Someone usually accompanies you when you head straight into danger.<br>Tell them why you trust them. You owe them two Debts.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9fd9196d-913d-4771-84e7-61fd7312c23b",
+                  "label": "Immortal Moves",
+                  "blocks": [
+                    {
+                      "id": "aa4ec31f-1100-43f8-b9df-965c8369a79a",
+                      "label": "Chameleon",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["2d6"],
+                        "helperText": "When you perform an important ritual of another Faction in<br>their presence, roll with Heart. On a hit, all the members of that Faction<br>must treat you as if you were one of their own for the rest of the scene.<br>On a 10+, hold 3. On a 7-9, hold 2. Spend that hold 1 for 1 to roll with<br>Heart instead of their Faction to put a face to a name, investigate a<br>place of power, or drop someone’s name. On a miss, your observance<br>opens up an opportunity for your enemies within the targeted Faction to<br>strike openly at you or your interests.",
+                        "hideModifier": false
+                      }
+                    },
+                    {
+                      "id": "2f1b7072-f29b-4484-a656-29cfe80abad1",
+                      "label": "Dauntless",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["2d6"],
+                        "helperText": "When you keep your cool in the face of violent threats or<br>intimidation, treat a 7-9 as a 10+ result. On a miss, you can stand your<br>ground as if you rolled a 7-9, but your resilience tips your hand; your<br>opposition learns something valuable about your schemes.",
+                        "hideModifier": false
+                      }
+                    },
+                    {
+                      "id": "7b9882f9-5274-4eed-82a8-3f070c728e86",
+                      "label": "And Choose one more:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "152ad086-aad0-4e8e-b47b-8da4e869df89",
+                      "label": "Neck Deep",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "&nbsp;You’ve been in the city a long time. Add +1 to any Faction<br>that’s not your own and name an NPC from that Faction with whom you<br>have extended history. Take + 1 ongoing when you hit the streets to<br>visit your old friend. On a miss, something from your past has come back<br>to haunt you both."
+                      }
+                    },
+                    {
+                      "id": "39821c20-6050-4660-862e-128d6ae9f458",
+                      "label": "Mortal Lover",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "You once had an intimate and lengthy relationship with a<br>mortal; you learned something of value from their short life. Tell the MC<br>what token you carry with you to sustain their memory and take a move<br>from a Mortality archetype."
+                      }
+                    },
+                    {
+                      "id": "af2947fe-a576-40b3-9709-a42f214dfc21",
+                      "label": "Duelist",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you unleash an attack with an elegant weapon, roll<br>with Heart instead of Blood. On a miss, you are disarmed, outgunned, or<br>overwhelmed (MC’s choice)."
+                      }
+                    },
+                    {
+                      "id": "3e6ed421-3b5f-4d57-ab89-c5a11fb10d21",
+                      "label": "Objets d’art",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "You have acquired a number of objects, relics, and artifacts<br>over your many lifetimes. You have enough space to house them at<br>your penthouse and one or two staff (Min-jun and Orlando, maybe) to<br>care for the most priceless items. Once per session, you may obtain an<br>item from your collection that will serve as a perfect gift to an NPC of<br>your choice; tell the MC where you got it from originally. If you bring an<br>arcane item home to add to your holdings, you can research it as if you<br>were a scholar consulting his private collection (Dark Streets, p29)."
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "40698d0e-3d57-4978-8763-6a27f0dfe102",
+                  "label": "Drama Moves",
+                  "blocks": [
+                    {
+                      "id": "e32dba40-67a2-4693-b4f0-bbd530b66ec4",
+                      "label": "Immortal Corruption Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you give someone a false prophecy, mark corruption.&nbsp;"
+                      }
+                    },
+                    {
+                      "id": "82c48702-f2da-47c9-bc61-3106bdd1aee1",
+                      "label": "Immortal Intimacy Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you share a moment of intimacy—physical or emotional—with another<br>person, you gain a specific and clear vision about that person’s future. You<br>can ask up to 3 questions about the vision; mark corruption for each.&nbsp;"
+                      }
+                    },
+                    {
+                      "id": "3cdb7abe-ee6b-46b4-9139-92de4646f88e",
+                      "label": "Immortal End Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you die or retire your character, announce a proclamation upon the<br>world that will reverberate in dreams worldwide. Detail the signs of its coming.<br>The MC will make your prophecy come to pass, sooner rather than later"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Moves"
+    },
+    {
+      "id": "313bd937-b4c7-48f4-9c11-8cbaded9a4df",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2a91c391-cbd7-4097-a376-1d943fdc9cd3",
+                  "label": "Standard Avances",
+                  "blocks": [
+                    {
+                      "id": "c19bf259-7746-46e3-b51c-328a3d228e4f",
+                      "label": "+1 Blood (max +3) ",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "84a19273-ba10-419f-a2ff-8fd860f4a4cd",
+                      "label": "+1 Heart (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "cbcaa462-dda8-47c6-8b46-1248737a8295",
+                      "label": "+1 Mind (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "02119108-d419-446c-b55b-f5c4cf3589e0",
+                      "label": "+1 Spirit (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "a2435a60-df27-4fb1-bee8-750c5c05ca23",
+                      "label": "A new Immortal Move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "5cbb7c7b-7098-4761-b753-24d1fd290b7e",
+                      "label": "A new Immortal Move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "a167d869-b076-4703-b099-f17cc03afd6c",
+                      "label": "A move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "a288c98b-c290-4d1d-b529-c8e5e874ff3e",
+                      "label": "A move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "e054adfa-f271-40a0-a5d9-c0daba130a24",
+                      "label": "Change your Faction",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "417a261a-3b64-4a2e-b6e1-6919d1918928",
+                      "label": "Change your Faction",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "9b7e6ad9-5413-4a67-bfa3-03c0f5384513",
+                  "label": "Cont...",
+                  "blocks": [
+                    {
+                      "id": "a4e9bee4-6269-40c9-940b-4c633be66a3e",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "After 5 advances you may select:",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ccd011fb-1de0-4014-8b80-64973f43ee81",
+                      "label": "+1 to any stat (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "8190239e-0739-4f5b-a791-67e0042670bf",
+                      "label": "+1 to any stat (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "a4fa303b-582e-4650-9ce8-b4927f7302b5",
+                      "label": "+1 to any Faction (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "04fb948a-8b9f-4eb8-86f6-3476ce710923",
+                      "label": "Erase a scar",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "9d769488-dab9-4dea-a15f-16288933d3c8",
+                      "label": "Take Foretellings and prophetic tools",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "989f35b7-a489-44f0-a634-2efa60be255a",
+                      "label": "Erase a corruption advance",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "2b0e43ce-4dd9-4d3e-bdb9-fe7b3577bc2b",
+                      "label": "Advance 3 basic moves",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "d0f98992-453c-4b55-9a04-48a21385e5c3",
+                      "label": "Advance 3 basic moves",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "bb1df445-e32e-4d78-9911-fdfc1bb723d9",
+                      "label": "Change to a new Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Advances"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "group": "Urban Shadows Archetypes"
+}

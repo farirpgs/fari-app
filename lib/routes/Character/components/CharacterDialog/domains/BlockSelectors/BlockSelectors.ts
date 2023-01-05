@@ -1,27 +1,26 @@
 import { previewContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
+import { BlockType } from "../../../../../../domains/character/types";
 import {
-  BlockType,
-  IBlock,
-  IDicePoolBlock,
-  ISkillBlock,
-} from "../../../../../../domains/character/types";
-import { IRollGroup } from "../../../../../../domains/dice/Dice";
+  IDiceCommandId,
+  IRollablePool,
+} from "../../../../../../domains/dice/Dice";
 
 export const BlockSelectors = {
-  getRollGroupFromBlock(
-    block: IBlock & (IDicePoolBlock | ISkillBlock)
-  ): IRollGroup {
+  getPoolFromBlock(props: {
+    type: BlockType;
+    hideModifier: boolean | undefined;
+    label: string | undefined;
+    value: string | undefined;
+    commands: Array<IDiceCommandId> | undefined;
+  }): IRollablePool {
     let modifier: number | undefined;
-    if (block.type === BlockType.Skill && !block.meta.hideModifier) {
-      modifier = parseInt(block.value) || 0;
+    if (props.type === BlockType.Skill && !props.hideModifier) {
+      modifier = parseInt(props.value || "") || 0;
     }
     return {
-      label: previewContentEditable({ value: block.label }),
+      label: previewContentEditable({ value: props.label }),
       modifier: modifier,
-      commandSets:
-        block.meta.commands?.map((commandGroupId) => ({
-          id: commandGroupId,
-        })) ?? [],
+      commandIds: props.commands ?? [],
     };
   },
 };

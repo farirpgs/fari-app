@@ -1,4 +1,4 @@
-import { css } from "@emotion/css";
+import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import React from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -21,14 +21,14 @@ export const Kofi: React.FC<{}> = () => {
   } catch (error) {}
 
   return (
-    <div
-      className={css({
+    <Box
+      sx={{
         "& span.kofitext": {
           color: `${theme.palette.getContrastText(
             theme.palette.primary.main
           )} !important`,
         },
-      })}
+      }}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );

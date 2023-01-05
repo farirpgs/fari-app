@@ -1,5 +1,3 @@
-import { DiceRoll } from "@dice-roller/rpg-dice-roller";
-import { css } from "@emotion/css";
 import Box from "@mui/material/Box";
 import Grow from "@mui/material/Grow";
 import { useTheme } from "@mui/material/styles";
@@ -7,8 +5,8 @@ import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
 import { Delays } from "../../../../constants/Delays";
-import { FontFamily } from "../../../../constants/FontFamily";
 import { useZIndex } from "../../../../constants/zIndex";
+import { ChatMessageParser } from "../../../../domains/chat/ChatMessageParser";
 import { ThemedLabel } from "../../../Character/components/CharacterDialog/components/ThemedLabel";
 import {
   MiniThemeContext,
@@ -16,10 +14,12 @@ import {
 } from "../../../Character/components/CharacterDialog/MiniThemeContext";
 import { DefaultPlayerColor } from "../../consts/PlayerColors";
 import { IPlayerCursorRollOutput } from "../../types/IPlayerCursorState";
+import { IMessageToSend, IRollMessage, MessageType } from "../Chat/useChat";
+import { DiceRollerMessage } from "../DiceRollMessage/DiceRollMessage";
 
 let topTenLatestRollCommandsSingleton: Array<string> = [];
-
 let openCount = -1;
+
 export default function CursorWithMessage(props: {
   color: string | null | undefined;
   x: number;
@@ -28,7 +28,7 @@ export default function CursorWithMessage(props: {
   rollOutput: IPlayerCursorRollOutput | null | undefined;
   readonly?: boolean;
   label: string | null | undefined;
-  onRollOutputChange?(roll: IPlayerCursorRollOutput | null): void;
+  onMessageSubmit?(messageToSend: IMessageToSend): void;
   onMessageChange?(message: string): void;
 }) {
   const [textPlaceholder] = useState(() => {
@@ -36,7 +36,7 @@ export default function CursorWithMessage(props: {
     if (openCount % 2 === 0) {
       return "Type a message...";
     }
-    return "2d6 + 3";
+    return "/roll 2d6 + 3";
   });
   const zIndex = useZIndex();
   const theme = useTheme();
@@ -70,20 +70,27 @@ export default function CursorWithMessage(props: {
     topTenLatestRollCommandsSingleton = topTenLatestRollCommands;
   }, [topTenLatestRollCommands]);
 
-  function handleDiceRoll() {
-    try {
-      const command = props.message || "";
-      const roll = new DiceRoll(command);
-      props.onRollOutputChange?.({
-        text: roll.output,
-        total: roll.total.toString(),
-      });
-      const newCommands = [command, ...topTenLatestRollCommands].slice(0, 10);
-      const uniqueCommandsArray = Array.from(new Set(newCommands));
-      setTopTenLatestRollCommands(uniqueCommandsArray);
-      setCommandtoPopIndex(0);
-    } catch (error) {
-      setHasDiceError(true);
+  function handleMessageSubmit() {
+    const message = ChatMessageParser.parse({
+      message: props.message,
+    });
+    if (message) {
+      props.onMessageSubmit?.(message);
+      props.onMessageChange?.("");
+
+      if (message.type === MessageType.Roll) {
+        const newCommands = [
+          (message as IRollMessage).value.label,
+          ...topTenLatestRollCommands,
+        ].slice(0, 10);
+        const uniqueCommandsArray = Array.from(new Set(newCommands));
+        const commandArraysWithoutUndefined = uniqueCommandsArray.filter(
+          (command) => command !== undefined
+        ) as Array<string>;
+
+        setTopTenLatestRollCommands(commandArraysWithoutUndefined);
+        setCommandtoPopIndex(0);
+      }
     }
   }
 
@@ -95,7 +102,7 @@ export default function CursorWithMessage(props: {
   function handleRollHistoryPrevious() {
     const poppedCommand = topTenLatestRollCommands[commandToPopIndex];
     if (poppedCommand) {
-      props.onMessageChange?.(poppedCommand);
+      props.onMessageChange?.(`/roll ${poppedCommand}`);
       const newIndex = Math.min(
         commandToPopIndex + 1,
         topTenLatestRollCommands.length - 1
@@ -107,7 +114,7 @@ export default function CursorWithMessage(props: {
   function handleRollHistoryNext() {
     const poppedCommand = topTenLatestRollCommands[commandToPopIndex];
     if (poppedCommand) {
-      props.onMessageChange?.(poppedCommand);
+      props.onMessageChange?.(`/roll ${poppedCommand}`);
       const newIndex = Math.max(commandToPopIndex - 1, 0);
       setCommandtoPopIndex(newIndex);
     }
@@ -116,15 +123,15 @@ export default function CursorWithMessage(props: {
 
   return (
     <MiniThemeContext.Provider value={miniTheme}>
-      <div
-        className={css({
+      <Box
+        sx={{
           label: "CursorWithMessage",
           position: "absolute",
           opacity: stale ? 0.15 : 1,
           pointerEvents: "none",
 
           zIndex: zIndex.cursor,
-        })}
+        }}
         style={{
           transition: isFirefox
             ? undefined
@@ -135,18 +142,19 @@ export default function CursorWithMessage(props: {
         {props.readonly && renderCursor()}
 
         <Grow in={!!shouldRenderPopover}>{renderPopover()}</Grow>
-      </div>
+      </Box>
     </MiniThemeContext.Provider>
   );
 
   function renderCursor() {
     return (
-      <svg
-        className={css({
+      <Box
+        component="svg"
+        sx={{
           position: "relative",
           width: "4rem",
           height: "4rem",
-        })}
+        }}
         width="24"
         height="36"
         viewBox="0 0 24 36"
@@ -158,19 +166,19 @@ export default function CursorWithMessage(props: {
           d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19841L11.7841 12.3673H5.65376Z"
           fill={color}
         />
-      </svg>
+      </Box>
     );
   }
 
   function renderPopover() {
     return (
-      <div
-        className={css({
+      <Box
+        sx={{
           position: "absolute",
           top: "0rem",
           left: "3rem",
           padding: "1rem",
-        })}
+        }}
         style={{ backgroundColor: color, borderRadius: 4 }}
       >
         <Box>
@@ -185,20 +193,20 @@ export default function CursorWithMessage(props: {
           </Typography>
         </Box>
         <ThemedLabel
-          className={css({
+          sx={{
             fontSize: "1.5rem",
-          })}
+          }}
         >
           <ContentEditable
             autoFocus
-            className={css({
+            sx={{
               color: textColor,
               background: "transparent",
               outline: "none",
               minWidth: "15rem",
               maxHeight: "10rem",
               overflow: "hidden",
-            })}
+            }}
             noDelay
             value={props.message || ""}
             onChange={(message) => {
@@ -213,7 +221,7 @@ export default function CursorWithMessage(props: {
               if (e.key === "Enter") {
                 e.preventDefault();
                 e.stopPropagation();
-                handleDiceRoll();
+                handleMessageSubmit();
               } else if (e.key === "ArrowUp") {
                 e.preventDefault();
                 e.stopPropagation();
@@ -235,8 +243,8 @@ export default function CursorWithMessage(props: {
               gutterBottom
               sx={{ color: textColor, display: "block" }}
             >
-              Press <KeyboardKey>Esc or /</KeyboardKey>
-              {" to close"}
+              Press <KeyboardKey>Esc</KeyboardKey>
+              {" to open or close"}
             </Typography>
             <Typography
               variant="caption"
@@ -244,12 +252,12 @@ export default function CursorWithMessage(props: {
               sx={{ color: textColor, display: "block" }}
             >
               Press <KeyboardKey>Enter</KeyboardKey>
-              {" to roll dice command."}
+              {" to send."}
             </Typography>
           </Box>
         )}
         {renderRollOutput()}
-      </div>
+      </Box>
     );
   }
 
@@ -259,49 +267,21 @@ export default function CursorWithMessage(props: {
         <Box>
           {props.rollOutput && (
             <Box
-              py=".5rem"
               sx={{
                 padding: ".5rem",
                 marginTop: ".5rem",
                 background: "#fff",
-                fontSize: "1.5rem",
-                fontFamily: FontFamily.Console,
-                display: "flex",
-                flexDirection: "column",
               }}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: "2rem",
-                    color: "#000",
-                  }}
-                  variant="caption"
-                >
-                  {props.rollOutput?.total}
-                </Typography>
-              </Box>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <Typography
-                  sx={{
-                    color: "#000",
-                  }}
-                  variant="caption"
-                >
-                  {props.rollOutput?.text}
-                </Typography>
-              </Box>
+              <DiceRollerMessage
+                message={
+                  props.rollOutput && {
+                    label: "",
+                    text: props.rollOutput.text,
+                    total: props.rollOutput.total,
+                  }
+                }
+              />
             </Box>
           )}
         </Box>

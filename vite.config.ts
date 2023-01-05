@@ -22,6 +22,9 @@ export default defineConfig({
       "/.netlify/functions/auth": "http://localhost:9999",
     },
   },
+  optimizeDeps: {
+    // disabled: false,
+  },
   test: {
     globals: true,
     globalSetup: ["global-test-setup.ts"],

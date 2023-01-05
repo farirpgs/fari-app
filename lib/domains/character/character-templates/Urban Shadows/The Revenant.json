@@ -1,1 +1,834 @@
-{"fariType":"character","lastUpdated":1660544249,"name":"Urban Shadows Character Template - The Revenant Template","pages":[{"id":"1e8929c2-60f5-414e-b234-f699aeff9df4","label":"Character","rows":[{"columns":[{"sections":[{"id":"9259a20e-b1e0-4819-baa1-6dcf972c1785","label":"Faction:  Night\nArchetype:  The Revenant","blocks":[]},{"id":"3444256d-b0de-43f6-89cb-e08f35e9b97c","label":"Character Name","blocks":[{"id":"24b5ff77-9ff8-400b-8377-86dac5d94e2c","label":"Abdul, Adair, Anamarija, Azarel, Bernhard, Daena, Dilla, Enrique, Faleaka,<br>Farooq, Jeong, Josseline, Kovit, Mwatabu, Natalia, Nikolas, Pablo, Samya,<br>Thomas, Walentyna","type":"Text","value":"","meta":{"helperText":"pick one"}}]}]}]},{"columns":[{"sections":[{"id":"d3612c97-007a-46a8-a12f-5ce1180041a9","label":"Look","blocks":[{"id":"9ae7904d-06e1-467c-a088-ca337059a0cc","label":"• Ambiguous, Female, Male, Transgressing","type":"Text","value":"• Asian or South Asian, Black, Hispanic/Latino, Indigenous, Middle<br>Eastern, White, __________\n• Bloody Clothing, Fetish Clothing, Goth Clothing, Street Clothing","meta":{"helperText":"pick as many as apply"}}]}]},{"sections":[{"id":"673c3d88-c3a7-41e5-9f49-f498376a2b9a","label":"Demeanor","blocks":[{"id":"4e0cf660-2124-450f-aff0-d24a2e9f0634","label":"Confused, Detached, Forgetful, Volatile","type":"Text","value":"","meta":{"helperText":"pick one"}}]}]}]},{"columns":[{"sections":[{"id":"ab35ebd1-5240-477f-9f97-41334075797a","label":"Your Caul","blocks":[{"id":"ee7d7a08-a892-4f24-8faf-bd78e6ba789d","label":"The injustice of your demise has pulled you back to this world, allowing you<br>to seek revenge on those who have done you wrong. List their names and<br>how they wronged you (max 3).","type":"Text","value":"","meta":{}}]}]}]},{"columns":[{"sections":[{"id":"6e0e1262-8147-4267-927a-75801c947880","label":"Intro Questions","blocks":[{"id":"d52b82ed-c803-4e44-8ac0-9899f6197a94","label":"• Who were you before your death?\n<br>• What do you remember of your old life?\n<br>• Who saw you rise from the grave?\n<br>• What symbol of your old life haunts you?\n<br>• Who pulls you away from your vengeance?\n<br>","type":"Text","value":"","meta":{}}]}]}]},{"columns":[{"sections":[{"id":"1527c6dd-b1bb-4a90-a58b-c134f1188868","label":"Starting Character Stats","blocks":[{"id":"800831bc-5249-406e-88b3-733e60e9533a","label":"Info Text","type":"InfoText","value":"(Add 1 to one of these)","meta":{}},{"id":"429ebb35-e3e3-4f6b-8624-b30e78964794","label":"Blood","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"2"},{"id":"d0a215ea-2fe1-42c6-a23e-4c28d68ded9b","label":"Heart","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"0"},{"id":"db355da3-c46b-4397-8303-e3da431f74b4","label":"Mind","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"-2"},{"id":"7608a1cc-4917-4573-8543-d71d1dc97754","label":"Spirit","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"1"},{"id":"1458f07a-475a-446d-87c0-2a487d400e86","label":"","type":"Separator","meta":{"hasLabel":false},"value":""}]}]},{"sections":[{"id":"ec74091f-a3bd-4131-992d-57618cce52f8","label":"Starting Factions ","blocks":[{"id":"3b441329-ba14-4903-850e-02dcfd49d2c7","label":"Info Text","type":"InfoText","value":"(Add 1 to one of these)","meta":{}},{"id":"bad6c91f-02d5-4c1a-9649-db02ee8e2070","label":"Mortality","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"-2"},{"id":"bac95879-fb81-426d-a3aa-a81a45dd051e","label":"Night","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"1"},{"id":"1d4086bd-19f3-4320-b5d7-6da3bc7ecb9a","label":"Power","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"1"},{"id":"e974418c-e3c6-4df6-9e5c-605b7e7cf775","label":"Wild","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"1"},{"id":"f60635a6-60e0-44b6-9152-a18a2de2aa06","label":"","type":"Separator","meta":{"hasLabel":false},"value":""}]}]}]},{"columns":[{"sections":[{"id":"eeba6369-08ae-4be4-a358-b018f9a989d2","label":"Gear","blocks":[{"id":"86d67039-5675-4e2d-939d-8b90a2a8806b","label":"• A remnant of death (a bullet, small bones, two silver coins, etc.)\n• A shotgun or magnum revolver (3-harm loud reload)<br>• A handful of photographs and mementos from your old life","type":"Text","value":"","meta":{}}]}]}]}]},{"id":"c62c59ef-b7fb-4d3d-8251-9708eaa0bd0e","rows":[{"columns":[{"sections":[{"id":"12239b7e-7ffc-451e-83d3-c39109c94897","label":"Harm","blocks":[{"id":"f0798d1e-1f88-4828-b611-d8efcde337b1","label":"Faint","type":"Numeric","value":"1","meta":{"checked":false}},{"id":"3cbef69c-2688-4680-9cfc-f72dde250f37","label":"Faint","type":"Numeric","value":"1","meta":{"checked":false}},{"id":"c9b83f78-4fd8-4b67-a32e-a1ab3454686e","label":"Grievous","type":"Numeric","value":"2","meta":{"checked":false}},{"id":"9c54444c-cd5e-45f8-9229-e4b3f610dd3a","label":"Grievous","type":"Numeric","value":"2","meta":{"checked":false}},{"id":"9200bb55-ba31-471c-9285-68f75129d516","label":"Critical","type":"Numeric","value":"3","meta":{"checked":false}},{"id":"c3fb0410-4e55-458b-866b-b14ba08be466","label":"Critical","type":"Numeric","value":"3","meta":{"checked":false}}]},{"id":"8b293629-a58d-4e32-af3d-dfca7dd569c3","label":"Armor","blocks":[{"id":"376b3407-8263-4ff8-ae53-80046753080a","label":"Current Armor Rating","type":"PointCounter","meta":{"isMainPointCounter":false},"value":"0"}]}]},{"sections":[{"id":"79d26dd1-114c-48d0-a8b2-46c98900cb1a","label":"S-Harm","blocks":[{"id":"619b1e21-3b20-4bb8-8c8b-a56c58c68be4","label":"Incapacitated","type":"Numeric","value":"1","meta":{"checked":false}}]},{"id":"3aa1a515-24f2-4a53-ad82-223523495e69","label":"Scars","blocks":[{"id":"8530ab09-dd28-48da-948c-ff9a121da674","label":"Shattered (-1 Blood)","type":"SlotTracker","meta":{"helperText":"Shattered means frightened, weakened, and overly cautious. Shattered characters hesitate when they should move, and their attempts to unleash an<br>attack on someone or escape a situation often come up short."},"value":[{"label":"","checked":false}]},{"id":"6a079005-2f99-4492-80ad-d6af721333fa","label":"Crushed (-1 Heart)","type":"SlotTracker","meta":{"helperText":"Crushed means traumatized, timid, and uncertain. Crushed characters bear<br>the full weight of the wounds they’ve suffered, and their attempts to persuade an NPC are inhibited by their reticent approach to conflict."},"value":[{"label":"","checked":false}]},{"id":"552b7088-78d4-44cf-af52-999a372e372b","label":"Fractured (-1 Mind)","type":"SlotTracker","meta":{"helperText":"Fractured means confused, disoriented, and disjointed. Fractured characters<br>are unstable and unsure, and their attempts to figure someone out or mislead, distract, or trick others are unfocused and imprecise."},"value":[{"label":"","checked":false}]},{"id":"469b0f86-99e8-4073-842e-99e64845ccd0","label":"Broken (-1 Spirit)","type":"SlotTracker","meta":{"helperText":"Broken means hopeless, forlorn, and cowardly. Broken characters have lost<br>their will to fight, and their attempts to keep their cool or let it out are often<br>half-hearted and incomplete."},"value":[{"label":"","checked":false}]}]}]}]}],"label":"Harm"},{"id":"7f983dbf-6690-4bb5-96c5-32ecdcdf53f0","rows":[{"columns":[{"sections":[{"id":"7d1362b2-1d4c-43d0-af1d-319a899447eb","label":"Corruption Track","blocks":[{"id":"423a35ff-ca77-49fd-8573-7a9c33004ab4","label":"Corruption ","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]}]},{"id":"081e3a23-73cc-448e-a20b-d99fd52c03fc","label":"Corruption Advances","blocks":[{"id":"d87fb343-0611-4591-a7e0-ed8391ce1bb8","label":"Strike out escape a situation; take Against the Wall","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"1a9edbcb-9c00-4869-acab-58a50084483b","label":"Strike out figure someone out; take Dig for Answers","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"bf6194a4-0386-4f35-82a2-b030a0fa8fbd","label":"Strike out mislead, distract, or trick; take Haunt the Darkness","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"2d454e8d-5494-4d54-93c3-734fa09f85c0","label":"Take a corruption move from another Archetype","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"15c11a84-bfd1-4971-88ca-0aea499a87e6","label":"Retire your character; your daemon returns you to the lands of the dead","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]}]}]},{"sections":[{"id":"ebea921a-54e3-49ba-809d-ad989a4264bf","label":"Underworld Moves","blocks":[{"id":"18a019cc-3bb0-4178-9858-1cce665a4f4e","label":"Against the Wall","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"&nbsp;When you are cornered by your enemies, roll with<br>Blood. On a hit, trade harm with your enemies as if you were a small<br>group (3-harm 1-armor) instead of a single person. On a 10+, pick 2. On<br>a 7-9, pick 1.<br>» You inflict terrible harm<br>» You suffer little harm<br>» You create an opportunity<br>» You don’t mark corruption<br>If you advance this move: You trade harm as if you were a medium<br>group (4-harm 2-armor) instead of a small group."}},{"id":"83c7c3da-a9a8-480a-bb33-15b5d9f4eccd","label":"Dig for Answers","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"When you hurt someone to get information, roll<br>with Blood. On a hit, their resolve breaks and they must answer your<br>questions truthfully. On a 10+, ask 2. On a 7-9, ask 1.<br>» Are you telling the truth about ?<br>» What do you know about ?<br>» Where can I find ?<br>» How can you bring me closer to vengeance?<br>» Mark corruption to ask any questions you want, not restrained to<br>this list.<br>If you advance this move: On a 12+, ask 3 from the list or any 1 question—not restrained to this list—without marking corruption."}},{"id":"44c6ff98-242a-4f1a-9134-89879bb810b2","label":"Haunt the Darkness","type":"Skill","value":"0","meta":{"checked":false,"commands":[],"helperText":"When you terrorize someone from the shadows,<br>roll with Spirit. On a hit, they are frightened, intimidated, or unnerved. On<br>a 10+, pick 2. On a 7-9, pick 1.<br>» You create an opportunity<br>» You inflict harm (ap)<br>» You remain in shadows<br>» You don’t mark corruption<br>If you advance this move: On a 12+, all four and one for double effect.<br>You cannot avoid marking corruption for double effect"}}]}]}]}],"label":"Corruption"},{"id":"9a976871-5407-416a-bac5-bfa1c521549c","rows":[{"columns":[{"sections":[{"id":"8db10222-30d6-4492-890b-0fc1b52bac55","label":"Debts","blocks":[{"id":"04b1e47c-ac77-4502-a9e9-95aa89deb053","label":"• Someone mourned your death, truly and deeply. You owe them a Debt.","type":"Text","value":"","meta":{}},{"id":"07494d82-7aae-4a59-a58a-16d09b8d468e","label":"• Someone tried to get justice for your murder, but failed to lay your soul<br>to rest. They owe you a Debt.","type":"Text","value":"","meta":{}},{"id":"5647ce42-5fd9-4cc2-aaa8-0427f71bc194","label":"• Someone has already come to rely on you and your powers. Ask them<br>what unique need you fill. They owe you two Debts. <br><br>","type":"Text","value":"","meta":{}},{"id":"bf4c0bc1-72ca-4069-8eea-19651002da0e","label":"• Your daemon carried you back from the land of the dead. You owe it<br>two Debts. <br><br>","type":"Text","value":"","meta":{}}]}]}]},{"columns":[{"sections":[{"id":"894c623e-d4d8-4a35-bb2a-ef815c998526","label":"Revenant Moves (choose 2)","blocks":[{"id":"ec477968-8eb2-43e6-8041-4b383a3e8924","label":"Abashed the Devil Stood","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"&nbsp;when you openly present yourself to the<br>agents of your enemies, roll with Spirit. On a hit, they choose:<br>» They scatter or flee before you<br>» They throw down their weapons and surrender<br>» They attack you, ignoring your allies<br>On a 10+, take armor+1 against them for the scene. On a miss, they<br>reveal that you’ve sprung a trap laid by those who wish to avoid your<br>judgment.","hideModifier":false}},{"id":"29419f97-0181-46d0-b13e-a61c321576b8","label":"Vigilante","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"when you go into a battle, roll with Blood. On a 10+, hold 3.<br>On a 7-9, hold 2. On a miss, hold 1 and take -1 forward. During the fight,<br>you can spend your hold 1 for 1 to:<br>» Kill, disable, or disarm (your choice) an NPC within reach<br>» Redirect an attack within reach to another character within your<br>reach, or else to nowhere—into the ground or a wall or the sky<br>» Cross the distance to any character outside of your reach before<br>they have time to adjust or react<br>» Name a character within your reach; while you fight, you intercept<br>any attack directed at them and they suffer no harm"}},{"id":"ece26ce3-6770-46b2-8301-5a238f33dc50","label":"Is That Gasoline I Smell?","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"&nbsp;When you search a location for the<br>resources or tools needed to destroy it, roll with Blood. On a hit, you<br>find whatever you need to bring the place down around you. On a 10+,<br>everything is already arrayed to your liking; all you have to do is light the<br>fuse. On a miss, your search leaves you or an ally vulnerable or exposed<br>to your enemies."}},{"id":"2513ec61-ee55-4c6e-9a04-14410ede0131","label":"You Don’t Scare Me","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"You have a mortal confidante who believes in your<br>cause. When you go to your mortal confidante for solace, comfort, or<br>protection, roll with Spirit. On a hit, they tend to your wounds and hide<br>you from your enemies; clear your harm track. On a 10+, they have been<br>keeping their eyes and ears open for you; they tell you about an opportunity you can use against your enemies. On a miss, your condition worries<br>them; they secretly contact someone they think can help you."}},{"id":"d6f02e52-2802-4da7-8eb2-449b42f15676","label":"Merciful","type":"Skill","value":"0","meta":{"checked":false,"commands":["2d6"],"helperText":"When you inflict harm with any weapon (or your fists), you can<br>choose to inflict s-harm. Decide at the moment you inflict the harm; you<br>need not tell anyone in advance what kind of harm you intend to inflict."}}]}]},{"sections":[{"id":"beab16de-b9c0-4aaa-9fe5-ff889cdf094e","label":"Drama Moves","blocks":[{"id":"7711aefa-9196-4dde-a192-0c19fb18ce1b","label":"Revenant Corruption Move<br>","type":"Text","value":"","meta":{"helperText":"When you kill someone not marked by your caul, mark corruption."}},{"id":"fbe5f9d0-2456-45d8-92bd-20f000d6a489","label":"Revenant Intimacy Move<br>","type":"Text","value":"","meta":{"helperText":"When you share a moment of intimacy—physical or emotional—with another<br>person, ask them if you should be an agent of justice or vengeance. If they say<br>justice, ask them how you could relieve the burdens they carry and take +1<br>ongoing to actions toward that end; if they say vengeance, mark corruption."}},{"id":"5e26dd64-2c2c-407b-8d44-fd0bba064190","label":"Revenant End Move<br>","type":"Text","value":"","meta":{"helperText":"When you fill up on harm, your body ceases to function, but you do not die.<br>Anyone who views your corpse with supernatural senses knows that you still<br>live and how to bring you back, e.g., sprinkling graveyard dirt on your body,<br>performing a lost ritual, etc. Your daemon may attempt to enlist someone<br>else to facilitate your return.&nbsp;"}}]},{"id":"e02757eb-09a9-4c66-8f87-a87543fd456d","label":"Your Daemon","blocks":[{"id":"a314d07b-adde-434d-9f69-19319f583d7d","label":"A daemon guided you back from the land of the dead and walks with you now among the living. The two of you are inseparable, and you are constantly aware of its presence. Choose one from each list:\n<br>They are: a dog, a snake, an owl, a vulture, a bat, a crow, a wolf, a cat, a raven, a rat\n<br>They have: a spectral voice, a dark voice, a patient voice, a maternal voice, a demanding voice\n<br>When your daemon stands with you in battle, take armor+1. Your daemon will only follow you in the pursuit of your caul or to fulfill a Debt.","type":"Text","value":"","meta":{}}]}]}]}],"label":"Moves"},{"id":"3e308dd5-01d1-44d3-9f51-a0fde5c1ac7f","rows":[{"columns":[{"sections":[{"id":"43f8ac32-f378-40b4-b4d3-0f5b15a83daa","label":"Standard Avances","blocks":[{"id":"f1b5fd16-a2ea-42c3-8eda-21e4c95b3531","label":"+1 Blood (max +3) ","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"dacac737-22a8-441a-b672-daf98c2d4904","label":"+1 Heart (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"57a36da3-8b80-46ba-8cdd-2d19087dbd90","label":"+1 Mind (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"d121cb3b-0910-428b-b7ca-56f8e8405260","label":"+1 Spirit (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"f28a4160-5bfb-4878-a3a0-e94172688e1b","label":"Gain armor +1 ongoing","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"1d239eea-baae-44b6-bda3-481d3773d364","label":"A new Revenant Move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"bbd44135-5ae5-44be-b460-47651b46f0d5","label":"A new Revenant Move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"22d284e4-3adf-4d53-8a6e-2fcaf52048da","label":"A move from another Archetype","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"c0eec065-97ff-4019-bde0-545d31918fe1","label":"A move from another Archetype","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"94d06597-8514-4c05-bbe2-f1cdbe71c344","label":"Change your Faction","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]}]}]},{"sections":[{"id":"f4ceb241-c67f-419a-860a-c938f255d4ca","label":"Cont...","blocks":[{"id":"373af352-5ee0-409f-a501-a97bd799ca68","label":"Info Text","type":"InfoText","value":"After 5 advances you may select:","meta":{}},{"id":"a6cc26a4-595d-4332-82d0-fe7e43b1f41d","label":"+1 to any stat (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"897f9f53-2e08-4f1a-be89-c7cb27f2f57e","label":"+1 to any Faction (max +3)","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"0e6e896f-c3d9-45c0-9f72-65371c848a7b","label":"Erase a scar","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"5e5c3de5-2d87-4042-b5c7-62edf4cf31e3","label":"Erase a scar","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"f37a8ba2-32c5-42f8-a37c-4856cfa0325c","label":"Advance 3 basic moves","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"f7912ef6-2bf2-45cf-a6c7-051b4cd7d4ef","label":"Advance 3 basic moves","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"6345b139-1559-4596-aa38-0bda9c1d53f7","label":"Advance an underworld move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]},{"id":"b7accb9d-feb9-438e-a960-51e0cdb6f195","label":"Advance an underworld move","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false}]}]}]}]}],"label":"Advances"}],"template":"Blank","version":6,"wide":true,"group":"Urban Shadows Archetypes"}
+{
+  "fariType": "character",
+  "lastUpdated": 1660544249,
+  "name": "Urban Shadows Character Template - The Revenant Template",
+  "pages": [
+    {
+      "id": "1e8929c2-60f5-414e-b234-f699aeff9df4",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9259a20e-b1e0-4819-baa1-6dcf972c1785",
+                  "label": "Faction:  Night\nArchetype:  The Revenant",
+                  "blocks": []
+                },
+                {
+                  "id": "3444256d-b0de-43f6-89cb-e08f35e9b97c",
+                  "label": "Character Name",
+                  "blocks": [
+                    {
+                      "id": "24b5ff77-9ff8-400b-8377-86dac5d94e2c",
+                      "label": "Abdul, Adair, Anamarija, Azarel, Bernhard, Daena, Dilla, Enrique, Faleaka,<br>Farooq, Jeong, Josseline, Kovit, Mwatabu, Natalia, Nikolas, Pablo, Samya,<br>Thomas, Walentyna",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pick one" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "d3612c97-007a-46a8-a12f-5ce1180041a9",
+                  "label": "Look",
+                  "blocks": [
+                    {
+                      "id": "9ae7904d-06e1-467c-a088-ca337059a0cc",
+                      "label": "• Ambiguous, Female, Male, Transgressing",
+                      "type": "Text",
+                      "value": "• Asian or South Asian, Black, Hispanic/Latino, Indigenous, Middle<br>Eastern, White, __________\n• Bloody Clothing, Fetish Clothing, Goth Clothing, Street Clothing",
+                      "meta": { "helperText": "pick as many as apply" }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "673c3d88-c3a7-41e5-9f49-f498376a2b9a",
+                  "label": "Demeanor",
+                  "blocks": [
+                    {
+                      "id": "4e0cf660-2124-450f-aff0-d24a2e9f0634",
+                      "label": "Confused, Detached, Forgetful, Volatile",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "pick one" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "ab35ebd1-5240-477f-9f97-41334075797a",
+                  "label": "Your Caul",
+                  "blocks": [
+                    {
+                      "id": "ee7d7a08-a892-4f24-8faf-bd78e6ba789d",
+                      "label": "The injustice of your demise has pulled you back to this world, allowing you<br>to seek revenge on those who have done you wrong. List their names and<br>how they wronged you (max 3).",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "6e0e1262-8147-4267-927a-75801c947880",
+                  "label": "Intro Questions",
+                  "blocks": [
+                    {
+                      "id": "d52b82ed-c803-4e44-8ac0-9899f6197a94",
+                      "label": "• Who were you before your death?\n<br>• What do you remember of your old life?\n<br>• Who saw you rise from the grave?\n<br>• What symbol of your old life haunts you?\n<br>• Who pulls you away from your vengeance?\n<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "1527c6dd-b1bb-4a90-a58b-c134f1188868",
+                  "label": "Starting Character Stats",
+                  "blocks": [
+                    {
+                      "id": "800831bc-5249-406e-88b3-733e60e9533a",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "(Add 1 to one of these)",
+                      "meta": {}
+                    },
+                    {
+                      "id": "429ebb35-e3e3-4f6b-8624-b30e78964794",
+                      "label": "Blood",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "2"
+                    },
+                    {
+                      "id": "d0a215ea-2fe1-42c6-a23e-4c28d68ded9b",
+                      "label": "Heart",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "db355da3-c46b-4397-8303-e3da431f74b4",
+                      "label": "Mind",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-2"
+                    },
+                    {
+                      "id": "7608a1cc-4917-4573-8543-d71d1dc97754",
+                      "label": "Spirit",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "1458f07a-475a-446d-87c0-2a487d400e86",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "ec74091f-a3bd-4131-992d-57618cce52f8",
+                  "label": "Starting Factions ",
+                  "blocks": [
+                    {
+                      "id": "3b441329-ba14-4903-850e-02dcfd49d2c7",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "(Add 1 to one of these)",
+                      "meta": {}
+                    },
+                    {
+                      "id": "bad6c91f-02d5-4c1a-9649-db02ee8e2070",
+                      "label": "Mortality",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "-2"
+                    },
+                    {
+                      "id": "bac95879-fb81-426d-a3aa-a81a45dd051e",
+                      "label": "Night",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "1d4086bd-19f3-4320-b5d7-6da3bc7ecb9a",
+                      "label": "Power",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "e974418c-e3c6-4df6-9e5c-605b7e7cf775",
+                      "label": "Wild",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "1"
+                    },
+                    {
+                      "id": "f60635a6-60e0-44b6-9152-a18a2de2aa06",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "eeba6369-08ae-4be4-a358-b018f9a989d2",
+                  "label": "Gear",
+                  "blocks": [
+                    {
+                      "id": "86d67039-5675-4e2d-939d-8b90a2a8806b",
+                      "label": "• A remnant of death (a bullet, small bones, two silver coins, etc.)\n• A shotgun or magnum revolver (3-harm loud reload)<br>• A handful of photographs and mementos from your old life",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c62c59ef-b7fb-4d3d-8251-9708eaa0bd0e",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "12239b7e-7ffc-451e-83d3-c39109c94897",
+                  "label": "Harm",
+                  "blocks": [
+                    {
+                      "id": "f0798d1e-1f88-4828-b611-d8efcde337b1",
+                      "label": "Faint",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "3cbef69c-2688-4680-9cfc-f72dde250f37",
+                      "label": "Faint",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "c9b83f78-4fd8-4b67-a32e-a1ab3454686e",
+                      "label": "Grievous",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "9c54444c-cd5e-45f8-9229-e4b3f610dd3a",
+                      "label": "Grievous",
+                      "type": "Numeric",
+                      "value": "2",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "9200bb55-ba31-471c-9285-68f75129d516",
+                      "label": "Critical",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "c3fb0410-4e55-458b-866b-b14ba08be466",
+                      "label": "Critical",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "8b293629-a58d-4e32-af3d-dfca7dd569c3",
+                  "label": "Armor",
+                  "blocks": [
+                    {
+                      "id": "376b3407-8263-4ff8-ae53-80046753080a",
+                      "label": "Current Armor Rating",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "79d26dd1-114c-48d0-a8b2-46c98900cb1a",
+                  "label": "S-Harm",
+                  "blocks": [
+                    {
+                      "id": "619b1e21-3b20-4bb8-8c8b-a56c58c68be4",
+                      "label": "Incapacitated",
+                      "type": "Numeric",
+                      "value": "1",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "3aa1a515-24f2-4a53-ad82-223523495e69",
+                  "label": "Scars",
+                  "blocks": [
+                    {
+                      "id": "8530ab09-dd28-48da-948c-ff9a121da674",
+                      "label": "Shattered (-1 Blood)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Shattered means frightened, weakened, and overly cautious. Shattered characters hesitate when they should move, and their attempts to unleash an<br>attack on someone or escape a situation often come up short."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "6a079005-2f99-4492-80ad-d6af721333fa",
+                      "label": "Crushed (-1 Heart)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Crushed means traumatized, timid, and uncertain. Crushed characters bear<br>the full weight of the wounds they’ve suffered, and their attempts to persuade an NPC are inhibited by their reticent approach to conflict."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "552b7088-78d4-44cf-af52-999a372e372b",
+                      "label": "Fractured (-1 Mind)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Fractured means confused, disoriented, and disjointed. Fractured characters<br>are unstable and unsure, and their attempts to figure someone out or mislead, distract, or trick others are unfocused and imprecise."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "469b0f86-99e8-4073-842e-99e64845ccd0",
+                      "label": "Broken (-1 Spirit)",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Broken means hopeless, forlorn, and cowardly. Broken characters have lost<br>their will to fight, and their attempts to keep their cool or let it out are often<br>half-hearted and incomplete."
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Harm"
+    },
+    {
+      "id": "7f983dbf-6690-4bb5-96c5-32ecdcdf53f0",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "7d1362b2-1d4c-43d0-af1d-319a899447eb",
+                  "label": "Corruption Track",
+                  "blocks": [
+                    {
+                      "id": "423a35ff-ca77-49fd-8573-7a9c33004ab4",
+                      "label": "Corruption ",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "081e3a23-73cc-448e-a20b-d99fd52c03fc",
+                  "label": "Corruption Advances",
+                  "blocks": [
+                    {
+                      "id": "d87fb343-0611-4591-a7e0-ed8391ce1bb8",
+                      "label": "Strike out escape a situation; take Against the Wall",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "1a9edbcb-9c00-4869-acab-58a50084483b",
+                      "label": "Strike out figure someone out; take Dig for Answers",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "bf6194a4-0386-4f35-82a2-b030a0fa8fbd",
+                      "label": "Strike out mislead, distract, or trick; take Haunt the Darkness",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "2d454e8d-5494-4d54-93c3-734fa09f85c0",
+                      "label": "Take a corruption move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "15c11a84-bfd1-4971-88ca-0aea499a87e6",
+                      "label": "Retire your character; your daemon returns you to the lands of the dead",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "ebea921a-54e3-49ba-809d-ad989a4264bf",
+                  "label": "Underworld Moves",
+                  "blocks": [
+                    {
+                      "id": "18a019cc-3bb0-4178-9858-1cce665a4f4e",
+                      "label": "Against the Wall",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "&nbsp;When you are cornered by your enemies, roll with<br>Blood. On a hit, trade harm with your enemies as if you were a small<br>group (3-harm 1-armor) instead of a single person. On a 10+, pick 2. On<br>a 7-9, pick 1.<br>» You inflict terrible harm<br>» You suffer little harm<br>» You create an opportunity<br>» You don’t mark corruption<br>If you advance this move: You trade harm as if you were a medium<br>group (4-harm 2-armor) instead of a small group."
+                      }
+                    },
+                    {
+                      "id": "83c7c3da-a9a8-480a-bb33-15b5d9f4eccd",
+                      "label": "Dig for Answers",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When you hurt someone to get information, roll<br>with Blood. On a hit, their resolve breaks and they must answer your<br>questions truthfully. On a 10+, ask 2. On a 7-9, ask 1.<br>» Are you telling the truth about ?<br>» What do you know about ?<br>» Where can I find ?<br>» How can you bring me closer to vengeance?<br>» Mark corruption to ask any questions you want, not restrained to<br>this list.<br>If you advance this move: On a 12+, ask 3 from the list or any 1 question—not restrained to this list—without marking corruption."
+                      }
+                    },
+                    {
+                      "id": "44c6ff98-242a-4f1a-9134-89879bb810b2",
+                      "label": "Haunt the Darkness",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": [],
+                        "helperText": "When you terrorize someone from the shadows,<br>roll with Spirit. On a hit, they are frightened, intimidated, or unnerved. On<br>a 10+, pick 2. On a 7-9, pick 1.<br>» You create an opportunity<br>» You inflict harm (ap)<br>» You remain in shadows<br>» You don’t mark corruption<br>If you advance this move: On a 12+, all four and one for double effect.<br>You cannot avoid marking corruption for double effect"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Corruption"
+    },
+    {
+      "id": "9a976871-5407-416a-bac5-bfa1c521549c",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "8db10222-30d6-4492-890b-0fc1b52bac55",
+                  "label": "Debts",
+                  "blocks": [
+                    {
+                      "id": "04b1e47c-ac77-4502-a9e9-95aa89deb053",
+                      "label": "• Someone mourned your death, truly and deeply. You owe them a Debt.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "07494d82-7aae-4a59-a58a-16d09b8d468e",
+                      "label": "• Someone tried to get justice for your murder, but failed to lay your soul<br>to rest. They owe you a Debt.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5647ce42-5fd9-4cc2-aaa8-0427f71bc194",
+                      "label": "• Someone has already come to rely on you and your powers. Ask them<br>what unique need you fill. They owe you two Debts. <br><br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "bf4c0bc1-72ca-4069-8eea-19651002da0e",
+                      "label": "• Your daemon carried you back from the land of the dead. You owe it<br>two Debts. <br><br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "894c623e-d4d8-4a35-bb2a-ef815c998526",
+                  "label": "Revenant Moves (choose 2)",
+                  "blocks": [
+                    {
+                      "id": "ec477968-8eb2-43e6-8041-4b383a3e8924",
+                      "label": "Abashed the Devil Stood",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "&nbsp;when you openly present yourself to the<br>agents of your enemies, roll with Spirit. On a hit, they choose:<br>» They scatter or flee before you<br>» They throw down their weapons and surrender<br>» They attack you, ignoring your allies<br>On a 10+, take armor+1 against them for the scene. On a miss, they<br>reveal that you’ve sprung a trap laid by those who wish to avoid your<br>judgment.",
+                        "hideModifier": false
+                      }
+                    },
+                    {
+                      "id": "29419f97-0181-46d0-b13e-a61c321576b8",
+                      "label": "Vigilante",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "when you go into a battle, roll with Blood. On a 10+, hold 3.<br>On a 7-9, hold 2. On a miss, hold 1 and take -1 forward. During the fight,<br>you can spend your hold 1 for 1 to:<br>» Kill, disable, or disarm (your choice) an NPC within reach<br>» Redirect an attack within reach to another character within your<br>reach, or else to nowhere—into the ground or a wall or the sky<br>» Cross the distance to any character outside of your reach before<br>they have time to adjust or react<br>» Name a character within your reach; while you fight, you intercept<br>any attack directed at them and they suffer no harm"
+                      }
+                    },
+                    {
+                      "id": "ece26ce3-6770-46b2-8301-5a238f33dc50",
+                      "label": "Is That Gasoline I Smell?",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "&nbsp;When you search a location for the<br>resources or tools needed to destroy it, roll with Blood. On a hit, you<br>find whatever you need to bring the place down around you. On a 10+,<br>everything is already arrayed to your liking; all you have to do is light the<br>fuse. On a miss, your search leaves you or an ally vulnerable or exposed<br>to your enemies."
+                      }
+                    },
+                    {
+                      "id": "2513ec61-ee55-4c6e-9a04-14410ede0131",
+                      "label": "You Don’t Scare Me",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "You have a mortal confidante who believes in your<br>cause. When you go to your mortal confidante for solace, comfort, or<br>protection, roll with Spirit. On a hit, they tend to your wounds and hide<br>you from your enemies; clear your harm track. On a 10+, they have been<br>keeping their eyes and ears open for you; they tell you about an opportunity you can use against your enemies. On a miss, your condition worries<br>them; they secretly contact someone they think can help you."
+                      }
+                    },
+                    {
+                      "id": "d6f02e52-2802-4da7-8eb2-449b42f15676",
+                      "label": "Merciful",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["2d6"],
+                        "helperText": "When you inflict harm with any weapon (or your fists), you can<br>choose to inflict s-harm. Decide at the moment you inflict the harm; you<br>need not tell anyone in advance what kind of harm you intend to inflict."
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "beab16de-b9c0-4aaa-9fe5-ff889cdf094e",
+                  "label": "Drama Moves",
+                  "blocks": [
+                    {
+                      "id": "7711aefa-9196-4dde-a192-0c19fb18ce1b",
+                      "label": "Revenant Corruption Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you kill someone not marked by your caul, mark corruption."
+                      }
+                    },
+                    {
+                      "id": "fbe5f9d0-2456-45d8-92bd-20f000d6a489",
+                      "label": "Revenant Intimacy Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you share a moment of intimacy—physical or emotional—with another<br>person, ask them if you should be an agent of justice or vengeance. If they say<br>justice, ask them how you could relieve the burdens they carry and take +1<br>ongoing to actions toward that end; if they say vengeance, mark corruption."
+                      }
+                    },
+                    {
+                      "id": "5e26dd64-2c2c-407b-8d44-fd0bba064190",
+                      "label": "Revenant End Move<br>",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "When you fill up on harm, your body ceases to function, but you do not die.<br>Anyone who views your corpse with supernatural senses knows that you still<br>live and how to bring you back, e.g., sprinkling graveyard dirt on your body,<br>performing a lost ritual, etc. Your daemon may attempt to enlist someone<br>else to facilitate your return.&nbsp;"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "e02757eb-09a9-4c66-8f87-a87543fd456d",
+                  "label": "Your Daemon",
+                  "blocks": [
+                    {
+                      "id": "a314d07b-adde-434d-9f69-19319f583d7d",
+                      "label": "A daemon guided you back from the land of the dead and walks with you now among the living. The two of you are inseparable, and you are constantly aware of its presence. Choose one from each list:\n<br>They are: a dog, a snake, an owl, a vulture, a bat, a crow, a wolf, a cat, a raven, a rat\n<br>They have: a spectral voice, a dark voice, a patient voice, a maternal voice, a demanding voice\n<br>When your daemon stands with you in battle, take armor+1. Your daemon will only follow you in the pursuit of your caul or to fulfill a Debt.",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Moves"
+    },
+    {
+      "id": "3e308dd5-01d1-44d3-9f51-a0fde5c1ac7f",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "43f8ac32-f378-40b4-b4d3-0f5b15a83daa",
+                  "label": "Standard Avances",
+                  "blocks": [
+                    {
+                      "id": "f1b5fd16-a2ea-42c3-8eda-21e4c95b3531",
+                      "label": "+1 Blood (max +3) ",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "dacac737-22a8-441a-b672-daf98c2d4904",
+                      "label": "+1 Heart (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "57a36da3-8b80-46ba-8cdd-2d19087dbd90",
+                      "label": "+1 Mind (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "d121cb3b-0910-428b-b7ca-56f8e8405260",
+                      "label": "+1 Spirit (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "f28a4160-5bfb-4878-a3a0-e94172688e1b",
+                      "label": "Gain armor +1 ongoing",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "1d239eea-baae-44b6-bda3-481d3773d364",
+                      "label": "A new Revenant Move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "bbd44135-5ae5-44be-b460-47651b46f0d5",
+                      "label": "A new Revenant Move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "22d284e4-3adf-4d53-8a6e-2fcaf52048da",
+                      "label": "A move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "c0eec065-97ff-4019-bde0-545d31918fe1",
+                      "label": "A move from another Archetype",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "94d06597-8514-4c05-bbe2-f1cdbe71c344",
+                      "label": "Change your Faction",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "f4ceb241-c67f-419a-860a-c938f255d4ca",
+                  "label": "Cont...",
+                  "blocks": [
+                    {
+                      "id": "373af352-5ee0-409f-a501-a97bd799ca68",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "After 5 advances you may select:",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a6cc26a4-595d-4332-82d0-fe7e43b1f41d",
+                      "label": "+1 to any stat (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "897f9f53-2e08-4f1a-be89-c7cb27f2f57e",
+                      "label": "+1 to any Faction (max +3)",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "0e6e896f-c3d9-45c0-9f72-65371c848a7b",
+                      "label": "Erase a scar",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "5e5c3de5-2d87-4042-b5c7-62edf4cf31e3",
+                      "label": "Erase a scar",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "f37a8ba2-32c5-42f8-a37c-4856cfa0325c",
+                      "label": "Advance 3 basic moves",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "f7912ef6-2bf2-45cf-a6c7-051b4cd7d4ef",
+                      "label": "Advance 3 basic moves",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "6345b139-1559-4596-aa38-0bda9c1d53f7",
+                      "label": "Advance an underworld move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "b7accb9d-feb9-438e-a960-51e0cdb6f195",
+                      "label": "Advance an underworld move",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [{ "label": "", "checked": false }]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Advances"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "group": "Urban Shadows Archetypes"
+}

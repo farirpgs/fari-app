@@ -1,4 +1,3 @@
-import { css } from "@emotion/css";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
 import Box from "@mui/material/Box";
@@ -10,22 +9,24 @@ import TextField from "@mui/material/TextField";
 import React, { useContext, useState } from "react";
 import { ConditionalWrapper } from "../../../../../components/ConditionalWrapper/ConditionalWrapper";
 import { Delays } from "../../../../../constants/Delays";
+import { IDataCyProps } from "../../../../../domains/cypress/types/IDataCyProps";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
 import { MiniThemeContext } from "../MiniThemeContext";
 
-export function CircleTextField(props: {
-  "data-cy"?: string;
-  "value": string | undefined;
-  "readonly"?: boolean;
-  "highlight"?: boolean;
-  "button"?: boolean;
-  "borderColor"?: string;
-  onChange?(value: string): void;
-  onIncrement?(): void;
-  onDecrement?(): void;
-  onClick?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
-  onContextMenu?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
-}) {
+export function CircleTextField(
+  props: {
+    value: string | undefined;
+    readonly?: boolean;
+    highlight?: boolean;
+    button?: boolean;
+    borderColor?: string;
+    onChange?(value: string): void;
+    onIncrement?(): void;
+    onDecrement?(): void;
+    onClick?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
+    onContextMenu?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
+  } & IDataCyProps
+) {
   const miniTheme = useContext(MiniThemeContext);
 
   const theme = useTheme();
@@ -44,11 +45,11 @@ export function CircleTextField(props: {
 
   return (
     <Box
-      className={css({
+      sx={{
         position: "relative",
         padding: ".2rem",
         cursor: cursor,
-      })}
+      }}
       onClick={(e) => {
         if (props.button) {
           props.onClick?.(e);
@@ -71,21 +72,19 @@ export function CircleTextField(props: {
         condition={props.button}
         wrapper={(children) => {
           return (
-            <ButtonBase className={css({ borderRadius: "50%" })}>
-              {children}
-            </ButtonBase>
+            <ButtonBase sx={{ borderRadius: "50%" }}>{children}</ButtonBase>
           );
         }}
       >
         <TextField
           variant="standard"
           type="number"
-          data-cy={props["data-cy"]}
+          data-cy={props.dataCy}
           value={value}
-          className={css({
+          sx={{
             textAlign: "center",
             cursor: cursor,
-          })}
+          }}
           onFocus={() => {
             setFocus(true);
           }}
@@ -109,7 +108,7 @@ export function CircleTextField(props: {
             }
           }}
           InputProps={{
-            className: css({
+            sx: {
               "cursor": cursor,
               "width": "3rem",
               "height": "3rem",
@@ -131,10 +130,10 @@ export function CircleTextField(props: {
               "transition": theme.transitions.create(["color", "background"], {
                 duration: theme.transitions.duration.shortest,
               }),
-            }),
+            },
           }}
           inputProps={{
-            className: css({
+            sx: {
               "cursor": cursor,
               "fontWeight": theme.typography.fontWeightRegular,
               "textAlign": "center",
@@ -154,7 +153,7 @@ export function CircleTextField(props: {
                 WebkitAppearance: "none",
                 margin: 0,
               },
-            }),
+            },
           }}
           InputLabelProps={{
             shrink: true,
@@ -166,21 +165,19 @@ export function CircleTextField(props: {
         <Fade in={areCounterButtonsVisible}>
           <IconButton
             size="small"
-            data-cy={`${props["data-cy"]}.decrement`}
-            className={css({
+            data-cy={`${props.dataCy}.decrement`}
+            sx={{
               "position": "absolute",
               "background": theme.palette.background.paper,
               "padding": "0",
               "left": "0",
               "bottom": "0",
               "&:hover": { background: theme.palette.background.default },
-            })}
-            onClick={() => {
-              props.onDecrement?.();
             }}
+            onClick={props.onDecrement}
           >
             <RemoveCircleOutlineOutlinedIcon
-              className={css({ width: "1.1rem", height: "1.1rem" })}
+              sx={{ width: "1.1rem", height: "1.1rem" }}
             />
           </IconButton>
         </Fade>
@@ -189,21 +186,19 @@ export function CircleTextField(props: {
         <Fade in={areCounterButtonsVisible}>
           <IconButton
             size="small"
-            data-cy={`${props["data-cy"]}.increment`}
-            className={css({
+            data-cy={`${props.dataCy}.increment`}
+            sx={{
               "position": "absolute",
               "background": theme.palette.background.paper,
               "padding": "0",
               "right": "0",
               "bottom": "0",
               "&:hover": { background: theme.palette.background.default },
-            })}
-            onClick={() => {
-              props.onIncrement?.();
             }}
+            onClick={props.onIncrement}
           >
             <AddCircleOutlineOutlinedIcon
-              className={css({ width: "1.1rem", height: "1.1rem" })}
+              sx={{ width: "1.1rem", height: "1.1rem" }}
             />
           </IconButton>
         </Fade>

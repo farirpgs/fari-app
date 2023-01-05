@@ -5,8 +5,7 @@ import React, { ReactNode, useContext } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { BrowserRouter, useHistory } from "react-router-dom";
-import { AppAnalytics } from "./components/AppAnalytics/AppAnalytics";
+import { BrowserRouter, useNavigate } from "react-router-dom";
 import { AppRouter } from "./components/AppRouter/AppRouter";
 import { previewContentEditable } from "./components/ContentEditable/ContentEditable";
 import { ErrorReport } from "./components/ErrorBoundary/ErrorReport";
@@ -63,15 +62,15 @@ function AppContexts(props: { children: ReactNode }) {
   const scenesManager = useScenes();
   const indexCardCollectionsManager = useIndexCardCollections();
   const diceManager = useDice({
-    defaultCommands: settingsManager.state.diceCommandIds,
-    defaultOptions: settingsManager.state.diceOptions,
-    onCommandSetsChange(commandSetOptions) {
-      const commandSetIds = commandSetOptions.map((l) => l.id);
-      settingsManager.actions.setDiceCommandsIds(commandSetIds);
-    },
-    onOptionsChange: (options) => {
-      settingsManager.actions.setDiceOptions(options);
-    },
+    // defaultCommands: settingsManager.state.diceCommandIds,
+    // defaultOptions: settingsManager.state.diceOptions,
+    // onCommandSetsChange(commandSetOptions) {
+    //   const commandSetIds = commandSetOptions.map((l) => l.id);
+    //   settingsManager.actions.setDiceCommandsIds(commandSetIds);
+    // },
+    // onOptionsChange: (options) => {
+    //   settingsManager.actions.setDiceOptions(options);
+    // },
   });
   const myBinderManager = useMyBinder();
 
@@ -105,7 +104,7 @@ function MyBinderManager() {
   const charactersManager = useContext(CharactersContext);
   const indexCardCollectionsManager = useContext(IndexCardCollectionsContext);
   const myBinderManager = useContext(MyBinderContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   type IHandlers = {
     onSelect(element: IManagerViewModel): void;
@@ -166,7 +165,7 @@ function MyBinderManager() {
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(newCharacter);
         } else {
-          history.push(`/characters/${newCharacter.id}?advanced=true`);
+          navigate(`/characters/${newCharacter.id}?advanced=true`);
         }
         myBinderManager.actions.close();
       },
@@ -174,7 +173,7 @@ function MyBinderManager() {
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(element.original);
         } else {
-          history.push(`/characters/${element.id}`);
+          navigate(`/characters/${element.id}`);
         }
         myBinderManager.actions.close();
       },
@@ -225,7 +224,7 @@ function MyBinderManager() {
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(newScene);
         } else {
-          history.push(`/scenes/${newScene.id}`);
+          navigate(`/scenes/${newScene.id}`);
         }
         myBinderManager.actions.close();
       },
@@ -233,7 +232,7 @@ function MyBinderManager() {
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(element.original);
         } else {
-          history.push(`/scenes/${element.id}`);
+          navigate(`/scenes/${element.id}`);
         }
         myBinderManager.actions.close();
       },
@@ -282,7 +281,7 @@ function MyBinderManager() {
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(newEntity);
         } else {
-          history.push(`/cards/${newEntity.id}`);
+          navigate(`/cards/${newEntity.id}`);
         }
         myBinderManager.actions.close();
       },
@@ -290,7 +289,7 @@ function MyBinderManager() {
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(element.original);
         } else {
-          history.push(`/cards/${element.id}`);
+          navigate(`/cards/${element.id}`);
         }
         myBinderManager.actions.close();
       },
@@ -398,7 +397,14 @@ function AppProviders(props: { children: ReactNode }) {
     >
       <StyledEngineProvider injectFirst>
         <CssBaseline />
-        <Sentry.ErrorBoundary fallback={ErrorReport} showDialog>
+        <Sentry.ErrorBoundary
+          fallback={
+            <>
+              <ErrorReport />
+            </>
+          }
+          showDialog
+        >
           <HelmetProvider>
             <BrowserRouter>
               <Helmet
@@ -408,7 +414,6 @@ function AppProviders(props: { children: ReactNode }) {
                   "client-context": env.context,
                 }}
               />
-              <AppAnalytics />
               <MyBinderManager />
               {props.children}
             </BrowserRouter>

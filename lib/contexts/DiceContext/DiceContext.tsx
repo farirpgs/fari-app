@@ -1,110 +1,33 @@
-import React, { useEffect, useMemo, useState } from "react";
-import {
-  CommmandSetOptions,
-  Dice,
-  IDiceCommandSetId,
-  IDiceCommandSetOption,
-  IRollDiceOptions,
-  IRollGroup,
-} from "../../domains/dice/Dice";
-import {
-  IDicePool,
-  IDicePoolElement,
-} from "../../routes/Character/components/CharacterDialog/components/blocks/BlockDicePool";
+import React, { useState } from "react";
+import { BlockType } from "../../domains/character/types";
+import { IRollablePool } from "../../domains/dice/Dice";
 export type IDiceManager = ReturnType<typeof useDice>;
 
 export const DiceContext = React.createContext<IDiceManager>(undefined as any);
 
-export function useDice(props: {
-  defaultCommands: Array<IDiceCommandSetId> | null;
-  defaultOptions: IRollDiceOptions;
-  onOptionsChange(options: IRollDiceOptions): void;
-  onCommandSetsChange(commandSets: Array<IDiceCommandSetOption>): void;
-}) {
-  const [options, setOptions] = useState<IRollDiceOptions>(
-    props.defaultOptions
-  );
+export type IBlockWithRollablePool = {
+  blockId: string;
+  blockType: BlockType;
+  label: string;
+  pool: IRollablePool;
+};
 
-  const [pool, setPool] = useState<IDicePool>([]);
-  const [playerId, setPlayerId] = useState<string>();
-
-  const [commandSets, setCommandSets] = useState<Array<IDiceCommandSetOption>>(
-    () => {
-      const defaultSet = props.defaultCommands?.map(
-        (c) => CommmandSetOptions[c]
-      ) ?? [CommmandSetOptions["1d6"]];
-      return defaultSet;
-    }
-  );
-  const [commandSetsBeforePool, setCommandSetsBeforePool] = useState<
-    Array<IDiceCommandSetOption>
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function useDice(props: {}) {
+  const [blockWithPools, setBlockWithPools] = useState<
+    Array<IBlockWithRollablePool>
   >([]);
+  const selectedCommandIds = blockWithPools
+    .flatMap((e) => {
+      return e.pool;
+    })
+    .flatMap((e) => e.commandIds);
+  const pools = blockWithPools.map((e) => e.pool);
 
-  useEffect(() => {
-    props.onCommandSetsChange(commandSets);
-  }, [commandSets]);
-
-  useEffect(() => {
-    props.onOptionsChange(options);
-  }, [options]);
-
-  const poolCommandSets = useMemo(() => {
-    const poolRollGroups = pool.flatMap((dicePoolElement) => {
-      return dicePoolElement.rollGroup.commandSets;
-    });
-    const poolRollCommandGroupOptions: Array<IDiceCommandSetOption> =
-      poolRollGroups
-        .map((commandOption) => {
-          return CommmandSetOptions[commandOption.id];
-        })
-        .filter(
-          (commandGroupId): commandGroupId is IDiceCommandSetOption =>
-            !!commandGroupId
-        );
-
-    return poolRollCommandGroupOptions;
-  }, [pool]);
-  const allCommandSets = [...commandSets, ...poolCommandSets];
-
-  function reset() {
-    setCommandSets([]);
-  }
-  function clear() {
-    clearPool();
-  }
-
-  function roll(
-    rollGroups: Array<IRollGroup>,
-    optionsForRoll: IRollDiceOptions = options
-  ) {
-    setOptions(optionsForRoll);
-    const result = Dice.rollGroups(rollGroups, optionsForRoll);
-    return result;
-  }
-
-  function rollCommandGroups(optionsForRoll: IRollDiceOptions = options) {
-    const rollGroups: Array<IRollGroup> = [
-      {
-        commandSets: commandSets.map((commandGroup) => {
-          return {
-            id: commandGroup.id,
-          };
-        }),
-      },
-    ];
-    return roll(rollGroups, optionsForRoll);
-  }
-
-  function addOrRemovePoolElement(element: IDicePoolElement) {
-    const isFirstPoolElement = pool.length === 0;
-    if (isFirstPoolElement) {
-      preparePool();
-    }
-
-    setPool((draft) => {
+  function addOrRemovePoolElement(element: IBlockWithRollablePool) {
+    setBlockWithPools((draft) => {
       const ids = draft.map((element) => element.blockId);
       const exists = ids.includes(element.blockId);
-
       if (exists) {
         return draft.filter((e) => e.blockId !== element.blockId);
       }
@@ -112,61 +35,15 @@ export function useDice(props: {
     });
   }
 
-  function preparePool() {
-    setCommandSetsBeforePool(commandSets);
-    setCommandSets([]);
-  }
-
-  function getPoolResult() {
-    const currentRollGroups: Array<IRollGroup> =
-      commandSets.length > 0
-        ? [
-            {
-              commandSets: commandSets.map((commandGroup) => {
-                return {
-                  id: commandGroup.id,
-                };
-              }),
-            },
-          ]
-        : [];
-
-    const rollGroupsFromPool = pool.flatMap((element) => element.rollGroup);
-    const commandSetsToRoll = [...currentRollGroups, ...rollGroupsFromPool];
-    const result = roll(commandSetsToRoll, options);
-    const latestPlayerId = playerId;
-
-    clearPool();
-    return { result, playerId: latestPlayerId };
-  }
-
   function clearPool() {
-    setPool([]);
-    setCommandSets(commandSetsBeforePool);
-    setCommandSetsBeforePool([]);
-    setPlayerId(undefined);
+    setBlockWithPools([]);
   }
 
   return {
-    state: {
-      options: options,
-      commandGroups: allCommandSets,
-      pool,
-    },
+    state: { blockWithPools: blockWithPools, selectedCommandIds, pools },
     actions: {
-      roll,
-      rollCommandGroups,
-      reset,
-      setOptions: setOptions,
-      setCommandSets: setCommandSets,
       addOrRemovePoolElement,
-      getPoolResult,
-      setPlayerId,
-      clear,
-    },
-    computed: {
-      hasSelectedCommands: allCommandSets.length > 0,
-      hasPool: pool.length > 0,
+      clearPool,
     },
   };
 }

@@ -1,1 +1,611 @@
-{"fariType":"character","id":"8d14a8ec-3e97-4166-9c03-5b3071b56f4b","lastUpdated":1658084328,"name":"ICRPG template","pages":[{"id":"d90b0d19-5731-4a7f-b338-4ef0e802c18c","label":"Character","rows":[{"columns":[{"sections":[{"id":"fbd3ced9-8c63-4207-83dd-e01b94132674","label":"Name","blocks":[{"id":"22813113-fa7a-4480-aa18-647db294e602","type":"Text","value":"","meta":{}}],"visibleOnCard":true}]},{"sections":[{"id":"d8d9231b-f26c-4fea-9dc1-372daba2c588","label":"Race","blocks":[{"id":"224a42d9-ce6d-4b03-ae40-ce96167917c7","type":"Text","value":"","meta":{}}]}]},{"sections":[{"id":"7a3bddec-1d53-4359-8c86-0cee8472d595","label":"Type","blocks":[{"id":"aa3916cf-fdcd-4f64-9ca7-0a1a29ed8a77","type":"Text","value":"","meta":{}}]}]}]},{"columns":[{"sections":[{"id":"26bda0b6-00e5-4580-bcc9-c83bd4285e43","label":"Story","blocks":[{"id":"7d7a46ad-608a-4319-ba56-37130f31431f","type":"Text","value":"","meta":{}}]}]}]},{"columns":[{"sections":[{"id":"5434c174-e18b-469a-b7ef-c2c33aa92c59","label":"Attribute","blocks":[{"id":"f85aae4f-35e4-4857-ba2d-1e1f15d4785e","label":"Strength","type":"Skill","value":"3","meta":{"commands":["1d20"],"helperText":"Used to apply brute force, crush and smash, overpower foes"}},{"id":"57521e7f-afc9-43f7-a7ff-469c515741d3","label":"Dexterity","type":"Skill","value":"0","meta":{"commands":["1d20"],"helperText":"Used to make ranged attacks, nimble acrobatic moves, or stealth"}},{"id":"2281f314-b414-4a11-8567-09be7989c399","label":"Constitution","type":"Skill","value":"0","meta":{"commands":["1d20"],"helperText":"Used when recovering HP, bracing for impact, or fighting to survive poison or terrible cold."}},{"id":"be53010a-6818-4f36-be8d-a42a70c4b448","label":"Intelligence","type":"Skill","value":"0","meta":{"commands":["1d20"],"helperText":"Used to cast spells, investigate mysteries, recall details, or operate complex machinery"}},{"id":"92663a19-79eb-4365-849b-399c32f3c307","label":"Wisdom","type":"Skill","value":"0","meta":{"commands":["1d20"],"helperText":"Used to scout, to be in tune with nature, or to feel danger coming"}},{"id":"49684bac-7248-4273-a44a-bbc0377060c3","label":"Charisma","type":"Skill","value":"0","meta":{"commands":["1d20"],"helperText":"Used for persuasive actions, to resist fear, or drive enemies back with a battle cry."}}],"visibleOnCard":true}]},{"sections":[{"id":"3d460ace-8173-4ebf-bdd5-9d0ea6e81873","label":"Effort","blocks":[{"id":"bae1cd2f-a369-4918-af0f-334469ae2003","label":"Basic","type":"Skill","value":"0","meta":{"commands":["1d4"],"helperText":"When you are only using your bare hands or your wits"}},{"id":"39e8d199-4391-434f-b65f-b2f9ebfa995b","label":"Weapon &amp; Tools","type":"Skill","value":"0","meta":{"commands":["1d6"],"helperText":"When you are using a standard ranged or melee weapon to do damage"}},{"id":"4774f839-07f3-46d2-92e6-c290f057fe00","label":"Guns","type":"Skill","value":"0","meta":{"commands":["1d8"],"helperText":"When you’re using a gun to attack an enemy and do damage"}},{"id":"7b1fb4c7-8231-4c34-ac6c-29c7496eb346","label":"Energy &amp; Magic","type":"Skill","value":"0","meta":{"commands":["1d10"],"helperText":"When you are casting explosive magic or using arcane energy."}},{"id":"710daecc-5f3b-4405-9b57-fb3797fe63a1","label":"Ultimate","type":"Skill","value":"0","meta":{"commands":["1d12"],"helperText":"When you roll a critical success on your ATTEMPT, a natural 20 on the D20 roll, add the result"}}],"visibleOnCard":true},{"id":"07b8bb3c-3d0a-4a5c-8110-a62209d2b1bf","label":"Spell Burn","blocks":[{"id":"bb0a08ef-c4b1-4a89-8cf6-858ad20f34fc","label":"Spell Burn","type":"PointCounter","meta":{"max":"3","isMainPointCounter":false,"helperText":"Add 1 for each spell cast. If max 3, do WIS or INT check. If success reset back to 0, if failed do burned out roll"},"value":"0"},{"id":"9fd59cdf-7552-41ed-a7bf-36f9469399e5","label":"Burned Out","type":"Numeric","value":"0","meta":{"checked":false,"helperText":"Player cannot cast spells for d4 rounds"}}]}]},{"sections":[{"id":"11935f94-190c-44c0-a039-d30bfce0a9cf","label":"Status","blocks":[{"id":"6360225f-c79c-4381-a11f-fc587f13cf56","label":"Health","type":"PointCounter","meta":{"max":"10","isMainPointCounter":true,"helperText":"1 heart to 10 HP. As an action, do recover by doing CON check. If passed regain CON + 1 health"},"value":"10"},{"id":"c2343421-39a6-4579-b262-2467d5fee559","label":"Battle Fury","type":"PointCounter","meta":{"max":"6","isMainPointCounter":false,"helperText":"Add 1 for each missed d20 roll. Add current battle fury to d20 rolls. Reset to 0 if player rolled a successful d20 roll."},"value":"0"},{"id":"2dec7910-3dae-48c2-a00e-7a1156b7a63e","label":"Dying","type":"Numeric","value":"0","meta":{"checked":false,"helperText":"When health reaches 0, roll for dying. Each round roll d20, if 20, recover 1 hp."}},{"id":"471f7fd3-d625-4eb1-bb64-8f4d67b6d15e","label":"Roll for Burnout or Dying","type":"DicePool","value":"","meta":{"commands":["1d4"],"helperText":"Player will die in 1d4 rounds if not stabilized. Another player do INT or WIS to stabilize dying player."}},{"id":"5c18c046-e1d6-44ad-a0bb-5ba501119184","label":"Hero Coin","type":"Text","meta":{"checked":false,"helperText":"Use to reroll, add d12 to result, or give to another player"}},{"id":"2ce44b72-079d-4d90-b6c8-481e8638f955","label":"Defense","type":"Numeric","value":"","meta":{"helperText":"Defense is CON + Equipped Loot with DEF.<br>Enemies need 10 + your DEF to hit you.<br>"}}],"visibleOnCard":true}]}]},{"columns":[{"sections":[{"id":"823165fc-3a1e-4f29-bc05-a695f1afc3c4","label":"Loot","blocks":[{"id":"3f8615a4-acba-4c8c-b2ab-fdd5e938faa9","type":"Text","value":"","meta":{"checked":false}},{"id":"6ef2858b-64aa-43ee-9b94-46e37d2e5342","type":"Text","value":"","meta":{"checked":false}},{"id":"3a3e8dfc-9df1-40c8-9068-596cf21283c6","type":"Text","value":"","meta":{"checked":false}},{"id":"d1c8a68c-ddf3-40c3-91bc-707d23e10213","type":"Text","value":"","meta":{"checked":false}},{"id":"c6762093-844d-4ec3-a73f-477ccba5af4a","type":"Text","value":"","meta":{"checked":false}},{"id":"a4741e50-4e79-4f77-943e-4dfb403e35ef","type":"Text","value":"","meta":{"checked":false}},{"id":"b33a6ba9-ccbd-466c-8660-58a328d5e39b","type":"Text","value":"","meta":{"checked":false}},{"id":"7feab296-d578-4779-a0b0-757702b89594","type":"Text","value":"","meta":{"checked":false}},{"id":"fcb64570-bbdb-49bf-99bd-bf9de9428afa","type":"Text","value":"","meta":{"checked":false}},{"id":"d524b351-7cbf-43a5-acf6-50223c291047","type":"Text","value":"","meta":{"checked":false}},{"id":"4e22d665-e684-4d5f-89af-02f139975da6","type":"Text","value":"","meta":{"checked":false}},{"id":"fd3fc1cb-2c89-44eb-8b3d-f02f8728fcb9","type":"Text","value":"","meta":{"checked":false}},{"id":"777c5190-04f5-4900-974e-36d6f0b0d2d7","type":"Text","value":"","meta":{"checked":false}},{"id":"e43d08d6-324f-4fb9-901f-c90a346c65a6","type":"Text","value":"","meta":{"checked":false}},{"id":"915069ba-0cec-4c69-be80-178535b509ac","type":"Text","value":"","meta":{"checked":false}},{"id":"a4a28dee-8386-4563-b2e4-f70e5bf82d15","type":"Text","value":"","meta":{"checked":false}},{"id":"69b7ede0-0c70-4cbd-8990-627f5b48cad6","type":"Text","value":"","meta":{"checked":false}},{"id":"7aa64277-b702-4d54-8d7e-c8747a37b7aa","type":"Text","value":"","meta":{"checked":false}},{"id":"b9c24436-3eec-4ace-a950-40755692b8ac","type":"Text","value":"","meta":{"checked":false}},{"id":"9a76ebbc-10f5-4db1-a8cd-6ad5ae2c6632","type":"Text","value":"","meta":{"checked":false}}],"visibleOnCard":true}]},{"sections":[{"id":"ba10e526-3d7d-461b-9b18-a541fdf3989a","label":"Abilities","blocks":[{"id":"d4cf5af6-fa20-44aa-866e-b39f1d78e117","type":"Text","value":"","meta":{}},{"id":"511974a9-4550-43f0-815c-9545b7e0e167","type":"Text","value":"","meta":{}},{"id":"a2bd483d-98d1-422e-86be-60818f2898e5","type":"Text","value":"","meta":{}},{"id":"7b9c873c-d87b-49cc-871e-112e900385e4","type":"Text","value":"","meta":{}},{"id":"9e1e9107-ccef-4a3e-8e98-a33b56481b06","type":"Text","value":"","meta":{}}],"visibleOnCard":true},{"id":"493497cb-a6aa-4211-9819-6c540c44792e","label":"Masteries","blocks":[{"id":"a668dd07-747c-4bf9-a8f2-3c6a157e96da","type":"Text","value":"","meta":{}},{"id":"89f30b19-c58b-417c-ba66-572b5456e1fd","type":"Text","value":"","meta":{}},{"id":"39f4bf21-b03d-4e9c-8c50-444c245e7687","type":"Text","value":"","meta":{}}],"visibleOnCard":true},{"id":"2dd4a5aa-4216-461f-a92c-ba684ca7bbd6","label":"Path Milestones","blocks":[{"id":"ea1b7f2c-a2f6-44a2-899a-aee1174fcdc4","label":"Path of Iron","type":"Text","value":"","meta":{}},{"id":"f029b92d-bb21-48f3-8022-16162a4b6a40","label":"Path of Smoke","type":"Text","value":"","meta":{}},{"id":"4229efc3-c31d-43f5-a81e-d7da4fa9c474","label":"Path of Amber","type":"Text","value":"","meta":{}},{"id":"a5afe4ff-b300-46c2-9565-92b1ac131699","label":"Path of Oak","type":"Text","value":"","meta":{}},{"id":"74846a26-5cf1-4456-8460-6e7a1c0f7bfe","label":"Path of the Hawk","type":"Text","value":"","meta":{}}],"visibleOnCard":true}]}]},{"columns":[{"sections":[{"id":"65c186d1-a65f-489f-92c4-b8320fd55f66","label":"Mastery Track","blocks":[{"id":"e569e73b-d79f-4591-9863-8772e84ef822","label":"Slot Tracker","type":"SlotTracker","meta":{},"value":[{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false},{"label":"","checked":false}]}],"visibleOnCard":true}]}]}]}],"template":"Blank","version":6,"playedDuringTurn":false,"wide":true}
+{
+  "fariType": "character",
+  "id": "8d14a8ec-3e97-4166-9c03-5b3071b56f4b",
+  "lastUpdated": 1658084328,
+  "name": "ICRPG template",
+  "pages": [
+    {
+      "id": "d90b0d19-5731-4a7f-b338-4ef0e802c18c",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "fbd3ced9-8c63-4207-83dd-e01b94132674",
+                  "label": "Name",
+                  "blocks": [
+                    {
+                      "id": "22813113-fa7a-4480-aa18-647db294e602",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "d8d9231b-f26c-4fea-9dc1-372daba2c588",
+                  "label": "Race",
+                  "blocks": [
+                    {
+                      "id": "224a42d9-ce6d-4b03-ae40-ce96167917c7",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "7a3bddec-1d53-4359-8c86-0cee8472d595",
+                  "label": "Type",
+                  "blocks": [
+                    {
+                      "id": "aa3916cf-fdcd-4f64-9ca7-0a1a29ed8a77",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "26bda0b6-00e5-4580-bcc9-c83bd4285e43",
+                  "label": "Story",
+                  "blocks": [
+                    {
+                      "id": "7d7a46ad-608a-4319-ba56-37130f31431f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5434c174-e18b-469a-b7ef-c2c33aa92c59",
+                  "label": "Attribute",
+                  "blocks": [
+                    {
+                      "id": "f85aae4f-35e4-4857-ba2d-1e1f15d4785e",
+                      "label": "Strength",
+                      "type": "Skill",
+                      "value": "3",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "helperText": "Used to apply brute force, crush and smash, overpower foes"
+                      }
+                    },
+                    {
+                      "id": "57521e7f-afc9-43f7-a7ff-469c515741d3",
+                      "label": "Dexterity",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "helperText": "Used to make ranged attacks, nimble acrobatic moves, or stealth"
+                      }
+                    },
+                    {
+                      "id": "2281f314-b414-4a11-8567-09be7989c399",
+                      "label": "Constitution",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "helperText": "Used when recovering HP, bracing for impact, or fighting to survive poison or terrible cold."
+                      }
+                    },
+                    {
+                      "id": "be53010a-6818-4f36-be8d-a42a70c4b448",
+                      "label": "Intelligence",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "helperText": "Used to cast spells, investigate mysteries, recall details, or operate complex machinery"
+                      }
+                    },
+                    {
+                      "id": "92663a19-79eb-4365-849b-399c32f3c307",
+                      "label": "Wisdom",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "helperText": "Used to scout, to be in tune with nature, or to feel danger coming"
+                      }
+                    },
+                    {
+                      "id": "49684bac-7248-4273-a44a-bbc0377060c3",
+                      "label": "Charisma",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "helperText": "Used for persuasive actions, to resist fear, or drive enemies back with a battle cry."
+                      }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "3d460ace-8173-4ebf-bdd5-9d0ea6e81873",
+                  "label": "Effort",
+                  "blocks": [
+                    {
+                      "id": "bae1cd2f-a369-4918-af0f-334469ae2003",
+                      "label": "Basic",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "helperText": "When you are only using your bare hands or your wits"
+                      }
+                    },
+                    {
+                      "id": "39e8d199-4391-434f-b65f-b2f9ebfa995b",
+                      "label": "Weapon &amp; Tools",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "helperText": "When you are using a standard ranged or melee weapon to do damage"
+                      }
+                    },
+                    {
+                      "id": "4774f839-07f3-46d2-92e6-c290f057fe00",
+                      "label": "Guns",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d8"],
+                        "helperText": "When you’re using a gun to attack an enemy and do damage"
+                      }
+                    },
+                    {
+                      "id": "7b1fb4c7-8231-4c34-ac6c-29c7496eb346",
+                      "label": "Energy &amp; Magic",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d10"],
+                        "helperText": "When you are casting explosive magic or using arcane energy."
+                      }
+                    },
+                    {
+                      "id": "710daecc-5f3b-4405-9b57-fb3797fe63a1",
+                      "label": "Ultimate",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d12"],
+                        "helperText": "When you roll a critical success on your ATTEMPT, a natural 20 on the D20 roll, add the result"
+                      }
+                    }
+                  ],
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "07b8bb3c-3d0a-4a5c-8110-a62209d2b1bf",
+                  "label": "Spell Burn",
+                  "blocks": [
+                    {
+                      "id": "bb0a08ef-c4b1-4a89-8cf6-858ad20f34fc",
+                      "label": "Spell Burn",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "3",
+                        "isMainPointCounter": false,
+                        "helperText": "Add 1 for each spell cast. If max 3, do WIS or INT check. If success reset back to 0, if failed do burned out roll"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "9fd59cdf-7552-41ed-a7bf-36f9469399e5",
+                      "label": "Burned Out",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Player cannot cast spells for d4 rounds"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "11935f94-190c-44c0-a039-d30bfce0a9cf",
+                  "label": "Status",
+                  "blocks": [
+                    {
+                      "id": "6360225f-c79c-4381-a11f-fc587f13cf56",
+                      "label": "Health",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "10",
+                        "isMainPointCounter": true,
+                        "helperText": "1 heart to 10 HP. As an action, do recover by doing CON check. If passed regain CON + 1 health"
+                      },
+                      "value": "10"
+                    },
+                    {
+                      "id": "c2343421-39a6-4579-b262-2467d5fee559",
+                      "label": "Battle Fury",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "6",
+                        "isMainPointCounter": false,
+                        "helperText": "Add 1 for each missed d20 roll. Add current battle fury to d20 rolls. Reset to 0 if player rolled a successful d20 roll."
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "2dec7910-3dae-48c2-a00e-7a1156b7a63e",
+                      "label": "Dying",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "When health reaches 0, roll for dying. Each round roll d20, if 20, recover 1 hp."
+                      }
+                    },
+                    {
+                      "id": "471f7fd3-d625-4eb1-bb64-8f4d67b6d15e",
+                      "label": "Roll for Burnout or Dying",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "helperText": "Player will die in 1d4 rounds if not stabilized. Another player do INT or WIS to stabilize dying player."
+                      }
+                    },
+                    {
+                      "id": "5c18c046-e1d6-44ad-a0bb-5ba501119184",
+                      "label": "Hero Coin",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Use to reroll, add d12 to result, or give to another player"
+                      }
+                    },
+                    {
+                      "id": "2ce44b72-079d-4d90-b6c8-481e8638f955",
+                      "label": "Defense",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Defense is CON + Equipped Loot with DEF.<br>Enemies need 10 + your DEF to hit you.<br>"
+                      }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "823165fc-3a1e-4f29-bc05-a695f1afc3c4",
+                  "label": "Loot",
+                  "blocks": [
+                    {
+                      "id": "3f8615a4-acba-4c8c-b2ab-fdd5e938faa9",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "6ef2858b-64aa-43ee-9b94-46e37d2e5342",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "3a3e8dfc-9df1-40c8-9068-596cf21283c6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "d1c8a68c-ddf3-40c3-91bc-707d23e10213",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "c6762093-844d-4ec3-a73f-477ccba5af4a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "a4741e50-4e79-4f77-943e-4dfb403e35ef",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "b33a6ba9-ccbd-466c-8660-58a328d5e39b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "7feab296-d578-4779-a0b0-757702b89594",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "fcb64570-bbdb-49bf-99bd-bf9de9428afa",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "d524b351-7cbf-43a5-acf6-50223c291047",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "4e22d665-e684-4d5f-89af-02f139975da6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "fd3fc1cb-2c89-44eb-8b3d-f02f8728fcb9",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "777c5190-04f5-4900-974e-36d6f0b0d2d7",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "e43d08d6-324f-4fb9-901f-c90a346c65a6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "915069ba-0cec-4c69-be80-178535b509ac",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "a4a28dee-8386-4563-b2e4-f70e5bf82d15",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "69b7ede0-0c70-4cbd-8990-627f5b48cad6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "7aa64277-b702-4d54-8d7e-c8747a37b7aa",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "b9c24436-3eec-4ace-a950-40755692b8ac",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "9a76ebbc-10f5-4db1-a8cd-6ad5ae2c6632",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "ba10e526-3d7d-461b-9b18-a541fdf3989a",
+                  "label": "Abilities",
+                  "blocks": [
+                    {
+                      "id": "d4cf5af6-fa20-44aa-866e-b39f1d78e117",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "511974a9-4550-43f0-815c-9545b7e0e167",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a2bd483d-98d1-422e-86be-60818f2898e5",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7b9c873c-d87b-49cc-871e-112e900385e4",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9e1e9107-ccef-4a3e-8e98-a33b56481b06",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "493497cb-a6aa-4211-9819-6c540c44792e",
+                  "label": "Masteries",
+                  "blocks": [
+                    {
+                      "id": "a668dd07-747c-4bf9-a8f2-3c6a157e96da",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "89f30b19-c58b-417c-ba66-572b5456e1fd",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "39f4bf21-b03d-4e9c-8c50-444c245e7687",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "2dd4a5aa-4216-461f-a92c-ba684ca7bbd6",
+                  "label": "Path Milestones",
+                  "blocks": [
+                    {
+                      "id": "ea1b7f2c-a2f6-44a2-899a-aee1174fcdc4",
+                      "label": "Path of Iron",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f029b92d-bb21-48f3-8022-16162a4b6a40",
+                      "label": "Path of Smoke",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4229efc3-c31d-43f5-a81e-d7da4fa9c474",
+                      "label": "Path of Amber",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a5afe4ff-b300-46c2-9565-92b1ac131699",
+                      "label": "Path of Oak",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "74846a26-5cf1-4456-8460-6e7a1c0f7bfe",
+                      "label": "Path of the Hawk",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "65c186d1-a65f-489f-92c4-b8320fd55f66",
+                  "label": "Mastery Track",
+                  "blocks": [
+                    {
+                      "id": "e569e73b-d79f-4591-9863-8772e84ef822",
+                      "label": "Slot Tracker",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "playedDuringTurn": false,
+  "wide": true
+}

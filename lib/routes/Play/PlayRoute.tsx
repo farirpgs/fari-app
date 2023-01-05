@@ -9,23 +9,24 @@ import {
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { Session } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { useScene } from "../../hooks/useScene/useScene";
-import {
-  useSession,
-  useSessionCharacterSheets,
-} from "../../hooks/useScene/useSession";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { IMessage, useChat } from "./components/Chat/useChat";
 import {
   IPlayersPresenceRef,
   PlayersPresence,
 } from "./components/PlayersPresence/PlayersPresence";
+import { Session } from "./components/Session/Session";
+import {
+  useSession,
+  useSessionCharacterSheets,
+} from "./components/Session/useSession";
 import {
   SessionPresenceUpdaterContext,
   useSessionPresenceUpdater,
@@ -50,7 +51,7 @@ export function useLiveObject<T>(props: {
   canBeEmpty?: boolean;
   onChange(newValue: T): void;
 }) {
-  const liveObject = useObject<T>(props.key);
+  const liveObject = useObject<any>(props.key);
   const [root] = useStorage();
 
   const room = useRoom();
@@ -63,7 +64,7 @@ export function useLiveObject<T>(props: {
 
   useEffect(() => {
     if (props.isOwner) {
-      liveObject?.update(props.value);
+      liveObject?.update(props.value as any);
     }
   }, [props.value]);
 
@@ -74,7 +75,7 @@ export function useLiveObject<T>(props: {
       const objectKeys = Object.keys(object ?? {});
       if (isSubscriber && object) {
         if (props.canBeEmpty || objectKeys.length > 0) {
-          props.onChange(object as T);
+          props.onChange(object as unknown as T);
         }
       }
     }
@@ -91,11 +92,8 @@ export function useLiveObject<T>(props: {
   return liveObject;
 }
 
-export const PlayRoute: React.FC<{
-  match: {
-    params: { id?: string };
-  };
-}> = (props) => {
+function PlayRoute() {
+  const params = useParams<{ id: string }>();
   const logger = useLogger();
   const { t } = useTranslate();
   const room = useRoom();
@@ -103,7 +101,7 @@ export const PlayRoute: React.FC<{
   const charactersManager = useContext(CharactersContext);
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  const idFromParams = props.match.params.id;
+  const idFromParams = params.id;
   const playerName = query.get("name");
   const isGM = !idFromParams;
   const isPlayer = !isGM;
@@ -115,6 +113,7 @@ export const PlayRoute: React.FC<{
     useState(false);
 
   const sceneManager = useScene();
+  const chatManager = useChat();
   const sessionManager = useSession({
     userId: userId,
   });
@@ -148,6 +147,15 @@ export const PlayRoute: React.FC<{
   });
 
   useLiveObject({
+    key: "chat",
+    isOwner: isGM,
+    value: chatManager.state.chat,
+    onChange: (newValue) => {
+      chatManager.actions.overrideChat(newValue);
+    },
+  });
+
+  useLiveObject({
     key: "scene",
     isOwner: isGM,
     value: sceneManager.state.scene,
@@ -168,17 +176,14 @@ export const PlayRoute: React.FC<{
 
   const broadcast = useBroadcastEvent();
 
-  useEventListener<IPlayerInteraction>(({ event }) => {
+  useEventListener((props) => {
+    const event = props.event as IPlayerInteraction;
     console.log(`Received player interaction: ${event.type}`, event);
+
     if (event.type === "pause") {
       sessionManager.actions.pause();
     }
-    if (event.type === "update-player-roll") {
-      sessionManager.actions.updatePlayerRoll(
-        event.payload.id,
-        event.payload.roll
-      );
-    }
+
     if (event.type === "add-player") {
       sessionManager.actions.addPlayer(event.payload.player);
     }
@@ -193,10 +198,10 @@ export const PlayRoute: React.FC<{
         event.payload.maxPoints
       );
     }
-    if (event.type === "update-player-played-during-turn") {
-      sessionManager.actions.updatePlayerPlayedDuringTurn(
+    if (event.type === "update-player-status") {
+      sessionManager.actions.updatePlayerStatus(
         event.payload.id,
-        event.payload.playedDuringTurn
+        event.payload.status
       );
     }
     if (event.type === "update-player-character") {
@@ -210,6 +215,9 @@ export const PlayRoute: React.FC<{
         event.payload.indexCard,
         event.payload.indexCardType
       );
+    }
+    if (event.type === "send-message") {
+      chatManager.actions.sendMessage(event.payload.message);
     }
     if (event.type === "ping") {
       broadcast(PlayerInteractionFactory.pong(), {
@@ -292,6 +300,7 @@ export const PlayRoute: React.FC<{
   }
 
   const playersPresenceRef = useRef<IPlayersPresenceRef>(null);
+
   return (
     <>
       <PageMeta
@@ -312,9 +321,29 @@ export const PlayRoute: React.FC<{
           </Alert>
         </Snackbar>
         <SessionPresenceUpdaterContext.Provider value={sessionPresenceUpdater}>
-          <PlayersPresence ref={playersPresenceRef} />
+          <PlayersPresence
+            ref={playersPresenceRef}
+            onMessageSubmit={(messageToSend) => {
+              if (messageToSend) {
+                const message = {
+                  type: messageToSend.type,
+                  fromUserId: userId,
+                  value: messageToSend.value,
+                } as IMessage;
+
+                if (isGM) {
+                  chatManager.actions.sendMessage(message);
+                } else {
+                  handlePlayerInteraction(
+                    PlayerInteractionFactory.sendMessage(message)
+                  );
+                }
+              }
+            }}
+          />
         </SessionPresenceUpdaterContext.Provider>
         <Session
+          chatManager={chatManager}
           sessionManager={sessionManager}
           sessionCharactersManager={sessionCharactersManager}
           sceneManager={sceneManager}
@@ -329,7 +358,7 @@ export const PlayRoute: React.FC<{
       </>
     </>
   );
-};
+}
 
 PlayRoute.displayName = "PlayRoute";
 export default PlayRoute;

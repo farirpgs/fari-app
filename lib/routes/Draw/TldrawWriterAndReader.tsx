@@ -11,8 +11,8 @@ export type IDrawingAreaState = {
 };
 
 export type IDrawingAreaInternalState = {
-  shapes: LiveMap<string, TDShape>;
-  bindings: LiveMap<string, TDBinding>;
+  shapes: LiveMap<string, any>;
+  bindings: LiveMap<string, any>;
 };
 
 export function TldrawWriter(props: {
@@ -20,12 +20,8 @@ export function TldrawWriter(props: {
   onChange?: (state: IDrawingAreaState) => void;
   tldrawProps?: TldrawProps;
 }) {
-  const shapesRef = React.useRef<LiveMap<string, TDShape>>(
-    new LiveMap<string, TDShape>()
-  );
-  const bindingsRef = React.useRef<LiveMap<string, TDBinding>>(
-    new LiveMap<string, TDBinding>()
-  );
+  const shapesRef = React.useRef<LiveMap>(new LiveMap());
+  const bindingsRef = React.useRef<LiveMap>(new LiveMap());
   const dirtyRef = React.useRef(false);
 
   useEffect(() => {
@@ -44,8 +40,8 @@ export function TldrawWriter(props: {
       const bindingsObject = Object.fromEntries(bindingsRef.current.entries());
 
       props.onChange?.({
-        shapes: shapesObject,
-        bindings: bindingsObject,
+        shapes: shapesObject as any,
+        bindings: bindingsObject as any,
       });
     }
     dirtyRef.current = false;
@@ -69,7 +65,7 @@ export function TldrawWriter(props: {
       if (!shape) {
         shapesRef.current.delete(id);
       } else {
-        shapesRef.current.set(shape.id, shape);
+        shapesRef.current.set(shape.id, shape as any);
       }
     });
 
@@ -77,7 +73,7 @@ export function TldrawWriter(props: {
       if (!binding) {
         bindingsRef.current.delete(id);
       } else {
-        bindingsRef.current.set(binding.id, binding);
+        bindingsRef.current.set(binding.id, binding as any);
       }
     });
   }
@@ -119,10 +115,12 @@ export function TldrawReader(props: { state: IDrawingAreaState }) {
 }
 
 export class TlDrawErrorBoundary extends React.Component<
-  {},
+  {
+    children: React.ReactNode;
+  },
   { hasError: boolean }
 > {
-  constructor(props: {}) {
+  constructor(props: { children: React.ReactNode }) {
     super(props);
     this.state = { hasError: false };
   }

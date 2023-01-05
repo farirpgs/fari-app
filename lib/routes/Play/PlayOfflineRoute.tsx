@@ -1,22 +1,19 @@
 import React, { useContext, useEffect } from "react";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { Session } from "../../components/Scene/Scene";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { useScene } from "../../hooks/useScene/useScene";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import { useChat } from "./components/Chat/useChat";
+import { Session } from "./components/Session/Session";
 import {
   useSession,
   useSessionCharacterSheets,
-} from "../../hooks/useScene/useSession";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+} from "./components/Session/useSession";
 
-export const PlayOfflineRoute: React.FC<{
-  match: {
-    params: { id?: string };
-  };
-}> = () => {
+export const PlayOfflineRoute: React.FC<{}> = () => {
   const settingsManager = useContext(SettingsContext);
   const charactersManager = useContext(CharactersContext);
 
@@ -24,6 +21,7 @@ export const PlayOfflineRoute: React.FC<{
   const sessionManager = useSession({
     userId: settingsManager.state.userId,
   });
+  const chatManager = useChat();
   const sessionCharactersManager = useSessionCharacterSheets({
     userId: settingsManager.state.userId,
     charactersManager: charactersManager,
@@ -50,6 +48,7 @@ export const PlayOfflineRoute: React.FC<{
         sessionManager={sessionManager}
         sessionCharactersManager={sessionCharactersManager}
         sceneManager={sceneManager}
+        chatManager={chatManager}
       />
     </>
   );
