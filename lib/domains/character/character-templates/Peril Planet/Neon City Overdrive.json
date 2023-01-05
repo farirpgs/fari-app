@@ -1,0 +1,245 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1672948720,
+  "name": "Neon City Overdrive Template",
+  "pages": [
+    {
+      "id": "b8ce55dd-8d80-4774-be92-b58977242d4a",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "4251e4d0-ccdc-4079-bc97-f137e02d29dc",
+                  "label": "Description",
+                  "blocks": [
+                    {
+                      "id": "5ff7a87b-4f11-4195-8c2e-a6167ac27047",
+                      "label": "Text",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Write a brief description of the character."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "bcae6ed9-6267-4686-9ac6-c40a6f3fc3ae",
+                  "label": "Trademarks",
+                  "blocks": [
+                    {
+                      "id": "1f4c801a-d920-4ee6-a425-199d62a34305",
+                      "label": "Trademark 1: ",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "" }
+                    },
+                    {
+                      "id": "e73129f3-04d6-4c63-a8d8-ea4b851449d1",
+                      "label": "Edges",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": { "helperText": "1 line per edge" }
+                    },
+                    {
+                      "id": "c1406eeb-74a0-4c18-b9a6-3df77b2dc06f",
+                      "label": "Trademark 2: ",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "" }
+                    },
+                    {
+                      "id": "a6baf264-2052-4974-a400-e9d802c89d22",
+                      "label": "Edges",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": { "helperText": "1 line per edge" }
+                    },
+                    {
+                      "id": "d1e17708-8d20-484b-bd19-ed5428021c1f",
+                      "label": "Trademark 3: ",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "" }
+                    },
+                    {
+                      "id": "34d62d8f-a0c7-46ab-811a-e3157d9c0c0b",
+                      "label": "Edges",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": { "helperText": "1 line per edge" }
+                    },
+                    {
+                      "id": "6532b824-e078-4960-af9c-1471e935d2f8",
+                      "label": "Trademark 4: ",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "62e7f868-dc48-4c54-9212-f97879907b7e",
+                      "label": "Edges",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": { "helperText": "1 line per edge" }
+                    },
+                    {
+                      "id": "60caf410-1944-450c-8c81-37f7ad914913",
+                      "label": "Trademark 5: ",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "37356ecc-bbe8-4e12-b374-5742a64bf354",
+                      "label": "Edges",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": { "helperText": "1 line per edge" }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "045a9fba-7650-477b-9143-dc31f47db054",
+                  "label": "Portrait",
+                  "blocks": [
+                    {
+                      "id": "918d014a-1ad9-4820-8e83-ab1df5d17a0e",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {
+                        "helperText": "Add an image of the character if you like."
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "9b0d4b1c-7b40-40b1-883c-978a5a8d81fe",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "dea34dd0-eba3-486b-9c82-e7637a7b741e",
+                      "label": "Hits",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "dedc3306-2b6d-4d65-bae1-08eec43140b2",
+                      "label": "Conditions",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "Angry", "checked": false },
+                        { "label": "Dazed", "checked": false },
+                        { "label": "Exhausted", "checked": false },
+                        { "label": "Scared", "checked": false },
+                        { "label": "Restrained", "checked": false },
+                        { "label": "Weakened", "checked": false },
+                        { "label": "other", "checked": false },
+                        { "label": "other", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "31ed2156-6f75-4a07-b8c9-9f07957e148a",
+                      "label": "Traumas:",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": { "helperText": "1 trauma per line" }
+                    },
+                    {
+                      "id": "92f46680-e556-4647-8e85-3f823cc9902d",
+                      "label": "Stunt Points",
+                      "type": "PointCounter",
+                      "meta": { "max": "3", "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "82118f7e-2bbc-41f5-b581-a8f5e8b5bf28",
+                      "label": "Basic Gear",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "54e5c87b-d0c7-45b8-827c-b758dbabdb76",
+                      "label": "Special Gear",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "908ae175-91d6-4886-ab21-4d6a1a232098",
+                      "label": "Experience Points",
+                      "type": "SlotTracker",
+                      "meta": { "width": 1 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "a386944d-9aeb-419e-a3d9-8e25fe3bfef4",
+                      "label": "Drive",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e004fe09-5d7a-427f-8e07-aabc24480905",
+                      "label": "Drive",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "playedDuringTurn": false
+}
