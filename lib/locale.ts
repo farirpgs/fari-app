@@ -243,6 +243,7 @@ export type ITranslationKeys =
   | "page.privacy-policy"
   | "play-route.add-index-card"
   | "play-route.assign-character-sheet"
+  | "play-route.change-character-sheet"
   | "play-route.chat"
   | "play-route.collapse-all"
   | "play-route.connect-to-game"

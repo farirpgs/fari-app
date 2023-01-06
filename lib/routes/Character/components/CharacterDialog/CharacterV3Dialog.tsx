@@ -230,9 +230,9 @@ export const CharacterV3Dialog: React.FC<{
         <Drawer
           anchor={"left"}
           sx={{
-            "& .MuiDialog-paper": {
-              marginTop: "5.5rem",
-              height: "calc(100vh - 5.5rem)",
+            "& .MuiDrawer-paper": {
+              marginTop: "5.2rem",
+              height: "calc(100vh - 5.2rem)",
             },
           }}
           BackdropProps={{
@@ -1784,31 +1784,50 @@ export const CharacterV3Dialog: React.FC<{
                   return (
                     <>
                       <FormHelperText>Background Color</FormHelperText>
-                      <IndexCardColorPicker
-                        color={value}
-                        onChange={(newColor) => {
-                          setValue(newColor);
-                        }}
-                        hidePastils
-                        render={(renderProps) => {
-                          return (
-                            <CircleIcon
-                              sx={{
-                                border: `2px solid ${theme.palette.text.secondary}`,
-                                borderRadius: "50%",
-                                cursor: "pointer",
-                                width: "3rem",
-                                height: "3rem",
-                              }}
-                              htmlColor={value}
-                              ref={renderProps.ref}
-                              onClick={() => {
-                                renderProps.setColorPickerOpen(true);
-                              }}
-                            />
-                          );
-                        }}
-                      />
+                      <Grid
+                        container
+                        justifyContent={"space-between"}
+                        alignItems="center"
+                      >
+                        <Grid item xs>
+                          <IndexCardColorPicker
+                            color={value}
+                            onChange={(newColor) => {
+                              setValue(newColor);
+                            }}
+                            hidePastils
+                            render={(renderProps) => {
+                              return (
+                                <CircleIcon
+                                  sx={{
+                                    border: `2px solid ${theme.palette.text.secondary}`,
+                                    borderRadius: "50%",
+                                    cursor: "pointer",
+                                    width: "3rem",
+                                    height: "3rem",
+                                  }}
+                                  htmlColor={value}
+                                  ref={renderProps.ref}
+                                  onClick={() => {
+                                    renderProps.setColorPickerOpen(true);
+                                  }}
+                                />
+                              );
+                            }}
+                          />
+                        </Grid>
+                        <Grid item>
+                          <Button
+                            size="small"
+                            variant="outlined"
+                            onClick={() => {
+                              setValue(undefined);
+                            }}
+                          >
+                            <Typography>Clear color</Typography>
+                          </Button>
+                        </Grid>
+                      </Grid>
                     </>
                   );
                 }}

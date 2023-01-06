@@ -1,4 +1,5 @@
 import { LiveMap } from "@liveblocks/client";
+import { useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { TDBinding, TDShape, TldrawApp } from "@tldraw/tldraw";
@@ -20,6 +21,7 @@ export function TldrawWriter(props: {
   onChange?: (state: IDrawingAreaState) => void;
   tldrawProps?: TldrawProps;
 }) {
+  const theme = useTheme();
   const shapesRef = React.useRef<LiveMap>(new LiveMap());
   const bindingsRef = React.useRef<LiveMap>(new LiveMap());
   const dirtyRef = React.useRef(false);
@@ -82,6 +84,7 @@ export function TldrawWriter(props: {
     <Tldraw
       showPages={false}
       showMenu={false}
+      darkMode={theme.palette.mode === "dark"}
       onChangePage={(app, shapes, bindings) => {
         handleTldrawChange(app, shapes, bindings);
       }}
@@ -94,6 +97,7 @@ export function TldrawWriter(props: {
 }
 
 export function TldrawReader(props: { state: IDrawingAreaState }) {
+  const theme = useTheme();
   const [app, setApp] = React.useState<TldrawApp>();
 
   useEffect(() => {
@@ -110,6 +114,7 @@ export function TldrawReader(props: { state: IDrawingAreaState }) {
       showPages={false}
       showMenu={false}
       readOnly
+      darkMode={theme.palette.mode === "dark"}
     />
   );
 }

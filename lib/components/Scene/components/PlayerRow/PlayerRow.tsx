@@ -133,7 +133,11 @@ export function PlayerRow(
                     <AssignmentIndIcon />
                   </ListItemIcon>
                   <ListItemText
-                    primary={t("play-route.assign-character-sheet")}
+                    primary={
+                      props.hasCharacterSheet
+                        ? t("play-route.change-character-sheet")
+                        : t("play-route.assign-character-sheet")
+                    }
                   />
                 </ListItemButton>
               </ListItem>

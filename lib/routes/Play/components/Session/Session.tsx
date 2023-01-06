@@ -105,7 +105,7 @@ export function Session(props: {
   useBlockReload(sceneManager.state.dirty);
 
   const theme = useTheme();
-  const isSmall = useMediaQuery(theme.breakpoints.down("md"));
+  const isSmall = useMediaQuery(theme.breakpoints.down("lg"));
 
   const miniTheme = useMiniTheme({
     enforceBackground: theme.palette.background.default,
@@ -301,7 +301,7 @@ export function Session(props: {
   );
 
   return (
-    <Page isLive gameId={props.idFromParams} maxWidth="none" hideFooter>
+    <Page isLive gameId={props.idFromParams} maxWidth="none" hideFooter sx={{}}>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={rollSnackVisible}
@@ -325,7 +325,13 @@ export function Session(props: {
           bottom: "10rem",
           position: "absolute",
           width: "100%",
-          height: "calc(100vh - 10rem)",
+          overflow: "auto",
+          height: {
+            xs: "calc(100vh - 12rem)",
+            sm: "calc(100vh - 12rem)",
+            md: "calc(100vh - 12em)",
+            lg: "calc(100vh - 10em)",
+          },
         }}
       >
         {renderPauseDialog()}
