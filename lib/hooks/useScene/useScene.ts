@@ -356,6 +356,6 @@ export function useScene() {
   };
 }
 
-export interface IPeerMeta {
+export type IPeerMeta = {
   playerName?: string;
-}
+};

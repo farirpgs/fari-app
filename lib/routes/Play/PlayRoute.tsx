@@ -72,11 +72,12 @@ export function useLiveObject<T>(props: {
     /**
      * https://github.com/liveblocks/liveblocks/blob/66eac7d21963d3b35e6a2987b083e2dc9ee5ffbe/packages/liveblocks-react/src/factory.tsx#L83
      */
-    const isRoomReady = room.getStorageSnapshot() !== null;
+    const isRoomReady = room.getStorageStatus() === "synchronized";
 
     if (isRoomReady) {
       console.log("GM: UPDATE LIVE OBJECT", newState, root.storage);
-      (root.storage.get(props.key) as any).set(newState);
+
+      root.storage.set(props.key, newState);
     }
   }, []);
 

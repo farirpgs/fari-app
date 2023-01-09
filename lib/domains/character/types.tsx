@@ -21,7 +21,7 @@ export enum V3Position {
 /**
  * @deprecated Deprecated V1 Character
  */
-export interface IV1Character {
+export type IV1Character = {
   id: string;
   name: string;
   aspects: ICharacterV2CustomField<string>;
@@ -44,12 +44,12 @@ export interface IV1Character {
   playedDuringTurn: boolean | undefined;
   version: number;
   lastUpdated: number;
-}
+};
 
 /**
  * @deprecated Deprecated V2 Character
  */
-export interface IV2Character {
+export type IV2Character = {
   id: string;
   name: string;
   aspects: ICharacterV2CustomField<string>;
@@ -74,7 +74,7 @@ export interface IV2Character {
   playedDuringTurn: boolean | undefined;
   version: number;
   lastUpdated: number;
-}
+};
 
 /**
  * @deprecated
@@ -95,13 +95,13 @@ export type IV3Section = {
   visibleOnCard?: boolean;
 };
 
-export interface IV3Page {
+export type IV3Page = {
   id: string;
   label: string;
   sections: Array<IV3Section>;
-}
+};
 
-export interface IV3Character {
+export type IV3Character = {
   id: string;
   name: string;
   group: string | undefined;
@@ -111,17 +111,11 @@ export interface IV3Character {
   version: number;
   lastUpdated: number;
   playedDuringTurn?: boolean;
-}
+};
 
 /**
  * V4
  */
-
-export interface IV4Page {
-  id: string;
-  label: string;
-  sections: { left: Array<ISection>; right: Array<ISection> };
-}
 
 export type IDefaultBlockMeta = {
   helperText?: string;
@@ -234,18 +228,18 @@ export type IBlock = {
   // value: unknown;
 } & IBlockTypes;
 
-export interface IV4Page {
+export type IV4Page = {
   id: string;
   label: string;
   sections: { left: Array<ISection>; right: Array<ISection> };
-}
+};
 
 export type IPageSectionPosition = keyof IV4Page["sections"];
 
 /**
  * @deprecated
  */
-export interface IV4Character {
+export type IV4Character = {
   id: string;
   name: string;
   group: string | undefined;
@@ -256,7 +250,7 @@ export interface IV4Character {
   version: number;
   lastUpdated: number;
   playedDuringTurn?: boolean;
-}
+};
 
 export type ISection = {
   id: string;
@@ -272,11 +266,11 @@ export type IPageRow = {
   columns: Array<IPageColumn>;
 };
 
-export interface IPage {
+export type IPage = {
   id: string;
   label: string;
   rows: Array<IPageRow>;
-}
+};
 
 export type ICharacterTheme = {
   backgroundColor?: string;
@@ -305,7 +299,7 @@ export type ICharacterTheme = {
   infoTextFontWeight?: any;
 };
 
-export interface ICharacter {
+export type ICharacter = {
   id: string;
   name: string;
   group: string | undefined;
@@ -317,4 +311,4 @@ export interface ICharacter {
   version: number;
   lastUpdated: number;
   playedDuringTurn?: boolean;
-}
+};

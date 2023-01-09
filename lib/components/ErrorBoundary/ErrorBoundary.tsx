@@ -2,14 +2,14 @@ import * as Sentry from "@sentry/browser";
 import React, { Component } from "react";
 import { ErrorReport } from "./ErrorReport";
 
-interface IProps {
+type IProps = {
   children: React.ReactNode;
-}
+};
 
-interface IState {
+type IState = {
   hasError?: boolean;
   eventId: string | null;
-}
+};
 
 export class ErrorBoundary extends Component<IProps, IState> {
   constructor(props: IProps) {
