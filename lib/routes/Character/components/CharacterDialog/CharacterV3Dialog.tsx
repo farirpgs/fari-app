@@ -116,6 +116,7 @@ export const CharacterV3Dialog: React.FC<{
   dialog: boolean;
 
   synced?: boolean;
+  autosave?: boolean;
 
   onClose?(): void;
   onSave?(newCharacter: ICharacter): void;
@@ -146,12 +147,25 @@ export const CharacterV3Dialog: React.FC<{
   const [tab, setTab] = useState<string>("0");
   const currentPageIndex = parseInt(tab);
 
+  useEffect(() => {
+    if (props.autosave) {
+      autoSave();
+    }
+  }, [props.autosave, characterManager.state.character]);
+
   function onSave() {
     const updatedCharacter =
       characterManager.actions.getCharacterWithNewTimestamp();
     props.onSave?.(updatedCharacter!);
     setSavedSnack(true);
     logger.track("character.save");
+  }
+
+  function autoSave() {
+    const updatedCharacter =
+      characterManager.actions.getCharacterWithNewTimestamp();
+    props.onSave?.(updatedCharacter!);
+    logger.track("character.auto-save");
   }
 
   function handleOnToggleAdvancedMode() {
@@ -1551,21 +1565,23 @@ export const CharacterV3Dialog: React.FC<{
               </Grid>
             )}
 
-            <Grid item>
-              <Button
-                color="primary"
-                data-cy="character-dialog.save"
-                data-cy-dirty={characterManager.state.dirty}
-                variant={
-                  characterManager.state.dirty ? "contained" : "outlined"
-                }
-                type="submit"
-                endIcon={<SaveIcon />}
-                onClick={onSave}
-              >
-                {t("character-dialog.save")}
-              </Button>
-            </Grid>
+            {!props.autosave && (
+              <Grid item>
+                <Button
+                  color="primary"
+                  data-cy="character-dialog.save"
+                  data-cy-dirty={characterManager.state.dirty}
+                  variant={
+                    characterManager.state.dirty ? "contained" : "outlined"
+                  }
+                  type="submit"
+                  endIcon={<SaveIcon />}
+                  onClick={onSave}
+                >
+                  {t("character-dialog.save")}
+                </Button>
+              </Grid>
+            )}
           </Grid>
         </Grid>
       </Box>

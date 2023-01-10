@@ -1013,6 +1013,7 @@ export function Session(props: {
                             <CharacterV3Dialog
                               readonly={!canControl}
                               open={true}
+                              autosave
                               preview={true}
                               character={player.characterSheet}
                               dialog={false}
