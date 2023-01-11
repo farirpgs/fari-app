@@ -570,14 +570,16 @@ export function Session(props: {
         <TabbedScreen
           tabs={[
             {
-              label: "Players",
+              label: t("play-route.side-panel.tabs.players"),
               dataCy: "players-tab",
               value: "players",
               sx: { padding: "0", overflow: "auto" },
               render: renderPlayers,
             },
             {
-              label: `${"Chat"} (${chatManager.state.unreadCount})`,
+              label: `${t("play-route.side-panel.tabs.chat")} (${
+                chatManager.state.unreadCount
+              })`,
               dataCy: "chat-tab",
               value: "chat",
               sx: { padding: "0", overflow: "auto", height: "100%" },
@@ -1108,11 +1110,10 @@ export function Session(props: {
       return (
         <Box sx={{ padding: "1rem" }}>
           <Typography variant="h6" color="textSecondary">
-            There are no players or GM characters in this session.
+            {t("play-route.characters-tab.no-players-warning.title")}
           </Typography>
           <Typography variant="body2" color="textSecondary">
-            Copy and send the session link to your friends, or add GM characters
-            using the buttons on the left.
+            {t("play-route.characters-tab.no-players-warning.description")}
           </Typography>
         </Box>
       );
@@ -1122,13 +1123,8 @@ export function Session(props: {
       return (
         <Box sx={{ padding: "1rem" }}>
           <Typography variant="h6" color="textSecondary">
-            No character sheets in session yet.
+            {t("play-route.characters-tab.no-sheets-warning.title")}
           </Typography>
-          {/* <Typography variant="body2" color="textSecondary">
-            To assign a character sheet to a player, click on the{" "}
-            <AssignmentIndIcon /> button, and select the character sheet you
-            want to use.
-          </Typography> */}
         </Box>
       );
     }
