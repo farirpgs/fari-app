@@ -101,7 +101,7 @@
   "character-dialog.load-template": "Load Template",
   "character-dialog.load-template-confirmation": "Are you sure you want to load this template and lose all your changes ?",
   "character-dialog.name": "Name",
-  "character-dialog.open-theme-editor": "Ouvrir l'éditeur de thème",
+  "character-dialog.open-theme-editor": "Open the theme editor",
   "character-dialog.print": "Print",
   "character-dialog.remove-page-confirmation": "Are you sure you want to remove that page",
   "character-dialog.remove-section-confirmation": "Are you sure you want to remove that section",
