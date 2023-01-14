@@ -1,0 +1,1171 @@
+{
+  "fariType": "character",
+  "id": "b6b35bb1-d985-479b-97b7-ff153cc67adc",
+  "lastUpdated": 1673658928,
+  "name": "Sworn By Ghostlight",
+  "pages": [
+    {
+      "id": "a22576bf-a32f-4004-b3b8-06cf6a387d8b",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9f92c4d8-9250-41ec-ad6e-150a9e28eaba",
+                  "label": "Character Details",
+                  "blocks": [
+                    {
+                      "id": "0abde69a-fdc1-4667-8104-11cd2f7f3ca9",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://img.itch.zone/aW1nLzEwMjEzNzkyLnBuZw==/original/f6DJTx.png"
+                    },
+                    {
+                      "id": "f76e4179-c042-4227-b308-23c8a1494080",
+                      "label": "Name:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "f37d1df2-d0d3-4683-b6e0-b7b3fb802c2d",
+                      "label": "Pronouns:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "4449e012-6814-4082-8b94-8ec8df407f04",
+                      "label": "Look:",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "helperText": "Envision your characters look.",
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "025e2dc8-0834-4e45-ab6f-7ab97055bf67",
+                      "label": "",
+                      "type": "Image",
+                      "meta": { "width": 0.33 },
+                      "value": ""
+                    },
+                    {
+                      "id": "deed9691-de79-46d9-8e8c-3624a4d53f30",
+                      "label": "Character Details:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Envision your characters motivations, skills, personality, and weaknesses.&nbsp;",
+                        "width": 0.66
+                      }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "278106d6-c114-4dce-9eaa-265cbe3fb436",
+                  "label": "Abilities",
+                  "blocks": [
+                    {
+                      "id": "b2559b84-8522-4e37-8410-a784c978bc96",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Arrange these bonuses across your five stats in any order: 4, 3, 3, 2 &amp; 1.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2dcfdfc0-8dcb-4d19-8508-f2245e7121fb",
+                      "label": "Edge",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d10", "1d10"],
+                        "width": 1,
+                        "helperText": "Quickness, agility, and prowess in ranged conflict."
+                      }
+                    },
+                    {
+                      "id": "b6409c7b-cceb-4847-a747-e39425626072",
+                      "label": "Heart",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d10", "1d10"],
+                        "width": 1,
+                        "helperText": "Courage, willpower, empathy, sociability, and loyalty."
+                      }
+                    },
+                    {
+                      "id": "e2dafe50-00b2-41cd-a64f-f7278fe2e089",
+                      "label": "Iron",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d10", "1d10"],
+                        "width": 1,
+                        "helperText": "Brawn, endurance, aggressiveness, and prowess in close conflict."
+                      }
+                    },
+                    {
+                      "id": "f9976379-fc42-42de-956b-9ccb51863864",
+                      "label": "Shadow",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d10", "1d10"],
+                        "width": 1,
+                        "helperText": "Sneakiness, deceptiveness, and cunning."
+                      }
+                    },
+                    {
+                      "id": "e89e411b-794b-44c8-95da-f976723b9cad",
+                      "label": "Wits",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d10", "1d10"],
+                        "width": 1,
+                        "helperText": "Expertise, knowledge, and observation."
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "5c04773c-8282-492b-b76f-6e8d3bfc67d2",
+                  "label": "Statuses",
+                  "blocks": [
+                    {
+                      "id": "5acb3a3f-b5fe-46a4-a7d9-7730fd666499",
+                      "label": "Health",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "5",
+                        "isMainPointCounter": false,
+                        "helperText": "Represents your physical condition."
+                      },
+                      "value": "5"
+                    },
+                    {
+                      "id": "db12e065-41f0-42e6-9cd9-64a913bc8e76",
+                      "label": "Spirit",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "5",
+                        "isMainPointCounter": false,
+                        "helperText": "Represents your mental state.&nbsp;"
+                      },
+                      "value": "5"
+                    },
+                    {
+                      "id": "ec5a6c70-12f3-49da-8aa7-67e9866a2240",
+                      "label": "Supply",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "5",
+                        "isMainPointCounter": false,
+                        "helperText": "Represents your preparedness.&nbsp;"
+                      },
+                      "value": "5"
+                    },
+                    {
+                      "id": "84654d96-911c-4467-a87f-7636457a3f7e",
+                      "label": "Momentum",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "10",
+                        "isMainPointCounter": false,
+                        "helperText": "An indicator of if things are going your way.<br>Exchange the results of an Action Roll to improve your odds at success. Reset to zero when used.<br>"
+                      },
+                      "value": "2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b66082fb-7439-4fe4-be9c-0c9a49e58dea",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "416350ca-6619-4c99-b0c5-676710e1b608",
+                  "label": "The Case",
+                  "blocks": [
+                    {
+                      "id": "66fbb509-aa94-413e-bc99-e6b17e819aa3",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://img.itch.zone/aW1nLzEwMjEzNzkyLnBuZw==/original/f6DJTx.png"
+                    },
+                    {
+                      "id": "9c4bed1a-1f6d-4f5a-b372-a93c029ec6a8",
+                      "label": "Case Title",
+                      "type": "Text",
+                      "value": " (e.g. The Ebon Wood Effigies)",
+                      "meta": {
+                        "width": 1,
+                        "helperText": "Place the name of your current case here."
+                      }
+                    },
+                    {
+                      "id": "f94d3bec-9253-4ed6-9a0e-3267d3a815fe",
+                      "label": "Case Tracker",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "3843ff7d-8499-404a-a3e4-73ef8a56b3c3",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ],
+                  "visibleOnCard": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "40ae24a4-88b2-422b-89d8-6f7d447dec96",
+                  "label": "Progress Tracks",
+                  "blocks": [
+                    {
+                      "id": "c540a54c-c512-4b8b-877d-6e7302647e6e",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Progress tracks start with all boxes empty and are filled as you succeed at actions. Assign the track a difficulty as follows.<br>&nbsp; &nbsp;● Troublesome: Mark 5 progress per hit.\n<br>&nbsp; &nbsp;● Dangerous: Mark 4 progress per hit.\n<br>&nbsp; &nbsp;● Formidable: Mark 3 progress per hit.\n<br>&nbsp; &nbsp;● Extreme: Mark 2 progress per hit.\n<br>&nbsp; &nbsp;● Epic: Mark 1 progress per hit.<br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "181eb1b1-541d-42dc-a348-9f7c1a226889",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "538f1387-01ac-4e4d-bbee-84cfc8e9c5fa",
+                      "label": "Progress Tracker",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "asClock": false,
+                        "helperText": "<br>",
+                        "width": 1
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "33d70b87-f11f-451d-8659-0e167627ea4c",
+                      "label": "Progress Tracker Details",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Write down the Difficulty and any goals associated with this Progress Track.",
+                        "width": 1
+                      }
+                    },
+                    {
+                      "id": "c2761f2c-0137-42c8-9139-a5fbea1d3799",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "width": 1 },
+                      "value": ""
+                    },
+                    {
+                      "id": "67d0c970-d829-4cee-b6fe-28321c7c4800",
+                      "label": "Progress Tracker",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false, "helperText": "<br>" },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "0f933ef1-cda7-4e57-89c3-fd9c19923312",
+                      "label": "Progress Tracker Details",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Write down the Difficulty and any goals associated with this Progress Track."
+                      }
+                    },
+                    {
+                      "id": "adbbcc5f-d2d0-452f-922c-f81a13351635",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "1092181f-0d9f-4a28-b257-5b7ba7bc6701",
+                      "label": "Progress Tracker",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false, "helperText": "<br>" },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "f70ca4c2-42ad-4cbf-9861-218fb7284733",
+                      "label": "Progress Tracker Details",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Write down the Difficulty and any goals associated with this Progress Track."
+                      }
+                    },
+                    {
+                      "id": "792694e0-dca0-4f6f-a20a-741ef3d3961b",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "72b59284-7c4f-4eca-b3b7-e2cec82d52d1",
+                      "label": "Progress Tracker",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false, "helperText": "<br>" },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "ae11980c-aeb3-4028-a2eb-a51607a11991",
+                      "label": "Progress Tracker Details",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Write down the Difficulty and any goals associated with this Progress Track."
+                      }
+                    },
+                    {
+                      "id": "e8da883f-f64b-4c9e-8a21-86f53b522458",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "f7f11543-70e2-4421-b1a2-8c5af0a33ab7",
+                      "label": "Progress Tracker",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false, "helperText": "<br>" },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "10f5466d-b8f1-413e-bf04-d31e078151b6",
+                      "label": "Progress Tracker Details",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Write down the Difficulty and any goals associated with this Progress Track."
+                      }
+                    },
+                    {
+                      "id": "b01f2d73-bd8b-49fe-8350-ad0fbedcbb42",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "393b4084-067a-4c49-83be-5f6805f4876c",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "ff67926c-7395-40ef-a587-c1d52c5836df",
+                      "label": "Progress Tracker",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "asClock": false,
+                        "helperText": "<br>",
+                        "width": 1
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "cc76b7bf-9418-4be0-b1a9-ef929d0fda3e",
+                      "label": "Progress Tracker Details",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Write down the Difficulty and any goals associated with this Progress Track.",
+                        "width": 1
+                      }
+                    },
+                    {
+                      "id": "b9991f16-1cc0-4280-bbca-df5e481fa331",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "width": 1 },
+                      "value": ""
+                    },
+                    {
+                      "id": "1de9f108-f07c-414a-a7d3-00ef57bc9703",
+                      "label": "Progress Tracker",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false, "helperText": "<br>" },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "687a40f2-7d06-4188-b30c-50d19f0fd60b",
+                      "label": "Progress Tracker Details",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Write down the Difficulty and any goals associated with this Progress Track."
+                      }
+                    },
+                    {
+                      "id": "7afb2e29-dbc7-497d-9357-87ffd06ed7f4",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "c7ed7986-f8bc-44a4-92bd-387e55268265",
+                      "label": "Progress Tracker",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false, "helperText": "<br>" },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "e41d1a33-dbf1-4b0f-8bad-19e0c11cea00",
+                      "label": "Progress Tracker Details",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Write down the Difficulty and any goals associated with this Progress Track."
+                      }
+                    },
+                    {
+                      "id": "86f61e24-c9d5-42a0-be47-a31998e98bad",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "703d794e-abab-4463-b4f9-436418a02342",
+                      "label": "Progress Tracker",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false, "helperText": "<br>" },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "094d4a9a-0bfd-4686-b0d3-4812ab851df5",
+                      "label": "Progress Tracker Details",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Write down the Difficulty and any goals associated with this Progress Track."
+                      }
+                    },
+                    {
+                      "id": "b3bd031f-a020-4f50-af9b-2ce62624130e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "b86f3dc9-b7fc-46ab-b35d-13a7ec131cc3",
+                      "label": "Progress Tracker",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false, "helperText": "<br>" },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "8a94d74a-7f3f-4566-865f-f6e00b5ddc9b",
+                      "label": "Progress Tracker Details",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Write down the Difficulty and any goals associated with this Progress Track."
+                      }
+                    },
+                    {
+                      "id": "e049b4bf-6e53-4af6-a5b1-c37ae74570c7",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Progress Tracks"
+    },
+    {
+      "id": "3d5a1741-ba1f-403d-921f-99ac0a380f29",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "e18e7915-e7d2-4897-adb4-5208d1e5602b",
+                  "label": "Case Notes",
+                  "blocks": [
+                    {
+                      "id": "b82c5e0c-28ac-4ecb-8774-7c0a11f33fab",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "dc0f165c-f228-4b9d-995c-26993093f2a8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "10254166-f09e-45f2-8976-0e9da56970d0",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9c920881-dc90-4524-9be6-7331fe6db30b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "eb6768e7-482f-4aa4-ad8d-01b6fa0d1c20",
+                  "label": "People",
+                  "blocks": [
+                    {
+                      "id": "485ccd66-cd84-4d27-ad4c-874f8a56aeed",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1fa115e2-96f8-49f3-8437-7b446dedb7a0",
+                      "label": "Mind-Set",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "6ba2b41c-e8f8-4875-80dc-61a9b0bb7da5",
+                      "label": "Role",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9df20654-4bc0-4985-a85d-e92c9133c2c0",
+                      "label": "Goal",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9fe8567f-fce8-4ef6-8457-13544e74db13",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "913d6f26-22d4-494c-a98e-1a07bacfba36",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "df0ddf4e-cb05-403b-8c04-620e790e2f3f",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "767fc36c-aea4-45ce-bcd2-b7afd9906a55",
+                      "label": "Mind-Set",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2924d6ae-8fb2-404d-93db-6529ff306f94",
+                      "label": "Role",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "648b755b-ae89-4491-a85b-7f49048b0301",
+                      "label": "Goal",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5f1933f1-9851-46e6-925c-1aef3221711d",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c183a5c5-be49-4102-aa42-9f31162d711d",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "99e40e97-ce63-49f8-a9df-b24dd1afd2f8",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "85cd8ed9-266a-4d6a-9b06-102e1a9c97ee",
+                      "label": "Mind-Set",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "997c949d-b11f-4d83-8843-07d0d152f9f8",
+                      "label": "Role",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d3620614-0f1f-40af-9c14-bf2f04c8fecf",
+                      "label": "Goal",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "75d7cdfa-5028-4d52-97e8-3611c65d2088",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8c8e3409-fd13-4694-8823-1d33becdd8a1",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "c2ec6700-b014-4883-a15b-e18f311f4349",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e95ba79d-a86c-4cd8-8802-6157e0925a7f",
+                      "label": "Mind-Set",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "53b3bad7-a2d1-403d-ac49-d98a1954b708",
+                      "label": "Role",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d4497214-2459-40f1-a497-abcb6eebbfc5",
+                      "label": "Goal",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e27b4308-1c7a-490e-91f7-1e84202c7760",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d23c7fde-0a0d-4c61-906b-0f7b7164e011",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "df44849e-e5f6-4e3b-a499-e5035a9430d2",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "34a3dc2b-6201-41ff-956c-42e407107836",
+                      "label": "Mind-Set",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1ea6973e-7800-462d-aa8e-7a83b4a911d9",
+                      "label": "Role",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "fff214b9-8eed-44a2-b1db-9f1e69a55d39",
+                      "label": "Goal",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e2c46907-660a-4ed1-aa03-6edb81f8b26c",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a0b35368-6aaf-4c5b-b221-c46543a5d978",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "3528c9b5-05f7-4422-843e-88333409aa98",
+                  "label": "Places",
+                  "blocks": [
+                    {
+                      "id": "5c6e6a4d-7819-4cef-bc6f-802fbd44c6b1",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "174000ec-7f21-4f16-9aa4-55dffd661df4",
+                      "label": "Theme",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ea8d580d-9099-4880-a863-892a70a39b7a",
+                      "label": "Location",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "46743bd6-41f6-4533-86d0-2340eb3c3d14",
+                      "label": "Detail",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "84729628-0c6f-43d7-994f-1ff70653092c",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "704b9acb-0643-422b-9a11-a1be2af951f7",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "ab9f7dc0-8d94-4bf0-8028-4b5ab8282b8a",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cfc7bc6b-5b20-4e29-88f7-40b8a05ffb5c",
+                      "label": "Theme",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "521483c5-0937-4700-becc-f4f4d696fc82",
+                      "label": "Location",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ddaaad1c-b0a1-44d7-a057-41818376947f",
+                      "label": "Detail",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7c654f42-1913-45e9-9fe5-b53cb2edbc95",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "fa46177f-ab65-464e-8e37-ff1f502c3221",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "4daacae2-6c50-401c-ba1e-63ce6ca44421",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d1e7aca8-44c9-4a2d-ba6a-6551d9f0e5c3",
+                      "label": "Theme",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c6d27a59-4bff-4a92-9f79-55c44f7f97b8",
+                      "label": "Location",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "96f80b2b-67f9-48f5-adf9-995b0a24b098",
+                      "label": "Detail",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "99f54b40-b47b-47ba-af6a-4703c0191b85",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ed86398d-3bda-44ba-bf75-ee2f09817c2d",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "865b41a2-36e5-46ef-9d1b-9388c711c2bb",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7636a8fe-3b63-4f69-a84e-b8bb08ac5176",
+                      "label": "Theme",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a3a2813d-6545-4205-9347-76792827c308",
+                      "label": "Location",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "14c44ad2-f02e-418a-9919-e402da1556b4",
+                      "label": "Detail",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "54f7d956-9c53-4c62-a5de-b49715b5d816",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a1dacec6-4c2e-4a8d-ad46-d4455be60e56",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "4d1691ee-4c98-412e-b7c8-8e1383fa7a91",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f27298b0-43fc-4823-9d15-eec321da2d7d",
+                      "label": "Theme",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9e04fa4b-0d51-498f-b2d9-502b696567a7",
+                      "label": "Location",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "640b1101-d88f-41b0-9ab7-ff43769ccba3",
+                      "label": "Detail",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "577334ca-b2d9-4e5e-acbd-1226fd1f12e1",
+                      "label": "Notes",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "687b91da-bf86-4261-a330-615dfd3531c0",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Notes"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "group": "Ironsworn",
+  "wide": false,
+  "theme": {
+    "pageHeadingFontFamily": "IM Fell English SC",
+    "pageHeadingFontSize": 1.5,
+    "sectionHeadingFontFamily": "IM Fell English SC",
+    "labelFontFamily": "IM Fell English SC",
+    "labelFontWeight": "",
+    "textFontFamily": "Crimson Text",
+    "infoTextFontFamily": "Crimson Text",
+    "helperTextFontFamily": "Crimson Text",
+    "textFontSize": 1.25,
+    "infoTextFontSize": 1.25,
+    "helperTextFontSize": 1
+  },
+  "playedDuringTurn": false
+}
