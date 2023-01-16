@@ -1,0 +1,491 @@
+{
+  "fariType": "character",
+  "id": "ccd888e8-d0d0-4ee6-b2dd-1c6d12c956e8",
+  "lastUpdated": 1673756599,
+  "name": "Lagash 3 Template",
+  "pages": [
+    {
+      "id": "1530ad1f-d61e-438f-93a0-b34f75766546",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "dd6ffbe8-1956-48db-9d1d-0e14ee07d882",
+                  "label": "Lagash 3",
+                  "blocks": [
+                    {
+                      "id": "c2aab54f-8532-4cc4-b0bd-34fa5dc09650",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "The Lagash Project was dream given form. Its goal, to create stations in neutral space where beings could work out their differences and connect in a home away from home. These stations were to be port of call for diplomats, hustlers, entrepreneurs, and wanderers.<br><br>Some say the project is cursed with all but one station destroyed before it could begin. This leaves Lagash 3, a quarter million beings encased in 8 kilometers of spinning metal, all alone in the night. Our last best hope for peace or, should peace fail, victory.",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "53af9e2b-68ae-49d8-b6a2-3cd1d3e4ec78",
+                  "label": "Resident Identi-file",
+                  "blocks": [
+                    {
+                      "id": "4b72c2d6-9e6a-4b08-b504-952d9174f7c0",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Include Aliases if you have them (Pronouns are below)"
+                      }
+                    },
+                    {
+                      "id": "93f7bc7b-6b36-47e4-a9ba-456364c7aae6",
+                      "label": "Description",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "What does your character look like? Personality? What do they do on the Station?"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "3cfb5176-fa9d-4940-b952-b560bedca3dd",
+                  "label": "Kit",
+                  "blocks": [
+                    {
+                      "id": "d4303a5a-6894-4066-94bf-968321a7a03d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Which Kit does your character have?"
+                      }
+                    },
+                    {
+                      "id": "cdbff086-3383-46c4-b2bc-766882831be1",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    }
+                  ],
+                  "visibleOnCard": false
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "581bdd58-71fc-47be-9b53-cc08df15fccd",
+                  "label": "Pronouns",
+                  "blocks": [
+                    {
+                      "id": "25903e9c-483e-4f54-bf5f-dcf39a914d45",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Pronouns does your character use"
+                      }
+                    },
+                    {
+                      "id": "1603fcde-adc2-4792-85a9-c183a68d42dc",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2e7e9e04-6e76-42df-8fe8-191e7d69ca36",
+                  "label": "Skills",
+                  "blocks": [
+                    {
+                      "id": "602f1cd2-0b98-4002-8851-2add2543e5d9",
+                      "label": "",
+                      "type": "InfoText",
+                      "value": "Assign a d10, d8, d6 to replace what is listed here. <br><br>Remember, they degrade from use: d12=&gt; d10=&gt; d8=&gt; d6=&gt; d4",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8fed7806-4986-47ad-b140-4f4049af4d08",
+                      "label": "Stunt",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Use a Stunt for a d12 on a skill roll. To reset, you must \"Catch Your Breath\""
+                      }
+                    },
+                    {
+                      "id": "24dcc147-8c50-4dd6-8df1-31e7d3ad92d7",
+                      "label": "Bash",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "72de0b57-ad67-4832-9de5-2290e24a31d9",
+                      "label": "Dash",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7ef888cf-f29e-4e5c-90a3-cd13919c34ff",
+                      "label": "Sneak",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7e61e7fa-6a73-4c0e-829a-1b5a923d3ef8",
+                      "label": "Shoot",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d0808d33-3a9b-470e-9afd-433d032d5d7d",
+                      "label": "Think",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "38989e1f-9331-483c-8729-e92498482cfb",
+                      "label": "Sway",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "0fbde31b-433c-46d8-9e57-e61a66a09835",
+                      "label": "(Kit Skill )",
+                      "type": "Text",
+                      "value": "Initial: d4\nCurrent: d4\n",
+                      "meta": {
+                        "helperText": "Remember to check your Kit on the next Tab for what this Skill should be."
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "b9549ad0-b548-425b-bc2d-aef8d7e2573f",
+                  "label": "Items",
+                  "blocks": [
+                    {
+                      "id": "223cec15-34d7-4d6a-aee9-7d7607f757d8",
+                      "label": "Shopping ",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "helperText": "Roll when shopping for new Items on the al-Sooq or scrounging on other locations on the station."
+                      }
+                    },
+                    {
+                      "id": "49105e97-95c7-49c0-aaa9-41b55c724c26",
+                      "label": "Item #1",
+                      "type": "Text",
+                      "value": "Description:\nCurrent: d?\n",
+                      "meta": { "helperText": "Lowest is d6" }
+                    },
+                    {
+                      "id": "3a545a80-feba-4374-ad10-eefbbc1c4844",
+                      "label": "Item #2",
+                      "type": "Text",
+                      "value": "Description:\nCurrent: d?\n",
+                      "meta": { "helperText": "Lowest is d6" }
+                    },
+                    {
+                      "id": "c2b91afe-23e1-4b8b-bf11-13a55a4d4b8e",
+                      "label": "Item #3",
+                      "type": "Text",
+                      "value": "Description:\nCurrent: d?\n",
+                      "meta": { "helperText": "Lowest is d6" }
+                    },
+                    {
+                      "id": "7b932a99-69f2-4fe1-bac0-277aef293427",
+                      "label": "Medkit",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Medkits can remove 2 Stress"
+                      }
+                    },
+                    {
+                      "id": "891dc3a0-e3e2-4c67-89b1-804247159db3",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "e6af7caf-10e4-4600-9fee-df8ef2804942",
+                      "label": "Hope",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "asClock": false,
+                        "helperText": "Hope can fuel you when things become Dark and can be shared with others."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "609af5d2-7df9-4ee6-81d1-c661ef916e2f",
+                      "label": "Stress",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "asClock": true,
+                        "helperText": "If you fill the clock your character is vulnerable.<br>Failing a dangerous action now could mean being taken out or sudden death."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "62f67c0f-e31b-40f9-9764-3009f61738bc",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "1958f7b6-7f87-4056-8c4d-3f2afdb8adfc",
+                  "label": "The Pilot",
+                  "blocks": [
+                    {
+                      "id": "559d3275-243d-4245-926d-87f6a4b7ce8e",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Calm under pressure and quick to act, they are great fliers. However, their risk-taking and focus can get them intro trouble outside of the cockpit. <br><br><br><br>SKILL: Pursue<br>",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": false
+                },
+                {
+                  "id": "fefc37e5-7e14-4282-bc66-e899082896ba",
+                  "label": "The Scavenger",
+                  "blocks": [
+                    {
+                      "id": "5fd6ba26-48ed-49e3-833d-706842d4e0a5",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "“In space, do not waste.” That is the motto they live by. They can solve all sorts of mechanical and survival problems, but sometimes over-rely on their own know- how over help from others. <br><br><br>SKILL: Refurbish",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "e9c8f7d3-a9bd-4a93-9593-99e6645e407f",
+                  "label": "The Diplomat",
+                  "blocks": [
+                    {
+                      "id": "d88781d2-4e11-4a0c-8d37-b6c8207fe3a5",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Influence is their trade and favors their currency. Some build webs on webs while others favor eloquence and truth. Both can still be blinded by either their honor or their elaborate plans. <br><br>SKILL: Intrigue",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": false
+                },
+                {
+                  "id": "9f4ba367-ea12-4263-b85f-dfdf3c5ffb17",
+                  "label": "The Wanderer",
+                  "blocks": [
+                    {
+                      "id": "5f2a1de6-dc09-4c2b-8ba1-74a15dcde2d2",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Explorers and drifters are often seen as outsiders and can experience difficulty connecting with others. However, have gained esoteric knowledge and cultural flexibility from their travels. <br><br><br>SKILL: Elucidate",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "48331a1e-416a-428e-9ab3-5556eae78cdb",
+                  "label": "The Warrior",
+                  "blocks": [
+                    {
+                      "id": "f89e0af0-5e3b-4dfb-ac4c-7e7a4e3f23ca",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "A soldier or lone champion, they are masters of war. They have become skilled at not just fighting, but also preparing Body, Supply, and Soul for coming conflict. However, some have trouble putting down the sword when the fight is done. <br><br>SKILL: Mobilize",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "e9222b5a-7898-441f-9cf8-30d58385c386",
+                  "label": "The Fixer",
+                  "blocks": [
+                    {
+                      "id": "d653b923-0eed-4367-ba3a-ba903ef6e644",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "There is always someone that wants something and they are the person that knows how to get it done. So tell me, what do you want? <br><br><br><br>SKILL: Connect<br>",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "2f509fe4-c007-4eca-b102-0f093da7a1e6",
+                  "label": "The Teep",
+                  "blocks": [
+                    {
+                      "id": "c464a463-3231-40a3-802e-3429ba079946",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Telepathy is present among almost all species in small numbers. They can use their skills to read the minds of others, but in turn are often mistrusted. <br><br><br>SKILL: Read<br>",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "1221287a-c279-481c-bb71-cdab8949dd80",
+                  "label": "The Skeptic",
+                  "blocks": [
+                    {
+                      "id": "2773327c-9e43-40a1-87c8-75760b950dd0",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "There are two kinds of Skeptics. Some don’t believe in anything anymore. Others believe strongly in a personal ideal they think is lacking in others. Both are bound to their world views and impulsively seek validation for their lack of trust in the Universe. <br><br>SKILL: Investigate",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Kits"
+    },
+    {
+      "id": "e5812c4d-f15d-4f6e-8c40-b75f94ba614d",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "ec2046b5-5f3c-4d56-8552-fee87e760374",
+                  "label": "When Making Checks...",
+                  "blocks": [
+                    {
+                      "id": "29c366dd-1c96-4c1f-9434-3f6ff0ee2002",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "* On 1-2, you fail, and something goes wrong<br>* On 3-4, you succeed at a cost.<br>* On 5+, you succeed. The higher the result, the better the effect.<br><br><br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "47eaf60d-8fcf-48f9-ae3b-3e7ee97341e6",
+                  "label": "When Shopping or Scrounging...",
+                  "blocks": [
+                    {
+                      "id": "21671789-799b-4afc-aca4-930454d651c4",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "* On a 1, something bad happens.<br>* On a 2-14, you don't find much of interest<br>* On a 15-16, you find a d6 item.<br>* On a 17-18, you find a d8 item.<br>* On a 19-20, you find a d10 item or a medkit.<br><br><br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2ff0db0d-9d96-40f9-bb7d-fc758fb0d830",
+                  "label": "Stress, Catching Your Breath, and Medkits",
+                  "blocks": [
+                    {
+                      "id": "eec4b5c0-2a96-4af8-a27a-7bc53785826e",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Remember, when you need to heal, you can either use a medkit to heal 2 Stress or Catch Your Breath or take advantage of other downtime to heal 1 Stress. <br><br>Catching your Breath also resets your dice, but it also allows The Station (GM) to make things \"interesting\" for your group",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Quickrules"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "theme": {
+    "backgroundColor": "#c8b7dc",
+    "pageHeadingFontSize": 2,
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Teko:wght@600&display=swap');",
+    "pageHeadingFontFamily": "Teko",
+    "sectionHeadingFontFamily": "Teko",
+    "labelFontFamily": "Teko",
+    "sectionHeadingFontSize": 2,
+    "labelFontSize": 1.75,
+    "textFontFamily": "Orbitron",
+    "infoTextFontFamily": "Orbitron",
+    "helperTextFontFamily": "Orbitron",
+    "textFontWeight": "500",
+    "textFontSize": 1.25,
+    "infoTextFontSize": 1,
+    "helperTextFontSize": 0.875
+  },
+  "wide": false
+}
