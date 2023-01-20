@@ -148,7 +148,7 @@ export const DiceOptions: Record<
         .map((result) => {
           return result;
         })
-        .join(" ")}`;
+        .join(" • ")}`;
       return { value: results.reduce((a, b) => a + b, 0).toString(), details };
     },
     possibleResults: ["-4", "-3", "-2", "-1", "0", "1", "2", "3", "4"],

@@ -16,7 +16,7 @@ import { useQuery } from "../../hooks/useQuery/useQuery";
 import { DiceResult } from "../DiceRoute/components/DiceResult";
 import { CharacterV3Dialog } from "./components/CharacterDialog/CharacterV3Dialog";
 
-const HIDE_RESULTS_DELAY = 5000;
+const HIDE_RESULTS_DELAY = 10000;
 
 function DicePoolResultsSnackBar(props: {
   dicePoolResults: Array<IDicePoolResult>;

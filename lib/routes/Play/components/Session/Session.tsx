@@ -37,10 +37,7 @@ import { MyBinderContext } from "../../../../contexts/MyBinderContext/MyBinderCo
 import { arraySort } from "../../../../domains/array/arraySort";
 import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
 import { ICharacter } from "../../../../domains/character/types";
-import {
-  DiceFabResultLabel,
-  IDicePoolResult,
-} from "../../../../domains/dice/Dice";
+import { IDicePoolResult } from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
 import { Icons } from "../../../../domains/Icons/Icons";
 import { usePrompt } from "../../../../hooks/useBlocker/useBlocker";
@@ -356,20 +353,10 @@ export function Session(props: {
                 commandResults: [],
               };
 
-              console.log(results);
               results.forEach((result) => {
-                const commandResults = result.commandResults.map((r) => {
-                  return {
-                    ...r,
-                    details:
-                      result.label !== DiceFabResultLabel
-                        ? result.label
-                        : undefined,
-                  };
-                });
                 singleResult.commandResults = [
                   ...singleResult.commandResults,
-                  ...commandResults,
+                  ...result.commandResults,
                 ];
               });
               handleSetMyRoll(singleResult);
