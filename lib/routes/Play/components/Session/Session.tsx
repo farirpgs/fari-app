@@ -1066,6 +1066,11 @@ export function Session(props: {
             border: `1px solid ${theme.palette.divider}`,
             margin: "0 auto",
             height: "100%",
+            minHeight: {
+              xs: "60vh",
+              sm: "60vh",
+              md: "60vh",
+            },
             position: "relative",
             overflow: "hidden",
           }}
