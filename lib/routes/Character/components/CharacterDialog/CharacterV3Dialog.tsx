@@ -52,7 +52,7 @@ import TextField from "@mui/material/TextField";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { BoxProps } from "@mui/system";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
 import { IndexCardColorPicker } from "../../../../components/IndexCard/IndexCard";
 import { CharacterCard } from "../../../../components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
@@ -74,6 +74,7 @@ import {
 import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
 import { IDicePoolResult } from "../../../../domains/dice/Dice";
 import { usePrompt } from "../../../../hooks/useBlocker/useBlocker";
+import { useEvent } from "../../../../hooks/useEvent/useEvent";
 import { LazyState } from "../../../../hooks/useLazyState/useLazyState";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
@@ -130,7 +131,15 @@ export const CharacterV3Dialog: React.FC<{
   const showCharacterCard = query.get("card") === "true";
   const defaultAdvanced = query.get("advanced") === "true";
   const logger = useLogger();
-  const characterManager = useCharacter(props.character);
+  const autoSaveTimeout = useRef<any>(null);
+  const characterManager = useCharacter(props.character, () => {
+    if (props.autosave) {
+      clearTimeout(autoSaveTimeout.current);
+      autoSaveTimeout.current = setTimeout(() => {
+        autoSave();
+      }, Delays.characterSheetSessionAutosave);
+    }
+  });
   const settingsManager = useContext(SettingsContext);
   const [advanced, setAdvanced] = useState(defaultAdvanced);
   const [themeEditorVisible, setThemeEditorVisible] = useState(false);
@@ -147,12 +156,6 @@ export const CharacterV3Dialog: React.FC<{
   const [tab, setTab] = useState<string>("0");
   const currentPageIndex = parseInt(tab);
 
-  useEffect(() => {
-    if (props.autosave) {
-      autoSave();
-    }
-  }, [props.autosave, characterManager.state.character]);
-
   function onSave() {
     const updatedCharacter =
       characterManager.actions.getCharacterWithNewTimestamp();
@@ -161,12 +164,12 @@ export const CharacterV3Dialog: React.FC<{
     logger.track("character.save");
   }
 
-  function autoSave() {
+  const autoSave = useEvent(() => {
     const updatedCharacter =
       characterManager.actions.getCharacterWithNewTimestamp();
     props.onSave?.(updatedCharacter!);
     logger.track("character.auto-save");
-  }
+  });
 
   function handleOnToggleAdvancedMode() {
     setAdvanced((prev) => !prev);

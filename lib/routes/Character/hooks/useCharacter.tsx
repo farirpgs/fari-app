@@ -15,7 +15,10 @@ import {
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
 import { Id } from "../../../domains/Id/Id";
 
-export function useCharacter(characterFromProps?: ICharacter | undefined) {
+export function useCharacter(
+  characterFromProps?: ICharacter | undefined,
+  onChange?: (character: ICharacter) => void
+) {
   const settingsManager = useContext(SettingsContext);
 
   const [character, setCharacter] = useState<ICharacter | undefined>(
@@ -37,7 +40,6 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
     const isDifferentCharacter = characterFromProps?.id !== character?.id;
     const isOutdated =
       characterFromPropsLastUpdated > currentCharacterLastUpdated;
-
     if (isDifferentCharacter || isOutdated) {
       setCharacter(characterFromProps);
     }
@@ -64,6 +66,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         };
       })
     );
+    onChange?.(character!);
   }
 
   function setName(newName: string) {
@@ -75,6 +78,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         draft.name = newName;
       })
     );
+    onChange?.(character!);
   }
 
   function setGroup(newGroup: string | null | undefined) {
@@ -86,6 +90,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         draft.group = newGroup as string | undefined;
       })
     );
+    onChange?.(character!);
   }
 
   function addPage() {
@@ -102,6 +107,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         draft.pages.push(newPage);
       })
     );
+    onChange?.(character!);
   }
 
   function deletePage(pageIndex: number) {
@@ -113,6 +119,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         draft.pages = draft.pages.filter((p, index) => index !== pageIndex);
       })
     );
+    onChange?.(character!);
   }
 
   function renamePage(pageIndex: number, value: string) {
@@ -124,6 +131,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         draft.pages[pageIndex].label = value;
       })
     );
+    onChange?.(character!);
   }
 
   function moveRowUp(indexes: { pageIndex: number; rowIndex: number }) {
@@ -139,6 +147,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         );
       })
     );
+    onChange?.(character!);
   }
 
   function setTheme(setter?: (theme: ICharacterTheme) => void) {
@@ -151,6 +160,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         setter?.(draft.theme);
       })
     );
+    onChange?.(character!);
   }
   function removeTheme() {
     setCharacter(
@@ -161,6 +171,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         draft.theme = undefined;
       })
     );
+    onChange?.(character!);
   }
 
   function moveRowDown(indexes: { pageIndex: number; rowIndex: number }) {
@@ -176,6 +187,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         );
       })
     );
+    onChange?.(character!);
   }
 
   function moveColumnLeft(indexes: {
@@ -196,6 +208,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           );
       })
     );
+    onChange?.(character!);
   }
 
   function moveColumnRight(indexes: {
@@ -216,6 +229,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
           );
       })
     );
+    onChange?.(character!);
   }
 
   function moveSectionUp(indexes: {
@@ -240,6 +254,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         );
       })
     );
+    onChange?.(character!);
   }
 
   function moveSectionDown(indexes: {
@@ -264,6 +279,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         );
       })
     );
+    onChange?.(character!);
   }
 
   function addRow(indexes: { pageIndex: number; rowIndex: number }) {
@@ -277,6 +293,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         });
       })
     );
+    onChange?.(character!);
   }
 
   function deleteRow(indexes: { pageIndex: number; rowIndex: number }) {
@@ -288,6 +305,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         draft.pages[indexes.pageIndex].rows.splice(indexes.rowIndex, 1);
       })
     );
+    onChange?.(character!);
   }
 
   function addColumn(indexes: {
@@ -309,6 +327,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         );
       })
     );
+    onChange?.(character!);
   }
 
   function deleteColumn(indexes: {
@@ -327,6 +346,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         );
       })
     );
+    onChange?.(character!);
   }
 
   function addSection(indexes: {
@@ -350,6 +370,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         });
       })
     );
+    onChange?.(character!);
   }
 
   function renameSection(
@@ -373,6 +394,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         sections[indexes.sectionIndex].label = label;
       })
     );
+    onChange?.(character!);
   }
 
   function toggleSectionVisibleOnCard(indexes: {
@@ -395,6 +417,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         sections[indexes.sectionIndex].visibleOnCard = !oldValue;
       })
     );
+    onChange?.(character!);
   }
 
   function movePage(pageIndex: number, direction: "up" | "down") {
@@ -406,6 +429,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         draft.pages = moveValueInList(draft.pages, pageIndex, direction);
       })
     );
+    onChange?.(character!);
   }
 
   function deleteSection(indexes: {
@@ -430,6 +454,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         });
       })
     );
+    onChange?.(character!);
   }
 
   function addBlock(
@@ -458,6 +483,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         );
       })
     );
+    onChange?.(character!);
   }
   function pasteBlocks(
     indexes: {
@@ -483,6 +509,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
       })
     );
+    onChange?.(character!);
   }
 
   function duplicatePage(pageIndex: number) {
@@ -499,6 +526,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         );
       })
     );
+    onChange?.(character!);
   }
 
   function moveDnDBlock(
@@ -532,6 +560,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         section.blocks.splice(hoverIndex, 0, dragItem);
       })
     );
+    onChange?.(character!);
   }
 
   function moveBlockUp(indexes: {
@@ -557,6 +586,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         );
       })
     );
+    onChange?.(character!);
   }
 
   function moveBlockDown(indexes: {
@@ -582,6 +612,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         );
       })
     );
+    onChange?.(character!);
   }
 
   function duplicateBlock(indexes: {
@@ -611,6 +642,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         );
       })
     );
+    onChange?.(character!);
   }
 
   function setBlock(
@@ -635,6 +667,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         section.blocks[indexes.blockIndex] = block;
       })
     );
+    onChange?.(character!);
   }
 
   function setBlockMeta(
@@ -659,6 +692,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         section.blocks[indexes.blockIndex].meta = meta;
       })
     );
+    onChange?.(character!);
   }
 
   function toggleBlockMainPointCounter(blockId: string) {
@@ -690,6 +724,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         }
       })
     );
+    onChange?.(character!);
   }
 
   function deleteBlock(indexes: {
@@ -713,17 +748,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         });
       })
     );
-  }
-
-  function getCharacterWithNewTimestamp() {
-    const updatedCharacter = produce(character!, (draft) => {
-      if (!draft) {
-        return;
-      }
-      draft.name = previewContentEditable({ value: draft.name });
-      draft.lastUpdated = getUnix();
-    });
-    return updatedCharacter;
+    onChange?.(character!);
   }
 
   function toggleWideMode() {
@@ -736,6 +761,7 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         draft.wide = draft.wide == null ? true : !draft.wide;
       })
     );
+    onChange?.(character!);
   }
 
   function setZoom(zoom: number) {
@@ -748,6 +774,18 @@ export function useCharacter(characterFromProps?: ICharacter | undefined) {
         draft.zoom = zoom;
       })
     );
+    onChange?.(character!);
+  }
+
+  function getCharacterWithNewTimestamp() {
+    const updatedCharacter = produce(character!, (draft) => {
+      if (!draft) {
+        return;
+      }
+      draft.name = previewContentEditable({ value: draft.name });
+      draft.lastUpdated = getUnix();
+    });
+    return updatedCharacter;
   }
 
   return {
