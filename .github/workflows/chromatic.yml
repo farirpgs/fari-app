@@ -16,6 +16,8 @@ jobs:
       # Checkout
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # 
       # Use Node
       - name: Use Node
         uses: actions/setup-node@v2
