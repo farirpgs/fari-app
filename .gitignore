@@ -116,3 +116,4 @@ dist-ssr
 
 # @11ty/eleventy
 _site
+storybook-static
