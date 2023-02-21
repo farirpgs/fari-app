@@ -537,7 +537,13 @@ export const DataRoute: React.FC = () => {
                     width: 250,
 
                     valueGetter: (cell) => {
-                      return getDayJSFrom(cell.value as number).format("lll");
+                      return cell.value;
+                    },
+                    renderCell: (params) => {
+                      const value = params.value as number;
+                      const formatted = getDayJSFrom(value).format("lll");
+
+                      return <>{formatted}</>;
                     },
                   },
                 ]}

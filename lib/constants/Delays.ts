@@ -7,4 +7,5 @@ export const Delays = {
   blockHoverLeaveControls: 1500,
   cursorStale: 3000,
   rollingDelay: 1000,
+  characterSheetSessionAutosave: 1000,
 };

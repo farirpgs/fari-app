@@ -19,7 +19,7 @@ jobs:
       - name: Use Node
         uses: actions/setup-node@v2
         with:
-          node-version: "16"
+          node-version: "18"
       # Cache
       - uses: actions/cache@v2
         with:
@@ -50,7 +50,7 @@ jobs:
   deploy-preview:
     needs: [build]
     runs-on: ubuntu-latest
-    if: github.repository == 'fariapp/fari-app' && github.ref != 'refs/heads/master' && github.event.repository.fork == false
+    if: github.ref != 'refs/heads/master' && github.event.repository.fork == false
     environment:
       name: Preview
       url: https://${{github.run_id}}--fari.netlify.app
@@ -60,7 +60,7 @@ jobs:
       - name: Use Node
         uses: actions/setup-node@v2
         with:
-          node-version: "16"
+          node-version: "18"
       # Cache
       - uses: actions/cache@v2
         with:
@@ -83,7 +83,7 @@ jobs:
   deploy-production:
     needs: [build]
     runs-on: ubuntu-latest
-    if: github.repository == 'fariapp/fari-app' && github.ref == 'refs/heads/master' && github.event.repository.fork == false
+    if: github.ref == 'refs/heads/master' && github.event.repository.fork == false
     environment:
       name: Production
       url: https://fari.app
@@ -93,7 +93,7 @@ jobs:
       - name: Use Node
         uses: actions/setup-node@v2
         with:
-          node-version: "16"
+          node-version: "18"
       # Cache
       - name: Cache
         uses: actions/cache@v2

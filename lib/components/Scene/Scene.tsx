@@ -151,7 +151,7 @@ export function Scene(props: {
           <Grid container>
             <Grid item>
               <Typography variant="h6" color="textSecondary" gutterBottom>
-                {"No scene has been loaded yet."}
+                {t("play-route.no-scene")}
               </Typography>
             </Grid>
           </Grid>
@@ -583,8 +583,6 @@ export function Scene(props: {
     return (
       <Box>
         <Tabs
-          // variant="scrollable"
-          // scrollButtons="auto"
           value={sceneTab}
           sx={{
             "& .MuiTabs-indicator": {

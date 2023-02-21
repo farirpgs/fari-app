@@ -1,4 +1,3 @@
-import { useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -22,8 +21,6 @@ export function DiceMenu(props: {
   onClear?(): void;
   onDiceCommandChange: React.Dispatch<React.SetStateAction<IDiceCommandId[]>>;
 }) {
-  const theme = useTheme();
-
   const zIndex = useZIndex();
 
   const handleDiceClick = useEvent((newCommand: IDiceCommandId) => {

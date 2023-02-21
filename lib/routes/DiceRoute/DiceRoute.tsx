@@ -39,7 +39,7 @@ export function DiceRoute(props: {}) {
           <Grid container justifyContent={"center"}>
             <Grid item>
               <Typography variant="h5">
-                {"Click on a dice to roll it."}
+                {t("dice-route.meta.subtitle")}
               </Typography>
             </Grid>
           </Grid>

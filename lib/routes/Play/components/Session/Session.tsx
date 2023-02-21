@@ -37,10 +37,7 @@ import { MyBinderContext } from "../../../../contexts/MyBinderContext/MyBinderCo
 import { arraySort } from "../../../../domains/array/arraySort";
 import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
 import { ICharacter } from "../../../../domains/character/types";
-import {
-  DiceFabResultLabel,
-  IDicePoolResult,
-} from "../../../../domains/dice/Dice";
+import { IDicePoolResult } from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
 import { Icons } from "../../../../domains/Icons/Icons";
 import { usePrompt } from "../../../../hooks/useBlocker/useBlocker";
@@ -350,26 +347,21 @@ export function Session(props: {
         <Toolbox
           diceFabProps={{
             onRoll(results) {
+              const modifierTotal: number = results.reduce((acc, result) => {
+                return acc + (result.modifier || 0);
+              }, 0);
+
               const singleResult: IDicePoolResult = {
                 id: "Pool",
+                modifier: modifierTotal,
                 label: results.map((r) => r.label).join(", "),
                 commandResults: [],
               };
 
-              console.log(results);
               results.forEach((result) => {
-                const commandResults = result.commandResults.map((r) => {
-                  return {
-                    ...r,
-                    details:
-                      result.label !== DiceFabResultLabel
-                        ? result.label
-                        : undefined,
-                  };
-                });
                 singleResult.commandResults = [
                   ...singleResult.commandResults,
-                  ...commandResults,
+                  ...result.commandResults,
                 ];
               });
               handleSetMyRoll(singleResult);
@@ -570,14 +562,16 @@ export function Session(props: {
         <TabbedScreen
           tabs={[
             {
-              label: "Players",
+              label: t("play-route.side-panel.tabs.players"),
               dataCy: "players-tab",
               value: "players",
               sx: { padding: "0", overflow: "auto" },
               render: renderPlayers,
             },
             {
-              label: `${"Chat"} (${chatManager.state.unreadCount})`,
+              label: `${t("play-route.side-panel.tabs.chat")} (${
+                chatManager.state.unreadCount
+              })`,
               dataCy: "chat-tab",
               value: "chat",
               sx: { padding: "0", overflow: "auto", height: "100%" },
@@ -1013,6 +1007,7 @@ export function Session(props: {
                             <CharacterV3Dialog
                               readonly={!canControl}
                               open={true}
+                              autosave
                               preview={true}
                               character={player.characterSheet}
                               dialog={false}
@@ -1076,6 +1071,11 @@ export function Session(props: {
             border: `1px solid ${theme.palette.divider}`,
             margin: "0 auto",
             height: "100%",
+            minHeight: {
+              xs: "60vh",
+              sm: "60vh",
+              md: "60vh",
+            },
             position: "relative",
             overflow: "hidden",
           }}
@@ -1107,11 +1107,10 @@ export function Session(props: {
       return (
         <Box sx={{ padding: "1rem" }}>
           <Typography variant="h6" color="textSecondary">
-            There are no players or GM characters in this session.
+            {t("play-route.characters-tab.no-players-warning.title")}
           </Typography>
           <Typography variant="body2" color="textSecondary">
-            Copy and send the session link to your friends, or add GM characters
-            using the buttons on the left.
+            {t("play-route.characters-tab.no-players-warning.description")}
           </Typography>
         </Box>
       );
@@ -1121,13 +1120,8 @@ export function Session(props: {
       return (
         <Box sx={{ padding: "1rem" }}>
           <Typography variant="h6" color="textSecondary">
-            No character sheets in session yet.
+            {t("play-route.characters-tab.no-sheets-warning.title")}
           </Typography>
-          {/* <Typography variant="body2" color="textSecondary">
-            To assign a character sheet to a player, click on the{" "}
-            <AssignmentIndIcon /> button, and select the character sheet you
-            want to use.
-          </Typography> */}
         </Box>
       );
     }

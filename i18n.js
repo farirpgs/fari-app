@@ -55,7 +55,6 @@ async function updateTranslations(keys) {
   const sortedKeys = sortBy(keys, (k) => k);
 
   const files = await importJsonFiles(["./public/locales/en/translation.json"]);
-  // const files = await importJsonFiles(translationFilesLocations);
 
   for (const file of files) {
     const content = file.content;
