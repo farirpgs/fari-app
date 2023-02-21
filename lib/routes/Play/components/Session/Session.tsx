@@ -347,8 +347,13 @@ export function Session(props: {
         <Toolbox
           diceFabProps={{
             onRoll(results) {
+              const modifierTotal: number = results.reduce((acc, result) => {
+                return acc + (result.modifier || 0);
+              }, 0);
+
               const singleResult: IDicePoolResult = {
                 id: "Pool",
+                modifier: modifierTotal,
                 label: results.map((r) => r.label).join(", "),
                 commandResults: [],
               };
