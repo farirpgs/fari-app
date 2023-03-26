@@ -156,6 +156,15 @@ export function DiceResult(props: {
   }
 
   function renderSelectedResultsDetails() {
+    const modifiersTotal = props.poolResults.reduce(
+      (acc, poolResult) =>
+        acc + (poolResult.modifier ? poolResult.modifier : 0),
+      0
+    );
+
+    const total = CommandResult.getTotal(resultsForDetails);
+    const highest = CommandResult.getHighest(resultsForDetails);
+    const lowest = CommandResult.getLowest(resultsForDetails);
     return (
       <Stack
         direction="row"
@@ -164,15 +173,24 @@ export function DiceResult(props: {
       >
         <Chip
           color={hasSelectedResults ? "primary" : "default"}
-          label={<>Total: {CommandResult.getTotal(resultsForDetails)}</>}
+          label={
+            <>
+              Total: {total}
+              {modifiersTotal > 0 && (
+                <>
+                  +{modifiersTotal} = {total + modifiersTotal}
+                </>
+              )}
+            </>
+          }
         />
         <Chip
           color={hasSelectedResults ? "primary" : "default"}
-          label={<>Highest: {CommandResult.getHighest(resultsForDetails)}</>}
+          label={<>Highest: {highest}</>}
         />
         <Chip
           color={hasSelectedResults ? "primary" : "default"}
-          label={<>Lowest: {CommandResult.getLowest(resultsForDetails)}</>}
+          label={<>Lowest: {lowest}</>}
         />
       </Stack>
     );
