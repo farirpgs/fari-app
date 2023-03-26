@@ -1,8 +1,13 @@
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ControlCameraIcon from "@mui/icons-material/ControlCamera";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
-import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import EditAttributesIcon from "@mui/icons-material/EditAttributes";
 import EditAttributesOutlinedIcon from "@mui/icons-material/EditAttributesOutlined";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
@@ -26,6 +31,7 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Popover from "@mui/material/Popover";
 import Select from "@mui/material/Select";
+import Stack from "@mui/material/Stack";
 import { darken, lighten, ThemeProvider, useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
@@ -35,14 +41,12 @@ import { Delays } from "../../constants/Delays";
 import { FontFamily } from "../../constants/FontFamily";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";
 import { IDicePoolResult } from "../../domains/dice/Dice";
-import { DragAndDropTypes } from "../../domains/drag-and-drop/DragAndDropTypes";
 import { useElementWidth } from "../../hooks/useElementWidth/useElementWidth";
 import { useLazyState } from "../../hooks/useLazyState/useLazyState";
 import { IIndexCard, IIndexCardType } from "../../hooks/useScene/IScene";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromColor";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
-import { BetterDnd } from "../../routes/Character/components/BetterDnD/BetterDnd";
 import { AddBlock } from "../../routes/Character/components/CharacterDialog/components/AddBlock";
 import { BlockByType } from "../../routes/Character/components/CharacterDialog/components/BlockByType";
 
@@ -50,7 +54,6 @@ import {
   MiniThemeContext,
   useMiniTheme,
 } from "../../routes/Character/components/CharacterDialog/MiniThemeContext";
-import { ConditionalWrapper } from "../ConditionalWrapper/ConditionalWrapper";
 import {
   ContentEditable,
   previewContentEditable,
@@ -167,6 +170,14 @@ export const IndexCard: React.FC<
 
   const hasSubCards = indexCardManager.state.indexCard.subCards.length > 0;
   const isSubCard = indexCardManager.state.indexCard.sub;
+  const arrayOfCardsForMoveAction = isSubCard
+    ? props.parentIndexCard?.subCards!
+    : props.allCards;
+  const canMoveLeft = arrayOfCardsForMoveAction.indexOf(props.indexCard) > 0;
+  const canMoveRight =
+    arrayOfCardsForMoveAction.indexOf(props.indexCard) <
+    arrayOfCardsForMoveAction.length - 1;
+
   const [advanced, setAdvanced] = useState(false);
   const open = !props.indexCardHiddenRecord?.[props.indexCard.id];
 
@@ -196,110 +207,54 @@ export const IndexCard: React.FC<
           }}
           position="relative"
         >
-          <ConditionalWrapper
-            condition={props.canMove}
-            wrapper={(children) => {
-              return (
-                <BetterDnd
-                  direction="horizontal"
-                  key={indexCardManager.state.indexCard.id}
-                  id={indexCardManager.state.indexCard.id}
-                  type={
-                    hasSubCards
-                      ? `${DragAndDropTypes.SceneIndexCardsSubCards}-${indexCardManager.state.indexCard.id}`
-                      : DragAndDropTypes.SceneIndexCards
-                  }
-                  onMove={(dragId, hoverId) => {
-                    props.onMove(dragId, hoverId);
-                  }}
-                  render={(dndRenderProps) => {
-                    return (
-                      <>
-                        <div ref={dndRenderProps.drag}>
-                          <Tooltip title={t("character-dialog.control.move")}>
-                            <IconButton
-                              size="small"
-                              sx={{
-                                position: "absolute",
-                                marginTop: ".5rem",
-                                marginLeft: ".25rem",
-                                cursor: "drag",
-                                display:
-                                  !props.canMove || !props.isGM
-                                    ? "none"
-                                    : "block",
-                              }}
-                            >
-                              <DragIndicatorIcon
-                                sx={{
-                                  transition: theme.transitions.create("color"),
-                                }}
-                                htmlColor={
-                                  dndRenderProps.isOver
-                                    ? paper.primary
-                                    : paper.secondary
-                                }
-                              />
-                            </IconButton>
-                          </Tooltip>
-                        </div>
-                        {children}
-                      </>
-                    );
-                  }}
-                />
-              );
-            }}
-          >
-            <Box>
-              <Grid container>
-                <Grid item xs={12} lg={hasSubCards ? 3 : 12}>
-                  <Box display="flex" height="100%" flexDirection="column">
-                    <ThemeProvider theme={defaultButtonTheme}>
-                      <Box
-                        sx={{
-                          fontSize: "1.5rem",
-                          width: "100%",
-                          padding: "0.5rem 0",
-                          borderBottom: `1px solid ${
-                            indexCardManager.state.indexCard.color === "#fff"
-                              ? "#f0a4a4"
-                              : paper.primary
-                          }`,
-                        }}
-                      >
-                        <Box px="1rem">
-                          {renderHeader()}
-                          {renderTitle()}
-                        </Box>
+          <Box>
+            <Grid container>
+              <Grid item xs={12} lg={hasSubCards ? 3 : 12}>
+                <Box display="flex" height="100%" flexDirection="column">
+                  <ThemeProvider theme={defaultButtonTheme}>
+                    <Box
+                      sx={{
+                        fontSize: "1.5rem",
+                        width: "100%",
+                        padding: "0.5rem 0",
+                        borderBottom: `1px solid ${
+                          indexCardManager.state.indexCard.color === "#fff"
+                            ? "#f0a4a4"
+                            : paper.primary
+                        }`,
+                      }}
+                    >
+                      <Box px="1rem">
+                        {renderHeader()}
+                        {renderTitle()}
                       </Box>
-                      <Collapse in={open}>
-                        <Box>
-                          <Box>{renderBlocks()}</Box>
-                        </Box>
-                      </Collapse>
-                      {renderGMActions()}
-                    </ThemeProvider>
-                  </Box>
-                </Grid>
-                {hasSubCards && (
-                  <Grid
-                    item
-                    xs={12}
-                    lg={9}
-                    sx={{
-                      background:
-                        paper.type === "light"
-                          ? darken(paper.bgColor, 0.1)
-                          : lighten(paper.bgColor, 0.2),
-                    }}
-                  >
-                    {renderSubCards()}
-                  </Grid>
-                )}
+                    </Box>
+                    <Collapse in={open}>
+                      <Box>
+                        <Box>{renderBlocks()}</Box>
+                      </Box>
+                    </Collapse>
+                    {renderGMActions()}
+                  </ThemeProvider>
+                </Box>
               </Grid>
-            </Box>
-          </ConditionalWrapper>
+              {hasSubCards && (
+                <Grid
+                  item
+                  xs={12}
+                  lg={9}
+                  sx={{
+                    background:
+                      paper.type === "light"
+                        ? darken(paper.bgColor, 0.1)
+                        : lighten(paper.bgColor, 0.2),
+                  }}
+                >
+                  {renderSubCards()}
+                </Grid>
+              )}
+            </Grid>
+          </Box>
         </Box>
       </Paper>
     </MiniThemeContext.Provider>
@@ -312,16 +267,39 @@ export const IndexCard: React.FC<
           py=".5rem"
           px="1rem"
           display="flex"
+          flexDirection={"column"}
           alignItems="flex-end"
           flex="1 0 auto"
         >
+          <Grid container justifyContent="center" spacing={1}>
+            <Grid item>
+              <Tooltip title={t("index-card.add-block")}>
+                <span>
+                  <AddBlock
+                    variant="icon"
+                    onAddBlock={(blockType) => {
+                      indexCardManager.actions.addBlock(blockType);
+
+                      if (!open) {
+                        props.onToggleVisibility?.(
+                          indexCardManager.state.indexCard
+                        );
+                      }
+
+                      setAdvanced(true);
+                    }}
+                  />
+                </span>
+              </Tooltip>
+            </Grid>
+          </Grid>
           <Grid
             container
             wrap="nowrap"
             justifyContent="space-between"
             spacing={1}
           >
-            <Grid item container justifyContent="flex-start" spacing={1}>
+            <Grid item container justifyContent="center" spacing={1}>
               <Grid item>
                 <IndexCardColorPicker
                   color={indexCardManager.state.indexCard.color}
@@ -345,6 +323,56 @@ export const IndexCard: React.FC<
                     );
                   }}
                 />
+              </Grid>
+              <Grid item sx={{ display: "flex" }}>
+                <Tooltip title={t("index-card.move-card-left")}>
+                  <Box component="span" sx={{ display: "flex" }}>
+                    <IconButton
+                      disabled={!canMoveLeft}
+                      size="small"
+                      onClick={() => {
+                        const previousId =
+                          arrayOfCardsForMoveAction[
+                            arrayOfCardsForMoveAction.indexOf(props.indexCard) -
+                              1
+                          ].id;
+
+                        props.onMove(props.indexCard.id, previousId);
+                      }}
+                    >
+                      <ArrowBackIcon
+                        sx={{
+                          fontSize: "1rem",
+                        }}
+                      />
+                    </IconButton>
+                  </Box>
+                </Tooltip>
+              </Grid>
+              <Grid item sx={{ display: "flex" }}>
+                <Tooltip title={t("index-card.move-card-right")}>
+                  <Box component="span" sx={{ display: "flex" }}>
+                    <IconButton
+                      disabled={!canMoveRight}
+                      size="small"
+                      onClick={() => {
+                        const nextId =
+                          arrayOfCardsForMoveAction[
+                            arrayOfCardsForMoveAction.indexOf(props.indexCard) +
+                              1
+                          ].id;
+
+                        props.onMove(props.indexCard.id, nextId);
+                      }}
+                    >
+                      <ArrowForwardIcon
+                        sx={{
+                          fontSize: "1rem",
+                        }}
+                      />
+                    </IconButton>
+                  </Box>
+                </Tooltip>
               </Grid>
               {!isSubCard && (
                 <Grid item>
@@ -378,30 +406,6 @@ export const IndexCard: React.FC<
                   </IconButton>
                 </Tooltip>
               </Grid>
-            </Grid>
-            <Grid item container justifyContent="center" spacing={1}>
-              <Grid item>
-                <Tooltip title={t("index-card.add-block")}>
-                  <span>
-                    <AddBlock
-                      variant="icon"
-                      onAddBlock={(blockType) => {
-                        indexCardManager.actions.addBlock(blockType);
-
-                        if (!open) {
-                          props.onToggleVisibility?.(
-                            indexCardManager.state.indexCard
-                          );
-                        }
-
-                        setAdvanced(true);
-                      }}
-                    />
-                  </span>
-                </Tooltip>
-              </Grid>
-            </Grid>
-            <Grid item container justifyContent="flex-end" spacing={1}>
               {props.isGM && (
                 <Grid item>
                   <Tooltip title={t("index-card.duplicate")}>
@@ -589,110 +593,132 @@ export const IndexCard: React.FC<
     return (
       <Box px="1rem" py=".5rem">
         {indexCardManager.state.indexCard.blocks.map((block) => {
+          const canMoveBlockUp =
+            indexCardManager.state.indexCard.blocks.indexOf(block) > 0;
+          const canMoveBlockDown =
+            indexCardManager.state.indexCard.blocks.indexOf(block) <
+            indexCardManager.state.indexCard.blocks.length - 1;
+
           return (
             <Box key={block.id} mb=".5rem">
-              <BetterDnd
-                direction="vertical"
-                id={block.id}
-                type={`${DragAndDropTypes.SceneIndexCardsBlocks}.${props.parentIndexCard?.id}`}
-                onMove={(dragId, hoverId) => {
-                  indexCardManager.actions.moveIndexCardBlock(dragId, hoverId);
-                }}
-                render={(dndRenderProps) => {
-                  return (
-                    <Box>
-                      <Grid container wrap="nowrap" spacing={1}>
-                        {advanced && (
+              <Box>
+                <Grid container wrap="nowrap" spacing={1}>
+                  {advanced && (
+                    <Grid item>
+                      <Stack spacing={1}>
+                        <Tooltip title={t("index-card.move-card-block-up")}>
+                          <span>
+                            <IconButton
+                              disabled={!canMoveBlockUp}
+                              size="small"
+                              onClick={() => {
+                                const previousId =
+                                  indexCardManager.state.indexCard.blocks[
+                                    indexCardManager.state.indexCard.blocks.indexOf(
+                                      block
+                                    ) - 1
+                                  ].id;
+
+                                indexCardManager.actions.moveIndexCardBlock(
+                                  block.id,
+                                  previousId
+                                );
+                              }}
+                            >
+                              <ArrowUpwardIcon
+                                sx={{
+                                  fontSize: "1rem",
+                                }}
+                              />
+                            </IconButton>
+                          </span>
+                        </Tooltip>
+
+                        <Tooltip title={t("index-card.move-card-block-down")}>
+                          <span>
+                            <IconButton
+                              disabled={!canMoveBlockDown}
+                              size="small"
+                              onClick={() => {
+                                const nextId =
+                                  indexCardManager.state.indexCard.blocks[
+                                    indexCardManager.state.indexCard.blocks.indexOf(
+                                      block
+                                    ) + 1
+                                  ].id;
+
+                                indexCardManager.actions.moveIndexCardBlock(
+                                  block.id,
+                                  nextId
+                                );
+                              }}
+                            >
+                              <ArrowDownwardIcon
+                                sx={{
+                                  fontSize: "1rem",
+                                }}
+                              />
+                            </IconButton>
+                          </span>
+                        </Tooltip>
+                      </Stack>
+                    </Grid>
+                  )}
+                  <Grid item xs>
+                    <BlockByType
+                      advanced={advanced}
+                      hideHelp
+                      readonly={false}
+                      dataCy={`index-card.${block.label}`}
+                      block={block}
+                      onChange={(newBlock) => {
+                        indexCardManager.actions.setBlock(newBlock);
+                      }}
+                      onRoll={(diceRollResult) => {
+                        props.onRoll(diceRollResult);
+                      }}
+                      otherActions={
+                        <>
                           <Grid item>
-                            <div ref={dndRenderProps.drag}>
-                              <Tooltip
-                                title={t("character-dialog.control.move")}
-                              >
-                                <IconButton
-                                  size="small"
-                                  sx={{
-                                    cursor: "drag",
-                                    display: "block",
-                                  }}
-                                >
-                                  <DragIndicatorIcon
-                                    sx={{
-                                      transition:
-                                        theme.transitions.create("color"),
-                                    }}
-                                    htmlColor={
-                                      dndRenderProps.isOver
-                                        ? paper.primary
-                                        : paper.secondary
-                                    }
-                                  />
-                                </IconButton>
-                              </Tooltip>
-                            </div>
+                            <Link
+                              component="button"
+                              variant="caption"
+                              color="inherit"
+                              data-cy={`index-card.${block.label}.duplicate`}
+                              sx={{
+                                label: "CharacterDialog-duplicate",
+                              }}
+                              onClick={() => {
+                                indexCardManager.actions.duplicateBlock(block);
+                              }}
+                              underline="hover"
+                            >
+                              {t("character-dialog.control.duplicate")}
+                            </Link>
                           </Grid>
-                        )}
-                        <Grid item xs>
-                          <BlockByType
-                            advanced={advanced}
-                            hideHelp
-                            readonly={false}
-                            dataCy={`index-card.${block.label}`}
-                            block={block}
-                            onChange={(newBlock) => {
-                              indexCardManager.actions.setBlock(newBlock);
-                            }}
-                            onRoll={(diceRollResult) => {
-                              props.onRoll(diceRollResult);
-                            }}
-                            otherActions={
-                              <>
-                                <Grid item>
-                                  <Link
-                                    component="button"
-                                    variant="caption"
-                                    color="inherit"
-                                    data-cy={`index-card.${block.label}.duplicate`}
-                                    sx={{
-                                      label: "CharacterDialog-duplicate",
-                                    }}
-                                    onClick={() => {
-                                      indexCardManager.actions.duplicateBlock(
-                                        block
-                                      );
-                                    }}
-                                    underline="hover"
-                                  >
-                                    {t("character-dialog.control.duplicate")}
-                                  </Link>
-                                </Grid>
-                                <Grid item>
-                                  <Link
-                                    component="button"
-                                    variant="caption"
-                                    color="inherit"
-                                    data-cy={`index-card.${block.label}.remove`}
-                                    sx={{
-                                      label: "CharacterDialog-remove",
-                                    }}
-                                    onClick={() => {
-                                      indexCardManager.actions.removeBlock(
-                                        block
-                                      );
-                                    }}
-                                    underline="hover"
-                                  >
-                                    {t("character-dialog.control.remove-block")}
-                                  </Link>
-                                </Grid>
-                              </>
-                            }
-                          />
-                        </Grid>
-                      </Grid>
-                    </Box>
-                  );
-                }}
-              />
+                          <Grid item>
+                            <Link
+                              component="button"
+                              variant="caption"
+                              color="inherit"
+                              data-cy={`index-card.${block.label}.remove`}
+                              sx={{
+                                label: "CharacterDialog-remove",
+                              }}
+                              onClick={() => {
+                                indexCardManager.actions.removeBlock(block);
+                              }}
+                              underline="hover"
+                            >
+                              {t("character-dialog.control.remove-block")}
+                            </Link>
+                          </Grid>
+                        </>
+                      }
+                    />
+                  </Grid>
+                </Grid>
+              </Box>
             </Box>
           );
         })}
@@ -701,9 +727,10 @@ export const IndexCard: React.FC<
   }
 
   function renderHeader() {
-    const dragIconMargin = "1.5rem";
+    const isSubCard = props.parentIndexCard !== undefined;
+
     return (
-      <Box ml={!props.isGM ? "0" : dragIconMargin}>
+      <Box>
         <Grid container alignItems="flex-start" spacing={1} wrap="nowrap">
           <Grid item xs>
             <Typography
@@ -757,30 +784,32 @@ export const IndexCard: React.FC<
                   </Grid>
                 )}
                 {props.isGM && (
-                  <Grid item>
-                    <Tooltip
-                      title={
-                        indexCardManager.state.indexCard.pinned
-                          ? t("index-card.unpin")
-                          : t("index-card.pin")
-                      }
-                    >
-                      <IconButton
-                        ref={$menu}
-                        size="small"
-                        data-cy={`${props["dataCy"]}.pin`}
-                        onClick={() => {
-                          indexCardManager.actions.togglePinned();
-                        }}
+                  <>
+                    <Grid item>
+                      <Tooltip
+                        title={
+                          indexCardManager.state.indexCard.pinned
+                            ? t("index-card.unpin")
+                            : t("index-card.pin")
+                        }
                       >
-                        {indexCardManager.state.indexCard.pinned ? (
-                          <PushPinIcon htmlColor={paper.primary} />
-                        ) : (
-                          <PushPinOutlinedIcon htmlColor={paper.primary} />
-                        )}
-                      </IconButton>
-                    </Tooltip>
-                  </Grid>
+                        <IconButton
+                          ref={$menu}
+                          size="small"
+                          data-cy={`${props["dataCy"]}.pin`}
+                          onClick={() => {
+                            indexCardManager.actions.togglePinned();
+                          }}
+                        >
+                          {indexCardManager.state.indexCard.pinned ? (
+                            <PushPinIcon htmlColor={paper.primary} />
+                          ) : (
+                            <PushPinOutlinedIcon htmlColor={paper.primary} />
+                          )}
+                        </IconButton>
+                      </Tooltip>
+                    </Grid>
+                  </>
                 )}
                 <Grid item>
                   <Tooltip
