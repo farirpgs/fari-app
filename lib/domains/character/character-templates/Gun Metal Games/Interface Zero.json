@@ -1,0 +1,435 @@
+{
+  "name": " Template",
+  "lastUpdated": 1681768247,
+  "wide": false,
+  "pages": [
+    {
+      "id": "1e136857-76df-4900-b2a3-436c6f6ad55c",
+      "label": "CHARACTER",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "ff1cd507-8171-45dd-869c-b22f8904ad90",
+                  "blocks": [
+                    {
+                      "id": "510a860d-21f9-478d-a254-7f9532338fd6",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "HIGH CONCEPT",
+                      "value": ""
+                    },
+                    {
+                      "id": "a56b0d6a-6a46-4a40-8abd-17f2bfe714e8",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "TROUBLE",
+                      "value": ""
+                    },
+                    {
+                      "id": "20cc4a10-e991-496f-944f-f2185f555cc7",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "FREE ASPECT",
+                      "value": ""
+                    },
+                    {
+                      "id": "f45bf197-b6db-4f09-acd8-7e8e95a0d498",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "CROSSING PATHS 1",
+                      "value": ""
+                    },
+                    {
+                      "id": "e3f3faca-d050-4e68-a5e5-f16f0fbe037f",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "CROSSING PATHS 2",
+                      "value": ""
+                    },
+                    {
+                      "id": "471d3bd2-d9a6-4f7a-8b76-0b7d19fd0983",
+                      "label": "OCCUPATION PERK",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "label": "ASPECTS",
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "8319ec5d-7d6b-4a0b-92f6-b3d506b1ce7d",
+                  "blocks": [
+                    {
+                      "id": "ff8cfc7e-76b8-422b-94ff-8ff760c00ae5",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "STUNT #1",
+                      "value": ""
+                    },
+                    {
+                      "id": "19ba8499-b1fb-482b-8df8-752242034b60",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "STUNT #2",
+                      "value": ""
+                    },
+                    {
+                      "id": "f388986a-9568-4d92-9357-ed125801154e",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "STUNT #3",
+                      "value": ""
+                    }
+                  ],
+                  "label": "STUNTS & EXTRAS"
+                },
+                {
+                  "id": "9dd4ffb3-f9f3-413a-ae1f-b130a084e776",
+                  "blocks": [
+                    {
+                      "id": "370383e3-d334-40b3-a8e0-ba979a40b4e5",
+                      "type": "Text",
+                      "meta": {},
+                      "label": "EQUIPMENT",
+                      "value": "<br>"
+                    },
+                    {
+                      "id": "4df4e4e0-ec72-49d1-b495-47be97b55ad3",
+                      "label": "AUGMENTS",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "label": "EQUIPMENT AND AUGMENTS"
+                },
+                {
+                  "id": "795937d5-2ffa-4aba-b9fe-4e5e3d545426",
+                  "blocks": [
+                    {
+                      "id": "6bcfc280-b93a-4707-8126-bf4d3a7fa45e",
+                      "meta": { "isMainPointCounter": true, "max": "3" },
+                      "type": "PointCounter",
+                      "label": "FATE POINTS",
+                      "value": "3"
+                    }
+                  ],
+                  "label": "FATE POINTS"
+                },
+                {
+                  "id": "ce98f3af-ad1e-45a8-9595-9acd5f439f8a",
+                  "label": "CYBERNETICS",
+                  "blocks": [
+                    {
+                      "id": "20ce2347-5970-4661-a5d9-ce8c56e22625",
+                      "label": "STRAIN",
+                      "type": "PointCounter",
+                      "meta": { "max": "1", "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "b4f56c37-d2d6-4404-96c4-b872a1c2ac8f",
+                      "label": "FIREWALL",
+                      "type": "Numeric",
+                      "value": "3",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "4b64dcf0-238e-4087-8f8c-623cce117a6e",
+                  "blocks": [
+                    {
+                      "id": "fdb1b9fb-c949-4a70-9173-52ca92dcddca",
+                      "label": "Interface Zero 2.0: Fate Edtion",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": true },
+                      "value": "https://www.drivethrurpg.com/product/186125/Interface-Zero-20-Fate-Edition"
+                    },
+                    {
+                      "id": "a16c5bc5-1e38-4713-af4b-b62f539d6538",
+                      "type": "Text",
+                      "value": "Template by: Jonathan Lowe",
+                      "meta": {}
+                    }
+                  ],
+                  "label": "CREDITS"
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "8b2ec390-3e8e-432b-a517-f56a46b3c2ba",
+                  "blocks": [
+                    {
+                      "id": "c5424e64-a26d-4d69-9fc2-b385a342ddd6",
+                      "label": "PHYSICAL",
+                      "meta": {},
+                      "type": "SlotTracker",
+                      "value": [
+                        { "checked": false, "label": "1" },
+                        { "checked": false, "label": "2" }
+                      ]
+                    },
+                    {
+                      "id": "1280e152-b958-47b3-b3b4-8ff57745ddd4",
+                      "label": "MENTAL",
+                      "meta": {},
+                      "type": "SlotTracker",
+                      "value": [
+                        { "checked": false, "label": "1" },
+                        { "checked": false, "label": "2" }
+                      ]
+                    }
+                  ],
+                  "label": "STRESS"
+                },
+                {
+                  "id": "139f0955-9b16-4ecd-8e19-adea6b53d0bb",
+                  "blocks": [
+                    {
+                      "id": "8ccf4804-acdc-4be5-9a3d-2fcd02d533a0",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "MILD",
+                      "value": ""
+                    },
+                    {
+                      "id": "52e6b64d-aac8-494e-ae36-264c12804666",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "MODERATE",
+                      "value": ""
+                    },
+                    {
+                      "id": "0727f1cd-084a-4ec1-ade9-c1632e87e1ed",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "SEVERE",
+                      "value": ""
+                    }
+                  ],
+                  "label": "CONSEQUENCES"
+                },
+                {
+                  "id": "93f9e900-1434-4fbc-a338-9bd2a4af99f4",
+                  "label": "RESOURCE STUFF",
+                  "blocks": [
+                    {
+                      "id": "b42a056c-8d16-4618-9345-ae65851a79e9",
+                      "label": "STRESS",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "1", "checked": false },
+                        { "label": "2", "checked": false },
+                        { "label": "3", "checked": false },
+                        { "label": "4", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "e15982d6-90d6-479c-9831-027eb0d4e68d",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "c3993a75-0939-4a7e-ae2a-13c295403bb3",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "MILD CONSEQUENCE",
+                      "value": ""
+                    },
+                    {
+                      "id": "9f6f15b7-eb61-412a-8d77-54621125154e",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "MODERATE CONSEQUENCE",
+                      "value": ""
+                    },
+                    {
+                      "id": "d1bb1620-29f7-4673-84a1-a81f6e51934a",
+                      "type": "Text",
+                      "meta": { "checked": false },
+                      "label": "SEVERE CONSEQUENCE",
+                      "value": ""
+                    },
+                    {
+                      "id": "e9441fcf-2992-4716-80ea-4e2f6d087eb8",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "d2774efb-da55-406f-8383-0851f9f06ba6",
+                      "label": "UNSPENT PAYMENTS",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "acd3f929-b434-40c6-bf55-954485a295f5",
+                  "blocks": [
+                    {
+                      "id": "02817e31-a0a6-490f-a4b2-f43c6e5e99e3",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "ACADEMICS",
+                      "value": ""
+                    },
+                    {
+                      "id": "b4f1cac8-c724-4298-bb53-a610acfd83a8",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "ATHLETICS",
+                      "value": ""
+                    },
+                    {
+                      "id": "c8cb5910-8e9b-42c7-9c68-71a27ddabecb",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "BURGLARY",
+                      "value": ""
+                    },
+                    {
+                      "id": "3c5d8734-d79b-4654-983a-e3a20a30ebdf",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "CONTACTS",
+                      "value": ""
+                    },
+                    {
+                      "id": "9ae8d7d8-25bd-40dc-b5ff-f62b492fdec6",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "DECEIVE",
+                      "value": ""
+                    },
+                    {
+                      "id": "397af456-a409-44b8-8764-a82e5e4f8ba0",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "EMPATHY",
+                      "value": ""
+                    },
+                    {
+                      "id": "752557f4-1776-4ee3-a9d1-d8e317e58c72",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "FIGHT",
+                      "value": ""
+                    },
+                    {
+                      "id": "4aad64b4-cb9f-490c-8eca-772a2bb07b09",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "HACK",
+                      "value": ""
+                    },
+                    {
+                      "id": "2012a85e-299f-4029-81d1-08e4d37a9e36",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "INVESTIGATE",
+                      "value": ""
+                    },
+                    {
+                      "id": "02436884-b5fa-4cf9-80f2-a9e50cba61eb",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "NOTICE",
+                      "value": ""
+                    },
+                    {
+                      "id": "28569b93-0709-4139-8167-df8dd940ccd4",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "PHYSIQUE",
+                      "value": ""
+                    },
+                    {
+                      "id": "3123d268-3331-4438-ad10-6bc21fb3789a",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "PILOT",
+                      "value": ""
+                    },
+                    {
+                      "id": "5ed19084-dead-407b-9545-9d77c5337bd4",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "PROVOKE",
+                      "value": ""
+                    },
+                    {
+                      "id": "6cdfba84-6c2a-489e-890c-6349c8f43a56",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "RAPPORT",
+                      "value": ""
+                    },
+                    {
+                      "id": "e4adcc05-68b0-4e52-9422-ddada3a4549a",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "RESOURCES",
+                      "value": ""
+                    },
+                    {
+                      "id": "6fa0abb1-552d-4964-aa53-e3e8c88be0af",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "SHOOT",
+                      "value": ""
+                    },
+                    {
+                      "id": "8755d63e-ff4e-49c7-adcb-3a6c46311737",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "STEALTH",
+                      "value": ""
+                    },
+                    {
+                      "id": "83957cb1-27e9-4227-880c-69b387463e0b",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "SURVIVAL",
+                      "value": ""
+                    },
+                    {
+                      "id": "e56ef72e-2e6a-4bc0-bf90-d0ce91a579a3",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "TECH",
+                      "value": ""
+                    },
+                    {
+                      "id": "b3150fe7-4bac-457a-8478-df98a0cfa4b3",
+                      "meta": { "commands": ["4dF"] },
+                      "type": "Skill",
+                      "label": "WILL",
+                      "value": ""
+                    }
+                  ],
+                  "label": "SKILLS",
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "version": 6,
+  "fariType": "character"
+}
