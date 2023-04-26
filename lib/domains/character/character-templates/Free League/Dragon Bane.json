@@ -1,0 +1,1165 @@
+{
+  "fariType": "character",
+  "id": "50638562-81ef-4478-b332-2204c82db314",
+  "lastUpdated": 1682454598,
+  "name": "Dragon Bane V2",
+  "pages": [
+    {
+      "id": "32ec1a62-a051-4cfb-9d49-b3d9b4ad2308",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "13966efc-443d-4314-b496-8b893fb1c101",
+                  "label": "Character",
+                  "blocks": [
+                    {
+                      "id": "c1c4e148-100a-4801-bd2a-44b09aa8b596",
+                      "label": "Name",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "b838bd76-d073-4def-96b0-89d6fd043060",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f3821fe9-c715-4a92-bbf7-f299e55ccb4a",
+                      "label": "Kin",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "90b5b8a0-12bd-43d0-baec-8e14a71715e7",
+                      "label": "PROFESSION",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "1bdcdeba-14f4-4173-8be4-cedf3f91acb0",
+                      "label": "WEAKNESS",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "c787a512-4dd2-422a-8d15-34a7832853a1",
+                      "label": "AGE",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "65bdc291-82cd-4647-80b9-ec640320d978",
+                      "label": "APPEARANCE",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "371c638e-54a3-466f-9280-bb87933c115c",
+                      "label": "Text",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "59fa386b-6e3a-409d-8e0d-7d9fb97b9770",
+                  "label": "Attributes",
+                  "blocks": [
+                    {
+                      "id": "4f1a8e48-f09e-4d40-91dd-812b390643c4",
+                      "label": "STR",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "Use toggle to show EXHAUSTED"
+                      }
+                    },
+                    {
+                      "id": "94289f29-f89e-42ef-9400-ae59d51c5e28",
+                      "label": "CON",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "Use toggle to show SICKLY"
+                      }
+                    },
+                    {
+                      "id": "40079696-351e-4e39-adf0-38f3a08e2898",
+                      "label": "AGL",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "Use toggle to show DAZED"
+                      }
+                    },
+                    {
+                      "id": "98fb0583-d061-45cb-9d7d-5d66e0dac807",
+                      "label": "INT",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "Use toggle to show ANGRY"
+                      }
+                    },
+                    {
+                      "id": "fa118140-1b82-4f08-a908-82982224f3b5",
+                      "label": "WIL",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "Use toggle to show SCARED"
+                      }
+                    },
+                    {
+                      "id": "a0d6a49d-b990-4f24-86f0-40a670fc9020",
+                      "label": "CHA",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "Use toggle to show DISHEARTENED"
+                      }
+                    },
+                    {
+                      "id": "0a094f93-4a19-4b1b-844c-77a7067cfb07",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "6ba9bec6-5aa6-4270-a895-f3ef6ad392a6",
+                      "label": "DAMAGE BON. STR",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": null,
+                        "width": 0.33,
+                        "hideModifier": true
+                      }
+                    },
+                    {
+                      "id": "b58ab549-a1db-41ca-800b-972d158bf11c",
+                      "label": "DAMAGE BON. AGL",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": null,
+                        "width": 0.33,
+                        "hideModifier": true
+                      }
+                    },
+                    {
+                      "id": "e14c7a7e-39a6-4814-8530-5e395aab16ac",
+                      "label": "MOVEMENT",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "ba413a3e-fa9f-49ee-90c1-25bec6996cc9",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "6c854f0d-3745-4d9f-8217-b86bfc870865",
+                      "label": "WILLPOWER POINTS",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "20",
+                        "isMainPointCounter": false,
+                        "width": 0.5
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "e4228713-481c-44a9-ae79-66ed42e782aa",
+                      "label": "HIT POINTS",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "20",
+                        "isMainPointCounter": false,
+                        "width": 0.5
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d1b5a885-7840-4135-95f1-f29150970083",
+                      "label": "ARMOR",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "2ff5c932-2381-40ea-8691-af43dadec3a9",
+                      "label": "Armor",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "11251ffd-a840-4498-9663-a21b6a436c87",
+                      "label": "HELMET",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "788d5b33-6ff0-4856-a21e-58d711d1a937",
+                      "label": "Bane on",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.5 },
+                      "value": [
+                        { "label": "SNEAKING", "checked": false },
+                        { "label": "EVADE", "checked": false },
+                        { "label": "ACROBATICS", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "29cd6e28-2485-4caa-a52b-fc36567779eb",
+                      "label": "Bane on",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.5 },
+                      "value": [
+                        { "label": "AWARENESS", "checked": false },
+                        { "label": "RANGED ATTACKS", "checked": false }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7cc90952-ce08-4650-bcf0-92f245008572",
+      "label": "ABILITIES, SPELLS &amp; SKILLS",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "bddd17bb-7ec6-4bda-bf29-409e271ed26a",
+                  "label": "Skills (STR)",
+                  "blocks": [
+                    {
+                      "id": "9509b958-9381-448c-994a-dc5101889539",
+                      "label": "Crafting ",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "07cb289b-1c67-4f58-bfd6-ba416c73c085",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "79193534-4edb-49a5-aa5e-2f9a40096e46",
+                      "label": "Axes",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "cc636f85-d555-4c7e-808e-860fc397d09e",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "6195bc04-200a-455d-8471-5deff76f8158",
+                      "label": "Brawling",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "0e87b757-eb59-4054-80ab-f6879518a45d",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "3cca82ad-4432-4302-a7ce-ad1a48d82698",
+                      "label": "Hammers",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "e9cf47bf-110f-4c81-a31e-4cc7e0828361",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "f4c7bfcb-a09f-4bb2-a946-b376f7f6248a",
+                      "label": "Spears",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "8f9b9efc-7c56-46fa-8696-0e4a1ecbfff4",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "2c4ce2ee-4f8c-4112-9625-74239ec4ac8c",
+                      "label": "Swords",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "dd3fed18-1f35-4ea7-b5e5-87295ea50e98",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    }
+                  ]
+                },
+                {
+                  "id": "4ef1c87c-857a-4158-961f-6204e2475f37",
+                  "label": "Skills (INT)",
+                  "blocks": [
+                    {
+                      "id": "e79a3315-746f-4bb5-8d1b-0da58e2b47e8",
+                      "label": "Awareness",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "4dbc41b9-d739-4c7a-9cbb-4ab62df9574d",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "98ef2b8d-cb4e-42ec-addc-ea4a92a9a1a9",
+                      "label": "Beast Lore",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "26d75f56-b615-44af-a818-39d79517e92b",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "79a32cc2-be19-46b1-a82c-a12b99fc219c",
+                      "label": "Bushcraft",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "f0e138ad-c8b8-4d4d-a33b-2af0e68717e5",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "8e92c918-3303-4527-9c6d-6751e5f61a97",
+                      "label": "Healing",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "4b70354c-698b-49d6-80f9-b7637cd0695f",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "5ff74c52-2c57-43b7-a694-1d5e7356d872",
+                      "label": "Languages",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "3488aa76-ab0a-4f59-88e0-2b98f2b7ef83",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "d9b01283-cfea-4ae3-bbd3-e512e7f4965a",
+                      "label": "Myths &amp; Legends",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "f505eeec-3d0b-484c-88e5-18841fa32a9e",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "78661863-5e6e-4762-a2e9-1266b943f5f4",
+                      "label": "Seamanship",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "e9883fb8-4171-49ba-ba04-44e7fb8e47d0",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "1c9201f9-bdad-4772-a7d1-838844f4c21e",
+                      "label": "Spot Hidden",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "54b43407-7672-42ee-be09-9a6bf65b5b3a",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "d0ae3cf2-4c17-4b27-a01a-216d0ce0a5ad",
+                  "label": "Skills (AGL)",
+                  "blocks": [
+                    {
+                      "id": "da869a25-6c5c-4c90-9470-7029d6e63607",
+                      "label": "Acrobatics",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "8f5810c9-03b4-41ae-84d6-72296baa90b0",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "ea05c1e4-cd8c-4adb-81fe-9423e22807e4",
+                      "label": "Evade",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "52a86738-7473-41b7-8131-03983325a77c",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "6d4031d8-ed9b-4e68-be1d-47baf89c1cb3",
+                      "label": "Hunting &amp; Fishing",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "73baf8b1-5bca-47c3-aa77-386958a74ff8",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "9884f35d-9d08-4be8-bb1d-73534279b324",
+                      "label": "Riding",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "89807fc1-a835-4ea6-9cdd-13e9a842c6ae",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "f788431f-90a7-4c95-9c7d-e2694868874c",
+                      "label": "Sleight of Hand ",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "f9db715a-5ab4-4723-a212-5a7cd281848a",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "6e339568-f710-4860-83f2-14f4f17e6a0b",
+                      "label": "Sneaking",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "6c6116db-8631-445f-9e15-eed61a83f97e",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "1aad59c7-306f-45ec-a0c2-a57d192421df",
+                      "label": "Swimming",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "49e006a3-0005-45c2-b414-14ff1a5eb424",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "1680f4c8-1766-4f10-be74-b7d63cc0797e",
+                      "label": "Bows",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "1d95e39e-a0ba-47d8-91af-d013591484a5",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "6e8b1e48-f60d-4eba-9b02-558c0419c29d",
+                      "label": "Crossbows",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "d11f3fc7-a184-4732-ad44-1010845e714e",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "da91d236-b7da-427f-9587-b81b7307f4a2",
+                      "label": "Knives",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "9e5292d5-e83f-4964-aa7d-8d0fffba668f",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "6ebbdca3-004e-4f1f-90f8-c6c547eafc2f",
+                      "label": "Slings",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "aebbcce5-d088-4f4c-8c1f-062454d357c5",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "df9d59d8-4cd3-46c9-a7f5-6409ccec1928",
+                      "label": "Staves",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "1e744621-cd73-4778-be5b-c82e197626a7",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    }
+                  ]
+                },
+                {
+                  "id": "b809794d-0f57-47f0-be42-cf7e43bd1f10",
+                  "label": "Skills (CHA)",
+                  "blocks": [
+                    {
+                      "id": "b576d9e6-2a5c-4215-b114-db505f32eabc",
+                      "label": "Bartering",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "d524cf0e-21f4-48ce-bf74-d782b76519e2",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "e1f7bb24-a046-4269-8805-976447d13f8c",
+                      "label": "Bluffing",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "f935d5a8-5f22-49d5-bd8f-e71b10550d9d",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "fdc7d758-1244-4192-b5c6-0cbb1a99acfb",
+                      "label": "Performance",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "5df33f00-22d3-4176-81d3-ac4229967776",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    },
+                    {
+                      "id": "1ef3e43e-54b2-4a3a-8275-52d9d014f5e1",
+                      "label": "Persuasion",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "4c81a295-7145-4280-a2da-b8c7031958fb",
+                      "label": "Rating",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "checked": false, "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        { "columns": [{ "sections": [] }] }
+      ]
+    },
+    {
+      "id": "96149c97-0049-42df-943d-03e034110989",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a544e9bc-a0ef-447e-9ea8-eb8e30757ba5",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "0a9cdcc6-6e84-4fa0-8c91-b77c6de3fd10",
+                      "label": "WEAPON",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "", "width": 1 }
+                    },
+                    {
+                      "id": "c34d3ec9-6fa8-4dc1-9c1c-cd6db5eaddca",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "c319bff7-381f-4776-aff6-6f2ab7540a2a",
+                      "label": "Weapon",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "", "width": 1 }
+                    },
+                    {
+                      "id": "2a323af3-a6a7-4031-84fe-3c7e01d9afb4",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "3963843c-b492-4232-b563-4cc6c00f5aa7",
+                      "label": "Weapon",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "", "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "dda08ec8-6a6d-4c33-a83f-9b5d6e1a0f35",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "587ac8d4-61b0-48dd-a06b-7fc719179020",
+                      "label": "GRIP",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "1fb91184-d0a6-40f9-850c-b1bc24864d1e",
+                      "label": "RANGE",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "10efcb3b-1916-429b-b717-d59c5e430f5e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "2f265f00-ce09-425a-bf7c-0df6d2db02f9",
+                      "label": "GRIP",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "838a47e5-76dd-4edf-99c2-68d7e27e6ad8",
+                      "label": "RANGE",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "a88d9844-9d0f-4222-b051-49353ef013a8",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "b80ae8a4-7ce2-48d2-abcd-9741dfe2981b",
+                      "label": "GRIP",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "aa348f22-5a59-4fb3-8277-a745d02479ff",
+                      "label": "RANGE",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "fdf6a670-d550-4b36-8ff7-8191023f5c79",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "0521ff54-5286-4c1b-9e88-f7090e8a8e13",
+                      "label": "",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": [], "helperText": "", "width": 0.5 }
+                    },
+                    {
+                      "id": "6e6691a7-6a15-4234-a5c5-a84091439c90",
+                      "label": "DURA-BILITY",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "02941755-e8da-47d2-9605-0ecd5ae40732",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "2d7933fb-d811-4169-a32a-0052a14ea76f",
+                      "label": "",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": null,
+                        "helperText": "",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "c0d14af8-d5b1-4520-9b9c-d30877e8e5d2",
+                      "label": "DURA-BILITY",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "9ba494a8-638a-4d4b-9431-fac3c0cf5bdd",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "bb5bdc6a-a534-47c8-bb65-15ad14086758",
+                      "label": "",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": null,
+                        "helperText": "",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "3fa377fd-145a-4a98-a0d7-21c88c02b191",
+                      "label": "DURA-BILITY",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "b0100dfa-c43a-4d32-a15c-08851fdba317",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "d690760f-6505-4d21-b7d5-c7927256a39f",
+                      "label": "FEATURES",
+                      "type": "Text",
+                      "value": "\n<br>",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "9b201e41-b072-4ebc-9fa4-df5b8b9d95bd",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "3b631887-b85b-43fb-a201-610d79423456",
+                      "label": "FEATURES",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "3a809a83-be1c-457c-b3a1-d12cff115088",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "ffdee935-d01d-40f8-acd6-12e752c4e694",
+                      "label": "FEATURES",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Weapons"
+    },
+    {
+      "id": "b743e2ea-ae20-4829-9adf-3f39fbc19c21",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a55d2b13-ad97-4074-91c7-9cbe2bddcd29",
+                  "label": "Currency",
+                  "blocks": [
+                    {
+                      "id": "8593dc33-db04-429a-807e-c56fd037fd8b",
+                      "label": "GOLD",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "62ad4994-943b-4288-9c46-0a3581796818",
+                      "label": "SILVER",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "fc73c054-c610-43a6-9399-bdd1ee70fea3",
+                      "label": "COPPER",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "a872de9b-7107-4d78-a47c-86e343632c07",
+                      "label": "INVENTORY",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "24b4db9e-0062-42fe-bd4d-8ee03a9c3bfc",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b501f2e2-9456-41a1-b987-7942046b2300",
+                      "label": "TINY ITEMS",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "ca905fa9-6626-4b77-86b4-b6d03bbadfee",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Inventory"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "playedDuringTurn": false
+}
