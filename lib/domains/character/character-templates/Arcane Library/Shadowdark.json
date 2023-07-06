@@ -1,0 +1,509 @@
+{
+  "fariType": "character",
+  "id": "d782240b-277c-482e-a396-5e3424c55b47",
+  "lastUpdated": 1688406375,
+  "name": "Shadowdark Character Sheet",
+  "pages": [
+    {
+      "id": "08c4464b-4924-4c4f-88e2-d34b9cba3473",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "b7ef4045-72d5-44ab-bc56-b01d32c5c98b",
+                  "label": "Character Info",
+                  "blocks": [
+                    {
+                      "id": "724c3cdc-5c28-4b5c-9ec7-c8f88f559b64",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c110cf28-ed3f-425c-93ae-7fd4d51e413d",
+                      "label": "Ancestry",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9e50fcd2-d770-4fbc-b9a6-611d85aa91a6",
+                      "label": "Title",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f59eda00-9641-43f7-8ff7-3e2e198ee273",
+                      "label": "Class",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "45cb3c2c-3f06-49f6-bc68-6f4c081d93cc",
+                      "label": "Background",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "44982f4b-99cd-4c4d-95e1-0a4894e7dfc0",
+                      "label": "Alignment",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5f838a90-baba-4295-bbb8-95537f920df9",
+                      "label": "Deity",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "0ebd37e3-fcb5-48ab-b2fb-d06da62240fb",
+                  "label": "Advancement",
+                  "blocks": [
+                    {
+                      "id": "7b0322b4-8de5-4ffb-bf8e-d7e1fddffe26",
+                      "label": "Level",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "width": 0.5
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "160db257-eff0-4576-9f16-a89109932936",
+                      "label": "XP",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "width": 0.5,
+                        "max": "0"
+                      },
+                      "value": "0"
+                    }
+                  ]
+                },
+                {
+                  "id": "75290cb4-95bf-4059-907f-55bea2a31603",
+                  "label": "Attributes",
+                  "blocks": [
+                    {
+                      "id": "97ace423-e886-4f9f-b9c0-e2e5355aadd3",
+                      "label": "Str",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": ""
+                      }
+                    },
+                    {
+                      "id": "2b059b38-fd93-4fbe-9c47-a184fe05cedc",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": [
+                          "1d20"
+                        ],
+                        "hideModifier": false,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "889e8134-a597-400c-853f-9667e5da87a7",
+                      "label": "Dex",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": ""
+                      }
+                    },
+                    {
+                      "id": "87635160-9ad7-4d2a-bbbb-994037617451",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": [
+                          "1d20"
+                        ],
+                        "hideModifier": false,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "a16f6cd6-641d-4200-bb3c-c425a97a88c5",
+                      "label": "Con",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": ""
+                      }
+                    },
+                    {
+                      "id": "933099e8-f91d-4c48-bd8b-007b6d5bb861",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": [
+                          "1d20"
+                        ],
+                        "hideModifier": false,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "3075be6a-7c37-4daf-8fc6-4191a4c86a64",
+                      "label": "Int",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": ""
+                      }
+                    },
+                    {
+                      "id": "65b7ecb0-e1af-423c-bc6e-6dbf8d730411",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": [
+                          "1d20"
+                        ],
+                        "hideModifier": false,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "c31387a7-2db4-4671-a292-312793d40826",
+                      "label": "Wis",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": ""
+                      }
+                    },
+                    {
+                      "id": "de140710-490f-4a0d-bbd3-e8b9a4a50c98",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": [
+                          "1d20"
+                        ],
+                        "hideModifier": false,
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "319c7e19-4c48-4c76-a73b-cd74032a8fb7",
+                      "label": "Cha",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": ""
+                      }
+                    },
+                    {
+                      "id": "d7e90b9f-766e-466a-bd3a-7ee215d490bb",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": [
+                          "1d20"
+                        ],
+                        "hideModifier": false,
+                        "width": 0.66
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "2700c538-fbaa-4d00-9be5-261b293477e1",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "483f7be3-148c-4036-8d6f-0f99e236d8e9",
+                      "label": "Health",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": true,
+                        "width": 0.5,
+                        "max": "0"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "7b6ed12b-4909-483b-a8b3-a73fd07fd76b",
+                      "label": "Armor",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "width": 0.5
+                      },
+                      "value": "0"
+                    }
+                  ],
+                  "visibleOnCard": false
+                },
+                {
+                  "id": "871551fd-f8be-4a9d-971d-f6df08c31b02",
+                  "label": "Attacks",
+                  "blocks": [
+                    {
+                      "id": "cde10280-0e38-45a3-8d27-9fec1a88233c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "f37ef942-faab-4951-9d02-e6b0873a56c4",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": [],
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "2a3077a8-2dfe-4dd5-8d7f-55eb7d8fdc17",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "31010346-a688-44f9-aac1-cedf725297f9",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": null,
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "9ee0de75-61d3-4574-a193-c607bcbce5d6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "824844a7-c1f8-4ab5-8005-9773f3ce5f0d",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": null,
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "412dbf60-09e5-4e01-8e39-1d0b63a62398",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "78b429c0-26b8-4cbd-9e34-78fdabac13fb",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": null,
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "bb0ef66a-0248-4efb-b873-0d009dd05928",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "6017fe7c-c9e0-40e5-aff4-8160b1c5d1b6",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": null,
+                        "width": 0.33
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "bdc0217f-d189-48c2-ad44-92bcb111fa3e",
+                  "label": "Talents &amp; Languages",
+                  "blocks": [
+                    {
+                      "id": "7fe73bb0-9adc-4aa4-9477-79b3dfe4b50b",
+                      "type": "Text",
+                      "value": "- <br>- <br>- <br>- <br>- <br>- <br>- <br>- <br>- <br>- ",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "677fc87d-5be1-4797-89ef-0b026804cc91",
+                  "label": "Spells",
+                  "blocks": [
+                    {
+                      "id": "d5a6aa7a-6b35-4c40-a9c6-46581c8a7300",
+                      "type": "Text",
+                      "value": "- <br>- <br>- <br>- <br>- <br>- <br>- <br>- <br>- <br>- ",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a19b919a-814e-4223-9685-4ffcd09a77e7",
+                  "label": "Inventory",
+                  "blocks": [
+                    {
+                      "id": "064084d4-99f9-42bb-9148-ca893f1f3c4e",
+                      "label": "Slots",
+                      "type": "Text",
+                      "value": "1. <br>2. <br>3. <br>4. <br>5. <br>6. <br>7. <br>8. <br>9. <br>10. <br>",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "Carry Capacity = 10 or Strength Score"
+                      }
+                    },
+                    {
+                      "id": "c52b7fc2-82b0-4da4-8ea8-ec06aa1a199f",
+                      "label": "Free to Carry",
+                      "type": "Text",
+                      "value": "- \n- \n- \n- \n- \n- <br>- <br>- <br>- <br>- <br>",
+                      "meta": {
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "f5cde035-3915-495d-b278-e662458b41f5",
+                      "label": "GP",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": "1gp / 10sp / 100cp"
+                      }
+                    },
+                    {
+                      "id": "5fd20a86-63c1-43e6-99d1-0a6bd6c4435a",
+                      "label": "SP",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": ""
+                      }
+                    },
+                    {
+                      "id": "5fe25ef9-244c-44a6-b443-15bd66fbb0b1",
+                      "label": "CP",
+                      "type": "Numeric",
+                      "value": "0",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": ""
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4a0ceb14-5eb2-426b-aacd-aee4303e69f5",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9844fcaf-d7c5-466b-9e1e-2c055c94e683",
+                  "label": "Notes",
+                  "blocks": [
+                    {
+                      "id": "dc3348a9-9941-41e0-807b-c0ca47634bc6",
+                      "type": "Text",
+                      "value": "<br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Notes"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "playedDuringTurn": false
+}
