@@ -1,7 +1,7 @@
-import produce from "immer";
+import { produce } from "immer";
+import { Id } from "../Id/Id";
 import { getUnix } from "../dayjs/getDayJS";
 import { IDiceCommandId } from "../dice/Dice";
-import { Id } from "../Id/Id";
 import { Migrator } from "../migration/Migrator";
 import { ICharacterTemplate } from "./CharacterType";
 import {
@@ -121,7 +121,7 @@ export const CharacterFactory = {
     type: BlockType,
     options: {
       defaultCommands?: Array<IDiceCommandId> | null;
-    } = {}
+    } = {},
   ) {
     const blockDefault: Record<BlockType, IBlock> = {
       [BlockType.Text]: {
@@ -420,10 +420,10 @@ export function migrateV3CharacterToV4(v3: IV3Character): IV4Character {
     wide: false,
     pages: v3.pages.map((page): IV4Page => {
       const leftSections = page.sections.filter(
-        (s) => s.position === V3Position.Left
+        (s) => s.position === V3Position.Left,
       );
       const rightSections = page.sections.filter(
-        (s) => s.position === V3Position.Right
+        (s) => s.position === V3Position.Right,
       );
       return {
         id: page.id,

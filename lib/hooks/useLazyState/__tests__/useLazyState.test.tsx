@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react";
-import produce from "immer";
+import { produce } from "immer";
 import { useLazyState } from "../useLazyState";
 
 describe("useLazyState", () => {
@@ -19,7 +19,7 @@ describe("useLazyState", () => {
               delay: delay,
             });
           },
-          { initialProps: { value: initialValue, onChange: onChange } }
+          { initialProps: { value: initialValue, onChange: onChange } },
         );
 
         // THEN the state should be initialized
@@ -53,7 +53,7 @@ describe("useLazyState", () => {
         expect(result.current[0]).toEqual("new-from-props");
         expect(onChange).toHaveBeenCalledWith("new");
         expect(onChange).toHaveBeenCalledTimes(1);
-      }
+      },
     );
   });
   describe("Given the state update is based on the previous state", () => {
@@ -72,7 +72,7 @@ describe("useLazyState", () => {
               delay: 250,
             });
           },
-          { initialProps: { value: initialValue, onChange: onChange } }
+          { initialProps: { value: initialValue, onChange: onChange } },
         );
 
         // THEN the state should be initialized
@@ -106,7 +106,7 @@ describe("useLazyState", () => {
               delay: 250,
             });
           },
-          { initialProps: { value: initialValue, onChange: onChange } }
+          { initialProps: { value: initialValue, onChange: onChange } },
         );
 
         // THEN the state should be initialized
@@ -140,7 +140,7 @@ describe("useLazyState", () => {
               delay: 250,
             });
           },
-          { initialProps: { value: initialValue, onChange: onChange } }
+          { initialProps: { value: initialValue, onChange: onChange } },
         );
 
         // THEN the state should be initialized
@@ -184,7 +184,7 @@ describe("useLazyState", () => {
               delay: 250,
             });
           },
-          { initialProps: { value: initialValue, onChange: onChange } }
+          { initialProps: { value: initialValue, onChange: onChange } },
         );
 
         // THEN the state should be initialized
@@ -195,17 +195,17 @@ describe("useLazyState", () => {
           result.current[1](
             produce((draft: { counter: number }) => {
               draft.counter += 1;
-            })
+            }),
           );
           result.current[1](
             produce((draft: { counter: number }) => {
               draft.counter += 1;
-            })
+            }),
           );
           result.current[1](
             produce((draft: { counter: number }) => {
               draft.counter += 1;
-            })
+            }),
           );
         });
 

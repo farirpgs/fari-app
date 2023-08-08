@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
-import produce from "immer";
+import { produce } from "immer";
 import React, { useState } from "react";
 import { IndexCard } from "../lib/components/IndexCard/IndexCard";
 import { IndexCardColor } from "../lib/components/IndexCard/IndexCardColor";

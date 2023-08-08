@@ -7,10 +7,10 @@ import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
 import { DataGrid, GridRowId } from "@mui/x-data-grid";
-import produce from "immer";
+import { produce } from "immer";
 import uniq from "lodash/uniq";
 import React, { useContext, useMemo, useRef, useState } from "react";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
@@ -22,11 +22,11 @@ import { Delays } from "../../constants/Delays";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { IndexCardCollectionsContext } from "../../contexts/IndexCardCollectionsContext/IndexCardCollectionsContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { Id } from "../../domains/Id/Id";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { ICharacter } from "../../domains/character/types";
-import { getDayJs, getDayJSFrom } from "../../domains/dayjs/getDayJS";
+import { getDayJSFrom, getDayJs } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
-import { Id } from "../../domains/Id/Id";
 import {
   IIndexCardCollection,
   IndexCardCollectionFactory,
@@ -165,7 +165,7 @@ export const DataRoute: React.FC = () => {
         return r.name.toLowerCase().includes(filters.search.toLowerCase());
       });
     const allRowsSize = FariEntity.getSize(
-      allRows.map((r) => r.entity)
+      allRows.map((r) => r.entity),
     ).kiloBytes;
 
     return {
@@ -190,14 +190,14 @@ export const DataRoute: React.FC = () => {
 
   function handleOnExport() {
     const charactersToExport = charactersManager.state.characters.filter((s) =>
-      selections.includes(s.id)
+      selections.includes(s.id),
     );
     const scenesToExport = scenesManager.state.scenes.filter((c) =>
-      selections.includes(c.id)
+      selections.includes(c.id),
     );
     const indexCardCollectionsToExport =
       indexCardCollectionsManager.state.indexCardCollections.filter((c) =>
-        selections.includes(c.id)
+        selections.includes(c.id),
       );
 
     FariEntity.export({
@@ -213,7 +213,7 @@ export const DataRoute: React.FC = () => {
 
   function handleOnImport(
     fileToImport: FileList | null | undefined,
-    mode: ImportMode
+    mode: ImportMode,
   ) {
     FariEntity.import<{
       scenes: Array<IScene>;
@@ -255,7 +255,7 @@ export const DataRoute: React.FC = () => {
 
   function importIndexCardCollection(
     indexCardCollection: IIndexCardCollection,
-    mode: ImportMode
+    mode: ImportMode,
   ) {
     const indexCardCollectionToUse =
       mode === ImportMode.Import
@@ -264,7 +264,7 @@ export const DataRoute: React.FC = () => {
             draft.id = Id.generate();
           });
     const migratedIndexCardCollection = IndexCardCollectionFactory.migrate(
-      indexCardCollectionToUse
+      indexCardCollectionToUse,
     );
     indexCardCollectionsManager.actions.upsert(migratedIndexCardCollection);
   }
@@ -294,14 +294,14 @@ export const DataRoute: React.FC = () => {
 
   function handleOnDelete() {
     const charactersToRemove = charactersManager.state.characters.filter((s) =>
-      selections.includes(s.id)
+      selections.includes(s.id),
     );
     const scenesToRemove = scenesManager.state.scenes.filter((c) =>
-      selections.includes(c.id)
+      selections.includes(c.id),
     );
     const indexCardCollectionsToRemove =
       indexCardCollectionsManager.state.indexCardCollections.filter((c) =>
-        selections.includes(c.id)
+        selections.includes(c.id),
       );
     charactersToRemove.forEach((c) => {
       charactersManager.actions.remove(c.id);
@@ -448,7 +448,7 @@ export const DataRoute: React.FC = () => {
                 onChange={(event: any) => {
                   handleOnImport(
                     event.target.files,
-                    ImportMode.ImportAndDuplicate
+                    ImportMode.ImportAndDuplicate,
                   );
                   event.target.value = "";
                 }}

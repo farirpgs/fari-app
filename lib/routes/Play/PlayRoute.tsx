@@ -1,11 +1,3 @@
-import { LiveObject } from "@liveblocks/client";
-import {
-  useBroadcastEvent,
-  useEventListener,
-  useObject,
-  useRoom,
-  useStorage,
-} from "@liveblocks/react";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
@@ -17,6 +9,12 @@ import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { useScene } from "../../hooks/useScene/useScene";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import {
+  useBroadcastEvent,
+  useEventListener,
+  useObject,
+  useRoom,
+} from "../../services/liveblocks/liveblocks.config";
 import { IMessage, useChat } from "./components/Chat/useChat";
 import {
   IPlayersPresenceRef,
@@ -51,16 +49,19 @@ export function useLiveObject<T>(props: {
   canBeEmpty?: boolean;
   onChange(newValue: T): void;
 }) {
-  const liveObject = useObject<any>(props.key);
-  const [root] = useStorage();
+  const liveObject = useObject(props.key);
+  // const root = useStorage((root) => {
+  //   return root;
+  // });
 
   const room = useRoom();
 
-  useEffect(() => {
-    if (props.isOwner) {
-      root?.set(props.key, new LiveObject({}));
-    }
-  }, [root]);
+  // TODO: clear data on load
+  // useEffect(() => {
+  //   if (props.isOwner) {
+  //     root?.set(props.key, new LiveObject({}));
+  //   }
+  // }, [root]);
 
   useEffect(() => {
     if (props.isOwner) {
@@ -190,30 +191,30 @@ function PlayRoute() {
     if (event.type === "update-player-points") {
       sessionManager.actions.updatePlayerPoints(
         event.payload.id,
-        event.payload.points
+        event.payload.points,
       );
       sessionCharactersManager.actions.updatePlayerCharacterMainPointCounter(
         event.payload.id,
         event.payload.points,
-        event.payload.maxPoints
+        event.payload.maxPoints,
       );
     }
     if (event.type === "update-player-status") {
       sessionManager.actions.updatePlayerStatus(
         event.payload.id,
-        event.payload.status
+        event.payload.status,
       );
     }
     if (event.type === "update-player-character") {
       sessionCharactersManager.actions.updatePlayerCharacter(
         event.payload.id,
-        event.payload.character
+        event.payload.character,
       );
     }
     if (event.type === "update-index-card") {
       sceneManager.actions.updateIndexCard(
         event.payload.indexCard,
-        event.payload.indexCardType
+        event.payload.indexCardType,
       );
     }
     if (event.type === "send-message") {
@@ -235,14 +236,14 @@ function PlayRoute() {
       },
       {
         shouldQueueEventIfNotReady: true,
-      }
+      },
     );
   }
 
   useEffect(() => {
     if (playerName) {
       handlePlayerInteraction(
-        PlayerInteractionFactory.addPlayer(userId, playerName)
+        PlayerInteractionFactory.addPlayer(userId, playerName),
       );
     }
   }, [playerName]);
@@ -335,7 +336,7 @@ function PlayRoute() {
                   chatManager.actions.sendMessage(message);
                 } else {
                   handlePlayerInteraction(
-                    PlayerInteractionFactory.sendMessage(message)
+                    PlayerInteractionFactory.sendMessage(message),
                   );
                 }
               }

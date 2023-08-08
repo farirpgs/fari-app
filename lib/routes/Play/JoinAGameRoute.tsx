@@ -1,4 +1,3 @@
-import { useBroadcastEvent, useEventListener } from "@liveblocks/react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -8,9 +7,9 @@ import Fade from "@mui/material/Fade";
 import Grid from "@mui/material/Grid";
 import InputLabel from "@mui/material/InputLabel";
 import Paper from "@mui/material/Paper";
-import { useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 import {
   default as React,
   useContext,
@@ -26,6 +25,10 @@ import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext"
 import { Icons } from "../../domains/Icons/Icons";
 import { isWebRTCSupported } from "../../hooks/usePeerJS/isWebRTCSupported";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+import {
+  useBroadcastEvent,
+  useEventListener,
+} from "../../services/liveblocks/liveblocks.config";
 import {
   IPlayerInteraction,
   PlayerInteractionFactory,

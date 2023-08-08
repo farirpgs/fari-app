@@ -1,4 +1,4 @@
-import produce from "immer";
+import { produce } from "immer";
 import { useContext } from "react";
 import { SettingsContext } from "../../../contexts/SettingsContext/SettingsContext";
 import { CharacterFactory } from "../../../domains/character/CharacterFactory";
@@ -25,7 +25,7 @@ export function useIndexCard(props: {
     setIndexCard(
       produce((draft: IIndexCard) => {
         draft.color = newColor;
-      })
+      }),
     );
   }
 
@@ -33,7 +33,7 @@ export function useIndexCard(props: {
     setIndexCard(
       produce((draft: IIndexCard) => {
         draft.pinned = !draft.pinned;
-      })
+      }),
     );
   }
 
@@ -41,14 +41,14 @@ export function useIndexCard(props: {
     setIndexCard(
       produce((draft: IIndexCard) => {
         draft.title = newTitle;
-      })
+      }),
     );
   }
   function setTitleLabel(newLabel: string) {
     setIndexCard(
       produce((draft: IIndexCard) => {
         draft.titleLabel = newLabel;
-      })
+      }),
     );
   }
 
@@ -56,7 +56,7 @@ export function useIndexCard(props: {
     setIndexCard(
       produce((draft: IIndexCard) => {
         draft.playedDuringTurn = !draft.playedDuringTurn;
-      })
+      }),
     );
   }
 
@@ -71,7 +71,7 @@ export function useIndexCard(props: {
           sub: oldSub,
         };
         return newIndexCard;
-      })
+      }),
     );
   }
 
@@ -84,7 +84,7 @@ export function useIndexCard(props: {
           }
           return block;
         });
-      })
+      }),
     );
   }
 
@@ -94,9 +94,9 @@ export function useIndexCard(props: {
         draft.blocks.push(
           CharacterFactory.makeBlock(blockType, {
             defaultCommands: settingsManager.state.diceCommandIds,
-          })
+          }),
         );
-      })
+      }),
     );
   }
 
@@ -104,7 +104,7 @@ export function useIndexCard(props: {
     setIndexCard(
       produce((draft: IIndexCard) => {
         draft.subCards.push(SceneFactory.makeSubIndexCard());
-      })
+      }),
     );
   }
 
@@ -114,11 +114,11 @@ export function useIndexCard(props: {
         const duplicatedBlock =
           CharacterFactory.duplicateBlock(blockToDuplicate);
         const index = draft.blocks.findIndex(
-          (block) => block.id === blockToDuplicate.id
+          (block) => block.id === blockToDuplicate.id,
         );
         draft.blocks.push();
         draft.blocks.splice(index + 1, 0, duplicatedBlock);
-      })
+      }),
     );
   }
 
@@ -128,7 +128,7 @@ export function useIndexCard(props: {
         draft.blocks = draft.blocks.filter((block) => {
           return block.id !== blockToRemove.id;
         });
-      })
+      }),
     );
   }
 
@@ -136,9 +136,9 @@ export function useIndexCard(props: {
     setIndexCard(
       produce((draft: IIndexCard) => {
         draft.subCards = draft.subCards.filter(
-          (indexCard) => indexCard.id !== indexCardId
+          (indexCard) => indexCard.id !== indexCardId,
         );
-      })
+      }),
     );
   }
 
@@ -148,7 +148,7 @@ export function useIndexCard(props: {
         const indexOf = draft.subCards.findIndex((i) => i.id === indexCard.id);
         const copy = SceneFactory.duplicateIndexCard(indexCard);
         draft.subCards.splice(indexOf, 0, copy);
-      })
+      }),
     );
   }
 
@@ -161,7 +161,7 @@ export function useIndexCard(props: {
           }
           return indexCard;
         });
-      })
+      }),
     );
   }
 
@@ -181,7 +181,7 @@ export function useIndexCard(props: {
           draft.subCards.splice(dragIndex, 1);
           draft.subCards.splice(hoverIndex, 0, dragItem);
         }
-      })
+      }),
     );
   }
 
@@ -193,16 +193,16 @@ export function useIndexCard(props: {
         }
 
         const dragIndex = draft.blocks.findIndex(
-          (block) => block.id === dragId
+          (block) => block.id === dragId,
         );
         const hoverIndex = draft.blocks.findIndex(
-          (block) => block.id === hoverId
+          (block) => block.id === hoverId,
         );
         const dragItem = draft.blocks[dragIndex];
 
         draft.blocks.splice(dragIndex, 1);
         draft.blocks.splice(hoverIndex, 0, dragItem);
-      })
+      }),
     );
   }
 

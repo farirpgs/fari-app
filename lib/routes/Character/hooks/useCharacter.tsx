@@ -1,8 +1,9 @@
-import produce from "immer";
+import { produce } from "immer";
 import isEqual from "lodash/isEqual";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { previewContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { SettingsContext } from "../../../contexts/SettingsContext/SettingsContext";
+import { Id } from "../../../domains/Id/Id";
 import { CharacterFactory } from "../../../domains/character/CharacterFactory";
 import { ICharacterTemplate } from "../../../domains/character/CharacterType";
 import {
@@ -13,16 +14,15 @@ import {
   IPage,
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
-import { Id } from "../../../domains/Id/Id";
 
 export function useCharacter(
   characterFromProps?: ICharacter | undefined,
-  onChange?: (character: ICharacter) => void
+  onChange?: (character: ICharacter) => void,
 ) {
   const settingsManager = useContext(SettingsContext);
 
   const [character, setCharacter] = useState<ICharacter | undefined>(
-    characterFromProps
+    characterFromProps,
   );
 
   const dirty = useMemo(() => {
@@ -31,10 +31,10 @@ export function useCharacter(
 
   useEffect(() => {
     const characterFromPropsLastUpdated = getUnixFrom(
-      characterFromProps?.lastUpdated ?? 0
+      characterFromProps?.lastUpdated ?? 0,
     );
     const currentCharacterLastUpdated = getUnixFrom(
-      character?.lastUpdated ?? 0
+      character?.lastUpdated ?? 0,
     );
 
     const isDifferentCharacter = characterFromProps?.id !== character?.id;
@@ -64,7 +64,7 @@ export function useCharacter(
           group: group,
           lastUpdated: getUnix(),
         };
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -76,7 +76,7 @@ export function useCharacter(
           return;
         }
         draft.name = newName;
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -88,7 +88,7 @@ export function useCharacter(
           return;
         }
         draft.group = newGroup as string | undefined;
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -105,7 +105,7 @@ export function useCharacter(
           label: "Page",
         };
         draft.pages.push(newPage);
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -117,7 +117,7 @@ export function useCharacter(
           return;
         }
         draft.pages = draft.pages.filter((p, index) => index !== pageIndex);
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -129,7 +129,7 @@ export function useCharacter(
           return;
         }
         draft.pages[pageIndex].label = value;
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -143,9 +143,9 @@ export function useCharacter(
         draft.pages[indexes.pageIndex].rows = moveValueInList(
           draft.pages[indexes.pageIndex].rows,
           indexes.rowIndex,
-          "up"
+          "up",
         );
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -158,7 +158,7 @@ export function useCharacter(
         }
         draft.theme = draft.theme ?? {};
         setter?.(draft.theme);
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -169,7 +169,7 @@ export function useCharacter(
           return;
         }
         draft.theme = undefined;
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -183,9 +183,9 @@ export function useCharacter(
         draft.pages[indexes.pageIndex].rows = moveValueInList(
           draft.pages[indexes.pageIndex].rows,
           indexes.rowIndex,
-          "down"
+          "down",
         );
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -204,9 +204,9 @@ export function useCharacter(
           moveValueInList(
             draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns,
             indexes.columnIndex,
-            "up"
+            "up",
           );
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -225,9 +225,9 @@ export function useCharacter(
           moveValueInList(
             draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns,
             indexes.columnIndex,
-            "down"
+            "down",
           );
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -250,9 +250,9 @@ export function useCharacter(
             indexes.columnIndex
           ].sections,
           indexes.sectionIndex,
-          "up"
+          "up",
         );
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -275,9 +275,9 @@ export function useCharacter(
             indexes.columnIndex
           ].sections,
           indexes.sectionIndex,
-          "down"
+          "down",
         );
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -291,7 +291,7 @@ export function useCharacter(
         draft.pages[indexes.pageIndex].rows.splice(indexes.rowIndex + 1, 0, {
           columns: [{ sections: [] }],
         });
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -303,7 +303,7 @@ export function useCharacter(
           return;
         }
         draft.pages[indexes.pageIndex].rows.splice(indexes.rowIndex, 1);
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -323,9 +323,9 @@ export function useCharacter(
           0,
           {
             sections: [],
-          }
+          },
         );
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -342,9 +342,9 @@ export function useCharacter(
         }
         draft.pages[indexes.pageIndex].rows[indexes.rowIndex].columns.splice(
           indexes.columnIndex,
-          1
+          1,
         );
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -368,7 +368,7 @@ export function useCharacter(
           label: "Section",
           blocks: [],
         });
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -380,7 +380,7 @@ export function useCharacter(
       columnIndex: number;
       sectionIndex: number;
     },
-    label: string
+    label: string,
   ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -392,7 +392,7 @@ export function useCharacter(
             indexes.columnIndex
           ].sections;
         sections[indexes.sectionIndex].label = label;
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -415,7 +415,7 @@ export function useCharacter(
           ].sections;
         const oldValue = sections[indexes.sectionIndex].visibleOnCard;
         sections[indexes.sectionIndex].visibleOnCard = !oldValue;
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -427,7 +427,7 @@ export function useCharacter(
           return;
         }
         draft.pages = moveValueInList(draft.pages, pageIndex, direction);
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -452,7 +452,7 @@ export function useCharacter(
         column.sections = column.sections.filter((a, index) => {
           return index !== indexes.sectionIndex;
         });
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -464,7 +464,7 @@ export function useCharacter(
       columnIndex: number;
       sectionIndex: number;
     },
-    type: BlockType
+    type: BlockType,
   ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -479,9 +479,9 @@ export function useCharacter(
         section.blocks.push(
           CharacterFactory.makeBlock(type, {
             defaultCommands: settingsManager.state.diceCommandIds,
-          })
+          }),
         );
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -492,7 +492,7 @@ export function useCharacter(
       columnIndex: number;
       sectionIndex: number;
     },
-    blocks: Array<IBlock>
+    blocks: Array<IBlock>,
   ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -507,7 +507,7 @@ export function useCharacter(
         for (const block of blocks) {
           section.blocks.push(CharacterFactory.duplicateBlock(block));
         }
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -522,9 +522,9 @@ export function useCharacter(
         draft.pages.splice(
           pageIndex + 1,
           0,
-          CharacterFactory.duplicatePage(pageToDuplicate)
+          CharacterFactory.duplicatePage(pageToDuplicate),
         );
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -537,7 +537,7 @@ export function useCharacter(
       sectionIndex: number;
     },
     dragIndex: number,
-    hoverIndex: number
+    hoverIndex: number,
   ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -558,7 +558,7 @@ export function useCharacter(
 
         section.blocks.splice(dragIndex, 1);
         section.blocks.splice(hoverIndex, 0, dragItem);
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -582,9 +582,9 @@ export function useCharacter(
             indexes.columnIndex
           ].sections[indexes.sectionIndex].blocks,
           indexes.blockIndex,
-          "up"
+          "up",
         );
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -608,9 +608,9 @@ export function useCharacter(
             indexes.columnIndex
           ].sections[indexes.sectionIndex].blocks,
           indexes.blockIndex,
-          "down"
+          "down",
         );
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -638,9 +638,9 @@ export function useCharacter(
         ].sections[indexes.sectionIndex].blocks.splice(
           indexes.blockIndex + 1,
           0,
-          newBlock
+          newBlock,
         );
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -653,7 +653,7 @@ export function useCharacter(
       sectionIndex: number;
       blockIndex: number;
     },
-    block: IBlock
+    block: IBlock,
   ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -665,7 +665,7 @@ export function useCharacter(
             indexes.columnIndex
           ].sections[indexes.sectionIndex];
         section.blocks[indexes.blockIndex] = block;
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -678,7 +678,7 @@ export function useCharacter(
       sectionIndex: number;
       blockIndex: number;
     },
-    meta: any
+    meta: any,
   ) {
     setCharacter(
       produce((draft: ICharacter | undefined) => {
@@ -690,7 +690,7 @@ export function useCharacter(
             indexes.columnIndex
           ].sections[indexes.sectionIndex];
         section.blocks[indexes.blockIndex].meta = meta;
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -722,7 +722,7 @@ export function useCharacter(
             }
           }
         }
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -746,7 +746,7 @@ export function useCharacter(
         section.blocks = section.blocks.filter((field, index) => {
           return index !== indexes.blockIndex;
         });
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -759,7 +759,7 @@ export function useCharacter(
         }
 
         draft.wide = draft.wide == null ? true : !draft.wide;
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -772,7 +772,7 @@ export function useCharacter(
         }
 
         draft.zoom = zoom;
-      })
+      }),
     );
     onChange?.(character!);
   }
@@ -835,7 +835,7 @@ export function useCharacter(
 export function moveValueInList<T>(
   list: Array<T>,
   index: number,
-  direction: "up" | "down"
+  direction: "up" | "down",
 ) {
   if (direction === "up") {
     return moveUp(list, index);

@@ -1,4 +1,4 @@
-import produce from "immer";
+import { produce } from "immer";
 import { CharacterFactory } from "./CharacterFactory";
 import { DefaultTemplates } from "./DefaultTemplates";
 import { ComplexCharacter } from "./mocks/ComplexCharacter";
@@ -655,7 +655,7 @@ describe("CharacterFactory.migrate", () => {
 describe("CharacterFactory.duplicate", () => {
   it("should reset the ids", async () => {
     const defaultCharacter = await CharacterFactory.make(
-      DefaultTemplates.FateCondensed
+      DefaultTemplates.FateCondensed,
     );
 
     const characterWithFakeIds = produce(defaultCharacter, (draft) => {

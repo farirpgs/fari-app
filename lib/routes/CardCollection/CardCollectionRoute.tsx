@@ -7,9 +7,9 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import FormHelperText from "@mui/material/FormHelperText";
 import Grid from "@mui/material/Grid";
-import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import produce from "immer";
+import { useTheme } from "@mui/material/styles";
+import { produce } from "immer";
 import isEqual from "lodash/isEqual";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router";
@@ -59,7 +59,7 @@ function useCardCollection(props: {
           return;
         }
         draft.name = name;
-      })
+      }),
     );
   }
 
@@ -70,7 +70,7 @@ function useCardCollection(props: {
           return;
         }
         draft.indexCards.push(SceneFactory.makeIndexCard());
-      })
+      }),
     );
   }
 
@@ -82,7 +82,7 @@ function useCardCollection(props: {
         }
         const index = draft.indexCards.findIndex((c) => c.id === indexCardId);
         draft.indexCards.splice(index, 1);
-      })
+      }),
     );
   }
 
@@ -95,7 +95,7 @@ function useCardCollection(props: {
         const index = draft.indexCards.findIndex((c) => c.id === indexCard.id);
         const copy = SceneFactory.duplicateIndexCard(indexCard);
         draft.indexCards.splice(index, 0, copy);
-      })
+      }),
     );
   }
 
@@ -106,10 +106,10 @@ function useCardCollection(props: {
           return;
         }
         const index = draft.indexCards.findIndex(
-          (c) => c.id === updatedIndexCard.id
+          (c) => c.id === updatedIndexCard.id,
         );
         draft.indexCards[index] = updatedIndexCard;
-      })
+      }),
     );
   }
 
@@ -134,7 +134,7 @@ function useCardCollection(props: {
 
         draft.indexCards.splice(dragIndex, 1);
         draft.indexCards.splice(hoverIndex, 0, dragItem);
-      })
+      }),
     );
   }
 
@@ -168,13 +168,13 @@ function useCardCollection(props: {
         if (index !== -1) {
           indexCards.splice(index + 1, 0, subCardToMove);
         }
-      })
+      }),
     );
   }
 
   function moveIndexCardTo(
     idOfIndexCardToMove: string,
-    idOfIndexCardToMoveTo: string
+    idOfIndexCardToMoveTo: string,
   ) {
     setCardCollection(
       produce((draft) => {
@@ -212,7 +212,7 @@ function useCardCollection(props: {
             }
           }
         }
-      })
+      }),
     );
   }
 
@@ -269,7 +269,7 @@ function CardCollectionRoute() {
   useEffect(() => {
     const cardToLoad =
       indexCardCollectionsManager.state.indexCardCollections.find(
-        (s) => s.id === params.id
+        (s) => s.id === params.id,
       );
 
     if (cardToLoad) {
@@ -332,7 +332,7 @@ function CardCollectionRoute() {
                   }
                   onClick={() => {
                     indexCardCollectionsManager.actions.upsert(
-                      indexCardCollectionManager.state.cardCollection
+                      indexCardCollectionManager.state.cardCollection,
                     );
                   }}
                 >
@@ -364,11 +364,11 @@ function CardCollectionRoute() {
   function renderIndexCards() {
     const cardsWithSubCards =
       indexCardCollectionManager.state.cardCollection?.indexCards.filter(
-        (card) => card.subCards.length > 0
+        (card) => card.subCards.length > 0,
       );
     const cardsWithoutSubCards =
       indexCardCollectionManager.state.cardCollection?.indexCards.filter(
-        (card) => card.subCards.length === 0
+        (card) => card.subCards.length === 0,
       );
 
     return (
@@ -420,37 +420,37 @@ function CardCollectionRoute() {
                 onRoll={() => {}}
                 onMoveTo={(
                   idOfIndexCardToMove: string,
-                  idOfIndexCardToMoveTo: string
+                  idOfIndexCardToMoveTo: string,
                 ) => {
                   indexCardCollectionManager.actions.moveIndexCardTo(
                     idOfIndexCardToMove,
-                    idOfIndexCardToMoveTo
+                    idOfIndexCardToMoveTo,
                   );
                 }}
                 onMoveOut={(idOfIndexCardToMove) => {
                   indexCardCollectionManager.actions.moveIndexCardOut(
-                    idOfIndexCardToMove
+                    idOfIndexCardToMove,
                   );
                 }}
                 onMove={(dragId, hoverId) => {
                   indexCardCollectionManager.actions.moveIndexCard(
                     dragId,
-                    hoverId
+                    hoverId,
                   );
                 }}
                 onChange={(newIndexCard) => {
                   indexCardCollectionManager.actions.updateIndexCard(
-                    newIndexCard
+                    newIndexCard,
                   );
                 }}
                 onDuplicate={() => {
                   indexCardCollectionManager.actions.duplicateIndexCard(
-                    indexCard
+                    indexCard,
                   );
                 }}
                 onRemove={() => {
                   indexCardCollectionManager.actions.removeIndexCard(
-                    indexCard.id
+                    indexCard.id,
                   );
                 }}
               />

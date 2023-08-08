@@ -1,5 +1,5 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
-import produce from "immer";
+import { produce } from "immer";
 import { useMemo } from "react";
 import { defaultThemeConfiguration } from "../../theme";
 import { whiteVariants } from "../useTextColors/useTextColors";

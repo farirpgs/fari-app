@@ -1,4 +1,4 @@
-import produce from "immer";
+import { produce } from "immer";
 import isEqual from "lodash/isEqual";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useCharacters } from "../../contexts/CharactersContext/CharactersContext";
@@ -80,7 +80,7 @@ export function useScene() {
           return;
         }
         draft.name = name;
-      })
+      }),
     );
   }
 
@@ -91,13 +91,13 @@ export function useScene() {
           return;
         }
         draft.group = newGroup as string | undefined;
-      })
+      }),
     );
   }
 
   function addIndexCard(
     type: IIndexCardType,
-    cardProducer?: (card: IIndexCard) => IIndexCard | void
+    cardProducer?: (card: IIndexCard) => IIndexCard | void,
   ) {
     const defaultCard = SceneFactory.makeIndexCard();
     const newCard = cardProducer
@@ -111,12 +111,12 @@ export function useScene() {
         const cards = draft.indexCards[type];
 
         cards.unshift(newCard);
-      })
+      }),
     );
     setTimeout(() => {
       try {
         const indexCard: HTMLSpanElement | null = document.querySelector(
-          `#index-card-${newCard.id}`
+          `#index-card-${newCard.id}`,
         );
         if (indexCard) {
           indexCard.focus();
@@ -135,7 +135,7 @@ export function useScene() {
         const cards = draft.indexCards[type];
         const index = cards.findIndex((c) => c.id === indexCardId);
         cards.splice(index, 1);
-      })
+      }),
     );
   }
 
@@ -153,7 +153,7 @@ export function useScene() {
         } else {
           cards.unshift(copy);
         }
-      })
+      }),
     );
   }
 
@@ -166,13 +166,13 @@ export function useScene() {
         const cards = draft.indexCards[type];
         const index = cards.findIndex((c) => c.id === updatedIndexCard.id);
         cards[index] = updatedIndexCard;
-      })
+      }),
     );
   }
 
   function toggleIndexCardSection(
     indexCardToMove: IIndexCard,
-    from: IIndexCardType
+    from: IIndexCardType,
   ) {
     setScene(
       produce((draft) => {
@@ -180,19 +180,19 @@ export function useScene() {
           return;
         }
         draft.indexCards[from] = draft.indexCards[from].filter(
-          (i) => i.id !== indexCardToMove.id
+          (i) => i.id !== indexCardToMove.id,
         );
 
         const to: IIndexCardType = from === "public" ? "private" : "public";
         draft.indexCards[to].unshift(indexCardToMove);
-      })
+      }),
     );
   }
 
   function moveIndexCardTo(
     idOfIndexCardToMove: string,
     idOfIndexCardToMoveTo: string,
-    type: IIndexCardType
+    type: IIndexCardType,
   ) {
     setScene(
       produce((draft) => {
@@ -230,7 +230,7 @@ export function useScene() {
             }
           }
         }
-      })
+      }),
     );
   }
 
@@ -264,14 +264,14 @@ export function useScene() {
         if (index !== -1) {
           indexCards.splice(index + 1, 0, subCardToMove);
         }
-      })
+      }),
     );
   }
 
   function moveIndexCard(
     dragId: string,
     hoverId: string,
-    type: IIndexCardType
+    type: IIndexCardType,
   ) {
     setScene(
       produce((draft) => {
@@ -292,7 +292,7 @@ export function useScene() {
           cards.splice(dragIndex, 1);
           cards.splice(hoverIndex, 0, dragItem);
         }
-      })
+      }),
     );
   }
 
@@ -315,7 +315,7 @@ export function useScene() {
             subCard.playedDuringTurn = false;
           });
         });
-      })
+      }),
     );
   }
 
@@ -326,7 +326,7 @@ export function useScene() {
           return;
         }
         draft.notes = notes;
-      })
+      }),
     );
   }
 

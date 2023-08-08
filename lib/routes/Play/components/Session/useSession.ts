@@ -1,7 +1,8 @@
-import produce from "immer";
+import { produce } from "immer";
 import { useEffect, useState } from "react";
 import { Delays } from "../../../../constants/Delays";
 import { useCharacters } from "../../../../contexts/CharactersContext/CharactersContext";
+import { Id } from "../../../../domains/Id/Id";
 import {
   BlockType,
   IBlock,
@@ -10,7 +11,6 @@ import {
 } from "../../../../domains/character/types";
 import { Confetti } from "../../../../domains/confetti/Confetti";
 import { getUnix } from "../../../../domains/dayjs/getDayJS";
-import { Id } from "../../../../domains/Id/Id";
 import { IPlayer, ISession } from "../../../../hooks/useScene/IScene";
 import { IDrawingAreaState } from "../../../Draw/TldrawWriterAndReader";
 import { DefaultPlayerColor, PlayerColors } from "../../consts/PlayerColors";
@@ -37,7 +37,7 @@ export function useSession(props: { userId: string }) {
         bindings: {},
         shapes: {},
       },
-    })
+    }),
   );
   const me = getEveryone(session).find((p) => p.id === props.userId);
 
@@ -52,7 +52,7 @@ export function useSession(props: { userId: string }) {
               return;
             }
             draft.goodConfetti = 0;
-          })
+          }),
         );
       }, Delays.clearSessionConfetti);
     }
@@ -74,7 +74,7 @@ export function useSession(props: { userId: string }) {
               return;
             }
             draft.badConfetti = 0;
-          })
+          }),
         );
       }, Delays.clearSessionConfetti);
     }
@@ -102,7 +102,7 @@ export function useSession(props: { userId: string }) {
             player.points = points;
           }
         });
-      })
+      }),
     );
   }
 
@@ -119,7 +119,7 @@ export function useSession(props: { userId: string }) {
           };
         }
         draft.playerColorIndex++;
-      })
+      }),
     );
   }
 
@@ -130,7 +130,7 @@ export function useSession(props: { userId: string }) {
           return;
         }
         draft.goodConfetti++;
-      })
+      }),
     );
   }
 
@@ -141,7 +141,7 @@ export function useSession(props: { userId: string }) {
           return;
         }
         draft.badConfetti++;
-      })
+      }),
     );
   }
   function pause() {
@@ -151,7 +151,7 @@ export function useSession(props: { userId: string }) {
           return;
         }
         draft.paused = true;
-      })
+      }),
     );
   }
   function unpause() {
@@ -161,7 +161,7 @@ export function useSession(props: { userId: string }) {
           return;
         }
         draft.paused = false;
-      })
+      }),
     );
   }
 
@@ -190,7 +190,7 @@ export function useSession(props: { userId: string }) {
           points: "3",
           color: draft.gm.color,
         });
-      })
+      }),
     );
 
     return id;
@@ -206,7 +206,7 @@ export function useSession(props: { userId: string }) {
           return p.id !== id;
         });
         delete draft.players[id];
-      })
+      }),
     );
   }
 
@@ -222,7 +222,7 @@ export function useSession(props: { userId: string }) {
             p.private = !p.private;
           }
         });
-      })
+      }),
     );
   }
 
@@ -236,7 +236,7 @@ export function useSession(props: { userId: string }) {
         everyone.forEach((p) => {
           p.status = "";
         });
-      })
+      }),
     );
   }
 
@@ -252,7 +252,7 @@ export function useSession(props: { userId: string }) {
             p.status = status;
           }
         });
-      })
+      }),
     );
   }
 
@@ -312,13 +312,13 @@ export function useSessionCharacterSheets(props: {
         charactersManager.actions.updateIfStoredAndMoreRecent(characterSheet);
       });
     },
-    [props.userId, characterSheets]
+    [props.userId, characterSheets],
   );
 
   function updatePlayerCharacter(
     id: string,
     character: ICharacter,
-    loadCharacterHiddenFieldsInPlayer = false
+    loadCharacterHiddenFieldsInPlayer = false,
   ) {
     setCharacterSheets(
       produce((draft) => {
@@ -331,7 +331,7 @@ export function useSessionCharacterSheets(props: {
         if (loadCharacterHiddenFieldsInPlayer) {
           draft[id].playedDuringTurn = character.playedDuringTurn ?? false;
         }
-      })
+      }),
     );
   }
 
@@ -342,7 +342,7 @@ export function useSessionCharacterSheets(props: {
   function updatePlayerCharacterMainPointCounter(
     id: string,
     points: string,
-    maxPoints: string | undefined
+    maxPoints: string | undefined,
   ) {
     setCharacterSheets(
       produce((draft) => {
@@ -372,12 +372,12 @@ export function useSessionCharacterSheets(props: {
             }
           }
         });
-      })
+      }),
     );
   }
 
   function overrideCharacterSheets(
-    newCharacterSheets: Record<string, ICharacter> | undefined
+    newCharacterSheets: Record<string, ICharacter> | undefined,
   ) {
     if (newCharacterSheets) {
       setCharacterSheets(newCharacterSheets);
@@ -392,7 +392,7 @@ export function useSessionCharacterSheets(props: {
         }
 
         delete draft[playerId];
-      })
+      }),
     );
   }
 

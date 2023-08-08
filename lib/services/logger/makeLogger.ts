@@ -1,4 +1,3 @@
-import { Severity } from "@sentry/react";
 import { env } from "../../constants/env";
 import { makeSentryService } from "../sentry/SentryService";
 
@@ -14,7 +13,7 @@ type LoggerContext = {
 };
 
 export function makeLogger(
-  sentryService: ReturnType<typeof makeSentryService>
+  sentryService: ReturnType<typeof makeSentryService>,
 ) {
   return {
     track(event: string, body = {}) {
@@ -36,11 +35,11 @@ export function makeLogger(
       }
     },
     warn(message: string, context?: LoggerContext) {
-      sentryService.log(message, Severity.Warning, context);
+      sentryService.log(message, "warning", context);
       console.warn(message, context);
     },
     error(message: string, context?: LoggerContext) {
-      sentryService.log(message, Severity.Error, context);
+      sentryService.log(message, "error", context);
       console.error(message, context);
     },
     setTag: sentryService.setTag,

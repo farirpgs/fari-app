@@ -1,7 +1,6 @@
-import { useUpdateMyPresence } from "@liveblocks/react";
 import { createContext, useEffect } from "react";
+import { useUpdateMyPresence } from "../../../services/liveblocks/liveblocks.config";
 import { IPlayerCursorRollOutput } from "../types/IPlayerCursorState";
-import { IPlayerPresence } from "../types/IPlayerPresence";
 
 export type ISessionPresenceUpdater = ReturnType<
   typeof useSessionPresenceUpdater
@@ -15,7 +14,7 @@ export function useSessionPresenceUpdater(props: {
   playerName: string | null | undefined;
   characterName: string | null | undefined;
 }) {
-  const updateMyPresence = useUpdateMyPresence<IPlayerPresence>();
+  const updateMyPresence = useUpdateMyPresence();
 
   useEffect(() => {
     updateMyPresence({
@@ -46,7 +45,3 @@ export function useSessionPresenceUpdater(props: {
     },
   };
 }
-
-// export function useSessionPresence(){
-//   return useMyPresence<IPlayerPresence>();
-// }
