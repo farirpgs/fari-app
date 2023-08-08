@@ -13,8 +13,8 @@ export function useTranslate() {
     currentLanguage,
     t: (
       key: ITranslationKeys,
-      options?: UseTranslationOptions & Record<string, string>,
-      noFallback: boolean = false
+      options?: UseTranslationOptions<""> & Record<string, string>,
+      noFallback: boolean = false,
     ): string => {
       const value = t(key, options);
       const englishValue = i18n.t(key, {

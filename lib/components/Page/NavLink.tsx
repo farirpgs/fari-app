@@ -5,9 +5,9 @@ import Collapse from "@mui/material/Collapse";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Popover from "@mui/material/Popover";
-import { useTheme } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useState } from "react";
 import { ReactRouterLink } from "../ReactRouterLink/ReactRouterLink";
@@ -23,7 +23,6 @@ export function NavLink(props: {
   endIcon?: React.ReactNode;
   children: React.ReactNode;
 }) {
-  const theme = useTheme();
   if (props.to) {
     return (
       <Tooltip title={props.tooltip ?? ""}>

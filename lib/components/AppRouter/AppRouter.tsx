@@ -1,7 +1,6 @@
 import { LiveObject } from "@liveblocks/client";
 import React, { useContext } from "react";
 import { Route, Routes, useLocation, useParams } from "react-router-dom";
-import { InjectionsContext } from "../../contexts/InjectionsContext/InjectionsContext";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { StoryBuilderRoute } from "../../routes/StoryBuilder/StoryBuilderRoute";
 import StoryDiceRoute from "../../routes/StoryDice/StoryDiceRoute";
@@ -52,7 +51,6 @@ const initialStorage = {
 export const AppRouter = () => {
   const location = useLocation();
   const settingsManager = useContext(SettingsContext);
-  const injections = useContext(InjectionsContext);
   const userId = settingsManager.state.userId;
 
   return (
@@ -82,7 +80,14 @@ export const AppRouter = () => {
                   <RoomProvider
                     id={sessionId}
                     initialStorage={initialStorage}
-                    initialPresence={{}}
+                    initialPresence={{
+                      rollOutput: null,
+                      characterName: null,
+                      color: null,
+                      cursor: null,
+                      message: null,
+                      playerName: null,
+                    }}
                   >
                     <PlayRoute />
                   </RoomProvider>
@@ -99,7 +104,17 @@ export const AppRouter = () => {
               render={(params: { id: string }) => {
                 const sessionId = params.id || userId;
                 return (
-                  <RoomProvider id={sessionId} initialPresence={{}}>
+                  <RoomProvider
+                    id={sessionId}
+                    initialPresence={{
+                      rollOutput: null,
+                      characterName: null,
+                      color: null,
+                      cursor: null,
+                      message: null,
+                      playerName: null,
+                    }}
+                  >
                     <PlayRoute />
                   </RoomProvider>
                 );
@@ -115,7 +130,17 @@ export const AppRouter = () => {
               render={(params: { id: string }) => {
                 const sessionId = params.id || userId;
                 return (
-                  <RoomProvider id={sessionId} initialPresence={{}}>
+                  <RoomProvider
+                    id={sessionId}
+                    initialPresence={{
+                      rollOutput: null,
+                      characterName: null,
+                      color: null,
+                      cursor: null,
+                      message: null,
+                      playerName: null,
+                    }}
+                  >
                     <JoinAGameRoute />
                   </RoomProvider>
                 );
