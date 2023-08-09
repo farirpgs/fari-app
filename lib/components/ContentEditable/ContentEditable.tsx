@@ -95,10 +95,15 @@ export const ContentEditable: React.FC<
 
   useEffect(
     function shouldUpdateInnerHtml() {
+      console.log("shouldUpdateInnerHtml", {
+        propValue: props.value,
+        currentValue: latestHtml.current,
+        timeout: timeout.current,
+      });
       if ($ref.current) {
         if (!props.value && props.readonly) {
           $ref.current.innerHTML = "&nbsp;";
-        } else if (latestHtml.current !== props.value) {
+        } else if (latestHtml.current !== props.value && !timeout.current) {
           const newHtml = DOMPurify.sanitize(
             props.value,
             DomPurifyOptions.onPropsChangeOptions
@@ -120,12 +125,15 @@ export const ContentEditable: React.FC<
   useEffect(() => {
     return () => {
       clearTimeout(timeout.current);
+      timeout.current = undefined;
     };
   }, []);
 
   function handleOnChange(e: React.FormEvent<HTMLSpanElement>) {
     if ($ref.current) {
+      console.log("handleOnChange");
       clearTimeout(timeout.current);
+      timeout.current = undefined;
       const cleanHTML = DOMPurify.sanitize(
         $ref.current.innerHTML,
         DomPurifyOptions.onInputChangeOptions
@@ -138,6 +146,7 @@ export const ContentEditable: React.FC<
         timeout.current = setTimeout(() => {
           latestHtml.current = cleanHTML;
           latestProps.current.onChange?.(cleanHTML, e);
+          timeout.current = undefined;
         }, Delays.contentEditable);
       }
     }

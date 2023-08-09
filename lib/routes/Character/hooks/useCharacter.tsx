@@ -3,6 +3,7 @@ import isEqual from "lodash/isEqual";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { previewContentEditable } from "../../../components/ContentEditable/ContentEditable";
 import { SettingsContext } from "../../../contexts/SettingsContext/SettingsContext";
+import { Id } from "../../../domains/Id/Id";
 import { CharacterFactory } from "../../../domains/character/CharacterFactory";
 import { ICharacterTemplate } from "../../../domains/character/CharacterType";
 import {
@@ -13,7 +14,6 @@ import {
   IPage,
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
-import { Id } from "../../../domains/Id/Id";
 
 export function useCharacter(
   characterFromProps?: ICharacter | undefined,
