@@ -33,7 +33,7 @@ type IPreviewContentEditableOptions = {
 };
 
 export function previewContentEditable(
-  options: IPreviewContentEditableOptions
+  options: IPreviewContentEditableOptions,
 ) {
   if (!options.value) {
     return "";
@@ -95,20 +95,25 @@ export const ContentEditable: React.FC<
 
   useEffect(
     function shouldUpdateInnerHtml() {
+      console.log("shouldUpdateInnerHtml", {
+        propValue: props.value,
+        currentValue: latestHtml.current,
+        timeout: timeout.current,
+      });
       if ($ref.current) {
         if (!props.value && props.readonly) {
           $ref.current.innerHTML = "&nbsp;";
-        } else if (latestHtml.current !== props.value) {
+        } else if (latestHtml.current !== props.value && !timeout.current) {
           const newHtml = DOMPurify.sanitize(
             props.value,
-            DomPurifyOptions.onPropsChangeOptions
+            DomPurifyOptions.onPropsChangeOptions,
           ) as string;
           latestHtml.current = newHtml;
           $ref.current.innerHTML = newHtml;
         }
       }
     },
-    [props.value, props.readonly]
+    [props.value, props.readonly],
   );
 
   useEffect(function focusOnLoad() {
@@ -120,15 +125,18 @@ export const ContentEditable: React.FC<
   useEffect(() => {
     return () => {
       clearTimeout(timeout.current);
+      timeout.current = undefined;
     };
   }, []);
 
   function handleOnChange(e: React.FormEvent<HTMLSpanElement>) {
     if ($ref.current) {
+      console.log("handleOnChange");
       clearTimeout(timeout.current);
+      timeout.current = undefined;
       const cleanHTML = DOMPurify.sanitize(
         $ref.current.innerHTML,
-        DomPurifyOptions.onInputChangeOptions
+        DomPurifyOptions.onInputChangeOptions,
       ) as string;
 
       if (props.noDelay) {
@@ -138,6 +146,7 @@ export const ContentEditable: React.FC<
         timeout.current = setTimeout(() => {
           latestHtml.current = cleanHTML;
           latestProps.current.onChange?.(cleanHTML, e);
+          timeout.current = undefined;
         }, Delays.contentEditable);
       }
     }
