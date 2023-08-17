@@ -1,5 +1,4 @@
-import Box, { BoxProps } from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
+import { Box, BoxProps, useTheme } from "@mui/material";
 import DOMPurify, { Config } from "dompurify";
 import lowerCase from "lodash/lowerCase";
 import startCase from "lodash/startCase";

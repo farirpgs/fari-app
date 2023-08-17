@@ -1,5 +1,4 @@
-import { BoxProps } from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { BoxProps, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import { MiniThemeContext } from "../MiniThemeContext";
 

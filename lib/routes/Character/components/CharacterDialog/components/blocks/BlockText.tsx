@@ -1,8 +1,4 @@
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import { useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
+import { Box, Grid, Link, Typography, useTheme } from "@mui/material";
 import React, { useContext } from "react";
 import {
   ContentEditable,
@@ -24,7 +20,7 @@ export const BlockText = React.memo(function (
     advanced: boolean;
     readonly: boolean | undefined;
     dataCy?: string;
-  } & IBlockHandlers<ITextBlock>
+  } & IBlockHandlers<ITextBlock>,
 ) {
   const isSlotTrackerVisible =
     props.checked === true || props.checked === false;
@@ -143,7 +139,7 @@ export const BlockTextActions = React.memo(
       value: string | undefined;
       label: string | undefined;
       checked: boolean | undefined;
-    } & IBlockHandlers<ITextBlock>
+    } & IBlockHandlers<ITextBlock>,
   ) => {
     const theme = useTheme();
     const { t } = useTranslate();
@@ -222,6 +218,6 @@ export const BlockTextActions = React.memo(
         </Grid>
       </>
     );
-  }
+  },
 );
 BlockTextActions.displayName = "BlockTextActions";

@@ -1,5 +1,4 @@
-import Box from "@mui/material/Box";
-import FormHelperText from "@mui/material/FormHelperText";
+import { Box, FormHelperText } from "@mui/material";
 import React, { useContext } from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { IInfoTextBlock } from "../../../../../../domains/character/types";
@@ -14,7 +13,7 @@ export const BlockInfoText = React.memo(
       advanced: boolean;
       readonly: boolean | undefined;
       dataCy?: string;
-    } & IBlockHandlers<IInfoTextBlock>
+    } & IBlockHandlers<IInfoTextBlock>,
   ) => {
     const miniTheme = useContext(MiniThemeContext);
 
@@ -45,6 +44,6 @@ export const BlockInfoText = React.memo(
         </Box>
       </>
     );
-  }
+  },
 );
 BlockInfoText.displayName = "BlockInfoText";

@@ -1,5 +1,4 @@
-import Alert from "@mui/material/Alert";
-import Snackbar from "@mui/material/Snackbar";
+import { Alert, Snackbar } from "@mui/material";
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";

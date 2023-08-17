@@ -1,9 +1,6 @@
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
-import { BoxProps } from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
+import { BoxProps, Paper, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
 
 export function TabbedScreen(props: {

@@ -1,12 +1,14 @@
 import IsoIcon from "@mui/icons-material/Iso";
-import Box from "@mui/material/Box";
-import Chip from "@mui/material/Chip";
-import Grid from "@mui/material/Grid";
-import Grow from "@mui/material/Grow";
-import Stack from "@mui/material/Stack";
-import { useTheme } from "@mui/material/styles";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
+import {
+  Box,
+  Chip,
+  Grid,
+  Grow,
+  Stack,
+  Tooltip,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
   CommandResult,
@@ -23,14 +25,14 @@ export function DiceResult(props: {
 }) {
   const allResults = props.poolResults.flatMap((e) => e.commandResults);
   const areAllSelectedValuesNumbers = allResults.every((result) =>
-    result.value.match(/^-?\d+$/)
+    result.value.match(/^-?\d+$/),
   );
 
   const [selectedCommandResultIds, setSelectedCommandResultIds] = useState<
     Array<string>
   >([]);
   const selectedCommandResults = allResults.filter((r) =>
-    selectedCommandResultIds.includes(r.id)
+    selectedCommandResultIds.includes(r.id),
   );
   const resultsForDetails =
     selectedCommandResults.length > 0 ? selectedCommandResults : allResults;
@@ -40,7 +42,7 @@ export function DiceResult(props: {
   const handleDiceResultClick = useEvent((id: string) => {
     if (selectedCommandResultIds.includes(id)) {
       setSelectedCommandResultIds(
-        selectedCommandResultIds.filter((e) => e !== id)
+        selectedCommandResultIds.filter((e) => e !== id),
       );
     } else {
       setSelectedCommandResultIds([...selectedCommandResultIds, id]);
@@ -111,7 +113,7 @@ export function DiceResult(props: {
                     {poolResult.commandResults.map((commandResult) => {
                       const options = DiceCommandOptions[commandResult.command];
                       const selected = selectedCommandResultIds.includes(
-                        commandResult.id
+                        commandResult.id,
                       );
                       return (
                         <Grid item key={commandResult.id}>
@@ -159,7 +161,7 @@ export function DiceResult(props: {
     const modifiersTotal = props.poolResults.reduce(
       (acc, poolResult) =>
         acc + (poolResult.modifier ? poolResult.modifier : 0),
-      0
+      0,
     );
 
     const total = CommandResult.getTotal(resultsForDetails);

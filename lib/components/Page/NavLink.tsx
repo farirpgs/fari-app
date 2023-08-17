@@ -1,14 +1,16 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Collapse from "@mui/material/Collapse";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Popover from "@mui/material/Popover";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import {
+  Box,
+  Button,
+  Collapse,
+  Grid,
+  Paper,
+  Popover,
+  Tooltip,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React, { useState } from "react";
 import { ReactRouterLink } from "../ReactRouterLink/ReactRouterLink";
 

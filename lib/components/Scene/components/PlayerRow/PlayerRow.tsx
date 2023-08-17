@@ -3,19 +3,21 @@ import CircleIcon from "@mui/icons-material/Circle";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material";
 
-import Autocomplete from "@mui/material/Autocomplete";
-import FormLabel from "@mui/material/FormLabel";
-import Grid from "@mui/material/Grid";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import { useTheme } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
+import {
+  Autocomplete,
+  FormLabel,
+  Grid,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import React from "react";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { IDataCyProps } from "../../../../domains/cypress/types/IDataCyProps";
@@ -52,7 +54,7 @@ export function PlayerRow(
     onTogglePrivate(): void;
     onPlayerRemove(): void;
     onAssignCharacterSheet(): void;
-  } & IDataCyProps
+  } & IDataCyProps,
 ) {
   const { t } = useTranslate();
   const logger = useLogger();
@@ -180,7 +182,7 @@ export function PlayerRow(
                   data-cy={`${props["dataCy"]}.remove`}
                   onClick={() => {
                     const confirmed = confirm(
-                      t("player-row.remove-player-confirmation")
+                      t("player-row.remove-player-confirmation"),
                     );
                     if (confirmed) {
                       props.onPlayerRemove();
@@ -259,7 +261,7 @@ function PlayerRowContainer(
   props: {
     children: React.ReactNode;
     isChild?: boolean;
-  } & IDataCyProps
+  } & IDataCyProps,
 ) {
   const theme = useTheme();
 
@@ -381,5 +383,5 @@ const PlayerRowName = React.memo(
         </Typography>
       );
     }
-  }
+  },
 );

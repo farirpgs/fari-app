@@ -1,5 +1,4 @@
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
+import { Box, Paper } from "@mui/material";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React, { useState } from "react";

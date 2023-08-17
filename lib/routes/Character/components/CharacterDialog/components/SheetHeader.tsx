@@ -1,7 +1,4 @@
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import { useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
+import { Box, Grid, Typography, useTheme } from "@mui/material";
 import React, { useContext } from "react";
 import { ContentEditable } from "../../../../../components/ContentEditable/ContentEditable";
 import { MiniThemeContext } from "../MiniThemeContext";

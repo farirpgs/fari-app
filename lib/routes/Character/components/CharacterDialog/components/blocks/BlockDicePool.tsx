@@ -2,20 +2,26 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import FastForwardIcon from "@mui/icons-material/FastForward";
 import FastRewindIcon from "@mui/icons-material/FastRewind";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import Badge from "@mui/material/Badge";
-import Box, { BoxProps } from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
-import Collapse from "@mui/material/Collapse";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import Link from "@mui/material/Link";
-import { darken, lighten, useTheme } from "@mui/material/styles";
-import Tooltip from "@mui/material/Tooltip";
+import {
+  Badge,
+  Box,
+  BoxProps,
+  ButtonBase,
+  Collapse,
+  Grid,
+  IconButton,
+  Link,
+  Tooltip,
+  darken,
+  lighten,
+  useTheme,
+} from "@mui/material";
 import isEqual from "lodash/isEqual";
 import { default as React, useContext, useEffect, useState } from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { Delays } from "../../../../../../constants/Delays";
 import { DiceContext } from "../../../../../../contexts/DiceContext/DiceContext";
+import { Icons } from "../../../../../../domains/Icons/Icons";
 import {
   BlockType,
   IDicePoolBlock,
@@ -27,7 +33,6 @@ import {
   IDiceCommandId,
   IDicePoolResult,
 } from "../../../../../../domains/dice/Dice";
-import { Icons } from "../../../../../../domains/Icons/Icons";
 import { useEvent } from "../../../../../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { BlockSelectors } from "../../domains/BlockSelectors/BlockSelectors";
@@ -60,7 +65,7 @@ export const BlockDicePool = React.memo(
       dataCy?: string;
       mid?: React.ReactNode;
       onRoll(diceRollResult: IDicePoolResult): void;
-    } & IBlockHandlers<IDicePoolBlock | ISkillBlock>
+    } & IBlockHandlers<IDicePoolBlock | ISkillBlock>,
   ) => {
     const { t } = useTranslate();
     const theme = useTheme();
@@ -70,17 +75,20 @@ export const BlockDicePool = React.memo(
     const hasCommands = !!props.commands?.length;
     const canRoll = !props.readonly;
     const isSelected = diceManager.state.blockWithPools.some(
-      (p) => p.blockId === props.blockId
+      (p) => p.blockId === props.blockId,
     );
     const isToggleVisible = props.checked === true || props.checked === false;
 
     const commands = props.commands || [];
-    const commandsCount = commands.reduce((acc, curr) => {
-      return {
-        ...acc,
-        [curr]: acc[curr] ? acc[curr] + 1 : 1,
-      };
-    }, {} as Record<IDiceCommandId, number>);
+    const commandsCount = commands.reduce(
+      (acc, curr) => {
+        return {
+          ...acc,
+          [curr]: acc[curr] ? acc[curr] + 1 : 1,
+        };
+      },
+      {} as Record<IDiceCommandId, number>,
+    );
 
     const firstCommand = commands[0];
     const isAllTheSameCommand =
@@ -137,7 +145,7 @@ export const BlockDicePool = React.memo(
         const currentDieSize = DiceCommandRange.indexOf(c);
         const newDieSizeIndex = Math.min(
           DiceCommandRange.length - 1,
-          currentDieSize + 1
+          currentDieSize + 1,
         );
         return DiceCommandRange[newDieSizeIndex];
       });
@@ -431,7 +439,7 @@ export const BlockDicePool = React.memo(
                       "& .MuiBadge-badge": {
                         background: theme.palette.text.primary,
                         color: theme.palette.getContrastText(
-                          theme.palette.text.primary
+                          theme.palette.text.primary,
                         ),
                       },
                     }}
@@ -450,7 +458,7 @@ export const BlockDicePool = React.memo(
         </Pool>
       );
     }
-  }
+  },
 );
 
 BlockDicePool.displayName = "BlockDicePool";
@@ -461,7 +469,7 @@ export const BlockDicePoolActions = React.memo(
       value: string | undefined;
       label: string | undefined;
       checked: boolean | undefined;
-    } & IBlockHandlers<IDicePoolBlock>
+    } & IBlockHandlers<IDicePoolBlock>,
   ) => {
     const { t } = useTranslate();
     const theme = useTheme();
@@ -495,7 +503,7 @@ export const BlockDicePoolActions = React.memo(
   },
   (prev, next) => {
     return isEqual(prev, next);
-  }
+  },
 );
 
 BlockDicePoolActions.displayName = "BlockDicePoolActions";
@@ -548,7 +556,7 @@ export const Pool: React.FC<
             selected || !props.clickable ? theme.shadows[0] : theme.shadows[1],
           "transition": theme.transitions.create(
             ["color", "background", "border", "borderWidth", "boxShadow"],
-            { duration: theme.transitions.duration.shorter }
+            { duration: theme.transitions.duration.shorter },
           ),
           "borderRadius": borderRadius ?? "24px",
           "display": "flex",

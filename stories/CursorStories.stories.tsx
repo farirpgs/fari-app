@@ -1,4 +1,4 @@
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material";
 import { Meta, Story } from "@storybook/react";
 import React from "react";
 import { ArgumentsType } from "vitest";
@@ -10,7 +10,7 @@ function StorybookCursorWithMessage(
   props: Pick<
     ArgumentsType<typeof CursorWithMessage>[0],
     "color" | "label" | "message" | "rollOutput" | "readonly"
-  >
+  >,
 ) {
   return (
     <>

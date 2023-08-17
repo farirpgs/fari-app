@@ -1,4 +1,4 @@
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React from "react";
@@ -14,7 +14,7 @@ function StorybookCharacterSheet(
   props: Pick<
     Parameters<typeof CharacterV3Dialog>["0"],
     "character" | "dialog" | "readonly"
-  >
+  >,
 ) {
   return (
     <>
@@ -95,7 +95,7 @@ function makeCharacterSheetStory(template: ICharacterTemplate) {
   return story;
 
   function overrideCharacterDateForStorybook(
-    character: ICharacter
+    character: ICharacter,
   ): ICharacter {
     return {
       ...character,

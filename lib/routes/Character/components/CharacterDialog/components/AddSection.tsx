@@ -1,5 +1,4 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import { Box, Button } from "@mui/material";
 import React from "react";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 

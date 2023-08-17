@@ -1,6 +1,6 @@
 import CircleIcon from "@mui/icons-material/Circle";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
-import Checkbox from "@mui/material/Checkbox";
+import { Checkbox } from "@mui/material";
 import React from "react";
 import {
   IBlock,
@@ -12,7 +12,7 @@ import {
 
 export function BlockToggleMeta<
   TBlock extends IBlock &
-    (ITextBlock | INumericBlock | ISkillBlock | IDicePoolBlock)
+    (ITextBlock | INumericBlock | ISkillBlock | IDicePoolBlock),
 >(props: {
   readonly: boolean | undefined;
   dataCy: string | undefined;

@@ -1,11 +1,13 @@
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import RemoveCircleOutlineOutlinedIcon from "@mui/icons-material/RemoveCircleOutlineOutlined";
-import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
-import Fade from "@mui/material/Fade";
-import IconButton from "@mui/material/IconButton";
-import { useTheme } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
+import {
+  Box,
+  ButtonBase,
+  Fade,
+  IconButton,
+  TextField,
+  useTheme,
+} from "@mui/material";
 import React, { useContext, useState } from "react";
 import { ConditionalWrapper } from "../../../../../components/ConditionalWrapper/ConditionalWrapper";
 import { Delays } from "../../../../../constants/Delays";
@@ -25,7 +27,7 @@ export function CircleTextField(
     onDecrement?(): void;
     onClick?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
     onContextMenu?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
-  } & IDataCyProps
+  } & IDataCyProps,
 ) {
   const miniTheme = useContext(MiniThemeContext);
 

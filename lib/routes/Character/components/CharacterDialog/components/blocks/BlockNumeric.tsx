@@ -1,7 +1,4 @@
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import { useTheme } from "@mui/material/styles";
+import { Box, Grid, Link, useTheme } from "@mui/material";
 import React from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { INumericBlock } from "../../../../../../domains/character/types";
@@ -21,7 +18,7 @@ export const BlockNumeric = React.memo(
       advanced: boolean;
       readonly: boolean | undefined;
       dataCy?: string;
-    } & IBlockHandlers<INumericBlock>
+    } & IBlockHandlers<INumericBlock>,
   ) => {
     const isSlotTrackerVisible =
       props.checked === true || props.checked === false;
@@ -69,7 +66,7 @@ export const BlockNumeric = React.memo(
         </Box>
       </>
     );
-  }
+  },
 );
 
 export const BlockNumericActions = React.memo(
@@ -78,7 +75,7 @@ export const BlockNumericActions = React.memo(
       value: string | undefined;
       label: string | undefined;
       checked: boolean | undefined;
-    } & IBlockHandlers<INumericBlock>
+    } & IBlockHandlers<INumericBlock>,
   ) => {
     const theme = useTheme();
     const { t } = useTranslate();
@@ -109,5 +106,5 @@ export const BlockNumericActions = React.memo(
         </Grid>
       </>
     );
-  }
+  },
 );

@@ -1,5 +1,4 @@
-import Box, { BoxProps } from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box, BoxProps, Typography } from "@mui/material";
 import React from "react";
 import { FateLabel } from "../FateLabel/FateLabel";
 

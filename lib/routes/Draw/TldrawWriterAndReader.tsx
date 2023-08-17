@@ -1,7 +1,5 @@
 import { LiveMap } from "@liveblocks/client";
-import { useTheme } from "@mui/material";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box, Typography, useTheme } from "@mui/material";
 import type { TDBinding, TDShape, TldrawApp } from "@tldraw/tldraw";
 import { Tldraw, TldrawProps } from "@tldraw/tldraw";
 import React, { useEffect } from "react";

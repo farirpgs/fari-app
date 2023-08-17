@@ -1,8 +1,4 @@
-import {
-  createTheme,
-  responsiveFontSizes,
-  ThemeOptions,
-} from "@mui/material/styles";
+import { createTheme, responsiveFontSizes, ThemeOptions } from "@mui/material";
 import { FontFamily } from "./constants/FontFamily";
 
 export const defaultThemeConfiguration: ThemeOptions = {
@@ -75,7 +71,7 @@ export const AppLightTheme = responsiveFontSizes(
         main: "#415f9c",
       },
     },
-  })
+  }),
 );
 
 export const AppDarkTheme = responsiveFontSizes(
@@ -94,5 +90,5 @@ export const AppDarkTheme = responsiveFontSizes(
         main: "#90caf9",
       },
     },
-  })
+  }),
 );

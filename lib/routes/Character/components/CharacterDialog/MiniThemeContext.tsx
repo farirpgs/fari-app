@@ -5,7 +5,7 @@ import {
   responsiveFontSizes,
   Theme,
   useTheme,
-} from "@mui/material/styles";
+} from "@mui/material";
 import { produce } from "immer";
 import { createContext, useMemo } from "react";
 import { FontFamily } from "../../../../constants/FontFamily";

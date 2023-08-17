@@ -1,9 +1,8 @@
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
+import { Box, Paper } from "@mui/material";
 import { Meta, Story } from "@storybook/react";
 import { default as React } from "react";
-import { useDecks } from "../lib/routes/StoryBuilder/hooks/useDecks";
 import { StoryDecks } from "../lib/routes/StoryBuilder/StoryBuilderRoute";
+import { useDecks } from "../lib/routes/StoryBuilder/hooks/useDecks";
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookStoryDeck(props: {}) {

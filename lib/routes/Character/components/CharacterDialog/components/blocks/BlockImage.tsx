@@ -1,14 +1,16 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Grid from "@mui/material/Grid";
-import { useTheme } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Grid,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import React, { useState } from "react";
 import {
   ContentEditable,
@@ -28,7 +30,7 @@ export const BlockImage = React.memo(
       advanced: boolean;
       readonly: boolean | undefined;
       dataCy?: string;
-    } & IBlockHandlers<IImageBlock>
+    } & IBlockHandlers<IImageBlock>,
   ) => {
     const { t } = useTranslate();
     const theme = useTheme();
@@ -41,7 +43,7 @@ export const BlockImage = React.memo(
       (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         setError(false);
         props.onValueChange(event.target.value);
-      }
+      },
     );
 
     const handleLabelChange = useEvent((value) => {
@@ -108,7 +110,7 @@ export const BlockImage = React.memo(
                       value={props.value}
                       onChange={handleValueChange}
                       label={t(
-                        "character-dialog.image-block.dialog.image-url-label"
+                        "character-dialog.image-block.dialog.image-url-label",
                       )}
                       fullWidth
                       variant="standard"
@@ -213,6 +215,6 @@ export const BlockImage = React.memo(
         </Box>
       );
     }
-  }
+  },
 );
 BlockImage.displayName = "BlockImage";

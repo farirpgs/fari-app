@@ -6,24 +6,27 @@ import PanToolIcon from "@mui/icons-material/PanTool";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Fade from "@mui/material/Fade";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import Snackbar from "@mui/material/Snackbar";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
-import { darken, useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Fade,
+  Grid,
+  IconButton,
+  Snackbar,
+  Tab,
+  Tabs,
+  Tooltip,
+  Typography,
+  darken,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Page } from "../../../../components/Page/Page";
 import { Scene } from "../../../../components/Scene/Scene";

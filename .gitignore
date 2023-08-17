@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/node
 # Edit at https://www.gitignore.io/?templates=node
 
@@ -116,3 +115,6 @@ dist-ssr
 
 # @11ty/eleventy
 _site
+
+# storybook
+storybook-static

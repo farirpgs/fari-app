@@ -16,25 +16,29 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import StorageIcon from "@mui/icons-material/Storage";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import TranslateIcon from "@mui/icons-material/Translate";
-import AppBar from "@mui/material/AppBar";
-import Box, { BoxProps } from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import Drawer from "@mui/material/Drawer";
-import Fade from "@mui/material/Fade";
-import Grid from "@mui/material/Grid";
-import Hidden from "@mui/material/Hidden";
-import IconButton from "@mui/material/IconButton";
-import Link from "@mui/material/Link";
-import Select from "@mui/material/Select";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import {
+  AppBar,
+  Box,
+  BoxProps,
+  Button,
+  Container,
+  Drawer,
+  Fade,
+  Grid,
+  Hidden,
+  IconButton,
+  Link,
+  Select,
+  ThemeProvider,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { env } from "../../constants/env";
 import { Images } from "../../constants/Images";
+import { env } from "../../constants/env";
 import { useZIndex } from "../../constants/zIndex";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";

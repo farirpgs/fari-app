@@ -1,4 +1,4 @@
-import { alpha, useTheme } from "@mui/material/styles";
+import { alpha, useTheme } from "@mui/material";
 import { useMemo } from "react";
 
 export const whiteVariants = ["#fff", "#ffffff", "#FFF", "#FFFFFF", "white"];
@@ -9,7 +9,7 @@ export function useTextColors(backgroundColor: string) {
   const textColors = useMemo(() => {
     const color = theme.palette.getContrastText(backgroundColor);
     const isContrastWhite = whiteVariants.some(
-      (whiteVariant) => whiteVariant === color
+      (whiteVariant) => whiteVariant === color,
     );
 
     if (isContrastWhite) {

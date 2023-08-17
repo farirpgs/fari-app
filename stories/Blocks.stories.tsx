@@ -1,16 +1,14 @@
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import { useTheme } from "@mui/material/styles";
+import { Box, Paper, useTheme } from "@mui/material";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React from "react";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
 import { BlockType, IBlock } from "../lib/domains/character/types";
-import { BlockByType } from "../lib/routes/Character/components/CharacterDialog/components/BlockByType";
 import {
   MiniThemeContext,
   useMiniTheme,
 } from "../lib/routes/Character/components/CharacterDialog/MiniThemeContext";
+import { BlockByType } from "../lib/routes/Character/components/CharacterDialog/components/BlockByType";
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookBlock(props: {
@@ -436,7 +434,7 @@ function makeNormalArgs(type: BlockType, blockOverride: Partial<IBlock> = {}) {
 }
 function makeAdvancedArgs(
   type: BlockType,
-  blockOverride: Partial<IBlock> = {}
+  blockOverride: Partial<IBlock> = {},
 ) {
   return {
     block: { ...CharacterFactory.makeBlock(type), ...blockOverride } as IBlock,
@@ -446,7 +444,7 @@ function makeAdvancedArgs(
 }
 function makeReadonlyArgs(
   type: BlockType,
-  blockOverride: Partial<IBlock> = {}
+  blockOverride: Partial<IBlock> = {},
 ) {
   return {
     block: { ...CharacterFactory.makeBlock(type), ...blockOverride } as IBlock,

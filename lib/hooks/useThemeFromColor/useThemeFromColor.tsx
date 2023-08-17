@@ -1,4 +1,4 @@
-import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material";
 import { produce } from "immer";
 import { useMemo } from "react";
 import { defaultThemeConfiguration } from "../../theme";

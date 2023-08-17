@@ -1,10 +1,13 @@
-import Box, { BoxProps } from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import ButtonBase from "@mui/material/ButtonBase";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import { useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
+import {
+  Box,
+  BoxProps,
+  Button,
+  ButtonBase,
+  Container,
+  Grid,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
@@ -54,7 +57,7 @@ export function StoryDice() {
   function handleRoll(diceName: string, sideName: string) {
     const icons = (StoryDiceIcons as any)[diceName];
     const possibleIconNames = Object.keys(icons).filter(
-      (iconName) => iconName !== sideName
+      (iconName) => iconName !== sideName,
     );
     const index = Math.trunc(Math.random() * possibleIconNames.length);
 
@@ -143,7 +146,7 @@ export function StoryDie(props: {
         clearTimeout(timeout);
       };
     },
-    [props.diceName, props.sideName]
+    [props.diceName, props.sideName],
   );
 
   useEffect(() => {

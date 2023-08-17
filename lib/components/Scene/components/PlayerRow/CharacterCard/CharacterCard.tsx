@@ -1,11 +1,6 @@
 import LaunchIcon from "@mui/icons-material/Launch";
 import SaveIcon from "@mui/icons-material/Save";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import Paper from "@mui/material/Paper";
-import { useTheme } from "@mui/material/styles";
-import Tooltip from "@mui/material/Tooltip";
+import { Box, Grid, IconButton, Paper, Tooltip, useTheme } from "@mui/material";
 import React from "react";
 import { useLogger } from "../../../../../contexts/InjectionsContext/hooks/useLogger";
 import { ICharacter } from "../../../../../domains/character/types";
@@ -94,7 +89,7 @@ export const CharacterCard: React.FC<{
                             onClick={() => {
                               handleSave();
                               logger.track(
-                                "session.save_character_sheet_from_card"
+                                "session.save_character_sheet_from_card",
                               );
                             }}
                           >
@@ -124,7 +119,7 @@ export const CharacterCard: React.FC<{
                             onClick={() => {
                               props.onCharacterDialogOpen?.();
                               logger.track(
-                                "session.open_character_sheet_from_card"
+                                "session.open_character_sheet_from_card",
                               );
                             }}
                           >
@@ -197,7 +192,7 @@ export const CharacterCard: React.FC<{
                                           sectionIndex: sectionIndex,
                                           blockIndex: blockIndex,
                                         },
-                                        newBlock
+                                        newBlock,
                                       );
                                     }}
                                     onRoll={(diceRollResult) => {

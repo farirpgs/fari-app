@@ -19,38 +19,43 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import Alert from "@mui/material/Alert";
-import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
-import Collapse from "@mui/material/Collapse";
-import Container from "@mui/material/Container";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import Drawer from "@mui/material/Drawer";
-import FormControl from "@mui/material/FormControl";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
-import FormHelperText from "@mui/material/FormHelperText";
-import Grid, { GridSize } from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import InputLabel from "@mui/material/InputLabel";
-import NativeSelect from "@mui/material/NativeSelect";
-import Slider from "@mui/material/Slider";
-import Snackbar from "@mui/material/Snackbar";
-import Switch from "@mui/material/Switch";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
-import TextField from "@mui/material/TextField";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Alert,
+  Autocomplete,
+  Box,
+  Button,
+  Checkbox,
+  Collapse,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Drawer,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormHelperText,
+  Grid,
+  GridSize,
+  IconButton,
+  InputLabel,
+  NativeSelect,
+  Slider,
+  Snackbar,
+  Switch,
+  Tab,
+  Tabs,
+  TextField,
+  ThemeProvider,
+  Tooltip,
+  Typography,
+  createFilterOptions,
+  useTheme,
+} from "@mui/material";
 import { BoxProps } from "@mui/system";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";

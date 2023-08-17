@@ -1,16 +1,18 @@
 import LoadingButton from "@mui/lab/LoadingButton";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
-import Container from "@mui/material/Container";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Fade from "@mui/material/Fade";
-import FormHelperText from "@mui/material/FormHelperText";
-import Link from "@mui/material/Link";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Fade,
+  FormHelperText,
+  Link,
+} from "@mui/material";
 import kebabCase from "lodash/kebabCase";
 import startCase from "lodash/startCase";
 import React, { useContext, useEffect, useState } from "react";
@@ -30,7 +32,7 @@ export function NewCharacterRoute() {
   const charactersManager = useContext(CharactersContext);
   const navigate = useNavigate();
   const [status, setStatus] = useState<"loading" | "success" | "error">(
-    "loading"
+    "loading",
   );
   const [template, setTemplate] = useState<ICharacterTemplate>();
   const params = useParams<{
@@ -69,7 +71,7 @@ export function NewCharacterRoute() {
   async function handleLoadTemplate() {
     setLoadingTemplate(true);
     const newCharacter = await charactersManager.actions.add(
-      template as ICharacterTemplate
+      template as ICharacterTemplate,
     );
     navigate(`/characters/${newCharacter.id}`);
   }
