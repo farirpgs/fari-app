@@ -372,11 +372,16 @@ export const BlockDicePool = React.memo(
           position="relative"
           clickable={canRoll}
           tooltipTitle={
-            canRoll ? t("character-dialog.helper-text.pool") : undefined
+            canRoll && hasCommands
+              ? t("character-dialog.helper-text.pool")
+              : undefined
           }
           borderStyle={hasCommands ? "solid" : "dashed"}
           onContextMenu={(e) => {
             e.preventDefault();
+            if (!canRoll || !hasCommands) {
+              return;
+            }
             const pool = BlockSelectors.getPoolFromBlock({
               commands: props.commands,
               label: props.label,
@@ -393,7 +398,7 @@ export const BlockDicePool = React.memo(
             });
           }}
           onClick={() => {
-            if (!canRoll) {
+            if (!canRoll || !hasCommands) {
               return;
             }
             const rollGroup = BlockSelectors.getPoolFromBlock({
