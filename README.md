@@ -49,7 +49,7 @@ Once the dependencies are installed, Fari will also build some of it's static co
 If you want to run Fari on your machine, simply run:
 
 ```sh
-npm run start
+npm run run dev
 ```
 
 This will start and bundle the app using [ViteJS](https://vitejs.dev/) and make it available on http://localhost:1234

@@ -46,6 +46,7 @@ const initialStorage = {
   scene: new LiveObject(),
   characters: new LiveObject(),
   session: new LiveObject(),
+  chat: new LiveObject(),
 };
 
 export const AppRouter = () => {
