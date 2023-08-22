@@ -69,7 +69,7 @@
     "react-i18next": "^11.16.9",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
-    "uuid": "^8.3.2"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.5.4",
@@ -85,7 +85,7 @@
     "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-color": "^3.0.6",
     "@types/react-dom": "^18.0.4",
-    "@types/uuid": "^8.3.4",
+    "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
     "@vitejs/plugin-legacy": "^3.0.1",
