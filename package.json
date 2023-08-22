@@ -13,6 +13,7 @@
     "dev": "vite --open",
     "start": "vite build --sourcemap inline --minify false && vite preview --port 1234",
     "build": "vite build",
+    "serve:build": "vite preview --port 1234",
     "i18n": "node -r esm i18n.js",
     "preview": "npm run build && npm run deploy:preview",
     "alpha": "npm run build && npm run deploy:preview -- --alias alpha",
