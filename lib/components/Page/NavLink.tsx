@@ -137,6 +137,7 @@ export function NavLinkCategory(props: {
             <Paper elevation={2}>
               <Box p="1rem">
                 <Box>{renderSubNav()}</Box>
+                <Box>{props.children}</Box>
               </Box>
             </Paper>
           </Box>
