@@ -11,13 +11,16 @@ jobs:
   chromatic-deployment:
     # Operating System
     runs-on: ubuntu-latest
+    env:
+      # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources
+      NODE_OPTIONS: --max-old-space-size=6144
     # Job steps
     steps:
       # Checkout
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0 # 
+          fetch-depth: 0 #
       # Use Node
       - name: Use Node
         uses: actions/setup-node@v2
