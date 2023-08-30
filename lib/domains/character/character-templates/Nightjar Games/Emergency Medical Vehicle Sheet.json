@@ -1,0 +1,589 @@
+{
+  "lastUpdated": 1693428616,
+  "name": "CRASH//CART Emergency Medical Vehicle Sheet Template",
+  "pages": [
+    {
+      "id": "9b42c89b-6ada-4623-a458-de6a62625878",
+      "label": "BASIC INFO",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "f485f0dc-21bd-46bf-a45e-4fb159933609",
+                  "label": "BASIC INFO",
+                  "blocks": [
+                    {
+                      "id": "78ce9dd9-9eaa-4a1c-a654-e664b4871586",
+                      "label": "ID NUMBER",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e053807d-6c9c-4cce-87c2-dc3ec893fba8",
+                      "label": "CALLSIGN",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "e7198ed1-fa91-4989-b840-e8004013050a",
+                  "label": "REPUTATION STATUS",
+                  "blocks": [
+                    {
+                      "id": "5fa12337-3d11-432d-b3bc-c87092da3cfd",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Six factions are listed below. Pick one faction and select its top word, then pick another faction and select its bottom word. This is your current reputation in the paramedic's world. ",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d0d3744f-ce82-48dd-8489-0ba595534740",
+                      "label": "HEAD OFFICE",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "fdeab3f2-1519-417b-8de3-50781bc6dedc",
+                      "label": "Fasttracked",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "Positive" }
+                    },
+                    {
+                      "id": "b71c9375-226d-4abb-a547-dee17a94d5b3",
+                      "label": "Offramped",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "Negative" }
+                    },
+                    {
+                      "id": "f9ad4c42-383c-4872-913a-be35699597d4",
+                      "label": "LEGAL SERVICE",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "33090803-63e9-4209-b8e5-472bc8995792",
+                      "label": "Goldenboys",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "Positive" }
+                    },
+                    {
+                      "id": "62214133-cceb-49ff-9ba4-b43e7728f0ee",
+                      "label": "Shitlist",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "Negative" }
+                    },
+                    {
+                      "id": "5698b094-6a9f-4509-abb3-af025c24dadc",
+                      "label": "GARAGE SERVICE",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "6427e281-9cf8-4846-9c1e-e5777fb76cf6",
+                      "label": "Rockstars",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "Positive" }
+                    },
+                    {
+                      "id": "5f9a0c95-b8e5-481a-a769-ba983b6ab63d",
+                      "label": "Wreckers",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "Negative" }
+                    },
+                    {
+                      "id": "5950689c-2851-4028-a999-4d98d755ed94",
+                      "label": "LOCAL GOV",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "5dc4ce6d-84d1-4098-829a-1d9e7071786e",
+                      "label": "Paragons",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "Positive" }
+                    },
+                    {
+                      "id": "80210eae-b110-417b-babc-9a73cac4dc8a",
+                      "label": "Parasites",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "Negative" }
+                    },
+                    {
+                      "id": "d45ff698-d152-4a64-9902-b0f284d21abc",
+                      "label": "LOCAL POLICE",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "bee3634b-4209-410b-bd17-d26f1e742558",
+                      "label": "Tolerated",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "Positive" }
+                    },
+                    {
+                      "id": "32b1f364-ca27-4d56-be55-33b214d195f1",
+                      "label": "Agitators",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "Negative" }
+                    },
+                    {
+                      "id": "0829ec99-eea7-4e1b-879b-df1d3d9dac8d",
+                      "label": "GANGS",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "fd26158e-1be1-496e-a010-e914ba19b3b7",
+                      "label": "Tolerated",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "Positive" }
+                    },
+                    {
+                      "id": "1151552e-590a-41c2-ad20-64dd56e26333",
+                      "label": "Narcs",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "Negative" }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "4675bfa5-3b23-42dd-9a41-a67e84e63736",
+                  "label": "EMV ABILITIES",
+                  "blocks": [
+                    {
+                      "id": "74c3091f-baac-47ea-b6ce-c945d5d561b5",
+                      "label": "EMV XP",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "8",
+                        "isMainPointCounter": false,
+                        "helperText": "At the end of a shift, mark EMV XP for each of the following, up to twice each:<br>- You brought a client safely home.<br>- You answered a dangerous dispatch.<br>- You made a run with no bloodshed.<br>Once you've accumulated 8XP, clear the EMV XP marks and pick a new EMV ABILITY below.<br>"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "ec367d38-3fd9-4564-83c7-e11dd879a889",
+                      "label": "EMV ABILITIES",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "Pick one to start. If you can't decide, pick either \"Tough Old Bird\" or \"Lucky Old Jack.\" "
+                      }
+                    },
+                    {
+                      "id": "6a0c0bef-8d13-4ed3-afd1-1586a7c679ad",
+                      "label": "Field Repairs",
+                      "type": "Text",
+                      "value": "Crewmembers have the edge when patching/hacking the EMV.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "b26fcae1-13c4-4751-a6ed-fb7770eb92a7",
+                      "label": "Hearts &amp; Minds",
+                      "type": "Text",
+                      "value": "Once per shift, any player may introduce a friendly NPC with the edge.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3478e2a5-2b58-487d-b6c8-2cf7f3851fce",
+                      "label": "Lucky Old Jack",
+                      "type": "Text",
+                      "value": "If a joker is drawn, any player may discard a jack from their cache to shuffle it back into the deck.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "1112051c-3455-441b-a619-3d36542793a5",
+                      "label": "Saints Of The Coast",
+                      "type": "Text",
+                      "value": "At end of shift, crewmembers gain 1XP if they put themselves at risk for a client.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "901b10c9-32a0-4892-b120-9c673c00b2ee",
+                      "label": "School Bus",
+                      "type": "Text",
+                      "value": "Your crew is learning from each other. Each character may increase an action rating by one, as long as another character has a higher rating in it.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9114f73b-e77b-40e3-8538-a63532802eb9",
+                      "label": "Shining Sight",
+                      "type": "Text",
+                      "value": "Your EMV is a welcome presence in the Cali skies. Gain the dge on the first interaction with a new person or group.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "59128501-1d6a-47a7-85b4-cf704e1eac9e",
+                      "label": "Speed Holes",
+                      "type": "Text",
+                      "value": "Fill in one section of the Maintenance clock permanently (next page).",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "61f51cf3-d827-41b1-93c7-49780de61f59",
+                      "label": "Tough Old Bird",
+                      "type": "Text",
+                      "value": "Any harm the EMV takes is reduced by one level.",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4a4c7539-d9c8-4700-b135-8187a6543783",
+      "label": "ABILITIES &amp; UPGRADES",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5e7af7e6-c437-47d6-92dc-fccf3bafbd0d",
+                  "label": "HARM &amp; RECOVERY",
+                  "blocks": [
+                    {
+                      "id": "7a01339a-ee9a-4719-9dfa-90a637136618",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Each time the EMV takes damage, mark off one box in the appropriate system per level of effect. Use CHASSIS if you're unsure.<br>In downtime, players may use the Maintenance Action to repair the EMV.<br>The Garage performs Full Maintenance between Shifts, unless your crew is considered Wreckers to them.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3bdbadc2-0e4e-416f-a6d0-29acc44d97fc",
+                      "label": "MAINTENANCE",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": true },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "61cb720f-426c-453b-933c-d4e8c963a95e",
+                      "label": "CHASSIS DAMAGE",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "4",
+                        "isMainPointCounter": false,
+                        "helperText": "1: Bangs and Scraps<br>2: Actions have less effect<br>3: Draw one fewer cards<br>4; Chassis destroyed"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "bc362008-2563-48bf-a4f1-e0a9e8551da6",
+                      "label": "ENGINES DAMAGE",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "3",
+                        "isMainPointCounter": false,
+                        "helperText": "1: Actions have less effect<br>2: Draw one fewer cards<br>3: Engines destroyed<br>"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "afa93f9c-ebc5-48b1-9c08-fb65427a6851",
+                      "label": "MEDBAY DAMAGE",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "3",
+                        "isMainPointCounter": false,
+                        "helperText": "1: Actions have less effect<br>2: Draw one fewer cards<br>3: Engines destroyed<br>"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d4e21dce-88f9-4147-a806-29eaace21bc7",
+                      "label": "NETLINK DAMAGE",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "2",
+                        "isMainPointCounter": false,
+                        "helperText": "1: Draw one fewer cards<br>2: Engines destroyed<br>"
+                      },
+                      "value": "0"
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "57253235-88c6-432c-b970-5ddcc99c89d5",
+                  "label": "SYSTEMS",
+                  "blocks": [
+                    {
+                      "id": "5baa99e9-2f5f-43b9-8aed-9aa04c65acce",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Each SYSTEM starts with one dot. Add one more to any two SYSTEMS of your choice.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "edf9d087-646a-4ae2-84d5-a8bc1977c0d0",
+                      "label": "CHASSIS",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "helperText": "",
+                        "max": "4"
+                      },
+                      "value": "1"
+                    },
+                    {
+                      "id": "f4a64c5a-a2c2-4be5-97ad-1256bdc7a9a2",
+                      "label": "ENGINES",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "helperText": "",
+                        "max": "4"
+                      },
+                      "value": "1"
+                    },
+                    {
+                      "id": "e134edfd-48da-4a6a-8ffc-d12771479dec",
+                      "label": "MEDBAY",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "helperText": "",
+                        "max": "4"
+                      },
+                      "value": "1"
+                    },
+                    {
+                      "id": "2130c227-9614-4eca-be4e-5455017b94e1",
+                      "label": "NETLINK",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "helperText": "",
+                        "max": "4"
+                      },
+                      "value": "1"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "96915ad6-bf3f-44f7-a1b2-c5bb58908ad0",
+                  "label": "UPGRADES",
+                  "blocks": [
+                    {
+                      "id": "f71fca54-feb3-40a6-a06a-6770f069a108",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Pick any four of the UPGRADES below. Additional UPGRADES can be gained via the ACQUIRE THE GOODS or WORKSHOP PROJECT Downtime actions. ",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8962f9ed-234a-41d4-be88-e96682fec00d",
+                      "label": "CHASSIS UPGRADES",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "4a5b76e8-9b6a-417d-8750-af84856914f9",
+                      "label": "Resinite Struts",
+                      "type": "Text",
+                      "value": "Early model nanotube carbon in the construction means that the EMV  automatically recovers one level of harm to the chassis during each downtime.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "43b2fa29-5e6a-41c5-ac17-520a3b001d2f",
+                      "label": "Stayaway Mesh",
+                      "type": "Text",
+                      "value": "Conductive tracery in the outer hull can be set to deliver a taser shock to anyone who touches it.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "101edb64-fb51-4dbf-a8db-0162244d0433",
+                      "label": "Stealth Coating",
+                      "type": "Text",
+                      "value": "Smart paint on the lower half of the EMV displays whatever is above, rendering the vehicle nearly invisible from below.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "8e91980a-b6f5-45f3-b4cd-fb59e5131c21",
+                      "label": "CREW UPGRADES",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "33083033-20ab-4ea6-8242-20b83664ce23",
+                      "label": "Kevlar Weave",
+                      "type": "Text",
+                      "value": "Reduces any harm characters would take in physical assaults by one step.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "1f19d97b-5e15-4f17-981b-a024381b79bb",
+                      "label": "Martyr Drones",
+                      "type": "Text",
+                      "value": "Relatively cheap and deployable, these bots may be used once a shift to ignore harm to the EMV.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "bb96fa19-bf02-4b04-b64c-0ea4779631e6",
+                      "label": "MilSec Licenses",
+                      "type": "Text",
+                      "value": "Expensive and frowned upon by Legal Services, but they do allow the crew to carry illegal equipment without being hassled by law enforcement.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "ad6f87a1-e604-4d83-be7c-9dd6444855d3",
+                      "label": "Pathfinder Drones",
+                      "type": "Text",
+                      "value": "Small flying bots that deploy from the EMV’s hull and scout ahead of the crew. Gives a big advantage to fortune draws involving on-foot operations.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "b652a838-8a9f-406b-b916-bd5a61040177",
+                      "label": "Smart Gurneys",
+                      "type": "Text",
+                      "value": "Wheeled and self-propelled cots that relieve the crew from having to lug their clients around.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "ae7a9785-46ed-42cb-ab53-4c2a1261c5c9",
+                      "label": "ENGINE UPGRADES",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "e42c4a2d-87ee-49b1-80d9-e6f182b50cef",
+                      "label": "Afterburners",
+                      "type": "Text",
+                      "value": "Injects fuel straight into the engines for a sudden burst of speed, treat the engine as one higher rating for one draw only. May damage them though.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "fc58ec88-dd50-454e-b8c2-a0386ebe38d8",
+                      "label": "Smart Gearbox",
+                      "type": "Text",
+                      "value": "Monitors engine use to allow incredibly quick spin up. This allows the EMV to take off and land with increased effect.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "2755f770-76f1-4dfd-ab0e-afb61b905eab",
+                      "label": "MEDBAY UPGRADES",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "264a9310-f1af-4e7c-8a68-b89d5f8a0013",
+                      "label": "Doc Waldos",
+                      "type": "Text",
+                      "value": "Looks like a robot octopus bolted to the chassis. As long as the Netlink is active, can perform medical procedures as a Medic. May never have the edge.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "0bef9dec-c785-4ac7-941c-c0a61664f8f3",
+                      "label": "Heavy Restraints",
+                      "type": "Text",
+                      "value": "The Doc Waldos’ big brother. Capable<br>of restraining the most uncooperative clients, even those of the full cyborg variety.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "e9fad1b0-142b-4a5d-9bf2-13cd317655a1",
+                      "label": "NETLINK UPGRADES",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "dbad0ae9-4e70-4bc5-9f80-c7e32380d353",
+                      "label": "Skeleton Key",
+                      "type": "Text",
+                      "value": "A rapidly evolving code imp in a bottle. May be unleashed once a shift to perform an intrusive hacking action with great effect. Illegal.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "048b0119-689d-46e4-bfe2-095682c4641f",
+                      "label": "Spoof Troop",
+                      "type": "Text",
+                      "value": "Virtual intelligence that catalogues passing vehicle ID’s. Allows the EMV to pretend to be a craft that it’s not with limited effect.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "6a7011b7-38cf-4cc1-8b82-8ccaea8791af",
+                      "label": "Wingman VI",
+                      "type": "Text",
+                      "value": "A braindub of another pilot that can boot up and fly the EMV on its own. Tends to be a bit repetitive in conversation, never gains the edge.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "381a746e-9892-407e-8e5a-cf3734995e8e",
+                      "label": "TRAINING",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "392e3416-b51e-4488-b7b3-d2847edfa304",
+                      "label": "ADD A NUMBERED CARD TO THE DECK",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "6",
+                        "isMainPointCounter": false,
+                        "helperText": "See pg 34"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "3abd7e77-4e86-4632-8b65-c755b963cd73",
+                      "label": "ADD A FACE CARD TO THE DECK",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "2",
+                        "isMainPointCounter": false,
+                        "helperText": "See pg 34"
+                      },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "theme": { "hideSectionBackground": false },
+  "fariType": "character"
+}

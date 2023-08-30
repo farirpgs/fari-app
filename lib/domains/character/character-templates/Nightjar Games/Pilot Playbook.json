@@ -1,0 +1,734 @@
+{
+  "lastUpdated": 1693424331,
+  "name": "CRASH//CART Pilot Playbook Template",
+  "pages": [
+    {
+      "id": "93317146-6f36-472c-bb0f-f4045508c2b1",
+      "label": "EMPLOYEE INFO",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "f45abc77-5269-4a41-a735-548005dde670",
+                  "label": "BASIC INFO",
+                  "blocks": [
+                    {
+                      "id": "e3e10c05-d087-49b1-ae30-4334b3bdb517",
+                      "label": "ID NUMBER",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "09b5f16c-b4bb-4a01-9330-90a088ead175",
+                      "label": "CALLSIGN",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b7473f30-f998-48d0-9e79-e7fffe6753f7",
+                      "label": "NAME",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ba2fd196-a202-4ed9-8585-859dac5b013e",
+                      "label": "EMV NAME",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b2366127-7c8c-40fd-bf81-936ce408ab49",
+                      "label": "CONVICTION",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "A sentence that defines why you put yourself in harm’s way for strangers, the reason that you work the graveyard shift, the reason that you are a part of *this* crew. Why is your character here?"
+                      }
+                    },
+                    {
+                      "id": "fc205c24-3c7f-44f4-acd8-2a5a891a3319",
+                      "label": "VICE",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Pick one vice: Booze, Gambling, Media, Obligation, Religion, Stims, Violence"
+                      }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "0a58e177-2ccc-421d-aad8-7cc755bccd2a",
+                  "label": "CONTACTS",
+                  "blocks": [
+                    {
+                      "id": "359ca8fb-be62-44d7-90e2-417a80b23493",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Five contacts are listed below. Mark one as positive and another as negative.<br>You may also substitute the prewritten contacts for ones of your own making.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "dba0f7f6-1186-4687-816f-b95665b40995",
+                      "label": "Albert Kangnam",
+                      "type": "Text",
+                      "value": "Status: +/0/-\nLawyer with Dad’s firm. Does he know why you left?<br>",
+                      "meta": { "helperText": "" }
+                    },
+                    {
+                      "id": "ea7aacc2-2a50-4c66-8a36-63b78c6097d5",
+                      "label": "Split-Lip",
+                      "type": "Text",
+                      "value": "Status: +/0/-\nGambling Parlor Owner. Who owes who here?<br>",
+                      "meta": { "helperText": "<br>" }
+                    },
+                    {
+                      "id": "cc4c959f-ed7e-473c-962d-3e1c8496dfee",
+                      "label": "Alderman Burt",
+                      "type": "Text",
+                      "value": "Status: +/0/-\nLocal Gov’t. Is it personal, do you need<br>help, or both?<br>",
+                      "meta": { "helperText": "" }
+                    },
+                    {
+                      "id": "442e3951-6a82-493e-bb17-c88fbccf4bbe",
+                      "label": "Jin",
+                      "type": "Text",
+                      "value": "Status: +/0/-\nStreetwalker. They call their patients clients too.<br>",
+                      "meta": { "helperText": "<br>" }
+                    },
+                    {
+                      "id": "c082475a-e76e-4f36-83ef-8bc976eb3a49",
+                      "label": "AGGRONOMY",
+                      "type": "Text",
+                      "value": "Status: +/0/-\nGaming VI. Equivalent to pets these days, is it loyal?<br>",
+                      "meta": { "helperText": "" }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "cd920aa7-18c4-4200-afc2-402f3ca69d8b",
+                  "label": "EQUIPMENT",
+                  "blocks": [
+                    {
+                      "id": "14d8f307-df3b-4325-a083-035cf60048df",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "In addition to UNIFORM, HELMET, and PHONE, you may have one or two items below upon exiting the EMV.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "aebcd380-077f-4fc6-8f16-788d45fe5726",
+                      "label": "Cash Money",
+                      "type": "Text",
+                      "value": "While credit chips are the order of the day<br>in most corporate arcologies, there is still a thriving trade in US currency.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "a0ee5a86-1993-459e-b1e1-b7e53cfc8780",
+                      "label": "Cigarettes",
+                      "type": "Text",
+                      "value": "An easy gift, minor bribe, or habit sustainer.<br>Officially banned across the entire Pacific Rim in 2032, but the African black market has filled the void.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "34ca2066-3c60-42ab-92d1-aa256ea8f8ed",
+                      "label": "Disposable Pistol",
+                      "type": "Text",
+                      "value": "Printed with an 8 round magazine. \nGMs should consider raising the Effect and Harm of gunshots to a minimum of Level 3. \nGMs should also consider increasing a character's Stress by 2 whenever they fire a gun at another person (pg 42).",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "16972dc9-e9e5-4c06-b90c-074d34dc9b42",
+                      "label": "Fine Buzzknuckles",
+                      "type": "Text",
+                      "value": "Impact resistant gauntlet with<br>embedded taser leads and capable of delivering multiple 1,200 volt shocks.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "e0664cdc-fb41-4cc7-9764-8c6d81a88634",
+                      "label": "Fine Vehicle Override",
+                      "type": "Text",
+                      "value": "A barely legal box that can be<br>used to Hack any modern vehicle into accepting its keypass, as well as hiding ID.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "0c0af34c-0f09-44ac-af0c-b666241eaa94",
+                      "label": "Fire Extinguisher",
+                      "type": "Text",
+                      "value": "Non-toxic flame retardants, 5 minutes<br>worth.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "c7348c65-7ca5-4894-aec4-46e0692d8658",
+                      "label": "Grapnel Gun",
+                      "type": "Text",
+                      "value": "Small explosive charges launch a grapnel and up to 50’ of airline cable. A powerful winch retracts it.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "d0efa7c1-62f7-4295-9fcb-758efc433ea0",
+                      "label": "Jaws of Life",
+                      "type": "Text",
+                      "value": "Cuts and bends vehicle frames with chain teeth.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "b2af294d-5c3b-4902-bb7a-49e3cf1ff312",
+                      "label": "Nightvision Goggles",
+                      "type": "Text",
+                      "value": "An augmented reality overlay with<br>flare protection. Allows user to see in pitch dark as if it were daylight.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "9349c780-a95d-40be-9f2d-49ced5735848",
+                      "label": "Personal Holo",
+                      "type": "Text",
+                      "value": "A reminder of happier times.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "21c72c31-3768-4e41-ad1f-6f51d9fa0077",
+                      "label": "Personal Toolkit",
+                      "type": "Text",
+                      "value": "Everything needed for basic repairs.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "329d438a-66bf-43b2-838c-1f42432f637c",
+                      "label": "Police Scanner",
+                      "type": "Text",
+                      "value": "Covers most public and corporate<br>bands.",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "218fd3c9-4ef0-42c7-a23a-21c93ea7a1b1",
+      "label": "STRESS, TRAUMA, &amp; PLAYBOOK ABILITIES",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a0474c37-dd30-4ed0-8e28-fa5f1fb57161",
+                  "label": "STRESS &amp; HARM",
+                  "blocks": [
+                    {
+                      "id": "4cfe07e4-60bd-4dbd-b6e6-83087c2627b7",
+                      "label": "STRESS",
+                      "type": "PointCounter",
+                      "meta": { "max": "10", "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "7b037512-2a69-4539-b5ac-0d768eb2ddbb",
+                      "label": "HARM",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Level 1 Harm = lower Effect, Level 2 Harm = -1 Card, 3 Harm = Need Help",
+                        "asClock": false
+                      },
+                      "value": [
+                        { "label": "1", "checked": false },
+                        { "label": "1", "checked": false },
+                        { "label": "2", "checked": false },
+                        { "label": "2", "checked": false },
+                        { "label": "3", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "aa4b7799-ea24-4ff4-aad3-eb5d12b5a157",
+                      "label": "HEALING",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "4067c868-5ec8-43f7-8c81-53b47bcf6103",
+                  "label": "PLAYBOOK ABILITIES",
+                  "blocks": [
+                    {
+                      "id": "610c39b8-8fa8-46ca-81f1-320b4b51eacb",
+                      "label": "PILOT",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "CONSIDER THE PILOT If you enjoy the daredevil life. <br>A Crash Cart pilot is more than just a driver, they also guard the EMV and crew at the Landing Zone, monitor Net traffic and the skies to ensure a quick, safe exit. They also tend to be fixers of a sort, procuring amenities and grey market gear for their crew."
+                      }
+                    },
+                    {
+                      "id": "2aaeba07-7a38-4173-916f-0c508ec5a8fa",
+                      "label": "PLAYBOOK XP",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "8",
+                        "isMainPointCounter": false,
+                        "helperText": "At the end of a shift, mark PLAYBOOK XP for each of the following, up to twice each:<br>- You lived up to your convictions.<br>- You played out your traumas.<br>- You risked yourself for your crew.<br>- (PILOT only) You took on a challenge with daredevil flair.<br>Once you've accumulated 8XP, clear the PLAYBOOK XP marks and pick a new PLAYBOOK ABILITY below.<br>"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "6833d0cd-bfd3-4a2d-8e0d-cb1f44ddb555",
+                      "label": "PLAYBOOK ABILITIES",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "Pick one to start. If you can't decide, pick either \"Born to the Yoke\" or \"Shortcut Queen.\""
+                      }
+                    },
+                    {
+                      "id": "dcc13e53-4477-4e9e-ad50-cce480dfee0a",
+                      "label": "Barfly King",
+                      "type": "Text",
+                      "value": "You may discard a king from your cache during downtime to tend to your crew. Every other crewmember may remove 2 stress.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "390ff454-274d-4575-955f-01f1ab78f72e",
+                      "label": "Born to the Yoke",
+                      "type": "Text",
+                      "value": "Any action you take while flying has<br>greater effect. Whenever you make a resistance check while flying, you may draw an extra card.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "ec901bae-1bfe-4942-a361-f664811b39ae",
+                      "label": "Casino Queen",
+                      "type": "Text",
+                      "value": "You may discard a Queen from your<br>cache to allow any player to return a draw to the deck, shuffle, and draw again.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "dd8eaa44-0900-4d2b-8d30-1f87684ebcc1",
+                      "label": "Flying Ace",
+                      "type": "Text",
+                      "value": "When at the controls of any vehicle, you may take levels of harm intended for it as points of stress and stress intended for you as harm to the vehicle.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "384f2570-a206-412d-b5a6-7acd315cfcf6",
+                      "label": "Jack this Ship",
+                      "type": "Text",
+                      "value": "While taking any action while flying, you may discard a jack from your cache to add any number of cards to your draw, then fill in that number of damage boxes on the EMV.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "dfd9c18e-dfdc-4911-ac79-bc82190fc2c3",
+                      "label": "Managed Habits",
+                      "type": "Text",
+                      "value": "After you draw cards to blow off steam during downtime, you may return two to the deck, or draw<br>two more, and then count your highest result.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "5dcb51f8-87cd-438f-8cfc-497350dcefd2",
+                      "label": "Sky King",
+                      "type": "Text",
+                      "value": "Discard a king from your cache to adjust an action that involves flying the EMV to any position you choose.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "e9da0dcc-5f3d-47f1-9371-723f3533cd67",
+                      "label": "Shortcut Queen",
+                      "type": "Text",
+                      "value": "During any action taken on board the<br>EMV, you may discard a Queen from your cache to shuffle one player’s trash into the deck.",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "b4e5ac82-6b12-4bad-a28c-25703e16f690",
+                  "label": "TRAUMAS",
+                  "blocks": [
+                    {
+                      "id": "bf04652c-3b61-455c-91e0-2b7b0f67a0b3",
+                      "label": "LOOPING",
+                      "type": "Text",
+                      "value": "You Are caught in a spiral behavior, fixated on perfecting a part of your job",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "84885069-c10c-41ac-b762-1deeb22817d7",
+                      "label": "GLITCHY",
+                      "type": "Text",
+                      "value": "Your mood state flips constantly. You could fill with rage from nothing, only to have it drain away to ennui in an instant.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "01ffc566-b8a1-4beb-baeb-4d607a31a793",
+                      "label": "BLUNTED",
+                      "type": "Text",
+                      "value": "You’ve lost the ability to make the hard decisions, wavering constantly.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "6a9e0dad-0d2b-4564-ac41-0003808e378a",
+                      "label": "UNGROUNDED",
+                      "type": "Text",
+                      "value": "You can’t weigh risks, pushing  yourself further into dangerous situations with every shift.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "204553a3-dca7-4337-bbf1-000266b16c4f",
+                      "label": "HAUNTED",
+                      "type": "Text",
+                      "value": "The ghost of a previous Client is haunting you.You see them on every street corner, every operating table, every dirty apartment floor.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "ca0c220e-29df-4619-83e7-98d0846cb3ea",
+                      "label": "CORROSIVE",
+                      "type": "Text",
+                      "value": "The bile has built up inside of you.It spills out and taints every decent thing in your life without provocation.",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ebfd8408-32c3-4229-93f6-f7ea694650d2",
+      "label": "ACTIONS",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "f79026d1-991b-4643-971e-cba38c6f03c2",
+                  "label": "INSIGHT",
+                  "blocks": [
+                    {
+                      "id": "6bd097fc-359a-48ee-bd66-0d37930f2556",
+                      "label": "INSIGHT",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "helperText": "Equal to number of first dots filled in DIAGNOSIS, PATCHING, and HACKING."
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "21f49dfc-1cf1-4332-8af3-a021601148d7",
+                      "label": "INSIGHT XP",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "6",
+                        "isMainPointCounter": false,
+                        "helperText": "Every time you take a Desperate Action with this Attribute, mark XP.<br>Once you've accumulated 6XP, erase all INSIGHT XP and add a dot to one of the ACTIONS below.<br>"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "87246b47-3340-483b-a803-bf03783e4597",
+                      "label": "DIAGNOSING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in DIAGNOSING, increase INSIGHT by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "b384724a-844a-4992-a135-fb0b44686556",
+                      "label": "PATCHING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in PATCHING, increase INSIGHT by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "a8f1656c-1c1a-40c5-942e-ac4805264441",
+                      "label": "HACKING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in HACKING, increase INSIGHT by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "65a0bc3a-3f78-4c7f-90f4-a27e92cc46f3",
+                  "label": "PROWESS",
+                  "blocks": [
+                    {
+                      "id": "2201a0f7-3cfb-48e7-957a-8d4f3a94e6d8",
+                      "label": "PROWESS",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "helperText": "Equal to number of first dots filled in EVADING, SCUFFLING and MOVING.<br>The Pilot starts with a dot in EVADING.<br>"
+                      },
+                      "value": "1"
+                    },
+                    {
+                      "id": "56665f57-592d-4c7e-957d-c7199b7e8db9",
+                      "label": "PROWESS XP",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "6",
+                        "isMainPointCounter": false,
+                        "helperText": "Every time you take a Desperate Action with this Attribute, mark XP. <br>Once you've accumulated 6XP, erase all PROWESS XP and add a dot to one of the ACTIONS below.<br>"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "1fa0b765-646a-460c-afff-ad742661ebe6",
+                      "label": "EVADING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in EVADING, increase PROWESS by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": true },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "d3e19673-0f12-400a-9f0b-28a214857e15",
+                      "label": "SCUFFLING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in SCUFFLING, increase PROWESS by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "14c3d513-8bc5-466b-a838-2dff7cf5cc5d",
+                      "label": "MOVING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in MOVING, increase PROWESS by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "755eed69-9b9e-4048-8634-4e5621bdac7a",
+                  "label": "RESOLVE",
+                  "blocks": [
+                    {
+                      "id": "a95e0e31-9871-4f00-a311-4af421e3c7f9",
+                      "label": "RESOLVE",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "helperText": "Equal to number of first dots filled in DIRECTING, HUSTLING and FRATERNIZING.<br>The Pilot starts with a dot in FRATERNIZING.<br>"
+                      },
+                      "value": "1"
+                    },
+                    {
+                      "id": "224ac8e6-3102-4c82-99cd-133b477ba511",
+                      "label": "RESOLVE XP",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "6",
+                        "isMainPointCounter": false,
+                        "helperText": "Every time you take a Desperate Action with this Attribute, mark XP. <br>Once you've accumulated 6XP, erase all RESOLVE XP and add a dot to one of the ACTIONS below.<br>"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "4ec11308-1400-42b5-ae79-11d6d3c56461",
+                      "label": "DIRECTING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in DIRECTING, increase RESOLVE by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "4b403a10-c722-4c2f-9cb8-efb6af3e0bfd",
+                      "label": "HUSTLING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in HUSTLING, increase RESOLVE by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "587d7542-cae9-4340-9fa5-eef66d1d28e8",
+                      "label": "FRATERNIZING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in FRATERNIZING, increase RESOLVE by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": true },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "472801b5-d8ae-474c-af56-6169cd82748e",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "97b8b1bc-071e-460e-a769-03fb7083f1dd",
+                  "label": "THE LETTERS",
+                  "blocks": [
+                    {
+                      "id": "518ba824-c5fa-409c-a38c-6a5241b3da94",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "At the end of every shift you gained a new PLAYBOOK ABILITY or increased an ACTION RATING, add a new sentence to one or both of the letters below. Each letter can have a maximum of twelve sentences, not counting the pre-included sentences and the final \"Sincerely.\"<br><br>Once you've written all sentences on either letter, it's time to make a choice: do you send this letter and move on, or do you stay with the crew?<br>Once both letters are complete, you need to choose which to send. Either way, your time on this crew is over.",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "97ccbdd9-8f6f-45f3-be26-225d5d1eeaf9",
+                  "label": "CRASHCART INTERAGENCY MAIL//FORM 00012-CND//STARNDARD FORM LETTER: CONDOLENCES TO BEREAVED",
+                  "blocks": [
+                    {
+                      "id": "e2fca774-8f52-4eb6-b407-1893a382b55a",
+                      "label": "Dear (Circle Appropriate) [Mr.] [Ms.] [Mrs.] [Mx.] [Sir] [Madam] [N/A]",
+                      "type": "Text",
+                      "value": "I'm writing you in regards to [NAME] who died in our care.",
+                      "meta": {
+                        "helperText": "After each shift, add a sentence here or to other letter.After writing twelve sentences, close it with \"Sincerest Regards, [YOUR NAME].\""
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "5bb72aae-d675-48f6-ae2e-592b8320aa86",
+                  "label": "CRASHCART INTERAGENCY MAIL//FORM 00138-ACT//STANDARD FORM LETTER: RESPONSE TO CORPORATE INQUIRY",
+                  "blocks": [
+                    {
+                      "id": "669b1469-d23b-4daa-bb11-ef8c189ed4be",
+                      "label": "To the HR office, regarding an Executive Promotion to: (Circle Appropriate) [Headquarters] [Legal Services] [Operations] [Franchise Expansion]",
+                      "type": "Text",
+                      "value": "Re: \"What kind of a future do I see for myself with CrashCart.\"",
+                      "meta": {
+                        "helperText": "After each shift, add a sentence here or to other letter.After writing twelve sentences, close it with \"Sincerest Regards, [YOUR NAME].\""
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "THE LETTERS<br>"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "theme": { "hideSectionBackground": false },
+  "fariType": "character"
+}
