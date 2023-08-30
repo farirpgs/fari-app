@@ -1,0 +1,342 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1692680932,
+  "name": " Template",
+  "pages": [
+    {
+      "id": "e10b6bf4-2e0b-4056-8f7a-f18ba5a278e4",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "ea7768d4-21fe-46c9-ba9c-4855a82437bd",
+                  "label": "Avatar",
+                  "blocks": [
+                    {
+                      "id": "17f14b1c-9b8f-4c4b-b49f-db4185665c3c",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "145c6636-3116-4bd9-a459-79e0728708a2",
+                  "label": "Description",
+                  "blocks": [
+                    {
+                      "id": "0084cd3f-a42b-4d17-9de4-0ed5719a10b3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "1b9d517e-770e-4691-89e5-ffb70aea5330",
+                  "label": "Health",
+                  "blocks": [
+                    {
+                      "id": "11a6dc0b-3b7b-46f3-afac-e769560e9fcf",
+                      "label": "Stress",
+                      "type": "PointCounter",
+                      "meta": { "max": "1", "isMainPointCounter": true },
+                      "value": "0"
+                    },
+                    {
+                      "id": "3a66e011-921d-4859-9dea-26e5d6055c75",
+                      "label": "Grit",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false },
+                      "value": "0"
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "eee70b00-5d43-4136-8910-be855e0c4fbd",
+                  "label": "Hooks",
+                  "blocks": [
+                    {
+                      "id": "65efc1c7-cb39-44b9-94a5-5b20ba0a1d4f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f4e98634-42c1-4bf6-9b35-7faa28963c06",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e79b1d2f-9e4c-404c-8106-924a39b4ecb1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9cc44764-9cdb-4f37-89e6-9bec34c097a6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ddc35b2f-b78c-47d6-ac35-43f5f82171c3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8f077ff4-54ac-4aa8-8f88-6f00f5310ab1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "8c988aaa-8193-40c6-bf0e-b52b30be88b9",
+                  "label": "Conditions",
+                  "blocks": [
+                    {
+                      "id": "1db4ad8e-9b50-413d-bcbe-6b336cbcfc73",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "83ef9a46-6e52-42a2-b66a-05443eeb4c03",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a08abb2b-3205-4e49-aa97-7317b722060b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "5c73e322-8d10-4e0b-8b9f-b13fde270951",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3822b1c1-a67b-472b-bedb-9a687b8af1c3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "bf3b39ed-b346-44be-95fe-d9a7aae9fa3d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9f8f4442-ab0e-4ea4-8095-3eb84b2ba513",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "ae251c33-8c51-487e-9b5d-256edc41b88c",
+                  "label": "Description",
+                  "blocks": [
+                    {
+                      "id": "d167ff51-89a3-49a3-96e4-8e22ef9c9cb7",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9c27ccac-940f-48b1-b8e2-a277b8b3cb53",
+                  "label": "Specializations",
+                  "blocks": [
+                    {
+                      "id": "73b7f60f-4920-4796-b8f7-47821f49d0ac",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cc947309-164e-49ae-88c0-e4059a363cef",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4431327c-fa1e-4e99-928f-7d2e32be7ac5",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9e9a6359-3f01-4fb0-bb60-2278b9099123",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "e7a04088-e4a7-418f-a30a-f6958ea5ff0d",
+                  "label": "Gear",
+                  "blocks": [
+                    {
+                      "id": "c3d25c7b-5ae9-45b8-a137-5a914567d18f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "397ff7b9-b346-4a34-8865-fd078cb9c37a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3107f7ed-c2dd-402a-96ee-52dcb2b8b1d1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7a6813cd-1cfa-49c2-932c-fd5f756ea1ec",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "7fca2655-818e-45c2-8a02-d8d2209023f7",
+                  "label": "Boosts",
+                  "blocks": [
+                    {
+                      "id": "439f00cc-9793-435a-bd34-ddd5c9e73382",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "f0e02e18-2c3d-4187-bf04-cc10420645ad",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "0de5e894-6662-45c7-ae26-68bebe4a2c6d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "dd66b915-bafd-4d1a-bf83-f5b94876f24c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "36e3c239-bd3a-4350-925a-83ef75250f36",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "13eaf8fb-bad0-460a-b65e-0381ad5f42d8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "8241e48a-83d2-4f50-ad0b-0f2419b23820",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "528f0f27-0430-4d9d-bdcd-6833ebc156d9",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "b1dde68e-22fa-4ede-a70b-aac395a2fae8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Occupation"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": false
+}

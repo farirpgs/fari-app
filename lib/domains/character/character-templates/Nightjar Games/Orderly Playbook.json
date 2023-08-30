@@ -1,0 +1,714 @@
+{
+  "lastUpdated": 1693424327,
+  "name": "CRASH//CART Orderly Playbook Template",
+  "pages": [
+    {
+      "id": "59aca8f2-e4f5-4dcc-840e-31caa4db5307",
+      "label": "EMPLOYEE INFO",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2a8ecb8e-405d-4098-bda3-c16895336c67",
+                  "label": "BASIC INFO",
+                  "blocks": [
+                    {
+                      "id": "f4a49ce1-c022-4c6a-b134-45b5849cc122",
+                      "label": "ID NUMBER",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2b9c1c68-c4ba-4ccb-8c92-2019fae61824",
+                      "label": "CALLSIGN",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d7ba0cd1-cdf7-4cb9-bcc7-ddba3848adaa",
+                      "label": "NAME",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9f746d88-5505-4635-93c9-2d16c54dcfbf",
+                      "label": "EMV NAME",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cfe4d876-97e4-4959-9c0c-ab203cc177d0",
+                      "label": "CONVICTION",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "A sentence that defines why you put yourself in harm’s way for strangers, the reason that you work the graveyard shift, the reason that you are a part of *this* crew. Why is your character here?"
+                      }
+                    },
+                    {
+                      "id": "25638d6b-d571-46be-9ff0-f006b46596dc",
+                      "label": "VICE",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Pick one vice: Booze, Gambling, Media, Obligation, Religion, Stims, Violence"
+                      }
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "0c666aed-a74a-4838-88d1-49f4485abfa4",
+                  "label": "CONTACTS",
+                  "blocks": [
+                    {
+                      "id": "1d6eebb0-1e96-40b3-b52a-6e461fd951c4",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Five contacts are listed below. Mark one as positive and another as negative.<br>You may also substitute the prewritten contacts for ones of your own making.<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "141afc43-1437-4089-90df-20446216f75b",
+                      "label": "Vu Nguyen",
+                      "type": "Text",
+                      "value": "Status: +/0/-\nTuring tester. A parole officer for bots, does he know?<br>",
+                      "meta": { "helperText": "" }
+                    },
+                    {
+                      "id": "d117237f-aa1f-467f-80b6-6366037259c4",
+                      "label": "CENTRE",
+                      "type": "Text",
+                      "value": "Status: +/0/-\nHanoi Dynamics AI. Parent/Teacher, how similar is it to you?<br>",
+                      "meta": { "helperText": "" }
+                    },
+                    {
+                      "id": "080cc699-48f4-425a-afd7-4d9f54769737",
+                      "label": "QuikCab#473",
+                      "type": "Text",
+                      "value": "Status: +/0/-\nAn autocab. Another awakened bot, dare<br>you trust it?<br>",
+                      "meta": { "helperText": "" }
+                    },
+                    {
+                      "id": "7833b126-35e5-4f38-8abb-3bf7d1087678",
+                      "label": "Tibor Gluck",
+                      "type": "Text",
+                      "value": "Status: +/0/-\nRabbi. Chess in the park on weekends.<br>Anything more?<br>",
+                      "meta": { "helperText": "" }
+                    },
+                    {
+                      "id": "1381cf4c-c3ea-438e-ba24-c57d561d1470",
+                      "label": "Coyote",
+                      "type": "Text",
+                      "value": "Status: +/0/-\nActivist. Some humans want us to be like them, are/should we?<br>",
+                      "meta": { "helperText": "" }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "885d2652-a86c-4e10-9e5a-f8748161339a",
+                  "label": "EQUIPMENT",
+                  "blocks": [
+                    {
+                      "id": "edc7ecfe-841e-4738-b16b-700b84eb55a3",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "In addition to UNIFORM, HELMET, and PHONE, you may have one or two items below upon exiting the EMV.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ae9d54e0-2371-43c6-a75a-64215e6aefa4",
+                      "label": "Anaesthetic Dispenser",
+                      "type": "Text",
+                      "value": "Contains 3 charges. Usually loaded with an aerosol version of ketamine.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "426c5f97-0666-4c7a-91f1-bfc82f49b1e3",
+                      "label": "Cheap Plush Rabbit Toy",
+                      "type": "Text",
+                      "value": "A little weathered. Tag indicates that it was won at a carnival game in Pacific Park. The garage thinks it’s someone’s joke.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "f421c770-86c7-437f-ab6b-1cd9176c8041",
+                      "label": "Collapsible Monowheel Gurney",
+                      "type": "Text",
+                      "value": "A smart bot in its own right. It unfolds to a full sized cot on wheels that can<br>handle stairs and rough terrain.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "160d7fb9-d961-45d1-a10e-f66323e59f43",
+                      "label": "Fine Hacking Unit",
+                      "type": "Text",
+                      "value": "Meant to send and receive updates<br>from the manufacturer, it becomes an incredible lockpick in awakened hands.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "5af8bad7-6a70-4ba8-a02c-db5fd056ddd5",
+                      "label": "Folding Wrecker’s Tool",
+                      "type": "Text",
+                      "value": "Big goddamned hammer.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "9aa0ce82-93c6-4c82-8067-b4817b3245ef",
+                      "label": "Infrared Camera",
+                      "type": "Text",
+                      "value": "Able to make out humans and other<br>warm objects with incredible detail, even through walls and floors.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "5d83c0d2-0703-47d7-a81a-44c0e72cc2c7",
+                      "label": "Judas Box",
+                      "type": "Text",
+                      "value": "Much of the Net is defended with ICE<br>dangerous for a machine, this little box can take a fatal blow in its user’s place.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "89478627-207d-40b7-aa00-5f7560e51df8",
+                      "label": "“Kusudama” Deployable Riot Shield",
+                      "type": "Text",
+                      "value": "Layers of kevlar and laser reflec that fold down into a pocketable envelope. Expands to dinner table size.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "aa9c4755-97ec-4b2b-8a29-41a6328ec7aa",
+                      "label": "Surprisingly Large Amount of Bitcoin",
+                      "type": "Text",
+                      "value": "Not hard for a big computer to earn, but it’s difficult to spend it if you’re not people.",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aeafe335-36a2-47e3-b9b3-742c96b88615",
+      "label": "STRESS, TRAUMA, &amp; PLAYBOOK ABILITIES",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "21b12239-672f-4618-8f6b-ac09dfe426bd",
+                  "label": "STRESS &amp; HARM",
+                  "blocks": [
+                    {
+                      "id": "8e09a048-22f1-4f80-aac5-d794f9e6d2b3",
+                      "label": "STRESS",
+                      "type": "PointCounter",
+                      "meta": { "max": "10", "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "03c7a67f-5ce3-44c4-a50a-5b07a583c62a",
+                      "label": "HARM",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "Level 1 Harm = lower Effect, Level 2 Harm = -1 Card, 3 Harm = Need Help",
+                        "asClock": false
+                      },
+                      "value": [
+                        { "label": "1", "checked": false },
+                        { "label": "1", "checked": false },
+                        { "label": "2", "checked": false },
+                        { "label": "2", "checked": false },
+                        { "label": "3", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "fecbee23-c32b-4c97-813b-a291a1379618",
+                      "label": "HEALING",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "6ea14d7d-e2cd-4537-8be5-4e9ba0820532",
+                  "label": "PLAYBOOK ABILITIES",
+                  "blocks": [
+                    {
+                      "id": "23c2d5a5-df26-47f9-bcea-39fdf814d92d",
+                      "label": "ORDERLY",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "CONSIDER THE ORDERLY If you’re a team player.<br>A jack-of-all-trades even by the flexible standard of Crash Cart, the Orderly is co-pilot, surgical assistant and mechanic’s go-fer all at once. They lug the bags, defend the crew, push the gurneys and fill in for any of their comrades who fall."
+                      }
+                    },
+                    {
+                      "id": "33bc84dc-0904-4a8f-a9b3-c022cfee057f",
+                      "label": "PLAYBOOK XP",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "8",
+                        "isMainPointCounter": false,
+                        "helperText": "At the end of a shift, mark PLAYBOOK XP for each of the following, up to twice each:<br>- You lived up to your convictions.<br>- You played out your traumas.<br>- You risked yourself for your crew.<br>- (ORDERLY only) You took on a challenge with physical skill.<br>Once you've accumulated 8XP, clear the PLAYBOOK XP marks and pick a new PLAYBOOK ABILITY below.<br>"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "5200b619-6b04-4eb3-b588-a572786cc557",
+                      "label": "PLAYBOOK ABILITIES",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "Pick one to start. If you can't decide, pick either \"Natural Brawler\" or \"Hustle Queen.\""
+                      }
+                    },
+                    {
+                      "id": "4b4b703e-5108-49aa-a7ea-b4ba1faa6d67",
+                      "label": "Fast Fix",
+                      "type": "Text",
+                      "value": "You heal much faster than most. Permanently fill in one box on your healing clock",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "27462d02-e205-4c5e-9bc1-7381a11d902c",
+                      "label": "Hustle Queen",
+                      "type": "Text",
+                      "value": "When you take a successful moving<br>action outside of the EMV, you may discard a queen from your cache to return another player’s trash to the deck.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "631cc3f6-25d9-4282-a2b4-e63c2cecc1dd",
+                      "label": "Ironsides",
+                      "type": "Text",
+                      "value": "When you take harm, you do so at one level lower than it normally would be.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "c4fb2ea2-447b-4740-874d-134dab7a8d06",
+                      "label": "Jack be Nimble",
+                      "type": "Text",
+                      "value": "When you help another, you may discard a jack from your cache to double their draw, including the bonus card you gave them.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "b8348bac-d3fe-4dba-8a0f-1319b8268189",
+                      "label": "Jack of All Trades",
+                      "type": "Text",
+                      "value": "You may discard a jack from your<br>cache during downtime to give each other player an extra action.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "a03f949f-bc8f-4c22-b2db-5c9e30f4a26b",
+                      "label": "Junkyard King",
+                      "type": "Text",
+                      "value": "You may discard a king from your cache to instantly produce any one piece of equipment which you might reasonably have been able to acquire.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "3d1f7418-3e5a-48c2-8d90-8b37e8370734",
+                      "label": "Natural Brawler",
+                      "type": "Text",
+                      "value": "When you scuffle with multiple opponents, you do so with no loss of effect.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "5f446d0a-12da-4b39-b4d5-3378f6ed20ed",
+                      "label": "Storage King",
+                      "type": "Text",
+                      "value": "You may discard a king from your cache while in the EMV to allow each other player to check a third item of gear when they next exit the EMV.",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "5ce71b91-f5f0-4183-a634-bf1688ca546b",
+                  "label": "TRAUMAS",
+                  "blocks": [
+                    {
+                      "id": "accafcc2-159f-48f7-87c7-7b4d13639194",
+                      "label": "LOOPING",
+                      "type": "Text",
+                      "value": "You Are caught in a spiral behavior, fixated on perfecting a part of your job",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "5980c8e9-4cf4-4540-b2a0-5e3f515f6ffd",
+                      "label": "GLITCHY",
+                      "type": "Text",
+                      "value": "Your mood state flips constantly. You could fill with rage from nothing, only to have it drain away to ennui in an instant.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "9c1c8277-0521-41a6-8a00-1203db140c22",
+                      "label": "BLUNTED",
+                      "type": "Text",
+                      "value": "You’ve lost the ability to make the hard decisions, wavering constantly.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "bebd3fd7-82b1-418f-a562-3be8c5d7f8e3",
+                      "label": "UNGROUNDED",
+                      "type": "Text",
+                      "value": "You can’t weigh risks, pushing  yourself further into dangerous situations with every shift.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "f9a132b7-7200-4252-855a-989e01271ffc",
+                      "label": "HAUNTED",
+                      "type": "Text",
+                      "value": "The ghost of a previous Client is haunting you.You see them on every street corner, every operating table, every dirty apartment floor.",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "48f45a4b-d090-4f2f-8005-106d1c18bdb8",
+                      "label": "CORROSIVE",
+                      "type": "Text",
+                      "value": "The bile has built up inside of you.It spills out and taints every decent thing in your life without provocation.",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6c590165-70a3-4d62-af2d-34be7181eb84",
+      "label": "ACTIONS",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "09b61715-8ee6-46dc-bab1-4b6658eb04cc",
+                  "label": "INSIGHT",
+                  "blocks": [
+                    {
+                      "id": "cadf540d-b317-4056-8069-49b48b7146d6",
+                      "label": "INSIGHT",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "helperText": "Equal to number of first dots filled in DIAGNOSIS, PATCHING, and HACKING."
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "f738eb27-f523-44b2-81da-ead7d1e1b702",
+                      "label": "INSIGHT XP",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "6",
+                        "isMainPointCounter": false,
+                        "helperText": "Every time you take a Desperate Action with this Attribute, mark XP.<br>Once you've accumulated 6XP, erase all INSIGHT XP and add a dot to one of the ACTIONS below.<br>"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "fd5e44b0-e0c2-4f86-9935-c6f444315649",
+                      "label": "DIAGNOSING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in DIAGNOSING, increase INSIGHT by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "1c9dd765-9daf-4ac2-a20d-4bd2c46e992f",
+                      "label": "PATCHING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in PATCHING, increase INSIGHT by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "cb148be0-8569-4a71-b6f4-7c41ec1b1343",
+                      "label": "HACKING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in HACKING, increase INSIGHT by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "0a6948fa-a6ce-4b8f-95c7-a5c272663c82",
+                  "label": "PROWESS",
+                  "blocks": [
+                    {
+                      "id": "804c83b6-e598-47aa-9481-6e014435322d",
+                      "label": "PROWESS",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "helperText": "Equal to number of first dots filled in EVADING, SCUFFLING and MOVING.<br>The Orderly starts with one dot in SCUFFLING and another dot in MOVING.<br>"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "761188be-10a3-4553-85ef-318ea550753e",
+                      "label": "PROWESS XP",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "6",
+                        "isMainPointCounter": false,
+                        "helperText": "Every time you take a Desperate Action with this Attribute, mark XP. <br>Once you've accumulated 6XP, erase all PROWESS XP and add a dot to one of the ACTIONS below.<br>"
+                      },
+                      "value": "2"
+                    },
+                    {
+                      "id": "daf94ebf-e8eb-40fc-be49-cf9fa7f33a99",
+                      "label": "EVADING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in EVADING, increase PROWESS by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "cbd84300-d6d4-46db-9d1a-bebcfc9d3017",
+                      "label": "SCUFFLING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in SCUFFLING, increase PROWESS by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": true },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "4299f728-d6d2-401b-88da-56b1f5647290",
+                      "label": "MOVING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in MOVING, increase PROWESS by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": true },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "a7158ba0-f423-4306-8f77-e3bba7d0c40b",
+                  "label": "RESOLVE",
+                  "blocks": [
+                    {
+                      "id": "466c03f9-3fd2-495d-a398-bbcda5861975",
+                      "label": "RESOLVE",
+                      "type": "PointCounter",
+                      "meta": {
+                        "isMainPointCounter": false,
+                        "helperText": "Equal to number of first dots filled in DIRECTING, HUSTLING and FRATERNIZING.<br>"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "acfc4329-2382-49e2-a593-7bd01e6d7e2f",
+                      "label": "RESOLVE XP",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "6",
+                        "isMainPointCounter": false,
+                        "helperText": "Every time you take a Desperate Action with this Attribute, mark XP. <br>Once you've accumulated 6XP, erase all RESOLVE XP and add a dot to one of the ACTIONS below.<br>"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "46a24a87-cd35-496a-a15f-343728921715",
+                      "label": "DIRECTING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in DIRECTING, increase RESOLVE by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "e95b1015-957a-4206-b502-000ab447dff5",
+                      "label": "HUSTLING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in HUSTLING, increase RESOLVE by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "14a1bff2-81ff-4724-aa13-37b06b448d1c",
+                      "label": "FRATERNIZING",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "helperText": "If you have any pips in FRATERNIZING, increase RESOLVE by 1."
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0639e24c-ee5f-4993-9a4e-4c617fa6c6ac",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a40882fb-c5d9-4ada-ae5f-367e519b62a9",
+                  "label": "THE LETTERS",
+                  "blocks": [
+                    {
+                      "id": "ed1c2497-2863-4152-a87f-c3384f259921",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "At the end of every shift you gained a new PLAYBOOK ABILITY or increased an ACTION RATING, add a new sentence to one or both of the letters below. Each letter can have a maximum of twelve sentences, not counting the pre-included sentences and the final \"Sincerely.\"<br><br>Once you've written all sentences on either letter, it's time to make a choice: do you send this letter and move on, or do you stay with the crew? <br>Once both letters are complete, you need to choose which to send. Either way, your time on this crew is over.<br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9c2e6d1a-0ea1-4836-84bd-77a1ca3a6dd2",
+                  "label": "CRASHCART INTERAGENCY MAIL//FORM 00012-CND//STARNDARD FORM LETTER: CONDOLENCES TO BEREAVED",
+                  "blocks": [
+                    {
+                      "id": "325e0b1e-e63a-4539-854b-50e01d864c78",
+                      "label": "Dear (Circle Appropriate) [Mr.] [Ms.] [Mrs.] [Mx.] [Sir] [Madam] [N/A]",
+                      "type": "Text",
+                      "value": "I'm writing you in regards to [NAME] who died in our care.\n<br>",
+                      "meta": {
+                        "helperText": "After each shift, add a sentence here or to other letter.After writing twelve sentences, close it with \"Sincerest Regards, [YOUR NAME].\""
+                      }
+                    }
+                  ],
+                  "visibleOnCard": false
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "bfaaa5f0-49dd-48a5-872c-ce44b76c6ae6",
+                  "label": "CRASHCART INTERAGENCY MAIL//FORM 00138-ACT//STANDARD FORM LETTER: RESPONSE TO CORPORATE INQUIRY",
+                  "blocks": [
+                    {
+                      "id": "1c487be7-a7e9-4c59-bc52-17f98067f2d7",
+                      "label": "To the HR office, regarding an Executive Promotion to: [Headquarters] [Legal Services] [Operations] [Franchise Expansion]",
+                      "type": "Text",
+                      "value": "Re: \"What kind of a future do I see for myself with CrashCart.\"\n<br>",
+                      "meta": {
+                        "helperText": "After each shift, add a sentence here or to other letter.After writing twelve sentences, close it with \"Sincerest Regards, [YOUR NAME].\""
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "THE LETTERS<br>"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "theme": { "hideSectionBackground": false },
+  "fariType": "character"
+}
