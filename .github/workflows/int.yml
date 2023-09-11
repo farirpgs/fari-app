@@ -15,30 +15,23 @@ jobs:
       # Checkout
       - name: Checkout
         uses: actions/checkout@v2
-      # Use Node
-      - name: Use Node
-        uses: actions/setup-node@v2
+      # Use Bun
+      - name: Use Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: "18"
-      # Cache
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          bun-version: latest
       # Install
       - name: Install
-        run: npm install
+        run: bun install
       # Build
       - name: Build
-        run: npm run build
-      # Install NPM dependencies, cache them correctly
+        run: bun run build
+      # Install bun dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          start: npm run serve:build
+          start: bun run serve:build
       - name: Upload Cypress Videos
         uses: actions/upload-artifact@v3
         if: always()
