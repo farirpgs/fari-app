@@ -1,9 +1,9 @@
+"use client";
 import { Box } from "@mui/material";
+import { useParams, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Scene } from "../../components/Scene/Scene";
 import { Toolbox } from "../../components/Toolbox/Toolbox";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
@@ -14,14 +14,14 @@ import { useEvent } from "../../hooks/useEvent/useEvent";
 import { useScene } from "../../hooks/useScene/useScene";
 import { DiceDrawer } from "../DiceRoute/components/DiceDrawer";
 
-function SceneRoute() {
-  const params = useParams<{ id: string }>();
+export function SceneRoute() {
+  const params = useParams();
   const scenesManager = useContext(ScenesContext);
   const sceneManager = useScene();
   const sceneName = sceneManager.state.scene?.name ?? "";
 
   const pageTitle = previewContentEditable({ value: sceneName });
-  const navigate = useNavigate();
+  const router = useRouter();
   const logger = useLogger();
   const myBinderManager = useContext(MyBinderContext);
 
@@ -42,14 +42,13 @@ function SceneRoute() {
     if (sceneToLoad) {
       sceneManager.actions.loadScene(sceneToLoad);
     } else {
-      navigate("/", { replace: true });
+      router.replace("/");
       myBinderManager.actions.open({ folder: "scenes" });
     }
   }, [params.id, scenesManager.state.scenes]);
 
   return (
     <>
-      <PageMeta title={pageTitle} />
       <Page maxWidth="none" sx={{ paddingTop: "2rem" }}>
         <Box px="2rem">
           <Scene

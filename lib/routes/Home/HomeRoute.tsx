@@ -396,7 +396,7 @@ export const HomeRoute: React.FC<{}> = () => {
             src="https://img.icons8.com/plasticine/100/000000/contract.png"
           />
         ),
-        href: "https://fari.games/en/resources/fari-rpgs/fari-app-wiki",
+        href: "https://fari.community/creators/fari-rpgs/projects/fari-app-wiki",
       },
       {
         label: t("home-route.cards.fari-games.title"),
@@ -410,7 +410,7 @@ export const HomeRoute: React.FC<{}> = () => {
             src="https://img.icons8.com/plasticine/100/000000/bookmark--v1.png"
           />
         ),
-        href: "https://fari.games",
+        href: "https://fari.community",
       },
     ];
     return (

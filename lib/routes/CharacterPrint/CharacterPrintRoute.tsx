@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   Container,
@@ -6,11 +7,10 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { useParams, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
@@ -22,10 +22,11 @@ import {
   useMiniTheme,
 } from "../Character/components/CharacterDialog/MiniThemeContext";
 import { BlockByType } from "../Character/components/CharacterDialog/components/BlockByType";
-function CharacterPrintRoute() {
+
+export function CharacterPrintRoute() {
   const theme = useTheme();
-  const navigate = useNavigate();
-  const params = useParams<{ id: string }>();
+  const router = useRouter();
+  const params = useParams();
   const charactersManager = useContext(CharactersContext);
   const settingsManager = useContext(SettingsContext);
   const [character, setCharacter] = useState<ICharacter | undefined>(undefined);
@@ -46,9 +47,7 @@ function CharacterPrintRoute() {
     if (characterToLoad) {
       setCharacter(characterToLoad);
     } else {
-      navigate("/", {
-        replace: true,
-      });
+      router.replace("/");
       myBinderManager.actions.open({ folder: "characters" });
     }
   }, [params.id, charactersManager.state.characters]);
@@ -57,8 +56,6 @@ function CharacterPrintRoute() {
 
   return (
     <>
-      <PageMeta title={character?.name} />
-
       <Box bgcolor={theme.palette.background.paper} mt="1rem">
         <Container maxWidth={maxWidth}>
           <PrintCharacter character={character} />

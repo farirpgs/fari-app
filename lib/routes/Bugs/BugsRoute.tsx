@@ -1,3 +1,4 @@
+"use client";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import { Box, Container, useTheme } from "@mui/material";
 import { Heading } from "../../components/Heading/Heading";

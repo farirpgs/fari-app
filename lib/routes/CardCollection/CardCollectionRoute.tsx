@@ -1,3 +1,5 @@
+"use client";
+
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import SaveIcon from "@mui/icons-material/Save";
 import Masonry from "@mui/lab/Masonry";
@@ -13,9 +15,8 @@ import {
 } from "@mui/material";
 import { produce } from "immer";
 import isEqual from "lodash/isEqual";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useContext, useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router";
 
 import {
   ContentEditable,
@@ -25,7 +26,6 @@ import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { IndexCard } from "../../components/IndexCard/IndexCard";
 import { MasonryResizer } from "../../components/MasonryResizer/MasonryResizer";
 import { Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { IndexCardCollectionsContext } from "../../contexts/IndexCardCollectionsContext/IndexCardCollectionsContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
@@ -239,8 +239,8 @@ function useCardCollection(props: {
   };
 }
 
-function CardCollectionRoute() {
-  const params = useParams<{ id: string }>();
+export function CardCollectionRoute() {
+  const params = useParams();
   const indexCardCollectionsManager = useContext(IndexCardCollectionsContext);
   const [selectedCardCollection, setSelectedCardCollection] = useState<
     IIndexCardCollection | undefined
@@ -286,7 +286,6 @@ function CardCollectionRoute() {
 
   return (
     <>
-      <PageMeta title={pageTitle} />
       <Page maxWidth="none" sx={{ paddingTop: "2rem" }}>
         <Container maxWidth="md">
           <Box mb=".5rem">

@@ -600,7 +600,7 @@ export const Page: React.FC<{
                     label: "Documents",
                     links: [
                       {
-                        href: "https://fari.games/en/resources/fari-rpgs/fari-app-wiki",
+                        href: "https://fari.community/creators/fari-rpgs/projects/fari-app-wiki",
                         label: t("menu.fari-wiki"),
                         icon: <InfoIcon />,
                       },
