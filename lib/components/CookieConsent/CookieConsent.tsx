@@ -1,12 +1,15 @@
+"useClient";
+
 import { Box, Button, Snackbar } from "@mui/material";
+
 import React, { useState } from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
 const cookieConsentLocalStorageKey = "cookie-consent";
-
+const storage = typeof window !== "undefined" ? window.localStorage : undefined;
 type ICookieConsent = "true" | undefined;
 export const CookieConsent: React.FC = () => {
-  const valueFromStorage = localStorage.getItem(
+  const valueFromStorage = storage?.getItem(
     cookieConsentLocalStorageKey,
   ) as ICookieConsent;
 
@@ -16,7 +19,7 @@ export const CookieConsent: React.FC = () => {
 
   function handleClose() {
     setConsent("true");
-    localStorage.setItem(cookieConsentLocalStorageKey, "true");
+    storage?.setItem(cookieConsentLocalStorageKey, "true");
   }
 
   return (

@@ -8,6 +8,6 @@ export async function generateMetadata() {
   };
 }
 
-export default function () {
+export default function DicePage() {
   return <DiceRoute></DiceRoute>;
 }

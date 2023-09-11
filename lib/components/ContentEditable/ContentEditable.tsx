@@ -62,6 +62,7 @@ export const ContentEditablePreview: React.FC<IPreviewContentEditableOptions> =
     });
     return <>{content}</>;
   });
+ContentEditablePreview.displayName = "ContentEditablePreview";
 
 export const ContentEditable: React.FC<
   {

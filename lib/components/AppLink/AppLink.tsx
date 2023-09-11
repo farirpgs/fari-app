@@ -98,6 +98,7 @@ export const AppButtonLink = React.forwardRef<
     </Button>
   );
 });
+AppButtonLink.displayName = "AppButtonLink";
 
 export const MUILink = MaterialUILink;
 export const RouterLink = NextJSLink;

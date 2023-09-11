@@ -12,8 +12,7 @@ export type IBlockWithRollablePool = {
   pool: IRollablePool;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function useDice(props: {}) {
+export function useDice() {
   const [blockWithPools, setBlockWithPools] = useState<
     Array<IBlockWithRollablePool>
   >([]);

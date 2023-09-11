@@ -68,6 +68,7 @@ export const BlockNumeric = React.memo(
     );
   },
 );
+BlockNumeric.displayName = "BlockNumeric";
 
 export const BlockNumericActions = React.memo(
   (
@@ -108,3 +109,5 @@ export const BlockNumericActions = React.memo(
     );
   },
 );
+
+BlockNumericActions.displayName = "BlockNumericActions";

@@ -225,6 +225,8 @@ export const BlockPointCounter = React.memo(
   },
 );
 
+BlockPointCounter.displayName = "BlockPointCounter";
+
 export function BlockPointCounterActions(
   props: IBlockActionComponentProps<IPointCounterBlock> & {
     onMainPointCounterChange?(): void;

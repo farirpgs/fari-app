@@ -69,6 +69,7 @@ export const BlockSkill = React.memo(
     );
   },
 );
+BlockSkill.displayName = "BlockSkill";
 
 export const BlockSkillActions = React.memo(
   (
@@ -129,3 +130,4 @@ export const BlockSkillActions = React.memo(
     );
   },
 );
+BlockSkillActions.displayName = "BlockSkillActions";

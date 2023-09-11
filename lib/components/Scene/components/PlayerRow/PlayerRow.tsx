@@ -384,3 +384,4 @@ const PlayerRowName = React.memo(
     }
   },
 );
+PlayerRowName.displayName = "PlayerRowName";

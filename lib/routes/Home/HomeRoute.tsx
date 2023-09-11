@@ -1,4 +1,5 @@
 "use client";
+
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
@@ -52,7 +53,7 @@ const Sponsors: Array<{ image: string; name: string; link: string }> = [
   },
   {
     name: "Lokalise",
-    image: lokalise,
+    image: lokalise.src,
     link: "https://lokalise.com/",
   },
   {
@@ -67,7 +68,7 @@ type IHomeRouteCard = {
   description: string;
   ctaLabel: string;
   icon: React.ElementType;
-  to?: string;
+  href?: string;
   onClick?: () => void;
 };
 
@@ -86,10 +87,6 @@ export const HomeRoute: React.FC<{}> = () => {
 
   return (
     <Page hideHeaderLogo maxWidth="100vw" sx={{ paddingTop: "2rem" }}>
-      {/* <PageMeta
-        title={undefined}
-        description={t("home-route.meta.description")}
-      /> */}
       <Box>
         <DarkBox px="2rem" mt="-2rem" textAlign="left" linear>
           <Box sx={{ maxWidth: FariToolbarMaxWidth, margin: "0 auto" }}>
@@ -287,6 +284,7 @@ export const HomeRoute: React.FC<{}> = () => {
           <img
             className={props.className}
             src="https://img.icons8.com/plasticine/100/000000/alps.png"
+            alt="scenes"
           />
         ),
         onClick: () => {
@@ -301,6 +299,7 @@ export const HomeRoute: React.FC<{}> = () => {
           <img
             className={props.className}
             src="https://img.icons8.com/plasticine/100/000000/wizard.png"
+            alt="characters"
           />
         ),
         ctaLabel: t("home-route.cards.characters.cta"),
@@ -317,9 +316,10 @@ export const HomeRoute: React.FC<{}> = () => {
           <img
             className={props.className}
             src="https://img.icons8.com/plasticine/100/000000/dice.png"
+            alt="dice-roller"
           />
         ),
-        to: "/dice",
+        href: "/dice",
       },
     ];
     return (
@@ -339,9 +339,10 @@ export const HomeRoute: React.FC<{}> = () => {
           <img
             className={props.className}
             src="https://img.icons8.com/plasticine/100/000000/cloud-backup-restore.png"
+            alt="data"
           />
         ),
-        to: "/data",
+        href: "/data",
       },
 
       {
@@ -354,9 +355,10 @@ export const HomeRoute: React.FC<{}> = () => {
           <img
             className={props.className}
             src="https://img.icons8.com/plasticine/100/000000/crystal-ball.png"
+            alt="play-solo"
           />
         ),
-        to: "/oracle",
+        href: "/oracle",
       },
     ];
     return (
@@ -376,10 +378,11 @@ export const HomeRoute: React.FC<{}> = () => {
           // https://icons8.com/icons/plasticine
           <img
             className={props.className}
+            alt="changelog"
             src="https://img.icons8.com/plasticine/100/000000/comments.png"
           />
         ),
-        to: "https://fari.canny.io/changelog",
+        href: "https://fari.canny.io/changelog",
       },
       {
         label: t("home-route.cards.wiki.title"),
@@ -389,10 +392,11 @@ export const HomeRoute: React.FC<{}> = () => {
           // https://icons8.com/icons/plasticine
           <img
             className={props.className}
+            alt="wiki"
             src="https://img.icons8.com/plasticine/100/000000/contract.png"
           />
         ),
-        to: "https://fari.games/en/resources/fari-rpgs/fari-app-wiki",
+        href: "https://fari.games/en/resources/fari-rpgs/fari-app-wiki",
       },
       {
         label: t("home-route.cards.fari-games.title"),
@@ -402,10 +406,11 @@ export const HomeRoute: React.FC<{}> = () => {
           // https://icons8.com/icons/plasticine
           <img
             className={props.className}
+            alt="fari-games"
             src="https://img.icons8.com/plasticine/100/000000/bookmark--v1.png"
           />
         ),
-        to: "https://fari.games",
+        href: "https://fari.games",
       },
     ];
     return (
@@ -443,7 +448,7 @@ export const HomeRoute: React.FC<{}> = () => {
           <Grid item xs={12}>
             <Box
               component="img"
-              src={discord}
+              src={discord.src}
               sx={{
                 width: "50px",
                 height: "auto",
@@ -797,13 +802,13 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                       {card.ctaLabel}
                     </Button>
                   )}
-                  {card.to && (
+                  {card.href && (
                     <Button
                       color="secondary"
                       variant="outlined"
                       size="large"
                       LinkComponent={AppButtonLink}
-                      href={card.to}
+                      href={card.href}
                     >
                       {card.ctaLabel}
                     </Button>

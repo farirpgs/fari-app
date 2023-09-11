@@ -32,7 +32,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           async
           src="https://www.googletagmanager.com/gtag/js?id=UA-150306816-1"
         />
-        <Script>
+        <Script id="universal-analytics">
           {` window.dataLayer = window.dataLayer || [];
           function gtag() {
             dataLayer.push(arguments);
@@ -46,7 +46,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-BRZ1HL2EJG"
         />
-        <Script>
+        <Script id="google-tag-manager">
           {`window.dataLayer = window.dataLayer || [];
           function gtag() {
             dataLayer.push(arguments);
@@ -71,7 +71,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           type="text/javaScript"
           src="https://ko-fi.com/widgets/widget_2.js"
         ></Script>
-        <Script>
+        <Script id="canny">
           {`!(function (w, d, i, s) {
             function l() {
               if (!d.getElementById(i)) {

@@ -180,3 +180,4 @@ export const PlayersPresence = React.forwardRef(
     }
   },
 );
+PlayersPresence.displayName = "PlayersPresence";
