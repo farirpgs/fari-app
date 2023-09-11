@@ -1,5 +1,5 @@
 import { Alert, Snackbar } from "@mui/material";
-import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -359,6 +359,3 @@ function PlayRoute() {
     </>
   );
 }
-
-PlayRoute.displayName = "PlayRoute";
-export default PlayRoute;

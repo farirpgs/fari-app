@@ -1,3 +1,4 @@
+"use client";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import ReplayIcon from "@mui/icons-material/Replay";
 import {
@@ -9,12 +10,11 @@ import {
   lighten,
   useTheme,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Heading } from "../../components/Heading/Heading";
 import { IndexCardColor } from "../../components/IndexCard/IndexCardColor";
 import { Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Images } from "../../constants/Images";
 import { useTextColors } from "../../hooks/useTextColors/useTextColors";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -39,11 +39,6 @@ export function StoryBuilderRoute() {
 
   return (
     <Page sx={{ paddingTop: "2rem" }}>
-      <PageMeta
-        title={t("story-builder-route.meta.title")}
-        description={t("story-builder-route.meta.description")}
-      />
-
       <Heading
         title={t("story-builder-route.meta.title")}
         icon={LocalLibraryIcon}

@@ -36,7 +36,8 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+
+import { useRouter } from "next/navigation";
 import { Images } from "../../constants/Images";
 import { env } from "../../constants/env";
 import { useZIndex } from "../../constants/zIndex";
@@ -77,7 +78,7 @@ export const Page: React.FC<{
   children?: React.ReactNode;
   sx?: BoxProps["sx"];
 }> = (props) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("md"));
   const [menuOpen, setMenuOpen] = useState(false);
@@ -168,7 +169,7 @@ export const Page: React.FC<{
             >
               <Grid item xs={isSmall ? 12 : undefined}>
                 <AppButtonLink
-                  to="https://farirpgs.com/discord"
+                  href="https://farirpgs.com/discord"
                   target="_blank"
                   color="secondary"
                   startIcon={<ChatIcon />}
@@ -201,7 +202,7 @@ export const Page: React.FC<{
               <Grid item xs={isSmall ? 12 : undefined}>
                 <Typography>
                   <AppLink
-                    to="/changelog"
+                    href="/changelog"
                     underline="always"
                     color="secondary"
                   >{`v${env.version}`}</AppLink>
@@ -381,7 +382,7 @@ export const Page: React.FC<{
                   display: props.hideHeaderLogo ? "none" : "inherit",
                 }}
               >
-                <NavLink to="/" data-cy="page.menu.home">
+                <NavLink href="/" data-cy="page.menu.home">
                   <Grid container wrap="nowrap" alignItems="center">
                     <Grid item sx={{ display: "flex" }}>
                       <Box
@@ -472,7 +473,7 @@ export const Page: React.FC<{
                   <Button
                     color="primary"
                     onClick={() => {
-                      navigate(`/play/${gameId}`);
+                      router.push(`/play/${gameId}`);
                     }}
                     variant={"outlined"}
                     sx={{
@@ -530,29 +531,29 @@ export const Page: React.FC<{
                     label: t("menu.tools"),
                     links: [
                       {
-                        to: "/data",
+                        href: "/data",
                         label: t("menu.data"),
                         icon: <StorageIcon />,
                       },
                       {
-                        to: "/dice",
+                        href: "/dice",
                         label: t("menu.dice"),
                         icon: <Icons.FateDice />,
                         ["data-cy"]: "page.menu.tools.dice",
                       },
 
                       {
-                        to: "/story-builder",
+                        href: "/story-builder",
                         label: "Story Builder",
                         icon: <LocalLibraryIcon />,
                       },
                       {
-                        to: "/story-dice",
+                        href: "/story-dice",
                         label: "Story Dice",
                         icon: <CasinoIcon />,
                       },
                       {
-                        to: "/oracle",
+                        href: "/oracle",
                         label: t("menu.oracle"),
                         icon: <Icons.EyeIcon />,
                       },
@@ -575,12 +576,12 @@ export const Page: React.FC<{
                         target: "_blank",
                       },
                       {
-                        to: "/feature-requests",
+                        href: "/feature-requests",
                         label: t("menu.feature-requests"),
                         icon: <EmojiObjectsIcon />,
                       },
                       {
-                        to: "/bugs",
+                        href: "/bugs",
                         label: t("menu.report-a-bug"),
                         icon: <BugReportIcon />,
                       },

@@ -64,7 +64,6 @@ export const BlockText = React.memo(function (
     </>
   );
 });
-BlockText.displayName = "BlockText";
 
 function BlockTextLabel(props: {
   label: string | undefined;
@@ -220,4 +219,3 @@ export const BlockTextActions = React.memo(
     );
   },
 );
-BlockTextActions.displayName = "BlockTextActions";

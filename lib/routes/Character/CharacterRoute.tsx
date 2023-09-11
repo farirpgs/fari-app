@@ -1,5 +1,5 @@
 import { Box, Snackbar, useTheme } from "@mui/material";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -170,6 +170,3 @@ function CharacterRoute() {
     </>
   );
 }
-
-CharacterRoute.displayName = "CharacterRoute";
-export default CharacterRoute;

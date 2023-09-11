@@ -10,7 +10,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -63,9 +63,6 @@ export const OracleRoute = () => {
     </Page>
   );
 };
-
-OracleRoute.displayName = "OracleRoute";
-export default OracleRoute;
 
 export function Oracle() {
   const { t } = useTranslate();

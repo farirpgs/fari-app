@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Box,
   BoxProps,
@@ -8,10 +10,9 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { StoryDiceIcons } from "../../domains/Icons/StoryDiceIcons/StoryDiceIcons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -29,10 +30,6 @@ export function StoryDiceRoute() {
   const { t } = useTranslate();
   return (
     <Page sx={{ paddingTop: "2rem" }}>
-      <PageMeta
-        title={t("story-dice-route.meta.title")}
-        description={t("story-dice-route.meta.description")}
-      />
       <Heading title={t("story-dice-route.meta.title")}>
         <>
           <Text>
@@ -46,8 +43,6 @@ export function StoryDiceRoute() {
     </Page>
   );
 }
-
-export default StoryDiceRoute;
 
 export function StoryDice() {
   const [diceNameAndIcon, setDiceNameAndIcon] = useState<

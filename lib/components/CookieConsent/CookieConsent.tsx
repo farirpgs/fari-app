@@ -54,5 +54,3 @@ export const CookieConsent: React.FC = () => {
     />
   );
 };
-
-CookieConsent.displayName = "CookieConsent";

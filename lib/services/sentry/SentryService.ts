@@ -3,7 +3,10 @@ import { SeverityLevel } from "@sentry/react";
 import { env } from "../../constants/env";
 
 const shouldLog =
-  !env.isTest && !env.isDev && location.hostname !== "localhost";
+  typeof window !== "undefined" &&
+  !env.isTest &&
+  !env.isDev &&
+  location.hostname !== "localhost";
 
 export function makeSentryService() {
   if (shouldLog) {

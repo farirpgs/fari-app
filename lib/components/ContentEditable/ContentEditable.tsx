@@ -199,4 +199,3 @@ export const ContentEditable: React.FC<
     </>
   );
 };
-ContentEditable.displayName = "ContentEditable";

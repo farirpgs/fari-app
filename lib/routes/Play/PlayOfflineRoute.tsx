@@ -53,6 +53,3 @@ export const PlayOfflineRoute: React.FC<{}> = () => {
     </>
   );
 };
-
-PlayOfflineRoute.displayName = "PlayOfflineRoute";
-export default PlayOfflineRoute;

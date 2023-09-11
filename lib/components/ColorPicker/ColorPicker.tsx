@@ -37,4 +37,3 @@ export const ColorPicker: React.FC<{
     />
   );
 };
-ColorPicker.displayName = "ColorPicker";

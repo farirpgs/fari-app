@@ -12,13 +12,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import {
-  default as React,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
@@ -211,5 +205,3 @@ function JoinAGameRoute() {
     );
   }
 }
-
-export default JoinAGameRoute;

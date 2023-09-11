@@ -13,7 +13,7 @@ import {
   Tooltip,
   useTheme,
 } from "@mui/material";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import {
   ContentEditable,
   previewContentEditable,
@@ -273,7 +273,6 @@ export function BlockSlotTracker(
     );
   }
 }
-BlockSlotTracker.displayName = "BlockSlotTracker";
 
 export function BlockSlotTrackerActions(
   props: IBlockActionComponentProps<ISlotTrackerBlock>,

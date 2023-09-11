@@ -13,8 +13,10 @@ import {
 } from "@mui/material";
 import { produce } from "immer";
 import isEqual from "lodash/isEqual";
-import React, { useContext, useEffect, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useRouter } from "next/navigation";
+import { useContext, useEffect, useMemo, useState } from "react";
+import { useParams } from "react-router";
+
 import {
   ContentEditable,
   previewContentEditable,
@@ -260,7 +262,7 @@ function CardCollectionRoute() {
 
   const { t } = useTranslate();
   const theme = useTheme();
-  const navigate = useNavigate();
+  const router = useRouter();
   const logger = useLogger();
   const myBinderManager = useContext(MyBinderContext);
 
@@ -277,7 +279,7 @@ function CardCollectionRoute() {
     if (cardToLoad) {
       setSelectedCardCollection(cardToLoad);
     } else {
-      navigate("/", { replace: true });
+      router.replace("/");
       myBinderManager.actions.open({ folder: "index-card-collections" });
     }
   }, [params.id, indexCardCollectionsManager.state.indexCardCollections]);
@@ -463,6 +465,3 @@ function CardCollectionRoute() {
     );
   }
 }
-
-CardCollectionRoute.displayName = "CardCollectionRoute";
-export default CardCollectionRoute;

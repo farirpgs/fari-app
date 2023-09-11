@@ -255,7 +255,6 @@ export function PlayerRow(
     </PlayerRowContainer>
   );
 }
-PlayerRow.displayName = "PlayerRow";
 
 function PlayerRowContainer(
   props: {

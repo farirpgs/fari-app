@@ -47,6 +47,3 @@ export const DrawRoute: React.FC = () => {
     </Page>
   );
 };
-
-DrawRoute.displayName = "DrawRoute";
-export default DrawRoute;

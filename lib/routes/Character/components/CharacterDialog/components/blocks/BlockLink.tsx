@@ -129,8 +129,6 @@ export const BlockLink = React.memo(
   },
 );
 
-BlockLink.displayName = "BlockLink";
-
 export const BlockLinkActions = React.memo(
   (
     props: {
@@ -168,5 +166,3 @@ export const BlockLinkActions = React.memo(
     );
   },
 );
-
-BlockLinkActions.displayName = "BlockLinkActions";

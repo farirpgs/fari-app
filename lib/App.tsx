@@ -1,19 +1,15 @@
-import {
-  CssBaseline,
-  StyledEngineProvider,
-  ThemeProvider,
-} from "@mui/material";
+"use client";
+
 import * as Sentry from "@sentry/react";
-import React, { ReactNode, useContext } from "react";
+import { ReactNode, useContext } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import { BrowserRouter, useNavigate } from "react-router-dom";
-import { AppRouter } from "./components/AppRouter/AppRouter";
+
+import { useRouter } from "next/navigation";
+import ThemeRegistry from "../app/ThemeRegistry";
 import { previewContentEditable } from "./components/ContentEditable/ContentEditable";
 import { ErrorReport } from "./components/ErrorBoundary/ErrorReport";
 import { IManagerViewModel, MyBinder } from "./components/MyBinder/MyBinder";
-import { env } from "./constants/env";
 import {
   CharactersContext,
   useCharacters,
@@ -47,58 +43,37 @@ import { SceneFactory } from "./domains/scene/SceneFactory";
 import { IScene } from "./hooks/useScene/IScene";
 import { useTranslate } from "./hooks/useTranslate/useTranslate";
 import { getDefaultInjections } from "./services/injections";
-import { AppDarkTheme, AppLightTheme } from "./theme";
 
 const injections = getDefaultInjections();
 
-export function App() {
-  return (
-    <AppContexts>
-      <AppRouter />
-    </AppContexts>
-  );
-}
-
-function AppContexts(props: { children: ReactNode }) {
+export function AppProviders(props: { children: ReactNode }) {
   const settingsManager = useSettings();
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
   const indexCardCollectionsManager = useIndexCardCollections();
-  const diceManager = useDice({
-    // defaultCommands: settingsManager.state.diceCommandIds,
-    // defaultOptions: settingsManager.state.diceOptions,
-    // onCommandSetsChange(commandSetOptions) {
-    //   const commandSetIds = commandSetOptions.map((l) => l.id);
-    //   settingsManager.actions.setDiceCommandsIds(commandSetIds);
-    // },
-    // onOptionsChange: (options) => {
-    //   settingsManager.actions.setDiceOptions(options);
-    // },
-  });
+  const diceManager = useDice({});
   const myBinderManager = useMyBinder();
 
   return (
-    <React.Suspense fallback={null}>
-      <InjectionsContext.Provider value={injections}>
-        <DndProvider backend={HTML5Backend}>
-          <SettingsContext.Provider value={settingsManager}>
-            <CharactersContext.Provider value={charactersManager}>
-              <ScenesContext.Provider value={scenesManager}>
-                <IndexCardCollectionsContext.Provider
-                  value={indexCardCollectionsManager}
-                >
-                  <DiceContext.Provider value={diceManager}>
-                    <MyBinderContext.Provider value={myBinderManager}>
-                      <AppProviders>{props.children}</AppProviders>
-                    </MyBinderContext.Provider>
-                  </DiceContext.Provider>
-                </IndexCardCollectionsContext.Provider>
-              </ScenesContext.Provider>
-            </CharactersContext.Provider>
-          </SettingsContext.Provider>
-        </DndProvider>
-      </InjectionsContext.Provider>
-    </React.Suspense>
+    <InjectionsContext.Provider value={injections}>
+      <DndProvider backend={HTML5Backend}>
+        <SettingsContext.Provider value={settingsManager}>
+          <CharactersContext.Provider value={charactersManager}>
+            <ScenesContext.Provider value={scenesManager}>
+              <IndexCardCollectionsContext.Provider
+                value={indexCardCollectionsManager}
+              >
+                <DiceContext.Provider value={diceManager}>
+                  <MyBinderContext.Provider value={myBinderManager}>
+                    <InternalProviders>{props.children}</InternalProviders>
+                  </MyBinderContext.Provider>
+                </DiceContext.Provider>
+              </IndexCardCollectionsContext.Provider>
+            </ScenesContext.Provider>
+          </CharactersContext.Provider>
+        </SettingsContext.Provider>
+      </DndProvider>
+    </InjectionsContext.Provider>
   );
 }
 
@@ -107,7 +82,7 @@ function MyBinderManager() {
   const charactersManager = useContext(CharactersContext);
   const indexCardCollectionsManager = useContext(IndexCardCollectionsContext);
   const myBinderManager = useContext(MyBinderContext);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   type IHandlers = {
     onSelect(element: IManagerViewModel): void;
@@ -168,7 +143,7 @@ function MyBinderManager() {
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(newCharacter);
         } else {
-          navigate(`/characters/${newCharacter.id}?advanced=true`);
+          router.push(`/characters/${newCharacter.id}?advanced=true`);
         }
         myBinderManager.actions.close();
       },
@@ -176,7 +151,7 @@ function MyBinderManager() {
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(element.original);
         } else {
-          navigate(`/characters/${element.id}`);
+          router.push(`/characters/${element.id}`);
         }
         myBinderManager.actions.close();
       },
@@ -193,9 +168,8 @@ function MyBinderManager() {
         charactersManager.actions.upsert(element.original);
       },
       async onImport(importPaths) {
-        const { entity, exists } = await charactersManager.actions.importEntity(
-          importPaths,
-        );
+        const { entity, exists } =
+          await charactersManager.actions.importEntity(importPaths);
 
         if (!exists) {
           charactersManager.actions.upsert(entity);
@@ -227,7 +201,7 @@ function MyBinderManager() {
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(newScene);
         } else {
-          navigate(`/scenes/${newScene.id}`);
+          router.push(`/scenes/${newScene.id}`);
         }
         myBinderManager.actions.close();
       },
@@ -235,7 +209,7 @@ function MyBinderManager() {
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(element.original);
         } else {
-          navigate(`/scenes/${element.id}`);
+          router.push(`/scenes/${element.id}`);
         }
         myBinderManager.actions.close();
       },
@@ -252,9 +226,8 @@ function MyBinderManager() {
         scenesManager.actions.upsert(element.original);
       },
       async onImport(importPaths) {
-        const { entity, exists } = await scenesManager.actions.importEntity(
-          importPaths,
-        );
+        const { entity, exists } =
+          await scenesManager.actions.importEntity(importPaths);
 
         if (!exists) {
           scenesManager.actions.upsert(entity);
@@ -284,7 +257,7 @@ function MyBinderManager() {
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(newEntity);
         } else {
-          navigate(`/cards/${newEntity.id}`);
+          router.push(`/cards/${newEntity.id}`);
         }
         myBinderManager.actions.close();
       },
@@ -292,7 +265,7 @@ function MyBinderManager() {
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(element.original);
         } else {
-          navigate(`/cards/${element.id}`);
+          router.push(`/cards/${element.id}`);
         }
         myBinderManager.actions.close();
       },
@@ -387,46 +360,23 @@ function MyBinderManager() {
   );
 }
 
-function AppProviders(props: { children: ReactNode }) {
-  const settingsManager = useContext(SettingsContext);
-
+function InternalProviders(props: { children: ReactNode }) {
   return (
-    <ThemeProvider
-      theme={
-        settingsManager.state.themeMode === "dark"
-          ? AppDarkTheme
-          : AppLightTheme
-      }
-    >
-      <StyledEngineProvider injectFirst>
-        <CssBaseline />
-        <Sentry.ErrorBoundary
-          fallback={
-            <>
-              <ErrorReport />
-            </>
-          }
-          showDialog
-        >
-          <HelmetProvider>
-            <BrowserRouter>
-              <Helmet
-                htmlAttributes={{
-                  "client-build-number": env.buildNumber,
-                  "client-hash": env.hash,
-                  "client-context": env.context,
-                }}
-              />
-              <MyBinderManager />
-              {props.children}
-            </BrowserRouter>
-          </HelmetProvider>
-        </Sentry.ErrorBoundary>
-      </StyledEngineProvider>
-    </ThemeProvider>
+    <ThemeRegistry options={{ key: "mui" }}>
+      <Sentry.ErrorBoundary
+        fallback={
+          <>
+            <ErrorReport />
+          </>
+        }
+        showDialog
+      >
+        <MyBinderManager />
+        {props.children}
+      </Sentry.ErrorBoundary>
+    </ThemeRegistry>
   );
 }
-AppProviders.displayName = "AppProvider";
 
 /**
  * for dynamic keys

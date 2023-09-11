@@ -217,4 +217,3 @@ export const BlockImage = React.memo(
     }
   },
 );
-BlockImage.displayName = "BlockImage";

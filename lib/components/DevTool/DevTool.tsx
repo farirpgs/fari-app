@@ -18,4 +18,3 @@ export const DevTool: React.FC<{
     </Box>
   );
 };
-DevTool.displayName = "DevTool";

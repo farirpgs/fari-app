@@ -2509,7 +2509,6 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 };
-CharacterV3Dialog.displayName = "CharacterV3Dialog";
 
 export function ManagerBox(props: {
   label: string | React.ReactNode;

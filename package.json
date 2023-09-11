@@ -10,7 +10,7 @@
   },
   "scripts": {
     "ci": "npm install --force && bun run build && bun run validate",
-    "dev": "bun run vite --open",
+    "dev": "next dev --turbo",
     "start": "bun run vite build --sourcemap inline --minify false && bun run vite preview --port 1234",
     "build": "bun run vite build",
     "serve:build": "bun run vite preview --port 1234",
@@ -60,15 +60,13 @@
     "immer": "^10.0.2",
     "lodash": "^4.17.21",
     "netlify-cli": "^15.11.0",
+    "next": "latest",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
-    "react-helmet-async": "^1.3.0",
     "react-i18next": "^13.0.3",
-    "react-router": "^6.14.2",
-    "react-router-dom": "^6.14.2",
     "uuid": "^9.0.0",
     "vitest": "^0.34.4"
   },
@@ -110,8 +108,7 @@
     "react-test-renderer": "^18.2.0",
     "storybook": "^7.3.1",
     "terser": "^5.19.4",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.9"
+    "typescript": "^5.1.6"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": "eslint --cache --fix",

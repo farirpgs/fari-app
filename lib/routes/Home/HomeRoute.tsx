@@ -1,3 +1,4 @@
+"use client";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
@@ -15,8 +16,8 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router";
 import discord from "../../../images/services/discord.png";
 import lokalise from "../../../images/services/lokalise.png";
 import { AppButtonLink, RouterLink } from "../../components/AppLink/AppLink";
@@ -24,7 +25,6 @@ import { ConditionalWrapper } from "../../components/ConditionalWrapper/Conditio
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Kofi } from "../../components/Kofi/Kofi";
 import { FariToolbarMaxWidth, Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Patreon } from "../../components/Patreon/Patreon";
 import { Images } from "../../constants/Images";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
@@ -74,23 +74,22 @@ type IHomeRouteCard = {
 const sectionsSeparator = "4rem";
 
 export const HomeRoute: React.FC<{}> = () => {
-  const navigate = useNavigate();
   const { t } = useTranslate();
   const logger = useLogger();
   const lightBackground = useLightBackground();
   const theme = useTheme();
   const myBinderManager = useContext(MyBinderContext);
-
+  const router = useRouter();
   useEffect(() => {
     logger.track("view_home");
   }, []);
 
   return (
     <Page hideHeaderLogo maxWidth="100vw" sx={{ paddingTop: "2rem" }}>
-      <PageMeta
+      {/* <PageMeta
         title={undefined}
         description={t("home-route.meta.description")}
-      />
+      /> */}
       <Box>
         <DarkBox px="2rem" mt="-2rem" textAlign="left" linear>
           <Box sx={{ maxWidth: FariToolbarMaxWidth, margin: "0 auto" }}>
@@ -433,8 +432,8 @@ export const HomeRoute: React.FC<{}> = () => {
               color="primary"
               variant="outlined"
               size="large"
-              component={RouterLink}
-              to={"/feature-requests"}
+              LinkComponent={RouterLink}
+              href={"/feature-requests"}
             >
               {t("home-route.sections.request-a-feature.cta")}
             </Button>
@@ -537,7 +536,7 @@ export const HomeRoute: React.FC<{}> = () => {
                 size="large"
                 sx={{ height: "3rem" }}
                 onClick={() => {
-                  navigate("/play");
+                  router.push("/play");
                   logger.track("home.start_online_game");
                 }}
               >
@@ -553,7 +552,7 @@ export const HomeRoute: React.FC<{}> = () => {
                 data-cy="home.play-offline"
                 sx={{ height: "3rem" }}
                 onClick={() => {
-                  navigate("/play-offline");
+                  router.push("/play-offline");
                   logger.track("home.start_offline_game");
                 }}
               >
@@ -596,9 +595,6 @@ export const HomeRoute: React.FC<{}> = () => {
     );
   }
 };
-
-HomeRoute.displayName = "HomeRoute";
-export default HomeRoute;
 
 type ILightBoxProps = {
   children: JSX.Element;
@@ -806,8 +802,8 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                       color="secondary"
                       variant="outlined"
                       size="large"
-                      component={AppButtonLink}
-                      to={card.to}
+                      LinkComponent={AppButtonLink}
+                      href={card.to}
                     >
                       {card.ctaLabel}
                     </Button>

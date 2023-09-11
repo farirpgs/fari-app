@@ -6,7 +6,6 @@ import {
 import React, { useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
 import {
   CharactersContext,
@@ -73,9 +72,7 @@ export function StoryProvider(props: {
                       }
                     >
                       <CssBaseline />
-                      <BrowserRouter>
-                        <HelmetProvider>{props.children}</HelmetProvider>
-                      </BrowserRouter>
+                      <BrowserRouter>{props.children}</BrowserRouter>
                     </ThemeProvider>
                   </StyledEngineProvider>
                 </DiceContext.Provider>

@@ -466,8 +466,6 @@ export const BlockDicePool = React.memo(
   },
 );
 
-BlockDicePool.displayName = "BlockDicePool";
-
 export const BlockDicePoolActions = React.memo(
   (
     props: {
@@ -510,8 +508,6 @@ export const BlockDicePoolActions = React.memo(
     return isEqual(prev, next);
   },
 );
-
-BlockDicePoolActions.displayName = "BlockDicePoolActions";
 
 export const Pool: React.FC<
   BoxProps & {

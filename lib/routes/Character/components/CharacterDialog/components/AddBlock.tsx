@@ -205,4 +205,3 @@ export const AddBlock: React.FC<
     </Box>
   );
 };
-AddBlock.displayName = "AddBlock";

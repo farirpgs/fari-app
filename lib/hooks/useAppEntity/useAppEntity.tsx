@@ -4,8 +4,9 @@ import { Id } from "../../domains/Id/Id";
 import { useGroups } from "../useGroups/useGroups";
 import { useStorageEntities } from "../useStorageEntities/useStorageEntities";
 
+const storage = typeof window !== "undefined" ? window.localStorage : undefined;
 export function useAppEntity<
-  T extends { id: string | undefined; name: string; group: string | undefined }
+  T extends { id: string | undefined; name: string; group: string | undefined },
 >(props: {
   fariType: IFariType;
   localStorageKey: string;
@@ -15,7 +16,7 @@ export function useAppEntity<
   onMigration: (entity: T) => T;
   localStorage: Storage | undefined;
 }) {
-  const localStorage = props?.localStorage ?? window.localStorage;
+  const localStorage = props?.localStorage ?? storage;
 
   const [entities, setEntities] = useStorageEntities<T>({
     key: props.localStorageKey,

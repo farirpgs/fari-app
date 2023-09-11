@@ -1,6 +1,5 @@
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import { Box, Container, useTheme } from "@mui/material";
-import React from "react";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -38,5 +37,3 @@ export function FeatureRequestsRoute() {
     </Page>
   );
 }
-
-export default FeatureRequestsRoute;

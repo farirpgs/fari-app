@@ -91,7 +91,6 @@ export const BlockSeparator = React.memo(
     );
   },
 );
-BlockSeparator.displayName = "BlockSeparator";
 
 export const BlockSeparatorActions = React.memo(
   (
@@ -159,4 +158,3 @@ export const BlockSeparatorActions = React.memo(
     );
   },
 );
-BlockSeparatorActions.displayName = "BlockSeparatorActions";

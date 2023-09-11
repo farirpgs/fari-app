@@ -36,7 +36,7 @@ export const Patreon: React.FC = () => {
           justifyContent="center"
         >
           <Grid item>
-            <img width="16px" src={patreonImage} />
+            <img width="16px" src={patreonImage.src} />
           </Grid>
           <Grid item>
             <Typography

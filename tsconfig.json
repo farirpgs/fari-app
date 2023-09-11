@@ -4,18 +4,50 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "esModuleInterop": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "outDir": "./.tsc",
     "skipLibCheck": true,
-    "lib": ["es2015", "es2016", "es2017", "ES2018", "ES2019", "dom"],
+    "lib": [
+      "es2015",
+      "es2016",
+      "es2017",
+      "ES2018",
+      "ES2019",
+      "dom"
+    ],
     "strict": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
     "plugins": [
       {
         "name": "typescript-tslint-plugin"
+      },
+      {
+        "name": "next"
       }
     ],
-    "types": ["vitest/globals", "vite/client", "bun-types"]
+    "types": [
+      "vitest/globals",
+      "bun-types",
+      "next"
+    ],
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
-  "include": ["lib/**/*", "stories/**/*"],
-  "exclude": ["node_modules", "cypress", "dist", "lib/**/*.test.tsx"]
+  "include": [
+    "lib/**/*",
+    "app/**/*",
+    "stories/**/*",
+    "./dist/types/**/*.ts",
+    "./next-env.d.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "./node_modules",
+    "cypress",
+    "dist",
+    "lib/**/*.test.tsx"
+  ]
 }

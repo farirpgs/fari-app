@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import kebabCase from "lodash/kebabCase";
 import startCase from "lodash/startCase";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
@@ -186,5 +186,3 @@ export function NewCharacterRoute() {
     </Page>
   );
 }
-
-export default NewCharacterRoute;

@@ -1217,4 +1217,3 @@ export function Session(props: {
     );
   }
 }
-Session.displayName = "Session";

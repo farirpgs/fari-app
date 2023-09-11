@@ -3,11 +3,14 @@ import { FariEntity } from "../../domains/fari-entity/FariEntity";
 
 export function useStorageEntity<T>(props: {
   defaultValue: T;
-  localStorage: Storage;
+  localStorage: Storage | undefined;
   key: string;
   migrationFunction?: (entity: T) => T;
 }) {
   const [entity, setEntity] = useState<T>(() => {
+    if (!props.localStorage) {
+      return props.defaultValue;
+    }
     const newEntity = FariEntity.loadEntityFromStorage<T>({
       defaultValue: props.defaultValue,
       key: props.key,
@@ -21,16 +24,19 @@ export function useStorageEntity<T>(props: {
     function syncLocalStorage() {
       try {
         const serialized = JSON.stringify(entity);
-        props.localStorage.setItem(props.key, serialized);
+        props.localStorage?.setItem(props.key, serialized);
       } catch (error) {
         console.error(error);
       }
     },
-    [entity]
+    [entity],
   );
 
   useEffect(function syncOtherTabLocalStorage() {
     function refreshStorage() {
+      if (!props.localStorage) {
+        return props.defaultValue;
+      }
       const newEntity = FariEntity.loadEntityFromStorage<T>({
         defaultValue: props.defaultValue,
         key: props.key,

@@ -6,7 +6,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
@@ -67,9 +67,6 @@ function CharacterPrintRoute() {
     </>
   );
 }
-
-CharacterPrintRoute.displayName = "CharacterPrintRoute";
-export default CharacterPrintRoute;
 
 function PrintCharacter(props: { character: ICharacter | undefined }) {
   const theme = useTheme();

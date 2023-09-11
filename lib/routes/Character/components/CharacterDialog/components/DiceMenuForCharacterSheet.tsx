@@ -92,4 +92,3 @@ export function DiceMenuForCharacterSheet(props: {
     </>
   );
 }
-DiceMenuForCharacterSheet.displayName = "DiceMenuForCharacterSheet";

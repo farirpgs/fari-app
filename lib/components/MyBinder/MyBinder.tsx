@@ -35,7 +35,8 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+
+import { useRouter } from "next/navigation";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { arraySort } from "../../domains/array/arraySort";
 import { LazyState, useLazyState } from "../../hooks/useLazyState/useLazyState";
@@ -88,7 +89,7 @@ export function MyBinder<TFolders extends string>(props: {
   const { t } = useTranslate();
   const logger = useLogger();
   const theme = useTheme();
-  const navigate = useNavigate();
+  const router = useRouter();
   const searchInputRef = React.useRef<HTMLInputElement>(null);
   const [search, setSearch] = useState(props.search);
   const [folder, setFolder] = useLazyState({
@@ -397,7 +398,7 @@ export function MyBinder<TFolders extends string>(props: {
               <AppLink
                 color="secondary"
                 onClick={() => {
-                  navigate("/data");
+                  router.push("/data");
                   props.onClose();
                 }}
               >

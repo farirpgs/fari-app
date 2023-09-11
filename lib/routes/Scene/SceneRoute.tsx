@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { Page } from "../../components/Page/Page";
@@ -77,6 +77,3 @@ function SceneRoute() {
     </>
   );
 }
-
-SceneRoute.displayName = "SceneRoute";
-export default SceneRoute;

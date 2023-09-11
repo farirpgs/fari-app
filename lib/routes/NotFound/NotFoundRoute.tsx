@@ -42,6 +42,3 @@ export const NotFoundRoute: React.FC<{}> = () => {
     </div>
   );
 };
-
-NotFoundRoute.displayName = "NotFoundRoute";
-export default NotFoundRoute;
