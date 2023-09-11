@@ -65,7 +65,8 @@
     "react-i18next": "^13.0.3",
     "react-router": "^6.14.2",
     "react-router-dom": "^6.14.2",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "vitest": "^0.34.4"
   },
   "devDependencies": {
     "@happy-dom/global-registrator": "^11.0.2",
