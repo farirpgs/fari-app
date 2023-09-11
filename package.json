@@ -105,6 +105,7 @@
     "prettier": "^3.0.1",
     "react-test-renderer": "^18.2.0",
     "storybook": "^7.3.1",
+    "terser": "^5.19.4",
     "typescript": "^5.1.6",
     "vite": "^4.4.9"
   },
