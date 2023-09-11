@@ -17,9 +17,7 @@
     "beta": "bun run build && bun run deploy:preview -- --alias beta",
     "tsc": "tsc --project tsconfig.json --incremental --noEmit",
     "lint": "eslint 'lib/**' --cache",
-    "test": "bun test watch",
-    "test:run": "bun test run",
-    "test:ui": "bun test watch --ui",
+    "test": "vitest",
     "int": "bun run build && concurrently \"cypress run\" \"bun run serve:build\" --success first --kill-others --names \"cypress,server\" ",
     "int:start": "concurrently \"cypress open\" \"bun run start\" --success first --kill-others --names \"cypress,server\" ",
     "tsc-and-lint": "bun run tsc && bun run lint",
@@ -70,6 +68,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@happy-dom/global-registrator": "^11.0.2",
     "@storybook/addon-essentials": "^7.3.1",
     "@storybook/addon-interactions": "^7.3.1",
     "@storybook/addon-links": "^7.3.1",
@@ -89,7 +88,7 @@
     "@typescript-eslint/parser": "^6.3.0",
     "@vitejs/plugin-legacy": "^4.1.1",
     "@vitejs/plugin-react": "^4.0.4",
-    "@vitest/ui": "^0.34.1",
+    "bun-types": "^1.0.1",
     "chromatic": "^6.21.0",
     "concurrently": "^8.2.0",
     "cypress": "^12.17.3",
@@ -106,8 +105,7 @@
     "react-test-renderer": "^18.2.0",
     "storybook": "^7.3.1",
     "typescript": "^5.1.6",
-    "vite": "^4.4.9",
-    "vitest": "^0.34.1"
+    "vite": "^4.4.9"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": "eslint --cache --fix",

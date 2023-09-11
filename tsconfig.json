@@ -14,7 +14,7 @@
         "name": "typescript-tslint-plugin"
       }
     ],
-    "types": ["vite/client", "vitest/globals"]
+    "types": ["bun-types", "vitest/globals"]
   },
   "include": ["lib/**/*", "stories/**/*"],
   "exclude": ["node_modules", "cypress"]

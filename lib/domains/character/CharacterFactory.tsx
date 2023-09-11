@@ -94,7 +94,8 @@ export const CharacterFactory = {
   resetAllIds(character: ICharacter): ICharacter {
     return produce(character, (draft) => {
       draft.id = Id.generate();
-      draft.pages.forEach((page) => {
+
+      draft.pages?.forEach((page) => {
         page.id = Id.generate();
         page.rows.forEach((row) => {
           row.columns.forEach((col) => {
