@@ -17,5 +17,5 @@
     "types": ["vitest/globals", "vite/client", "bun-types"]
   },
   "include": ["lib/**/*", "stories/**/*"],
-  "exclude": ["node_modules", "cypress"]
+  "exclude": ["node_modules", "cypress", "dist", "lib/**/*.test.tsx"]
 }

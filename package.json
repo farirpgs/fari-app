@@ -18,6 +18,7 @@
     "tsc": "tsc --project tsconfig.json --incremental --noEmit",
     "lint": "eslint 'lib/**' --cache",
     "test": "vitest",
+    "test:run": "vitest run",
     "int": "bun run build && concurrently \"cypress run\" \"bun run serve:build\" --success first --kill-others --names \"cypress,server\" ",
     "int:start": "concurrently \"cypress open\" \"bun run start\" --success first --kill-others --names \"cypress,server\" ",
     "tsc-and-lint": "bun run tsc && bun run lint",
