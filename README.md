@@ -30,26 +30,24 @@ If you want to make a contribution to Fari, you will need to fork / clone this r
 
 ### Prerequisites
 
-1. Install Node `^16.2.0` (to match engine property in `package.json`) or use the [devcontainer](https://microsoft.github.io/code-with-engineering-playbook/developer-experience/devcontainers/) provided using [VS Code](https://code.visualstudio.com/).
+1. Install Bun at [bun.sh](bun.sh).
 
 ### Installation
 
-Fari relies on Node and the Node Package Manager to download its dependencies and run.
+Fari relies on Bun download its dependencies and run the app.
 
-If you are using the proper node and npm version, you then need to install Fari's dependencies
+To install the dependencies, simply run:
 
 ```sh
-npm install
+bun install
 ```
-
-Once the dependencies are installed, Fari will also build some of it's static content (e.g. the content of the SRD) using [11ty](https://www.11ty.dev/) which will convert the markdown files to HTML files insides a `_site` directory.
 
 ### Running the application
 
 If you want to run Fari on your machine, simply run:
 
 ```sh
-npm run run dev
+bun run dev
 ```
 
 This will start and bundle the app using [ViteJS](https://vitejs.dev/) and make it available on http://localhost:1234
