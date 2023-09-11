@@ -5,6 +5,9 @@
   "author": "René-Pier Deshaies-Gélinas",
   "license": "AGPL-3.0",
   "main": "index.js",
+  "engines": {
+    "node": "^18.17.0"
+  },
   "scripts": {
     "ci": "npm install --force && bun run build && bun run validate",
     "dev": "bun run vite --open",
