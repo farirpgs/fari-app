@@ -48,6 +48,9 @@ jobs:
       name: Preview
       url: https://${{github.run_id}}--fari.netlify.app
     steps:
+      # Checkout
+      - name: Checkout
+        uses: actions/checkout@v2
       # Use Bun
       - name: Use Bun
         uses: oven-sh/setup-bun@v1
