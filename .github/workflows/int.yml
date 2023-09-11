@@ -32,7 +32,7 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           start: bun run serve:build
-          install-command: bun install
+          install-command: bun install && cypress install
       - name: Upload Cypress Videos
         uses: actions/upload-artifact@v3
         if: always()
