@@ -1,7 +1,7 @@
 import { HomeRoute } from "../lib/routes/Home/HomeRoute";
 import { t } from "./i18n";
 
-export function generatePageMeta() {
+export async function generateMetadata() {
   return {
     title: "",
     description: t("home-route.meta.description"),
