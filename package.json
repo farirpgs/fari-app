@@ -10,7 +10,7 @@
   },
   "scripts": {
     "ci": "npm install --force && bun run build && bun run validate",
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "bun run next build",
     "serve:build": "bun run vite preview --port 1234",
     "i18n": "bun i18n.js",

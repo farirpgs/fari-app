@@ -10,6 +10,7 @@ import ThemeRegistry from "../app/ThemeRegistry";
 import { previewContentEditable } from "./components/ContentEditable/ContentEditable";
 import { ErrorReport } from "./components/ErrorBoundary/ErrorReport";
 import { IManagerViewModel, MyBinder } from "./components/MyBinder/MyBinder";
+import { AppI18nProvider } from "./contexts/AppI18nContext/AppI18nContext";
 import {
   CharactersContext,
   useCharacters,
@@ -51,28 +52,30 @@ export function AppProviders(props: { children: ReactNode }) {
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
   const indexCardCollectionsManager = useIndexCardCollections();
-  const diceManager = useDice({});
+  const diceManager = useDice();
   const myBinderManager = useMyBinder();
 
   return (
     <InjectionsContext.Provider value={injections}>
-      <DndProvider backend={HTML5Backend}>
-        <SettingsContext.Provider value={settingsManager}>
-          <CharactersContext.Provider value={charactersManager}>
-            <ScenesContext.Provider value={scenesManager}>
-              <IndexCardCollectionsContext.Provider
-                value={indexCardCollectionsManager}
-              >
-                <DiceContext.Provider value={diceManager}>
-                  <MyBinderContext.Provider value={myBinderManager}>
-                    <InternalProviders>{props.children}</InternalProviders>
-                  </MyBinderContext.Provider>
-                </DiceContext.Provider>
-              </IndexCardCollectionsContext.Provider>
-            </ScenesContext.Provider>
-          </CharactersContext.Provider>
-        </SettingsContext.Provider>
-      </DndProvider>
+      <AppI18nProvider>
+        <DndProvider backend={HTML5Backend}>
+          <SettingsContext.Provider value={settingsManager}>
+            <CharactersContext.Provider value={charactersManager}>
+              <ScenesContext.Provider value={scenesManager}>
+                <IndexCardCollectionsContext.Provider
+                  value={indexCardCollectionsManager}
+                >
+                  <DiceContext.Provider value={diceManager}>
+                    <MyBinderContext.Provider value={myBinderManager}>
+                      <InternalProviders>{props.children}</InternalProviders>
+                    </MyBinderContext.Provider>
+                  </DiceContext.Provider>
+                </IndexCardCollectionsContext.Provider>
+              </ScenesContext.Provider>
+            </CharactersContext.Provider>
+          </SettingsContext.Provider>
+        </DndProvider>
+      </AppI18nProvider>
     </InjectionsContext.Provider>
   );
 }
@@ -91,9 +94,7 @@ function MyBinderManager() {
     onDelete(element: IManagerViewModel): void;
     onDuplicate(element: IManagerViewModel): void;
     onUndo(element: IManagerViewModel): void;
-    onImport(
-      importPaths: FileList | null,
-    ): Promise<{ entity: any | undefined }>;
+    onImport(importPaths: any | null): Promise<{ entity: any | undefined }>;
     onImportAddAsNew(entity: any): void;
     onImportUpdateExisting(entity: any): void;
     onExport(element: IManagerViewModel): void;
@@ -214,6 +215,7 @@ function MyBinderManager() {
         myBinderManager.actions.close();
       },
       onSelectOnNewTab(element) {
+        if (typeof window === "undefined") return;
         window.open(`/scenes/${element.id}`);
       },
       onDelete(element) {

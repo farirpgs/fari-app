@@ -1217,3 +1217,5 @@ export function Session(props: {
     );
   }
 }
+
+export default Session;

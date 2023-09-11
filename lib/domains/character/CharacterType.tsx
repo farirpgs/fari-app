@@ -5,9 +5,9 @@ let allCharactersTemplatesFiles: Record<
   }>
 > = {};
 try {
-  allCharactersTemplatesFiles = import.meta.glob(
-    "./character-templates/*/*.json"
-  );
+  // allCharactersTemplatesFiles = import.meta.glob(
+  //   "./character-templates/*/*.json"
+  // );
 } catch (error) {}
 
 export type ICharacterTemplate = {
@@ -35,7 +35,7 @@ export const allTemplates = Object.keys(allCharactersTemplatesFiles).reduce(
       },
     ];
   },
-  []
+  [],
 );
 
 export const CharacterTemplates = [...allTemplates].sort((a, b) => {

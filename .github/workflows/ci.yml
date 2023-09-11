@@ -28,8 +28,8 @@ jobs:
         run: |
           CONTEXT=production bun run build
         env:
-          VITE_GITHUB_RUN_NUMBER: ${{github.run_number}}
-          VITE_GITHUB_SHA: ${{github.sha}}
+          NEXT_PUBLIC__GITHUB_RUN_NUMBER: ${{github.run_number}}
+          NEXT_PUBLIC__GITHUB_SHA: ${{github.sha}}
       # Validate
       - name: Validate
         run: bun run validate

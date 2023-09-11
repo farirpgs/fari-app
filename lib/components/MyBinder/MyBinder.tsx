@@ -397,8 +397,8 @@ export function MyBinder<TFolders extends string>(props: {
             <Grid item>
               <AppLink
                 color="secondary"
+                href="/data"
                 onClick={() => {
-                  router.push("/data");
                   props.onClose();
                 }}
               >

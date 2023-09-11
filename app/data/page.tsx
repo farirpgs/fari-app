@@ -3,8 +3,8 @@ import { t } from "../i18n";
 
 export async function generateMetadata() {
   return {
-    title: t("data-route-route.title"),
-    description: t("data-route-route.description"),
+    title: t("data-route.title"),
+    description: t("data-route.description"),
   };
 }
 

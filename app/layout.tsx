@@ -1,7 +1,11 @@
+/// <reference lib="dom" />
+/// <reference lib="dom.iterable" />
+
 import Script from "next/script";
 import { Metadata } from "next/types";
 import React from "react";
 import { AppProviders } from "../lib/App";
+import NoSSR from "../lib/components/NoSSR/NoSSR";
 export const metadata: Metadata = {
   title: "Fari App VTT | The Free and Open-Source Virtual Tabletop",
   description: "",
@@ -65,7 +69,9 @@ export default function RootLayout(props: { children: React.ReactNode }) {
 
       <body>
         <div id="root">
-          <AppProviders>{props.children}</AppProviders>
+          <NoSSR>
+            <AppProviders>{props.children}</AppProviders>
+          </NoSSR>
         </div>
         <Script
           type="text/javaScript"

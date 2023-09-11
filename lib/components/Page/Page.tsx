@@ -48,11 +48,12 @@ import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext"
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { Icons } from "../../domains/Icons/Icons";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
+
 import {
   IPossibleLanguages,
   PossibleLanguagesNames,
-} from "../../services/internationalization/InternationalizationService";
+} from "../../contexts/AppI18nContext/AppI18nContext";
+import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { AppButtonLink, AppLink } from "../AppLink/AppLink";
 import { CannyChangelog } from "../CannyChangelog/CannyChangelog";
 import { CookieConsent } from "../CookieConsent/CookieConsent";
@@ -104,12 +105,12 @@ export const Page: React.FC<{
   }, [props.gameId]);
 
   return (
-    <>
+    <React.Fragment>
       <ScrollToTop />
 
       {renderHeader()}
       {renderContent()}
-    </>
+    </React.Fragment>
   );
 
   function renderContent() {
