@@ -1,9 +1,9 @@
 import React from "react";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
-import { ICharacterTemplate } from "../../domains/character/CharacterType";
 import { ICharacter } from "../../domains/character/types";
 import { getUnixFrom } from "../../domains/dayjs/getDayJS";
 import { useAppEntity } from "../../hooks/useAppEntity/useAppEntity";
+import { ICharacterTemplate } from "../../services/character-templates/CharacterTemplateService";
 
 export const CharactersContext = React.createContext<
   ReturnType<typeof useCharacters>

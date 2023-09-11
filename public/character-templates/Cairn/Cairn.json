@@ -1,0 +1,1037 @@
+{
+  "name": "Cairn Template v4 Template",
+  "lastUpdated": 1685915053,
+  "wide": false,
+  "pages": [
+    {
+      "id": "e0ab1a77-5d3a-4e9d-8ae4-2554a7c655d8",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "4ed8c0cc-812c-474a-837a-736bd1614677",
+                  "label": "Details",
+                  "blocks": [
+                    {
+                      "id": "4ea611c2-bcac-4890-87bd-17e383edddb5",
+                      "label": "Description",
+                      "type": "Text",
+                      "value": "<i>Roll on the <b>Character Traits </b>table to determine traits and physical description.</i>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "dfa24b3b-4b0b-4d13-ab0a-2d998d426843",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "220f01c8-0218-48c9-9114-2a9de05cefa1",
+                      "label": "Background",
+                      "type": "Text",
+                      "value": "<i>Roll on the <b>Background </b>table to determine a career or specialty.</i>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ccd04781-6cea-47b1-8784-0c7bd3a08e4a",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "3e42571a-79b6-4dcc-a158-9eac90594f53",
+                      "label": "Age",
+                      "type": "Text",
+                      "value": "<i>Roll <b>2d20+10</b> to determine age.</i><br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "bff9a4af-eca5-4154-9729-a82d7e744847",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "df122c55-3a6f-439e-8392-18c7861e6e4d",
+                  "label": "Saves",
+                  "blocks": [
+                    {
+                      "id": "358dd279-8a50-4720-8a9f-34c327a0ad21",
+                      "type": "Text",
+                      "meta": {
+                        "width": 1,
+                        "helperText": "A <b>save </b>is a roll to avoid bad outcomes from risky choices and circumstances. <br><br>Cairn uses a \"roll under\" mechanic where PCs roll <b>1d20 </b>for an appropriate ability score. If they roll <b>equal to</b> or <b>under</b> that ability score, they pass. Otherwise, they fail.<br><br>Rolling a 1 is <i>always</i> a success, and rolling a 20 is <i>always</i> a failure.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "54475b85-9683-4600-878f-5bd051610082",
+                  "label": "Hit Protection &amp; Armor",
+                  "blocks": [
+                    {
+                      "id": "0ca28dc3-ff4d-4f44-80e2-7d50185cc9b8",
+                      "label": "Hit Protection",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "0",
+                        "isMainPointCounter": true,
+                        "width": 0.5,
+                        "helperText": "<i>Roll <b>1d6</b>&nbsp;during character creation.</i>"
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "99f8ae8d-f9c5-4a94-b71a-b9abe6247615",
+                      "label": "Armor",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "<i>Name (<b>+X</b> Armor)</i><br>"
+                      }
+                    },
+                    {
+                      "id": "200c7ea8-cd51-4896-9a66-03688524d026",
+                      "label": "Deprived",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "width": 1,
+                        "helperText": "<i>A PC deprived of a crucial need (such as food or rest) is unable to recover HP or ability scores. Anyone deprived for more than a day adds <b>Fatigue </b>to their inventory, one for each day.</i>"
+                      },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "848f834f-54a8-4127-85dc-47af4ac427da",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "28a411e6-807f-4294-9ae9-cd4d78ee751e",
+                  "label": "Ability Scores",
+                  "blocks": [
+                    {
+                      "id": "7c5b0a78-2531-473d-a443-25b5f17d26e2",
+                      "label": "Strength",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "helperText": "Brawn, prowess &amp; resistance.<br>",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "4ea20129-5eca-485c-a5a2-3f130e6c58e7",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "1",
+                        "isMainPointCounter": false,
+                        "width": 0.5,
+                        "helperText": "<b>STR&nbsp;</b>0 means <b>death</b>.<br>"
+                      },
+                      "value": "1"
+                    },
+                    {
+                      "id": "be028483-5632-4968-8975-90d98bc20307",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "af5601c9-d70f-42ae-bcb9-a3a5922ae331",
+                      "label": "Dexterity",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "helperText": "Dodging, sneaking &amp; reflexes.<br>",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "2dee75b3-3468-412a-a934-4a705d0d7b02",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "1",
+                        "isMainPointCounter": false,
+                        "width": 0.5,
+                        "helperText": "<b>DEX</b> 0 means <b>paralysis</b>.<br>"
+                      },
+                      "value": "1"
+                    },
+                    {
+                      "id": "59a5a298-acb7-4ee0-94d0-63d6e9808315",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "hideDivider": true,
+                        "width": 1
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "39cc5038-ac4d-45e4-8f0b-d236376ee19d",
+                      "label": "Willpower",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d20"],
+                        "hideModifier": true,
+                        "helperText": "Persuasion, intimidation &amp; magic.<br>",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "eb794628-1f8c-4033-8e79-dbe52ccfe165",
+                      "label": "",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "1",
+                        "isMainPointCounter": false,
+                        "width": 0.5,
+                        "helperText": "<b>WIL</b> 0 means <b>delirium</b>.<br>"
+                      },
+                      "value": "1"
+                    },
+                    {
+                      "id": "10e808c8-e072-491d-9e2f-0403808b085e",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "hideDivider": true,
+                        "width": 1
+                      },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "93196f93-fb02-4fcc-9672-9067c37b04b8",
+                  "label": "Inventory",
+                  "blocks": [
+                    {
+                      "id": "69dbe2df-a5b4-4fb0-98e8-da3e3a26d1b3",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "<b>Mark box when items are being held.</b><br>"
+                      }
+                    },
+                    {
+                      "id": "ea6dd40a-475b-4046-8fa1-42724b84c1dd",
+                      "label": "Hands, Body",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "width": 1 },
+                      "value": ""
+                    },
+                    {
+                      "id": "2edf1075-98ce-4624-8837-aa7d1e34abd7",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "<i>Hand</i>",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "e9d8262b-9473-4f15-9d5d-544a73efedee",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "<i>Hand</i>",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "cca838d5-e7e3-4508-adc5-4e4423062df2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "<i>Body</i>",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "cb08a650-400b-440d-a78d-47c5d0282d06",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "<i>Body</i>",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "e54cd9d3-017f-4f05-a54f-cf5712ef1ce5",
+                      "label": "Backpack",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "3ec87edf-09ca-4c39-8bbb-a38587c8111d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "<i>Backpack</i>",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "b29aa5a3-c94d-4c2d-9278-624062a369fd",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "<i>Backpack</i>",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "11230c2a-ca57-4785-977e-413014addef4",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "<i>Backpack</i>",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "5d05829b-dc8f-4bdb-832a-d83eb2ea8253",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "<i>Backpack</i>",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "79ca1f2e-8e2c-4731-b44a-8f6b9b5b7144",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "<i>Backpack</i>",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "b36d9f7a-fb96-4a41-b638-9dce3106213b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "<i>Backpack</i>",
+                        "width": 0.5
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "03a0f466-d97b-49de-bf43-181623fc1d29",
+                  "label": "Currency",
+                  "blocks": [
+                    {
+                      "id": "ab5c5f19-fc80-4f15-b804-d6d7318722c7",
+                      "type": "Text",
+                      "meta": { "width": 0.33, "helperText": "<br>" },
+                      "label": "Gp"
+                    },
+                    {
+                      "id": "7241f56d-bdc2-4676-879d-a7abe1bd7796",
+                      "type": "Text",
+                      "value": "<b>0</b>\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "5b7a0aa0-cee7-455f-b820-596d1e7ec2de",
+                      "type": "Text",
+                      "meta": { "width": 0.33, "helperText": "<br>" },
+                      "label": "Sp"
+                    },
+                    {
+                      "id": "149f0dbf-9639-4345-a9c4-5b9715463297",
+                      "type": "Text",
+                      "value": "<b>0</b>\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "bcbd1413-0494-4ce5-b861-58c27fcd81d9",
+                      "type": "Text",
+                      "meta": { "width": 0.33, "helperText": "<br>" },
+                      "label": "Cp"
+                    },
+                    {
+                      "id": "4baef908-d6fa-49e9-8ac0-9bbbac72174e",
+                      "type": "Text",
+                      "value": "<b>0</b>\n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "b8e25b0e-508a-4233-bd4c-4ab1c2ee0177",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": {
+                        "hasLabel": false,
+                        "hideDivider": true,
+                        "helperText": "<i>The most common coin is the <b>gold piece</b> (gp), which is equal to 10 <b>silver pieces </b>(sp) and 100 <b>copper pieces </b>(cp).</i><br>"
+                      },
+                      "value": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "17592cc2-d3e4-476f-a336-c5338f38f294",
+                  "label": "Weapons",
+                  "blocks": [
+                    {
+                      "id": "1bccfaae-2d97-44e9-b782-6825813231ac",
+                      "label": "Weapon",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": [],
+                        "width": 1,
+                        "hideModifier": true,
+                        "helperText": "<i>Edit weapon text in <b>Advanced</b>&nbsp;mode.</i><br>"
+                      }
+                    },
+                    {
+                      "id": "1c8b4167-e135-4992-899b-30b1c57ba32e",
+                      "label": "Enhanced",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d12"],
+                        "width": 1,
+                        "hideModifier": true,
+                        "helperText": "<i>Roll when fighting from a position of <b>advantage</b>.</i>"
+                      }
+                    },
+                    {
+                      "id": "d2bef8ab-11f6-45ee-9175-29562c1c3f8f",
+                      "label": "Impaired / Unarmed",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d4"],
+                        "width": 1,
+                        "hideModifier": true,
+                        "helperText": "<i>Roll when fighting from a position of <b>weakness</b>.</i><br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "6a51f5cd-dca5-4de5-91e0-db69c312cf8f",
+                  "label": "Credits",
+                  "blocks": [
+                    {
+                      "id": "8a3b5574-2cb1-4df2-83d4-ab89f44a1be0",
+                      "label": "",
+                      "type": "Image",
+                      "meta": { "helperText": "" },
+                      "value": "https://cairnrpg.com/img/cairn.svg"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "e82ea70d-4754-4831-8fe0-d37fe607c4ac",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "c27f02f6-4e30-4238-9982-58d42d5f73d7",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Template by <b>bonk!</b> • https://bingusbonk.us<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b293961d-5eb9-4b3d-acb8-c39924fc243b",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "<b><i>Cairn </i></b>is an adventure game about exploring a dark &amp; mysterious Wood filled with strange folk, hidden treasure, and unspeakable monstrosities. Character generation is quick and random, classless, and relies on fictional advancement rather than through XP or level mechanics. It is based on <b><i>Knave </i></b>by Ben Milton and <b><i>Into The Odd </i></b>by Chris McDowall. The game was written by Yochai Gal.<br><br>Access the <i style=\"font-weight: bold;\">Cairn</i>&nbsp;rules in full at the link below:<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e89faf7d-0f7d-41d9-ade5-5ce837f7e159",
+                      "label": "Cairn System Reference Document (v.1.0)",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": true },
+                      "value": "https://cairnrpg.com/cairn-srd/"
+                    },
+                    {
+                      "id": "9e66b7f1-a221-49de-bd32-59683d4f0515",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "CHARACTER"
+    },
+    {
+      "id": "f9041871-159b-40d3-bf4f-3d056b3f5149",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c1345ec7-7557-47e7-a181-ab313b49b3e2",
+                  "label": "Forms of Magic",
+                  "blocks": [
+                    {
+                      "id": "f1780b4e-6519-46d1-9221-4012baa055e6",
+                      "label": "Spellbooks",
+                      "type": "Text",
+                      "meta": {
+                        "width": 1,
+                        "helperText": "<b>Spellbooks</b> contain a single spell, take up one slot, and induce <b>Fatigue</b> when used to cast spells. They cannot be transcribed or created, only recovered from places like tombs, dungeons, and manors.<br>"
+                      }
+                    },
+                    {
+                      "id": "21193c91-2b8a-4e62-b63e-2fc455f1cfb6",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "a321bb69-d503-4f9d-af24-d0f003eeab66",
+                      "label": "Scrolls",
+                      "type": "Text",
+                      "meta": {
+                        "width": 1,
+                        "helperText": "<b>Scrolls</b> are similar to Spellbooks, however:<br>&nbsp; • They do not take up an inventory slot.<br>&nbsp; • They do not cause fatigue.<br>&nbsp; • They disappear after one use.<br>"
+                      }
+                    },
+                    {
+                      "id": "198a7f97-8be7-4697-aad2-6a0833362178",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "e70b2ac5-43a9-4ca8-91df-9b851efa9ce9",
+                      "label": "Relics",
+                      "type": "Text",
+                      "meta": {
+                        "width": 1,
+                        "helperText": "<b>Relics </b>are items imbued with a magical spell or power. They take up an item slot but do not cause Fatigue. Relics usually have a limited use, as well as a recharge condition.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "d7ca11e6-de06-4b12-944f-ed87b2968351",
+                  "label": "Using Magic",
+                  "blocks": [
+                    {
+                      "id": "a3a62b63-ae68-4f18-abdf-3726ca9ae1aa",
+                      "label": "Spellcasting",
+                      "type": "Text",
+                      "meta": {
+                        "width": 1,
+                        "helperText": "Anyone can cast a spell by holding a Spellbook in both hands and reading its contents aloud. They must then add a Fatigue to inventory, occupying one slot.<br><br>Given time and safety, PCs can <i>enhance</i> a spell’s impact (e.g., affecting multiple targets, increasing its power, etc.) without any additional cost.<br>"
+                      }
+                    },
+                    {
+                      "id": "ac6917a2-5b63-462d-b8a3-7b85d69f9d01",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    },
+                    {
+                      "id": "5307186a-497d-4335-9579-7f5c5deeb02f",
+                      "label": "Casting under pressure",
+                      "type": "Text",
+                      "meta": {
+                        "width": 1,
+                        "helperText": "If the PC is deprived or in danger, PCs may be required to roll a <b>WIL</b> save to avoid any ill-effects from casting the spell.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "MAGIC"
+    },
+    {
+      "id": "76936ab0-a68c-4884-98ef-55ec511476a8",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "0abad3a9-b73a-411e-ac31-3417d2e2bdf6",
+                  "label": "About the Game",
+                  "blocks": [
+                    {
+                      "id": "4cd359f1-3b34-4319-8569-e985bb4fc176",
+                      "label": "",
+                      "type": "Image",
+                      "meta": { "helperText": "" },
+                      "value": "https://cairnrpg.com/img/cairn.svg"
+                    },
+                    {
+                      "id": "23585b23-3778-4d3d-ba48-7e887d18fdef",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "2e277f5a-b137-47ed-897d-a4a5d3310ed8",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "9bc2b5b4-0aff-42fc-900a-f6673245ba1c",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "<b><i>Cairn </i></b>is an adventure game about exploring a dark &amp; mysterious Wood filled with strange folk, hidden treasure, and unspeakable monstrosities. Character generation is quick and random, classless, and relies on fictional advancement rather than through XP or level mechanics. It is based on <b><i>Knave </i></b>by Ben Milton and <b><i>Into The Odd </i></b>by Chris McDowall. The game was written by Yochai Gal.<br><br>Access the <i style=\"font-weight: bold;\">Cairn</i>&nbsp;rules in full at the link below:<br>",
+                      "meta": {}
+                    },
+                    {
+                      "id": "576471b5-7a00-4ca7-b843-0ab46b449d54",
+                      "label": "Cairn System Reference Document (v.1.0)",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": true },
+                      "value": "https://cairnrpg.com/cairn-srd/"
+                    },
+                    {
+                      "id": "36b31879-300f-4683-9345-3ace9f7b21bf",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "12630267-5ef4-4663-b6d4-288769dea2f0",
+                  "label": "Rules Summary",
+                  "blocks": [
+                    {
+                      "id": "e47551b6-9ed8-451b-ad88-65ad6ac0866d",
+                      "label": "ACTIONS",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "On their turn, a character may move up to <b>40ft </b>and take up to <b>one action</b>. Actions may include casting a spell, attacking, making a second move, or other reasonable activities. Actions, attacks, and movements take place simultaneously. Whenever turn order is uncertain, the PCs should make a <b>DEX </b>save to see if they go before their enemies.<br><br><b>Retreating </b>from a dangerous situation always requires a successful <b>DEX </b>save, as well as a safe destination to run to.<br>"
+                      }
+                    },
+                    {
+                      "id": "9dcaf541-cd02-44a6-8d34-89b6e5205af3",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "45d0a374-3032-435a-be26-64b033912dd7",
+                      "label": "ABILITIES",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "<b>STR: </b>Brawn, prowess &amp; resistance.\n<br><b>DEX: </b>Dodging, sneaking &amp; reflexes.\n<br><b>WIL:</b> Persuasion, intimidation &amp; magic.<br>"
+                      }
+                    },
+                    {
+                      "id": "bfb50e7b-4ff1-4b94-ab3a-2ab4cc5909bc",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "feea8228-317b-4970-9c56-eef48e2fc085",
+                      "label": "SAVES",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "&nbsp; • Roll a <b>d20 </b>equal to or under an ability.\n<br>&nbsp; • <b>1 </b>is always a success, <b>20 </b>is always a failure.<br>"
+                      }
+                    },
+                    {
+                      "id": "e5567210-40e9-42fc-824b-bdd6d7465f73",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "130e7c8a-da35-4c67-a7d1-999e86049034",
+                      "label": "HIT PROTECTION",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "<b>HP </b>indicates a PC’s ability to avoid getting hurt. It is lost during combat &amp; recovered after a few moment’s rest.<br>"
+                      }
+                    },
+                    {
+                      "id": "d3d6f164-352d-45b1-8316-254333675bc9",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "5bf55694-b2b4-462b-9902-d0671e495cd8",
+                      "label": "INVENTORY",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "PCs have <b>10 </b>inventory slots: four on their body and six in their backpack (which acts as a sleeping bag if emptied). Most items take up a one slot, but smaller items can be bundled. <b>Bulky </b>items take up two slots and are awkward or difficult to carry.\n<br>\n<br>Filling all ten item slots reduces a PC to <b>0 HP</b>. PCs cannot carry more than their inventory allows, though carts &amp; horses may provide an increase in slots.<br>"
+                      }
+                    },
+                    {
+                      "id": "6a64c33c-20c1-4853-9aba-a23e69824458",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "23d95fc6-d820-4ed7-b729-be6a3fc68253",
+                      "label": "DEPRIVATION",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "<b>Deprived</b> PCs cannot recover HP. If deprived for more than a day, they add a <b>Fatigue </b>to inventory. Fatigue occupies one slot and lasts until they can recover in safety. This effect is cumulative.<br>"
+                      }
+                    },
+                    {
+                      "id": "548824c9-db9c-4540-86d6-87326d98de1a",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "fb078787-2240-4034-9049-b15130da6118",
+                      "label": "HEALING",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "A moment’s rest and a swig of water will restore lost HP, but may leave the party vulnerable. <b>Ability </b>loss requires a week’s rest and the aid of a skilled healer.<br>"
+                      }
+                    },
+                    {
+                      "id": "993bacb4-f310-4f08-8aff-11fcdb63dfea",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "d8f39db5-ad51-4332-b68c-433720033e93",
+                      "label": "SPELLBOOKS",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "Spellbooks contain a single spell and take up one item slot. Anyone can cast a spell by holding a Spellbook in both hands and reading its contents aloud. Casting a spell adds <b>Fatigue</b> to the PC’s inventory.\n<br>\n<br>Given time and safety, PCs can enhance a spell without any additional cost. If they are deprived or in danger, a <b>WIL </b>save may be required to avoid terrible consequences.<br>"
+                      }
+                    },
+                    {
+                      "id": "cfe32daa-74d1-4c57-9552-009385949f36",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "c386bcf8-261b-41fc-8498-ca7f18ae8d90",
+                      "label": "COMBAT",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "The attacker rolls their weapon die and subtracts the target’s Armor, then deals the remaining total to their opponent’s HP.\n<br>\n<br>Before calculating damage to HP, subtract the target’s <b>Armor </b>value from the result of damage rolls. Shields and similar armor provides a bonus defense (e.g. +1 Armor), but only while the item is held or worn.\n<br>\n<br>No one can have more than 3 Armor.<br><br><b>Unarmed</b> attacks always do <b>1d4 </b>damage. If <b>multiple attackers</b> target the same foe, roll all damage dice and keep the single highest result. If attacking with <b>two weapons</b> at the same time, roll both damage dice and keep the highest.\n<br>\n<br>If an attack is <b>impaired</b>,&nbsp;the damage die is reduced to 1d4, regardless of weapon. If the attack is <b>enhanced</b>, the attacker rolls <b>1d12</b>. Attacks with the <b>blast </b>quality affect all area targets, rolling separately for each.<br>"
+                      }
+                    },
+                    {
+                      "id": "86833b04-acb7-4f03-b2fe-e8f488505f1c",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "5e55c6cf-8745-417a-8cd8-5b59de839045",
+                      "label": "DAMAGE",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "If an attack reduces a PC’s HP exactly to 0, refer to the <b>Scars </b>table.<br><br>Damage that reduces a target’s HP <b>below </b>0 decreases their <b>STR </b>by the remainder. They must then make a <b>STR </b>save to avoid <b>critical damage</b>. Failure takes them out of combat, dying if left untreated.\n<br>\n<br>Having <b>STR </b>0 means <b>death</b>; having <b>DEX</b> 0 is <b>paralysis</b>; having <b>WIL </b>0 is <b>delirium</b>.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "RULES SUMMARY"
+    },
+    {
+      "id": "46404d79-98dc-4627-b092-82c0e55a42cf",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "e1a6493f-2d5d-43ff-bf98-0c5b870f7646",
+                  "label": "Principles for Players",
+                  "blocks": [
+                    {
+                      "id": "d73fabaf-5250-45ea-a7e2-296798b5ef87",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "<b><i>Cairn</i></b> is an adventure game for one facilitator (the <b>Warden</b>) and at least one other player. Players act as hardened adventurers exploring a dark &amp; mysterious Wood filled with strange folk, hidden treasure, and unspeakable monstrosities.<br><br>The game provides players with guidelines that help foster a specific play experience defined by critical thinking, exploration, and an emergent narrative.<br>"
+                      }
+                    },
+                    {
+                      "id": "921b00dd-19c4-4966-b869-611524ae7add",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "dd8d24dd-ef3e-46b0-80b2-dd0199730ff9",
+                      "label": "AGENCY",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "&nbsp; • Attributes and related saves do not define your character. They are tools.<br>&nbsp; • Don’t ask only what your character would do, ask what you would do, too.<br>&nbsp; • Be creative with your intuition, items, and connections.<br>"
+                      }
+                    },
+                    {
+                      "id": "cb74b583-779f-4e1f-aecc-954e452d61c7",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "229ad8b1-e814-4f8f-ab07-997a60d9b95d",
+                      "label": "TEAMWORK",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "&nbsp; • Seek consensus from the other players before barreling forward.<br>&nbsp; • Stay on the same page about goals and limits, respecting each other and accomplishing more as a group than alone.<br>"
+                      }
+                    },
+                    {
+                      "id": "c042b1d0-f6d6-469a-a51e-91dc0cd36dfe",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "9ed3dd81-e53f-4623-9041-ae001e1489a4",
+                      "label": "EXPLORATION",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "&nbsp; • Asking questions and listening to detail is more useful than any stats, items, or skills you have.<br>&nbsp; • Take the Warden’s description without suspicion, but don’t shy away from seeking more information.<br>&nbsp; • There is no single correct way forward.<br>"
+                      }
+                    },
+                    {
+                      "id": "2f10461a-6fa7-4dc5-a10f-dc03df7dfea3",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "bf82b995-1867-4cc5-ae10-0f152f4d95ca",
+                      "label": "TALKING",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "&nbsp; • Treat NPCs as if they were real people, and rely on your curiosity to safely gain information and solve problems.<br>&nbsp; • You’ll find that most people are interesting and will want to talk things through before getting violent.<br>"
+                      }
+                    },
+                    {
+                      "id": "541ce3fa-634f-45d2-8bfb-968e9a2373be",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "2c26930d-1b2a-4f1d-acda-9198a0468acb",
+                      "label": "CAUTION",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "&nbsp; • Fighting is a choice and rarely a wise one; consider whether violence is the best way to achieve your goals.<br>&nbsp; • Try to stack the odds in your favor and retreat when things seem unfavorable.<br>"
+                      }
+                    },
+                    {
+                      "id": "898e669e-dc5d-44ed-8b67-0e9510d6276d",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "9c9c7e22-4b8c-4469-adf2-69ee0535010f",
+                      "label": "PLANNING",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "&nbsp; • Think of ways to avoid your obstacles through reconnaissance, subtlety, and fact-finding.<br>&nbsp; • Do some research and ask around about your objectives.<br>"
+                      }
+                    },
+                    {
+                      "id": "20b71fd0-3b32-43b2-8d6a-9dd9f0fdaf91",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "66d41d2c-2dc4-466a-88b7-2b563d19e955",
+                      "label": "AMBITION",
+                      "type": "Text",
+                      "meta": {
+                        "helperText": "&nbsp; • Set goals and use your meager means to take steps forward.<br>&nbsp; • Expect nothing. Earn your reputation.<br>&nbsp; • Keep things moving forward and play to see what happens.<br>"
+                      }
+                    },
+                    {
+                      "id": "9635f785-3565-47b0-b555-71f1a4bb2938",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "00378243-7479-4779-9e76-3506109e5d32",
+                      "label": "",
+                      "type": "Text",
+                      "meta": { "helperText": "<br>" }
+                    },
+                    {
+                      "id": "88efdfbb-465d-4c0e-b235-709cd141bf4a",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": true },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "PLAYER PRINCIPLES"
+    }
+  ],
+  "version": 6,
+  "group": "Cairn",
+  "theme": {
+    "infoTextFontWeight": "400",
+    "infoTextFontSize": 1,
+    "helperTextFontWeight": "400",
+    "helperTextFontSize": 1,
+    "hideSectionBackground": false,
+    "pageHeadingFontWeight": "bold",
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');\n@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Vollkorn:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');",
+    "pageHeadingFontFamily": "Averia Serif Libre",
+    "sectionHeadingFontFamily": "Averia Serif Libre",
+    "labelFontFamily": "Vollkorn",
+    "textFontFamily": "Averia Serif Libre",
+    "infoTextFontFamily": "Averia Serif Libre",
+    "helperTextFontFamily": "Averia Serif Libre",
+    "labelFontSize": 1.375,
+    "labelFontWeight": "",
+    "sectionHeadingFontSize": 1.5,
+    "textFontSize": 1.125,
+    "textFontWeight": "400"
+  },
+  "fariType": "character"
+}

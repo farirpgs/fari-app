@@ -1,4 +1,6 @@
+import { CharacterTemplatesProvider } from "../../../lib/contexts/CharacterTemplatesContext/CharacterTemplatesContext";
 import { CharacterRoute } from "../../../lib/routes/Character/CharacterRoute";
+import { CharacterTemplateService } from "../../../lib/services/character-templates/CharacterTemplateService";
 import { t } from "../../i18n";
 
 export async function generateMetadata() {
@@ -8,6 +10,16 @@ export async function generateMetadata() {
   };
 }
 
-export default function CharacterPage() {
-  return <CharacterRoute></CharacterRoute>;
+export default async function CharacterPage() {
+  const templates = await CharacterTemplateService.getAll();
+
+  return (
+    <CharacterTemplatesProvider
+      value={{
+        templates,
+      }}
+    >
+      <CharacterRoute></CharacterRoute>;
+    </CharacterTemplatesProvider>
+  );
 }

@@ -1,22 +1,20 @@
-import { ICharacterTemplate } from "./CharacterType";
+import { ICharacterTemplate } from "../../services/character-templates/CharacterTemplateService";
 
 export const DefaultTemplates = {
   BlankTemplate: {
-    category: "Default",
-    fileName: "Blank",
-    importFunction: async () =>
-      import("./character-templates/Defaults/Blank.json"),
+    publisher: "Default",
+    name: "Blank",
+    fetchPath: "/public/character-templates/Blank/Blank.json",
   } as ICharacterTemplate,
   FateCondensed: {
-    category: "Default",
-    fileName: "FateCondensed",
-    importFunction: async () =>
-      import("./character-templates/Fate Condensed/Fate Condensed.json"),
-  } as ICharacterTemplate,
-  FateAccelerated: {
-    category: "Default",
-    fileName: "FateAccelerated",
-    importFunction: async () =>
-      import("./character-templates/Fate Accelerated/Fate Accelerated.json"),
-  } as ICharacterTemplate,
+    publisher: "Default",
+    name: "FateCondensed",
+    fetchPath: "/public/character-templates/Fate Condensed/Fate Condensed.json",
+    FateAccelerated: {
+      publisher: "Default",
+      name: "FateAccelerated",
+      fetchPath:
+        "/public/character-templates/Fate Accelerated/Fate Accelerated.json",
+    } as ICharacterTemplate,
+  },
 } as const;

@@ -1,13 +1,12 @@
 import { Box } from "@mui/material";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
-import React from "react";
 import { Toolbox } from "../lib/components/Toolbox/Toolbox";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
-import { ICharacterTemplate } from "../lib/domains/character/CharacterType";
 import { ICharacter } from "../lib/domains/character/types";
 import { dayJS } from "../lib/domains/dayjs/getDayJS";
 import { CharacterV3Dialog } from "../lib/routes/Character/components/CharacterDialog/CharacterV3Dialog";
+import { ICharacterTemplate } from "../lib/services/character-templates/CharacterTemplateService";
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookCharacterSheet(
@@ -67,21 +66,15 @@ const Template: Story<IProps> = (args, context) => {
 };
 
 export const FateCondensed = makeCharacterSheetStory({
-  fileName: "",
-  category: "",
-  importFunction: async () =>
-    import(
-      "../lib/domains/character/character-templates/Fate Condensed/Fate Condensed.json"
-    ),
+  name: "",
+  publisher: "",
+  fetchPath: "/public/character-templates/Fate Condensed/Fate Condensed.json",
 });
 
 export const Charge = makeCharacterSheetStory({
-  fileName: "",
-  category: "",
-  importFunction: async () =>
-    import(
-      "../lib/domains/character/character-templates/Fari RPGs/Charge RPG.json"
-    ),
+  name: "",
+  publisher: "",
+  fetchPath: "/public/character-templates/Fari RPGs/Charge RPG.json",
 });
 
 function makeCharacterSheetStory(template: ICharacterTemplate) {

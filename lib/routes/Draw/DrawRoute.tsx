@@ -2,7 +2,6 @@ import { Box, Container, useTheme } from "@mui/material";
 import React from "react";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Icons } from "../../domains/Icons/Icons";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { TldrawWriter } from "./TldrawWriterAndReader";
@@ -13,10 +12,6 @@ export const DrawRoute: React.FC = () => {
 
   return (
     <Page sx={{ paddingTop: "2rem" }}>
-      <PageMeta
-        title={t("draw-route.meta.title")}
-        description={t("draw-route.meta.description")}
-      />
       <Container maxWidth="lg">
         <Box
           py="1rem"

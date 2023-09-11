@@ -1,0 +1,1433 @@
+{
+  "id": "70791845-125c-4e75-9f31-c1be40661cb6",
+  "lastUpdated": 1680469934,
+  "name": "Jamais Vu",
+  "pages": [
+    {
+      "id": "3d0c43fa-f720-44f4-9f72-5d317fab8521",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5b0b918e-100f-49ea-a1da-100ff96787fe",
+                  "label": "YOU???",
+                  "blocks": [
+                    {
+                      "id": "5f3b918b-1ef6-470d-abe7-3007c03268c6",
+                      "label": "NAME",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "You don't even remember your name, do you?"
+                      }
+                    },
+                    {
+                      "id": "919130ab-dabf-4b66-890e-17e23df9ad1d",
+                      "label": "LOOKS",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {
+                        "width": 0.5,
+                        "helperText": "This one is easy, just look in the mirror."
+                      }
+                    },
+                    {
+                      "id": "e43339f0-fc1a-43c8-88ba-47927eb41995",
+                      "label": "MORAL",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": "Morale measures your resistance against stressful &amp; shameful situations, as well as your overall resolve &amp; confidence.&nbsp;"
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "6f20b3ab-33d2-4dbf-a85e-b17f59786b13",
+                      "label": "HEALTH",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": "Health measures your resistance against physical harm, as well as your overall well-being.&nbsp;<br>&nbsp;<br>"
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "8b87bcac-8b97-45de-ba39-1af9f4df08f2",
+                      "label": "XP",
+                      "type": "SlotTracker",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": "Experience points (XP) are a measure of your accomplishments and ongoing learning.&nbsp;<br><br>"
+                      },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "00ac4b85-35b1-49c7-88f6-ab0e5e1d195e",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "329a2b49-46c1-4133-a963-3ff660573cf8",
+                  "label": "SKILLS",
+                  "blocks": [
+                    {
+                      "id": "41554640-1d32-48c1-a88b-66ada8d8d4ac",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "Skills are aspects of your psyche with their own will and personality. They manifest themselves as voices in your head that react to what you do and what’s happening around you. They interject to provide help, argue with each other, and sometimes even make demands on you. There are 24 skills, and they’re non-player characters with full rights. Even more, they are the stars in your brain’s show, and sometimes you’ll just have to sit down and watch. The higher a skill gets, the higher its influence over you. Skills can be directly modified by putting points into them at character creation or spending experience points during the game. Internalizing Thoughts, wearing gear, and using drugs give bonuses and penalties to your skills.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b2a92105-6fb7-43aa-a3dc-55c540684432",
+                      "label": "LOGIC",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "It believes everything’s a problem that can be solved, and that there’s one optimal way to do anything."
+                      }
+                    },
+                    {
+                      "id": "08dd4118-2e2f-427c-9273-7759fe5e2768",
+                      "label": "ENCYCLO­PEDIA",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "It has a memory as prodigious as selective and it can bless you with astonishing eidetic recollections."
+                      }
+                    },
+                    {
+                      "id": "8d4df908-3ec8-426b-92ab-d53bc71eed01",
+                      "label": "RHETORIC",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "The star of endless arguing and futile debate. The bread and butter of politicians and talk shows."
+                      }
+                    },
+                    {
+                      "id": "972c730a-f08d-45b7-b12d-96bcaba27319",
+                      "label": "DRAMA",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "A euphemism for lying. But besides deceiving people, it also excels at performing."
+                      }
+                    },
+                    {
+                      "id": "e16efd81-b85b-468f-9a05-2ed5b2e26fce",
+                      "label": "CONCEPTUALIZATION",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "It’s the spark of creativity that separates man from beast."
+                      }
+                    },
+                    {
+                      "id": "adcd2173-a80e-45e1-bbf6-c1a5ba8a1fec",
+                      "label": "VISUAL CALCULUS",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "It loves reconstructing a crime scene and interpreting blood splatters and bullet ricochets like in a TV show.<br>"
+                      }
+                    },
+                    {
+                      "id": "92424b7f-2d10-4c76-8c1b-984c3226d8fb",
+                      "label": "VOLITION",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "It wants you to get shit done and become a better person. It makes you get up in the morning, quit drugs, eat quinoa."
+                      }
+                    },
+                    {
+                      "id": "07502eee-7062-4df0-91cc-8a6f405ca416",
+                      "label": "INLAND EMPIRE",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "An unstoppable stream of emotions and premonitions. It makes you experience the world through a lens of surrealism."
+                      }
+                    },
+                    {
+                      "id": "dce05298-bc5f-44e9-9fa5-25b7ff2acf38",
+                      "label": "EMPATHY\r\n",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "It helps you connect with the human condition and relate to the circumstances and suffering of others."
+                      }
+                    },
+                    {
+                      "id": "c2dcd87e-be36-4ea0-bbd3-36d32e4db2c5",
+                      "label": "AUTHORITY",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "hideModifier": false,
+                        "helperText": "It's about respect, for both you and the institution you represent. It helps you be assertive and exert dominance.<br>"
+                      }
+                    },
+                    {
+                      "id": "c66ca312-e4aa-423b-924b-ef5f2f29bbfa",
+                      "label": "ESPRIT DE CORPS",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "It gives you flashes about your coworkers to better understand your tiny role in the institution.<br>"
+                      }
+                    },
+                    {
+                      "id": "3188f9e6-8917-4a7d-b74b-ed271ff577bd",
+                      "label": "SUGGESTION\r\n",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "Ah, the subtle art of making others think their interests and yours are aligned.<br>"
+                      }
+                    },
+                    {
+                      "id": "30b2afa2-9fbc-494d-8b22-498bd93379dc",
+                      "label": "ENDURANCE",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "It prevents you from losing health when you’re hurt but encourages you to really try with its “bring it on!” attitude.<br>"
+                      }
+                    },
+                    {
+                      "id": "8c05ceac-6b9b-4f55-a225-a827e8aee3c3",
+                      "label": "PAIN THRESHOLD\r\n",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "It keeps you functioning when you get hurt, ignoring your own blood spilling to the ground.<br>"
+                      }
+                    },
+                    {
+                      "id": "0c8630d7-34c8-4360-8476-d7cd755bbd89",
+                      "label": "PHYSICAL INSTRUMENT\r\n",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "It makes you punch things right in their face. An adrenaline-junkie gym coach that encompasses all your physicality.<br>"
+                      }
+                    },
+                    {
+                      "id": "7ce088f5-8580-487b-9909-dffafdff3133",
+                      "label": "ELECTRO­CHEMISTRY\r\n",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "The perfect hedonist. It knows a lot about every drug on Earth, even the neurochemical details.<br>"
+                      }
+                    },
+                    {
+                      "id": "d1fb0c3f-9b50-4907-ae9d-736584a2e648",
+                      "label": "SHIVERS\r\n",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "Feelings you can’t put your finger on. This guy wants to tell you something... if only you knew what it was.<br>"
+                      }
+                    },
+                    {
+                      "id": "b6153794-b847-41fe-81c6-7858d5363115",
+                      "label": "HALF LIGHT\r\n",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "It loves you so much it’s just afraid of anything that could hurt you, even your own ideas.<br>"
+                      }
+                    },
+                    {
+                      "id": "8aeb77c0-b526-4747-b001-9a4493aca533",
+                      "label": "HAND/EYE COORDINATION\r\n",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "The one you need to throw a ball and catch it on the fly. To aim and fire a gun with a resemblance of competency.<br>"
+                      }
+                    },
+                    {
+                      "id": "f8343f8e-6fc5-4c3c-aa62-c758912979b4",
+                      "label": "PERCEPTION\r\n",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "The magnifying glass that gives you the details other people miss but in a cold way, detached from humanity.<br>"
+                      }
+                    },
+                    {
+                      "id": "5c7c1a32-2d52-47bd-a3ff-7dad32a0aaf0",
+                      "label": "REACTION SPEED\r\n",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "It lets you dodge punches and come up with great comebacks at the speed of photons in a vacuum.<br>"
+                      }
+                    },
+                    {
+                      "id": "1d3c4c67-de62-447f-abbf-d5ecd57d2296",
+                      "label": "SAVOIR FAIRE\r\n",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "Balance, acrobatics, and stealth. It makes you effortlessly cool while jumping from roof to roof.<br>"
+                      }
+                    },
+                    {
+                      "id": "a23592e3-bdb7-49ca-a293-60ba726e619a",
+                      "label": "INTERFACING\r\n",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "It covers all your finger-working needs. It also covers your motor memory.<br>"
+                      }
+                    },
+                    {
+                      "id": "9c44e901-00bc-40f2-bb25-355c9e194e51",
+                      "label": "COMPOSURE\r\n",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6"],
+                        "width": 0.33,
+                        "helperText": "It lets you keep a resemblance of calmness. It’s your stillness under pressure.<br>"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "c08da1ab-8738-4dda-bf91-e4b58d959635",
+                  "label": "GENERAL GAME INFO SHEET",
+                  "blocks": [
+                    {
+                      "id": "57c0e986-9f8d-4497-983e-4f2f6db175e7",
+                      "label": "END OF A SCENE ",
+                      "type": "Text",
+                      "value": "- RECAP YOUR NEW CLUES \n- TRY TO FORM NEW HUNCES \n- EARN XP \n- CREATE / INTERNALIZE THOUHTS \n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "1b0ae360-fb87-40e7-ae93-a762a1b16392",
+                      "label": "EARNING XP",
+                      "type": "Text",
+                      "value": "1 XP - FAILING A SKILL CHECK \n1-3 XP - EXPRESS YOUR CHARACTER  \n2 XP - USE A NEGATIVE TAG IN A CHECK \n2 XP - FORM A HUNCH \n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "1c3ea290-ac71-4039-befd-0610eda3ff04",
+                      "label": "CHARACTER CREATION ",
+                      "type": "Text",
+                      "value": "Assign the following points to different skills: 7, 6, 5, 4, 3, 2, and 1. Write these values in the natural column. Leave the remaining skills at 0. Choose 3 pieces of gear or drugs.  \n",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "b1ccfb0c-03ec-4e6f-a23e-fa336541933a",
+                      "label": "CHARACTER ADVANCEMENT",
+                      "type": "Text",
+                      "value": "Spend 5 XP in order to internalise a Thought, or spend 3 XP in order to increase a skill by 1.\n\n",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "609dca70-8498-4079-88f6-1861e806c7f4",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "36bb59d0-7448-42b6-8646-c07a74b5a63a",
+                  "label": "CASE",
+                  "blocks": [
+                    {
+                      "id": "dcc05293-9da4-4d62-a077-68fc2f29277d",
+                      "label": "Case Progress Bar",
+                      "type": "SlotTracker",
+                      "meta": { "helperText": "<br>" },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "f560676e-cc30-4e31-8ab2-675935811d3d",
+                      "label": "CLUES",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "<br>" },
+                      "value": ""
+                    },
+                    {
+                      "id": "5cc8c291-bd23-4313-bfb3-547959de7794",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cd922424-06be-482e-98ce-51566029873e",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7afd8647-bd07-4210-a1b8-38aebd975c39",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1e912f45-67f2-4cdf-b1e0-57c61ef29cca",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "61a4eb53-236c-4080-8ae3-5951a4f1bcdc",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e52c66e6-468d-489c-8a3c-784ae23d595a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "037266b4-5912-4c56-bb22-0a24137ae86d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "31fdeee0-68c7-4570-b0af-2fd5af1e1425",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "8840b17b-3cd5-4c3b-9e8c-7d8f38340baa",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "e6481af0-1fcc-4e95-9068-4c9f164ee158",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "547f73a0-5306-49a3-901d-15289aed098c",
+                      "label": "HUNCHES",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "<br>" },
+                      "value": ""
+                    },
+                    {
+                      "id": "97ddeded-c91a-4af8-8abb-f5d7e89c40e8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b82300bc-eaed-4bc0-a45c-1b90ecbee872",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2aaf9340-5c38-418b-a619-6be4c575d8d4",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "115d8943-7aa3-495c-9f3c-cb3173da55b0",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "52783326-5e12-4360-9fdd-dcb38b596260",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cec9ae9e-3eb9-4752-899b-30e0f0391ee2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ff69c619-3543-49be-82f5-b67c5f31bda0",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "564e7206-0e9e-4806-879c-1c4266fa050c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9c420cb1-fbbe-4973-8c56-56e12740c6a5",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "536a0484-e2fe-4f7c-a7ae-b85f2568c6f8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "2f277f10-721e-46f5-b856-7de733fefca4",
+                  "label": "IDENTITY ",
+                  "blocks": [
+                    {
+                      "id": "c7083591-6c4f-4396-9bff-ab91322a5eb6",
+                      "label": "Identity Progress Bar",
+                      "type": "SlotTracker",
+                      "meta": { "helperText": "<b><br></b>", "asClock": false },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "38f7c7ad-fc57-4c95-bacb-76dd65e7377e",
+                      "label": "CLUES",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "" },
+                      "value": ""
+                    },
+                    {
+                      "id": "a5053c8e-5532-4901-8d56-8a4a4c4f4fc0",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "811434da-1b05-4095-91c6-a4642e42f876",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2225313b-094b-4219-a006-c3b836d1896e",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "234ffcb7-e940-4e4b-8c4e-c5d4c811f7fa",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b5705dcd-4802-492e-9cc7-f74022aee952",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d4a08dc9-0ba1-4209-9173-e63a6e51d670",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a6a5baa4-aff2-45a5-88fc-4cc02b8f961e",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "10be5802-f97b-4eff-9097-8ad3791f5550",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a819e2de-6754-4618-a6a4-f1a6ae5c83f5",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1826c4b7-c88d-4cd9-aa76-5698a4e2d0ca",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3b1b497e-38df-42fa-bf16-1fde957756ba",
+                      "label": "HUNCHES",
+                      "type": "Separator",
+                      "meta": { "hasLabel": true, "helperText": "<br>" },
+                      "value": ""
+                    },
+                    {
+                      "id": "28dafc30-246e-466e-9012-a32b18eeb18c",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d895ba3c-d8dc-45b9-8ee7-562738583beb",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "eb6b0cc9-7655-43fb-bc4d-9f57b1c828bd",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cf2f96ed-fd82-4312-80d7-83f4d5b5fe9c",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "2b0cf7b6-9708-4ffc-9d48-9774e5089a5e",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1b5f925a-dd84-48d1-ad17-dd8fdbc81932",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3f1473c7-7f7c-4026-a99c-19af04327b4a",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "d4ebfb75-d00e-4112-8499-7db6779381b9",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cd10d3c8-acd8-48c6-a296-e17b976a0561",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1118ed63-3452-4f2a-92e0-03fd31ac2c8f",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "0b4f0de4-d3d7-40d8-bbce-212d855d398c",
+                  "label": "CASE/IDENTITY INFO SHEET",
+                  "blocks": [
+                    {
+                      "id": "2f62cb50-d3db-4c58-84b2-faee2312d621",
+                      "label": "Clues",
+                      "type": "Text",
+                      "value": "Clue categories help you visualize what kind of evidence to look for during the game. There are 6 different categories: coincidence, key, memento, oddness, testimony, and trace.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "68fc7c6e-1170-4829-8c77-e8c3c7c600f4",
+                      "label": "Hunches",
+                      "type": "Text",
+                      "value": "Hunches are hypotheses, facts that you believe take you one step closer to solving the case, or details you seem to remember about your identity. In order to gain a Hunch, you need to \n1: Combine 3 clues from at least 2 different categories.  \n2: Explain in a plausible way how the clues fit together.  \n3: Roleplay how a skill helps you connect the dots, no dice roll needed. ",
+                      "meta": {}
+                    },
+                    {
+                      "id": "6f976d42-f63c-4e28-9550-a65421f56609",
+                      "label": "Progress Bar",
+                      "type": "Text",
+                      "value": "When you gain a Hunch mark your progress in the progress bar of either the case or your identity, and you mark 2 experience points. You can’t recycle the same clues to gain new Hunches, and you’re limited to one case Hunch and one identity Hunch during a single scene. In order to gain a Hunch, you need to  \n1: Combine 3 clues from at least 2 different categories. \n2: Explain in a plausible way how the clues fit together. \n3: Roleplay how a skill helps you connect the dots, no dice roll needed.",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "CASE/IDENTITY "
+    },
+    {
+      "id": "26a429be-c8bf-4cbe-8b67-e23cdd7535ab",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "165fd84d-a67f-4044-a1fb-509653bbfbc6",
+                  "label": "TOKENS",
+                  "blocks": [
+                    {
+                      "id": "64daf8b0-7d34-42a5-ad57-52698ea10d19",
+                      "label": "Tokens",
+                      "type": "SlotTracker",
+                      "meta": {},
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "731824b9-a64d-4e63-84b0-aab11dec8db4",
+                  "label": "FLAGS",
+                  "blocks": [
+                    {
+                      "id": "51e42bb8-9324-4638-b91f-93b3a4f724ff",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "3bcb49e1-8123-4f75-93a2-ac67d38a2367",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "93f6ccf9-cea2-4052-9ad4-7df9471564fb",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "60ccdd3f-9b04-48a1-8b30-6dd46307e21f",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "94095564-d94e-4b06-8db3-b6b26ed9736c",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "4203d012-f566-449a-bd87-81931b9d8f44",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "cda1ef9b-f6b4-4010-bcb9-a58c2515726b",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "f071b914-86ae-459f-b628-6619f1781280",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                },
+                {
+                  "id": "24947eb1-b37c-4877-93d8-45b61ee0410a",
+                  "label": "OTHER PLAYERS' FLAGS",
+                  "blocks": [
+                    {
+                      "id": "8abc4841-4bfc-42e6-bdc5-f8b134bb5bea",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "01951a7c-48cc-4c0b-a5fa-5936488f5052",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "83c6a19d-13a1-4bcc-9fc7-c6534e5d008f",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "6d00c71c-c7d9-4eb2-a27a-162106ebc01c",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "4f11ed57-8c4b-49af-92be-04e9908bbbf1",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "42f3875a-3f65-4e4e-9cee-79f5c7c7ecc3",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "9fbbc206-9386-4834-9640-24b4eb52876a",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "194fcb6d-55e1-4635-b89f-17cfbebd62f8",
+                      "label": "Flag",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                },
+                {
+                  "id": "efee56b9-f082-4585-b373-5176a3aa53c2",
+                  "label": " FLAGGS &amp; TOKENS INFO SHEET",
+                  "blocks": [
+                    {
+                      "id": "5207280b-6987-4f6e-97b8-ccaa6d89e294",
+                      "label": "Tokens",
+                      "type": "Text",
+                      "value": "At the beginning of every game session, tokens are reset to one per player, excluding the GM. Tokens are used in the game for balancing interjections, so shy players are encouraged to contribute at the same level as the more eager players. You can call for interjections upon your character without using a token. The GM can freely call for an interjection without using tokens. When you run out of tokens, you can’t call for interjections upon other characters. A player with 3 tokens can’t be interjected.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "bd5374df-2bac-492d-9cff-5b23a7d81dac",
+                      "label": "Flags",
+                      "type": "Text",
+                      "value": "You can indicate how you'd like to be interjected by others to explore an aspect of your character. This is called flagging. You can, for instance, flag out that you want to be interjected regarding your character’s addiction, a love interest, a recurring feeling, or some prejudice. You can also flag not to be interjected by a particular topic or in the current scene. Flags are your tool to customize and dial up or down the interjections you receive. Your character sheet has an area to write other players’ flags as well.",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "TOKENS &amp; FLAGS\n"
+    },
+    {
+      "id": "f0f93a8c-661b-4f69-ac49-fe76ebb07770",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "64f16727-ff2c-49bd-a976-e4a216af643d",
+                  "label": "THE THOUGHT CABINET",
+                  "blocks": [
+                    {
+                      "id": "af21905f-2ce4-4b3d-bc4d-8d9498cd6418",
+                      "label": "Thought",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "c35ae639-4e4b-4ddd-95ec-e76c64bc2115",
+                      "label": "Thought Progress Bar",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": true, "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "0ebed899-2d62-4259-bc51-6ac4fd5f8f47",
+                      "label": "Effect ",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "3f1d7578-d765-4c7a-9ca7-2227376bd906",
+                      "label": "Thought",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "c943f1b0-e5db-4a85-8df7-dbcacbcdcdac",
+                      "label": "Thought Progress Bar",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": true, "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "7ab48c87-5c76-4f46-a770-71c23880386a",
+                      "label": "Effect ",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "a192be6a-648d-4782-acec-1e2c4ec617a0",
+                      "label": "Thought",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e6ea690c-c0b6-472f-bcae-99da505c7245",
+                      "label": "Thought Progress Bar",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": true, "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "6cd24836-78cc-4b2d-a932-01ab8ea02667",
+                      "label": "Effect",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "d257a204-84ff-45de-9d59-803875190eb8",
+                      "label": "Thought",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "b9eaed72-4a2d-45c3-9908-6e81f792796f",
+                      "label": "Thought Progress Bar",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": true, "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "edce6ece-ec76-4d2a-a7ef-666049fc76f2",
+                      "label": "Effect",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "70a9a064-3844-4deb-8eca-2bde2a06a5d6",
+                      "label": "Thought",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "8d9848ee-e9ab-4242-b2c2-822af36e5276",
+                      "label": "Thought Progress Bar",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": true, "width": 0.33 },
+                      "value": [
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false },
+                        { "label": "", "checked": false }
+                      ]
+                    },
+                    {
+                      "id": "f203d5e5-f450-4d51-9b2c-131320c5729f",
+                      "label": "Effect",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                },
+                {
+                  "id": "f300fea0-466c-4ac7-8a6a-bdb52172ad9f",
+                  "label": "THOUGHT CABINET INFO SHEET",
+                  "blocks": [
+                    {
+                      "id": "f74cef42-2693-4750-b597-3b8dee8a42a1",
+                      "label": "What are Thoughts?",
+                      "type": "Text",
+                      "value": "Thoughts are the items of your brain’s inventory and further develop your unique personality and worldview. They’re a powerful way to express what things are important to your character, what makes them unique, and how it all evolves during the story. They’re stored in a special part of your brain, equipped to handle such dangerous weapons of mass disruption: The Thought Cabinet. You can store up to 5 Thoughts in your Thought Cabinet. Your subconscious mind will work on them in the background, while you do other stuff. Fill in one unit of time in your Thought Progress Bar after every scene. \n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "59a153ee-c385-4d0b-90ac-a6a88f6f59ba",
+                      "label": "Internalizing Thoughts",
+                      "type": "Text",
+                      "value": "Anything that happens in the game can trigger a Thought. Other players and the GM can propose Thoughts, but only you decide whether to add them to your Thought Cabinet or not. It’s probably a good time to trigger a Thought when: \n♦ Something challenges your character’s worldview.\n♦ Something inexplicable happens, challenging your beliefs.\n♦ Something your character was chasing is no longer desired or attainable.\n♦ A previous Thought is challenged by an event and a new one should replace it.\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "68ce5fad-1616-4972-86d7-59003a26779e",
+                      "label": "Creating Thoughts",
+                      "type": "Text",
+                      "value": "Thoughts have 4 separate elements: trigger, question, conclusions, and effects. The trigger is the situation, specific or vague, that allows a Thought to pop into your character’s head. The question of a Thought is its narrative side; a problem or topic your mind ruminates about. Each thought has 2 possible conclusions you can reach, which shape your character’s personality. Finally, the effect is the mechanical dimension of a Thought, and it derives from its conclusion. When deciding what a Thought’s question should be, consider it should:\n♦ Emerge naturally from the fictional context and not from the game’s mechanics.\n♦ Depict a world of magical surrealism.\n♦ Be silly, emotional, or both.\n",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "THOUGHTS"
+    },
+    {
+      "id": "69084d4d-488d-4a04-8071-76d173f74f2d",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5335c75d-121a-451a-a524-f09b957adf7b",
+                  "label": "GEAR &amp; DRUGS",
+                  "blocks": [
+                    {
+                      "id": "89c0e23c-91a5-45dc-9be3-e3fda0ed7e45",
+                      "label": "ITEM",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "bb4247c8-4f7b-498f-a8fb-74194bc943fb",
+                      "label": "ITEM",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "8860b7d1-6480-4930-b2a5-3db2279d7f64",
+                      "label": "ITEM",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "420115db-8f4f-45f3-9fbe-92a814cbb2cd",
+                      "label": "ITEM",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "761b173a-cdb9-4352-a3d5-db3169f6dd69",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "b574bf56-e33a-409b-af26-d72362ec3ba8",
+                      "label": "ITEM",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "340f7dbf-5394-4d19-9b7d-4ced41ce4659",
+                      "label": "ITEM",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "4dd2409e-afe6-42a6-925c-fd62f561c33a",
+                      "label": "ITEM",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "07cdf02d-fc82-4cb1-b908-c8cac34b7b38",
+                      "label": "ITEM",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "5c9c686c-6843-4096-9f42-171be85c66cd",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "5bfd118a-6770-46a6-be74-1bcc8aed1988",
+                      "label": "ITEM",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "32c3a667-42dd-4c3b-8c69-d5ec2a0559b5",
+                      "label": "ITEM",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "32c4de72-4add-48a9-b028-958f2239db20",
+                      "label": "ITEM",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    },
+                    {
+                      "id": "ff78167f-21e7-4822-8148-67413889d945",
+                      "label": "ITEM",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "checked": false }
+                    }
+                  ]
+                },
+                {
+                  "id": "a0cbafb4-8025-47ad-862f-c7c169108d46",
+                  "label": "GEAR &amp; DRUGS INFO SHEET",
+                  "blocks": [
+                    {
+                      "id": "c7d5958a-d3f8-4c3b-8999-a60af632e9d8",
+                      "label": "Gear",
+                      "type": "Text",
+                      "value": "Gear refers to any useful object you carry around. Wearing special clothes or using specific tools can apply bonuses or penalties to your skills. Clothes give passive bonuses to some skills and sometimes penalties to others, while tools give bonuses only when using them to perform certain tasks, or enable you to make certain actions in the first place.",
+                      "meta": { "helperText": "" }
+                    },
+                    {
+                      "id": "813a1e75-f29d-4a71-9394-efef0c0281be",
+                      "label": "Drugs",
+                      "type": "Text",
+                      "value": "A way of manipulating your abilities is using drugs, legal or otherwise. They temporarily increase some skills and decrease others, but they damage either your health or your morale every time you use them, and their boost is short-lived.",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3452f6e1-3f7e-4d29-851d-ce989d82d420",
+                      "label": "Using &amp; combining items",
+                      "type": "Text",
+                      "value": "You can only use 3 items at a time, and you can’t switch them during a scene, so choose wisely. That doesn’t mean that your character is constantly changing clothes and items, it just means that only 3 of them will be mechanically relevant in a scene. You can combine 2 small tools if that makes sense in the fictional context, but you can’t stack multiple clothing items of the same kind, like two pairs of boots.\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c792ad44-15d8-40f7-9690-21201fa7f554",
+                      "label": "Carry capacity ",
+                      "type": "Text",
+                      "value": "You can carry up to 12 relevant items with you, but in the fiction, you’ll be carrying any irrelevant items that would make sense in the context. For instance, if you are not carrying any shoes on your gear list it doesn’t automatically mean that you go barefooted, just that the shoes you wear are unremarkable and don’t affect your skills. Out of these 12 items, you can wear up to 3 of them at any given moment. Not having a clothing item active doesn’t mean you stopped wearing it, just that it doesn’t grant you any skill modifiers.",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "GEAR &amp; DRUGS"
+    },
+    {
+      "id": "2960a30d-cc7a-48ca-929f-a2d231396a8d",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "00f5988b-be0f-4afb-9814-425f0c380c14",
+                  "label": "TAGS",
+                  "blocks": [
+                    {
+                      "id": "f76739df-851c-4a31-9b2e-7dae0d15e454",
+                      "label": "TAG",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "6356dfc0-4ec7-4947-aa8d-2f61489d4529",
+                      "label": "TAG",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "4a499c8b-f04e-4c03-ace7-fed7fe59f2de",
+                      "label": "TAG",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "90e2bb50-465a-4b59-b7d1-b8d3234ec988",
+                      "label": "TAG",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "bdf081a7-ed9b-48ae-83f1-d90b23972514",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "e2ace4b3-ace6-4d00-baec-6e8052637a01",
+                      "label": "TAG",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "3ea4a07a-2859-4ac3-949c-79624c7ed950",
+                      "label": "TAG",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "bc2cc287-5279-4748-94b1-b9566662034d",
+                      "label": "TAG",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a8e64d56-fcf1-4941-a253-4f2955ba1b10",
+                      "label": "TAG",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "9ec1f199-d147-4068-9da6-9bb334b1d83a",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "690dcd91-4119-45bb-af36-a6123252ee9c",
+                      "label": "TAG",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "fa95441f-a59a-41f5-80b6-777f69a0f06a",
+                      "label": "TAG",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "a16acead-47e3-4e39-a8e1-71d019008dcf",
+                      "label": "TAG",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "37c42fc3-cdc4-4e2e-b0ac-beb96b4f1ab5",
+                      "label": "TAG",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "f3239b54-fdd5-4d1f-ae71-51b5dd44a52c",
+                  "label": "TAGS INFO SHEET",
+                  "blocks": [
+                    {
+                      "id": "97657c1a-116b-483f-9669-9aec448d6600",
+                      "label": "Tags",
+                      "type": "Text",
+                      "value": "Your actions have an impact on the world, and facts affect the game’s fiction. Asking somebody for a favor will be harder if you’ve been mocking that person previously. On the other hand, crossing the street unseen will be easier if it’s midnight, there’s a dense fog in the air and a brawl starts in the bar around the corner.Tags are the game’s way of introducing these things into the mechanics. They’re events in the story that are taken note of and can potentially affect gameplay. Tags can provide bonuses and penalties to your skill checks, ranging from ±1, if the tag has a minimum impact on a given action, to ±3, if the tag is absolutely relevant.\n\nThe same tag can be positive or negative depending on the fictional context and can be used multiple times or cease to be relevant. Tags can also stack with each other or be canceled out by other tags. Players can gain tags as a result of a skill check. This allows players to tackle seemingly impossible tasks by taking steps that make the final roll easier. GMs typically introduce negative tags to make your actions more challenging, but during a skill check, you can also invoke a tag to hinder your chances of success. Doing so will reward you with 1 experience point. When playing with a GM, they’ll have the final say regarding which tags apply to a roll and how strong their effect is.\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "7875a78f-bd24-4de3-880c-82c48fadb830",
+                      "label": "Conditions",
+                      "type": "Text",
+                      "value": "Conditions are a special type of negative tag that you gain any time you lose morale or health, representing how the harm affects you. They’re divided between mental conditions if they’re the result of a morale loss, and physical conditions if they’re the product of a health loss. Similarly to tags, conditions can provide penalties for some of your actions. These penalties range from ±1, if the condition has a minimum impact on a given action, to ±3, if the condition is absolutely relevant to the action. When you recover a point in morale or health, clear the most fitting condition you have.\n\nKeep in mind that conditions don’t affect your skills directly; they only affect the difficulty of broad types of goals. For instance, being insecure would affect you anytime you want to act courageously, regardless of the skill used; or having a sprained ankle would make it difficult for you to run or jump, no matter what skill you use for the action.\n",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "TAGS"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true,
+  "group": "Jamais Vu ",
+  "fariType": "character"
+}

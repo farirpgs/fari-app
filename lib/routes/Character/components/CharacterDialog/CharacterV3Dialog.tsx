@@ -67,10 +67,8 @@ import { env } from "../../../../constants/env";
 import { CharactersContext } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../../../contexts/SettingsContext/SettingsContext";
-import {
-  CharacterTemplates,
-  ICharacterTemplate,
-} from "../../../../domains/character/CharacterType";
+
+import { CharacterTemplatesContext } from "../../../../contexts/CharacterTemplatesContext/CharacterTemplatesContext";
 import {
   ICharacter,
   IPage,
@@ -82,6 +80,7 @@ import { useEvent } from "../../../../hooks/useEvent/useEvent";
 import { LazyState } from "../../../../hooks/useLazyState/useLazyState";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
+import { ICharacterTemplate } from "../../../../services/character-templates/CharacterTemplateService";
 import { useCharacter } from "../../hooks/useCharacter";
 import { MiniThemeContext, useMiniTheme } from "./MiniThemeContext";
 import { AddBlock } from "./components/AddBlock";
@@ -153,6 +152,7 @@ export const CharacterV3Dialog: React.FC<{
   const miniTheme = useMiniTheme({
     character: characterManager.state.character,
   });
+  const characterTemplatesManager = useContext(CharacterTemplatesContext);
   // usePrompt(t("manager.leave-without-saving"), characterManager.state.dirty);
 
   const hasMiniTheme = !!characterManager.state.character?.theme;
@@ -407,8 +407,8 @@ export const CharacterV3Dialog: React.FC<{
         >
           <Grid item>
             <InputLabel>
-              {t("character-dialog.load-template")} ({CharacterTemplates.length}
-              )
+              {t("character-dialog.load-template")} (
+              {characterTemplatesManager.templates.length})
             </InputLabel>
           </Grid>
           <Grid item>
@@ -418,22 +418,22 @@ export const CharacterV3Dialog: React.FC<{
               filterOptions={createFilterOptions({
                 limit: 100,
                 stringify: (option) => {
-                  const templateName = option.fileName;
-                  const groupName = option.category;
+                  const templateName = option.name;
+                  const groupName = option.publisher;
                   return `${templateName} ${groupName}`;
                 },
               })}
-              options={CharacterTemplates}
+              options={characterTemplatesManager.templates}
               sx={{
                 width: "300px",
                 color: "red !important",
               }}
               getOptionLabel={(option) => {
-                return option.fileName;
+                return option.name;
               }}
-              groupBy={(option) => option.category}
+              groupBy={(option) => option.publisher}
               onChange={(event, template) => {
-                if (template?.importFunction) {
+                if (template?.fetchPath) {
                   onLoadTemplate(template);
                 }
               }}

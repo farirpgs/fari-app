@@ -1,5 +1,10 @@
 # TODO
 
+- [ ] templates
+- [ ] not found route
+- [ ] page meta checks
+- [ ] full test suit
+
 # [Fari](https://fari.app) - The Free and Open-Source Virtual Tabletop
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->

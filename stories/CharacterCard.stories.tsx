@@ -1,15 +1,14 @@
 import { Box, useTheme } from "@mui/material";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
-import React from "react";
 import { CharacterCard } from "../lib/components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
 import { Toolbox } from "../lib/components/Toolbox/Toolbox";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
-import { ICharacterTemplate } from "../lib/domains/character/CharacterType";
 import {
   MiniThemeContext,
   useMiniTheme,
 } from "../lib/routes/Character/components/CharacterDialog/MiniThemeContext";
+import { ICharacterTemplate } from "../lib/services/character-templates/CharacterTemplateService";
 import { StoryProvider } from "./StoryProvider";
 
 function StorybookCharacterCard(
@@ -79,12 +78,10 @@ export const FateCondensed = Template.bind({});
 (FateCondensed as any).loaders = [
   async () => {
     const template: ICharacterTemplate = {
-      fileName: "",
-      category: "",
-      importFunction: async () =>
-        import(
-          "../lib/domains/character/character-templates/Fate Condensed/Fate Condensed.json"
-        ),
+      name: "",
+      publisher: "",
+      fetchPath:
+        "/public/character-templates/Fate Condensed/Fate Condensed.json",
     };
 
     const character = await CharacterFactory.make(template);
@@ -97,12 +94,9 @@ export const Charge = Template.bind({});
 (Charge as any).loaders = [
   async () => {
     const template: ICharacterTemplate = {
-      fileName: "",
-      category: "",
-      importFunction: async () =>
-        import(
-          "../lib/domains/character/character-templates/Fari RPGs/Charge RPG.json"
-        ),
+      name: "",
+      publisher: "",
+      fetchPath: "/public/character-templates/Fari RPGs/Charge RPG.json",
     };
 
     const character = await CharacterFactory.make(template);

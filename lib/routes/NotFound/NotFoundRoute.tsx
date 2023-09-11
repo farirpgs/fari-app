@@ -1,7 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { Font } from "../../domains/font/Font";
 
@@ -15,7 +14,6 @@ export const NotFoundRoute: React.FC<{}> = () => {
   return (
     <div>
       <Page sx={{ paddingTop: "2rem" }}>
-        <PageMeta title="Page Not Found" noIndex />
         <Box display="flex" justifyContent="center" pt="3rem">
           <Typography
             sx={{
