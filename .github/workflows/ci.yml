@@ -63,8 +63,8 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@master
         with:
-          name: dist
-          path: dist
+          name: out
+          path: out
       # Deploy Preview
       - name: Deploy Preview
         run: bun run deploy:preview -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --alias $GITHUB_RUN_ID
@@ -90,8 +90,8 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@master
         with:
-          name: dist
-          path: dist
+          name: out
+          path: out
       # Deploy Production
       - name: Deploy Production
         run: bun run deploy:prod -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
