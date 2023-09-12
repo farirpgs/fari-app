@@ -38,8 +38,8 @@ jobs:
         uses: actions/upload-artifact@v1
         if: always()
         with:
-          name: dist
-          path: dist
+          name: out
+          path: out
   deploy-preview:
     needs: [build]
     runs-on: ubuntu-latest
