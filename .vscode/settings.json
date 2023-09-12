@@ -14,6 +14,7 @@
   "search.exclude": {
     "**/node_modules/**": true,
     "**/dist/**": true,
+    "**/out/**": true,
     "**/.cache/**": true,
     "yarn.lock": true
   },

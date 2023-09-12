@@ -17,6 +17,8 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect } from "react";
 import discord from "../../../images/services/discord.png";
@@ -182,6 +184,7 @@ export const HomeRoute: React.FC<{}> = () => {
         <Box mb="2rem">
           <Typography
             variant="subtitle1"
+            component={"p"}
             align="center"
             sx={{ whiteSpace: "pre-line" }}
           >
@@ -256,14 +259,14 @@ export const HomeRoute: React.FC<{}> = () => {
             {Sponsors.map((sponsor, i) => {
               return (
                 <Grid item key={i}>
-                  <a href={sponsor.link} target="_blank" rel="noreferrer">
+                  <Link href={sponsor.link} target="_blank" rel="noreferrer">
                     <Box
                       component="img"
                       sx={{ width: "auto", height: "50px" }}
                       src={sponsor.image}
                       title={sponsor.name}
                     />
-                  </a>
+                  </Link>
                 </Grid>
               );
             })}
@@ -281,7 +284,7 @@ export const HomeRoute: React.FC<{}> = () => {
         ctaLabel: t("home-route.cards.scenes.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
             src="https://img.icons8.com/plasticine/100/000000/alps.png"
             alt="scenes"
@@ -296,7 +299,7 @@ export const HomeRoute: React.FC<{}> = () => {
         description: t("home-route.cards.characters.description"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
             src="https://img.icons8.com/plasticine/100/000000/wizard.png"
             alt="characters"
@@ -313,7 +316,7 @@ export const HomeRoute: React.FC<{}> = () => {
         ctaLabel: t("home-route.cards.dice-roller.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
             src="https://img.icons8.com/plasticine/100/000000/dice.png"
             alt="dice-roller"
@@ -336,7 +339,7 @@ export const HomeRoute: React.FC<{}> = () => {
         ctaLabel: t("home-route.cards.data.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
             src="https://img.icons8.com/plasticine/100/000000/cloud-backup-restore.png"
             alt="data"
@@ -352,7 +355,7 @@ export const HomeRoute: React.FC<{}> = () => {
 
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
             src="https://img.icons8.com/plasticine/100/000000/crystal-ball.png"
             alt="play-solo"
@@ -376,7 +379,7 @@ export const HomeRoute: React.FC<{}> = () => {
         ctaLabel: t("home-route.cards.changelog.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
             alt="changelog"
             src="https://img.icons8.com/plasticine/100/000000/comments.png"
@@ -390,7 +393,7 @@ export const HomeRoute: React.FC<{}> = () => {
         ctaLabel: t("home-route.cards.wiki.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
             alt="wiki"
             src="https://img.icons8.com/plasticine/100/000000/contract.png"
@@ -404,7 +407,7 @@ export const HomeRoute: React.FC<{}> = () => {
         ctaLabel: t("home-route.cards.fari-games.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
             alt="fari-games"
             src="https://img.icons8.com/plasticine/100/000000/bookmark--v1.png"
@@ -446,14 +449,7 @@ export const HomeRoute: React.FC<{}> = () => {
         </Grid>
         <Grid item md={6} xs={12} container justifyContent="center" spacing={2}>
           <Grid item xs={12}>
-            <Box
-              component="img"
-              src={discord.src}
-              sx={{
-                width: "50px",
-                height: "auto",
-              }}
-            />
+            <Image src={discord.src} width={50} alt="Discord" />
           </Grid>
           <Grid item xs={12}>
             <Button
@@ -482,13 +478,14 @@ export const HomeRoute: React.FC<{}> = () => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <a
+          <Link
             href="https://github.com/fariapp/fari"
             target="_blank"
             rel="noreferrer"
+            title="Github"
           >
             <GitHubIcon sx={{ width: "5rem", height: "5rem" }} />
-          </a>
+          </Link>
         </Grid>
         <Grid item xs={12}>
           <Button
@@ -588,6 +585,7 @@ export const HomeRoute: React.FC<{}> = () => {
           <Box>
             <Typography
               variant="subtitle2"
+              component={"p"}
               sx={{
                 fontWeight: theme.typography.fontWeightBold,
               }}
@@ -628,7 +626,7 @@ function LightBox(props: ILightBoxProps) {
       {title && (
         <Typography
           variant="h3"
-          component="h3"
+          component="p"
           sx={{
             marginBottom: subTitle ? "1rem" : "3rem",
             textAlign: (textAlign as any) ?? "center",
@@ -642,6 +640,7 @@ function LightBox(props: ILightBoxProps) {
       {subTitle && (
         <Typography
           variant="h5"
+          component="p"
           sx={{
             marginBottom: "3rem",
             textAlign: (textAlign as any) ?? "center",

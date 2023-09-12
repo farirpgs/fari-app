@@ -13,6 +13,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AppLink } from "../../components/AppLink/AppLink";
@@ -105,9 +106,9 @@ export function JoinAGameRoute() {
         }}
       >
         <Box pb="2rem" textAlign="center">
-          <img
+          <Image
             alt="Fari"
-            width="150px"
+            width={150}
             src={
               theme.palette.mode === "dark"
                 ? Images.logoWhite

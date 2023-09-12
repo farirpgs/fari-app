@@ -16,6 +16,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <title>Fari App VTT | The Free and Open-Source Virtual Tabletop</title>
         <meta
           name="google-site-verification"
           content="_SkIJRylG7gB1j0jbxxXboxdViB678DOHglRv43DNtE"
