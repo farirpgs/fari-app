@@ -286,6 +286,8 @@ export const HomeRoute: React.FC<{}> = () => {
           // https://icons8.com/icons/plasticine
           <Image
             className={props.className}
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/alps.png"
             alt="scenes"
           />
@@ -301,6 +303,8 @@ export const HomeRoute: React.FC<{}> = () => {
           // https://icons8.com/icons/plasticine
           <Image
             className={props.className}
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/wizard.png"
             alt="characters"
           />
@@ -318,6 +322,8 @@ export const HomeRoute: React.FC<{}> = () => {
           // https://icons8.com/icons/plasticine
           <Image
             className={props.className}
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/dice.png"
             alt="dice-roller"
           />
@@ -341,6 +347,8 @@ export const HomeRoute: React.FC<{}> = () => {
           // https://icons8.com/icons/plasticine
           <Image
             className={props.className}
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/cloud-backup-restore.png"
             alt="data"
           />
@@ -357,6 +365,8 @@ export const HomeRoute: React.FC<{}> = () => {
           // https://icons8.com/icons/plasticine
           <Image
             className={props.className}
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/crystal-ball.png"
             alt="play-solo"
           />
@@ -382,6 +392,8 @@ export const HomeRoute: React.FC<{}> = () => {
           <Image
             className={props.className}
             alt="changelog"
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/comments.png"
           />
         ),
@@ -396,6 +408,8 @@ export const HomeRoute: React.FC<{}> = () => {
           <Image
             className={props.className}
             alt="wiki"
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/contract.png"
           />
         ),
@@ -410,6 +424,8 @@ export const HomeRoute: React.FC<{}> = () => {
           <Image
             className={props.className}
             alt="fari-games"
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/bookmark--v1.png"
           />
         ),
@@ -449,7 +465,7 @@ export const HomeRoute: React.FC<{}> = () => {
         </Grid>
         <Grid item md={6} xs={12} container justifyContent="center" spacing={2}>
           <Grid item xs={12}>
-            <Image src={discord.src} width={50} alt="Discord" />
+            <Image src={discord.src} alt="Discord" />
           </Grid>
           <Grid item xs={12}>
             <Button
@@ -773,6 +789,7 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                 <Box mb="1rem">
                   <FateLabel
                     variant="h5"
+                    component={"p"}
                     align="center"
                     color="textPrimary"
                     uppercase={false}

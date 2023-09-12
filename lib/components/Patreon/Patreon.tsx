@@ -39,6 +39,7 @@ export const Patreon: React.FC = () => {
           <Grid item>
             <Image
               width={16}
+              height={16}
               src={patreonImage.src}
               alt={t("donation.patreon")}
             />
