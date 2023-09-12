@@ -7,14 +7,7 @@
     "jsx": "preserve",
     "outDir": "./.tsc",
     "skipLibCheck": true,
-    "lib": [
-      "es2015",
-      "es2016",
-      "es2017",
-      "ES2018",
-      "ES2019",
-      "dom"
-    ],
+    "lib": ["es2015", "es2016", "es2017", "ES2018", "ES2019", "dom"],
     "strict": true,
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
@@ -27,11 +20,7 @@
         "name": "next"
       }
     ],
-    "types": [
-      "vitest/globals",
-      "bun-types",
-      "next"
-    ],
+    "types": ["vitest/globals", "bun-types", "next"],
     "noEmit": true,
     "resolveJsonModule": true,
     "isolatedModules": true
@@ -44,10 +33,5 @@
     "./next-env.d.ts",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "./node_modules",
-    "cypress",
-    "dist",
-    "lib/**/*.test.tsx"
-  ]
+  "exclude": ["out", "./node_modules", "cypress", "dist", "lib/**/*.test.tsx"]
 }

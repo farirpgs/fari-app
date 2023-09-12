@@ -1,3 +1,4 @@
+"use client";
 import { Box, Container, useTheme } from "@mui/material";
 import React from "react";
 import { FateLabel } from "../../components/FateLabel/FateLabel";

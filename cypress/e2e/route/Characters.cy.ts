@@ -21,13 +21,13 @@ describe("/characters", () => {
 
       // fill up fields
       Fari.get("character-dialog.ASPECTS.HIGH CONCEPT.value").type(
-        "The Last Jedi"
+        "The Last Jedi",
       );
       Fari.get("character-dialog.ASPECTS.TROUBLE.value").type(
-        "Everything for my friends"
+        "Everything for my friends",
       );
       Fari.get("character-dialog.ASPECTS.RELATIONSHIP.value").type(
-        "Leia is my sister"
+        "Leia is my sister",
       );
       Fari.get("character-dialog.ASPECTS.OTHER ASPECT.value")
         .eq(0)
@@ -56,7 +56,7 @@ describe("/characters", () => {
       Fari.get("character-dialog.CONSEQUENCES.SEVERE.value").type("An Arm");
 
       Fari.get("character-dialog.OTHER.NOTES.value").type(
-        "A long time ago in a galaxy far, far away...."
+        "A long time ago in a galaxy far, far away....",
       );
       Fari.get("character-dialog.group").find("input").type("Star Wars");
 
@@ -89,7 +89,7 @@ describe("/characters", () => {
       cy.contains("Luke Skywalker").should("not.exist");
 
       // should be back to home page
-      cy.url().should("eq", "http://localhost:1234/");
+      cy.url().should("eq", "http://localhost:3000/");
 
       // undo
       cy.contains("Undo").click();
@@ -102,7 +102,7 @@ describe("/characters", () => {
       // add player
       Fari.get("scene.add-player").click();
       Fari.get(
-        "scene.player-row.gm-npc-0.assign-or-open-character-sheet"
+        "scene.player-row.gm-npc-0.assign-or-open-character-sheet",
       ).click();
 
       cy.contains("Luke Skywalker").click();
