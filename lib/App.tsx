@@ -137,9 +137,9 @@ function MyBinderManager() {
   const handler: Record<IFolders, IHandlers> = {
     "characters": {
       async onAdd() {
-        const newCharacter = await charactersManager.actions.add(
-          DefaultTemplates.BlankTemplate,
-        );
+        const newCharacter = await charactersManager.actions.add({
+          json: DefaultTemplates.BlankTemplate,
+        });
 
         if (myBinderManager.state.managerCallback.current) {
           myBinderManager.state.managerCallback.current(newCharacter);
