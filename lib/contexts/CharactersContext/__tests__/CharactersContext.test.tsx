@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 import { expect } from "vitest";
-import { DefaultTemplates } from "../../../domains/character/DefaultTemplates";
+import FateCondensed from "../../../../public/character-templates/Fate Condensed/Fate Condensed.json";
 import { ICharacter } from "../../../domains/character/types";
 import { useCharacters } from "../CharactersContext";
 
@@ -56,7 +56,7 @@ describe("useCharacters", () => {
       let newCharacter: ICharacter | undefined = undefined;
       await act(async () => {
         newCharacter = await result.current.actions.add({
-          json: DefaultTemplates.FateCondensed,
+          json: FateCondensed,
         });
       });
       // THEN the character is added

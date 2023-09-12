@@ -45,8 +45,14 @@ export function useCharacter(
     }
   }, [characterFromProps]);
 
-  async function loadTemplate(template: ICharacterTemplate) {
-    const defaultCharacter = await CharacterFactory.make({ template });
+  async function loadTemplate(props: {
+    template?: ICharacterTemplate;
+    json?: any;
+  }) {
+    const defaultCharacter = await CharacterFactory.make({
+      json: props.json,
+      template: props.template,
+    });
 
     setCharacter(
       produce((draft: ICharacter | undefined) => {

@@ -185,7 +185,9 @@ export const CharacterV3Dialog: React.FC<{
 
     if (confirmed) {
       setTab("0");
-      characterManager.actions.loadTemplate(newTemplate);
+      characterManager.actions.loadTemplate({
+        template: newTemplate,
+      });
       setAdvanced(false);
       logger.track("character.load_template", { template: newTemplate });
     }
