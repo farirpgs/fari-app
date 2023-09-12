@@ -57,7 +57,7 @@ export function NewCharacterRoute() {
         return categoryMatch && nameMatch;
       });
       if (template) {
-        const fake = await CharacterFactory.make(template);
+        const fake = await CharacterFactory.make({ template });
         setFakeCharacter(fake);
         setTemplate(template);
         setStatus("success");
@@ -68,9 +68,9 @@ export function NewCharacterRoute() {
   }, [params.category, params.name]);
   async function handleLoadTemplate() {
     setLoadingTemplate(true);
-    const newCharacter = await charactersManager.actions.add(
-      template as ICharacterTemplate,
-    );
+    const newCharacter = await charactersManager.actions.add({
+      template: template as ICharacterTemplate,
+    });
     router.push(`/characters/${newCharacter.id}`);
   }
   const [fakeCharacter, setFakeCharacter] = useState<ICharacter>();

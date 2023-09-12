@@ -131,8 +131,8 @@ export const CharacterV3Dialog: React.FC<{
 
   const theme = useTheme();
   const query = useQuery<"card" | "advanced">();
-  const showCharacterCard = query.get("card") === "true";
-  const defaultAdvanced = query.get("advanced") === "true";
+  const showCharacterCard = query?.get("card") === "true";
+  const defaultAdvanced = query?.get("advanced") === "true";
   const logger = useLogger();
   const autoSaveTimeout = useRef<any>(null);
   const characterManager = useCharacter(props.character, () => {
