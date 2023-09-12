@@ -1,3 +1,6 @@
+/// <reference lib="dom" />
+/// <reference lib="dom.iterable" />
+
 import { setAutoFreeze } from "immer";
 import React from "react";
 import { createRoot } from "react-dom/client";
