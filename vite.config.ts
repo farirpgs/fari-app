@@ -1,4 +1,3 @@
-import legacy from "@vitejs/plugin-legacy";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
 
@@ -6,16 +5,11 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   define: {
     "process.env.npm_package_version": JSON.stringify(
-      process.env.npm_package_version
+      process.env.npm_package_version,
     ),
     "process.env.JEST_WORKER_ID": JSON.stringify(false),
   },
-  plugins: [
-    react(),
-    legacy({
-      targets: ["defaults", "not IE 11"],
-    }),
-  ],
+  plugins: [react()],
   server: {
     port: 1234,
     proxy: {

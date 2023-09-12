@@ -32,8 +32,13 @@ import {
 
 export const CharacterFactory = {
   latestVersion: 4,
-  async make(template: ICharacterTemplate): Promise<ICharacter> {
-    const result = await fetch(template.fetchPath).then((r) => r.json());
+  async make(props: {
+    template?: ICharacterTemplate;
+    json?: any;
+  }): Promise<ICharacter> {
+    let result = props.template
+      ? await fetch(props.template.fetchPath).then((r) => r.json())
+      : props.json;
     const newCharacter = this.makeFromJson(result);
     const characterWithNewName = {
       ...newCharacter,

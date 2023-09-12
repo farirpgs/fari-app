@@ -2,6 +2,7 @@
  * @jest-environment jsdom
  */
 import { act, renderHook, waitFor } from "@testing-library/react";
+import { expect } from "vitest";
 import { CharacterFactory } from "../../../../domains/character/CharacterFactory";
 import { DefaultTemplates } from "../../../../domains/character/DefaultTemplates";
 import { ICharacter } from "../../../../domains/character/types";
@@ -10,9 +11,9 @@ import { useCharacter } from "../useCharacter";
 describe("useCharacter", () => {
   describe("sanitizeCharacter", () => {
     it("should sanitize the character", async () => {
-      const defaultCahracter = await CharacterFactory.make(
-        DefaultTemplates.FateCondensed
-      );
+      const defaultCahracter = await CharacterFactory.make({
+        json: DefaultTemplates.FateCondensed,
+      });
       // GIVEN
       const character = {
         ...defaultCahracter,
@@ -26,7 +27,7 @@ describe("useCharacter", () => {
         },
         {
           initialProps: { character: character },
-        }
+        },
       );
       // THEN
       expect(result.current.state.character).toEqual(character);
@@ -35,10 +36,10 @@ describe("useCharacter", () => {
         result.current.actions.setName("Luke Skywalker");
       });
       expect(
-        result.current.actions.getCharacterWithNewTimestamp().name
+        result.current.actions.getCharacterWithNewTimestamp().name,
       ).toEqual("Luke Skywalker");
       expect(
-        result.current.actions.getCharacterWithNewTimestamp().lastUpdated
+        result.current.actions.getCharacterWithNewTimestamp().lastUpdated,
       ).not.toEqual(1);
     });
   });
@@ -54,7 +55,7 @@ describe("useCharacter", () => {
         },
         {
           initialProps: { character: initialRenderCharacter },
-        }
+        },
       );
       expect(result.current.state.character).toEqual(undefined);
     });
@@ -71,7 +72,7 @@ describe("useCharacter", () => {
         },
         {
           initialProps: { character: initialRenderCharacter },
-        }
+        },
       );
       // CHARACTER UPDATED IN DIALOG
       const newName = "Luke Skywalker";
@@ -101,7 +102,7 @@ describe("useCharacter", () => {
         },
         {
           initialProps: { character: initialRenderCharacter },
-        }
+        },
       );
       const newName = "Luke Skywalker";
       act(() => {
@@ -132,7 +133,7 @@ describe("useCharacter", () => {
         },
         {
           initialProps: { character: initialRenderCharacter },
-        }
+        },
       );
       // CHARACTER UPDATED IN DIALOG
       const newName = "Luke Skywalker";
@@ -161,7 +162,7 @@ describe("useCharacter", () => {
         },
         {
           initialProps: { character: initialRenderCharacter },
-        }
+        },
       );
       // CHARACTER UPDATED IN DIALOG
       const newName = "Luke Skywalker";
@@ -181,9 +182,9 @@ describe("useCharacter", () => {
 
   describe("load template", () => {
     it("should load the new template but keep the id and the name as is", async () => {
-      const defaultCharacter = await CharacterFactory.make(
-        DefaultTemplates.FateCondensed
-      );
+      const defaultCharacter = await CharacterFactory.make({
+        json: DefaultTemplates.FateCondensed,
+      });
       // GIVEN
       const character = {
         ...defaultCharacter,
@@ -198,7 +199,7 @@ describe("useCharacter", () => {
         },
         {
           initialProps: { character: character },
-        }
+        },
       );
 
       // THEN
@@ -206,13 +207,15 @@ describe("useCharacter", () => {
 
       // WHEN a template is loading
       act(() => {
-        result.current.actions.loadTemplate(DefaultTemplates.FateAccelerated);
+        result.current.actions.loadTemplate({
+          json: DefaultTemplates.FateAccelerated,
+        });
       });
 
       // Wait for JSON download
       await waitFor(() => {
         expect(result.current.state.character?.lastUpdated).not.toEqual(
-          character.lastUpdated
+          character.lastUpdated,
         );
       });
 

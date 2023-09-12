@@ -19,8 +19,14 @@ export function useCharacters(props?: { localStorage: Storage }) {
     onMigration: CharacterFactory.migrate,
   });
 
-  async function add(type: ICharacterTemplate): Promise<ICharacter> {
-    const newCharacter = await CharacterFactory.make(type);
+  async function add(props: {
+    template?: ICharacterTemplate;
+    json?: any;
+  }): Promise<ICharacter> {
+    const newCharacter = await CharacterFactory.make({
+      template: props.template,
+      json: props.json,
+    });
 
     entityManager.actions.setEntities((draft: Array<ICharacter>) => {
       return [newCharacter, ...draft];

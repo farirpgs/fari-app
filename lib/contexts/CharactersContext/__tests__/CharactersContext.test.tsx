@@ -1,4 +1,5 @@
 import { act, renderHook } from "@testing-library/react";
+import { expect } from "vitest";
 import { DefaultTemplates } from "../../../domains/character/DefaultTemplates";
 import { ICharacter } from "../../../domains/character/types";
 import { useCharacters } from "../CharactersContext";
@@ -54,9 +55,9 @@ describe("useCharacters", () => {
       // WHEN I add a new character
       let newCharacter: ICharacter | undefined = undefined;
       await act(async () => {
-        newCharacter = await result.current.actions.add(
-          DefaultTemplates.FateCondensed
-        );
+        newCharacter = await result.current.actions.add({
+          json: DefaultTemplates.FateCondensed,
+        });
       });
       // THEN the character is added
       expect(result.current.state.characters.length).toEqual(1);
@@ -80,14 +81,14 @@ describe("useCharacters", () => {
       expect(result.current.state.characters[0]).toEqual(
         expect.objectContaining({
           id: playingCharacter!.id,
-        })
+        }),
       );
       expect(result.current.state.characters[1]).toEqual(
         expect.objectContaining({
           id: newCharacter!.id,
           lastUpdated: newCharacter!.lastUpdated,
           name: "UPDATED NAME",
-        })
+        }),
       );
 
       act(() => {
@@ -100,7 +101,7 @@ describe("useCharacters", () => {
           id: newCharacter!.id,
           lastUpdated: newCharacter!.lastUpdated,
           name: "UPDATED NAME",
-        })
+        }),
       );
       expect(result.current.state.characters[1]).toEqual(undefined);
 
@@ -114,7 +115,7 @@ describe("useCharacters", () => {
           id: newCharacter!.id,
           lastUpdated: newCharacter!.lastUpdated,
           name: "UPDATED NAME",
-        })
+        }),
       );
 
       act(() => {
@@ -127,7 +128,7 @@ describe("useCharacters", () => {
           id: newCharacter!.id,
           lastUpdated: newCharacter!.lastUpdated,
           name: "UPDATED NAME",
-        })
+        }),
       );
 
       act(() => {
@@ -146,7 +147,7 @@ describe("useCharacters", () => {
           id: newCharacter!.id,
           lastUpdated: newCharacter!.lastUpdated,
           name: "UPDATED NAME",
-        })
+        }),
       );
 
       act(() => {
@@ -164,7 +165,7 @@ describe("useCharacters", () => {
           id: newCharacter!.id,
           lastUpdated: newCharacter!.lastUpdated + 100,
           name: "new timestamp",
-        })
+        }),
       );
 
       act(() => {
@@ -184,14 +185,14 @@ describe("useCharacters", () => {
           id: "new-id",
           name: "new character",
           lastUpdated: newCharacter!.lastUpdated + 100,
-        })
+        }),
       );
       expect(result.current.state.characters[1]).toEqual(
         expect.objectContaining({
           id: newCharacter!.id,
           name: "new timestamp",
           lastUpdated: newCharacter!.lastUpdated + 100,
-        })
+        }),
       );
     });
   });
