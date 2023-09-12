@@ -12,11 +12,10 @@ export async function generateMetadata() {
 
 export default async function CharacterPage() {
   const templates = await CharacterTemplateService.getAll();
-
   return (
     <CharacterTemplatesProvider
       value={{
-        templates,
+        templates: templates,
       }}
     >
       <CharacterRoute></CharacterRoute>;

@@ -1,5 +1,3 @@
-export const DefaultTemplates = {
-  BlankTemplate: await import(
-    "../../../public/character-templates/Defaults/Blank.json"
-  ),
+export const DefaultTemplatesPaths = {
+  Blank: "/character-templates/Defaults/Blank.json",
 } as const;

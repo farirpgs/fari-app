@@ -35,7 +35,7 @@ import {
   useSettings,
 } from "./contexts/SettingsContext/SettingsContext";
 import { CharacterFactory } from "./domains/character/CharacterFactory";
-import { DefaultTemplates } from "./domains/character/DefaultTemplates";
+import { DefaultTemplatesPaths } from "./domains/character/DefaultTemplates";
 import {
   IIndexCardCollection,
   IndexCardCollectionFactory,
@@ -138,7 +138,11 @@ function MyBinderManager() {
     "characters": {
       async onAdd() {
         const newCharacter = await charactersManager.actions.add({
-          json: DefaultTemplates.BlankTemplate,
+          template: {
+            name: "Blank",
+            publisher: "Blank",
+            fetchPath: DefaultTemplatesPaths.Blank,
+          },
         });
 
         if (myBinderManager.state.managerCallback.current) {

@@ -465,7 +465,12 @@ export const HomeRoute: React.FC<{}> = () => {
         </Grid>
         <Grid item md={6} xs={12} container justifyContent="center" spacing={2}>
           <Grid item xs={12}>
-            <Image src={discord.src} alt="Discord" />
+            <Image
+              src={discord.src}
+              width={213 / 2}
+              height={240 / 2}
+              alt="Discord"
+            />
           </Grid>
           <Grid item xs={12}>
             <Button

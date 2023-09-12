@@ -1,14 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 
-export type ICharacterTemplate = {
-  publisher: string;
-  name: string;
-  fetchPath: string;
-};
+import { ICharacterTemplate } from "./ICharacterTemplate";
 
 export const CharacterTemplateService = {
   async getAll() {
+    debugger;
     const templates: Array<ICharacterTemplate> = [];
 
     const publishers = fs.readdirSync(
@@ -24,7 +21,7 @@ export const CharacterTemplateService = {
         templates.push({
           publisher: publisher,
           name: game.split(".json").join(""),
-          fetchPath: `/public/character-templates/${publisher}/${game}`,
+          fetchPath: `/character-templates/${publisher}/${game}`,
         });
       });
     });

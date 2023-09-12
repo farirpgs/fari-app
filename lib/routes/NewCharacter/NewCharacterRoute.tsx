@@ -24,7 +24,7 @@ import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { useParams, useRouter } from "next/navigation";
 import { CharacterTemplatesContext } from "../../contexts/CharacterTemplatesContext/CharacterTemplatesContext";
 import { ICharacter } from "../../domains/character/types";
-import { ICharacterTemplate } from "../../services/character-templates/CharacterTemplateService";
+import { ICharacterTemplate } from "../../services/character-templates/ICharacterTemplate";
 import { CharacterV3Dialog } from "../Character/components/CharacterDialog/CharacterV3Dialog";
 
 export function NewCharacterRoute() {

@@ -80,7 +80,7 @@ import { useEvent } from "../../../../hooks/useEvent/useEvent";
 import { LazyState } from "../../../../hooks/useLazyState/useLazyState";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
-import { ICharacterTemplate } from "../../../../services/character-templates/CharacterTemplateService";
+import { ICharacterTemplate } from "../../../../services/character-templates/ICharacterTemplate";
 import { useCharacter } from "../../hooks/useCharacter";
 import { MiniThemeContext, useMiniTheme } from "./MiniThemeContext";
 import { AddBlock } from "./components/AddBlock";
@@ -153,7 +153,6 @@ export const CharacterV3Dialog: React.FC<{
     character: characterManager.state.character,
   });
   const characterTemplatesManager = useContext(CharacterTemplatesContext);
-  // usePrompt(t("manager.leave-without-saving"), characterManager.state.dirty);
 
   const hasMiniTheme = !!characterManager.state.character?.theme;
 

@@ -1,5 +1,5 @@
 import { produce } from "immer";
-import { ICharacterTemplate } from "../../services/character-templates/CharacterTemplateService";
+import { ICharacterTemplate } from "../../services/character-templates/ICharacterTemplate";
 import { Id } from "../Id/Id";
 import { getUnix } from "../dayjs/getDayJS";
 import { IDiceCommandId } from "../dice/Dice";

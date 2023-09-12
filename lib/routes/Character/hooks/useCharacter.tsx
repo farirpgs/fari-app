@@ -13,7 +13,7 @@ import {
   IPage,
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
-import { ICharacterTemplate } from "../../../services/character-templates/CharacterTemplateService";
+import { ICharacterTemplate } from "../../../services/character-templates/ICharacterTemplate";
 
 export function useCharacter(
   characterFromProps?: ICharacter | undefined,
