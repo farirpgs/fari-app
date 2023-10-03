@@ -4,6 +4,7 @@ export const Fari = {
   },
   start() {
     cy.visit("/");
+    this.forceClick();
     this.get("cookie-consent").click({ force: true });
   },
   /**
@@ -12,6 +13,10 @@ export const Fari = {
    */
   visit(url: string) {
     cy.visit(url);
+    this.forceClick();
+  },
+  forceClick() {
+    cy.get("body").click({ force: true });
   },
   get(tag: string) {
     return cy.get(`[data-cy='${tag}']`);

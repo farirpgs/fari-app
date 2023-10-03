@@ -12,7 +12,7 @@
     "ci": "npm install --force && bun run build && bun run validate",
     "dev": "next dev",
     "build": "bun run next build",
-    "start": "bun serve out",
+    "start": "bun run next start",
     "i18n": "bun i18n.js",
     "preview": "bun run build && bun run deploy:preview",
     "alpha": "bun run build && bun run deploy:preview -- --alias alpha",
@@ -68,7 +68,6 @@
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
     "react-i18next": "^13.0.3",
-    "serve": "latest",
     "uuid": "^9.0.0",
     "vitest": "^0.34.4"
   },

@@ -1,6 +1,8 @@
 import { NewCharacterRoute } from "../../../../../lib/routes/NewCharacter/NewCharacterRoute";
 import { t } from "../../../../i18n";
 
+export const dynamicParams = true;
+
 export async function generateMetadata() {
   return {
     title: t("new-character-route.meta.title"),

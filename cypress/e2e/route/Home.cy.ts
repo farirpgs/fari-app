@@ -16,7 +16,7 @@ describe("/", () => {
       cy.contains("Commencez à jouer maintenant");
       Fari.get("page.menu.tools").click({ force: true });
       Fari.get("page.menu.tools.dice").click({ force: true });
-
+      Fari.forceClick();
       cy.contains("Lancer des dés en ligne");
     });
   });

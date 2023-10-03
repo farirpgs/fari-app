@@ -3,6 +3,8 @@ import { CharacterRoute } from "../../../lib/routes/Character/CharacterRoute";
 import { CharacterTemplateService } from "../../../lib/services/character-templates/CharacterTemplateService";
 import { t } from "../../i18n";
 
+export const dynamicParams = true;
+
 export async function generateMetadata() {
   return {
     title: t("character-route.meta.title"),
