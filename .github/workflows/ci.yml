@@ -38,8 +38,8 @@ jobs:
         uses: actions/upload-artifact@v1
         if: always()
         with:
-          name: out
-          path: out
+          name: .next
+          path: .next
   deploy-preview:
     needs: [build]
     runs-on: ubuntu-latest
@@ -63,8 +63,8 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@master
         with:
-          name: out
-          path: out
+          name: .next
+          path: .next
       # Deploy Preview
       - name: Deploy Preview
         run: bun run deploy:preview -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --alias $GITHUB_RUN_ID
@@ -90,8 +90,8 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@master
         with:
-          name: out
-          path: out
+          name: .next
+          path: .next
       # Deploy Production
       - name: Deploy Production
         run: bun run deploy:prod -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}}

@@ -79,6 +79,7 @@ export function DiceMenu(props: {
               <DiceButtons
                 onClick={handleDiceClick}
                 onRightClick={handleRightClick}
+                onDoubleClick={handleRightClick}
                 pool={props.pool}
                 commands={[
                   "1d4",
