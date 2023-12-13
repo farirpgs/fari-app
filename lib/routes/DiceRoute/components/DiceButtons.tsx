@@ -6,7 +6,6 @@ export function DiceButtons(props: {
   pool?: Array<IDiceCommandId>;
   onClick(command: IDiceCommandId): void;
   onRightClick?(command: IDiceCommandId): void;
-  onDoubleClick?(command: IDiceCommandId): void;
 }) {
   const theme = useTheme();
   const pool = props.pool || [];
@@ -26,7 +25,6 @@ export function DiceButtons(props: {
                     e.preventDefault();
                     props.onRightClick?.(command);
                   }}
-                  onDoubleClick={() => props.onDoubleClick?.(command)}
                   size="large"
                 >
                   <Badge badgeContent={count} color="primary">
