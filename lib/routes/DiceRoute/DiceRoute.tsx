@@ -1,13 +1,10 @@
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import { Container } from "@mui/system";
+import { Container, Grid, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
-import { Dice, ICommandResult, IDiceCommandId } from "../../domains/dice/Dice";
 import { Icons } from "../../domains/Icons/Icons";
+import { Dice, ICommandResult, IDiceCommandId } from "../../domains/dice/Dice";
 import { useEvent } from "../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { DiceButtons } from "./components/DiceButtons";

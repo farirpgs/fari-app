@@ -1,9 +1,11 @@
 import SendIcon from "@mui/icons-material/Send";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import { useTheme } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
+import {
+  Box,
+  IconButton,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { ChatMessageParser } from "../../../../domains/chat/ChatMessageParser";
 import { useEvent } from "../../../../hooks/useEvent/useEvent";
@@ -32,7 +34,8 @@ export function Chat(props: {
     .reverse() as Array<IRollMessage>;
   const uniqueCommandHistory = commandHistory.filter(
     (current, index, self) =>
-      self.findIndex((t) => t.value.command === current.value.command) === index
+      self.findIndex((t) => t.value.command === current.value.command) ===
+      index,
   );
 
   const handleOnMessage = useEvent((messageString) => {
@@ -49,7 +52,7 @@ export function Chat(props: {
   const handleRollHistoryPrevious = useEvent(() => {
     const newIndex = Math.min(
       commandToPopIndex + 1,
-      uniqueCommandHistory.length - 1
+      uniqueCommandHistory.length - 1,
     );
     const poppedCommand = uniqueCommandHistory[newIndex] as IRollMessage;
 

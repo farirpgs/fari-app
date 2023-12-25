@@ -1,14 +1,16 @@
 import CasinoIcon from "@mui/icons-material/Casino";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import { useTheme } from "@mui/material/styles";
-import Tooltip from "@mui/material/Tooltip";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  Grid,
+  IconButton,
+  Tooltip,
+  useTheme,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useZIndex } from "../../constants/zIndex";
 import { Icons } from "../../domains/Icons/Icons";

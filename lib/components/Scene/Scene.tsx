@@ -1,25 +1,25 @@
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import SaveIcon from "@mui/icons-material/Save";
-import Masonry from "@mui/lab/Masonry";
-import TabContext from "@mui/lab/TabContext";
-import TabPanel from "@mui/lab/TabPanel";
-import Alert from "@mui/material/Alert";
-import Autocomplete from "@mui/material/Autocomplete";
-import Box, { BoxProps } from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
-import Grid from "@mui/material/Grid";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import Snackbar from "@mui/material/Snackbar";
-import { useTheme } from "@mui/material/styles";
-
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
+import { Masonry, TabContext, TabPanel } from "@mui/lab";
+import {
+  Alert,
+  Autocomplete,
+  Box,
+  BoxProps,
+  Button,
+  ButtonGroup,
+  FormControl,
+  FormHelperText,
+  Grid,
+  InputLabel,
+  Select,
+  Snackbar,
+  Tab,
+  Tabs,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import React, { useContext, useRef, useState } from "react";
 import { IndexCardCollectionsContext } from "../../contexts/IndexCardCollectionsContext/IndexCardCollectionsContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
@@ -75,7 +75,7 @@ export function Scene(props: {
   const indexCardCollectionsManager = useContext(IndexCardCollectionsContext);
   const selectedIndexCardCollection =
     indexCardCollectionsManager.state.sceneIndexCardCollections.find(
-      (i) => i.id === settingsManager.state.gameTemplate
+      (i) => i.id === settingsManager.state.gameTemplate,
     );
 
   const theme = useTheme();
@@ -86,24 +86,24 @@ export function Scene(props: {
   const myBinderManager = useContext(MyBinderContext);
 
   const headerBackgroundColor = useTextColors(
-    theme.palette.background.paper
+    theme.palette.background.paper,
   ).primary;
 
   const indexCardsContainerRef = useRef<HTMLElement>(null);
   const indexCardsContainerWidth = useElementWidth(indexCardsContainerRef);
   const numberOfColumnsForIndexCardsMasonry = Math.floor(
-    indexCardsContainerWidth / IndexCardMinWidth
+    indexCardsContainerWidth / IndexCardMinWidth,
   );
 
   const hiddenIndexCardRecord = useHiddenIndexCardRecord(
-    sceneManager.state.scene?.indexCards
+    sceneManager.state.scene?.indexCards,
   );
 
   const [sort, setSort] = useState<SortMode>(SortMode.None);
 
   const [savedSnack, setSavedSnack] = useState(false);
   const [sceneTab, setSceneTab] = useState<"public" | "private" | "notes">(
-    "public"
+    "public",
   );
 
   const headerColor = theme.palette.background.paper;
@@ -217,7 +217,7 @@ export function Scene(props: {
               onClick={() => {
                 scenesManager.actions.upsert(sceneManager.state.scene);
                 sceneManager.actions.loadScene(
-                  sceneManager.state.scene as IScene
+                  sceneManager.state.scene as IScene,
                 );
                 setSavedSnack(true);
                 logger.track("scene.save");
@@ -279,13 +279,13 @@ export function Scene(props: {
                 <TabPanel value={"public"} sx={tabPanelStyle}>
                   {renderIndexCardsForTab(
                     sceneManager.state.scene?.indexCards.public,
-                    "public"
+                    "public",
                   )}
                 </TabPanel>
                 <TabPanel value={"private"} sx={tabPanelStyle}>
                   {renderIndexCardsForTab(
                     sceneManager.state.scene?.indexCards.private,
-                    "private"
+                    "private",
                   )}
                 </TabPanel>
                 <TabPanel value={"notes"} sx={tabPanelStyle}>
@@ -406,7 +406,7 @@ export function Scene(props: {
 
   function renderIndexCardsForTab(
     indexCardsFromTab: Array<IIndexCard> = [],
-    type: IIndexCardType
+    type: IIndexCardType,
   ) {
     const hasIndexCards = indexCardsFromTab.length > 0;
 
@@ -434,7 +434,7 @@ export function Scene(props: {
 
   function renderIndexCards(
     indexCardsFromTab: Array<IIndexCard>,
-    type: IIndexCardType
+    type: IIndexCardType,
   ) {
     const sortByPinned: IArraySortGetter<IIndexCard> = (indexCard) => {
       return { value: indexCard.pinned, direction: "asc" };
@@ -515,7 +515,7 @@ export function Scene(props: {
                     sceneManager.actions.moveIndexCard(
                       oldId,
                       newId,
-                      renderProps.type
+                      renderProps.type,
                     );
                   }}
                   onToggleVisibility={(indexCard) => {
@@ -524,23 +524,23 @@ export function Scene(props: {
                   onTogglePrivate={() => {
                     sceneManager.actions.toggleIndexCardSection(
                       indexCard,
-                      renderProps.type
+                      renderProps.type,
                     );
                   }}
                   onMoveTo={(
                     idOfIndexCardToMove: string,
-                    idOfIndexCardToMoveTo: string
+                    idOfIndexCardToMoveTo: string,
                   ) => {
                     sceneManager.actions.moveIndexCardTo(
                       idOfIndexCardToMove,
                       idOfIndexCardToMoveTo,
-                      renderProps.type
+                      renderProps.type,
                     );
                   }}
                   onMoveOut={(idOfIndexCardToMove) => {
                     sceneManager.actions.moveIndexCardOut(
                       idOfIndexCardToMove,
-                      renderProps.type
+                      renderProps.type,
                     );
                   }}
                   isGM={props.isGM}
@@ -552,13 +552,13 @@ export function Scene(props: {
                   onDuplicate={() => {
                     sceneManager.actions.duplicateIndexCard(
                       indexCard,
-                      renderProps.type
+                      renderProps.type,
                     );
                   }}
                   onRemove={() => {
                     sceneManager.actions.removeIndexCard(
                       indexCard.id,
-                      renderProps.type
+                      renderProps.type,
                     );
                   }}
                 />
@@ -678,7 +678,7 @@ export function Scene(props: {
                               value: indexCardCollection.name,
                             })}
                           </option>
-                        )
+                        ),
                       )}
                     </Select>
                   </FormControl>
@@ -707,11 +707,11 @@ export function Scene(props: {
                             onClick: () => {
                               return sceneManager.actions.duplicateIndexCard(
                                 card,
-                                type
+                                type,
                               );
                             },
                           };
-                        }
+                        },
                       ),
                     ]}
                   />

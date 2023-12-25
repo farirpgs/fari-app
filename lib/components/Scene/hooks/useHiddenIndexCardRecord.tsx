@@ -1,9 +1,9 @@
-import produce from "immer";
+import { produce } from "immer";
 import { useEffect, useState } from "react";
 import { IIndexCard, IIndexCardType } from "../../../hooks/useScene/IScene";
 
 export function useHiddenIndexCardRecord(
-  indexCards: Record<IIndexCardType, Array<IIndexCard>> | undefined
+  indexCards: Record<IIndexCardType, Array<IIndexCard>> | undefined,
 ) {
   const [indexCardHiddenRecord, setIndexCardHiddenRecord] = useState<
     Record<string, boolean>
@@ -15,8 +15,8 @@ export function useHiddenIndexCardRecord(
       : Object.values(indexCardHiddenRecord).every((c) => !c);
   useEffect(
     function keepHiddenRecordsInSync() {
-      if(!indexCards){
-        return
+      if (!indexCards) {
+        return;
       }
       setIndexCardHiddenRecord((prev: Record<string, boolean>) => {
         const newRecord: Record<string, boolean> = {};
@@ -33,7 +33,7 @@ export function useHiddenIndexCardRecord(
         return newRecord;
       });
     },
-    [indexCards]
+    [indexCards],
   );
 
   function toggle(indexCard: IIndexCard) {
@@ -45,13 +45,13 @@ export function useHiddenIndexCardRecord(
         indexCard.subCards.forEach((subCard) => {
           draft[subCard.id] = newValue;
         });
-      })
+      }),
     );
   }
 
   function toggleAll() {
-    if(!indexCards){
-      return
+    if (!indexCards) {
+      return;
     }
     setIndexCardHiddenRecord(
       produce((draft: Record<string, boolean>) => {
@@ -66,7 +66,7 @@ export function useHiddenIndexCardRecord(
             draft[subCard.id] = newValue;
           }
         }
-      })
+      }),
     );
   }
 

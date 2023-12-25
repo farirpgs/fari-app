@@ -1,6 +1,4 @@
-import Box from "@mui/material/Box";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import { ThemeProvider } from "@mui/material/styles";
+import { Box, ClickAwayListener, ThemeProvider } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { DiceMenu } from "../../../../../components/DiceFab/DiceMenu";
 import { SettingsContext } from "../../../../../contexts/SettingsContext/SettingsContext";
@@ -44,7 +42,7 @@ export function DiceMenuForCharacterSheet(props: {
     function syncPropsWithState() {
       setCommandSetIds(props.commandSetIds);
     },
-    [props.commandSetIds]
+    [props.commandSetIds],
   );
 
   const settingsManager = useContext(SettingsContext);

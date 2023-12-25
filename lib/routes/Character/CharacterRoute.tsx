@@ -1,6 +1,4 @@
-import Box from "@mui/material/Box";
-import Snackbar from "@mui/material/Snackbar";
-import { useTheme } from "@mui/material/styles";
+import { Box, Snackbar, useTheme } from "@mui/material";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Page } from "../../components/Page/Page";
@@ -126,7 +124,7 @@ function CharacterRoute() {
 
   useEffect(() => {
     const characterToLoad = charactersManager.state.characters.find(
-      (s) => s.id === params.id
+      (s) => s.id === params.id,
     );
 
     if (characterToLoad) {

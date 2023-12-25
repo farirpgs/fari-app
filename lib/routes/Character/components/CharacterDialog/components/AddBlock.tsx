@@ -8,16 +8,19 @@ import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import LinkIcon from "@mui/icons-material/Link";
 import RemoveIcon from "@mui/icons-material/Remove";
 import TextFieldsIcon from "@mui/icons-material/TextFields";
-import Box from "@mui/material/Box";
-import Button, { ButtonProps } from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import {
+  Box,
+  Button,
+  ButtonProps,
+  IconButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import React from "react";
-import { BlockType } from "../../../../../domains/character/types";
 import { Icons } from "../../../../../domains/Icons/Icons";
+import { BlockType } from "../../../../../domains/character/types";
 import { useTranslate } from "../../../../../hooks/useTranslate/useTranslate";
 
 export const AddBlock: React.FC<

@@ -1,4 +1,4 @@
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React from "react";
@@ -238,7 +238,7 @@ PlayerOutOfBoundWithCharacter.args = {
   canUpdateInitiative: true,
   canUpdatePoints: true,
   characterSheet: aCharacter(
-    "CharacterNameCharacterNameCharacterNameCharacterNameCharacterNameCharacterName"
+    "CharacterNameCharacterNameCharacterNameCharacterNameCharacterNameCharacterName",
   ),
   player: aPlayer({
     playerName:

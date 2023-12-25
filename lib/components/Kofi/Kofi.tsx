@@ -1,5 +1,4 @@
-import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
+import { Box, useTheme } from "@mui/material";
 import React from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -14,7 +13,7 @@ export const Kofi: React.FC<{}> = () => {
       kofiwidget2.init(
         t("donation.kofi"),
         theme.palette.primary.main,
-        "B0B4AHLJ"
+        "B0B4AHLJ",
       );
       html = kofiwidget2.getHTML();
     }
@@ -25,7 +24,7 @@ export const Kofi: React.FC<{}> = () => {
       sx={{
         "& span.kofitext": {
           color: `${theme.palette.getContrastText(
-            theme.palette.primary.main
+            theme.palette.primary.main,
           )} !important`,
         },
       }}

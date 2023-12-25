@@ -1,4 +1,4 @@
-import { useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material";
 import { useThemeFromColor } from "../useThemeFromColor/useThemeFromColor";
 
 export function useHighlight() {
@@ -12,7 +12,7 @@ export function useHighlight() {
   const radialBackground = `${firstColor} radial-gradient(${firstColor},${secondColor})`;
   const highlightTheme = useThemeFromColor(
     theme.palette.getContrastText(firstColor),
-    "dark"
+    "dark",
   );
   const color = highlightTheme.palette.text.primary;
   const hover = "#b1cbff";

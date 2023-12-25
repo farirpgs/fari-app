@@ -1,5 +1,4 @@
-import { Theme, useTheme } from "@mui/material/styles";
-import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon";
+import { SvgIcon, SvgIconProps, Theme, useTheme } from "@mui/material";
 import React from "react";
 
 export function makeIcon(options: {
@@ -18,7 +17,7 @@ export function makeIcon(options: {
           {options.svg(theme)}
         </SvgIcon>
       );
-    }
+    },
   );
 
   IconComponent.displayName = `Icons.${options.name}`;

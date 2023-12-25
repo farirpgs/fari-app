@@ -1,6 +1,4 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Snackbar from "@mui/material/Snackbar";
+import { Box, Button, Snackbar } from "@mui/material";
 import React, { useState } from "react";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -9,7 +7,7 @@ const cookieConsentLocalStorageKey = "cookie-consent";
 type ICookieConsent = "true" | undefined;
 export const CookieConsent: React.FC = () => {
   const valueFromStorage = localStorage.getItem(
-    cookieConsentLocalStorageKey
+    cookieConsentLocalStorageKey,
   ) as ICookieConsent;
 
   const [consent, setConsent] = useState<ICookieConsent>(valueFromStorage);

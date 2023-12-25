@@ -1,6 +1,4 @@
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import { useTheme } from "@mui/material/styles";
+import { Grid, Link, useTheme } from "@mui/material";
 import React from "react";
 import { Delays } from "../../../../../../constants/Delays";
 import {
@@ -31,7 +29,7 @@ export const BlockSkill = React.memo(
       hideModifier: boolean | undefined;
       dataCy?: string;
       onRoll(diceRollResult: IDicePoolResult): void;
-    } & IBlockHandlers<ISkillBlock>
+    } & IBlockHandlers<ISkillBlock>,
   ) => {
     const [state, setState] = useLazyState({
       value: props.value,
@@ -69,7 +67,7 @@ export const BlockSkill = React.memo(
         }
       />
     );
-  }
+  },
 );
 BlockSkill.displayName = "BlockSkill";
 
@@ -80,7 +78,7 @@ export const BlockSkillActions = React.memo(
       label: string | undefined;
       checked: boolean | undefined;
       hideModifier: boolean | undefined;
-    } & IBlockHandlers<ISkillBlock>
+    } & IBlockHandlers<ISkillBlock>,
   ) => {
     const theme = useTheme();
     const { t } = useTranslate();
@@ -130,7 +128,7 @@ export const BlockSkillActions = React.memo(
         </Grid>
       </>
     );
-  }
+  },
 );
 
 BlockSkillActions.displayName = "BlockSkillActions";

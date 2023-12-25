@@ -1,17 +1,15 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import Paper from "@mui/material/Paper";
+import { Box, Button, Container, Paper, useTheme } from "@mui/material";
 
-import { useTheme } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableFooter from "@mui/material/TableFooter";
-import TableRow from "@mui/material/TableRow";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableFooter,
+  TableRow,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";

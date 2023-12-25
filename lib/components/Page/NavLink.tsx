@@ -1,14 +1,16 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Collapse from "@mui/material/Collapse";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Popover from "@mui/material/Popover";
-import { useTheme } from "@mui/material/styles";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import {
+  Box,
+  Button,
+  Collapse,
+  Grid,
+  Paper,
+  Popover,
+  Tooltip,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React, { useState } from "react";
 import { ReactRouterLink } from "../ReactRouterLink/ReactRouterLink";
 
@@ -23,7 +25,6 @@ export function NavLink(props: {
   endIcon?: React.ReactNode;
   children: React.ReactNode;
 }) {
-  const theme = useTheme();
   if (props.to) {
     return (
       <Tooltip title={props.tooltip ?? ""}>
@@ -136,6 +137,7 @@ export function NavLinkCategory(props: {
             <Paper elevation={2}>
               <Box p="1rem">
                 <Box>{renderSubNav()}</Box>
+                <Box>{props.children}</Box>
               </Box>
             </Paper>
           </Box>

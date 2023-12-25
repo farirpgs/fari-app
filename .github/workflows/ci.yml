@@ -15,31 +15,24 @@ jobs:
       # Checkout
       - name: Checkout
         uses: actions/checkout@v2
-      # Use Node
-      - name: Use Node
-        uses: actions/setup-node@v2
+      # Use Bun
+      - name: Use Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: "18"
-      # Cache
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          bun-version: latest
       # Install
       - name: Install
-        run: npm install
+        run: bun install
       # Build
       - name: Build
         run: |
-          CONTEXT=production npm run build
+          CONTEXT=production bun run build
         env:
           VITE_GITHUB_RUN_NUMBER: ${{github.run_number}}
           VITE_GITHUB_SHA: ${{github.sha}}
       # Validate
       - name: Validate
-        run: npm run validate
+        run: bun run validate
       # Upload Artifacts
       - name: Upload Artifacts
         uses: actions/upload-artifact@v1
@@ -55,22 +48,17 @@ jobs:
       name: Preview
       url: https://${{github.run_id}}--fari.netlify.app
     steps:
-      # Setup
-      - uses: actions/checkout@v2
-      - name: Use Node
-        uses: actions/setup-node@v2
+      # Checkout
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Use Bun
+      - name: Use Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: "18"
-      # Cache
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          bun-version: latest
       # Install
       - name: Install
-        run: npm install
+        run: bun install
       # Download Artifacts
       - name: Download Artifacts
         uses: actions/download-artifact@master
@@ -79,7 +67,7 @@ jobs:
           path: dist
       # Deploy Preview
       - name: Deploy Preview
-        run: npm run deploy:preview -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --alias $GITHUB_RUN_ID
+        run: bun run deploy:preview -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --alias $GITHUB_RUN_ID
   deploy-production:
     needs: [build]
     runs-on: ubuntu-latest
@@ -90,21 +78,14 @@ jobs:
     steps:
       # Setup
       - uses: actions/checkout@v2
-      - name: Use Node
-        uses: actions/setup-node@v2
+      # Use Bun
+      - name: Use Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: "18"
-      # Cache
-      - name: Cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          bun-version: latest
       # Install
       - name: Install
-        run: npm install
+        run: bun install
       # Download Artifacts
       - name: Download Artifacts
         uses: actions/download-artifact@master
@@ -113,4 +94,4 @@ jobs:
           path: dist
       # Deploy Production
       - name: Deploy Production
-        run: npm run deploy:prod -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
+        run: bun run deploy:prod -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}}

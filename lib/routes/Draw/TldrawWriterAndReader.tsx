@@ -1,7 +1,5 @@
 import { LiveMap } from "@liveblocks/client";
-import { useTheme } from "@mui/material";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { Box, Typography, useTheme } from "@mui/material";
 import type { TDBinding, TDShape, TldrawApp } from "@tldraw/tldraw";
 import { Tldraw, TldrawProps } from "@tldraw/tldraw";
 import React, { useEffect } from "react";
@@ -22,8 +20,8 @@ export function TldrawWriter(props: {
   tldrawProps?: TldrawProps;
 }) {
   const theme = useTheme();
-  const shapesRef = React.useRef<LiveMap>(new LiveMap());
-  const bindingsRef = React.useRef<LiveMap>(new LiveMap());
+  const shapesRef = React.useRef<LiveMap<string, any>>(new LiveMap());
+  const bindingsRef = React.useRef<LiveMap<string, any>>(new LiveMap());
   const dirtyRef = React.useRef(false);
 
   useEffect(() => {
@@ -59,7 +57,7 @@ export function TldrawWriter(props: {
   function handleTldrawChange(
     app: TldrawApp,
     shapes: Record<string, TDShape | undefined>,
-    bindings: Record<string, TDBinding | undefined>
+    bindings: Record<string, TDBinding | undefined>,
   ) {
     dirtyRef.current = true;
 

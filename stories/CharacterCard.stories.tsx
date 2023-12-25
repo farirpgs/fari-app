@@ -1,5 +1,4 @@
-import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
+import { Box, useTheme } from "@mui/material";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
 import React from "react";
@@ -17,7 +16,7 @@ function StorybookCharacterCard(
   props: Pick<
     Parameters<typeof CharacterCard>["0"],
     "characterSheet" | "readonly"
-  >
+  >,
 ) {
   const theme = useTheme();
   const miniTheme = useMiniTheme({

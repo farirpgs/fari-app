@@ -1,8 +1,4 @@
-import Badge from "@mui/material/Badge";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import { useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
+import { Badge, Grid, IconButton, Typography, useTheme } from "@mui/material";
 import React from "react";
 import { DiceOptions, IDiceCommandId } from "../../../domains/dice/Dice";
 

@@ -1,5 +1,4 @@
-import { useMyPresence } from "@liveblocks/react";
-import Box from "@mui/material/Box";
+import { Box } from "@mui/material";
 import React, {
   useContext,
   useEffect,
@@ -7,6 +6,7 @@ import React, {
   useState,
 } from "react";
 import { useZIndex } from "../../../../constants/zIndex";
+import { useMyPresence } from "../../../../services/liveblocks/liveblocks.config";
 import { PlayCursorMode } from "../../consts/PlayCursorMode";
 import { SessionPresenceUpdaterContext } from "../../contexts/SessionPresenceContext";
 import {
@@ -17,7 +17,6 @@ import {
   IPlayerCursorRollOutput,
   IPlayerCursorState,
 } from "../../types/IPlayerCursorState";
-import { IPlayerPresence } from "../../types/IPlayerPresence";
 import { IMessageToSend, IRollMessage } from "../Chat/useChat";
 import CursorWithMessage from "../CursorWithMessage/CursorWithMessage";
 
@@ -30,14 +29,14 @@ export const PlayersPresence = React.forwardRef(
     props: {
       onMessageSubmit?(messageToSend: IMessageToSend): void;
     },
-    ref
+    ref,
   ) => {
     const [cursorState, setCursorState] = useState<IPlayerCursorState>({
       mode: PlayCursorMode.Hidden,
     });
     const sessionPresenceUpdater = useContext(SessionPresenceUpdaterContext);
 
-    const [presence] = useMyPresence<IPlayerPresence>();
+    const [presence] = useMyPresence();
     const myWindowCursor = useMyWindowLiveCursor();
     const windowCursors = useWindowLiveCursors();
     const zIndex = useZIndex();
@@ -49,7 +48,7 @@ export const PlayersPresence = React.forwardRef(
     useEffect(() => {
       function onKeyUp(e: KeyboardEvent) {
         const hasADialogOpened = !!document.querySelector(
-          ".MuiDialog-container"
+          ".MuiDialog-container",
         );
 
         if (e.key === "Escape") {
@@ -179,5 +178,5 @@ export const PlayersPresence = React.forwardRef(
         </>
       );
     }
-  }
+  },
 );

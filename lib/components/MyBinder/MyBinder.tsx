@@ -6,30 +6,34 @@ import ExportIcon from "@mui/icons-material/GetApp";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import SearchIcon from "@mui/icons-material/Search";
 import ShareIcon from "@mui/icons-material/Share";
-import Alert from "@mui/material/Alert";
-import Avatar from "@mui/material/Avatar";
-import Box, { BoxProps } from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Fade from "@mui/material/Fade";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import InputBase from "@mui/material/InputBase";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
-import Paper from "@mui/material/Paper";
-import Snackbar from "@mui/material/Snackbar";
-import { darken, useTheme } from "@mui/material/styles";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
+import {
+  Alert,
+  Avatar,
+  Box,
+  BoxProps,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Fade,
+  Grid,
+  IconButton,
+  InputBase,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+  Paper,
+  Snackbar,
+  Tooltip,
+  Typography,
+  darken,
+  useTheme,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
@@ -74,7 +78,7 @@ export function MyBinder<TFolders extends string>(props: {
   onUndo(folder: TFolders, element: IManagerViewModel): void;
   onImport(
     folder: TFolders,
-    importPaths: FileList | null
+    importPaths: FileList | null,
   ): Promise<{ entity: any | undefined }>;
   onImportAddAsNew(folder: TFolders, entity: any): void;
   onImportUpdateExisting(folder: TFolders, entity: any): void;
@@ -123,7 +127,7 @@ export function MyBinder<TFolders extends string>(props: {
         setSearch("");
       }
     },
-    [props.open]
+    [props.open],
   );
 
   function handleOnSelect(currentFolder: TFolders, element: IManagerViewModel) {
@@ -137,7 +141,7 @@ export function MyBinder<TFolders extends string>(props: {
 
   function handleOnSelectOnNewTab(
     currentFolder: TFolders,
-    element: IManagerViewModel
+    element: IManagerViewModel,
   ) {
     props.onSelectOnNewTab(currentFolder, element);
     logger.track("binder.select-on-new-tab", {
@@ -168,7 +172,7 @@ export function MyBinder<TFolders extends string>(props: {
 
   function handleOnDuplicate(
     currentFolder: TFolders,
-    element: IManagerViewModel
+    element: IManagerViewModel,
   ) {
     props.onDuplicate(currentFolder, element);
     logger.track("binder.duplicate", {
@@ -189,7 +193,7 @@ export function MyBinder<TFolders extends string>(props: {
 
   function handleOnExportAsTemplate(
     currentFolder: TFolders,
-    element: IManagerViewModel
+    element: IManagerViewModel,
   ) {
     props.onExportAsTemplate(currentFolder, element);
     logger.track("binder.export-as-template", {
@@ -352,7 +356,7 @@ export function MyBinder<TFolders extends string>(props: {
                           placeholder={
                             folder
                               ? `${t(
-                                  "my-binder.search-in"
+                                  "my-binder.search-in",
                                 )} "${currentFolderLabel}"...`
                               : t("my-binder.search")
                           }
@@ -414,7 +418,7 @@ export function MyBinder<TFolders extends string>(props: {
           {folderNames.map((name, key) => {
             const folderItemCount = props.folders[name].length;
             const translatedFolderName = t(
-              `my-binder.folder.${name}` as ITranslationKeys
+              `my-binder.folder.${name}` as ITranslationKeys,
             );
             return (
               <ListItem
@@ -567,14 +571,17 @@ export function MyBinder<TFolders extends string>(props: {
   }
 
   function renderElements(elements: IManagerViewModel[], displayType = false) {
-    const groups = elements.reduce((acc, curr) => {
-      const group = curr.group || "Other";
-      const currentList = acc[group] ?? [];
-      return {
-        ...acc,
-        [group]: [...currentList, curr],
-      };
-    }, {} as Record<string, Array<IManagerViewModel>>);
+    const groups = elements.reduce(
+      (acc, curr) => {
+        const group = curr.group || "Other";
+        const currentList = acc[group] ?? [];
+        return {
+          ...acc,
+          [group]: [...currentList, curr],
+        };
+      },
+      {} as Record<string, Array<IManagerViewModel>>,
+    );
 
     const groupNames = arraySort(Object.keys(groups), [
       (g) => ({ value: g !== "Other", direction: "asc" }),

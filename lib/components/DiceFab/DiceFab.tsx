@@ -1,16 +1,19 @@
 import CloseIcon from "@mui/icons-material/Close";
-import Badge from "@mui/material/Badge";
-import Box from "@mui/material/Box";
-import ButtonBase from "@mui/material/ButtonBase";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import Fab from "@mui/material/Fab";
-import Grid from "@mui/material/Grid";
-import { useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-import Zoom from "@mui/material/Zoom";
+import {
+  Badge,
+  Box,
+  ButtonBase,
+  ClickAwayListener,
+  Fab,
+  Grid,
+  Typography,
+  Zoom,
+  useTheme,
+} from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { useZIndex } from "../../constants/zIndex";
 import { DiceContext } from "../../contexts/DiceContext/DiceContext";
+import { Icons } from "../../domains/Icons/Icons";
 import {
   Dice,
   DiceFabResultLabel,
@@ -18,7 +21,6 @@ import {
   IDicePoolResult,
   IRollablePool,
 } from "../../domains/dice/Dice";
-import { Icons } from "../../domains/Icons/Icons";
 import { useEvent } from "../../hooks/useEvent/useEvent";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { DiceMenu } from "./DiceMenu";
@@ -49,7 +51,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       props.onOpen?.();
       setAnchorEl(event.currentTarget);
-    }
+    },
   );
 
   const handleMenuClose = useEvent(() => {
@@ -71,7 +73,7 @@ export const DiceFab: React.FC<IProps> = (props) => {
       } else {
         handleMenuClose();
       }
-    }
+    },
   );
 
   function handleRoll() {
@@ -159,7 +161,7 @@ export function DiceFabButton(props: {
     function () {
       setHasPool(props.hasPool);
     },
-    [props.hasPool]
+    [props.hasPool],
   );
 
   return (
@@ -243,7 +245,7 @@ export function DiceFabButton(props: {
             ["max-width", "background", "border"],
             {
               duration: theme.transitions.duration.complex,
-            }
+            },
           ),
           maxWidth: hasPool ? "100vw" : "0",
         }}
@@ -268,7 +270,7 @@ export function DiceFabButton(props: {
                   marginRight: "-.1rem",
                   background: theme.palette.background.paper,
                   color: theme.palette.getContrastText(
-                    theme.palette.background.paper
+                    theme.palette.background.paper,
                   ),
                 },
               }}

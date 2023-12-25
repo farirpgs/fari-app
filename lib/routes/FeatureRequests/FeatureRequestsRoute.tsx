@@ -1,7 +1,5 @@
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import { useTheme } from "@mui/material/styles";
+import { Box, Container, useTheme } from "@mui/material";
 import React from "react";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";

@@ -1,45 +1,44 @@
 import { LiveObject } from "@liveblocks/client";
-import { LiveblocksProvider, RoomProvider } from "@liveblocks/react";
 import React, { useContext } from "react";
 import { Route, Routes, useLocation, useParams } from "react-router-dom";
-import { InjectionsContext } from "../../contexts/InjectionsContext/InjectionsContext";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { StoryBuilderRoute } from "../../routes/StoryBuilder/StoryBuilderRoute";
 import StoryDiceRoute from "../../routes/StoryDice/StoryDiceRoute";
+import { RoomProvider } from "../../services/liveblocks/liveblocks.config";
 import { ExternalRedirect } from "../ExternalRedirect/ExternalRedirect";
 import { LoadingRoute } from "./LoadingRoute";
 
 const HomeRoute = React.lazy(() => import("../../routes/Home/HomeRoute"));
 
 const CharacterRoute = React.lazy(
-  () => import("../../routes/Character/CharacterRoute")
+  () => import("../../routes/Character/CharacterRoute"),
 );
 const NewCharacterRoute = React.lazy(
-  () => import("../../routes/NewCharacter/NewCharacterRoute")
+  () => import("../../routes/NewCharacter/NewCharacterRoute"),
 );
 const CharacterPrintRoute = React.lazy(
-  () => import("../../routes/CharacterPrint/CharacterPrintRoute")
+  () => import("../../routes/CharacterPrint/CharacterPrintRoute"),
 );
 const DiceRoute = React.lazy(() => import("../../routes/DiceRoute/DiceRoute"));
 const FeatureRequestsRoute = React.lazy(
-  () => import("../../routes/FeatureRequests/FeatureRequestsRoute")
+  () => import("../../routes/FeatureRequests/FeatureRequestsRoute"),
 );
 const BugsRoute = React.lazy(() => import("../../routes/Bugs/BugsRoute"));
 const DataRoute = React.lazy(() => import("../../routes/Data/DataRoute"));
 const DrawRoute = React.lazy(() => import("../../routes/Draw/DrawRoute"));
 const NotFoundRoute = React.lazy(
-  () => import("../../routes/NotFound/NotFoundRoute")
+  () => import("../../routes/NotFound/NotFoundRoute"),
 );
 const PlayOfflineRoute = React.lazy(
-  () => import("../../routes/Play/PlayOfflineRoute")
+  () => import("../../routes/Play/PlayOfflineRoute"),
 );
 const PlayRoute = React.lazy(() => import("../../routes/Play/PlayRoute"));
 const JoinAGameRoute = React.lazy(
-  () => import("../../routes/Play/JoinAGameRoute")
+  () => import("../../routes/Play/JoinAGameRoute"),
 );
 const SceneRoute = React.lazy(() => import("../../routes/Scene/SceneRoute"));
 const CardCollection = React.lazy(
-  () => import("../../routes/CardCollection/CardCollectionRoute")
+  () => import("../../routes/CardCollection/CardCollectionRoute"),
 );
 const OracleRoute = React.lazy(() => import("../../routes/Oracle/OracleRoute"));
 
@@ -47,12 +46,12 @@ const initialStorage = {
   scene: new LiveObject(),
   characters: new LiveObject(),
   session: new LiveObject(),
+  chat: new LiveObject(),
 };
 
 export const AppRouter = () => {
   const location = useLocation();
   const settingsManager = useContext(SettingsContext);
-  const injections = useContext(InjectionsContext);
   const userId = settingsManager.state.userId;
 
   return (
@@ -79,14 +78,20 @@ export const AppRouter = () => {
               render={(params: { id: string }) => {
                 const sessionId = params.id || userId;
                 return (
-                  <LiveblocksProvider client={injections.liveBlocksClient}>
-                    <RoomProvider
-                      id={sessionId}
-                      initialStorage={initialStorage}
-                    >
-                      <PlayRoute />
-                    </RoomProvider>
-                  </LiveblocksProvider>
+                  <RoomProvider
+                    id={sessionId}
+                    initialStorage={initialStorage}
+                    initialPresence={{
+                      rollOutput: null,
+                      characterName: null,
+                      color: null,
+                      cursor: null,
+                      message: null,
+                      playerName: null,
+                    }}
+                  >
+                    <PlayRoute />
+                  </RoomProvider>
                 );
               }}
             />
@@ -100,11 +105,19 @@ export const AppRouter = () => {
               render={(params: { id: string }) => {
                 const sessionId = params.id || userId;
                 return (
-                  <LiveblocksProvider client={injections.liveBlocksClient}>
-                    <RoomProvider id={sessionId}>
-                      <PlayRoute />
-                    </RoomProvider>
-                  </LiveblocksProvider>
+                  <RoomProvider
+                    id={sessionId}
+                    initialPresence={{
+                      rollOutput: null,
+                      characterName: null,
+                      color: null,
+                      cursor: null,
+                      message: null,
+                      playerName: null,
+                    }}
+                  >
+                    <PlayRoute />
+                  </RoomProvider>
                 );
               }}
             />
@@ -118,11 +131,19 @@ export const AppRouter = () => {
               render={(params: { id: string }) => {
                 const sessionId = params.id || userId;
                 return (
-                  <LiveblocksProvider client={injections.liveBlocksClient}>
-                    <RoomProvider id={sessionId}>
-                      <JoinAGameRoute />
-                    </RoomProvider>
-                  </LiveblocksProvider>
+                  <RoomProvider
+                    id={sessionId}
+                    initialPresence={{
+                      rollOutput: null,
+                      characterName: null,
+                      color: null,
+                      cursor: null,
+                      message: null,
+                      playerName: null,
+                    }}
+                  >
+                    <JoinAGameRoute />
+                  </RoomProvider>
                 );
               }}
             />

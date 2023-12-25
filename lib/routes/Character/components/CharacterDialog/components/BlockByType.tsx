@@ -1,9 +1,5 @@
-import Box from "@mui/material/Box";
-import FormHelperText from "@mui/material/FormHelperText";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import { useTheme } from "@mui/material/styles";
-import produce from "immer";
+import { Box, FormHelperText, Grid, Link, useTheme } from "@mui/material";
+import { produce } from "immer";
 import React, { useContext } from "react";
 import {
   ContentEditable,
@@ -63,7 +59,7 @@ export function BlockByType(props: {
           return;
         }
         draft.label = label;
-      })
+      }),
     );
   });
 
@@ -74,7 +70,7 @@ export function BlockByType(props: {
           return;
         }
         draft.value = value;
-      })
+      }),
     );
   });
 
@@ -86,7 +82,7 @@ export function BlockByType(props: {
         }
 
         draft.meta = produce(draft.meta, producer);
-      })
+      }),
     );
   });
 
@@ -98,7 +94,7 @@ export function BlockByType(props: {
         }
 
         draft.meta.helperText = helperText;
-      })
+      }),
     );
   });
 

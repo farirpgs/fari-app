@@ -1,5 +1,8 @@
-import CssBaseline from "@mui/material/CssBaseline";
-import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
+import {
+  CssBaseline,
+  StyledEngineProvider,
+  ThemeProvider,
+} from "@mui/material";
 import * as Sentry from "@sentry/react";
 import React, { ReactNode, useContext } from "react";
 import { DndProvider } from "react-dnd";
@@ -114,7 +117,7 @@ function MyBinderManager() {
     onDuplicate(element: IManagerViewModel): void;
     onUndo(element: IManagerViewModel): void;
     onImport(
-      importPaths: FileList | null
+      importPaths: FileList | null,
     ): Promise<{ entity: any | undefined }>;
     onImportAddAsNew(entity: any): void;
     onImportUpdateExisting(entity: any): void;
@@ -131,7 +134,7 @@ function MyBinderManager() {
         lastUpdated: c.lastUpdated,
         type: "characters",
         original: c,
-      })
+      }),
     ),
     "scenes": scenesManager.state.scenes.map(
       (s): IManagerViewModel => ({
@@ -141,7 +144,7 @@ function MyBinderManager() {
         lastUpdated: s.lastUpdated,
         type: "scenes",
         original: s,
-      })
+      }),
     ),
     "index-card-collections":
       indexCardCollectionsManager.state.indexCardCollections.map(
@@ -152,14 +155,14 @@ function MyBinderManager() {
           lastUpdated: s.lastUpdated,
           type: "index-card-collections",
           original: s,
-        })
+        }),
       ),
   };
   const handler: Record<IFolders, IHandlers> = {
     "characters": {
       async onAdd() {
         const newCharacter = await charactersManager.actions.add(
-          DefaultTemplates.BlankTemplate
+          DefaultTemplates.BlankTemplate,
         );
 
         if (myBinderManager.state.managerCallback.current) {
@@ -191,7 +194,7 @@ function MyBinderManager() {
       },
       async onImport(importPaths) {
         const { entity, exists } = await charactersManager.actions.importEntity(
-          importPaths
+          importPaths,
         );
 
         if (!exists) {
@@ -205,7 +208,7 @@ function MyBinderManager() {
       },
       onImportAddAsNew(character) {
         charactersManager.actions.addIfDoesntExist(
-          CharacterFactory.duplicate(character)
+          CharacterFactory.duplicate(character),
         );
       },
       onImportUpdateExisting(character) {
@@ -250,7 +253,7 @@ function MyBinderManager() {
       },
       async onImport(importPaths) {
         const { entity, exists } = await scenesManager.actions.importEntity(
-          importPaths
+          importPaths,
         );
 
         if (!exists) {
@@ -320,7 +323,7 @@ function MyBinderManager() {
       },
       onImportAddAsNew(entity: IIndexCardCollection) {
         indexCardCollectionsManager.actions.upsert(
-          IndexCardCollectionFactory.duplicate(entity)
+          IndexCardCollectionFactory.duplicate(entity),
         );
       },
       onImportUpdateExisting(scene) {
@@ -331,7 +334,7 @@ function MyBinderManager() {
       },
       onExportAsTemplate(element) {
         indexCardCollectionsManager.actions.exportEntityAsTemplate(
-          element.original
+          element.original,
         );
       },
     },

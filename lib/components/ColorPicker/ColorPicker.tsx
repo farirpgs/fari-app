@@ -1,4 +1,4 @@
-import { useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material";
 import React from "react";
 import TwitterPicker from "react-color/lib/components/twitter/Twitter";
 import { pickerColors } from "../../domains/colors/pickerColors";

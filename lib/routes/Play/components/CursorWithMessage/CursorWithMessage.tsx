@@ -1,17 +1,14 @@
-import Box from "@mui/material/Box";
-import Grow from "@mui/material/Grow";
-import { useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
+import { Box, Grow, Typography, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
 import { Delays } from "../../../../constants/Delays";
 import { useZIndex } from "../../../../constants/zIndex";
 import { ChatMessageParser } from "../../../../domains/chat/ChatMessageParser";
-import { ThemedLabel } from "../../../Character/components/CharacterDialog/components/ThemedLabel";
 import {
   MiniThemeContext,
   useMiniTheme,
 } from "../../../Character/components/CharacterDialog/MiniThemeContext";
+import { ThemedLabel } from "../../../Character/components/CharacterDialog/components/ThemedLabel";
 import { DefaultPlayerColor } from "../../consts/PlayerColors";
 import { IPlayerCursorRollOutput } from "../../types/IPlayerCursorState";
 import { IMessageToSend, IRollMessage, MessageType } from "../Chat/useChat";
@@ -85,7 +82,7 @@ export default function CursorWithMessage(props: {
         ].slice(0, 10);
         const uniqueCommandsArray = Array.from(new Set(newCommands));
         const commandArraysWithoutUndefined = uniqueCommandsArray.filter(
-          (command) => command !== undefined
+          (command) => command !== undefined,
         ) as Array<string>;
 
         setTopTenLatestRollCommands(commandArraysWithoutUndefined);
@@ -105,7 +102,7 @@ export default function CursorWithMessage(props: {
       props.onMessageChange?.(`/roll ${poppedCommand}`);
       const newIndex = Math.min(
         commandToPopIndex + 1,
-        topTenLatestRollCommands.length - 1
+        topTenLatestRollCommands.length - 1,
       );
       setCommandtoPopIndex(newIndex);
     }

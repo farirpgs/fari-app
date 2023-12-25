@@ -1,6 +1,4 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Drawer from "@mui/material/Drawer";
+import { Box, Button, Drawer } from "@mui/material";
 import React from "react";
 import { ICommandResult } from "../../../domains/dice/Dice";
 import { useTranslate } from "../../../hooks/useTranslate/useTranslate";

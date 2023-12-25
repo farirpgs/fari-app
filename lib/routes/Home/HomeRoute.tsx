@@ -1,15 +1,20 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
-import Box, { BoxProps } from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Container, { ContainerProps } from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import Rating from "@mui/material/Rating";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import {
+  Box,
+  BoxProps,
+  Button,
+  Container,
+  ContainerProps,
+  Divider,
+  Grid,
+  Rating,
+  ThemeProvider,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
 import discord from "../../../images/services/discord.png";

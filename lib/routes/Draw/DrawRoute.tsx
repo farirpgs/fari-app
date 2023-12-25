@@ -1,6 +1,4 @@
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import { useTheme } from "@mui/material/styles";
+import { Box, Container, useTheme } from "@mui/material";
 import React from "react";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";

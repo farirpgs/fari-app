@@ -19,22 +19,26 @@ import PushPinIcon from "@mui/icons-material/PushPin";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import Masonry from "@mui/lab/Masonry";
-import Box from "@mui/material/Box";
-import Collapse from "@mui/material/Collapse";
-import Fade from "@mui/material/Fade";
-import FormControl from "@mui/material/FormControl";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import InputLabel from "@mui/material/InputLabel";
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Popover from "@mui/material/Popover";
-import Select from "@mui/material/Select";
-import Stack from "@mui/material/Stack";
-import { darken, lighten, ThemeProvider, useTheme } from "@mui/material/styles";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
+import {
+  Box,
+  Collapse,
+  darken,
+  Fade,
+  FormControl,
+  Grid,
+  IconButton,
+  InputLabel,
+  lighten,
+  Link,
+  Paper,
+  Popover,
+  Select,
+  Stack,
+  ThemeProvider,
+  Tooltip,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { default as React, useRef, useState } from "react";
 import { ChromePicker } from "react-color";
 import { Delays } from "../../constants/Delays";
@@ -49,6 +53,8 @@ import { useThemeFromColor } from "../../hooks/useThemeFromColor/useThemeFromCol
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { AddBlock } from "../../routes/Character/components/CharacterDialog/components/AddBlock";
 import { BlockByType } from "../../routes/Character/components/CharacterDialog/components/BlockByType";
+
+import { Masonry } from "@mui/lab";
 
 import {
   MiniThemeContext,
@@ -165,7 +171,7 @@ export const IndexCard: React.FC<
   const subCardsContainerRef = useRef<HTMLElement>(null);
   const subCardsContainerWidth = useElementWidth(subCardsContainerRef);
   const numberOfColumnsForSubCardsMasonry = Math.floor(
-    subCardsContainerWidth / IndexCardMinWidth
+    subCardsContainerWidth / IndexCardMinWidth,
   );
 
   const hasSubCards = indexCardManager.state.indexCard.subCards.length > 0;
@@ -282,7 +288,7 @@ export const IndexCard: React.FC<
 
                       if (!open) {
                         props.onToggleVisibility?.(
-                          indexCardManager.state.indexCard
+                          indexCardManager.state.indexCard,
                         );
                       }
 
@@ -447,12 +453,12 @@ export const IndexCard: React.FC<
                                 if (e.target.value) {
                                   if (e.target.value === "move-out") {
                                     props.onMoveOut?.(
-                                      indexCardManager.state.indexCard.id
+                                      indexCardManager.state.indexCard.id,
                                     );
                                   } else {
                                     props.onMoveTo?.(
                                       indexCardManager.state.indexCard.id,
-                                      e.target.value as string
+                                      e.target.value as string,
                                     );
                                   }
                                 }
@@ -514,7 +520,7 @@ export const IndexCard: React.FC<
                       data-cy={`${props["dataCy"]}.remove`}
                       onClick={() => {
                         const confirmed = confirm(
-                          t("index-card.remove-confirmation")
+                          t("index-card.remove-confirmation"),
                         );
                         if (confirmed) {
                           props.onRemove();
@@ -558,7 +564,7 @@ export const IndexCard: React.FC<
                   onMoveTo={(idOfIndexCardToMove, idOfIndexCardToMoveTo) => {
                     props.onMoveTo?.(
                       idOfIndexCardToMove,
-                      idOfIndexCardToMoveTo
+                      idOfIndexCardToMoveTo,
                     );
                   }}
                   onMoveOut={(idOfIndexCardToMove) => {
@@ -615,13 +621,13 @@ export const IndexCard: React.FC<
                                 const previousId =
                                   indexCardManager.state.indexCard.blocks[
                                     indexCardManager.state.indexCard.blocks.indexOf(
-                                      block
+                                      block,
                                     ) - 1
                                   ].id;
 
                                 indexCardManager.actions.moveIndexCardBlock(
                                   block.id,
-                                  previousId
+                                  previousId,
                                 );
                               }}
                             >
@@ -643,13 +649,13 @@ export const IndexCard: React.FC<
                                 const nextId =
                                   indexCardManager.state.indexCard.blocks[
                                     indexCardManager.state.indexCard.blocks.indexOf(
-                                      block
+                                      block,
                                     ) + 1
                                   ].id;
 
                                 indexCardManager.actions.moveIndexCardBlock(
                                   block.id,
-                                  nextId
+                                  nextId,
                                 );
                               }}
                             >
@@ -850,7 +856,7 @@ export const IndexCard: React.FC<
                           data-cy={`${props["dataCy"]}.collapse`}
                           onClick={() => {
                             props.onToggleVisibility?.(
-                              indexCardManager.state.indexCard
+                              indexCardManager.state.indexCard,
                             );
                           }}
                         >

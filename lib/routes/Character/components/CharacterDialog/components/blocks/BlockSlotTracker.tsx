@@ -2,22 +2,25 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CircleIcon from "@mui/icons-material/Circle";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import Box, { BoxProps } from "@mui/material/Box";
-import Checkbox from "@mui/material/Checkbox";
-import Fade from "@mui/material/Fade";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import Link from "@mui/material/Link";
-import { useTheme } from "@mui/material/styles";
-import Tooltip from "@mui/material/Tooltip";
+import {
+  Box,
+  BoxProps,
+  Checkbox,
+  Fade,
+  Grid,
+  IconButton,
+  Link,
+  Tooltip,
+  useTheme,
+} from "@mui/material";
 import React, { useContext, useState } from "react";
 import {
   ContentEditable,
   previewContentEditable,
 } from "../../../../../../components/ContentEditable/ContentEditable";
 import { Delays } from "../../../../../../constants/Delays";
-import { ISlotTrackerBlock } from "../../../../../../domains/character/types";
 import { Id } from "../../../../../../domains/Id/Id";
+import { ISlotTrackerBlock } from "../../../../../../domains/character/types";
 import { useLazyState } from "../../../../../../hooks/useLazyState/useLazyState";
 import { useTranslate } from "../../../../../../hooks/useTranslate/useTranslate";
 import { MiniThemeContext } from "../../MiniThemeContext";
@@ -27,7 +30,7 @@ import {
 } from "../../types/IBlockComponentProps";
 import { ThemedLabel } from "../ThemedLabel";
 export function BlockSlotTracker(
-  props: IBlockComponentProps<ISlotTrackerBlock>
+  props: IBlockComponentProps<ISlotTrackerBlock>,
 ) {
   const { t } = useTranslate();
   const [hover, setHover] = useState(false);
@@ -273,7 +276,7 @@ export function BlockSlotTracker(
 BlockSlotTracker.displayName = "BlockSlotTracker";
 
 export function BlockSlotTrackerActions(
-  props: IBlockActionComponentProps<ISlotTrackerBlock>
+  props: IBlockActionComponentProps<ISlotTrackerBlock>,
 ) {
   const theme = useTheme();
   const { t } = useTranslate();

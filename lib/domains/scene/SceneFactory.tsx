@@ -1,4 +1,4 @@
-import produce from "immer";
+import { produce } from "immer";
 import {
   IndexCardColor,
   IndexCardColorTypes,
@@ -16,10 +16,10 @@ import {
   ISceneV1,
   IV2Scene,
 } from "../../hooks/useScene/IScene";
+import { Id } from "../Id/Id";
 import { CharacterFactory } from "../character/CharacterFactory";
 import { BlockType, IBlock } from "../character/types";
 import { getUnix } from "../dayjs/getDayJS";
-import { Id } from "../Id/Id";
 import { Migrator } from "../migration/Migrator";
 
 export const SceneFactory = {
@@ -162,7 +162,7 @@ function migrateV1SceneToV2(v1: ISceneV1): IScene {
 
 function aspectToIndexCard(
   aspect: IAspectV1,
-  aspectId: string
+  aspectId: string,
 ): IIndexCardForV2Scene {
   const blocks: Array<IBlock> = [];
 

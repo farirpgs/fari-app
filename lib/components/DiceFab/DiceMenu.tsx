@@ -1,7 +1,4 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import Popover, { PopoverOrigin } from "@mui/material/Popover";
+import { Box, Button, Grid, Popover, PopoverOrigin } from "@mui/material";
 import React from "react";
 import { useZIndex } from "../../constants/zIndex";
 import { IDiceCommandId } from "../../domains/dice/Dice";
@@ -31,7 +28,7 @@ export function DiceMenu(props: {
   const handleRightClick = useEvent((newCommand: IDiceCommandId) => {
     props.onDiceCommandChange((prevCommands) => {
       const indexToRemove = prevCommands.findIndex(
-        (command) => command === newCommand
+        (command) => command === newCommand,
       );
       if (indexToRemove !== -1) {
         prevCommands.splice(indexToRemove, 1);

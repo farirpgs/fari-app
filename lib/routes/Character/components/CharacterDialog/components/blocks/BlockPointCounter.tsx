@@ -1,8 +1,4 @@
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import { useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
+import { Box, Grid, Link, Typography, useTheme } from "@mui/material";
 import { default as React } from "react";
 import {
   ContentEditable,
@@ -100,7 +96,7 @@ export const BlockPointCounter = React.memo(
       advanced: boolean;
       readonly: boolean | undefined;
       dataCy?: string;
-    } & IBlockHandlers<IPointCounterBlock>
+    } & IBlockHandlers<IPointCounterBlock>,
   ) => {
     const { t } = useTranslate();
 
@@ -226,14 +222,14 @@ export const BlockPointCounter = React.memo(
         </Box>
       </>
     );
-  }
+  },
 );
 BlockPointCounter.displayName = "BlockPointCounter";
 
 export function BlockPointCounterActions(
   props: IBlockActionComponentProps<IPointCounterBlock> & {
     onMainPointCounterChange?(): void;
-  }
+  },
 ) {
   const theme = useTheme();
   const { t } = useTranslate();

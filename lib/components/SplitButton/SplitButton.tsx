@@ -1,14 +1,17 @@
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import Button from "@mui/material/Button";
-import ButtonGroup, { ButtonGroupProps } from "@mui/material/ButtonGroup";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import Grid from "@mui/material/Grid";
-import Grow from "@mui/material/Grow";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import MenuItem from "@mui/material/MenuItem";
-import MenuList from "@mui/material/MenuList";
-import Paper from "@mui/material/Paper";
-import Popper from "@mui/material/Popper";
+import {
+  Button,
+  ButtonGroup,
+  ButtonGroupProps,
+  ClickAwayListener,
+  Grid,
+  Grow,
+  ListItemIcon,
+  MenuItem,
+  MenuList,
+  Paper,
+  Popper,
+} from "@mui/material";
 import React, { useEffect } from "react";
 import { zIndex } from "../../constants/zIndex";
 import { IDataCyProps } from "../../domains/cypress/types/IDataCyProps";

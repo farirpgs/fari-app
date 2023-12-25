@@ -1,11 +1,14 @@
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import ReplayIcon from "@mui/icons-material/Replay";
-import Box from "@mui/material/Box";
-import Chip from "@mui/material/Chip";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import { lighten, useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
+import {
+  Box,
+  Chip,
+  Container,
+  Grid,
+  Typography,
+  lighten,
+  useTheme,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Heading } from "../../components/Heading/Heading";
@@ -303,7 +306,7 @@ export function StoryDeckTags(props: {
             <Chip
               variant={
                 props.decksManager.state.selectedTags.includes(
-                  tag as unknown as Tags
+                  tag as unknown as Tags,
                 )
                   ? "filled"
                   : "outlined"

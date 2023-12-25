@@ -1,8 +1,8 @@
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { useMediaQuery } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { Id } from "../../domains/Id/Id";
 import { IBlock } from "../../domains/character/types";
 import { IDiceCommandId } from "../../domains/dice/Dice";
-import { Id } from "../../domains/Id/Id";
 import { useStorageEntity } from "../../hooks/useStorageEntities/useStorageEntity";
 
 type IThemeMode = "dark" | "light" | undefined;

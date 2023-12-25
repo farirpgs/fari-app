@@ -1,16 +1,19 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
-import Grid from "@mui/material/Grid";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
-import { DataGrid, GridRowId } from "@mui/x-data-grid";
-import produce from "immer";
+import {
+  Box,
+  Button,
+  Container,
+  FormControl,
+  FormHelperText,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  ThemeProvider,
+  useTheme,
+} from "@mui/material";
+import { DataGrid, GridRowSelectionModel } from "@mui/x-data-grid";
+import { produce } from "immer";
 import uniq from "lodash/uniq";
 import React, { useContext, useMemo, useRef, useState } from "react";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
@@ -22,11 +25,11 @@ import { Delays } from "../../constants/Delays";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { IndexCardCollectionsContext } from "../../contexts/IndexCardCollectionsContext/IndexCardCollectionsContext";
 import { ScenesContext } from "../../contexts/SceneContext/ScenesContext";
+import { Id } from "../../domains/Id/Id";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
 import { ICharacter } from "../../domains/character/types";
-import { getDayJs, getDayJSFrom } from "../../domains/dayjs/getDayJS";
+import { getDayJSFrom, getDayJs } from "../../domains/dayjs/getDayJS";
 import { FariEntity } from "../../domains/fari-entity/FariEntity";
-import { Id } from "../../domains/Id/Id";
 import {
   IIndexCardCollection,
   IndexCardCollectionFactory,
@@ -71,7 +74,9 @@ export const DataRoute: React.FC = () => {
   const scenesManager = useContext(ScenesContext);
   const indexCardCollectionsManager = useContext(IndexCardCollectionsContext);
 
-  const [selections, setSelection] = useState<Array<GridRowId>>([]);
+  const [rowSelectionModel, setRowSelectionModel] =
+    React.useState<GridRowSelectionModel>([]);
+
   const $importInput = useRef<any>();
   const $importAndDuplicateInput = useRef<any>();
   const [filters, setFilters] = useState({ group: "", search: "", type: "" });
@@ -165,7 +170,7 @@ export const DataRoute: React.FC = () => {
         return r.name.toLowerCase().includes(filters.search.toLowerCase());
       });
     const allRowsSize = FariEntity.getSize(
-      allRows.map((r) => r.entity)
+      allRows.map((r) => r.entity),
     ).kiloBytes;
 
     return {
@@ -182,22 +187,22 @@ export const DataRoute: React.FC = () => {
 
   const selectedRowsSize = useMemo(() => {
     const rows = allRows.filter((r) => {
-      return selections.includes(r.id);
+      return rowSelectionModel.includes(r.id);
     });
 
     return FariEntity.getSize(rows).kiloBytes;
-  }, [allRows, selections]);
+  }, [allRows, rowSelectionModel]);
 
   function handleOnExport() {
     const charactersToExport = charactersManager.state.characters.filter((s) =>
-      selections.includes(s.id)
+      rowSelectionModel.includes(s.id),
     );
     const scenesToExport = scenesManager.state.scenes.filter((c) =>
-      selections.includes(c.id)
+      rowSelectionModel.includes(c.id),
     );
     const indexCardCollectionsToExport =
       indexCardCollectionsManager.state.indexCardCollections.filter((c) =>
-        selections.includes(c.id)
+        rowSelectionModel.includes(c.id),
       );
 
     FariEntity.export({
@@ -213,7 +218,7 @@ export const DataRoute: React.FC = () => {
 
   function handleOnImport(
     fileToImport: FileList | null | undefined,
-    mode: ImportMode
+    mode: ImportMode,
   ) {
     FariEntity.import<{
       scenes: Array<IScene>;
@@ -255,7 +260,7 @@ export const DataRoute: React.FC = () => {
 
   function importIndexCardCollection(
     indexCardCollection: IIndexCardCollection,
-    mode: ImportMode
+    mode: ImportMode,
   ) {
     const indexCardCollectionToUse =
       mode === ImportMode.Import
@@ -264,7 +269,7 @@ export const DataRoute: React.FC = () => {
             draft.id = Id.generate();
           });
     const migratedIndexCardCollection = IndexCardCollectionFactory.migrate(
-      indexCardCollectionToUse
+      indexCardCollectionToUse,
     );
     indexCardCollectionsManager.actions.upsert(migratedIndexCardCollection);
   }
@@ -294,14 +299,14 @@ export const DataRoute: React.FC = () => {
 
   function handleOnDelete() {
     const charactersToRemove = charactersManager.state.characters.filter((s) =>
-      selections.includes(s.id)
+      rowSelectionModel.includes(s.id),
     );
     const scenesToRemove = scenesManager.state.scenes.filter((c) =>
-      selections.includes(c.id)
+      rowSelectionModel.includes(c.id),
     );
     const indexCardCollectionsToRemove =
       indexCardCollectionsManager.state.indexCardCollections.filter((c) =>
-        selections.includes(c.id)
+        rowSelectionModel.includes(c.id),
       );
     charactersToRemove.forEach((c) => {
       charactersManager.actions.remove(c.id);
@@ -395,7 +400,7 @@ export const DataRoute: React.FC = () => {
               <Button
                 color="secondary"
                 variant="outlined"
-                disabled={!selections.length}
+                disabled={!rowSelectionModel.length}
                 onClick={() => {
                   handleOnExport();
                 }}
@@ -448,7 +453,7 @@ export const DataRoute: React.FC = () => {
                 onChange={(event: any) => {
                   handleOnImport(
                     event.target.files,
-                    ImportMode.ImportAndDuplicate
+                    ImportMode.ImportAndDuplicate,
                   );
                   event.target.value = "";
                 }}
@@ -460,7 +465,7 @@ export const DataRoute: React.FC = () => {
                 <Button
                   color="primary"
                   variant="outlined"
-                  disabled={!selections.length}
+                  disabled={!rowSelectionModel.length}
                   onClick={() => {
                     if (window.confirm(t("data-route.delete-confirmation"))) {
                       handleOnDelete();
@@ -475,7 +480,7 @@ export const DataRoute: React.FC = () => {
               {t("data-route.total-size")}
               {": "}
               {FariEntity.formatSize(size)}
-              {selections.length > 0 && (
+              {rowSelectionModel.length > 0 && (
                 <>
                   {" "}
                   ({t("data-route.selected-size")}
@@ -496,8 +501,9 @@ export const DataRoute: React.FC = () => {
                 autoPageSize
                 pagination
                 checkboxSelection
-                onSelectionModelChange={(ids) => {
-                  setSelection(ids);
+                rowSelectionModel={rowSelectionModel}
+                onRowSelectionModelChange={(newRowSelectionModel) => {
+                  setRowSelectionModel(newRowSelectionModel);
                 }}
                 columns={[
                   {

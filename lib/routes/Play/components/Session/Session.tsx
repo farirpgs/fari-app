@@ -6,41 +6,43 @@ import PanToolIcon from "@mui/icons-material/PanTool";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Fade from "@mui/material/Fade";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import Snackbar from "@mui/material/Snackbar";
-import { darken, useTheme } from "@mui/material/styles";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Fade,
+  Grid,
+  IconButton,
+  Snackbar,
+  Tab,
+  Tabs,
+  Tooltip,
+  Typography,
+  darken,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Page } from "../../../../components/Page/Page";
-import { PlayerRow } from "../../../../components/Scene/components/PlayerRow/PlayerRow";
 import { Scene } from "../../../../components/Scene/Scene";
 import { TabbedScreen } from "../../../../components/Scene/TabbedScreen";
+import { PlayerRow } from "../../../../components/Scene/components/PlayerRow/PlayerRow";
 import { Toolbox } from "../../../../components/Toolbox/Toolbox";
 import { WindowPortal } from "../../../../components/WindowPortal/WindowPortal";
 import { CharactersContext } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../../../contexts/MyBinderContext/MyBinderContext";
+import { Icons } from "../../../../domains/Icons/Icons";
 import { arraySort } from "../../../../domains/array/arraySort";
 import { CharacterSelector } from "../../../../domains/character/CharacterSelector";
 import { ICharacter } from "../../../../domains/character/types";
 import { IDicePoolResult } from "../../../../domains/dice/Dice";
 import { Font } from "../../../../domains/font/Font";
-import { Icons } from "../../../../domains/Icons/Icons";
-import { usePrompt } from "../../../../hooks/useBlocker/useBlocker";
 import { useBlockReload } from "../../../../hooks/useBlockReload/useBlockReload";
 import { useEvent } from "../../../../hooks/useEvent/useEvent";
 import { useLightBackground } from "../../../../hooks/useLightBackground/useLightBackground";
@@ -109,7 +111,7 @@ export function Session(props: {
   });
 
   const { t } = useTranslate();
-  usePrompt(t("manager.leave-without-saving"), true);
+  // usePrompt(t("manager.leave-without-saving"), true);
   const logger = useLogger();
 
   const [streamerModalOpen, setStreamerModalOpen] = useState(false);
@@ -150,7 +152,7 @@ export function Session(props: {
   const playersWithCharacterSheets = Object.keys(characters)
     .map((characterId) => {
       const playerMatch = everyone.find(
-        (player) => player.id === characterId
+        (player) => player.id === characterId,
       ) as IPlayer;
       return {
         ...playerMatch,
@@ -188,32 +190,32 @@ export function Session(props: {
 
   const handleAssignOriginalCharacterSheet = (
     playerId: string,
-    character: ICharacter
+    character: ICharacter,
   ) => {
     if (isGM) {
       sessionCharactersManager.actions.loadPlayerCharacter(playerId, character);
     } else {
       props.onPlayerInteraction?.(
-        PlayerInteractionFactory.updatePlayerCharacter(playerId, character)
+        PlayerInteractionFactory.updatePlayerCharacter(playerId, character),
       );
     }
   };
 
   function handleUpdateCharacter(
     playerId: string,
-    updatedCharacter: ICharacter
+    updatedCharacter: ICharacter,
   ) {
     if (isGM) {
       sessionCharactersManager.actions.updatePlayerCharacter(
         playerId,
-        updatedCharacter
+        updatedCharacter,
       );
     } else {
       props.onPlayerInteraction?.(
         PlayerInteractionFactory.updatePlayerCharacter(
           playerId,
-          updatedCharacter
-        )
+          updatedCharacter,
+        ),
       );
     }
   }
@@ -234,14 +236,14 @@ export function Session(props: {
       chatManager.actions.sendMessage(message);
     } else {
       props.onPlayerInteraction?.(
-        PlayerInteractionFactory.sendMessage(message)
+        PlayerInteractionFactory.sendMessage(message),
       );
     }
   };
 
   const handleSetPlayerRoll = (
     playerId: string | undefined,
-    result: IDicePoolResult
+    result: IDicePoolResult,
   ) => {
     const rollMessage = RollMessage.fromDicePoolResult(result);
     const message: IMessage = {
@@ -254,7 +256,7 @@ export function Session(props: {
       chatManager.actions.sendMessage(message);
     } else {
       props.onPlayerInteraction?.(
-        PlayerInteractionFactory.sendMessage(message)
+        PlayerInteractionFactory.sendMessage(message),
       );
     }
   };
@@ -270,7 +272,7 @@ export function Session(props: {
       chatManager.actions.sendMessage(message);
     } else {
       props.onPlayerInteraction?.(
-        PlayerInteractionFactory.sendMessage(message)
+        PlayerInteractionFactory.sendMessage(message),
       );
     }
   });
@@ -294,7 +296,7 @@ export function Session(props: {
         return;
       }
       setRollSnackVisible(false);
-    }
+    },
   );
 
   return (
@@ -397,7 +399,7 @@ export function Session(props: {
                         sessionManager.actions.pause();
                       } else {
                         props.onPlayerInteraction?.(
-                          PlayerInteractionFactory.pause()
+                          PlayerInteractionFactory.pause(),
                         );
                       }
                     }}
@@ -584,10 +586,13 @@ export function Session(props: {
   }
 
   function renderChat() {
-    const playersNameMapping = everyone.reduce((acc, player) => {
-      acc[player.id] = player.playerName;
-      return acc;
-    }, {} as Record<string, string | undefined>);
+    const playersNameMapping = everyone.reduce(
+      (acc, player) => {
+        acc[player.id] = player.playerName;
+        return acc;
+      },
+      {} as Record<string, string | undefined>,
+    );
 
     return (
       <Chat
@@ -882,7 +887,7 @@ export function Session(props: {
             sessionManager.actions.updatePlayerStatus(player.id, newStatus);
           } else {
             props.onPlayerInteraction?.(
-              PlayerInteractionFactory.updatePlayerStatus(player.id, newStatus)
+              PlayerInteractionFactory.updatePlayerStatus(player.id, newStatus),
             );
           }
         }}
@@ -989,7 +994,7 @@ export function Session(props: {
                       const canControl = isGM || isMe;
                       const isCharacterInStorage =
                         charactersManager.selectors.isInStorage(
-                          player.characterSheet?.id
+                          player.characterSheet?.id,
                         );
                       return (
                         <TabPanel
@@ -1014,19 +1019,19 @@ export function Session(props: {
                               onSave={(updatedCharacter) => {
                                 handleUpdateCharacter(
                                   player.id,
-                                  updatedCharacter
+                                  updatedCharacter,
                                 );
                               }}
                               synced={isCharacterInStorage}
                               onToggleSync={() => {
                                 handleOnToggleCharacterSync(
-                                  player.characterSheet
+                                  player.characterSheet,
                                 );
                               }}
                               onRoll={(newDiceRollResult) => {
                                 handleSetPlayerRoll(
                                   player.id,
-                                  newDiceRollResult
+                                  newDiceRollResult,
                                 );
                               }}
                             />
@@ -1097,7 +1102,7 @@ export function Session(props: {
 
   function showEmptyWarnings() {
     const numberOfSheets = Object.keys(
-      sessionCharactersManager.state.characterSheets
+      sessionCharactersManager.state.characterSheets,
     ).length;
     const showNoPlayersWarning =
       sessionManager.computed.playersAndNPCs.length === 0;

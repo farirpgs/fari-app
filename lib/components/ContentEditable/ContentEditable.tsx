@@ -1,5 +1,4 @@
-import Box, { BoxProps } from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
+import { Box, BoxProps, useTheme } from "@mui/material";
 import DOMPurify, { Config } from "dompurify";
 import lowerCase from "lodash/lowerCase";
 import startCase from "lodash/startCase";
@@ -33,7 +32,7 @@ type IPreviewContentEditableOptions = {
 };
 
 export function previewContentEditable(
-  options: IPreviewContentEditableOptions
+  options: IPreviewContentEditableOptions,
 ) {
   if (!options.value) {
     return "";
@@ -106,14 +105,14 @@ export const ContentEditable: React.FC<
         } else if (latestHtml.current !== props.value && !timeout.current) {
           const newHtml = DOMPurify.sanitize(
             props.value,
-            DomPurifyOptions.onPropsChangeOptions
+            DomPurifyOptions.onPropsChangeOptions,
           ) as string;
           latestHtml.current = newHtml;
           $ref.current.innerHTML = newHtml;
         }
       }
     },
-    [props.value, props.readonly]
+    [props.value, props.readonly],
   );
 
   useEffect(function focusOnLoad() {
@@ -136,7 +135,7 @@ export const ContentEditable: React.FC<
       timeout.current = undefined;
       const cleanHTML = DOMPurify.sanitize(
         $ref.current.innerHTML,
-        DomPurifyOptions.onInputChangeOptions
+        DomPurifyOptions.onInputChangeOptions,
       ) as string;
 
       if (props.noDelay) {

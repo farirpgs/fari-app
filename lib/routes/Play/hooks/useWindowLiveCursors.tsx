@@ -1,7 +1,9 @@
-import { useMyPresence, useOthers } from "@liveblocks/react";
 import { useContext, useEffect } from "react";
+import {
+  useMyPresence,
+  useOthers,
+} from "../../../services/liveblocks/liveblocks.config";
 import { SessionPresenceUpdaterContext } from "../contexts/SessionPresenceContext";
-import { IPlayerPresence } from "../types/IPlayerPresence";
 
 export function useWindowLiveCursors() {
   const sessionPresenceUpdater = useContext(SessionPresenceUpdaterContext);
@@ -65,10 +67,9 @@ export function useWindowLiveCursors() {
     };
   }, []);
 
-  const others = useOthers<IPlayerPresence>();
+  const others = useOthers();
 
   return others
-    .toArray()
     .filter((user) => user.presence?.cursor != null)
     .map(({ connectionId, presence, id, info }) => {
       const x = presence?.cursor?.x ?? 0;
@@ -85,7 +86,7 @@ export function useWindowLiveCursors() {
 }
 
 export function useMyWindowLiveCursor() {
-  const [presence] = useMyPresence<IPlayerPresence>();
+  const [presence] = useMyPresence();
 
   if (!presence.cursor) {
     return null;

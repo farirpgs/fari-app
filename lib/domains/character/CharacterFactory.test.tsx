@@ -1,4 +1,4 @@
-import produce from "immer";
+import { produce } from "immer";
 import { CharacterFactory } from "./CharacterFactory";
 import { DefaultTemplates } from "./DefaultTemplates";
 import { ComplexCharacter } from "./mocks/ComplexCharacter";
@@ -655,12 +655,12 @@ describe("CharacterFactory.migrate", () => {
 describe("CharacterFactory.duplicate", () => {
   it("should reset the ids", async () => {
     const defaultCharacter = await CharacterFactory.make(
-      DefaultTemplates.FateCondensed
+      DefaultTemplates.FateCondensed,
     );
 
     const characterWithFakeIds = produce(defaultCharacter, (draft) => {
       draft.id = "1";
-      draft.pages.forEach((p) => {
+      draft.pages?.forEach((p) => {
         p.id = "1";
         p.rows.forEach((r) => {
           r.columns.forEach((c) => {
@@ -677,7 +677,7 @@ describe("CharacterFactory.duplicate", () => {
 
     const duplicate = CharacterFactory.duplicate(characterWithFakeIds);
     expect(duplicate.id).not.toBe("1");
-    duplicate.pages.forEach((p) => {
+    duplicate.pages?.forEach((p) => {
       expect(p.id).not.toBe("1");
       p.rows.forEach((r) => {
         r.columns.forEach((c) => {

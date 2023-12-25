@@ -1,6 +1,4 @@
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
+import { Box, Grid, Paper } from "@mui/material";
 import { Meta, Story } from "@storybook/react";
 import { default as React } from "react";
 import { FateLabel } from "../lib/components/FateLabel/FateLabel";
@@ -31,7 +29,7 @@ function StorybookStoryBuilderIcons(props: {}) {
                         <StoryDie diceName={diceName} sideName={sideName} />
                       </Grid>
                     );
-                  }
+                  },
                 )}
               </Grid>
             </Box>

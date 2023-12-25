@@ -1,8 +1,4 @@
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import { useTheme } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
+import { Box, Grid, Link, TextField, useTheme } from "@mui/material";
 import React from "react";
 import { AppLink } from "../../../../../../components/AppLink/AppLink";
 import { Delays } from "../../../../../../constants/Delays";
@@ -25,7 +21,7 @@ export const BlockLink = React.memo(
       advanced: boolean;
       readonly: boolean | undefined;
       dataCy?: string;
-    } & IBlockHandlers<ILinkBlock>
+    } & IBlockHandlers<ILinkBlock>,
   ) => {
     const { t } = useTranslate();
     const [link, setLink] = useLazyState({
@@ -48,13 +44,13 @@ export const BlockLink = React.memo(
     const handleLinkChange = useEvent(
       (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         setLink(e.target.value || "");
-      }
+      },
     );
 
     const handleLinkLabelChange = useEvent(
       (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         setLinkLabel(e.target.value || "");
-      }
+      },
     );
 
     return (
@@ -130,7 +126,7 @@ export const BlockLink = React.memo(
         </Grid>
       </Box>
     );
-  }
+  },
 );
 
 BlockLink.displayName = "BlockLink";
@@ -139,7 +135,7 @@ export const BlockLinkActions = React.memo(
   (
     props: {
       hasDisplayName: boolean | undefined;
-    } & IBlockHandlers<ILinkBlock>
+    } & IBlockHandlers<ILinkBlock>,
   ) => {
     const theme = useTheme();
     const { t } = useTranslate();
@@ -170,7 +166,7 @@ export const BlockLinkActions = React.memo(
         </Grid>
       </>
     );
-  }
+  },
 );
 
 BlockLinkActions.displayName = "BlockLinkActions";

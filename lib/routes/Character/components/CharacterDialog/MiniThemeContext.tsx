@@ -5,15 +5,15 @@ import {
   responsiveFontSizes,
   Theme,
   useTheme,
-} from "@mui/material/styles";
-import produce from "immer";
+} from "@mui/material";
+import { produce } from "immer";
 import { createContext, useMemo } from "react";
 import { FontFamily } from "../../../../constants/FontFamily";
 import { ICharacter } from "../../../../domains/character/types";
 import { defaultThemeConfiguration } from "../../../../theme";
 
 export const MiniThemeContext = createContext<IMiniTheme>(
-  undefined as unknown as IMiniTheme
+  undefined as unknown as IMiniTheme,
 );
 
 export function useMiniTheme(props: {

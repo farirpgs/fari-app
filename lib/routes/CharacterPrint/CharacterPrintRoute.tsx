@@ -1,8 +1,11 @@
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Grid, { GridSize } from "@mui/material/Grid";
-import { useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
+import {
+  Box,
+  Container,
+  Grid,
+  GridSize,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
@@ -14,11 +17,11 @@ import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext"
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
 import { ICharacter, ISection } from "../../domains/character/types";
 import { ManagerBox } from "../Character/components/CharacterDialog/CharacterV3Dialog";
-import { BlockByType } from "../Character/components/CharacterDialog/components/BlockByType";
 import {
   MiniThemeContext,
   useMiniTheme,
 } from "../Character/components/CharacterDialog/MiniThemeContext";
+import { BlockByType } from "../Character/components/CharacterDialog/components/BlockByType";
 function CharacterPrintRoute() {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -37,7 +40,7 @@ function CharacterPrintRoute() {
 
   useEffect(() => {
     const characterToLoad = charactersManager.state.characters.find(
-      (s) => s.id === params.id
+      (s) => s.id === params.id,
     );
 
     if (characterToLoad) {

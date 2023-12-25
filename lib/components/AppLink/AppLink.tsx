@@ -1,6 +1,10 @@
-import Button, { ButtonProps } from "@mui/material/Button";
-import MaterialUILink, { LinkProps as MUILinkProps } from "@mui/material/Link";
-import { useTheme } from "@mui/material/styles";
+import {
+  Button,
+  ButtonProps,
+  LinkProps as MUILinkProps,
+  Link as MaterialUILink,
+  useTheme,
+} from "@mui/material";
 import React from "react";
 import {
   Link as ReactRouterLink,

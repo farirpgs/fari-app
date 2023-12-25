@@ -1,8 +1,4 @@
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
-import { useTheme } from "@mui/material/styles";
+import { Box, Divider, Grid, Link, useTheme } from "@mui/material";
 import React, { useContext } from "react";
 import { ContentEditable } from "../../../../../../components/ContentEditable/ContentEditable";
 import { ISeparatorBlock } from "../../../../../../domains/character/types";
@@ -21,7 +17,7 @@ export const BlockSeparator = React.memo(
       advanced: boolean;
       readonly: boolean | undefined;
       dataCy?: string;
-    } & IBlockHandlers<ISeparatorBlock>
+    } & IBlockHandlers<ISeparatorBlock>,
   ) => {
     const dividerHeight = "3px";
     const dividerMargin = ".5rem 0";
@@ -93,7 +89,7 @@ export const BlockSeparator = React.memo(
         </Box>
       </>
     );
-  }
+  },
 );
 BlockSeparator.displayName = "BlockSeparator";
 
@@ -105,7 +101,7 @@ export const BlockSeparatorActions = React.memo(
       advanced: boolean;
       readonly: boolean | undefined;
       dataCy?: string;
-    } & IBlockHandlers<ISeparatorBlock>
+    } & IBlockHandlers<ISeparatorBlock>,
   ) => {
     const theme = useTheme();
     const { t } = useTranslate();
@@ -161,6 +157,6 @@ export const BlockSeparatorActions = React.memo(
         )}
       </>
     );
-  }
+  },
 );
 BlockSeparatorActions.displayName = "BlockSeparatorActions";

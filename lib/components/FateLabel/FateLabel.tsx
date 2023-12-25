@@ -1,5 +1,4 @@
-import { BoxProps } from "@mui/material/Box";
-import Typography, { TypographyProps } from "@mui/material/Typography";
+import { BoxProps, Typography, TypographyProps } from "@mui/material";
 import React from "react";
 
 export const FateLabel: React.FC<

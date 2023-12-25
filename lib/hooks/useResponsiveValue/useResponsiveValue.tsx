@@ -1,5 +1,4 @@
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 export function useResponsiveValue<T>(props: {
   xl: T;

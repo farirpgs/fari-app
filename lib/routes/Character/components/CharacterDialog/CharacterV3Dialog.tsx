@@ -19,46 +19,51 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import Alert from "@mui/material/Alert";
-import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
-import Collapse from "@mui/material/Collapse";
-import Container from "@mui/material/Container";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import Drawer from "@mui/material/Drawer";
-import FormControl from "@mui/material/FormControl";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
-import FormHelperText from "@mui/material/FormHelperText";
-import Grid, { GridSize } from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import InputLabel from "@mui/material/InputLabel";
-import NativeSelect from "@mui/material/NativeSelect";
-import Slider from "@mui/material/Slider";
-import Snackbar from "@mui/material/Snackbar";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
-import Switch from "@mui/material/Switch";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
-import TextField from "@mui/material/TextField";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Alert,
+  Autocomplete,
+  Box,
+  Button,
+  Checkbox,
+  Collapse,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Drawer,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormHelperText,
+  Grid,
+  GridSize,
+  IconButton,
+  InputLabel,
+  NativeSelect,
+  Slider,
+  Snackbar,
+  Switch,
+  Tab,
+  Tabs,
+  TextField,
+  ThemeProvider,
+  Tooltip,
+  Typography,
+  createFilterOptions,
+  useTheme,
+} from "@mui/material";
 import { BoxProps } from "@mui/system";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { ContentEditable } from "../../../../components/ContentEditable/ContentEditable";
 import { IndexCardColorPicker } from "../../../../components/IndexCard/IndexCard";
 import { CharacterCard } from "../../../../components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
 import { Delays } from "../../../../constants/Delays";
-import { env } from "../../../../constants/env";
 import { FontFamily } from "../../../../constants/FontFamily";
+import { env } from "../../../../constants/env";
 import { CharactersContext } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../../../contexts/SettingsContext/SettingsContext";
@@ -73,18 +78,17 @@ import {
 } from "../../../../domains/character/types";
 import { getDayJSFrom } from "../../../../domains/dayjs/getDayJS";
 import { IDicePoolResult } from "../../../../domains/dice/Dice";
-import { usePrompt } from "../../../../hooks/useBlocker/useBlocker";
 import { useEvent } from "../../../../hooks/useEvent/useEvent";
 import { LazyState } from "../../../../hooks/useLazyState/useLazyState";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
 import { useCharacter } from "../../hooks/useCharacter";
+import { MiniThemeContext, useMiniTheme } from "./MiniThemeContext";
 import { AddBlock } from "./components/AddBlock";
 import { AddSection } from "./components/AddSection";
 import { BlockByType } from "./components/BlockByType";
 import { SheetHeader } from "./components/SheetHeader";
 import { ThemedLabel } from "./components/ThemedLabel";
-import { MiniThemeContext, useMiniTheme } from "./MiniThemeContext";
 
 const ZoomOptions = [
   {
@@ -149,7 +153,7 @@ export const CharacterV3Dialog: React.FC<{
   const miniTheme = useMiniTheme({
     character: characterManager.state.character,
   });
-  usePrompt(t("manager.leave-without-saving"), characterManager.state.dirty);
+  // usePrompt(t("manager.leave-without-saving"), characterManager.state.dirty);
 
   const hasMiniTheme = !!characterManager.state.character?.theme;
 
@@ -212,7 +216,7 @@ export const CharacterV3Dialog: React.FC<{
         setTab("0");
       }
     },
-    [props.character]
+    [props.character],
   );
 
   if (!characterManager.state.character) {
@@ -553,7 +557,7 @@ export const CharacterV3Dialog: React.FC<{
                             onChange={(newValue) => {
                               characterManager.actions.renamePage(
                                 pageIndex,
-                                newValue
+                                newValue,
                               );
                             }}
                           />
@@ -596,7 +600,7 @@ export const CharacterV3Dialog: React.FC<{
                       onClick={() => {
                         characterManager.actions.movePage(
                           currentPageIndex,
-                          "up"
+                          "up",
                         );
                         setTab((currentPageIndex - 1).toString());
                       }}
@@ -612,7 +616,7 @@ export const CharacterV3Dialog: React.FC<{
                     <IconButton
                       onClick={() => {
                         characterManager.actions.duplicatePage(
-                          currentPageIndex
+                          currentPageIndex,
                         );
                         setTab((currentPageIndex + 1).toString());
                       }}
@@ -631,7 +635,7 @@ export const CharacterV3Dialog: React.FC<{
                       }
                       onClick={() => {
                         const confirmed = confirm(
-                          t("character-dialog.remove-page-confirmation")
+                          t("character-dialog.remove-page-confirmation"),
                         );
                         if (confirmed) {
                           characterManager.actions.deletePage(currentPageIndex);
@@ -652,7 +656,7 @@ export const CharacterV3Dialog: React.FC<{
                       onClick={() => {
                         characterManager.actions.movePage(
                           currentPageIndex,
-                          "down"
+                          "down",
                         );
                         setTab((currentPageIndex + 1).toString());
                       }}
@@ -726,7 +730,7 @@ export const CharacterV3Dialog: React.FC<{
                               <Grid item>
                                 <Tooltip
                                   title={t(
-                                    "character-dialog.control.move-row-up"
+                                    "character-dialog.control.move-row-up",
                                   )}
                                 >
                                   <span>
@@ -752,7 +756,7 @@ export const CharacterV3Dialog: React.FC<{
                               <Grid item>
                                 <Tooltip
                                   title={t(
-                                    "character-dialog.control.move-row-down"
+                                    "character-dialog.control.move-row-down",
                                   )}
                                 >
                                   <span>
@@ -777,7 +781,7 @@ export const CharacterV3Dialog: React.FC<{
                               <Grid item>
                                 <Tooltip
                                   title={t(
-                                    "character-dialog.control.delete-row"
+                                    "character-dialog.control.delete-row",
                                   )}
                                 >
                                   <span>
@@ -845,7 +849,7 @@ export const CharacterV3Dialog: React.FC<{
                                             <Grid item>
                                               <Tooltip
                                                 title={t(
-                                                  "character-dialog.control.move-column-left"
+                                                  "character-dialog.control.move-column-left",
                                                 )}
                                               >
                                                 <span>
@@ -857,7 +861,7 @@ export const CharacterV3Dialog: React.FC<{
                                                           pageIndex,
                                                           rowIndex,
                                                           columnIndex,
-                                                        }
+                                                        },
                                                       );
                                                     }}
                                                   >
@@ -873,7 +877,7 @@ export const CharacterV3Dialog: React.FC<{
                                             <Grid item>
                                               <Tooltip
                                                 title={t(
-                                                  "character-dialog.control.move-column-right"
+                                                  "character-dialog.control.move-column-right",
                                                 )}
                                               >
                                                 <span>
@@ -887,7 +891,7 @@ export const CharacterV3Dialog: React.FC<{
                                                           pageIndex,
                                                           rowIndex,
                                                           columnIndex,
-                                                        }
+                                                        },
                                                       );
                                                     }}
                                                   >
@@ -904,7 +908,7 @@ export const CharacterV3Dialog: React.FC<{
                                             <Grid item>
                                               <Tooltip
                                                 title={t(
-                                                  "character-dialog.control.delete-column"
+                                                  "character-dialog.control.delete-column",
                                                 )}
                                               >
                                                 <span>
@@ -917,7 +921,7 @@ export const CharacterV3Dialog: React.FC<{
                                                           rowIndex: rowIndex,
                                                           columnIndex:
                                                             columnIndex,
-                                                        }
+                                                        },
                                                       );
                                                     }}
                                                   >
@@ -941,7 +945,7 @@ export const CharacterV3Dialog: React.FC<{
                                           columnIndex,
                                         },
                                         page,
-                                        column.sections
+                                        column.sections,
                                       )}
                                     </ManagerBox>
                                   </Grid>
@@ -1090,7 +1094,7 @@ export const CharacterV3Dialog: React.FC<{
   function renderSections(
     indexes: { pageIndex: number; rowIndex: number; columnIndex: number },
     page: IPage,
-    sections: Array<ISection> | undefined
+    sections: Array<ISection> | undefined,
   ) {
     const numberOfSections = sections?.length ?? 0;
     const shouldRenderAddSectionButton = advanced && numberOfSections === 0;
@@ -1116,7 +1120,7 @@ export const CharacterV3Dialog: React.FC<{
                           columnIndex: indexes.columnIndex,
                           sectionIndex: sectionIndex,
                         },
-                        newLabel
+                        newLabel,
                       );
                     }}
                     actions={
@@ -1124,7 +1128,7 @@ export const CharacterV3Dialog: React.FC<{
                         <Grid item>
                           <Tooltip
                             title={t(
-                              "character-dialog.control.visible-on-card"
+                              "character-dialog.control.visible-on-card",
                             )}
                           >
                             <IconButton
@@ -1137,7 +1141,7 @@ export const CharacterV3Dialog: React.FC<{
                                     rowIndex: indexes.rowIndex,
                                     columnIndex: indexes.columnIndex,
                                     sectionIndex: sectionIndex,
-                                  }
+                                  },
                                 );
                               }}
                             >
@@ -1170,7 +1174,7 @@ export const CharacterV3Dialog: React.FC<{
                         <Grid item>
                           <Tooltip
                             title={t(
-                              "character-dialog.control.move-section-up"
+                              "character-dialog.control.move-section-up",
                             )}
                           >
                             <span>
@@ -1204,7 +1208,7 @@ export const CharacterV3Dialog: React.FC<{
                         <Grid item>
                           <Tooltip
                             title={t(
-                              "character-dialog.control.move-section-down"
+                              "character-dialog.control.move-section-down",
                             )}
                           >
                             <span>
@@ -1238,14 +1242,14 @@ export const CharacterV3Dialog: React.FC<{
                         <Grid item>
                           <Tooltip
                             title={t(
-                              "character-dialog.control.copy-section-blocks"
+                              "character-dialog.control.copy-section-blocks",
                             )}
                           >
                             <IconButton
                               size="small"
                               onClick={() => {
                                 settingsManager.actions.setBlocksInClipboard(
-                                  section.blocks
+                                  section.blocks,
                                 );
                               }}
                             >
@@ -1272,8 +1276,8 @@ export const CharacterV3Dialog: React.FC<{
                               onClick={() => {
                                 const confirmed = confirm(
                                   t(
-                                    "character-dialog.delete-section-confirmation"
-                                  )
+                                    "character-dialog.delete-section-confirmation",
+                                  ),
                                 );
                                 if (confirmed) {
                                   characterManager.actions.deleteSection({
@@ -1327,7 +1331,7 @@ export const CharacterV3Dialog: React.FC<{
                                   columnIndex: indexes.columnIndex,
                                   sectionIndex: sectionIndex,
                                 },
-                                blockType
+                                blockType,
                               );
                             }}
                           />
@@ -1347,7 +1351,7 @@ export const CharacterV3Dialog: React.FC<{
                                         columnIndex: indexes.columnIndex,
                                         sectionIndex: sectionIndex,
                                       },
-                                      settingsManager.state.blocksInClipboard
+                                      settingsManager.state.blocksInClipboard,
                                     );
                                   }}
                                 >
@@ -1496,12 +1500,12 @@ export const CharacterV3Dialog: React.FC<{
                     size="small"
                     onClick={() => {
                       const confirm = window.confirm(
-                        t("character-dialog.delete-confirmation")
+                        t("character-dialog.delete-confirmation"),
                       );
 
                       if (confirm) {
                         charactersManager.actions.remove(
-                          characterManager.state?.character?.id
+                          characterManager.state?.character?.id,
                         );
                       }
                     }}
@@ -1520,7 +1524,7 @@ export const CharacterV3Dialog: React.FC<{
                     size="small"
                     onClick={() => {
                       charactersManager.actions.exportEntity(
-                        characterManager.state.character as ICharacter
+                        characterManager.state.character as ICharacter,
                       );
                     }}
                   >
@@ -1540,7 +1544,7 @@ export const CharacterV3Dialog: React.FC<{
                       size="small"
                       onClick={() => {
                         charactersManager.actions.exportEntityAsTemplate(
-                          characterManager.state.character as ICharacter
+                          characterManager.state.character as ICharacter,
                         );
                       }}
                     >
@@ -2049,7 +2053,7 @@ export const CharacterV3Dialog: React.FC<{
                             disabled={!hasMiniTheme}
                             label={`Font Family`}
                             placeholder={FontFamily.Default.split(",").join(
-                              ", "
+                              ", ",
                             )}
                             fullWidth
                             multiline
@@ -2273,7 +2277,7 @@ export const CharacterV3Dialog: React.FC<{
       rowIndex: number;
       columnIndex: number;
       sectionIndex: number;
-    }
+    },
   ) {
     const hasBlock = section.blocks.length > 0;
     if (!hasBlock) {
@@ -2310,7 +2314,7 @@ export const CharacterV3Dialog: React.FC<{
                           <Grid item>
                             <Tooltip
                               title={t(
-                                "character-dialog.control.move-section-up"
+                                "character-dialog.control.move-section-up",
                               )}
                             >
                               <span>
@@ -2339,7 +2343,7 @@ export const CharacterV3Dialog: React.FC<{
                           <Grid item>
                             <Tooltip
                               title={t(
-                                "character-dialog.control.move-section-down"
+                                "character-dialog.control.move-section-down",
                               )}
                             >
                               <span>
@@ -2369,7 +2373,7 @@ export const CharacterV3Dialog: React.FC<{
                           <Grid item>
                             <Tooltip
                               title={t(
-                                "character-dialog.control.duplicate-block"
+                                "character-dialog.control.duplicate-block",
                               )}
                             >
                               <IconButton
@@ -2456,7 +2460,7 @@ export const CharacterV3Dialog: React.FC<{
                             sectionIndex: indexes.sectionIndex,
                             blockIndex,
                           },
-                          newBlock
+                          newBlock,
                         );
                       }}
                       onToggleSplit={() => {
@@ -2483,12 +2487,12 @@ export const CharacterV3Dialog: React.FC<{
                           {
                             ...block.meta,
                             width: newWidth,
-                          }
+                          },
                         );
                       }}
                       onMainPointCounterChange={() => {
                         characterManager.actions.toggleBlockMainPointCounter(
-                          block.id
+                          block.id,
                         );
                       }}
                       onRoll={(diceRollResult) => {
