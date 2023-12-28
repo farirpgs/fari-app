@@ -46,8 +46,6 @@ Once the dependencies are installed, Fari will also build some of it's static co
 
 ### Running the application
 
-<!--  -->
-
 If you want to run Fari on your machine, simply run:
 
 ```sh
