@@ -67,10 +67,8 @@ import { env } from "../../../../constants/env";
 import { CharactersContext } from "../../../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../../../contexts/SettingsContext/SettingsContext";
-import {
-  CharacterTemplates,
-  ICharacterTemplate,
-} from "../../../../domains/character/CharacterType";
+
+import { CharacterTemplatesContext } from "../../../../contexts/CharacterTemplatesContext/CharacterTemplatesContext";
 import {
   ICharacter,
   IPage,
@@ -82,6 +80,7 @@ import { useEvent } from "../../../../hooks/useEvent/useEvent";
 import { LazyState } from "../../../../hooks/useLazyState/useLazyState";
 import { useQuery } from "../../../../hooks/useQuery/useQuery";
 import { useTranslate } from "../../../../hooks/useTranslate/useTranslate";
+import { ICharacterTemplate } from "../../../../services/character-templates/ICharacterTemplate";
 import { useCharacter } from "../../hooks/useCharacter";
 import { MiniThemeContext, useMiniTheme } from "./MiniThemeContext";
 import { AddBlock } from "./components/AddBlock";
@@ -132,8 +131,8 @@ export const CharacterV3Dialog: React.FC<{
 
   const theme = useTheme();
   const query = useQuery<"card" | "advanced">();
-  const showCharacterCard = query.get("card") === "true";
-  const defaultAdvanced = query.get("advanced") === "true";
+  const showCharacterCard = query?.get("card") === "true";
+  const defaultAdvanced = query?.get("advanced") === "true";
   const logger = useLogger();
   const autoSaveTimeout = useRef<any>(null);
   const characterManager = useCharacter(props.character, () => {
@@ -153,7 +152,7 @@ export const CharacterV3Dialog: React.FC<{
   const miniTheme = useMiniTheme({
     character: characterManager.state.character,
   });
-  // usePrompt(t("manager.leave-without-saving"), characterManager.state.dirty);
+  const characterTemplatesManager = useContext(CharacterTemplatesContext);
 
   const hasMiniTheme = !!characterManager.state.character?.theme;
 
@@ -186,7 +185,9 @@ export const CharacterV3Dialog: React.FC<{
 
     if (confirmed) {
       setTab("0");
-      characterManager.actions.loadTemplate(newTemplate);
+      characterManager.actions.loadTemplate({
+        template: newTemplate,
+      });
       setAdvanced(false);
       logger.track("character.load_template", { template: newTemplate });
     }
@@ -407,8 +408,8 @@ export const CharacterV3Dialog: React.FC<{
         >
           <Grid item>
             <InputLabel>
-              {t("character-dialog.load-template")} ({CharacterTemplates.length}
-              )
+              {t("character-dialog.load-template")} (
+              {characterTemplatesManager.templates.length})
             </InputLabel>
           </Grid>
           <Grid item>
@@ -418,22 +419,22 @@ export const CharacterV3Dialog: React.FC<{
               filterOptions={createFilterOptions({
                 limit: 100,
                 stringify: (option) => {
-                  const templateName = option.fileName;
-                  const groupName = option.category;
+                  const templateName = option.name;
+                  const groupName = option.publisher;
                   return `${templateName} ${groupName}`;
                 },
               })}
-              options={CharacterTemplates}
+              options={characterTemplatesManager.templates}
               sx={{
                 width: "300px",
                 color: "red !important",
               }}
               getOptionLabel={(option) => {
-                return option.fileName;
+                return option.name;
               }}
-              groupBy={(option) => option.category}
+              groupBy={(option) => option.publisher}
               onChange={(event, template) => {
-                if (template?.importFunction) {
+                if (template?.fetchPath) {
                   onLoadTemplate(template);
                 }
               }}
@@ -2509,7 +2510,6 @@ export const CharacterV3Dialog: React.FC<{
     );
   }
 };
-CharacterV3Dialog.displayName = "CharacterV3Dialog";
 
 export function ManagerBox(props: {
   label: string | React.ReactNode;

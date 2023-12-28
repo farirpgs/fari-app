@@ -1,52 +1,58 @@
 {
-  "root": true,
-  "extends": [
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "prettier"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["react", "@typescript-eslint", "react-hooks"],
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true
-  },
-  "globals": {
-    "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
-  },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 2018,
-    "sourceType": "module"
-  },
+  "extends": "next",
   "rules": {
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["warn"],
-    "no-restricted-imports": [
-      "error",
-
-      { "name": "lodash", "message": "Use lodash/myFunction instead" }
-    ],
-    "react/prop-types": 0,
-    "react-hooks/rules-of-hooks": "error",
-    "react/display-name": 0,
-    // "react-hooks/exhaustive-deps": "warn",
-    "prefer-template": "error",
-    "react/self-closing-comp": [
-      "warn",
-      {
-        "component": true,
-        "html": true
-      }
-    ]
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
+    "react-hooks/exhaustive-deps": "off",
+    "@next/next/no-img-element": "off",
+    "@next/next/no-page-custom-font": "off"
   }
+  // "root": true,
+  // "extends": [
+  //   "plugin:react/recommended",
+  //   "plugin:@typescript-eslint/eslint-recommended",
+  //   "prettier"
+  // ],
+  // "parser": "@typescript-eslint/parser",
+  // "plugins": ["react", "@typescript-eslint", "react-hooks"],
+  // "env": {
+  //   "browser": true,
+  //   "es6": true,
+  //   "node": true
+  // },
+  // "globals": {
+  //   "Atomics": "readonly",
+  //   "SharedArrayBuffer": "readonly"
+  // },
+  // "parserOptions": {
+  //   "ecmaFeatures": {
+  //     "jsx": true
+  //   },
+  //   "ecmaVersion": 2018,
+  //   "sourceType": "module"
+  // },
+  // "rules": {
+  //   "no-unused-vars": "off",
+  //   "@typescript-eslint/no-unused-vars": ["warn"],
+  //   "no-restricted-imports": [
+  //     "error",
+
+  //     { "name": "lodash", "message": "Use lodash/myFunction instead" }
+  //   ],
+  //   "react/prop-types": 0,
+  //   "react-hooks/rules-of-hooks": "error",
+  //   "react/display-name": 0,
+  //   // "react-hooks/exhaustive-deps": "warn",
+  //   "prefer-template": "error",
+  //   "react/self-closing-comp": [
+  //     "warn",
+  //     {
+  //       "component": true,
+  //       "html": true
+  //     }
+  //   ]
+  // },
+  // "settings": {
+  //   "react": {
+  //     "version": "detect"
+  //   }
+  // }
 }

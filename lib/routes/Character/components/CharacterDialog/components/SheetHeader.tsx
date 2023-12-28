@@ -83,4 +83,3 @@ export const SheetHeader: React.FC<{
     </Box>
   );
 };
-SheetHeader.displayName = "SheetHeader";

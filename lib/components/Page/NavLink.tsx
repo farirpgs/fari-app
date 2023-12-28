@@ -12,10 +12,10 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
-import { ReactRouterLink } from "../ReactRouterLink/ReactRouterLink";
+import { RouterLink } from "../AppLink/AppLink";
 
 export function NavLink(props: {
-  to?: string | { pathname: string };
+  href?: string;
   target?: "_blank";
   tooltip?: string;
   onClick?: () => void;
@@ -25,13 +25,13 @@ export function NavLink(props: {
   endIcon?: React.ReactNode;
   children: React.ReactNode;
 }) {
-  if (props.to) {
+  if (props.href) {
     return (
       <Tooltip title={props.tooltip ?? ""}>
         <Button
           color="inherit"
-          component={ReactRouterLink}
-          to={props.to}
+          component={RouterLink}
+          href={props.href ?? ""}
           onClick={props.onClick}
           target={props.target}
           data-cy={props["data-cy"]}
@@ -81,7 +81,6 @@ export function NavLinkCategory(props: {
     label: React.ReactNode;
     links: Array<{
       "label": React.ReactNode;
-      "to"?: string | { pathname: string };
       "href"?: string;
       "target"?: "_blank";
       "tooltip"?: string;
@@ -220,26 +219,6 @@ export function NavLinkCategory(props: {
                               textAlign: "left",
                             }}
                           >
-                            {link.to && (
-                              <Box
-                                component={ReactRouterLink}
-                                to={link.to}
-                                target={link.target}
-                                onClick={props.onAnyLinkClick}
-                                data-cy={link["data-cy"]}
-                                sx={{
-                                  "color": theme.palette.secondary.main,
-                                  "fontWeight": theme.typography.fontWeightBold,
-                                  "fontSize": "1rem",
-                                  "textDecoration": "none",
-                                  "&:hover": {
-                                    textDecoration: "underline",
-                                  },
-                                }}
-                              >
-                                {link.label}
-                              </Box>
-                            )}
                             {link.href && (
                               <Box
                                 component="a"

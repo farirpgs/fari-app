@@ -1,8 +1,9 @@
+"use client";
+
 import { Container, Grid, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Icons } from "../../domains/Icons/Icons";
 import { Dice, ICommandResult, IDiceCommandId } from "../../domains/dice/Dice";
 import { useEvent } from "../../hooks/useEvent/useEvent";
@@ -10,7 +11,6 @@ import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import { DiceButtons } from "./components/DiceButtons";
 import { DiceDrawer } from "./components/DiceDrawer";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function DiceRoute(props: {}) {
   const { t } = useTranslate();
   const [results, setResults] = useState<Array<ICommandResult>>([]);
@@ -26,10 +26,6 @@ export function DiceRoute(props: {}) {
 
   return (
     <Page maxWidth="sm" sx={{ paddingTop: "2rem" }}>
-      <PageMeta
-        title={t("dice-route.meta.title")}
-        description={t("dice-route.meta.description")}
-      />
       <Container sx={{ minHeight: "70vh" }}>
         <Heading icon={Icons.FateDice} title={t("dice-route.meta.title")} />
         <Stack spacing={2}>
@@ -65,6 +61,3 @@ export function DiceRoute(props: {}) {
     </Page>
   );
 }
-
-DiceRoute.displayName = "DiceRoute";
-export default DiceRoute;

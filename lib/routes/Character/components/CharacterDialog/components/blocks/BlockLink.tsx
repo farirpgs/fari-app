@@ -107,9 +107,9 @@ export const BlockLink = React.memo(
               </Box>
             ) : (
               <>
-                {isValid && props.value !== "" ? (
+                {isValid && props.value ? (
                   <AppLink
-                    to={props.value}
+                    href={props.value}
                     target="_blank"
                     sx={{
                       lineHeight: "normal",
@@ -128,7 +128,6 @@ export const BlockLink = React.memo(
     );
   },
 );
-
 BlockLink.displayName = "BlockLink";
 
 export const BlockLinkActions = React.memo(
@@ -168,5 +167,4 @@ export const BlockLinkActions = React.memo(
     );
   },
 );
-
 BlockLinkActions.displayName = "BlockLinkActions";

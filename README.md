@@ -1,5 +1,10 @@
 # TODO
 
+- [ ] templates
+- [ ] not found route
+- [ ] page meta checks
+- [ ] full test suit
+
 # [Fari](https://fari.app) - The Free and Open-Source Virtual Tabletop
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
@@ -50,7 +55,7 @@ If you want to run Fari on your machine, simply run:
 bun run dev
 ```
 
-This will start and bundle the app using [ViteJS](https://vitejs.dev/) and make it available on http://localhost:1234
+This will start and bundle the app using [ViteJS](https://vitejs.dev/) and make it available on http://localhost:3000
 
 ViteJS will also update your browser's content (using React Refresh) anytime you do save a file on the disk.
 

@@ -1217,4 +1217,5 @@ export function Session(props: {
     );
   }
 }
-Session.displayName = "Session";
+
+export default Session;

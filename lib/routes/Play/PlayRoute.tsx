@@ -1,18 +1,20 @@
+"use client";
+
 import { Alert, Snackbar } from "@mui/material";
-import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+
+import { useParams } from "next/navigation";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { SettingsContext } from "../../contexts/SettingsContext/SettingsContext";
+import { useQuery } from "../../hooks/useQuery/useQuery";
 import { useScene } from "../../hooks/useScene/useScene";
-import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 import {
   useBroadcastEvent,
   useEventListener,
-  useObject,
-  useRoom,
+  useMutation,
+  useStorage,
 } from "../../services/liveblocks/liveblocks.config";
 import { IMessage, useChat } from "./components/Chat/useChat";
 import {
@@ -48,62 +50,62 @@ export function useLiveObject<T>(props: {
   canBeEmpty?: boolean;
   onChange(newValue: T): void;
 }) {
-  const liveObject = useObject(props.key);
-  // const root = useStorage((root) => {
-  //   return root;
-  // });
-
-  const room = useRoom();
+  const object = useStorage((root) => {
+    return root[props.key];
+  });
 
   // TODO: clear data on load
   // useEffect(() => {
   //   if (props.isOwner) {
-  //     root?.set(props.key, new LiveObject({}));
+  //     update()
   //   }
-  // }, [root]);
+  // }, []);
+
+  const update = useMutation(
+    (context) => {
+      if (props.isOwner) {
+        context.storage.set(props.key, props.value as any);
+      }
+    },
+    [props.isOwner, props.value],
+  );
 
   useEffect(() => {
     if (props.isOwner) {
-      liveObject?.update(props.value as any);
+      update();
     }
   }, [props.value]);
 
   useEffect(() => {
-    function onLiveObjectChange() {
-      const isSubscriber = !props.isOwner;
-      const object = liveObject?.toObject();
-      const objectKeys = Object.keys(object ?? {});
-      if (isSubscriber && object) {
-        if (props.canBeEmpty || objectKeys.length > 0) {
-          props.onChange(object as unknown as T);
-        }
+    const isSubscriber = !props.isOwner;
+
+    const objectKeys = Object.keys(object ?? {});
+
+    console.log("CALLING PARENT FOR", {
+      key: props.key,
+      isSubscriber,
+      objectKeys,
+    });
+    if (isSubscriber && object) {
+      if (props.canBeEmpty || objectKeys.length > 0) {
+        props.onChange(object as unknown as T);
       }
     }
+  }, [object]);
 
-    onLiveObjectChange();
-
-    if (liveObject == null) {
-      return;
-    }
-
-    return room.subscribe(liveObject, onLiveObjectChange);
-  }, [liveObject]);
-
-  return liveObject;
+  return object;
 }
 
-function PlayRoute() {
-  const params = useParams<{ id: string }>();
+export function PlayRoute() {
+  const params = useParams();
   const logger = useLogger();
-  const { t } = useTranslate();
-  const room = useRoom();
   const settingsManager = useContext(SettingsContext);
   const charactersManager = useContext(CharactersContext);
-  const location = useLocation();
-  const query = new URLSearchParams(location.search);
-  const idFromParams = params.id;
+  const query = useQuery();
+  const idFromParams = params.id as string;
   const playerName = query.get("name");
   const isGM = !idFromParams;
+  console.log("isGM", isGM);
   const isPlayer = !isGM;
   const userId = settingsManager.state.userId;
   const sessionId = isPlayer ? idFromParams : userId;
@@ -248,10 +250,10 @@ function PlayRoute() {
   }, [playerName]);
 
   useEffect(() => {
-    const unsubscribe = room.subscribe("connection", (status) => {
-      setConnectionState(status);
-    });
-    return unsubscribe;
+    // const unsubscribe = room.subscribe("connection", (status) => {
+    //   setConnectionState(status);
+    // });
+    // return unsubscribe;
   }, []);
 
   useEffect(() => {
@@ -303,10 +305,6 @@ function PlayRoute() {
 
   return (
     <>
-      <PageMeta
-        title={pageTitle || t("home-route.play-online.title")}
-        description={t("home-route.play-online.description")}
-      />
       <>
         <Snackbar
           open={connectionStateSnackBarOpen && !!connectionState}
@@ -359,6 +357,3 @@ function PlayRoute() {
     </>
   );
 }
-
-PlayRoute.displayName = "PlayRoute";
-export default PlayRoute;

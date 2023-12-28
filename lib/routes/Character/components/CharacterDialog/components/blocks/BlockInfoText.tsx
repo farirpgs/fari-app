@@ -46,4 +46,5 @@ export const BlockInfoText = React.memo(
     );
   },
 );
+
 BlockInfoText.displayName = "BlockInfoText";

@@ -1,8 +1,9 @@
+"use client";
+
 import { Box, Snackbar, useTheme } from "@mui/material";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams, useRouter } from "next/navigation";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Toolbox } from "../../components/Toolbox/Toolbox";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
@@ -86,13 +87,13 @@ function DicePoolResultsSnackBar(props: {
   );
 }
 
-function CharacterRoute() {
+export function CharacterRoute() {
   const theme = useTheme();
-  const params = useParams<{ id: string }>();
+  const params = useParams();
   const query = useQuery<"dialog" | "readonly">();
   const dialogMode = query.get("dialog") === "true";
   const readonly = query.get("readonly") === "true";
-  const navigate = useNavigate();
+  const router = useRouter();
   const charactersManager = useContext(CharactersContext);
   const [dicePoolResults, setDicePoolResults] = useState<
     Array<IDicePoolResult>
@@ -130,16 +131,13 @@ function CharacterRoute() {
     if (characterToLoad) {
       setSelectedCharacter(characterToLoad);
     } else {
-      navigate("/", {
-        replace: true,
-      });
+      router.replace("/");
       myBinderManager.actions.open({ folder: "characters" });
     }
   }, [params.id, charactersManager.state.characters]);
 
   return (
     <>
-      <PageMeta title={selectedCharacter?.name} />
       <DicePoolResultsSnackBar
         open={resultsVisible}
         onClose={handleHideResults}
@@ -170,6 +168,3 @@ function CharacterRoute() {
     </>
   );
 }
-
-CharacterRoute.displayName = "CharacterRoute";
-export default CharacterRoute;

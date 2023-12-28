@@ -1,0 +1,335 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1679496832,
+  "name": "Case File Time Tracker Template",
+  "pages": [
+    {
+      "id": "4c229969-55dd-4748-868c-a1f0db70f436",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "0a8b51c4-d8eb-4462-8f0c-82b0485fa828",
+                  "label": "- LAPD POLICE REPORT - ",
+                  "blocks": [
+                    {
+                      "id": "505511f4-d40f-421d-845a-e1d2694eab08",
+                      "label": "Case File Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "1d23fadb-8db0-408f-8bc2-b5f3fe4052c9",
+                      "label": "Reporting Officer",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "59b3f54e-b719-474c-a868-035dc16efa67",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "471e54a0-aa27-406f-b12b-638ae05bca20",
+                  "label": "DAY 1",
+                  "blocks": [
+                    {
+                      "id": "3992d53f-2587-4700-a886-268b7a04c102",
+                      "label": "SHIFT 1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "bc731b24-5f1b-4841-80bd-601e651e7998",
+                      "label": "SHIFT 3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "8f86a8de-2ba3-4ae9-b154-46cab44f66e4",
+                      "label": "SHIFT 3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "38cbdf6f-2e03-4226-8974-13d43156580e",
+                      "label": "SHIFT 4",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                },
+                {
+                  "id": "54158232-0153-47dd-8d75-19ee2069b6a9",
+                  "label": "DAY 2",
+                  "blocks": [
+                    {
+                      "id": "f7738446-bcfe-424a-bd04-409dd79df6f0",
+                      "label": "SHIFT 1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "a78ceae9-e2cc-4173-b99d-b9e68d4e800b",
+                      "label": "SHIFT 2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "74c8c9fd-8742-4ea1-9956-0bbac9a1bba8",
+                      "label": "SHIFT 3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "20965bc9-3335-4192-9303-078ec71340b4",
+                      "label": "SHIFT 4",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                },
+                {
+                  "id": "06935cd9-273d-4328-b779-bad7c24104fc",
+                  "label": "DAY 3",
+                  "blocks": [
+                    {
+                      "id": "12b0b783-693f-48a9-a8ca-5819423509c0",
+                      "label": "SHIFT 1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "914db2d4-bc37-4bb0-898b-ac933c253177",
+                      "label": "SHIFT 2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "3d13677c-9620-4bea-8d37-65c4c01f6418",
+                      "label": "SHIFT 3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "a9a7ec26-5d87-4f81-a7dc-cfbb53401156",
+                      "label": "SHIFT 4",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                },
+                {
+                  "id": "05eed149-d3bd-4465-9027-ffef0849b761",
+                  "label": "DAY 4",
+                  "blocks": [
+                    {
+                      "id": "485bc2f0-7533-45fc-94b0-4e3372762009",
+                      "label": "SHIFT 1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "b727b8e2-00c9-4052-afad-4bffee6c7a9b",
+                      "label": "SHIFT 2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "56d4c5de-3bfc-46e1-b3c0-f9abf1175210",
+                      "label": "SHIFT 3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "96c16648-5f0d-4e6b-8f93-32d6c45af4ba",
+                      "label": "SHIFT 4",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                },
+                {
+                  "id": "9640e0b0-52f6-4fa6-a856-2414a083919c",
+                  "label": "DAY 5",
+                  "blocks": [
+                    {
+                      "id": "2c8df4bb-2880-4435-8724-83bdd9ed0e5a",
+                      "label": "SHIFT 1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "54b8d3b0-6a54-4d2d-85db-3837c3850238",
+                      "label": "SHIFT 2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "372214d6-6a2f-4692-9bc6-a78a27bc64e1",
+                      "label": "SHIFT 3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "f5ef5892-3002-4e3f-99dd-b7a8da112f4e",
+                      "label": "SHIFT 4",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                },
+                {
+                  "id": "94634dc6-4c0d-4295-a80f-d9b8e9f44b12",
+                  "label": "DAY 6",
+                  "blocks": [
+                    {
+                      "id": "f59e3458-aca7-4e78-b743-bb3d1f2002ab",
+                      "label": "SHIFT 1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "9b0defcf-5401-447c-ae86-5146a2f30d71",
+                      "label": "SHIFT 2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "0d4b5231-e417-4d4b-9df3-5ff6450c9326",
+                      "label": "SHIFT 3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "86562611-919e-4fae-9a04-c38191333e8b",
+                      "label": "SHIFT 4",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                },
+                {
+                  "id": "bb6062b8-3b50-4f93-89b2-2ae05c4bab39",
+                  "label": "DAY 7",
+                  "blocks": [
+                    {
+                      "id": "c779688b-caea-4c7e-86b8-f6d858c1a193",
+                      "label": "SHIFT 1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "25c695bd-0224-462e-91be-76eb516f7684",
+                      "label": "SHIFT 2",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "879ff710-1534-4ff2-b132-287074a28a33",
+                      "label": "SHIFT 3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "d37f1b98-c9df-4085-9f3a-8d5b8061c635",
+                      "label": "SHIFT 4",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "b644bdc4-55fd-4aff-bee1-490d8be4545c",
+                  "label": "REFERENCES",
+                  "blocks": [
+                    {
+                      "id": "b123aa49-c86b-4c9b-a260-3d488adc4ccb",
+                      "label": "",
+                      "type": "Link",
+                      "meta": {
+                        "hasDisplayName": true,
+                        "helperText": "Blade Runner: The Roleplaying Game is ©2017 Alcon Entertainment, LLC. All rights reserved. Published by Free League Publishing.<br><br>*This Fari character sheet was independently designed by Discord user PistolPants#8314 and is not affiliated with the original game designers and publishers."
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "ae4517a1-05be-4157-ae53-3bab7d074970",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "e33a60b2-7228-485a-adf1-4e98f282867f",
+                      "label": "",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": false, "width": 1 },
+                      "value": "https://www.bladerunner-rpg.com/"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Time Tracker Details"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "group": "Blade Runner"
+}

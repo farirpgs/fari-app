@@ -43,7 +43,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          start: npm run serve:build
+          start: npm start
       - name: Upload Cypress Videos
         uses: actions/upload-artifact@v3
         if: always()

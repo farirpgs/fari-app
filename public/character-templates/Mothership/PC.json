@@ -1,0 +1,865 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1674781820,
+  "name": "Mothership RPG PC Template",
+  "pages": [
+    {
+      "id": "836bd7f5-2ca9-476a-a807-a3deee96f699",
+      "label": "Main",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "75de4153-f72d-4865-bcc9-7c873d102ba1",
+                  "label": "Info",
+                  "blocks": [
+                    {
+                      "id": "5165aecf-2b2a-4fc2-a208-9b2bf60a399d",
+                      "label": "",
+                      "type": "Image",
+                      "meta": { "width": 0.33 },
+                      "value": ""
+                    },
+                    {
+                      "id": "8504ec5a-e379-44a4-9c2a-ed1483104817",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "52452a15-1f7c-4526-905c-f13eef4f844e",
+                      "label": "Rank/Title",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "50e6cf60-a379-43d6-b28a-5ed2003f991e",
+                      "label": "Level",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "ec08865f-3f65-4eb1-a1e5-f7ea05a35805",
+                      "label": "XP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "b4dd78d9-c72c-4805-92f5-d6d64b8e7843",
+                      "label": "Class",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Teamster/Android/Scientist/Marine",
+                        "width": 0.33
+                      }
+                    }
+                  ],
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "94ef4f1f-2fa4-4e7b-935c-955ab08292d8",
+                  "label": "Monitor",
+                  "blocks": [
+                    {
+                      "id": "98259f70-a44a-4e09-906c-c6fda60b4ad1",
+                      "label": "Stress",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "helperText": "Starts at 2", "width": 0.33 }
+                    },
+                    {
+                      "id": "c1a8f273-ac25-4655-92e0-c491760d973d",
+                      "label": "Resolve",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "helperText": "Starts at 0", "width": 0.33 }
+                    },
+                    {
+                      "id": "860e72e4-b737-462b-9a7c-ad2d1a997506",
+                      "label": "Health",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "0",
+                        "isMainPointCounter": true,
+                        "helperText": "Max = 2x Strength",
+                        "width": 0.33
+                      },
+                      "value": "0"
+                    }
+                  ]
+                },
+                {
+                  "id": "b936ca86-bebb-4141-b8e1-2fef254cf042",
+                  "label": "Attributes",
+                  "blocks": [
+                    {
+                      "id": "1b997369-8402-416d-9999-c6c1260d6ceb",
+                      "label": "Strength",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d100"],
+                        "helperText": "How able-bodied you are. Lifting,&nbsp;pushing, hitting things hard, etc.&nbsp;<br>",
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "6b454813-fad3-46a3-b8a8-f2140aa55bc1",
+                      "label": "Speed",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d100"],
+                        "helperText": "How quickly you can act and react&nbsp;under pressure.<br>",
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "b357a3ce-5b66-404b-ab74-5625babe8260",
+                      "label": "Intellect",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d100"],
+                        "helperText": "How knowledgeable and&nbsp;experienced you are.<br>",
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "b4cace13-f61a-4081-a2f9-a025ad682e9d",
+                      "label": "Combat",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d100"],
+                        "helperText": "How good you are at fighting.<br>",
+                        "hideModifier": false,
+                        "width": 0.5
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "4f8e36d2-0e1b-4d20-890f-d96683691f98",
+                  "label": "Saves",
+                  "blocks": [
+                    {
+                      "id": "45f153bf-f7e5-40ba-994a-5d6f252b2883",
+                      "label": "Sanity",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d100"],
+                        "helperText": "Rationalization, Logic",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "86c59751-edc5-4894-9b82-27416c8e72ff",
+                      "label": "Fear",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d100"],
+                        "helperText": "Surprise, Loneliness",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "021e4ad6-a3ef-4e7f-8d44-a00ad116ea7e",
+                      "label": "Body",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d100"],
+                        "helperText": "Hunger, Disease, Infection",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "e8973c65-0741-4adc-a0ed-c1207b342293",
+                      "label": "Armor",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d100"],
+                        "helperText": "Physical Damage",
+                        "width": 0.5
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fd6dfb85-ee21-4293-8e44-16adc50a2dfe",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "46635c24-980a-41cc-9a30-0135013333df",
+                  "label": "Trained +10%",
+                  "blocks": [
+                    {
+                      "id": "45fa3324-f35d-4f94-80f5-7068bebff4cc",
+                      "label": "Linguistics",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Study of language."
+                      }
+                    },
+                    {
+                      "id": "ffe0bd0c-bf1d-4c19-b6b6-e7c4970563cc",
+                      "label": "Biology",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Study of life."
+                      }
+                    },
+                    {
+                      "id": "e68c6caf-6fb2-40c2-8a70-b0ff6b8e3653",
+                      "label": "First Aid",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Emergency medical&nbsp;care and treatment.<br>"
+                      }
+                    },
+                    {
+                      "id": "aeaef4a6-c71f-4690-903c-05ce2ea604c4",
+                      "label": "Hydroponics",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Growing plants&nbsp;in nutrient solutions without soil&nbsp;(farming in space).<br>"
+                      }
+                    },
+                    {
+                      "id": "f1126599-a8ea-4c07-8e72-6ed861a00085",
+                      "label": "Geology",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "The solid features of&nbsp;any terrestrial planet or natural \n<br>satellite.<br>"
+                      }
+                    },
+                    {
+                      "id": "ad6e1e95-81d5-46f8-b413-7e7d7641687c",
+                      "label": "Zero-G",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Working in a vacuum,&nbsp;vaccsuits, etc.<br>"
+                      }
+                    },
+                    {
+                      "id": "acbd1088-29aa-4f98-b185-538630c2a4d0",
+                      "label": "Scavenging",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Searching&nbsp;discarded waste for useful items.<br>"
+                      }
+                    },
+                    {
+                      "id": "cb82443c-5ede-4d9a-bb5c-abd004117771",
+                      "label": "Heavy Machinery ",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Operation&nbsp;and use of large pieces of&nbsp;equipment (cranes, exosuits,&nbsp;forklifts, etc.).<br>"
+                      }
+                    },
+                    {
+                      "id": "be6a3f07-8570-43b0-a3f5-ecb18e881a64",
+                      "label": "Computers",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Fluent use of&nbsp;computers and networks.<br>"
+                      }
+                    },
+                    {
+                      "id": "fa703186-9b86-4c21-888d-b2f25a523360",
+                      "label": "Mechanical Repair ",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Fixing&nbsp;broken machines.<br>"
+                      }
+                    },
+                    {
+                      "id": "def144bb-590a-4a4e-a7c2-cc3f35f9fdf1",
+                      "label": "Driving",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Operation and control of&nbsp;motor vehicles.<br>"
+                      }
+                    },
+                    {
+                      "id": "3a618e18-869a-4627-b1fe-aa57ab39c8c0",
+                      "label": "Piloting",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Operation and control&nbsp;of air and spacecraft.<br>"
+                      }
+                    },
+                    {
+                      "id": "2876dd9a-ba20-4aad-a1c4-e883ccdb6846",
+                      "label": "Mathematics",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "The science of&nbsp;numbers, quantity, and space.<br>"
+                      }
+                    },
+                    {
+                      "id": "7303ff19-da24-492a-8828-6809edde881e",
+                      "label": "Art",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "The expression or&nbsp;application of a species’ creative&nbsp;ability and imagination.<br>"
+                      }
+                    },
+                    {
+                      "id": "40f5a0fb-9b15-4d70-99a8-e11786a3bac5",
+                      "label": "Archaeology",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Ancient cultures&nbsp;and their artifacts.<br>"
+                      }
+                    },
+                    {
+                      "id": "0684250f-d46f-4779-985b-cf61a5b81cc8",
+                      "label": "Theology",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Study of religion."
+                      }
+                    },
+                    {
+                      "id": "eb232c25-60ec-49c9-8ce5-cdc0488b2ae7",
+                      "label": "Military Training",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Standard&nbsp;basic training given to all military&nbsp;personnel.<br>"
+                      }
+                    },
+                    {
+                      "id": "f632e6ef-f9d7-4d25-b882-ad277ae1abad",
+                      "label": "Rimwise",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Outer rim colonies and&nbsp;seedy parts of the galaxy.<br>"
+                      }
+                    },
+                    {
+                      "id": "9411cc3a-85e1-4985-a7ef-3d4396bad49f",
+                      "label": "Athletics",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Physical sports and&nbsp;games.<br>"
+                      }
+                    },
+                    {
+                      "id": "f09c24bf-92b6-47e2-bd24-ae73270f4840",
+                      "label": "Chemistry",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "The identification of&nbsp;the substances of which matter is composed.<br>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "70942c6c-2f85-4354-b2a4-c05d848c627a",
+                  "label": "Expert +15%",
+                  "blocks": [
+                    {
+                      "id": "6f30617e-fc49-4433-aa98-74ae15fbc18e",
+                      "label": "Psychology",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "The study of behavior and the human mind. Req: Biology<br>"
+                      }
+                    },
+                    {
+                      "id": "8a60e27c-cbca-4a5f-b2c5-be1a09c9bddf",
+                      "label": "Genetics",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Heredity and the variation of inherited&nbsp;characteristics. Req: Biology<br>"
+                      }
+                    },
+                    {
+                      "id": "02bc26f0-bf32-4be3-8ea8-c3bbc282fb21",
+                      "label": "Pathology",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Study of the cause&nbsp;and effect of disease. Req: First Aid<br>"
+                      }
+                    },
+                    {
+                      "id": "517a08f7-dd9a-475a-b47d-187becedd3bb",
+                      "label": "Botany",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "The study of plant life. Req: Hydroponics<br>"
+                      }
+                    },
+                    {
+                      "id": "d42bd945-d09b-4897-a9b2-7ec4e878df20",
+                      "label": "Planetology",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Study of planets and&nbsp;other celestial bodies. Req: Geology<br>"
+                      }
+                    },
+                    {
+                      "id": "ce73d5f2-2f78-4221-9bbe-4de021cfe96d",
+                      "label": "Asteroid Mining",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Training in the&nbsp;tools and procedures used in&nbsp;mining asteroids. Req: Biology, Zero-G, Heavy Machinery, Scavenging<br>"
+                      }
+                    },
+                    {
+                      "id": "51c9d76d-639f-452f-9d69-18ed406f2e52",
+                      "label": "Jury Rigging",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Training in the&nbsp;tools and procedures used in&nbsp;mining asteroids. Req: Scavenging<br>"
+                      }
+                    },
+                    {
+                      "id": "39e9cce7-eacd-404a-8963-6861fcb443d6",
+                      "label": "Engineering",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Design, building,&nbsp;and use of engines, machines,&nbsp;and structures. Req: Heavy Machinery, Mechanical Repair, Computers,&nbsp;<br>"
+                      }
+                    },
+                    {
+                      "id": "e1e4cbc6-9183-4876-9c32-2edb7292c386",
+                      "label": "Hacking",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Unauthorized access&nbsp;to computer systems. Req: Computers<br>"
+                      }
+                    },
+                    {
+                      "id": "77da94ca-17cb-4bd3-97e9-3c9996aca158",
+                      "label": "Vehicle Specialization",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Specific&nbsp;vehicle class. Req: Mechanical Repair, Piloting, Driving<br>"
+                      }
+                    },
+                    {
+                      "id": "5ebb62f7-4d17-4a00-93bb-67c91bd0ef9c",
+                      "label": "Astrogation",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Navigation in outer&nbsp;space. Req: Piloting<br>"
+                      }
+                    },
+                    {
+                      "id": "9f96b483-ed25-424e-9ad8-71d78e801e7f",
+                      "label": "Physics",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Study of nature and&nbsp;properties of matter and energy. Req: Mathematics<br>"
+                      }
+                    },
+                    {
+                      "id": "6999c816-8e61-4cf8-98cc-74ecaaf56ce2",
+                      "label": "Mysticism",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Spiritual apprehension&nbsp;of hidden knowledge. Req: Art, Archaeology, Theology<br>"
+                      }
+                    },
+                    {
+                      "id": "3efb698b-9104-4914-81a9-7baa2ca4e706",
+                      "label": "Tactics",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Maneuvering military&nbsp;forces in battle. Req: Military Training<br>"
+                      }
+                    },
+                    {
+                      "id": "c89fdf58-9563-4d05-929a-0143caf69ebe",
+                      "label": "Gunnery",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "&nbsp;Starship weaponry. Req: Military Training<br>"
+                      }
+                    },
+                    {
+                      "id": "3b4f5aa7-7aa7-44e2-9e12-22a4dd96a393",
+                      "label": "Firearms",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Guns and their use. Req: Military Training, Rimwise<br>"
+                      }
+                    },
+                    {
+                      "id": "0a5a4987-15fd-4b9d-b40c-657d7563e6bb",
+                      "label": "Close-Quarters Combat",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Hand-to-hand, melee fighting. Req: Military Training, Rimwise, Athletics<br>"
+                      }
+                    },
+                    {
+                      "id": "826292d3-c06f-4e23-88b9-635a43bf923d",
+                      "label": "Explosives",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Bombs and incendiary devices. Req: Military Training, Chemistry<br>"
+                      }
+                    },
+                    {
+                      "id": "73ba2d94-158d-47a3-937f-9a7a6feeec89",
+                      "label": "Custom Expert Skill #1",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "<br>" },
+                      "value": ""
+                    },
+                    {
+                      "id": "6dcd55d1-e570-449b-8883-ee895a821726",
+                      "label": "Custom Expert Skill #2",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "<br>" },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "dbfcf0e2-896a-4017-bd39-df8ece40d5ab",
+                  "label": "Master +20%",
+                  "blocks": [
+                    {
+                      "id": "b20b648f-8493-4dfe-808d-3d52500370af",
+                      "label": "Sophontology",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Alien psychology. Req: Linguistics, Psychology<br>"
+                      }
+                    },
+                    {
+                      "id": "8ad448c3-bc99-4702-a10d-7a4fa29d27c0",
+                      "label": "Xenobiology",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Alien biology. Req: Genetics, Botany, Pathology<br>"
+                      }
+                    },
+                    {
+                      "id": "27fec6b3-d8f0-4928-9880-1d18ef2c2f80",
+                      "label": "Surgery",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Medical specialty&nbsp;involving manual operation. Req: Pathology<br>"
+                      }
+                    },
+                    {
+                      "id": "df91e6a3-006b-495b-b4b3-e2f15bde158b",
+                      "label": "Cybernetics",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Interface between&nbsp;man and machine. Req: Jury Rigging, Engineering<br>"
+                      }
+                    },
+                    {
+                      "id": "15a6e7fe-1881-4ac5-92d2-c998022915fd",
+                      "label": "Robotics",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Design and operation of&nbsp;robots, drones, and androids. Req: Engineering<br>"
+                      }
+                    },
+                    {
+                      "id": "4538367d-55ba-48e3-b9bb-809ddf0f456e",
+                      "label": "Artificial Intelligence",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Knowledge of simulacrum of human consciousness. Req: Engineering, Hacking<br>"
+                      }
+                    },
+                    {
+                      "id": "dbd4ef9e-1edd-4954-b73c-c89c5aa925ba",
+                      "label": "Command",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "&nbsp;Leadership and&nbsp;authority. Req: Vehicle Specialization<br>"
+                      }
+                    },
+                    {
+                      "id": "e344b573-ae07-43bc-9281-195c5ed7a93f",
+                      "label": "Hyperspace",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "FTL travel. Req: Astrogation, Mysticism, Tactics&nbsp;<br>"
+                      }
+                    },
+                    {
+                      "id": "83813253-1a1d-42cb-ba15-ed94e7f6f646",
+                      "label": "Xenoesotericism",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Obscure alien&nbsp;mysticism, religion, and belief. Req: Mysticism<br>"
+                      }
+                    },
+                    {
+                      "id": "2fcfcd6b-2393-4934-a582-4f8730e3d4e3",
+                      "label": "Weapon Specialization",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "helperText": "Proficiency with a specific weapon. Req: Gunnery, Firearms, Close-quarters Combat, Explosives<br>"
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "0ce4cb93-154a-4037-a17b-dac0f10a42d4",
+                      "label": "Custom Master Skill #1",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "<br>" },
+                      "value": ""
+                    },
+                    {
+                      "id": "fbcabc1d-d35e-4888-9b7d-fd2a2a249eca",
+                      "label": "Custom Master Skill #2",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "<br>" },
+                      "value": ""
+                    },
+                    {
+                      "id": "2201fc43-c1a5-451d-b7c8-49ec09ffbd8a",
+                      "label": "Custom Master Skill #3",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "<br>" },
+                      "value": ""
+                    },
+                    {
+                      "id": "3097b7a9-9e4b-4c3a-93df-7edef940331a",
+                      "label": "Custom Master Skill #4",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "<br>" },
+                      "value": ""
+                    },
+                    {
+                      "id": "1eddff35-c5c4-4e09-846b-e436ab19770f",
+                      "label": "Custom Master Skill #4",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "<br>" },
+                      "value": ""
+                    },
+                    {
+                      "id": "9caba7a2-1331-4dfd-8f0b-ea3531592ab0",
+                      "label": "Custom Master Skill #5",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "<br>" },
+                      "value": ""
+                    },
+                    {
+                      "id": "b3dff80e-e7d9-462c-aba4-117dde4da925",
+                      "label": "Custom Master Skill #6",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "<br>" },
+                      "value": ""
+                    },
+                    {
+                      "id": "db1df63e-df2f-47e0-b7cd-cdf6db3d81e7",
+                      "label": "Custom Master Skill #7",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "<br>" },
+                      "value": ""
+                    },
+                    {
+                      "id": "91c67317-b2dc-4445-83b4-ab92f008c541",
+                      "label": "Custom Master Skill #8",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "<br>" },
+                      "value": ""
+                    },
+                    {
+                      "id": "865453e2-4aa8-4932-8449-64981ceeffc0",
+                      "label": "Custom Master Skill #9",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "<br>" },
+                      "value": ""
+                    },
+                    {
+                      "id": "46328cde-f0c7-47d0-a2ce-61ab27494d86",
+                      "label": "Custom Master Skill #10",
+                      "type": "Text",
+                      "meta": { "checked": false, "helperText": "<br>" },
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Skills"
+    },
+    {
+      "id": "28a8c1e2-77dd-4c4c-aaaa-c805a2271d58",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5861f997-c473-46e5-bc00-679a2315701f",
+                  "label": "Inventory",
+                  "blocks": [
+                    {
+                      "id": "c1dbb895-c9b2-4319-83d2-5fd7fb4a4fde",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": {}
+                    },
+                    {
+                      "id": "fd9f5702-5ecb-4542-9273-98be8b55255c",
+                      "label": "Random Trinket",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "", "width": 0.5 }
+                    },
+                    {
+                      "id": "87fb2bff-2973-4a5f-bc3b-8af942cbf283",
+                      "label": "Random Patch",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "", "width": 0.5 }
+                    },
+                    {
+                      "id": "9dac69d5-554f-4d1c-bf65-65f2709d6b6e",
+                      "label": "Credits",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "Starting credits 5d10*10&nbsp;" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Equipment"
+    },
+    {
+      "id": "7adb0642-a3b2-4db0-84b2-42500b60e5bd",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "30a5e1f3-f415-410d-a95a-a99e9427e208",
+                  "label": "Notes",
+                  "blocks": [
+                    {
+                      "id": "896275b1-5623-42c7-9234-3a81783cb37c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "12b3d9c2-35df-402b-9326-939e5b9f6fda",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "bdcf5b2f-3177-43b6-8302-6b35a08e6960",
+                      "label": "Learn more and grab a full version at mothershiprpg.com",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": true },
+                      "value": "https://mothershiprpg.com/"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Misc"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "group": "Mothership RPG",
+  "wide": false
+}

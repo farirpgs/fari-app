@@ -1,9 +1,8 @@
+"use client";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import { Box, Container, useTheme } from "@mui/material";
-import React from "react";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useCanny } from "../../hooks/useCanny/useCanny";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -21,10 +20,6 @@ export function BugsRoute() {
 
   return (
     <Page sx={{ paddingTop: "2rem" }}>
-      <PageMeta
-        title={pageTitle}
-        description={t("bugs-route.meta.description")}
-      />
       <Heading
         icon={BugReportIcon}
         title={t("bugs-route.meta.title")}
@@ -38,5 +33,3 @@ export function BugsRoute() {
     </Page>
   );
 }
-
-export default BugsRoute;

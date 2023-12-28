@@ -1,11 +1,12 @@
 import { Box, useTheme } from "@mui/material";
 import { action } from "@storybook/addon-actions";
 import { Meta, Story } from "@storybook/react";
-import React from "react";
 import { CharacterCard } from "../lib/components/Scene/components/PlayerRow/CharacterCard/CharacterCard";
 import { Toolbox } from "../lib/components/Toolbox/Toolbox";
+import { CharacterTemplatesProvider } from "../lib/contexts/CharacterTemplatesContext/CharacterTemplatesContext";
 import { CharacterFactory } from "../lib/domains/character/CharacterFactory";
-import { ICharacterTemplate } from "../lib/domains/character/CharacterType";
+import { ICharacter } from "../lib/domains/character/types";
+import { dayJS } from "../lib/domains/dayjs/getDayJS";
 import {
   MiniThemeContext,
   useMiniTheme,
@@ -25,21 +26,27 @@ function StorybookCharacterCard(
 
   return (
     <>
-      <Toolbox
-        diceFabProps={{
-          onRoll: () => {},
+      <CharacterTemplatesProvider
+        value={{
+          templates: [],
         }}
-        hideDefaultRightActions={true}
-      />
-      <MiniThemeContext.Provider value={miniTheme}>
-        <CharacterCard
-          readonly={props.readonly}
-          characterSheet={props.characterSheet}
-          onCharacterDialogOpen={action("onCharacterDialogOpen") as any}
-          onRoll={() => {}}
+      >
+        <Toolbox
+          diceFabProps={{
+            onRoll: () => {},
+          }}
+          hideDefaultRightActions={true}
         />
-      </MiniThemeContext.Provider>
-      <Box mt="6rem" />
+        <MiniThemeContext.Provider value={miniTheme}>
+          <CharacterCard
+            readonly={props.readonly}
+            characterSheet={props.characterSheet}
+            onCharacterDialogOpen={action("onCharacterDialogOpen") as any}
+            onRoll={() => {}}
+          />
+        </MiniThemeContext.Provider>
+        <Box mt="6rem" />
+      </CharacterTemplatesProvider>
     </>
   );
 }
@@ -75,38 +82,33 @@ const Template: Story<IProps> = (args, context) => {
   );
 };
 
-export const FateCondensed = Template.bind({});
-(FateCondensed as any).loaders = [
-  async () => {
-    const template: ICharacterTemplate = {
-      fileName: "",
-      category: "",
-      importFunction: async () =>
-        import(
-          "../lib/domains/character/character-templates/Fate Condensed/Fate Condensed.json"
-        ),
+export const FateCondensed = makeCharacterSheetStory({
+  importPath:
+    "../public/character-templates/Fate Condensed/Fate Condensed.json",
+});
+
+export const Charge = makeCharacterSheetStory({
+  importPath: "../public/character-templates/Fari RPGs/Charge RPG.json",
+});
+
+function makeCharacterSheetStory({ importPath }: { importPath: string }) {
+  const story = Template.bind({});
+  (story as any).loaders = [
+    async () => {
+      const file = await import(importPath);
+      const character = await CharacterFactory.make({ json: file.default });
+      return { character: overrideCharacterDateForStorybook(character) };
+    },
+  ];
+  return story;
+
+  function overrideCharacterDateForStorybook(
+    character: ICharacter,
+  ): ICharacter {
+    return {
+      ...character,
+      id: "50fa2",
+      lastUpdated: dayJS("2021-01-01").unix(),
     };
-
-    const character = await CharacterFactory.make(template);
-
-    return { character };
-  },
-];
-
-export const Charge = Template.bind({});
-(Charge as any).loaders = [
-  async () => {
-    const template: ICharacterTemplate = {
-      fileName: "",
-      category: "",
-      importFunction: async () =>
-        import(
-          "../lib/domains/character/character-templates/Fari RPGs/Charge RPG.json"
-        ),
-    };
-
-    const character = await CharacterFactory.make(template);
-
-    return { character };
-  },
-];
+  }
+}

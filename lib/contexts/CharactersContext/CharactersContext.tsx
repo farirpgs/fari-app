@@ -1,9 +1,9 @@
 import React from "react";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
-import { ICharacterTemplate } from "../../domains/character/CharacterType";
 import { ICharacter } from "../../domains/character/types";
 import { getUnixFrom } from "../../domains/dayjs/getDayJS";
 import { useAppEntity } from "../../hooks/useAppEntity/useAppEntity";
+import { ICharacterTemplate } from "../../services/character-templates/ICharacterTemplate";
 
 export const CharactersContext = React.createContext<
   ReturnType<typeof useCharacters>
@@ -19,8 +19,14 @@ export function useCharacters(props?: { localStorage: Storage }) {
     onMigration: CharacterFactory.migrate,
   });
 
-  async function add(type: ICharacterTemplate): Promise<ICharacter> {
-    const newCharacter = await CharacterFactory.make(type);
+  async function add(props: {
+    template?: ICharacterTemplate;
+    json?: any;
+  }): Promise<ICharacter> {
+    const newCharacter = await CharacterFactory.make({
+      template: props.template,
+      json: props.json,
+    });
 
     entityManager.actions.setEntities((draft: Array<ICharacter>) => {
       return [newCharacter, ...draft];

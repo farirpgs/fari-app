@@ -4,7 +4,6 @@
 
   // List of extensions which should be recommended for users of this workspace.
   "recommendations": [
-    "bierner.comment-tagged-templates",
     "dbaeumer.vscode-eslint",
     "eamodio.gitlens",
     "yzhang.markdown-all-in-one",

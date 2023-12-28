@@ -1,12 +1,15 @@
 import { useTranslation, UseTranslationOptions } from "react-i18next";
 import { ITranslationKeys } from "../../locale";
+
+import { serverSideTranslations } from "../../../app/i18n";
 import {
   IPossibleLanguages,
   PossibleLanguages,
-} from "../../services/internationalization/InternationalizationService";
+} from "../../contexts/AppI18nContext/AppI18nContext";
 
 export function useTranslate() {
   const { t, i18n } = useTranslation();
+
   const currentLanguage = getCurrentLanguage();
 
   return {
@@ -16,6 +19,10 @@ export function useTranslate() {
       options?: UseTranslationOptions<""> & Record<string, string>,
       noFallback: boolean = false,
     ): string => {
+      if (currentLanguage === "en") {
+        return serverSideTranslations(key);
+      }
+
       const value = t(key, options);
       const englishValue = i18n.t(key, {
         ...options,
@@ -41,6 +48,9 @@ export function useTranslate() {
   };
 
   function getCurrentLanguage() {
+    if (!i18n.language) {
+      return "en";
+    }
     const [sanitizedLanguage] = i18n.language.split("-");
 
     return PossibleLanguages.includes(i18n.language as IPossibleLanguages)

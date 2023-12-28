@@ -7,9 +7,11 @@ import { useStorageEntity } from "../../hooks/useStorageEntities/useStorageEntit
 
 type IThemeMode = "dark" | "light" | undefined;
 
+const storage = typeof window !== "undefined" ? window.localStorage : undefined;
+
 const oldDarkThemeLocalStorageKey = "prefers-dark-mode";
 const oldDarkThemeLocalStorageValue =
-  localStorage?.getItem(oldDarkThemeLocalStorageKey) === "true";
+  storage?.getItem(oldDarkThemeLocalStorageKey) === "true";
 
 export function useSettings() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -20,28 +22,28 @@ export function useSettings() {
   const [themeMode, setThemeMode] = useStorageEntity<IThemeMode>({
     defaultValue: oldDarkThemeLocalStorageValue ? "dark" : "light",
     key: "fari-theme",
-    localStorage: window.localStorage,
+    localStorage: storage,
   });
   const [userId] = useStorageEntity<string>({
     defaultValue: Id.generate(),
     key: "fari-user-id",
-    localStorage: window.localStorage,
+    localStorage: storage,
   });
   const [userName, setUserName] = useStorageEntity<string>({
     defaultValue: "",
     key: "fari-user-name",
-    localStorage: window.localStorage,
+    localStorage: storage,
   });
   const [gameTemplate, setGameTemplate] = useStorageEntity<string>({
     defaultValue: "",
     key: "fari-game-template",
-    localStorage: window.localStorage,
+    localStorage: storage,
   });
   const [diceCommandIds, setDiceCommandsIds] =
     useStorageEntity<Array<IDiceCommandId> | null>({
       defaultValue: null,
       key: "fari-dice-command-ids",
-      localStorage: window.localStorage,
+      localStorage: storage,
     });
 
   const [blocksInClipboard, setBlocksInClipboard] = useStorageEntity<
@@ -49,7 +51,7 @@ export function useSettings() {
   >({
     defaultValue: [],
     key: "fari-blocks-in-clipboard",
-    localStorage: window.localStorage,
+    localStorage: storage,
   });
 
   useEffect(() => {

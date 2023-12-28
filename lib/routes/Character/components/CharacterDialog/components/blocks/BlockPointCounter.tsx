@@ -224,6 +224,7 @@ export const BlockPointCounter = React.memo(
     );
   },
 );
+
 BlockPointCounter.displayName = "BlockPointCounter";
 
 export function BlockPointCounterActions(
@@ -277,5 +278,3 @@ export function BlockPointCounterActions(
     </>
   );
 }
-
-BlockPointCounterActions.displayName = "BlockPointCounterActions";

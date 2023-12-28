@@ -5,22 +5,12 @@ import {
   Link as MaterialUILink,
   useTheme,
 } from "@mui/material";
+import NextJSLink, { LinkProps as NextJSLinkProps } from "next/link";
 import React from "react";
-import {
-  Link as ReactRouterLink,
-  LinkProps as ReactRouterLinkProps,
-} from "react-router-dom";
 
-type IProps = {
-  to?: string;
-  onClick?(event: React.MouseEvent<HTMLAnchorElement>): void;
-};
-
-export const AppLink: React.FC<
-  Omit<ReactRouterLinkProps, "to"> & Omit<MUILinkProps, "to"> & IProps
-> = (props) => {
-  const { to = "", onClick, sx, ...rest } = props;
-  const isInternal = to.startsWith("/");
+export const AppLink: React.FC<MUILinkProps & NextJSLinkProps> = (props) => {
+  const { href = "", onClick, sx, ...rest } = props;
+  const isInternal = href?.startsWith("/");
   const theme = useTheme();
 
   const style = {
@@ -38,8 +28,8 @@ export const AppLink: React.FC<
   if (isInternal) {
     return (
       <MaterialUILink
-        to={to}
-        component={ReactRouterLink}
+        href={href}
+        component={NextJSLink}
         onClick={(event: React.MouseEvent<HTMLAnchorElement>) => {
           if (onClick) {
             event.preventDefault();
@@ -58,7 +48,7 @@ export const AppLink: React.FC<
 
   return (
     <MaterialUILink
-      href={to as string}
+      href={href}
       component={"a"}
       sx={style}
       rel={props.target === "_blank" ? "noreferrer" : undefined}
@@ -78,18 +68,18 @@ export const AppLink: React.FC<
 
 export const AppButtonLink = React.forwardRef<
   any,
-  ReactRouterLinkProps & ButtonProps
+  ButtonProps<"a"> & NextJSLinkProps
 >((props, ref) => {
-  const isInternal = (props.to as string).startsWith("/");
+  const isInternal = (props.href as string)?.startsWith("/");
 
   if (isInternal) {
     return (
       <Button
         {...props}
-        to={props.to}
-        component={ReactRouterLink}
+        href={props.href}
+        LinkComponent={NextJSLink}
         ref={ref}
-        rel={props.target === "_blank" ? "noreferrer" : undefined}
+        rel={props.rel}
       >
         {props.children}
       </Button>
@@ -99,15 +89,16 @@ export const AppButtonLink = React.forwardRef<
   return (
     <Button
       {...props}
-      href={props.to as string}
-      component={"a"}
+      href={props.href as string}
+      LinkComponent={"a"}
       ref={ref}
-      rel={props.target === "_blank" ? "noreferrer" : undefined}
+      rel={props.rel}
     >
       {props.children}
     </Button>
   );
 });
+AppButtonLink.displayName = "AppButtonLink";
 
 export const MUILink = MaterialUILink;
-export const RouterLink = ReactRouterLink;
+export const RouterLink = NextJSLink;

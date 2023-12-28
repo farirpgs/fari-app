@@ -22,4 +22,3 @@ export const AddSection: React.FC<{
     </Box>
   );
 };
-AddSection.displayName = "AddSection";

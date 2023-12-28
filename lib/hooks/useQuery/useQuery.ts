@@ -1,12 +1,7 @@
-import { useLocation } from "react-router";
+import { useSearchParams } from "next/navigation";
 
 export function useQuery<TKeys extends string>() {
-  const routeLocation = useLocation();
-  const urlSearchParams = new URLSearchParams(routeLocation.search);
+  const searchParams = useSearchParams();
 
-  return {
-    get(key: TKeys) {
-      return urlSearchParams.get(key);
-    },
-  };
+  return searchParams;
 }

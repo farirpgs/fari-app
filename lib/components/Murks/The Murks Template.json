@@ -1,1 +1,500 @@
-{"lastUpdated":1694111299,"name":"The Murk Template","pages":[{"id":"f085783b-19ee-4cc8-9a78-dcd3e1dcb626","label":"Character","rows":[{"columns":[{"sections":[{"id":"ad942632-6e8c-4e9d-ad99-95bd49fb7ac7","label":"","blocks":[{"id":"c92b9c39-c766-4bec-a8ba-2968f146998d","label":"Actor Name","type":"Text","value":"","meta":{}},{"id":"67275e78-123d-440c-a306-29b8455f8cc3","label":"Portrait","type":"Image","meta":{},"value":""}]},{"id":"bc8c6b93-881f-49bc-91ab-34d8497bfc24","label":"Information","blocks":[{"id":"534c8eb8-515f-46be-9c4b-dfce12c6205f","label":"Homeland","type":"Text","value":"","meta":{}},{"id":"f1e847c0-9e08-4443-9d2a-d72bb18fbfc1","label":"Concept","type":"Text","value":"","meta":{}},{"id":"cf51f233-5256-4163-a37b-5aa69809f5d9","label":"Archetype","type":"Text","value":"","meta":{}}],"visibleOnCard":false},{"id":"171ee81d-110a-4122-aa1a-a4c400f6de4b","label":"Attributes","blocks":[{"id":"93bbf7f2-f902-4f1a-9d28-e1a97e8b5d9f","label":"Body","type":"DicePool","value":"","meta":{"commands":null,"width":0.33}},{"id":"817a509a-6bb7-4cc6-bf60-3d70c1d43f2b","label":"Mind","type":"DicePool","value":"","meta":{"commands":null,"width":0.33}},{"id":"eceed0f4-1ac3-464e-9a71-b0b842952ec2","label":"Spirit","type":"DicePool","value":"","meta":{"commands":null,"width":0.33}},{"id":"39dc61ed-a95b-463f-bb1f-302c93a2d7ab","label":"Initiative","type":"DicePool","value":"","meta":{"commands":null,"width":0.5}},{"id":"fcaf3d67-52c9-42fa-b352-57ba04056048","label":"Wealth","type":"DicePool","value":"","meta":{"commands":null,"width":0.5}},{"id":"37296a1b-c0c6-41da-8727-3b4dfe091db1","label":"Faith","type":"DicePool","value":"","meta":{"commands":null,"checked":false,"width":0.5}},{"id":"3510aa45-4ffe-42b0-9aeb-c3c47260433a","label":"Esoteria","type":"DicePool","value":"","meta":{"commands":null,"checked":false,"width":0.5}}]}]},{"sections":[{"id":"30d20c91-4900-4c12-a2e5-cffe98ee7ca6","label":"Injury Tracks","blocks":[{"id":"95c7bd70-ca27-4f46-a3ca-7159ec3654af","label":"Potential","type":"Numeric","value":"","meta":{"width":0.33}},{"id":"14d2e7b9-84b1-4ecc-a672-1822d89fa112","label":"Suffering","type":"Numeric","value":"","meta":{"width":0.33}},{"id":"85ece356-9079-4428-be4e-8525097b4f35","label":"XP","type":"Numeric","value":"","meta":{"width":0.33}},{"id":"ab36b0fc-2d08-4d7e-96fe-6a25b46d17ff","label":"Damage","type":"DicePool","value":"","meta":{"commands":[],"helperText":"Body + Armor","width":0.5}},{"id":"6b46ea29-74c5-4176-83f0-1cf7fb39621a","label":"Current","type":"Numeric","value":"","meta":{"width":0.5}},{"id":"f7957c1b-05c6-4c01-ac39-158b8b578016","label":"Stress","type":"DicePool","value":"","meta":{"commands":null,"helperText":"Equal to Mind Stat at base","width":0.5}},{"id":"bbc9be0c-c3e7-49a8-a455-f3ad91060916","label":"Current","type":"Numeric","value":"","meta":{"width":0.5}},{"id":"7b31bc20-df6f-4f03-b8fc-8310aa00b63c","label":"Exhaustion","type":"DicePool","value":"","meta":{"commands":null,"helperText":"Equal to Spirit Stat at base","width":0.5}},{"id":"36b43cc9-94ad-456b-81b8-1203e695dd6a","label":"Current","type":"Numeric","value":"","meta":{"width":0.5}}]},{"id":"8016dc45-456c-4b3f-8c19-f1fd01afc6f9","label":"","blocks":[{"id":"ad047a5f-7d31-4d2c-8d3b-27caef005eef","label":"Talents and Traits","type":"Text","value":"","meta":{}}]},{"id":"7ab39e4a-3937-478a-8d88-aedcd2e072c9","label":"Links and Credits","blocks":[{"id":"db370d9d-071b-4eb9-b53d-2c995b08ee4c","label":"SRD Link","type":"Link","meta":{"hasDisplayName":true,"helperText":""},"value":"https://fari.community/creators/13th-hour-games/projects/the-murk"},{"id":"f3755972-7227-458f-a9f6-2743aeb35470","label":"Join The Murk on Discord","type":"Link","meta":{"hasDisplayName":true},"value":"https://discord.gg/N48V7zBNju"},{"id":"9f8e6596-0408-4c5e-8937-7379ee21118b","label":"Info Text","type":"InfoText","value":"This Template and The Murk RPG are creations of Nick Bragg of 13th Hour Games.&nbsp;","meta":{}}]}]}]}]},{"id":"5eaf1e47-e576-4ae9-84c7-caee724fff7e","rows":[{"columns":[{"sections":[{"id":"2ce9ea65-56e8-4ff7-8103-1a8d48c3bdbc","label":"Weaponry","blocks":[{"id":"7fbf1a71-79aa-404f-8dfe-889b50a8bee2","label":"Name","type":"Text","value":"","meta":{"width":0.66}},{"id":"46a3f802-4629-4e45-a203-9382bf46e8e7","label":"Damage","type":"Numeric","value":"","meta":{"width":0.33}},{"id":"7891e499-80c1-4ef1-ba45-a484159b30d3","type":"Text","value":"","meta":{"width":0.66}},{"id":"88b6c70c-5a46-4490-bde7-294251494a43","label":"Damage","type":"Numeric","value":"","meta":{"width":0.33}},{"id":"a7d49269-f81b-4041-9aa3-6b6e12ed879a","type":"Text","value":"","meta":{"width":0.66}},{"id":"1d18a631-1c5e-48d2-abe9-e97afaf77414","label":"Damage","type":"Numeric","value":"","meta":{"width":0.33}}]},{"id":"156a71f7-eeea-49d3-94b7-445a26957d01","label":"Equipment","blocks":[{"id":"69cd14b8-921c-40ea-bc96-62023f047f18","label":"","type":"Text","value":"","meta":{"width":1}}]}]},{"sections":[{"id":"109d43c5-cdb2-41f7-bda6-5c508aaf6f83","label":"Armory","blocks":[{"id":"4bf93184-6e06-4641-8e7d-0fc0a63c9382","label":"Name","type":"Text","value":"","meta":{"width":0.33}},{"id":"e30e14c2-48f1-41d4-bdf4-e4e848b245d8","label":"Type","type":"Text","value":"","meta":{"width":0.33}},{"id":"7be94953-a979-42bf-8f0e-7d69b55b328c","type":"Text","value":"","meta":{"width":0.33},"label":"Dice"}]},{"id":"1eed9e13-72c1-4a0d-940b-ae0d1db31acf","label":"Notes","blocks":[{"id":"cb9e467c-ef64-499f-af35-0d4ce9635f88","type":"Text","value":"","meta":{}}]}]}]}],"label":"Conflict"},{"id":"ad871eff-e23d-493c-a2fd-04bd40e76139","rows":[{"columns":[{"sections":[{"id":"70112312-2cf2-4b9c-bc7a-0a2af73e9ea3","label":"Faith","blocks":[{"id":"7a321695-dba8-4c7c-b1e0-034306cc13c4","label":"Chosen God","type":"Text","value":"","meta":{}},{"id":"063663ce-8916-4869-aaa0-fc1313829391","label":"Tenets and Sins","type":"Text","value":"","meta":{}}]}]},{"sections":[{"id":"db113d83-ed67-455c-8dc3-117e070e154a","label":"Section","blocks":[{"id":"e3fe0fb6-1c5e-4967-92b7-8fc57334f850","label":"Notes of Faith","type":"Text","value":"","meta":{}},{"id":"1f5aaedd-3500-4c00-8acb-41daef365082","label":"Miracles Performed","type":"Text","value":"","meta":{}}]}]}]}],"label":"Faith"},{"id":"3d49e1d0-5d05-4d4b-838f-09b03a2310a4","rows":[{"columns":[{"sections":[{"id":"667752ff-22f7-47e4-973e-1e096f941c21","label":"Esoteria","blocks":[{"id":"3b6b09e3-9fd1-40c9-a968-c93749dd7b10","label":"Circle of Power(Location and Rank)","type":"Text","value":"","meta":{}},{"id":"1e800709-3e15-4607-9d7d-ccbc22a92700","label":"Contacts","type":"Text","value":"","meta":{}}]}]},{"sections":[{"id":"6ab6c01a-6ddc-4c5b-b77b-6f949c9f3578","label":"Section","blocks":[{"id":"8ca9f434-3898-4388-8ecf-035c0cfb3fe1","label":"Daemons and Spirits ","type":"Text","value":"","meta":{}},{"id":"43eb193e-bce7-472e-85bc-1e6ec09e6d15","label":"Items","type":"Text","value":"","meta":{}}]}]}]}],"label":"Esoteria"}],"template":"Blank","version":6,"wide":false,"theme":{"sectionHeadingFontSize":0.5,"backgroundColor":"#000000","sectionHeadingFontWeight":"","labelFontSize":0.75,"labelFontWeight":"bolder"},"playedDuringTurn":false,"fariType":"character"}
+{
+  "lastUpdated": 1694111299,
+  "name": "The Murk Template",
+  "pages": [
+    {
+      "id": "f085783b-19ee-4cc8-9a78-dcd3e1dcb626",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "ad942632-6e8c-4e9d-ad99-95bd49fb7ac7",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "c92b9c39-c766-4bec-a8ba-2968f146998d",
+                      "label": "Actor Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "67275e78-123d-440c-a306-29b8455f8cc3",
+                      "label": "Portrait",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "bc8c6b93-881f-49bc-91ab-34d8497bfc24",
+                  "label": "Information",
+                  "blocks": [
+                    {
+                      "id": "534c8eb8-515f-46be-9c4b-dfce12c6205f",
+                      "label": "Homeland",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "f1e847c0-9e08-4443-9d2a-d72bb18fbfc1",
+                      "label": "Concept",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "cf51f233-5256-4163-a37b-5aa69809f5d9",
+                      "label": "Archetype",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ],
+                  "visibleOnCard": false
+                },
+                {
+                  "id": "171ee81d-110a-4122-aa1a-a4c400f6de4b",
+                  "label": "Attributes",
+                  "blocks": [
+                    {
+                      "id": "93bbf7f2-f902-4f1a-9d28-e1a97e8b5d9f",
+                      "label": "Body",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": null, "width": 0.33 }
+                    },
+                    {
+                      "id": "817a509a-6bb7-4cc6-bf60-3d70c1d43f2b",
+                      "label": "Mind",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": null, "width": 0.33 }
+                    },
+                    {
+                      "id": "eceed0f4-1ac3-464e-9a71-b0b842952ec2",
+                      "label": "Spirit",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": null, "width": 0.33 }
+                    },
+                    {
+                      "id": "39dc61ed-a95b-463f-bb1f-302c93a2d7ab",
+                      "label": "Initiative",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": null, "width": 0.5 }
+                    },
+                    {
+                      "id": "fcaf3d67-52c9-42fa-b352-57ba04056048",
+                      "label": "Wealth",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": { "commands": null, "width": 0.5 }
+                    },
+                    {
+                      "id": "37296a1b-c0c6-41da-8727-3b4dfe091db1",
+                      "label": "Faith",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": null,
+                        "checked": false,
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "3510aa45-4ffe-42b0-9aeb-c3c47260433a",
+                      "label": "Esoteria",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": null,
+                        "checked": false,
+                        "width": 0.5
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "30d20c91-4900-4c12-a2e5-cffe98ee7ca6",
+                  "label": "Injury Tracks",
+                  "blocks": [
+                    {
+                      "id": "95c7bd70-ca27-4f46-a3ca-7159ec3654af",
+                      "label": "Potential",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "14d2e7b9-84b1-4ecc-a672-1822d89fa112",
+                      "label": "Suffering",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "85ece356-9079-4428-be4e-8525097b4f35",
+                      "label": "XP",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "ab36b0fc-2d08-4d7e-96fe-6a25b46d17ff",
+                      "label": "Damage",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": [],
+                        "helperText": "Body + Armor",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "6b46ea29-74c5-4176-83f0-1cf7fb39621a",
+                      "label": "Current",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "f7957c1b-05c6-4c01-ac39-158b8b578016",
+                      "label": "Stress",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": null,
+                        "helperText": "Equal to Mind Stat at base",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "bbc9be0c-c3e7-49a8-a455-f3ad91060916",
+                      "label": "Current",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "7b31bc20-df6f-4f03-b8fc-8310aa00b63c",
+                      "label": "Exhaustion",
+                      "type": "DicePool",
+                      "value": "",
+                      "meta": {
+                        "commands": null,
+                        "helperText": "Equal to Spirit Stat at base",
+                        "width": 0.5
+                      }
+                    },
+                    {
+                      "id": "36b43cc9-94ad-456b-81b8-1203e695dd6a",
+                      "label": "Current",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    }
+                  ]
+                },
+                {
+                  "id": "8016dc45-456c-4b3f-8c19-f1fd01afc6f9",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "ad047a5f-7d31-4d2c-8d3b-27caef005eef",
+                      "label": "Talents and Traits",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "7ab39e4a-3937-478a-8d88-aedcd2e072c9",
+                  "label": "Links and Credits",
+                  "blocks": [
+                    {
+                      "id": "db370d9d-071b-4eb9-b53d-2c995b08ee4c",
+                      "label": "SRD Link",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": true, "helperText": "" },
+                      "value": "https://fari.community/creators/13th-hour-games/projects/the-murk"
+                    },
+                    {
+                      "id": "f3755972-7227-458f-a9f6-2743aeb35470",
+                      "label": "Join The Murk on Discord",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": true },
+                      "value": "https://discord.gg/N48V7zBNju"
+                    },
+                    {
+                      "id": "9f8e6596-0408-4c5e-8937-7379ee21118b",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "This Template and The Murk RPG are creations of Nick Bragg of 13th Hour Games.&nbsp;",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5eaf1e47-e576-4ae9-84c7-caee724fff7e",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2ce9ea65-56e8-4ff7-8103-1a8d48c3bdbc",
+                  "label": "Weaponry",
+                  "blocks": [
+                    {
+                      "id": "7fbf1a71-79aa-404f-8dfe-889b50a8bee2",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "46a3f802-4629-4e45-a203-9382bf46e8e7",
+                      "label": "Damage",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "7891e499-80c1-4ef1-ba45-a484159b30d3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "88b6c70c-5a46-4490-bde7-294251494a43",
+                      "label": "Damage",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "a7d49269-f81b-4041-9aa3-6b6e12ed879a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "1d18a631-1c5e-48d2-abe9-e97afaf77414",
+                      "label": "Damage",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                },
+                {
+                  "id": "156a71f7-eeea-49d3-94b7-445a26957d01",
+                  "label": "Equipment",
+                  "blocks": [
+                    {
+                      "id": "69cd14b8-921c-40ea-bc96-62023f047f18",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "109d43c5-cdb2-41f7-bda6-5c508aaf6f83",
+                  "label": "Armory",
+                  "blocks": [
+                    {
+                      "id": "4bf93184-6e06-4641-8e7d-0fc0a63c9382",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "e30e14c2-48f1-41d4-bdf4-e4e848b245d8",
+                      "label": "Type",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "7be94953-a979-42bf-8f0e-7d69b55b328c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 },
+                      "label": "Dice"
+                    }
+                  ]
+                },
+                {
+                  "id": "1eed9e13-72c1-4a0d-940b-ae0d1db31acf",
+                  "label": "Notes",
+                  "blocks": [
+                    {
+                      "id": "cb9e467c-ef64-499f-af35-0d4ce9635f88",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Conflict"
+    },
+    {
+      "id": "ad871eff-e23d-493c-a2fd-04bd40e76139",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "70112312-2cf2-4b9c-bc7a-0a2af73e9ea3",
+                  "label": "Faith",
+                  "blocks": [
+                    {
+                      "id": "7a321695-dba8-4c7c-b1e0-034306cc13c4",
+                      "label": "Chosen God",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "063663ce-8916-4869-aaa0-fc1313829391",
+                      "label": "Tenets and Sins",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "db113d83-ed67-455c-8dc3-117e070e154a",
+                  "label": "Section",
+                  "blocks": [
+                    {
+                      "id": "e3fe0fb6-1c5e-4967-92b7-8fc57334f850",
+                      "label": "Notes of Faith",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1f5aaedd-3500-4c00-8acb-41daef365082",
+                      "label": "Miracles Performed",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Faith"
+    },
+    {
+      "id": "3d49e1d0-5d05-4d4b-838f-09b03a2310a4",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "667752ff-22f7-47e4-973e-1e096f941c21",
+                  "label": "Esoteria",
+                  "blocks": [
+                    {
+                      "id": "3b6b09e3-9fd1-40c9-a968-c93749dd7b10",
+                      "label": "Circle of Power(Location and Rank)",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1e800709-3e15-4607-9d7d-ccbc22a92700",
+                      "label": "Contacts",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "6ab6c01a-6ddc-4c5b-b77b-6f949c9f3578",
+                  "label": "Section",
+                  "blocks": [
+                    {
+                      "id": "8ca9f434-3898-4388-8ecf-035c0cfb3fe1",
+                      "label": "Daemons and Spirits ",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "43eb193e-bce7-472e-85bc-1e6ec09e6d15",
+                      "label": "Items",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Esoteria"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": false,
+  "theme": {
+    "sectionHeadingFontSize": 0.5,
+    "backgroundColor": "#000000",
+    "sectionHeadingFontWeight": "",
+    "labelFontSize": 0.75,
+    "labelFontWeight": "bolder"
+  },
+  "playedDuringTurn": false,
+  "fariType": "character"
+}

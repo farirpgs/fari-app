@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   Button,
@@ -19,7 +20,6 @@ import React, { useContext, useMemo, useRef, useState } from "react";
 import { previewContentEditable } from "../../components/ContentEditable/ContentEditable";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { SplitButton } from "../../components/SplitButton/SplitButton";
 import { Delays } from "../../constants/Delays";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
@@ -321,10 +321,6 @@ export const DataRoute: React.FC = () => {
 
   return (
     <Page sx={{ paddingTop: "2rem" }}>
-      <PageMeta
-        title={t("data-route.meta.title")}
-        description={t("data-route.meta.description")}
-      />
       <Heading
         title={t("data-route.meta.title")}
         subtitle={t("data-route.meta.description")}
@@ -561,5 +557,3 @@ export const DataRoute: React.FC = () => {
     </Page>
   );
 };
-
-export default DataRoute;

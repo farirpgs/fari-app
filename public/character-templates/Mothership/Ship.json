@@ -1,0 +1,253 @@
+{
+  "fariType": "character",
+  "lastUpdated": 1674782670,
+  "name": "Mothership RPG Ship Template",
+  "pages": [
+    {
+      "id": "2192e388-08f4-4401-84a8-bdbe0bf62425",
+      "label": "Main",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "2a0ecebe-b755-490a-a45a-276a2206e374",
+                  "label": "General",
+                  "blocks": [
+                    {
+                      "id": "0ef38cf5-aef5-4f46-88ac-f96c71cdcdeb",
+                      "label": "Ship Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "6f1ce2b0-1e06-4fd3-82d4-a2b2c08b921f",
+                      "label": "Type",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "12a9ca19-8795-4ecf-a489-fea91ba3364d",
+                      "label": "Class",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "90428949-1695-4fa7-9e56-c665a707cc67",
+                      "label": "Hull",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "0",
+                        "isMainPointCounter": false,
+                        "width": 0.5
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "eb794972-3bde-40b8-9b41-0dde7f51544d",
+                      "label": "Damage",
+                      "type": "SlotTracker",
+                      "meta": { "asClock": false, "width": 0.5 },
+                      "value": [
+                        { "label": "25%", "checked": false },
+                        { "label": "50%", "checked": false },
+                        { "label": "75%", "checked": false }
+                      ]
+                    }
+                  ],
+                  "visibleOnCard": true
+                },
+                {
+                  "id": "5112e0da-aafe-496c-a71e-cfbaa256c8ed",
+                  "label": "Stats",
+                  "blocks": [
+                    {
+                      "id": "4a53dd2d-bf38-4dca-8d63-94e367760be3",
+                      "label": "Armor",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d100"], "width": 0.5 }
+                    },
+                    {
+                      "id": "45fb952e-4897-43eb-bf70-f9d7f0d73989",
+                      "label": "Combat",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d100"], "width": 0.5 }
+                    },
+                    {
+                      "id": "493047c8-b108-4c25-b6ec-484e1ec749c2",
+                      "label": "Intellect",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d100"], "width": 0.5 }
+                    },
+                    {
+                      "id": "d08d902b-915f-4e51-a8ee-2bdbc7da7314",
+                      "label": "Speed",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": { "commands": ["1d100"], "width": 0.5 }
+                    },
+                    {
+                      "id": "5f1bc9bd-a948-4268-bab5-b54e618592bc",
+                      "label": "Weapons",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "Weapon/Damage" }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2143bd52-9232-4117-bad1-4492bf2f9646",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "17138f90-d6cf-403f-9934-ebb8fc343275",
+                  "label": "Cargo Manifest",
+                  "blocks": [
+                    {
+                      "id": "f4f015d3-b407-4a14-aa5f-3f06845df9d6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "1660071b-e51d-4cbe-bab3-93638926d732",
+                      "label": "Max Fuel",
+                      "type": "PointCounter",
+                      "meta": { "max": "0", "isMainPointCounter": false },
+                      "value": "0"
+                    },
+                    {
+                      "id": "e81e88d0-ac79-432b-9f40-af9ecd0e95f5",
+                      "label": "Cost",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "0013fad6-ec8a-4143-9738-af2ea8094eea",
+                      "label": "Owed",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Cargo"
+    },
+    {
+      "id": "5b4db2c8-bd99-42e2-9b3f-1b8963a5ceff",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "93da5325-ea1d-4534-9bd0-11646d8168e0",
+                  "label": "Officers",
+                  "blocks": [
+                    {
+                      "id": "72cd6108-7ae6-46d5-8e0f-2e297a9ce5c8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "Name/Rank" }
+                    },
+                    {
+                      "id": "61d56603-22d1-4cd2-b7f0-a9d4eb7c45a0",
+                      "label": "Galley Stock",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "0",
+                        "isMainPointCounter": false,
+                        "width": 0.5
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "8cf802b4-cfe4-463a-a921-d8afe6c68e85",
+                      "label": "Total Crew",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "0",
+                        "isMainPointCounter": false,
+                        "width": 0.5
+                      },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Crew"
+    },
+    {
+      "id": "1b3a7004-269f-4580-bac7-310ea111cd74",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "00d54fd5-f57b-4a65-8ad8-431f71c0c92e",
+                  "label": "Layout",
+                  "blocks": [
+                    {
+                      "id": "f007a52f-ff19-4cb1-a69f-baafba14e4ad",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {
+                        "helperText": "Draw your ship's layout and drop here."
+                      },
+                      "value": ""
+                    },
+                    {
+                      "id": "ecab411f-e4d2-47cf-bfb5-2c3eb2ec5b99",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "7c8a9bb6-4126-4235-bccb-6ae3db4ee0ef",
+                      "label": "Learn more and grab the full version at mothershiprpg.com",
+                      "type": "Link",
+                      "meta": { "hasDisplayName": true, "helperText": "" },
+                      "value": "https://www.mothershiprpg.com/"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Misc"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "group": "Mothership RPG"
+}

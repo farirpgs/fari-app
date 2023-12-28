@@ -28,8 +28,8 @@ jobs:
         run: |
           CONTEXT=production bun run build
         env:
-          VITE_GITHUB_RUN_NUMBER: ${{github.run_number}}
-          VITE_GITHUB_SHA: ${{github.sha}}
+          NEXT_PUBLIC__GITHUB_RUN_NUMBER: ${{github.run_number}}
+          NEXT_PUBLIC__GITHUB_SHA: ${{github.sha}}
       # Validate
       - name: Validate
         run: bun run validate
@@ -38,8 +38,8 @@ jobs:
         uses: actions/upload-artifact@v1
         if: always()
         with:
-          name: dist
-          path: dist
+          name: .next
+          path: .next
   deploy-preview:
     needs: [build]
     runs-on: ubuntu-latest
@@ -63,8 +63,8 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@master
         with:
-          name: dist
-          path: dist
+          name: .next
+          path: .next
       # Deploy Preview
       - name: Deploy Preview
         run: bun run deploy:preview -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --alias $GITHUB_RUN_ID
@@ -90,8 +90,8 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@master
         with:
-          name: dist
-          path: dist
+          name: .next
+          path: .next
       # Deploy Production
       - name: Deploy Production
         run: bun run deploy:prod -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}}

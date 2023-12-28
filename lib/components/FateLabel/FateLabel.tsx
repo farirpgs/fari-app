@@ -30,4 +30,3 @@ export const FateLabel: React.FC<
     </Typography>
   );
 };
-FateLabel.displayName = "FateLabel";

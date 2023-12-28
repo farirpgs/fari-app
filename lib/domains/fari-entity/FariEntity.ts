@@ -5,7 +5,7 @@ const fariTypes = [
   "full",
 ] as const;
 
-export type IFariType = typeof fariTypes[number];
+export type IFariType = (typeof fariTypes)[number];
 
 type IFariEntity = {
   fariType: IFariType;
@@ -26,7 +26,7 @@ export const FariEntity = {
         try {
           if (!!event.target?.result) {
             const data = JSON.parse(
-              event.target.result.toString()
+              event.target.result.toString(),
             ) as IExportedFariEntity;
             const { fariType, ...entity } = data;
             if (fariType === props.fariType) {

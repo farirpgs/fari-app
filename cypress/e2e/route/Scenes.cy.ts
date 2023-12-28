@@ -37,7 +37,7 @@ describe("/scenes", () => {
       // aspect
       Fari.get("scene.aspect.4.title").type("Something weird is going on");
       Fari.find(Fari.get("scene.aspect.4"), "index-card.Text.value").type(
-        "There is no war in Ba Sing Se"
+        "There is no war in Ba Sing Se",
       );
 
       // remove second
@@ -67,7 +67,7 @@ describe("/scenes", () => {
       cy.contains("Ba Sing Se").should("not.exist");
 
       // should be back to home page
-      cy.url().should("eq", "http://localhost:1234/");
+      cy.url().should("eq", "http://localhost:3000/");
 
       // undo
       cy.contains("Undo").click();

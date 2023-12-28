@@ -6,7 +6,7 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   define: {
     "process.env.npm_package_version": JSON.stringify(
-      process.env.npm_package_version
+      process.env.npm_package_version,
     ),
     "process.env.JEST_WORKER_ID": JSON.stringify(false),
   },

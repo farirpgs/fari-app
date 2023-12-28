@@ -1,3 +1,4 @@
+"use client";
 import LoadingButton from "@mui/lab/LoadingButton";
 import {
   Box,
@@ -15,33 +16,30 @@ import {
 } from "@mui/material";
 import kebabCase from "lodash/kebabCase";
 import startCase from "lodash/startCase";
-import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useContext, useEffect, useState } from "react";
 import { Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { CharactersContext } from "../../contexts/CharactersContext/CharactersContext";
 import { CharacterFactory } from "../../domains/character/CharacterFactory";
-import {
-  CharacterTemplates,
-  ICharacterTemplate,
-} from "../../domains/character/CharacterType";
+
+import { useParams, useRouter } from "next/navigation";
+import { CharacterTemplatesContext } from "../../contexts/CharacterTemplatesContext/CharacterTemplatesContext";
 import { ICharacter } from "../../domains/character/types";
+import { ICharacterTemplate } from "../../services/character-templates/ICharacterTemplate";
 import { CharacterV3Dialog } from "../Character/components/CharacterDialog/CharacterV3Dialog";
 
 export function NewCharacterRoute() {
   const charactersManager = useContext(CharactersContext);
-  const navigate = useNavigate();
+  const router = useRouter();
   const [status, setStatus] = useState<"loading" | "success" | "error">(
     "loading",
   );
   const [template, setTemplate] = useState<ICharacterTemplate>();
-  const params = useParams<{
-    category: string;
-    name: string;
-  }>();
-  const templateCategoryLabel = startCase(params.category);
-  const templateNameLabel = startCase(params.name);
-
+  const params = useParams();
+  const categoryParam = params.category as string;
+  const nameParam = params.name as string;
+  const templateCategoryLabel = startCase(categoryParam);
+  const templateNameLabel = startCase(nameParam);
+  const characterTemplatesManager = useContext(CharacterTemplatesContext);
   const [loadingTemplate, setLoadingTemplate] = useState(false);
 
   const isLoading = status === "loading";
@@ -49,17 +47,17 @@ export function NewCharacterRoute() {
   useEffect(() => {
     load();
     async function load() {
-      const template = CharacterTemplates.find((t) => {
+      const template = characterTemplatesManager.templates.find((t) => {
         const categoryMatch =
-          kebabCase(t.category.toLowerCase()) ===
-          kebabCase(params.category?.toLowerCase());
+          kebabCase(t.publisher.toLowerCase()) ===
+          kebabCase(categoryParam?.toLowerCase());
         const nameMatch =
-          kebabCase(t.fileName.toLowerCase()) ===
-          kebabCase(params.name?.toLowerCase());
+          kebabCase(t.name.toLowerCase()) ===
+          kebabCase(nameParam?.toLowerCase());
         return categoryMatch && nameMatch;
       });
       if (template) {
-        const fake = await CharacterFactory.make(template);
+        const fake = await CharacterFactory.make({ template });
         setFakeCharacter(fake);
         setTemplate(template);
         setStatus("success");
@@ -70,25 +68,19 @@ export function NewCharacterRoute() {
   }, [params.category, params.name]);
   async function handleLoadTemplate() {
     setLoadingTemplate(true);
-    const newCharacter = await charactersManager.actions.add(
-      template as ICharacterTemplate,
-    );
-    navigate(`/characters/${newCharacter.id}`);
+    const newCharacter = await charactersManager.actions.add({
+      template: template as ICharacterTemplate,
+    });
+    router.push(`/characters/${newCharacter.id}`);
   }
   const [fakeCharacter, setFakeCharacter] = useState<ICharacter>();
 
   function handleCancel() {
-    navigate(`/`);
+    router.push(`/`);
   }
 
   return (
     <Page sx={{ paddingTop: "2rem" }}>
-      {template && (
-        <PageMeta
-          title={`Use the ${template?.fileName} character sheet template on Fari App`}
-          description={`Get started playing TTRPGs online with Fari App using this ${template?.fileName} template!`}
-        />
-      )}
       {isLoading && (
         <Fade in>
           <Container maxWidth="md">
@@ -124,7 +116,7 @@ export function NewCharacterRoute() {
               textAlign: "center",
             }}
           >
-            {`You're about to create a new character sheet using the "${template?.fileName}" template.`}
+            {`You're about to create a new character sheet using the "${template?.name}" template.`}
             <br />
             <br />
             {`Click "Use Template" to continue.`}
@@ -186,5 +178,3 @@ export function NewCharacterRoute() {
     </Page>
   );
 }
-
-export default NewCharacterRoute;

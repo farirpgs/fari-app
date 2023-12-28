@@ -1,6 +1,7 @@
 import { produce } from "immer";
+import { expect } from "vitest";
+import FateCondensed from "../../../public/character-templates/Fate Condensed/Fate Condensed.json";
 import { CharacterFactory } from "./CharacterFactory";
-import { DefaultTemplates } from "./DefaultTemplates";
 import { ComplexCharacter } from "./mocks/ComplexCharacter";
 import { Warden } from "./mocks/WardenLeMagane";
 import { IV1Character } from "./types";
@@ -654,9 +655,9 @@ describe("CharacterFactory.migrate", () => {
 
 describe("CharacterFactory.duplicate", () => {
   it("should reset the ids", async () => {
-    const defaultCharacter = await CharacterFactory.make(
-      DefaultTemplates.FateCondensed,
-    );
+    const defaultCharacter = await CharacterFactory.make({
+      json: FateCondensed,
+    });
 
     const characterWithFakeIds = produce(defaultCharacter, (draft) => {
       draft.id = "1";

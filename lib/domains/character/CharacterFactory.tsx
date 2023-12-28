@@ -1,9 +1,9 @@
 import { produce } from "immer";
+import { ICharacterTemplate } from "../../services/character-templates/ICharacterTemplate";
 import { Id } from "../Id/Id";
 import { getUnix } from "../dayjs/getDayJS";
 import { IDiceCommandId } from "../dice/Dice";
 import { Migrator } from "../migration/Migrator";
-import { ICharacterTemplate } from "./CharacterType";
 import {
   BlockType,
   IBlock,
@@ -32,8 +32,13 @@ import {
 
 export const CharacterFactory = {
   latestVersion: 4,
-  async make(template: ICharacterTemplate): Promise<ICharacter> {
-    const result = await template.importFunction();
+  async make(props: {
+    template?: ICharacterTemplate;
+    json?: any;
+  }): Promise<ICharacter> {
+    let result = props.template
+      ? await fetch(props.template.fetchPath).then((r) => r.json())
+      : props.json;
     const newCharacter = this.makeFromJson(result);
     const characterWithNewName = {
       ...newCharacter,

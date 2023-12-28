@@ -1,7 +1,6 @@
 import CircleIcon from "@mui/icons-material/Circle";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import { Checkbox } from "@mui/material";
-import React from "react";
 import {
   IBlock,
   IDicePoolBlock,
@@ -43,4 +42,3 @@ export function BlockToggleMeta<
     />
   );
 }
-BlockToggleMeta.displayName = "BlockToggleMeta";

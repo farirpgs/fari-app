@@ -1,4 +1,5 @@
 import { Box, Grid, Typography, useTheme } from "@mui/material";
+import Image from "next/image";
 import React from "react";
 import patreonImage from "../../../images/services/patreon.png";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
@@ -36,7 +37,12 @@ export const Patreon: React.FC = () => {
           justifyContent="center"
         >
           <Grid item>
-            <img width="16px" src={patreonImage} />
+            <Image
+              width={16}
+              height={16}
+              src={patreonImage.src}
+              alt={t("donation.patreon")}
+            />
           </Grid>
           <Grid item>
             <Typography

@@ -1,5 +1,4 @@
 import { Badge, Grid, IconButton, Typography, useTheme } from "@mui/material";
-import React from "react";
 import { DiceOptions, IDiceCommandId } from "../../../domains/dice/Dice";
 
 export function DiceButtons(props: {

@@ -1,9 +1,9 @@
+"use client";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+
 import { Box, Container, useTheme } from "@mui/material";
-import React from "react";
 import { Heading } from "../../components/Heading/Heading";
 import { Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useCanny } from "../../hooks/useCanny/useCanny";
 import { useTranslate } from "../../hooks/useTranslate/useTranslate";
 
@@ -21,10 +21,6 @@ export function FeatureRequestsRoute() {
 
   return (
     <Page sx={{ paddingTop: "2rem" }}>
-      <PageMeta
-        title={pageTitle}
-        description={t("feature-requests-route.meta.description")}
-      />
       <Heading
         icon={QuestionAnswerIcon}
         title={t("feature-requests-route.meta.title")}
@@ -38,5 +34,3 @@ export function FeatureRequestsRoute() {
     </Page>
   );
 }
-
-export default FeatureRequestsRoute;

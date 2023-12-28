@@ -62,6 +62,7 @@ export const ContentEditablePreview: React.FC<IPreviewContentEditableOptions> =
     });
     return <>{content}</>;
   });
+ContentEditablePreview.displayName = "ContentEditablePreview";
 
 export const ContentEditable: React.FC<
   {
@@ -94,11 +95,6 @@ export const ContentEditable: React.FC<
 
   useEffect(
     function shouldUpdateInnerHtml() {
-      console.log("shouldUpdateInnerHtml", {
-        propValue: props.value,
-        currentValue: latestHtml.current,
-        timeout: timeout.current,
-      });
       if ($ref.current) {
         if (!props.value && props.readonly) {
           $ref.current.innerHTML = "&nbsp;";
@@ -199,4 +195,3 @@ export const ContentEditable: React.FC<
     </>
   );
 };
-ContentEditable.displayName = "ContentEditable";

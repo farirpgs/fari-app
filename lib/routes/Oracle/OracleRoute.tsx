@@ -1,3 +1,4 @@
+"use client";
 import { Box, Button, Container, Paper, useTheme } from "@mui/material";
 
 import {
@@ -10,10 +11,9 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { Dice, ICommandResult } from "../../domains/dice/Dice";
 import { useEvent } from "../../hooks/useEvent/useEvent";
@@ -55,17 +55,10 @@ export const OracleRoute = () => {
 
   return (
     <Page sx={{ paddingTop: "2rem" }}>
-      <PageMeta
-        title={t("oracle-route.meta.title")}
-        description={t("oracle-route.meta.description")}
-      />
       <Oracle />
     </Page>
   );
 };
-
-OracleRoute.displayName = "OracleRoute";
-export default OracleRoute;
 
 export function Oracle() {
   const { t } = useTranslate();

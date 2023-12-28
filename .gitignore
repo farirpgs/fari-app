@@ -118,3 +118,7 @@ _site
 
 # storybook
 storybook-static
+
+# next
+out
+.next

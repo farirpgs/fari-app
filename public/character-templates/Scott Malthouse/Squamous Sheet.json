@@ -1,0 +1,399 @@
+{
+  "lastUpdated": 1676477977,
+  "name": "Squamous Sheet Template",
+  "pages": [
+    {
+      "id": "4ea90441-7ad8-4d5e-9d1d-e04154f04cc4",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "1a50c54e-6fcd-40b2-8af6-dc3389349944",
+                  "label": "Squamous - Character Sheet\n",
+                  "blocks": [
+                    {
+                      "id": "ab7943f1-0a74-4a14-9aa3-1b5132cba6ca",
+                      "label": "Character Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "b2d43cd4-21da-4319-bc6a-e90eae47a965",
+                      "label": "Class",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Private Investigator, Professor, Occultist, Soldier, Doctor<br>",
+                        "width": 0.33
+                      }
+                    },
+                    {
+                      "id": "c35d9692-b817-4f4f-b7f7-913e064505c4",
+                      "label": "Level",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "18c5acf2-e0e0-4e45-a2f2-0a8d1fad6c36",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "0237fb98-6eea-48ca-b621-80d0fca61512",
+                      "label": "Brawn",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "ffd7990c-f22c-41e8-8db9-5efd786ac47d",
+                      "label": "Nimble",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "b6dd3c63-5d70-43c4-98ff-af684fa30e3a",
+                      "label": "Mind",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "0192c585-0916-46f6-aa89-6b9b96ce5588",
+                      "label": "Person",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": { "width": 0.5 }
+                    },
+                    {
+                      "id": "9bd6cfd0-71ee-4923-b8c4-c77f76209fcc",
+                      "label": "Wounds",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "0",
+                        "isMainPointCounter": false,
+                        "width": 0.33
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "406abca0-fa3e-4757-874f-aa78a6dd260a",
+                      "label": "Lucidity",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "0",
+                        "isMainPointCounter": false,
+                        "width": 0.33
+                      },
+                      "value": "0"
+                    },
+                    {
+                      "id": "2cbd18d4-d631-4d3f-81eb-f4be38acffd7",
+                      "label": "Special Ability",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                },
+                {
+                  "id": "9861c1fd-672b-4a1d-b9b2-e579bdb46ad4",
+                  "label": "Resources",
+                  "blocks": [
+                    {
+                      "id": "8d067870-305b-4200-824d-df91f14045aa",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "Resource 1" }
+                    },
+                    {
+                      "id": "7e77ea4b-bf7c-423f-92f2-88f7594b937f",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "Resource 2" }
+                    },
+                    {
+                      "id": "5a80b41e-2777-4a8d-a984-282fd05e4cd7",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "Resource 3" }
+                    },
+                    {
+                      "id": "116ca613-9c17-43ec-b510-7c4a4c7b8c0e",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "Resource 4" }
+                    },
+                    {
+                      "id": "b5d5625c-fc6c-4c13-856b-4034f17ce133",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "Resource 5" }
+                    }
+                  ]
+                },
+                {
+                  "id": "8d3e7fe9-46b9-4034-b28a-03e3d78b1de4",
+                  "label": "Lucidity Effects",
+                  "blocks": [
+                    {
+                      "id": "4c799b1e-c79a-49e8-9976-53083ad5a496",
+                      "label": "Terrified",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "You won’t look at or interact with anything to do with the source that triggered the effect.<br>"
+                      }
+                    },
+                    {
+                      "id": "c5a63fa4-5d9b-4da7-a256-7bc2637254b1",
+                      "label": "Obsessed",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "You will intentionally endanger yourself and others in your obsession for the Mystery.<br>"
+                      }
+                    },
+                    {
+                      "id": "c391b6b5-db81-4edd-8049-2eaca1ec0e2d",
+                      "label": "Distracted",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "You are unable to find major clues and take a -2 to Mind Tests<br>"
+                      }
+                    },
+                    {
+                      "id": "e2e0d653-325c-48be-9906-18cffd0b66d6",
+                      "label": "Drained\n",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "You have grown weak. Take a -2 to Brawn Tests.<br>"
+                      }
+                    },
+                    {
+                      "id": "24edf991-3bc1-45b1-9bce-ecb177547367",
+                      "label": "Shaken\n",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "You have uncontrollable tremors. Take a -2 to Nimble Tests.<br>"
+                      }
+                    },
+                    {
+                      "id": "c7402a68-34a4-4c55-8154-881e80038770",
+                      "label": "Silent\n",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "You cannot communicate through speech or cast spells. Take a -2 to Person Tests.<br>"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "c17e7a93-dd4d-4be6-975a-b4efc7d0cc81",
+                  "label": "Status",
+                  "blocks": [
+                    {
+                      "id": "efba8fca-5cf7-4a56-9814-7769daa0e07f",
+                      "label": "Poisoned",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "Take 1 damage each turn."
+                      }
+                    },
+                    {
+                      "id": "a1f046b4-3caf-478e-8c4f-e6800231d356",
+                      "label": "Paralysed",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "Cannot move or act."
+                      }
+                    },
+                    {
+                      "id": "2b95e9aa-32a3-4dfc-a287-7721d3dc18e3",
+                      "label": "Stunned",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "Take a -1 to all rolls."
+                      }
+                    },
+                    {
+                      "id": "b499490f-a5c2-4075-8b62-03dcf7383b3e",
+                      "label": "Diseased\n",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "Take 1 damage each turn and -1 to all rolls."
+                      }
+                    },
+                    {
+                      "id": "3cd030ee-2f3e-4d2a-8b4d-db1f09d4f834",
+                      "label": "Prone\n",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "On the ground. Takes an action to stand. Attackers gain +1."
+                      }
+                    },
+                    {
+                      "id": "10e23fcf-f436-4976-a20d-ea14c7a13b9b",
+                      "label": "Frightened\n",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "Must move away from the source of the effect each turn."
+                      }
+                    },
+                    {
+                      "id": "1d0c4cf1-8f22-498b-bea7-f0c04a12a0d3",
+                      "label": "Pinned",
+                      "type": "Text",
+                      "meta": {
+                        "checked": false,
+                        "width": 0.33,
+                        "helperText": "Cannot move."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "6a355dd1-22d9-44f3-aeb5-6229a9f8d5a7",
+                  "label": "Magick",
+                  "blocks": [
+                    {
+                      "id": "166f7408-a555-48af-aca8-2f974e503fb9",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Spell name (Lucidity Cost), Effect"
+                      }
+                    },
+                    {
+                      "id": "a745477a-fcb1-4efa-ab45-dfd5ed2b822a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Spell name (Lucidity Cost), Effect"
+                      }
+                    },
+                    {
+                      "id": "51bea075-978f-474b-8abc-7da5b25aad9c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Spell name (Lucidity Cost), Effect"
+                      }
+                    },
+                    {
+                      "id": "b1e46061-616b-42d5-bcb1-047e329c7f2f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Spell name (Lucidity Cost), Effect"
+                      }
+                    },
+                    {
+                      "id": "fc4eff7c-d8a0-4934-ab36-c31eb01825a4",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Spell name (Lucidity Cost), Effect"
+                      }
+                    },
+                    {
+                      "id": "670a9f4b-dcbd-4c62-bb64-38b7aad9677e",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "helperText": "Spell name (Lucidity Cost), Effect"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9afc5db7-bcf0-4959-8240-05913119233f",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "160a51e1-59c4-42eb-aa0d-a1a1f722a089",
+                  "label": "Clues",
+                  "blocks": [
+                    {
+                      "id": "c7654342-a2ed-450c-8002-1aa9538b0d29",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "cb4afbe5-6498-4d8d-94fb-ed709943e344",
+                  "label": "Notes",
+                  "blocks": [
+                    {
+                      "id": "eba6b698-d4d3-475b-a1af-ee77e6ba21e8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "Notes and Clues"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "group": "Squamous-Scott Malthouse",
+  "wide": false,
+  "theme": {
+    "pageHeadingFontFamily": "Calibri",
+    "hideSectionBackground": false
+  },
+  "playedDuringTurn": false,
+  "fariType": "character"
+}

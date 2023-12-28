@@ -6,8 +6,6 @@ import {
 import React, { useEffect } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { HelmetProvider } from "react-helmet-async";
-import { BrowserRouter } from "react-router-dom";
 import {
   CharactersContext,
   useCharacters,
@@ -38,19 +36,7 @@ export function StoryProvider(props: {
   const settingsManager = useSettings();
   const charactersManager = useCharacters();
   const scenesManager = useScenes();
-  const diceManager = useDice({
-    // defaultCommands: settingsManager.state.diceCommandIds,
-    // defaultOptions: {
-    //   listResults: false,
-    // },
-    // onCommandSetsChange(commandSetOptions) {
-    //   const commandSetIds = commandSetOptions.map((l) => l.id);
-    //   settingsManager.actions.setDiceCommandsIds(commandSetIds);
-    // },
-    // onOptionsChange: (options) => {
-    //   settingsManager.actions.setDiceOptions(options);
-    // },
-  });
+  const diceManager = useDice();
 
   useEffect(() => {
     settingsManager.actions.setThemeMode(props.theme);
@@ -73,9 +59,7 @@ export function StoryProvider(props: {
                       }
                     >
                       <CssBaseline />
-                      <BrowserRouter>
-                        <HelmetProvider>{props.children}</HelmetProvider>
-                      </BrowserRouter>
+                      {props.children}
                     </ThemeProvider>
                   </StyledEngineProvider>
                 </DiceContext.Provider>

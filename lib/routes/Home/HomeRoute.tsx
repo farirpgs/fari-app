@@ -1,3 +1,5 @@
+"use client";
+
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
@@ -15,8 +17,10 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router";
 import discord from "../../../images/services/discord.png";
 import lokalise from "../../../images/services/lokalise.png";
 import { AppButtonLink, RouterLink } from "../../components/AppLink/AppLink";
@@ -24,7 +28,6 @@ import { ConditionalWrapper } from "../../components/ConditionalWrapper/Conditio
 import { FateLabel } from "../../components/FateLabel/FateLabel";
 import { Kofi } from "../../components/Kofi/Kofi";
 import { FariToolbarMaxWidth, Page } from "../../components/Page/Page";
-import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Patreon } from "../../components/Patreon/Patreon";
 import { Images } from "../../constants/Images";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
@@ -52,7 +55,7 @@ const Sponsors: Array<{ image: string; name: string; link: string }> = [
   },
   {
     name: "Lokalise",
-    image: lokalise,
+    image: lokalise.src,
     link: "https://lokalise.com/",
   },
   {
@@ -67,30 +70,25 @@ type IHomeRouteCard = {
   description: string;
   ctaLabel: string;
   icon: React.ElementType;
-  to?: string;
+  href?: string;
   onClick?: () => void;
 };
 
 const sectionsSeparator = "4rem";
 
 export const HomeRoute: React.FC<{}> = () => {
-  const navigate = useNavigate();
   const { t } = useTranslate();
   const logger = useLogger();
   const lightBackground = useLightBackground();
   const theme = useTheme();
   const myBinderManager = useContext(MyBinderContext);
-
+  const router = useRouter();
   useEffect(() => {
     logger.track("view_home");
   }, []);
 
   return (
     <Page hideHeaderLogo maxWidth="100vw" sx={{ paddingTop: "2rem" }}>
-      <PageMeta
-        title={undefined}
-        description={t("home-route.meta.description")}
-      />
       <Box>
         <DarkBox px="2rem" mt="-2rem" textAlign="left" linear>
           <Box sx={{ maxWidth: FariToolbarMaxWidth, margin: "0 auto" }}>
@@ -186,6 +184,7 @@ export const HomeRoute: React.FC<{}> = () => {
         <Box mb="2rem">
           <Typography
             variant="subtitle1"
+            component={"p"}
             align="center"
             sx={{ whiteSpace: "pre-line" }}
           >
@@ -260,14 +259,14 @@ export const HomeRoute: React.FC<{}> = () => {
             {Sponsors.map((sponsor, i) => {
               return (
                 <Grid item key={i}>
-                  <a href={sponsor.link} target="_blank" rel="noreferrer">
+                  <Link href={sponsor.link} target="_blank" rel="noreferrer">
                     <Box
                       component="img"
                       sx={{ width: "auto", height: "50px" }}
                       src={sponsor.image}
                       title={sponsor.name}
                     />
-                  </a>
+                  </Link>
                 </Grid>
               );
             })}
@@ -285,9 +284,12 @@ export const HomeRoute: React.FC<{}> = () => {
         ctaLabel: t("home-route.cards.scenes.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/alps.png"
+            alt="scenes"
           />
         ),
         onClick: () => {
@@ -299,9 +301,12 @@ export const HomeRoute: React.FC<{}> = () => {
         description: t("home-route.cards.characters.description"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/wizard.png"
+            alt="characters"
           />
         ),
         ctaLabel: t("home-route.cards.characters.cta"),
@@ -315,12 +320,15 @@ export const HomeRoute: React.FC<{}> = () => {
         ctaLabel: t("home-route.cards.dice-roller.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/dice.png"
+            alt="dice-roller"
           />
         ),
-        to: "/dice",
+        href: "/dice",
       },
     ];
     return (
@@ -337,12 +345,15 @@ export const HomeRoute: React.FC<{}> = () => {
         ctaLabel: t("home-route.cards.data.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/cloud-backup-restore.png"
+            alt="data"
           />
         ),
-        to: "/data",
+        href: "/data",
       },
 
       {
@@ -352,12 +363,15 @@ export const HomeRoute: React.FC<{}> = () => {
 
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/crystal-ball.png"
+            alt="play-solo"
           />
         ),
-        to: "/oracle",
+        href: "/oracle",
       },
     ];
     return (
@@ -375,12 +389,15 @@ export const HomeRoute: React.FC<{}> = () => {
         ctaLabel: t("home-route.cards.changelog.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
+            alt="changelog"
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/comments.png"
           />
         ),
-        to: "https://fari.canny.io/changelog",
+        href: "https://fari.canny.io/changelog",
       },
       {
         label: t("home-route.cards.wiki.title"),
@@ -388,12 +405,15 @@ export const HomeRoute: React.FC<{}> = () => {
         ctaLabel: t("home-route.cards.wiki.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
+            alt="wiki"
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/contract.png"
           />
         ),
-        to: "https://fari.games/en/resources/fari-rpgs/fari-app-wiki",
+        href: "https://fari.community/creators/fari-rpgs/projects/fari-app-wiki",
       },
       {
         label: t("home-route.cards.fari-games.title"),
@@ -401,12 +421,15 @@ export const HomeRoute: React.FC<{}> = () => {
         ctaLabel: t("home-route.cards.fari-games.cta"),
         icon: (props: { className: string }) => (
           // https://icons8.com/icons/plasticine
-          <img
+          <Image
             className={props.className}
+            alt="fari-games"
+            width={100}
+            height={100}
             src="https://img.icons8.com/plasticine/100/000000/bookmark--v1.png"
           />
         ),
-        to: "https://fari.games",
+        href: "https://fari.community",
       },
     ];
     return (
@@ -433,8 +456,8 @@ export const HomeRoute: React.FC<{}> = () => {
               color="primary"
               variant="outlined"
               size="large"
-              component={RouterLink}
-              to={"/feature-requests"}
+              LinkComponent={RouterLink}
+              href={"/feature-requests"}
             >
               {t("home-route.sections.request-a-feature.cta")}
             </Button>
@@ -442,13 +465,11 @@ export const HomeRoute: React.FC<{}> = () => {
         </Grid>
         <Grid item md={6} xs={12} container justifyContent="center" spacing={2}>
           <Grid item xs={12}>
-            <Box
-              component="img"
-              src={discord}
-              sx={{
-                width: "50px",
-                height: "auto",
-              }}
+            <Image
+              src={discord.src}
+              width={213 / 2}
+              height={240 / 2}
+              alt="Discord"
             />
           </Grid>
           <Grid item xs={12}>
@@ -478,13 +499,14 @@ export const HomeRoute: React.FC<{}> = () => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <a
+          <Link
             href="https://github.com/fariapp/fari"
             target="_blank"
             rel="noreferrer"
+            title="Github"
           >
             <GitHubIcon sx={{ width: "5rem", height: "5rem" }} />
-          </a>
+          </Link>
         </Grid>
         <Grid item xs={12}>
           <Button
@@ -537,7 +559,7 @@ export const HomeRoute: React.FC<{}> = () => {
                 size="large"
                 sx={{ height: "3rem" }}
                 onClick={() => {
-                  navigate("/play");
+                  router.push("/play");
                   logger.track("home.start_online_game");
                 }}
               >
@@ -553,7 +575,7 @@ export const HomeRoute: React.FC<{}> = () => {
                 data-cy="home.play-offline"
                 sx={{ height: "3rem" }}
                 onClick={() => {
-                  navigate("/play-offline");
+                  router.push("/play-offline");
                   logger.track("home.start_offline_game");
                 }}
               >
@@ -584,6 +606,7 @@ export const HomeRoute: React.FC<{}> = () => {
           <Box>
             <Typography
               variant="subtitle2"
+              component={"p"}
               sx={{
                 fontWeight: theme.typography.fontWeightBold,
               }}
@@ -596,9 +619,6 @@ export const HomeRoute: React.FC<{}> = () => {
     );
   }
 };
-
-HomeRoute.displayName = "HomeRoute";
-export default HomeRoute;
 
 type ILightBoxProps = {
   children: JSX.Element;
@@ -627,7 +647,7 @@ function LightBox(props: ILightBoxProps) {
       {title && (
         <Typography
           variant="h3"
-          component="h3"
+          component="p"
           sx={{
             marginBottom: subTitle ? "1rem" : "3rem",
             textAlign: (textAlign as any) ?? "center",
@@ -641,6 +661,7 @@ function LightBox(props: ILightBoxProps) {
       {subTitle && (
         <Typography
           variant="h5"
+          component="p"
           sx={{
             marginBottom: "3rem",
             textAlign: (textAlign as any) ?? "center",
@@ -773,6 +794,7 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                 <Box mb="1rem">
                   <FateLabel
                     variant="h5"
+                    component={"p"}
                     align="center"
                     color="textPrimary"
                     uppercase={false}
@@ -801,13 +823,13 @@ function HomeRouteCards(props: { cards: Array<IHomeRouteCard> }) {
                       {card.ctaLabel}
                     </Button>
                   )}
-                  {card.to && (
+                  {card.href && (
                     <Button
                       color="secondary"
                       variant="outlined"
                       size="large"
-                      component={AppButtonLink}
-                      to={card.to}
+                      LinkComponent={AppButtonLink}
+                      href={card.href}
                     >
                       {card.ctaLabel}
                     </Button>

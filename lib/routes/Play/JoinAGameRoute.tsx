@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   Button,
@@ -12,14 +13,9 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import {
-  default as React,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { useNavigate, useParams } from "react-router";
+import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AppLink } from "../../components/AppLink/AppLink";
 import { Page } from "../../components/Page/Page";
 import { Images } from "../../constants/Images";
@@ -36,16 +32,17 @@ import {
   PlayerInteractionFactory,
 } from "./types/IPlayerInteraction";
 
-function JoinAGameRoute() {
+export function JoinAGameRoute() {
   const { t } = useTranslate();
   const theme = useTheme();
   const settingsManager = useContext(SettingsContext);
-  const params = useParams<{ id: string }>();
+  const params = useParams();
+  const idFromParams = params.id as string;
   const [playerName, setPlayerName] = useState(settingsManager.state.userName);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const isGameLinkValid = useRef(false);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const broadcast = useBroadcastEvent();
 
@@ -53,7 +50,7 @@ function JoinAGameRoute() {
     const event = props.event as IPlayerInteraction;
     if (event.type === "pong") {
       isGameLinkValid.current = true;
-      navigate(`/play/${params.id}?name=${playerName}`);
+      router.push(`/play/${idFromParams}?name=${playerName}`);
     }
   });
 
@@ -109,9 +106,9 @@ function JoinAGameRoute() {
         }}
       >
         <Box pb="2rem" textAlign="center">
-          <img
+          <Image
             alt="Fari"
-            width="150px"
+            width={150}
             src={
               theme.palette.mode === "dark"
                 ? Images.logoWhite
@@ -200,7 +197,7 @@ function JoinAGameRoute() {
                 {t("play-route.join-error")}
               </Typography>
               <Typography color="error">
-                <AppLink to="/fari-wiki/connection-issues">
+                <AppLink href="/fari-wiki/connection-issues">
                   {t("play-route.join-error.connection-issues")}
                 </AppLink>
               </Typography>
@@ -211,5 +208,3 @@ function JoinAGameRoute() {
     );
   }
 }
-
-export default JoinAGameRoute;

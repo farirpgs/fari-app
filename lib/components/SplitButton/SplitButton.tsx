@@ -121,5 +121,3 @@ export const SplitButton: React.FC<IProps> = (props) => {
     </Grid>
   );
 };
-
-SplitButton.displayName = "SplitButton";

@@ -255,7 +255,6 @@ export function PlayerRow(
     </PlayerRowContainer>
   );
 }
-PlayerRow.displayName = "PlayerRow";
 
 function PlayerRowContainer(
   props: {
@@ -385,3 +384,4 @@ const PlayerRowName = React.memo(
     }
   },
 );
+PlayerRowName.displayName = "PlayerRowName";

@@ -5,7 +5,6 @@ import { previewContentEditable } from "../../../components/ContentEditable/Cont
 import { SettingsContext } from "../../../contexts/SettingsContext/SettingsContext";
 import { Id } from "../../../domains/Id/Id";
 import { CharacterFactory } from "../../../domains/character/CharacterFactory";
-import { ICharacterTemplate } from "../../../domains/character/CharacterType";
 import {
   BlockType,
   IBlock,
@@ -14,6 +13,7 @@ import {
   IPage,
 } from "../../../domains/character/types";
 import { getUnix, getUnixFrom } from "../../../domains/dayjs/getDayJS";
+import { ICharacterTemplate } from "../../../services/character-templates/ICharacterTemplate";
 
 export function useCharacter(
   characterFromProps?: ICharacter | undefined,
@@ -45,8 +45,14 @@ export function useCharacter(
     }
   }, [characterFromProps]);
 
-  async function loadTemplate(template: ICharacterTemplate) {
-    const defaultCharacter = await CharacterFactory.make(template);
+  async function loadTemplate(props: {
+    template?: ICharacterTemplate;
+    json?: any;
+  }) {
+    const defaultCharacter = await CharacterFactory.make({
+      json: props.json,
+      template: props.template,
+    });
 
     setCharacter(
       produce((draft: ICharacter | undefined) => {
