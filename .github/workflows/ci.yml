@@ -47,70 +47,11 @@ jobs:
         with:
           name: dist
           path: dist
-  deploy-preview:
-    needs: [build]
-    runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/master' && github.event.repository.fork == false
-    environment:
-      name: Preview
-      url: https://${{github.run_id}}--fari.netlify.app
-    steps:
-      # Setup
-      - uses: actions/checkout@v2
-      - name: Use Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: "18"
-      # Cache
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      # Install
-      - name: Install
-        run: npm install
-      # Download Artifacts
-      - name: Download Artifacts
-        uses: actions/download-artifact@master
-        with:
-          name: dist
-          path: dist
       # Deploy Preview
       - name: Deploy Preview
+        if: github.ref != 'refs/heads/master' && github.event.repository.fork == false
         run: npm run deploy:preview -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --alias $GITHUB_RUN_ID
-  deploy-production:
-    needs: [build]
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master' && github.event.repository.fork == false
-    environment:
-      name: Production
-      url: https://fari.app
-    steps:
-      # Setup
-      - uses: actions/checkout@v2
-      - name: Use Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: "18"
-      # Cache
-      - name: Cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      # Install
-      - name: Install
-        run: npm install
-      # Download Artifacts
-      - name: Download Artifacts
-        uses: actions/download-artifact@master
-        with:
-          name: dist
-          path: dist
       # Deploy Production
       - name: Deploy Production
+        if: github.ref == 'refs/heads/master' && github.event.repository.fork == false
         run: npm run deploy:prod -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
