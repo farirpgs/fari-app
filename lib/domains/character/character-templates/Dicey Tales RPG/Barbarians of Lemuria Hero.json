@@ -1,0 +1,577 @@
+{
+    "lastUpdated": 1703622011,
+    "name": "Barbarians of Lemuria Hero Template Template",
+    "pages": [
+        {
+            "id": "753f19d6-03fc-4770-b74c-4364c689eeab",
+            "label": "Character",
+            "rows": [
+                {
+                    "columns": [
+                        {
+                            "sections": [
+                                {
+                                    "id": "76d590e3-3871-4ab4-a2f8-fd0cf1661216",
+                                    "label": "Attributes",
+                                    "blocks": [
+                                        {
+                                            "id": "33303819-629b-4783-87fb-c945d890708f",
+                                            "label": "Strength",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "9cf2d1b7-78c5-49e4-9e47-c91e98f1afd3",
+                                            "label": "Agility",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "cc125ecf-2f80-431d-a30e-ca8e19c89509",
+                                            "label": "Mind",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "7aa67300-0cc3-4e9d-aa84-ac6395228d82",
+                                            "label": "Appeal",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "701b6dcb-c105-43de-9fd6-ea294d8f3795",
+                                    "label": "Portrait",
+                                    "blocks": [
+                                        {
+                                            "id": "0c1ea3e8-51ec-41a6-b5a3-618da156ad10",
+                                            "label": "",
+                                            "type": "Image",
+                                            "meta": {},
+                                            "value": ""
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "sections": [
+                                {
+                                    "id": "d6ffbec0-6848-43c6-872d-af4cc240a779",
+                                    "label": "Combat",
+                                    "blocks": [
+                                        {
+                                            "id": "701c99b2-bafb-4e36-9213-fdfab8cc559e",
+                                            "label": "Melee",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "ed2006bc-288c-4885-acf5-14749e7276b4",
+                                            "label": "Ranged",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "94200028-8dc3-4df2-8caa-fffe92734ac1",
+                                            "label": "Defense",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "942041e1-a8fe-4507-948d-5f05d289626e",
+                                            "label": "Initiative",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "ea8ed77a-cc57-45a2-8601-a212012e7f4a",
+                                            "label": "Lifeblood",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "ecb0cd04-a03c-4097-a38a-d9a45b95b21b",
+                                            "label": "Lifeblood",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        }
+                                    ],
+                                    "visibleOnCard": true
+                                }
+                            ]
+                        },
+                        {
+                            "sections": [
+                                {
+                                    "id": "8f60efb6-f0c8-414c-822d-27747bf4d293",
+                                    "label": "Meta",
+                                    "blocks": [
+                                        {
+                                            "id": "bb52aa48-4b85-4271-9828-229c9072168c",
+                                            "label": "Hero Points",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "b53a2c84-76fd-462a-a9cb-37095aab0c9f",
+                                            "label": "Lifeblood",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "0e3e03bc-d12c-4268-a0f8-fc660b1ad2f6",
+                                            "label": "Advance Points",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "e396156a-6c68-4f28-8e03-12192d4c8029",
+                                            "label": "Arcane Points",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "6fad0c76-3a8c-437f-9ce6-e2c79f4bfec0",
+            "rows": [
+                {
+                    "columns": [
+                        {
+                            "sections": [
+                                {
+                                    "id": "df4bff56-f7a4-4ac2-a0d0-a5630c421ecd",
+                                    "label": "Careers",
+                                    "blocks": [
+                                        {
+                                            "id": "09b8f1aa-f3f2-40eb-a14a-52005ee36ead",
+                                            "label": "Numeric",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "ae5fba94-b655-4455-a516-61dd1bb39315",
+                                            "label": "Numeric",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "f6797b47-54a4-438d-b907-856de3aa861a",
+                                            "label": "Numeric",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "846b7ade-db4f-410e-ae53-864437986388",
+                                            "label": "Numeric",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "fd830c4f-6bae-4f38-9aba-89b3d3197c36",
+                                            "label": "Numeric",
+                                            "type": "Numeric",
+                                            "value": "",
+                                            "meta": {}
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "sections": [
+                                {
+                                    "id": "5bda0008-5c8d-4853-a072-31a9ecafa51d",
+                                    "label": "Languages",
+                                    "blocks": [
+                                        {
+                                            "id": "ce522993-62c8-4095-80bd-27624cf741b2",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "7596fa1c-3919-4406-bc6e-0d71c56c531f",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "0e9cc84f-26ee-4248-b7aa-b845e1e780c7",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "73befbf2-a65f-47a2-8ca6-e2492bc1ef12",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "64e1c8f1-5114-48b0-ac11-542568443eb2",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "label": "Careers"
+        },
+        {
+            "id": "954a0474-2dee-4b56-a0eb-7b90142cae73",
+            "rows": [
+                {
+                    "columns": [
+                        {
+                            "sections": [
+                                {
+                                    "id": "10b1b5a0-a3f9-4374-8257-37d25f237923",
+                                    "label": "Boons",
+                                    "blocks": [
+                                        {
+                                            "id": "a4bd6b63-068a-4574-a593-d6f338b0d492",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "df67a919-d93d-4c4e-b500-8da5737ed0ed",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "083264e6-695c-40de-9e4e-fcddcc68df12",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "dd406e24-b4f3-4f8f-b229-2b3c20c7d9f5",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "2f169175-b2bd-46ef-b999-9a7878877baf",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "sections": [
+                                {
+                                    "id": "c9e87ec7-4811-465b-b24c-4836715f4ac5",
+                                    "label": "Flaws",
+                                    "blocks": [
+                                        {
+                                            "id": "f4575f0a-49ea-4e99-b9c5-66bac9e4b18c",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "eab44596-fb76-458f-b457-70e6b927d102",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "acbc9ca1-cb79-4af4-b0ef-5082bd26f218",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "d7e013c1-fc35-4b42-8f34-d044ea655291",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "label": "Boons &amp; Flaws\n"
+        },
+        {
+            "id": "75deceda-940e-445d-8985-13c71a13b850",
+            "rows": [
+                {
+                    "columns": [
+                        {
+                            "sections": [
+                                {
+                                    "id": "f9d1efe8-2048-4359-98e7-d51e3f0378e0",
+                                    "label": "Background",
+                                    "blocks": [
+                                        {
+                                            "id": "638f0c0c-8aab-4076-b6eb-cbf6e45fdb49",
+                                            "label": "Info Text",
+                                            "type": "InfoText",
+                                            "value": "",
+                                            "meta": {}
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "sections": [
+                                {
+                                    "id": "0d1dea19-be90-4ff0-86f5-f98194c87fed",
+                                    "label": "Languages",
+                                    "blocks": [
+                                        {
+                                            "id": "9f231bbd-3de0-46e3-b6e1-f526d3339076",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "a64116ec-2fb5-423b-bc46-6b85a260922b",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "b7206e41-ab76-4f5c-9b6a-f20661bc50e7",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "28ce69b6-cdd2-4f20-ab99-bf4898b42998",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "35820816-8f80-4453-834d-b870762b2178",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "label": "Backround &amp; Languages"
+        },
+        {
+            "id": "5c53b402-863d-4e22-b50c-8c14e264bb36",
+            "rows": [
+                {
+                    "columns": [
+                        {
+                            "sections": [
+                                {
+                                    "id": "2a0e5560-c95d-41fe-bc79-8810508b27b8",
+                                    "label": "Weapons",
+                                    "blocks": [
+                                        {
+                                            "id": "497af53b-4eca-4862-a6b8-1818bd8336e7",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "53ed6729-6a92-4290-b44d-6170f08a9fee",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "b75ba50c-c681-4118-967a-05c389dc3aa5",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "3a8c72e5-eb01-4bf4-8f61-aa8fa6f3701b",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "sections": [
+                                {
+                                    "id": "61fad3a0-10d3-4d43-b4fc-74044d641eb7",
+                                    "label": "Armor",
+                                    "blocks": [
+                                        {
+                                            "id": "9b5d210c-5f34-4c27-bfa0-b667f8a63146",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "0a8fa591-ad92-4b4d-a0c6-762e22de4999",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "cd7fd252-adad-4fac-9eb0-63b88fcc9dfc",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "b469ee9d-6484-4cb8-aebe-3fa8740db8fd",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "sections": [
+                                {
+                                    "id": "1c8974c1-d623-4ece-bc14-9b33cbb9b735",
+                                    "label": "Equipment",
+                                    "blocks": [
+                                        {
+                                            "id": "0717e586-ee68-40c0-acbd-b0c35e6441f6",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "19302202-9a8e-4d39-ae81-df67a55655fb",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "6411a580-6dfd-4938-b505-a19fe0d0eb57",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "e2be8e1f-e747-4627-8ad8-d3ca2bff8fb7",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "09893021-88f6-4e29-991c-0b311e12d3f2",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        },
+                                        {
+                                            "id": "b33e22ee-b082-4cea-84a3-fa5b6f89341a",
+                                            "label": "Text",
+                                            "type": "Text",
+                                            "value": "",
+                                            "meta": {}
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "label": "Gear"
+        }
+    ],
+    "template": "Blank",
+    "theme": {
+        "hideSectionBackground": false,
+        "sectionHeadingFontFamily": "Sigmar",
+        "sectionHeadingFontWeight": "initial",
+        "style": "@import url(\"https://fonts.googleapis.com/css?family=Sigmar|Open Sans\")",
+        "sectionHeadingFontSize": 2,
+        "labelFontFamily": "Open Sans",
+        "infoTextFontWeight": "",
+        "textFontWeight": "bold"
+    },
+    "version": 6,
+    "group": "Barbarians of Lemuria (Mythic Edition)",
+    "wide": false,
+    "playedDuringTurn": false,
+    "fariType": "character"
+}
