@@ -11,6 +11,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment:
+      name: Preview
+      url: https://${{github.run_id}}--fari.netlify.app
     steps:
       # Checkout
       - name: Checkout
