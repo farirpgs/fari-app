@@ -1,0 +1,1177 @@
+{
+  "id": "361442fc-7048-4f3e-ab44-d51f6676aee5",
+  "lastUpdated": 1706189095,
+  "name": "Blue Rose Template Light",
+  "pages": [
+    {
+      "id": "fe9f8cc0-0c8d-488a-b814-e3708a2df9f0",
+      "label": "SHEET",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "87f00f3b-198e-451b-860c-0d3551cab799",
+                  "label": "Identity",
+                  "blocks": [
+                    {
+                      "id": "9d6d7a0d-20e3-47e3-bd0d-418a4835190b",
+                      "label": "",
+                      "type": "Image",
+                      "meta": { "width": 1 },
+                      "value": "https://i.imgur.com/DPuk8U6.png"
+                    },
+                    {
+                      "id": "c744c9f6-00fa-4f94-9bde-6f0e9355eb79",
+                      "label": "Name",
+                      "type": "Text",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "7d3ad833-1c6d-4023-9771-e5b53d642b5e",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "33d10fcf-d64f-4b2e-a333-d800b9074210",
+                      "label": "Class",
+                      "type": "Text",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "fdefd4e1-d0b3-48ae-884e-710c65cf5b7b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "3282bd69-d6fb-48e3-9af4-128163a9a0fe",
+                      "label": "Race",
+                      "type": "Text",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "60b875a6-1d88-4940-8f1c-7cacb1bbd97a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "3fd4df05-e516-45cd-95e3-850cddd29155",
+                      "label": "BkGrnd",
+                      "type": "Text",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "3de498f5-1f69-4d28-90ed-a6b0a081669d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.66 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "2b679891-596f-4a5a-909b-b7e32da9e646",
+                  "label": "Armor",
+                  "blocks": [
+                    {
+                      "id": "b418f997-85e4-4a9b-b2db-060b2f5efa63",
+                      "label": "Speed",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "b962baa3-e760-45fe-b8ed-f2132af65898",
+                      "label": "Defense",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "56a876aa-40f9-4654-86bd-bcb35d39a0fc",
+                      "label": "Armor",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "ec305c32-1bc5-45fa-acf1-4c28f745452f",
+                      "label": "Penalty",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "3c64d3e0-9faa-41cf-85f0-f377af315c1c",
+                      "label": "Armor Type",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "e7f11977-16ad-44e1-9a7f-4c19f7c7ca89",
+                  "label": "Condition",
+                  "blocks": [
+                    {
+                      "id": "834a5e99-9f7c-4bc0-b76c-b478cd781022",
+                      "label": "Fatigue",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 0.5 },
+                      "value": "0"
+                    },
+                    {
+                      "id": "d5aedcc3-c751-41ba-bfd6-1d46fcc3a1ac",
+                      "label": "Health",
+                      "type": "PointCounter",
+                      "meta": {
+                        "max": "1",
+                        "isMainPointCounter": true,
+                        "width": 0.5
+                      },
+                      "value": "1"
+                    },
+                    {
+                      "id": "cc496d8b-23a8-45f0-ae2d-ea8a099adbe8",
+                      "label": "",
+                      "type": "Separator",
+                      "meta": { "hasLabel": false, "hideDivider": false },
+                      "value": ""
+                    },
+                    {
+                      "id": "2ee0beee-2047-42d7-b4a5-79f62661484c",
+                      "label": "Level",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 1 },
+                      "value": "0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "de3f2c90-2c0c-4568-bb77-4be639b516da",
+                  "label": "Abilities",
+                  "blocks": [
+                    {
+                      "id": "54d41e65-2a81-4d16-8238-347bb9c6473e",
+                      "label": "Accuracy",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "cea1f0cf-8c10-481c-96f7-1f1a902aac12",
+                      "type": "Text",
+                      "value": "\n",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "d673f053-513a-4981-9b1d-7839a48ea966",
+                      "label": "Communicate",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "0048325a-5e94-489c-b028-4dd1d40ee5d3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "7282c7f2-342c-4d6e-a094-061602ada208",
+                      "label": "Constitution",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "fc2f52e8-1621-4524-a54b-b0d2f7245b1a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "d9a322fc-a7d0-4819-81b2-94b957ab8d9d",
+                      "label": "Dexterity",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "d4edae3c-50d5-4a86-8e27-54b33c0dcde8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "3c9c4d77-79f6-4012-954c-406aed94adce",
+                      "label": "Fighting",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "7602cf1f-c5a8-4ade-80bb-63aa6009228f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "14703ee2-e9ef-4685-a5bf-6c5c507645dd",
+                      "label": "Intelligence",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "3ca116cc-264c-4f68-91d3-79cfb72798ee",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "8fbe9a27-456f-4e87-a531-5fea3235a27f",
+                      "label": "Perception",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "b4cf276d-1bd2-4604-a864-0f433a168a5f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "3f6c5de6-1d71-46be-81c1-8781c6d44d5d",
+                      "label": "Strength",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "23bcf353-081f-419e-8e75-34844e9ffed9",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "250e04e4-60e3-4837-8cf0-6abe2afff2e4",
+                      "label": "Willpower",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "checked": false,
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66
+                      }
+                    },
+                    {
+                      "id": "d935a899-6ae9-47e0-91fb-1c4f66329a26",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "07fcd146-6539-426f-89e4-2a688eaea047",
+                  "label": "Powers, Talents, &amp; Specializations",
+                  "blocks": [
+                    {
+                      "id": "0050eeb4-46aa-4319-acbf-471bb10b1118",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "bb3eff94-cb3a-4b76-b3e2-55361cc9ca89",
+                      "label": "Conviction Points",
+                      "type": "PointCounter",
+                      "meta": { "isMainPointCounter": false, "width": 1 },
+                      "value": "0"
+                    }
+                  ]
+                },
+                {
+                  "id": "7a30b3e1-e9c9-4551-bf54-95acbcf946e3",
+                  "label": "Movement",
+                  "blocks": [
+                    {
+                      "id": "2e93e945-5268-4cae-afcb-7600f8ecd652",
+                      "label": "Move",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "19ba66e5-8c91-4c91-86a5-badd0d52ab95",
+                      "label": "Charge",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "7f4ed62f-a5fd-4295-a9b8-e62b74f60582",
+                      "label": "Run",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "300354b6-20f7-4f36-8b84-1687e4d9b925",
+                  "label": "Melee Weapons",
+                  "blocks": [
+                    {
+                      "id": "4dca6976-0e16-4c96-864c-819f2ed5692f",
+                      "label": "Attack",
+                      "type": "Text",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "cbc629e8-9d4e-469a-a177-643dea7cc196",
+                      "label": "Damage",
+                      "type": "Text",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "0011e886-3052-47b2-b90b-80cfb196ed2c",
+                      "label": "[Weapon Name]",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66,
+                        "helperText": "<br>"
+                      }
+                    },
+                    {
+                      "id": "7cac1777-7b77-4d19-b55d-e8155871744e",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "width": 0.33,
+                        "helperText": "<br>"
+                      }
+                    },
+                    {
+                      "id": "2909c4c2-6ccd-445b-9e51-0d6ff366fdd8",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "<i>Special</i><br>" }
+                    },
+                    {
+                      "id": "ca0a033d-f633-446c-bce9-ac77f12a69ae",
+                      "label": "[Weapon Name]",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66,
+                        "helperText": "<br>"
+                      }
+                    },
+                    {
+                      "id": "a9eb98f6-3d61-430f-892c-a3c41a68ca54",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "width": 0.33,
+                        "helperText": "<br>"
+                      }
+                    },
+                    {
+                      "id": "6bd48078-53e0-4fb8-a870-e30125c2a9ee",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "<i>Special</i><br>" }
+                    },
+                    {
+                      "id": "aa7561e2-847d-44a1-985f-b3228fdb752c",
+                      "label": "[Weapon Name]",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66,
+                        "helperText": "<br>"
+                      }
+                    },
+                    {
+                      "id": "873212b3-931f-483e-8e9b-e16e7ff5acb5",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "width": 0.33,
+                        "helperText": "<br>"
+                      }
+                    },
+                    {
+                      "id": "290d7168-9e8d-4ab4-ab9c-6b7c2cb5d28f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "helperText": "<i>Special</i><br>" }
+                    },
+                    {
+                      "id": "29b388e4-4e83-459a-a13e-a56dfdd818e5",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "<i>Advanced mode to modify name; duplicate section for more</i>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "400b8eda-153f-4eb0-b42c-65f4b8bf122b",
+                  "label": "Ranged Weapons",
+                  "blocks": [
+                    {
+                      "id": "8dd91aff-f6b2-41a8-8c20-09bc58a51049",
+                      "label": "Attack",
+                      "type": "Text",
+                      "meta": { "width": 0.66 }
+                    },
+                    {
+                      "id": "e4f69895-8940-435e-9337-f2ae9554d307",
+                      "label": "Damage",
+                      "type": "Text",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "74644c7c-e0fc-44a2-a813-c35020ed3f60",
+                      "label": "[Weapon Name]",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66,
+                        "helperText": "<br>"
+                      }
+                    },
+                    {
+                      "id": "8ac4ef18-f3da-4e43-89ae-9d8362bb05c4",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "width": 0.33,
+                        "helperText": "<br>"
+                      }
+                    },
+                    {
+                      "id": "ad2e412b-c6b3-441d-8d37-609e9d270471",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": "<i>Short Range</i>"
+                      }
+                    },
+                    {
+                      "id": "8d9508b2-454c-49ae-a979-cae6886de097",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": "<i>Long Range</i>"
+                      }
+                    },
+                    {
+                      "id": "e2def213-ec6f-4982-b54a-d6f5ce5021ee",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "<i>Reload</i>" }
+                    },
+                    {
+                      "id": "af6d0488-b970-40c6-8385-b5a83387e65a",
+                      "label": "[Weapon Name]",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66,
+                        "helperText": "<br>"
+                      }
+                    },
+                    {
+                      "id": "d2b95935-7121-4124-8bcb-0d1719ad1910",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "width": 0.33,
+                        "helperText": "<br>"
+                      }
+                    },
+                    {
+                      "id": "df14c2e7-88f8-4c32-bbbf-5facb5e85bf7",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": "<i>Short Range</i>"
+                      }
+                    },
+                    {
+                      "id": "26c9b786-6a5c-4410-8449-556bcf266738",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": "<i>Long Range</i>"
+                      }
+                    },
+                    {
+                      "id": "d4323bb1-39c1-4c55-8c1a-982f95414225",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "<i>Reload</i>" }
+                    },
+                    {
+                      "id": "6e830588-a909-497f-b0e9-3451cb3190e7",
+                      "label": "[Weapon Name]",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6", "1d6", "1d6"],
+                        "width": 0.66,
+                        "helperText": "<br>"
+                      }
+                    },
+                    {
+                      "id": "666497d5-dc81-4a42-ac86-ebd8b4150509",
+                      "label": "",
+                      "type": "Skill",
+                      "value": "0",
+                      "meta": {
+                        "commands": ["1d6"],
+                        "width": 0.33,
+                        "helperText": "<br>"
+                      }
+                    },
+                    {
+                      "id": "f19c538a-234e-4d60-b85e-edab32601c78",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": "<i>Short Range</i>"
+                      }
+                    },
+                    {
+                      "id": "a1fe19ae-5774-47db-9808-2d86bddcdf4c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {
+                        "width": 0.33,
+                        "helperText": "<i>Long Range</i>"
+                      }
+                    },
+                    {
+                      "id": "4d96f54e-d218-4047-9272-0667a5408947",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33, "helperText": "<i>Reload</i>" }
+                    },
+                    {
+                      "id": "668b5f78-52c2-4ea6-a571-5fd8ac74adf7",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "<i>Advanced mode to modify name; duplicate section for more</i>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "600942e1-7437-4997-b020-4917ac11aab1",
+                  "label": "Arcana",
+                  "blocks": [
+                    {
+                      "id": "5ec02c89-7d37-4a89-902d-d7539635b0f5",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "329e3640-518d-4cf0-bb16-aa3ebf788b18",
+                  "label": "Gear",
+                  "blocks": [
+                    {
+                      "id": "5ffd4129-af3f-41e0-920a-8e397d6cc532",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "864657d9-c3e0-4c1f-903b-356fad07a75c",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "cfeb598e-ead2-4691-963b-4b3beaa11fd2",
+                  "label": "Persona",
+                  "blocks": [
+                    {
+                      "id": "371b15ec-45f5-4dc7-a219-2345603897d3",
+                      "label": "Calling",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "cc0cadfd-672c-4c55-90ac-818fe9ecf606",
+                      "label": "Destiny",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "f017f7a5-3361-46fd-b887-9f153f401ffd",
+                      "label": "Fate",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "d76c17b6-14be-4744-a347-96a4e55afbe9",
+                      "label": "Corruption",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "efe93a17-9c8d-4542-8ef2-6adfc359d690",
+                  "label": "Appearance",
+                  "blocks": [
+                    {
+                      "id": "c859827e-e3e5-4be4-bc31-c8d7d0b751a8",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    },
+                    {
+                      "id": "fe6dac92-348b-4d2b-99e9-0a4c442b0378",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "3a20f586-57ae-4d41-b2e5-bdd2a220f91d",
+                  "label": "Goals",
+                  "blocks": [
+                    {
+                      "id": "8c665e1b-0ec8-48c2-826a-abdcc7f2cf0d",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "f30a1e2a-63c2-4f34-bd0f-10332c9f8ce5",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "dcaed678-c7fe-421c-aeae-1c1b8d2d8c76",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "616f575c-520d-40ca-9d65-e0c12c79a8fd",
+                  "label": "Relationships",
+                  "blocks": [
+                    {
+                      "id": "ec8dbedf-bbbe-431e-ab81-9d2d4d7a61f6",
+                      "label": "Name",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "23ec25a1-ef43-47e7-bfe1-3a38d801e80c",
+                      "label": "Intensity",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "888a8858-ecd9-4041-a2af-afb4b7d86faa",
+                      "label": "Bond",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "beff8153-fab5-4c0a-a265-b33c9f837c17",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "4b5862df-3124-4e89-95be-3b45b894073f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "5e03c15b-3312-406f-bb79-9b03f7a8b1e3",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "1828946c-7417-48cf-9420-b743f1ea5a56",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "56d5c8f6-6739-4eb9-b3e5-5b6960545585",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "4051c12c-0d5f-4da7-94fb-2636ee97fc48",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "3d23d13d-9770-45da-9384-8a44856155e7",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "6fdcc8f6-3a29-453a-82c0-1ebfe17bbe9b",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "5b09a151-d850-420c-b261-4651f83ab64f",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "607594d0-3028-48e9-a33b-91c85214cb28",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "2afd663c-8d2e-4c63-aafc-6db0bc93fb9a",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    },
+                    {
+                      "id": "09d57f79-93bf-4b56-9d8d-b741016b71b7",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 0.33 }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "6c6814bb-fccd-4d0c-afa9-ee9be4f781db",
+                  "label": "Backstory &amp; Character Notes",
+                  "blocks": [
+                    {
+                      "id": "dc61db85-c8c5-4a77-972b-9ec1d6514c88",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "fa5ed860-c272-409b-b4c5-d93d4718529e",
+                  "label": "Honorifics, Titles, &amp; Memberships",
+                  "blocks": [
+                    {
+                      "id": "cec6700d-4647-4ac2-97dd-610758e339da",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "018b1d90-9065-4443-8a09-5f247c4eedcd",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": "https://i.imgur.com/DPuk8U6.png"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "BIOGRAPHY"
+    },
+    {
+      "id": "18d585a3-b4ff-4899-8d44-32b05c3cbe4e",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "36a448cb-f02f-4b49-af5b-0a188b2ae7fb",
+                  "label": "Arcana",
+                  "blocks": [
+                    {
+                      "id": "9cd9890f-88c5-4581-9dd8-d39e34beed5c",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "6bb536d5-d1bb-4f2e-a438-171516432cd2",
+                  "label": "Talents",
+                  "blocks": [
+                    {
+                      "id": "a17a4bbd-52f8-430e-9ac5-9aaa982112ea",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "5700d010-c4b7-47ce-9744-a7afa97153ad",
+                  "label": "Special &amp; Arcane Items",
+                  "blocks": [
+                    {
+                      "id": "16ad19b0-4af0-470b-b578-ba81cbe844fc",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "f65543d5-d43b-4fd6-8a3a-a0fa94d022dd",
+                  "label": "Gear",
+                  "blocks": [
+                    {
+                      "id": "e8140c52-d883-4167-ba20-e0229963dfce",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "DETAILS"
+    },
+    {
+      "id": "1af74ce5-970c-47f6-a91d-c326b1718677",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "972da819-84e6-49ad-a96f-50d01a1a9edb",
+                  "label": "Notes",
+                  "blocks": [
+                    {
+                      "id": "09c165ef-dcef-4ebf-9fec-8c44b19d3bf6",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "f9ded270-5be8-49b7-86fe-0c9587dbda75",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "01bdb9ee-8b15-4720-aa9f-edafe7b238e1",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "NOTES"
+    },
+    {
+      "id": "13cf73e6-c6be-44fe-bda4-f81c017aef7e",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "9020fe2d-9e68-44ac-84b4-da4b88d0dfbd",
+                  "label": "Images",
+                  "blocks": [
+                    {
+                      "id": "f8a1a069-3e8e-4236-9326-4c2a7a0271ae",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    },
+                    {
+                      "id": "71ef4edd-f3e4-4b53-b4e7-08cb391b7292",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    },
+                    {
+                      "id": "2c8b6909-13ba-41b9-ab5c-3f549f15e663",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "d4001b77-e8e5-4c98-be5c-97f1a6a288ed",
+                  "label": "",
+                  "blocks": [
+                    {
+                      "id": "81a8d3b1-b231-4774-863d-e1d6807204d1",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    },
+                    {
+                      "id": "34837e0a-1e33-4a33-8217-2848364aeb21",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    },
+                    {
+                      "id": "886e7fa9-efd7-4c81-94a7-a5cee1795a47",
+                      "label": "",
+                      "type": "Image",
+                      "meta": {},
+                      "value": ""
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "label": "GALLERY"
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "theme": {
+    "backgroundColor": "#c2cee4",
+    "labelFontSize": 0.875,
+    "infoTextFontSize": 0.75,
+    "style": "@import url('https://fonts.googleapis.com/css2?family=Almendra+Display&family=Crimson+Text:ital@0;1&family=Glass+Antiqua&family=IM+Fell+English+SC&family=IM+Fell+English&family=Spectral+SC:wght@300;400&display=swap')",
+    "pageHeadingFontFamily": "Glass Antiqua",
+    "pageHeadingFontSize": 1.75,
+    "sectionHeadingFontFamily": "IM Fell English SC",
+    "sectionHeadingFontSize": 1.5,
+    "sectionHeadingFontWeight": "600",
+    "labelFontFamily": "Spectral SC",
+    "labelFontWeight": "600",
+    "textFontFamily": "Crimson Text",
+    "infoTextFontFamily": "Crimson Text",
+    "helperTextFontFamily": "Crimson Text",
+    "pageHeadingFontWeight": "600",
+    "textFontWeight": "400"
+  },
+  "wide": false,
+  "fariType": "character"
+}
