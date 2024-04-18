@@ -1,0 +1,276 @@
+{
+  "fariType": "character",
+  "id": "207f4c9d-8e59-430e-bf6f-81489e1827dc",
+  "lastUpdated": 1713383730,
+  "name": "",
+  "pages": [
+    {
+      "id": "52386399-dc43-4047-99b1-7498ce49f326",
+      "label": "Character",
+      "rows": [
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "8108b29e-11a5-4c05-a10b-b0ce489f1461",
+                  "label": "Character",
+                  "blocks": [
+                    {
+                      "id": "8c2b8f4f-a4c2-4a06-b53f-142e342aa432",
+                      "label": "Name:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "2cc02527-1686-46c2-be15-42431375b259",
+                      "label": "Concept:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "49439e03-2cbb-4925-9eed-ef1153d57621",
+                      "label": "Description:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "643d97eb-28fa-4ba8-9991-934e56b73f83",
+                      "label": "Relationships",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "b23e5512-eabb-40e4-9a36-2562a134cef5",
+                  "label": "Drives",
+                  "blocks": [
+                    {
+                      "id": "f6b27aae-eaa5-4918-b3e1-4f3ae135a44d",
+                      "label": "What do you want?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": { "width": 1 }
+                    },
+                    {
+                      "id": "1d6346d1-eafe-4c0e-be60-3cd91d3c37ea",
+                      "label": "What is stopping you?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "02bd0e52-fb8d-47a4-abbe-85183a08db01",
+                      "label": "What will you do?",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "c9fd9339-7b97-4e6d-922b-10419efa4f86",
+                  "label": "Stats",
+                  "blocks": [
+                    {
+                      "id": "ec2f9bc2-7c57-4799-b358-a16bd12c522c",
+                      "label": "Body:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "b71efc34-0f5a-458b-bf23-6909d82c06d3",
+                      "label": "Mind:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "c489270a-5283-4bab-ab42-4099622d4c79",
+                      "label": "Edge:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    },
+                    {
+                      "id": "ebbcf0ff-0701-4a85-bc15-544fe8a6b960",
+                      "label": "Flaw:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "9fb9518e-b9e7-4473-b504-342f59148770",
+                  "label": "Fate Points",
+                  "blocks": [
+                    {
+                      "id": "35285fc3-1bfc-4d1f-bffb-a44677da24fe",
+                      "label": "Fate Points",
+                      "type": "Numeric",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "22a1cbc0-a55a-4e80-9688-5e9cb710ba62",
+                  "label": "Equipment",
+                  "blocks": [
+                    {
+                      "id": "efe0e1e7-df20-4071-91b8-4ae6a8d1b921",
+                      "label": "Gear:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                },
+                {
+                  "id": "a77d4dad-d3c3-48fa-a8e4-b94de123eaee",
+                  "label": "Conditions",
+                  "blocks": [
+                    {
+                      "id": "5dc7f936-301b-40e2-b448-b8b7299e181a",
+                      "label": "Angry",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "18d9fa36-be46-4808-b407-83af5bd6416f",
+                      "label": "Trapped",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "04223702-1a89-4f70-bdd0-b6c8a7e4855e",
+                      "label": "Dazed",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "c1234a99-4431-494d-808e-e9cbaca237a2",
+                      "label": "Scared",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "4b1b4feb-a334-4d6c-a413-b08fda8b7a16",
+                      "label": "Blinded",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "7ea288b2-c053-4ac9-8be1-33fd3f49ddec",
+                      "label": "Injured",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "3b314886-bfba-43f0-bb42-c751a97c1f25",
+                      "label": "Tired",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "df30cd5d-ae4d-4756-9ab5-300f8456f86f",
+                      "label": "Hungry",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "cefa414c-7b95-42ea-bc6f-97ae0f1954d2",
+                      "label": "Dying",
+                      "type": "SlotTracker",
+                      "meta": { "width": 0.33 },
+                      "value": [{ "label": "", "checked": false }]
+                    },
+                    {
+                      "id": "8ad3e91a-c18f-4443-a621-9e9928aea6db",
+                      "label": "Other:",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "sections": [
+                {
+                  "id": "a88b9b2f-c015-42f5-977d-34fb88eb6d0f",
+                  "label": "The Odds",
+                  "blocks": [
+                    {
+                      "id": "16d6167a-a312-4401-b52f-bf59a9501f7e",
+                      "label": "Info Text",
+                      "type": "InfoText",
+                      "value": "6 Yes, and...<br>4 Yes...<br>2 Yes, but...<br>5 No, but...<br>3 No...<br>1 No, and...<br>",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sections": [
+                {
+                  "id": "d60c49dc-c87a-4230-bcae-03584c82c7a9",
+                  "label": "Notes",
+                  "blocks": [
+                    {
+                      "id": "9172161f-0d12-4faf-924f-39943ab53b67",
+                      "label": "",
+                      "type": "Text",
+                      "value": "",
+                      "meta": {}
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "template": "Blank",
+  "version": 6,
+  "wide": true
+}
