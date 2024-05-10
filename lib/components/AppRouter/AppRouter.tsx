@@ -21,10 +21,10 @@ const CharacterPrintRoute = React.lazy(
   () => import("../../routes/CharacterPrint/CharacterPrintRoute")
 );
 const DiceRoute = React.lazy(() => import("../../routes/DiceRoute/DiceRoute"));
-const FeatureRequestsRoute = React.lazy(
-  () => import("../../routes/FeatureRequests/FeatureRequestsRoute")
-);
-const BugsRoute = React.lazy(() => import("../../routes/Bugs/BugsRoute"));
+// const FeatureRequestsRoute = React.lazy(
+//   () => import("../../routes/FeatureRequests/FeatureRequestsRoute")
+// );
+// const BugsRoute = React.lazy(() => import("../../routes/Bugs/BugsRoute"));
 const DataRoute = React.lazy(() => import("../../routes/Data/DataRoute"));
 const DrawRoute = React.lazy(() => import("../../routes/Draw/DrawRoute"));
 const NotFoundRoute = React.lazy(
@@ -195,13 +195,13 @@ export const AppRouter = () => {
           path="/changelog"
           element={<ExternalRedirect url="https://fari.canny.io/changelog/" />}
         />
-        <Route path={"/feature-requests"} element={<FeatureRequestsRoute />} />
+        {/* <Route path={"/feature-requests"} element={<FeatureRequestsRoute />} />
         <Route
           path={"/feature-requests/*"}
           element={<FeatureRequestsRoute />}
-        />
-        <Route path={"/bugs"} element={<BugsRoute />} />
-        <Route path={"/bugs/*"} element={<BugsRoute />} />
+        /> */}
+        {/* <Route path={"/bugs"} element={<BugsRoute />} />
+        <Route path={"/bugs/*"} element={<BugsRoute />} /> */}
         <Route path={"/story-builder"} element={<StoryBuilderRoute />} />
         <Route path={"/story-dice"} element={<StoryDiceRoute />} />
         <Route path="*" element={<NotFoundRoute />} />

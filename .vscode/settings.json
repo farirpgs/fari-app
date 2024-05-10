@@ -37,5 +37,11 @@
   ],
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "i18n-ally.localesPaths": [
+    "out/locales",
+    "public/locales",
+    "lib/services/internationalization/locales"
+  ],
+  "i18n-ally.keystyle": "nested"
 }

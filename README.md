@@ -16,13 +16,7 @@
 
 This repo contains the source code that powers Fari, the open source virtual tabletop platform.
 
-## Feature Requests
-
-You can request new features [here](https://fari.app/feature-requests/)
-
-## Bug Report
-
-If you found an issue with the app, you can report the bug [here](https://fari.app/bugs)
+<!--  -->
 
 ## Development
 

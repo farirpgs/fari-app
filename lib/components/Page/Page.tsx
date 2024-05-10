@@ -1,9 +1,7 @@
-import BugReportIcon from "@mui/icons-material/BugReport";
 import CasinoIcon from "@mui/icons-material/Casino";
 import ChatIcon from "@mui/icons-material/Chat";
 import ComputerIcon from "@mui/icons-material/Computer";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
 import FiberNewIcon from "@mui/icons-material/FiberNew";
 import ForumIcon from "@mui/icons-material/Forum";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -27,14 +25,14 @@ import Hidden from "@mui/material/Hidden";
 import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import Select from "@mui/material/Select";
-import { ThemeProvider, useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { ThemeProvider, useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { env } from "../../constants/env";
 import { Images } from "../../constants/Images";
+import { env } from "../../constants/env";
 import { useZIndex } from "../../constants/zIndex";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
@@ -570,16 +568,16 @@ export const Page: React.FC<{
                         icon: <FiberNewIcon />,
                         target: "_blank",
                       },
-                      {
-                        to: "/feature-requests",
-                        label: t("menu.feature-requests"),
-                        icon: <EmojiObjectsIcon />,
-                      },
-                      {
-                        to: "/bugs",
-                        label: t("menu.report-a-bug"),
-                        icon: <BugReportIcon />,
-                      },
+                      // {
+                      //   to: "/feature-requests",
+                      //   label: t("menu.feature-requests"),
+                      //   icon: <EmojiObjectsIcon />,
+                      // },
+                      // {
+                      //   to: "/bugs",
+                      //   label: t("menu.report-a-bug"),
+                      //   icon: <BugReportIcon />,
+                      // },
                       {
                         href: "https://farirpgs.com/discord",
                         label: t("menu.discord"),
