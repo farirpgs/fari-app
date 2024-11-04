@@ -1,11 +1,10 @@
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import { Link } from "@mui/material";
 import Box, { BoxProps } from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container, { ContainerProps } from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
-import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider, useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -20,7 +19,6 @@ import { Kofi } from "../../components/Kofi/Kofi";
 import { FariToolbarMaxWidth, Page } from "../../components/Page/Page";
 import { PageMeta } from "../../components/PageMeta/PageMeta";
 import { Patreon } from "../../components/Patreon/Patreon";
-import { Images } from "../../constants/Images";
 import { useLogger } from "../../contexts/InjectionsContext/hooks/useLogger";
 import { MyBinderContext } from "../../contexts/MyBinderContext/MyBinderContext";
 import { useHighlight } from "../../hooks/useHighlight/useHighlight";
@@ -86,7 +84,7 @@ export const HomeRoute: React.FC<{}> = () => {
         description={t("home-route.meta.description")}
       />
       <Box>
-        <DarkBox px="2rem" mt="-2rem" textAlign="left" linear>
+        {/* <DarkBox px="2rem" mt="-2rem" textAlign="left" linear>
           <Box sx={{ maxWidth: FariToolbarMaxWidth, margin: "0 auto" }}>
             <Box
               component="img"
@@ -98,32 +96,36 @@ export const HomeRoute: React.FC<{}> = () => {
               src={Images.logoTextWhite}
             />
           </Box>
-        </DarkBox>
-        <DarkBox linear px="2rem">
+        </DarkBox> */}
+        <DarkBox linear px="2rem" mt="-2rem" pt="4rem">
           <Box sx={{ maxWidth: FariToolbarMaxWidth, margin: "0 auto" }}>
             <Box>
               <LightBox
                 textAlign="left"
                 py="2rem"
-                imageSrcs={[
-                  "https://gyazo.com/697a63e5e97d9384310d87e7c0b462e1.png",
-                  "https://gyazo.com/cc7519a58190e6d12504f9d06908d518.png",
-                ]}
+                // imageSrcs={
+                //   [
+                //     // "https://gyazo.com/697a63e5e97d9384310d87e7c0b462e1.png",
+                //     // "https://gyazo.com/cc7519a58190e6d12504f9d06908d518.png",
+                //   ]
+                // }
               >
-                {renderHeading()}
+                <Container maxWidth="md" style={{}}>
+                  {renderHeading()}
+                </Container>
               </LightBox>
             </Box>
           </Box>
         </DarkBox>
-        <LightBox
+        {/* <LightBox
           subTitle={t("home-route.sections.getting-started.sub-title")}
           maxWidth="lg"
           px="2rem"
           py="2rem"
         >
           {renderFirstActionCards()}
-        </LightBox>
-        <DarkBox
+        </LightBox> */}
+        {/* <DarkBox
           title={t("home-route.sections.join-community.title")}
           subTitle={t("home-route.sections.join-community.sub-title")}
           px="2rem"
@@ -131,28 +133,28 @@ export const HomeRoute: React.FC<{}> = () => {
           maxWidth="sm"
         >
           {renderCommunity()}
-        </DarkBox>
-        <LightBox
+        </DarkBox> */}
+        {/* <LightBox
           title={t("home-route.sections.tools.title")}
           px="2rem"
           py="2rem"
           maxWidth="lg"
         >
           {renderSecondActionCards()}
-        </LightBox>
-        <DarkBox
+        </LightBox> */}
+        {/* <DarkBox
           title={t("home-route.sections.patreon.title")}
           px="2rem"
           py="5rem"
           maxWidth="sm"
         >
           {renderPatrons()}
-        </DarkBox>
+        </DarkBox> */}
         {renderSponsors()}
-        <LightBox px="2rem" maxWidth="lg" pt="2rem" pb="5rem">
+        {/* <LightBox px="2rem" maxWidth="lg" pt="2rem" pb="5rem">
           {renderThirdActionCards()}
-        </LightBox>
-        <DarkBox
+        </LightBox> */}
+        {/* <DarkBox
           title={t("home-route.sections.open-source.title")}
           subTitle={t("home-route.sections.open-source.sub-title")}
           px="2rem"
@@ -160,16 +162,16 @@ export const HomeRoute: React.FC<{}> = () => {
           maxWidth="sm"
         >
           {renderOpenSource()}
-        </DarkBox>
+        </DarkBox> */}
 
-        <LightBox
+        {/* <LightBox
           px="2rem"
           py="5rem"
           maxWidth="sm"
           title={t("home-route.support-fari.title")}
         >
           {renderSupport()}
-        </LightBox>
+        </LightBox> */}
       </Box>
     </Page>
   );
@@ -504,40 +506,76 @@ export const HomeRoute: React.FC<{}> = () => {
           component="h1"
           sx={{
             marginBottom: ".5rem",
-            textAlign: "left",
+            textAlign: "center",
             fontWeight: theme.typography.fontWeightBold,
             letterSpacing: "-0.035em",
           }}
         >
-          <>{t("home-route.header.title")}</>
+          <>Fari App Is No Longer Being Worked On Or Maintained.</>
         </Typography>
         <Typography
           variant="subtitle1"
           component="h2"
           sx={{
             marginBottom: "2rem",
-            textAlign: "left",
+            textAlign: "center",
           }}
         >
-          {t("home-route.header.subtitle")}
+          Fari App is currently neither under active development nor
+          maintenance.
+          <br />
+          <br />
+          If any bugs come to our attention, we may address them or not
+          depending on their complexity and the time required for fixes. No new
+          features are being developed or implemented.
+          <br />
+          <br />
+          Online play is currently broken because the third-party service we
+          relied on has broken its API contract with us, and we don&apos;t have
+          the time to adress this issue.
+          <br />
+          <br />
+          If you’d like to contribute to the app, please feel free to open a PR{" "}
+          <Link href="https://github.com/farirpgs/fari-app" fontWeight={"bold"}>
+            here
+          </Link>
+          . <br /> <br />
+          Want to know more about the whys:{" "}
+          <Link
+            href="https://news.farirpgs.com/p/the-future-of-the-fari-app-vtt"
+            fontWeight={"bold"}
+          >
+            click here
+          </Link>
+          .
+          <br />
         </Typography>
         <Box mb="1rem" display="flex">
-          <Grid container spacing={2} alignItems="center">
-            <Grid item lg={6} xs={12}>
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                size="large"
-                sx={{ height: "3rem" }}
-                onClick={() => {
-                  navigate("/play");
-                  logger.track("home.start_online_game");
-                }}
-              >
-                {t("home-route.header.cta")}
-              </Button>
-            </Grid>
+          <Grid
+            container
+            spacing={2}
+            alignItems="center"
+            justifyContent={"center"}
+          >
+            {false && (
+              <Grid item lg={6} xs={12}>
+                {
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    sx={{ height: "3rem" }}
+                    onClick={() => {
+                      navigate("/play");
+                      logger.track("home.start_online_game");
+                    }}
+                  >
+                    {t("home-route.header.cta")}
+                  </Button>
+                }
+              </Grid>
+            )}
             <Grid item lg={6} xs={12}>
               <Button
                 fullWidth
@@ -565,7 +603,7 @@ export const HomeRoute: React.FC<{}> = () => {
             flex: "1 0 auto",
           }}
         >
-          <Box>
+          {/* <Box>
             <Rating
               defaultValue={5}
               readOnly
@@ -574,8 +612,8 @@ export const HomeRoute: React.FC<{}> = () => {
                 <FavoriteIcon sx={{ fontSize: "inherit", color: "#ff6d75" }} />
               }
             />
-          </Box>
-          <Box>
+          </Box> */}
+          {/* <Box>
             <Typography
               variant="subtitle2"
               sx={{
@@ -584,7 +622,7 @@ export const HomeRoute: React.FC<{}> = () => {
             >
               {t("home-route.header.stats")}
             </Typography>
-          </Box>
+          </Box> */}
         </Box>
       </Box>
     );
