@@ -112,12 +112,11 @@ export function CircleTextField(
               "cursor": cursor,
               "width": "3rem",
               "height": "3rem",
-              "borderRadius": "50%",
-              "border": `2px solid ${
-                props.borderColor ?? miniTheme.textPrimary
-              }`,
+              // Fixes issue #414
+              "font-family": "monospace",
               "outline": "none",
               "background": props.highlight ? miniTheme.textPrimary : "inherit",
+              "background": theme.palette.action.hover,
               "&&": {
                 color: "inherit",
               },
