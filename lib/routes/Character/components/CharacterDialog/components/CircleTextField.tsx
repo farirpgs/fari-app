@@ -100,11 +100,7 @@ export function CircleTextField(
               setValue("");
             } else {
               const parsed = parseInt(e.target.value);
-              if (parsed > 999) {
-                setValue("999");
-              } else {
-                setValue(parsed.toString());
-              }
+              setValue(parsed.toString());
             }
           }}
           InputProps={{
