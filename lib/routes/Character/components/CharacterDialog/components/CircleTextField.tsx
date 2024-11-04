@@ -106,7 +106,7 @@ export function CircleTextField(
           InputProps={{
             sx: {
               "cursor": cursor,
-              "width": "3rem",
+              // Removing width so that we can put in arbitrary values here
               "height": "3rem",
               // Fixes issue #414
               "font-family": "monospace",
