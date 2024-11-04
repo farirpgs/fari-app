@@ -530,11 +530,6 @@ export const HomeRoute: React.FC<{}> = () => {
           features are being developed or implemented.
           <br />
           <br />
-          Online play is currently broken because the third-party service we
-          relied on has broken its API contract with us, and we don&apos;t have
-          the time to adress this issue.
-          <br />
-          <br />
           If you’d like to contribute to the app, please feel free to open a PR{" "}
           <Link href="https://github.com/farirpgs/fari-app" fontWeight={"bold"}>
             here
@@ -557,7 +552,7 @@ export const HomeRoute: React.FC<{}> = () => {
             alignItems="center"
             justifyContent={"center"}
           >
-            {false && (
+            {true && (
               <Grid item lg={6} xs={12}>
                 {
                   <Button

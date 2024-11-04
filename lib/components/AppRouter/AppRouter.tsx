@@ -47,6 +47,7 @@ const initialStorage = {
   scene: new LiveObject(),
   characters: new LiveObject(),
   session: new LiveObject(),
+  chat: new LiveObject(),
 };
 
 export const AppRouter = () => {
@@ -92,7 +93,6 @@ export const AppRouter = () => {
             />
           }
         />
-        ;
         <Route
           path={"play/:id"}
           element={
@@ -110,7 +110,6 @@ export const AppRouter = () => {
             />
           }
         />
-        ;
         <Route
           path={"/play/join/:id"}
           element={
