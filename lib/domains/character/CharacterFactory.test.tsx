@@ -650,29 +650,6 @@ describe("CharacterFactory.migrate", () => {
         version: 6,
       });
     });
-
-    it("should handle DuplicateIds", () => {
-      const result = CharacterFactory.makeFromJson(DuplicateIds);
-
-      const ids = [result.id];
-
-      for (const page of result.pages) {
-        ids.push(page.id);
-        for (const row of page.rows) {
-          for (const column of row.columns) {
-            for (const section of column.sections) {
-              ids.push(section.id);
-              for (const block of section.blocks) {
-                ids.push(block.id);
-              }
-            }
-          }
-        }
-      }
-
-      // This should check for duplicates
-      expect(new Set(ids).size).toEqual(ids.length);
-    });
   });
 });
 
@@ -714,5 +691,28 @@ describe("CharacterFactory.duplicate", () => {
         });
       });
     });
+  });
+
+  it("should handle duplicate id imports", () => {
+    const result = CharacterFactory.makeFromJson(DuplicateIds);
+
+    const ids = [result.id];
+
+    for (const page of result.pages) {
+      ids.push(page.id);
+      for (const row of page.rows) {
+        for (const column of row.columns) {
+          for (const section of column.sections) {
+            ids.push(section.id);
+            for (const block of section.blocks) {
+              ids.push(block.id);
+            }
+          }
+        }
+      }
+    }
+
+    // This should check for duplicates
+    expect(new Set(ids).size).toEqual(ids.length);
   });
 });
