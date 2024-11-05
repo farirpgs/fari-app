@@ -103,7 +103,9 @@ export function CircleTextField(
           InputProps={{
             sx: {
               "cursor": cursor,
+              "width": "5rem",
               "height": "3rem",
+              "px": "0.5rem",
               "font-family": "monospace",
               "outline": "none",
               "background": (theme) => theme.palette.action.hover,
