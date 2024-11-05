@@ -6,12 +6,11 @@ import Fade from "@mui/material/Fade";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { ConditionalWrapper } from "../../../../../components/ConditionalWrapper/ConditionalWrapper";
 import { Delays } from "../../../../../constants/Delays";
 import { IDataCyProps } from "../../../../../domains/cypress/types/IDataCyProps";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
-import { MiniThemeContext } from "../MiniThemeContext";
 
 export function CircleTextField(
   props: {
@@ -27,8 +26,6 @@ export function CircleTextField(
     onContextMenu?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
   } & IDataCyProps
 ) {
-  const miniTheme = useContext(MiniThemeContext);
-
   const theme = useTheme();
   const [hover, setHover] = useState(false);
   const [focus, setFocus] = useState(false);
