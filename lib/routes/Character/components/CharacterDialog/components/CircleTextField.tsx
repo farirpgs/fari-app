@@ -111,8 +111,7 @@ export function CircleTextField(
               // Fixes issue #414
               "font-family": "monospace",
               "outline": "none",
-              "background": props.highlight ? miniTheme.textPrimary : "inherit",
-              "background": theme.palette.action.hover,
+              "background": miniTheme.boxBackgroundColor,
               "&&": {
                 color: "inherit",
               },
