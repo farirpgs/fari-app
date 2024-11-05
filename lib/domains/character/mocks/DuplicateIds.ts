@@ -1185,4 +1185,4 @@ export const DuplicateIds: ICharacter = {
   wide: false,
   id: "381872d5-4f72-4475-afda-5fdd7c47ae4a",
   fariType: "character",
-};
+} as unknown as ICharacter;
