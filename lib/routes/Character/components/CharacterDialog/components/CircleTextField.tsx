@@ -106,12 +106,10 @@ export function CircleTextField(
           InputProps={{
             sx: {
               "cursor": cursor,
-              // Removing width so that we can put in arbitrary values here
               "height": "3rem",
-              // Fixes issue #414
               "font-family": "monospace",
               "outline": "none",
-              "background": miniTheme.boxBackgroundColor,
+              "background": (theme) => theme.palette.action.hover,
               "&&": {
                 color: "inherit",
               },
@@ -158,7 +156,6 @@ export function CircleTextField(
       {!props.readonly && props.onDecrement && (
         <Fade in={areCounterButtonsVisible}>
           <IconButton
-            size="small"
             data-cy={`${props.dataCy}.decrement`}
             sx={{
               "position": "absolute",
@@ -171,7 +168,7 @@ export function CircleTextField(
             onClick={props.onDecrement}
           >
             <RemoveCircleOutlineOutlinedIcon
-              sx={{ width: "1.1rem", height: "1.1rem" }}
+              sx={{ width: "1.5rem", height: "1.5rem" }}
             />
           </IconButton>
         </Fade>
@@ -179,7 +176,6 @@ export function CircleTextField(
       {!props.readonly && props.onIncrement && (
         <Fade in={areCounterButtonsVisible}>
           <IconButton
-            size="small"
             data-cy={`${props.dataCy}.increment`}
             sx={{
               "position": "absolute",
@@ -192,7 +188,7 @@ export function CircleTextField(
             onClick={props.onIncrement}
           >
             <AddCircleOutlineOutlinedIcon
-              sx={{ width: "1.1rem", height: "1.1rem" }}
+              sx={{ width: "1.5rem", height: "1.5rem" }}
             />
           </IconButton>
         </Fade>
