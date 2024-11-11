@@ -43,7 +43,7 @@
     "@liveblocks/node": "^0.3.0",
     "@liveblocks/react": "^0.16.9",
     "@mui/icons-material": "^5.8.4",
-    "@mui/lab": "^5.0.0-alpha.93",
+    "@mui/lab": "^5.0.0-alpha.149",
     "@mui/material": "^5.9.3",
     "@mui/x-data-grid": "^5.15.0",
     "@sentry/react": "^6.19.7",
