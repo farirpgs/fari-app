@@ -90,7 +90,7 @@
     "@typescript-eslint/parser": "^5.25.0",
     "@vitejs/plugin-legacy": "^3.0.1",
     "@vitejs/plugin-react": "^3.0.0",
-    "@vitest/ui": "^0.25.8",
+    "@vitest/ui": "^0.30.1",
     "chromatic": "^6.5.4",
     "concurrently": "^7.2.1",
     "cypress": "^12.3.0",
