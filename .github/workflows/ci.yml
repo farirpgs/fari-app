@@ -52,9 +52,9 @@ jobs:
           path: dist
       # Deploy Preview
       - name: Deploy Preview
-        if: github.ref != 'refs/heads/master' && github.event.repository.fork == false
+        if: github.ref != 'refs/heads/master' && !github.event.pull_request.head.repo.fork
         run: npm run deploy:preview -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}} --alias $GITHUB_RUN_ID
       # Deploy Production
       - name: Deploy Production
-        if: github.ref == 'refs/heads/master' && github.event.repository.fork == false
+        if: github.ref == 'refs/heads/master' && !github.event.pull_request.head.repo.fork
         run: npm run deploy:prod -- --auth ${{secrets.NETLIFY_AUTH_TOKEN}}
