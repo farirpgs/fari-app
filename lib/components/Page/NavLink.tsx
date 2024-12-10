@@ -23,7 +23,6 @@ export function NavLink(props: {
   endIcon?: React.ReactNode;
   children: React.ReactNode;
 }) {
-  const theme = useTheme();
   if (props.to) {
     return (
       <Tooltip title={props.tooltip ?? ""}>

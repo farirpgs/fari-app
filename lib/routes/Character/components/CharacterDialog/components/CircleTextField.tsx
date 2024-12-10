@@ -6,12 +6,11 @@ import Fade from "@mui/material/Fade";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { ConditionalWrapper } from "../../../../../components/ConditionalWrapper/ConditionalWrapper";
 import { Delays } from "../../../../../constants/Delays";
 import { IDataCyProps } from "../../../../../domains/cypress/types/IDataCyProps";
 import { useLazyState } from "../../../../../hooks/useLazyState/useLazyState";
-import { MiniThemeContext } from "../MiniThemeContext";
 
 export function CircleTextField(
   props: {
@@ -27,8 +26,6 @@ export function CircleTextField(
     onContextMenu?(event: React.MouseEvent<HTMLElement, MouseEvent>): void;
   } & IDataCyProps
 ) {
-  const miniTheme = useContext(MiniThemeContext);
-
   const theme = useTheme();
   const [hover, setHover] = useState(false);
   const [focus, setFocus] = useState(false);
@@ -100,24 +97,18 @@ export function CircleTextField(
               setValue("");
             } else {
               const parsed = parseInt(e.target.value);
-              if (parsed > 999) {
-                setValue("999");
-              } else {
-                setValue(parsed.toString());
-              }
+              setValue(parsed.toString());
             }
           }}
           InputProps={{
             sx: {
               "cursor": cursor,
-              "width": "3rem",
+              "width": "5rem",
               "height": "3rem",
-              "borderRadius": "50%",
-              "border": `2px solid ${
-                props.borderColor ?? miniTheme.textPrimary
-              }`,
+              "px": "0.5rem",
+              "font-family": "monospace",
               "outline": "none",
-              "background": props.highlight ? miniTheme.textPrimary : "inherit",
+              "background": (theme) => theme.palette.action.hover,
               "&&": {
                 color: "inherit",
               },
@@ -164,7 +155,6 @@ export function CircleTextField(
       {!props.readonly && props.onDecrement && (
         <Fade in={areCounterButtonsVisible}>
           <IconButton
-            size="small"
             data-cy={`${props.dataCy}.decrement`}
             sx={{
               "position": "absolute",
@@ -177,7 +167,7 @@ export function CircleTextField(
             onClick={props.onDecrement}
           >
             <RemoveCircleOutlineOutlinedIcon
-              sx={{ width: "1.1rem", height: "1.1rem" }}
+              sx={{ width: "1.5rem", height: "1.5rem" }}
             />
           </IconButton>
         </Fade>
@@ -185,7 +175,6 @@ export function CircleTextField(
       {!props.readonly && props.onIncrement && (
         <Fade in={areCounterButtonsVisible}>
           <IconButton
-            size="small"
             data-cy={`${props.dataCy}.increment`}
             sx={{
               "position": "absolute",
@@ -198,7 +187,7 @@ export function CircleTextField(
             onClick={props.onIncrement}
           >
             <AddCircleOutlineOutlinedIcon
-              sx={{ width: "1.1rem", height: "1.1rem" }}
+              sx={{ width: "1.5rem", height: "1.5rem" }}
             />
           </IconButton>
         </Fade>
