@@ -18,7 +18,7 @@ export function useIndexCard(props: {
     onChange: (newIndexCard) => {
       props.onChange(newIndexCard);
     },
-    delay: 0,
+    delay: 75,
   });
 
   function setColor(newColor: string) {
