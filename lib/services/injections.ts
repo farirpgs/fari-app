@@ -1,5 +1,5 @@
 import { InternationalizationService } from "./internationalization/InternationalizationService";
-import { makeLiveBlocksClient } from "./liveblocks/makeLiveBlocksClient";
+import { makeLiveBlocksClient as makeLiveBlocksClient } from "./liveblocks/makeLiveBlocksClient";
 import { makeLogger } from "./logger/makeLogger";
 import { makeSentryService } from "./sentry/SentryService";
 
