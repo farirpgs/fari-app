@@ -1,7 +1,6 @@
 import { useMyPresence, useOthers } from "@liveblocks/react";
 import { useContext, useEffect } from "react";
 import { SessionPresenceUpdaterContext } from "../contexts/SessionPresenceContext";
-import { IPlayerPresence } from "../types/IPlayerPresence";
 
 export function useWindowLiveCursors() {
   const sessionPresenceUpdater = useContext(SessionPresenceUpdaterContext);
@@ -65,14 +64,14 @@ export function useWindowLiveCursors() {
     };
   }, []);
 
-  const others = useOthers<IPlayerPresence>();
+  const others = useOthers();
 
   return others
-    .toArray()
     .filter((user) => user.presence?.cursor != null)
     .map(({ connectionId, presence, id, info }) => {
-      const x = presence?.cursor?.x ?? 0;
-      const y = presence?.cursor?.y ?? 0;
+      const cursor = presence?.cursor as { x: number; y: number } | undefined;
+      const x = cursor?.x ?? 0;
+      const y = cursor?.y ?? 0;
       return {
         x: x * window.innerWidth,
         y: y,
@@ -85,13 +84,14 @@ export function useWindowLiveCursors() {
 }
 
 export function useMyWindowLiveCursor() {
-  const [presence] = useMyPresence<IPlayerPresence>();
+  const [presence] = useMyPresence();
 
   if (!presence.cursor) {
     return null;
   }
+  const cursor = presence.cursor as { x: number; y: number };
   return {
-    x: presence.cursor.x * window.innerWidth,
-    y: presence.cursor.y,
+    x: cursor.x * window.innerWidth,
+    y: cursor.y,
   };
 }
