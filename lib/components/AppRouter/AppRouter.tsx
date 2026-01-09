@@ -80,10 +80,15 @@ export const AppRouter = () => {
               render={(params: { id: string }) => {
                 const sessionId = params.id || userId;
                 return (
-                  <LiveblocksProvider client={injections.liveBlocksClient}>
+                  <LiveblocksProvider
+                    publicApiKey={
+                      "pk_dev_idze__Foj9T2QRR01oBR1su_4y-gl_mx8JwL90_FjQrsrtqxLnvJw5Q1GooxboHQ"
+                    }
+                  >
                     <RoomProvider
                       id={sessionId}
                       initialStorage={initialStorage}
+                      initialPresence={{}}
                     >
                       <PlayRoute />
                     </RoomProvider>
@@ -100,7 +105,11 @@ export const AppRouter = () => {
               render={(params: { id: string }) => {
                 const sessionId = params.id || userId;
                 return (
-                  <LiveblocksProvider client={injections.liveBlocksClient}>
+                  <LiveblocksProvider
+                    publicApiKey={
+                      "pk_dev_idze__Foj9T2QRR01oBR1su_4y-gl_mx8JwL90_FjQrsrtqxLnvJw5Q1GooxboHQ"
+                    }
+                  >
                     <RoomProvider id={sessionId}>
                       <PlayRoute />
                     </RoomProvider>
@@ -117,7 +126,11 @@ export const AppRouter = () => {
               render={(params: { id: string }) => {
                 const sessionId = params.id || userId;
                 return (
-                  <LiveblocksProvider client={injections.liveBlocksClient}>
+                  <LiveblocksProvider
+                    publicApiKey={
+                      "pk_dev_idze__Foj9T2QRR01oBR1su_4y-gl_mx8JwL90_FjQrsrtqxLnvJw5Q1GooxboHQ"
+                    }
+                  >
                     <RoomProvider id={sessionId}>
                       <JoinAGameRoute />
                     </RoomProvider>
