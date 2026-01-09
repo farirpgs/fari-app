@@ -2,8 +2,9 @@ import { LiveObject } from "@liveblocks/client";
 import {
   useBroadcastEvent,
   useEventListener,
-  useObject,
+  useMutation,
   useRoom,
+  useStatus,
   useStorage,
 } from "@liveblocks/react";
 import Alert from "@mui/material/Alert";
@@ -37,12 +38,11 @@ import {
 } from "./types/IPlayerInteraction";
 
 type ConnectionState =
-  | "closed"
-  | "authenticating"
-  | "unavailable"
-  | "failed"
-  | "open"
-  | "connecting";
+  | "initial"
+  | "connecting"
+  | "connected"
+  | "reconnecting"
+  | "disconnected";
 
 export function useLiveObject<T>(props: {
   key: string;
@@ -51,45 +51,51 @@ export function useLiveObject<T>(props: {
   canBeEmpty?: boolean;
   onChange(newValue: T): void;
 }) {
-  const liveObject = useObject<any>(props.key);
-  const [root] = useStorage();
+  const isStorageLoaded = useStorage(() => true) ?? false;
 
-  const room = useRoom();
+  const liveData = useStorage((root) => root[props.key]);
+
+  const initObject = useMutation(
+    ({ storage }) => {
+      if (!storage.get(props.key)) {
+        storage.set(props.key, new LiveObject({}));
+      }
+    },
+    [props.key]
+  );
+
+  const updateObject = useMutation(
+    ({ storage }, newValue) => {
+      storage.set(props.key, newValue as any);
+    },
+    [props.key]
+  );
 
   useEffect(() => {
-    if (props.isOwner) {
-      root?.set(props.key, new LiveObject({}));
+    if (props.isOwner && isStorageLoaded) {
+      initObject();
     }
-  }, [root]);
+  }, [props.isOwner, initObject, isStorageLoaded]);
 
   useEffect(() => {
-    if (props.isOwner) {
-      liveObject?.update(props.value as any);
+    if (props.isOwner && isStorageLoaded) {
+      updateObject(props.value);
     }
-  }, [props.value]);
+  }, [props.isOwner, props.value, updateObject, isStorageLoaded]);
 
   useEffect(() => {
-    function onLiveObjectChange() {
-      const isSubscriber = !props.isOwner;
-      const object = liveObject?.toObject();
-      const objectKeys = Object.keys(object ?? {});
-      if (isSubscriber && object) {
-        if (props.canBeEmpty || objectKeys.length > 0) {
-          props.onChange(object as unknown as T);
-        }
+    const isSubscriber = !props.isOwner;
+    const object = liveData;
+    const objectKeys = Object.keys(object ?? {});
+
+    if (isSubscriber && object) {
+      if (props.canBeEmpty || objectKeys.length > 0) {
+        props.onChange(object as unknown as T);
       }
     }
+  }, [liveData, props.isOwner, props.canBeEmpty, props.onChange]);
 
-    onLiveObjectChange();
-
-    if (liveObject == null) {
-      return;
-    }
-
-    return room.subscribe(liveObject, onLiveObjectChange);
-  }, [liveObject]);
-
-  return liveObject;
+  return liveData;
 }
 
 function PlayRoute() {
@@ -108,7 +114,7 @@ function PlayRoute() {
   const userId = settingsManager.state.userId;
   const sessionId = isPlayer ? idFromParams : userId;
   const shareLink = `${window.location.origin}/play/join/${sessionId}`;
-  const [connectionState, setConnectionState] = useState<ConnectionState>();
+  const connectionState = useStatus();
   const [connectionStateSnackBarOpen, setConnectionStateSnackBarOpen] =
     useState(false);
 
@@ -220,7 +226,7 @@ function PlayRoute() {
       chatManager.actions.sendMessage(event.payload.message);
     }
     if (event.type === "ping") {
-      broadcast(PlayerInteractionFactory.pong(), {
+      broadcast(PlayerInteractionFactory.pong() as any, {
         shouldQueueEventIfNotReady: true,
       });
     }
@@ -232,7 +238,7 @@ function PlayRoute() {
       {
         type: interaction.type,
         payload: interaction.payload,
-      },
+      } as any,
       {
         shouldQueueEventIfNotReady: true,
       }
@@ -246,13 +252,6 @@ function PlayRoute() {
       );
     }
   }, [playerName]);
-
-  useEffect(() => {
-    const unsubscribe = room.subscribe("connection", (status) => {
-      setConnectionState(status);
-    });
-    return unsubscribe;
-  }, []);
 
   useEffect(() => {
     setConnectionStateSnackBarOpen(true);
@@ -277,26 +276,20 @@ function PlayRoute() {
     }
   }, []);
 
-  function getAlertSevirityColor(connectionState: ConnectionState | undefined) {
-    if (connectionState === "closed") {
-      return "error";
+  function getAlertSevirityColor(connectionState: ConnectionState) {
+    switch (connectionState) {
+      case "disconnected":
+        return "error";
+      case "reconnecting":
+        return "info";
+      case "connecting":
+      case "initial":
+        return "info";
+      case "connected":
+        return "success";
+      default:
+        return "info";
     }
-    if (connectionState === "failed") {
-      return "error";
-    }
-    if (connectionState === "unavailable") {
-      return "error";
-    }
-    if (connectionState === "authenticating") {
-      return "info";
-    }
-    if (connectionState === "connecting") {
-      return "info";
-    }
-    if (connectionState === "open") {
-      return "success";
-    }
-    return "info";
   }
 
   const playersPresenceRef = useRef<IPlayersPresenceRef>(null);
