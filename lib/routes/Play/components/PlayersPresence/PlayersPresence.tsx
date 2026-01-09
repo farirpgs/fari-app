@@ -17,7 +17,6 @@ import {
   IPlayerCursorRollOutput,
   IPlayerCursorState,
 } from "../../types/IPlayerCursorState";
-import { IPlayerPresence } from "../../types/IPlayerPresence";
 import { IMessageToSend, IRollMessage } from "../Chat/useChat";
 import CursorWithMessage from "../CursorWithMessage/CursorWithMessage";
 
@@ -37,7 +36,7 @@ export const PlayersPresence = React.forwardRef(
     });
     const sessionPresenceUpdater = useContext(SessionPresenceUpdaterContext);
 
-    const [presence] = useMyPresence<IPlayerPresence>();
+    const [presence] = useMyPresence();
     const myWindowCursor = useMyWindowLiveCursor();
     const windowCursors = useWindowLiveCursors();
     const zIndex = useZIndex();
@@ -106,22 +105,38 @@ export const PlayersPresence = React.forwardRef(
             zIndex: zIndex.cursor,
           }}
         >
-          {windowCursors.map((cursor) => {
-            return (
-              <CursorWithMessage
-                key={cursor.connectionId}
-                label={
-                  cursor.presence?.characterName || cursor.presence?.playerName
-                }
-                color={cursor.presence?.color}
-                message={cursor.presence?.message}
-                rollOutput={cursor.presence?.rollOutput}
-                x={cursor.x}
-                y={cursor.y}
-                readonly
-              />
-            );
-          })}
+          {windowCursors.map(
+            (cursor: ReturnType<typeof useWindowLiveCursors>[number]) => {
+              return (
+                <CursorWithMessage
+                  key={cursor.connectionId}
+                  label={String(
+                    cursor.presence?.characterName ||
+                      cursor.presence?.playerName
+                  )}
+                  color={
+                    cursor.presence?.color
+                      ? String(cursor.presence.color)
+                      : undefined
+                  }
+                  message={
+                    cursor.presence?.message
+                      ? String(cursor.presence.message)
+                      : undefined
+                  }
+                  rollOutput={
+                    cursor.presence?.rollOutput as
+                      | IPlayerCursorRollOutput
+                      | null
+                      | undefined
+                  }
+                  x={cursor.x}
+                  y={cursor.y}
+                  readonly
+                />
+              );
+            }
+          )}
           {renderMyMessage()}
         </Box>
       </>
@@ -136,10 +151,10 @@ export const PlayersPresence = React.forwardRef(
         <>
           {myWindowCursor && (
             <CursorWithMessage
-              color={presence.color}
+              color={presence.color ? String(presence.color) : undefined}
               x={myWindowCursor.x}
               y={myWindowCursor.y}
-              label={presence.characterName || presence.playerName}
+              label={String(presence.characterName || presence.playerName)}
               message={cursorState.message}
               rollOutput={cursorState.rollOutput}
               onMessageChange={(message) => {
