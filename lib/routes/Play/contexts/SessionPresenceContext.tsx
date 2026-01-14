@@ -15,7 +15,7 @@ export function useSessionPresenceUpdater(props: {
   playerName: string | null | undefined;
   characterName: string | null | undefined;
 }) {
-  const updateMyPresence = useUpdateMyPresence<IPlayerPresence>();
+  const updateMyPresence = useUpdateMyPresence();
 
   useEffect(() => {
     updateMyPresence({

@@ -53,7 +53,7 @@ function JoinAGameRoute() {
   });
 
   async function onJoin() {
-    broadcast(PlayerInteractionFactory.ping());
+    broadcast(PlayerInteractionFactory.ping() as any);
     setLoading(true);
     setTimeout(() => {
       if (!isGameLinkValid) {

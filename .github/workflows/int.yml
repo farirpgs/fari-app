@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: "18"
       # Cache
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -40,13 +40,13 @@ jobs:
         with:
           start: npm run serve:build
       - name: Upload Cypress Videos
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: cypress-videos
           path: cypress/videos
       - name: Upload Cypress Screenshots
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: cypress-screenshots
