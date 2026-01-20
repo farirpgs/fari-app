@@ -50,7 +50,7 @@ export const CharacterFactory = {
       default: undefined,
     };
     const migratedSheet = this.migrate(newSheet);
-    return migratedSheet;
+    return CharacterFactory.resetAllIds(migratedSheet);
   },
   migrate(character: any): ICharacter {
     try {

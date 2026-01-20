@@ -2,8 +2,9 @@ import produce from "immer";
 import { CharacterFactory } from "./CharacterFactory";
 import { DefaultTemplates } from "./DefaultTemplates";
 import { ComplexCharacter } from "./mocks/ComplexCharacter";
+import { DuplicateIds } from "./mocks/DuplicateIds";
 import { Warden } from "./mocks/WardenLeMagane";
-import { IV1Character } from "./types";
+import { ICharacter, IV1Character } from "./types";
 
 describe("CharacterFactory.migrate", () => {
   describe("v1", () => {
@@ -690,5 +691,28 @@ describe("CharacterFactory.duplicate", () => {
         });
       });
     });
+  });
+
+  it("should handle duplicate id imports", () => {
+    const result = CharacterFactory.makeFromJson(DuplicateIds);
+
+    const ids = [result.id];
+
+    for (const page of result.pages) {
+      ids.push(page.id);
+      for (const row of page.rows) {
+        for (const column of row.columns) {
+          for (const section of column.sections) {
+            ids.push(section.id);
+            for (const block of section.blocks) {
+              ids.push(block.id);
+            }
+          }
+        }
+      }
+    }
+
+    // This should check for duplicates
+    expect(new Set(ids).size).toEqual(ids.length);
   });
 });
